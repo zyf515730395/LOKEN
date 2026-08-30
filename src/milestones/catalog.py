@@ -222,57 +222,11 @@ def first_ready_family(catalog: dict[str, Any]) -> dict[str, Any]:
     raise MilestoneCatalogError("No ready milestone family")
 
 
-def render_primary_sidebar(
-    active_section: str,
-    archive_href: str,
-    milestone_href: str,
-) -> list[str]:
-    """Render the shared left-most navigation for archive and model pages."""
-    items = [
-        ("papers", "论文阅读", archive_href),
-        ("milestones", "经典模型", milestone_href),
-    ]
-    output = [
-        '  <aside class="primary-sidebar" aria-label="Main sections">',
-        f'    <a class="primary-brand" href="{html.escape(archive_href, quote=True)}" '
-        'aria-label="TOGOS 首页">TOGOS</a>',
-        '    <p class="primary-navigation-label">内容</p>',
-        '    <nav class="primary-navigation" aria-label="Knowledge sections">',
-    ]
-    for key, label, href in items:
-        active_class = " is-active" if key == active_section else ""
-        current = ' aria-current="page"' if key == active_section else ""
-        output.extend([
-            f'      <a class="primary-nav-item{active_class}" '
-            f'href="{html.escape(href, quote=True)}"{current}>',
-            f'        <strong>{html.escape(label)}</strong>',
-            '      </a>',
-        ])
-    output.extend(["    </nav>", "  </aside>"])
-    return output
-
-
 def render_milestone_navigation(
-    catalog: dict[str, Any], active_family: str, archive_href: str = "../index.html"
+    catalog: dict[str, Any], active_family: str
 ) -> str:
-    """Render the two-column navigation shell for a milestone family page."""
-    ready_family = first_ready_family(catalog)
-    output = ['<div class="navigation-shell" id="navigation-shell">']
-    output.extend(
-        render_primary_sidebar(
-            "milestones",
-            archive_href,
-            f"{ready_family['slug']}.html",
-        )
-    )
-    output.extend([
-        '  <aside class="paper-sidebar" id="paper-sidebar" aria-label="Milestone model families">',
-        '    <div class="sidebar-brand">',
-        '      <a href="flux.html">经典模型</a>',
-        '      <span>按论文主题与官方模型系列浏览</span>',
-        '    </div>',
-        '    <nav class="archive-nav milestone-nav">',
-    ])
+    """Render model-family navigation without duplicating the shared shell."""
+    output = ['      <div class="milestone-nav">']
     for topic in catalog["topics"]:
         contains_active = any(family["slug"] == active_family for family in topic["families"])
         open_attribute = " open" if contains_active else ""
@@ -296,5 +250,5 @@ def render_milestone_navigation(
                     '<span class="nav-count">规划中</span></span></li>'
                 )
         output.extend(["        </ul>", "      </details>"])
-    output.extend(["    </nav>", "  </aside>", "</div>"])
+    output.append("      </div>")
     return "\n".join(output)

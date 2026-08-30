@@ -9,11 +9,9 @@ from pathlib import Path
 import re
 import unicodedata
 
-from milestones.catalog import (
-    first_ready_family,
-    load_milestone_catalog,
-    render_primary_sidebar,
-)
+from milestones.catalog import load_milestone_catalog
+from shared.rendering import atomic_write_text
+from shared.site_shell import render_empty_section_page, render_site_page
 
 
 ENTRY_PATTERN = re.compile(
@@ -165,27 +163,13 @@ def filter_recent_archive(
 
 def render_sidebar(
     themes: OrderedDict,
-    milestone_catalog: dict,
     show_book_notes: bool = SHOW_BOOK_NOTES_NAV,
 ) -> str:
-    milestone_family = first_ready_family(milestone_catalog)
     output = [
-        '<div class="navigation-shell" id="navigation-shell">',
-        *render_primary_sidebar(
-            "papers",
-            "#top",
-            f"milestone-models/{milestone_family['slug']}.html",
-        ),
-        '  <aside class="paper-sidebar" id="paper-sidebar" aria-label="Paper archive">',
-        '    <div class="sidebar-brand">',
-        '      <a href="#top">论文阅读</a>',
-        '      <span>按主题、年份与月份浏览</span>',
-        '    </div>',
-        '    <div class="sidebar-actions">',
-        '      <button type="button" data-sidebar-action="expand">Expand all</button>',
-        '      <button type="button" data-sidebar-action="collapse">Collapse all</button>',
-        '    </div>',
-        '    <nav class="archive-nav">',
+        '      <div class="sidebar-actions">',
+        '        <button type="button" data-sidebar-action="expand">Expand all</button>',
+        '        <button type="button" data-sidebar-action="collapse">Collapse all</button>',
+        '      </div>',
     ]
 
     for theme_index, (theme, categories) in enumerate(themes.items()):
@@ -232,7 +216,6 @@ def render_sidebar(
 
         output.append("    </details>")
 
-    output.extend(["    </nav>", "  </aside>", "</div>"])
     return "\n".join(output)
 
 
@@ -294,7 +277,7 @@ def render_table(
         elif candidate_statuses.get(row["id"]) in {"pending", "accepted"}:
             summary_cell = '<span class="summary-pending">待生成</span>'
         output.append(
-            "      <tr>"
+            f'      <tr id="paper-{html.escape(row["id"], quote=True)}">'
             f'<td class="paper-id"><a href="{paper_url}" target="_blank" rel="noopener">'
             f'{html.escape(row["id"])}</a></td>'
             f'<td class="paper-title"><a href="{paper_url}" target="_blank" rel="noopener">'
@@ -418,11 +401,14 @@ def generate_site(
     output_path: str | Path,
     candidate_path: str | Path | None = None,
     milestone_catalog_path: str | Path = DEFAULT_MILESTONE_CATALOG,
+    *,
+    output_root: str | Path | None = None,
+    generated_on: datetime.date | None = None,
 ) -> None:
     data = json.loads(Path(json_path).read_text(encoding="utf-8"))
-    milestone_catalog = load_milestone_catalog(milestone_catalog_path)
+    load_milestone_catalog(milestone_catalog_path)
     all_categories, _ = build_archive(data)
-    today = datetime.date.today()
+    today = generated_on or datetime.date.today()
     categories, themes = filter_recent_archive(all_categories, today.year)
     summary_catalog = load_summary_catalog(output_path)
     candidate_statuses = load_candidate_statuses(candidate_path)
@@ -434,40 +420,11 @@ def generate_site(
         for year in category["years"]
     }
 
-    document = f"""<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="A daily index of image, video, and 3D generation, neural rendering, and depth estimation papers from arXiv.">
-  <title>{SITE_TITLE}</title>
-  <script>
-    (() => {{
-      document.documentElement.classList.add("js");
-      const storageKey = "arxiv-theme";
-      let theme = null;
-      try {{ theme = window.localStorage.getItem(storageKey); }} catch (error) {{ /* Storage can be unavailable. */ }}
-      if (theme !== "light" && theme !== "dark") {{
-        theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-      }}
-      document.documentElement.dataset.theme = theme;
-    }})();
-  </script>
-  <link rel="stylesheet" href="assets/css/site.css">
-  <script src="assets/js/sidebar.js" defer></script>
-</head>
-<body>
-  <button class="sidebar-toggle" type="button" aria-controls="navigation-shell" aria-expanded="false">
-    <span aria-hidden="true">&#9776;</span> Browse archive
-  </button>
-  <button class="theme-toggle" type="button" aria-label="Switch color theme" aria-pressed="false">
-    <span data-theme-icon aria-hidden="true"></span>
-  </button>
-  <div class="sidebar-scrim" data-sidebar-close></div>
-{render_sidebar(themes, milestone_catalog)}
-  <main class="page-content" id="top">
-    <header class="hero">
-      <h1>{SITE_TITLE}</h1>
+    page_output = Path(output_path)
+    site_root = Path(output_root) if output_root is not None else page_output.parent
+    main_content = f"""    <header class="hero">
+      <p class="section-eyebrow">TOGOS · 学习一个</p>
+      <h1>今天学什么</h1>
       <div class="hero-stats" aria-label="Archive statistics">
         <div><strong>{total_papers:,}</strong><span>Papers</span></div>
         <div><strong>{len(themes)}</strong><span>Topics</span></div>
@@ -477,8 +434,8 @@ def generate_site(
     </header>
 {render_content(categories, summary_catalog, candidate_statuses)}
     <footer>Generated from arXiv metadata · Source: <a href="https://github.com/zyf515730395/TOGOS">{SITE_TITLE}</a></footer>
-  </main>
-  <dialog class="summary-dialog" id="summary-dialog" aria-labelledby="summary-dialog-title">
+"""
+    summary_dialog = """  <dialog class="summary-dialog" id="summary-dialog" aria-labelledby="summary-dialog-title">
     <div class="summary-dialog-shell">
       <header class="summary-dialog-header">
         <h2 id="summary-dialog-title">论文要点</h2>
@@ -489,7 +446,42 @@ def generate_site(
       </div>
     </div>
   </dialog>
-</body>
-</html>
 """
-    Path(output_path).write_text(document, encoding="utf-8")
+    document = render_site_page(
+        output_file=page_output,
+        output_root=site_root,
+        active_section="learning",
+        page_title=SITE_TITLE,
+        meta_description=(
+            "A daily index of image, video, and 3D generation, neural rendering, "
+            "and depth estimation papers from arXiv."
+        ),
+        secondary_navigation=render_sidebar(themes),
+        main_content=main_content,
+        body_class="learning-page",
+        trailing_dialogs=summary_dialog,
+    )
+    atomic_write_text(page_output, document)
+
+    empty_pages = (
+        (
+            "writings",
+            site_root / "writings" / "index.html",
+            "公开的学习笔记和读书笔记会在这里汇集。",
+        ),
+        (
+            "journeys",
+            site_root / "journeys" / "index.html",
+            "城市坐标与摄影作品会在这里出现。",
+        ),
+    )
+    for section_key, destination, body_copy in empty_pages:
+        atomic_write_text(
+            destination,
+            render_empty_section_page(
+                output_file=destination,
+                output_root=site_root,
+                section_key=section_key,
+                body_copy=body_copy,
+            ),
+        )

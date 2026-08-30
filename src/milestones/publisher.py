@@ -19,6 +19,7 @@ from .catalog import (
     render_milestone_navigation,
 )
 from shared.rendering import atomic_write_text, render_note_content
+from shared.site_shell import render_site_page
 
 
 DEEP_READING_FIELDS = (
@@ -314,35 +315,20 @@ def render_comparison_table(
 
 
 def render_family_page(
-    catalog: dict[str, Any], topic: dict[str, Any], family: dict[str, Any], notes: dict
+    catalog: dict[str, Any],
+    topic: dict[str, Any],
+    family: dict[str, Any],
+    notes: dict,
+    *,
+    output_file: Path,
+    output_root: Path,
 ) -> str:
     updated = dt.date.today().isoformat()
     statuses = "".join(
         f'<li>{_status_badge(status)}<span>{label}</span></li>'
         for status, label in STATUS_LABELS.items()
     )
-    return f"""<!doctype html>
-<html lang="zh-CN">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="{html.escape(family['name'])} 官方模型版本时间线与技术对比。">
-  <title>{html.escape(family['name'])} · 经典模型</title>
-{_theme_bootstrap()}
-  <link rel="stylesheet" href="../assets/css/site.css">
-  <script src="../assets/js/sidebar.js" defer></script>
-</head>
-<body>
-  <button class="sidebar-toggle" type="button" aria-controls="navigation-shell" aria-expanded="false">
-    <span aria-hidden="true">&#9776;</span> Browse models
-  </button>
-  <button class="theme-toggle" type="button" aria-label="Switch color theme" aria-pressed="false">
-    <span data-theme-icon aria-hidden="true"></span>
-  </button>
-  <div class="sidebar-scrim" data-sidebar-close></div>
-{render_milestone_navigation(catalog, family['slug'])}
-  <main class="page-content milestone-page" id="top">
-    <header class="milestone-hero">
+    main_content = f"""    <header class="milestone-hero">
       <div>
         <p>{html.escape(topic['name'])} · {html.escape(family['organization'])}</p>
         <h1>{html.escape(family['name'])}</h1>
@@ -358,10 +344,17 @@ def render_family_page(
 {render_comparison_table(family, notes)}
     </div>
     <footer>仅收录官方发布 · 未公开的信息明确标记为“未披露”</footer>
-  </main>
-</body>
-</html>
 """
+    return render_site_page(
+        output_file=output_file,
+        output_root=output_root,
+        active_section="milestones",
+        page_title=f"{family['name']} · 身经百战",
+        meta_description=f"{family['name']} 官方模型版本时间线与技术对比。",
+        secondary_navigation=render_milestone_navigation(catalog, family["slug"]),
+        main_content=main_content,
+        body_class="milestone-page",
+    )
 
 
 def render_notes_page(family: dict[str, Any], notes: dict) -> str:
@@ -425,7 +418,14 @@ def publish_milestone_models(
         ready_notes += sum(bool(note and note["ready"]) for note in notes.values())
         atomic_write_text(
             destination / f"{family['slug']}.html",
-            render_family_page(catalog, topic, family, notes),
+            render_family_page(
+                catalog,
+                topic,
+                family,
+                notes,
+                output_file=destination / f"{family['slug']}.html",
+                output_root=destination.parent,
+            ),
         )
         atomic_write_text(
             destination / f"{family['slug']}-notes.html",
