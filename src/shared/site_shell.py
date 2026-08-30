@@ -133,7 +133,8 @@ def _render_search_dialog() -> str:
       </header>
       <label class="visually-hidden" for="search-input">搜索公开文章标题</label>
       <input id="search-input" class="search-input" type="search" placeholder="搜索公开文章标题"
-             autocomplete="off" role="combobox" aria-autocomplete="list" aria-controls="search-results">
+             autocomplete="off" role="combobox" aria-autocomplete="list" aria-controls="search-results"
+             aria-haspopup="listbox" aria-expanded="false">
       <p class="search-status" data-search-status aria-live="polite">输入标题关键词开始搜索</p>
       <div class="search-results" id="search-results" data-search-results role="listbox" aria-label="搜索结果"></div>
     </div>

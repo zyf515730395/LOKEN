@@ -15,7 +15,7 @@
   --row-line: var(--rule);
   --text: var(--ink);
   --subtle-text: var(--ink);
-  --muted-strong: #7e8995;
+  --muted-strong: #66707b;
   --emphasis: var(--ink);
   --accent-soft: rgba(34, 88, 230, .07);
   --emphasis-soft: rgba(17, 20, 24, .045);
@@ -50,7 +50,7 @@
   --row-line: var(--rule);
   --text: var(--ink);
   --subtle-text: var(--ink);
-  --muted-strong: #75808d;
+  --muted-strong: #98a2ae;
   --emphasis: var(--ink);
   --accent-soft: rgba(126, 162, 255, .09);
   --emphasis-soft: rgba(242, 244, 247, .06);
@@ -131,14 +131,14 @@ summary { cursor: pointer; }
   text-align: left;
   text-decoration: none;
 }
-.primary-nav-item strong { font-size: 1rem; font-weight: 500; }
+.primary-nav-item > span { font-size: 1rem; font-weight: 500; }
 .primary-nav-item small { color: var(--muted-strong); font-size: .62rem; }
 .primary-nav-item.is-active {
   border-left-color: var(--accent);
   background: transparent;
   color: var(--accent);
 }
-.primary-nav-item.is-active strong { font-weight: 700; }
+.primary-nav-item.is-active > span { font-weight: 700; }
 .primary-nav-item:hover { background: var(--emphasis-soft); color: var(--text); }
 .primary-nav-item.is-active:hover { background: var(--accent-soft); color: var(--accent); }
 .primary-nav-item.is-disabled { cursor: not-allowed; opacity: .62; }
@@ -732,7 +732,7 @@ footer { padding: 2rem clamp(1rem, 5vw, 5rem); color: var(--muted); font-size: .
 }
 
 @media (max-width: 900px) {
-  .sidebar-toggle {
+  .js .sidebar-toggle {
     position: fixed;
     top: .75rem;
     left: .75rem;
@@ -744,11 +744,21 @@ footer { padding: 2rem clamp(1rem, 5vw, 5rem); color: var(--muted); font-size: .
     color: var(--text);
     padding: .55rem .8rem;
   }
+  .theme-toggle { width: 2.75rem; height: 2.75rem; }
+  .js .sidebar-toggle { min-height: 2.75rem; }
   .navigation-shell {
     grid-template-columns: 11rem minmax(0, 1fr);
     width: min(94vw, 31rem);
+  }
+  .js .navigation-shell {
     transform: translateX(-105%);
     transition: transform .16s ease;
+  }
+  :root:not(.js) .navigation-shell {
+    position: static;
+    inset: auto;
+    width: 100%;
+    min-height: 100vh;
   }
   :root[data-secondary-collapsed="true"] .context-sidebar {
     overflow-y: auto;
@@ -804,7 +814,7 @@ footer { padding: 2rem clamp(1rem, 5vw, 5rem); color: var(--muted); font-size: .
   .primary-brand { margin-inline: .1rem; padding-inline: .45rem; font-size: 1.05rem; }
   .primary-navigation-label { margin-inline: .55rem; }
   .primary-nav-item { padding-inline: .55rem; }
-  .primary-nav-item strong { font-size: .76rem; }
+  .primary-nav-item > span { font-size: .76rem; }
   .hero { padding: 4.75rem 1.25rem 1.5rem; }
   .topic-section { padding-top: 2.5rem; }
   .topic-header { display: block; }

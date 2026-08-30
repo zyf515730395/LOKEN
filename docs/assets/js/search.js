@@ -83,6 +83,7 @@
       } else {
         input.removeAttribute("aria-activedescendant");
       }
+      input.setAttribute("aria-expanded", String(currentResults.length > 0));
     }
 
     function updateResults() {
@@ -125,6 +126,7 @@
     async function open(trigger = triggers[0] ?? null) {
       lastTrigger = trigger;
       if (!dialog.open) dialog.showModal();
+      input.setAttribute("aria-expanded", "false");
       status.textContent = documents ? EMPTY_GUIDANCE : "正在加载公开标题…";
       try {
         await loadIndex();
@@ -133,11 +135,13 @@
         loadFailed = true;
         status.textContent = LOAD_FAILURE;
         results.innerHTML = "";
+        input.setAttribute("aria-expanded", "false");
       }
       input.focus();
     }
 
     function close() {
+      input.setAttribute("aria-expanded", "false");
       if (dialog.open) dialog.close();
     }
 
@@ -179,6 +183,7 @@
       if (event.target === dialog) close();
     });
     dialog.addEventListener("close", () => {
+      input.setAttribute("aria-expanded", "false");
       lastTrigger?.focus();
       lastTrigger = null;
     });
