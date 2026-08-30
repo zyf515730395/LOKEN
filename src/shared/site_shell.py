@@ -121,6 +121,25 @@ def _state_bootstrap() -> str:
   </script>"""
 
 
+def _render_search_dialog() -> str:
+    return """  <dialog class="search-dialog" id="search-dialog" aria-labelledby="search-dialog-title">
+    <div class="search-dialog-shell">
+      <header class="search-dialog-header">
+        <div>
+          <p>全站公开内容</p>
+          <h2 id="search-dialog-title">搜索文章标题</h2>
+        </div>
+        <button type="button" class="search-dialog-close" data-search-close aria-label="关闭搜索">×</button>
+      </header>
+      <label class="visually-hidden" for="search-input">搜索公开文章标题</label>
+      <input id="search-input" class="search-input" type="search" placeholder="搜索公开文章标题"
+             autocomplete="off" role="combobox" aria-autocomplete="list" aria-controls="search-results">
+      <p class="search-status" data-search-status aria-live="polite">输入标题关键词开始搜索</p>
+      <div class="search-results" id="search-results" data-search-results role="listbox" aria-label="搜索结果"></div>
+    </div>
+  </dialog>"""
+
+
 def render_site_page(
     *,
     output_file: Path,
@@ -150,6 +169,8 @@ def render_site_page(
 {_state_bootstrap()}
   <link rel="stylesheet" href="{html.escape(site_root, quote=True)}assets/css/site.css">
   <script src="{html.escape(site_root, quote=True)}assets/js/site-shell.js" defer></script>
+  <script src="{html.escape(site_root, quote=True)}assets/js/search-core.js" defer></script>
+  <script src="{html.escape(site_root, quote=True)}assets/js/search.js" defer></script>
   <script src="{html.escape(site_root, quote=True)}assets/js/sidebar.js" defer></script>
 </head>
 <body{body_attributes}>
@@ -158,6 +179,9 @@ def render_site_page(
   </button>
   <button class="theme-toggle" type="button" aria-label="切换颜色主题" aria-pressed="false">
     <span data-theme-icon aria-hidden="true"></span>
+  </button>
+  <button class="search-trigger" type="button" data-search-trigger>
+    <span>搜索公开文章标题</span><kbd>Ctrl K</kbd>
   </button>
   <div class="sidebar-scrim" data-sidebar-close></div>
 <div class="navigation-shell" id="navigation-shell">
@@ -168,6 +192,7 @@ def render_site_page(
 {main_content}
   </main>
 {trailing_dialogs}
+{_render_search_dialog()}
 </body>
 </html>
 """
