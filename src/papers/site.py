@@ -291,6 +291,7 @@ def render_table(
     topic: str,
     summary_catalog: dict[str, dict],
     candidate_statuses: dict[str, str] | None = None,
+    anchored_papers: set[str] | None = None,
 ) -> str:
     output = [
         '<div class="table-scroll">',
@@ -300,6 +301,7 @@ def render_table(
     ]
     topic_summaries = summary_catalog.get(topic, {})
     candidate_statuses = candidate_statuses or {}
+    anchored_papers = anchored_papers if anchored_papers is not None else set()
     for row in rows:
         paper_url = html.escape(row["paper_url"], quote=True)
         summary = topic_summaries.get(row["id"], {})
@@ -316,14 +318,18 @@ def render_table(
             )
         elif candidate_statuses.get(row["id"]) in {"pending", "accepted"}:
             summary_cell = '<span class="summary-pending">待生成</span>'
+        anchor = ""
+        if row["id"] not in anchored_papers:
+            anchor = f' id="paper-{html.escape(row["id"], quote=True)}"'
+            anchored_papers.add(row["id"])
         output.append(
-            f'      <tr id="paper-{html.escape(row["id"], quote=True)}">'
-            f'<td class="paper-id"><a href="{paper_url}" target="_blank" rel="noopener">'
+            f"      <tr{anchor}>"
+            f'<td class="paper-id" data-label="Arxiv ID"><a href="{paper_url}" target="_blank" rel="noopener">'
             f'{html.escape(row["id"])}</a></td>'
-            f'<td class="paper-title"><a href="{paper_url}" target="_blank" rel="noopener">'
+            f'<td class="paper-title" data-label="Paper"><a href="{paper_url}" target="_blank" rel="noopener">'
             f'{html.escape(row["title"])}</a></td>'
-            f'<td>{html.escape(row["authors"])}</td>'
-            f'<td class="paper-summary">{summary_cell}</td>'
+            f'<td data-label="Authors">{html.escape(row["authors"])}</td>'
+            f'<td class="paper-summary" data-label="Summary">{summary_cell}</td>'
             "</tr>"
         )
     output.extend(["    </tbody>", "  </table>", "</div>"])
@@ -336,6 +342,7 @@ def render_content(
     candidate_statuses: dict[str, str] | None = None,
 ) -> str:
     output = []
+    anchored_papers: set[str] = set()
     for category in categories:
         eyebrow = category["theme"]
         heading = category["subtype"] or category["theme"]
@@ -414,6 +421,7 @@ def render_content(
                             category["topic"],
                             summary_catalog,
                             candidate_statuses,
+                            anchored_papers,
                         )
                     )
                     output.append("        </details>")
