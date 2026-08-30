@@ -93,7 +93,7 @@ def render_context_sidebar(active_section: str, secondary_navigation: str) -> st
       <span>{html.escape(section.description)}</span>
       <button class="context-collapse" type="button" aria-controls="context-navigation" aria-expanded="true" data-context-collapse>
         <span aria-hidden="true" data-context-collapse-icon>‹</span>
-        <span class="visually-hidden">折叠二级导航</span>
+        <span class="visually-hidden" data-context-collapse-label>折叠二级导航</span>
       </button>
     </div>
     <nav class="archive-nav context-navigation" id="context-navigation" aria-label="{html.escape(section.label, quote=True)}目录">
@@ -149,6 +149,7 @@ def render_site_page(
   <title>{html.escape(page_title)}</title>
 {_state_bootstrap()}
   <link rel="stylesheet" href="{html.escape(site_root, quote=True)}assets/css/site.css">
+  <script src="{html.escape(site_root, quote=True)}assets/js/site-shell.js" defer></script>
   <script src="{html.escape(site_root, quote=True)}assets/js/sidebar.js" defer></script>
 </head>
 <body{body_attributes}>
