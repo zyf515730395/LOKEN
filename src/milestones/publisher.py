@@ -19,6 +19,7 @@ from .catalog import (
     render_milestone_navigation,
 )
 from shared.rendering import atomic_write_text, render_note_content
+from shared.search_index import SearchDocument
 from shared.site_shell import render_site_page
 
 
@@ -42,6 +43,25 @@ STATUS_LABELS = {
     "early-access": "Early Access",
     "announced": "已宣布",
 }
+
+
+def build_milestone_search_documents(catalog: dict[str, Any]) -> list[SearchDocument]:
+    documents = []
+    for _, family in iter_families(catalog):
+        if family["page_status"] != "ready":
+            continue
+        release_dates = [release["release_date"] for release in family.get("releases", [])]
+        documents.append(
+            SearchDocument(
+                id=f"model:{family['slug']}",
+                title=family["name"],
+                url=f"milestone-models/{family['slug']}.html",
+                section="milestones",
+                kind="model",
+                published_at=max(release_dates) if release_dates else None,
+            )
+        )
+    return documents
 
 
 class MilestoneNoteError(ValueError):

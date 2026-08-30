@@ -11,6 +11,7 @@ import unicodedata
 
 from milestones.catalog import load_milestone_catalog
 from shared.rendering import atomic_write_text
+from shared.search_index import SearchDocument, write_search_index
 from shared.site_shell import render_empty_section_page, render_site_page
 
 
@@ -159,6 +160,45 @@ def filter_recent_archive(
         recent_themes.setdefault(recent_category["theme"], []).append(recent_category)
 
     return recent_categories, recent_themes
+
+
+def _iter_category_rows(category: dict):
+    for months in category["years"].values():
+        for weeks in months.values():
+            for rows in weeks.values():
+                yield from rows
+
+
+def build_paper_search_documents(
+    categories: list[dict], summary_catalog: dict[str, dict]
+) -> list[SearchDocument]:
+    """Create one public result per canonical paper, preferring ready summaries."""
+    documents: dict[str, SearchDocument] = {}
+    for category in categories:
+        topic_summaries = summary_catalog.get(category["topic"], {})
+        for row in _iter_category_rows(category):
+            paper_id = row["id"]
+            summary = topic_summaries.get(paper_id, {})
+            ready_summary = summary.get("status") == "ready" and summary.get("url")
+            url = (
+                summary["url"]
+                if ready_summary
+                else f"index.html#paper-{paper_id}"
+            )
+            document = SearchDocument(
+                id=f"paper:{paper_id}",
+                title=row["title"],
+                url=url,
+                section="learning",
+                kind="paper",
+                published_at=row["date"].isoformat(),
+            )
+            existing = documents.get(paper_id)
+            if existing is None or (
+                existing.url.startswith("index.html#") and ready_summary
+            ):
+                documents[paper_id] = document
+    return list(documents.values())
 
 
 def render_sidebar(
@@ -403,10 +443,11 @@ def generate_site(
     milestone_catalog_path: str | Path = DEFAULT_MILESTONE_CATALOG,
     *,
     output_root: str | Path | None = None,
+    search_index_path: str | Path | None = None,
     generated_on: datetime.date | None = None,
 ) -> None:
     data = json.loads(Path(json_path).read_text(encoding="utf-8"))
-    load_milestone_catalog(milestone_catalog_path)
+    milestone_catalog = load_milestone_catalog(milestone_catalog_path)
     all_categories, _ = build_archive(data)
     today = generated_on or datetime.date.today()
     categories, themes = filter_recent_archive(all_categories, today.year)
@@ -485,3 +526,15 @@ def generate_site(
                 body_copy=body_copy,
             ),
         )
+
+    from milestones.publisher import build_milestone_search_documents
+
+    search_documents = [
+        *build_paper_search_documents(categories, summary_catalog),
+        *build_milestone_search_documents(milestone_catalog),
+    ]
+    write_search_index(
+        search_index_path or site_root / "search-index.json",
+        search_documents,
+        generated_on=today,
+    )

@@ -225,6 +225,9 @@ def collect(config_path: str | Path) -> dict[str, int]:
     archive_path = config["json_gitpage_path"]
     html_path = config["html_gitpage_path"]
     output_root = config.get("output_root", str(Path(html_path).parent))
+    search_index_path = config.get(
+        "search_index_path", str(Path(output_root) / "search-index.json")
+    )
     ledger_path = config["candidate_ledger_path"]
     milestone_catalog_path = config["milestone_catalog_path"]
     topics = list(config["queries"])
@@ -244,6 +247,7 @@ def collect(config_path: str | Path) -> dict[str, int]:
         ledger_path,
         milestone_catalog_path,
         output_root=output_root,
+        search_index_path=search_index_path,
     )
     result = {
         "collected": len(records),
