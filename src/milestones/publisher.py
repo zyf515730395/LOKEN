@@ -20,7 +20,7 @@ from .catalog import (
 )
 from shared.rendering import atomic_write_text, render_note_content
 from shared.search_index import SearchDocument
-from shared.site_shell import render_site_page
+from shared.site_shell import render_section_intro, render_site_page
 
 
 DEEP_READING_FIELDS = (
@@ -349,7 +349,8 @@ def render_family_page(
         for status, label in STATUS_LABELS.items()
     )
     main_content = f"""    <header class="milestone-hero">
-      <div>
+{render_section_intro("milestones")}
+      <div class="milestone-title-block">
         <p>{html.escape(topic['name'])} · {html.escape(family['organization'])}</p>
         <h1>{html.escape(family['name'])}</h1>
         <span>官方模型版本演进与核心技术对比</span>
@@ -396,7 +397,7 @@ def render_notes_page(family: dict[str, Any], notes: dict) -> str:
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{html.escape(family['name'])} · 文章精读</title>
-  <link rel="stylesheet" href="../assets/css/site.css">
+  <link rel="stylesheet" href="../assets/css/site.css?v=3">
 </head>
 <body class="summary-page">
   <main class="summary-page-shell">

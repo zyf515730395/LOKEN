@@ -85,12 +85,22 @@ def render_primary_navigation(active_section: str, site_root: str) -> str:
     )
 
 
+def render_section_intro(section_key: str) -> str:
+    """Render the section identity at the top of the page body."""
+    section = get_section(section_key)
+    return (
+        '      <div class="section-intro">\n'
+        f'        <p class="section-intro-label">{html.escape(section.label)}</p>\n'
+        f'        <p class="section-intro-description">{html.escape(section.description)}</p>\n'
+        "      </div>"
+    )
+
+
 def render_context_sidebar(active_section: str, secondary_navigation: str) -> str:
     section = get_section(active_section)
     return f"""  <aside class="paper-sidebar context-sidebar" id="paper-sidebar" aria-label="{html.escape(section.label, quote=True)}导航">
-    <div class="sidebar-brand context-heading">
-      <a href="#top">{html.escape(section.label)}</a>
-      <span>{html.escape(section.description)}</span>
+    <div class="context-toolbar">
+      <p class="context-toolbar-label"><span>CONTENTS</span><span>目录</span></p>
       <button class="context-collapse" type="button" aria-controls="context-navigation" aria-expanded="true" data-context-collapse>
         <span aria-hidden="true" data-context-collapse-icon>‹</span>
         <span class="visually-hidden" data-context-collapse-label>折叠二级导航</span>
@@ -168,15 +178,15 @@ def render_site_page(
   <meta name="description" content="{html.escape(meta_description, quote=True)}">
   <title>{html.escape(page_title)}</title>
 {_state_bootstrap()}
-  <link rel="stylesheet" href="{html.escape(site_root, quote=True)}assets/css/site.css">
-  <script src="{html.escape(site_root, quote=True)}assets/js/site-shell.js" defer></script>
-  <script src="{html.escape(site_root, quote=True)}assets/js/search-core.js" defer></script>
-  <script src="{html.escape(site_root, quote=True)}assets/js/search.js" defer></script>
-  <script src="{html.escape(site_root, quote=True)}assets/js/sidebar.js" defer></script>
+  <link rel="stylesheet" href="{html.escape(site_root, quote=True)}assets/css/site.css?v=3">
+  <script src="{html.escape(site_root, quote=True)}assets/js/site-shell.js?v=3" defer></script>
+  <script src="{html.escape(site_root, quote=True)}assets/js/search-core.js?v=3" defer></script>
+  <script src="{html.escape(site_root, quote=True)}assets/js/search.js?v=3" defer></script>
+  <script src="{html.escape(site_root, quote=True)}assets/js/sidebar.js?v=3" defer></script>
 </head>
 <body{body_attributes}>
   <button class="sidebar-toggle" type="button" aria-controls="navigation-shell" aria-expanded="false">
-    <span aria-hidden="true">☰</span><span>打开导航</span>
+    <span aria-hidden="true" data-sidebar-toggle-icon>☰</span><span data-sidebar-toggle-label>打开导航</span>
   </button>
   <button class="theme-toggle" type="button" aria-label="切换颜色主题" aria-pressed="false">
     <span data-theme-icon aria-hidden="true"></span>
@@ -209,12 +219,12 @@ def render_empty_section_page(
     section = get_section(section_key)
     secondary_navigation = (
         '      <a class="context-overview is-active" href="#top" '
-        f'aria-current="page">{html.escape(section.label)}概览</a>'
+        'aria-current="page">页面概览</a>'
     )
     main_content = f"""    <section class="empty-section" aria-labelledby="empty-section-title">
-      <p class="section-eyebrow">TOGOS · {html.escape(section.label)}</p>
+{render_section_intro(section_key)}
       <h1 id="empty-section-title">{html.escape(section.label)}</h1>
-      <p>{html.escape(body_copy)}</p>
+      <p class="empty-section-copy">{html.escape(body_copy)}</p>
     </section>
 """
     return render_site_page(

@@ -29,12 +29,15 @@
     const body = document.body;
     const navigationShell = document.querySelector("#navigation-shell");
     const drawerToggle = document.querySelector(".sidebar-toggle");
+    const drawerToggleIcon = drawerToggle?.querySelector("[data-sidebar-toggle-icon]");
+    const drawerToggleLabel = drawerToggle?.querySelector("[data-sidebar-toggle-label]");
     const drawerScrim = document.querySelector("[data-sidebar-close]");
     const collapseToggle = document.querySelector("[data-context-collapse]");
     const collapseIcon = collapseToggle?.querySelector("[data-context-collapse-icon]");
     const collapseLabel = collapseToggle?.querySelector("[data-context-collapse-label]");
     const themeToggle = document.querySelector(".theme-toggle");
     const themeIcon = themeToggle?.querySelector("[data-theme-icon]");
+    const drawerMedia = window.matchMedia("(max-width: 900px)");
     const themeMedia = window.matchMedia("(prefers-color-scheme: dark)");
     const storedTheme = readStoredValue(window.localStorage, THEME_STORAGE_KEY);
     let followsSystemTheme = storedTheme !== "light" && storedTheme !== "dark";
@@ -58,9 +61,13 @@
       }
     }
 
-    function setDrawer(open) {
+    function setDrawer(open, returnFocus = false) {
       body.classList.toggle("sidebar-open", open);
       drawerToggle?.setAttribute("aria-expanded", String(open));
+      navigationShell?.toggleAttribute("inert", drawerMedia.matches && !open);
+      if (drawerToggleIcon) drawerToggleIcon.textContent = open ? "×" : "☰";
+      if (drawerToggleLabel) drawerToggleLabel.textContent = open ? "关闭导航" : "打开导航";
+      if (!open && returnFocus && drawerMedia.matches) drawerToggle?.focus();
     }
 
     function setCollapsed(collapsed, persist = false) {
@@ -74,6 +81,7 @@
       if (persist) writeStoredCollapse(window.localStorage, collapsed);
     }
 
+    setDrawer(false);
     setCollapsed(readStoredCollapse(window.localStorage));
     applyTheme(
       storedTheme === "light" || storedTheme === "dark"
@@ -87,9 +95,10 @@
       setCollapsed(root.dataset.secondaryCollapsed !== "true", true);
     });
     drawerToggle?.addEventListener("click", () => {
-      setDrawer(!body.classList.contains("sidebar-open"));
+      const isOpen = body.classList.contains("sidebar-open");
+      setDrawer(!isOpen, isOpen);
     });
-    drawerScrim?.addEventListener("click", () => setDrawer(false));
+    drawerScrim?.addEventListener("click", () => setDrawer(false, true));
     navigationShell?.addEventListener("click", (event) => {
       if (event.target.closest?.("a")) setDrawer(false);
     });
@@ -100,8 +109,11 @@
     themeMedia.addEventListener?.("change", (event) => {
       if (followsSystemTheme) applyTheme(event.matches ? "dark" : "light");
     });
+    drawerMedia.addEventListener?.("change", () => setDrawer(false));
     document.addEventListener("keydown", (event) => {
-      if (event.key === "Escape") setDrawer(false);
+      if (event.key === "Escape" && body.classList.contains("sidebar-open")) {
+        setDrawer(false, true);
+      }
     });
 
     return { setCollapsed, setDrawer };

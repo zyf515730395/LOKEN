@@ -12,7 +12,7 @@ import unicodedata
 from milestones.catalog import load_milestone_catalog
 from shared.rendering import atomic_write_text
 from shared.search_index import SearchDocument, write_search_index
-from shared.site_shell import render_empty_section_page, render_site_page
+from shared.site_shell import render_empty_section_page, render_section_intro, render_site_page
 
 
 ENTRY_PATTERN = re.compile(
@@ -472,7 +472,7 @@ def generate_site(
     page_output = Path(output_path)
     site_root = Path(output_root) if output_root is not None else page_output.parent
     main_content = f"""    <header class="hero">
-      <p class="section-eyebrow">TOGOS · 学习一个</p>
+{render_section_intro("learning")}
       <h1>今天学什么</h1>
       <div class="hero-stats" aria-label="Archive statistics">
         <div><strong>{total_papers:,}</strong><span>Papers</span></div>
