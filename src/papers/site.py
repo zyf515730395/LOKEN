@@ -11,7 +11,7 @@ import unicodedata
 
 from milestones.catalog import load_milestone_catalog
 from shared.rendering import atomic_write_text
-from shared.search_index import SearchDocument, write_search_index
+from shared.search_index import SearchDocument, serialize_search_index
 from shared.site_shell import render_empty_section_page, render_section_intro, render_site_page
 
 
@@ -24,7 +24,7 @@ SITE_TITLE = "TOGOS"
 RECENT_YEAR_COUNT = 3
 NOTES_DIRECTORY_NAME = "notes"
 SHOW_BOOK_NOTES_NAV = False
-PROJECT_ROOT = Path(__file__).resolve().parents[3]
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_MILESTONE_CATALOG = PROJECT_ROOT / "config" / "milestone_models.yaml"
 
 
@@ -453,6 +453,8 @@ def generate_site(
     output_root: str | Path | None = None,
     search_index_path: str | Path | None = None,
     generated_on: datetime.date | None = None,
+    writings_source_root: str | Path = PROJECT_ROOT / "content" / "writings",
+    writings_report_path: str | Path = PROJECT_ROOT / "build" / "reports" / "writings.json",
 ) -> None:
     data = json.loads(Path(json_path).read_text(encoding="utf-8"))
     milestone_catalog = load_milestone_catalog(milestone_catalog_path)
@@ -514,11 +516,6 @@ def generate_site(
 
     empty_pages = (
         (
-            "writings",
-            site_root / "writings" / "index.html",
-            "公开的学习笔记和读书笔记会在这里汇集。",
-        ),
-        (
             "journeys",
             site_root / "journeys" / "index.html",
             "城市坐标与摄影作品会在这里出现。",
@@ -536,13 +533,36 @@ def generate_site(
         )
 
     from milestones.publisher import build_milestone_search_documents
+    from writings.publisher import (
+        commit_writings_and_search,
+        prepare_writings_publication,
+    )
+
+    prepared_writings = prepare_writings_publication(
+        writings_source_root,
+        site_root / "writings",
+        writings_report_path,
+        today,
+    )
 
     search_documents = [
         *build_paper_search_documents(categories, summary_catalog),
         *build_milestone_search_documents(milestone_catalog),
+        *prepared_writings.result.search_documents,
     ]
-    write_search_index(
+    search_content = serialize_search_index(search_documents, generated_on=today)
+    commit_writings_and_search(
+        prepared_writings,
         search_index_path or site_root / "search-index.json",
-        search_documents,
-        generated_on=today,
+        search_content,
+    )
+    for issue in prepared_writings.result.issues:
+        source = issue.source.replace("%", "%25").replace("\r", "%0D").replace("\n", "%0A")
+        message = issue.message.replace("%", "%25").replace("\r", "%0D").replace("\n", "%0A")
+        print(f"::warning file={source},title=Writings {issue.code}::{message}")
+    result = prepared_writings.result
+    print(
+        "Writings publication: "
+        f"published={len(result.published)} retained={len(result.retained)} "
+        f"skipped={len(result.skipped)} removed={len(result.removed)}"
     )

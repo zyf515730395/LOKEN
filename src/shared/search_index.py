@@ -107,9 +107,18 @@ def write_search_index(
     *,
     generated_on: datetime.date,
 ) -> None:
+    atomic_write_text(
+        path,
+        serialize_search_index(documents, generated_on=generated_on),
+    )
+
+
+def serialize_search_index(
+    documents: Iterable[SearchDocument], *, generated_on: datetime.date
+) -> str:
+    """Serialize the validated public search index without writing it."""
     payload = build_search_payload(documents, generated_on=generated_on)
-    serialized = json.dumps(payload, ensure_ascii=False, separators=(",", ":")) + "\n"
-    atomic_write_text(path, serialized)
+    return json.dumps(payload, ensure_ascii=False, separators=(",", ":")) + "\n"
 
 
 def public_article_search_documents(
