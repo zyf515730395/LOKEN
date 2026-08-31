@@ -19,3 +19,10 @@
 ## README 保持固定
 
 - 任何更改都不再修改 `README.md`。
+
+## Writings 目录约定
+
+- `content/writings/<slug>/index.md` 是公开文章唯一真源；本地图片只放在同 bundle 的 `assets/`。
+- `src/writings/` 只包含文章校验、渲染与发布逻辑；跨主题能力留在 `src/shared/`。
+- `docs/writings/` 只保存生成产物，受管范围以 `manifest.json` 为准，不手工编辑受管文件。
+- `build/` 只保存本地报告和临时产物，必须保持忽略且不得提交。
