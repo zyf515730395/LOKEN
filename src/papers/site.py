@@ -534,6 +534,7 @@ def generate_site(
 
     from milestones.publisher import build_milestone_search_documents
     from writings.publisher import (
+        abort_writings_publication,
         commit_writings_and_search,
         prepare_writings_publication,
     )
@@ -545,12 +546,16 @@ def generate_site(
         today,
     )
 
-    search_documents = [
-        *build_paper_search_documents(categories, summary_catalog),
-        *build_milestone_search_documents(milestone_catalog),
-        *prepared_writings.result.search_documents,
-    ]
-    search_content = serialize_search_index(search_documents, generated_on=today)
+    try:
+        search_documents = [
+            *build_paper_search_documents(categories, summary_catalog),
+            *build_milestone_search_documents(milestone_catalog),
+            *prepared_writings.result.search_documents,
+        ]
+        search_content = serialize_search_index(search_documents, generated_on=today)
+    except Exception:
+        abort_writings_publication(prepared_writings)
+        raise
     commit_writings_and_search(
         prepared_writings,
         search_index_path or site_root / "search-index.json",
