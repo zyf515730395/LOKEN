@@ -162,6 +162,7 @@ def render_site_page(
     main_content: str,
     body_class: str = "",
     trailing_dialogs: str = "",
+    head_content: str = "",
 ) -> str:
     site_root = site_root_for(output_file, output_root)
     body_attributes = (
@@ -178,7 +179,7 @@ def render_site_page(
   <meta name="description" content="{html.escape(meta_description, quote=True)}">
   <title>{html.escape(page_title)}</title>
 {_state_bootstrap()}
-  <link rel="stylesheet" href="{html.escape(site_root, quote=True)}assets/css/site.css?v=3">
+{head_content}  <link rel="stylesheet" href="{html.escape(site_root, quote=True)}assets/css/site.css?v=3">
   <script src="{html.escape(site_root, quote=True)}assets/js/site-shell.js?v=3" defer></script>
   <script src="{html.escape(site_root, quote=True)}assets/js/search-core.js?v=3" defer></script>
   <script src="{html.escape(site_root, quote=True)}assets/js/search.js?v=3" defer></script>
