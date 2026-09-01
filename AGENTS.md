@@ -32,3 +32,10 @@
 - `src/writings/importers/` 只负责把外部导出物转换为标准 writing bundle；发布器不得反向依赖 importer。
 - 导入计划、私有映射、预览、报告和解压内容只放在已忽略的 `build/notion-import/` 或 `build/reports/`，不得进入 `content/` 或 `docs/`。
 - importer 只能通过显式 apply 修改 `content/writings/<slug>/`，不得生成、提交或推送站点产物。
+
+## WeChat Reading 导入器约定
+
+- `src/writings/importers/weread/` 只负责本地微信读书 Markdown 归一化、loopback 模型调用、私有缓存、预览与 CLI 编排。
+- 可复用的路径安全、状态和事务逻辑保留在 `src/writings/importers/`；Notion 与 WeChat adapter 不得相互依赖。
+- 微信读书计划、原始归一化内容、提示词、模型响应、缓存、预览、状态和报告只放在已忽略的 `build/weread-import/` 或 `build/reports/`。
+- 只有显式 apply 可以修改 `content/writings/<slug>/`；adapter 不得直接生成 `docs/`。
