@@ -26,3 +26,9 @@
 - `src/writings/` 只包含文章校验、渲染与发布逻辑；跨主题能力留在 `src/shared/`。
 - `docs/writings/` 只保存生成产物，受管范围以 `manifest.json` 为准，不手工编辑受管文件。
 - `build/` 只保存本地报告和临时产物，必须保持忽略且不得提交。
+
+## Writings 导入器约定
+
+- `src/writings/importers/` 只负责把外部导出物转换为标准 writing bundle；发布器不得反向依赖 importer。
+- 导入计划、私有映射、预览、报告和解压内容只放在已忽略的 `build/notion-import/` 或 `build/reports/`，不得进入 `content/` 或 `docs/`。
+- importer 只能通过显式 apply 修改 `content/writings/<slug>/`，不得生成、提交或推送站点产物。
