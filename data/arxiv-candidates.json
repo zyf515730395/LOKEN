@@ -1055,8 +1055,870 @@
       "status": "pending",
       "title": "ChainSplat: A Physics-Inspired Screw-Theoretic Model for Learning Deformable Linear Object Dynamics from Multi-View RGB Videos",
       "updated": "2026-08-28"
+    },
+    "2608.28895": {
+      "abstract": "We introduce ReconSplat, a feed-forward model for 3D scene reconstruction that aims to address the longstanding trade-off between plausible view generation for unobserved regions and geometric consistency, providing both geometrically aligned novel views and sharp depth estimates. Our approach builds on 3D Gaussian splatting (3DGS) as an intermediate differentiable scene representation and integrates it with a multi-view latent diffusion model (MV-LDM) trained to act simultaneously as a refiner and an inpainter for appearance and scene geometry. We enforce geometric consistency by guiding the diffusion process with variational 3D latent features for appearance and geometry, encoded by the feed-forward 3DGS representation and rasterized to 2D latent space. ReconSplat produces both photorealistic novel views and accurate depth maps on real-world benchmarks, RealEstate10K and DL3DV-10K, outperforming existing methods in challenging extrapolation setups. Notably, ReconSplat allows the extrapolation of unseen and challenging viewpoints jointly with coherent and precise scene geometry.",
+      "archive_rows": {
+        "Depth Estimation": "|**2026-08-28**|**ReconSplat: Generalizable 3D Scene Reconstruction Beyond Observed Views**|Giuseppe Stracquadanio et.al.|[2608.28895](https://arxiv.org/abs/2608.28895)|null|\n"
+      },
+      "authors": "Giuseppe Stracquadanio et.al.",
+      "collected_at": "2026-09-01T06:02:05+00:00",
+      "decision_reason": null,
+      "id": "2608.28895",
+      "matched_topics": [
+        "Depth Estimation"
+      ],
+      "paper_url": "https://arxiv.org/abs/2608.28895",
+      "pdf_url": "https://arxiv.org/pdf/2608.28895v1",
+      "reviewed_at": null,
+      "selected_topic": null,
+      "status": "pending",
+      "title": "ReconSplat: Generalizable 3D Scene Reconstruction Beyond Observed Views",
+      "updated": "2026-08-28"
+    },
+    "2608.28933": {
+      "abstract": "Stereo reconstruction is one of the last remaining Computer Vision tasks where all state-of-the-art methods employ a heavy architectural inductive bias. Even though it has been demonstrated that the task can be solved using general-purpose methods, it is widely believed that inductive biases in stereo are strictly necessary for both high-quality results and computational efficiency. We challenge this paradigm. In this paper, we demonstrate that both state-of-the-art accuracy and superior runtime efficiency are achievable with a model completely devoid of architectural inductive biases, relying instead on a simple, end-to-end Vision Transformer. By training on massive synthetic datasets, we show that pure data-driven learning can surpass explicitly engineered geometry. This work proves that explicit inductive biases are no longer a prerequisite for stereo matching, ultimately unlocking true scaling laws for continuous improvement in 3D reconstruction.",
+      "archive_rows": {
+        "Depth Estimation": "|**2026-08-28**|**NBS: No Bias Stereo**|Vage Taamazyan et.al.|[2608.28933](https://arxiv.org/abs/2608.28933)|null|\n"
+      },
+      "authors": "Vage Taamazyan et.al.",
+      "collected_at": "2026-09-01T06:02:05+00:00",
+      "decision_reason": null,
+      "id": "2608.28933",
+      "matched_topics": [
+        "Depth Estimation"
+      ],
+      "paper_url": "https://arxiv.org/abs/2608.28933",
+      "pdf_url": "https://arxiv.org/pdf/2608.28933v1",
+      "reviewed_at": null,
+      "selected_topic": null,
+      "status": "pending",
+      "title": "NBS: No Bias Stereo",
+      "updated": "2026-08-28"
+    },
+    "2608.29123": {
+      "abstract": "Training a video-generation model from scratch is hard for reasons that precede model design. The feedback loop is long: a failure that appears only after a training run can make each attempted fix another run. The data are hard to reach: the corpora and recipes behind strong models are large, heterogeneous, and often unreleased. And scoring is blunt: open-ended generation has no single correct output, and an aggregate score does not by itself establish whether a sample succeeds or which property failed. Dancing Stick Figures is a synthetic video dataset built against these three obstacles. For iteration speed, its 64x64, 64-frame reference task is sized for practical repeated training on a single workstation GPU. For accessibility, the release is a 0.79-GB training tier of 4,020 video clips--1,340 six-second source motions, each rendered from three cameras by a deterministic dataset-generation harness--with checkpoints and a Colab workflow that reruns the reference training pipeline at reduced budget on a 16 GB Tesla T4. For scoring, every frame retains its generating state (ARDY cskel27 joint positions, camera, body parameters, and source motion) and per-pixel depth, surface normals, and part labels. These annotations support dataset-specific metrics for visible topology and part-wise motion; corruptions expose their sensitivities and blind spots.",
+      "archive_rows": {
+        "Video Generation": "|**2026-08-29**|**Dancing Stick Figures: An Introductory Dataset for Training Video Generation Models**|Jin Hyuk Cho et.al.|[2608.29123](https://arxiv.org/abs/2608.29123)|null|\n"
+      },
+      "authors": "Jin Hyuk Cho et.al.",
+      "collected_at": "2026-09-01T06:02:05+00:00",
+      "decision_reason": null,
+      "id": "2608.29123",
+      "matched_topics": [
+        "Video Generation"
+      ],
+      "paper_url": "https://arxiv.org/abs/2608.29123",
+      "pdf_url": "https://arxiv.org/pdf/2608.29123v1",
+      "reviewed_at": null,
+      "selected_topic": null,
+      "status": "pending",
+      "title": "Dancing Stick Figures: An Introductory Dataset for Training Video Generation Models",
+      "updated": "2026-08-29"
+    },
+    "2608.29160": {
+      "abstract": "We aim to improve frozen flow-matching image generators by adding inference computation inside the denoiser, without changing model weights or the outer sampler. Existing generators usually spend extra test-time computation by increasing the number of sampling steps, which repeatedly evaluates the entire denoiser and couples quality gains to sampler cost. A key challenge is how to use extra computation inside a frozen transformer denoiser: the method must decide which tokens, layers, and sampling times receive repeated updates while preserving the original generation pipeline. We introduce a training-free looping framework that repeatedly applies selected transformer layers inside each denoising call. Dense and Sparse Token Loop vary the token scope; Sampling-Progress Gating and the loop layer range specify when and where looping is active; loop count and strength control the repeated updates; and Loop Guidance combines ordinary and looped vector-field predictions. Across two Scale-RAE model scales, loop variants improve primary and auxiliary quality metrics with competitive quality--efficiency trade-offs. Loop Guidance further improves both primary metrics across all three tested models; on Scale-RAE DiT2.4B, it raises GenEval from 0.4471 to 0.5691 and DPG-Bench from 0.7656 to 0.8053. Code will be released.",
+      "archive_rows": {
+        "Image Generation": "|**2026-08-29**|**Training-Free Hidden-State Refinement for Flow-Matching Image Generators**|Yuanyi Yan et.al.|[2608.29160](https://arxiv.org/abs/2608.29160)|null|\n"
+      },
+      "authors": "Yuanyi Yan et.al.",
+      "collected_at": "2026-09-01T06:02:05+00:00",
+      "decision_reason": null,
+      "id": "2608.29160",
+      "matched_topics": [
+        "Image Generation"
+      ],
+      "paper_url": "https://arxiv.org/abs/2608.29160",
+      "pdf_url": "https://arxiv.org/pdf/2608.29160v1",
+      "reviewed_at": null,
+      "selected_topic": null,
+      "status": "pending",
+      "title": "Training-Free Hidden-State Refinement for Flow-Matching Image Generators",
+      "updated": "2026-08-29"
+    },
+    "2608.29233": {
+      "abstract": "We present the winning solution to the ACM Multimedia 2026 Grand Challenge on Single-Image Guided Multi-Angle Image Synthesis. It ranks first among 293 registered teams; 56 teams obtained at least one scored submission on the public Phase-A leaderboard. With only 40 training scenes, the challenge requires 26 target views from one RGB model and one forward pass per view; it prohibits explicit geometry, external rendering, chained generation, candidate selection, and post-processing. We identify a critical model-selection failure: shared training and validation scenes make memorization appear as transferable view control. We therefore introduce GoM. Short for Generalization over Memorization, the framework combines scene-disjoint validation, exposure-matched selection, and targeted diffusion adaptation. Its synthesis model adapts a 4B rectified-flow DiT using rank-32 LoRA, optimizer restarts, late-checkpoint averaging, and VAE decoder tuning. More than 300 offline experiments and 24 online submissions show that validation design and training-trajectory control can matter as much as architecture scale in small-data generative modeling.",
+      "archive_rows": {
+        "Image Generation": "|**2026-08-29**|**Generalization over Memorization: Generalization-Aware Diffusion Adaptation for Single-Image Multi-View Synthesis**|Jie Li et.al.|[2608.29233](https://arxiv.org/abs/2608.29233)|null|\n"
+      },
+      "authors": "Jie Li et.al.",
+      "collected_at": "2026-09-01T06:02:05+00:00",
+      "decision_reason": null,
+      "id": "2608.29233",
+      "matched_topics": [
+        "Image Generation"
+      ],
+      "paper_url": "https://arxiv.org/abs/2608.29233",
+      "pdf_url": "https://arxiv.org/pdf/2608.29233v1",
+      "reviewed_at": null,
+      "selected_topic": null,
+      "status": "pending",
+      "title": "Generalization over Memorization: Generalization-Aware Diffusion Adaptation for Single-Image Multi-View Synthesis",
+      "updated": "2026-08-29"
+    },
+    "2608.29264": {
+      "abstract": "Diffusion-based visual generative models deliver strong image and video synthesis quality but incur high inference costs because sequential samplers repeatedly evaluate large networks. Caching-based methods reduce inference latency by reusing intermediate computations across adjacent timesteps. However, existing cache controllers rely primarily on local temporal variation and overlook the trajectory-level consequences of cache reuse. We introduce Error-Propagation-Aware Cache (EpaCache), a training-free caching policy that adaptively allocates the reuse budget on timesteps with lower downstream impact. Experiments on image and video synthesis models demonstrate that EpaCache consistently improves the latency--fidelity trade-off over existing caching methods. On FLUX.1-dev, EpaCache outperforms the prior state-of-the-art caching method in both latency and fidelity, reducing inference time from $11.7$ s to $11.3$ s while improving PSNR from $21.4$ to $22.8$. On HunyuanVideo, EpaCache achieves a $2.63\\times$ speedup over uncached inference and improves SSIM from $0.891$ to $0.905$ over the prior state-of-the-art method at matched latency.",
+      "archive_rows": {
+        "Video Generation": "|**2026-08-29**|**EpaCache: Error-Propagation-Aware Caching for Accelerating Diffusion-Based Visual Generation**|Yuhan Liu et.al.|[2608.29264](https://arxiv.org/abs/2608.29264)|null|\n"
+      },
+      "authors": "Yuhan Liu et.al.",
+      "collected_at": "2026-09-01T06:02:05+00:00",
+      "decision_reason": null,
+      "id": "2608.29264",
+      "matched_topics": [
+        "Video Generation"
+      ],
+      "paper_url": "https://arxiv.org/abs/2608.29264",
+      "pdf_url": "https://arxiv.org/pdf/2608.29264v1",
+      "reviewed_at": null,
+      "selected_topic": null,
+      "status": "pending",
+      "title": "EpaCache: Error-Propagation-Aware Caching for Accelerating Diffusion-Based Visual Generation",
+      "updated": "2026-08-29"
+    },
+    "2608.29322": {
+      "abstract": "Recent video diffusion models have achieved remarkable generation quality, but high-fidelity results still largely depend on closed-source systems or costly large-scale infrastructure. Test-time scaling (TTS) offers a training-free way to improve lightweight generators by spending additional inference compute, yet existing methods mostly remain within a noise-search paradigm: they sample, select, or perturb denoising trajectories and discard low-scoring candidates after expensive generation. This generate-and-discard process wastes not only computation but also the partial motion, layout, or appearance structure already encoded in recoverable samples. We present \\textbf{GEARS} (\\textbf{G}uided \\textbf{E}diting for \\textbf{A}daptive \\textbf{R}ecycling \\textbf{S}earch), a training-free framework that introduces {diagnosis-guided candidate recycling} into video TTS by turning such candidates into editable priors through a generation-evaluation-editing loop. GEARS consists of two collaborative components. The \\textbf{Stage-Aware Scheduler} determines what to repair, when to repair it, and which candidates should be preserved, recycled, or discarded. The \\textbf{Candidate Recycler} diagnoses recoverable failures from keyframes and multi-dimensional reward feedback, derives candidate-specific repair prompts, and repairs the corresponding candidates through manifold-aware latent SDEdit. The repaired candidates are recycled into the search pool, creating refinement paths beyond standard noise perturbation while preserving useful structure. Under matched NFE budgets, GEARS consistently outperforms existing video TTS methods on VBench, bringing a 1.3B model to a total score comparable to a 14B counterpart, and ablations verify the necessity of adaptive scheduling, diagnosis-conditioned editing, and manifold-aware re-denoising. Code is available on GitHub.",
+      "archive_rows": {
+        "Video Generation": "|**2026-08-29**|**Test-Time Scaling for Video Diffusion Models via Diagnosis-Guided Candidate Recycling**|Hangzhou He et.al.|[2608.29322](https://arxiv.org/abs/2608.29322)|null|\n"
+      },
+      "authors": "Hangzhou He et.al.",
+      "collected_at": "2026-09-01T06:02:05+00:00",
+      "decision_reason": null,
+      "id": "2608.29322",
+      "matched_topics": [
+        "Video Generation"
+      ],
+      "paper_url": "https://arxiv.org/abs/2608.29322",
+      "pdf_url": "https://arxiv.org/pdf/2608.29322v1",
+      "reviewed_at": null,
+      "selected_topic": null,
+      "status": "pending",
+      "title": "Test-Time Scaling for Video Diffusion Models via Diagnosis-Guided Candidate Recycling",
+      "updated": "2026-08-29"
+    },
+    "2608.29335": {
+      "abstract": "Latent generative models typically follow a two-stage pipeline, training a variational autoencoder for reconstruction and then a generative model on the frozen latent space. Since reconstruction-optimized latents are not necessarily generation-friendly, jointly training both models is an appealing alternative. However, direct end-to-end training remains challenging, as it is prone to latent collapse and faces a generation-reconstruction conflict. We revisit this problem by analyzing how different objectives shape the latent space and identify two key insights. First, the entropy term in the Kullback-Leibler divergence objective is essential for preventing collapse: reconstruction and prior fitting tend to shrink the posterior, while entropy preserves non-degenerate latent uncertainty. Second, reconstruction and generation exhibit asymmetric learning dynamics: reconstruction is fast and strongly supervised, whereas generation is slower and harder to optimize. Based on these insights, we achieve the first direct end-to-end training without latent collapse and propose GenFirst, a simple generation-before-reconstruction strategy. The generative objective first shapes the latent space under weak reconstruction pressure, after which reconstruction is progressively strengthened to recover visual details. We validate GenFirst with continuous autoregressive priors with exact likelihoods and SiT priors with implicit likelihoods. With our end-to-end objective and GenFirst, SiT achieves a gFID of 0.97 with CFG and 1.45 without CFG on ImageNet-256, while MMDiT reaches a GenEval score of 0.90 on text-to-image generation. Beyond image generation, we extend the framework to shared visual latents for generation and representation learning, and to continuous unified text-image generation. These results demonstrate the generality of stable end-to-end latent learning across generative priors and modalities.",
+      "archive_rows": {
+        "Image Generation": "|**2026-08-29**|**GenFirst: Generation Before Reconstruction for Stable End-to-End Latent Generative Modeling**|Guangting Zheng et.al.|[2608.29335](https://arxiv.org/abs/2608.29335)|null|\n"
+      },
+      "authors": "Guangting Zheng et.al.",
+      "collected_at": "2026-09-01T06:02:05+00:00",
+      "decision_reason": null,
+      "id": "2608.29335",
+      "matched_topics": [
+        "Image Generation"
+      ],
+      "paper_url": "https://arxiv.org/abs/2608.29335",
+      "pdf_url": "https://arxiv.org/pdf/2608.29335v1",
+      "reviewed_at": null,
+      "selected_topic": null,
+      "status": "pending",
+      "title": "GenFirst: Generation Before Reconstruction for Stable End-to-End Latent Generative Modeling",
+      "updated": "2026-08-29"
+    },
+    "2608.29346": {
+      "abstract": "3D Gaussian Splatting has achieved remarkable success in photorealistic rendering, yet it suffers from severe overfitting and geometric artifacts in sparse-view scenarios due to the inherent deficiency of photometric supervision. Recent advances have attempted to regularize optimization by incorporating external priors, such as depth, point clouds, or diffusion models. However, these methods typically overlook the non-uniform distribution of supervision across the viewing space, resulting in limited specificity in prior use and primitive control. In this paper, we propose GSPotential, a framework that quantifies view-space supervision imbalance using a Camera Potential Field. Our key insight is to identify supervision valleys where photometric constraints are most deficient, and use the potential field to guide reconstruction from two complementary aspects. First, we devise a probabilistic spherical sampling strategy that places informative virtual cameras in low-potential regions. Point-cloud renderings from these views then provide targeted geometric guidance. Second, the same field provides a directional coverage cue for conservative Gaussian updates in weakly covered spatial sectors. Extensive experiments demonstrate that GSPotential achieves high reconstruction fidelity while maintaining competitive training efficiency.",
+      "archive_rows": {
+        "Neural Rendering": "|**2026-08-29**|**GSPotential: Camera Potential Field for Sparse-View 3D Gaussian Splatting**|Zeyuan An et.al.|[2608.29346](https://arxiv.org/abs/2608.29346)|null|\n"
+      },
+      "authors": "Zeyuan An et.al.",
+      "collected_at": "2026-09-01T06:02:05+00:00",
+      "decision_reason": null,
+      "id": "2608.29346",
+      "matched_topics": [
+        "Neural Rendering"
+      ],
+      "paper_url": "https://arxiv.org/abs/2608.29346",
+      "pdf_url": "https://arxiv.org/pdf/2608.29346v1",
+      "reviewed_at": null,
+      "selected_topic": null,
+      "status": "pending",
+      "title": "GSPotential: Camera Potential Field for Sparse-View 3D Gaussian Splatting",
+      "updated": "2026-08-29"
+    },
+    "2608.29374": {
+      "abstract": "Tool-augmented multimodal reasoning integrates external tools (e.g., object detection, depth estimation) into multimodal large language models (MLLMs) to address perceptual bottlenecks in complex visual tasks. However, existing approaches rarely verify tool outputs, limiting their ability to detect and recover from tool failures. We propose ReVISE, a framework that equips MLLMs with verification and dynamic error recovery for tool-augmented reasoning. ReVISE introduces (1) a curated training dataset that supervises reflective behaviors, enabling models to validate tool-derived evidence, reformulate queries when visual mismatches arise, and fall back to intrinsic grounding when external tools are unreliable; and (2) a reinforcement learning based targeted rewards that encourage internal reflection and penalize spatial misalignment. Experiments on several benchmarks demonstrate consistent improvements over existing methods, highlighting the importance of error detection and correction in tool-augmented multimodal reasoning.",
+      "archive_rows": {
+        "Depth Estimation": "|**2026-08-29**|**Think, Look, and Revise: Inconsistency-Aware Visual Self-Correction in MLLMs**|Yu Cheng et.al.|[2608.29374](https://arxiv.org/abs/2608.29374)|null|\n"
+      },
+      "authors": "Yu Cheng et.al.",
+      "collected_at": "2026-09-01T06:02:05+00:00",
+      "decision_reason": null,
+      "id": "2608.29374",
+      "matched_topics": [
+        "Depth Estimation"
+      ],
+      "paper_url": "https://arxiv.org/abs/2608.29374",
+      "pdf_url": "https://arxiv.org/pdf/2608.29374v1",
+      "reviewed_at": null,
+      "selected_topic": null,
+      "status": "pending",
+      "title": "Think, Look, and Revise: Inconsistency-Aware Visual Self-Correction in MLLMs",
+      "updated": "2026-08-29"
+    },
+    "2608.29469": {
+      "abstract": "Optical neural networks (ONNs) promise high-throughput and energy-efficient artificial intelligence, yet essentially all implementations so far encode information across space either in free-space arrays or in integrated waveguide meshes, tying the number of neurons to the number of physical components and fixes the routing topology at fabrication. Here we show that moving the computation into time decouples computational dimension from hardware dimension. Exploiting space-time duality, we implement optical diffraction and interference entirely in time domain, using thin-film lithium niobate modulators as time lenses and temporal masks, with chromatic dispersion providing the coupling between successive temporal neurons. We experimentally verify high-order, complex-valued matrix-matrix multiplications using just a single optical input/output port, scaling the computational dimensions far beyond the channel count. By incorporating optical feedback, we extend this platform into versatile neural networks, where the network layers, neuron numbers, and synaptic connections are fully programmable and in-situ trainable. Our temporal diffractive neural networks are successfully validated on various classification benchmarks, alongside image and video generation tasks. Notably, using this platform we demonstrate an all-analogue generative pipeline in which the latent variable is drawn directly from amplified spontaneous emission, so that no digital sampling or electronic modulation appears anywhere in the generative path. Furthermore, high-resolution images and videos are generated at high frame rates, outperforming state-of-the-art modulator-refresh-limited optical generative systems. These results establish a unified photonic temporal computing framework, providing a scalable and deployable pathway toward next-generation machine intelligence.",
+      "archive_rows": {
+        "Video Generation": "|**2026-08-29**|**Artificial Intelligence in a Photonic Temporal Processor**|Youlve Chen et.al.|[2608.29469](https://arxiv.org/abs/2608.29469)|null|\n"
+      },
+      "authors": "Youlve Chen et.al.",
+      "collected_at": "2026-09-01T06:02:05+00:00",
+      "decision_reason": null,
+      "id": "2608.29469",
+      "matched_topics": [
+        "Video Generation"
+      ],
+      "paper_url": "https://arxiv.org/abs/2608.29469",
+      "pdf_url": "https://arxiv.org/pdf/2608.29469v1",
+      "reviewed_at": null,
+      "selected_topic": null,
+      "status": "pending",
+      "title": "Artificial Intelligence in a Photonic Temporal Processor",
+      "updated": "2026-08-29"
+    },
+    "2608.29538": {
+      "abstract": "3D Gaussian Splatting (3DGS) models radiance fields as sparsely distributed 3D Gaussians, providing a compelling solution to novel view synthesis at high resolutions and real-time frame rates. However, deforming objects represented by 3D Gaussians remains a challenging task. Existing methods deform a 3DGS object by editing Gaussians geometrically. These approaches ignore the fact that it is the radiance field that rasterizes and renders the final image. The inconsistency between the deformed 3D Gaussians and the desired radiance field inevitably leads to artifacts in the final results. In this paper, we propose an interactive method for as-rigid-as-possible (ARAP) deformation of the Gaussian radiance fields. Specifically, after performing geometric edits on the Gaussians, we further optimize Gaussians to ensure its rasterization yields a similar result as the deformed radiance field. To facilitate this objective, we design radial features to mathematically describe the radial difference before and after the deformation, which are densely sampled across the radiance field. Additionally, we propose an adaptive anisotropic spatial low-pass filter to prevent aliasing issues during sampling and to preserve the field with the varying non-uniform sampling intervals. Users can interactively employ this tool to achieve large-scale ARAP deformations of the radiance field. Since our method maintains the consistency of the Gaussian radiance field before and after deformation, it avoids artifacts that are common in existing 3DGS deformation frameworks. Meanwhile, our method keeps the high quality and efficiency of 3DGS in rendering.",
+      "archive_rows": {
+        "Neural Rendering": "|**2026-08-30**|**As-Rigid-As-Possible Deformation of Gaussian Radiance Fields**|Xinhao Tong et.al.|[2608.29538](https://arxiv.org/abs/2608.29538)|null|\n"
+      },
+      "authors": "Xinhao Tong et.al.",
+      "collected_at": "2026-09-01T06:02:05+00:00",
+      "decision_reason": null,
+      "id": "2608.29538",
+      "matched_topics": [
+        "Neural Rendering"
+      ],
+      "paper_url": "https://arxiv.org/abs/2608.29538",
+      "pdf_url": "https://arxiv.org/pdf/2608.29538v1",
+      "reviewed_at": null,
+      "selected_topic": null,
+      "status": "pending",
+      "title": "As-Rigid-As-Possible Deformation of Gaussian Radiance Fields",
+      "updated": "2026-08-30"
+    },
+    "2608.29598": {
+      "abstract": "We present the first systematic study of the resilience of text-to-video (T2V) diffusion models under random hardware-level faults. While T2V models are widely used for automated video generation due to their ability to produce high-quality, temporally coherent, and realistic videos, their iterative denoising process and spatiotemporal dependencies introduce unique failure modes. We perform an extensive fault-injection study covering both computational and memory faults across three T2V models and a representative benchmark. Our results show that (1) a single fault can degrade overall performance by up to 3.7\\%, with semantic correctness more affected than perceptual quality; (2) memory faults are more damaging than computational faults, high-order exponent bits are particularly vulnerable, and the widely-used bfloat16 is more susceptible than alternative formats; and (3) 7-28\\% of faults cause visible artifacts, including semantic changes such as added objects, suggesting that single faults are sufficient to alter output semantics. Our findings reveal reliability risks in deployed T2V systems and motivate further research on improving fault resilience. Code: \\href{https://github.com/ztcoalson/T2V-Resilience}{https://github.com/ztcoalson/T2V-Resilience}.",
+      "archive_rows": {
+        "Video Generation": "|**2026-08-30**|**On the Resilience of Text-to-Video Diffusion Models to Hardware Faults**|Zachary Coalson et.al.|[2608.29598](https://arxiv.org/abs/2608.29598)|null|\n"
+      },
+      "authors": "Zachary Coalson et.al.",
+      "collected_at": "2026-09-01T06:02:05+00:00",
+      "decision_reason": null,
+      "id": "2608.29598",
+      "matched_topics": [
+        "Video Generation"
+      ],
+      "paper_url": "https://arxiv.org/abs/2608.29598",
+      "pdf_url": "https://arxiv.org/pdf/2608.29598v1",
+      "reviewed_at": null,
+      "selected_topic": null,
+      "status": "pending",
+      "title": "On the Resilience of Text-to-Video Diffusion Models to Hardware Faults",
+      "updated": "2026-08-30"
+    },
+    "2608.29804": {
+      "abstract": "Virtual try-on (VTON) requires not only realistic generation but also faithful preservation of garment characteristics. However, existing evaluation metrics such as PSNR, SSIM, KID and FID struggle to measure the consistency between the generated and reference garments, particularly in capturing the multi-dimensional characteristics of garment fidelity. To address this, we propose DAT: a Dimension-wise Assessment framework for virtual Try-on, which decomposes garment consistency into seven interpretable dimensions: silhouette, color, neckline and sleeve shape, major decoration and structure, material texture, fine-detail fidelity, and logo preservation, each formulated as a discrete attribute-level prediction task. To train this specialized assessment model, we adopt a two-stage learning paradigm comprising large-scale weak supervision on 50K samples, followed by refinement on 10K higher-quality annotations obtained via multi-model voting. Furthermore, we employ weighted cross-entropy loss to mitigate the severe label imbalance inherent across evaluation dimensions. Beyond its role as an evaluation framework, the assessment model can be integrated into reinforcement learning optimization of Qwen-Image-Edit for VTON, where dimension-wise rewards are adaptively aggregated to emphasize under-optimized aspects during training. Experimental results show that our method (8B parameters) achieves state-of-the-art performance in terms of balanced accuracy, SROCC, and PLCC, outperforming strong proprietary models such as Gemini-3.1, Qwen3.7-plus, and GPT-5.5, while also serving as an effective optimization signal for reward-guided VTON generation",
+      "archive_rows": {
+        "Image Generation": "|**2026-08-30**|**Beyond Global Realism: Virtual Try-On Evaluation and Optimization with Dimension-wise Garment Fidelity Assessment**|Kaidong Zhang et.al.|[2608.29804](https://arxiv.org/abs/2608.29804)|null|\n"
+      },
+      "authors": "Kaidong Zhang et.al.",
+      "collected_at": "2026-09-01T06:02:05+00:00",
+      "decision_reason": null,
+      "id": "2608.29804",
+      "matched_topics": [
+        "Image Generation"
+      ],
+      "paper_url": "https://arxiv.org/abs/2608.29804",
+      "pdf_url": "https://arxiv.org/pdf/2608.29804v1",
+      "reviewed_at": null,
+      "selected_topic": null,
+      "status": "pending",
+      "title": "Beyond Global Realism: Virtual Try-On Evaluation and Optimization with Dimension-wise Garment Fidelity Assessment",
+      "updated": "2026-08-30"
+    },
+    "2608.29809": {
+      "abstract": "Real-world image generation often involves multi-turn editing, where users iteratively modify small regions while most image content remains unchanged. However, existing diffusion transformer (DiT)-based editing pipelines recompute the entire image at every turn, causing substantial redundant computation. Existing DiT acceleration methods further ignore semantic correspondence across prompts, leading to unnecessary recomputation or unsafe reuse that harms editing quality. To address this, we propose RegionCache, a semantic-aware reuse framework for multi-turn image editing that selectively reuses diffusion states from unchanged regions. RegionCache detects reusable regions through semantic overlap between consecutive prompts and cross-attention localization, and adopts an adaptive reuse schedule based on prompt similarity and contextual consistency. Experiments on PixArt-alpha demonstrate that RegionCache achieves 1.43x--2.55x end-to-end speedup while maintaining comparable image quality. Code is available at https://github.com/hebutBryant/RegionCache.",
+      "archive_rows": {
+        "Image Generation": "|**2026-08-30**|**RegionCache: Semantic-Aware Region Reuse for Efficient Multi-Turn Image Generation**|Peizheng Li et.al.|[2608.29809](https://arxiv.org/abs/2608.29809)|null|\n"
+      },
+      "authors": "Peizheng Li et.al.",
+      "collected_at": "2026-09-01T06:02:05+00:00",
+      "decision_reason": null,
+      "id": "2608.29809",
+      "matched_topics": [
+        "Image Generation"
+      ],
+      "paper_url": "https://arxiv.org/abs/2608.29809",
+      "pdf_url": "https://arxiv.org/pdf/2608.29809v1",
+      "reviewed_at": null,
+      "selected_topic": null,
+      "status": "pending",
+      "title": "RegionCache: Semantic-Aware Region Reuse for Efficient Multi-Turn Image Generation",
+      "updated": "2026-08-30"
+    },
+    "2608.29819": {
+      "abstract": "Accurate stereo matching remains challenging in ill-posed regions such as fine structures, reflective, or transparent objects, where appearance cues are often ambiguous or unreliable. To tackle this, we propose PhasorNet, a lightweight yet powerful framework that boosts geometric discrimination via frequency-domain cues. At its core, the Phase-Augmented Transformer (PAT) injects Fourier-derived phase information into the attention mechanism, yielding photometrically robust, structure-preserving features that prioritize structural consistency in difficult areas. Additionally, we develop a Geometry-Context Fusion Refinement Module (GCFRM) that combines a full-resolution convolutional stream with a lightweight attention-based stream (leveraging WQA and CDGA blocks) to efficiently preserve fine details and object boundaries without excessive overhead. Training is further enhanced by a multi-scale Edge-guided High-Error Region (EHR) loss that adaptively focuses optimization on high-error and edge regions, guiding hierarchical cost volume refinement. With only 5.3M parameters, PhasorNet achieves state-of-the-art performance on the challenging ETH3D benchmark while exhibiting excellent cross-domain generalization on KITTI, delivering an efficient and practical solution for accurate real-time stereo matching.",
+      "archive_rows": {
+        "Depth Estimation": "|**2026-08-30**|**PhasorNet: Learning Structure from Frequency for Real-Time Stereo Matching**|Md Raqib Khan et.al.|[2608.29819](https://arxiv.org/abs/2608.29819)|null|\n"
+      },
+      "authors": "Md Raqib Khan et.al.",
+      "collected_at": "2026-09-01T06:02:05+00:00",
+      "decision_reason": null,
+      "id": "2608.29819",
+      "matched_topics": [
+        "Depth Estimation"
+      ],
+      "paper_url": "https://arxiv.org/abs/2608.29819",
+      "pdf_url": "https://arxiv.org/pdf/2608.29819v1",
+      "reviewed_at": null,
+      "selected_topic": null,
+      "status": "pending",
+      "title": "PhasorNet: Learning Structure from Frequency for Real-Time Stereo Matching",
+      "updated": "2026-08-30"
+    },
+    "2608.29881": {
+      "abstract": "Monocular depth estimation has achieved strong open-domain generalization, yet reliable robotic deployment remains difficult in transparent, reflective, and specular environments, where depth sensors often produce missing or biased depth. Existing methods often handle such optical failures with scene-specific preprocessing, auxiliary modules, or post-hoc fine-tuning. While effective in constrained settings, these designs increase architectural redundancy and can over-specialize general geometry models to narrow optical scenarios. We revisit this problem as a localized failure mode within base-model training and identify sensor-induced supervision bias as a key bottleneck: models inherit sensor failure patterns from biased real-depth supervision in optically challenging regions. We then introduce OptiGeo, a bias-aware training framework that rehabilitates biased real supervision using a clean-geometry teacher and residual-trimmed alignment. We redefine transparency-targeted rendering as a compact source of clean optical geometry, rather than a large domain-specific fine-tuning set. With only a small targeted rendering set, OptiGeo learns the geometric structure of transparent objects and regions, correcting local geometry distortions that real sensors cannot reliably supervise. Despite only 30M parameters, OptiGeo outperforms substantially larger 300M-scale monocular models and billion-scale multi-view baselines on transparent-scene benchmarks, while remaining competitive on general zero-shot depth and boundary sharpness. Real-world navigation cases further validate its practicality as an efficient perception module in optically challenging scenes.",
+      "archive_rows": {
+        "Depth Estimation": "|**2026-08-30**|**OptiGeo: Efficient Monocular Geometry for Embodied Perception in Optically Challenging Scenes**|Muxin Liu et.al.|[2608.29881](https://arxiv.org/abs/2608.29881)|null|\n"
+      },
+      "authors": "Muxin Liu et.al.",
+      "collected_at": "2026-09-01T06:02:05+00:00",
+      "decision_reason": null,
+      "id": "2608.29881",
+      "matched_topics": [
+        "Depth Estimation"
+      ],
+      "paper_url": "https://arxiv.org/abs/2608.29881",
+      "pdf_url": "https://arxiv.org/pdf/2608.29881v1",
+      "reviewed_at": null,
+      "selected_topic": null,
+      "status": "pending",
+      "title": "OptiGeo: Efficient Monocular Geometry for Embodied Perception in Optically Challenging Scenes",
+      "updated": "2026-08-30"
+    },
+    "2608.29925": {
+      "abstract": "Controllable image relighting is an important problem in image editing, and hand-drawn scribbles provide an intuitive interface for specifying the desired illumination. However, existing methods do not establish a consistent and effective mapping between scribble inputs and relighting results, limiting their ability to control illumination intensity, chromaticity, and complex spatial distributions. We address this limitation by introducing a material-decoupled illumination representation, termed the Lumi Map, which establishes an explicit mapping between user scribbles and the resulting illumination, thereby improving both relighting accuracy and controllability. Specifically, we use a renderer to synthesize source image-Lumi Map-relit image triplets and train the model to predict the target relighting result conditioned on the Lumi Map. To mitigate the domain gap introduced by synthetic data, we further perform reconstruction training on real relighting pairs, improving the model's generalization to real-world images. Finally, we present Dior-Light, an image relighting method controlled by hand-drawn strokes. Extensive experiments demonstrate that our method outperforms existing approaches in relighting accuracy and enables effective control over illumination intensity and chromaticity on in-the-wild images.",
+      "archive_rows": {
+        "Image Generation": "|**2026-08-30**|**Dior: Drawing the Light of Image via Material-Decoupled Illumination Representation**|Xuanpu Zhang et.al.|[2608.29925](https://arxiv.org/abs/2608.29925)|null|\n"
+      },
+      "authors": "Xuanpu Zhang et.al.",
+      "collected_at": "2026-09-01T06:02:05+00:00",
+      "decision_reason": null,
+      "id": "2608.29925",
+      "matched_topics": [
+        "Image Generation"
+      ],
+      "paper_url": "https://arxiv.org/abs/2608.29925",
+      "pdf_url": "https://arxiv.org/pdf/2608.29925v1",
+      "reviewed_at": null,
+      "selected_topic": null,
+      "status": "pending",
+      "title": "Dior: Drawing the Light of Image via Material-Decoupled Illumination Representation",
+      "updated": "2026-08-30"
+    },
+    "2608.29997": {
+      "abstract": "We propose Discrete Diffusion Bridges (DDB), a novel framework designed to resolve the fundamental spatiotemporal misalignment of standard discrete diffusion in image translation and generation. By corrupting data into a pure mask state via a random schedule, the conventional forward process induces a twofold misalignment: spatially, this pure-mask destination entirely discards the rich structural priors of the source image; temporally, the random masking order inherently contradicts the ``easy-first, hard-last'' decoding mechanism used during inference. To address this, DDB constructs a direct and efficient trajectory between domains. Spatially, we introduce a hybrid absorption mechanism that redefines the absorbing state to a stochastic mixture of mask and source tokens, effectively injecting source prior as spatial anchors into the latent space. Temporally, we design an information-guided noise schedule that quantifies semantic variation to prioritize the corruption of high-information regions at earlier timesteps. This ensures the model learns to resolve difficult semantic changes using robust context from invariant regions. Extensive experiments validate the versatility and robustness of our framework across diverse generative paradigms. DDB effectively balances edit alignment with structural fidelity across both text-guided semantic manipulation and pure structural image translation, while inherently complementing text-to-image generation and guaranteeing robust high-quality decoding under extremely low sampling steps. Code and models are available at \\href{https://github.com/HKU-HealthAI/DDB}{https://github.com/HKU-HealthAI/DDB}.",
+      "archive_rows": {
+        "Image Generation": "|**2026-08-30**|**Discrete Diffusion Bridges for Spatiotemporally Aligned Image Translation and Generation**|Xing Xie et.al.|[2608.29997](https://arxiv.org/abs/2608.29997)|null|\n"
+      },
+      "authors": "Xing Xie et.al.",
+      "collected_at": "2026-09-01T06:02:05+00:00",
+      "decision_reason": null,
+      "id": "2608.29997",
+      "matched_topics": [
+        "Image Generation"
+      ],
+      "paper_url": "https://arxiv.org/abs/2608.29997",
+      "pdf_url": "https://arxiv.org/pdf/2608.29997v1",
+      "reviewed_at": null,
+      "selected_topic": null,
+      "status": "pending",
+      "title": "Discrete Diffusion Bridges for Spatiotemporally Aligned Image Translation and Generation",
+      "updated": "2026-08-30"
+    },
+    "2608.30054": {
+      "abstract": "When does 3D Gaussian Splatting (3DGS) recover the true scene surface rather than just overfitting view-dependent appearance? We answer this by developing a mathematical framework based on a first-hit rendering abstraction that cleanly isolates geometry from appearance. We prove that geometric misalignment forcefully converts spatial textures into high-frequency angular signals via parallax. This establishes a strict identifiability window: if angular capacity is bounded, surface-consistent solutions are mathematically preferred; if unrestricted, the same images can be perfectly explained by an incorrect, opaque billboard geometry. Experiments on synthetic stress tests confirm this prediction, showing billboard failures emerge precisely at high angular capacities. Conversely, in the real-world datasets we evaluate under standard capture protocols, reconstructions remain surface-consistent even at high SH degrees, which is consistent with the prediction that rich spatial texture can push billboard solutions outside the tested angular-capacity range.",
+      "archive_rows": {
+        "Neural Rendering": "|**2026-08-30**|**When 3D Gaussian Splatting Recovers Real Surfaces**|Songhe Wang et.al.|[2608.30054](https://arxiv.org/abs/2608.30054)|null|\n"
+      },
+      "authors": "Songhe Wang et.al.",
+      "collected_at": "2026-09-01T06:02:05+00:00",
+      "decision_reason": null,
+      "id": "2608.30054",
+      "matched_topics": [
+        "Neural Rendering"
+      ],
+      "paper_url": "https://arxiv.org/abs/2608.30054",
+      "pdf_url": "https://arxiv.org/pdf/2608.30054v1",
+      "reviewed_at": null,
+      "selected_topic": null,
+      "status": "pending",
+      "title": "When 3D Gaussian Splatting Recovers Real Surfaces",
+      "updated": "2026-08-30"
+    },
+    "2608.30129": {
+      "abstract": "This work presents $\\textbf{Lapis}$, a $\\textbf{l}$inear-$\\textbf{a}$ttention-based $\\textbf{pi}$xel-$\\textbf{s}$pace generative framework that achieves efficient and high-fidelity depth estimation with one-step diffusion. While generative frameworks have significantly advanced monocular depth estimation with superior detail fidelity, the $\\mathcal{O}(N^2)$ complexity of standard attention and the multi-step denoising process introduce prohibitive computational costs when scaling them to high-resolution image applications. Although linear attention and one-step prediction are intuitively viable, directly applying them leads to poor structural consistency, detail loss, and noise. Lapis rectifies these limitations through a coarse-to-fine hierarchy. Specifically, a Patch-level Consistency Module restores structural coherence by integrating semantic and spatial priors. Subsequently, a Pixel-level Refinement Module recovers sharp geometric boundaries via skip-connection-based pixel correspondence. Furthermore, to mitigate sampling noise inherent in one-step diffusion, we leverage the manifold assumption and adopt a direct $\\mathbf{x}$-prediction strategy to target the clean data manifold. Extensive evaluations on multiple benchmarks demonstrate that Lapis consistently achieves state-of-the-art (SOTA) accuracy and boundary sharpness across various resolutions, reducing inference latency by up to 7.6$\\times$ at 1080P and 10.9$\\times$ at 1440P resolution compared to previous SOTA generative models.",
+      "archive_rows": {
+        "Depth Estimation": "|**2026-08-31**|**Efficient and High-Quality Depth Estimation via Pixel-Space Diffusion with Linear Attention**|Bingde Liu et.al.|[2608.30129](https://arxiv.org/abs/2608.30129)|null|\n"
+      },
+      "authors": "Bingde Liu et.al.",
+      "collected_at": "2026-09-01T06:02:05+00:00",
+      "decision_reason": null,
+      "id": "2608.30129",
+      "matched_topics": [
+        "Depth Estimation"
+      ],
+      "paper_url": "https://arxiv.org/abs/2608.30129",
+      "pdf_url": "https://arxiv.org/pdf/2608.30129v1",
+      "reviewed_at": null,
+      "selected_topic": null,
+      "status": "pending",
+      "title": "Efficient and High-Quality Depth Estimation via Pixel-Space Diffusion with Linear Attention",
+      "updated": "2026-08-31"
+    },
+    "2608.30161": {
+      "abstract": "Maize ear geometry (length, width, curvature, and volume) is closely tied to yield and grain-filling outcomes, but existing high-throughput phenotyping pipelines remain constrained by the cost, labor, and specialized hardware they require. We developed and validated a low-cost pipeline that reconstructs a watertight 3-D mesh of a maize ear from a single 20-second video captured with a consumer-grade DSLR on a motorized turntable under uniform LED illumination. Camera poses from a multi-seed COLMAP procedure initialize a Neural Radiance Field (NeRF), and a cylindrical holder of known diameter, visible in every frame, provides automatic metric scaling with downstream geometric quality control. Applied to 300 ears spanning a diverse maize inbred panel, 250 (83.3%) passed automated processing and quality control. Skeleton length agreed with manual caliper measurements across all 250 ears (R^2 = 0.964, RMSE = 4.68 mm), and convex-hull volume agreed with water-displacement volume on a 15-ear subset spanning the full size range (R^2 = 0.982, RMSE = 5.26 mL). Residual length error grew with ear curvature, whereas bounding-box height, which records the same straight-line chord as calipers, showed no such trend; the discrepancy therefore originates in the measurement definition, since calipers record the chord while skeleton length traces the geodesic arc. The capture hardware costs approximately 607 USD, and operator involvement fell from roughly five minutes to one minute per ear, with all downstream processing running unattended. The platform provides a foundation for breeding-scale 3-D ear phenotyping.",
+      "archive_rows": {
+        "Neural Rendering": "|**2026-08-31**|**AI-enabled Low-Cost 3D Maize Ear Morphometry Platform at Breeding Scale**|Therin Young et.al.|[2608.30161](https://arxiv.org/abs/2608.30161)|null|\n"
+      },
+      "authors": "Therin Young et.al.",
+      "collected_at": "2026-09-01T06:02:05+00:00",
+      "decision_reason": null,
+      "id": "2608.30161",
+      "matched_topics": [
+        "Neural Rendering"
+      ],
+      "paper_url": "https://arxiv.org/abs/2608.30161",
+      "pdf_url": "https://arxiv.org/pdf/2608.30161v1",
+      "reviewed_at": null,
+      "selected_topic": null,
+      "status": "pending",
+      "title": "AI-enabled Low-Cost 3D Maize Ear Morphometry Platform at Breeding Scale",
+      "updated": "2026-08-31"
+    },
+    "2608.30184": {
+      "abstract": "Volumetric video enables immersive free viewpoint rendering of dynamic real world scenes, yet existing methods struggle with long sequences and complex motions, often leading to temporal instability and visual artifacts. To address these challenges, we propose \\ourname, a Gaussian splatting based framework for volumetric video reconstruction. Our key insight is that explicitly tracking long term complex motion with individual Gaussian primitives is inherently unstable. Instead, we organize Gaussians around time conditioned anchors that localize their spatial and temporal support, thereby reducing long range motion complexity. We further introduce a temporal windowing strategy to activate only anchors relevant to the queried time, which improves scalability and temporal coherence. In addition, to ensure spatial and temporal stability, we design a compact set of multi level anchor features that encode global features, local spatial features, and local temporal features, jointly constraining Gaussian generation. Extensive experiments demonstrate that \\ourname \\ consistently outperforms prior methods on long sequence volumetric videos with complex motions. Project page: https://github.com/WuJH2001/ATGS.",
+      "archive_rows": {
+        "Neural Rendering": "|**2026-08-31**|**ATGS: Anchored Temporal Gaussian Splatting for Long Volumetric Video Representation**|Jiahao Wu et.al.|[2608.30184](https://arxiv.org/abs/2608.30184)|null|\n"
+      },
+      "authors": "Jiahao Wu et.al.",
+      "collected_at": "2026-09-01T06:02:05+00:00",
+      "decision_reason": null,
+      "id": "2608.30184",
+      "matched_topics": [
+        "Neural Rendering"
+      ],
+      "paper_url": "https://arxiv.org/abs/2608.30184",
+      "pdf_url": "https://arxiv.org/pdf/2608.30184v1",
+      "reviewed_at": null,
+      "selected_topic": null,
+      "status": "pending",
+      "title": "ATGS: Anchored Temporal Gaussian Splatting for Long Volumetric Video Representation",
+      "updated": "2026-08-31"
+    },
+    "2608.30194": {
+      "abstract": "Diffusion models have recently advanced text-to-video (T2V) generation, yet they still struggle with fine-grained compositional alignment, such as attribute binding, spatial relations, and object interactions. While reward-based fine-tuning improves alignment, it is susceptible to reward hacking and adapts poorly to new prompt distributions. In this work, we propose NoisEasier, a test-time scaling framework that improves T2V generation through differentiable reward-guided noise optimization without modifying the underlying model. By combining efficient short-step generators with a multi-objective reward formulation, NoisEasier enables stable and practical test-time optimization under realistic inference budgets. Our key insight is that jointly optimizing the entire stochastic trajectory accelerates reward convergence and improves compositional alignment over optimizing only the initial latent, with negligible additional computational and time cost. Experiments on VBench and T2V-CompBench demonstrate consistent improvements across multiple backbones, achieving over 10% average gains on challenging dimensions such as attribute binding, object interaction, and numeracy. Overall, NoisEasier serves as both a flexible alternative and a complementary enhancement to reward-based fine-tuning, establishing test-time scaling as an effective paradigm for controllable text-to-video generation.",
+      "archive_rows": {
+        "Video Generation": "|**2026-08-31**|**NoisEasier: Test-Time Noise Optimization for Text-to-Video Generation**|Yujiang Pu et.al.|[2608.30194](https://arxiv.org/abs/2608.30194)|null|\n"
+      },
+      "authors": "Yujiang Pu et.al.",
+      "collected_at": "2026-09-01T06:02:05+00:00",
+      "decision_reason": null,
+      "id": "2608.30194",
+      "matched_topics": [
+        "Video Generation"
+      ],
+      "paper_url": "https://arxiv.org/abs/2608.30194",
+      "pdf_url": "https://arxiv.org/pdf/2608.30194v1",
+      "reviewed_at": null,
+      "selected_topic": null,
+      "status": "pending",
+      "title": "NoisEasier: Test-Time Noise Optimization for Text-to-Video Generation",
+      "updated": "2026-08-31"
+    },
+    "2608.30342": {
+      "abstract": "3D Gaussian Splatting (3DGS) enables photorealistic real-time novel view synthesis, yet placing a virtual camera to capture a desired frame remains largely manual. Existing language-guided approaches in 3D scenes mainly focus on object-centric grounding, determining what to observe but rarely controlling how it should appear in a single frame, such as subject orientation or frame layout. To address this limitation, we introduce a new task, Text-Instructed Viewpoint Grounding (TIVG), which aims to identify a 6-DoF camera pose in a 3D Gaussian scene whose rendered frame aligns with a text instruction. To solve this task, we propose CapFrame, a partially differentiable framework that converts language into geometric pseudo labels for camera pose optimization. CapFrame follows a Retrieve-Translate-Refine pipeline: it retrieves relevant views and ranks them through a Question-Evaluation process with MLLMs, translates the instruction into orientation and layout pseudo labels, and refines the camera pose via differentiable optimization with layout and orientation losses in 3DGS. Experiments on 38 real-world scenes with 135 instructions indicate that CapFrame produces viewpoints better aligned with texts than heuristic viewpoint search and adapted trajectory generation baselines, validated by VLM metrics, MLLM judges, and user studies. Code is available at: https://github.com/jirongli/CapFrame",
+      "archive_rows": {
+        "Neural Rendering": "|**2026-08-31**|**CapFrame: Text-Instructed Viewpoint Grounding in 3D Gaussian Scenes via Geometric Pseudo Labels**|Jirong Li et.al.|[2608.30342](https://arxiv.org/abs/2608.30342)|null|\n"
+      },
+      "authors": "Jirong Li et.al.",
+      "collected_at": "2026-09-01T06:02:05+00:00",
+      "decision_reason": null,
+      "id": "2608.30342",
+      "matched_topics": [
+        "Neural Rendering"
+      ],
+      "paper_url": "https://arxiv.org/abs/2608.30342",
+      "pdf_url": "https://arxiv.org/pdf/2608.30342v1",
+      "reviewed_at": null,
+      "selected_topic": null,
+      "status": "pending",
+      "title": "CapFrame: Text-Instructed Viewpoint Grounding in 3D Gaussian Scenes via Geometric Pseudo Labels",
+      "updated": "2026-08-31"
+    },
+    "2608.30423": {
+      "abstract": "Splatting-based algorithms reconstruct photorealistic, real-time-renderable, and mesh-exportable 3D scenes from regular images, but they represent a scene as a single monolithic field. Therefore, the reconstruction has no object-level structure, leaving it infeasible for downstream editing or interaction. Moreover, regions that are never directly observed in the input scans are contaminated by the surrounding texture and left uncorrected, capping both mesh fidelity and novel-view synthesis. We propose a decompose-before-reconstruct approach: we segment the instances out of every frame, consider the remaining as background and inpaint it, reconstruct each instance and the background independently with mesh splatting, and compose them into a single scene. Our method significantly improves mesh fidelity (over a 5\\% gain in F-score) and novel-view synthesis, while supporting object-wise modifiability and interactivity. The code will be made publicly available.",
+      "archive_rows": {
+        "Neural Rendering": "|**2026-08-31**|**ObjectSplat: Improving Mesh Fidelity and Interactivity for 3D Scenes via Object-Level Mesh Splatting**|Minhas Kamal et.al.|[2608.30423](https://arxiv.org/abs/2608.30423)|null|\n"
+      },
+      "authors": "Minhas Kamal et.al.",
+      "collected_at": "2026-09-01T06:02:05+00:00",
+      "decision_reason": null,
+      "id": "2608.30423",
+      "matched_topics": [
+        "Neural Rendering"
+      ],
+      "paper_url": "https://arxiv.org/abs/2608.30423",
+      "pdf_url": "https://arxiv.org/pdf/2608.30423v1",
+      "reviewed_at": null,
+      "selected_topic": null,
+      "status": "pending",
+      "title": "ObjectSplat: Improving Mesh Fidelity and Interactivity for 3D Scenes via Object-Level Mesh Splatting",
+      "updated": "2026-08-31"
+    },
+    "2608.30451": {
+      "abstract": "Image-based 3D visual grounding is critical for embodied agents, yet existing benchmarks suffer from loose text-observation alignment and neglect temporal ordering. We introduce SeqAlign3DVG, a novel benchmark dedicated to temporally ordered and strictly observation-aligned image-based 3D visual grounding. Unlike prior works using order-agnostic views or global point clouds, SeqAlign3DVG ensures all expressions are human-verified and strictly grounded in the provided RGB observations (single frames or ordered observation sequences). It comprises 9,622 single-view and 14,493 sequence samples featuring rich descriptions, complex relations, and multi-instance ambiguities. To tackle this benchmark, we propose a unified voxel-based pipeline featuring Relevance-Ordered Voxel Memory (ROVM) and Progressive Language-Voxel Fusion (PLVF). ROVM dynamically ranks and aggregates multi-view evidence via a conservative memory to mitigate noisy observations, while PLVF performs coarse-to-fine spatial-linguistic reasoning for precise disambiguation. Our approach achieves state-of-the-art performance under the depth-free protocol, significantly improving localization for targets defined by complex relations and appearance cues.",
+      "archive_rows": {
+        "3D Generation": "|**2026-08-31**|**SeqAlign3DVG: A Sequence-Aligned Benchmark and Voxel Reasoning Framework for 3D Visual Grounding**|Yi Zhang et.al.|[2608.30451](https://arxiv.org/abs/2608.30451)|null|\n"
+      },
+      "authors": "Yi Zhang et.al.",
+      "collected_at": "2026-09-01T06:02:05+00:00",
+      "decision_reason": null,
+      "id": "2608.30451",
+      "matched_topics": [
+        "3D Generation"
+      ],
+      "paper_url": "https://arxiv.org/abs/2608.30451",
+      "pdf_url": "https://arxiv.org/pdf/2608.30451v1",
+      "reviewed_at": null,
+      "selected_topic": null,
+      "status": "pending",
+      "title": "SeqAlign3DVG: A Sequence-Aligned Benchmark and Voxel Reasoning Framework for 3D Visual Grounding",
+      "updated": "2026-08-31"
+    },
+    "2608.30455": {
+      "abstract": "It is known that only a narrow plasma wakefield sliver in the electron-beam-driven blowout regime suits positron acceleration. Using 3D simulations, we show that matching the cyclotron frequency $ω_{c}$ with the plasma frequency $ω_{p}$ forms a stable electron column on axis, expanding the suitable phase space for positron acceleration sizably. For a plasma density $n_p = 10^{16}\\text{ cm}^{-3}$ in a 35 T field, the interval expands 4.3 times, and a witness positron beam gains 100--150 MeV over 6 cm ($1.6$--$2.5$~GeV/m) with a 92\\% capture rate.",
+      "archive_rows": {
+        "3D Generation": "|**2026-08-31**|**Magnetizing nonlinear plasma wakefields for positron acceleration**|Yung-Kun Liu et.al.|[2608.30455](https://arxiv.org/abs/2608.30455)|null|\n"
+      },
+      "authors": "Yung-Kun Liu et.al.",
+      "collected_at": "2026-09-01T06:02:05+00:00",
+      "decision_reason": null,
+      "id": "2608.30455",
+      "matched_topics": [
+        "3D Generation"
+      ],
+      "paper_url": "https://arxiv.org/abs/2608.30455",
+      "pdf_url": "https://arxiv.org/pdf/2608.30455v1",
+      "reviewed_at": null,
+      "selected_topic": null,
+      "status": "pending",
+      "title": "Magnetizing nonlinear plasma wakefields for positron acceleration",
+      "updated": "2026-08-31"
+    },
+    "2608.30475": {
+      "abstract": "We present an overview of the ImageEval 2026 shared task on culturally grounded Arabic multimodal evaluation. It includes two tasks: (i) AynVQA, covering spoken visual question answering and image-grounded hallucination detection in English and Modern Standard Arabic (MSA), and (ii) CRAI-Bench, evaluating the cultural accuracy of text-to-image generation. A total of 14 teams participated in the test phase, with 12 teams submitting system description papers. Participating systems used a range of approaches, including zero-shot prompting, fine-tuning of vision-language models, speech-recognition pipelines, ensembling, and score calibration. We describe the task setup, datasets, evaluation procedure, and participating systems, and summarize the main results across the different tracks. All datasets and evaluation scripts from the shared task are released to the research community. The shared task highlights the challenges of culturally grounded multimodal evaluation, particularly for Arabic speech and image-text reasoning.",
+      "archive_rows": {
+        "Image Generation": "|**2026-08-31**|**ImageEval 2026: Culturally Grounded Arabic Multimodal Evaluation**|Samir Abdaljalil et.al.|[2608.30475](https://arxiv.org/abs/2608.30475)|null|\n"
+      },
+      "authors": "Samir Abdaljalil et.al.",
+      "collected_at": "2026-09-01T06:02:05+00:00",
+      "decision_reason": null,
+      "id": "2608.30475",
+      "matched_topics": [
+        "Image Generation"
+      ],
+      "paper_url": "https://arxiv.org/abs/2608.30475",
+      "pdf_url": "https://arxiv.org/pdf/2608.30475v1",
+      "reviewed_at": null,
+      "selected_topic": null,
+      "status": "pending",
+      "title": "ImageEval 2026: Culturally Grounded Arabic Multimodal Evaluation",
+      "updated": "2026-08-31"
+    },
+    "2608.30479": {
+      "abstract": "Generative retrieval has attracted increasing attention in Location-Based Services (LBS), where each Point-of-Interest (POI) is represented as a Semantic ID (SID). As the SID is the only channel through which POI information reaches the generative model, whatever it fails to preserve is irrecoverable at decoding time, and LBS retrieval is especially sensitive to the fine-grained differences that existing SIDs blur. Specifically, (1) LLMs embed continuous coordinates discontinuously, so their numeric differences do not reflect true geographic distance; (2) dynamic numerical attributes differ vastly in scale, so an identical gap may be decisive for one attribute yet negligible for another; and (3) short text cannot convey hierarchical affiliation, as text-similar POIs may belong to different hierarchies. We therefore propose HF-SID, which restores geographic, numerical, and structural fidelity at the representation stage, before any information is committed to a discrete code. It transforms coordinates into a continuous 3D Cartesian form and encodes each numerical value as a single unit, consolidated inside the LLM by Geo-CPT and Num-CPT with type-aware embeddings; a Structure-based Contrastive Learning objective, applied only to the last-layer residual, then separates co-located POIs that share a coarse tag but differ at the fine level. Because these mechanisms enrich the representation rather than lengthen the identifier, HF-SID uses a 3-token SID at no extra decoding cost. On a large-scale industrial",
+      "archive_rows": {
+        "3D Generation": "|**2026-08-31**|**HF-SID: High-Fidelity Semantic IDs for Generative Retrieval in Location-Based Services**|Haowen Lin et.al.|[2608.30479](https://arxiv.org/abs/2608.30479)|null|\n"
+      },
+      "authors": "Haowen Lin et.al.",
+      "collected_at": "2026-09-01T06:02:05+00:00",
+      "decision_reason": null,
+      "id": "2608.30479",
+      "matched_topics": [
+        "3D Generation"
+      ],
+      "paper_url": "https://arxiv.org/abs/2608.30479",
+      "pdf_url": "https://arxiv.org/pdf/2608.30479v1",
+      "reviewed_at": null,
+      "selected_topic": null,
+      "status": "pending",
+      "title": "HF-SID: High-Fidelity Semantic IDs for Generative Retrieval in Location-Based Services",
+      "updated": "2026-08-31"
+    },
+    "2608.30617": {
+      "abstract": "Reconstructing editable Computer-Aided Design (CAD) models from images is essential for downstream modification, manufacturing, and design reuse. However, existing image-to-CAD methods are developed predominantly on synthetic renderings and face two coupled obstacles: a substantial appearance domain gap between synthetic and real images, and a previously overlooked parameter bias in widely used CAD data. We show that the local normalization adopted by DeepCAD concentrates several geometric parameters around a few discrete values while encoding substantial information in a single scale factor. Consequently, a model can achieve deceptively high parameter accuracy by exploiting these frequent values rather than inferring geometry from the input image. In this paper, we propose RealCAD, a unified framework that addresses these limitations at the representation, image, and feature levels. At the representation level, we redistribute scale information to the corresponding geometric parameters, producing less concentrated parameter distributions in a shared scale space. At the image level, geometry-constrained translation converts synthetic renderings toward the real-image domain while conditioning on object contours. At the feature level, a multi-positive contrastive objective aligns representations of the same CAD model across viewpoints and image domains, enabling CAD sequence prediction from each individual view. We further introduce OpenRealCAD, comprising four-view photographs of 392 3D-printed objects paired with ground-truth command sequences. Experiments show that the revised representation substantially reduces the accuracy attainable from parameter-frequency priors, making parameter accuracy a more reliable measure of image-conditioned geometric inference. RealCAD further improves real-domain command and parameter accuracy, while retaining competitive synthetic-domain performance.",
+      "archive_rows": {
+        "3D Generation": "|**2026-08-31**|**RealCAD: Towards Real-World Image-to-CAD Reconstruction under Domain Shift and Parameter Bias**|Yihe Sun et.al.|[2608.30617](https://arxiv.org/abs/2608.30617)|null|\n"
+      },
+      "authors": "Yihe Sun et.al.",
+      "collected_at": "2026-09-01T06:02:05+00:00",
+      "decision_reason": null,
+      "id": "2608.30617",
+      "matched_topics": [
+        "3D Generation"
+      ],
+      "paper_url": "https://arxiv.org/abs/2608.30617",
+      "pdf_url": "https://arxiv.org/pdf/2608.30617v1",
+      "reviewed_at": null,
+      "selected_topic": null,
+      "status": "pending",
+      "title": "RealCAD: Towards Real-World Image-to-CAD Reconstruction under Domain Shift and Parameter Bias",
+      "updated": "2026-08-31"
+    },
+    "2608.30820": {
+      "abstract": "Occlusion boundaries (OBs) are pixel-level image boundaries corresponding to surface visibility discontinuities caused by occlusion. Through precise boundary localisation and occlusion orientation, OBs encode local surface layout and depth ordering, providing geometry-driven mid-level cues for scene understanding. However, progress in pixel-level OB estimation has been limited by fragmented supervision: Existing benchmarks often suffer from limited coverage, category-specific designs, missing self-occlusion annotations, or inconsistent annotation definitions. Meanwhile, modern edge detectors and monocular depth estimators have become strong boundary and geometry predictors, yet their relationship to definition-consistent OBs remains underexplored. We introduce RealOOB, a carefully annotated real-world benchmark with 4.26M definition-consistent, geometry-grounded OB labels covering both inter-object and self-occlusion boundaries, together with validity-aware occlusion-orientation maps that restrict supervision to pixels whose cross-boundary depth ordering is reliably measurable. Based on RealOOB, we evaluate forty OB estimators and edge detectors alongside six monocular depth estimators. Our evaluation reveals a clear gap in occlusion reasoning: modern edge detectors perform competitively with OB methods in localisation, whereas orientation prediction remains challenging for all evaluated methods. Meanwhile, even strong depth estimators often fail to exhibit measurable geometry at true OBs. We believe RealOOB provides a strong reference benchmark for the OB estimation community and a real-world testbed for assessing depth discontinuities and geometry fidelity in broader low-level vision tasks. Dataset and code will be released.",
+      "archive_rows": {
+        "Depth Estimation": "|**2026-08-31**|**RealOOB: A Definition-Consistent Real-World Oriented Occlusion Boundary Benchmark**|Lintao Xu et.al.|[2608.30820](https://arxiv.org/abs/2608.30820)|null|\n"
+      },
+      "authors": "Lintao Xu et.al.",
+      "collected_at": "2026-09-01T06:02:05+00:00",
+      "decision_reason": null,
+      "id": "2608.30820",
+      "matched_topics": [
+        "Depth Estimation"
+      ],
+      "paper_url": "https://arxiv.org/abs/2608.30820",
+      "pdf_url": "https://arxiv.org/pdf/2608.30820v1",
+      "reviewed_at": null,
+      "selected_topic": null,
+      "status": "pending",
+      "title": "RealOOB: A Definition-Consistent Real-World Oriented Occlusion Boundary Benchmark",
+      "updated": "2026-08-31"
+    },
+    "2608.30821": {
+      "abstract": "Composable scene modeling aims to recover a real indoor scene as complete, editable object assets arranged as observed, giving robot simulation and embodied AI a simulation-ready replica of the real environment whose objects can be manipulated individually. Existing pipelines decompose the task into three steps---parse the observations into instances, generate an asset for each, and place each asset back---but every step presumes an input that a cluttered capture rarely provides: accurate instance geometry, unoccluded views, and assets that accurately match the observations. We propose Lucida, which keeps this order but redistributes the requirements, so each step consumes only what a real capture reliably provides and precision is reached at the end of the pipeline rather than demanded at its start. Lucida parses the video into a scene graph whose nodes carry per-instance multi-view evidence, generates a complete asset for each instance from its evidence, and places assets with GizmoAct, a VLM policy that casts placement as multi-turn GUI interaction, manipulating the object's gizmo in a closed loop and deciding itself when alignment is reached. Across scene-level 3D object detection, object pose estimation, and scene reconstruction, Lucida improves mAP over Boxer by 69% on R2S-Scene, raises ADD-SB@0.05 from 57.8% to 83.4% on CA-1M, and increases scene F-Score from 0.794 for SAM3D to 0.924.",
+      "archive_rows": {
+        "3D Generation": "|**2026-08-31**|**Lucida: Parse, Generate, and Place for Composable Real-to-Sim Scene Modeling**|Minghan Qin et.al.|[2608.30821](https://arxiv.org/abs/2608.30821)|null|\n"
+      },
+      "authors": "Minghan Qin et.al.",
+      "collected_at": "2026-09-01T06:02:05+00:00",
+      "decision_reason": null,
+      "id": "2608.30821",
+      "matched_topics": [
+        "3D Generation"
+      ],
+      "paper_url": "https://arxiv.org/abs/2608.30821",
+      "pdf_url": "https://arxiv.org/pdf/2608.30821v1",
+      "reviewed_at": null,
+      "selected_topic": null,
+      "status": "pending",
+      "title": "Lucida: Parse, Generate, and Place for Composable Real-to-Sim Scene Modeling",
+      "updated": "2026-08-31"
+    },
+    "2608.30839": {
+      "abstract": "Thermal Infrared detection is widely used in autonomous driving, medical AI, etc., but its security has only attracted attention recently. We propose infrared adversarial clothing designed to evade thermal person detectors in real-world scenarios. The design of the adversarial clothing is based on 3D modeling, which makes it easier to simulate multiangle scenes near the real world compared to 2D modeling. We optimized the black patch layout pattern of 3D clothing based on the adversarial example technique and made physical adversarial clothing using the aerogel. The idea is to paste a set of square aerogel patches, which display black squares in thermal images, in the inner side of clothing at specific locations with specific orientations. To enhance realism, we propose a method to build infrared 3D models with real infrared photos and develop texture maps for 3D models to simulate varied infrared characteristics over time and location. In physical attacks, we achieved an attack success rate of 80.11\\% indoors and 76.85\\% outdoors against YOLOv9. In contrast, randomly placed patches yielded much lower success rates (26.53\\% indoors and 23.03\\% outdoors). The adversarial clothing also showed good transferability to unknown detectors with an ensemble attack method, demonstrating the effectiveness of our approach.",
+      "archive_rows": {
+        "3D Generation": "|**2026-08-31**|**Physical Adversarial Examples for Person Detectors in Thermal Images Based on 3D Modeling**|Xiaopei Zhu et.al.|[2608.30839](https://arxiv.org/abs/2608.30839)|null|\n"
+      },
+      "authors": "Xiaopei Zhu et.al.",
+      "collected_at": "2026-09-01T06:02:05+00:00",
+      "decision_reason": null,
+      "id": "2608.30839",
+      "matched_topics": [
+        "3D Generation"
+      ],
+      "paper_url": "https://arxiv.org/abs/2608.30839",
+      "pdf_url": "https://arxiv.org/pdf/2608.30839v1",
+      "reviewed_at": null,
+      "selected_topic": null,
+      "status": "pending",
+      "title": "Physical Adversarial Examples for Person Detectors in Thermal Images Based on 3D Modeling",
+      "updated": "2026-08-31"
+    },
+    "2608.30870": {
+      "abstract": "Semantic segmentation in 3D Gaussian Splatting (3DGS) is crucial for advancing 3D scene understanding. Existing methods predominantly rely on feature distillation, which incurs substantial per-scene training overhead and often yields blurred segmentation boundaries. We identify that these boundary artifacts are driven in part by insufficient viewpoint coverage and boundary overflow of anisotropic Gaussian primitives. To address these challenges, we propose VCAR, a training-free coarse-to-fine segmentation strategy based on View Completeness and Axis-aware Boundary Refinement. In the coarse stage, a visibility-based weighted multi-view voting scheme rapidly localizes the target. In the fine stage, an object-centric sphere derived from the coarse result generates supplementary viewpoints via Spherical Spiral Sampling (SSS), allowing multi-view voting on the augmented views to precisely refine object boundaries and suppress irrelevant 3D Gaussians. Moreover, we introduce Axis-aware Boundary Refinement (ABR) to mitigate artifacts from anisotropic primitives. By decomposing the projected 2D covariance into per-axis contributions, ABR identifies the dominant axis responsible for boundary leakage and applies targeted anisotropic compression exclusively along that axis. Extensive experiments on NVOS and LERF demonstrate that VCAR achieves state-of-the-art segmentation accuracy and efficiency without training. Our code is available at https://github.com/DDKK0526/VCAR.",
+      "archive_rows": {
+        "Neural Rendering": "|**2026-08-31**|**VCAR: Training-Free 3DGS Segmentation via View Completeness and Axis-Aware Boundary Refinement**|Kun Cao et.al.|[2608.30870](https://arxiv.org/abs/2608.30870)|null|\n"
+      },
+      "authors": "Kun Cao et.al.",
+      "collected_at": "2026-09-01T06:02:05+00:00",
+      "decision_reason": null,
+      "id": "2608.30870",
+      "matched_topics": [
+        "Neural Rendering"
+      ],
+      "paper_url": "https://arxiv.org/abs/2608.30870",
+      "pdf_url": "https://arxiv.org/pdf/2608.30870v1",
+      "reviewed_at": null,
+      "selected_topic": null,
+      "status": "pending",
+      "title": "VCAR: Training-Free 3DGS Segmentation via View Completeness and Axis-Aware Boundary Refinement",
+      "updated": "2026-08-31"
+    },
+    "2608.30951": {
+      "abstract": "The rapid development of generative portrait models has raised growing concerns about privacy leakage and identity misuse. In particular, audio-driven 3D talking face generation can reconstruct a reusable 3D portrait of a target person from a monocular video and animate it with arbitrary speech, making realistic identity impersonation alarmingly practical. Existing proactive defenses mainly operate in the visual domain by injecting subtle perturbations into acial regions to disrupt identity acquisition. However, such perturbations often compromise visual quality due to the strong structural priors and social sensitivity of human faces, and are easily weakened by common real-world transformations such as resizing. To overcome these limitations, we propose an imperceptible audio defense for audio-driven 3D talking face generation by shifting protection from the visual modality to the audio modality. Specifically,we exploit psychoacoustic masking to hide protective perturbations within perceptually masked frequency regions of the speech signal, thereby reducing perceptual distortion while suppressing reliable facial animation. Extensive experiments demonstrate that the proposed method effectively degrades 3D talking face generation while preserving favorable perceptual quality. These findings highlight psychoacoustically guided audio perturbations as a practical and promising direction for privacy-preserving portrait protection.",
+      "archive_rows": {
+        "3D Generation": "|**2026-08-31**|**Audio-Driven Adversarial Defense for 3D Talking Face Generation with totally Visual Fidelity Preservation**|Rui-Qing Sun et.al.|[2608.30951](https://arxiv.org/abs/2608.30951)|null|\n"
+      },
+      "authors": "Rui-Qing Sun et.al.",
+      "collected_at": "2026-09-01T06:02:05+00:00",
+      "decision_reason": null,
+      "id": "2608.30951",
+      "matched_topics": [
+        "3D Generation"
+      ],
+      "paper_url": "https://arxiv.org/abs/2608.30951",
+      "pdf_url": "https://arxiv.org/pdf/2608.30951v1",
+      "reviewed_at": null,
+      "selected_topic": null,
+      "status": "pending",
+      "title": "Audio-Driven Adversarial Defense for 3D Talking Face Generation with totally Visual Fidelity Preservation",
+      "updated": "2026-08-31"
+    },
+    "2608.30975": {
+      "abstract": "Cardiac magnetic resonance imaging (CMR) produces rich sequential data such as temporal cine videos and spatial LGE/mapping stacks, yet most deep learning approaches process individual 2D slices, discarding this context. We present MR-JEPA, a self-supervised video foundation model for CMR that extends LeJEPA to 3D spatiotemporal inputs through tubelet tokenization, spatiotemporal masking augmentation, and initialization from a 2D CMR foundation model. Unlike prior CMR video models limited to cine data, MR-JEPA is pretrained on multi-sequence data (cine, LGE, mapping) from 10,505 patients across two centers without annotations. We evaluate the frozen encoder on six downstream tasks using a unified multi-view gated attention architecture: LV ejection fraction, RV ejection fraction, three myocardial strains (GLS, GCS, GRS), and four-class disease detection. MR-JEPA outperforms other compared methods on all five regression tasks, including both a domain-specific CMR model pretrained on more data with text supervision and a natural-video foundation model, achieving an LV EF MAE of 4.79% (r =0.764) and a GLS MAE of 1.87 (r=0.805), with 21-27% MAE reductions over baselines on strain tasks. For disease detection, MR-JEPA achieved a macro AUG of 0.868, remaining competitive with the domain-specific baseline despite using a fully self-supervised pretraining objective. These results demonstrate the potential of a unified video encoder for robust, multi-view utilization of diverse CMR sequences in clinical cardiac quantification and diagnosis.",
+      "archive_rows": {
+        "3D Generation": "|**2026-08-31**|**MR-JEPA: A General Purpose Video Foundation Model for Cardiac MRI**|Athira J. Jacob et.al.|[2608.30975](https://arxiv.org/abs/2608.30975)|null|\n"
+      },
+      "authors": "Athira J. Jacob et.al.",
+      "collected_at": "2026-09-01T06:02:05+00:00",
+      "decision_reason": null,
+      "id": "2608.30975",
+      "matched_topics": [
+        "3D Generation"
+      ],
+      "paper_url": "https://arxiv.org/abs/2608.30975",
+      "pdf_url": "https://arxiv.org/pdf/2608.30975v1",
+      "reviewed_at": null,
+      "selected_topic": null,
+      "status": "pending",
+      "title": "MR-JEPA: A General Purpose Video Foundation Model for Cardiac MRI",
+      "updated": "2026-08-31"
+    },
+    "2608.31023": {
+      "abstract": "We study dynamic Gaussian Splatting from monocular videos. While recent advancements in dynamic Gaussian splatting offer a promising foundation for modeling dynamic scenes, they often overfit to the training views and fail under occlusion or complex scene motion due to the lack of reliable regularization signals in under-constrained regions. We propose Semantic Motion Graph (SMG), a novel approach models the Gaussian motion as the low-rank semantic motion. Our key insight is that the real-world scene motion is often structured by semantic coherence: regions that are spatially close and semantically related tend to exhibit consistent dynamics. To leverage this prior, we construct SMG to model structured motion of the scene. The Gaussian motion is driven by the motion of SMG nodes. We further observe that the uncertainty of Gaussian motion arises from both unreliable off-the-shelf priors and weakly constrained regions during optimization. SMG addresses this by using reliable graph nodes to guide the motion of nearby unreliable nodes. To evaluate dynamic Gaussian splatting under challenging real-world scenarios, we introduce a new multiview dataset collected under an ego-exo setup. Extensive experiments demonstrate that SMG achieves state-of-the-art performance on monocular dynamic Gaussian splatting across challenging real-world benchmarks. Project page: https://smg-gaussian.github.io/.",
+      "archive_rows": {
+        "Neural Rendering": "|**2026-08-31**|**SMG: Semantic Motion Graph for Monocular Dynamic Gaussian Splatting**|Haozheng Yu et.al.|[2608.31023](https://arxiv.org/abs/2608.31023)|null|\n"
+      },
+      "authors": "Haozheng Yu et.al.",
+      "collected_at": "2026-09-01T06:02:05+00:00",
+      "decision_reason": null,
+      "id": "2608.31023",
+      "matched_topics": [
+        "Neural Rendering"
+      ],
+      "paper_url": "https://arxiv.org/abs/2608.31023",
+      "pdf_url": "https://arxiv.org/pdf/2608.31023v1",
+      "reviewed_at": null,
+      "selected_topic": null,
+      "status": "pending",
+      "title": "SMG: Semantic Motion Graph for Monocular Dynamic Gaussian Splatting",
+      "updated": "2026-08-31"
+    },
+    "2608.31053": {
+      "abstract": "Diffusion models have achieved strong results in high-fidelity image synthesis, but their iterative sampling process makes large-scale generation computationally expensive. This limitation is especially relevant when generating synthetic face datasets for face recognition, where a large number of subjects with many samples in different poses, expressions, ages, etc., are required. In this work, we show that identity-conditioned face synthesis can be performed at a substantially lower computational cost by a latent Consistency Model with few iterations, without compromising image quality. For training, we distill knowledge from the foundation Diffusion Model Arc2Face (teacher) by adapting its original text-to-image pipeline to an embedding-to-face setting, replacing textual prompts with ArcFace identity embeddings. Our distilled model (student) generates identity-conditioned face images with an average inference time of 0.4819 seconds per image, compared with 2.102 seconds for Arc2Face, resulting in a 4.36$\\times$ speed-up. Quantitative results, based on FID scores, show that the distilled model remains competitive with Arc2Face across all evaluation protocols. On 100k generated images, it achieves near-parity on CelebA (13.921 vs. 12.928) and outperforms the teacher on WebFace42M (9.317 vs. 9.802). Further evaluations on Synth-500 and AgeDB show a moderate performance gap for the former but comparable results for the latter. These results indicate that Arc2Face can be accelerated through task-specific latent consistency distillation while preserving high image quality for large-scale synthetic face generation. Our proposal is publicly available at https://github.com/UFPR-IPASP-PR/FaceRec-IdentityConsistency.",
+      "archive_rows": {
+        "Image Generation": "|**2026-08-31**|**Identity-Conditioned Latent Consistency Distillation for Face Synthesis**|Tiago Kienen Chaves et.al.|[2608.31053](https://arxiv.org/abs/2608.31053)|null|\n"
+      },
+      "authors": "Tiago Kienen Chaves et.al.",
+      "collected_at": "2026-09-01T06:02:05+00:00",
+      "decision_reason": null,
+      "id": "2608.31053",
+      "matched_topics": [
+        "Image Generation"
+      ],
+      "paper_url": "https://arxiv.org/abs/2608.31053",
+      "pdf_url": "https://arxiv.org/pdf/2608.31053v1",
+      "reviewed_at": null,
+      "selected_topic": null,
+      "status": "pending",
+      "title": "Identity-Conditioned Latent Consistency Distillation for Face Synthesis",
+      "updated": "2026-08-31"
+    },
+    "2608.31073": {
+      "abstract": "Whole-heart segmentation (WHS) in computed tomography (CT) and magnetic resonance imaging (MRI) is affected by acquisition shifts and heterogeneous cardiac annotations. Existing WHS systems combine architectural design, transfer learning, and generic spatial or intensity augmentation. We investigate whether changes to data augmentation and training supervision can improve cross-modality WHS while the segmentation architecture is held constant. We present LISynSeg, a data-centric approach that augments real-image nnU-Net training with label-to-image synthesis. Synthetic volumes are generated from cardiac label maps using contrast and acquisition perturbations calibrated to the training cohort, then mixed with real images to retain thoracic context absent from the labels (and thus the synthesized images). We model cardiac label variation through controlled changes in myocardial wall thickness and partial supervision of uncertain vessel endpoints. On the CARE Whole-Heart benchmark, synthetic-only training performs worse than the real-image nnU-Net baseline, whereas calibrated real-synthetic training improves cross-modality segmentation without changing the architecture; the improvement is larger for MRI than for CT. The results show that modifying the training data strategy can benefit model development for heterogeneous cardiac data. Code and trained weights will be released at https://github.com/MedICL-VU/Care26_LISynSeg.",
+      "archive_rows": {
+        "Image Generation": "|**2026-08-31**|**LISynSeg: Data-Centric Label-to-Image Synthesis for Cross-Modality Whole-Heart Segmentation**|Jiacheng Wang et.al.|[2608.31073](https://arxiv.org/abs/2608.31073)|null|\n"
+      },
+      "authors": "Jiacheng Wang et.al.",
+      "collected_at": "2026-09-01T06:02:05+00:00",
+      "decision_reason": null,
+      "id": "2608.31073",
+      "matched_topics": [
+        "Image Generation"
+      ],
+      "paper_url": "https://arxiv.org/abs/2608.31073",
+      "pdf_url": "https://arxiv.org/pdf/2608.31073v1",
+      "reviewed_at": null,
+      "selected_topic": null,
+      "status": "pending",
+      "title": "LISynSeg: Data-Centric Label-to-Image Synthesis for Cross-Modality Whole-Heart Segmentation",
+      "updated": "2026-08-31"
+    },
+    "2608.31106": {
+      "abstract": "Recent video generators often omit audio or synthesize it in a separate stage, limiting reciprocal modeling of visual dynamics and acoustic events. We present DreamX-Creator 1.0, a compact native joint audio-video generation system centered on a 7B generator. Conditioned on a first frame and a text prompt, the generator jointly denoises modality-specialized audio and video streams. The streams are processed independently in the first half of the network and coupled in the latter half through Gated Cross-Modal Attention, whose token- and head-wise output gates modulate each active cross-modal attention-head output. A unified Audio-Video Data System constructs and filters temporally coherent clips, produces structured multimodal annotations, and organizes clips into capability-oriented data pools. Progressive Joint Training comprises two audio-video pre-training stages followed by High-Quality Finetuning. Audio-Video Reinforcement Learning further post-trains the generator with Modality-Aware Multimodal Feedback that routes video-, audio-, and cross-modal feedback to the corresponding streams. For high-resolution output, our Autoregressive 1-Step 2K Refinement pipeline adapts a bidirectional multi-step teacher into an autoregressive multi-step refiner and distills it into a student requiring one denoising evaluation per temporal chunk. Overall, DreamX-Creator 1.0 achieves native, synchronized audio-video generation with performance competitive with state-of-the-art open-source systems. By releasing our compact 7B generator and 2K Refiner, we seek to democratize native audio-video generation and provide an accessible foundation for future research in unified audio-video generative modeling.",
+      "archive_rows": {
+        "Video Generation": "|**2026-08-31**|**DreamX-Creator: Democratizing Native Audio-Video Generation at 2K Resolution**|Jiashu Zhu et.al.|[2608.31106](https://arxiv.org/abs/2608.31106)|null|\n"
+      },
+      "authors": "Jiashu Zhu et.al.",
+      "collected_at": "2026-09-01T06:02:05+00:00",
+      "decision_reason": null,
+      "id": "2608.31106",
+      "matched_topics": [
+        "Video Generation"
+      ],
+      "paper_url": "https://arxiv.org/abs/2608.31106",
+      "pdf_url": "https://arxiv.org/pdf/2608.31106v1",
+      "reviewed_at": null,
+      "selected_topic": null,
+      "status": "pending",
+      "title": "DreamX-Creator: Democratizing Native Audio-Video Generation at 2K Resolution",
+      "updated": "2026-08-31"
+    },
+    "2608.31113": {
+      "abstract": "We introduce BLARM, a feed-forward method for video-driven 3D mesh animation. Given a monocular video and a static object mesh, BLARM predicts a temporally coherent animated mesh whose motion follows the video. Rather than relying on explicit rigs or directly regressing high-dimensional vertex motion, we represent animation using a compact set of learned, time-varying rigid motion components and time-invariant vertex-to-component skinning weights. This yields a low-dimensional deformation space without requiring skeletons, cages, skinning weights, or rig annotations. Our architecture conditions geometry-derived deformation latents on video features through factorized spatial-temporal attention, then decodes rigid transformations blended by predicted skinning weights. Trained with trajectory reconstruction, entropy regularization, and motion-aware contrastive learning, BLARM produces accurate and temporally stable animations while recovering compact, interpretable motion structure from monocular video.",
+      "archive_rows": {
+        "3D Generation": "|**2026-08-31**|**BLARM: Animating 3D Objects from Video via Blending Latent Rigid Motion Primitives**|Pradyumn Goyal et.al.|[2608.31113](https://arxiv.org/abs/2608.31113)|null|\n"
+      },
+      "authors": "Pradyumn Goyal et.al.",
+      "collected_at": "2026-09-01T06:02:05+00:00",
+      "decision_reason": null,
+      "id": "2608.31113",
+      "matched_topics": [
+        "3D Generation"
+      ],
+      "paper_url": "https://arxiv.org/abs/2608.31113",
+      "pdf_url": "https://arxiv.org/pdf/2608.31113v1",
+      "reviewed_at": null,
+      "selected_topic": null,
+      "status": "pending",
+      "title": "BLARM: Animating 3D Objects from Video via Blending Latent Rigid Motion Primitives",
+      "updated": "2026-08-31"
+    },
+    "2608.31159": {
+      "abstract": "The bidirectional reflectance factor (BRF) characterizes the directional radiative properties of terrestrial surfaces. However, existing three-dimensional (3D) radiative transfer models require complex scene construction and computationally intensive radiative transfer solvers, limiting efficient generation of multi-angle hyperspectral reflectance imagery. 3D Gaussian Splatting (3DGS) offers an efficient framework for neural scene representation and novel view synthesis, but its low-order spherical harmonics representation is insufficient for complex directional reflectance, while the high dimensionality and inter-band quality differences of hyperspectral data introduce additional challenges. To address these challenges, we propose BRF-GS, a 3DGS-based framework for BRF modeling and hyperspectral reflectance image generation. BRF-GS introduces a hybrid BRDF-driven kernel to represent complex directional reflectance, selects geometry-reliable spectral bands for robust 3D scene initialization, and adopts a two-stage training strategy that decouples geometry optimization from spectral modeling. We further construct the AIR-BRF dataset, a multi-angle hyperspectral directional reflectance dataset comprising three scenes with diverse natural and artificial targets. Experiments demonstrate that BRF-GS achieves superior spatial and spectral fidelity and accurately reproduces characteristic view-dependent BRF responses. The proposed framework provides an efficient data-driven approach for BRF modeling and multi-angle hyperspectral reflectance image generation in remote sensing scenes.",
+      "archive_rows": {
+        "3D Generation": "|**2026-08-31**|**BRF-GS: Hyperspectral Bidirectional Reflectance Factor Modeling and Image Generation Based on 3D Gaussian Splatting**|Yiling Yao et.al.|[2608.31159](https://arxiv.org/abs/2608.31159)|null|\n",
+        "Neural Rendering": "|**2026-08-31**|**BRF-GS: Hyperspectral Bidirectional Reflectance Factor Modeling and Image Generation Based on 3D Gaussian Splatting**|Yiling Yao et.al.|[2608.31159](https://arxiv.org/abs/2608.31159)|null|\n"
+      },
+      "authors": "Yiling Yao et.al.",
+      "collected_at": "2026-09-01T06:02:05+00:00",
+      "decision_reason": null,
+      "id": "2608.31159",
+      "matched_topics": [
+        "3D Generation",
+        "Neural Rendering"
+      ],
+      "paper_url": "https://arxiv.org/abs/2608.31159",
+      "pdf_url": "https://arxiv.org/pdf/2608.31159v1",
+      "reviewed_at": null,
+      "selected_topic": null,
+      "status": "pending",
+      "title": "BRF-GS: Hyperspectral Bidirectional Reflectance Factor Modeling and Image Generation Based on 3D Gaussian Splatting",
+      "updated": "2026-08-31"
     }
   },
-  "updated_at": "2026-08-31T06:40:51+00:00",
+  "updated_at": "2026-09-01T06:02:05+00:00",
   "version": 1
 }
