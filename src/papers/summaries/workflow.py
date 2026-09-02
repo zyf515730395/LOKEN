@@ -81,7 +81,6 @@ def _write_report(result: RunResult, *, model: str) -> Path:
         "published": result.published,
         "records": [asdict(record) for record in result.records],
     }
-    path = _atomic_private_json("report.json", report)
     _atomic_private_json(
         "state.json",
         {
@@ -94,7 +93,74 @@ def _write_report(result: RunResult, *, model: str) -> Path:
             "failed": result.failed,
         },
     )
-    return path
+    return _atomic_private_json("report.json", report)
+
+
+def _read_state() -> dict | None:
+    path = private_path("state.json")
+    try:
+        raw = path.read_bytes()
+    except FileNotFoundError:
+        return None
+    except OSError:
+        raise PaperSummaryError(
+            "state_unavailable", "private run state cannot be read safely"
+        ) from None
+    if len(raw) > 64 * 1024:
+        raise PaperSummaryError("invalid_state", "private run state is invalid")
+    try:
+        state = json.loads(raw.decode("utf-8", errors="strict"))
+    except (UnicodeDecodeError, json.JSONDecodeError, RecursionError):
+        raise PaperSummaryError("invalid_state", "private run state is invalid") from None
+    canonical = (
+        json.dumps(
+            state, ensure_ascii=False, sort_keys=True, separators=(",", ":")
+        ).encode("utf-8")
+        + b"\n"
+    )
+    if (
+        raw != canonical
+        or not isinstance(state, dict)
+        or state.get("version") != REPORT_VERSION
+        or state.get("status")
+        not in {"running", "publishing", "complete", "failed", "recovered"}
+    ):
+        raise PaperSummaryError("invalid_state", "private run state is invalid")
+    return state
+
+
+def _recover_interrupted_publication(
+    *, docs_root: Path, ledger_path: Path, archive_path: Path
+) -> None:
+    state = _read_state()
+    if state is None or state["status"] != "publishing":
+        return
+    try:
+        _regenerate_site(
+            docs_root=docs_root,
+            ledger_path=ledger_path,
+            archive_path=archive_path,
+        )
+        _atomic_private_json(
+            "state.json",
+            {
+                "version": REPORT_VERSION,
+                "status": "recovered",
+                "recovered_at": datetime.now(timezone.utc)
+                .replace(microsecond=0)
+                .isoformat(),
+            },
+        )
+    except OSError:
+        raise PaperSummaryError(
+            "recovery_failed", "interrupted public build could not be recovered"
+        ) from None
+    except PaperSummaryError:
+        raise
+    except Exception:
+        raise PaperSummaryError(
+            "recovery_failed", "interrupted public build could not be recovered"
+        ) from None
 
 
 def status_snapshot(
@@ -221,6 +287,9 @@ def _run_summaries_locked(
     docs = docs_root
     ledger = ledger_path
     archive = archive_path
+    _recover_interrupted_publication(
+        docs_root=docs, ledger_path=ledger, archive_path=archive
+    )
     ready = load_ready_keys(docs, strict=False)
     candidates = load_candidates(
         ledger,
@@ -284,6 +353,26 @@ def _run_summaries_locked(
     grouped: dict[str, list[tuple[PaperCandidate, PaperSummary, str]]] = {}
     for item in completed:
         grouped.setdefault(item[0].topic, []).append(item)
+    if grouped:
+        try:
+            _atomic_private_json(
+                "state.json",
+                {
+                    "version": REPORT_VERSION,
+                    "status": "publishing",
+                    "started_at": datetime.now(timezone.utc)
+                    .replace(microsecond=0)
+                    .isoformat(),
+                    "model": model,
+                    "selected": len(candidates),
+                    "generated": len(completed),
+                },
+            )
+        except OSError:
+            raise PaperSummaryError(
+                "state_unavailable",
+                "publication transaction state cannot be written safely",
+            ) from None
     originals: dict[str, bytes] = {}
     published_topics: list[str] = []
     for topic, topic_results in grouped.items():
@@ -375,10 +464,32 @@ def _run_summaries_locked(
                     originals=originals,
                 )
             except Exception:
+                try:
+                    _atomic_private_json(
+                        "state.json",
+                        {
+                            "version": REPORT_VERSION,
+                            "status": "failed",
+                            "error_code": "rollback_failed",
+                        },
+                    )
+                except OSError:
+                    pass
                 raise PaperSummaryError(
                     "rollback_failed",
                     "private state failed and automatic public rollback also failed",
                 ) from None
+        try:
+            _atomic_private_json(
+                "state.json",
+                {
+                    "version": REPORT_VERSION,
+                    "status": "failed",
+                    "error_code": "state_write_failed",
+                },
+            )
+        except OSError:
+            pass
         raise PaperSummaryError(
             "state_write_failed",
             "private report failed; published note pages were restored",
