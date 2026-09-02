@@ -17,29 +17,29 @@
 <h1>[2608.30129] Efficient and High-Quality Depth Estimation via Pixel-Space Diffusion with Linear Attention</h1>
 <p><a href="https://arxiv.org/abs/2608.30129" rel="nofollow">arXiv 原文</a></p>
 <h2>一句话结论</h2>
-<p>本文提出了 Lapis，首个基于线性注意力的像素空间生成框架，通过单步扩散实现高效高精度的单目深度估计，在保持 O(N) 计算复杂度的同时，显著优于现有生成式替代方案。</p>
+<p>本文提出了 Lapis，首个基于线性注意力的像素空间生成框架，通过单步扩散推理实现单目深度估计，在保持高保真度与边界锐度的同时，显著降低了高分辨率下的推理延迟，达到最先进精度。</p>
 <h2>解决的问题</h2>
-<p>现有生成式框架在追求高分辨率像素级几何感知时，面临精度与效率的根本权衡矛盾。基于潜空间的 U-Net 受限于 VAE 瓶颈且难以捕捉长距离依赖，而像素空间 Diffusion Transformers 的二次复杂度在高分辨率下计算昂贵，且多步采样过程显著增加开销。直接应用线性注意力与单步预测策略会导致结构不一致、细节丢失及采样噪声，难以同时实现像素级精度与高效推理。</p>
+<p>现有生成框架在高分辨率单目深度估计中面临保真度与效率的权衡：基于潜空间 U-Net 的架构受限于 VAE 瓶颈且难以捕捉长距离依赖，而基于像素空间 Diffusion Transformers 的模型虽能保持全局一致性，但其二次方复杂度和多步采样过程导致计算开销过高；此外，直接应用线性注意力和一步预测会导致结构不一致、细节丢失及采样噪声严重。</p>
 <h2>创新点</h2>
 <ul>
-<li>提出首个基于线性注意力的像素空间生成框架 Lapis，实现单步扩散内的线性时间深度扩散，显著提升推理效率。</li>
-<li>设计 Patch-level Consistency Module (PCM)，利用预训练语义先验与局部卷积偏差纠正结构错位，恢复全局结构一致性。</li>
-<li>开发 Pixel-level Refinement Module (PRM)，通过基于跳连接的像素对应关系恢复精细几何边界与细节。</li>
-<li>基于流形假设采用直接 x-prediction 策略替代不稳定的 v-prediction，有效抑制单步生成中的采样噪声。</li>
+<li>提出了首个基于线性注意力的像素空间生成框架 Lapis，实现了单步扩散推理，在保持高保真度的同时显著降低推理延迟。</li>
+<li>设计了 Patch-level Consistency Module (PCM)，通过整合语义和空间先验纠正块级结构错位，恢复全局结构一致性。</li>
+<li>开发了 Pixel-level Refinement Module (PRM)，利用基于跳连接的像素对应关系恢复细粒度几何细节和锐利边界。</li>
+<li>采用直接 x-prediction 策略替代不稳定的 v-prediction，基于 manifold assumption 抑制一步生成中的采样噪声。</li>
 </ul>
     </article>
     <article class="summary-article summary-topic-entry" id="summary-2608.29881" data-arxiv-id="2608.29881" data-status="ready">
 <h1>[2608.29881] OptiGeo: Efficient Monocular Geometry for Embodied Perception in Optically Challenging Scenes</h1>
 <p><a href="https://arxiv.org/abs/2608.29881" rel="nofollow">arXiv 原文</a></p>
 <h2>一句话结论</h2>
-<p>OptiGeo 提出一种偏置感知训练框架，利用清洁几何教师模型与残差修剪对齐机制纠正真实监督中的传感器失效模式偏置，仅需 30M 参数即在透明场景基准上超越 300M 级单目模型及多视图基线，同时保持通用 zero-shot 深度与边界锐度竞争力。</p>
+<p>论文提出 OptiGeo 框架，通过 bias-aware training framework 结合 clean-geometry teacher 与 residual-trimmed alignment，在仅 30M 参数下显著优于大型单目模型，实现了光学挑战性场景中高效且鲁棒的单目几何估计。</p>
 <h2>解决的问题</h2>
-<p>现有单目深度估计方法在透明、反射及高光泽环境中常因深度传感器产生缺失或偏差数据而失效，通常依赖场景特定预处理、辅助模块或后处理微调，但这增加了架构冗余并导致模型过度针对狭窄的光学场景。关键矛盾在于通用几何模型继承了真实深度监督中传感器失效模式导致的偏置，而现有方法未能有效区分局部光学失效与全局几何结构。</p>
+<p>现有单目深度估计方法在透明、反射及高光环境中常因传感器故障产生缺失或偏差数据，而通过场景特定预处理或后处理微调的解决方案增加了架构冗余并导致模型过度特化。核心矛盾在于现有模型继承了真实深度监督中的传感器诱导偏差，未能有效区分光学失败与真实几何结构，导致在光学挑战性区域产生错误的几何感知。</p>
 <h2>创新点</h2>
 <ul>
-<li>提出偏置感知训练框架，利用清洁几何教师模型与残差修剪对齐机制纠正真实监督中的传感器失效模式偏置。</li>
-<li>构建基于 Infinigen 的紧凑透明度目标渲染集，提供真实传感器无法可靠标注的光学挑战区域清洁几何。</li>
-<li>构建高效学生模型架构，在仅 30M 参数下超越 300M 级单目模型及多视图基线，同时保持通用 zero-shot 深度与边界锐度竞争力。</li>
+<li>提出 bias-aware training framework，利用 clean-geometry teacher 和 residual-trimmed alignment 修复真实监督中的传感器诱导偏差。</li>
+<li>构建基于 Infinigen 的 compact transparency-targeted rendering set 作为清洁光学几何来源，替代大规模领域特定微调。</li>
+<li>将光学故障视为一般单目几何估计中的局部失败模式，而非独立下游任务，保持模型的通用性。</li>
 </ul>
     </article>
     <article class="summary-article summary-topic-entry" id="summary-2608.29819" data-arxiv-id="2608.29819" data-status="ready">

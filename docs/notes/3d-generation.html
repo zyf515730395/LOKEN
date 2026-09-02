@@ -17,43 +17,44 @@
 <h1>[2608.31113] BLARM: Animating 3D Objects from Video via Blending Latent Rigid Motion Primitives</h1>
 <p><a href="https://arxiv.org/abs/2608.31113" rel="nofollow">arXiv 原文</a></p>
 <h2>一句话结论</h2>
-<p>BLARM 提出了一种视频驱动的 3D 网格动画方法，通过混合潜在刚体运动分量与顶点蒙皮权重构建低维变形空间，在无需骨骼标注的情况下，从单目视频中生成几何准确且时间稳定的动画。</p>
+<p>BLARM 提出了一种 feed-forward 的 3D 网格动画方法，通过混合潜在刚性运动基元（latent rigid motion primitives）与不变蒙皮权重构建低维变形空间，在无需骨骼或标注的情况下实现了几何准确且时间稳定的动画。</p>
 <h2>解决的问题</h2>
-<p>现有网格动画系统依赖预定义骨骼和笼子等结构化变形模型，需要繁琐的标注且难以适应特定视频中的运动，而直接回归顶点偏移的方法处于高维空间且与标准动画工作流不匹配，导致在无需显式 rigged 的情况下实现低维、可编辑且适应视频运动的动画仍是一个挑战。</p>
+<p>传统网格动画依赖骨骼和笼子（skeletons and cages）等结构化模型，而现有学习方法的刚性推断主要基于几何信息，难以适应特定视频中的目标运动；直接预测顶点偏移虽能建模复杂变形，但处于高维空间且与标准动画工作流不匹配，缺乏兼顾低维控制与运动适应性的中间表示。</p>
 <h2>创新点</h2>
 <ul>
-<li>提出紧凑的潜在变形表示，利用学习的时间变化 rigid motion components 与时间不变的 vertex-to-component skinning weights 构建低维动画空间，无需预定义 skeletons 或 cages。</li>
-<li>设计基于 Transformer 的 feed-forward 架构，通过 factorized spatial-temporal attention 结合 geometry-derived deformation latents 与 video features，捕捉运动分量间的交互与跨帧时间一致性。</li>
-<li>引入 trajectory reconstruction、entropy regularization 及 motion-aware contrastive learning 损失，促进顶点到分量分配的运动一致性并实现稀疏蒙皮。</li>
+<li>提出紧凑的潜在变形表示，利用学习的时间变化刚性运动分量与时间不变的顶点分量蒙皮权重构建低维动画空间，无需明确骨骼或笼子（skeletons, cages）。</li>
+<li>设计了结合几何条件变形潜变量与视频特征的 feed-forward Transformer 架构，使用因子化空间 - 时间 attention 捕捉帧内运动分量交互与跨帧时序一致性。</li>
+<li>引入训练损失促进准确的轨迹重建、稀疏每顶点蒙皮以及运动一致的顶点分量分配，生成连贯的网格动画。</li>
 </ul>
     </article>
     <article class="summary-article summary-topic-entry" id="summary-2608.30821" data-arxiv-id="2608.30821" data-status="ready">
 <h1>[2608.30821] Lucida: Parse, Generate, and Place for Composable Real-to-Sim Scene Modeling</h1>
 <p><a href="https://arxiv.org/abs/2608.30821" rel="nofollow">arXiv 原文</a></p>
 <h2>一句话结论</h2>
-<p>Lucida 提出了一种解析 - 生成 - 放置的 pipeline，通过重新分配各步骤的需求使每一步仅消耗真实捕获可靠提供的信息，最终在场景重建、检测与姿态估计指标上显著优于现有方法。</p>
+<p>论文提出了 Lucida 系统，通过重新分配解析、生成和放置三个步骤的输入要求，使其仅依赖真实捕获可靠提供的信息，并将精度收敛至闭环最终步骤，实现了可组合的实境到仿真场景建模。</p>
 <h2>解决的问题</h2>
-<p>现有可组合场景建模方法（如 NeRF 或基于库资产的 Real-to-Sim 系统）要么生成 monolithic 结构无法编辑，要么依赖外部库资产导致保真度受限。传统的解析 - 生成 - 放置流水线中，每一步都预设了混乱真实捕获难以提供的输入（如精确实例几何、无遮挡视图或匹配资产），导致未满足的任一环节要求都会级联降解后续步骤精度，且端到端方法受限于稀缺配对数据泛化性差。</p>
+<p>现有可组合场景建模流水线虽遵循解析、生成、放置的顺序，但每一步均预设了混乱捕获中难以提供的输入，如准确的实例几何、无遮挡视角及与观察匹配的资产，导致端到端方法受限于稀缺配对数据且泛化性差，无法同时获得完整可编辑资产与对观测环境的忠实还原。</p>
 <h2>创新点</h2>
 <ul>
-<li>保持解析 - 生成 - 放置顺序但重新分配需求，使各步骤仅依赖真实捕获可靠提供的输入。</li>
-<li>构建携带实例多视图证据的 scene graph，为生成与放置提供上下文与初始化。</li>
-<li>采用基于证据的生成与 GizmoAct VLM 策略的闭环放置，解决遮挡与对齐问题。</li>
-<li>引入关系感知的场景细化组织实例并提升一致性。</li>
+<li>提出重新分配解析、生成和放置步骤输入要求的框架，使各步骤仅消耗真实捕获可靠提供的信息，并将精度收敛至闭环最终步骤而非起始步骤。</li>
+<li>构建包含每实例多视图证据的解析级 3D 对象检测方法，通过 Scene Graph 整合证据以提升检测精度并初始化后续生成。</li>
+<li>设计 GizmoAct 策略，将资产放置映射为多轮 GUI 交互，利用 VLM 在闭环中自主进行 gizmo 操作以对齐资产并决定停止时机。</li>
+<li>生成模块基于每对象证据条件生成而非依赖干净裁剪，解决了遮挡下的完整资产重建问题并支持统一多模态模型。</li>
 </ul>
     </article>
     <article class="summary-article summary-topic-entry" id="summary-2608.30617" data-arxiv-id="2608.30617" data-status="ready">
 <h1>[2608.30617] RealCAD: Towards Real-World Image-to-CAD Reconstruction under Domain Shift and Parameter Bias</h1>
 <p><a href="https://arxiv.org/abs/2608.30617" rel="nofollow">arXiv 原文</a></p>
 <h2>一句话结论</h2>
-<p>论文提出 RealCAD 框架，通过修正 DeepCAD 参数表示消除统计捷径，并结合几何约束图像翻译与多正对比学习，显著提升了真实世界图像到 CAD 模型的重建性能。</p>
+<p>本文提出了 RealCAD 统一框架，通过重构表示、图像转换及特征对齐机制，有效缓解了合成渲染与真实图像间的域差异及 DeepCAD 数据中的参数偏差问题，显著提升了真实世界图像到 CAD 模型的重建精度。</p>
 <h2>解决的问题</h2>
-<p>现有图像到 CAD 重建方法主要基于合成渲染数据，面临合成到真实图像（Sim2Real）的外观域差距。同时，DeepCAD 表示中的局部归一化导致几何参数分布高度集中，促使模型利用数据集特定的统计捷径而非从视觉证据推断几何，使得参数准确性难以反映真实的几何推断能力。</p>
+<p>现有图像到 CAD 重建方法主要基于合成渲染训练，面临合成与真实图像间的外观域差距，且忽视了广泛使用的 CAD 数据（如 DeepCAD）中存在的参数偏差问题。由于局部归一化导致几何参数集中在少数离散值上，模型可能通过利用高频参数值而非从图像推断几何结构，从而获得具有欺骗性的参数精度，导致真实世界应用中的几何推理不可靠。</p>
 <h2>创新点</h2>
 <ul>
-<li>识别 DeepCAD 表示中的参数分布偏差，通过重新分配尺度因子 S 编码的尺度信息到几何参数，缓解参数集中化问题。</li>
-<li>构建 OpenRealCAD 基准数据集，包含 392 个 3D 打印 CAD 对象的四视图图像与配对真实命令序列，支持 Sim2Real 重建评估。</li>
-<li>提出 RealCAD 框架，在图像级采用几何约束的合成到真实图像翻译，在特征级采用多正对比学习以对齐跨视角和跨域表示。</li>
+<li>在表示层面，将比例信息重新分配到对应的几何参数中，在共享比例空间中产生更分散的参数分布。</li>
+<li>在图像层面，引入几何约束的平移，在物体轮廓条件下将合成渲染转换为真实图像域。</li>
+<li>在特征层面，采用多正对比学习目标，对齐跨视角和图像域的同 CAD 模型表示，实现单视图的 CAD 序列预测。</li>
+<li>构建 OpenRealCAD 数据集，包含 392 个 3D 打印物体的四视图照片及真实指令序列。</li>
 </ul>
     </article>
     <article class="summary-article summary-topic-entry" id="summary-2608.28534" data-arxiv-id="2608.28534" data-status="ready">

@@ -17,42 +17,44 @@
 <h1>[2608.31053] Identity-Conditioned Latent Consistency Distillation for Face Synthesis</h1>
 <p><a href="https://arxiv.org/abs/2608.31053" rel="nofollow">arXiv 原文</a></p>
 <h2>一句话结论</h2>
-<p>本文提出了一种基于 Latent Consistency Model 的身份条件人脸合成方法，通过将 Arc2Face 的文本生成管道适配为 embedding-to-face 设置，在保持 FID 指标竞争力的同时实现了 4.36 倍的推理速度提升。</p>
+<p>本文提出了一种身份条件潜一致性蒸馏方法，通过将 Arc2Face 扩散模型的知识蒸馏至一致性模型，在保持图像质量的同时显著降低了大规模人脸合成的计算成本与推理时间。</p>
 <h2>解决的问题</h2>
-<p>现有的 Diffusion Model 因迭代采样导致计算昂贵，难以满足人脸识别中大规模身份平衡数据集的需求，且现有 Consistency Model 加速方法多集中于文本生成或图像修复，未解决身份一致的大规模人脸合成问题。</p>
+<p>现有的扩散模型虽然能生成高质量图像，但其迭代采样过程导致推理成本高，难以满足人脸识别任务中大规模生成多姿态、多表情人脸数据集的需求；同时，现有的潜一致性模型研究多集中于文本生成或图像修复，尚未有效解决大规模身份一致人脸数据集生成的效率与质量平衡问题。</p>
 <h2>创新点</h2>
 <ul>
-<li>提出将基础 Diffusion Model Arc2Face 的知识蒸馏至 Latent Consistency Model，适配 embedding-to-face 设置替代传统文本 prompt。</li>
-<li>利用 ArcFace identity embeddings 实现身份条件生成，推理时间从 2.102 秒降至 0.4819 秒，实现 4.36 倍加速。</li>
-<li>在 CelebA 和 WebFace42M 等基准上保持与 teacher model 相当的 FID 分数，证明了该方法在大规模合成中的有效性。</li>
+<li>提出将 Arc2Face 扩散模型适配为 embedding-to-face 设置，利用 ArcFace 身份嵌入替代文本 prompt 进行知识蒸馏。</li>
+<li>构建身份条件潜一致性模型，实现仅需少量迭代即可生成高质量人脸图像。</li>
+<li>在保持与教师模型 Arc2Face 相当的 FID 分数的情况下，将平均推理时间从 2.102 秒降低至 0.4819 秒，实现 4.36 倍加速。</li>
+<li>填补了潜一致性模型在大规模身份一致人脸数据集生成领域的空白，支持多姿态、表情及光照条件下的合成。</li>
 </ul>
     </article>
     <article class="summary-article summary-topic-entry" id="summary-2608.29997" data-arxiv-id="2608.29997" data-status="ready">
 <h1>[2608.29997] Discrete Diffusion Bridges for Spatiotemporally Aligned Image Translation and Generation</h1>
 <p><a href="https://arxiv.org/abs/2608.29997" rel="nofollow">arXiv 原文</a></p>
 <h2>一句话结论</h2>
-<p>本文提出了离散扩散桥（DDB）框架，通过构建直接高效的域间轨迹，解决了标准离散扩散模型在图像翻译与生成中的时空不对齐问题，有效平衡了编辑对齐与结构保真度，并在极低采样步数下保证了高质量解码。</p>
+<p>本文提出了离散扩散桥（Discrete Diffusion Bridges, DDB），通过构建时空一致的轨迹解决了标准离散扩散在图像翻译与生成中的时空错位问题，实现了 edit alignment 与 structural fidelity 的平衡，并在极低 sampling steps 下保持高质量解码。</p>
 <h2>解决的问题</h2>
-<p>现有标准离散扩散方法存在根本性的时空不对齐问题。在空间维度上，常规前向过程将数据腐蚀为纯掩码状态，完全丢弃了源图像的丰富结构先验；在时间维度上，随机掩码顺序与推理阶段使用的“先易后难”解码机制存在内在矛盾，导致模型难以有效利用源图像信息进行生成。</p>
+<p>现有离散扩散模型（DDMs）在图像翻译与生成中存在时空错位问题。空间上，标准方法将数据盲目吸收至 pure mask state，丢弃了源图像的结构先验，导致身份保持任务保真度丢失；时间上，training 时的 random schedule 与 inference 时的“易先难后”置信度采样策略相矛盾，阻碍了模型有效学习复杂翻译逻辑。</p>
 <h2>创新点</h2>
 <ul>
-<li>提出离散扩散桥（DDB）框架，构建直接高效的域间轨迹以解决时空不对齐问题</li>
-<li>引入混合吸收机制，将吸收状态重定义为掩码与源 token 的随机混合，向潜在空间注入源先验作为空间锚点</li>
-<li>设计信息引导的噪声调度，量化语义变化以在早期时间步优先腐蚀高信息区域，确保利用不变区域提供的鲁棒上下文解决困难语义变化</li>
+<li>提出离散扩散桥（Discrete Diffusion Bridges, DDB），构建时空一致的轨迹以调和 state space 与 generative trajectory。</li>
+<li>引入 Hybrid Absorption，将 absorbing state 定义为 mask token 与 source token 的随机混合，作为 spatial anchors 注入 latent space。</li>
+<li>设计 Information-Guided Noise Schedule，根据 semantic variation 量化优先 corruption 高信息区域，使 training 与 inference 轨迹对齐。</li>
+<li>在图像翻译与生成任务中平衡 edit alignment 与 structural fidelity，并在极低 sampling steps 下保证高质量解码。</li>
 </ul>
     </article>
     <article class="summary-article summary-topic-entry" id="summary-2608.29925" data-arxiv-id="2608.29925" data-status="ready">
 <h1>[2608.29925] Dior: Drawing the Light of Image via Material-Decoupled Illumination Representation</h1>
 <p><a href="https://arxiv.org/abs/2608.29925" rel="nofollow">arXiv 原文</a></p>
 <h2>一句话结论</h2>
-<p>本文提出了 Dior-Light 方法，通过引入材料解耦的照明表示（Lumi Map）建立了手绘涂鸦与照明效果之间的显式映射，有效提升了图像重照明 (image relighting) 的准确性及对光照强度和色相的控制能力。</p>
+<p>论文提出 Dior 方法，通过引入材料解耦的照明表示（Lumi Map）及两阶段训练策略，实现了基于手绘涂鸦的图像重光照，在真实世界图像上显著提升了重光照精度并实现了对光照强度与色度的有效控制。</p>
 <h2>解决的问题</h2>
-<p>现有图像重照明方法难以在保持几何和材质一致性的同时实现精确的光照控制，分解方法依赖难以获取的高质量照明表示，而涂鸦驱动方法主要局限于空间分布控制，对光照强度和色相的调控能力不足，且合成训练数据与真实图像之间存在域差距导致泛化性能受限。</p>
+<p>现有图像重光照方法在精确光照控制上存在瓶颈，基于分解的方法依赖难以获取的高质量照明表示，而基于涂鸦的方法主要控制空间分布，光照强度和色度难以显式控制。同时，从稀疏表示预测完整照明分布本质上是欠定的，且合成训练数据与真实世界图像之间存在域差距，导致模型泛化能力受限并产生过度平滑现象。</p>
 <h2>创新点</h2>
 <ul>
-<li>提出材料解耦的照明表示（Lumi Map），显式编码光照的空间分布、强度及色相，解决了传统 shading 或 Phong 表示与材质纠缠或忽略遮挡的问题</li>
-<li>建立手绘涂鸦与照明效果之间的显式映射，支持通过调整涂鸦值直接控制光照强度与色相</li>
-<li>设计数据合成管道并引入真实重照明对的重建训练，缓解合成数据域差距，提升模型在真实图像上的泛化能力</li>
+<li>提出材料解耦的照明表示（Lumi Map），显式编码光照的空间分布、强度和色度，建立了涂鸦与照明结果之间的一致映射。</li>
+<li>提出统一的训练框架，通过两阶段策略（合成数据联合训练 + 真实重光照对在线估计）将训练数据从合成域扩展至真实世界，缓解域差距。</li>
+<li>提出 Dior-Light 方法，实现了基于手绘涂鸦的图像重光照，在真实世界图像上达到最先进精度并支持连续一致的光照控制。</li>
 </ul>
     </article>
     <article class="summary-article summary-topic-entry" id="summary-2608.29809" data-arxiv-id="2608.29809" data-status="ready">
