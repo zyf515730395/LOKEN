@@ -406,7 +406,13 @@ def render_family_page(
     )
 
 
-def render_notes_page(family: dict[str, Any], notes: dict) -> str:
+def render_notes_page(
+    family: dict[str, Any],
+    notes: dict,
+    *,
+    output_file: Path,
+    output_root: Path,
+) -> str:
     articles = []
     for release in family["releases"]:
         note = notes[release["slug"]]
@@ -419,27 +425,35 @@ def render_notes_page(family: dict[str, Any], notes: dict) -> str:
             "    </article>"
         )
     article_markup = "\n".join(articles) or '    <p class="muted">暂无已完成的文章精读。</p>'
-    return f"""<!doctype html>
-<html lang="zh-CN">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{html.escape(family['name'])} · 文章精读</title>
-  <link rel="stylesheet" href="../assets/css/site.css?v=4">
-</head>
-<body class="summary-page">
-  <main class="summary-page-shell">
-    <header class="summary-topic-header">
-      <a class="summary-back" href="{html.escape(family['slug'], quote=True)}.html">← 返回版本对比</a>
-      <h1>{html.escape(family['name'])} · 文章精读</h1>
-    </header>
-    <div class="summary-topic-list">
+    secondary_navigation = "\n".join(
+        (
+            f'<a class="context-filter" href="#milestone-{html.escape(release["slug"], quote=True)}">'
+            f'{html.escape(release["name"])}</a>'
+        )
+        for release in family["releases"]
+        if notes.get(release["slug"]) and notes[release["slug"]]["ready"]
+    )
+    main_content = f"""
+    <section class="summary-page-shell" aria-labelledby="notes-page-title">
+      <header class="summary-topic-header">
+        <a class="summary-back" href="{html.escape(family['slug'], quote=True)}.html">← 返回版本对比</a>
+        <h1 id="notes-page-title">{html.escape(family['name'])} · 文章精读</h1>
+      </header>
+      <div class="summary-topic-list">
 {article_markup}
-    </div>
-  </main>
-</body>
-</html>
-"""
+      </div>
+    </section>
+    """.strip()
+    return render_site_page(
+        output_file=output_file,
+        output_root=output_root,
+        active_section="milestones",
+        page_title=f"{family['name']} · 文章精读",
+        meta_description=f"{family['name']} 版本文章精读。",
+        secondary_navigation=secondary_navigation,
+        main_content=main_content,
+        body_class="summary-page milestone-notes-page",
+    )
 
 
 def publish_milestone_models(
@@ -476,9 +490,15 @@ def publish_milestone_models(
                 output_root=destination.parent,
             ),
         )
+        notes_output = destination / f"{family['slug']}-notes.html"
         atomic_write_text(
-            destination / f"{family['slug']}-notes.html",
-            render_notes_page(family, notes),
+            notes_output,
+            render_notes_page(
+                family,
+                notes,
+                output_file=notes_output,
+                output_root=destination.parent,
+            ),
         )
         published += 1
     return {"published_families": published, "ready_release_notes": ready_notes}
