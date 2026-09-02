@@ -10,7 +10,7 @@ from pathlib import Path
 
 from papers.site import generate_site
 from shared.loopback_chat import LoopbackChatError, validate_loopback_base_url
-from shared.rendering import atomic_write_text
+from shared.rendering import atomic_write_bytes
 
 from .acquisition import ArxivSourceClient
 from .catalog import PaperCandidate, load_candidates, notes_path
@@ -86,6 +86,7 @@ def _write_report(result: RunResult, *, model: str) -> Path:
         "state.json",
         {
             "version": REPORT_VERSION,
+            "status": "complete",
             "last_run": generated_at,
             "model": model,
             "selected": result.selected,
@@ -152,6 +153,21 @@ def _regenerate_site(
     )
 
 
+def _restore_public_notes(
+    *,
+    docs_root: Path,
+    ledger_path: Path,
+    archive_path: Path,
+    topics: list[str],
+    originals: dict[str, bytes],
+) -> None:
+    for topic in topics:
+        atomic_write_bytes(notes_path(docs_root, topic), originals[topic])
+    _regenerate_site(
+        docs_root=docs_root, ledger_path=ledger_path, archive_path=archive_path
+    )
+
+
 def run_summaries(
     *,
     model: str,
@@ -213,6 +229,23 @@ def _run_summaries_locked(
         limit=limit,
         refresh=refresh,
     )
+    try:
+        _atomic_private_json(
+            "state.json",
+            {
+                "version": REPORT_VERSION,
+                "status": "running",
+                "started_at": datetime.now(timezone.utc)
+                .replace(microsecond=0)
+                .isoformat(),
+                "model": model,
+                "selected": len(candidates),
+            },
+        )
+    except OSError:
+        raise PaperSummaryError(
+            "state_unavailable", "private run state cannot be written safely"
+        ) from None
     client = ArxivSourceClient()
     completed: list[tuple[PaperCandidate, PaperSummary, str]] = []
     records: list[PaperRunRecord] = []
@@ -251,12 +284,12 @@ def _run_summaries_locked(
     grouped: dict[str, list[tuple[PaperCandidate, PaperSummary, str]]] = {}
     for item in completed:
         grouped.setdefault(item[0].topic, []).append(item)
-    originals: dict[str, str] = {}
+    originals: dict[str, bytes] = {}
     published_topics: list[str] = []
     for topic, topic_results in grouped.items():
         target = notes_path(docs, topic)
         try:
-            originals[topic] = target.read_text(encoding="utf-8")
+            originals[topic] = target.read_bytes()
         except OSError:
             records.extend(
                 PaperRunRecord(
@@ -304,10 +337,12 @@ def _run_summaries_locked(
             _regenerate_site(docs_root=docs, ledger_path=ledger, archive_path=archive)
         except Exception:
             try:
-                for topic in published_topics:
-                    atomic_write_text(notes_path(docs, topic), originals[topic])
-                _regenerate_site(
-                    docs_root=docs, ledger_path=ledger, archive_path=archive
+                _restore_public_notes(
+                    docs_root=docs,
+                    ledger_path=ledger,
+                    archive_path=archive,
+                    topics=published_topics,
+                    originals=originals,
                 )
             except Exception:
                 raise PaperSummaryError(
@@ -327,5 +362,25 @@ def _run_summaries_locked(
         published=published,
         records=tuple(records),
     )
-    _write_report(result, model=model)
+    try:
+        _write_report(result, model=model)
+    except OSError:
+        if published_topics:
+            try:
+                _restore_public_notes(
+                    docs_root=docs,
+                    ledger_path=ledger,
+                    archive_path=archive,
+                    topics=published_topics,
+                    originals=originals,
+                )
+            except Exception:
+                raise PaperSummaryError(
+                    "rollback_failed",
+                    "private state failed and automatic public rollback also failed",
+                ) from None
+        raise PaperSummaryError(
+            "state_write_failed",
+            "private report failed; published note pages were restored",
+        ) from None
     return result

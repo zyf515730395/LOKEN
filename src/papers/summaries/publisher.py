@@ -9,7 +9,7 @@ import re
 
 from shared.rendering import atomic_write_text
 
-from .catalog import PaperCandidate, notes_path
+from .catalog import TOPIC_SLUGS, PaperCandidate, notes_path
 from .models import PaperSummary, PaperSummaryError
 
 
@@ -81,13 +81,23 @@ def load_ready_keys(
     ready: set[tuple[str, str]] = set()
     notes = Path(docs_root) / "notes"
     for path in sorted(notes.glob("*.html")):
-        document = path.read_text(encoding="utf-8")
         try:
+            expected_topic = next(
+                topic
+                for topic, slug in TOPIC_SLUGS.items()
+                if path.name == f"{slug}.html"
+            )
+            document = path.read_text(encoding="utf-8")
             _, manifest = _manifest(document, path)
-            _validate(document, path, manifest["topic"])
-        except PaperSummaryError:
+            _validate(document, path, expected_topic)
+        except (OSError, UnicodeError, StopIteration, PaperSummaryError) as error:
             if strict:
-                raise
+                if isinstance(error, PaperSummaryError):
+                    raise
+                raise PaperSummaryError(
+                    "invalid_summary_page",
+                    f"summary page cannot be validated: {path.name}",
+                ) from None
             continue
         for paper_id, value in manifest["papers"].items():
             if isinstance(value, dict) and value.get("status") == "ready":
