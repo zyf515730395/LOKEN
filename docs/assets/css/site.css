@@ -422,6 +422,16 @@ img { max-width: 100%; }
 .topic-header p { grid-column: 1 / -1; margin: 0 0 .55rem; color: var(--accent); font-family: var(--mono); font-size: .64rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; }
 .topic-header h2 { margin: 0; font-size: clamp(1.7rem, 3vw, 2.4rem); font-weight: 740; letter-spacing: -.045em; line-height: 1.08; }
 .topic-header > span { color: var(--muted); font-family: var(--mono); font-size: .7rem; }
+.learning-workspace { display: grid; max-width: 96rem; grid-template-columns: minmax(0, 1fr) minmax(18rem, 22rem); align-items: start; }
+.learning-archive { min-width: 0; }
+.learning-archive .topic-section { max-width: none; }
+.paper-summary-panel { position: sticky; top: 4.75rem; max-height: calc(100vh - 5.75rem); min-width: 0; overflow-y: auto; border-left: 1px solid var(--line); background: var(--surface); scrollbar-width: thin; }
+.paper-summary-header { position: sticky; top: 0; z-index: 1; border-bottom: 1px solid var(--line); background: var(--surface); padding: 1.1rem 1.2rem; }
+.paper-summary-header h2 { margin: 0; font-size: 1.05rem; line-height: 1.35; }
+[data-summary-content] { padding: 1.2rem; }
+[data-summary-content].has-error { color: #b42318; }
+[data-summary-direct] { display: block; margin: 0 1.2rem 1.4rem; color: var(--accent); font-size: .8rem; font-weight: 700; text-decoration: none; }
+[data-summary-direct]:hover { text-decoration: underline; text-underline-offset: .2em; }
 .archive-year { margin: 0; border-block: 1px solid var(--line); overflow: clip; }
 .archive-year + .archive-year { border-top: 0; }
 .archive-year-header { display: grid; min-width: 0; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; }
@@ -450,6 +460,8 @@ img { max-width: 100%; }
 .paper-table th, .paper-table td { border-bottom: 1px solid var(--row-line); padding: .9rem .8rem; vertical-align: top; }
 .paper-table tr:last-child td { border-bottom: 0; }
 .paper-table tbody tr:hover { background: var(--row-hover); }
+.paper-table tr.is-summary-active td { background: color-mix(in srgb, var(--accent-soft) 62%, transparent); }
+.paper-table tr.is-summary-active td:first-child { box-shadow: inset 2px 0 var(--accent); }
 .paper-table th:first-child, .paper-table td:first-child { width: 7.4rem; color: var(--muted); white-space: nowrap; }
 .paper-table th:last-child, .paper-table td:last-child { width: 6.4rem; white-space: nowrap; }
 .paper-title { min-width: 19rem; font-weight: 650; line-height: 1.45; }
@@ -461,16 +473,7 @@ img { max-width: 100%; }
 .summary-pending, .muted { color: var(--muted); }
 footer { max-width: 96rem; padding: 2.2rem clamp(1.25rem, 5vw, 5rem); color: var(--muted); font-size: .72rem; }
 
-/* Dialogs and standalone notes. */
-.summary-dialog { width: min(54rem, calc(100vw - 2rem)); max-height: min(44rem, calc(100vh - 2rem)); margin: auto; padding: 0; overflow: hidden; border: 1px solid var(--line); border-radius: .7rem; background: var(--surface); color: var(--text); box-shadow: var(--shadow); }
-.summary-dialog::backdrop { background: var(--scrim); backdrop-filter: blur(4px); }
-.summary-dialog-shell { display: flex; max-height: inherit; flex-direction: column; }
-.summary-dialog-header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; border-bottom: 1px solid var(--line); padding: 1.1rem 1.25rem; }
-.summary-dialog-header h2 { margin: .12rem 0 0; font-size: 1.05rem; }
-.summary-dialog-close { display: grid; width: 2.75rem; min-height: 44px; place-items: center; border: 0; border-radius: 50%; background: transparent; color: var(--muted); font-size: 1.25rem; }
-.summary-dialog-close:hover { background: var(--hover); color: var(--text); }
-.summary-dialog-content { overflow-y: auto; padding: 1.5rem clamp(1.25rem, 4vw, 2.5rem) 2rem; }
-.summary-dialog-content.has-error { color: #b42318; }
+/* Standalone notes. */
 .summary-page { min-height: 100vh; background: var(--canvas); }
 .summary-page-shell { padding: clamp(2rem, 7vw, 6rem) clamp(1.25rem, 6vw, 5rem); }
 .summary-topic-header { max-width: 50rem; margin: 0 auto 2.5rem; border-bottom: 1px solid var(--line); padding-bottom: 1.5rem; }
@@ -614,7 +617,7 @@ footer { max-width: 96rem; padding: 2.2rem clamp(1.25rem, 5vw, 5rem); color: var
 .context-overview:focus-visible, .context-filter:focus-visible, .archive-nav summary:focus-visible,
 .archive-nav a:focus-visible, .sidebar-actions button:focus-visible, .sidebar-toggle:focus-visible,
 .site-search-field input:focus-visible, .theme-toggle:focus-visible,
-.context-drawer-header button:focus-visible, .summary-dialog-close:focus-visible, .search-result:focus-visible, .archive-year-toggle:focus-visible,
+.context-drawer-header button:focus-visible, .search-result:focus-visible, .archive-year-toggle:focus-visible,
 .archive-month-tabs button:focus-visible, .paper-table a:focus-visible, .writing-entry a:focus-visible,
 .writing-body a:focus-visible, .writing-toc a:focus-visible, .summary-back:focus-visible {
   outline: 2px solid var(--accent);
@@ -640,6 +643,11 @@ footer { max-width: 96rem; padding: 2.2rem clamp(1.25rem, 5vw, 5rem); color: var
   .js .context-drawer[aria-hidden="true"] { display: none; }
   .js[data-context-open="true"] .context-scrim { display: none; }
   .page-content { margin-left: 0; }
+  .learning-workspace { display: block; }
+  .paper-summary-panel { position: static; max-height: none; border: 1px solid var(--line); }
+  .mobile-summary-row { display: table-row !important; border: 0 !important; padding: 0 !important; }
+  .mobile-summary-row > td { display: table-cell !important; width: auto !important; padding: 0 !important; }
+  .mobile-summary-row > td::before { content: none !important; }
   .sidebar-scrim { position: fixed; inset: 0; z-index: 39; background: var(--scrim); }
   body.sidebar-open .navigation-shell { transform: translateX(0); }
   body.sidebar-open .sidebar-scrim { display: block; }
@@ -709,7 +717,6 @@ footer { max-width: 96rem; padding: 2.2rem clamp(1.25rem, 5vw, 5rem); color: var
   .writing-body { font-size: 1rem; }
   .writing-body pre, .writing-table-scroll { max-width: calc(100vw - 2.5rem); }
   .empty-section { padding: 10.5rem 1.25rem 5rem; }
-  .summary-dialog { width: calc(100vw - 1rem); max-height: calc(100vh - 1rem); }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -314,7 +314,7 @@ def render_table(
             summary_cell = (
                 f'<a class="summary-link" href="{summary_url}" '
                 f'data-summary-url="{summary_url}" data-summary-id="{summary_id}" '
-                'aria-haspopup="dialog">查看要点</a>'
+                'aria-controls="paper-summary-panel" aria-expanded="false">要点</a>'
             )
         elif candidate_statuses.get(row["id"]) in {"pending", "accepted"}:
             summary_cell = '<span class="summary-pending">待生成</span>'
@@ -428,7 +428,18 @@ def render_content(
                 output.append("      </section>")
             output.extend(["    </div>", "  </section>"])
         output.append("</section>")
-    return "\n".join(output)
+    archive = "\n".join(output)
+    return f"""<div class="learning-workspace">
+  <div class="learning-archive">
+{archive}
+  </div>
+  <div data-summary-panel-home></div>
+  <aside class="paper-summary-panel" id="paper-summary-panel" aria-live="polite">
+    <header class="paper-summary-header"><h2 data-summary-title>论文要点</h2></header>
+    <div data-summary-content><p>选择一篇已有摘要的论文查看要点。</p></div>
+    <a data-summary-direct hidden>打开完整总结 →</a>
+  </aside>
+</div>"""
 
 
 def load_candidate_statuses(candidate_path: str | Path | None) -> dict[str, str]:
@@ -486,18 +497,6 @@ def generate_site(
 {render_content(categories, summary_catalog, candidate_statuses)}
     <footer>Generated from arXiv metadata · Source: <a href="https://github.com/zyf515730395/TOGOS">{SITE_TITLE}</a></footer>
 """
-    summary_dialog = """  <dialog class="summary-dialog" id="summary-dialog" aria-labelledby="summary-dialog-title">
-    <div class="summary-dialog-shell">
-      <header class="summary-dialog-header">
-        <h2 id="summary-dialog-title">论文要点</h2>
-        <button type="button" class="summary-dialog-close" data-summary-close aria-label="关闭">×</button>
-      </header>
-      <div class="summary-dialog-content" data-summary-content>
-        <p class="muted">正在加载…</p>
-      </div>
-    </div>
-  </dialog>
-"""
     document = render_site_page(
         output_file=page_output,
         output_root=site_root,
@@ -510,7 +509,6 @@ def generate_site(
         secondary_navigation=render_sidebar(themes),
         main_content=main_content,
         body_class="learning-page",
-        trailing_dialogs=summary_dialog,
     )
     atomic_write_text(page_output, document)
 
