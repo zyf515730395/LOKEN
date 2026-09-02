@@ -397,7 +397,7 @@ def render_notes_page(family: dict[str, Any], notes: dict) -> str:
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{html.escape(family['name'])} · 文章精读</title>
-  <link rel="stylesheet" href="../assets/css/site.css?v=3">
+  <link rel="stylesheet" href="../assets/css/site.css?v=4">
 </head>
 <body class="summary-page">
   <main class="summary-page-shell">
