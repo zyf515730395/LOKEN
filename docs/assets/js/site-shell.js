@@ -99,6 +99,11 @@
     );
 
     contextToggle?.addEventListener("click", () => {
+      if (drawerMedia.matches && !body.classList.contains("sidebar-open")) {
+        setDrawer(true);
+        setContextOpen(true, true);
+        return;
+      }
       setContextOpen(root.dataset.contextOpen !== "true", true);
     });
     drawerToggle?.addEventListener("click", () => {
