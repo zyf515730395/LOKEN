@@ -75,12 +75,17 @@ def _validate(document: str, path: Path, expected_topic: str) -> tuple[dict, dic
     return manifest, articles
 
 
-def load_ready_ids(docs_root: str | Path) -> set[str]:
+def load_ready_ids(docs_root: str | Path, *, strict: bool = True) -> set[str]:
     ready: set[str] = set()
     notes = Path(docs_root) / "notes"
     for path in sorted(notes.glob("*.html")):
         document = path.read_text(encoding="utf-8")
-        _, manifest = _manifest(document, path)
+        try:
+            _, manifest = _manifest(document, path)
+        except PaperSummaryError:
+            if strict:
+                raise
+            continue
         for paper_id, value in manifest["papers"].items():
             if isinstance(value, dict) and value.get("status") == "ready":
                 ready.add(paper_id)

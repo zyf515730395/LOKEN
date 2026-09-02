@@ -10,6 +10,7 @@ import unicodedata
 from .models import PaperDocument, PaperSection, PaperSummaryError
 
 
+EXTRACTION_VERSION = "paper-extraction-v1"
 MIN_DOCUMENT_CHARS = 1_000
 MAX_DOCUMENT_CHARS = 400_000
 MAX_PDF_PAGES = 200

@@ -2,8 +2,11 @@
 
 from __future__ import annotations
 
+from contextlib import contextmanager
+import os
 from pathlib import Path
 import re
+from typing import Iterator
 
 from .models import PaperSummaryError
 
@@ -32,3 +35,48 @@ def private_path(*parts: str) -> Path:
 
 def source_directory(arxiv_id: str) -> Path:
     return private_path("sources", normalize_arxiv_id(arxiv_id))
+
+
+@contextmanager
+def run_lock() -> Iterator[None]:
+    """Hold a non-blocking, process-wide lock for public summary mutation."""
+    path = private_path("run.lock")
+    path.parent.mkdir(parents=True, exist_ok=True)
+    stream = path.open("a+b")
+    locked = False
+    try:
+        stream.seek(0, os.SEEK_END)
+        if stream.tell() == 0:
+            stream.write(b"0")
+            stream.flush()
+        stream.seek(0)
+        try:
+            if os.name == "nt":
+                import msvcrt
+
+                msvcrt.locking(stream.fileno(), msvcrt.LK_NBLCK, 1)
+            else:
+                import fcntl
+
+                fcntl.flock(stream.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+            locked = True
+        except (OSError, BlockingIOError):
+            raise PaperSummaryError(
+                "workflow_locked", "another paper summary run is active"
+            ) from None
+        yield
+    finally:
+        if locked:
+            stream.seek(0)
+            try:
+                if os.name == "nt":
+                    import msvcrt
+
+                    msvcrt.locking(stream.fileno(), msvcrt.LK_UNLCK, 1)
+                else:
+                    import fcntl
+
+                    fcntl.flock(stream.fileno(), fcntl.LOCK_UN)
+            except OSError:
+                pass
+        stream.close()

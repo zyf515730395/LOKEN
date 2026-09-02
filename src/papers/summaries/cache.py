@@ -8,6 +8,7 @@ import json
 import os
 from pathlib import Path
 
+from .extraction import EXTRACTION_VERSION
 from .models import PaperSummary
 from .paths import private_path
 from .prompts import PROMPT_VERSION, TRANSPORT_VERSION
@@ -25,6 +26,7 @@ def cache_key(source_sha256: str, model: str) -> str:
         _canonical(
             {
                 "source_sha256": source_sha256,
+                "extraction_version": EXTRACTION_VERSION,
                 "model": model,
                 "prompt_version": PROMPT_VERSION,
                 "transport_version": TRANSPORT_VERSION,

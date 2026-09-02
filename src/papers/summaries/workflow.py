@@ -14,7 +14,7 @@ from shared.loopback_chat import LoopbackChatError, validate_loopback_base_url
 from .acquisition import ArxivSourceClient
 from .catalog import PaperCandidate, load_candidates
 from .models import PaperSummary, PaperSummaryError
-from .paths import PROJECT_ROOT, private_path
+from .paths import PROJECT_ROOT, private_path, run_lock
 from .publisher import load_ready_ids, publish_summaries
 from .summarizer import summarize_paper
 
@@ -49,8 +49,8 @@ class RunResult:
         return self.failed > 0
 
 
-def _atomic_report(payload: dict) -> Path:
-    path = private_path("report.json")
+def _atomic_private_json(name: str, payload: dict) -> Path:
+    path = private_path(name)
     path.parent.mkdir(parents=True, exist_ok=True)
     temporary = path.with_name(f".{path.name}.tmp-{os.getpid()}")
     data = json.dumps(payload, ensure_ascii=False, sort_keys=True, separators=(",", ":")) + "\n"
@@ -69,18 +69,30 @@ def _atomic_report(payload: dict) -> Path:
 
 
 def _write_report(result: RunResult, *, model: str) -> Path:
-    return _atomic_report(
+    generated_at = datetime.now(timezone.utc).replace(microsecond=0).isoformat()
+    report = {
+        "version": REPORT_VERSION,
+        "generated_at": generated_at,
+        "model": model,
+        "selected": result.selected,
+        "succeeded": result.succeeded,
+        "failed": result.failed,
+        "published": result.published,
+        "records": [asdict(record) for record in result.records],
+    }
+    path = _atomic_private_json("report.json", report)
+    _atomic_private_json(
+        "state.json",
         {
             "version": REPORT_VERSION,
-            "generated_at": datetime.now(timezone.utc).replace(microsecond=0).isoformat(),
+            "last_run": generated_at,
             "model": model,
             "selected": result.selected,
             "succeeded": result.succeeded,
             "failed": result.failed,
-            "published": result.published,
-            "records": [asdict(record) for record in result.records],
-        }
+        },
     )
+    return path
 
 
 def status_snapshot(
@@ -91,11 +103,33 @@ def status_snapshot(
     ready = load_ready_ids(docs_root)
     pending = load_candidates(ledger_path, ready_ids=ready)
     all_accepted = load_candidates(ledger_path, refresh=True)
+    report_path = private_path("report.json")
+    last_failed = 0
+    last_model = None
+    try:
+        report = json.loads(report_path.read_text(encoding="utf-8"))
+        if isinstance(report, dict) and report.get("version") == REPORT_VERSION:
+            if isinstance(report.get("failed"), int) and report["failed"] >= 0:
+                last_failed = report["failed"]
+            if isinstance(report.get("model"), str):
+                last_model = report["model"]
+    except (OSError, json.JSONDecodeError, UnicodeDecodeError, RecursionError):
+        pass
+    source_root = private_path("sources")
+    cache_root = private_path("cache")
     return {
         "accepted": len(all_accepted),
         "ready": len({item.arxiv_id for item in all_accepted} & ready),
         "pending": len(pending),
-        "report": str(private_path("report.json")),
+        "processable": len(pending),
+        "last_failed": last_failed,
+        "source_cache": {
+            "html": sum(1 for _ in source_root.glob("*/source.html")),
+            "pdf": sum(1 for _ in source_root.glob("*/source.pdf")),
+            "summaries": sum(1 for _ in cache_root.glob("*/*.json")),
+        },
+        "last_model": last_model,
+        "report": "build/paper-summaries/report.json",
     }
 
 
@@ -141,10 +175,36 @@ def run_summaries(
         validate_loopback_base_url(base_url)
     except LoopbackChatError as error:
         raise PaperSummaryError(error.code, error.message) from None
-    docs = Path(docs_root)
-    ledger = Path(ledger_path)
-    archive = Path(archive_path)
-    ready = load_ready_ids(docs)
+    with run_lock():
+        return _run_summaries_locked(
+            model=model,
+            base_url=base_url,
+            timeout=timeout,
+            paper_ids=paper_ids,
+            limit=limit,
+            refresh=refresh,
+            ledger_path=Path(ledger_path),
+            docs_root=Path(docs_root),
+            archive_path=Path(archive_path),
+        )
+
+
+def _run_summaries_locked(
+    *,
+    model: str,
+    base_url: str,
+    timeout: float,
+    paper_ids: tuple[str, ...],
+    limit: int | None,
+    refresh: bool,
+    ledger_path: Path,
+    docs_root: Path,
+    archive_path: Path,
+) -> RunResult:
+    docs = docs_root
+    ledger = ledger_path
+    archive = archive_path
+    ready = load_ready_ids(docs, strict=False)
     candidates = load_candidates(
         ledger,
         ready_ids=ready,
@@ -153,7 +213,7 @@ def run_summaries(
         refresh=refresh,
     )
     client = ArxivSourceClient()
-    completed: list[tuple[PaperCandidate, PaperSummary]] = []
+    completed: list[tuple[PaperCandidate, PaperSummary, str]] = []
     records: list[PaperRunRecord] = []
     for candidate in candidates:
         try:
@@ -165,10 +225,7 @@ def run_summaries(
                 timeout=timeout,
                 refresh=refresh,
             )
-            completed.append((candidate, summary))
-            records.append(
-                PaperRunRecord(candidate.arxiv_id, candidate.topic, "succeeded", source.kind)
-            )
+            completed.append((candidate, summary, source.kind))
         except PaperSummaryError as error:
             records.append(
                 PaperRunRecord(
@@ -189,14 +246,48 @@ def run_summaries(
                     error_message="paper failed without changing public output",
                 )
             )
-    if completed:
-        publish_summaries(docs, tuple(completed), refresh=refresh)
+    published = 0
+    grouped: dict[str, list[tuple[PaperCandidate, PaperSummary, str]]] = {}
+    for item in completed:
+        grouped.setdefault(item[0].topic, []).append(item)
+    for topic_results in grouped.values():
+        try:
+            publish_summaries(
+                docs,
+                tuple((candidate, summary) for candidate, summary, _ in topic_results),
+                refresh=refresh,
+            )
+        except (PaperSummaryError, OSError) as error:
+            code = error.code if isinstance(error, PaperSummaryError) else "publish_failed"
+            message = error.message if isinstance(error, PaperSummaryError) else "topic could not be published safely"
+            records.extend(
+                PaperRunRecord(
+                    candidate.arxiv_id,
+                    candidate.topic,
+                    "failed",
+                    source=source_kind,
+                    error_code=code,
+                    error_message=message,
+                )
+                for candidate, _, source_kind in topic_results
+            )
+            continue
+        published += len(topic_results)
+        records.extend(
+            PaperRunRecord(
+                candidate.arxiv_id, candidate.topic, "succeeded", source_kind
+            )
+            for candidate, _, source_kind in topic_results
+        )
+    if published:
         _regenerate_site(docs_root=docs, ledger_path=ledger, archive_path=archive)
+    order = {candidate.arxiv_id: index for index, candidate in enumerate(candidates)}
+    records.sort(key=lambda record: order[record.arxiv_id])
     result = RunResult(
         selected=len(candidates),
-        succeeded=len(completed),
+        succeeded=sum(record.status == "succeeded" for record in records),
         failed=sum(record.status == "failed" for record in records),
-        published=len(completed),
+        published=published,
         records=tuple(records),
     )
     _write_report(result, model=model)
