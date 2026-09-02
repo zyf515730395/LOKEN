@@ -73,6 +73,7 @@ def _write_report(result: RunResult, *, model: str) -> Path:
     generated_at = datetime.now(timezone.utc).replace(microsecond=0).isoformat()
     report = {
         "version": REPORT_VERSION,
+        "status": "complete",
         "generated_at": generated_at,
         "model": model,
         "selected": result.selected,
@@ -85,15 +86,20 @@ def _write_report(result: RunResult, *, model: str) -> Path:
         "state.json",
         {
             "version": REPORT_VERSION,
-            "status": "complete",
-            "last_run": generated_at,
-            "model": model,
-            "selected": result.selected,
-            "succeeded": result.succeeded,
-            "failed": result.failed,
+            "status": "reporting",
+            "report": report,
         },
     )
-    return _atomic_private_json("report.json", report)
+    path = _atomic_private_json("report.json", report)
+    _atomic_private_json(
+        "state.json",
+        {
+            "version": REPORT_VERSION,
+            "status": "complete",
+            "report": report,
+        },
+    )
+    return path
 
 
 def _read_state() -> dict | None:
@@ -123,7 +129,14 @@ def _read_state() -> dict | None:
         or not isinstance(state, dict)
         or state.get("version") != REPORT_VERSION
         or state.get("status")
-        not in {"running", "publishing", "complete", "failed", "recovered"}
+        not in {
+            "running",
+            "publishing",
+            "reporting",
+            "complete",
+            "failed",
+            "recovered",
+        }
     ):
         raise PaperSummaryError("invalid_state", "private run state is invalid")
     return state
@@ -133,7 +146,53 @@ def _recover_interrupted_publication(
     *, docs_root: Path, ledger_path: Path, archive_path: Path
 ) -> None:
     state = _read_state()
-    if state is None or state["status"] != "publishing":
+    if state is None:
+        return
+    if state["status"] in {"reporting", "complete"}:
+        report = state.get("report")
+        if (
+            not isinstance(report, dict)
+            or report.get("version") != REPORT_VERSION
+            or report.get("status") != "complete"
+            or not isinstance(report.get("records"), list)
+        ):
+            raise PaperSummaryError(
+                "invalid_state", "private report recovery state is invalid"
+            )
+        try:
+            _atomic_private_json("report.json", report)
+            if state["status"] == "reporting":
+                _atomic_private_json(
+                    "state.json",
+                    {
+                        "version": REPORT_VERSION,
+                        "status": "complete",
+                        "report": report,
+                    },
+                )
+        except OSError:
+            raise PaperSummaryError(
+                "recovery_failed", "private report could not be recovered"
+            ) from None
+        return
+    if state["status"] == "running":
+        try:
+            _atomic_private_json(
+                "state.json",
+                {
+                    "version": REPORT_VERSION,
+                    "status": "recovered",
+                    "recovered_at": datetime.now(timezone.utc)
+                    .replace(microsecond=0)
+                    .isoformat(),
+                },
+            )
+        except OSError:
+            raise PaperSummaryError(
+                "recovery_failed", "private run state could not be recovered"
+            ) from None
+        return
+    if state["status"] != "publishing":
         return
     try:
         _regenerate_site(
@@ -298,6 +357,8 @@ def _run_summaries_locked(
         limit=limit,
         refresh=refresh,
     )
+    if not candidates:
+        return RunResult(0, 0, 0, 0, ())
     try:
         _atomic_private_json(
             "state.json",
