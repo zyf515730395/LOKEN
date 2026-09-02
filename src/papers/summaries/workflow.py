@@ -10,9 +10,10 @@ from pathlib import Path
 
 from papers.site import generate_site
 from shared.loopback_chat import LoopbackChatError, validate_loopback_base_url
+from shared.rendering import atomic_write_text
 
 from .acquisition import ArxivSourceClient
-from .catalog import PaperCandidate, load_candidates
+from .catalog import PaperCandidate, load_candidates, notes_path
 from .models import PaperSummary, PaperSummaryError
 from .paths import PROJECT_ROOT, private_path, run_lock
 from .publisher import load_ready_keys, publish_summaries
@@ -250,7 +251,25 @@ def _run_summaries_locked(
     grouped: dict[str, list[tuple[PaperCandidate, PaperSummary, str]]] = {}
     for item in completed:
         grouped.setdefault(item[0].topic, []).append(item)
-    for topic_results in grouped.values():
+    originals: dict[str, str] = {}
+    published_topics: list[str] = []
+    for topic, topic_results in grouped.items():
+        target = notes_path(docs, topic)
+        try:
+            originals[topic] = target.read_text(encoding="utf-8")
+        except OSError:
+            records.extend(
+                PaperRunRecord(
+                    candidate.arxiv_id,
+                    candidate.topic,
+                    "failed",
+                    source=source_kind,
+                    error_code="summary_page_missing",
+                    error_message="summary page is unavailable for safe publication",
+                )
+                for candidate, _, source_kind in topic_results
+            )
+            continue
         try:
             publish_summaries(
                 docs,
@@ -273,6 +292,7 @@ def _run_summaries_locked(
             )
             continue
         published += len(topic_results)
+        published_topics.append(topic)
         records.extend(
             PaperRunRecord(
                 candidate.arxiv_id, candidate.topic, "succeeded", source_kind
@@ -280,7 +300,24 @@ def _run_summaries_locked(
             for candidate, _, source_kind in topic_results
         )
     if published:
-        _regenerate_site(docs_root=docs, ledger_path=ledger, archive_path=archive)
+        try:
+            _regenerate_site(docs_root=docs, ledger_path=ledger, archive_path=archive)
+        except Exception:
+            try:
+                for topic in published_topics:
+                    atomic_write_text(notes_path(docs, topic), originals[topic])
+                _regenerate_site(
+                    docs_root=docs, ledger_path=ledger, archive_path=archive
+                )
+            except Exception:
+                raise PaperSummaryError(
+                    "rollback_failed",
+                    "site build and automatic public rollback both failed",
+                ) from None
+            raise PaperSummaryError(
+                "site_build_failed",
+                "site build failed; published note pages were restored",
+            ) from None
     order = {candidate.arxiv_id: index for index, candidate in enumerate(candidates)}
     records.sort(key=lambda record: order[record.arxiv_id])
     result = RunResult(
