@@ -9,57 +9,65 @@
     (() => {
       document.documentElement.classList.add("js");
       let theme = null;
-      let collapsed = null;
+      let contextOpen = null;
       try {
         theme = window.localStorage.getItem("arxiv-theme");
-        collapsed = window.localStorage.getItem("togos-secondary-sidebar-collapsed");
+        contextOpen = window.localStorage.getItem("togos-secondary-sidebar-collapsed");
       } catch (error) { /* Storage can be unavailable. */ }
       if (theme !== "light" && theme !== "dark") {
         theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
       }
       document.documentElement.dataset.theme = theme;
-      if (collapsed === "true") document.documentElement.dataset.secondaryCollapsed = "true";
+      if (contextOpen === "false") document.documentElement.dataset.contextOpen = "true";
     })();
   </script>
-  <link rel="stylesheet" href="../assets/css/site.css?v=4">
-  <script src="../assets/js/site-shell.js?v=4" defer></script>
-  <script src="../assets/js/search-core.js?v=4" defer></script>
-  <script src="../assets/js/search.js?v=4" defer></script>
-  <script src="../assets/js/sidebar.js?v=4" defer></script>
+  <link rel="stylesheet" href="../assets/css/site.css?v=5">
+  <script src="../assets/js/site-shell.js?v=5" defer></script>
+  <script src="../assets/js/search-core.js?v=5" defer></script>
+  <script src="../assets/js/search.js?v=5" defer></script>
+  <script src="../assets/js/sidebar.js?v=5" defer></script>
 </head>
 <body data-site-root="../" data-active-section="milestones" class="milestone-page">
   <header class="site-utility" aria-label="页面工具">
     <button class="sidebar-toggle" type="button" aria-controls="navigation-shell" aria-expanded="false">
       <span aria-hidden="true" data-sidebar-toggle-icon>☰</span><span data-sidebar-toggle-label>导航</span>
     </button>
-    <button class="search-trigger" type="button" data-search-trigger>
-      <span class="search-trigger-icon" aria-hidden="true">⌕</span>
-      <span>搜索文章</span><kbd>Ctrl K</kbd>
-    </button>
+    <div class="site-search" data-search-root>
+      <label class="site-search-field" for="search-input">
+        <span aria-hidden="true">⌕</span>
+        <input id="search-input" type="search" placeholder="搜索文章标题" role="combobox"
+               autocomplete="off" aria-autocomplete="list" aria-controls="search-results" aria-expanded="false">
+        <kbd>Ctrl K</kbd>
+      </label>
+      <div class="search-popover" data-search-popover hidden>
+        <p class="search-status" data-search-status aria-live="polite">输入标题关键词开始搜索</p>
+        <div id="search-results" class="search-results" data-search-results role="listbox"></div>
+      </div>
+    </div>
+    <button class="context-toggle" type="button" data-context-toggle aria-controls="context-drawer" aria-expanded="false">INDEX <span aria-hidden="true">☰</span></button>
     <button class="theme-toggle" type="button" aria-label="切换颜色主题" aria-pressed="false">
       <span data-theme-icon aria-hidden="true"></span>
     </button>
   </header>
   <div class="sidebar-scrim" data-sidebar-close></div>
+  <div class="context-scrim" data-context-scrim></div>
 <div class="navigation-shell" id="navigation-shell">
   <aside class="primary-sidebar" aria-label="知识主题">
-    <a class="primary-brand" href="../index.html" aria-label="TOGOS 首页"><span>TO</span><span>/GOS</span></a>
+    <a class="primary-brand" href="../index.html" aria-label="LOKEN 首页"><span class="brand-mark" aria-hidden="true">LK</span><span class="brand-wordmark">LOKEN</span></a>
     <nav class="primary-navigation" aria-label="知识主题">
-      <a class="primary-nav-item" href="../index.html"><span class="primary-nav-marker" aria-hidden="true"></span><span class="primary-nav-label">学习一个</span></a>
-      <a class="primary-nav-item is-active" href="../milestone-models/flux.html" aria-current="page"><span class="primary-nav-marker" aria-hidden="true"></span><span class="primary-nav-label">身经百战</span></a>
+      <a class="primary-nav-item" href="../index.html"><span class="primary-nav-marker" aria-hidden="true"></span><span class="primary-nav-copy"><span class="primary-nav-meta">01 / PAPER SIGNALS</span><span class="primary-nav-label">学习一个</span></span></a>
+      <a class="primary-nav-item is-active" href="../milestone-models/flux.html" aria-current="page"><span class="primary-nav-marker" aria-hidden="true"></span><span class="primary-nav-copy"><span class="primary-nav-meta">02 / MODEL ARCHIVE</span><span class="primary-nav-label">身经百战</span></span></a>
       
       
     </nav>
   </aside>
-  <aside class="paper-sidebar context-sidebar" id="paper-sidebar" aria-label="身经百战导航">
-    <div class="context-toolbar">
-      <p class="context-toolbar-label"><span>本页目录</span></p>
-      <button class="context-collapse" type="button" aria-controls="context-navigation" aria-expanded="true" data-context-collapse>
-        <span aria-hidden="true" data-context-collapse-icon>←</span>
-        <span class="visually-hidden" data-context-collapse-label>折叠二级导航</span>
-      </button>
-    </div>
-    <nav class="archive-nav context-navigation" id="context-navigation" aria-label="身经百战目录">
+  <div id="paper-sidebar">
+  <aside class="context-drawer" id="context-drawer" aria-label="本页目录">
+    <header class="context-drawer-header">
+      <span>INDEX</span>
+      <button type="button" data-context-close aria-label="关闭本页目录">×</button>
+    </header>
+    <nav id="context-navigation" class="context-navigation">
       <div class="milestone-nav">
       <details class="nav-theme" open>
         <summary><span>Image Generation</span></summary>
@@ -91,6 +99,7 @@
       </div>
     </nav>
   </aside>
+  </div>
 </div>
   <main class="page-content" id="top">
     <header class="milestone-hero">
@@ -105,10 +114,11 @@
       </div>
       <div class="milestone-hero-meta">
         <ul class="status-legend" aria-label="发布状态图例"><li><span class="release-status status-released">已发布</span><span>已发布</span></li><li><span class="release-status status-early-access">Early Access</span><span>Early Access</span></li><li><span class="release-status status-announced">已宣布</span><span>已宣布</span></li></ul>
-        <p>Updated 2026-09-02</p>
+        <p>Updated 2026-09-03</p>
       </div>
     </header>
     <div class="milestone-workspace">
+      <div class="milestone-overview">
 <section class="milestone-panel timeline-panel" aria-labelledby="timeline-heading">
   <div class="milestone-panel-heading">
     <div><p>ROADMAP</p><h2 id="timeline-heading">官方版本时间线</h2></div>
@@ -189,6 +199,23 @@
     </ol>
   </div>
 </section>
+<section class="model-specimen" aria-labelledby="model-specimen-heading">
+  <div class="model-specimen-heading">
+    <p>SELECTED SPECIMEN</p>
+    <h2 id="model-specimen-heading">最新发布节点</h2>
+  </div>
+  <div class="model-specimen-graphic" aria-hidden="true">
+    <span></span><span></span><span></span>
+  </div>
+  <dl class="model-specimen-data">
+    <div><dt>MODEL</dt><dd>FLUX 3</dd></div>
+    <div><dt>RELEASED</dt><dd><time datetime="2026-07-23">2026-07-23</time></dd></div>
+    <div><dt>ORGANIZATION</dt><dd>Black Forest Labs</dd></div>
+    <div><dt>STATUS</dt><dd><span class="release-status status-early-access">Early Access</span></dd></div>
+    <div><dt>READING</dt><dd>精读已就绪</dd></div>
+  </dl>
+</section>
+      </div>
 <section class="milestone-panel comparison-panel" aria-labelledby="comparison-heading">
   <div class="milestone-panel-heading">
     <div><p>COMPARISON</p><h2 id="comparison-heading">大版本技术对比</h2></div>
@@ -436,22 +463,5 @@
 
   </main>
 
-  <dialog class="search-dialog" id="search-dialog" aria-labelledby="search-dialog-title">
-    <div class="search-dialog-shell">
-      <header class="search-dialog-header">
-        <div>
-          <p>全站公开内容</p>
-          <h2 id="search-dialog-title">搜索文章标题</h2>
-        </div>
-        <button type="button" class="search-dialog-close" data-search-close aria-label="关闭搜索">×</button>
-      </header>
-      <label class="visually-hidden" for="search-input">搜索公开文章标题</label>
-      <input id="search-input" class="search-input" type="search" placeholder="搜索公开文章标题"
-             autocomplete="off" role="combobox" aria-autocomplete="list" aria-controls="search-results"
-             aria-haspopup="listbox" aria-expanded="false">
-      <p class="search-status" data-search-status aria-live="polite">输入标题关键词开始搜索</p>
-      <div class="search-results" id="search-results" data-search-results role="listbox" aria-label="搜索结果"></div>
-    </div>
-  </dialog>
 </body>
 </html>
