@@ -29,6 +29,7 @@
     const body = document.body;
     const navigationShell = document.querySelector("#navigation-shell");
     const siteUtility = document.querySelector(".site-utility");
+    const pageContent = document.querySelector(".page-content");
     const drawerToggle = document.querySelector(".sidebar-toggle");
     const drawerToggleIcon = drawerToggle?.querySelector("[data-sidebar-toggle-icon]");
     const drawerToggleLabel = drawerToggle?.querySelector("[data-sidebar-toggle-label]");
@@ -67,17 +68,19 @@
     }
 
     function setDrawer(open, returnFocus = false, focusTarget = drawerToggle) {
-      if (open && drawerMedia.matches) drawerReturnFocus = focusTarget || drawerToggle;
+      const mobile = drawerMedia.matches;
+      if (open && mobile) drawerReturnFocus = focusTarget || drawerToggle;
       body.classList.toggle("sidebar-open", open);
       drawerToggle?.setAttribute("aria-expanded", String(open));
-      navigationShell?.toggleAttribute("inert", drawerMedia.matches && !open);
-      siteUtility?.toggleAttribute("inert", drawerMedia.matches && open);
-      if (navigationClose) navigationClose.hidden = !(drawerMedia.matches && open);
+      navigationShell?.toggleAttribute("inert", mobile && !open);
+      siteUtility?.toggleAttribute("inert", mobile && open);
+      pageContent?.toggleAttribute("inert", mobile && open);
+      if (navigationClose) navigationClose.hidden = !(mobile && open);
       if (drawerToggleIcon) drawerToggleIcon.textContent = open ? "×" : "☰";
       if (drawerToggleLabel) drawerToggleLabel.textContent = open ? "关闭" : "导航";
-      updateContextDrawer(drawerMedia.matches && open ? true : contextOpen);
-      if (open && drawerMedia.matches) navigationClose?.focus();
-      if (!open && returnFocus && drawerMedia.matches) drawerReturnFocus?.focus();
+      updateContextDrawer(mobile ? open : contextOpen);
+      if (open && mobile) navigationClose?.focus();
+      if (!open && returnFocus) drawerReturnFocus?.focus();
     }
 
     function updateContextDrawer(open) {
@@ -90,7 +93,7 @@
 
     function setContextOpen(open, persist = false, returnFocus = false) {
       contextOpen = open;
-      updateContextDrawer(open);
+      updateContextDrawer(drawerMedia.matches ? body.classList.contains("sidebar-open") : contextOpen);
       if (persist) writeStoredContextOpen(window.localStorage, open);
       if (!open && returnFocus) contextToggle?.focus();
     }
@@ -106,11 +109,11 @@
     );
 
     contextToggle?.addEventListener("click", () => {
-      if (drawerMedia.matches && !body.classList.contains("sidebar-open")) {
-        setDrawer(true, false, contextToggle);
+      if (drawerMedia.matches) {
+        if (!body.classList.contains("sidebar-open")) setDrawer(true, false, contextToggle);
         return;
       }
-      setContextOpen(root.dataset.contextOpen !== "true", true);
+      setContextOpen(!contextOpen, true);
     });
     drawerToggle?.addEventListener("click", () => {
       const isOpen = body.classList.contains("sidebar-open");
@@ -138,7 +141,28 @@
     themeMedia.addEventListener?.("change", (event) => {
       if (followsSystemTheme) applyTheme(event.matches ? "dark" : "light");
     });
-    drawerMedia.addEventListener?.("change", () => setDrawer(false));
+    drawerMedia.addEventListener?.("change", () => {
+      const activeElement = document.activeElement;
+      const activeWasInNavigation = navigationShell?.contains(activeElement);
+      const activeWasInContext = contextDrawer?.contains(activeElement);
+      setDrawer(false);
+      if (!activeWasInNavigation) return;
+
+      const activeIsNowHidden =
+        (drawerMedia.matches && navigationShell?.hasAttribute("inert")) ||
+        activeElement === navigationClose ||
+        (activeWasInContext && contextDrawer?.hasAttribute("inert"));
+      if (!activeIsNowHidden) return;
+      if (activeWasInContext || drawerReturnFocus === contextToggle) {
+        contextToggle?.focus();
+      } else if (drawerMedia.matches) {
+        drawerToggle?.focus();
+      } else {
+        (navigationShell?.querySelector(".primary-nav-item.is-active") ||
+          navigationShell?.querySelector(".primary-brand") ||
+          contextToggle)?.focus();
+      }
+    });
     document.addEventListener("keydown", (event) => {
       if (event.key !== "Escape" || event.defaultPrevented) return;
       if (drawerMedia.matches && body.classList.contains("sidebar-open")) {
