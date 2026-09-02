@@ -250,3 +250,38 @@ def render_empty_section_page(
         main_content=main_content,
         body_class="empty-section-page",
     )
+
+
+def render_journey_placeholder_page(*, output_file: Path, output_root: Path) -> str:
+    """Render the City Memory shell without manufacturing travel data."""
+    section = get_section("journeys")
+    secondary_navigation = (
+        '      <a class="context-overview is-active" href="#top" '
+        'aria-current="page">页面概览</a>'
+    )
+    main_content = f"""    <section class="journey-archive" aria-labelledby="journey-title">
+{render_section_intro("journeys")}
+      <header class="journey-header">
+        <p>CITY MEMORY / FUTURE ARCHIVE</p>
+        <h1 id="journey-title">{html.escape(section.label)}</h1>
+        <p>城市档案尚未开放。这里会保留走过的城市与拍下的瞬间。</p>
+      </header>
+      <div class="journey-map-placeholder" aria-label="尚未开放的城市地图档案">
+        <div class="journey-map-grid" aria-hidden="true"><span class="journey-world-silhouette"></span></div>
+        <aside class="journey-photo-contact">
+          <div class="journey-photo-contact-surface" aria-hidden="true"></div>
+          <p>摄影接触表将随首批城市档案一同出现。</p>
+        </aside>
+      </div>
+    </section>
+"""
+    return render_site_page(
+        output_file=output_file,
+        output_root=output_root,
+        active_section="journeys",
+        page_title=f"{section.label} · {SITE_NAME}",
+        meta_description=section.description,
+        secondary_navigation=secondary_navigation,
+        main_content=main_content,
+        body_class="journey-page",
+    )

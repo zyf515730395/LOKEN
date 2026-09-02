@@ -247,6 +247,31 @@ def render_timeline(family: dict[str, Any]) -> str:
     return "\n".join(output)
 
 
+def render_model_specimen(
+    family: dict[str, Any], notes: dict[str, Any]
+) -> str:
+    """Render the latest documented release as a compact, data-backed specimen."""
+    release = family["releases"][-1]
+    note = notes.get(release["slug"])
+    note_availability = "精读已就绪" if note and note.get("ready") else "精读待补充"
+    return f"""<section class="model-specimen" aria-labelledby="model-specimen-heading">
+  <div class="model-specimen-heading">
+    <p>SELECTED SPECIMEN</p>
+    <h2 id="model-specimen-heading">最新发布节点</h2>
+  </div>
+  <div class="model-specimen-graphic" aria-hidden="true">
+    <span></span><span></span><span></span>
+  </div>
+  <dl class="model-specimen-data">
+    <div><dt>MODEL</dt><dd>{html.escape(release["name"])}</dd></div>
+    <div><dt>RELEASED</dt><dd><time datetime="{html.escape(release["release_date"], quote=True)}">{html.escape(release["release_date"])}</time></dd></div>
+    <div><dt>ORGANIZATION</dt><dd>{html.escape(family["organization"])}</dd></div>
+    <div><dt>STATUS</dt><dd>{_status_badge(release["status"])}</dd></div>
+    <div><dt>READING</dt><dd>{note_availability}</dd></div>
+  </dl>
+</section>"""
+
+
 def render_comparison_table(
     family: dict[str, Any], notes: dict[str, dict[str, Any] | None]
 ) -> str:
@@ -361,7 +386,10 @@ def render_family_page(
       </div>
     </header>
     <div class="milestone-workspace">
+      <div class="milestone-overview">
 {render_timeline(family)}
+{render_model_specimen(family, notes)}
+      </div>
 {render_comparison_table(family, notes)}
     </div>
     <footer>仅收录官方发布 · 未公开的信息明确标记为“未披露”</footer>

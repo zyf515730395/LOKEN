@@ -12,7 +12,11 @@ import unicodedata
 from milestones.catalog import load_milestone_catalog
 from shared.rendering import atomic_write_text
 from shared.search_index import SearchDocument, serialize_search_index
-from shared.site_shell import render_empty_section_page, render_section_intro, render_site_page
+from shared.site_shell import (
+    render_journey_placeholder_page,
+    render_section_intro,
+    render_site_page,
+)
 
 
 ENTRY_PATTERN = re.compile(
@@ -512,23 +516,14 @@ def generate_site(
     )
     atomic_write_text(page_output, document)
 
-    empty_pages = (
-        (
-            "journeys",
-            site_root / "journeys" / "index.html",
-            "城市坐标与摄影作品会在这里出现。",
+    journey_destination = site_root / "journeys" / "index.html"
+    atomic_write_text(
+        journey_destination,
+        render_journey_placeholder_page(
+            output_file=journey_destination,
+            output_root=site_root,
         ),
     )
-    for section_key, destination, body_copy in empty_pages:
-        atomic_write_text(
-            destination,
-            render_empty_section_page(
-                output_file=destination,
-                output_root=site_root,
-                section_key=section_key,
-                body_copy=body_copy,
-            ),
-        )
 
     from milestones.publisher import build_milestone_search_documents
     from writings.publisher import (
