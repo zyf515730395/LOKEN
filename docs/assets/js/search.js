@@ -135,6 +135,7 @@
       showResults();
       input.setAttribute("aria-expanded", "false");
       status.textContent = documents ? EMPTY_GUIDANCE : "正在加载公开标题…";
+      input.focus();
       try {
         await loadIndex();
         updateResults();
@@ -144,7 +145,6 @@
         results.innerHTML = "";
         input.setAttribute("aria-expanded", "false");
       }
-      input.focus();
     }
 
     function closeResults() {
