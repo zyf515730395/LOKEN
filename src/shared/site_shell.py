@@ -85,10 +85,12 @@ def render_primary_navigation(active_section: str, site_root: str) -> str:
             "</span></a>"
         )
     brand_href = html.escape(site_root + SECTIONS[0].route, quote=True)
+    brand_label = html.escape(f"{SITE_NAME} 首页", quote=True)
+    brand_wordmark = html.escape(SITE_NAME)
     brand = (
-        f'<a class="primary-brand" href="{brand_href}" aria-label="LOKEN 首页">'
+        f'<a class="primary-brand" href="{brand_href}" aria-label="{brand_label}">'
         '<span class="brand-mark" aria-hidden="true">LK</span>'
-        '<span class="brand-wordmark">LOKEN</span></a>'
+        f'<span class="brand-wordmark">{brand_wordmark}</span></a>'
     )
     return "\n".join(
         [

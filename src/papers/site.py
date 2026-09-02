@@ -13,6 +13,7 @@ from milestones.catalog import load_milestone_catalog
 from shared.rendering import atomic_write_text
 from shared.search_index import SearchDocument, serialize_search_index
 from shared.site_shell import (
+    SITE_NAME,
     render_journey_placeholder_page,
     render_section_intro,
     render_site_page,
@@ -24,7 +25,6 @@ ENTRY_PATTERN = re.compile(
     r"(?P<authors>.*?)\|\[(?P<pdf_label>[^]]+)]\((?P<pdf_url>[^)]+)\)\|"
     r"(?P<code>.*?)\|$"
 )
-SITE_TITLE = "LOKEN"
 RECENT_YEAR_COUNT = 3
 NOTES_DIRECTORY_NAME = "notes"
 SHOW_BOOK_NOTES_NAV = False
@@ -499,13 +499,13 @@ def generate_site(
       <p class="updated">Updated {updated}</p>
     </header>
 {render_content(categories, summary_catalog, candidate_statuses)}
-    <footer>Generated from arXiv metadata · Source: <a href="https://github.com/zyf515730395/TOGOS">{SITE_TITLE}</a></footer>
+    <footer>Generated from arXiv metadata · Source: <a href="https://github.com/zyf515730395/TOGOS">{SITE_NAME}</a></footer>
 """
     document = render_site_page(
         output_file=page_output,
         output_root=site_root,
         active_section="learning",
-        page_title=SITE_TITLE,
+        page_title=SITE_NAME,
         meta_description=(
             "A daily index of image, video, and 3D generation, neural rendering, "
             "and depth estimation papers from arXiv."
