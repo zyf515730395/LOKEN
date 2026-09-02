@@ -147,14 +147,14 @@
 <h1>[2608.26956] RubricRM: Generative Reward Modeling via Dynamic Rubrics for Image Generation and Editing</h1>
 <p><a href="https://arxiv.org/abs/2608.26956" rel="nofollow">arXiv 原文</a></p>
 <h2>一句话结论</h2>
-<p>本文提出 RubricRM，一种基于动态评分细则的生成式奖励建模框架，通过为文本到图像生成和图像编辑任务构建输入特定的评分细则，实现了可解释且自适应的偏好评估，并在 MMRB2、GenAI-Bench 等多个基准测试中超越了现有奖励模型基线。</p>
+<p>本文提出了 RubricRM，一种通过动态 rubrics 进行图像生成与编辑的生成式奖励建模框架，在多个基准测试中优于现有专用奖励模型并可与强专有 MLLM 评委竞争。</p>
 <h2>解决的问题</h2>
-<p>现有奖励模型中，CLIP 基指标缺乏细粒度组合语义的敏感度，而基于大规模偏好数据训练的模型仅产生缺乏可解释性的标量分数。近期采用多模态大语言模型生成评估理由的方法通常采用预定义且固定的评估维度，无法适应不同指令对评估标准的需求，导致评估准则缺乏适应性。</p>
+<p>现有视觉奖励模型多采用单一标量分数或固定标准，无法适应不同指令的评估需求，导致可解释性与任务敏感性受限，特别是在文本生成图像和指令编辑中，不同输入需要不同的评估维度，而现有方法缺乏动态适应性。</p>
 <h2>创新点</h2>
 <ul>
-<li>提出动态评分细则生成范式，将指令与偏好决策间构建为中间评估协议，支持自适应评估。</li>
-<li>设计两阶段训练流程，结合基于合成细则的监督微调（SFT）与基于维度级奖励的强化学习（GRPO）。</li>
-<li>构建覆盖广泛的训练数据，通过分类标准与专家标注合成补充提示，收集 31.8K 文本到图像和 30.7K 图像编辑样本。</li>
+<li>提出 RubricRM 框架，通过生成输入特定的 rubrics（包含 evaluation dimensions、weights 和 scoring criteria）来替代固定标准，提升评估的可解释性与任务敏感性。</li>
+<li>采用两阶段训练 pipeline，先通过 supervised fine-tuning 学习 rubric-based scoring paradigm，再利用 GRPO 优化 dimension-level rewards。</li>
+<li>构建 RubricRM-Gen 和 RubricRM-Edit 专用模型，在 Qwen3.5 骨干上实现优于现有专用奖励模型的效果。</li>
 </ul>
     </article>
     <article class="summary-article summary-topic-entry" id="summary-2608.25648" data-arxiv-id="2608.25648" data-status="ready">
