@@ -28,10 +28,12 @@
     const root = document.documentElement;
     const body = document.body;
     const navigationShell = document.querySelector("#navigation-shell");
+    const siteUtility = document.querySelector(".site-utility");
     const drawerToggle = document.querySelector(".sidebar-toggle");
     const drawerToggleIcon = drawerToggle?.querySelector("[data-sidebar-toggle-icon]");
     const drawerToggleLabel = drawerToggle?.querySelector("[data-sidebar-toggle-label]");
     const drawerScrim = document.querySelector("[data-sidebar-close]");
+    const navigationClose = document.querySelector("[data-navigation-close]");
     const contextDrawer = document.querySelector("#context-drawer");
     const contextToggle = document.querySelector("[data-context-toggle]");
     const contextClose = document.querySelector("[data-context-close]");
@@ -43,6 +45,7 @@
     const storedTheme = readStoredValue(window.localStorage, THEME_STORAGE_KEY);
     let followsSystemTheme = storedTheme !== "light" && storedTheme !== "dark";
     let contextOpen = readStoredContextOpen(window.localStorage);
+    let drawerReturnFocus = drawerToggle;
 
     function updateThemeControl(theme) {
       const isDark = theme === "dark";
@@ -63,14 +66,18 @@
       }
     }
 
-    function setDrawer(open, returnFocus = false) {
+    function setDrawer(open, returnFocus = false, focusTarget = drawerToggle) {
+      if (open && drawerMedia.matches) drawerReturnFocus = focusTarget || drawerToggle;
       body.classList.toggle("sidebar-open", open);
       drawerToggle?.setAttribute("aria-expanded", String(open));
       navigationShell?.toggleAttribute("inert", drawerMedia.matches && !open);
+      siteUtility?.toggleAttribute("inert", drawerMedia.matches && open);
+      if (navigationClose) navigationClose.hidden = !(drawerMedia.matches && open);
       if (drawerToggleIcon) drawerToggleIcon.textContent = open ? "×" : "☰";
       if (drawerToggleLabel) drawerToggleLabel.textContent = open ? "关闭" : "导航";
-      if (drawerMedia.matches) updateContextDrawer(open || contextOpen);
-      if (!open && returnFocus && drawerMedia.matches) drawerToggle?.focus();
+      updateContextDrawer(drawerMedia.matches && open ? true : contextOpen);
+      if (open && drawerMedia.matches) navigationClose?.focus();
+      if (!open && returnFocus && drawerMedia.matches) drawerReturnFocus?.focus();
     }
 
     function updateContextDrawer(open) {
@@ -100,21 +107,26 @@
 
     contextToggle?.addEventListener("click", () => {
       if (drawerMedia.matches && !body.classList.contains("sidebar-open")) {
-        setDrawer(true);
-        setContextOpen(true, true);
+        setDrawer(true, false, contextToggle);
         return;
       }
       setContextOpen(root.dataset.contextOpen !== "true", true);
     });
     drawerToggle?.addEventListener("click", () => {
       const isOpen = body.classList.contains("sidebar-open");
-      setDrawer(!isOpen, isOpen);
+      setDrawer(!isOpen, isOpen, drawerToggle);
     });
+    navigationClose?.addEventListener("click", () => setDrawer(false, true));
     drawerScrim?.addEventListener("click", () => setDrawer(false, true));
-    contextClose?.addEventListener("click", () => setContextOpen(false, true, true));
+    contextClose?.addEventListener("click", () => {
+      if (drawerMedia.matches) setDrawer(false, true);
+      else setContextOpen(false, true, true);
+    });
     contextScrim?.addEventListener("click", () => setContextOpen(false, true, true));
     contextDrawer?.addEventListener("click", (event) => {
-      if (event.target.closest?.("a")) setContextOpen(false, true, true);
+      if (!event.target.closest?.("a")) return;
+      if (drawerMedia.matches) setDrawer(false, true);
+      else setContextOpen(false, true, true);
     });
     navigationShell?.addEventListener("click", (event) => {
       if (event.target.closest?.("a")) setDrawer(false);
@@ -128,11 +140,11 @@
     });
     drawerMedia.addEventListener?.("change", () => setDrawer(false));
     document.addEventListener("keydown", (event) => {
-      if (event.key !== "Escape") return;
-      if (root.dataset.contextOpen === "true") {
-        setContextOpen(false, true, true);
-      } else if (body.classList.contains("sidebar-open")) {
+      if (event.key !== "Escape" || event.defaultPrevented) return;
+      if (drawerMedia.matches && body.classList.contains("sidebar-open")) {
         setDrawer(false, true);
+      } else if (root.dataset.contextOpen === "true") {
+        setContextOpen(false, true, true);
       }
     });
 

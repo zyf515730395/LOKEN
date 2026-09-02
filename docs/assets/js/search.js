@@ -157,6 +157,7 @@
     function handleKeydown(event) {
       if (event.key === "Escape") {
         event.preventDefault();
+        event.stopPropagation?.();
         closeResults();
         return;
       }

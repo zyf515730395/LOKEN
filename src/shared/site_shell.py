@@ -151,9 +151,10 @@ def render_inline_search() -> str:
     return """    <div class="site-search" data-search-root>
       <label class="site-search-field" for="search-input">
         <span aria-hidden="true">⌕</span>
-        <input id="search-input" type="search" placeholder="搜索文章标题" role="combobox"
+        <input id="search-input" type="search" placeholder="搜索文章标题"
+               aria-label="搜索文章标题" role="combobox"
                autocomplete="off" aria-autocomplete="list" aria-controls="search-results" aria-expanded="false">
-        <kbd>Ctrl K</kbd>
+        <kbd aria-hidden="true">Ctrl K</kbd>
       </label>
       <div class="search-popover" data-search-popover hidden>
         <p class="search-status" data-search-status aria-live="polite">输入标题关键词开始搜索</p>
@@ -210,6 +211,8 @@ def render_site_page(
   <div class="sidebar-scrim" data-sidebar-close></div>
   <div class="context-scrim" data-context-scrim></div>
 <div class="navigation-shell" id="navigation-shell">
+  <button class="navigation-close" type="button" data-navigation-close
+          aria-label="关闭导航" hidden>×</button>
 {render_primary_navigation(active_section, site_root)}
 {render_context_sidebar(active_section, secondary_navigation)}
 </div>
