@@ -20,7 +20,7 @@ ENTRY_PATTERN = re.compile(
     r"(?P<authors>.*?)\|\[(?P<pdf_label>[^]]+)]\((?P<pdf_url>[^)]+)\)\|"
     r"(?P<code>.*?)\|$"
 )
-SITE_TITLE = "TOGOS"
+SITE_TITLE = "LOKEN"
 RECENT_YEAR_COUNT = 3
 NOTES_DIRECTORY_NAME = "notes"
 SHOW_BOOK_NOTES_NAV = False

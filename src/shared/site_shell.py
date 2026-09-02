@@ -1,4 +1,4 @@
-"""Shared information architecture and outer page shell for TOGOS."""
+"""Shared information architecture and outer page shell for LOKEN."""
 
 from __future__ import annotations
 
@@ -42,6 +42,8 @@ SECTIONS = (
     ),
 )
 SECTIONS_BY_KEY = {section.key: section for section in SECTIONS}
+SITE_NAME = "LOKEN"
+ASSET_VERSION = "5"
 
 
 def get_section(key: str) -> Section:
@@ -73,11 +75,16 @@ def render_primary_navigation(active_section: str, site_root: str) -> str:
             '<span class="primary-nav-marker" aria-hidden="true"></span>'
             f'<span class="primary-nav-label">{html.escape(section.label)}</span></a>'
         )
+    brand_href = html.escape(site_root + SECTIONS[0].route, quote=True)
+    brand = (
+        f'<a class="primary-brand" href="{brand_href}" aria-label="LOKEN 首页">'
+        '<span class="brand-mark" aria-hidden="true">LK</span>'
+        '<span class="brand-wordmark">LOKEN</span></a>'
+    )
     return "\n".join(
         [
             '  <aside class="primary-sidebar" aria-label="知识主题">',
-            f'    <a class="primary-brand" href="{html.escape(site_root + SECTIONS[0].route, quote=True)}" '
-            'aria-label="TOGOS 首页"><span>TO</span><span>/GOS</span></a>',
+            f"    {brand}",
             '    <nav class="primary-navigation" aria-label="知识主题">',
             *items,
             "    </nav>",
@@ -132,24 +139,19 @@ def _state_bootstrap() -> str:
   </script>"""
 
 
-def _render_search_dialog() -> str:
-    return """  <dialog class="search-dialog" id="search-dialog" aria-labelledby="search-dialog-title">
-    <div class="search-dialog-shell">
-      <header class="search-dialog-header">
-        <div>
-          <p>全站公开内容</p>
-          <h2 id="search-dialog-title">搜索文章标题</h2>
-        </div>
-        <button type="button" class="search-dialog-close" data-search-close aria-label="关闭搜索">×</button>
-      </header>
-      <label class="visually-hidden" for="search-input">搜索公开文章标题</label>
-      <input id="search-input" class="search-input" type="search" placeholder="搜索公开文章标题"
-             autocomplete="off" role="combobox" aria-autocomplete="list" aria-controls="search-results"
-             aria-haspopup="listbox" aria-expanded="false">
-      <p class="search-status" data-search-status aria-live="polite">输入标题关键词开始搜索</p>
-      <div class="search-results" id="search-results" data-search-results role="listbox" aria-label="搜索结果"></div>
-    </div>
-  </dialog>"""
+def render_inline_search() -> str:
+    return """    <div class="site-search" data-search-root>
+      <label class="site-search-field" for="search-input">
+        <span aria-hidden="true">⌕</span>
+        <input id="search-input" type="search" placeholder="搜索文章标题" role="combobox"
+               autocomplete="off" aria-autocomplete="list" aria-controls="search-results" aria-expanded="false">
+        <kbd>Ctrl K</kbd>
+      </label>
+      <div class="search-popover" data-search-popover hidden>
+        <p class="search-status" data-search-status aria-live="polite">输入标题关键词开始搜索</p>
+        <div id="search-results" class="search-results" data-search-results role="listbox"></div>
+      </div>
+    </div>"""
 
 
 def render_site_page(
@@ -180,21 +182,18 @@ def render_site_page(
   <meta name="description" content="{html.escape(meta_description, quote=True)}">
   <title>{html.escape(page_title)}</title>
 {_state_bootstrap()}
-{head_content}  <link rel="stylesheet" href="{html.escape(site_root, quote=True)}assets/css/site.css?v=4">
-  <script src="{html.escape(site_root, quote=True)}assets/js/site-shell.js?v=4" defer></script>
-  <script src="{html.escape(site_root, quote=True)}assets/js/search-core.js?v=4" defer></script>
-  <script src="{html.escape(site_root, quote=True)}assets/js/search.js?v=4" defer></script>
-  <script src="{html.escape(site_root, quote=True)}assets/js/sidebar.js?v=4" defer></script>
+{head_content}  <link rel="stylesheet" href="{html.escape(site_root, quote=True)}assets/css/site.css?v={ASSET_VERSION}">
+  <script src="{html.escape(site_root, quote=True)}assets/js/site-shell.js?v={ASSET_VERSION}" defer></script>
+  <script src="{html.escape(site_root, quote=True)}assets/js/search-core.js?v={ASSET_VERSION}" defer></script>
+  <script src="{html.escape(site_root, quote=True)}assets/js/search.js?v={ASSET_VERSION}" defer></script>
+  <script src="{html.escape(site_root, quote=True)}assets/js/sidebar.js?v={ASSET_VERSION}" defer></script>
 </head>
 <body{body_attributes}>
   <header class="site-utility" aria-label="页面工具">
     <button class="sidebar-toggle" type="button" aria-controls="navigation-shell" aria-expanded="false">
       <span aria-hidden="true" data-sidebar-toggle-icon>☰</span><span data-sidebar-toggle-label>导航</span>
     </button>
-    <button class="search-trigger" type="button" data-search-trigger>
-      <span class="search-trigger-icon" aria-hidden="true">⌕</span>
-      <span>搜索文章</span><kbd>Ctrl K</kbd>
-    </button>
+{render_inline_search()}
     <button class="theme-toggle" type="button" aria-label="切换颜色主题" aria-pressed="false">
       <span data-theme-icon aria-hidden="true"></span>
     </button>
@@ -208,7 +207,6 @@ def render_site_page(
 {main_content}
   </main>
 {trailing_dialogs}
-{_render_search_dialog()}
 </body>
 </html>
 """
@@ -236,7 +234,7 @@ def render_empty_section_page(
         output_file=output_file,
         output_root=output_root,
         active_section=section_key,
-        page_title=f"{section.label} · TOGOS",
+        page_title=f"{section.label} · {SITE_NAME}",
         meta_description=section.description,
         secondary_navigation=secondary_navigation,
         main_content=main_content,

@@ -7,6 +7,7 @@
     writings: "谈笑风生",
     journeys: "跑得还快",
   };
+  const SECTION_ORDER = ["learning", "milestones", "writings", "journeys"];
   const KIND_LABELS = { paper: "论文", model: "模型", article: "文章" };
   const EMPTY_GUIDANCE = "输入标题关键词开始搜索";
   const LOAD_FAILURE = "搜索索引加载失败，请刷新后重试";
@@ -41,15 +42,7 @@
   }
 
   function createSearchController({
-    body,
-    closeButton,
-    dialog,
-    fetchImpl,
-    input,
-    results,
-    status,
-    triggers,
-    window,
+    body, fetchImpl, input, popover, results, root, status, window,
   }) {
     const core = globalScope.TogosSearchCore;
     if (!core?.searchTitles) throw new Error("Search core is unavailable");
@@ -57,7 +50,6 @@
     let indexRequest = null;
     let currentResults = [];
     let activeIndex = -1;
-    let lastTrigger = null;
     let loadFailed = false;
 
     function resultUrl(document) {
@@ -65,17 +57,28 @@
       return new URL(`${siteRoot}${document.url}`, window.location.href).href;
     }
 
+    function resultMarkup(document, index) {
+      const active = index === activeIndex;
+      const section = SECTION_LABELS[document.section];
+      const kind = KIND_LABELS[document.kind];
+      return `<a class="search-result${active ? " is-active" : ""}" `
+        + `id="search-result-${index}" role="option" aria-selected="${active}" `
+        + `data-result-index="${index}" href="${escapeHtml(resultUrl(document))}">`
+        + `<strong>${escapeHtml(document.title)}</strong>`
+        + `<span>${escapeHtml(section)} · ${escapeHtml(kind)}</span></a>`;
+    }
+
     function renderResults() {
-      results.innerHTML = currentResults
-        .map((document, index) => {
-          const active = index === activeIndex;
-          const section = SECTION_LABELS[document.section];
-          const kind = KIND_LABELS[document.kind];
-          return `<a class="search-result${active ? " is-active" : ""}" `
-            + `id="search-result-${index}" role="option" aria-selected="${active}" `
-            + `data-result-index="${index}" href="${escapeHtml(resultUrl(document))}">`
-            + `<strong>${escapeHtml(document.title)}</strong>`
-            + `<span>${escapeHtml(section)} · ${escapeHtml(kind)}</span></a>`;
+      results.innerHTML = SECTION_ORDER
+        .map((sectionKey) => {
+          const entries = currentResults
+            .map((document, index) => ({ document, index }))
+            .filter(({ document }) => document.section === sectionKey);
+          if (!entries.length) return "";
+          return `<section class="search-result-group" role="group" aria-label="${escapeHtml(SECTION_LABELS[sectionKey])}">`
+            + `<p>${escapeHtml(SECTION_LABELS[sectionKey])}</p>`
+            + entries.map(({ document, index }) => resultMarkup(document, index)).join("")
+            + "</section>";
         })
         .join("");
       if (activeIndex >= 0) {
@@ -86,7 +89,12 @@
       input.setAttribute("aria-expanded", String(currentResults.length > 0));
     }
 
+    function showResults() {
+      popover.hidden = false;
+    }
+
     function updateResults() {
+      showResults();
       if (loadFailed) {
         status.textContent = LOAD_FAILURE;
         return;
@@ -123,9 +131,8 @@
       return documents;
     }
 
-    async function open(trigger = triggers[0] ?? null) {
-      lastTrigger = trigger;
-      if (!dialog.open) dialog.showModal();
+    async function focusSearch() {
+      showResults();
       input.setAttribute("aria-expanded", "false");
       status.textContent = documents ? EMPTY_GUIDANCE : "正在加载公开标题…";
       try {
@@ -140,15 +147,17 @@
       input.focus();
     }
 
-    function close() {
+    function closeResults() {
+      popover.hidden = true;
+      activeIndex = -1;
+      input.removeAttribute("aria-activedescendant");
       input.setAttribute("aria-expanded", "false");
-      if (dialog.open) dialog.close();
     }
 
     function handleKeydown(event) {
       if (event.key === "Escape") {
         event.preventDefault();
-        close();
+        closeResults();
         return;
       }
       if (!currentResults.length) return;
@@ -160,16 +169,32 @@
         event.preventDefault();
         activeIndex = activeIndex <= 0 ? currentResults.length - 1 : activeIndex - 1;
         renderResults();
+      } else if (event.key === "Home") {
+        event.preventDefault();
+        activeIndex = 0;
+        renderResults();
+      } else if (event.key === "End") {
+        event.preventDefault();
+        activeIndex = currentResults.length - 1;
+        renderResults();
       } else if (event.key === "Enter" && activeIndex >= 0) {
         event.preventDefault();
         window.location.assign(resultUrl(currentResults[activeIndex]));
       }
     }
 
-    triggers.forEach((trigger) => {
-      trigger.addEventListener("click", () => open(trigger));
-    });
-    closeButton?.addEventListener("click", close);
+    async function handleDocumentKeydown(event) {
+      if ((event.ctrlKey || event.metaKey) && !event.altKey && event.key.toLowerCase() === "k") {
+        event.preventDefault();
+        await focusSearch();
+      }
+    }
+
+    function handleDocumentPointer(event) {
+      if (!root.contains(event.target)) closeResults();
+    }
+
+    input.addEventListener("focus", focusSearch);
     input.addEventListener("input", updateResults);
     input.addEventListener("keydown", handleKeydown);
     results.addEventListener?.("mousemove", (event) => {
@@ -179,42 +204,29 @@
         renderResults();
       }
     });
-    dialog.addEventListener("click", (event) => {
-      if (event.target === dialog) close();
-    });
-    dialog.addEventListener("close", () => {
-      input.setAttribute("aria-expanded", "false");
-      lastTrigger?.focus();
-      lastTrigger = null;
-    });
 
-    return { close, handleKeydown, open, updateResults };
+    return {
+      closeResults,
+      focusSearch,
+      handleDocumentKeydown,
+      handleDocumentPointer,
+      handleKeydown,
+      updateResults,
+    };
   }
 
   function initSearch({ document, window, fetchImpl = window.fetch.bind(window) }) {
-    const dialog = document.querySelector("#search-dialog");
+    const root = document.querySelector("[data-search-root]");
     const input = document.querySelector("#search-input");
+    const popover = document.querySelector("[data-search-popover]");
     const status = document.querySelector("[data-search-status]");
     const results = document.querySelector("[data-search-results]");
-    const triggers = [...document.querySelectorAll("[data-search-trigger]")];
-    if (!dialog || !input || !status || !results || !triggers.length) return null;
+    if (!root || !input || !popover || !status || !results) return null;
     const controller = createSearchController({
-      body: document.body,
-      closeButton: document.querySelector("[data-search-close]"),
-      dialog,
-      fetchImpl,
-      input,
-      results,
-      status,
-      triggers,
-      window,
+      body: document.body, fetchImpl, input, popover, results, root, status, window,
     });
-    document.addEventListener("keydown", (event) => {
-      if ((event.ctrlKey || event.metaKey) && !event.altKey && event.key.toLowerCase() === "k") {
-        event.preventDefault();
-        controller.open(triggers[0]);
-      }
-    });
+    document.addEventListener("keydown", controller.handleDocumentKeydown);
+    document.addEventListener("pointerdown", controller.handleDocumentPointer);
     return controller;
   }
 
