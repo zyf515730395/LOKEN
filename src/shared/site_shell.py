@@ -44,6 +44,12 @@ SECTIONS = (
 SECTIONS_BY_KEY = {section.key: section for section in SECTIONS}
 SITE_NAME = "LOKEN"
 ASSET_VERSION = "5"
+SECTION_METADATA = {
+    "learning": "01 / PAPER SIGNALS",
+    "milestones": "02 / MODEL ARCHIVE",
+    "writings": "03 / FIELD NOTES",
+    "journeys": "04 / CITY MEMORY",
+}
 
 
 def get_section(key: str) -> Section:
@@ -73,7 +79,10 @@ def render_primary_navigation(active_section: str, site_root: str) -> str:
             f'      <a class="primary-nav-item{active_class}" '
             f'href="{html.escape(site_root + section.route, quote=True)}"{current}>'
             '<span class="primary-nav-marker" aria-hidden="true"></span>'
-            f'<span class="primary-nav-label">{html.escape(section.label)}</span></a>'
+            '<span class="primary-nav-copy">'
+            f'<span class="primary-nav-meta">{SECTION_METADATA[section.key]}</span>'
+            f'<span class="primary-nav-label">{html.escape(section.label)}</span>'
+            "</span></a>"
         )
     brand_href = html.escape(site_root + SECTIONS[0].route, quote=True)
     brand = (
@@ -105,19 +114,18 @@ def render_section_intro(section_key: str) -> str:
 
 
 def render_context_sidebar(active_section: str, secondary_navigation: str) -> str:
-    section = get_section(active_section)
-    return f"""  <aside class="paper-sidebar context-sidebar" id="paper-sidebar" aria-label="{html.escape(section.label, quote=True)}导航">
-    <div class="context-toolbar">
-      <p class="context-toolbar-label"><span>本页目录</span></p>
-      <button class="context-collapse" type="button" aria-controls="context-navigation" aria-expanded="true" data-context-collapse>
-        <span aria-hidden="true" data-context-collapse-icon>←</span>
-        <span class="visually-hidden" data-context-collapse-label>折叠二级导航</span>
-      </button>
-    </div>
-    <nav class="archive-nav context-navigation" id="context-navigation" aria-label="{html.escape(section.label, quote=True)}目录">
+    get_section(active_section)
+    return f"""  <div id="paper-sidebar">
+  <aside class="context-drawer" id="context-drawer" aria-label="本页目录">
+    <header class="context-drawer-header">
+      <span>INDEX</span>
+      <button type="button" data-context-close aria-label="关闭本页目录">×</button>
+    </header>
+    <nav id="context-navigation" class="context-navigation">
 {secondary_navigation}
     </nav>
-  </aside>"""
+  </aside>
+  </div>"""
 
 
 def _state_bootstrap() -> str:
@@ -125,16 +133,16 @@ def _state_bootstrap() -> str:
     (() => {
       document.documentElement.classList.add("js");
       let theme = null;
-      let collapsed = null;
+      let contextOpen = null;
       try {
         theme = window.localStorage.getItem("arxiv-theme");
-        collapsed = window.localStorage.getItem("togos-secondary-sidebar-collapsed");
+        contextOpen = window.localStorage.getItem("togos-secondary-sidebar-collapsed");
       } catch (error) { /* Storage can be unavailable. */ }
       if (theme !== "light" && theme !== "dark") {
         theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
       }
       document.documentElement.dataset.theme = theme;
-      if (collapsed === "true") document.documentElement.dataset.secondaryCollapsed = "true";
+      if (contextOpen === "false") document.documentElement.dataset.contextOpen = "true";
     })();
   </script>"""
 
@@ -194,11 +202,13 @@ def render_site_page(
       <span aria-hidden="true" data-sidebar-toggle-icon>☰</span><span data-sidebar-toggle-label>导航</span>
     </button>
 {render_inline_search()}
+    <button class="context-toggle" type="button" data-context-toggle aria-controls="context-drawer" aria-expanded="false">INDEX <span aria-hidden="true">☰</span></button>
     <button class="theme-toggle" type="button" aria-label="切换颜色主题" aria-pressed="false">
       <span data-theme-icon aria-hidden="true"></span>
     </button>
   </header>
   <div class="sidebar-scrim" data-sidebar-close></div>
+  <div class="context-scrim" data-context-scrim></div>
 <div class="navigation-shell" id="navigation-shell">
 {render_primary_navigation(active_section, site_root)}
 {render_context_sidebar(active_section, secondary_navigation)}
