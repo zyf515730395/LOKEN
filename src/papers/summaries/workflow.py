@@ -15,7 +15,7 @@ from .acquisition import ArxivSourceClient
 from .catalog import PaperCandidate, load_candidates
 from .models import PaperSummary, PaperSummaryError
 from .paths import PROJECT_ROOT, private_path, run_lock
-from .publisher import load_ready_ids, publish_summaries
+from .publisher import load_ready_keys, publish_summaries
 from .summarizer import summarize_paper
 
 
@@ -100,7 +100,7 @@ def status_snapshot(
     ledger_path: str | Path = DEFAULT_LEDGER,
     docs_root: str | Path = DEFAULT_DOCS,
 ) -> dict[str, object]:
-    ready = load_ready_ids(docs_root)
+    ready = load_ready_keys(docs_root)
     pending = load_candidates(ledger_path, ready_ids=ready)
     all_accepted = load_candidates(ledger_path, refresh=True)
     report_path = private_path("report.json")
@@ -119,7 +119,7 @@ def status_snapshot(
     cache_root = private_path("cache")
     return {
         "accepted": len(all_accepted),
-        "ready": len({item.arxiv_id for item in all_accepted} & ready),
+        "ready": sum((item.topic, item.arxiv_id) in ready for item in all_accepted),
         "pending": len(pending),
         "processable": len(pending),
         "last_failed": last_failed,
@@ -204,7 +204,7 @@ def _run_summaries_locked(
     docs = docs_root
     ledger = ledger_path
     archive = archive_path
-    ready = load_ready_ids(docs, strict=False)
+    ready = load_ready_keys(docs, strict=False)
     candidates = load_candidates(
         ledger,
         ready_ids=ready,

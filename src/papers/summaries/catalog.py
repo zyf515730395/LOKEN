@@ -50,7 +50,7 @@ def _candidate(paper_id: str, entry: object) -> PaperCandidate | None:
 def load_candidates(
     ledger_path: str | Path,
     *,
-    ready_ids: set[str] | None = None,
+    ready_ids: set[str] | set[tuple[str, str]] | None = None,
     paper_ids: tuple[str, ...] = (),
     limit: int | None = None,
     refresh: bool = False,
@@ -64,7 +64,7 @@ def load_candidates(
         for key, entry in ledger["papers"].items()
         if (candidate := _candidate(key, entry)) is not None
     }
-    ready = ready_ids or set()
+    ready: set[str] | set[tuple[str, str]] = ready_ids or set()
     if paper_ids:
         normalized_requested = tuple(normalize_arxiv_id(value) for value in paper_ids)
         missing = [value for value in normalized_requested if value not in candidates]
@@ -76,7 +76,11 @@ def load_candidates(
     else:
         selected = sorted(candidates.values(), key=lambda value: (value.updated, value.arxiv_id))
     if not refresh:
-        selected = [value for value in selected if value.arxiv_id not in ready]
+        selected = [
+            value
+            for value in selected
+            if value.arxiv_id not in ready and (value.topic, value.arxiv_id) not in ready
+        ]
     if limit is not None:
         if limit < 1:
             raise PaperSummaryError("invalid_limit", "limit must be at least one")

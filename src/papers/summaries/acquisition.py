@@ -24,7 +24,6 @@ from .paths import normalize_arxiv_id, source_directory
 
 ARXIV_ORIGIN = "https://arxiv.org"
 HTML_UNAVAILABLE_STATUSES = {404, 410, 415}
-TRANSIENT_STATUSES = {429, 500, 502, 503, 504}
 MAX_HTML_BYTES = 32 * 1024 * 1024
 MAX_PDF_BYTES = 64 * 1024 * 1024
 RETRY_ATTEMPTS = 3
@@ -130,7 +129,7 @@ class ArxivSourceClient:
                     ) from None
                 self.sleeper(float(2 ** (attempt - 1)))
                 continue
-            if response.status_code in TRANSIENT_STATUSES:
+            if response.status_code == 429 or 500 <= response.status_code <= 599:
                 response.close()
                 if attempt == RETRY_ATTEMPTS:
                     raise PaperSummaryError(
@@ -139,6 +138,9 @@ class ArxivSourceClient:
                 self.sleeper(float(2 ** (attempt - 1)))
                 continue
             content_type = response.headers.get("Content-Type", "").split(";", 1)[0].strip().casefold()
+            if response.status_code != 200:
+                response.close()
+                return response.status_code, content_type, b""
             length = response.headers.get("Content-Length")
             if length is not None:
                 try:

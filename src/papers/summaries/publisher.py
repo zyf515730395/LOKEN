@@ -75,21 +75,31 @@ def _validate(document: str, path: Path, expected_topic: str) -> tuple[dict, dic
     return manifest, articles
 
 
-def load_ready_ids(docs_root: str | Path, *, strict: bool = True) -> set[str]:
-    ready: set[str] = set()
+def load_ready_keys(
+    docs_root: str | Path, *, strict: bool = True
+) -> set[tuple[str, str]]:
+    ready: set[tuple[str, str]] = set()
     notes = Path(docs_root) / "notes"
     for path in sorted(notes.glob("*.html")):
         document = path.read_text(encoding="utf-8")
         try:
             _, manifest = _manifest(document, path)
+            _validate(document, path, manifest["topic"])
         except PaperSummaryError:
             if strict:
                 raise
             continue
         for paper_id, value in manifest["papers"].items():
             if isinstance(value, dict) and value.get("status") == "ready":
-                ready.add(paper_id)
+                ready.add((manifest["topic"], paper_id))
     return ready
+
+
+def load_ready_ids(docs_root: str | Path, *, strict: bool = True) -> set[str]:
+    return {
+        paper_id
+        for _, paper_id in load_ready_keys(docs_root, strict=strict)
+    }
 
 
 def render_article(candidate: PaperCandidate, summary: PaperSummary) -> str:

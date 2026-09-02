@@ -16,6 +16,7 @@ MAX_DOCUMENT_CHARS = 400_000
 MAX_PDF_PAGES = 200
 _SPACE = re.compile(r"\s+")
 _WORD = re.compile(r"[a-z0-9]+", re.IGNORECASE)
+_REFERENCE_HEADING = re.compile(r"(?im)^\s*(?:references|bibliography)\s*$")
 
 
 def _clean(value: str) -> str:
@@ -46,6 +47,10 @@ def _validate_document(document: PaperDocument, expected_title: str) -> PaperDoc
 class _ArxivHTMLParser(HTMLParser):
     _SKIP_TAGS = {"script", "style", "nav", "footer", "noscript", "svg"}
     _BLOCK_TAGS = {"h1", "h2", "h3", "h4", "h5", "h6", "p", "li", "td", "th"}
+    _VOID_TAGS = {
+        "area", "base", "br", "col", "embed", "hr", "img", "input", "link",
+        "meta", "param", "source", "track", "wbr",
+    }
 
     def __init__(self) -> None:
         super().__init__(convert_charrefs=True)
@@ -61,7 +66,7 @@ class _ArxivHTMLParser(HTMLParser):
         classes = attributes.get("class", "")
         if tag == "article" or "ltx_document" in classes.split():
             self.capture_depth += 1
-        elif self.capture_depth:
+        elif self.capture_depth and tag not in self._VOID_TAGS:
             self.capture_depth += 1
         if self.capture_depth and (
             tag in self._SKIP_TAGS
@@ -69,7 +74,7 @@ class _ArxivHTMLParser(HTMLParser):
             or "ltx_role_footnote" in classes
         ):
             self.skip_depth += 1
-        elif self.skip_depth:
+        elif self.skip_depth and tag not in self._VOID_TAGS:
             self.skip_depth += 1
         if self.capture_depth and not self.skip_depth and tag in self._BLOCK_TAGS:
             self.current_tag = tag
@@ -81,6 +86,8 @@ class _ArxivHTMLParser(HTMLParser):
             self.current.append(data)
 
     def handle_endtag(self, tag: str) -> None:
+        if tag in self._VOID_TAGS:
+            return
         if self.capture_depth and not self.skip_depth and tag == self.current_tag:
             value = _clean("".join(self.current))
             if value:
@@ -92,6 +99,13 @@ class _ArxivHTMLParser(HTMLParser):
             self.skip_depth -= 1
         if self.capture_depth:
             self.capture_depth -= 1
+
+    def handle_startendtag(
+        self, tag: str, attrs: list[tuple[str, str | None]]
+    ) -> None:
+        self.handle_starttag(tag, attrs)
+        if tag not in self._VOID_TAGS:
+            self.handle_endtag(tag)
 
 
 def extract_html_document(raw: bytes, expected_title: str) -> PaperDocument:
@@ -155,7 +169,14 @@ def extract_pdf_document(raw: bytes, expected_title: str) -> PaperDocument:
     pages: list[str] = []
     try:
         for page in reader.pages:
-            pages.append(_clean(page.extract_text() or ""))
+            raw_page = unicodedata.normalize("NFKC", page.extract_text() or "")
+            reference_start = _REFERENCE_HEADING.search(raw_page)
+            if reference_start is not None:
+                prefix = _clean(raw_page[: reference_start.start()])
+                if prefix:
+                    pages.append(prefix)
+                break
+            pages.append(_clean(raw_page))
     except Exception:
         raise PaperSummaryError("pdf_invalid", "arXiv PDF text extraction failed") from None
     joined = "\n".join(value for value in pages if value)
