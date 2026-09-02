@@ -13,6 +13,110 @@
       <h1>Depth Estimation · 论文要点</h1>
     </header>
     <div class="summary-topic-list">
+    <article class="summary-article summary-topic-entry" id="summary-2608.30129" data-arxiv-id="2608.30129" data-status="ready">
+<h1>[2608.30129] Efficient and High-Quality Depth Estimation via Pixel-Space Diffusion with Linear Attention</h1>
+<p><a href="https://arxiv.org/abs/2608.30129" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了 Lapis，首个基于线性注意力的像素空间生成框架，通过单步扩散实现高效高精度的单目深度估计，在保持 O(N) 计算复杂度的同时，显著优于现有生成式替代方案。</p>
+<h2>解决的问题</h2>
+<p>现有生成式框架在追求高分辨率像素级几何感知时，面临精度与效率的根本权衡矛盾。基于潜空间的 U-Net 受限于 VAE 瓶颈且难以捕捉长距离依赖，而像素空间 Diffusion Transformers 的二次复杂度在高分辨率下计算昂贵，且多步采样过程显著增加开销。直接应用线性注意力与单步预测策略会导致结构不一致、细节丢失及采样噪声，难以同时实现像素级精度与高效推理。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出首个基于线性注意力的像素空间生成框架 Lapis，实现单步扩散内的线性时间深度扩散，显著提升推理效率。</li>
+<li>设计 Patch-level Consistency Module (PCM)，利用预训练语义先验与局部卷积偏差纠正结构错位，恢复全局结构一致性。</li>
+<li>开发 Pixel-level Refinement Module (PRM)，通过基于跳连接的像素对应关系恢复精细几何边界与细节。</li>
+<li>基于流形假设采用直接 x-prediction 策略替代不稳定的 v-prediction，有效抑制单步生成中的采样噪声。</li>
+</ul>
+    </article>
+    <article class="summary-article summary-topic-entry" id="summary-2608.29881" data-arxiv-id="2608.29881" data-status="ready">
+<h1>[2608.29881] OptiGeo: Efficient Monocular Geometry for Embodied Perception in Optically Challenging Scenes</h1>
+<p><a href="https://arxiv.org/abs/2608.29881" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>OptiGeo 提出一种偏置感知训练框架，利用清洁几何教师模型与残差修剪对齐机制纠正真实监督中的传感器失效模式偏置，仅需 30M 参数即在透明场景基准上超越 300M 级单目模型及多视图基线，同时保持通用 zero-shot 深度与边界锐度竞争力。</p>
+<h2>解决的问题</h2>
+<p>现有单目深度估计方法在透明、反射及高光泽环境中常因深度传感器产生缺失或偏差数据而失效，通常依赖场景特定预处理、辅助模块或后处理微调，但这增加了架构冗余并导致模型过度针对狭窄的光学场景。关键矛盾在于通用几何模型继承了真实深度监督中传感器失效模式导致的偏置，而现有方法未能有效区分局部光学失效与全局几何结构。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出偏置感知训练框架，利用清洁几何教师模型与残差修剪对齐机制纠正真实监督中的传感器失效模式偏置。</li>
+<li>构建基于 Infinigen 的紧凑透明度目标渲染集，提供真实传感器无法可靠标注的光学挑战区域清洁几何。</li>
+<li>构建高效学生模型架构，在仅 30M 参数下超越 300M 级单目模型及多视图基线，同时保持通用 zero-shot 深度与边界锐度竞争力。</li>
+</ul>
+    </article>
+    <article class="summary-article summary-topic-entry" id="summary-2608.29819" data-arxiv-id="2608.29819" data-status="ready">
+<h1>[2608.29819] PhasorNet: Learning Structure from Frequency for Real-Time Stereo Matching</h1>
+<p><a href="https://arxiv.org/abs/2608.29819" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>论文提出 PhasorNet 框架，利用 Phase-Augmented Transformer 注入 Fourier 相位信息增强注意力机制，并结合 Geometry-Context Fusion Refinement Module 与多尺度 Edge-guided High-Error Region Loss，在仅需 5.3M 参数的情况下实现了 ETH3D 基准上的 SOTA 性能及优异的跨域泛化能力。</p>
+<h2>解决的问题</h2>
+<p>现有基于深度学习的立体匹配方法在透明、反射或低纹理等 ill-posed 区域往往出现几何特征模糊，且传统 3D 卷积成本体积计算开销大，迭代优化方法如 RAFT - Stereo 存在延迟高和边界过平滑的矛盾，难以在实时性约束下平衡精度与细节。</p>
+<h2>创新点</h2>
+<ul>
+<li>Phase-Augmented Transformer 将 Fourier 相位信息注入注意力机制，利用频域相位对强度变化不敏感的特性，显著提升在透明、反射及低纹理表面的鲁棒性。</li>
+<li>Geometry-Context Fusion Refinement Module 融合全分辨率卷积流与轻量级注意力流（集成 Wavelet-Based Query Attention 与 Cross - Dimensional Gated Attention），有效保留细粒度细节与物体边界。</li>
+<li>Edge-guided High-Error Region Loss 采用多尺度监督策略，自适应聚焦于高误差与边缘区域，指导层级成本体积的精细化优化。</li>
+<li>摒弃传统的 3D 卷积处理成本体积，仅使用 2D 操作进行多尺度处理，大幅降低内存与计算开销以实现高效实时匹配。</li>
+</ul>
+    </article>
+    <article class="summary-article summary-topic-entry" id="summary-2608.28933" data-arxiv-id="2608.28933" data-status="ready">
+<h1>[2608.28933] NBS: No Bias Stereo</h1>
+<p><a href="https://arxiv.org/abs/2608.28933" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种无归纳偏置的立体匹配基础模型，通过端到端的 Vision Transformer 架构在大规模数据驱动下，实现了超越现有专用几何模块的最先进精度与推理效率，证明了显式归纳偏置不再是立体重建的前提。</p>
+<h2>解决的问题</h2>
+<p>现有立体重建最先进方法严重依赖沉重的架构归纳偏置，包括显式 3D 或 4D 成本体积、3D 卷积及迭代更新块，导致模型复杂度高且改进边际收益递减，同时社区因过度依赖专用操作而偏离了通用机器学习架构的范式。</p>
+<h2>创新点</h2>
+<ul>
+<li>首个无显式成本体积、3D 卷积或迭代优化的竞争性立体匹配基础模型，采用统一的端到端 Vision Transformer 架构。</li>
+<li>模型内部涌现出单目 - 立体融合能力，实现跨基准的零样本泛化，即使在完全相机遮挡下也能保持合理的深度估计。</li>
+<li>在 ETH3D 基准上排名首位，并在 1K 和 2K 分辨率下实现比现有高性能方法快数倍的推理效率。</li>
+<li>利用大规模合成数据集证明纯数据驱动学习可超越显式工程的几何偏置，支持复现的 SimpleProc 场景生成与 XYZ-IBD 工业数据集评估。</li>
+</ul>
+    </article>
+    <article class="summary-article summary-topic-entry" id="summary-2608.28549" data-arxiv-id="2608.28549" data-status="ready">
+<h1>[2608.28549] Video Generative Models as Geometry Learner</h1>
+<p><a href="https://arxiv.org/abs/2608.28549" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 GeoNeXt，一种将预训练视频生成模型作为统一几何学习器的方法，通过将几何估计建模为视频扩散模型中的下一帧预测任务，实现了图像与几何目标的联合建模，在显著减少训练数据需求的情况下，实现了零样本单目深度和表面法线估计，性能优于现有生成式方法并可与大规模数据训练的判别式最先进方法相媲美。</p>
+<h2>解决的问题</h2>
+<p>现有基于图像扩散模型的方法将几何估计视为图像条件生成，存在显著不足：独立训练任务特定模型无法利用深度与法线等几何目标间的内在相关性；联合微调修改后的扩散模型则因架构改动拉大了预训练与微调的差距，导致对数据需求大幅增加。此外，现有方法未显式建模图像与几何间的交互，易引发跨模态不一致和几何细节丢失，难以在数据有限时保持高精度。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出 GeoNeXt 框架，将预训练视频生成模型作为统一几何学习器，将几何估计创新性地重构为视频扩散模型中的下一帧预测任务。</li>
+<li>利用视频模型中的时序注意力先验（temporal-attention priors）捕获跨帧依赖，实现图像与几何目标（image-geometry）的联合建模，增强几何一致性。</li>
+<li>采用轻量级适配策略，仅微调去噪 U-Net 并移除文本/CLIP 分支，在 Hypersim 和 Virtual KITTI 等数据集上实现零样本泛化，显著降低训练数据需求。</li>
+<li>通过共享去噪轨迹同步生成图像及其几何，保留了细粒度细节并增强了图像与几何的一致性，无需大量额外数据集即可转移图像到视频的生成能力。</li>
+</ul>
+    </article>
+    <article class="summary-article summary-topic-entry" id="summary-2608.28033" data-arxiv-id="2608.28033" data-status="ready">
+<h1>[2608.28033] ZipMVS: Multi-View Stereo with Compressed Cost Volumes</h1>
+<p><a href="https://arxiv.org/abs/2608.28033" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 ZipMVS，针对多视角立体视觉（MVS）中代价体积内存占用过高的问题，通过新颖的深度假设策略压缩代价体积，在显著降低 GPU 内存消耗的同时保持了高重建精度，在 DTU 和 Tanks and Temples 数据集上实现了质量与效率的平衡。</p>
+<h2>解决的问题</h2>
+<p>现有的学习基多视角立体视觉（MVS）方法依赖代价体积进行 3D 卷积，导致 GPU 内存需求巨大，难以部署于嵌入式或实时系统；传统方法轻量但敏感，现有内存优化多依赖迭代优化或二分搜索，计算开销大且难以避免早期错误，如何在显著降低内存消耗的同时保持高重建质量并避免复杂的迭代搜索是关键矛盾。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出像素级自适应深度采样策略，结合可微缩放网络动态调整深度范围。</li>
+<li>设计基于 GRU 的深度推测器（Depth Speculator），聚合空间线索以生成可靠深度假设，减少采样数。</li>
+<li>融合保守与探索两种深度假设生成范式，避免穷举深度扫描并提升计算效率。</li>
+<li>构建合成空间数据集，专门用于低纹理环境下的验证与评估。</li>
+</ul>
+    </article>
+    <article class="summary-article summary-topic-entry" id="summary-2608.27860" data-arxiv-id="2608.27860" data-status="ready">
+<h1>[2608.27860] From Perspective to Fisheye Depth Estimation and Open-Vocabulary Segmentation</h1>
+<p><a href="https://arxiv.org/abs/2608.27860" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了 Distortion Extenders (DEX)，一种轻量级特征空间调制器，通过自监督学习将 fisheye 图像的 latent embeddings 对齐至 perspective 图像的分布，从而无需重训 backbone 即可将 pretrained 视觉基础模型泛化到 fisheye 相机，在单目深度估计和 open-vocabulary segmentation 任务上均优于基线。</p>
+<h2>解决的问题</h2>
+<p>现有的 vision foundation models 主要基于 perspective 图像的 pinhole 投影模型训练，直接应用于 fisheye 图像时因径向畸变导致 covariate shift，产生错误的 3D 重建和分割结果。现有解决方案包括图像去畸变重投影（引入 resampling artifacts 和校准依赖）、针对 fisheye 训练专用模型（泛化性差）、微调 pretrained 模型（参数漂移风险）或混合相机训练（牺牲 fidelity），且多为 task-specific 或需引入特定 inductive biases，限制了架构选择灵活性与任务通用性。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出 Distortion Extenders (DEX)，通过一组轻量级 learnable parameters 在 latent space 隐式建模 fisheye 畸变，将 fisheye embeddings 映射至 perspective 分布以恢复高保真估计。</li>
+<li>方法具有 architecture-agnostic 和 task-agnostic 特性，可应用于卷积及 Transformer 架构，支持 monocular depth estimation 和 open-vocabulary segmentation 等多种任务。</li>
+<li>采用自监督训练策略，仅需 calibrated perspective 图像合成 fisheye 数据进行训练，无需真实 fisheye 标注数据或重训 backbone。</li>
+<li>DEX 的激活值可被解码为 distortion coefficients，作为副产品支持相机校准。</li>
+</ul>
+    </article>
     <article class="summary-article summary-topic-entry" id="summary-2608.24518" data-arxiv-id="2608.24518" data-status="ready">
 <h1>[2608.24518] It depends: Incorporating correlations for joint aleatoric and epistemic uncertainties of high-dimensional output spaces</h1>
 <p><a href="https://arxiv.org/abs/2608.24518" rel="nofollow">arXiv 原文</a></p>
@@ -866,6 +970,6 @@
     </article>
     </div>
   </main>
-  <script type="application/json" id="summary-catalog">{"papers":{"2601.17074":{"status":"ready","url":"notes/depth-estimation.html#summary-2601.17074"},"2603.05711":{"status":"ready","url":"notes/depth-estimation.html#summary-2603.05711"},"2603.09385":{"status":"ready","url":"notes/depth-estimation.html#summary-2603.09385"},"2605.12027":{"status":"ready","url":"notes/depth-estimation.html#summary-2605.12027"},"2606.29716":{"status":"ready","url":"notes/depth-estimation.html#summary-2606.29716"},"2607.00736":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.00736"},"2607.01677":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.01677"},"2607.01900":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.01900"},"2607.04303":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.04303"},"2607.06779":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.06779"},"2607.08771":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.08771"},"2607.09284":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.09284"},"2607.12433":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.12433"},"2607.12993":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.12993"},"2607.13674":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.13674"},"2607.15600":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.15600"},"2607.16286":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.16286"},"2607.17058":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.17058"},"2607.17099":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.17099"},"2607.18897":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.18897"},"2607.19986":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.19986"},"2607.21438":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.21438"},"2607.21526":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.21526"},"2607.22172":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.22172"},"2607.24249":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.24249"},"2607.25234":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.25234"},"2607.26600":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.26600"},"2607.27139":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.27139"},"2607.28285":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.28285"},"2608.00415":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.00415"},"2608.00678":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.00678"},"2608.01129":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.01129"},"2608.02068":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.02068"},"2608.03666":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.03666"},"2608.03851":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.03851"},"2608.04737":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.04737"},"2608.07562":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.07562"},"2608.11564":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.11564"},"2608.12743":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.12743"},"2608.13102":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.13102"},"2608.13147":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.13147"},"2608.15297":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.15297"},"2608.15471":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.15471"},"2608.15659":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.15659"},"2608.16756":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.16756"},"2608.16984":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.16984"},"2608.17178":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.17178"},"2608.17553":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.17553"},"2608.17832":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.17832"},"2608.18413":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.18413"},"2608.19769":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.19769"},"2608.20788":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.20788"},"2608.21468":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.21468"},"2608.21710":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.21710"},"2608.22289":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.22289"},"2608.22821":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.22821"},"2608.23175":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.23175"},"2608.23290":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.23290"},"2608.24518":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.24518"},"2608.27860":{"status":"pending"},"2608.28033":{"status":"pending"},"2608.28549":{"status":"pending"},"2608.28933":{"status":"pending"},"2608.29819":{"status":"pending"},"2608.29881":{"status":"pending"},"2608.30129":{"status":"pending"}},"topic":"Depth Estimation","version":1}</script>
+  <script type="application/json" id="summary-catalog">{"papers":{"2601.17074":{"status":"ready","url":"notes/depth-estimation.html#summary-2601.17074"},"2603.05711":{"status":"ready","url":"notes/depth-estimation.html#summary-2603.05711"},"2603.09385":{"status":"ready","url":"notes/depth-estimation.html#summary-2603.09385"},"2605.12027":{"status":"ready","url":"notes/depth-estimation.html#summary-2605.12027"},"2606.29716":{"status":"ready","url":"notes/depth-estimation.html#summary-2606.29716"},"2607.00736":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.00736"},"2607.01677":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.01677"},"2607.01900":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.01900"},"2607.04303":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.04303"},"2607.06779":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.06779"},"2607.08771":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.08771"},"2607.09284":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.09284"},"2607.12433":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.12433"},"2607.12993":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.12993"},"2607.13674":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.13674"},"2607.15600":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.15600"},"2607.16286":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.16286"},"2607.17058":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.17058"},"2607.17099":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.17099"},"2607.18897":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.18897"},"2607.19986":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.19986"},"2607.21438":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.21438"},"2607.21526":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.21526"},"2607.22172":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.22172"},"2607.24249":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.24249"},"2607.25234":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.25234"},"2607.26600":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.26600"},"2607.27139":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.27139"},"2607.28285":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.28285"},"2608.00415":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.00415"},"2608.00678":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.00678"},"2608.01129":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.01129"},"2608.02068":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.02068"},"2608.03666":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.03666"},"2608.03851":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.03851"},"2608.04737":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.04737"},"2608.07562":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.07562"},"2608.11564":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.11564"},"2608.12743":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.12743"},"2608.13102":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.13102"},"2608.13147":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.13147"},"2608.15297":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.15297"},"2608.15471":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.15471"},"2608.15659":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.15659"},"2608.16756":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.16756"},"2608.16984":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.16984"},"2608.17178":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.17178"},"2608.17553":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.17553"},"2608.17832":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.17832"},"2608.18413":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.18413"},"2608.19769":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.19769"},"2608.20788":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.20788"},"2608.21468":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.21468"},"2608.21710":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.21710"},"2608.22289":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.22289"},"2608.22821":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.22821"},"2608.23175":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.23175"},"2608.23290":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.23290"},"2608.24518":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.24518"},"2608.27860":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.27860"},"2608.28033":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.28033"},"2608.28549":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.28549"},"2608.28933":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.28933"},"2608.29819":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.29819"},"2608.29881":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.29881"},"2608.30129":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.30129"}},"topic":"Depth Estimation","version":1}</script>
 </body>
 </html>
