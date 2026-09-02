@@ -110,7 +110,10 @@
         renderResults();
         return;
       }
-      currentResults = core.searchTitles(documents, input.value, 20);
+      const rankedResults = core.searchTitles(documents, input.value, 20);
+      currentResults = SECTION_ORDER.flatMap((sectionKey) =>
+        rankedResults.filter((document) => document.section === sectionKey),
+      );
       activeIndex = -1;
       status.textContent = currentResults.length ? `${currentResults.length} 个结果` : NO_MATCH;
       renderResults();
