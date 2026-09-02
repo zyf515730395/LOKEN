@@ -66,7 +66,7 @@
       drawerToggle?.setAttribute("aria-expanded", String(open));
       navigationShell?.toggleAttribute("inert", drawerMedia.matches && !open);
       if (drawerToggleIcon) drawerToggleIcon.textContent = open ? "×" : "☰";
-      if (drawerToggleLabel) drawerToggleLabel.textContent = open ? "关闭导航" : "打开导航";
+      if (drawerToggleLabel) drawerToggleLabel.textContent = open ? "关闭" : "导航";
       if (!open && returnFocus && drawerMedia.matches) drawerToggle?.focus();
     }
 
@@ -74,7 +74,7 @@
       if (collapsed) root.dataset.secondaryCollapsed = "true";
       else delete root.dataset.secondaryCollapsed;
       collapseToggle?.setAttribute("aria-expanded", String(!collapsed));
-      if (collapseIcon) collapseIcon.textContent = collapsed ? "›" : "‹";
+      if (collapseIcon) collapseIcon.textContent = collapsed ? "→" : "←";
       if (collapseLabel) {
         collapseLabel.textContent = collapsed ? "展开二级导航" : "折叠二级导航";
       }

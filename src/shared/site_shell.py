@@ -70,13 +70,14 @@ def render_primary_navigation(active_section: str, site_root: str) -> str:
         items.append(
             f'      <a class="primary-nav-item{active_class}" '
             f'href="{html.escape(site_root + section.route, quote=True)}"{current}>'
-            f'<span>{html.escape(section.label)}</span></a>'
+            '<span class="primary-nav-marker" aria-hidden="true"></span>'
+            f'<span class="primary-nav-label">{html.escape(section.label)}</span></a>'
         )
     return "\n".join(
         [
             '  <aside class="primary-sidebar" aria-label="知识主题">',
             f'    <a class="primary-brand" href="{html.escape(site_root + SECTIONS[0].route, quote=True)}" '
-            'aria-label="TOGOS 首页">TOGOS</a>',
+            'aria-label="TOGOS 首页"><span>TO</span><span>/GOS</span></a>',
             '    <nav class="primary-navigation" aria-label="知识主题">',
             *items,
             "    </nav>",
@@ -100,9 +101,9 @@ def render_context_sidebar(active_section: str, secondary_navigation: str) -> st
     section = get_section(active_section)
     return f"""  <aside class="paper-sidebar context-sidebar" id="paper-sidebar" aria-label="{html.escape(section.label, quote=True)}导航">
     <div class="context-toolbar">
-      <p class="context-toolbar-label"><span>CONTENTS</span><span>目录</span></p>
+      <p class="context-toolbar-label"><span>本页目录</span></p>
       <button class="context-collapse" type="button" aria-controls="context-navigation" aria-expanded="true" data-context-collapse>
-        <span aria-hidden="true" data-context-collapse-icon>‹</span>
+        <span aria-hidden="true" data-context-collapse-icon>←</span>
         <span class="visually-hidden" data-context-collapse-label>折叠二级导航</span>
       </button>
     </div>
@@ -179,22 +180,25 @@ def render_site_page(
   <meta name="description" content="{html.escape(meta_description, quote=True)}">
   <title>{html.escape(page_title)}</title>
 {_state_bootstrap()}
-{head_content}  <link rel="stylesheet" href="{html.escape(site_root, quote=True)}assets/css/site.css?v=3">
-  <script src="{html.escape(site_root, quote=True)}assets/js/site-shell.js?v=3" defer></script>
-  <script src="{html.escape(site_root, quote=True)}assets/js/search-core.js?v=3" defer></script>
-  <script src="{html.escape(site_root, quote=True)}assets/js/search.js?v=3" defer></script>
-  <script src="{html.escape(site_root, quote=True)}assets/js/sidebar.js?v=3" defer></script>
+{head_content}  <link rel="stylesheet" href="{html.escape(site_root, quote=True)}assets/css/site.css?v=4">
+  <script src="{html.escape(site_root, quote=True)}assets/js/site-shell.js?v=4" defer></script>
+  <script src="{html.escape(site_root, quote=True)}assets/js/search-core.js?v=4" defer></script>
+  <script src="{html.escape(site_root, quote=True)}assets/js/search.js?v=4" defer></script>
+  <script src="{html.escape(site_root, quote=True)}assets/js/sidebar.js?v=4" defer></script>
 </head>
 <body{body_attributes}>
-  <button class="sidebar-toggle" type="button" aria-controls="navigation-shell" aria-expanded="false">
-    <span aria-hidden="true" data-sidebar-toggle-icon>☰</span><span data-sidebar-toggle-label>打开导航</span>
-  </button>
-  <button class="theme-toggle" type="button" aria-label="切换颜色主题" aria-pressed="false">
-    <span data-theme-icon aria-hidden="true"></span>
-  </button>
-  <button class="search-trigger" type="button" data-search-trigger>
-    <span>搜索公开文章标题</span><kbd>Ctrl K</kbd>
-  </button>
+  <header class="site-utility" aria-label="页面工具">
+    <button class="sidebar-toggle" type="button" aria-controls="navigation-shell" aria-expanded="false">
+      <span aria-hidden="true" data-sidebar-toggle-icon>☰</span><span data-sidebar-toggle-label>导航</span>
+    </button>
+    <button class="search-trigger" type="button" data-search-trigger>
+      <span class="search-trigger-icon" aria-hidden="true">⌕</span>
+      <span>搜索文章</span><kbd>Ctrl K</kbd>
+    </button>
+    <button class="theme-toggle" type="button" aria-label="切换颜色主题" aria-pressed="false">
+      <span data-theme-icon aria-hidden="true"></span>
+    </button>
+  </header>
   <div class="sidebar-scrim" data-sidebar-close></div>
 <div class="navigation-shell" id="navigation-shell">
 {render_primary_navigation(active_section, site_root)}
