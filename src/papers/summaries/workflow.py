@@ -91,14 +91,20 @@ def _write_report(result: RunResult, *, model: str) -> Path:
         },
     )
     path = _atomic_private_json("report.json", report)
-    _atomic_private_json(
-        "state.json",
-        {
-            "version": REPORT_VERSION,
-            "status": "complete",
-            "report": report,
-        },
-    )
+    try:
+        _atomic_private_json(
+            "state.json",
+            {
+                "version": REPORT_VERSION,
+                "status": "complete",
+                "report": report,
+            },
+        )
+    except OSError:
+        # The durable report and the reporting WAL agree. Leaving the WAL in
+        # reporting is safer than rolling back successful public output; the
+        # next locked run completes this final marker idempotently.
+        pass
     return path
 
 
