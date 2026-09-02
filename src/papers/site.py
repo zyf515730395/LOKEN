@@ -12,7 +12,12 @@ import unicodedata
 from milestones.catalog import load_milestone_catalog
 from shared.rendering import atomic_write_text
 from shared.search_index import SearchDocument, serialize_search_index
-from shared.site_shell import render_empty_section_page, render_section_intro, render_site_page
+from shared.site_shell import (
+    SITE_NAME,
+    render_journey_placeholder_page,
+    render_section_intro,
+    render_site_page,
+)
 
 
 ENTRY_PATTERN = re.compile(
@@ -20,7 +25,6 @@ ENTRY_PATTERN = re.compile(
     r"(?P<authors>.*?)\|\[(?P<pdf_label>[^]]+)]\((?P<pdf_url>[^)]+)\)\|"
     r"(?P<code>.*?)\|$"
 )
-SITE_TITLE = "TOGOS"
 RECENT_YEAR_COUNT = 3
 NOTES_DIRECTORY_NAME = "notes"
 SHOW_BOOK_NOTES_NAV = False
@@ -314,7 +318,7 @@ def render_table(
             summary_cell = (
                 f'<a class="summary-link" href="{summary_url}" '
                 f'data-summary-url="{summary_url}" data-summary-id="{summary_id}" '
-                'aria-haspopup="dialog">查看要点</a>'
+                'aria-controls="paper-summary-panel" aria-expanded="false">要点</a>'
             )
         elif candidate_statuses.get(row["id"]) in {"pending", "accepted"}:
             summary_cell = '<span class="summary-pending">待生成</span>'
@@ -428,7 +432,18 @@ def render_content(
                 output.append("      </section>")
             output.extend(["    </div>", "  </section>"])
         output.append("</section>")
-    return "\n".join(output)
+    archive = "\n".join(output)
+    return f"""<div class="learning-workspace">
+  <div class="learning-archive">
+{archive}
+  </div>
+  <div data-summary-panel-home></div>
+  <aside class="paper-summary-panel" id="paper-summary-panel" aria-live="polite">
+    <header class="paper-summary-header"><h2 data-summary-title>论文要点</h2></header>
+    <div data-summary-content><p>选择一篇已有摘要的论文查看要点。</p></div>
+    <a data-summary-direct hidden>打开完整总结 →</a>
+  </aside>
+</div>"""
 
 
 def load_candidate_statuses(candidate_path: str | Path | None) -> dict[str, str]:
@@ -484,25 +499,13 @@ def generate_site(
       <p class="updated">Updated {updated}</p>
     </header>
 {render_content(categories, summary_catalog, candidate_statuses)}
-    <footer>Generated from arXiv metadata · Source: <a href="https://github.com/zyf515730395/TOGOS">{SITE_TITLE}</a></footer>
-"""
-    summary_dialog = """  <dialog class="summary-dialog" id="summary-dialog" aria-labelledby="summary-dialog-title">
-    <div class="summary-dialog-shell">
-      <header class="summary-dialog-header">
-        <h2 id="summary-dialog-title">论文要点</h2>
-        <button type="button" class="summary-dialog-close" data-summary-close aria-label="关闭">×</button>
-      </header>
-      <div class="summary-dialog-content" data-summary-content>
-        <p class="muted">正在加载…</p>
-      </div>
-    </div>
-  </dialog>
+    <footer>Generated from arXiv metadata · Source: <a href="https://github.com/zyf515730395/TOGOS">{SITE_NAME}</a></footer>
 """
     document = render_site_page(
         output_file=page_output,
         output_root=site_root,
         active_section="learning",
-        page_title=SITE_TITLE,
+        page_title=SITE_NAME,
         meta_description=(
             "A daily index of image, video, and 3D generation, neural rendering, "
             "and depth estimation papers from arXiv."
@@ -510,27 +513,17 @@ def generate_site(
         secondary_navigation=render_sidebar(themes),
         main_content=main_content,
         body_class="learning-page",
-        trailing_dialogs=summary_dialog,
     )
     atomic_write_text(page_output, document)
 
-    empty_pages = (
-        (
-            "journeys",
-            site_root / "journeys" / "index.html",
-            "城市坐标与摄影作品会在这里出现。",
+    journey_destination = site_root / "journeys" / "index.html"
+    atomic_write_text(
+        journey_destination,
+        render_journey_placeholder_page(
+            output_file=journey_destination,
+            output_root=site_root,
         ),
     )
-    for section_key, destination, body_copy in empty_pages:
-        atomic_write_text(
-            destination,
-            render_empty_section_page(
-                output_file=destination,
-                output_root=site_root,
-                section_key=section_key,
-                body_copy=body_copy,
-            ),
-        )
 
     from milestones.publisher import build_milestone_search_documents
     from writings.publisher import (

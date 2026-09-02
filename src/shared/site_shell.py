@@ -1,4 +1,4 @@
-"""Shared information architecture and outer page shell for TOGOS."""
+"""Shared information architecture and outer page shell for LOKEN."""
 
 from __future__ import annotations
 
@@ -42,6 +42,14 @@ SECTIONS = (
     ),
 )
 SECTIONS_BY_KEY = {section.key: section for section in SECTIONS}
+SITE_NAME = "LOKEN"
+ASSET_VERSION = "5"
+SECTION_METADATA = {
+    "learning": "01 / PAPER SIGNALS",
+    "milestones": "02 / MODEL ARCHIVE",
+    "writings": "03 / FIELD NOTES",
+    "journeys": "04 / CITY MEMORY",
+}
 
 
 def get_section(key: str) -> Section:
@@ -71,13 +79,23 @@ def render_primary_navigation(active_section: str, site_root: str) -> str:
             f'      <a class="primary-nav-item{active_class}" '
             f'href="{html.escape(site_root + section.route, quote=True)}"{current}>'
             '<span class="primary-nav-marker" aria-hidden="true"></span>'
-            f'<span class="primary-nav-label">{html.escape(section.label)}</span></a>'
+            '<span class="primary-nav-copy">'
+            f'<span class="primary-nav-meta">{SECTION_METADATA[section.key]}</span>'
+            f'<span class="primary-nav-label">{html.escape(section.label)}</span>'
+            "</span></a>"
         )
+    brand_href = html.escape(site_root + SECTIONS[0].route, quote=True)
+    brand_label = html.escape(f"{SITE_NAME} 首页", quote=True)
+    brand_wordmark = html.escape(SITE_NAME)
+    brand = (
+        f'<a class="primary-brand" href="{brand_href}" aria-label="{brand_label}">'
+        '<span class="brand-mark" aria-hidden="true">LK</span>'
+        f'<span class="brand-wordmark">{brand_wordmark}</span></a>'
+    )
     return "\n".join(
         [
             '  <aside class="primary-sidebar" aria-label="知识主题">',
-            f'    <a class="primary-brand" href="{html.escape(site_root + SECTIONS[0].route, quote=True)}" '
-            'aria-label="TOGOS 首页"><span>TO</span><span>/GOS</span></a>',
+            f"    {brand}",
             '    <nav class="primary-navigation" aria-label="知识主题">',
             *items,
             "    </nav>",
@@ -98,19 +116,18 @@ def render_section_intro(section_key: str) -> str:
 
 
 def render_context_sidebar(active_section: str, secondary_navigation: str) -> str:
-    section = get_section(active_section)
-    return f"""  <aside class="paper-sidebar context-sidebar" id="paper-sidebar" aria-label="{html.escape(section.label, quote=True)}导航">
-    <div class="context-toolbar">
-      <p class="context-toolbar-label"><span>本页目录</span></p>
-      <button class="context-collapse" type="button" aria-controls="context-navigation" aria-expanded="true" data-context-collapse>
-        <span aria-hidden="true" data-context-collapse-icon>←</span>
-        <span class="visually-hidden" data-context-collapse-label>折叠二级导航</span>
-      </button>
-    </div>
-    <nav class="archive-nav context-navigation" id="context-navigation" aria-label="{html.escape(section.label, quote=True)}目录">
+    get_section(active_section)
+    return f"""  <div id="paper-sidebar">
+  <aside class="context-drawer" id="context-drawer" aria-label="本页目录">
+    <header class="context-drawer-header">
+      <span>INDEX</span>
+      <button type="button" data-context-close aria-label="关闭本页目录">×</button>
+    </header>
+    <nav id="context-navigation" class="context-navigation">
 {secondary_navigation}
     </nav>
-  </aside>"""
+  </aside>
+  </div>"""
 
 
 def _state_bootstrap() -> str:
@@ -118,38 +135,34 @@ def _state_bootstrap() -> str:
     (() => {
       document.documentElement.classList.add("js");
       let theme = null;
-      let collapsed = null;
+      let contextOpen = null;
       try {
         theme = window.localStorage.getItem("arxiv-theme");
-        collapsed = window.localStorage.getItem("togos-secondary-sidebar-collapsed");
+        contextOpen = window.localStorage.getItem("togos-secondary-sidebar-collapsed");
       } catch (error) { /* Storage can be unavailable. */ }
       if (theme !== "light" && theme !== "dark") {
         theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
       }
       document.documentElement.dataset.theme = theme;
-      if (collapsed === "true") document.documentElement.dataset.secondaryCollapsed = "true";
+      if (contextOpen === "false") document.documentElement.dataset.contextOpen = "true";
     })();
   </script>"""
 
 
-def _render_search_dialog() -> str:
-    return """  <dialog class="search-dialog" id="search-dialog" aria-labelledby="search-dialog-title">
-    <div class="search-dialog-shell">
-      <header class="search-dialog-header">
-        <div>
-          <p>全站公开内容</p>
-          <h2 id="search-dialog-title">搜索文章标题</h2>
-        </div>
-        <button type="button" class="search-dialog-close" data-search-close aria-label="关闭搜索">×</button>
-      </header>
-      <label class="visually-hidden" for="search-input">搜索公开文章标题</label>
-      <input id="search-input" class="search-input" type="search" placeholder="搜索公开文章标题"
-             autocomplete="off" role="combobox" aria-autocomplete="list" aria-controls="search-results"
-             aria-haspopup="listbox" aria-expanded="false">
-      <p class="search-status" data-search-status aria-live="polite">输入标题关键词开始搜索</p>
-      <div class="search-results" id="search-results" data-search-results role="listbox" aria-label="搜索结果"></div>
-    </div>
-  </dialog>"""
+def render_inline_search() -> str:
+    return """    <div class="site-search" data-search-root>
+      <label class="site-search-field" for="search-input">
+        <span aria-hidden="true">⌕</span>
+        <input id="search-input" type="search" placeholder="搜索文章标题"
+               aria-label="搜索文章标题" role="combobox"
+               autocomplete="off" aria-autocomplete="list" aria-controls="search-results" aria-expanded="false">
+        <kbd aria-hidden="true">Ctrl K</kbd>
+      </label>
+      <div class="search-popover" data-search-popover hidden>
+        <p class="search-status" data-search-status aria-live="polite">输入标题关键词开始搜索</p>
+        <div id="search-results" class="search-results" data-search-results role="listbox"></div>
+      </div>
+    </div>"""
 
 
 def render_site_page(
@@ -180,27 +193,28 @@ def render_site_page(
   <meta name="description" content="{html.escape(meta_description, quote=True)}">
   <title>{html.escape(page_title)}</title>
 {_state_bootstrap()}
-{head_content}  <link rel="stylesheet" href="{html.escape(site_root, quote=True)}assets/css/site.css?v=4">
-  <script src="{html.escape(site_root, quote=True)}assets/js/site-shell.js?v=4" defer></script>
-  <script src="{html.escape(site_root, quote=True)}assets/js/search-core.js?v=4" defer></script>
-  <script src="{html.escape(site_root, quote=True)}assets/js/search.js?v=4" defer></script>
-  <script src="{html.escape(site_root, quote=True)}assets/js/sidebar.js?v=4" defer></script>
+{head_content}  <link rel="stylesheet" href="{html.escape(site_root, quote=True)}assets/css/site.css?v={ASSET_VERSION}">
+  <script src="{html.escape(site_root, quote=True)}assets/js/site-shell.js?v={ASSET_VERSION}" defer></script>
+  <script src="{html.escape(site_root, quote=True)}assets/js/search-core.js?v={ASSET_VERSION}" defer></script>
+  <script src="{html.escape(site_root, quote=True)}assets/js/search.js?v={ASSET_VERSION}" defer></script>
+  <script src="{html.escape(site_root, quote=True)}assets/js/sidebar.js?v={ASSET_VERSION}" defer></script>
 </head>
 <body{body_attributes}>
   <header class="site-utility" aria-label="页面工具">
     <button class="sidebar-toggle" type="button" aria-controls="navigation-shell" aria-expanded="false">
       <span aria-hidden="true" data-sidebar-toggle-icon>☰</span><span data-sidebar-toggle-label>导航</span>
     </button>
-    <button class="search-trigger" type="button" data-search-trigger>
-      <span class="search-trigger-icon" aria-hidden="true">⌕</span>
-      <span>搜索文章</span><kbd>Ctrl K</kbd>
-    </button>
+{render_inline_search()}
+    <button class="context-toggle" type="button" data-context-toggle aria-controls="context-drawer" aria-expanded="false">INDEX <span aria-hidden="true">☰</span></button>
     <button class="theme-toggle" type="button" aria-label="切换颜色主题" aria-pressed="false">
       <span data-theme-icon aria-hidden="true"></span>
     </button>
   </header>
   <div class="sidebar-scrim" data-sidebar-close></div>
+  <div class="context-scrim" data-context-scrim></div>
 <div class="navigation-shell" id="navigation-shell">
+  <button class="navigation-close" type="button" data-navigation-close
+          aria-label="关闭导航" hidden>×</button>
 {render_primary_navigation(active_section, site_root)}
 {render_context_sidebar(active_section, secondary_navigation)}
 </div>
@@ -208,7 +222,6 @@ def render_site_page(
 {main_content}
   </main>
 {trailing_dialogs}
-{_render_search_dialog()}
 </body>
 </html>
 """
@@ -236,9 +249,44 @@ def render_empty_section_page(
         output_file=output_file,
         output_root=output_root,
         active_section=section_key,
-        page_title=f"{section.label} · TOGOS",
+        page_title=f"{section.label} · {SITE_NAME}",
         meta_description=section.description,
         secondary_navigation=secondary_navigation,
         main_content=main_content,
         body_class="empty-section-page",
+    )
+
+
+def render_journey_placeholder_page(*, output_file: Path, output_root: Path) -> str:
+    """Render the City Memory shell without manufacturing travel data."""
+    section = get_section("journeys")
+    secondary_navigation = (
+        '      <a class="context-overview is-active" href="#top" '
+        'aria-current="page">页面概览</a>'
+    )
+    main_content = f"""    <section class="journey-archive" aria-labelledby="journey-title">
+{render_section_intro("journeys")}
+      <header class="journey-header">
+        <p>CITY MEMORY / FUTURE ARCHIVE</p>
+        <h1 id="journey-title">{html.escape(section.label)}</h1>
+        <p>城市档案尚未开放。这里会保留走过的城市与拍下的瞬间。</p>
+      </header>
+      <div class="journey-map-placeholder" aria-label="尚未开放的城市地图档案">
+        <div class="journey-map-grid" aria-hidden="true"><span class="journey-world-silhouette"></span></div>
+        <aside class="journey-photo-contact">
+          <div class="journey-photo-contact-surface" aria-hidden="true"></div>
+          <p>摄影接触表将随首批城市档案一同出现。</p>
+        </aside>
+      </div>
+    </section>
+"""
+    return render_site_page(
+        output_file=output_file,
+        output_root=output_root,
+        active_section="journeys",
+        page_title=f"{section.label} · {SITE_NAME}",
+        meta_description=section.description,
+        secondary_navigation=secondary_navigation,
+        main_content=main_content,
+        body_class="journey-page",
     )

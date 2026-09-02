@@ -104,16 +104,19 @@ document.querySelectorAll("[data-sidebar-action]").forEach((button) => {
 window.addEventListener("hashchange", () => revealHashTarget({ scroll: true }));
 revealHashTarget({ scroll: true });
 
-const summaryDialog = document.querySelector("#summary-dialog");
-const summaryDialogTitle = summaryDialog?.querySelector("#summary-dialog-title");
-const summaryDialogContent = summaryDialog?.querySelector("[data-summary-content]");
+const summaryPanel = document.querySelector("#paper-summary-panel");
+const summaryPanelHome = document.querySelector("[data-summary-panel-home]");
+const summaryPanelTitle = summaryPanel?.querySelector("[data-summary-title]");
+const summaryPanelContent = summaryPanel?.querySelector("[data-summary-content]");
+const summaryDirectLink = summaryPanel?.querySelector("[data-summary-direct]");
 const summaryDocumentCache = new Map();
 let summaryTrigger = null;
+let summaryRequest = 0;
 
-function setSummaryDialogContent(markup, { error = false } = {}) {
-  if (!summaryDialogContent) return;
-  summaryDialogContent.classList.toggle("has-error", error);
-  summaryDialogContent.innerHTML = markup;
+function setSummaryPanelContent(markup, { error = false } = {}) {
+  if (!summaryPanelContent) return;
+  summaryPanelContent.classList.toggle("has-error", error);
+  summaryPanelContent.innerHTML = markup;
 }
 
 async function loadSummaryDocument(link) {
@@ -133,22 +136,58 @@ async function loadSummaryDocument(link) {
   return summaryDocumentCache.get(cacheKey);
 }
 
-async function openSummaryDialog(link) {
-  if (!summaryDialog?.showModal || !summaryDialogContent) return;
+function moveSummaryPanel() {
+  if (!summaryPanel || !summaryPanelHome) return;
+  document.querySelectorAll(".mobile-summary-row").forEach((row) => row.remove());
+  if (!summaryTrigger || !summaryMobileQuery?.matches) {
+    summaryPanelHome.after(summaryPanel);
+    return;
+  }
+
+  const paperRow = summaryTrigger.closest("tr");
+  if (!paperRow) return;
+  const mobileRow = document.createElement("tr");
+  mobileRow.className = "mobile-summary-row";
+  const cell = document.createElement("td");
+  cell.colSpan = 4;
+  mobileRow.append(cell);
+  paperRow.after(mobileRow);
+  cell.append(summaryPanel);
+}
+
+function setSummaryActive(link) {
+  document.querySelectorAll("[data-summary-url]").forEach((candidate) => {
+    candidate.setAttribute("aria-expanded", String(candidate === link));
+  });
+  document.querySelectorAll(".paper-table tr.is-summary-active").forEach((row) => {
+    row.classList.remove("is-summary-active");
+  });
+  link.closest("tr")?.classList.add("is-summary-active");
+}
+
+async function openSummaryPanel(link) {
+  if (!summaryPanel || !summaryPanelContent) return;
+  const requestId = ++summaryRequest;
   summaryTrigger = link;
   const paperTitle = link.closest("tr")?.querySelector(".paper-title")?.textContent?.trim();
-  if (summaryDialogTitle) summaryDialogTitle.textContent = paperTitle || "论文要点";
-  setSummaryDialogContent('<p class="muted">正在加载…</p>');
-  summaryDialog.showModal();
+  if (summaryPanelTitle) summaryPanelTitle.textContent = paperTitle || "论文要点";
+  if (summaryDirectLink) {
+    summaryDirectLink.href = link.href;
+    summaryDirectLink.hidden = false;
+  }
+  setSummaryActive(link);
+  moveSummaryPanel();
+  setSummaryPanelContent('<p class="muted">正在加载…</p>');
 
   try {
     const parsed = await loadSummaryDocument(link);
     const articleId = link.dataset.summaryId || new URL(link.href).hash.slice(1);
     const article = parsed.getElementById(articleId);
     if (!article) throw new Error("Summary content is missing");
-    setSummaryDialogContent(article.innerHTML);
+    if (requestId === summaryRequest) setSummaryPanelContent(article.innerHTML);
   } catch (error) {
-    setSummaryDialogContent(
+    if (requestId !== summaryRequest) return;
+    setSummaryPanelContent(
       '<p>要点加载失败，请稍后重试，或使用链接直接打开总结页面。</p>',
       { error: true },
     );
@@ -157,23 +196,14 @@ async function openSummaryDialog(link) {
 
 document.addEventListener("click", (event) => {
   const link = event.target.closest("[data-summary-url]");
-  if (!link || !summaryDialog?.showModal) return;
+  if (!link || !summaryPanel) return;
   event.preventDefault();
-  openSummaryDialog(link);
+  openSummaryPanel(link);
 });
 
-summaryDialog?.querySelector("[data-summary-close]")?.addEventListener("click", () => {
-  summaryDialog.close();
-});
-
-summaryDialog?.addEventListener("click", (event) => {
-  if (event.target === summaryDialog) summaryDialog.close();
-});
-
-summaryDialog?.addEventListener("close", () => {
-  summaryTrigger?.focus();
-  summaryTrigger = null;
-});
+const summaryMobileQuery = window.matchMedia?.("(max-width: 900px)");
+summaryMobileQuery?.addEventListener?.("change", moveSummaryPanel);
+summaryMobileQuery?.addListener?.(moveSummaryPanel);
 
 document.querySelectorAll("[data-drag-scroll]").forEach((viewport) => {
   let pointerId = null;
