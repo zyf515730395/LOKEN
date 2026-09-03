@@ -1,4 +1,58 @@
 const sidebar = document.querySelector("#paper-sidebar");
+const topicNavigation = document.querySelector("[data-topic-navigation]");
+const topicLinks = [...document.querySelectorAll("[data-topic-filter]")];
+const topicSections = [...document.querySelectorAll("[data-topic-section]")];
+
+function topicForHash() {
+  const id = decodeURIComponent(window.location.hash.slice(1));
+  if (!id) return null;
+  const target = document.getElementById(id);
+  return target?.closest("[data-topic-section]")?.dataset.topicSection || null;
+}
+
+function selectTopic(topic, { updateLocation = false, scroll = false } = {}) {
+  const selected = topicSections.find((section) => section.dataset.topicSection === topic);
+  if (!selected) return false;
+  const previousTopic = topicSections.find((section) => section.classList.contains("is-topic-active"))?.dataset.topicSection;
+
+  topicSections.forEach((section) => {
+    section.hidden = false;
+    section.classList.toggle("is-topic-active", section === selected);
+  });
+  topicLinks.forEach((link) => {
+    const active = link.dataset.topicFilter === topic;
+    link.classList.toggle("is-active", active);
+    if (active) link.setAttribute("aria-current", "location");
+    else link.removeAttribute("aria-current");
+  });
+
+  if (updateLocation) {
+    const url = new URL(window.location.href);
+    url.searchParams.set("topic", topic);
+    url.hash = selected.id;
+    window.history.replaceState(null, "", url);
+  }
+  if (scroll) window.requestAnimationFrame(() => selected.scrollIntoView({ block: "start" }));
+  if (previousTopic && previousTopic !== topic) {
+    document.dispatchEvent(new CustomEvent("loken:paper-topic-change"));
+  }
+  return true;
+}
+
+function syncTopicFromLocation({ scroll = false } = {}) {
+  if (!topicNavigation || !topicSections.length) return;
+  const requested = new URL(window.location.href).searchParams.get("topic");
+  const topic = topicForHash() || requested || topicSections[0].dataset.topicSection;
+  if (!selectTopic(topic, { scroll })) selectTopic(topicSections[0].dataset.topicSection, { scroll });
+}
+
+topicLinks.forEach((link) => {
+  link.addEventListener("click", (event) => {
+    event.preventDefault();
+    selectTopic(link.dataset.topicFilter, { updateLocation: true, scroll: true });
+  });
+});
+syncTopicFromLocation();
 
 function setYearExpanded(yearArchive, expanded) {
   if (!yearArchive) return;
@@ -97,11 +151,14 @@ function revealHashTarget({ scroll = false } = {}) {
 document.querySelectorAll("[data-sidebar-action]").forEach((button) => {
   button.addEventListener("click", () => {
     const shouldOpen = button.dataset.sidebarAction === "expand";
-    sidebar.querySelectorAll("details").forEach((details) => { details.open = shouldOpen; });
+    sidebar?.querySelectorAll("details").forEach((details) => { details.open = shouldOpen; });
   });
 });
 
-window.addEventListener("hashchange", () => revealHashTarget({ scroll: true }));
+window.addEventListener("hashchange", () => {
+  syncTopicFromLocation();
+  revealHashTarget({ scroll: true });
+});
 revealHashTarget({ scroll: true });
 
 const summaryPanel = document.querySelector("#paper-summary-panel");
@@ -112,6 +169,25 @@ const summaryDirectLink = summaryPanel?.querySelector("[data-summary-direct]");
 const summaryDocumentCache = new Map();
 let summaryTrigger = null;
 let summaryRequest = 0;
+
+document.addEventListener("loken:paper-topic-change", () => {
+  summaryTrigger = null;
+  summaryRequest += 1;
+  document.querySelectorAll(".mobile-summary-row").forEach((row) => row.remove());
+  document.querySelectorAll("[data-summary-url]").forEach((link) => {
+    link.setAttribute("aria-expanded", "false");
+  });
+  document.querySelectorAll(".paper-table tr.is-summary-active").forEach((row) => {
+    row.classList.remove("is-summary-active");
+  });
+  if (summaryPanelHome && summaryPanel) summaryPanelHome.after(summaryPanel);
+  if (summaryPanelTitle) summaryPanelTitle.textContent = "论文要点";
+  if (summaryPanelContent) {
+    summaryPanelContent.classList.remove("has-error");
+    summaryPanelContent.innerHTML = "<p>选择一篇已有摘要的论文查看要点。</p>";
+  }
+  if (summaryDirectLink) summaryDirectLink.hidden = true;
+});
 
 function setSummaryPanelContent(markup, { error = false } = {}) {
   if (!summaryPanelContent) return;

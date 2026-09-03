@@ -20,7 +20,7 @@ from .catalog import (
 )
 from shared.rendering import atomic_write_text, render_note_content
 from shared.search_index import SearchDocument
-from shared.site_shell import render_context_strip, render_section_intro, render_site_page
+from shared.site_shell import render_section_intro, render_site_page
 
 
 DEEP_READING_FIELDS = (
@@ -219,15 +219,39 @@ def _status_badge(status: str) -> str:
     )
 
 
+def render_family_navigation(catalog: dict[str, Any], active_family: str) -> str:
+    """Render every tracked model family in one horizontal strip."""
+    items = []
+    for _, family in iter_families(catalog):
+        label = html.escape(family["name"])
+        if family["page_status"] == "ready":
+            active_class = " is-active" if family["slug"] == active_family else ""
+            current = ' aria-current="location"' if family["slug"] == active_family else ""
+            items.append(
+                f'    <a class="context-strip-link{active_class}" '
+                f'href="{html.escape(family["slug"], quote=True)}.html"{current}>{label}</a>'
+            )
+        else:
+            items.append(
+                '    <span class="context-strip-link is-disabled" aria-disabled="true">'
+                f'{label}</span>'
+            )
+    return (
+        '<nav class="context-strip" aria-label="模型系列">\n'
+        + "\n".join(items)
+        + "\n  </nav>"
+    )
+
+
 def render_timeline(family: dict[str, Any]) -> str:
     output = [
         '<section class="milestone-panel timeline-panel" aria-labelledby="timeline-heading">',
         '  <div class="milestone-panel-heading">',
-        '    <div><p>ROADMAP</p><h2 id="timeline-heading">官方版本时间线</h2></div>',
+        '    <div><p>ROADMAP</p><h2 id="timeline-heading">时间线</h2></div>',
         '    <span>可横向拖动</span>',
         '  </div>',
         '  <div class="milestone-timeline-viewport" data-drag-scroll tabindex="0" '
-        'aria-label="FLUX 官方版本时间线，使用左右方向键或拖动浏览">',
+        f'aria-label="{html.escape(family["name"], quote=True)} 时间线，使用左右方向键或拖动浏览">',
         '    <ol class="milestone-timeline">',
     ]
     for release in family["releases"]:
@@ -287,7 +311,7 @@ def render_comparison_table(
     output = [
         '<section class="milestone-panel comparison-panel" aria-labelledby="comparison-heading">',
         '  <div class="milestone-panel-heading">',
-        '    <div><p>COMPARISON</p><h2 id="comparison-heading">大版本技术对比</h2></div>',
+        '    <div><p>COMPARISON</p><h2 id="comparison-heading">模型对比</h2></div>',
         '    <span>内容来自本地 Markdown 精读</span>',
         '  </div>',
         '  <div class="milestone-table-scroll">',
@@ -375,18 +399,20 @@ def render_family_page(
     )
     main_content = f"""    <header class="milestone-hero">
 {render_section_intro("milestones")}
+    </header>
+{render_family_navigation(catalog, family["slug"])}
+    <div class="milestone-workspace">
+      <header class="milestone-family-header">
       <div class="milestone-title-block">
         <p>{html.escape(topic['name'])} · {html.escape(family['organization'])}</p>
-        <h1>{html.escape(family['name'])}</h1>
+        <h2>{html.escape(family['name'])}</h2>
         <span>官方模型版本演进与核心技术对比</span>
       </div>
       <div class="milestone-hero-meta">
         <ul class="status-legend" aria-label="发布状态图例">{statuses}</ul>
         <p>Updated {updated}</p>
       </div>
-    </header>
-{render_context_strip((("TIMELINE", "#timeline-heading"), ("SPECIMEN", "#model-specimen-heading"), ("COMPARE", "#comparison-heading")))}
-    <div class="milestone-workspace">
+      </header>
       <div class="milestone-overview">
 {render_timeline(family)}
 {render_model_specimen(family, notes)}
@@ -401,13 +427,13 @@ def render_family_page(
         active_section="milestones",
         page_title=f"{family['name']} · 身经百战",
         meta_description=f"{family['name']} 官方模型版本时间线与技术对比。",
-        secondary_navigation=render_milestone_navigation(catalog, family["slug"]),
         main_content=main_content,
         body_class="milestone-page",
     )
 
 
 def render_notes_page(
+    catalog: dict[str, Any],
     family: dict[str, Any],
     notes: dict,
     *,
@@ -426,7 +452,7 @@ def render_notes_page(
             "    </article>"
         )
     article_markup = "\n".join(articles) or '    <p class="muted">暂无已完成的文章精读。</p>'
-    secondary_navigation = "\n".join(
+    release_navigation = "\n".join(
         (
             f'<a class="context-filter" href="#milestone-{html.escape(release["slug"], quote=True)}">'
             f'{html.escape(release["name"])}</a>'
@@ -434,13 +460,22 @@ def render_notes_page(
         for release in family["releases"]
         if notes.get(release["slug"]) and notes[release["slug"]]["ready"]
     )
+    inline_navigation = ""
+    if release_navigation:
+        inline_navigation = f'''      <details class="content-tools" open>
+        <summary>版本精读目录</summary>
+        <nav class="content-tools-navigation" aria-label="版本精读目录">
+{release_navigation}
+        </nav>
+      </details>'''
     main_content = f"""
     <section class="summary-page-shell" aria-labelledby="notes-page-title">
       <header class="summary-topic-header">
         <a class="summary-back" href="{html.escape(family['slug'], quote=True)}.html">← 返回版本对比</a>
         <h1 id="notes-page-title">{html.escape(family['name'])} · 文章精读</h1>
       </header>
-{render_context_strip((("READING", "#notes-page-title"),))}
+{render_family_navigation(catalog, family["slug"])}
+{inline_navigation}
       <div class="summary-topic-list">
 {article_markup}
       </div>
@@ -452,7 +487,6 @@ def render_notes_page(
         active_section="milestones",
         page_title=f"{family['name']} · 文章精读",
         meta_description=f"{family['name']} 版本文章精读。",
-        secondary_navigation=secondary_navigation,
         main_content=main_content,
         body_class="summary-page milestone-notes-page",
     )
@@ -496,6 +530,7 @@ def publish_milestone_models(
         atomic_write_text(
             notes_output,
             render_notes_page(
+                catalog,
                 family,
                 notes,
                 output_file=notes_output,

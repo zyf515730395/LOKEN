@@ -389,9 +389,9 @@ img { max-width: 100%; }
 .search-result:hover, .search-result.is-active { border-left-color: var(--accent); background: var(--accent-soft); }
 .sidebar-scrim { display: none; }
 
-.section-intro { display: grid; max-width: 42rem; gap: .3rem; }
-.section-intro-label { margin: 0; color: var(--accent); font-size: .75rem; font-weight: 760; letter-spacing: .12em; }
-.section-intro-description { margin: 0; color: var(--muted); font-size: clamp(.92rem, 1.5vw, 1.04rem); line-height: 1.5; }
+.section-intro { display: grid; max-width: 52rem; gap: .45rem; }
+.section-intro-title { margin: 0; font-size: clamp(2rem, 3.3vw, 3rem); font-weight: 780; letter-spacing: -.06em; line-height: .95; }
+.section-intro-description { margin: 0; color: var(--accent); font-size: clamp(.92rem, 1.5vw, 1.04rem); font-weight: 620; line-height: 1.5; }
 
 .context-strip {
   display: flex;
@@ -423,7 +423,16 @@ img { max-width: 100%; }
 }
 .context-strip-link:hover, .context-strip .context-toggle:hover { background: var(--hover); color: var(--text); }
 .context-strip-link.is-active { background: var(--text); color: var(--canvas); }
+.context-strip-link.is-disabled { color: var(--muted-strong); cursor: not-allowed; opacity: .62; }
+.context-strip-link.is-disabled:hover { background: transparent; color: var(--muted-strong); }
 .context-strip .context-toggle { position: sticky; right: 0; z-index: 2; min-width: 6.4rem; gap: .45rem; margin-left: auto; border-right: 0; border-left: 1px solid var(--line); background: var(--surface); box-shadow: -.8rem 0 1rem color-mix(in srgb, var(--surface) 85%, transparent); }
+.js .topic-section:not(.is-topic-active) { display: none; }
+
+.content-tools { margin: 1.25rem clamp(1.25rem, 2.6vw, 2.5rem); border: 1px solid var(--line); background: var(--surface-muted); }
+.content-tools > summary { cursor: pointer; padding: .8rem 1rem; color: var(--muted); font-family: var(--mono); font-size: .68rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+.content-tools[open] > summary { border-bottom: 1px solid var(--line); }
+.content-tools-navigation { padding: .85rem 1rem 1rem; }
+.content-tools-navigation .writing-filter-heading:first-child { margin-top: 0; }
 
 /* Learning archive. */
 .hero {
@@ -534,13 +543,12 @@ footer { padding: 2.2rem clamp(1.25rem, 2.6vw, 2.5rem); color: var(--muted); fon
 
 /* City Memory: an explicitly empty archive, not fabricated travel data. */
 .journey-page { min-height: 100vh; }
-.journey-archive { display: grid; gap: 1.75rem; padding: 1.4rem clamp(1.25rem, 2.6vw, 2.5rem) 4rem; }
-.journey-archive > .section-intro { max-width: 30rem; }
-.journey-header { display: grid; max-width: 48rem; gap: .85rem; }
+.journey-archive { display: grid; gap: 0; padding: 0 0 4rem; }
+.journey-header { display: grid; border-bottom: 1px solid var(--line); padding: 1.4rem clamp(1.25rem, 2.6vw, 2.5rem) 1.25rem; }
+.journey-header .section-intro { max-width: 52rem; }
 .journey-header > p { margin: 0; color: var(--muted); font-size: 1rem; line-height: 1.65; }
 .journey-header > p:first-child { color: var(--accent); font-family: var(--mono); font-size: .65rem; font-weight: 700; letter-spacing: .14em; }
-.journey-header h1 { margin: 0; font-size: clamp(3.2rem, 7vw, 5.75rem); font-weight: 780; letter-spacing: -.075em; line-height: .92; }
-.journey-map-placeholder { display: grid; min-height: min(38rem, 62vw); grid-template-columns: minmax(0, 1fr) minmax(15rem, .35fr); border: 1px solid var(--line); background: var(--surface-muted); }
+.journey-map-placeholder { display: grid; min-height: min(38rem, 62vw); grid-template-columns: minmax(0, 1fr) minmax(15rem, .35fr); margin: 2rem clamp(1.25rem, 2.6vw, 2.5rem) 0; border: 1px solid var(--line); background: var(--surface-muted); }
 .journey-map-grid { position: relative; min-height: 24rem; overflow: hidden; border-right: 1px solid var(--line); background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px); background-size: 2.75rem 2.75rem; }
 .journey-map-grid::before, .journey-map-grid::after { position: absolute; inset: 12% 8%; border: 1px solid var(--line); content: ""; }
 .journey-map-grid::after { inset: 30% 0 auto; height: 1px; border: 0; border-top: 1px solid var(--line); }
@@ -557,9 +565,10 @@ footer { padding: 2.2rem clamp(1.25rem, 2.6vw, 2.5rem); color: var(--muted); fon
 .milestone-family-link.is-planned { color: var(--muted-strong); cursor: not-allowed; }
 .milestone-page { min-height: 100vh; }
 .milestone-hero { display: grid; min-height: 0; grid-template-columns: minmax(0, 1fr) auto; align-content: start; align-items: end; gap: .6rem 2rem; border-bottom: 1px solid var(--line); padding: 1.4rem clamp(1.25rem, 2.6vw, 2.5rem) 1.25rem; }
-.milestone-hero > .section-intro { grid-column: 1 / -1; margin-bottom: .65rem; }
+.milestone-hero > .section-intro { grid-column: 1 / -1; }
 .milestone-title-block > p, .milestone-panel-heading p { margin: 0 0 .5rem; color: var(--accent); font-family: var(--mono); font-size: .62rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; }
-.milestone-hero h1 { margin: 0; font-size: clamp(2.25rem, 4vw, 3.5rem); font-weight: 780; letter-spacing: -.065em; line-height: .92; }
+.milestone-family-header { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: 1.5rem; border-bottom: 1px solid var(--line); padding-bottom: 1.5rem; }
+.milestone-title-block h2 { margin: 0; font-size: clamp(2.25rem, 4vw, 3.5rem); font-weight: 780; letter-spacing: -.065em; line-height: .92; }
 .milestone-title-block > span { display: block; margin-top: .9rem; color: var(--muted); font-size: .88rem; }
 .milestone-hero-meta { display: grid; justify-items: end; gap: .85rem; margin: 0; }
 .milestone-hero-meta > p { margin: 0; color: var(--muted); font-family: var(--mono); font-size: .64rem; letter-spacing: .1em; text-transform: uppercase; }
@@ -659,7 +668,7 @@ footer { padding: 2.2rem clamp(1.25rem, 2.6vw, 2.5rem); color: var(--muted); fon
 .writing-article { width: min(100%, 65rem); padding: clamp(7rem, 11vw, 10rem) clamp(1.5rem, 7vw, 7rem) 7rem; }
 .writing-header { max-width: 48rem; border-bottom: 1px solid var(--line); padding-bottom: 2.5rem; }
 .writing-header > .section-intro { margin-bottom: 2.5rem; }
-.writing-header h1 { max-width: 52rem; margin: 0; font-size: clamp(2.45rem, 5.5vw, 4.4rem); font-weight: 770; letter-spacing: -.06em; line-height: 1.02; }
+.writing-header h2 { max-width: 52rem; margin: 0; font-size: clamp(2.45rem, 5.5vw, 4.4rem); font-weight: 770; letter-spacing: -.06em; line-height: 1.02; }
 .writing-header .writing-meta { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: 1.4rem; }
 .writing-summary { max-width: 46rem; margin: 1.2rem 0 0; color: var(--muted); font-size: 1.05rem; }
 .writing-header .writing-tags { margin-top: 1rem; }
@@ -802,7 +811,7 @@ footer { padding: 2.2rem clamp(1.25rem, 2.6vw, 2.5rem); color: var(--muted); fon
   .writing-source-rail { margin: 0 0 2.5rem; }
   .writing-meta { display: flex; flex-wrap: wrap; gap: .35rem .75rem; }
   .writing-article { padding: 2rem 1.25rem 5rem; }
-  .writing-header h1 { font-size: clamp(2.2rem, 11vw, 3.15rem); }
+  .writing-header h2 { font-size: clamp(2.2rem, 11vw, 3.15rem); }
   .writing-body { font-size: 1rem; }
   .writing-body pre, .writing-table-scroll { max-width: calc(100vw - 2.5rem); }
   .empty-section { padding: 2rem 1.25rem 5rem; }

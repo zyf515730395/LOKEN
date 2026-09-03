@@ -14,9 +14,9 @@ from shared.rendering import atomic_write_text
 from shared.search_index import SearchDocument, serialize_search_index
 from shared.site_shell import (
     SITE_NAME,
-    get_section,
     render_context_strip,
     render_journey_placeholder_page,
+    render_section_intro,
     render_site_page,
 )
 
@@ -348,11 +348,13 @@ def render_content(
 ) -> str:
     output = []
     anchored_papers: set[str] = set()
-    for category in categories:
+    for category_index, category in enumerate(categories):
         eyebrow = category["theme"]
         heading = category["subtype"] or category["theme"]
+        active_class = " is-topic-active" if category_index == 0 else ""
         output.extend([
-            f'<section class="topic-section" id="{category["slug"]}">',
+            f'<section class="topic-section{active_class}" id="{category["slug"]}" '
+            f'data-topic-section="{category["slug"]}">',
             '  <header class="topic-header">',
             f'    <p>{html.escape(eyebrow)}</p>',
             f'    <h2>{html.escape(heading)}</h2>',
@@ -447,6 +449,16 @@ def render_content(
 </div>"""
 
 
+def render_paper_navigation(categories: list[dict]) -> str:
+    """Render full paper-topic names as the learning archive switcher."""
+    links = tuple(
+        (category["topic"], f'?topic={category["slug"]}#{category["slug"]}')
+        for category in categories
+    )
+    filter_keys = tuple(category["slug"] for category in categories)
+    return render_context_strip(links, filter_keys=filter_keys)
+
+
 def load_candidate_statuses(candidate_path: str | Path | None) -> dict[str, str]:
     if candidate_path is None or not Path(candidate_path).is_file():
         return {}
@@ -483,39 +495,20 @@ def generate_site(
 
     page_output = Path(output_path)
     site_root = Path(output_root) if output_root is not None else page_output.parent
-    learning_section = get_section("learning")
     archive_rows = [
         row for category in categories for row in _iter_category_rows(category)
     ]
     latest_date = max((row["date"] for row in archive_rows), default=today)
     latest_count = sum(row["date"] == latest_date for row in archive_rows)
     archive_count = len(archive_rows)
-    context_labels = {
-        "image-generation": "IMAGE",
-        "video-generation": "VIDEO",
-        "3d-generation": "3D",
-        "neural-rendering": "RENDER",
-        "depth-estimation": "DEPTH",
-    }
-    context_links = (("TODAY", "#top"),) + tuple(
-        (
-            context_labels.get(category["slug"], category["topic"].upper()),
-            f'#{category["slug"]}',
-        )
-        for category in categories
-    )
     main_content = f"""    <header class="hero">
-      <div class="section-intro">
-        <p class="section-intro-label">Paper signals / live archive</p>
-        <h1>{html.escape(learning_section.label)}</h1>
-        <p class="section-intro-description">{html.escape(learning_section.description)}</p>
-      </div>
+{render_section_intro("learning")}
       <div class="hero-stats" aria-label="主题统计">
         <div><strong>{latest_count:,}</strong><span>LATEST BATCH</span></div>
         <div><strong>{archive_count:,}</strong><span>ARCHIVED</span></div>
       </div>
     </header>
-{render_context_strip(context_links)}
+{render_paper_navigation(categories)}
 {render_content(categories, summary_catalog, candidate_statuses)}
     <footer>Generated from arXiv metadata · Source: <a href="https://github.com/zyf515730395/TOGOS">{SITE_NAME}</a></footer>
 """
@@ -528,7 +521,6 @@ def generate_site(
             "A daily index of image, video, and 3D generation, neural rendering, "
             "and depth estimation papers from arXiv."
         ),
-        secondary_navigation=render_sidebar(themes),
         main_content=main_content,
         body_class="learning-page",
         sidebar_status=f"{updated.replace('-', '.')} / DAILY",
