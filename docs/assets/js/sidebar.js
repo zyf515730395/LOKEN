@@ -184,7 +184,11 @@ async function openSummaryPanel(link) {
     const articleId = link.dataset.summaryId || new URL(link.href).hash.slice(1);
     const article = parsed.getElementById(articleId);
     if (!article) throw new Error("Summary content is missing");
-    if (requestId === summaryRequest) setSummaryPanelContent(article.innerHTML);
+    const preview = article.cloneNode(true);
+    preview.querySelector(":scope > h1")?.remove();
+    const sourceLink = preview.querySelector(':scope > p > a[href*="arxiv.org"]');
+    sourceLink?.closest("p")?.remove();
+    if (requestId === summaryRequest) setSummaryPanelContent(preview.innerHTML);
   } catch (error) {
     if (requestId !== summaryRequest) return;
     setSummaryPanelContent(

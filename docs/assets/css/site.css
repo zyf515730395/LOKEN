@@ -467,11 +467,18 @@ img { max-width: 100%; }
 .learning-archive .topic-section { max-width: none; }
 [data-summary-panel-home] { display: none; }
 .paper-summary-panel { position: sticky; top: 4.75rem; grid-column: 2; max-height: calc(100vh - 5.75rem); min-width: 0; overflow-y: auto; border-left: 1px solid var(--line); background: var(--surface); scrollbar-width: thin; }
-.paper-summary-header { position: sticky; top: 0; z-index: 1; border-bottom: 1px solid var(--line); background: var(--surface); padding: 1.1rem 1.2rem; }
+.paper-summary-header { position: sticky; top: 0; z-index: 1; border-bottom: 1px solid var(--line); background: var(--text); color: var(--canvas); padding: 1.15rem 1.2rem; }
+.paper-summary-header::before { content: "PAPER KEY POINTS"; display: block; margin-bottom: .65rem; color: color-mix(in srgb, var(--canvas) 70%, transparent); font-family: var(--mono); font-size: .56rem; font-weight: 650; letter-spacing: .11em; }
 .paper-summary-header h2 { margin: 0; font-size: 1.05rem; line-height: 1.35; }
-[data-summary-content] { padding: 1.2rem; }
+[data-summary-content] { padding: .35rem 1.2rem 1.2rem; }
+[data-summary-content] > h2 { margin: 0; border-bottom: 1px solid var(--row-line); padding: 1rem 0 .38rem; color: var(--muted); font-family: var(--mono); font-size: .62rem; font-weight: 700; letter-spacing: .08em; }
+[data-summary-content] > p { margin: .55rem 0 0; font-size: .82rem; line-height: 1.65; }
+[data-summary-content] > ul, [data-summary-content] > ol { margin: .55rem 0 0; padding-left: 1.15rem; }
+[data-summary-content] li { margin: .35rem 0; font-size: .8rem; line-height: 1.6; }
+[data-summary-content] code { font-family: var(--mono); font-size: .76em; }
 [data-summary-content].has-error { color: var(--error); }
 [data-summary-direct] { display: block; margin: 0 1.2rem 1.4rem; color: var(--accent); font-size: .8rem; font-weight: 700; text-decoration: none; }
+[data-summary-direct][hidden] { display: none; }
 [data-summary-direct]:hover { text-decoration: underline; text-underline-offset: .2em; }
 .archive-year { margin: 0; border-block: 1px solid var(--line); overflow: clip; }
 .archive-year + .archive-year { border-top: 0; }
