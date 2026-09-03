@@ -1,10 +1,6 @@
-# TOGOS
+# LOKEN
 
-
-## Topics
-
-- Image Generation
-- Video Generation
-- 3D Generation
-- Neural Rendering
-- Depth Estimation
+Personal Knowledge Base
+- Tracking the latest research paper
+- Rrecording study notes
+- Travel and photography
