@@ -14,7 +14,7 @@ from .paths import private_path
 from .prompts import PROMPT_VERSION, TRANSPORT_VERSION
 
 
-CACHE_VERSION = 1
+CACHE_VERSION = 2
 
 
 def _canonical(value: object) -> bytes:

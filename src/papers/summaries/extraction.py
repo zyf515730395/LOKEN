@@ -10,17 +10,86 @@ import unicodedata
 from .models import PaperDocument, PaperSection, PaperSummaryError
 
 
-EXTRACTION_VERSION = "paper-extraction-v2"
+EXTRACTION_VERSION = "paper-extraction-v3"
 MIN_DOCUMENT_CHARS = 1_000
 MAX_DOCUMENT_CHARS = 400_000
 MAX_PDF_PAGES = 200
 _SPACE = re.compile(r"\s+")
 _WORD = re.compile(r"[a-z0-9]+", re.IGNORECASE)
 _REFERENCE_HEADING = re.compile(r"(?im)^\s*(?:references|bibliography)\s*$")
+_INTRODUCTION_HEADING = re.compile(
+    r"^(?:(?:\d+(?:\.\d+)*|[ivxlcdm]+)\.?\s+)?introduction\s*[:.]*$",
+    re.IGNORECASE,
+)
+_NUMBERED_HEADING = re.compile(
+    r"^(?:\d+(?:\.\d+)*|[ivxlcdm]+)\.?\s+\S.{0,160}$",
+    re.IGNORECASE,
+)
+_INLINE_INTRODUCTION = re.compile(
+    r"(?<!\S)(?:\d+(?:\.\d+)*|[ivxlcdm]+)\.?\s+introduction\b\s*[:.]*",
+    re.IGNORECASE,
+)
+_INLINE_NUMBERED_HEADING = re.compile(
+    r"\s+(?:\d+(?:\.\d+)*|[ivxlcdm]+)\.?\s+[A-Z][A-Za-z][^.!?]{0,120}(?=\s|$)",
+)
+MIN_INTRODUCTION_CHARS = 40
+MIN_INTRODUCTION_WORDS = 8
 
 
 def _clean(value: str) -> str:
     return _SPACE.sub(" ", unicodedata.normalize("NFKC", value)).strip()
+
+
+def _is_introduction_heading(value: str) -> bool:
+    return _INTRODUCTION_HEADING.fullmatch(_clean(value)) is not None
+
+
+def _is_numbered_heading(value: str) -> bool:
+    return _NUMBERED_HEADING.fullmatch(_clean(value)) is not None
+
+
+def _usable_introduction(value: str) -> str:
+    cleaned = _clean(value)
+    if len(cleaned) < MIN_INTRODUCTION_CHARS or len(_WORD.findall(cleaned)) < MIN_INTRODUCTION_WORDS:
+        raise PaperSummaryError(
+            "introduction_unavailable", "paper introduction is not available as usable text"
+        )
+    return cleaned
+
+
+def extract_introduction(document: PaperDocument) -> str:
+    """Return only the bounded Introduction text from a normalized paper document."""
+    for section in document.sections:
+        if _is_introduction_heading(section.heading):
+            return _usable_introduction(section.text)
+
+    captured: list[str] = []
+    in_introduction = False
+    for section in document.sections:
+        for line in unicodedata.normalize("NFKC", section.text).splitlines():
+            if _is_introduction_heading(line):
+                in_introduction = True
+                continue
+            if in_introduction and _is_numbered_heading(line):
+                return _usable_introduction("\n".join(captured))
+            if in_introduction:
+                captured.append(line)
+    if in_introduction:
+        return _usable_introduction("\n".join(captured))
+
+    for section in document.sections:
+        text = unicodedata.normalize("NFKC", section.text)
+        start = _INLINE_INTRODUCTION.search(text)
+        if start is None:
+            continue
+        content = text[start.end() :]
+        boundary = _INLINE_NUMBERED_HEADING.search(content)
+        if boundary is not None:
+            content = content[: boundary.start()]
+        return _usable_introduction(content)
+    raise PaperSummaryError(
+        "introduction_unavailable", "paper introduction is not available as usable text"
+    )
 
 
 def _title_similarity(left: str, right: str) -> float:
@@ -176,7 +245,11 @@ def extract_pdf_document(raw: bytes, expected_title: str) -> PaperDocument:
                 if prefix:
                     pages.append(prefix)
                 break
-            pages.append(_clean(raw_page))
+            page = "\n".join(
+                cleaned for line in raw_page.splitlines() if (cleaned := _clean(line))
+            )
+            if page:
+                pages.append(page)
     except Exception:
         raise PaperSummaryError("pdf_invalid", "arXiv PDF text extraction failed") from None
     joined = "\n".join(value for value in pages if value)
