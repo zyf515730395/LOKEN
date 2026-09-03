@@ -48,7 +48,7 @@ SECTIONS = (
 )
 SECTIONS_BY_KEY = {section.key: section for section in SECTIONS}
 SITE_NAME = "LOKEN"
-ASSET_VERSION = "11"
+ASSET_VERSION = "12"
 SECTION_METADATA = {
     "learning": "01 / PAPERS",
     "milestones": "02 / CLASSIC MODELS",
@@ -282,10 +282,12 @@ def render_journey_placeholder_page(*, output_file: Path, output_root: Path) -> 
     """Render the City Memory shell without manufacturing travel data."""
     section = get_section("journeys")
     main_content = f"""    <section class="journey-archive" aria-labelledby="section-journeys-title">
-      <header class="journey-header">
+      <div class="section-sticky-header">
+      <header class="journey-header section-header">
 {render_section_intro("journeys")}
       </header>
 {render_context_strip((("WORLD MAP", "#world-map"), ("PHOTOGRAPHY", "#photography")))}
+      </div>
       <div class="journey-map-placeholder" id="world-map" aria-label="尚未开放的城市地图档案">
         <div class="journey-map-grid" aria-hidden="true"><span class="journey-world-silhouette"></span></div>
         <aside class="journey-photo-contact" id="photography">

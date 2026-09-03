@@ -501,7 +501,8 @@ def generate_site(
     latest_date = max((row["date"] for row in archive_rows), default=today)
     latest_count = sum(row["date"] == latest_date for row in archive_rows)
     archive_count = len(archive_rows)
-    main_content = f"""    <header class="hero">
+    main_content = f"""    <div class="section-sticky-header">
+    <header class="hero section-header">
 {render_section_intro("learning")}
       <div class="hero-stats" aria-label="主题统计">
         <div><strong>{latest_count:,}</strong><span>LATEST BATCH</span></div>
@@ -509,6 +510,7 @@ def generate_site(
       </div>
     </header>
 {render_paper_navigation(categories)}
+    </div>
 {render_content(categories, summary_catalog, candidate_statuses)}
     <footer>Generated from arXiv metadata · Source: <a href="https://github.com/zyf515730395/TOGOS">{SITE_NAME}</a></footer>
 """

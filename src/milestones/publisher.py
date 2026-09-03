@@ -397,10 +397,12 @@ def render_family_page(
         f'<li>{_status_badge(status)}<span>{label}</span></li>'
         for status, label in STATUS_LABELS.items()
     )
-    main_content = f"""    <header class="milestone-hero">
+    main_content = f"""    <div class="section-sticky-header">
+    <header class="milestone-hero section-header">
 {render_section_intro("milestones")}
     </header>
 {render_family_navigation(catalog, family["slug"])}
+    </div>
     <div class="milestone-workspace">
       <header class="milestone-family-header">
       <div class="milestone-title-block">
