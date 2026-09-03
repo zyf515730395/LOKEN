@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from dataclasses import asdict, dataclass
 from datetime import datetime, timezone
 import json
@@ -69,13 +70,14 @@ def _atomic_private_json(name: str, payload: dict) -> Path:
     return path
 
 
-def _write_report(result: RunResult, *, model: str) -> Path:
+def _write_report(result: RunResult, *, model: str, workers: int | None) -> Path:
     generated_at = datetime.now(timezone.utc).replace(microsecond=0).isoformat()
     report = {
         "version": REPORT_VERSION,
         "status": "complete",
         "generated_at": generated_at,
         "model": model,
+        "workers": workers,
         "selected": result.selected,
         "succeeded": result.succeeded,
         "failed": result.failed,
@@ -299,11 +301,20 @@ def _restore_public_notes(
     )
 
 
+def _validate_workers(workers: int) -> int:
+    if type(workers) is not int or not 1 <= workers <= 8:
+        raise PaperSummaryError(
+            "invalid_workers", "workers must be an integer from 1 to 8"
+        )
+    return workers
+
+
 def run_summaries(
     *,
     model: str,
     base_url: str,
     timeout: float,
+    workers: int = 2,
     paper_ids: tuple[str, ...] = (),
     limit: int | None = None,
     refresh: bool = False,
@@ -311,6 +322,7 @@ def run_summaries(
     docs_root: str | Path = DEFAULT_DOCS,
     archive_path: str | Path = DEFAULT_ARCHIVE,
 ) -> RunResult:
+    workers = _validate_workers(workers)
     if not isinstance(model, str) or not model.strip():
         raise PaperSummaryError("model_required", "local model name is required")
     if not isinstance(timeout, (int, float)) or timeout <= 0:
@@ -328,6 +340,7 @@ def run_summaries(
             model=model,
             base_url=base_url,
             timeout=timeout,
+            workers=workers,
             paper_ids=paper_ids,
             limit=limit,
             refresh=refresh,
@@ -342,6 +355,7 @@ def _run_summaries_locked(
     model: str,
     base_url: str,
     timeout: float,
+    workers: int,
     paper_ids: tuple[str, ...],
     limit: int | None,
     refresh: bool,
@@ -349,6 +363,7 @@ def _run_summaries_locked(
     docs_root: Path,
     archive_path: Path,
 ) -> RunResult:
+    workers = _validate_workers(workers)
     docs = docs_root
     ledger = ledger_path
     archive = archive_path
@@ -364,7 +379,15 @@ def _run_summaries_locked(
         refresh=refresh,
     )
     if not candidates:
-        return RunResult(0, 0, 0, 0, ())
+        result = RunResult(0, 0, 0, 0, ())
+        try:
+            _write_report(result, model=model, workers=None)
+        except OSError:
+            raise PaperSummaryError(
+                "state_write_failed", "private empty-run report could not be written safely"
+            ) from None
+        return result
+    effective_workers = min(workers, len(candidates))
     try:
         _atomic_private_json(
             "state.json",
@@ -375,6 +398,7 @@ def _run_summaries_locked(
                 .replace(microsecond=0)
                 .isoformat(),
                 "model": model,
+                "workers": effective_workers,
                 "selected": len(candidates),
             },
         )
@@ -382,40 +406,52 @@ def _run_summaries_locked(
         raise PaperSummaryError(
             "state_unavailable", "private run state cannot be written safely"
         ) from None
-    client = ArxivSourceClient()
-    completed: list[tuple[PaperCandidate, PaperSummary, str]] = []
+    completed_with_order: list[tuple[int, PaperCandidate, PaperSummary, str]] = []
     records: list[PaperRunRecord] = []
-    for candidate in candidates:
-        try:
-            source = client.acquire(candidate.arxiv_id, candidate.title)
-            summary = summarize_paper(
-                source,
+    with ThreadPoolExecutor(max_workers=effective_workers) as executor:
+        futures = {
+            executor.submit(
+                _summarize_candidate,
+                candidate,
                 model=model,
                 base_url=base_url,
                 timeout=timeout,
                 refresh=refresh,
-            )
-            completed.append((candidate, summary, source.kind))
-        except PaperSummaryError as error:
-            records.append(
-                PaperRunRecord(
-                    candidate.arxiv_id,
-                    candidate.topic,
-                    "failed",
-                    error_code=error.code,
-                    error_message=error.message,
+            ): (index, candidate)
+            for index, candidate in enumerate(candidates)
+        }
+        for future in as_completed(futures):
+            index, candidate = futures[future]
+            try:
+                summary, source_kind = future.result()
+            except PaperSummaryError as error:
+                records.append(
+                    PaperRunRecord(
+                        candidate.arxiv_id,
+                        candidate.topic,
+                        "failed",
+                        error_code=error.code,
+                        error_message=error.message,
+                    )
                 )
-            )
-        except Exception:
-            records.append(
-                PaperRunRecord(
-                    candidate.arxiv_id,
-                    candidate.topic,
-                    "failed",
-                    error_code="unexpected_failure",
-                    error_message="paper failed without changing public output",
+            except Exception:
+                records.append(
+                    PaperRunRecord(
+                        candidate.arxiv_id,
+                        candidate.topic,
+                        "failed",
+                        error_code="unexpected_failure",
+                        error_message="paper failed without changing public output",
+                    )
                 )
-            )
+            else:
+                completed_with_order.append(
+                    (index, candidate, summary, source_kind)
+                )
+    completed = [
+        (candidate, summary, source_kind)
+        for _, candidate, summary, source_kind in sorted(completed_with_order)
+    ]
     published = 0
     grouped: dict[str, list[tuple[PaperCandidate, PaperSummary, str]]] = {}
     for item in completed:
@@ -431,6 +467,7 @@ def _run_summaries_locked(
                     .replace(microsecond=0)
                     .isoformat(),
                     "model": model,
+                    "workers": effective_workers,
                     "selected": len(candidates),
                     "generated": len(completed),
                 },
@@ -519,7 +556,7 @@ def _run_summaries_locked(
         records=tuple(records),
     )
     try:
-        _write_report(result, model=model)
+        _write_report(result, model=model, workers=effective_workers)
     except OSError:
         if published_topics:
             try:
@@ -537,6 +574,7 @@ def _run_summaries_locked(
                         {
                             "version": REPORT_VERSION,
                             "status": "failed",
+                            "workers": effective_workers,
                             "error_code": "rollback_failed",
                         },
                     )
@@ -552,6 +590,7 @@ def _run_summaries_locked(
                 {
                     "version": REPORT_VERSION,
                     "status": "failed",
+                    "workers": effective_workers,
                     "error_code": "state_write_failed",
                 },
             )
@@ -562,3 +601,23 @@ def _run_summaries_locked(
             "private report failed; published note pages were restored",
         ) from None
     return result
+
+
+def _summarize_candidate(
+    candidate: PaperCandidate,
+    *,
+    model: str,
+    base_url: str,
+    timeout: float,
+    refresh: bool,
+) -> tuple[PaperSummary, str]:
+    client = ArxivSourceClient()
+    source = client.acquire(candidate.arxiv_id, candidate.title)
+    summary = summarize_paper(
+        source,
+        model=model,
+        base_url=base_url,
+        timeout=timeout,
+        refresh=refresh,
+    )
+    return summary, source.kind

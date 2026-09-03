@@ -66,7 +66,9 @@ def load_candidates(
     }
     ready: set[str] | set[tuple[str, str]] = ready_ids or set()
     if paper_ids:
-        normalized_requested = tuple(normalize_arxiv_id(value) for value in paper_ids)
+        normalized_requested = tuple(
+            dict.fromkeys(normalize_arxiv_id(value) for value in paper_ids)
+        )
         missing = [value for value in normalized_requested if value not in candidates]
         if missing:
             raise PaperSummaryError(
