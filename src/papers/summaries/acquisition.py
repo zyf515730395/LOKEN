@@ -7,6 +7,7 @@ import hmac
 import json
 import os
 from pathlib import Path
+import threading
 import time
 from typing import Callable
 
@@ -38,7 +39,9 @@ def _sha256(value: bytes) -> str:
 
 def _atomic_write(path: Path, value: bytes) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    temporary = path.with_name(f".{path.name}.tmp-{os.getpid()}")
+    temporary = path.with_name(
+        f".{path.name}.tmp-{os.getpid()}-{threading.get_ident()}"
+    )
     try:
         with temporary.open("wb") as stream:
             stream.write(value)

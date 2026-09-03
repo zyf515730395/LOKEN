@@ -7,6 +7,7 @@ import hmac
 import json
 import os
 from pathlib import Path
+import threading
 
 from .extraction import EXTRACTION_VERSION
 from .models import PaperSummary
@@ -90,7 +91,9 @@ class PaperSummaryCache:
         data = _canonical(envelope) + b"\n"
         path = self.path_for(key)
         path.parent.mkdir(parents=True, exist_ok=True)
-        temporary = path.with_name(f".{path.name}.tmp-{os.getpid()}")
+        temporary = path.with_name(
+            f".{path.name}.tmp-{os.getpid()}-{threading.get_ident()}"
+        )
         try:
             with temporary.open("wb") as stream:
                 stream.write(data)
