@@ -20,7 +20,7 @@ from .catalog import (
 )
 from shared.rendering import atomic_write_text, render_note_content
 from shared.search_index import SearchDocument
-from shared.site_shell import render_section_intro, render_site_page
+from shared.site_shell import render_context_strip, render_section_intro, render_site_page
 
 
 DEEP_READING_FIELDS = (
@@ -385,6 +385,7 @@ def render_family_page(
         <p>Updated {updated}</p>
       </div>
     </header>
+{render_context_strip((("TIMELINE", "#timeline-heading"), ("SPECIMEN", "#model-specimen-heading"), ("COMPARE", "#comparison-heading")))}
     <div class="milestone-workspace">
       <div class="milestone-overview">
 {render_timeline(family)}
@@ -439,6 +440,7 @@ def render_notes_page(
         <a class="summary-back" href="{html.escape(family['slug'], quote=True)}.html">← 返回版本对比</a>
         <h1 id="notes-page-title">{html.escape(family['name'])} · 文章精读</h1>
       </header>
+{render_context_strip((("READING", "#notes-page-title"),))}
       <div class="summary-topic-list">
 {article_markup}
       </div>

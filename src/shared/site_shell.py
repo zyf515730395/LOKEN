@@ -43,7 +43,7 @@ SECTIONS = (
 )
 SECTIONS_BY_KEY = {section.key: section for section in SECTIONS}
 SITE_NAME = "LOKEN"
-ASSET_VERSION = "6"
+ASSET_VERSION = "8"
 SECTION_METADATA = {
     "learning": "01 / PAPER SIGNALS",
     "milestones": "02 / MODEL ARCHIVE",
@@ -172,6 +172,33 @@ def render_inline_search() -> str:
     </div>"""
 
 
+def render_context_strip(
+    links: tuple[tuple[str, str], ...],
+    *,
+    active_index: int = 0,
+) -> str:
+    """Render the compact in-content index from the approved visual system."""
+    rendered_links = []
+    for index, (label, href) in enumerate(links):
+        active_class = " is-active" if index == active_index else ""
+        current = ' aria-current="location"' if index == active_index else ""
+        rendered_links.append(
+            f'    <a class="context-strip-link{active_class}" '
+            f'href="{html.escape(href, quote=True)}"{current}>'
+            f'{html.escape(label)}</a>'
+        )
+    rendered_links.append(
+        '    <button class="context-toggle" type="button" data-context-toggle '
+        'aria-controls="context-drawer" aria-expanded="false">'
+        'INDEX <span aria-hidden="true">☰</span></button>'
+    )
+    return (
+        '<nav class="context-strip" aria-label="本页快捷目录">\n'
+        + "\n".join(rendered_links)
+        + "\n  </nav>"
+    )
+
+
 def render_site_page(
     *,
     output_file: Path,
@@ -213,7 +240,6 @@ def render_site_page(
       <span aria-hidden="true" data-sidebar-toggle-icon>☰</span><span data-sidebar-toggle-label>导航</span>
     </button>
 {render_inline_search()}
-    <button class="context-toggle" type="button" data-context-toggle aria-controls="context-drawer" aria-expanded="false">INDEX <span aria-hidden="true">☰</span></button>
     <button class="theme-toggle" type="button" aria-label="切换颜色主题" aria-pressed="false">
       <span data-theme-icon aria-hidden="true"></span>
     </button>
@@ -252,6 +278,7 @@ def render_empty_section_page(
       <h1 id="empty-section-title">{html.escape(section.label)}</h1>
       <p class="empty-section-copy">{html.escape(body_copy)}</p>
     </section>
+{render_context_strip((("OVERVIEW", "#top"),))}
 """
     return render_site_page(
         output_file=output_file,
@@ -279,6 +306,7 @@ def render_journey_placeholder_page(*, output_file: Path, output_root: Path) -> 
         <h1 id="journey-title">{html.escape(section.label)}</h1>
         <p>城市档案尚未开放。这里会保留走过的城市与拍下的瞬间。</p>
       </header>
+{render_context_strip((("WORLD MAP", "#journey-title"),))}
       <div class="journey-map-placeholder" aria-label="尚未开放的城市地图档案">
         <div class="journey-map-grid" aria-hidden="true"><span class="journey-world-silhouette"></span></div>
         <aside class="journey-photo-contact">

@@ -37,6 +37,7 @@
     const navigationClose = document.querySelector("[data-navigation-close]");
     const contextDrawer = document.querySelector("#context-drawer");
     const contextToggle = document.querySelector("[data-context-toggle]");
+    const contextLinks = [...document.querySelectorAll(".context-strip-link")];
     const contextClose = document.querySelector("[data-context-close]");
     const contextScrim = document.querySelector("[data-context-scrim]");
     const themeToggle = document.querySelector(".theme-toggle");
@@ -98,8 +99,30 @@
       if (!open && returnFocus) contextToggle?.focus();
     }
 
+    function setActiveContextLink(activeLink) {
+      contextLinks.forEach((link) => {
+        const active = link === activeLink;
+        link.classList.toggle("is-active", active);
+        if (active) link.setAttribute("aria-current", "location");
+        else link.removeAttribute("aria-current");
+      });
+    }
+
+    function syncActiveContextLink() {
+      if (!contextLinks.length) return;
+      const currentHash = window.location.hash || "#top";
+      const matchingLink = contextLinks.find((link) => {
+        const targetHash = new URL(link.href, window.location.href).hash || "#top";
+        return targetHash === currentHash || (
+          targetHash !== "#top" && currentHash.startsWith(`${targetHash}-`)
+        );
+      });
+      setActiveContextLink(matchingLink || contextLinks[0]);
+    }
+
     setDrawer(false);
     setContextOpen(contextOpen);
+    syncActiveContextLink();
     applyTheme(
       storedTheme === "light" || storedTheme === "dark"
         ? storedTheme
@@ -115,6 +138,10 @@
       }
       setContextOpen(!contextOpen, true);
     });
+    contextLinks.forEach((link) => {
+      link.addEventListener("click", () => setActiveContextLink(link));
+    });
+    window.addEventListener("hashchange", syncActiveContextLink);
     drawerToggle?.addEventListener("click", () => {
       const isOpen = body.classList.contains("sidebar-open");
       setDrawer(!isOpen, isOpen, drawerToggle);

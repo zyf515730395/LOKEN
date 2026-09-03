@@ -15,6 +15,7 @@ from shared.search_index import SearchDocument, serialize_search_index
 from shared.site_shell import (
     SITE_NAME,
     get_section,
+    render_context_strip,
     render_journey_placeholder_page,
     render_site_page,
 )
@@ -483,13 +484,38 @@ def generate_site(
     page_output = Path(output_path)
     site_root = Path(output_root) if output_root is not None else page_output.parent
     learning_section = get_section("learning")
+    archive_rows = [
+        row for category in categories for row in _iter_category_rows(category)
+    ]
+    latest_date = max((row["date"] for row in archive_rows), default=today)
+    latest_count = sum(row["date"] == latest_date for row in archive_rows)
+    archive_count = len(archive_rows)
+    context_labels = {
+        "image-generation": "IMAGE",
+        "video-generation": "VIDEO",
+        "3d-generation": "3D",
+        "neural-rendering": "RENDER",
+        "depth-estimation": "DEPTH",
+    }
+    context_links = (("TODAY", "#top"),) + tuple(
+        (
+            context_labels.get(category["slug"], category["topic"].upper()),
+            f'#{category["slug"]}',
+        )
+        for category in categories
+    )
     main_content = f"""    <header class="hero">
       <div class="section-intro">
         <p class="section-intro-label">Paper signals / live archive</p>
         <h1>{html.escape(learning_section.label)}</h1>
         <p class="section-intro-description">{html.escape(learning_section.description)}</p>
       </div>
+      <div class="hero-stats" aria-label="主题统计">
+        <div><strong>{latest_count:,}</strong><span>LATEST BATCH</span></div>
+        <div><strong>{archive_count:,}</strong><span>ARCHIVED</span></div>
+      </div>
     </header>
+{render_context_strip(context_links)}
 {render_content(categories, summary_catalog, candidate_statuses)}
     <footer>Generated from arXiv metadata · Source: <a href="https://github.com/zyf515730395/TOGOS">{SITE_NAME}</a></footer>
 """
