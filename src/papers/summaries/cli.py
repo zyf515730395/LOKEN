@@ -33,6 +33,12 @@ def build_parser() -> argparse.ArgumentParser:
         help="literal loopback OpenAI-compatible /v1 URL",
     )
     run.add_argument("--timeout", type=float, default=180.0)
+    run.add_argument(
+        "--workers",
+        type=int,
+        default=os.environ.get("TOGOS_WSL_LLM_WORKERS", "2"),
+        help="parallel paper workers (1-8)",
+    )
     run.add_argument("--paper", action="append", default=[], help="accepted arXiv ID; repeatable")
     run.add_argument("--limit", type=int, default=10)
     run.add_argument("--refresh", action="store_true")
@@ -65,6 +71,7 @@ def _execute(argv: list[str] | None = None) -> int:
         model=arguments.model.strip(),
         base_url=arguments.base_url,
         timeout=arguments.timeout,
+        workers=arguments.workers,
         paper_ids=tuple(arguments.paper),
         limit=arguments.limit,
         refresh=arguments.refresh,
