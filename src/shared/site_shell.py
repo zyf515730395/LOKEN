@@ -11,6 +11,7 @@ from pathlib import Path
 class Section:
     key: str
     label: str
+    content_label: str
     description: str
     route: str
 
@@ -19,36 +20,40 @@ SECTIONS = (
     Section(
         "learning",
         "学习一个",
+        "PAPERS",
         "毕竟还too young，感觉还要学习一个",
         "index.html",
     ),
     Section(
         "milestones",
         "身经百战",
+        "MODELS",
         "这些模型是身经百战了",
         "milestone-models/flux.html",
     ),
     Section(
         "writings",
         "谈笑风生",
+        "ARTICLES",
         "还是要提高自己的知识水平",
         "writings/index.html",
     ),
     Section(
         "journeys",
         "跑得还快",
-        "记录走过的城市与拍下的瞬间",
+        "TRAVELS",
+        "比哪方记者跑得都快",
         "journeys/index.html",
     ),
 )
 SECTIONS_BY_KEY = {section.key: section for section in SECTIONS}
 SITE_NAME = "LOKEN"
-ASSET_VERSION = "9"
+ASSET_VERSION = "11"
 SECTION_METADATA = {
-    "learning": "01 / PAPER SIGNALS",
-    "milestones": "02 / MODEL ARCHIVE",
-    "writings": "03 / FIELD NOTES",
-    "journeys": "04 / CITY MEMORY",
+    "learning": "01 / PAPERS",
+    "milestones": "02 / CLASSIC MODELS",
+    "writings": "03 / ARTICLES",
+    "journeys": "04 / TRAVELS",
 }
 
 
@@ -115,25 +120,11 @@ def render_section_intro(section_key: str) -> str:
     section = get_section(section_key)
     return (
         '      <div class="section-intro">\n'
-        f'        <p class="section-intro-label">{html.escape(section.label)}</p>\n'
+        f'        <h1 class="section-intro-title" id="section-{html.escape(section.key, quote=True)}-title">'
+        f'{html.escape(section.content_label)}</h1>\n'
         f'        <p class="section-intro-description">{html.escape(section.description)}</p>\n'
         "      </div>"
     )
-
-
-def render_context_sidebar(active_section: str, secondary_navigation: str) -> str:
-    get_section(active_section)
-    return f"""  <div id="paper-sidebar">
-  <aside class="context-drawer" id="context-drawer" aria-label="本页目录">
-    <header class="context-drawer-header">
-      <span>INDEX</span>
-      <button type="button" data-context-close aria-label="关闭本页目录">×</button>
-    </header>
-    <nav id="context-navigation" class="context-navigation">
-{secondary_navigation}
-    </nav>
-  </aside>
-  </div>"""
 
 
 def _state_bootstrap() -> str:
@@ -175,24 +166,28 @@ def render_context_strip(
     links: tuple[tuple[str, str], ...],
     *,
     active_index: int = 0,
+    filter_keys: tuple[str, ...] | None = None,
 ) -> str:
-    """Render the compact in-content index from the approved visual system."""
+    """Render one compact in-content navigation strip."""
+    if filter_keys is not None and len(filter_keys) != len(links):
+        raise ValueError("filter_keys must align with links")
     rendered_links = []
     for index, (label, href) in enumerate(links):
         active_class = " is-active" if index == active_index else ""
         current = ' aria-current="location"' if index == active_index else ""
+        filter_attribute = ""
+        if filter_keys is not None:
+            filter_attribute = (
+                f' data-topic-filter="{html.escape(filter_keys[index], quote=True)}"'
+            )
         rendered_links.append(
             f'    <a class="context-strip-link{active_class}" '
-            f'href="{html.escape(href, quote=True)}"{current}>'
+            f'href="{html.escape(href, quote=True)}"{current}{filter_attribute}>'
             f'{html.escape(label)}</a>'
         )
-    rendered_links.append(
-        '    <button class="context-toggle" type="button" data-context-toggle '
-        'aria-controls="context-drawer" aria-expanded="false">'
-        'INDEX <span aria-hidden="true">☰</span></button>'
-    )
+    navigation_attribute = " data-topic-navigation" if filter_keys is not None else ""
     return (
-        '<nav class="context-strip" aria-label="本页快捷目录">\n'
+        f'<nav class="context-strip" aria-label="本页快捷目录"{navigation_attribute}>\n'
         + "\n".join(rendered_links)
         + "\n  </nav>"
     )
@@ -244,12 +239,10 @@ def render_site_page(
     </button>
   </header>
   <div class="sidebar-scrim" data-sidebar-close></div>
-  <div class="context-scrim" data-context-scrim></div>
 <div class="navigation-shell" id="navigation-shell">
   <button class="navigation-close" type="button" data-navigation-close
           aria-label="关闭导航" hidden>×</button>
 {render_primary_navigation(active_section, site_root, sidebar_status)}
-{render_context_sidebar(active_section, secondary_navigation)}
 </div>
   <main class="page-content" id="top">
 {main_content}
@@ -298,17 +291,14 @@ def render_journey_placeholder_page(*, output_file: Path, output_root: Path) -> 
         '      <a class="context-overview is-active" href="#top" '
         'aria-current="page">页面概览</a>'
     )
-    main_content = f"""    <section class="journey-archive" aria-labelledby="journey-title">
-{render_section_intro("journeys")}
+    main_content = f"""    <section class="journey-archive" aria-labelledby="section-journeys-title">
       <header class="journey-header">
-        <p>CITY MEMORY / FUTURE ARCHIVE</p>
-        <h1 id="journey-title">{html.escape(section.label)}</h1>
-        <p>城市档案尚未开放。这里会保留走过的城市与拍下的瞬间。</p>
+{render_section_intro("journeys")}
       </header>
-{render_context_strip((("WORLD MAP", "#journey-title"),))}
-      <div class="journey-map-placeholder" aria-label="尚未开放的城市地图档案">
+{render_context_strip((("WORLD MAP", "#world-map"), ("PHOTOGRAPHY", "#photography")))}
+      <div class="journey-map-placeholder" id="world-map" aria-label="尚未开放的城市地图档案">
         <div class="journey-map-grid" aria-hidden="true"><span class="journey-world-silhouette"></span></div>
-        <aside class="journey-photo-contact">
+        <aside class="journey-photo-contact" id="photography">
           <div class="journey-photo-contact-surface" aria-hidden="true"></div>
           <p>摄影接触表将随首批城市档案一同出现。</p>
         </aside>

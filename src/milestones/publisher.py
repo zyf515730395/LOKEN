@@ -20,7 +20,7 @@ from .catalog import (
 )
 from shared.rendering import atomic_write_text, render_note_content
 from shared.search_index import SearchDocument
-from shared.site_shell import render_context_strip, render_section_intro, render_site_page
+from shared.site_shell import render_section_intro, render_site_page
 
 
 DEEP_READING_FIELDS = (
@@ -219,15 +219,39 @@ def _status_badge(status: str) -> str:
     )
 
 
+def render_family_navigation(catalog: dict[str, Any], active_family: str) -> str:
+    """Render every tracked model family in one horizontal strip."""
+    items = []
+    for _, family in iter_families(catalog):
+        label = html.escape(family["name"])
+        if family["page_status"] == "ready":
+            active_class = " is-active" if family["slug"] == active_family else ""
+            current = ' aria-current="location"' if family["slug"] == active_family else ""
+            items.append(
+                f'    <a class="context-strip-link{active_class}" '
+                f'href="{html.escape(family["slug"], quote=True)}.html"{current}>{label}</a>'
+            )
+        else:
+            items.append(
+                '    <span class="context-strip-link is-disabled" aria-disabled="true">'
+                f'{label}</span>'
+            )
+    return (
+        '<nav class="context-strip" aria-label="模型系列">\n'
+        + "\n".join(items)
+        + "\n  </nav>"
+    )
+
+
 def render_timeline(family: dict[str, Any]) -> str:
     output = [
         '<section class="milestone-panel timeline-panel" aria-labelledby="timeline-heading">',
         '  <div class="milestone-panel-heading">',
-        '    <div><p>ROADMAP</p><h2 id="timeline-heading">官方版本时间线</h2></div>',
+        '    <div><p>ROADMAP</p><h2 id="timeline-heading">时间线</h2></div>',
         '    <span>可横向拖动</span>',
         '  </div>',
         '  <div class="milestone-timeline-viewport" data-drag-scroll tabindex="0" '
-        'aria-label="FLUX 官方版本时间线，使用左右方向键或拖动浏览">',
+        f'aria-label="{html.escape(family["name"], quote=True)} 时间线，使用左右方向键或拖动浏览">',
         '    <ol class="milestone-timeline">',
     ]
     for release in family["releases"]:
@@ -287,7 +311,7 @@ def render_comparison_table(
     output = [
         '<section class="milestone-panel comparison-panel" aria-labelledby="comparison-heading">',
         '  <div class="milestone-panel-heading">',
-        '    <div><p>COMPARISON</p><h2 id="comparison-heading">大版本技术对比</h2></div>',
+        '    <div><p>COMPARISON</p><h2 id="comparison-heading">模型对比</h2></div>',
         '    <span>内容来自本地 Markdown 精读</span>',
         '  </div>',
         '  <div class="milestone-table-scroll">',
@@ -375,6 +399,10 @@ def render_family_page(
     )
     main_content = f"""    <header class="milestone-hero">
 {render_section_intro("milestones")}
+    </header>
+{render_family_navigation(catalog, family["slug"])}
+    <div class="milestone-workspace">
+      <header class="milestone-family-header">
       <div class="milestone-title-block">
         <p>{html.escape(topic['name'])} · {html.escape(family['organization'])}</p>
         <h1>{html.escape(family['name'])}</h1>
@@ -384,9 +412,7 @@ def render_family_page(
         <ul class="status-legend" aria-label="发布状态图例">{statuses}</ul>
         <p>Updated {updated}</p>
       </div>
-    </header>
-{render_context_strip((("TIMELINE", "#timeline-heading"), ("SPECIMEN", "#model-specimen-heading"), ("COMPARE", "#comparison-heading")))}
-    <div class="milestone-workspace">
+      </header>
       <div class="milestone-overview">
 {render_timeline(family)}
 {render_model_specimen(family, notes)}
@@ -408,6 +434,7 @@ def render_family_page(
 
 
 def render_notes_page(
+    catalog: dict[str, Any],
     family: dict[str, Any],
     notes: dict,
     *,
@@ -440,7 +467,7 @@ def render_notes_page(
         <a class="summary-back" href="{html.escape(family['slug'], quote=True)}.html">← 返回版本对比</a>
         <h1 id="notes-page-title">{html.escape(family['name'])} · 文章精读</h1>
       </header>
-{render_context_strip((("READING", "#notes-page-title"),))}
+{render_family_navigation(catalog, family["slug"])}
       <div class="summary-topic-list">
 {article_markup}
       </div>
@@ -496,6 +523,7 @@ def publish_milestone_models(
         atomic_write_text(
             notes_output,
             render_notes_page(
+                catalog,
                 family,
                 notes,
                 output_file=notes_output,
