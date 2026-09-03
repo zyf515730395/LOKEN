@@ -43,7 +43,7 @@ SECTIONS = (
 )
 SECTIONS_BY_KEY = {section.key: section for section in SECTIONS}
 SITE_NAME = "LOKEN"
-ASSET_VERSION = "5"
+ASSET_VERSION = "6"
 SECTION_METADATA = {
     "learning": "01 / PAPER SIGNALS",
     "milestones": "02 / MODEL ARCHIVE",
@@ -69,7 +69,11 @@ def site_root_for(output_file: str | Path, output_root: str | Path) -> str:
     return "../" * len(relative_parent.parts)
 
 
-def render_primary_navigation(active_section: str, site_root: str) -> str:
+def render_primary_navigation(
+    active_section: str,
+    site_root: str,
+    sidebar_status: str = "AUTOMATED / WEEKDAYS",
+) -> str:
     get_section(active_section)
     items = []
     for section in SECTIONS:
@@ -78,10 +82,9 @@ def render_primary_navigation(active_section: str, site_root: str) -> str:
         items.append(
             f'      <a class="primary-nav-item{active_class}" '
             f'href="{html.escape(site_root + section.route, quote=True)}"{current}>'
-            '<span class="primary-nav-marker" aria-hidden="true"></span>'
             '<span class="primary-nav-copy">'
-            f'<span class="primary-nav-meta">{SECTION_METADATA[section.key]}</span>'
             f'<span class="primary-nav-label">{html.escape(section.label)}</span>'
+            f'<span class="primary-nav-meta">{SECTION_METADATA[section.key]}</span>'
             "</span></a>"
         )
     brand_href = html.escape(site_root + SECTIONS[0].route, quote=True)
@@ -96,9 +99,13 @@ def render_primary_navigation(active_section: str, site_root: str) -> str:
         [
             '  <aside class="primary-sidebar" aria-label="知识主题">',
             f"    {brand}",
+            '    <div class="primary-menu" aria-hidden="true">'
+            '<span>MENU</span><span>☰</span></div>',
             '    <nav class="primary-navigation" aria-label="知识主题">',
             *items,
             "    </nav>",
+            '    <div class="primary-sidebar-status">'
+            f'<span>LAST SYNC</span><strong>{html.escape(sidebar_status)}</strong></div>',
             "  </aside>",
         ]
     )
@@ -175,6 +182,7 @@ def render_site_page(
     secondary_navigation: str,
     main_content: str,
     body_class: str = "",
+    sidebar_status: str = "AUTOMATED / WEEKDAYS",
     trailing_dialogs: str = "",
     head_content: str = "",
 ) -> str:
@@ -215,7 +223,7 @@ def render_site_page(
 <div class="navigation-shell" id="navigation-shell">
   <button class="navigation-close" type="button" data-navigation-close
           aria-label="关闭导航" hidden>×</button>
-{render_primary_navigation(active_section, site_root)}
+{render_primary_navigation(active_section, site_root, sidebar_status)}
 {render_context_sidebar(active_section, secondary_navigation)}
 </div>
   <main class="page-content" id="top">
