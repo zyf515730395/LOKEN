@@ -43,7 +43,7 @@ SECTIONS = (
 )
 SECTIONS_BY_KEY = {section.key: section for section in SECTIONS}
 SITE_NAME = "LOKEN"
-ASSET_VERSION = "8"
+ASSET_VERSION = "9"
 SECTION_METADATA = {
     "learning": "01 / PAPER SIGNALS",
     "milestones": "02 / MODEL ARCHIVE",
@@ -89,11 +89,10 @@ def render_primary_navigation(
         )
     brand_href = html.escape(site_root + SECTIONS[0].route, quote=True)
     brand_label = html.escape(f"{SITE_NAME} 首页", quote=True)
-    brand_wordmark = html.escape(SITE_NAME)
+    logo_src = html.escape(site_root + "assets/images/loken-logo.png", quote=True)
     brand = (
         f'<a class="primary-brand" href="{brand_href}" aria-label="{brand_label}">'
-        '<span class="brand-mark" aria-hidden="true">LK</span>'
-        f'<span class="brand-wordmark">{brand_wordmark}</span></a>'
+        f'<img class="brand-logo" src="{logo_src}" width="1990" height="329" alt=""></a>'
     )
     return "\n".join(
         [
