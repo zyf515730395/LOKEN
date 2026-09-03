@@ -70,7 +70,7 @@ def _atomic_private_json(name: str, payload: dict) -> Path:
     return path
 
 
-def _write_report(result: RunResult, *, model: str, workers: int) -> Path:
+def _write_report(result: RunResult, *, model: str, workers: int | None) -> Path:
     generated_at = datetime.now(timezone.utc).replace(microsecond=0).isoformat()
     report = {
         "version": REPORT_VERSION,
@@ -379,7 +379,14 @@ def _run_summaries_locked(
         refresh=refresh,
     )
     if not candidates:
-        return RunResult(0, 0, 0, 0, ())
+        result = RunResult(0, 0, 0, 0, ())
+        try:
+            _write_report(result, model=model, workers=None)
+        except OSError:
+            raise PaperSummaryError(
+                "state_write_failed", "private empty-run report could not be written safely"
+            ) from None
+        return result
     effective_workers = min(workers, len(candidates))
     try:
         _atomic_private_json(

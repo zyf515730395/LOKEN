@@ -10,7 +10,7 @@ import unicodedata
 from .models import PaperDocument, PaperSection, PaperSummaryError
 
 
-EXTRACTION_VERSION = "paper-extraction-v4"
+EXTRACTION_VERSION = "paper-extraction-v5"
 MIN_DOCUMENT_CHARS = 1_000
 MAX_DOCUMENT_CHARS = 400_000
 MAX_PDF_PAGES = 200
@@ -18,11 +18,13 @@ _SPACE = re.compile(r"\s+")
 _WORD = re.compile(r"[a-z0-9]+", re.IGNORECASE)
 _REFERENCE_HEADING = re.compile(r"(?im)^\s*(?:references|bibliography)\s*$")
 _INTRODUCTION_HEADING = re.compile(
-    r"^(?:(?:\d+(?:\.\d+)*|[ivxlcdm]+)\.?\s+)?introduction\s*[:.]*$",
+    r"^(?:(?P<marker>\d+(?:\.\d+)*|[ivxlcdm]+)\.?\s+)?"
+    r"introduction\s*[:.]*$",
     re.IGNORECASE,
 )
 _NUMBERED_SECTION = re.compile(
-    r"^(?:(?P<decimal>\d+(?:\.\d+)*)|(?P<roman>[ivxlcdm]+))\.?\s+\S.{0,160}$",
+    r"^(?:(?P<decimal>\d+(?:\.\d+)*)|(?P<roman>[ivxlcdm]+))\.?\s+"
+    r"(?P<title>\S.{0,160})$",
     re.IGNORECASE,
 )
 _INLINE_INTRODUCTION = re.compile(
@@ -43,6 +45,23 @@ _UNNUMBERED_PEER_HEADINGS = frozenset(
         "conclusion", "conclusions", "references", "bibliography", "appendix",
     }
 )
+_NUMBERED_PEER_HEADINGS = _UNNUMBERED_PEER_HEADINGS | {
+    "introduction",
+    "motivation",
+}
+_ROMAN_NUMERAL = re.compile(
+    r"M{0,3}(?:CM|CD|D?C{0,3})(?:XC|XL|L?X{0,3})(?:IX|IV|V?I{0,3})",
+    re.IGNORECASE,
+)
+_ROMAN_VALUES = {
+    "i": 1,
+    "v": 5,
+    "x": 10,
+    "l": 50,
+    "c": 100,
+    "d": 500,
+    "m": 1000,
+}
 MIN_INTRODUCTION_CHARS = 40
 MIN_INTRODUCTION_WORDS = 8
 
@@ -52,19 +71,47 @@ def _clean(value: str) -> str:
 
 
 def _is_introduction_heading(value: str) -> bool:
-    return _INTRODUCTION_HEADING.fullmatch(_clean(value)) is not None
+    match = _INTRODUCTION_HEADING.fullmatch(_clean(value))
+    if match is None:
+        return False
+    marker = match.group("marker")
+    return marker is None or _section_number_from_marker(marker) is not None
 
 
-def _section_number_from_marker(marker: str) -> tuple[str, tuple[int, ...]]:
+def _section_number_from_marker(marker: str) -> tuple[str, tuple[int, ...]] | None:
     normalized = unicodedata.normalize("NFKC", marker).casefold()
     if normalized[0].isdigit():
         return "decimal", tuple(int(part) for part in normalized.split("."))
-    return "roman", ()
+    if _ROMAN_NUMERAL.fullmatch(normalized) is None:
+        return None
+    total = 0
+    previous = 0
+    for character in reversed(normalized):
+        value = _ROMAN_VALUES[character]
+        if value < previous:
+            total -= value
+        else:
+            total += value
+            previous = value
+    return "roman", (total,)
 
 
 def _section_number(value: str) -> tuple[str, tuple[int, ...]] | None:
     match = _NUMBERED_SECTION.fullmatch(_clean(value))
     if match is None:
+        return None
+    marker = match.group("decimal") or match.group("roman")
+    if marker is None:
+        return None
+    return _section_number_from_marker(marker)
+
+
+def _peer_section_number(value: str) -> tuple[str, tuple[int, ...]] | None:
+    match = _NUMBERED_SECTION.fullmatch(_clean(value))
+    if match is None:
+        return None
+    title = match.group("title").casefold().rstrip(" :.")
+    if title not in _NUMBERED_PEER_HEADINGS:
         return None
     marker = match.group("decimal") or match.group("roman")
     if marker is None:
@@ -78,14 +125,13 @@ def _is_introduction_boundary(
 ) -> bool:
     if introduction_number is None:
         return True
-    kind, parts = introduction_number
-    candidate_kind, candidate_parts = candidate_number
-    return not (
-        kind == "decimal"
-        and candidate_kind == "decimal"
-        and len(candidate_parts) > len(parts)
-        and candidate_parts[: len(parts)] == parts
-    )
+    _, parts = introduction_number
+    _, candidate_parts = candidate_number
+    if candidate_parts == parts:
+        return False
+    if len(candidate_parts) > len(parts) and candidate_parts[: len(parts)] == parts:
+        return False
+    return candidate_parts > parts
 
 
 def _is_unnumbered_peer_heading(value: str) -> bool:
@@ -128,7 +174,7 @@ def extract_introduction(document: PaperDocument) -> str:
                 introduction_number = _section_number(line)
                 continue
             if in_introduction:
-                candidate_number = _section_number(line)
+                candidate_number = _peer_section_number(line)
                 if candidate_number is not None and _is_introduction_boundary(
                     introduction_number, candidate_number
                 ):
@@ -140,14 +186,16 @@ def extract_introduction(document: PaperDocument) -> str:
 
     for section in document.sections:
         text = unicodedata.normalize("NFKC", section.text)
-        start = _INLINE_INTRODUCTION.search(text)
-        if start is None:
-            continue
-        introduction_number = _section_number_from_marker(start.group("marker"))
-        for boundary in _INLINE_NUMBERED_SECTION.finditer(text, start.end()):
-            candidate_number = _section_number_from_marker(boundary.group("marker"))
-            if _is_introduction_boundary(introduction_number, candidate_number):
-                return _usable_introduction(text[start.end() : boundary.start()])
+        for start in _INLINE_INTRODUCTION.finditer(text):
+            introduction_number = _section_number_from_marker(start.group("marker"))
+            if introduction_number is None:
+                continue
+            for boundary in _INLINE_NUMBERED_SECTION.finditer(text, start.end()):
+                candidate_number = _section_number_from_marker(boundary.group("marker"))
+                if candidate_number is not None and _is_introduction_boundary(
+                    introduction_number, candidate_number
+                ):
+                    return _usable_introduction(text[start.end() : boundary.start()])
     raise PaperSummaryError(
         "introduction_unavailable", "paper introduction is not available as usable text"
     )
