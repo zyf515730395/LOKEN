@@ -10,7 +10,7 @@ import unicodedata
 from .models import PaperDocument, PaperSection, PaperSummaryError
 
 
-EXTRACTION_VERSION = "paper-extraction-v3"
+EXTRACTION_VERSION = "paper-extraction-v4"
 MIN_DOCUMENT_CHARS = 1_000
 MAX_DOCUMENT_CHARS = 400_000
 MAX_PDF_PAGES = 200
@@ -21,16 +21,27 @@ _INTRODUCTION_HEADING = re.compile(
     r"^(?:(?:\d+(?:\.\d+)*|[ivxlcdm]+)\.?\s+)?introduction\s*[:.]*$",
     re.IGNORECASE,
 )
-_NUMBERED_HEADING = re.compile(
-    r"^(?:\d+(?:\.\d+)*|[ivxlcdm]+)\.?\s+\S.{0,160}$",
+_NUMBERED_SECTION = re.compile(
+    r"^(?:(?P<decimal>\d+(?:\.\d+)*)|(?P<roman>[ivxlcdm]+))\.?\s+\S.{0,160}$",
     re.IGNORECASE,
 )
 _INLINE_INTRODUCTION = re.compile(
-    r"(?<!\S)(?:\d+(?:\.\d+)*|[ivxlcdm]+)\.?\s+introduction\b\s*[:.]*",
+    r"(?<!\S)(?P<marker>\d+(?:\.\d+)*|[ivxlcdm]+)\.?\s+introduction\b\s*[:.]*",
     re.IGNORECASE,
 )
-_INLINE_NUMBERED_HEADING = re.compile(
-    r"\s+(?:\d+(?:\.\d+)*|[ivxlcdm]+)\.?\s+[A-Z][A-Za-z][^.!?]{0,120}(?=\s|$)",
+_INLINE_NUMBERED_SECTION = re.compile(
+    r"(?<!\S)(?P<marker>\d+(?:\.\d+)*|[ivxlcdm]+)\.?\s+"
+    r"(?:introduction|motivation|related\s+work|background|methods?|methodology|"
+    r"approach|experiments?|evaluation|results?|discussion|conclusions?|references|"
+    r"bibliography|appendix)\b",
+    re.IGNORECASE,
+)
+_UNNUMBERED_PEER_HEADINGS = frozenset(
+    {
+        "related work", "background", "methods", "method", "methodology", "approach",
+        "experiments", "experiment", "evaluation", "results", "result", "discussion",
+        "conclusion", "conclusions", "references", "bibliography", "appendix",
+    }
 )
 MIN_INTRODUCTION_CHARS = 40
 MIN_INTRODUCTION_WORDS = 8
@@ -44,8 +55,41 @@ def _is_introduction_heading(value: str) -> bool:
     return _INTRODUCTION_HEADING.fullmatch(_clean(value)) is not None
 
 
-def _is_numbered_heading(value: str) -> bool:
-    return _NUMBERED_HEADING.fullmatch(_clean(value)) is not None
+def _section_number_from_marker(marker: str) -> tuple[str, tuple[int, ...]]:
+    normalized = unicodedata.normalize("NFKC", marker).casefold()
+    if normalized[0].isdigit():
+        return "decimal", tuple(int(part) for part in normalized.split("."))
+    return "roman", ()
+
+
+def _section_number(value: str) -> tuple[str, tuple[int, ...]] | None:
+    match = _NUMBERED_SECTION.fullmatch(_clean(value))
+    if match is None:
+        return None
+    marker = match.group("decimal") or match.group("roman")
+    if marker is None:
+        return None
+    return _section_number_from_marker(marker)
+
+
+def _is_introduction_boundary(
+    introduction_number: tuple[str, tuple[int, ...]] | None,
+    candidate_number: tuple[str, tuple[int, ...]],
+) -> bool:
+    if introduction_number is None:
+        return True
+    kind, parts = introduction_number
+    candidate_kind, candidate_parts = candidate_number
+    return not (
+        kind == "decimal"
+        and candidate_kind == "decimal"
+        and len(candidate_parts) > len(parts)
+        and candidate_parts[: len(parts)] == parts
+    )
+
+
+def _is_unnumbered_peer_heading(value: str) -> bool:
+    return _clean(value).casefold().rstrip(":.") in _UNNUMBERED_PEER_HEADINGS
 
 
 def _usable_introduction(value: str) -> str:
@@ -59,34 +103,51 @@ def _usable_introduction(value: str) -> str:
 
 def extract_introduction(document: PaperDocument) -> str:
     """Return only the bounded Introduction text from a normalized paper document."""
-    for section in document.sections:
+    for index, section in enumerate(document.sections):
         if _is_introduction_heading(section.heading):
-            return _usable_introduction(section.text)
+            introduction_number = _section_number(section.heading)
+            if introduction_number is None:
+                return _usable_introduction(section.text)
+            captured = [section.text]
+            for following in document.sections[index + 1 :]:
+                candidate_number = _section_number(following.heading)
+                if candidate_number is None:
+                    return _usable_introduction("\n".join(captured))
+                if _is_introduction_boundary(introduction_number, candidate_number):
+                    return _usable_introduction("\n".join(captured))
+                captured.append(f"{following.heading}\n{following.text}")
+            return _usable_introduction("\n".join(captured))
 
     captured: list[str] = []
     in_introduction = False
+    introduction_number: tuple[str, tuple[int, ...]] | None = None
     for section in document.sections:
         for line in unicodedata.normalize("NFKC", section.text).splitlines():
             if _is_introduction_heading(line):
                 in_introduction = True
+                introduction_number = _section_number(line)
                 continue
-            if in_introduction and _is_numbered_heading(line):
-                return _usable_introduction("\n".join(captured))
+            if in_introduction:
+                candidate_number = _section_number(line)
+                if candidate_number is not None and _is_introduction_boundary(
+                    introduction_number, candidate_number
+                ):
+                    return _usable_introduction("\n".join(captured))
+                if candidate_number is None and _is_unnumbered_peer_heading(line):
+                    return _usable_introduction("\n".join(captured))
             if in_introduction:
                 captured.append(line)
-    if in_introduction:
-        return _usable_introduction("\n".join(captured))
 
     for section in document.sections:
         text = unicodedata.normalize("NFKC", section.text)
         start = _INLINE_INTRODUCTION.search(text)
         if start is None:
             continue
-        content = text[start.end() :]
-        boundary = _INLINE_NUMBERED_HEADING.search(content)
-        if boundary is not None:
-            content = content[: boundary.start()]
-        return _usable_introduction(content)
+        introduction_number = _section_number_from_marker(start.group("marker"))
+        for boundary in _INLINE_NUMBERED_SECTION.finditer(text, start.end()):
+            candidate_number = _section_number_from_marker(boundary.group("marker"))
+            if _is_introduction_boundary(introduction_number, candidate_number):
+                return _usable_introduction(text[start.end() : boundary.start()])
     raise PaperSummaryError(
         "introduction_unavailable", "paper introduction is not available as usable text"
     )
