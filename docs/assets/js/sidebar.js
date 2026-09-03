@@ -13,9 +13,12 @@ function topicForHash() {
 function selectTopic(topic, { updateLocation = false, scroll = false } = {}) {
   const selected = topicSections.find((section) => section.dataset.topicSection === topic);
   if (!selected) return false;
-  const previousTopic = topicSections.find((section) => !section.hidden)?.dataset.topicSection;
+  const previousTopic = topicSections.find((section) => section.classList.contains("is-topic-active"))?.dataset.topicSection;
 
-  topicSections.forEach((section) => { section.hidden = section !== selected; });
+  topicSections.forEach((section) => {
+    section.hidden = false;
+    section.classList.toggle("is-topic-active", section === selected);
+  });
   topicLinks.forEach((link) => {
     const active = link.dataset.topicFilter === topic;
     link.classList.toggle("is-active", active);

@@ -200,7 +200,6 @@ def render_site_page(
     active_section: str,
     page_title: str,
     meta_description: str,
-    secondary_navigation: str,
     main_content: str,
     body_class: str = "",
     sidebar_status: str = "AUTOMATED / WEEKDAYS",
@@ -261,10 +260,6 @@ def render_empty_section_page(
     body_copy: str,
 ) -> str:
     section = get_section(section_key)
-    secondary_navigation = (
-        '      <a class="context-overview is-active" href="#top" '
-        'aria-current="page">页面概览</a>'
-    )
     main_content = f"""    <section class="empty-section" aria-labelledby="empty-section-title">
 {render_section_intro(section_key)}
       <h1 id="empty-section-title">{html.escape(section.label)}</h1>
@@ -278,7 +273,6 @@ def render_empty_section_page(
         active_section=section_key,
         page_title=f"{section.label} · {SITE_NAME}",
         meta_description=section.description,
-        secondary_navigation=secondary_navigation,
         main_content=main_content,
         body_class="empty-section-page",
     )
@@ -287,10 +281,6 @@ def render_empty_section_page(
 def render_journey_placeholder_page(*, output_file: Path, output_root: Path) -> str:
     """Render the City Memory shell without manufacturing travel data."""
     section = get_section("journeys")
-    secondary_navigation = (
-        '      <a class="context-overview is-active" href="#top" '
-        'aria-current="page">页面概览</a>'
-    )
     main_content = f"""    <section class="journey-archive" aria-labelledby="section-journeys-title">
       <header class="journey-header">
 {render_section_intro("journeys")}
@@ -311,7 +301,6 @@ def render_journey_placeholder_page(*, output_file: Path, output_root: Path) -> 
         active_section="journeys",
         page_title=f"{section.label} · {SITE_NAME}",
         meta_description=section.description,
-        secondary_navigation=secondary_navigation,
         main_content=main_content,
         body_class="journey-page",
     )

@@ -405,7 +405,7 @@ def render_family_page(
       <header class="milestone-family-header">
       <div class="milestone-title-block">
         <p>{html.escape(topic['name'])} · {html.escape(family['organization'])}</p>
-        <h1>{html.escape(family['name'])}</h1>
+        <h2>{html.escape(family['name'])}</h2>
         <span>官方模型版本演进与核心技术对比</span>
       </div>
       <div class="milestone-hero-meta">
@@ -427,7 +427,6 @@ def render_family_page(
         active_section="milestones",
         page_title=f"{family['name']} · 身经百战",
         meta_description=f"{family['name']} 官方模型版本时间线与技术对比。",
-        secondary_navigation=render_milestone_navigation(catalog, family["slug"]),
         main_content=main_content,
         body_class="milestone-page",
     )
@@ -453,7 +452,7 @@ def render_notes_page(
             "    </article>"
         )
     article_markup = "\n".join(articles) or '    <p class="muted">暂无已完成的文章精读。</p>'
-    secondary_navigation = "\n".join(
+    release_navigation = "\n".join(
         (
             f'<a class="context-filter" href="#milestone-{html.escape(release["slug"], quote=True)}">'
             f'{html.escape(release["name"])}</a>'
@@ -461,6 +460,14 @@ def render_notes_page(
         for release in family["releases"]
         if notes.get(release["slug"]) and notes[release["slug"]]["ready"]
     )
+    inline_navigation = ""
+    if release_navigation:
+        inline_navigation = f'''      <details class="content-tools" open>
+        <summary>版本精读目录</summary>
+        <nav class="content-tools-navigation" aria-label="版本精读目录">
+{release_navigation}
+        </nav>
+      </details>'''
     main_content = f"""
     <section class="summary-page-shell" aria-labelledby="notes-page-title">
       <header class="summary-topic-header">
@@ -468,6 +475,7 @@ def render_notes_page(
         <h1 id="notes-page-title">{html.escape(family['name'])} · 文章精读</h1>
       </header>
 {render_family_navigation(catalog, family["slug"])}
+{inline_navigation}
       <div class="summary-topic-list">
 {article_markup}
       </div>
@@ -479,7 +487,6 @@ def render_notes_page(
         active_section="milestones",
         page_title=f"{family['name']} · 文章精读",
         meta_description=f"{family['name']} 版本文章精读。",
-        secondary_navigation=secondary_navigation,
         main_content=main_content,
         body_class="summary-page milestone-notes-page",
     )

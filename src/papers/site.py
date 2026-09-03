@@ -351,10 +351,10 @@ def render_content(
     for category_index, category in enumerate(categories):
         eyebrow = category["theme"]
         heading = category["subtype"] or category["theme"]
-        hidden = "" if category_index == 0 else " hidden"
+        active_class = " is-topic-active" if category_index == 0 else ""
         output.extend([
-            f'<section class="topic-section" id="{category["slug"]}" '
-            f'data-topic-section="{category["slug"]}"{hidden}>',
+            f'<section class="topic-section{active_class}" id="{category["slug"]}" '
+            f'data-topic-section="{category["slug"]}">',
             '  <header class="topic-header">',
             f'    <p>{html.escape(eyebrow)}</p>',
             f'    <h2>{html.escape(heading)}</h2>',
@@ -521,7 +521,6 @@ def generate_site(
             "A daily index of image, video, and 3D generation, neural rendering, "
             "and depth estimation papers from arXiv."
         ),
-        secondary_navigation=render_sidebar(themes),
         main_content=main_content,
         body_class="learning-page",
         sidebar_status=f"{updated.replace('-', '.')} / DAILY",

@@ -37,7 +37,7 @@
     const navigationClose = document.querySelector("[data-navigation-close]");
     const contextDrawer = document.querySelector("#context-drawer");
     const contextToggle = document.querySelector("[data-context-toggle]");
-    const contextLinks = [...document.querySelectorAll(".context-strip-link")];
+    const contextLinks = [...document.querySelectorAll("a.context-strip-link")];
     const contextClose = document.querySelector("[data-context-close]");
     const contextScrim = document.querySelector("[data-context-scrim]");
     const themeToggle = document.querySelector(".theme-toggle");
