@@ -10,7 +10,7 @@ import unicodedata
 from .models import PaperDocument, PaperSection, PaperSummaryError
 
 
-EXTRACTION_VERSION = "paper-extraction-v5"
+EXTRACTION_VERSION = "paper-extraction-v6"
 MIN_DOCUMENT_CHARS = 1_000
 MAX_DOCUMENT_CHARS = 400_000
 MAX_PDF_PAGES = 200
@@ -29,6 +29,10 @@ _NUMBERED_SECTION = re.compile(
 )
 _INLINE_INTRODUCTION = re.compile(
     r"(?<!\S)(?P<marker>\d+(?:\.\d+)*|[ivxlcdm]+)\.?\s+introduction\b\s*[:.]*",
+    re.IGNORECASE,
+)
+_INLINE_NUMBERED_MARKER = re.compile(
+    r"(?<!\S)(?P<marker>\d+(?:\.\d+)*|[ivxlcdm]+)\.?\s+(?=\S)",
     re.IGNORECASE,
 )
 _INLINE_NUMBERED_SECTION = re.compile(
@@ -174,10 +178,15 @@ def extract_introduction(document: PaperDocument) -> str:
                 introduction_number = _section_number(line)
                 continue
             if in_introduction:
-                candidate_number = _peer_section_number(line)
+                candidate_number = _section_number(line)
                 if candidate_number is not None and _is_introduction_boundary(
                     introduction_number, candidate_number
                 ):
+                    if _peer_section_number(line) is None:
+                        raise PaperSummaryError(
+                            "introduction_unavailable",
+                            "paper introduction is not available as usable text",
+                        )
                     return _usable_introduction("\n".join(captured))
                 if candidate_number is None and _is_unnumbered_peer_heading(line):
                     return _usable_introduction("\n".join(captured))
@@ -190,11 +199,16 @@ def extract_introduction(document: PaperDocument) -> str:
             introduction_number = _section_number_from_marker(start.group("marker"))
             if introduction_number is None:
                 continue
-            for boundary in _INLINE_NUMBERED_SECTION.finditer(text, start.end()):
+            for boundary in _INLINE_NUMBERED_MARKER.finditer(text, start.end()):
                 candidate_number = _section_number_from_marker(boundary.group("marker"))
                 if candidate_number is not None and _is_introduction_boundary(
                     introduction_number, candidate_number
                 ):
+                    if _INLINE_NUMBERED_SECTION.match(text, boundary.start()) is None:
+                        raise PaperSummaryError(
+                            "introduction_unavailable",
+                            "paper introduction is not available as usable text",
+                        )
                     return _usable_introduction(text[start.end() : boundary.start()])
     raise PaperSummaryError(
         "introduction_unavailable", "paper introduction is not available as usable text"
