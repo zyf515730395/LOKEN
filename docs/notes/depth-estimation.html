@@ -13,6 +13,1121 @@
       <h1>Depth Estimation · 论文要点</h1>
     </header>
     <div class="summary-topic-list">
+    <article class="summary-article summary-topic-entry" id="summary-2512.22653" data-arxiv-id="2512.22653" data-status="ready">
+<h1>[2512.22653] Visual Autoregressive Modelling for Monocular Depth Estimation</h1>
+<p><a href="https://arxiv.org/abs/2512.22653" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种基于视觉自回归（VAR）建模的单目深度估计方法，将其作为扩散模型的替代方案，通过三种关键设计选择实现了在少量数据上训练并保持了强大的生成先验。</p>
+<h2>解决的问题</h2>
+<p>单目深度估计本身存在尺度模糊、透视模糊和遮挡等固有挑战，且现有的基于扩散模型的方法计算开销大且依赖大规模数据集。</p>
+<h2>创新点</h2>
+<ul>
+<li>引入尺度级条件上采样机制以传播跨分辨率的几何线索。</li>
+<li>设计指导规则以平衡自回归先验与条件上采样器的贡献。</li>
+<li>提出重编码策略以实现无需每个尺度多个上采样器的中间预测。</li>
+<li>微调仅依赖 74K 合成图像，保持数据需求适度。</li>
+<li>实验表明 VAR 先验是扩散方法的可行替代，在多个数据集上具有竞争力。</li>
+<li>分析了采样速度及模型大小与训练成本之间的权衡。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2601.03252" data-arxiv-id="2601.03252" data-status="ready">
+<h1>[2601.03252] InfiniDepth: Arbitrary-Resolution and Fine-Grained Depth Estimation with Neural Implicit Fields</h1>
+<p><a href="https://arxiv.org/abs/2601.03252" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 InfiniDepth，一种基于神经隐式场的深度表示方法，实现了任意分辨率和细粒度深度估计，并改进了大视角变化下的新视图合成质量。</p>
+<h2>解决的问题</h2>
+<p>现有基于网格的深度估计方法受限于训练图像分辨率，难以生成高分辨率且保留细节的深度图，且在几何变化显著区域预测不准；此外，现有新视图合成方法在大视角变化下因密度不平衡导致质量下降。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种将深度建模为神经隐式场的新深度表示方法，并证明了其在任意分辨率和细粒度深度估计方面的能力。</li>
+<li>设计了一种深度查询策略，在物体表面上产生均匀分布的 3D 点，从而改进了大视角变化下的新视图合成质量。</li>
+<li>整理了一个高质量的 4K 基准 Synth4K，用于评估高分辨率和精细几何细节的深度估计方法。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2601.02793" data-arxiv-id="2601.02793" data-status="ready">
+<h1>[2601.02793] StableDPT: Temporal Stable Monocular Video Depth Estimation</h1>
+<p><a href="https://arxiv.org/abs/2601.02793" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种名为 StableDPT 的新方法，通过利用视频序列中的时序信息来提高深度预测的准确性，无需使用任何补充传感器或数据。</p>
+<h2>解决的问题</h2>
+<p>单目深度估计存在固有模糊性，单张图像信息不足导致预测困难，现有方法难以利用视频时序信息导致闪烁和模糊，且部分方法计算量大难以实时应用。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出 StableDPT 模型，利用视频序列时序信息提高深度预测，无需补充传感器。</li>
+<li>引入基于 Transformer 的时序模块，利用交叉注意力机制捕捉帧间关系。</li>
+<li>实现全局高效时序交叉注意力，将基于图像的模型适应于稳定视频预测。</li>
+<li>提出处理任意长度视频的高效推理策略，避免尺度不对齐和冗余计算。</li>
+<li>在真实场景中实现准确性和时序一致性方面具有竞争力的最先进性能。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2601.01457" data-arxiv-id="2601.01457" data-status="ready">
+<h1>[2601.01457] Language as Prior, Vision as Calibration: Metric Scale Recovery for Monocular Depth Estimation</h1>
+<p><a href="https://arxiv.org/abs/2601.01457" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种语言引导的深度校准框架，在冻结的相对深度骨干网络上利用语言作为有界先验和视觉作为每图像校准器，以解决单目深度估计中的度量尺度恢复问题。</p>
+<h2>解决的问题</h2>
+<p>单目深度估计中度量尺度本质上不可观测，导致度量深度估计是病态问题，且现有方法在域偏移下泛化性差，语言线索本身粗糙且不完整。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种包络 - 选择框架，将语言视为有界先验，将视觉视为冻结骨干网络上的每图像校准器。</li>
+<li>设计了一种轻量级校准层，能够在不微调骨干网络的情况下实现鲁棒的每图像尺度/偏移参数估计。</li>
+<li>在 NYUv2 和 KITTI 上验证了该方法，并评估了向 SUN-RGBD 和 DDAD 的零样本迁移，展示了优于语言引导基线的域偏移鲁棒性。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2601.12423" data-arxiv-id="2601.12423" data-status="ready">
+<h1>[2601.12423] HOT-POT: Optimal Transport for Sparse Stereo Matching</h1>
+<p><a href="https://arxiv.org/abs/2601.12423" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 HOT-POT 方法，利用最优传输（OT）解决稀疏立体匹配问题，通过定制成本函数和分层 OT 框架实现跨模态场景下稀疏特征及对象的鲁棒匹配。</p>
+<h2>解决的问题</h2>
+<p>传统立体匹配方法在辐射畸变、遮挡及跨模态（如 RGB-热成像）条件下失效，且稀疏特征点的跨视图匹配因噪声、遮挡及特征差异而具有内在病态性，难以保证鲁棒性。</p>
+<h2>创新点</h2>
+<ul>
+<li>将立体匹配问题形式化为带有针对几何设置定制成本函数的最优传输（OT）问题实例。</li>
+<li>提出基于 3D 半线距离的新型成本函数（3D 射线距离），数值实验显示其优于经典极线距离。</li>
+<li>引入分层最优传输（HOT）形式来处理由无序点集表示的整个对象之间的匹配，数值研究表明其产生稳定对应关系。</li>
+<li>提出的成本函数通过降低对噪声和歧义的敏感性，增强了点级匹配的鲁棒性，特别是在遮挡和跨模态场景中。</li>
+<li>最优传输（OT）的使用为匹配问题提供了高效的公式化。</li>
+<li>HOT 框架将算法从点对点匹配扩展到对象对对象匹配。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2601.17271" data-arxiv-id="2601.17271" data-status="ready">
+<h1>[2601.17271] Cross360: 360° Monocular Depth Estimation via Cross Projections Across Scales</h1>
+<p><a href="https://arxiv.org/abs/2601.17271" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了 Cross360，一种通过跨投影和跨尺度的交叉注意力机制有效整合局部与全局信息以解决 360° 单目深度估计问题的新方法。</p>
+<h2>解决的问题</h2>
+<p>现有 360° 深度估计方法在利用局部特征时仅探索有限视场，导致无法理解复杂场景细节，且 ERP 特征缺乏连续性，现有融合技术性能未达最优。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出 Cross360 方法，通过跨投影和跨尺度的交叉注意力解决失真和不连续问题。</li>
+<li>提出 CPFA 模块，利用交叉注意力机制对齐有限视场局部 TP 特征与全视场 ERP 表示。</li>
+<li>引入 PFAA 模块，使用注意力图聚合多尺度特征以细化最终表示并输出深度预测。</li>
+<li>实现了在完整 360° 图像可用情况下的最先进性能。</li>
+<li>采用略微重叠的 TP 补丁布局及双向 ERP-TP 变换以保持几何一致性并减轻边界伪影。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2601.19461" data-arxiv-id="2601.19461" data-status="ready">
+<h1>[2601.19461] Towards Gold-Standard Depth Estimation for Tree Branches in UAV Forestry: Benchmarking Deep Stereo Matching Methods</h1>
+<p><a href="https://arxiv.org/abs/2601.19461" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文旨在通过零样本评估多种深度立体匹配方法，为无人机林业中的树枝深度估计建立金标准基准。</p>
+<h2>解决的问题</h2>
+<p>现有立体匹配基准缺乏植被密集环境数据，且多数研究允许微调，无法评估纯泛化能力，导致无人机林业中树枝深度估计缺乏可靠的零样本评估方法。</p>
+<h2>创新点</h2>
+<ul>
+<li>系统化的范式比较：首次在同一训练条件下对迭代细化、基础模型、扩散模型和 3D CNN 方法进行零样本评估。</li>
+<li>全面的跨域评估：在四个涵盖室内、汽车和高分辨率场景的标准基准上一致评估。</li>
+<li>性能分析：定量比较揭示了场景依赖模式，为植被特定应用的方法选择提供信息。</li>
+<li>林业金标准基线：基于跨域一致性确定 DEFOM 为 Tree Branches 数据集的最优方法，支持未来伪真值深度图的定量基准测试。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2601.19314" data-arxiv-id="2601.19314" data-status="ready">
+<h1>[2601.19314] Instance-Guided Radar Depth Estimation for 3D Object Detection</h1>
+<p><a href="https://arxiv.org/abs/2601.19314" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 InstaRadar 方法，通过实例引导雷达扩展和雷达引导深度估计模型，结合相机与雷达互补特性以提升 3D 目标检测性能。</p>
+<h2>解决的问题</h2>
+<p>相机图像缺乏固有深度导致单目深度估计不适定，现有雷达预处理方法泛化性不足，且 LiDAR 成本高且受天气影响。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出 InstaRadar，一种实例分割引导的雷达扩展方法，利用 OneFormer 密集化原始雷达点并与物体级语义对齐。</li>
+<li>该方法增加了雷达覆盖范围，同时保留了物体感知能力。</li>
+<li>将预训练的 RCDPT 集成到 BEVDepth 流程中，替换其默认深度模块。</li>
+<li>通过基于 Transformer 的跨模态重组机制融合雷达和图像特征，显式监督深度预测。</li>
+<li>生成的深度图通过体素池化投影到 BEV 空间，产生更准确的空间特征用于 3D 检测。</li>
+<li>整体框架改进了基线 3D 目标检测模型，并在深度估计中实现了 SOTA 性能。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2601.17046" data-arxiv-id="2601.17046" data-status="ready">
+<h1>[2601.17046] Atomic Depth Estimation From Noisy Electron Microscopy Data Via Deep Learning</h1>
+<p><a href="https://arxiv.org/abs/2601.17046" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 SegDepth 框架，利用深度学习分割模型从单个二维透射电子显微镜（TEM）图像中估计纳米颗粒中原子柱的深度信息。</p>
+<h2>解决的问题</h2>
+<p>从二维透射电子显微镜（TEM）图像中估计三维结构，特别是针对动态对象和嘈杂数据（低信噪比）下的原子柱深度估计问题。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出 SegDepth 框架，利用深度学习分割模型从单个二维图像中估计三维信息。</li>
+<li>将深度估计问题转化为分割问题，目标是估计每个像素对应的原子柱深度或原子数量。</li>
+<li>设计了包含不同厚度纳米颗粒表面模拟 TEM 图像的数据集，并使用泊松噪声模拟真实采集条件。</li>
+<li>以 CeO2 纳米颗粒作为概念验证，旨在理解氧传输和交换过程中氧原子柱占据率的变化。</li>
+<li>该方法旨在解决传统电子断层扫描无法应用于动态对象的问题，并处理低信噪比数据。</li>
+<li>训练好的网络可应用于真实数据，以研究纳米颗粒原子结构随环境相互作用的动态变化。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2601.22808" data-arxiv-id="2601.22808" data-status="ready">
+<h1>[2601.22808] Diachronic Stereo Matching for Multi-Date Satellite Imagery</h1>
+<p><a href="https://arxiv.org/abs/2601.22808" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了首个能够可靠执行历时卫星立体匹配的模型，通过微调预训练 MonSter 模型在专用数据集上实现了多日期卫星影像的 3D 重建，并发布了包含真值的数据集及配对标注方法。</p>
+<h2>解决的问题</h2>
+<p>现有的立体重建模型在处理多日期卫星影像（历时立体对）时面临挑战，随着时间间隔增加（如季节差异），性能显著下降，且传统及学习基方法难以应对光照、阴影、天气变化及移动物体带来的影响。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了首个能够可靠执行历时卫星立体匹配的模型，实现从不同日期获取的卫星图像对中进行 3D 重建。</li>
+<li>证明了在训练期间包含历时数据以及使用单目深度先验对于实现这些结果至关重要。</li>
+<li>发布了一个用于卫星影像立体匹配的精选数据集，包含真值视差和 DSM，并分为同步和历时对。</li>
+<li>提出了一种基于元数据和图像外观的简单启发式方法，用于将配对标记为历时或同步。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2602.01268" data-arxiv-id="2602.01268" data-status="ready">
+<h1>[2602.01268] OASIS-DC: Generalizable Depth Completion via Output-level Alignment of Sparse-Integrated Monocular Pseudo Depth</h1>
+<p><a href="https://arxiv.org/abs/2602.01268" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种基于输出级对齐的稀疏集成单目伪深度框架，通过利用单目基础深度估计器的稠密输出与稀疏锚点构建伪深度先验，并在少样本监督下学习残差修正，以实现可泛化的深度补全。</p>
+<h2>解决的问题</h2>
+<p>现有深度补全方法依赖大量标注数据和验证集，难以适应部署环境快速变化的少样本场景；同时，基于特征级耦合的基础模型方法增加了运行时内存和延迟，且部署复杂。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种无需训练参数的非学习化 MDE 引导伪深度构建方法，通过稀疏锚点与基础深度估计器对齐。</li>
+<li>利用泊松公式与硬约束重构出度量准确、边缘保持的伪深度先验。</li>
+<li>设计了一种轻量级的先验引导深度补全网络，输入伪深度图和锚点掩码，仅在少样本监督下学习残差修正。</li>
+<li>该方法实现了锐利边界和严重数据稀缺下的鲁棒性能，同时避免了与基础深度估计器的特征级耦合。</li>
+<li>在 KITTI 深度补全和 NYUv2 室内场景上进行了评估，包括标准少样本评估和严格的部署导向评估。</li>
+<li>验证了在缺乏大量精心策划的验证集的情况下，是否可以获得可靠的泛化能力。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2602.11066" data-arxiv-id="2602.11066" data-status="ready">
+<h1>[2602.11066] PuriLight: A Lightweight Shuffle and Purification Framework for Monocular Depth Estimation</h1>
+<p><a href="https://arxiv.org/abs/2602.11066" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种名为 PuriLight 的新型轻量级深度学习架构，通过减少网络深度、扩展特征通道维度及利用频率域特性来增强轮廓细节提取，旨在解决现有方法计算复杂度高且边缘设备部署困难的问题。</p>
+<h2>解决的问题</h2>
+<p>现有主流单目深度估计方法因网络深度大或架构复杂导致推理速度慢、计算资源需求高，难以部署在边缘设备上，且现有轻量级方法存在感受野低、计算复杂度高或细节区域性能不佳的问题。</p>
+<h2>创新点</h2>
+<ul>
+<li>设计了一种适用于资源受限场景的新型轻量级高效网络架构，用于自监督单目深度估计。</li>
+<li>引入了三个创新模块（SDC、RAKA 和 DFSP），专注于捕捉更精确的结构特征和轮廓细节，同时允许减少网络深度。</li>
+<li>在 KITTI 数据集上与其他高竞争力模型相比，该架构使用的参数数量最少，并达到了最先进的精度水平。</li>
+<li>在多种计算平台上验证了模型的推理速度，证明了 PuriLight 的优越性。</li>
+<li>在 Make3D 数据集上的实验表明，该模型具有出色的泛化能力，适用于大多数现实世界场景。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2602.14751" data-arxiv-id="2602.14751" data-status="ready">
+<h1>[2602.14751] Depth Completion as Parameter-Efficient Test-Time Adaptation</h1>
+<p><a href="https://arxiv.org/abs/2602.14751" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出将深度补全重构为参数高效测试时适应（CAPA），利用冻结的 3D 基础模型和测试时的稀疏深度图进行逐样本适应，并扩展至视频领域以实现时序一致性。</p>
+<h2>解决的问题</h2>
+<p>传统深度补全方法存在过拟合训练配置导致泛化能力差，以及为特定场景重新训练基础模型计算成本高且可能破坏预训练表示的问题。</p>
+<h2>创新点</h2>
+<ul>
+<li>将深度补全重构为参数高效适应基础 3D 视觉模型，由测试时可用的稀疏深度引导。</li>
+<li>引入视频深度补全的序列级参数共享，利用帧间强相关性提升时序一致性和鲁棒性。</li>
+<li>使用两种 PEFT 策略（LoRA 和 VPT）及三种不同基础模型（VGGT, MoGe-2, UniDepthV2）进行全面的评估和消融研究。</li>
+<li>在四个不同环境捕获的数据集上实现最佳性能，适应不同的条件模式。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2602.16915" data-arxiv-id="2602.16915" data-status="ready">
+<h1>[2602.16915] StereoAdapter-2: Globally Structure-Consistent Underwater Stereo Depth Estimation</h1>
+<p><a href="https://arxiv.org/abs/2602.16915" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了 StereoAdapter-2 框架，通过架构创新（ConvSS2D 算子）和数据扩展（UW-StereoDepth-80K 数据集），解决了水下立体深度估计中的迭代细化效率及合成到真实差距问题。</p>
+<h2>解决的问题</h2>
+<p>水下成像引入的域偏移破坏了光度一致性假设，且现有方法在迭代视差细化效率及合成到真实数据的差距方面存在挑战。</p>
+<h2>创新点</h2>
+<ul>
+<li>引入基于选择性状态空间模型的 ConvSS2D 更新算子，采用四向扫描策略替代 ConvGRU，在单次细化步骤内捕捉水平极线约束和垂直结构一致性，实现线性计算复杂度的长程空间传播。</li>
+<li>构建 UW-StereoDepth-80K 大规模合成水下立体数据集，通过结合语义感知风格迁移和几何一致新视图合成的两阶段生成管道，系统变化基线、衰减系数和散射参数以模拟多样化的 ROV 配置。</li>
+<li>在 TartanAir-UW 和 SQUID 水下基准上实现最先进的零样本性能，并在 BlueROV2 平台上进行真实世界部署验证，证明了从合成训练到真实水下场景的鲁棒泛化能力。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2602.19763" data-arxiv-id="2602.19763" data-status="ready">
+<h1>[2602.19763] Training Deep Stereo Matching Networks on Tree Branch Imagery: A Benchmark Study for Real-Time UAV Forestry Applications</h1>
+<p><a href="https://arxiv.org/abs/2602.19763" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出利用 DEFOM 生成的伪真值标签在真实林业数据上训练深度立体匹配网络，并建立基准以评估实时无人机林业应用中的网络设计与性能。</p>
+<h2>解决的问题</h2>
+<p>森林场景包含细枝重叠、重复纹理和光照差异，导致通用立体匹配模型精度下降，且无人机林业修剪需要厘米级深度精度，而利用 LiDAR 收集数据在树冠中不切实际。</p>
+<h2>创新点</h2>
+<ul>
+<li>首个植被聚焦立体基准：创建带有 DEFOM 参考标签的坎特伯雷树枝数据集，作为林业使用的训练和测试资源，消除了对昂贵 LiDAR 数据收集的需求。</li>
+<li>广泛的十种方法比较：使用感知（SSIM, LPIPS, ViTScore）和结构（SIFT/ORB 特征匹配）指标训练和测试来自六个设计家族的十种立体方法，BANet-3D 成为质量最高的方法。</li>
+<li>质量 - 速度权衡分析：绘制了差异质量和处理速度之间的最佳权衡边界，发现只有 AnyNet、BANet-2D 和 BANet-3D 提供无与伦比的组合。</li>
+<li>现实世界无人机部署：在独立供电的 NVIDIA Jetson Orin Super (16 GB) 上展示实际结果，带有 1080P 和 720P 的实时 ZED Mini 立体输入，为自主修剪提供速度配置文件和部署指南。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2602.20496" data-arxiv-id="2602.20496" data-status="ready">
+<h1>[2602.20496] Pip-Stereo: Progressive Iterations Pruner for Iterative Optimization based Stereo Matching</h1>
+<p><a href="https://arxiv.org/abs/2602.20496" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 Pip-Stereo，旨在通过渐进式迭代剪枝、单目深度先验协同学习和 FlashGRU 算子，解决迭代立体匹配方法在边缘设备部署中面临的 RNN 计算与内存访问瓶颈问题。</p>
+<h2>解决的问题</h2>
+<p>迭代优化立体匹配模型中的 RNN 机制在实时部署中面临复杂控制流阻碍算子融合、对量化噪声敏感以及高内存带宽需求等瓶颈，且现有方法多关注成本体积计算而忽视 RNN 部署瓶颈，导致非迭代方法泛化性较差。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出渐进式迭代剪枝算法 (Pip-Stereo)，通过逐步减半迭代次数和渐进特征对齐，消除 RNN 的 I/O 和计算瓶颈。</li>
+<li>提出单目深度先验协同学习范式，通过重参数化编码器块在学生分支内实现知识迁移，避免嵌入独立深度预测基础模型。</li>
+<li>引入高效 GRU 算子 FlashGRU，基于结构化稀疏性和 I/O 感知设计，针对当代 GPU 和 NPU 特性实现三倍以上加速。</li>
+<li>通过广泛实验验证，实现了迭代立体匹配中最佳精度与速度的权衡，并证实设计能减少计算和内存需求。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2602.21740" data-arxiv-id="2602.21740" data-status="ready">
+<h1>[2602.21740] Structure-to-Image: Zero-Shot Depth Estimation in Colonoscopy via High-Fidelity Sim-to-Real Adaptation</h1>
+<p><a href="https://arxiv.org/abs/2602.21740" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种“结构到图像”策略，将深度信息作为生成基础而非辅助约束，通过高保真 Sim-to-Real 适应实现结肠镜中的零样本深度估计。</p>
+<h2>解决的问题</h2>
+<p>结肠镜单目深度估计受限于合成数据与真实数据间的域差距，现有图像翻译方法难以在保持宏观几何结构准确性的同时合成真实的微观结构，导致局部失真和镜面伪影。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了“结构到图像”生成范式，将结构从被动约束提升为生成基础，增强几何准确性和图像真实感。</li>
+<li>设计了新颖的跨层级结构约束，以优化生成过程中的空间几何和微观结构。</li>
+<li>在幻影数据集上进行了零样本深度估计评估，验证了该方法相比竞争方法 RMSE 降低了高达 44.18%。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2603.01475" data-arxiv-id="2603.01475" data-status="ready">
+<h1>[2603.01475] WildCross: A Cross-Modal Large Scale Benchmark for Place Recognition and Metric Depth Estimation in Natural Environments</h1>
+<p><a href="https://arxiv.org/abs/2603.01475" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了 WildCross，这是一个旨在推进自然环境中跨模态定位和度量深度估计的大规模多模态基准。</p>
+<h2>解决的问题</h2>
+<p>现有基准数据集主要采集于结构化城市或室内环境，不足以评估非结构化自然环境中的机器人自主性，且缺乏支持自然场景下 2D 和 3D 场景理解跨模态的基准。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出 WildCross，一个用于自然环境的大规模多模态基准。</li>
+<li>数据集包含超过 476K 个顺序 RGB 帧，带有相应的半密集深度注释、表面法线注释和准确的 6DoF 地面真值姿态。</li>
+<li>演示了一种通过结合密集累积点云地图、准确相机姿态和鲁棒点可见性估计管道来生成半密集深度和表面法线注释的新方法。</li>
+<li>在 WildCross 上进行了广泛实验，评估了视觉和跨模态定位以及度量深度估计的几种最先进方法。</li>
+<li>结果显示领先方法在这些具有挑战性的自然环境中表现不佳，强调了 WildCross 基准的难度并为未来研究提供了新机会。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2603.03571" data-arxiv-id="2603.03571" data-status="ready">
+<h1>[2603.03571] Confidence-aware Monocular Depth Estimation for Minimally Invasive Surgery</h1>
+<p><a href="https://arxiv.org/abs/2603.03571" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种用于微创手术场景的置信度感知单目深度估计框架，通过集成立体匹配模型生成像素级置信度标签，并在训练和推理中显式地利用置信度信息以提高深度预测的可靠性。</p>
+<h2>解决的问题</h2>
+<p>微创手术中的内窥镜图像常包含非均匀光照、反光、烟雾等干扰因素，破坏深度模型的视觉一致性假设；且现有方法缺乏分级可靠性或显式置信度估计，不可靠的深度预测可能导致解剖评估错误或手术风险。</p>
+<h2>创新点</h2>
+<ul>
+<li>使用立体匹配模型集成计算像素级深度置信度，并引入新函数将方差转换为概率，生成连续置信度图。</li>
+<li>将校准后的置信度图纳入 MDE 训练，通过置信度加权损失强调可靠区域并降低不确定像素的影响。</li>
+<li>为 MDE 主干附加轻量级置信度头，使模型能在推理时输出像素级置信度。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2603.01650" data-arxiv-id="2603.01650" data-status="ready">
+<h1>[2603.01650] PromptStereo: Zero-Shot Stereo Matching via Structure and Motion Prompts</h1>
+<p><a href="https://arxiv.org/abs/2603.01650" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 PromptStereo，通过基于单目深度基础模型解码器的 Prompt 循环单元（PRU）及结构/运动提示，解决了现有 GRU 在迭代细化阶段的局限性，实现了零样本立体匹配的最先进性能。</p>
+<h2>解决的问题</h2>
+<p>现有零样本立体匹配方法在迭代细化阶段使用的 GRU 循环单元存在局限性，包括独立于视觉基础模型难以继承先验、隐藏状态范围狭窄难以处理复杂几何结构、以及融合方式导致状态信息失真和引导模糊。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出 Prompt 循环单元（PRU），基于单目深度基础模型解码器构建，直接继承单目深度先验且比 GRU 具有更好的表示能力和可扩展性。</li>
+<li>提出结构提示（SP）和运动提示（MP），将单目结构和立体运动线索引入 PRU，避免状态信息失真和引导模糊。</li>
+<li>提出针对 PRU 的简单有效更新策略及初始差值的仿射不变融合（AIF），均有利于迭代细化。</li>
+<li>提出的 PromptStereo 在多个数据集上实现了最先进的零样本泛化性能，同时保持了相当或更快的推理速度。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2603.03765" data-arxiv-id="2603.03765" data-status="ready">
+<h1>[2603.03765] LiDAR Prompted Spatio-Temporal Multi-View Stereo for Autonomous Driving</h1>
+<p><a href="https://arxiv.org/abs/2603.03765" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了 DriveMVS 框架，通过整合稀疏度量提示与时空推理，解决了极简 LiDAR 配置下自动驾驶深度估计中的度量精度、时间一致性及跨域泛化问题。</p>
+<h2>解决的问题</h2>
+<p>现有深度估计方法在自动驾驶场景中存在局限：单目基础模型存在尺度模糊和时序不一致；通用 MVS 模型在低视差或纹理重复下表现不佳且存在时序闪烁；前馈多视图模型绝对深度精度较差；多模态融合提示稀疏、间歇且不均匀；依赖当前帧线索的系统在输入缺失或退化时脆弱。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了 DriveMVS 框架，统一了绝对尺度精度、跨域泛化能力和鲁棒的时间一致性。</li>
+<li>设计了度量嵌入机制，将几何线索锚定到绝对尺度，并与结构先验和高保真度量提示融合以解决歧义。</li>
+<li>提出了基于 Transformer 的 Triple-Cues Combiner，融合锚定几何线索、结构先验和高保真稀疏度量引导。</li>
+<li>设计了带有运动感知时间层的时空解码器，确保视频序列中深度传播的平滑、稳定及度量准确。</li>
+<li>在 KITTI、DDAD 和 Waymo 等多个基准上实现了最先进的性能，并验证了跨数据集和领域的零样本迁移能力。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2603.12250" data-arxiv-id="2603.12250" data-status="ready">
+<h1>[2603.12250] DVD: Deterministic Video Depth Estimation with Generative Priors</h1>
+<p><a href="https://arxiv.org/abs/2603.12250" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了 DVD 框架，通过确定性适应预训练视频扩散模型，实现了具有生成先验的确定性视频深度估计，有效解决了现有生成模型的几何幻觉和判别式模型的语义模糊问题。</p>
+<h2>解决的问题</h2>
+<p>视频深度估计面临从静态图像到动态视频过渡的挑战，现有扩散模型因随机采样引入时间不确定性并产生几何幻觉，判别式模型依赖大量标注且存在语义模糊，且将确定性适应从静态图像扩展到动态视频面临模糊和结构不稳定问题。</p>
+<h2>创新点</h2>
+<ul>
+<li>通过分析现有范式，识别了生成模型的几何幻觉和判别式模型的语义模糊等关键瓶颈。</li>
+<li>提出了 DVD 框架，实现了预训练视频扩散模型向单通回归器的确定性适应。</li>
+<li>引入时间步作为结构锚点，平衡几何稳定性与细节精度。</li>
+<li>引入潜在流形校正，确保空间和时间的一致性。</li>
+<li>引入全局仿射一致性，支持长视频的无缝推理。</li>
+<li>在四个真实世界基准上验证了优越性能、高效性和可扩展性。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2603.15374" data-arxiv-id="2603.15374" data-status="ready">
+<h1>[2603.15374] Spectral Rectification for Parameter-Efficient Adaptation of Foundation Models in Colonoscopy Depth Estimation</h1>
+<p><a href="https://arxiv.org/abs/2603.15374" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 SpecDepth 框架，通过自适应小波调制机制解决结肠镜深度估计中基础模型因光谱信号衰减导致的参数高效适应难题。</p>
+<h2>解决的问题</h2>
+<p>现有方法将结肠镜基础模型性能下降归因于高层语义差异，但本文指出根本瓶颈在于低层信号分布的光谱衰减，导致特征提取器无法有效激活深度推理。</p>
+<h2>创新点</h2>
+<ul>
+<li>识别结肠镜固有的光谱衰减是迁移性的根本障碍，将适应范式从语义重训练转变为统计信号重新校准。</li>
+<li>提出由自适应小波调制驱动的 SpecDepth 框架，该机制明确对抗高频衰减以恢复精确边界划分所需的结构线索。</li>
+<li>引入结合尺度不变回归和梯度平滑的多约束目标，稳定光谱放大过程以增强解剖连贯性而不放大传感器噪声。</li>
+<li>在 C3VD 和 SimCol3D 两个公共数据集上进行广泛实验，证明在最小参数开销下实现了最先进的性能。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2603.15019" data-arxiv-id="2603.15019" data-status="ready">
+<h1>[2603.15019] Reference-Free Omnidirectional Stereo Matching via Multi-View Consistency Maximization</h1>
+<p><a href="https://arxiv.org/abs/2603.15019" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种名为 FreeOmniMVS 的无参考全景立体匹配框架，通过最大化多视图一致性来实现可见性感知的全局一致深度估计。</p>
+<h2>解决的问题</h2>
+<p>现有全景深度估计方法难以显式利用多视图间的几何关系，导致全局依赖隐式、可见性未显式处理以及融合不稳定，难以维持跨所有相机的重叠区域一致性。</p>
+<h2>创新点</h2>
+<ul>
+<li>我们引入了 FreeOmniMVS，这是一个无参考的全景 MVS 框架，将深度估计视为多视图一致性最大化，产生可见性感知、全局一致深度估计。</li>
+<li>我们提出了 VCT，显式建模所有相机对之间的相关性，并使用带有 Top-k 稀疏化的注意力机制消除不可靠证据，同时保持聚合的可扩展性。</li>
+<li>在干净和遮挡增强基准上的实验结果表明，FreeOmniMVS 在保持具有竞争力的准确性的同时，提供了对局部退化视图更好的容忍度。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2603.14702" data-arxiv-id="2603.14702" data-status="ready">
+<h1>[2603.14702] Fractal Autoregressive Depth Estimation with Continuous Token Diffusion</h1>
+<p><a href="https://arxiv.org/abs/2603.14702" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种基于分形自回归和连续 Token 扩散的单目深度估计框架，旨在解决传统自回归模型在跨模态映射、推理成本、量化误差及推理稳定性方面的挑战。</p>
+<h2>解决的问题</h2>
+<p>传统自回归模型直接应用于单目深度估计面临三大挑战：跨模态映射困难、像素级生成导致高串行推理成本、生成过程中的误差传播破坏预测稳定性；此外，深度值的离散化量化过程会引入误差导致细粒度几何信息丢失，且多尺度迭代若使用独立生成器会增加模型复杂度和推理成本，AR 生成的深度在推理期间存在不稳定性和有限可靠性。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种用于单目深度估计的分形递归自回归框架，将深度预测重构为下一尺度生成过程，并使用可重用的自回归模块递归组合尺度生成器。</li>
+<li>引入 VCFR 模块，通过融合多尺度图像特征与当前深度预测构建视觉 - 深度联合 Token，从而改善自回归生成过程中的跨模态条件。</li>
+<li>将条件去噪扩散损失纳入尺度自回归过程，直接在连续空间中建模深度分布，减少离散 Token 化引起的量化误差。</li>
+<li>提出了一种不确定性感知的鲁棒共识聚合方案，用于多样本推理，提高融合稳定性并提供无需额外训练的实用像素级可靠性代理。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2603.16362" data-arxiv-id="2603.16362" data-status="ready">
+<h1>[2603.16362] $D^3$-RSMDE: 40$\times$ Faster and High-Fidelity Remote Sensing Monocular Depth Estimation</h1>
+<p><a href="https://arxiv.org/abs/2603.16362" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 D3D^{3}-RSMDE 框架，通过结合快速 ViT 粗深度预测与轻量级扩散细化模块，实现了遥感单目深度估计的 40 倍加速和高保真度。</p>
+<h2>解决的问题</h2>
+<p>现有基于 ViT 的模型缺乏高频细节导致模糊，而基于扩散的模型计算密集不适合实时，且传统加速策略往往牺牲生成质量或受限于遥感领域大数据缺乏。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出 D3D^{3}-RSMDE 框架，专为遥感单目深度估计设计，相比 Marigold 获得超过 40 倍的速度提升。</li>
+<li>引入创新的 PLBR 策略并结合 VAE 在潜在空间操作，显著增强了准确性和计算效率。</li>
+<li>在五个数据集上的广泛实验证明，该方法达到 SOTA 或次优性能，效率与轻量级 ViT 模型相当。</li>
+<li>利用优化了 HDN 损失函数的快速 ViT 模块高效预测高质量粗深度图，替代扩散过程耗时的初始阶段。</li>
+<li>设计轻量级扩散细化模块，在更短轨迹上执行由粗到细的细节增强。</li>
+<li>通过 VAE 将整个细化操作映射到紧凑的潜在空间，以大幅减少大规模遥感图像处理的计算开销。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2603.16238" data-arxiv-id="2603.16238" data-status="ready">
+<h1>[2603.16238] PureCLIP-Depth: Prompt-Free and Decoder-Free Monocular Depth Estimation within CLIP Embedding Space</h1>
+<p><a href="https://arxiv.org/abs/2603.16238" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 PureCLIP-Depth，一种在 CLIP 嵌入空间内无需提示且无需解码器的单目深度估计方法，通过建立 RGB 到深度域的映射函数实现度量级深度估计。</p>
+<h2>解决的问题</h2>
+<p>现有单目深度估计方法依赖显式文本提示或提示设计，存在提示敏感性高、依赖解码器或中间特征的问题，且未能直接利用 CLIP 嵌入空间内的深度概念表示。</p>
+<h2>创新点</h2>
+<ul>
+<li>实证证明了 CLIP 嵌入空间内存在从 RGB 域到深度域的映射。</li>
+<li>通过在概念 CLIP 嵌入空间内执行计算且无需解码器，实现了度量级单目深度估计。</li>
+<li>该配置在 CLIP 编码器仅架构中实现了最先进的性能。</li>
+<li>提出了一种联合优化策略，同时优化 RGB 到深度的映射和 CLIP 嵌入空间内的度量级对齐。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2603.16340" data-arxiv-id="2603.16340" data-status="ready">
+<h1>[2603.16340] Iris: Bringing Real-World Priors into Diffusion Model for Monocular Depth Estimation</h1>
+<p><a href="https://arxiv.org/abs/2603.16340" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了 Iris 框架，通过整合真实世界先验将扩散范式转化为确定性架构，在有限数据和计算预算下实现了单目深度估计的跨域泛化、细节保真度及高精度。</p>
+<h2>解决的问题</h2>
+<p>单目深度估计面临真实数据标注不完美、合成数据域差距大、现有方法依赖大规模数据或泛化能力不足的问题，且扩散模型蒸馏时存在频率 - 可靠性不匹配导致的梯度干扰。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出 Iris 框架，整合真实世界先验，在有限资源下实现单目深度估计的跨域泛化与细节保真。</li>
+<li>提出 Priors-to-Geometry Deterministic (PGD) 框架，通过高扩散步长先验对齐和低步长几何细化分离，缓解梯度干扰。</li>
+<li>提出 Spectral-Gated Distillation (SGD) 和 Spectral-Gated Consistency (SGC)，利用频域门控解决频率 - 可靠性不匹配问题。</li>
+<li>实验表明 Iris 在零样本单目深度估计中达到新基准，优于现有扩散方法及大规模数据方法。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2603.19547" data-arxiv-id="2603.19547" data-status="ready">
+<h1>[2603.19547] SeeClear: Reliable Transparent Object Depth Estimation via Generative Opacification</h1>
+<p><a href="https://arxiv.org/abs/2603.19547" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 SeeClear，一种通过生成式不透明化将透明物体转换为几何一致的不透明图像，从而利用单目深度模型进行可靠深度估计的即插即用前端框架。</p>
+<h2>解决的问题</h2>
+<p>单目深度估计在处理具有复杂外观属性的真实场景（特别是透明物体）时往往失效，因为折射和透射效应违反了常见的光度假设，且现有针对透明物体的方法依赖大规模配对数据并引入分布偏移。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出 SeeClear 框架，首先将透明区域转换为几何一致的不透明图像，然后利用单目深度模型对透明物体进行深度预测。</li>
+<li>引入带有掩码预测头的即插即用前端适配器，将透明区域转换为几何一致的不透明表示。</li>
+<li>构建大规模高质量配对透明 - 不透明合成数据集 SeeClear-396k 以支持训练。</li>
+<li>在合成和真实世界数据集上进行广泛实验，证明方法优于基线并验证了其有效性和通用性。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2603.21882" data-arxiv-id="2603.21882" data-status="ready">
+<h1>[2603.21882] Deep S2P: Integrating Learning Based Stereo Matching Into the Satellite Stereo Pipeline</h1>
+<p><a href="https://arxiv.org/abs/2603.21882" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出将最先进的基于学习的立体匹配器集成到卫星立体管道（S2P）中，并通过实验验证了其在卫星影像重建中的性能优势。</p>
+<h2>解决的问题</h2>
+<p>将基于深度学习的立体匹配器集成到现有的卫星立体处理管道中仍然具有挑战性，因为大多数模型是在近距离数据集上训练的，其视差分布假设与卫星影像不符，直接替换可能导致性能次优或不稳定。</p>
+<h2>创新点</h2>
+<ul>
+<li>将最先进的基于学习的立体匹配器集成到卫星立体管道（S2P）中。</li>
+<li>扩展 S2P 以支持多种先进相关器，包括 StereoAnywhere、MonSter、Foundation Stereo 及 EO 微调版本的 MonSter。</li>
+<li>调整校正阶段以确保与视差假设的兼容性，并处理不同模型输出的符号约定差异。</li>
+<li>通过卫星影像上的综合实验评估验证了该集成方案。</li>
+<li>发现现有评估指标（如 MAE）可能无法完全捕捉现代立体匹配器在感知质量上的提升。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2601.17657" data-arxiv-id="2601.17657" data-status="ready">
+<h1>[2601.17657] SPACE-CLIP: Spatial Perception via Adaptive CLIP Embeddings for Monocular Depth Estimation</h1>
+<p><a href="https://arxiv.org/abs/2601.17657" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 SPACE-CLIP，一种在冻结 CLIP 视觉编码器上运行的解码器仅单目深度估计模型，通过双路径解码器提取语义和结构信号以实现空间感知。</p>
+<h2>解决的问题</h2>
+<p>现有 CLIP 模型难以直接用于单目深度估计，因为语义理解与密集空间线索存在不匹配，且现有深度估计器计算量大、难以集成到现有感知 - 行动栈中，提示匹配策略存在推理间接性或骨干维护开销。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种在 TFI-FB 约束下运行的解码器仅单目深度模型，直接从冻结的 CLIP 骨干网络读取几何信息。</li>
+<li>展示了双路径解码是一种有效的归纳结构，通过分离场景级语义线索和精细结构细节来暴露冻结 CLIP 特征中的潜在几何信息。</li>
+<li>将所得模型定位为具身 AI 的模块化感知块，通过将其设计连接到当前的机器人感知和 VLA 集成需求。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2603.16816" data-arxiv-id="2603.16816" data-status="ready">
+<h1>[2603.16816] WildDepth: A Multimodal Dataset for 3D Wildlife Perception and Depth Estimation</h1>
+<p><a href="https://arxiv.org/abs/2603.16816" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了 WildDepth，一个包含三个子集的统一多模态野生动物数据集，旨在解决现有数据集在模态、时间范围或地理多样性方面的局限性，以支持野生动物感知和深度估计任务。</p>
+<h2>解决的问题</h2>
+<p>现有野生动物监测数据集在模态、时间范围或地理多样性方面存在局限，导致深度学习方法的训练和基准测试存在显著差距，且传统方法难以支持 3D 和行为建模。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了 WildDepth，一个在生态不同环境中使用同步 RGB 和 LiDAR 成像系统收集的包含三个子集的统一多模态野生动物数据集。</li>
+<li>在深度估计、姿态检测、3D 重建和种群密度估计任务上进行了基准实验，为 AI 驱动的保守研究建立了基线。</li>
+<li>提供了关于生态数据多模态学习的见解，展示了结合异构传感器如何提高野外野生动物监测的准确性和泛化能力。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2603.15304" data-arxiv-id="2603.15304" data-status="ready">
+<h1>[2603.15304] UE5-Forest: A Photorealistic Synthetic Stereo Dataset for UAV Forestry Depth Estimation</h1>
+<p><a href="https://arxiv.org/abs/2603.15304" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文介绍了 UE5-Forest，一个专为无人机林业深度估计设计的合成立体数据集，利用虚幻引擎 5 和摄影测量扫描的树木资产生成具有像素级精确度差值标签的光学真实数据。</p>
+<h2>解决的问题</h2>
+<p>监督立体匹配网络依赖密集视差真值，但在非受控环境下收集标签是未解决的挑战，森林树冠的复杂几何结构导致 LiDAR 或结构光传感器无法可靠获取深度，且现有合成基准缺乏细粒度植被几何特征。</p>
+<h2>创新点</h2>
+<ul>
+<li>一个具有像素级精确度差值标签的光学真实林业立体数据集，在 UE5 中从 115 个摄影测量扫描的树木资产生成，相机参数与真实 ZED Mini 硬件精确匹配。</li>
+<li>数据集的详细统计特征，包括视差范围分析、场景多样性指标，以及与真实世界坎特伯雷树枝图像的定性视觉比较，确认了渲染数据的光学真实质量。</li>
+<li>一个公开发布的、即插即用的基准和训练资源，填补了林业领域监督立体匹配研究的数据真空。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2604.01118" data-arxiv-id="2604.01118" data-status="ready">
+<h1>[2604.01118] Lightweight Prompt-Guided CLIP Adaptation for Monocular Depth Estimation</h1>
+<p><a href="https://arxiv.org/abs/2604.01118" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种名为 MoA-DepthCLIP 的框架，通过结合轻量级 MoA 参数高效微调与混合分类回归架构，实现了高效且精确的单目深度估计。</p>
+<h2>解决的问题</h2>
+<p>如何将视觉语言模型（VLM）的高层语义知识转化为单目深度估计所需的细粒度度量预测，同时克服现有方法在数据效率、计算负担或几何细节方面的局限性。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出 MoA-DepthCLIP，这是首个基于轻量级 MoA PEFT 方法并结合选择性骨干网络微调的单目深度估计适应策略。</li>
+<li>探索了 MoA 在密集几何任务如单目深度估计中的应用，填补了该领域未探索的空白。</li>
+<li>展示了如何将现代 VLM 原生适应策略与经典的几何关注混合（分类 - 回归）预测头相结合，以恢复细粒度度量细节。</li>
+<li>引入了轻量级 MoA 模块和选择性微调至 ViT 骨干网络，并将适应后的特征馈入混合头架构。</li>
+<li>模型由全局场景上下文向量引导，并通过结合分类和回归损失的复合损失函数进行约束。</li>
+<li>在 NYU Depth V2 上的实验证明该方法显著优于先前的 VLM 方法，提高了 δ1 精度并减少了 RMSE，同时仅使用少量可训练参数。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2604.01791" data-arxiv-id="2604.01791" data-status="ready">
+<h1>[2604.01791] PTC-Depth: Pose-Refined Monocular Depth Estimation with Temporal Consistency</h1>
+<p><a href="https://arxiv.org/abs/2604.01791" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种无需依赖额外稀疏深度数据或深度传感器的深度估计框架，通过跟踪基础深度模型相对输出的度量尺度来增强单目深度预测的时间一致性。</p>
+<h2>解决的问题</h2>
+<p>保持连续帧之间的时间一致性是现实世界应用的主要挑战，且现有方法缺乏绝对距离信息或依赖额外传感器，限制了其在自动驾驶和机器人系统中的应用。</p>
+<h2>创新点</h2>
+<ul>
+<li>我们的方法通过递归贝叶斯更新跟踪基础深度模型相对输出的度量尺度，生成时间一致的度量深度图。</li>
+<li>关键见解是里程计和光流直接约束尺度，通过超像素聚合像素估计可实现即使在里程计噪声下也能鲁棒的贝叶斯尺度跟踪。</li>
+<li>利用基础深度模型，我们的方法实现了度量深度估计，同时在不同成像模态（包括 RGB 和长波红外图像）上保持锐利的边界质量。</li>
+<li>我们的方法在不依赖额外深度传感器或预训练度量先验的情况下，实现了比现有基于视频的深度方法更高的准确度的时间一致度量深度。</li>
+<li>我们在多个基准数据集（包括 KITTI、TartanAir 和 MS2）以及自己收集的多样化环境数据集上进行了实验评估。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2604.02639" data-arxiv-id="2604.02639" data-status="ready">
+<h1>[2604.02639] Cross-Vehicle 3D Geometric Consistency for Self-Supervised Surround Depth Estimation on Articulated Vehicles</h1>
+<p><a href="https://arxiv.org/abs/2604.02639" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了 ArticuSurDepth 框架，通过利用跨车辆 3D 几何一致性来增强铰接车辆的自监督环视深度估计。</p>
+<h2>解决的问题</h2>
+<p>铰接车辆存在感知挑战，现有自监督单目方法存在尺度模糊，多相机设置引入跨视图一致性挑战，且现有工作多关注乘用车，缺乏对铰接车辆动态铰接和复杂跨视图几何关系的探索。</p>
+<h2>创新点</h2>
+<ul>
+<li>建立针对铰接车辆的实验平台并收集环视数据集以支持该任务。</li>
+<li>引入跨车辆多视图空间上下文增强策略，通过增强光度和跨视图几何一致性来加强自监督。</li>
+<li>提出基于直接插值的跨视图表面法线一致性约束，以缓解时空上下文中的几何差异。</li>
+<li>提出基于视觉基础模型的感知平面感知相机高度正则化方法，以稳定无标签方式促进度量深度估计。</li>
+<li>开发跨车辆姿态一致性损失，连接车辆间的运动估计，加强铰接系统间的几何耦合。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2603.01765" data-arxiv-id="2603.01765" data-status="ready">
+<h1>[2603.01765] Efficient Test-Time Optimization for Depth Completion via Low-Rank Decoder Adaptation</h1>
+<p><a href="https://arxiv.org/abs/2603.01765" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种通过低秩解码器适应实现高效测试时优化的深度补全方法，在无需额外训练的情况下实现了最先进的性能并加快了推理速度。</p>
+<h2>解决的问题</h2>
+<p>现有的测试时优化深度补全方法虽然无需训练且跨域鲁棒，但依赖全网络重复前向传播导致推理耗时过长，与需要训练但快速的训练基方法存在效率与部署性的权衡。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种通过低秩解码器适应实现高效测试时优化的深度补全方法。</li>
+<li>通过分析发现强深度对齐信号集中在早期解码器的低维子空间中，从而探索仅解码器适应作为高效设计选择。</li>
+<li>仅执行一次编码器提取并缓存图像特征，迭代适应仅通过解码器进行。</li>
+<li>在五个室内和室外数据集上实现了最先进的性能，并提供了现有零样本深度补全方法中最快的测试时优化速度。</li>
+<li>解决了测试时优化方法易于部署但慢，与训练基方法快但需额外训练之间的权衡。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2602.09532" data-arxiv-id="2602.09532" data-status="ready">
+<h1>[2602.09532] RAD: Retrieval-Augmented Monocular Metric Depth Estimation for Underrepresented Classes</h1>
+<p><a href="https://arxiv.org/abs/2602.09532" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种名为 RAD 的检索增强单目度量深度估计方法，旨在通过检索内容相关图像作为代理辅助视图，解决单目深度估计在长尾类场景下表现不佳的问题。</p>
+<h2>解决的问题</h2>
+<p>单目度量深度估计在现实世界长尾数据中，针对代表性不足的类别难以准确估计深度；现有微调方法在分布外类别上先验不准确，而零样本方法忽略领域特定信息导致性能下降。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种名为 RAD 的检索增强单目度量深度估计方法，通过检索内容相关图像作为代理辅助视图来近似多视图系统的优势。</li>
+<li>设计了包含不确定性感知检索管道或 3D 增强生成上下文样本、建立空间对应关系以及双流网络融合匹配交叉注意力机制的三阶段训练流程。</li>
+<li>在推理阶段仅使用不确定性感知检索管道获取上下文图像，无需测试时适应。</li>
+<li>引入了一个新的基准来评估各数据集上的代表性不足类别，并在 NYU Depth v2、KITTI 和 Cityscapes 数据集上进行了验证。</li>
+<li>在代表性不足类别上实现了绝对相对误差的显著提升（NYU 29.2%，KITTI 13.3%，Cityscapes 7.2%），同时在领域内类别上保持或提升了性能。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2604.04925" data-arxiv-id="2604.04925" data-status="ready">
+<h1>[2604.04925] SimpleProc: Fully Procedural Synthetic Data from Simple Rules for Multi-View Stereo</h1>
+<p><a href="https://arxiv.org/abs/2604.04925" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了 SimpleProc，一种基于简单规则的完全程序化合成数据生成器，用于多视图立体视觉任务，并证明少量简单规则即可生成高质量数据。</p>
+<h2>解决的问题</h2>
+<p>程序化生成中如何设计有效的规则以生成多视图立体视觉（MVS）的高质量训练数据，以及是否仅需少量简单规则即可实现有效训练。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出 SimpleProc 程序化生成器，通过放样过程生成 NURBS 表面形状。</li>
+<li>从简单模式（如 Perlin 噪声）推导纹理和材质，并在场景中安排各种尺度的形状。</li>
+<li>证明少量简单规则即可生成高质量的多视图立体视觉训练数据。</li>
+<li>提供用于多视图立体视觉的大规模数据集。</li>
+<li>在固定数据预算下，生成的数据在 RMVD 基准测试中优于现有数据集。</li>
+<li>在扩大数据预算后，生成的数据在某些基准测试中达到或超过基于人工筛选图像的 SOTA 结果。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2603.27105" data-arxiv-id="2603.27105" data-status="ready">
+<h1>[2603.27105] UniDAC: Universal Metric Depth Estimation for Any Camera</h1>
+<p><a href="https://arxiv.org/abs/2603.27105" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了 UniDAC 框架，旨在设计一个无需大幅增加模型或数据集规模即可在各类相机类型和场景域中有效泛化的单目度量深度估计方法。</p>
+<h2>解决的问题</h2>
+<p>现有的单目度量深度估计方法难以在各类相机类型（如大视场角相机）和场景域之间有效泛化，且 UniK3D 依赖多样化训练数据，DAC 需要分域模型且统一模型性能下降。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出 UniDAC 框架，实现单一模型在多样化相机模型和场景类型上的泛化。</li>
+<li>设计深度引导尺度估计模块，以最小计算开销生成空间自适应尺度图。</li>
+<li>引入 RoPE-φ，一种通过纬度加权尊重 ERP 几何的失真感知 RoPE。</li>
+<li>大量实验表明 UniDAC 在单目度量深度估计的跨相机泛化方面达到最先进水平。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2604.07665" data-arxiv-id="2604.07665" data-status="ready">
+<h1>[2604.07665] Adaptive Depth-converted-Scale Convolution for Self-supervised Monocular Depth Estimation</h1>
+<p><a href="https://arxiv.org/abs/2604.07665" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种基于深度信息转换的自适应尺度卷积（DcSConv），旨在解决自监督单目深度估计中因物体尺度随深度变化而导致的特征提取不足问题。</p>
+<h2>解决的问题</h2>
+<p>现有深度估计方法采用固定尺度的卷积和池化操作，无法为不同大小的物体提供灵活的局部感受野，且忽略了物体深度与尺度之间的关系，导致在移动相机视频场景下无法有效提取不同深度物体的特征。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种基于深度信息和深度 - 尺度转换关系的自适应尺度卷积，解决了同一物体在不同深度和帧间的大小模糊问题，并形成了适当尺度的感受野。</li>
+<li>开发了两种自适应尺度卷积方法，即深度转换多尺度卷积融合（DMSF）和深度转换尺度卷积（DcSConv），后者可泛化为学习尺度卷积（GLSConv）。</li>
+<li>设计了一个深度转换尺度感知融合（DcS-F）模块，根据尺度信息自适应地融合尺度感知特征和传统卷积特征。</li>
+<li>提出的 DcSConv 和 DcS-F 模块不依赖于单目深度估计网络的详细架构，可替换现有网络中的基本卷积层。</li>
+<li>在两个基线网络上进行了实验，验证了所提方法的有效性，并通过消融研究验证了各模块的有效性。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2604.09352" data-arxiv-id="2604.09352" data-status="ready">
+<h1>[2604.09352] LuMon: A Comprehensive Benchmark and Development Suite with Novel Datasets for Lunar Monocular Depth Estimation</h1>
+<p><a href="https://arxiv.org/abs/2604.09352" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了 LuMon 套件，旨在通过构建基准和开发工具解决月球单目深度估计中地球模型在月球极端环境下可行性未经验证及存在严重视觉域差异的问题。</p>
+<h2>解决的问题</h2>
+<p>现有深学习 MDE 网络在地球导航成功但月球可行性未经验证，因月球环境缺乏大气散射、高对比度阴影及独特纹理导致与地球训练数据存在严重视觉域差异，且现有地球模拟类比无法完全复制极端月球光学。</p>
+<h2>创新点</h2>
+<ul>
+<li>提供完整的 MDE 评估框架，整理六个数据集，并为 Chang&#x27;e-3 图像和 CHERI 环境构建高质量立体视觉基础真值深度图。</li>
+<li>对 14 个领先模型进行系统性零样本分析，评估其在相对、度量、生成和视频一致范式下对月球挑战（如陨石坑、岩石和阴影）的鲁棒性。</li>
+<li>在合成数据上微调度量基础模型，以揭示将学习特征转移到真实月球图像时的当前泛化差距。</li>
+<li>将深度预测集成到相对姿态估计管道中，量化 MDE 质量如何直接影响机器人自主性。</li>
+<li>识别网络的固有局限性，并强调关键开放问题以指导未来的月球漫游车导航研究。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2604.14781" data-arxiv-id="2604.14781" data-status="ready">
+<h1>[2604.14781] Integrating Object Detection, LiDAR-Enhanced Depth Estimation, and Segmentation Models for Railway Environments</h1>
+<p><a href="https://arxiv.org/abs/2604.14781" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种模块化障碍物检测框架，整合了目标检测、深度估计和语义分割任务，旨在解决铁路环境中缺乏统一框架和可靠数据集的问题。</p>
+<h2>解决的问题</h2>
+<p>现有研究多集中于自动驾驶而非铁路系统，且缺乏公开的真实世界数据集；现有方法缺乏针对铁路场景的模块化灵活系统，任务往往孤立处理，距离估计常受背景干扰，且缺乏具有可靠距离真值的公开数据集阻碍了可复现评估。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种模块化且灵活的基于多传感器的障碍物检测框架</li>
+<li>针对铁路环境微调了最先进的分割、目标检测和单目深度估计模型</li>
+<li>提出并评估了整合目标检测、深度估计和语义分割的数据融合算法</li>
+<li>利用多目标跟踪过滤帧间距离估计以提高距离预测准确性</li>
+<li>在合成和增强数据上评估了该框架</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2604.18790" data-arxiv-id="2604.18790" data-status="ready">
+<h1>[2604.18790] EfficientPENet: Real-Time Depth Completion from Sparse LiDAR via Lightweight Multi-Modal Fusion</h1>
+<p><a href="https://arxiv.org/abs/2604.18790" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了 EfficientPENet，一种针对稀疏 LiDAR 数据的深度补全架构，通过轻量级多模态融合解决了边缘设备上精度与效率之间的权衡问题。</p>
+<h2>解决的问题</h2>
+<p>现有高性能深度补全方法依赖重型骨干网络，计算需求与嵌入式边缘设备（如 NVIDIA Jetson AGX）的实时性、功耗和内存约束不兼容，且地下巡检环境存在光照不足、表面反光等额外挑战。</p>
+<h2>创新点</h2>
+<ul>
+<li>将标准 ResNet-34 RGB 编码器替换为集成 Layer Normalization、7×7 深度可分离卷积、GELU 激活和随机深度正则化的 ConvNeXt 骨干网络，并通过结构化权重复制策略将 ImageNet 预训练权重转移到 6 通道输入。</li>
+<li>在深度编码分支中引入稀疏不变卷积，并维护并行二进制有效性掩码，以防止零值缺失测量通过网络层腐蚀学习到的特征图。</li>
+<li>引入位置感知测试时增强（TTA）策略，在水平翻转期间应用坐标校正，以维持接收显式像素位置编码的网络的几何一致性。</li>
+<li>在 KITTI 深度补全基准上实现了最低 RMSE（631.94 mm），同时在 NVIDIA Jetson 平台上达到 48.76 FPS，相比 PENet 参数减少 3.7 倍，相比 BP-Net 延迟提升 23 倍。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2604.23432" data-arxiv-id="2604.23432" data-status="ready">
+<h1>[2604.23432] Sphere-Depth: A Benchmark for Depth Estimation Methods with Varying Spherical Camera Orientations</h1>
+<p><a href="https://arxiv.org/abs/2604.23432" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文介绍了一种名为 Sphere-Depth 的新基准，旨在系统评估单目深度估计模型在真实场景下不同相机姿态变化下的鲁棒性。</p>
+<h2>解决的问题</h2>
+<p>现有深度估计模型大多假设球形相机处于标准姿态，但实际应用中移动平台会导致不可控的姿态扰动，从而严重影响深度预测精度，而这一问题在文献中受到的关注较少。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种针对等距矩形图像的单目深度估计的姿态感知基准，旨在评估模型在相机姿态变化下的泛化能力，重点关注对俯仰角和翻滚角变化的敏感性。</li>
+<li>提出了一种基于深度校准的评估协议，引入可学习的缩放因子λ以将预测深度与真实值对齐，允许对输出尺度不同的模型进行公平比较。</li>
+<li>对基于透视图像或球形图像训练的模型进行了比较研究，得出结论表明即使在球形图像模型中，相机姿态扰动也会导致性能显著下降。</li>
+<li>提供了一个公共基准，为未来关于全向设置下姿态和几何不变深度估计的研究提供了可复现的基础。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2604.26454" data-arxiv-id="2604.26454" data-status="ready">
+<h1>[2604.26454] Last-Layer-Centric Feature Recombination: Unleashing 3D Geometric Knowledge in DINOv3 for Monocular Depth Estimation</h1>
+<p><a href="https://arxiv.org/abs/2604.26454" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种名为 LFR 的模块，通过以最后一层特征为中心重组特征，释放 DINOv3 中的 3D 几何知识，从而提升单目深度估计性能。</p>
+<h2>解决的问题</h2>
+<p>现有基于 DINO 系列的单目深度估计模型通常采用固定中间层特征输入解码器的范式，可能无法充分利用视觉基础模型中嵌入的丰富几何知识，且 ViT 层间特征分布差异显著。</p>
+<h2>创新点</h2>
+<ul>
+<li>首次对 DINOv3 进行 3D 几何的逐层系统分析，证明更深层包含更密集和明确的几何信息，对深度预测高度可预测。</li>
+<li>提出 LFR 模块，一种简单有效的以最后一层为中心的特征重组模块，自适应选择并融合互补的中间特征以增强 MDE 的几何信号。</li>
+<li>在多个基准上验证 LFR，显示相对于强基线的一致增益，并实现高效计算和强大零样本泛化能力的 SOTA 结果。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2603.10584" data-arxiv-id="2603.10584" data-status="ready">
+<h1>[2603.10584] Need for Speed: Zero-Shot Depth Completion with Single-Step Diffusion</h1>
+<p><a href="https://arxiv.org/abs/2603.10584" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种名为 Marigold-SSD 的单步扩散方法，旨在通过端到端微调实现零样本深度补全，在显著降低推理计算成本的同时保持与现有迭代方法相当的性能。</p>
+<h2>解决的问题</h2>
+<p>现有的基于扩散的深度补全方法虽然效果好，但推理需要大量去噪步骤且计算成本高，难以满足实际应用对效率的需求。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了首个用于深度补全的单步扩散方法，在显著快于扩散基线且平均性能更好的同时，即使基线采用更高计算成本的集成策略也保持竞争力。</li>
+<li>提出了一种简单有效的晚期融合策略用于对稀疏测量进行条件控制，并通过消融研究验证了其相对于早期融合的有效性。</li>
+<li>在室内和室外数据集上进行了全面的零样本评估，展示了 Marigold-SSD 对不同条件稀疏水平的强鲁棒性，并揭示了现有评估基准的局限性。</li>
+<li>通过将计算从推理转移到微调阶段，实现了单步推理，显著缩小了性能与运行时效率之间的差距。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2605.02667" data-arxiv-id="2605.02667" data-status="ready">
+<h1>[2605.02667] AnchorD: Metric Grounding of Monocular Depth Using Factor Graphs</h1>
+<p><a href="https://arxiv.org/abs/2605.02667" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种无需训练的零样本深度定位框架，通过因子图优化将单目深度估计先验与原始度量传感器深度结合，并引入了一个针对非朗伯体深度补全的新数据集。</p>
+<h2>解决的问题</h2>
+<p>非朗伯表面导致深度传感器测量无效或损坏；单目深度估计的全局度量缩放存在厘米级误差；现有监督学习方法需要难以获取的标注数据且对域偏移敏感；缺乏适用于非朗伯体深度补全的合适基准数据集。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种无需训练的零样本深度定位框架，避免任务特定训练。</li>
+<li>结合原始度量传感器深度与单目深度估计先验，将其融合为因子图优化问题。</li>
+<li>引入块级仿射对齐，在度量空间中局部定位单目深度预测同时保留结构线索。</li>
+<li>提出了一种针对非朗伯体深度补全的新数据集，提供物体区域外部的密集真值深度图。</li>
+<li>实现了框架的 GPU 并行化，使用 jaxLS 并公开了完整数据集。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2603.01999" data-arxiv-id="2603.01999" data-status="ready">
+<h1>[2603.01999] Learning Vision-Based Omnidirectional Navigation: A Teacher-Student Approach Using Monocular Depth Estimation</h1>
+<p><a href="https://arxiv.org/abs/2603.01999" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种结合单目深度估计与深度强化学习的视觉全向导航方法，采用教师 - 学生框架将基于 2D LiDAR 的教师策略蒸馏到仅使用多相机深度图的學生策略中，并实现了从仿真到实物的迁移。</p>
+<h2>解决的问题</h2>
+<p>自主移动机器人主要依赖 2D LiDAR 进行导航和避障，但 2D LiDAR 感知仅限于单一水平扫描平面，难以处理超出该平面的障碍物（如叉车叉齿、悬空负载等），而补充 3D 传感器会增加成本、重量和集成复杂度。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种教师 - 学生强化学习框架，其中经过 PPO 训练的教师利用特权 2D LiDAR 观测将策略蒸馏到仅使用多相机设置中 MDE 衍生深度图的學生进行导航。</li>
+<li>在 NVIDIA Jetson Orin AGX 嵌入式平台上实现了机载部署，并成功完成了从仿真到实物的迁移。</li>
+<li>在仿真和真实世界实验中进行了比较评估，证明基于 MDE 的学生策略匹配或超过了 2D LiDAR 教师。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2605.08521" data-arxiv-id="2605.08521" data-status="ready">
+<h1>[2605.08521] Geometric Flood Depth Estimation: Fusing Transformer-Based Segmentation with Digital Elevation Models</h1>
+<p><a href="https://arxiv.org/abs/2605.08521" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种结合 Transformer 分割与数字高程模型的几何洪水深度估计方法，利用浴缸原理从航空影像中推断深度，以克服现有模拟方法计算成本高及数据驱动方法不稳定的问题。</p>
+<h2>解决的问题</h2>
+<p>现有洪水深度估计面临深度学习无法从单目影像提取体积深度、水动力求解器计算延迟高且依赖稀缺实时数据、事后参考产品发布滞后、以及机器学习代理模型存在伪影或幻觉等问题。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种几何深度估计管道，通过融合高精度 2D 分割掩码与现有 DEM 来推断深度，绕过模拟计算成本和数据驱动代理的不稳定性。</li>
+<li>利用“浴缸原理”假设静止洪水形成局部平坦表面，仅需航空影像和开源高程数据，提供计算高效且物理基础的方法。</li>
+<li>集成 Transformer 网络（Mask2Former）以利用注意力机制获得更清晰的水线轮廓，解决几何深度准确性的关键瓶颈。</li>
+<li>引入“严格干地接触”边界逻辑及边缘伪影拒绝机制，这是先前浴缸方法中不存在的。</li>
+<li>使用 FloodNet 训练分割架构，CRASAR-U-DROIDS 进行部署，并采用 FEMA 深度栅格作为体积累积验证的定量真值。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2605.08320" data-arxiv-id="2605.08320" data-status="ready">
+<h1>[2605.08320] Improved monocular depth prediction using distance transform over pre-semantic contours with self-supervised neural networks</h1>
+<p><a href="https://arxiv.org/abs/2605.08320" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种利用距离变换和自监督预语义轮廓估计来增强单目深度预测在低纹理区域判别力的方法。</p>
+<h2>解决的问题</h2>
+<p>现有的自监督单目深度估计方法在低纹理区域因依赖 SSIM 和基于颜色的成本函数而存在病态问题，导致对应关系难以确定。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种用于预语义轮廓估计的自监督方法，生成计算距离变换所需的边缘信息并强化深度估计网络。</li>
+<li>提出了一种包含距离变换的新颖方差增强图像，增强了低纹理区域的判别力并改进了收敛特性。</li>
+<li>提供了理论基础，证明了距离变换在恒定性假设下增加方差的有效性。</li>
+<li>对新管道进行了广泛的实验验证，在 KITTI、Cityscapes、Waymo、NYUv2 和 ScanNet 等多个基准数据集上取得了具有竞争力的性能。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2605.10251" data-arxiv-id="2605.10251" data-status="ready">
+<h1>[2605.10251] Efficient Hybrid CNN-GNN Architecture for Monocular Depth Estimation</h1>
+<p><a href="https://arxiv.org/abs/2605.10251" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 GraphDepth 架构，通过混合 CNN-GNN 设计解决单目深度估计中局部特征与全局上下文建模的矛盾，并实现了精度与效率的平衡。</p>
+<h2>解决的问题</h2>
+<p>单目深度估计领域面临局部特征提取与全局上下文建模之间的核心张力，CNN 受限于感受野无法捕捉长程依赖，Transformer 计算复杂度高且可能忽略局部细节，而现有 GNN 方法未将 GNN 直接嵌入 CNN 特征层级。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出可扩展的批处理图构建方法，实现批并行化 k-NN 和基于网格的邻接关系，支持混合精度训练。</li>
+<li>将 GraphSAGE 层嵌入瓶颈和两个解码器阶段，实现多尺度 GNN 推理以传播关系上下文。</li>
+<li>设计异方差不确定性头学习像素级置信度图，通过调制训练损失减少域偏移下的过度自信错误。</li>
+<li>在室内、空中和合成基准上进行全面评估，包含零样本跨域迁移实验。</li>
+<li>证明混合设计相比 CNN 和 Transformer 基线实现了有利的精度 - 效率权衡。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2605.16628" data-arxiv-id="2605.16628" data-status="ready">
+<h1>[2605.16628] SCARED-C: Corrected Camera Poses for Endoscopic Depth Estimation</h1>
+<p><a href="https://arxiv.org/abs/2605.16628" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文针对 SCARED 数据集中非关键帧深度图因机器人运动学误差导致严重错位的问题，提出利用结构光运动恢复算法修正相机位姿并扩展可靠标注数据的方法。</p>
+<h2>解决的问题</h2>
+<p>SCARED 数据集通过机器人运动学扩展的非关键帧深度图存在严重错位，导致大部分扩展数据不适合用于训练或评估。</p>
+<h2>创新点</h2>
+<ul>
+<li>使用结构光运动恢复算法和尺度恢复算法修正 SCARED 数据集中非关键帧的相机位姿。</li>
+<li>将可靠标注数据从 35 个关键帧扩展至 17,135 帧。</li>
+<li>通过现成立体模型评估和单目深度估计训练比较两个实验验证修正数据集。</li>
+<li>在 HuggingFace 上公开发布修正后的数据集及建议的训练验证划分。</li>
+<li>公开发布尺度恢复代码。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2605.14963" data-arxiv-id="2605.14963" data-status="ready">
+<h1>[2605.14963] H-OmniStereo: Zero-Shot Omnidirectional Stereo Matching with Heading-Aligned Normal Priors</h1>
+<p><a href="https://arxiv.org/abs/2605.14963" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了 H-OmniStereo 框架，利用大规模合成数据集和 heading-aligned 法线先验，实现了全景立体匹配的零样本泛化能力。</p>
+<h2>解决的问题</h2>
+<p>现有全景立体匹配方法存在零样本泛化能力有限的问题，主要源于大规模等距柱面立体数据集稀缺，且单目深度先验受球面畸变影响导致跨视图深度值不一致，难以建立可靠的立体对应关系。</p>
+<h2>创新点</h2>
+<ul>
+<li>构建了用于顶底全景立体匹配的高质量合成数据集，包含超过 2.8M 图像对，规模约为先前最大数据集的 70 倍。</li>
+<li>提出了一种在 heading-aligned 坐标系中运行的等距柱面单目法线估计器，提供抗球面畸变且跨视图一致的几何先验。</li>
+<li>该方法在域外数据集上优于现有方法，并能使用单个模型成功泛化到现实世界的消费级相机。</li>
+<li>通过定义随经度变化的 heading-aligned 坐标系，使相同局部模式对应相同的法线，提高了学习效率并适应随机裁剪。</li>
+<li>立体数据集可作为准确的法线监督，因为法线估计对场景和物体的绝对尺度不敏感。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2605.19797" data-arxiv-id="2605.19797" data-status="ready">
+<h1>[2605.19797] Depth2Pose: A Pose-Based Benchmark for Monocular Depth Estimation without Ground-Truth Depth</h1>
+<p><a href="https://arxiv.org/abs/2605.19797" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了 Depth2Pose 框架，通过利用深度感知相对姿态估计间接评估单目深度预测质量，无需真值深度，并引入了 D2P 数据集以验证评估框架及泛化能力。</p>
+<h2>解决的问题</h2>
+<p>现有单目深度估计评估协议依赖难以获取的像素级真值深度，限制了场景多样性，且现有指标未考虑下游任务中不同区域的几何重要性，无法准确反映深度在几何任务中的实际效用。</p>
+<h2>创新点</h2>
+<ul>
+<li>引入 Depth2Pose，一种基于深度感知相对姿态估计的任务驱动评估框架，用真值姿态替代真值深度进行基准测试。</li>
+<li>在现有基准上验证框架，表明基于姿态的指标与标准深度指标相关，同时能捕捉任务相关的非均匀深度质量。</li>
+<li>提出包含挑战性真实场景的新数据集 D2P，证明在标准基准上表现良好不一定意味着在新数据集上表现良好。</li>
+<li>提供简单可扩展的评估协议以促进可复现的基准测试，代码和数据集公开可用。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2605.15876" data-arxiv-id="2605.15876" data-status="ready">
+<h1>[2605.15876] Unlocking Dense Metric Depth Estimation in VLMs</h1>
+<p><a href="https://arxiv.org/abs/2605.15876" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 DepthVLM 框架，通过附加轻量级深度头并采用统一视觉 - 文本监督范式，使 VLM 能够原生地进行密集度量深度估计，同时保持多模态能力。</p>
+<h2>解决的问题</h2>
+<p>现有 VLM 受限于文本-only 监督范式，难以进行精细的视觉感知和密集场景几何建模，且现有改进方法存在推理慢、输出粗糙或训练成本高的问题。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出 DepthVLM 框架，使 VLM 能原生进行密集几何预测，同时兼容标准指令微调阶段。</li>
+<li>设计两阶段训练策略，在建立深度预测能力的同时保留 VLM 原有的多模态能力。</li>
+<li>构建 DepthVLM-Bench 统一基准，整合室内外深度数据集以支持 VLM 训练及与纯视觉模型的公平比较。</li>
+<li>实验表明 DepthVLM 在推理效率、度量深度估计精度及 3D 空间推理性能上均优于现有方法。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2602.03209" data-arxiv-id="2602.03209" data-status="ready">
+<h1>[2602.03209] Depth Completion in Unseen Field Robotics Environments Using Extremely Sparse Depth Measurements</h1>
+<p><a href="https://arxiv.org/abs/2602.03209" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种利用图像和极稀疏深度测量在未见过的野外机器人环境中进行深度补全的方法，并提供了相应的数据集和代码。</p>
+<h2>解决的问题</h2>
+<p>现有的度量深度估计方法在野外机器人环境中因缺乏尺度特征和纹理条件而难以直接应用，且针对该场景的大规模数据集稀缺，同时利用极稀疏、噪声和退化测量进行深度补全并泛化到未见过的野外环境的研究较少。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种实时深度补全方法，能够从输入图像和极稀疏深度测量中预测度量密集深度。</li>
+<li>架构上扩展了最先进度量深度估计方法，结合稀疏深度测量同时保留其泛化能力。</li>
+<li>提出了一种针对野外机器人定制的合成训练数据集生成方法，利用 3D 网格、SfM、照片级真实渲染和新视角合成。</li>
+<li>发布了四个合成训练数据集、代码、训练好的模型以及现实世界评估数据集以支持该领域的未来研究。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2605.23098" data-arxiv-id="2605.23098" data-status="ready">
+<h1>[2605.23098] UfM*: Uncertainty from Motion* for DNN Depth Estimation Using Gaussians</h1>
+<p><a href="https://arxiv.org/abs/2605.23098" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 UfM∗算法，利用高斯表示测量多视图不一致性，实现了资源受限机器人单目深度 DNN 的高效且准确的后处理不确定性估计。</p>
+<h2>解决的问题</h2>
+<p>单目深度 DNN 在噪声或分布外图像上精度下降且部署时无法获取真值，传统单图不确定性估计不适合连续视频流，而现有多视图方法存在计算内存开销大、点云表示导致过度自信及需重新训练等局限性。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出 UfM∗算法，满足单次推理、后处理、紧凑 3D 表示和区域不一致性敏感等四个理想属性。</li>
+<li>引入高斯多视图不一致性，通过高斯表示而非单个点预测来测量不一致性，提高效率和不确定性质量。</li>
+<li>提出跨视图的高斯对应关系，通过比较 2D 图像平面上的高斯分量重叠来匹配 3D 高斯组件。</li>
+<li>定义多视图不一致性为对应高斯之间的距离。</li>
+<li>利用高斯混合回归（GMR）从高斯混合表示中获取密集的每像素不确定性。</li>
+<li>实验表明 UfM∗相比集成基线提高了 24-28% 的校准度，同时仅消耗 3% 的能量和 0.02% 的内存。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2605.24074" data-arxiv-id="2605.24074" data-status="ready">
+<h1>[2605.24074] WideDepth: Millimeter-Accurate Benchmark for Fisheye Depth Estimation</h1>
+<p><a href="https://arxiv.org/abs/2605.24074" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文介绍了 WideDepth，这是首个基于高精度激光扫描的室内毫米级鱼眼深度基准，并提出了生成真值的 CUDA 加速管道及模型评估方法。</p>
+<h2>解决的问题</h2>
+<p>宽视场深度估计研究不足，特别是室内鱼眼深度估计缺乏真实数据，且现有针孔方法无法直接应用于鱼眼几何。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了首个室内毫米级精确鱼眼深度基准，包含 5K 样本跨 101 个场景。</li>
+<li>评估了最先进预训练模型在该数据集上的性能。</li>
+<li>提出了基于 Double Sphere 模型的 CUDA 加速管道，从高分辨率激光扫描生成鱼眼 RGB、深度和视差真值。</li>
+<li>实现了无需存储大型全景图的可扩展基准创建，并允许在不重新训练的情况下将针孔训练模型适配到鱼眼。</li>
+<li>编译了包含 18K 户外立体鱼眼对的训练数据集，并展示了通过微调针孔模型进行域适应可进一步提升指标。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2605.23281" data-arxiv-id="2605.23281" data-status="ready">
+<h1>[2605.23281] DepthAgent: Towards Better Universal Depth Estimation via Sample-wise Expert Selection</h1>
+<p><a href="https://arxiv.org/abs/2605.23281" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 DepthAgent，一种基于 VLM 代理的自适应单目深度估计框架，旨在通过样本级专家选择解决不同相机几何下的深度估计问题。</p>
+<h2>解决的问题</h2>
+<p>现有单目深度估计模型在不同相机几何（如标准视角、鱼眼、全景）下表现不一，缺乏单一最优模型，且模型组合策略探索不足，缺乏输入自适应机制。</p>
+<h2>创新点</h2>
+<ul>
+<li>本文对单目深度估计中的单模型选择和多模型融合进行了系统分析，揭示了强模型互补性和相机依赖的专家偏好。</li>
+<li>将鲁棒通用深度估计形式化为输入自适应解决方案选择问题，并提出 DepthAgent，一种为每个样本自适应选择深度专家和融合策略的 VLM 代理。</li>
+<li>设计了一种多奖励强化微调方案，鼓励有效的工具执行、相机和场景感知的决策制定以及质量 - 效率平衡。</li>
+<li>在多种深度基准上验证了 DepthAgent，显示与单个专家、非代理融合基线及不同选择策略相比的一致改进，在困难样本上增益尤为显著。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2605.30115" data-arxiv-id="2605.30115" data-status="ready">
+<h1>[2605.30115] Large Depth Completion Model from Sparse Observations</h1>
+<p><a href="https://arxiv.org/abs/2605.30115" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种名为大深度补全模型 (LDCM) 的方法，通过结合单目深度基础模型增强几何先验及改革训练目标为点图回归，实现了从稀疏不规则观测中生成稠密且度量准确的深度图。</p>
+<h2>解决的问题</h2>
+<p>现有深度补全方法在未见环境和不规则稀疏深度图（如 SfM 点）上泛化能力差，且将任务视为深度恢复，缺乏显式的 3D 几何推理，导致在严重域偏移下性能不佳。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出大深度补全模型 (LDCM)，将传统的深度回归头替换为点图回归头，直接预测度量尺度的 3D 坐标。</li>
+<li>引入基于泊松的粗深度补全策略，利用单目深度基础模型的相对深度线索和稀疏观测生成高质量的初始深度图。</li>
+<li>无需相机内参即可预测 3D 点图，便于在未校准环境中部署。</li>
+<li>通过广泛实验证明 LDCM 在多种基准测试和不同稀疏度水平上优于先前的最先进方法，展示了其强大的泛化能力。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2606.01367" data-arxiv-id="2606.01367" data-status="ready">
+<h1>[2606.01367] ActMVS: Active Scene Reconstruction with Monocular Multi-View Stereo</h1>
+<p><a href="https://arxiv.org/abs/2606.01367" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了首个单目主动场景重建框架 ActMVS，通过视图因子图和全局深度优化算法实现了无需深度传感器的在线稠密深度图生成和场景重建。</p>
+<h2>解决的问题</h2>
+<p>现有主动重建方法依赖昂贵的深度传感器，且单目深度估计缺乏度量精度，MVS 方法因基线不足和缺乏全局上下文导致深度预测次优及误差累积。</p>
+<h2>创新点</h2>
+<ul>
+<li>首个单目主动重建工作，性能与 RGB-D 方法具有竞争力。</li>
+<li>一种用于信息 MVS 深度预测的视图因子图公式，包含体素 - 帧可见性建模。</li>
+<li>一种利用视图因子图增强空间一致性和几何精度的新颖全局深度优化方法。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2606.03989" data-arxiv-id="2606.03989" data-status="ready">
+<h1>[2606.03989] PixVOD: Pixel-Distributed Direct Visual Odometry and Depth Estimation</h1>
+<p><a href="https://arxiv.org/abs/2606.03989" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种基于像素并行计算的算法，旨在实现在传感器上的纯像素内 6DoF 视觉里程计估计。</p>
+<h2>解决的问题</h2>
+<p>移动边缘应用需要低功耗、低延迟的视觉处理，而现有的基于 SCAMP 的视觉里程计方法需要与外部 CPU 通信才能完成 6DoF 运动估计优化，且如何在 PPA 的分布式内存结构上实现一致的全局相机运动估计是一个关键挑战。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种算法，实现 6DoF 视觉里程计估计的纯像素内计算，无需外部 CPU 通信。</li>
+<li>论证了密集视觉里程计方法（同时估计相机运动和密集深度图）在 PPA 上比稀疏方法更容易实现。</li>
+<li>将方法形式化为存储在整个像素阵列上的分布式因子图，每个像素都有变量。</li>
+<li>利用恒等因子在整个阵列上同步全局相机运动估计。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2605.28477" data-arxiv-id="2605.28477" data-status="ready">
+<h1>[2605.28477] SA4Depth: Consistent Pose-Depth Scale Alignment for Self-Supervised Monocular Depth Estimation</h1>
+<p><a href="https://arxiv.org/abs/2605.28477" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 SA4Depth 方法，通过改进联合深度和姿态自监督框架内的姿态估计，实现一致的姿态 - 深度尺度对齐，从而提升单目深度估计的准确性。</p>
+<h2>解决的问题</h2>
+<p>自监督单目深度估计方法中，直接姿态回归和固有的尺度模糊性导致深度和姿态尺度在场景间出现大幅波动，破坏了自监督机制并降低了深度估计性能。</p>
+<h2>创新点</h2>
+<ul>
+<li>重新审视自监督深度训练中姿态估计的作用，强调深度与姿态尺度对齐的重要性。</li>
+<li>提出通过姿态细化例程耦合深度和姿态估计，在重投影的可学习对应特征距离上细化相对姿态，直接影响尺度一致性。</li>
+<li>联合训练特征网络以学习用于姿态细化的鲁棒特征，并推断置信图以减轻无纹理区域的影响。</li>
+<li>利用 Levenberg-Marquardt 算法减少特征对齐残差，细化姿态以提高精度和深度尺度，并使用细化后的姿态计算光度损失。</li>
+<li>在 KITTI、Cityscapes 和 NYUv2 数据集上的实验证明该方法在室内外场景下均一致且显著优于基线方法。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2606.17475" data-arxiv-id="2606.17475" data-status="ready">
+<h1>[2606.17475] StereoFactory: A Unified Merging Framework for Robust Stereo Matching</h1>
+<p><a href="https://arxiv.org/abs/2606.17475" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 StereoFactory，一种用于立体匹配的自适应模型合并框架，通过两阶段进化搜索解决模型选择与模块级路由问题，实现了比统一平均或干扰减少方法更优的性能。</p>
+<h2>解决的问题</h2>
+<p>现有立体匹配模型合并范式存在训练扩展性差、合并所有模型可能引入有害干扰、现有选择策略易陷入局部最优以及全局合并系数忽略模块级知识专业化等问题。</p>
+<h2>创新点</h2>
+<ul>
+<li>实证表明自适应模型选择是有效立体模型合并的核心因素，选择性合并紧凑子集优于合并所有模型。</li>
+<li>识别了合并立体网络中的模块级知识专业化现象，并提出利用 CMA-ES 进行架构自适应路由的粗到细框架。</li>
+<li>引入了 StereoFactory，一种仅需轻量验证集且无需联合重训练的两阶段进化框架。</li>
+<li>提供了系统性分析，揭示知识贡献本质上是模块特定的，且选定子集可在架构间迁移。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2606.24457" data-arxiv-id="2606.24457" data-status="ready">
+<h1>[2606.24457] Lite Any Stereo V2: Faster and Stronger Efficient Zero-Shot Stereo Matching</h1>
+<p><a href="https://arxiv.org/abs/2606.24457" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了 Lite Any Stereo V2 (LAS2)，这是一个专为零样本泛化设计的超快立体匹配模型系列，旨在实现高效部署与强零样本性能之间的平衡。</p>
+<h2>解决的问题</h2>
+<p>现有立体匹配方法往往在精度和效率之间存在权衡，高精度模型难以在资源受限平台部署，而高效模型精度不足且缺乏实用的即插即用零样本解决方案。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出 LAS2，一个用于零样本泛化的高效立体匹配模型系列，在保持显著更低延迟的同时实现了比代表性基线更强的零样本性能。</li>
+<li>系统研究了实际部署设置下的高效立体架构设计，开发了纯 2D 成本聚合框架，实现了有利的精度 - 延迟权衡。</li>
+<li>提出了一种结合合成监督、自蒸馏和现实世界知识蒸馏的三阶段训练策略，使高效立体模型能够泛化到多样化的现实场景。</li>
+<li>引入伪标签过滤机制和误差钳位操作，以提高现实世界伪监督的可靠性并促进更平滑的合成到现实转移。</li>
+<li>构建了包含 S、M、L 和 H 变体的完整 LAS2 模型家族，以满足 GPU 和边缘设备上的不同部署需求。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2606.25437" data-arxiv-id="2606.25437" data-status="ready">
+<h1>[2606.25437] LinStereo: Linear-Complexity Global Attention for Multi-Scale Iterative Stereo Matching</h1>
+<p><a href="https://arxiv.org/abs/2606.25437" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>LinStereo 提出了一种以位置感知线性注意力（PALA）为核心的迭代立体匹配框架，通过分层语义成本体积和深度先验初始化实现线性复杂度下的全局聚合，在标准基准及水下跨域场景中达到最先进精度。</p>
+<h2>解决的问题</h2>
+<p>立体深度估计在纹理缺失、遮挡或水下等复杂区域困难，现有迭代方法存在骨干网络能力与更新循环利用不匹配的问题，具体表现为更新主要基于局部邻域、多尺度特征简化为单级相关性以及几何先验在初始化时未被充分利用。</p>
+<h2>创新点</h2>
+<ul>
+<li>LinStereo 是一个迭代立体框架，其核心是 PALA，一种位置感知线性注意力算子，以线性复杂度将局部循环替换为全局聚合。</li>
+<li>PALA 与 HSCV（分层语义成本体积）配对，提供利用骨干网络多尺度特征的策略及每个尺度体积的新结构。</li>
+<li>PALA 与 DPI（深度先验初始化）配对，提供从单目深度开始的细化预热启动。</li>
+<li>这些组件共同实现了最先进的精度，同时显著减少了细化迭代次数，且每次迭代的计算成本为线性。</li>
+<li>仅使用 SceneFlow 训练且无水下数据，LinStereo 在水下立体基准上达到最先进性能，无需域特定适应，展示了在严重光度退化下的强跨域泛化能力。</li>
+<li>论文提供了开源代码和一个包含密集视差真值和逼真水下光学建模的新评估数据集。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2603.10438" data-arxiv-id="2603.10438" data-status="ready">
+<h1>[2603.10438] AsyncMDE: Real-Time Monocular Depth Estimation via Asynchronous Spatial Memory</h1>
+<p><a href="https://arxiv.org/abs/2603.10438" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了 AsyncMDE，一种通过异步空间记忆实现实时单目深度估计的系统，利用基础模型与轻量网络的异步并行架构来平衡精度与效率。</p>
+<h2>解决的问题</h2>
+<p>现有深度基础模型参数过大导致边缘平台推理延迟过高，无法满足实时感知需求，而轻量化方法又导致精度和泛化能力显著下降，且现有方法难以在严格延迟和资源约束下实现可靠的深度估计。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出异步深度感知范式，利用场景表示与时间适应之间的复杂度差异，随时间摊销基础模型的成本。</li>
+<li>设计速率控制的感知系统，其精度由硬件决定的刷新率控制，无需重新训练即可随平台能力平滑扩展。</li>
+<li>设计 SpatialMemoryUnit，利用互补融合和自回归记忆更新来利用基础模型特征，在刷新间隔内保持有界的精度下降。</li>
+<li>部署系统保留 97.5M 冻结慢路径进行周期性刷新，3.83M 可训练快路径在 RTX 4090 上运行 237 FPS，在 TensorRT 优化的 Jetson AGX Orin 上运行 161 FPS。</li>
+<li>在室内静态、动态和合成极端运动基准上验证了 AsyncMDE。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2604.09142" data-arxiv-id="2604.09142" data-status="ready">
+<h1>[2604.09142] Geometry Reinforced Efficient Attention Tuning Equipped with Normals for Robust Stereo Matching</h1>
+<p><a href="https://arxiv.org/abs/2604.09142" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了 GREATEN 框架，通过融合图像纹理与表面法线特征及稀疏注意力机制，实现了在合成数据上训练后在真实世界立体匹配任务中的鲁棒零样本泛化。</p>
+<h2>解决的问题</h2>
+<p>现有立体匹配方法在从合成数据到真实场景（Syn-to-Real）的泛化上表现不佳，特别是在处理遮挡、无纹理、重复及非朗伯等病态区域时，仅依赖图像纹理容易受到误导。</p>
+<h2>创新点</h2>
+<ul>
+<li>引入门控上下文 - 几何融合（GCGF）模块，有效融合立体图像和表面法线特征，缓解跨域差异和图像纹理固有的病态歧义。</li>
+<li>设计镜面 - 透明增强（STA）策略，故意扰乱训练图像的纹理一致性，迫使 GCGF 模块更好地过滤模糊图像纹理并提高融合可靠性。</li>
+<li>开发稀疏注意力替代方案（SSA、SDMA 和 SVA），在保留全局特征提取能力的同时显著降低计算成本。</li>
+<li>仅使用合成数据训练，在五个主要真实世界基准测试（ETH3D、Middlebury、KITTI-2012、KITTI-2015 和 Booster）的 Syn-to-Real 泛化上优于现有已发表的立体匹配方法。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2606.31636" data-arxiv-id="2606.31636" data-status="ready">
+<h1>[2606.31636] LiteMatch: Lightweight Zero-Shot Stereo Matching via Cost Volume Stabilization</h1>
+<p><a href="https://arxiv.org/abs/2606.31636" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 LiteMatch，一种轻量级零样本立体匹配框架，通过稳定特征表示和代价体来消除对 3D 卷积、大型骨干网络和外部单目先验的依赖，实现性能与复杂度的平衡。</p>
+<h2>解决的问题</h2>
+<p>现有立体匹配方法存在早期特征匹配过程的根本性不稳定性，导致代价体噪声和模糊，依赖重型 3D 正则化或大量迭代步骤，成为效率和实时部署的主要瓶颈。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出 LiteMatch，一种轻量级零样本立体匹配框架，无需大型骨干网络或单目深度先验引导。</li>
+<li>引入频率感知立体表示，整合对应特征与高频结构线索，改善结构模糊区域的视差估计。</li>
+<li>提出 CVC-Loss，分布级监督策略，通过强制视差假设间的跨 bin 对比来稳定代价体表示。</li>
+<li>设计轻量级视差细化框架，实现强单次通过性能，扩展迭代细化后达到最先进精度。</li>
+<li>在五个基准数据集上广泛评估，证明轻量设计下的优越性能和跨域泛化能力，并验证各核心组件贡献。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2601.21291" data-arxiv-id="2601.21291" data-status="ready">
+<h1>[2601.21291] Gaussian Belief Propagation Network for Depth Completion</h1>
+<p><a href="https://arxiv.org/abs/2601.21291" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文引入高斯信念传播网络（GBPN），这是一种结合深度学习表征能力与概率图模型推理能力的混合框架，用于从稀疏深度推断密集深度。</p>
+<h2>解决的问题</h2>
+<p>传统深度补全方法依赖手工流程或固定图模型，难以捕捉复杂几何细节；而基于学习的方法在处理高稀疏度下的稀疏和不规则输入时，标准深度架构存在性能下降和鲁棒性不足的问题。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出高斯信念传播网络（GBPN），结合深度学习与概率图模型，动态构建场景特定的马尔可夫随机场（MRF）。</li>
+<li>将稀疏深度测量作为原则性数据项整合到全局一致的 MRF 框架中，有效解决输入稀疏和不规则问题。</li>
+<li>提出预测非局部边的图模型构建网络（GMCN），自适应捕捉由图像内容引导的复杂长程空间依赖。</li>
+<li>设计了一种新的串行与并行消息传递方案用于高斯信念传播，增强信息流动，特别是从稀疏测量到未测量像素。</li>
+<li>采用基于概率的损失函数进行端到端训练，提供深度分布以支持风险感知下游任务。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.02448" data-arxiv-id="2609.02448" data-status="ready">
+<h1>[2609.02448] Adapting a Foundation Model for Lunar Surface Height Estimation</h1>
+<p><a href="https://arxiv.org/abs/2609.02448" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出通过微调 DAV2 基础模型来适应月球表面高度估计，旨在解决领域差距问题并专注于相对高度估计以支持现有危险检测器。</p>
+<h2>解决的问题</h2>
+<p>月球表面危险检测需要高度信息，但现有方法多依赖 2D 图像或受限于 DEM 生成技术的分辨率与覆盖范围，且直接应用基础模型存在领域差距，现有月球深度估计方法多关注绝对高度。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种通过微调 DAV2 基础模型来适应月球表面高度估计的新方法。</li>
+<li>利用公开的高分辨率 SPG 衍生 DEM 数据对模型进行微调，以解决领域差距问题。</li>
+<li>该方法专注于相对高度估计，而非像现有方法那样使用粗糙激光测高数据重建绝对高度。</li>
+<li>开发的辅助模型能够支持仅考虑 2D 数据的现有危险检测器。</li>
+<li>论证了与零样本模型比较的局限性，强调了适配和微调的必要性。</li>
+</ul>
+</article>
     <article class="summary-article summary-topic-entry" id="summary-2609.01579" data-arxiv-id="2609.01579" data-status="ready">
 <h1>[2609.01579] SG-AMP: Scene-Graph-Guided Active Perception and Semantics-Aware Motion Planning for Pepper Plants</h1>
 <p><a href="https://arxiv.org/abs/2609.01579" rel="nofollow">arXiv 原文</a></p>
@@ -985,6 +2100,6 @@
     </article>
     </div>
   </main>
-  <script type="application/json" id="summary-catalog">{"papers":{"2601.17074":{"status":"ready","url":"notes/depth-estimation.html#summary-2601.17074"},"2603.05711":{"status":"ready","url":"notes/depth-estimation.html#summary-2603.05711"},"2603.09385":{"status":"ready","url":"notes/depth-estimation.html#summary-2603.09385"},"2605.12027":{"status":"ready","url":"notes/depth-estimation.html#summary-2605.12027"},"2606.29716":{"status":"ready","url":"notes/depth-estimation.html#summary-2606.29716"},"2607.00736":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.00736"},"2607.01677":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.01677"},"2607.01900":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.01900"},"2607.04303":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.04303"},"2607.06779":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.06779"},"2607.08771":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.08771"},"2607.09284":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.09284"},"2607.12433":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.12433"},"2607.12993":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.12993"},"2607.13674":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.13674"},"2607.15600":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.15600"},"2607.16286":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.16286"},"2607.17058":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.17058"},"2607.17099":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.17099"},"2607.18897":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.18897"},"2607.19986":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.19986"},"2607.21438":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.21438"},"2607.21526":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.21526"},"2607.22172":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.22172"},"2607.24249":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.24249"},"2607.25234":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.25234"},"2607.26600":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.26600"},"2607.27139":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.27139"},"2607.28285":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.28285"},"2608.00415":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.00415"},"2608.00678":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.00678"},"2608.01129":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.01129"},"2608.02068":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.02068"},"2608.03666":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.03666"},"2608.03851":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.03851"},"2608.04737":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.04737"},"2608.07562":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.07562"},"2608.11564":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.11564"},"2608.12743":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.12743"},"2608.13102":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.13102"},"2608.13147":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.13147"},"2608.15297":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.15297"},"2608.15471":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.15471"},"2608.15659":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.15659"},"2608.16756":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.16756"},"2608.16984":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.16984"},"2608.17178":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.17178"},"2608.17553":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.17553"},"2608.17832":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.17832"},"2608.18413":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.18413"},"2608.19769":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.19769"},"2608.20788":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.20788"},"2608.21468":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.21468"},"2608.21710":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.21710"},"2608.22289":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.22289"},"2608.22821":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.22821"},"2608.23175":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.23175"},"2608.23290":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.23290"},"2608.24518":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.24518"},"2608.27860":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.27860"},"2608.28033":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.28033"},"2608.28549":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.28549"},"2608.28933":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.28933"},"2608.29819":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.29819"},"2608.29881":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.29881"},"2608.30129":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.30129"},"2609.01579":{"status":"ready","url":"notes/depth-estimation.html#summary-2609.01579"},"2609.02448":{"status":"pending"}},"topic":"Depth Estimation","version":1}</script>
+  <script type="application/json" id="summary-catalog">{"papers":{"2512.22653":{"status":"ready","url":"notes/depth-estimation.html#summary-2512.22653"},"2601.01457":{"status":"ready","url":"notes/depth-estimation.html#summary-2601.01457"},"2601.02793":{"status":"ready","url":"notes/depth-estimation.html#summary-2601.02793"},"2601.03252":{"status":"ready","url":"notes/depth-estimation.html#summary-2601.03252"},"2601.12423":{"status":"ready","url":"notes/depth-estimation.html#summary-2601.12423"},"2601.17046":{"status":"ready","url":"notes/depth-estimation.html#summary-2601.17046"},"2601.17074":{"status":"ready","url":"notes/depth-estimation.html#summary-2601.17074"},"2601.17271":{"status":"ready","url":"notes/depth-estimation.html#summary-2601.17271"},"2601.17657":{"status":"ready","url":"notes/depth-estimation.html#summary-2601.17657"},"2601.19314":{"status":"ready","url":"notes/depth-estimation.html#summary-2601.19314"},"2601.19461":{"status":"ready","url":"notes/depth-estimation.html#summary-2601.19461"},"2601.21291":{"status":"ready","url":"notes/depth-estimation.html#summary-2601.21291"},"2601.22808":{"status":"ready","url":"notes/depth-estimation.html#summary-2601.22808"},"2602.01268":{"status":"ready","url":"notes/depth-estimation.html#summary-2602.01268"},"2602.03209":{"status":"ready","url":"notes/depth-estimation.html#summary-2602.03209"},"2602.09532":{"status":"ready","url":"notes/depth-estimation.html#summary-2602.09532"},"2602.11066":{"status":"ready","url":"notes/depth-estimation.html#summary-2602.11066"},"2602.14751":{"status":"ready","url":"notes/depth-estimation.html#summary-2602.14751"},"2602.16915":{"status":"ready","url":"notes/depth-estimation.html#summary-2602.16915"},"2602.19763":{"status":"ready","url":"notes/depth-estimation.html#summary-2602.19763"},"2602.20496":{"status":"ready","url":"notes/depth-estimation.html#summary-2602.20496"},"2602.21740":{"status":"ready","url":"notes/depth-estimation.html#summary-2602.21740"},"2603.01475":{"status":"ready","url":"notes/depth-estimation.html#summary-2603.01475"},"2603.01650":{"status":"ready","url":"notes/depth-estimation.html#summary-2603.01650"},"2603.01765":{"status":"ready","url":"notes/depth-estimation.html#summary-2603.01765"},"2603.01999":{"status":"ready","url":"notes/depth-estimation.html#summary-2603.01999"},"2603.03571":{"status":"ready","url":"notes/depth-estimation.html#summary-2603.03571"},"2603.03765":{"status":"ready","url":"notes/depth-estimation.html#summary-2603.03765"},"2603.05711":{"status":"ready","url":"notes/depth-estimation.html#summary-2603.05711"},"2603.09385":{"status":"ready","url":"notes/depth-estimation.html#summary-2603.09385"},"2603.10438":{"status":"ready","url":"notes/depth-estimation.html#summary-2603.10438"},"2603.10584":{"status":"ready","url":"notes/depth-estimation.html#summary-2603.10584"},"2603.12250":{"status":"ready","url":"notes/depth-estimation.html#summary-2603.12250"},"2603.14702":{"status":"ready","url":"notes/depth-estimation.html#summary-2603.14702"},"2603.15019":{"status":"ready","url":"notes/depth-estimation.html#summary-2603.15019"},"2603.15304":{"status":"ready","url":"notes/depth-estimation.html#summary-2603.15304"},"2603.15374":{"status":"ready","url":"notes/depth-estimation.html#summary-2603.15374"},"2603.16238":{"status":"ready","url":"notes/depth-estimation.html#summary-2603.16238"},"2603.16340":{"status":"ready","url":"notes/depth-estimation.html#summary-2603.16340"},"2603.16362":{"status":"ready","url":"notes/depth-estimation.html#summary-2603.16362"},"2603.16816":{"status":"ready","url":"notes/depth-estimation.html#summary-2603.16816"},"2603.19547":{"status":"ready","url":"notes/depth-estimation.html#summary-2603.19547"},"2603.21882":{"status":"ready","url":"notes/depth-estimation.html#summary-2603.21882"},"2603.27105":{"status":"ready","url":"notes/depth-estimation.html#summary-2603.27105"},"2604.01118":{"status":"ready","url":"notes/depth-estimation.html#summary-2604.01118"},"2604.01791":{"status":"ready","url":"notes/depth-estimation.html#summary-2604.01791"},"2604.02639":{"status":"ready","url":"notes/depth-estimation.html#summary-2604.02639"},"2604.04925":{"status":"ready","url":"notes/depth-estimation.html#summary-2604.04925"},"2604.07665":{"status":"ready","url":"notes/depth-estimation.html#summary-2604.07665"},"2604.09142":{"status":"ready","url":"notes/depth-estimation.html#summary-2604.09142"},"2604.09352":{"status":"ready","url":"notes/depth-estimation.html#summary-2604.09352"},"2604.14781":{"status":"ready","url":"notes/depth-estimation.html#summary-2604.14781"},"2604.18790":{"status":"ready","url":"notes/depth-estimation.html#summary-2604.18790"},"2604.23432":{"status":"ready","url":"notes/depth-estimation.html#summary-2604.23432"},"2604.26454":{"status":"ready","url":"notes/depth-estimation.html#summary-2604.26454"},"2605.02667":{"status":"ready","url":"notes/depth-estimation.html#summary-2605.02667"},"2605.08320":{"status":"ready","url":"notes/depth-estimation.html#summary-2605.08320"},"2605.08521":{"status":"ready","url":"notes/depth-estimation.html#summary-2605.08521"},"2605.10251":{"status":"ready","url":"notes/depth-estimation.html#summary-2605.10251"},"2605.12027":{"status":"ready","url":"notes/depth-estimation.html#summary-2605.12027"},"2605.14963":{"status":"ready","url":"notes/depth-estimation.html#summary-2605.14963"},"2605.15876":{"status":"ready","url":"notes/depth-estimation.html#summary-2605.15876"},"2605.16628":{"status":"ready","url":"notes/depth-estimation.html#summary-2605.16628"},"2605.19797":{"status":"ready","url":"notes/depth-estimation.html#summary-2605.19797"},"2605.23098":{"status":"ready","url":"notes/depth-estimation.html#summary-2605.23098"},"2605.23281":{"status":"ready","url":"notes/depth-estimation.html#summary-2605.23281"},"2605.24074":{"status":"ready","url":"notes/depth-estimation.html#summary-2605.24074"},"2605.28477":{"status":"ready","url":"notes/depth-estimation.html#summary-2605.28477"},"2605.30115":{"status":"ready","url":"notes/depth-estimation.html#summary-2605.30115"},"2606.01367":{"status":"ready","url":"notes/depth-estimation.html#summary-2606.01367"},"2606.03989":{"status":"ready","url":"notes/depth-estimation.html#summary-2606.03989"},"2606.17475":{"status":"ready","url":"notes/depth-estimation.html#summary-2606.17475"},"2606.24457":{"status":"ready","url":"notes/depth-estimation.html#summary-2606.24457"},"2606.25437":{"status":"ready","url":"notes/depth-estimation.html#summary-2606.25437"},"2606.29716":{"status":"ready","url":"notes/depth-estimation.html#summary-2606.29716"},"2606.31636":{"status":"ready","url":"notes/depth-estimation.html#summary-2606.31636"},"2607.00736":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.00736"},"2607.01677":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.01677"},"2607.01900":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.01900"},"2607.04303":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.04303"},"2607.06779":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.06779"},"2607.08771":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.08771"},"2607.09284":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.09284"},"2607.12433":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.12433"},"2607.12993":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.12993"},"2607.13674":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.13674"},"2607.15600":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.15600"},"2607.16286":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.16286"},"2607.17058":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.17058"},"2607.17099":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.17099"},"2607.18897":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.18897"},"2607.19986":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.19986"},"2607.21438":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.21438"},"2607.21526":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.21526"},"2607.22172":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.22172"},"2607.24249":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.24249"},"2607.25234":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.25234"},"2607.26600":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.26600"},"2607.27139":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.27139"},"2607.28285":{"status":"ready","url":"notes/depth-estimation.html#summary-2607.28285"},"2608.00415":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.00415"},"2608.00678":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.00678"},"2608.01129":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.01129"},"2608.02068":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.02068"},"2608.03666":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.03666"},"2608.03851":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.03851"},"2608.04737":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.04737"},"2608.07562":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.07562"},"2608.11564":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.11564"},"2608.12743":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.12743"},"2608.13102":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.13102"},"2608.13147":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.13147"},"2608.15297":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.15297"},"2608.15471":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.15471"},"2608.15659":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.15659"},"2608.16756":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.16756"},"2608.16984":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.16984"},"2608.17178":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.17178"},"2608.17553":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.17553"},"2608.17832":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.17832"},"2608.18413":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.18413"},"2608.19769":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.19769"},"2608.20788":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.20788"},"2608.21468":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.21468"},"2608.21710":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.21710"},"2608.22289":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.22289"},"2608.22821":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.22821"},"2608.23175":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.23175"},"2608.23290":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.23290"},"2608.24518":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.24518"},"2608.27860":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.27860"},"2608.28033":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.28033"},"2608.28549":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.28549"},"2608.28933":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.28933"},"2608.29819":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.29819"},"2608.29881":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.29881"},"2608.30129":{"status":"ready","url":"notes/depth-estimation.html#summary-2608.30129"},"2609.01579":{"status":"ready","url":"notes/depth-estimation.html#summary-2609.01579"},"2609.02448":{"status":"ready","url":"notes/depth-estimation.html#summary-2609.02448"}},"topic":"Depth Estimation","version":1}</script>
 </body>
 </html>

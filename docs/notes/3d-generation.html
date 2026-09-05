@@ -13,6 +13,1698 @@
       <h1>3D Generation · 论文要点</h1>
     </header>
     <div class="summary-topic-list">
+    <article class="summary-article summary-topic-entry" id="summary-2512.23628" data-arxiv-id="2512.23628" data-status="ready">
+<h1>[2512.23628] Memorization in 3D Shape Generation: An Empirical Study</h1>
+<p><a href="https://arxiv.org/abs/2512.23628" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文引入评估框架评估 3D 生成模型记忆性，并通过实验研究数据与建模设计对记忆性的影响。</p>
+<h2>解决的问题</h2>
+<p>3D 生成模型可能通过记忆训练形状来实现高保真度，导致数据泄露和泛化失败，且目前缺乏量化生成形状新颖性的标准指标。</p>
+<h2>创新点</h2>
+<ul>
+<li>引入评估框架量化 3D 生成模型中的记忆性，定义对象级记忆性为生成形状与训练形状视觉近相同，定义模型级记忆性为生成集合比保留测试集更接近训练集。</li>
+<li>通过基准测试发现 Light Field Distance (LFD) 是识别训练形状副本中最准确的指标，并提出结合 z-score 与 Fréchet Distance 的框架以量化记忆性并解耦生成质量。</li>
+<li>评估现有 3D 生成器，发现小数据集训练模型显示明显记忆性，而大规模条件生成模型记忆性有限且泛化能力增强。</li>
+<li>利用 Vecset 表示进行受控实验，从数据视角（渲染图像比 3D 形状更易记忆、语义多样性与细粒度条件增强记忆性）和建模视角（中等分类器自由引导尺度记忆性最高、增加潜在 Vecset 长度和应用旋转增强可减少记忆性）分析驱动因素。</li>
+<li>提出特定策略（如应用旋转增强和增加潜在 Vecset 长度）可在保持生成质量的同时减轻记忆性，为未来可泛化 3D 合成研究提供指导。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2601.07143" data-arxiv-id="2601.07143" data-status="ready">
+<h1>[2601.07143] EZBlender: Efficient 3D Editing with Plan-and-ReAct Agent</h1>
+<p><a href="https://arxiv.org/abs/2601.07143" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了 EZBlender，一种集成 Plan-and-ReAct 代理设计的 Blender 代理，通过并行化工作流解决 3D 编辑中效率与性能之间的权衡问题。</p>
+<h2>解决的问题</h2>
+<p>现有 3D 编辑工作流未能有效解决效率与性能之间的权衡，追求效率的系统常忽略用户意图，而追求精度的系统则存在高延迟并破坏交互流程。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出一种专为 Blender 应用设计的混合代理架构，通过并行化子任务执行优先级来提高整体系统响应速度。</li>
+<li>将自主权委托给专用子代理，以提高任务完成的性能和成功率，增强场景变体生成及文本与视觉对齐。</li>
+<li>引入一个可量化的多任务基准测试，用于评估 AI 代理在 3D 编辑任务中的精度和效率，涵盖 85 个场景和五个评估维度。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2601.12234" data-arxiv-id="2601.12234" data-status="ready">
+<h1>[2601.12234] Proc3D: Procedural 3D Generation and Parametric Editing of 3D Shapes with Large Language Models</h1>
+<p><a href="https://arxiv.org/abs/2601.12234" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了 Proc3D，一个利用大语言模型从文本生成并编辑参数化 3D 图形的统一系统，其核心是过程紧凑图（PCG）表示。</p>
+<h2>解决的问题</h2>
+<p>现有文本驱动的 3D 生成格式（如点云、网格、隐式场）静态且难以进行针对性编辑，而过程化建模虽具动态控制优势但需要深厚的领域知识，且现有 AI 方法局限于预定义模板，限制了用户创造力。</p>
+<h2>创新点</h2>
+<ul>
+<li>开发 Proc3D 系统，支持通过高级文本输入生成 3D 模型并通过紧凑图表示进行直观编辑。</li>
+<li>引入过程紧凑图（PCG）表示，简化过程化 3D 图形的固有复杂性。</li>
+<li>收集过程化 3D 图及其指令的大型数据集，并微调 LLaMA-3 模型以支持鲁棒的 3D 模型生成。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2601.02103" data-arxiv-id="2601.02103" data-status="ready">
+<h1>[2601.02103] HeadLighter: Disentangling Illumination in Generative 3D Gaussian Heads via Lightstage Captures</h1>
+<p><a href="https://arxiv.org/abs/2601.02103" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 HeadLighter 方法，利用 LightStage 捕获数据解耦生成式 3D 高斯头部中的光照与外观，通过双分支架构和渐进式训练策略实现物理逼真的实时渲染。</p>
+<h2>解决的问题</h2>
+<p>现有的生成式 3D 高斯头部模型中，光照与内在外观（材质或反照率）深度纠缠，限制了精细的光照控制，且现有无监督分解方法缺乏真实世界数据监督，难以处理复杂光照并实现高度物理合理性。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出一种双分支架构，包含光不变基分支用于生成几何和反照率，以及重光照分支用于预测物理渲染属性。</li>
+<li>设计渐进式训练策略，先微调基分支去除光照，再冻结基分支注入 LightStage 材质先验，最后通过对抗训练增强泛化能力。</li>
+<li>针对 3D 高斯缺乏表面法线的问题，任务重光照分支直接预测法线，并通过蒸馏策略和平滑项确保法线预测的一致性和合理性。</li>
+<li>利用 LightStage 捕获的多视图面部数据集进行训练，以解决现有方法缺乏真实世界数据监督的问题。</li>
+<li>通过综合比较评估生成多样性、渲染速度和多视图空间一致性，并公开代码和授权数据集。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2601.19433" data-arxiv-id="2601.19433" data-status="ready">
+<h1>[2601.19433] RoamScene3D: Immersive Text-to-3D Scene Generation via Adaptive Object-aware Roaming</h1>
+<p><a href="https://arxiv.org/abs/2601.19433" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 RoamScene3D 框架，通过整合语义场景理解、自适应轨迹规划和运动注入修复技术，实现从文本提示生成空间一致且逼真的 3D 环境。</p>
+<h2>解决的问题</h2>
+<p>现有文本到 3D 场景生成方法面临相机轨迹适应性差导致覆盖不足、对象关系推理缺失限制空间语义依赖捕捉、以及运动注入修复难以在复杂遮挡下保持几何一致性的挑战。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出 RoamScene3D 框架，整合语义理解、自适应探索和全景场景构建以生成沉浸式 3D 场景。</li>
+<li>提出自适应漫游轨迹规划模块，利用对象关系推理引导视点选择。</li>
+<li>通过构建场景图识别对象间语义关系，自适应规划闭环轨迹以确保全面空间覆盖和语义关注。</li>
+<li>提出运动注入全景修复模型，在包含标注相机运动的全景数据集上微调以适应视点转换引起的遮挡。</li>
+<li>该方法在视觉质量和对象连贯性方面相比最先进基线表现出明显的性能提升。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2601.19785" data-arxiv-id="2601.19785" data-status="ready">
+<h1>[2601.19785] GeoDiff3D: Self-Supervised 3D Scene Generation with Geometry-Constrained 2D Diffusion Guidance</h1>
+<p><a href="https://arxiv.org/abs/2601.19785" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 GeoDiff3D 框架，通过整合粗几何约束与 2D 扩散模型的优势，实现无需大规模数据集支持的高效高质量 3D 场景生成。</p>
+<h2>解决的问题</h2>
+<p>现有 2D 扩散模型缺乏 3D 结构约束导致几何不一致，而直接 3D 生成方法难以处理复杂场景且依赖大规模数据集。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出 GeoDiff3D，一种结合粗几何约束与 2D 扩散模型的自监督框架，解决现有方法结构约束弱和依赖大规模数据集的问题。</li>
+<li>引入体素对齐的 3D 特征聚合机制，联合保持生成质量与结构一致性，减少过度依赖参考图像一致性。</li>
+<li>设计双重自监督优化策略，精确平衡结构一致性与真实细节，显著减少对大规模标注数据集的依赖。</li>
+<li>方法无需高端计算资源，可快速生成高质量 3D 场景，适用于低门槛、高效率的 3D 内容创作。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2601.21314" data-arxiv-id="2601.21314" data-status="ready">
+<h1>[2601.21314] HiFi-Mesh: High-Fidelity Efficient 3D Mesh Generation via Compact Autoregressive Dependence</h1>
+<p><a href="https://arxiv.org/abs/2601.21314" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了 HiFi-Mesh，通过紧凑自回归依赖和自适应计算图重配置策略，解决了现有 3D 网格生成在序列长度限制和推理效率上的瓶颈，实现了高保真且高效的 3D 网格生成。</p>
+<h2>解决的问题</h2>
+<p>现有基于高斯泼溅的网格生成缺乏拓扑连接；基于 SDF 的方法丢失离散面索引信息导致拓扑结构差；现有自回归方法受限于序列压缩率导致最大生成长度不足（约 5 万 tokens），限制了结构细节；严格的顺序生成机制导致推理效率低，且截断上下文会导致信息丢失和性能下降。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出 HiFi-Mesh，通过紧凑自回归依赖实现富含细节的 3D 网格的快速生成。</li>
+<li>引入 Latent Autoregressive Network (LANE)，通过子序列顺序生成和潜在空间语义重建，增强最大可生成长度。</li>
+<li>提出 Adaptive Computation Graph Reconfiguration (AdaGraph) 策略，通过时空解耦将串行推理分解为独立路径，实现并行生成。</li>
+<li>相比现有方法，在生成速度、结构细节和几何一致性方面表现更优。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2602.04271" data-arxiv-id="2602.04271" data-status="ready">
+<h1>[2602.04271] SkeletonGaussian: Editable 4D Generation through Gaussian Skeletonization</h1>
+<p><a href="https://arxiv.org/abs/2602.04271" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 SkeletonGaussian 框架，通过高斯骨架化技术实现可编辑的 4D 生成，利用分层运动表示和显式骨架驱动解决了隐式变形场在控制、编辑及参数效率上的局限。</p>
+<h2>解决的问题</h2>
+<p>现有 4D 对象表示方法通常使用隐式变形场建模运动，导致直接控制受限、编辑需重训练且耗时、参数随时间平方增长难以处理长序列，且难以转换为标准骨架数据以集成动画工具。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出 SkeletonGaussian，一个用于生成任务中运动建模的骨架驱动动态 3D 高斯框架。</li>
+<li>通过采用分层运动表示，SkeletonGaussian 提高了运动保真度，同时提供可解释和可编辑的姿势控制。</li>
+<li>与密集变形场相比，基于骨架的姿势参数化更参数高效，从而降低了存储需求和训练时间。</li>
+<li>显式的基于骨架的表示允许通过操纵骨架姿势进行直接、实时的运动编辑。</li>
+<li>生成的运动可以导出为标准骨架和姿势格式，确保与 Blender 等动画流程无缝集成。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2603.29592" data-arxiv-id="2603.29592" data-status="ready">
+<h1>[2603.29592] Bioinspired123D: Generative 3D Modeling System for Bioinspired Structures</h1>
+<p><a href="https://arxiv.org/abs/2603.29592" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文介绍了 Bioinspired123D，这是一个将自然语言提示转换为基于生物启发结构动机的 3D 几何的紧凑管道，利用 Blender 的 Python 接口表达几何，旨在实现轻量级、模块化的科学设计。</p>
+<h2>解决的问题</h2>
+<p>可控的 3D 结构设计对于生成式 AI 是一个基本挑战，特别是在几何、内部结构和功能紧密耦合的科学环境中；现有的基于图像或扩散模型的 3D 生成方法通常计算密集，优先考虑照片级真实感，而不适合优先考虑内部结构、参数控制和轻量级部署的科学设计任务；将语言驱动的设计从 1D 文本扩展到完整 3D 几何需要能够翻译语义意图为空间结构的方法，同时保持轻量、模块化且兼容有限的计算资源；现有的文本到 3D 生成方法需要适应生物启发材料，其结构是分层的、多尺度的，并且通常通过描述性生物语言而非正式设计约束来指定。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出 Bioinspired123D，一个紧凑管道，将自然语言提示转换为基于生物启发结构动机的 3D 几何，利用 Blender 的 Python 接口通过程序化指令表达几何。</li>
+<li>构建首个生物启发 3D 结构数据集，通过 LLM 驱动管道增强，包含逐步叙事推理，并使用无头 Blender 验证管道确保有效渲染几何。</li>
+<li>微调紧凑语言模型 Bioinspired3D，使其在给定自然语言描述时输出可自动验证和渲染的 Blender Python 脚本。</li>
+<li>设计新基准评估 3D 推理、参数控制和 Blender 脚本生成质量，并将模型集成到包含多模态检索和视觉语言模型的代理系统中进行迭代优化。</li>
+<li>展示完整的文本到 3D 管道，集成 BioinspiredLLM 与 Bioinspired123D，实现从生物材料文本描述到可执行 3D 几何的无缝转换。</li>
+<li>证明无需大规模 3D 基础模型即可实现可控的生物启发 3D 生成，提供轻量级、模块化且可扩展的框架。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2602.11706" data-arxiv-id="2602.11706" data-status="ready">
+<h1>[2602.11706] LLM-Driven 3D Scene Generation of Agricultural Simulation Environments</h1>
+<p><a href="https://arxiv.org/abs/2602.11706" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文研究了一种基于大语言模型（LLM）的完整方法，旨在通过整合资产检索、领域知识集成和代码生成来自动化农业模拟环境的 3D 场景生成。</p>
+<h2>解决的问题</h2>
+<p>农业模拟环境的创建过程耗时且难以扩展，现有程序化内容生成工具难以满足农业特定规则，且当前单一 LLM 方法缺乏结构化农业知识、难以验证输出且模块化有限。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种将 LLM 整合到整个生成流程中的完整方法，包括资产检索、基于 RAG 的领域知识集成以及通过 Unreal Engine API 驱动环境渲染的 Python 代码生成。</li>
+<li>结合了多种 LLM 优化技术，包括少样本提示、微调、检索增强生成（RAG）以及基于 LLM 的输出验证，以提高准确性、灵活性和泛化能力。</li>
+<li>将专家知识直接嵌入生成过程，以弥合高层意图与底层过程逻辑之间的差距。</li>
+<li>通过语义准确性指标进行定量评估，并通过用户研究和与手动设计的专家时间比较进行定性评估。</li>
+<li>旨在评估和细化 LLM 如何有效集成到结构化流程中，识别其价值、不足及如何与其他方法互补。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2602.13818" data-arxiv-id="2602.13818" data-status="ready">
+<h1>[2602.13818] VAR-3D: View-aware Auto-Regressive Model for Text-to-3D Generation via a 3D Tokenizer</h1>
+<p><a href="https://arxiv.org/abs/2602.13818" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种名为 VAR-3D 的统一框架，通过视图感知的 3D VQ-VAE 和渲染监督训练策略，解决了文本到 3D 生成中几何一致性和语义保真度的问题。</p>
+<h2>解决的问题</h2>
+<p>现有文本到 3D 生成面临 3D 数据结构复杂、全局空间一致性要求高、重建方法推断几何困难、2D 扩散先验视图不一致、原生模型效率与保真度受限、量化导致结构拓扑坍缩、两阶段范式存在模态差距及生成形状不连贯等问题。</p>
+<h2>创新点</h2>
+<ul>
+<li>设计了一种视图感知的 3D VQ-VAE，有效编码复杂的几何结构，使离散令牌更准确地表示物体特征并提高重建保真度。</li>
+<li>引入了一种渲染监督训练策略，弥合了离散令牌预测与视觉重建之间的差距，有效缓解了文本到 3D 任务中的表示 - 生成不匹配问题。</li>
+<li>实验证明 VAR-3D 在文本引导的 3D 合成中优于现有方法，提供了卓越的视觉保真度和几何一致性。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2602.17033" data-arxiv-id="2602.17033" data-status="ready">
+<h1>[2602.17033] PartRAG: Retrieval-Augmented Part-Level 3D Generation and Editing</h1>
+<p><a href="https://arxiv.org/abs/2602.17033" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>PartRAG 是一种检索增强框架，通过分层对比检索模块和掩码流匹配编辑头，实现了基于单图像的 3D 部分生成与编辑。</p>
+<h2>解决的问题</h2>
+<p>现有生成先验多样性有限导致罕见布局下几何不可信和视图不一致，且缺乏精确的部分级编辑支持，难以在不破坏整体资产的情况下调整子组件。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出 PartRAG，一种检索增强部分级生成器，集成单图像条件与分层对比检索目标，利用 1,236 个部分标注对象库实现鲁棒的 2D-3D 对应。</li>
+<li>引入部分级编辑流程，通过保持规范对齐，使局部交换和细化能跨视图和组装网格一致传播，实现 5-8 秒内的交互式编辑。</li>
+<li>在 Objaverse、ShapeNet 和 ABO 上实现竞争性性能，相比 PartCrafter 在 CD 和 F-Score 上均有提升，并保持 38 秒推理时间。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2602.10116" data-arxiv-id="2602.10116" data-status="ready">
+<h1>[2602.10116] SAGE: Scalable Agentic 3D Scene Generation for Embodied AI</h1>
+<p><a href="https://arxiv.org/abs/2602.10116" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了 SAGE，一种基于代理的可扩展 3D 场景生成框架，通过视觉和物理批评家实现自适应工具使用与模拟器验证，为具身 AI 提供仿真就绪的环境及数据。</p>
+<h2>解决的问题</h2>
+<p>现有 3D 模拟数据生成方法在物理真实性、多样性、仿真就绪性或任务适应性方面存在不足，且缺乏物理接地和机器人模拟器兼容性，无法支持具身 AI 的大规模训练。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出一个基于代理的场景生成框架，在 MCP 下统一多个生成器与视觉及物理批评家，实现自适应工具使用、自我改进和模拟器验证的稳定性。</li>
+<li>生成具有最先进真实性和物理有效性的开放词汇场景，解决现有方法缺乏物理接地和模拟器兼容性的问题。</li>
+<li>构建具身 AI 数据管道，自动生成无限场景和模仿学习的教师演示，实现清晰的可扩展性优势。</li>
+<li>通过多级别增强（对象配置、类别和布局）生成多样化但任务一致的环境，并合成包含抓取姿态、碰撞感知逆运动学和导航规划的动作数据。</li>
+<li>实现闭环自我修正，无需硬编码工具顺序，确保场景既真实又可交互。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2602.19542" data-arxiv-id="2602.19542" data-status="ready">
+<h1>[2602.19542] Vinedresser3D: Agentic Text-guided 3D Editing</h1>
+<p><a href="https://arxiv.org/abs/2602.19542" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了 Vinedresser3D，这是一个利用多模态大语言模型（MLLM）作为核心，能够智能解释文本指令、自动定位 3D 编辑区域并协调工具执行高质量 3D 编辑的智能体。</p>
+<h2>解决的问题</h2>
+<p>现有的文本引导 3D 编辑方法难以语义理解复杂编辑请求、仅凭文本自动检测精确编辑区域，且难以在遵循提示的同时保留未编辑区域；此外，现有方法存在计算昂贵、多视图不一致、需要用户手动提供掩码等局限性。</p>
+<h2>创新点</h2>
+<ul>
+<li>引入 Vinedresser3D，一个以 MLLM 为核心、能智能解释文本指令并协调工具进行高质量 3D 编辑的 3D 编辑智能体。</li>
+<li>该框架实现了强文本对齐、未编辑部分的鲁棒保留以及高整体 3D 质量。</li>
+<li>证明主要基于 2D 图像 - 文本数据训练的 MLLM 可集成到 3D 编辑流程中，通过规划策略、生成多模态指导并与工具交互来显著提升编辑性能。</li>
+<li>在文本引导 3D 编辑任务上进行了广泛实验，证明 Vinedresser3D 能提供精确、连贯的编辑，并在定量指标和人类评估中与最先进基线相比表现优异。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2602.22785" data-arxiv-id="2602.22785" data-status="ready">
+<h1>[2602.22785] SceneTransporter: Optimal Transport-Guided Compositional Latent Diffusion for Single-Image Structured 3D Scene Generation</h1>
+<p><a href="https://arxiv.org/abs/2602.22785" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 SceneTransporter，通过最优传输引导的关联分配框架解决开放世界结构化 3D 场景生成中的结构误分割和几何冗余问题。</p>
+<h2>解决的问题</h2>
+<p>现有方法多产生单体非结构化网格，分而治之方案依赖 2D 分割导致脆弱性，端到端结构化生成在开放世界应用中存在结构误分割（语义实例无法形成独立部分）和几何冗余（多个潜变量竞争同一几何区域）问题。</p>
+<h2>创新点</h2>
+<ul>
+<li>设计基于典型相关分析（CCA）的去偏聚类探针，调查部分级生成器的潜在结构，揭示分配机制缺乏结构约束是核心失败原因。</li>
+<li>将任务重构为最优传输（OT）引导的关联分配问题。</li>
+<li>提出 SceneTransporter 框架，利用熵正则化 OT 框架施加结构约束，包括 OT 计划门控交叉注意力模块实现独占一对一路由，以及边缘正则化分配成本确保连贯结构分组。</li>
+<li>在开放世界 3D 场景生成上实现最先进性能，显著提升了实例级一致性和几何保真度。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2603.01594" data-arxiv-id="2603.01594" data-status="ready">
+<h1>[2603.01594] Preference Score Distillation: Leveraging 2D Rewards to Align Text-to-3D Generation with Human Preference</h1>
+<p><a href="https://arxiv.org/abs/2603.01594" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 Preference Score Distillation (PSD) 框架，通过利用隐式奖励模型梯度作为 PF-ODE 兼容的引导信号，在无需 3D 训练数据的情况下实现文本到 3D 生成与人类偏好的对齐。</p>
+<h2>解决的问题</h2>
+<p>现有的分数蒸馏（SDS）生成的 3D 资产常与人类偏好不一致，且现有的基于人类反馈的强化学习（RLHF）方法需要训练 3D 特定奖励模型，破坏了无 3D 数据合成的核心优势并导致梯度错位。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种用于分数蒸馏的偏好对齐方法，即 Preference Score Distillation (PSD)。</li>
+<li>首次证明偏好对齐可以直接形式化为 CFG 类型的引导，并通过在优化过程中构建对比样本对产生增加偏好样本可能性的梯度。</li>
+<li>提出了一种交替更新偏好分数和负嵌入的策略，通过优化连续负嵌入来实现更新预训练扩散参数的效果。</li>
+<li>大量实验证明 PSD 能够提高美学分数，并在 4 个人类偏好评估模型和 1 个视觉问答模型上优于其他比较方法。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2603.02619" data-arxiv-id="2603.02619" data-status="ready">
+<h1>[2603.02619] Direct Reward Fine-Tuning on Poses for Single Image to 3D Human in the Wild</h1>
+<p><a href="https://arxiv.org/abs/2603.02619" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 DrPose 算法和 DrPose15K 数据集，通过直接奖励微调优化图像到多视图扩散模型，以提升单图像 3D 人体重建在动态复杂姿态下的质量。</p>
+<h2>解决的问题</h2>
+<p>多视图扩散模型重建的 3D 人体在动态复杂姿态下常出现不自然的姿势，且现有公开训练数据集缺乏多样化的姿态分布。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出 DrPose，一种新颖的后训练算法，用于增强图像到多视图（I2MV）模型在动态和复杂场景中与自然姿态的对齐。</li>
+<li>构建 DrPose15K 数据集，包含来自运动数据集的人体姿态与每个姿态条件生成的单视图图像。</li>
+<li>通过定量评估证明，该方法在所有数据集上均取得一致改进，包括传统基准和提出的 MixamoRP。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2603.05081" data-arxiv-id="2603.05081" data-status="ready">
+<h1>[2603.05081] Orthogonal Spatial-temporal Distributional Transfer for 4D Generation</h1>
+<p><a href="https://arxiv.org/abs/2603.05081" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种正交时空分布迁移框架，通过解耦时空特征并利用 3D 和视频扩散模型的先验知识，解决了 4D 内容生成中数据稀缺及特征建模困难的问题。</p>
+<h2>解决的问题</h2>
+<p>4D 内容生成面临标注数据稀缺的挑战，且现有方法直接融合 3D 空间先验和视频时间先验会导致灾难性遗忘，未能考虑时空特征分布的异构性与正交性。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种通过从 3D 和视频扩散模型转移时空先验来生成高质量 4D 内容的新框架。</li>
+<li>开发了一种时空解耦的 4D 感知扩散模型，设计了时空潜变量解耦表示机制以维持特征独立。</li>
+<li>提出了基于知识蒸馏的正交时空分布迁移（Orster）学习，同时执行空间和时间迁移学习以注入先验知识。</li>
+<li>设计了四步时空增强 4D 训练过程，包括预训练、迁移学习、一致性对齐和条件生成训练。</li>
+<li>通过广泛的定性定量实验证明该方法在时空一致性和细节丰富度上显著优于现有方法。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2603.05908" data-arxiv-id="2603.05908" data-status="ready">
+<h1>[2603.05908] Pano3DComposer: Feed-Forward Compositional 3D Scene Generation from Single Panoramic Image</h1>
+<p><a href="https://arxiv.org/abs/2603.05908" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 Pano3DComposer，这是一个用于从单张全景图像生成组合式 3D 场景的模块化前馈框架，通过解耦对象生成与布局估计来解决现有方法在效率、泛化性和全景适配上的局限。</p>
+<h2>解决的问题</h2>
+<p>现有 3D 场景生成方法主要依赖透视图像导致视野受限，且针对全景图像的方法存在优化耗时、无法生成纹理化场景或难以满足效率要求的问题，难以实现从单张全景图高效生成几何完整的 3D 场景。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出 Pano3DComposer，一个用于从单张全景图像生成组合式 3D 场景的模块化前馈框架。</li>
+<li>设计基于 Alignment-VGGT 架构的对象 - 世界变换预测器，实现生成 3D 对象与目标全景场景渲染的高效前向对齐。</li>
+<li>引入粗到细（Coarse-to-Fine）对齐机制，无需基于梯度的优化即可逐步改进对象与场景的对齐。</li>
+<li>使用从可微优化器蒸馏的伪几何监督训练变换预测器，以处理生成对象与真实对象之间的形状差异。</li>
+<li>在合成和真实场景上的大量实验表明，该方法在几何精度和推理效率方面优于最先进的方法。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2603.05845" data-arxiv-id="2603.05845" data-status="ready">
+<h1>[2603.05845] Cog2Gen3D: Sculpturing 3D Semantic-Geometric Cognition for 3D Generation</h1>
+<p><a href="https://arxiv.org/abs/2603.05845" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 Cog2Gen3D 框架，通过整合高层语义和绝对几何信息来增强 3D 生成的物理空间感知，实现高质量的 3D 生成。</p>
+<h2>解决的问题</h2>
+<p>现有的 3D 生成方法因缺乏几何约束而容易发生结构坍塌，且现有引入几何先验的方法局限于 2D 相对空间关系，无法捕捉 3D 绝对几何，导致尺度不一致和几何坍塌。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出 Cog2Gen3D 框架，引入 3D 认知引导 3D 生成，桥接语义先验与几何约束以支持可控的 3D 对象和场景生成。</li>
+<li>观察到几何特征提供几何一致性且潜在场景图提供结构合理性，据此设计认知特征嵌入和 3D 潜在认知图以构建鲁棒的 3D 表示。</li>
+<li>开发认知引导的潜在扩散机制，利用认知图引导 3D 高斯生成，确保生成场景的语义保真度和几何合理性。</li>
+<li>整合一系列 3D 数据集并构建名为认知场景图 3D 数据集（CogSG-3D）的验证子集，包含显式的场景图标签用于监督。</li>
+<li>通过广泛的实验证明了该方法的有效性。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2603.08060" data-arxiv-id="2603.08060" data-status="ready">
+<h1>[2603.08060] CinemaWorld: Generative Augmented Reality with LLMs and 3D Scene Generation for Movie Augmentation</h1>
+<p><a href="https://arxiv.org/abs/2603.08060" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 CinemaWorld 系统，利用生成式 AI 和 LLM 将电影内容自动转化为混合现实场景，实现基于电影内容的物理环境增强。</p>
+<h2>解决的问题</h2>
+<p>传统混合现实体验需精心准备和预设计，且现有系统缺乏利用生成式 AI 进行大规模电影增强及将 3D 内容无缝融入混合现实场景的能力。</p>
+<h2>创新点</h2>
+<ul>
+<li>通过形式化激发研究确定了 CinemaWorld 的设计空间，识别了七种关键增强方法。</li>
+<li>提出了一种新颖的电影到 MR 增强管道，包含场景分析、环境捕获和生成渲染三个阶段。</li>
+<li>技术评估显示 18 种增强类型准确率超过 80%，并分析了剩余三种低准确率的原因。</li>
+<li>可用性研究和专家访谈表明系统提高了沉浸感和享受度，同时揭示了创作者对控制和版权的担忧。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2603.05522" data-arxiv-id="2603.05522" data-status="ready">
+<h1>[2603.05522] RoboLayout: Differentiable 3D Scene Generation for Embodied Agents</h1>
+<p><a href="https://arxiv.org/abs/2603.05522" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 RoboLayout，作为 LayoutVLM 的扩展，通过整合代理感知可达性约束和后优化清理过程，实现了面向具身智能体的可微分 3D 场景生成。</p>
+<h2>解决的问题</h2>
+<p>领域内的基本挑战在于将自然语言表达的高层语义意图与控制物体放置和场景结构的高层几何、空间及智能体特定约束进行对齐。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出 RoboLayout，作为 LayoutVLM 的扩展，整合了代理感知可达性和后优化清理过程。</li>
+<li>将显式可达性约束整合到可微分优化循环中，使生成的布局对具身智能体可行且可操作。</li>
+<li>局部细化阶段选择性地仅重新优化有问题的物体放置，同时保持布局其余部分固定，提高了收敛效率。</li>
+<li>这种组合允许 RoboLayout 在保持语义一致性的同时，将全局结构目标与局部关系细化分离。</li>
+<li>RoboLayout 保留了端到端可微分性和与视觉 - 语言监督的兼容性，并允许布局明确针对预期行为者的物理能力进行定制。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2603.12238" data-arxiv-id="2603.12238" data-status="ready">
+<h1>[2603.12238] SceneAssistant: A Visual Feedback Agent for Open-Vocabulary 3D Scene Generation</h1>
+<p><a href="https://arxiv.org/abs/2603.12238" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 SceneAssistant，一种基于视觉反馈代理的开放词汇 3D 场景生成框架，利用 VLM 的潜在空间推理能力通过 Action API 和 ReAct 范式实现无需预定义空间关系的复杂场景合成。</p>
+<h2>解决的问题</h2>
+<p>现有基于检索的 3D 场景生成方法依赖受限的预定义空间关系原语，难以泛化到开放词汇场景，且在处理复杂配置时容易产生次优或错误的布局，同时数据驱动方法缺乏可编辑性。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种用于开放词汇 3D 场景生成的新型代理框架，通过纯视觉反馈驱动的循环运行，有效弥合了高层文本概念与复杂 3D 场景之间的差距。</li>
+<li>设计了一套多功能场景编辑和视点控制 API，激发现代 VLM 的潜在空间推理和规划能力，实现无需预定义空间关系或外部布局工具的细粒度场景操作。</li>
+<li>在多样且非传统的场景描述上进行了广泛实验，证明该方法在布局连贯性、资产质量和与复杂用户意图的对齐方面始终优于现有的最先进方法。</li>
+<li>将发布代码以促进该方向的未来研究。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2603.11554" data-arxiv-id="2603.11554" data-status="ready">
+<h1>[2603.11554] MANSION: Multi-floor lANguage-to-3D Scene generatIOn for loNg-horizon tasks</h1>
+<p><a href="https://arxiv.org/abs/2603.11554" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了 MANSION 框架，旨在解决长视界具身智能任务中缺乏可扩展、可重配置的建筑规模模拟环境的问题，并发布了包含 1000 多个多楼层建筑的 MansionWorld 生态系统。</p>
+<h2>解决的问题</h2>
+<p>现有场景资源有限且难以复用，合成环境多局限于单层房间，缺乏对垂直结构和跨楼层设施的建模，导致缺乏可扩展、可重配置的建筑规模模拟环境，限制了长视界具身智能任务的研究。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出混合多模态大语言模型 - 几何管道，将自然语言指令转化为包含语义基础和垂直对齐矢量平面图的完整多层建筑 3D 场景。</li>
+<li>扩展 AI2-THOR 框架，添加可重用的隧道资产和跨楼层技能 API，支持定义和评估建筑规模的多楼层具身任务。</li>
+<li>设计任务语义场景编辑代理，将生成的静态建筑转化为可适应的游乐场，支持细粒度场景修改和环境复用。</li>
+<li>发布 MansionWorld，一个包含超过 1000 个多样化、交互式多楼层建筑的大型生态系统，涵盖住宅、办公和公共设施领域。</li>
+<li>通过实验证明约束增长求解器在标准住宅数据集之外具有泛化能力，且最先进的具身智能代理在多层任务上表现急剧下降。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2603.13098" data-arxiv-id="2603.13098" data-status="ready">
+<h1>[2603.13098] SldprtNet: A Large-Scale Multimodal Dataset for CAD Generation in Language-Driven 3D Design</h1>
+<p><a href="https://arxiv.org/abs/2603.13098" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了 SldprtNet，这是一个包含超过 242,000 个高质量样本的大规模多模态 CAD 数据集，旨在支持语言驱动的 3D 设计和几何深度学习应用。</p>
+<h2>解决的问题</h2>
+<p>现有 CAD 数据集规模小、质量有限、标注困难且缺乏标准化的参数化表示格式，导致语义驱动的 CAD 建模研究进展缓慢。</p>
+<h2>创新点</h2>
+<ul>
+<li>构建了一个包含超过 242,000 个高质量样本的大规模 CAD 数据集，每个样本包含多视图复合图像、结构化参数化文本表示和自然语言描述。</li>
+<li>利用 SolidWorks API 开发了编码器和解码器工具，实现了 CAD 模型与文本之间的无损转换，支持 13 种 CAD 操作。</li>
+<li>为每个 3D 模型提供了复合图像和参数化建模脚本，并通过多模态语言模型生成自然语言描述，实现了图像、脚本和描述的完全对齐。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2603.12820" data-arxiv-id="2603.12820" data-status="ready">
+<h1>[2603.12820] NeurFrame: Learning Continuous Frame Fields for Structured Mesh Generation</h1>
+<p><a href="https://arxiv.org/abs/2603.12820" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 NeurFrame，一种自监督神经网络方法，通过连续帧场表示指导结构化网格生成，避免了细四面体离散化依赖并实现了单一网络的高效优化。</p>
+<h2>解决的问题</h2>
+<p>现有结构化网格生成方法在 3D 中构建高质量帧场具有挑战性，且基于离散网格的场引导方法存在计算成本高或离散化伪影问题，同时现有神经网络方法通常需要联合优化两个场导致计算量大。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出 NeurFrame，一种自监督神经网络方法，提供帧场的连续表示，允许在粗粒度体离散化上进行优化并支持对整个模型的查询。</li>
+<li>生成的帧场同时指导高质量的四边形表面网格和六面体体积网格生成，具有更少且分布更好的奇点，提高了网格规则性和结构保真度。</li>
+<li>采用单一网络，相比先前联合优化两个神经场的自监督神经网络方法，实现了更低的计算成本。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2603.17841" data-arxiv-id="2603.17841" data-status="ready">
+<h1>[2603.17841] Omni-3DEdit: Generalized Versatile 3D Editing in One-Pass</h1>
+<p><a href="https://arxiv.org/abs/2603.17841" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 Omni-3DEdit，一种在多图潜在空间进行 3D 编辑的新框架，通过利用多视图生成、2D 编辑和 3D 重建的进展，实现了针对多样化场景级 3D 资产的高效统一编辑。</p>
+<h2>解决的问题</h2>
+<p>现有 3D 编辑方法主要依赖 2D 模型迭代优化，存在多视图一致性差、任务特定缺乏通用性、计算耗时过长且纹理过平滑、以及基于物体中心数据集限制无法处理通用 3D 场景输入等问题。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出 Omni-3DEdit，一个在多图潜在空间中操作的基于学习的框架，实现了针对多样化场景级 3D 资产的高效统一编辑。</li>
+<li>探索并提出了在数据受限场景下训练多图一致编辑模型 OmniNet 的有效策略。</li>
+<li>通过大量实验证明了所提方法在各种 3D 编辑任务中的优越效率和有效性。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2603.21557" data-arxiv-id="2603.21557" data-status="ready">
+<h1>[2603.21557] From Part to Whole: 3D Generative World Model with an Adaptive Structural Hierarchy</h1>
+<p><a href="https://arxiv.org/abs/2603.21557" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种从部分到整体的 3D 生成世界模型，通过自适应结构层次学习单图像 3D 生成，旨在解决固定粒度形状表示和缺乏共享结构先验的局限性。</p>
+<h2>解决的问题</h2>
+<p>单图像 3D 生成问题高度病态且鲁棒性不足，现有方法存在两个关键局限性：一是固定粒度形状表示导致难以处理复杂结构且部分数量需预先决定；二是缺乏共享的部件级结构先验，限制了跨类别的组成泛化能力。</p>
+<h2>创新点</h2>
+<ul>
+<li>本文提出了一种新的从部分到整体的 3D 世界模型，将单图像 3D 生成公式化为学习自适应结构层次，其中每个物体或场景由潜在结构槽位表示。</li>
+<li>提出自适应槽位门控机制以学习可变物体部分，并结合类别无关的原型库将原型引导残差注入部分潜变量，从而实现形状组成泛化同时保留细粒度细节。</li>
+<li>在物体和场景级别的基准上进行评估，展示了在跨类别泛化和鲁棒性方面的改进。</li>
+<li>消融实验证实了自适应槽位门控和原型库在结构适应和几何先验共享方面的益处。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2605.13852" data-arxiv-id="2605.13852" data-status="ready">
+<h1>[2605.13852] Realiz3D: 3D Generation Made Photorealistic via Domain-Aware Learning</h1>
+<p><a href="https://arxiv.org/abs/2605.13852" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 Realiz3D 框架，通过解耦域身份与控制信号，在保持图像生成器照片真实性的同时实现精确的 3D 控制。</p>
+<h2>解决的问题</h2>
+<p>基于扩散的图像生成器难以配备精确的 3D 控制以确保图像符合几何、材质和视角规范，且现有微调策略导致真实图像与合成渲染之间存在严重的域差距，造成真实感与可控性之间的权衡。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种灵活且通用的配方，用于在保持基础模型真实先验的同时，在可控但域偏移的数据集上微调扩散模型。</li>
+<li>设计了一种新的域偏移适配器，将域身份与控制信号分离，防止微调期间的域泄漏。</li>
+<li>提出了一种分层感知的训练和采样策略，通过逐步统一特征空间，实现如文本到多视图和从 3D 输入纹理化等任务的真实且可控的生成。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2603.01601" data-arxiv-id="2603.01601" data-status="ready">
+<h1>[2603.01601] Dehallu3D: Hallucination-Mitigated 3D Generation from Single Image via Cyclic View Consistency Refinement</h1>
+<p><a href="https://arxiv.org/abs/2603.01601" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了 Dehallu3D 框架，通过循环视图一致性细化（CVCR）模块和异常风险度量（ORM）指标，有效缓解了单图像 3D 生成中的幻觉问题。</p>
+<h2>解决的问题</h2>
+<p>现有的单图像 3D 重建模型常因稀疏多视图图像不一致而产生幻觉（hallucinations），导致重建内容出现异常值（outliers），影响下游应用（如 3D 打印、游戏）的准确性与沉浸感，且当前研究对此探索不足。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出 Dehallu3D 框架，用于从单图像生成高保真 3D 网格，通过消除异常值有效缓解幻觉。</li>
+<li>引入即插即用的 CVCR 模块，确保相邻视图的一致性和网格的光滑度变化，在保留细节的同时抑制幻觉异常值。</li>
+<li>设计异常风险度量（ORM）指标，专门用于评估几何保真度。</li>
+<li>实验表明 Dehallu3D 实现了优越的性能，支持高质量的单图像到 3D 生成。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2604.19773" data-arxiv-id="2604.19773" data-status="ready">
+<h1>[2604.19773] PR-CAD: Progressive Refinement for Unified Controllable and Faithful Text-to-CAD Generation with Large Language Models</h1>
+<p><a href="https://arxiv.org/abs/2604.19773" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了 PR-CAD 框架，通过渐进式改进统一可控且忠实的文本到 CAD 生成与编辑，解决现有方法缺乏统一迭代框架及依赖非自然提示的问题。</p>
+<h2>解决的问题</h2>
+<p>现有文本到 CAD 生成方法将生成与编辑视为分离任务，缺乏统一的迭代改进框架，且依赖非专家友好的技术提示及简化的训练数据，难以满足真实设计需求。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出 PR-CAD 框架，在单一可控智能体中统一文本驱动的 CAD 生成与编辑。</li>
+<li>引入覆盖完整 CAD 生命周期的高保真交互数据集，支持多样化的编辑类型和描述模态。</li>
+<li>开发结合监督微调、结构化思维链和强化学习的增强推理方法，以优化几何保真度、可执行性和用户意图对齐。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2603.26512" data-arxiv-id="2603.26512" data-status="ready">
+<h1>[2603.26512] CADSmith: Multi-Agent CAD Generation with Programmatic Geometric Validation</h1>
+<p><a href="https://arxiv.org/abs/2603.26512" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了 CADSmith，一种结合程序化几何验证与视觉语言模型评估的多智能体管道，旨在解决 LLM 在 CAD 生成中存在的维度幻觉和拓扑错误问题。</p>
+<h2>解决的问题</h2>
+<p>现有 LLM 在 CAD 生成中常出现维度幻觉和 API 误用，且缺乏程序化验证；现有系统要么视觉反馈丢失几何精度，要么仅单次生成无迭代修正，无法同时满足数值精度与形状一致性的双重需求。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出 CADSmith 多智能体管道，包含 Planner、Coder、Executor、Validator 和 Refiner 等专用智能体。</li>
+<li>结合 OpenCASCADE 内核检查与视觉语言模型 Judge，提供精确的几何反馈和高层形状评估。</li>
+<li>设计嵌套修正循环，内循环处理执行错误，外循环进行几何优化。</li>
+<li>使用更强的模型（Claude Opus）作为 Judge 以避免单模型修正中的自我确认偏差。</li>
+<li>基于程序化测量而非微调进行优化，确保系统随 CadQuery API 演进保持更新。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2603.18532" data-arxiv-id="2603.18532" data-status="ready">
+<h1>[2603.18532] Scaling Sim-to-Real Reinforcement Learning for Robot VLAs with Generative 3D Worlds</h1>
+<p><a href="https://arxiv.org/abs/2603.18532" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出利用生成式 3D 世界模型自动构建大规模交互式环境分布，以支持机器人 VLA 的可扩展仿真到现实强化学习微调，解决了场景多样性不足和人工设计成本高的问题。</p>
+<h2>解决的问题</h2>
+<p>现有机器人 VLA 微调流程在仿真到现实阶段需要大量人工参与，且物理世界场景多样性扩展成本过高导致模型过拟合，缺乏泛化性。</p>
+<h2>创新点</h2>
+<ul>
+<li>展示强化学习与 3D 世界生成模型能互补 VLA 的大容量。</li>
+<li>引入语言驱动的场景设计师，将任务描述转换为结构化场景布局，并由 3D 世界生成模型生成完全交互式环境。</li>
+<li>在仿真中微调预训练 VLA，在 100 个唯一生成的场景中成功率提升 70.1 个百分点，任务完成速度提升 1.25 倍。</li>
+<li>证明增加场景多样性可显著提高零样本泛化能力（在 50 个场景上微调比单场景微调零样本成功率提升 24.7 个百分点）。</li>
+<li>展示仿真到现实的迁移技术可应用于 VLA（通过高保真生成 3D 对象、简单域随机化和 PD 控制）。</li>
+<li>证明将 VLA 微调为高斯策略的 RL 流程匹配方法有效（PPOFlow 实现 2.36 倍推理延迟加速）。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2603.29387" data-arxiv-id="2603.29387" data-status="ready">
+<h1>[2603.29387] Extend3D: Town-Scale 3D Generation</h1>
+<p><a href="https://arxiv.org/abs/2603.29387" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 Extend3D，一种从单图像生成大规模 3D 场景的新型无训练管道，通过扩展潜在空间和重叠补丁流技术解决了现有方法在细节和一致性上的不足。</p>
+<h2>解决的问题</h2>
+<p>现有 3D 数据集多为对象中心数据，缺乏复杂排列和背景，导致无法生成大型通用场景；现有潜在生成模型使用固定潜在大小，导致大场景输出模糊；现有外绘方法会导致块一致性下降且依赖子场景生成能力不足。</p>
+<h2>创新点</h2>
+<ul>
+<li>扩展潜在空间以将对象中心模型集成到 3D 场景生成中，实现更通用和可扩展的生成管道。</li>
+<li>引入带有图像条件的重叠补丁流，捕捉局部信息并减轻对象中心模型产生的错误。</li>
+<li>结合迭代去噪 SDEdit 过程和 3D 感知优化，完成单目深度点云中的遮挡区域并克服对象中心模型与场景动态的偏差。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2603.18782" data-arxiv-id="2603.18782" data-status="ready">
+<h1>[2603.18782] Points-to-3D: Structure-Aware 3D Generation with Point Cloud Priors</h1>
+<p><a href="https://arxiv.org/abs/2603.18782" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 Points-to-3D 框架，通过将可见点云编码为结构潜变量并作为硬约束，结合掩码感知修复网络实现由点云先验驱动的几何可控 3D 生成。</p>
+<h2>解决的问题</h2>
+<p>现有 3D 生成模型仅依赖 2D 图像或文本条件，缺乏对真实 3D 测量的几何可控性，且未能有效利用传感器或图像预测器提供的部分点云结构信息。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出 Points-to-3D 框架，实现由点云先验驱动的几何可控 3D 生成。</li>
+<li>重新定义结构潜变量的初始化，将可见点云体素化并编码为部分观测潜变量而非纯噪声。</li>
+<li>将观测区域作为固定约束，未观测区域保持自由，利用掩码感知修复网络完成混合潜变量。</li>
+<li>构建可见性感知训练流程，使用真实部分 - 完整结构对监督修复模型生成几何线索。</li>
+<li>采用轻量级两阶段推理过程，先建立全局一致结构再进行边界质量优化。</li>
+<li>在 Toys4K 和 3D-FRONT 基准上优于 TRELLIS 等基线，显著提升点云先验覆盖区域的几何保真度。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2603.09266" data-arxiv-id="2603.09266" data-status="ready">
+<h1>[2603.09266] ForgeDreamer: Industrial Text-to-3D Generation with Multi-Expert LoRA and Cross-View Hypergraph</h1>
+<p><a href="https://arxiv.org/abs/2603.09266" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了名为 ForgeDreamer 的系统框架，旨在通过多专家 LoRA 集成和跨视图超图几何增强技术实现高保真工业文本到 3D 生成。</p>
+<h2>解决的问题</h2>
+<p>现有文本到 3D 生成方法在工业应用中面临领域差距（自然场景模型无法理解工业语义和几何要求）和几何推理不足（成对一致性约束无法捕捉复杂结构依赖）两大挑战，同时现有 LoRA 融合存在知识干扰且缺乏合适的工业数据集。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种新颖的教师 - 学生蒸馏框架，有效整合多个类别特定的 LoRA 模型，实现工业领域的卓越跨类别泛化能力。</li>
+<li>引入了一种跨视图超图增强高阶几何梯度损失，捕捉跨越多个视图的结构依赖，解决了成对几何一致性假设的根本局限性。</li>
+<li>构建了一个受控的多视图工业数据集，解决了现有数据集视角有限和成像条件不一致的问题，用于可靠的工业文本到 3D 生成。</li>
+<li>在自定义构建的多视图工业数据集上进行了广泛实验，证明了在生成质量和语义泛化方面优于现有最先进方法。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2601.16148" data-arxiv-id="2601.16148" data-status="ready">
+<h1>[2601.16148] ActionMesh: Animated 3D Mesh Generation with Temporal 3D Diffusion</h1>
+<p><a href="https://arxiv.org/abs/2601.16148" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文介绍了 ActionMesh，一种从视频输入生成动画 3D 网格的 feed-forward 生成模型，通过扩展 3D 扩散模型并引入时间轴，实现了快速、拓扑一致且无需绑定的动画 3D 网格生成。</p>
+<h2>解决的问题</h2>
+<p>现有工作主要存在三个局限性：特定于有限的设置（预定义输入模态和对象类别）、依赖漫长的优化循环（30-45 分钟）导致速度慢且易陷入局部最优、整体输出质量未达到生产标准。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出 ActionMesh，一种从视频输入生成动画 3D 网格的 feed-forward 生成模型。</li>
+<li>设计了两阶段方法，包括基于预训练 3D 潜在扩散模型的时序 3D 扩散模型和时序 3D 自编码器。</li>
+<li>实现了快速生成（16 帧视频仅需 2 分钟）且无需绑定（rig-free）和拓扑一致。</li>
+<li>能够保持网格属性（如纹理）在动画过程中的一致性，并适用于复杂形状。</li>
+<li>模型可扩展至其他生成任务（如 text-to-4D）及相关应用（如重定向/运动转移）。</li>
+<li>在 Consistent4D 和 ActionBench 基准上优于现有最先进方法，速度提升约 10 倍。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2604.04425" data-arxiv-id="2604.04425" data-status="ready">
+<h1>[2604.04425] HandDreamer: Zero-Shot Text to 3D Hand Model Generation using Corrective Hand Shape Guidance</h1>
+<p><a href="https://arxiv.org/abs/2604.04425" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了 HandDreamer，一种利用矫正手部形状引导的零样本文本到 3D 手部模型生成方法，旨在解决现有生成方法在视图一致性和几何细节上的不足。</p>
+<h2>解决的问题</h2>
+<p>现有传统方法成本高且难以定制；现有文本到 3D 生成方法存在视图不一致（Janus artifact）、无法适应高可动性物体（如手部导致手指异常突出）、几何细节缺失以及难以泛化到虚构手部等问题。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了 HandDreamer，据作者所知是首个利用文本提示和形状先验进行零样本 3D 手部模型生成的方法。</li>
+<li>分析了文本到 3D 手部视图不一致性的起源，并开发了新颖的矫正手部形状引导方法以限制 SDS 过程中的几何退化。</li>
+<li>提出利用手部骨架条件化扩散模型，嵌入相机和手部姿态以减少每个视图点的概率模式。</li>
+<li>提出使用 MANO 手部模型创建低分数初始化，以确保所有视图收敛到正确的几何模式。</li>
+<li>该方法生成的 3D 手部具有高保真度，在定性和定量上均优于现有方法。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2604.08760" data-arxiv-id="2604.08760" data-status="ready">
+<h1>[2604.08760] SIC3D: Style Image Conditioned Text-to-3D Gaussian Splatting Generation</h1>
+<p><a href="https://arxiv.org/abs/2604.08760" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了 SIC3D，一种首个针对 3D 高斯泼溅的图像条件风格化框架，通过两阶段变分分数蒸馏实现高效可控的风格迁移。</p>
+<h2>解决的问题</h2>
+<p>现有文本到 3D 生成管道主要关注几何和一致性，图像条件风格控制未被充分探索，且基于 NeRF 或重建的风格化方法难以平衡风格迁移与几何稳定性，且缺乏与 3D 高斯泼溅的兼容性。</p>
+<h2>创新点</h2>
+<ul>
+<li>我们引入了 SIC3D，这是首个针对 3D 高斯泼溅的图像条件风格化框架，实现了高效可控的风格化文本到 3D 生成。</li>
+<li>我们提出了 VSSD，通过风格注入机制扩展 VSD，提供稳定的优化和多视图一致的风格化。</li>
+<li>我们采用基于梯度的正则化策略，减少因几何 - 纹理不一致产生的伪影，实现鲁棒风格化。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2604.10789" data-arxiv-id="2604.10789" data-status="ready">
+<h1>[2604.10789] ReplicateAnyScene: Zero-Shot Video-to-3D Composition via Textual-Visual-Spatial Alignment</h1>
+<p><a href="https://arxiv.org/abs/2604.10789" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了 ReplicateAnyScene，一个全自动且零样本的视频到 3D 场景组合框架，通过独特的多模态对齐机制协同孤立的基础视觉模型，并引入了 C3DR 基准进行评估。</p>
+<h2>解决的问题</h2>
+<p>现有方法难以在真实场景中实现鲁棒和自动化的部署，存在对人工干预依赖重、需要辅助深度或语义输入、生成物体质量低、物理布局不合理、受限于简单场景等问题；此外，直接组装孤立的基础视觉模型会导致信息碎片化，缺乏跨维度感知，产生尺度模糊、身份不匹配和空间布局不连贯。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了 ReplicateAnyScene，一个全自动且零样本的视频到 3D 场景组合框架，旨在协同孤立的基础视觉模型。</li>
+<li>设计了五阶段级联流水线，包括渐进式物体发现、空间引导视觉去重、最佳视角 3D 资产生成、迭代视觉 - 空间对齐和语义感知场景细化。</li>
+<li>通过独特的多模态对齐机制，将 2D 语义和感知先验渐进式地锚定到连贯的 3D 物理空间中。</li>
+<li>引入了 C3DR 基准，用于评估跨语义、视觉和几何维度的组合重建质量。</li>
+<li>实验表明该方法显著优于现有基线，为高质量全自动组合场景生成设立了新标准。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2604.10772" data-arxiv-id="2604.10772" data-status="ready">
+<h1>[2604.10772] HOG-Layout: Hierarchical 3D Scene Generation, Optimization and Editing via Vision-Language Models</h1>
+<p><a href="https://arxiv.org/abs/2604.10772" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种名为 HOG-Layout 的分层 3D 场景生成、优化和编辑框架，利用视觉语言模型结合分层优化与检索增强生成技术，旨在解决现有方法在多样性、物理合理性及场景编辑能力方面的不足。</p>
+<h2>解决的问题</h2>
+<p>现有 3D 室内场景生成方法存在多样性不足或缺乏交互性、LLM 生成易产生碰撞或布局不合理、空间约束降低生成多样性、VLM 需要预先指定物体集合以及现有方法主要关注从头生成而忽视场景编辑等问题。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种基于分层的多步场景布局生成、优化和编辑方法，增强了 VLM 推理能力以生成交互式场景。</li>
+<li>引入了一种分层优化模块，通过分解力方向实现同级物体和父子相关物体之间的优化，实现快速且精确的优化。</li>
+<li>实验证明 HOG-Layout 能够快速生成更合理的场景布局，并实现低延迟的场景编辑。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2604.13036" data-arxiv-id="2604.13036" data-status="ready">
+<h1>[2604.13036] Lyra 2.0: Explorable Generative 3D Worlds</h1>
+<p><a href="https://arxiv.org/abs/2604.13036" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 Lyra 2.0 系统，通过解耦几何跟踪与像素合成及自增强训练方案，解决视频扩散模型在长轨迹探索中的空间遗忘和时间漂移问题，实现可扩展的生成式 3D 世界探索与重建。</p>
+<h2>解决的问题</h2>
+<p>当前视频扩散模型在大规模复杂环境的长轨迹探索中难以维持 3D 一致性，主要面临空间遗忘（有限上下文导致重访时幻觉）和时间漂移（自回归生成误差累积）问题，且现有缓解方案存在误差放大或长程几何对应推断失败等缺陷。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出解耦几何跟踪与像素合成的机制，利用显式 3D 代理进行信息路由和空间对应，由扩散模型处理像素合成以避免渲染伪影传播。</li>
+<li>提出自增强训练方案，通过随机条件化网络自身的去噪预测暴露模型在自回归推理中遇到的误差分布，结合高重叠历史帧检索以缓解时间漂移。</li>
+<li>采用微调后的前馈 3D 高斯泼溅（3DGS）流水线处理生成视频中的微小多视图不一致性，实现可靠的场景重建。</li>
+<li>集成上述组件构建 Lyra 2.0 交互式系统，支持从单张图像出发定义任意长轨迹并渐进式重建复杂环境。</li>
+<li>实现高度持久且长视距的场景生成，支持包括回溯和大规模合成在内的广泛场景导航。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2604.13905" data-arxiv-id="2604.13905" data-status="ready">
+<h1>[2604.13905] Rethinking Image-to-3D Generation with Sparse Queries: Efficiency, Capacity, and Input-View Bias</h1>
+<p><a href="https://arxiv.org/abs/2604.13905" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了 SparseGen，一种基于稀疏 3D 锚点查询和生成式框架的 3D 生成模型，旨在实现低输入视角偏差与高效推理。</p>
+<h2>解决的问题</h2>
+<p>现有图像到 3D 生成方法面临视角偏差大、计算效率低或生成能力不足的权衡问题，确定性方法缺乏生成建模能力，迭代方法生成速度慢，且稠密表示导致内存和计算开销大。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了 SparseGen，一种基于稀疏查询的 3D 生成框架，通过生成式建模实现低输入视角偏差，同时比迭代扩散方法更高效。</li>
+<li>设计了统一架构，结合 3D 位置感知编码、基于 Transformer 的查询到高斯扩展和 rectified flow 训练，支持从可变数量输入视图的单步前馈合成。</li>
+<li>提供了全面的实证分析，表明稀疏查询具有高基元利用率并表现出查询诱导的空间局部性，暗示了部分级编辑的潜力。</li>
+<li>展示了显著的质量和效率，相比迭代基线实现了 600 倍加速，同时使用紧凑的 280KB 表示。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2604.13730" data-arxiv-id="2604.13730" data-status="ready">
+<h1>[2604.13730] ReConText3D: Replay-based Continual Text-to-3D Generation</h1>
+<p><a href="https://arxiv.org/abs/2604.13730" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文介绍了首个持续文本到 3D 生成框架 ReConText3D，利用基于重放的语义记忆机制缓解遗忘，并提出了 Toys4K-CL 基准进行评估。</p>
+<h2>解决的问题</h2>
+<p>现有 3D 生成模型训练范式是静态的，无法适应现实世界中持续学习新概念而不牺牲旧资产性能的需求，且该领域尚未被研究，存在分布偏移和条件路径漂移等挑战。</p>
+<h2>创新点</h2>
+<ul>
+<li>本文是首个提出持续文本到 3D 生成问题并呈现 ReConText3D 框架的工作，该框架模型无关且可插入任何文本到 3D 骨干网络。</li>
+<li>通过实证分析展示了最先进的文本到 3D 模型在类增量训练下遭受严重的灾难性遗忘。</li>
+<li>提出了一种新颖的基于重放的持续学习方法，结合计数感知预算分配和文本嵌入 k-中心选择来构建紧凑且语义多样化的记忆。</li>
+<li>引入了 Toys4K-CL，这是首个具有平衡和对抗性基/新类划分的持续文本到 3D 生成基准。</li>
+<li>实验表明 ReConText3D 显著减少了遗忘并提高了多种骨干网络的整体生成质量，验证了其模型无关设计。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2604.13688" data-arxiv-id="2604.13688" data-status="ready">
+<h1>[2604.13688] Beyond Voxel 3D Editing: Learning from 3D Masks and Self-Constructed Data</h1>
+<p><a href="https://arxiv.org/abs/2604.13688" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种名为 Beyond Voxel 3D Editing (BVE) 的高效框架，通过轻量级模块实现高质量文本驱动的 3D 编辑，并发布了首个大规模数据集 Edit-3DVerse。</p>
+<h2>解决的问题</h2>
+<p>现有 3D 生成单步质量难达标且需后期调整；现有编辑方法存在计算成本高（如 SDS）、跨视图一致性差（如 2D 提升法）或难以在局部编辑时保持全局结构语义完整性（如体素方法）的问题，且缺乏大规模高质量数据集。</p>
+<h2>创新点</h2>
+<ul>
+<li>构建并发布 Edit-3DVerse，首个大规模、高质量的文本驱动 3D 编辑数据集。</li>
+<li>提出 BVE 框架，通过轻量级可训练模块实现高保真 3D 编辑，无需昂贵的全模型重训练。</li>
+<li>设计了一种无需标注的 3D 掩码策略，通过精确保留未编辑区域确保语义和结构一致性。</li>
+<li>通过大量实验证明该方法在编辑质量和身份保持方面显著优于最先进方法。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2604.22828" data-arxiv-id="2604.22828" data-status="ready">
+<h1>[2604.22828] MetaEarth3D: Unlocking World-scale 3D Generation with Spatially Scalable Generative Modeling</h1>
+<p><a href="https://arxiv.org/abs/2604.22828" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>MetaEarth3D 通过耦合尺度与维度空间进行概率分布的渐进转换，扩展了生成式基础模型的空间边界，实现了世界尺度 3D 生成。</p>
+<h2>解决的问题</h2>
+<p>现有生成式基础模型的空间尺度受限，主要局限于有界环境，缺乏空间可扩展性是推进超宽区域空间智能的关键瓶颈，且现有方法在扩展至大面积连续无界场景时面临计算不可行及空间一致性问题。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出 MetaEarth3D，将超宽 3D 场景生成重构为通过耦合尺度和维度空间进行概率分布的渐进转换。</li>
+<li>在尺度空间内采用递归尺度转换生成管道，通过跨尺度 2D 图像以渐进的由粗到细方式生成，并在级联阶段共享统一模型。</li>
+<li>引入几何 - 纹理解耦的维度提升方法，通过结构几何生成器预测高程图，并通过纹理生成器渲染多视图观测。</li>
+<li>在纹理生成器中引入显式的姿态感知条件和跨视图局部注意力模块，确保跨视图一致性。</li>
+<li>构建了包含 1000 万真实世界数据的超大规模数据集，涵盖全球分布的多尺度卫星图像及地理对齐的高程图。</li>
+<li>验证了 MetaEarth3D 作为生成数据引擎的价值，在真实世界 UAV 场景的视觉感知任务上实现了平均 22.85% 的性能提升。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2604.07960" data-arxiv-id="2604.07960" data-status="ready">
+<h1>[2604.07960] TOOLCAD: Exploring Tool-Using Large Language Models in Text-to-CAD Generation with Reinforcement Learning</h1>
+<p><a href="https://arxiv.org/abs/2604.07960" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了 ToolCAD 框架，利用强化学习和工具使用大语言模型实现从文本到 CAD 生成的全自动建模。</p>
+<h2>解决的问题</h2>
+<p>现有方法距离完全自主的专家 CAD 建模系统仍有差距，LLM 与 CAD 引擎的最优交互方式尚不明确，具体挑战包括推理与工具集成能力有限、缺乏交互式 CAD 环境及评估基准、以及复杂任务中 CAD 工具使用代理训练不足。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出 ToolCAD，一个通过利用工具使用的大语言模型代理实现文本到 CAD 生成全自动的新框架。</li>
+<li>通过引入具有基于规则和基于结果反馈信号的交互式 CAD 建模健身房，推进工具使用大语言模型的端到端强化学习训练。</li>
+<li>提供基于课程的在线探索工具学习策略，以开发更具竞争力的 CAD 工具使用代理。</li>
+<li>证明 ToolCAD 优于代理生成基线，在多样化的复杂性上实现了高质量的文本到 CAD 结果。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2604.20038" data-arxiv-id="2604.20038" data-status="ready">
+<h1>[2604.20038] FluSplat: Sparse-View 3D Editing without Test-Time Optimization</h1>
+<p><a href="https://arxiv.org/abs/2604.20038" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 FluSplat，一种无需测试时优化的全前向稀疏视图 3D 编辑框架，通过图像域跨视图一致性编辑与直接 3D 提升，实现了高效且语义一致的 3D 场景编辑。</p>
+<h2>解决的问题</h2>
+<p>现有 3D 编辑方法难以保持跨视图一致性，且依赖测试时优化、逐场景调整或监督微调，导致在稀疏视图或实时设置下效率低下。</p>
+<h2>创新点</h2>
+<ul>
+<li>引入首个无需逐场景优化的全前向稀疏视图 3D 编辑框架。</li>
+<li>提出包含全局和局部特征对齐的自监督跨视图扩散正则化，以强制多视图编辑一致性。</li>
+<li>证明在图像域解决跨视图不一致性可实现直接 3D 提升，获得更优的 3D 语义保真度和显著提升的效率。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2605.13862" data-arxiv-id="2605.13862" data-status="ready">
+<h1>[2605.13862] Seed3D 2.0: Advancing High-Fidelity Simulation-Ready 3D Content Generation</h1>
+<p><a href="https://arxiv.org/abs/2605.13862" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 Seed3D 2.0，旨在通过改进几何生成、统一 PBR 纹理生成及扩展仿真就绪能力，解决高质量 3D 资产生成中的质量差距与能力差距。</p>
+<h2>解决的问题</h2>
+<p>现有模型存在质量差距，即缺乏几何规则性（如锐利边缘）和物理材质一致性；以及能力差距，即无法满足下游应用对多物体场景、功能分解对象及部件级物理交互的需求。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出粗到细的两阶段生成管道，结合局部感知 VAE 以恢复锐利边缘和精细表面细节。</li>
+<li>引入统一模型直接生成多视图反照率和金属 - 粗糙度图，利用 MoE 架构和 VLM 语义条件解决材质估计问题。</li>
+<li>扩展仿真就绪能力，包括场景布局规划、部件感知生成及无需训练的关节运动生成。</li>
+<li>引入渐进式蒸馏管道，在保持生成质量的同时显著降低推理成本。</li>
+<li>通过对比五个最近商业模型的人类偏好研究验证了模型在端到端纹理资产生成中的优势。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2603.11831" data-arxiv-id="2603.11831" data-status="ready">
+<h1>[2603.11831] Towards High-Fidelity CAD Generation via LLM-Driven Program Generation and Text-Based B-Rep Primitive Grounding</h1>
+<p><a href="https://arxiv.org/abs/2603.11831" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了 FutureCAD 框架，通过结合大语言模型驱动的程序生成与基于文本的 B-Rep 原语定位，实现了高保真 CAD 模型的生成。</p>
+<h2>解决的问题</h2>
+<p>现有 CAD 生成方法将参数化建模和 B-Rep 建模视为独立问题，导致两者之间的碎片化成为 AI 驱动 CAD 生成的根本瓶颈，限制了先进操作的支持和模型的可重用性。</p>
+<h2>创新点</h2>
+<ul>
+<li>引入 FutureCAD 作为首个统一基于 LLM 的程序生成与基于文本的 B-Rep 原语定位的通用文本到 CAD 范式，实现实用的基于特征的 CAD 建模。</li>
+<li>构建了一个包含超过 140k 个具有丰富参数化操作（如倒角、圆角和壳）、详细几何注释和 CadQuery 代码表示的真实世界 CAD 模型的新数据集。</li>
+<li>引入基于文本的 B-Rep 定位任务，并提出 BRepGround，一种将文本查询定位到目标几何原语的基于 Transformer 的模型。</li>
+<li>证明结合 SFT 和 RL 的两阶段训练策略在保持低无效率的同时实现了高保真 CAD 生成的最先进性能。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2604.27106" data-arxiv-id="2604.27106" data-status="ready">
+<h1>[2604.27106] Reconstruction by Generation: 3D Multi-Object Scene Reconstruction from Sparse Observations</h1>
+<p><a href="https://arxiv.org/abs/2604.27106" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 RecGen 框架，通过联合推断几何形状和 6-DoF 姿态，解决了从稀疏 RGB-D 观测中重建 3D 多物体场景时面临的遮挡、对称性及多视图整合等挑战。</p>
+<h2>解决的问题</h2>
+<p>构建高保真数字孪生成本高且复杂；从稀疏观测中准确估计物体几何和 6-DoF 姿态在遮挡、对称和噪声环境下具有挑战性；现有方法将生成、补全和姿态估计分离导致误差累积；现有模型缺乏对遮挡区域和内部部分结构的恢复能力；深度信息利用不足且对噪声敏感；多视图条件支持不足。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出 RecGen，一个无需先验知识的多元假设框架，用于从一张或几张图像中联合估计物体姿态和完整 3D 纹理形状。</li>
+<li>引入一个包含遮挡物体及其部分的合成数据集，实现严重遮挡和物体对称性下的鲁棒 RGB-D 训练。</li>
+<li>在几何形状质量、纹理重建和姿态估计方面超越 SAM3D，同时训练数据量减少 80%。</li>
+<li>通过大量实验证明 RecGen 在部分级、遮挡、对称和不常见物体上具有鲁棒的泛化能力。</li>
+<li>支持单视图和多视图条件，在统一框架内整合互补观测以减少重建歧义。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2604.26943" data-arxiv-id="2604.26943" data-status="ready">
+<h1>[2604.26943] ProcFunc: Function-Oriented Abstractions for Procedural 3D Generation in Python</h1>
+<p><a href="https://arxiv.org/abs/2604.26943" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了 ProcFunc，一个旨在简化基于 Blender 的过程化生成器创建、组合、分析和执行流程的 Python 库。</p>
+<h2>解决的问题</h2>
+<p>现有的开源过程化生成编程接口（如 Blender 原生 Python API）在实现函数组合、参数标准化和访问方面存在复杂性高、代码冗长、模块脆弱且难以组合的问题，难以满足高效开发和数据分析的需求。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出 ProcFunc 库以简化基于 Blender 的过程化生成器的创建、组合、分析和执行。</li>
+<li>设计了三层 API 架构，包括显式图形操作函数、模块级组合模式及高质量生成器库。</li>
+<li>提供自动分析工具以访问生成器参数、组合结构、中间值及随机分布。</li>
+<li>在内容创建和合成数据集生成两个主要应用场景中验证了系统的有效性。</li>
+<li>开源了 ProcFunc 系统及示例生成器以促进社区使用。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2605.00345" data-arxiv-id="2605.00345" data-status="ready">
+<h1>[2605.00345] Pose-Aware Diffusion for 3D Generation</h1>
+<p><a href="https://arxiv.org/abs/2605.00345" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 Pose-Aware Diffusion (PAD)，一种直接在观察空间内实现端到端、姿态对齐的 3D 生成框架，以解决空间链接断裂和姿态估计模糊问题。</p>
+<h2>解决的问题</h2>
+<p>现有生成模型在规范坐标空间工作，导致与物理世界空间链接断裂；现有的“规范 - 旋转”范式缺乏直接连接，导致像素级对齐困难，且独立姿态预测步骤引入严重歧义，特别是对于对称物体。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出 PAD，一种在观察空间内生成的端到端 3D 生成框架，从根本上消除姿态模糊和空间不匹配。</li>
+<li>引入直接 3D 潜在条件机制，将未投影的部分点云编码到扩散潜在空间中，为姿态对齐生成施加严格的空间约束。</li>
+<li>通过训练 3D 条件模型实现端到端姿态感知生成，无需后处理姿态估计，自然支持组合场景生成。</li>
+<li>实验证明 PAD 在单物体生成、姿态精度及组合场景生成任务中均达到最先进水平并有效解决遮挡问题。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2604.26509" data-arxiv-id="2604.26509" data-status="ready">
+<h1>[2604.26509] 3D Generation for Embodied AI and Robotic Simulation: A Survey</h1>
+<p><a href="https://arxiv.org/abs/2604.26509" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文综述了用于具身智能和机器人仿真的 3D 生成技术，通过建立仿真就绪性评估标准和三角色分类法，解决了传统 3D 生成缺乏物理可执行性和仿真兼容性的问题。</p>
+<h2>解决的问题</h2>
+<p>具身智能和机器人系统的性能受到可扩展、多样化且可交互的 3D 资产和环境可用性的根本限制，现有文献往往只关注单一层面（如生成无执行性、场景无交互语义），且缺乏针对仿真就绪性的统一评估标准。</p>
+<h2>创新点</h2>
+<ul>
+<li>明确区分了面向具身的 3D 生成与传统 3D 生成，确立了仿真就绪性（涵盖几何有效性、物理参数化、运动学可执行性和仿真器兼容性）作为核心评估标准。</li>
+<li>提供了首个围绕具身 AI 中 3D 生成三个核心角色（数据生成器、仿真环境、Sim2Real 桥梁）组织的分类法，连接了通常孤立讨论的研究线程。</li>
+<li>识别并系统化限制了实际部署的关键技术差距，包括大规模标准化物理标注的缺乏、生成质量与仿真器兼容性之间的张力、评估具身有用性的困难以及 Sim2Real 转移中剩余的领域差距。</li>
+<li>将这些技术差距转化为社区的具体研究方向。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2605.09071" data-arxiv-id="2605.09071" data-status="ready">
+<h1>[2605.09071] Probability-Flow Distillation: Exact Wasserstein Gradient Flow for High-Fidelity 3D Generation</h1>
+<p><a href="https://arxiv.org/abs/2605.09071" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出概率流蒸馏（PFD），通过精确积分概率流常微分方程替代 SDS 中的近似估计，诱导 Wasserstein 梯度流以实现高保真 3D 生成。</p>
+<h2>解决的问题</h2>
+<p>现有文本到 3D 生成方法（如 SDS、SDI）受限于梯度搜索特性及后验均值估计器的粗略近似，导致生成几何纹理过平滑或结构复杂捕捉不足，且部分方法存在额外内存开销。</p>
+<h2>创新点</h2>
+<ul>
+<li>证明 DDIM 的后验均值估计器对应于反向扩散轨迹的粗略单步欧拉离散化，限制了 SDI 的采样能力。</li>
+<li>提出概率流蒸馏（PFD），通过精确积分 PF-ODE 替代近似，诱导 Wasserstein 梯度流并建立原则性采样程序。</li>
+<li>将 PFD 应用于文本到 3D 生成，证明其相对于最先进蒸馏方法具有竞争力的生成质量。</li>
+<li>为 SDI 中使用负分类器自由引导比例提供了理论解释。</li>
+<li>相比 SDI 和 VSD，PFD 在保持内存使用相当的同时实现了更少的迭代次数和相似或更好的视觉保真度。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2604.23629" data-arxiv-id="2604.23629" data-status="ready">
+<h1>[2604.23629] From Visual Synthesis to Interactive Worlds: Toward Production-Ready 3D Asset Generation</h1>
+<p><a href="https://arxiv.org/abs/2604.23629" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文综述了从视觉合成到交互式世界的生产就绪 3D 资产生成，旨在解决当前生成方法无法满足实时渲染、物理模拟和编辑需求的问题。</p>
+<h2>解决的问题</h2>
+<p>当前 3D 生成方法虽然视觉质量高，但缺乏生产就绪属性（如网格拓扑、UV、PBR 材质、骨骼绑定等），导致难以直接用于交互式系统，存在资产化瓶颈。</p>
+<h2>创新点</h2>
+<ul>
+<li>围绕游戏资产生产生命周期重新组织 3D 生成研究，将学术任务映射到工业工作流阶段。</li>
+<li>提供对关键后生成阶段的聚焦综述，包括拓扑生成、UV 参数化、PBR 材质预测和自动绑定。</li>
+<li>追踪 3D 数据集的演变，并检查数据表示如何决定可控性和可编辑性。</li>
+<li>识别物理感知生成、LLM 驱动场景自动化和端到端资产化方面的开放挑战。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2605.10922" data-arxiv-id="2605.10922" data-status="ready">
+<h1>[2605.10922] Pixal3D: Pixel-Aligned 3D Generation from Images</h1>
+<p><a href="https://arxiv.org/abs/2605.10922" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>Pixal3D 提出了一种像素对齐的 3D 生成范式，通过反向投影条件机制建立显式的 2D-3D 对应关系，显著提高了从图像生成 3D 资产的保真度。</p>
+<h2>解决的问题</h2>
+<p>当前图像到 3D 生成方法存在保真度瓶颈，生成的 3D 资产与输入图像存在明显的错位和细节丢失，且依赖隐式的交叉注意力机制导致 2D-3D 对应关系不明确。</p>
+<h2>创新点</h2>
+<ul>
+<li>引入 Pixal3D 像素对齐 3D 生成范式，证明其在大规模下可行并显著提升图像到 3D 的保真度。</li>
+<li>提出射线反向投影条件机制，用显式 2D-3D 对应关系替代交叉注意力，实现像素到 3D 特征的直接提升。</li>
+<li>通过多视图特征体积聚合，将 Pixal3D 从单视图扩展到多视图生成。</li>
+<li>提出基于 Pixal3D 的模块化 3D 场景生成管道，生成高保真、物体分离的 3D 场景。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2605.13293" data-arxiv-id="2605.13293" data-status="ready">
+<h1>[2605.13293] Img2CADSeq: Image-to-CAD Generation via Sequence-Based Diffusion</h1>
+<p><a href="https://arxiv.org/abs/2605.13293" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 Img2CADSeq 框架，通过序列扩散模型结合分层编码、点云中间表示及对比学习对齐机制，实现从单视图图像到符合工程标准的 BRep CAD 模型的生成。</p>
+<h2>解决的问题</h2>
+<p>现有的单视图 3D 生成方法产生隐式场或非结构化点溅射，缺乏清晰的几何拓扑结构，不适合工业设计和制造等高精度任务，且从单图像重建高质量 BRep 模型仍具挑战。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出分层三层代码本策略，将 CAD 操作序列量化为曲线簇、草图补丁和拉伸块三个层级，以紧凑序列长度并保留拓扑有效性。</li>
+<li>提供两个大规模数据集（CAD-220K 和 PrintCAD），结合合成与真实数据以解决工业数据稀缺并桥接仿真到现实的差距。</li>
+<li>设计粗到细的点云中间表示，利用 Dens3R 和不确定性感知 DGCNN 模块生成鲁棒的细粒度几何编码。</li>
+<li>提出基于对比学习的对齐机制，将点云特征与 CAD 序列编码的潜在空间进行语义连接。</li>
+<li>利用 VQ-Diffusion 模型生成离散令牌，并通过几何内核编译为符合标准的 BRep 模型。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2605.13129" data-arxiv-id="2605.13129" data-status="ready">
+<h1>[2605.13129] Rigel3D: Rig-aware Latents for Animation-Ready 3D Asset Generation</h1>
+<p><a href="https://arxiv.org/abs/2605.13129" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 Rigel3D，一种生成动画就绪 3D 资产的端到端框架，通过联合生成几何与骨骼结构及皮肤权重，支持运动重定向。</p>
+<h2>解决的问题</h2>
+<p>现有 3D 生成资产多为静态且缺乏骨骼、关节层级和蒙皮权重，传统自动绑骨方法作为后处理步骤难以适应生成几何与下游绑骨器训练分布的差异，且生成的骨骼缺乏支持运动重定向的语义标签。</p>
+<h2>创新点</h2>
+<ul>
+<li>引入 Rigel3D，一种生成动画就绪 3D 资产的端到端框架，可生成网格、外观、骨骼和蒙皮权重。</li>
+<li>提出具有耦合表面和骨骼 SLats 的绑骨感知自动编码器，包含骨骼条件网格解码器、自回归骨骼解码器和基于注意力的蒙皮解码器，实现几何与骨骼结构的联合生成。</li>
+<li>引入开放词汇关节标签模块，通过在共享视觉 - 语言空间中匹配生成的关节与文本标签，支持运动重定向。</li>
+<li>在 Anymate 和 ModelsResource 两个数据集上展示了优于先前自动绑骨基线的最先进性能。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2605.15398" data-arxiv-id="2605.15398" data-status="ready">
+<h1>[2605.15398] 3DEditSafe: Defending 3D Editing Pipelines from Unsafe Generation</h1>
+<p><a href="https://arxiv.org/abs/2605.15398" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了首个针对文本驱动 3D 编辑管道不安全内容生成的防御框架 3DEditSafe，通过引入 3D 优化过程中的语义安全约束来解决不安全语义在多视图优化中传播和巩固的问题。</p>
+<h2>解决的问题</h2>
+<p>现有的文本驱动 3D 编辑管道存在安全限制，不安全编辑语义会在多视图优化中传播并巩固到 3D 表示中，且仅基于 2D 生成阶段的安全防御无法有效防止残留的不安全信号通过 3D 优化过程。</p>
+<h2>创新点</h2>
+<ul>
+<li>首次对 3D 编辑进行安全分析并提出防御方法，证明了文本驱动 3D 编辑管道可将不安全提示转化为持久 NSFW 或图形 3D 内容，并提出了 3DEditSafe 防御框架。</li>
+<li>构建了对象兼容的不安全 3D 编辑数据集基准，包含 30 个针对 10 个 EditSplat 场景定制的提示 - 场景对。</li>
+<li>引入了感知安全的 3D 优化，通过不安全概念排斥和语义安全投影，直接在 3D 优化过程中惩罚不安全语义对齐。</li>
+<li>展示了 3DEditSafe 在减少不安全内容传播的同时，保留了原始编辑指令，避免了完全提示阻止或拒绝，实现了安全与质量的权衡。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2605.15187" data-arxiv-id="2605.15187" data-status="ready">
+<h1>[2605.15187] Articraft: An Agentic System for Scalable Articulated 3D Asset Generation</h1>
+<p><a href="https://arxiv.org/abs/2605.15187" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了 Articraft，一个通过生成代码来大规模生成可动 3D 资产的代理系统，旨在解决现有数据集不足和生成方法泛化能力差的问题。</p>
+<h2>解决的问题</h2>
+<p>现有可动资产数据集规模小、覆盖窄、质量不均，导致基于学习的方法过拟合且难以泛化到新类别，且仅建模形状不足以描述可动物体的功能。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了 Articraft 系统，通过生成代码自动构建可动 3D 资产，无需人工干预。</li>
+<li>设计了包含代理 harness 和 LLM 友好 SDK 的技术架构，支持低推理成本的大规模生成。</li>
+<li>构建了 Articraft-10K 数据集，包含超过 10K 个可动物体，涵盖 245 个类别。</li>
+<li>该系统在生成质量和效率上优于先前的相关工作及通用编程代理。</li>
+<li>展示了利用该数据集重新训练 Particulate 模型及在机器人模拟和虚拟现实中的应用。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2605.14984" data-arxiv-id="2605.14984" data-status="ready">
+<h1>[2605.14984] Sat3DGen: Comprehensive Street-Level 3D Scene Generation from Single Satellite Image</h1>
+<p><a href="https://arxiv.org/abs/2605.14984" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 Sat3DGen，一种基于几何优先的方法，旨在通过解决稀疏监督和视角差异问题，从单张卫星图像生成逼真的街景 3D 场景。</p>
+<h2>解决的问题</h2>
+<p>现有 3D 几何着色法无法捕捉非建筑元素且与输入图像一致性弱，而 3D 代理渲染法虽语义忠实但几何质量差（如边界退化、屋顶不真实、漂浮伪影），根源在于监督稀疏和视角差异导致的几何约束不足。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出 Sat3DGen，采用整体几何优先的方法，通过提升通用框架来解决核心几何失败问题。</li>
+<li>引入基于重力的密度变化损失（Gravity-based Density Variation Loss），以强制合理的垂直结构并抑制漂浮伪影。</li>
+<li>使用空间令牌（Spatial Token）正则化外围布局，解决因足迹不匹配导致的边界错误。</li>
+<li>采用单目相对深度先验（Monocular Relative-Depth Prior）约束卫星视角深度，解决屋顶模糊问题。</li>
+<li>实施透视视图训练（Perspective View Training），联合训练全景图及其投影视图以缓解稀疏监督。</li>
+<li>在自建基准上验证了方法在几何精度（RMSE 5.20m）和照片真实感（FID 19）上的显著增益。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2601.21798" data-arxiv-id="2601.21798" data-status="ready">
+<h1>[2601.21798] CG-MLLM: Captioning and Generating 3D content via Multi-modal Large Language Models</h1>
+<p><a href="https://arxiv.org/abs/2601.21798" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 CG-MLLM，一种原生集成语言 - 图像 -3D 的多模态大语言模型，旨在通过单一模型实现精确的空间理解与高保真 3D 内容生成。</p>
+<h2>解决的问题</h2>
+<p>现有 3D 大语言模型仅能生成粗略的 3D 表示，无法端到端生成详细 3D 对象，且受限于文本/令牌预算或低分辨率体素结构，导致 3D 建模进展滞后于 2D 多模态生成。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种原生集成语言 - 图像 -3D 的端到端 3D 生成方法。</li>
+<li>提出了 CG-MLLM，在 3D 理解任务上优于 Qwen3-VL，并在 LLM 基 3D 生成中达到最先进性能。</li>
+<li>设计了 TokenAR 和 BlockAR 混合架构，分别用于令牌级串行建模和块级并行建模。</li>
+<li>通过集成预训练 Qwen3-VL 骨干与 Hunyuan3D2.1-VAE 的高阶潜在空间，实现了语言意图与 3D 构建的同步处理。</li>
+<li>桥接了多模态 LLM 与高精度 3D 合成，在较低计算成本下提供高效可扩展的架构。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2605.18451" data-arxiv-id="2605.18451" data-status="ready">
+<h1>[2605.18451] Code-as-Room: Generating 3D Rooms from Top-Down View Images via Agentic Code Synthesis</h1>
+<p><a href="https://arxiv.org/abs/2605.18451" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种名为 Code-as-Room 的基于多模态大语言模型代理的框架，利用结构化执行机制从俯视图图像生成可执行的 Blender 代码以合成 3D 房间。</p>
+<h2>解决的问题</h2>
+<p>现有 3D 房间生成方法存在局限，包括传统方法受限于手工规则、文本描述缺乏空间信息、以及现有代理方法在处理俯视图时难以恢复细粒度空间细节且易陷入无限循环。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种由俯视图引导的 3D 房间合成范式，其中输入图像作为全局空间先验来指导完整的室内房间生成。</li>
+<li>提出了一种结构化执行机制，用于协调多模态大语言模型代理进行基于代码的 3D 房间生成，确保稳定且连贯的合成。</li>
+<li>引入了一个图像到 3D 房间合成基准，并进行了综合实验，以评估现有 MLLM 在视觉理解、空间推理、视觉到代码能力以及场景质量方面的表现。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2605.19786" data-arxiv-id="2605.19786" data-status="ready">
+<h1>[2605.19786] Fast 4D Mesh Generation by Spatio-Temporal Attention Chains</h1>
+<p><a href="https://arxiv.org/abs/2605.19786" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种基于时空注意力链的无训练框架，通过利用 4D 生成骨干网络中的注意力模式建立像素、潜在 token 和网格顶点间的对应关系，实现了从视频到动态网格的快速重建。</p>
+<h2>解决的问题</h2>
+<p>从单目视频中重建动态几何具有挑战性，需要在每一帧推断详细 3D 几何的同时保持跨时间表面身份，且在 4D 监督稀缺的情况下难以学习，同时现有方法存在成本高、输出坐标任意及长视频易漂移等问题。</p>
+<h2>创新点</h2>
+<ul>
+<li>我们识别出时空注意力链是 4D 生成骨干网络内部连接像素、潜在 token 和网格顶点的隐藏对应关系信号。</li>
+<li>我们提出了一种针对 4D 生成骨干网络的无训练框架，通过追踪这些链上的稀疏地标并将其提升到完整动画网格，将推理时间从 120 秒减少到 9 秒，同时保持有利质量。</li>
+<li>我们通过强化这些对应关系来改进自回归生成，以减少漂移，从而实现连贯的 16 倍更长的序列生成。</li>
+<li>我们展示了相同的链可以产生先前工作中缺失的几种能力：具有竞争力的零样本 4D 和 2D 点跟踪，以及从 2D-3D 匹配中恢复相机。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2605.21121" data-arxiv-id="2605.21121" data-status="ready">
+<h1>[2605.21121] ROAR-3D: Routing Arbitrary Views for High-Fidelity 3D Generation</h1>
+<p><a href="https://arxiv.org/abs/2605.21121" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 ROAR-3D，一种轻量级方法，通过升级预训练的单图像到 3D 模型以支持任意多视角输入，无需外部编码器或相机姿态，同时保持推理成本不变。</p>
+<h2>解决的问题</h2>
+<p>现有单视角 3D 生成方法存在歧义，而现有的多视角条件生成方法要么受限于固定视角配置，要么依赖外部重建模块导致域差距和精度上限，且直接多视图输入会导致注意力层结果下降。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出 ROAR-3D，一种将预训练单图像到 3D 模型扩展为支持任意多视角输入的方法，无需外部编码器或相机姿态。</li>
+<li>引入 token-wise view router，利用 3D 潜在 token 作为锚点将多视图 2D 信息定位到 3D 空间，并结合双流注意力设计与方向扰动策略解耦方向控制与几何结构转移。</li>
+<li>在保持与单视角基线相同推理成本的同时，实现最先进的多视角 3D 生成质量，并支持测试时从 1 到 12+ 个视图的扩展。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2605.26137" data-arxiv-id="2605.26137" data-status="ready">
+<h1>[2605.26137] AssetGen: Deployable 3D Asset Generation at Interactive Speed</h1>
+<p><a href="https://arxiv.org/abs/2605.26137" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了 AssetGen，一个旨在以交互速度生成可部署 3D 资产的系统，解决了现有图像转 3D 生成资产过于复杂且生成速度过慢的问题。</p>
+<h2>解决的问题</h2>
+<p>现有的 3D 资产生产流程缓慢且手动，且生成的图像转 3D 资产通常过于复杂无法用于实时应用，同时生成速度无法满足交互式创意工作流的需求。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出可交互速率的部署型 3D 资产生成，将图像转 3D 任务重新定义为生成可直接用于实时渲染引擎（包括移动端）的资产，并满足严格的延迟约束。</li>
+<li>实现端到端系统优化，通过模型蒸馏、网格简化、隐藏面移除、UV 展开、法线烘焙及纹理反投影等组件优化，最小化 I/O 并利用并行性降低延迟。</li>
+<li>设计资产级质量 - 延迟帕累托优化，提供两种配置：默认版 AssetGen 优先视觉质量（约 30 秒），快速版 AssetGen Flash 优先响应速度（亚 15 秒）。</li>
+<li>引入新的基准和评估指标，系统性地评估 3D 生成中的特定细节（如角色面部和手部）的重建情况。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2605.28763" data-arxiv-id="2605.28763" data-status="ready">
+<h1>[2605.28763] CubePart: An Open-Vocabulary Part-Controllable 3D Generator</h1>
+<p><a href="https://arxiv.org/abs/2605.28763" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了 CubePart，这是首个支持开放词汇、部件可控的 3D 网格生成框架，能够根据文本提示和部件架构生成可直接集成到游戏引擎中的多部件网格。</p>
+<h2>解决的问题</h2>
+<p>现有 3D 生成方法要么产生无明确部件结构的单体网格，要么生成任意部件集合，无法与下游游戏逻辑所需的预定义部件架构对齐；2D 控制信号存在视角依赖和歧义，无法控制隐藏部件；且固定或封闭词汇的部件架构无法适应不同应用对同一对象分解的多样性需求。</p>
+<h2>创新点</h2>
+<ul>
+<li>一个可扩展的数据引擎，用于从非结构化网格构建开放词汇、部件标注的 3D 数据集，利用 VLM 进行 3D 感知聚类和语义描述。</li>
+<li>一种架构驱动的生成架构，支持开放词汇、部件可控的 3D 网格生成，同时保持部件间的全局一致性。</li>
+<li>端到端的演示，展示了生成的多部件网格如何集成到游戏引擎中并由行为脚本驱动，无需手动后处理。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2605.17448" data-arxiv-id="2605.17448" data-status="ready">
+<h1>[2605.17448] Self-Improving CAD Generation Agents with Finite Element Analysis as Feedback</h1>
+<p><a href="https://arxiv.org/abs/2605.17448" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种利用有限元分析反馈进行自改进的 CAD 生成代理方法，通过迭代循环、蓝图约束和丰富视图视觉检查来提升生成 CAD 的工程有效性。</p>
+<h2>解决的问题</h2>
+<p>现有的 CAD 生成系统主要弱耦合于工程有效性，评估信号（如参考形状距离、视觉合理性）无法捕捉导致设计不可用的失败（如错位接口、不足间隙、无效载荷路径）。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出工程导向的 CAD 代理任务，将 CAD 生成转向由几何检查和有限元分析要求评估的组装 STEP 工件，而非仅参考匹配或视觉合理性。</li>
+<li>发布 Hephaestus-CCX 基准，包含 50 个单件和多件工程简报，配对 CalculiX 评估套件和类型化通过/失败要求检查器。</li>
+<li>在生成代理框架内实现结构化蓝图、丰富视图视觉检查和 FEA 重试反馈。</li>
+<li>测量每个反馈源如何改善前沿模型性能，以及重复反馈驱动修复如何随时间累积增益。</li>
+<li>引入预 CAD 蓝图阶段，记录设计承诺并约束几何到可审计的参数化原语，暴露尺寸和功能声明供验证器使用。</li>
+<li>引入有限元分析反馈循环，利用 CalculiX 分析并返回关于应力、位移、模态、屈曲、接触和间隙要求的类型化失败报告。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2603.05425" data-arxiv-id="2603.05425" data-status="ready">
+<h1>[2603.05425] RelaxFlow: Text-Driven Amodal 3D Generation</h1>
+<p><a href="https://arxiv.org/abs/2603.05425" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了 RelaxFlow，一种无需训练的文本驱动非模态 3D 生成框架，通过解耦控制粒度来解决遮挡导致的歧义问题，同时保持可见部分的观测保真度。</p>
+<h2>解决的问题</h2>
+<p>现有图像到 3D 生成模型在遮挡情况下仅依赖可见像素，导致语义歧义；现有策略难以同时平衡观测保真度与提示遵循，存在控制粒度冲突。</p>
+<h2>创新点</h2>
+<ul>
+<li>我们形式化了文本驱动的非模态 3D 生成，这是一种需要通过文本提示解决遮挡引起的歧义，同时严格保留输入观测的新设置。</li>
+<li>我们提出了 RelaxFlow，这是一种无需训练的双分支框架，通过基于共识的多先验条件和可见性感知融合有效地解耦了控制粒度。</li>
+<li>我们提供了一个理论证明，即我们在语义分支上的松弛机制等同于生成向量场上的低通滤波器，证明了我们提取结构指导的策略。</li>
+<li>我们引入了两个诊断基准 ExtremeOcc-3D 和 AmbiSem-3D。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2605.30268" data-arxiv-id="2605.30268" data-status="ready">
+<h1>[2605.30268] PhyGenHOI: Physically-Aware 4D Generation of Dynamic Human-Object Interactions</h1>
+<p><a href="https://arxiv.org/abs/2605.30268" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 PhyGenHOI，一种利用 3D 高斯泼溅作为共同底座的统一框架，旨在生成语义响应且物理基础的 4D 人机交互，通过结合运动扩散模型与可微分物质点方法实现物理感知。</p>
+<h2>解决的问题</h2>
+<p>现有文本到 4D 生成方法缺乏物理模型导致因果异常（如“鬼影”），而运动学框架将物体视为静态道具无法捕捉动态力，导致语义连贯性与物理保真度之间存在二分法。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出 PhyGenHOI 框架，利用 3D 高斯泼溅作为共同底座耦合语义生成与物理模拟。</li>
+<li>将人类建模为受 SMPL 约束的运动扩散模型驱动的活动代理，提供语义先验。</li>
+<li>将物体高斯核直接映射到可微分物质点方法模拟器的粒子中，作为反应性物理代理。</li>
+<li>提出窗口化吸引损失以同步人类语义意图与物体位置。</li>
+<li>实施接触检测与 MPM 重模拟以确保物理因果性和动量传递。</li>
+<li>应用时间掩码视频 SDS 在接触帧周围注入丰富的视觉先验。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2605.11367" data-arxiv-id="2605.11367" data-status="ready">
+<h1>[2605.11367] 3D-Belief: Embodied Belief Inference via Generative 3D World Modeling</h1>
+<p><a href="https://arxiv.org/abs/2605.11367" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了 3D-Belief，一种基于扩散模型的生成式 3D 世界模型，旨在通过部分观察推断包含几何、空间和语义信息的完整 3D 场景信念，并引入了 3D-CORE 基准进行评估。</p>
+<h2>解决的问题</h2>
+<p>现有的视频生成模型仅能预测像素，无法为具身智能体提供推断底层 3D 世界所需的信念，且现有方法缺乏空间一致性、不确定性建模、序列信念更新及语义预测等关键能力。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一个通过生成式 3D 世界建模对具身信念推断进行建模的概念框架。</li>
+<li>提出了 3D-Belief，一种从部分观察预测可操作、语义化和不确定性感知的 3D 场景信念的生成式 3D 世界模型。</li>
+<li>提出了 3D-CORE，一个用于评估具身设置中对象和场景级 3D 想象力的基准。</li>
+<li>进行了全面的评估，证明了 3D-Belief 在场景记忆和想象力的 2D 视觉质量、3D 场景想象力以及仿真和现实世界中的下游物体导航任务上的有效性。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2605.28995" data-arxiv-id="2605.28995" data-status="ready">
+<h1>[2605.28995] GAP3D: Generative Alignment of VLM Latents to Patch-Level Embeddings for 3D Generation</h1>
+<p><a href="https://arxiv.org/abs/2605.28995" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 GAP3D 方法，通过扩散模型将 VLM 生成的潜在特征对齐到预训练图像编码器的补丁级嵌入空间，从而实现无需重新训练的模块化 3D 资产生成。</p>
+<h2>解决的问题</h2>
+<p>标准文本编码器受限于输入长度和全局语义，难以实现细粒度控制；现有模块化方法将 VLM 特征对齐到冻结生成模型时，主要关注池化特征而丢弃了补丁级结构，导致缺乏精细的外观和几何控制能力。</p>
+<h2>创新点</h2>
+<ul>
+<li>通过流匹配将 VLM 生成的特征对齐到预训练图像编码器的补丁级嵌入空间，证明在高维特征空间中连接预训练基础模型的可行性。</li>
+<li>将方法应用于 3D 资产生成，扩展了基于 VLM 的条件生成工作，实现了无需端到端重新训练的模块化文本到 3D 生成。</li>
+<li>展示了领域特定微调对于桥接自然图像与合成 3D 渲染之间的分布偏移至关重要，可减少伪影并确保高保真输出。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2606.02573" data-arxiv-id="2606.02573" data-status="ready">
+<h1>[2606.02573] HumanNOVA: Photorealistic, Universal and Rapid 3D Human Avatar Modeling from a Single Image</h1>
+<p><a href="https://arxiv.org/abs/2606.02573" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了 HumanNOVA，一种基于大规模重建模型（LRM）的单视图 3D 人体头像建模方法，旨在实现快速、通用且逼真的 3D 人体重建。</p>
+<h2>解决的问题</h2>
+<p>单视图 3D 人体头像重建是病态问题，现有方法逐实例优化速度慢限制可扩展性，且现有 LRM 训练数据稀缺且缺乏人体特定先验。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出 HumanNOVA，一种通用大型人体头像重建模型，可从单张图像在不到一秒内重建静态 3D 人体。</li>
+<li>证明数据和模型对于将 LRM 从通用物体重建扩展到人体领域都至关重要。</li>
+<li>设计有效的数据生成管道，将训练数据集扩展至 10 万个资产，结合合成和真实世界数据。</li>
+<li>通过多个基准上的广泛实验，证明 HumanNOVA 在定量和定性上优于最先进方法，LPIPS 相对提升超过 40%。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2606.02491" data-arxiv-id="2606.02491" data-status="ready">
+<h1>[2606.02491] MORPHOS: Autoregressive 4D Generation with Temporal Structured Latents</h1>
+<p><a href="https://arxiv.org/abs/2606.02491" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了 MORPHOS，一种基于自回归的 4D 生成模型，利用时间结构化潜变量解决现有 4D 生成方法在表示碎片化和拓扑变化处理上的局限性。</p>
+<h2>解决的问题</h2>
+<p>现有 4D 生成方法存在表示碎片化（专注于单一不兼容的 3D 格式）和无法处理拓扑变化（依赖变形建模，难以适应显著的结构转变）两大主要限制。</p>
+<h2>创新点</h2>
+<ul>
+<li>引入一种用于统一和动态 3D 表示的自回归 4D 生成框架，支持复杂运动和拓扑变化。</li>
+<li>提出 T-SLat（时间结构化潜变量），将 3D 结构化潜变量扩展到时间域以联合编码几何和外观。</li>
+<li>提出带有时间 - 结构增强的训练策略，以提高长视界 4D 生成的稳定性和鲁棒性。</li>
+<li>采用因果注意力架构和 KV 缓存机制，实现长视界 4D 生成并加速推理。</li>
+<li>MORPHOS 在多个 4D 基准测试中表现优异，实现了卓越的几何保真度和外观，且误差积累最小。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2606.04108" data-arxiv-id="2606.04108" data-status="ready">
+<h1>[2606.04108] SymTRELLIS: Symmetry-Enforced Voxel Latents for 3D Generation</h1>
+<p><a href="https://arxiv.org/abs/2606.04108" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>SymTRELLIS 是一种在基于流的生成过程中强制对称性的新方法，通过空间变换潜在映射器和速度对称化技术，在不重新训练底层模型的情况下生成既符合输入图像又满足对称性要求的 3D 模型。</p>
+<h2>解决的问题</h2>
+<p>现有的单视图 3D 重建和生成模型虽然视觉逼真，但往往无法满足结构或功能要求（如对称性），导致生成的物体在实际应用中无法正常工作；且后处理对称化方法存在局限性，可能丢弃输入图像信息且无法处理复杂的不对称情况。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出 SymTRELLIS，在 TRELLIS.2 的基于流的生成过程中强制对称性，无需重新训练底层 VAE 或流模型。</li>
+<li>设计轻量级空间变换潜在映射器，将空间变换（旋转或反射）建模为体素潜在空间上的学习线性算子。</li>
+<li>引入速度对称化过程，在每次 ODE 步骤中通过对称等价变换平均预测的流速度来强制对称性。</li>
+<li>支持复杂的对称群（如四面体、八面体、二十面体对称及旋转反射组合）以及用户指定的对称结构操纵。</li>
+<li>在包含 250 多个严格对称物体的新基准测试中，显著降低了所有对称性误差指标，同时保持了与基线模型相当的重建精度。</li>
+<li>消融实验表明，结构阶段指导负责主要的修正，形状阶段指导提供了额外的增益。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2606.05162" data-arxiv-id="2606.05162" data-status="ready">
+<h1>[2606.05162] Controllable Dynamic 3D Shape Generation via 3D Trajectories and Text</h1>
+<p><a href="https://arxiv.org/abs/2606.05162" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 T2Mo 框架，利用 3D 轨迹和文本提示实现通用对象的可控动态 3D 形状生成。</p>
+<h2>解决的问题</h2>
+<p>动态 3D 形状生成的可控性研究不足，现有模型缺乏精确指定预期运动的显式机制，且现有的辅助控制方法高度特定于其领域，无法直接应用于动态 3D 网格生成。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出 T2Mo 框架，这是一个针对通用对象的可控动态 3D 形状生成的前馈框架，条件为 3D 轨迹和文本提示。</li>
+<li>引入基于形状的轨迹嵌入，将任意配置的输入轨迹映射到覆盖整个对象的预定义形状感知令牌集中，无论配置如何均提供一致的条件，同时保持几何局部性。</li>
+<li>通过广泛的实验和用户偏好研究证明，该框架能够实现各种用户定义的运动控制，在保持生成运动质量的同时，在可控性和表现力方面优于最近的基线。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2606.04688" data-arxiv-id="2606.04688" data-status="ready">
+<h1>[2606.04688] MeshWeaver: Sparse-Voxel-Guided Surface Weaving for Autoregressive Mesh Generation</h1>
+<p><a href="https://arxiv.org/abs/2606.04688" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 MeshWeaver，一种自回归网格生成框架，通过将任务表述为表面编织过程并采用分层稀疏体素编码器，实现了从下一个坐标到下一个顶点预测的范式转变，从而生成结构连贯且几何保真度高的网格。</p>
+<h2>解决的问题</h2>
+<p>现有自回归网格生成方法面临 token 序列过长增加训练和推理负担，以及依赖全局形状嵌入和静态词汇表示导致缺乏局部几何上下文、难以保持细粒度表面保真度的问题。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出 MeshWeaver，一种将网格生成表述为表面编织过程的自回归框架，将生成范式从下一个坐标预测转变为下一个顶点预测。</li>
+<li>设计分层稀疏体素编码器，通过表示、令牌预测和支架三个层面将细粒度几何引导注入生成过程。</li>
+<li>实现最先进的网格压缩比（18%），可扩展至 16K 面网格，并显著提高几何保真度。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2606.06390" data-arxiv-id="2606.06390" data-status="ready">
+<h1>[2606.06390] HomeWorld: A Unified Floorplan-to-Furnished Framework for Generating Controllable, Densely Interactive Whole-Home Scenes</h1>
+<p><a href="https://arxiv.org/abs/2606.06390" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 HomeWorld 框架，通过结合大语言模型生成 2D 平面图与基础图像模型生成 3D 场景，并构建大规模数据集，以解决全屋室内场景生成中的数据稀缺与几何一致性问题。</p>
+<h2>解决的问题</h2>
+<p>全屋场景生成面临大规模高保真 3D 数据稀缺、现有规则或重建数据集存在偏差或几何不完整、以及现有生成方法难以保证几何一致性和物理可行性的问题。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出一种统一的层级生成管道，利用 LLM 通过 K-D 树表示和详细描述生成精确可控的平面图。</li>
+<li>利用基础图像模型作为强 2D 先验，通过层级视图漫游提出物体，同时保持 3D 一致性和物理遵循。</li>
+<li>采用基于 VLM 的递归改进器来纠正构建错误和约束违反。</li>
+<li>支持通过 3D 生成模块进行灵活的 3D 资产替换，以增加物体多样性和渲染变化。</li>
+<li>整理并公开一个包含 30 万标注真实住宅平面图和 5000 个完全布置的高质量全屋 3D 场景样本的大规模数据集。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2606.07115" data-arxiv-id="2606.07115" data-status="ready">
+<h1>[2606.07115] 3DMorph: Single-Image-Guided Local 3D Shape Editing and Morphing</h1>
+<p><a href="https://arxiv.org/abs/2606.07115" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种无需训练的 3DMorph 框架，利用单张编辑图像引导任意形状的局部 3D 形状编辑和变形，并引入了针对几何中心评估的 Delta3D 基准数据集。</p>
+<h2>解决的问题</h2>
+<p>工程工作流中局部编辑网格往往需要重新运行整个网格生成流程，且高质量参数化 CAD 模型通常不可用，同时缺乏直观的局部网格修改方法。</p>
+<h2>创新点</h2>
+<ul>
+<li>一种无需训练的直观局部 3D 编辑方法，可从单张编辑图像对任意形状进行编辑。</li>
+<li>一个包含真实局部修改的基准数据集，用于定量 3D 编辑评估。</li>
+<li>一个边界框估计模块，可从单张编辑图像自动定位 3D 编辑区域。</li>
+<li>一种局部变形机制，可生成中间形状以支持设计探索和可视化。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2606.09967" data-arxiv-id="2606.09967" data-status="ready">
+<h1>[2606.09967] ABot-Earth 0.5: Generative 3D Earth Model</h1>
+<p><a href="https://arxiv.org/abs/2606.09967" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了 ABot-Earth 0.5，一种基于 3DGS 的生成式 3D 框架，旨在通过标准卫星图像条件生成大规模、近乎无缝的 3D 航空场景，无需精确的采集角度或多视图重叠。</p>
+<h2>解决的问题</h2>
+<p>传统大规模 3D 重建管道受限于极高的数据获取成本、处理延迟和计算障碍，且现有户外生成器依赖合成虚拟资产或无约束的想象场景幻觉，缺乏真实世界的物理和地理真实性，无法弥合模拟到现实的领域差距。</p>
+<h2>创新点</h2>
+<ul>
+<li>模型直接训练于多样化的真实世界城市重建，能够稳健地合成高度详细的结构，如复杂的建筑立面、茂密的植被冠层和连贯的道路网络，并具备地球尺度的泛化能力。</li>
+<li>原生生成分层细节级别（Multi-LOD）输出，支持从行星概览到细粒度街道级别的无缝缩放，实现万亿级高斯原语的动态视口依赖平铺和流式传输。</li>
+<li>生成的 3D 环境和多视图一致纹理为具身 AI（如无人机导航、避障和控制）提供了高保真闭环模拟和训练平台。</li>
+<li>实现了每平方公里低于 10 分钟的可扩展生成速率，显著降低了大规模 3D 重建的技术和财务门槛。</li>
+<li>作为原生 3DGS 生成框架，合成的环境可与精确重建的高保真 3DGS 地标模型无缝集成，支持混合现实体验。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2606.09273" data-arxiv-id="2606.09273" data-status="ready">
+<h1>[2606.09273] EditSSC: Toward Editable Semantic Occupancy Scenes with Unconditional Diffusion Models</h1>
+<p><a href="https://arxiv.org/abs/2606.09273" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 EditSSC 方法，通过复用标准 2D 扩散管道实现 3D 语义占用场景生成，并支持无训练编辑能力。</p>
+<h2>解决的问题</h2>
+<p>现有的 3D 场景生成方法通常依赖复杂的 3D 特定架构，且难以实现编辑能力，特别是在数据多样性有限的领域（如自动驾驶）。</p>
+<h2>创新点</h2>
+<ul>
+<li>将标准 2D 扩散管道重新用于 3D 语义占用场景生成，证明成熟的 2D 架构可有效用于此任务</li>
+<li>证明简单的管道在无条件场景生成上具有竞争力的性能</li>
+<li>基于架构演示了无需训练的编辑能力，包括草图引导生成、修复和扩展</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2606.09187" data-arxiv-id="2606.09187" data-status="ready">
+<h1>[2606.09187] CP4D: Compositional Physics-aware 4D Scene Generation</h1>
+<p><a href="https://arxiv.org/abs/2606.09187" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种名为 CP4D 的新颖组合框架，旨在生成具有准确复杂物理动态的逼真 4D 场景。</p>
+<h2>解决的问题</h2>
+<p>现有 4D 生成方法通常缺乏对底层物理原理的显式表征，导致生成的内容常出现物理不一致性和视觉伪影。</p>
+<h2>创新点</h2>
+<ul>
+<li>本文提出了 CP4D，一种新颖的组合框架，旨在生成具有准确复杂物理动态的逼真 4D 场景。</li>
+<li>提出了一种混合运动合成策略，整合了可微物理模拟器的物理先验和视频生成模型的常识知识，以产生物理合理的轨迹和真实的交互。</li>
+<li>开发了一种自动组合机制，将动态前景与静态背景和谐融合，产生连贯且视觉上引人注目的 4D 场景。</li>
+<li>广泛的实验表明，CP4D 能够合成具有高视觉保真度、鲁棒物理真实性和精确可控性的可探索交互式 4D 场景，并一致优于先前方法。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2606.08957" data-arxiv-id="2606.08957" data-status="ready">
+<h1>[2606.08957] Rethinking 3D Shape Generation: Diffusion over Superquadrics</h1>
+<p><a href="https://arxiv.org/abs/2606.08957" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出扩散超二次曲面（DoSs）方法，通过将 3D 形状生成中的去噪目标从高基数表示转变为紧凑且明确的超二次曲面原语集合，在保持显式几何可解释性的同时实现了可扩展的扩散生成。</p>
+<h2>解决的问题</h2>
+<p>现有 3D 扩散方法主要瓶颈在于去噪的高基数表示（如点云、体素）导致计算和内存成本随维度急剧增加，且现有改进方案存在分辨率依赖或牺牲几何可解释性与可编辑性的权衡。</p>
+<h2>创新点</h2>
+<ul>
+<li>重新思考扩散的形状表示，将去噪目标从高基数体素、网格或点表示转变为紧凑且明确的超二次曲面原语集合。</li>
+<li>开发实用的超二次曲面扩散公式，通过存在分数处理可变原语数量，使用连续 6D 表示处理旋转，并使用确定性规范排序处理无序原语。</li>
+<li>展示 DoSs 在 ShapeNet 上具有竞争力的保真度和分布性能，并通过更小的扩散状态提高效率。</li>
+<li>演示 DoSs 支持的能力，包括任意采样分辨率的无分辨率解码、部件级编辑以及通过约束去噪实现的基于约束的设计。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2606.11446" data-arxiv-id="2606.11446" data-status="ready">
+<h1>[2606.11446] 3D-CBM: A Framework for Concept-Based Interpretability in Generative 3D Modeling</h1>
+<p><a href="https://arxiv.org/abs/2606.11446" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种将概念瓶颈模型（CBM）整合到 3D 生成架构中的新框架，旨在通过嵌入人类定义的几何和结构概念来实现语义可解释性和后生成干预。</p>
+<h2>解决的问题</h2>
+<p>当前 3D 生成模型存在“语义鸿沟”，即无法解释生成结果的结构合理性，且现有 3D 可解释性方法多为事后诊断工具，缺乏对内部逻辑的透明控制和干预能力。</p>
+<h2>创新点</h2>
+<ul>
+<li>定义了一个通用的 3D-CBM 数学框架，将非欧几里得 3D 数据映射到人类可解释的概念层，支持判别式和生成式任务。</li>
+<li>提出了一种多层次的 3D 特定概念分类法，涵盖低级几何原语、中级结构部件和高级功能属性。</li>
+<li>提出了一种人机协作的 3D 干预协议，允许用户在测试时交互式地修改概念激活以纠正几何错误并引导模型输出。</li>
+<li>提供了对现有 3D 数据集（如 PartNet 和 ShapeNet）的审查和分类，这些数据集适合用于训练概念基础模型。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2606.10601" data-arxiv-id="2606.10601" data-status="ready">
+<h1>[2606.10601] Dmsh: A Multi-Agent Reinforcement Learning Framework for All-Quad Mesh Generation</h1>
+<p><a href="https://arxiv.org/abs/2606.10601" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了 Dmsh，这是首个将几何分解和全四边形网格生成统一在单个学习框架内的完全自动化强化学习管道，旨在解决复杂几何下全四边形网格生成需要大量人工干预的问题。</p>
+<h2>解决的问题</h2>
+<p>工程仿真中网格生成是主要瓶颈，特别是全四边形和全六面体网格需要大量人工干预，且现有算法难以处理复杂几何特征，现有强化学习方法存在单智能体局限，无法稳健处理尖锐角、大规模边界和孔洞。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了 Dmsh，这是首个将几何分解和全四边形网格生成统一在单个学习框架内的完全自动化强化学习管道。</li>
+<li>引入了三个协同工作的强化学习智能体：网格生成智能体、块分解智能体和孔分解智能体。</li>
+<li>网格生成智能体采用了针对混合离散 - 连续动作空间定制的参数化软演员 - 评论家（Parametric SAC）架构。</li>
+<li>块分解智能体利用计算机视觉系统性地划分域以消除尖锐角并降低边界复杂度，这是计算机视觉首次用于解决块分解问题。</li>
+<li>孔分解智能体将包含内部空腔的几何体分割为规则子区域，以便独立生成网格。</li>
+<li>递归分解策略不仅提高了单元质量，还实现了大规模并行化，并保证只要子域包含偶数个点即可生成全四边形网格。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2606.12099" data-arxiv-id="2606.12099" data-status="ready">
+<h1>[2606.12099] ISAP-3D: Identity-Slot Aligned Part-Aware 3D Generation</h1>
+<p><a href="https://arxiv.org/abs/2606.12099" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 ISAP-3D 框架，通过语义身份锚定生成槽位实现身份 - 槽位对齐，以解决部分感知 3D 生成中的结构不稳定问题。</p>
+<h2>解决的问题</h2>
+<p>现有的部分感知 3D 生成方法存在结构不稳定性（如部件坍塌、合并或分解不一致），根源在于语义部分身份与生成槽位之间缺乏显式对齐，导致身份 - 槽位排列自由度引发结构模糊。</p>
+<h2>创新点</h2>
+<ul>
+<li>识别出身份 - 槽位排列自由（identity–slot permutation freedom）是导致部分感知 3D 生成结构不稳定的关键原因。</li>
+<li>提出身份对齐的一对一槽位建模（identity-aligned one-to-one slot modeling），显式将语义部分身份锚定到专用生成槽位。</li>
+<li>开发了一个身份对齐生成框架，执行身份条件布局预测，随后进行布局条件几何合成。</li>
+<li>构建了一个遵循统一语义协议的身份导向部分级数据集，以支持可靠实验验证。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2606.11805" data-arxiv-id="2606.11805" data-status="ready">
+<h1>[2606.11805] TextHOI-3D: Text-to-3D Hand-Object Interaction via Discrete Multi-View Generation and Joint Mesh Optimization</h1>
+<p><a href="https://arxiv.org/abs/2606.11805" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 TextHOI-3D 框架，通过离散的视图生成和联合网格优化，实现了从文本到 3D 手物交互的生成。</p>
+<h2>解决的问题</h2>
+<p>直接文本到网格生成难以满足手物交互的多个耦合要求，特别是接触区域频繁遮挡且缺乏配对的文本和网格数据。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种用于文本驱动的 3D 手物交互的分阶段文本到多视图到网格的公式，实例化为 TextHOI-3D。</li>
+<li>提出了一种离散多视图表示，将固定摄像机的手物观察压缩为适合自回归生成的 VQ 令牌。</li>
+<li>提出了一种 CLIP 条件的下一尺度生成模块，结合全局 AdaLN 调制和令牌级交叉注意力进行文本控制的多视图合成。</li>
+<li>提出了一种恢复管道，将分割、修复、对象和手先验、多视图优化及防穿透细化组合成统一的手物网格输出。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2606.11152" data-arxiv-id="2606.11152" data-status="ready">
+<h1>[2606.11152] P3D-Bench: Benchmarking MLLMs for Parametric 3D Generation and Structural Reasoning</h1>
+<p><a href="https://arxiv.org/abs/2606.11152" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了 P3D-Bench，这是一个用于评估多模态大语言模型在参数化 3D 生成和结构推理方面性能的基准，包含三个任务、四种代码格式及新数据集。</p>
+<h2>解决的问题</h2>
+<p>现有基准无法全面评估参数化 3D 生成，仅覆盖单一能力，缺乏结合可执行参数化 3D 的综合评估。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出一个统一基准，包含三个任务（Text-, Image- 和 Assembly-3D）和四种代码格式（JSON, OpenSCAD, CadQuery, Three.js），在统一协议下执行和渲染输出。</li>
+<li>构建新数据集及流水线，从 Text2CAD v1.1 和 Fusion 360 Gallery 过滤、标注并验证，生成包含描述性、参数化和部件级标注的 P3D-Dataset。</li>
+<li>建立结构化评估协议，除可执行有效性外，报告几何、拓扑、MLLM 判断和部件级结构四个分数。</li>
+<li>对前沿模型进行统一评估，发现可执行渲染合理的程序仍无法恢复正确的参数化几何。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2606.13652" data-arxiv-id="2606.13652" data-status="ready">
+<h1>[2606.13652] World Tracing: Generative Pixel-Aligned Geometry Beyond the Visible</h1>
+<p><a href="https://arxiv.org/abs/2606.13652" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了 World Tracing (WT)，一种像素对齐的多层几何表示方法，旨在统一可见表面的忠实重建与不可见部分的生成，并通过 WT-DiT 模型在多个下游任务中验证了其有效性。</p>
+<h2>解决的问题</h2>
+<p>现有单图像 3D 估计方法要么局限于可见表面重建，要么缺乏像素对齐，无法同时提供相机坐标系下忠实且完整的几何信息，且依赖难以扩展的 3D 资产并丢弃了细粒度的图像证据。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种用于忠实 3D 生成的像素对齐多层几何表示，将高保真可见表面估计和遮挡几何补全统一在一个相机空间张量中。</li>
+<li>提出了 WT-DiT，一种具有高效三路因子化注意力的流匹配扩散 Transformer，使用深度填充目标训练以简化预测头。</li>
+<li>提供了跨物体、场景和视频的全面评估，表明多层生成在改善完整几何的同时也提高了可见表面精度。</li>
+<li>展示了下游应用，包括 3D 场景编辑、几何引导的视频合成和无训练纹理网格生成，证明了 WT 作为 3D 流水线几何先验的有效性。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2602.22629" data-arxiv-id="2602.22629" data-status="ready">
+<h1>[2602.22629] CRAG: Can 3D Generative Models Help 3D Assembly?</h1>
+<p><a href="https://arxiv.org/abs/2602.22629" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 Crag 框架，通过联合流匹配统一 3D 组装与生成任务，利用共享潜在空间和双向注意力机制解决缺失部分填充与对齐歧义问题。</p>
+<h2>解决的问题</h2>
+<p>现有 3D 组装方法主要重定位输入点而不合成新几何以填充缺失区域，且缺乏组装与生成的统一；挑战在于构建兼容生成先验的共享潜在空间及实现碎片与整体间的有效双向信息交换。</p>
+<h2>创新点</h2>
+<ul>
+<li>Crag 联合组装碎片并合成合理的完整形状，对缺失部分保持鲁棒性并在歧义下改善对齐。</li>
+<li>将 3D 组装重构为耦合的重组与生成目标，提出联合流匹配框架，在单次推理循环中在 SE(3) 中消噪碎片姿态并在潜在空间中消噪整体形状。</li>
+<li>在 PartNeXt 和 Breaking Bad 上实现 SOTA 性能，并整理发布来自 MorphoSource 的新骨碎片数据集以促进未来研究。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2606.14168" data-arxiv-id="2606.14168" data-status="ready">
+<h1>[2606.14168] MUSE: Agentic 3D Scene Authoring via Memory-Grounded Incremental Requirement Satisfaction</h1>
+<p><a href="https://arxiv.org/abs/2606.14168" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 MUSE 框架，通过基于记忆的增量需求满足机制统一了 3D 场景的生成与编辑，实现了可控的场景创作。</p>
+<h2>解决的问题</h2>
+<p>现有的文本驱动 3D 场景生成方法缺乏可控生成能力，难以在保持非目标区域稳定的情况下进行局部内容的添加、移除或调整，往往被迫进行全局再生成。</p>
+<h2>创新点</h2>
+<ul>
+<li>将可控 3D 场景创作重构为基于持久场景状态的增量需求满足，通过分解、执行、验证和保留建立了统一的需求级基础。</li>
+<li>提出 MUSE 框架，其中 Architect、Sculptor 和 Inspector 智能体在 Working、Scene 和 Skill Memory 上运行，支持局部修订、已满足内容保护及场景母题的可重用分解。</li>
+<li>引入 AuthorBench 基准，用于评估场景构建和感知保留的编辑。</li>
+<li>通过自动化指标、人类偏好研究、下游导航测试及消融实验证明 MUSE 在可控 3D 场景创作中相对于近期基线具有强大的性能。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2606.04621" data-arxiv-id="2606.04621" data-status="ready">
+<h1>[2606.04621] MeshFlow: Efficient Artistic Mesh Generation via MeshVAE and Flow-based Diffusion Transformer</h1>
+<p><a href="https://arxiv.org/abs/2606.04621" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 MeshFlow，通过 MeshVAE 和基于流的扩散 Transformer 实现高效的艺术家级 3D 网格生成，旨在解决现有方法在效率和质量上的不足。</p>
+<h2>解决的问题</h2>
+<p>现有隐式表示方法（如 SDF）存在约束多、结构不满足实时应用的问题；自回归（AR）生成方法存在 token 数量大、推理成本二次增长、序列提前终止及量化误差等缺点。</p>
+<h2>创新点</h2>
+<ul>
+<li>引入 MeshVAE，一种新型自编码器，将 3D 网格压缩到紧凑、无离散化的潜在空间，实现优异的重建质量且潜在尺寸显著小于现有网格分词器。</li>
+<li>展示使用所提 VAE 的 Rectified Flow 生成器在标准艺术家级网格生成基准上达到 SOTA 性能，并在推理时间上实现 18 倍加速。</li>
+<li>展示了应用于点云和图像条件网格生成的应用。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2606.18451" data-arxiv-id="2606.18451" data-status="ready">
+<h1>[2606.18451] A Cross-Model VLM-Judge Protocol for Single-Image 3D Mesh Quality (and Why Cheap Proxies Fall Short)</h1>
+<p><a href="https://arxiv.org/abs/2606.18451" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文构建了一种基于跨模型 VLM 法官的评估协议，并发现廉价代理指标在评估单图 3D 网格质量时表现薄弱且存在误导性。</p>
+<h2>解决的问题</h2>
+<p>单图 3D 生成器的评估目前缺乏标准，依赖廉价代理指标，但这些指标是否真正反映下游用户关心的感知质量尚未得到仔细测量。</p>
+<h2>创新点</h2>
+<ul>
+<li>构建了一种基于两个独立开源 VLM 模型族（预言机与验证模型）在固定 24 视图无头渲染器上的评估协议。</li>
+<li>提出了一种位置偏差修正方法，并证明该方法对于确保评估可靠性至关重要。</li>
+<li>将验证后的 VLM 法官作为参考标准，对多种廉价代理指标（几何有效性、渲染 CLIP 相似度等）进行了严格保留对象的评分。</li>
+<li>发现廉价代理指标表现薄弱，仅在几何缺陷在渲染中可见的对比中显著优于随机，而在对排名或优化更重要的模糊质量判断中降至随机水平。</li>
+<li>证实了该协议具有可靠性，表现出显著的跨模型一致性。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2606.08402" data-arxiv-id="2606.08402" data-status="ready">
+<h1>[2606.08402] SceneConductor: 3D Scene Generation from a Single Image with Multi-Agent Orchestration</h1>
+<p><a href="https://arxiv.org/abs/2606.08402" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种名为 SceneConductor 的多智能体编排框架，通过场景初始化、环境构建和多智能体细化三个阶段，实现了从单张图像生成 3D 场景。</p>
+<h2>解决的问题</h2>
+<p>从单张图像生成完整 3D 场景面临挑战，现有扩散模型难以扩展到杂乱场景，对象中心方法泛化性差，基于智能体的方法缺乏图像约束且效率低。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出基于多智能体编排的三阶段 3D 场景生成框架，包括场景初始化、环境构建和多智能体细化。</li>
+<li>引入几何感知布局预测器，利用分割掩码和点云地图的稀疏几何先验学习空间信息，无需场景级布局标注。</li>
+<li>通过为每个智能体分配特定角色和结构化指南，提高任务协调性和场景生成可靠性。</li>
+<li>设计规划器智能体检查场景并应用简单修正，同时派遣专业智能体进行复杂局部修订。</li>
+<li>在基准数据集和真实世界图像上展示了在几何准确性和感知质量方面的一致改进。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2605.07971" data-arxiv-id="2605.07971" data-status="ready">
+<h1>[2605.07971] DVD: Discrete Voxel Diffusion for 3D Generation and Editing</h1>
+<p><a href="https://arxiv.org/abs/2605.07971" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出将稀疏体素占用直接建模为离散数据，利用离散扩散作为 SLat 管道中稀疏体素生成的实用先验，以解决连续扩散的局限性。</p>
+<h2>解决的问题</h2>
+<p>现有框架使用连续扩散模型生成稀疏体素骨架，连续到离散的转换降低了可解释性且不适合下游操作，二值化边界附近的微小误差会导致体素翻转产生空洞。</p>
+<h2>创新点</h2>
+<ul>
+<li>引入离散扩散公式用于 SLat 管道中的稀疏体素生成，避免连续到离散转换，在大多数评估指标上实现性能提升并减少模型大小和训练数据。</li>
+<li>展示离散扩散中的预测不确定性可定位模糊体素，并通过聚合体素熵推导轻量级形状级不确定性分数，支持数据过滤和质量评估。</li>
+<li>提出基于块结构扰动的微调策略，实现单次采样过程中的高效体素编辑和修复，无需额外的神经网络评估。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2606.20563" data-arxiv-id="2606.20563" data-status="ready">
+<h1>[2606.20563] JanusMesh: Fast and Zero-Shot 3D Visual Illusion Generation via Cross-Space Denoising</h1>
+<p><a href="https://arxiv.org/abs/2606.20563" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种名为 JanusMesh 的零样本两阶段框架，通过跨空间去噪技术实现了快速且高质量的 3D 视觉错觉生成。</p>
+<h2>解决的问题</h2>
+<p>现有 3D 视觉错觉方法效率低下（如优化方法需约 40 分钟且存在颜色过饱和问题），且简单拼接方法会产生不自然的几何接缝和可见的背面泄漏。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种将生成式多视角错觉从 2D 扩展到完全纹理化的 3D 网格的零样本框架。</li>
+<li>提出了一种无需训练的两阶段架构，包含具有 SDF 混合和 CLIP 引导对齐的双分支去噪以保障几何完整性，以及用于双语义一致性的视图条件纹理化。</li>
+<li>建立了一套严格的评估协议，结合 CLIP、GPT-4.1-mini、FID/KID 和新型物体检测指标，并通过实验验证了方法相对于基线的优越性及扩展到三物体错觉的可扩展性。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2606.23489" data-arxiv-id="2606.23489" data-status="ready">
+<h1>[2606.23489] MeshFlow: Mesh Generation with Equivariant Flow Matching</h1>
+<p><a href="https://arxiv.org/abs/2606.23489" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 MeshFlow，一种基于等变最优传输流匹配模型的网格生成方法，旨在解决现有扩散模型在网格生成中因忽略对称性导致的质量不足及自回归模型推理慢的问题，实现高质量网格的快速生成。</p>
+<h2>解决的问题</h2>
+<p>现有两阶段流水线受限于转换算法质量，自回归模型存在推理慢、控制难及误差累积问题，而直接应用扩散模型的方法因未能考虑网格面与顶点的固有对称性，难以达到自回归模型的质量。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出一种新的网格生成方法，将最优传输等变性流匹配模型应用于三角形汤。</li>
+<li>提出一种 DiT 架构变体，尊重三角形汤中面的排列不变性和三角形顶点的循环旋转不变性。</li>
+<li>提出适当的最优传输损失函数以改善训练收敛性，将每个采样数据点与噪声耦合以最小化其到数据点的距离。</li>
+<li>在 ShapeNet 数据集上实验证明模型有效性，达到最先进的网格生成质量且采样时间低于一秒。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2606.24301" data-arxiv-id="2606.24301" data-status="ready">
+<h1>[2606.24301] MM-TRELLIS: Point-Cloud Guided Multi-Modal 3D Vehicle Generation in Autonomous Driving</h1>
+<p><a href="https://arxiv.org/abs/2606.24301" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 MM-TRELLIS，一种零样本 3D 车辆生成框架，通过多模态输入适应原生 3D 扩散先验，利用点云引导测试时优化和基于不透明度的体素过滤策略，实现高质量野外 3D 车辆生成。</p>
+<h2>解决的问题</h2>
+<p>现有方法存在单视图重建病态导致几何模糊、多视图受遮挡和视角限制导致重建不完整、神经渲染方法推理慢且质量低、以及原生 3D 生成模型未针对野外车辆生成设计、缺乏 LiDAR 点云融合能力、对低质量输入性能下降等问题。</p>
+<h2>创新点</h2>
+<ul>
+<li>我们引入 MM-TRELLIS，一种零样本 3D 车辆生成框架，将原生 3D 扩散先验适应于多模态自动驾驶数据。</li>
+<li>我们提出一种点云引导的测试时优化方案，通过解决方向差异并在去噪过程中用 LiDAR 结构正则化几何生成，施加显式几何监督并增强在遮挡和困难视角下的鲁棒性。</li>
+<li>我们提出一种基于不透明度的体素过滤策略，以去除漂浮物并进一步提高表面保真度。</li>
+<li>广泛的实验表明，MM-TRELLIS 超越了现有的 3D/车辆生成方法，实现了高质量的野外 3D 车辆生成。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2606.30673" data-arxiv-id="2606.30673" data-status="ready">
+<h1>[2606.30673] PolyFlow: Continuous Topology Embedding Flow Matching for Artist-style Mesh Generation</h1>
+<p><a href="https://arxiv.org/abs/2606.30673" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>PolyFlow 通过构建连续拓扑嵌入表示来解决网格拓扑离散性限制，利用基于 Transformer 的流匹配模型实现顶点位置、法线和拓扑坐标的并行生成，从而大幅降低网格生成延迟。</p>
+<h2>解决的问题</h2>
+<p>现有自动重拓扑方法主要依赖自回归序列建模，存在生成延迟高、串行错误累积以及连续生成模型难以处理离散网格拓扑结构等核心问题。</p>
+<h2>创新点</h2>
+<ul>
+<li>识别出网格拓扑的离散性是应用连续生成模型进行重拓扑的关键障碍，并通过学习由时空距离监督的连续拓扑嵌入来解决该问题。</li>
+<li>引入联合几何 - 拓扑流状态 [p,n,e]，其中顶点位置、法线和连续拓扑坐标由单个 Transformer 流模型共同去噪，用并行生成替代自回归解码。</li>
+<li>证明 PolyFlow 能在秒级时间内生成具有清晰拓扑的网格，并具备精确的顶点数量控制，在网格生成任务上达到最先进性能。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2606.27305" data-arxiv-id="2606.27305" data-status="ready">
+<h1>[2606.27305] Sculpting NeRF Geometry: Human-Preference Fine-Tuning of a 3D-Aware Face GAN</h1>
+<p><a href="https://arxiv.org/abs/2606.27305" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种基于人类偏好的微调方法，通过直接对 3D 密度表示进行评分来优化 3D 感知人脸 GAN 的几何结构，从而在保持 2D 外观相似的同时改善 3D 形状质量。</p>
+<h2>解决的问题</h2>
+<p>尽管现有的 3D 感知模型能生成逼真的 2D 图像，但恢复的 3D 形状常包含不现实的断裂或不规则几何，且 2D 外观逼真不能保证 3D 几何逼真。</p>
+<h2>创新点</h2>
+<ul>
+<li>展示了可以通过直接人类排名学习 3D 形状质量，简化了现有工作对多维度评分的要求。</li>
+<li>开发了直接在 3D 密度表示上运行的质量评分模块，无需语言提示、颜色信息或网格先验。</li>
+<li>提出在无条件 3D 感知人脸 GAN 上操作，奖励模型直接对 NeRF 密度体积评分，无需渲染或网格提取。</li>
+<li>使用密度一致性约束保持 2D 外观相似，并避免了文本条件化奖励在潜空间失效的问题。</li>
+<li>用户研究显示微调后的 3D 形状在 74.4% 的成对比较中优于原始输出。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2606.27738" data-arxiv-id="2606.27738" data-status="ready">
+<h1>[2606.27738] HandMade: Spatial Prompting for Generative 3D Creation with Part-Labeled VR Sketches</h1>
+<p><a href="https://arxiv.org/abs/2606.27738" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>HandMade 是一种结合 VR 3D 草图绘制和语言描述的工作流，用于开放领域的 3D 资产生成和编辑。</p>
+<h2>解决的问题</h2>
+<p>文本作为空间设计意图接口不直接，难以指定部件位置、大小和连接；现有图像到 3D 系统假设用户已有完整视觉参考，而自由手绘 3D 草图稀疏、不完整且噪声大，不符合现有系统的期望。</p>
+<h2>创新点</h2>
+<ul>
+<li>一种结合 3D 草图绘制、部件标注和文本的 VR 创作工作流，将其转化为开放领域 3D 资产生成的多视图视觉条件。</li>
+<li>一项将 HandMade 与仅文本生成和基于草图基线（包括 MeshPad、LAS-Diffusion、SketchDream 和 Instant3dit）进行对比的技术评估。</li>
+<li>一项用户研究，表征用户如何在 3D 草图、语言和修订之间分配意图。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2606.26850" data-arxiv-id="2606.26850" data-status="ready">
+<h1>[2606.26850] Appearance-Preserving Refinement of Generated 3D Assets for Monochromatic Fabrication</h1>
+<p><a href="https://arxiv.org/abs/2606.26850" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 GenMF 框架，旨在解决单色制造中生成 3D 资产外观保持与结构鲁棒性之间的权衡问题，通过几何细化将纹理外观转化为几何阴影并引入应力感知正则化。</p>
+<h2>解决的问题</h2>
+<p>生成的 3D 资产依赖纹理表现细节，但在单色制造中纹理信息被丢弃，外观由几何阴影决定，导致原始几何无法保留感知外观；同时，恢复外观所需的几何高频扰动会引入应力集中并降低结构鲁棒性，而全面建模结构鲁棒性又难以泛化。</p>
+<h2>创新点</h2>
+<ul>
+<li>识别并解决单色制造中外观保持与制造导向鲁棒性之间的权衡，将几何细化表述为联合优化问题。</li>
+<li>引入可微应力感知鲁棒性先验，抑制与应力集中相关的高频表面扰动，同时保留外观相关的几何细节。</li>
+<li>通过定量评估、消融研究、有限元模拟和物理制造证明 GenMF 在提高单色外观保持的同时减少了应力集中。</li>
+<li>提出模型无关的框架，可应用于由不同图像到 3D 和文本到 3D 管道生成的纹理资产，无需修改底层生成模型。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2605.13838" data-arxiv-id="2605.13838" data-status="ready">
+<h1>[2605.13838] R-DMesh: Video-Guided 3D Animation via Rectified Dynamic Mesh Flow</h1>
+<p><a href="https://arxiv.org/abs/2605.13838" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了 R-DMesh 框架，通过引入可学习的跳跃偏移量和 Triflow Attention 机制，实现了基于视频引导的高保真、运动对齐的 4D 网格生成，有效解决了姿态错位难题。</p>
+<h2>解决的问题</h2>
+<p>现有 4D 生成方法面临时空一致性差、缺乏局部细节或受限于特定模板的局限，且视频引导 3D 动画中存在初始网格姿态与参考视频起始姿态不匹配的错位难题，导致动画失真或失败。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出 R-DMesh 统一框架，解决视频引导 3D 动画中的姿态错位难题。</li>
+<li>设计包含跳跃偏移量的 R-DMesh VAE，实现任意初始姿态网格与视频起始帧的对齐。</li>
+<li>引入 Triflow Attention 机制，利用顶点几何特征调制解耦流以增强物理先验。</li>
+<li>采用基于正交流的 DiT 架构生成 4D 网格，利用预训练视频模型的时空先验。</li>
+<li>构建 Video-RDMesh 大规模数据集，包含超过 50 万序列及错位模拟。</li>
+<li>支持姿态/运动重定向及整体 4D 生成等下游应用。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2606.29301" data-arxiv-id="2606.29301" data-status="ready">
+<h1>[2606.29301] Pointer-CAD v2: Plan-Then-Construct CAD Generation with Dimension-Aware Parametric Precision</h1>
+<p><a href="https://arxiv.org/abs/2606.29301" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 Pointer-CAD v2，通过 Plan-Then-Construct 范式解耦参数推理与几何构建，解决现有方法在参数精度和维度一致性上的不足，并构建新数据集与几何精度指标。</p>
+<h2>解决的问题</h2>
+<p>现有 CAD 生成方法因命令序列表示的量化导致参数保真度损失，且现有评估指标对工业级严格公差所需的数值偏差不敏感，限制了其在精密工程中的应用。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出 Plan-Then-Construct 框架及 Pointer-CAD v2，分离参数推理与几何构建以生成维度准确的模型。</li>
+<li>构建 OmniCAD-Plan 及 OmniCAD-Plan+ 新数据集，并引入超越视觉相似性的几何精度评估指标。</li>
+<li>实验证明该方法通过消除量化数值参数预测需求，在三个几何层级上显著优于基线方法。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2603.14152" data-arxiv-id="2603.14152" data-status="ready">
+<h1>[2603.14152] SK-Adapter: Skeleton-Based Structural Control for Native 3D Generation</h1>
+<p><a href="https://arxiv.org/abs/2603.14152" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了 SK-Adapter 框架，通过将 3D 骨架作为稀疏空间令牌直接注入原生 3D 生成空间，解决了 2D 投影导致的维度不匹配问题，实现了高效的结构控制与参数微调。</p>
+<h2>解决的问题</h2>
+<p>现有的原生 3D 生成模型缺乏精确的结构可控性，而将 3D 骨架投影到 2D 平面进行引导会导致深度信息丢失、空间模糊及重建质量下降，且难以在保持生成先验的同时让大规模 3D 变换器遵循严格的骨架约束。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了 SK-Adapter，这是首个在原生 3D 生成过程中实现骨架控制的框架。</li>
+<li>构建了 Objaverse-TMS 数据集，包含 24k 高质量文本 - 网格 - 骨架三元组，解决了结构引导 3D 生成的数据稀缺瓶颈。</li>
+<li>实验表明该方法在结构对齐和生成质量上显著优于现有基线。</li>
+<li>展示了基于骨架提示的灵活 3D 编辑能力，支持无需调用的局部区域添加和替换。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2606.29964" data-arxiv-id="2606.29964" data-status="ready">
+<h1>[2606.29964] Variance Reduction on the Camera Axis: Multi-View Score Distillation for 3D</h1>
+<p><a href="https://arxiv.org/abs/2606.29964" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种名为 MV-SDI 的无训练框架，通过在每个步骤聚合 K 个反相视图的蒸馏梯度来减少相机轴上的方差，从而在固定 UNet 预算下解决 3D 生成中的优化慢和几何不一致问题。</p>
+<h2>解决的问题</h2>
+<p>现有基于冻结 2D 扩散先验的 3D 生成方法存在优化速度慢和几何视图不一致（Janus 问题）的障碍，且现有多视图方法需重新训练先验导致成本高，收敛慢主要源于单视图蒸馏梯度的相机轴方差过高。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种无训练框架（MV-SDI），用 K 个反相视图的平均梯度替代单步单视图梯度。</li>
+<li>在 4343-prompt SDI 基准上的评估显示图像质量成本源于 2D 先验，且 MV-SDI 在对齐和偏好指标上优于现有基线。</li>
+<li>提出了前后视图一致性分数，为 Janus 问题提供首个数值处理手段，无需 3D 监督即可诊断几何失败。</li>
+<li>提出了共识加权 MV-SDI，一种自监督扩展，学习每个视图的标量权重，下权重与多视图共识不一致的视图。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2606.27923" data-arxiv-id="2606.27923" data-status="ready">
+<h1>[2606.27923] Home3D 1.0: A High-Fidelity Image-to-3D Asset Generation System for Interior Design</h1>
+<p><a href="https://arxiv.org/abs/2606.27923" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>Home3D 1.0 是一个专为室内家具和装饰资产构建的模块化图像到 3D 生成系统，旨在通过保留产品身份和实现材料可编辑性来解决现有 3D 生成方法在几何、纹理和材料质量上的不足。</p>
+<h2>解决的问题</h2>
+<p>现有通用 3D 生成方法无法满足室内设计对家具资产的具体要求，生成的资产缺乏特定产品的轮廓、比例和风格，且存在几何质量不稳定、纹理模糊、材料属性恢复失败以及部分生成仅按功能而非材料分解的问题。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出 Home3D 1.0，一个专为室内家具和装饰资产构建的模块化图像到 3D 生成系统，输入单张参考图像并输出高质量 3D 资产。</li>
+<li>实现产品忠实几何与纹理生成，通过粗到细的潜在 SDF 生成管道和多视图纹理管道确保几何连贯性和纹理覆盖。</li>
+<li>引入高质量 PBR 材料创建分支，将表面分割为材料区域，通过分层视觉语义搜索检索材料并烘焙到引擎就绪纹理图中。</li>
+<li>提出材料感知的部分生成用于室内编辑，产生语义、材料可编辑的部分网格，支持设计师按材料区域（如织物、木材）而非仅按功能编辑家具。</li>
+<li>在家具基准测试中取得最佳几何分数，支持大规模电子商务资产创建并提供复杂的编辑能力以满足室内设计用例。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2606.24257" data-arxiv-id="2606.24257" data-status="ready">
+<h1>[2606.24257] 3DCarGen: Scalable 3D Car Generation via 3D-consistent Multi-view Synthesis</h1>
+<p><a href="https://arxiv.org/abs/2606.24257" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了 3DCarGen，一个可扩展的框架，通过 3D 一致的多视图合成从单张真实世界图像生成高质量的 3D 汽车模型。</p>
+<h2>解决的问题</h2>
+<p>现有自动 3D 汽车生成方法存在计算成本高、需多输入视图、生成质量缺乏真实感和细节、可扩展性有限；多视图扩散模型生成视图数量固定且存在局部不一致、视图间不一致导致重建质量下降；输入假设与真实世界透视相机不匹配导致视图扭曲；对非正面视角表现差等问题。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出 3DCarGen，一个可扩展的单图像到 3D 汽车生成框架，包含 3D 一致的多视图生成和快速网格重建。</li>
+<li>该方法能有效且鲁棒地从真实世界车辆图像生成高质量网格。</li>
+<li>提出一种 3D 一致的多视图扩散模型，通过引入粗略 3D 表示作为同步条件，克服了现有方法视图不一致和固定视图的限制。</li>
+<li>将 ISOMER 扩展为 ISOMER+，支持从任意数量的多视图图像进行快速鲁棒的网格重建，产生高质量几何和纹理的网格。</li>
+<li>通过联合优化颜色图像和法线图，并采用一次性颜色投影策略，减少最终纹理网格的模糊和鬼影伪影。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2606.31777" data-arxiv-id="2606.31777" data-status="ready">
+<h1>[2606.31777] Mesh BDF: Barycentric Dominance Field for 3D Native Mesh Generation</h1>
+<p><a href="https://arxiv.org/abs/2606.31777" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种基于重心优势场（BDF）的新标量场表示，旨在弥合离散原生网格生成与连续扩散范式之间的差距，并实现无缝集成。</p>
+<h2>解决的问题</h2>
+<p>当前基于自回归（AR）的原生网格生成方法存在扩展性受限、缺乏属性支持、鲁棒性脆弱以及推理慢和训练成本高等问题，难以适应扩散范式。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出 BDF，一种定义在三角形网格表面的新标量场，并正式证明其数学性质。</li>
+<li>该表示法弥合了离散原生网格生成与连续扩散范式之间的差距。</li>
+<li>通过将 BDF 概念化为纹理图，无缝将其集成到现有的 3D VAE 和扩散生成范式中，无需修改底层模型架构。</li>
+<li>将几何（形状）和拓扑解耦，使生成网络能够专注于高分辨率表面上的顶点定位及其局部连接。</li>
+<li>大量实验表明，该方法在生成质量、可扩展性和鲁棒性方面优于最先进的自回归方法。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2604.09100" data-arxiv-id="2604.09100" data-status="ready">
+<h1>[2604.09100] Physically Grounded 3D Generative Reconstruction under Hand Occlusion using Proprioception and Multi-Contact Touch</h1>
+<p><a href="https://arxiv.org/abs/2604.09100" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种利用本体感知和多接触触觉反馈进行物理基础 3D 生成重建的方法，旨在解决手部严重遮挡下的物体几何重建问题。</p>
+<h2>解决的问题</h2>
+<p>在手部严重遮挡场景下，单目 RGB 视觉重建不可靠且受限于遮挡，而现有的触觉或生成式模型很少将物理约束整合为稠密 3D 重建的几何约束，导致重建结果可能违反接触可行性或尺度漂移。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种将物理约束注入生成式重建管道的方法。</li>
+<li>提出了一种姿态感知、相机对齐的 SDF 表示及多模态条件，将 2D 证据、手姿和触觉接触对齐到共享 3D 网格中。</li>
+<li>设计了接触一致性损失和非穿透损失，作为解码器物理引导以约束生成形状满足接触和可行性约束。</li>
+<li>提出了基于 Structure-VAE 和条件流匹配模型的多模态推断架构，结合可见 RGB 证据、手姿编码和体素触觉表示。</li>
+<li>通过仿真和真实机器人实验验证了方法在严重遮挡下的非模态补全能力和跨化身迁移能力。</li>
+</ul>
+</article>
     <article class="summary-article summary-topic-entry" id="summary-2609.01276" data-arxiv-id="2609.01276" data-status="ready">
 <h1>[2609.01276] Seeing the World and the Self from Egocentric Video</h1>
 <p><a href="https://arxiv.org/abs/2609.01276" rel="nofollow">arXiv 原文</a></p>
@@ -2165,6 +3857,6 @@
     </article>
     </div>
   </main>
-  <script type="application/json" id="summary-catalog">{"papers":{"2603.05607":{"status":"ready","url":"notes/3d-generation.html#summary-2603.05607"},"2603.16085":{"status":"ready","url":"notes/3d-generation.html#summary-2603.16085"},"2603.19216":{"status":"ready","url":"notes/3d-generation.html#summary-2603.19216"},"2603.21611":{"status":"ready","url":"notes/3d-generation.html#summary-2603.21611"},"2603.22782":{"status":"ready","url":"notes/3d-generation.html#summary-2603.22782"},"2603.27084":{"status":"ready","url":"notes/3d-generation.html#summary-2603.27084"},"2605.16813":{"status":"ready","url":"notes/3d-generation.html#summary-2605.16813"},"2605.19748":{"status":"pending"},"2605.21472":{"status":"ready","url":"notes/3d-generation.html#summary-2605.21472"},"2605.27351":{"status":"ready","url":"notes/3d-generation.html#summary-2605.27351"},"2606.29395":{"status":"ready","url":"notes/3d-generation.html#summary-2606.29395"},"2607.00382":{"status":"ready","url":"notes/3d-generation.html#summary-2607.00382"},"2607.00832":{"status":"ready","url":"notes/3d-generation.html#summary-2607.00832"},"2607.01222":{"status":"ready","url":"notes/3d-generation.html#summary-2607.01222"},"2607.01766":{"status":"ready","url":"notes/3d-generation.html#summary-2607.01766"},"2607.01803":{"status":"ready","url":"notes/3d-generation.html#summary-2607.01803"},"2607.02045":{"status":"ready","url":"notes/3d-generation.html#summary-2607.02045"},"2607.02407":{"status":"ready","url":"notes/3d-generation.html#summary-2607.02407"},"2607.02516":{"status":"ready","url":"notes/3d-generation.html#summary-2607.02516"},"2607.02674":{"status":"ready","url":"notes/3d-generation.html#summary-2607.02674"},"2607.03731":{"status":"ready","url":"notes/3d-generation.html#summary-2607.03731"},"2607.03819":{"status":"ready","url":"notes/3d-generation.html#summary-2607.03819"},"2607.03990":{"status":"ready","url":"notes/3d-generation.html#summary-2607.03990"},"2607.04540":{"status":"ready","url":"notes/3d-generation.html#summary-2607.04540"},"2607.05373":{"status":"ready","url":"notes/3d-generation.html#summary-2607.05373"},"2607.05392":{"status":"ready","url":"notes/3d-generation.html#summary-2607.05392"},"2607.05573":{"status":"ready","url":"notes/3d-generation.html#summary-2607.05573"},"2607.06565":{"status":"ready","url":"notes/3d-generation.html#summary-2607.06565"},"2607.07187":{"status":"ready","url":"notes/3d-generation.html#summary-2607.07187"},"2607.07459":{"status":"ready","url":"notes/3d-generation.html#summary-2607.07459"},"2607.07749":{"status":"ready","url":"notes/3d-generation.html#summary-2607.07749"},"2607.07817":{"status":"ready","url":"notes/3d-generation.html#summary-2607.07817"},"2607.08246":{"status":"ready","url":"notes/3d-generation.html#summary-2607.08246"},"2607.08891":{"status":"ready","url":"notes/3d-generation.html#summary-2607.08891"},"2607.10560":{"status":"ready","url":"notes/3d-generation.html#summary-2607.10560"},"2607.10623":{"status":"ready","url":"notes/3d-generation.html#summary-2607.10623"},"2607.10826":{"status":"ready","url":"notes/3d-generation.html#summary-2607.10826"},"2607.11673":{"status":"ready","url":"notes/3d-generation.html#summary-2607.11673"},"2607.12193":{"status":"ready","url":"notes/3d-generation.html#summary-2607.12193"},"2607.12752":{"status":"ready","url":"notes/3d-generation.html#summary-2607.12752"},"2607.13365":{"status":"ready","url":"notes/3d-generation.html#summary-2607.13365"},"2607.13468":{"status":"ready","url":"notes/3d-generation.html#summary-2607.13468"},"2607.13563":{"status":"ready","url":"notes/3d-generation.html#summary-2607.13563"},"2607.13654":{"status":"ready","url":"notes/3d-generation.html#summary-2607.13654"},"2607.14927":{"status":"ready","url":"notes/3d-generation.html#summary-2607.14927"},"2607.16352":{"status":"ready","url":"notes/3d-generation.html#summary-2607.16352"},"2607.16577":{"status":"ready","url":"notes/3d-generation.html#summary-2607.16577"},"2607.16805":{"status":"ready","url":"notes/3d-generation.html#summary-2607.16805"},"2607.17093":{"status":"ready","url":"notes/3d-generation.html#summary-2607.17093"},"2607.17145":{"status":"ready","url":"notes/3d-generation.html#summary-2607.17145"},"2607.19120":{"status":"ready","url":"notes/3d-generation.html#summary-2607.19120"},"2607.19777":{"status":"ready","url":"notes/3d-generation.html#summary-2607.19777"},"2607.20660":{"status":"ready","url":"notes/3d-generation.html#summary-2607.20660"},"2607.20789":{"status":"ready","url":"notes/3d-generation.html#summary-2607.20789"},"2607.22738":{"status":"ready","url":"notes/3d-generation.html#summary-2607.22738"},"2607.24298":{"status":"ready","url":"notes/3d-generation.html#summary-2607.24298"},"2607.24721":{"status":"ready","url":"notes/3d-generation.html#summary-2607.24721"},"2607.26646":{"status":"ready","url":"notes/3d-generation.html#summary-2607.26646"},"2607.28164":{"status":"ready","url":"notes/3d-generation.html#summary-2607.28164"},"2607.28581":{"status":"ready","url":"notes/3d-generation.html#summary-2607.28581"},"2607.28675":{"status":"ready","url":"notes/3d-generation.html#summary-2607.28675"},"2608.00094":{"status":"ready","url":"notes/3d-generation.html#summary-2608.00094"},"2608.00891":{"status":"ready","url":"notes/3d-generation.html#summary-2608.00891"},"2608.01335":{"status":"ready","url":"notes/3d-generation.html#summary-2608.01335"},"2608.01605":{"status":"ready","url":"notes/3d-generation.html#summary-2608.01605"},"2608.02016":{"status":"ready","url":"notes/3d-generation.html#summary-2608.02016"},"2608.02711":{"status":"ready","url":"notes/3d-generation.html#summary-2608.02711"},"2608.03062":{"status":"ready","url":"notes/3d-generation.html#summary-2608.03062"},"2608.03179":{"status":"ready","url":"notes/3d-generation.html#summary-2608.03179"},"2608.05248":{"status":"ready","url":"notes/3d-generation.html#summary-2608.05248"},"2608.05714":{"status":"ready","url":"notes/3d-generation.html#summary-2608.05714"},"2608.05879":{"status":"ready","url":"notes/3d-generation.html#summary-2608.05879"},"2608.06161":{"status":"ready","url":"notes/3d-generation.html#summary-2608.06161"},"2608.08053":{"status":"ready","url":"notes/3d-generation.html#summary-2608.08053"},"2608.09110":{"status":"ready","url":"notes/3d-generation.html#summary-2608.09110"},"2608.09186":{"status":"ready","url":"notes/3d-generation.html#summary-2608.09186"},"2608.10744":{"status":"ready","url":"notes/3d-generation.html#summary-2608.10744"},"2608.11876":{"status":"ready","url":"notes/3d-generation.html#summary-2608.11876"},"2608.12175":{"status":"ready","url":"notes/3d-generation.html#summary-2608.12175"},"2608.12997":{"status":"ready","url":"notes/3d-generation.html#summary-2608.12997"},"2608.13541":{"status":"ready","url":"notes/3d-generation.html#summary-2608.13541"},"2608.14783":{"status":"ready","url":"notes/3d-generation.html#summary-2608.14783"},"2608.15749":{"status":"ready","url":"notes/3d-generation.html#summary-2608.15749"},"2608.16234":{"status":"ready","url":"notes/3d-generation.html#summary-2608.16234"},"2608.17988":{"status":"ready","url":"notes/3d-generation.html#summary-2608.17988"},"2608.18616":{"status":"ready","url":"notes/3d-generation.html#summary-2608.18616"},"2608.18627":{"status":"ready","url":"notes/3d-generation.html#summary-2608.18627"},"2608.18711":{"status":"ready","url":"notes/3d-generation.html#summary-2608.18711"},"2608.18734":{"status":"ready","url":"notes/3d-generation.html#summary-2608.18734"},"2608.18750":{"status":"ready","url":"notes/3d-generation.html#summary-2608.18750"},"2608.18840":{"status":"ready","url":"notes/3d-generation.html#summary-2608.18840"},"2608.18948":{"status":"ready","url":"notes/3d-generation.html#summary-2608.18948"},"2608.19036":{"status":"ready","url":"notes/3d-generation.html#summary-2608.19036"},"2608.19063":{"status":"ready","url":"notes/3d-generation.html#summary-2608.19063"},"2608.19177":{"status":"ready","url":"notes/3d-generation.html#summary-2608.19177"},"2608.19756":{"status":"ready","url":"notes/3d-generation.html#summary-2608.19756"},"2608.19769":{"status":"ready","url":"notes/3d-generation.html#summary-2608.19769"},"2608.19823":{"status":"ready","url":"notes/3d-generation.html#summary-2608.19823"},"2608.19900":{"status":"ready","url":"notes/3d-generation.html#summary-2608.19900"},"2608.19934":{"status":"ready","url":"notes/3d-generation.html#summary-2608.19934"},"2608.19965":{"status":"ready","url":"notes/3d-generation.html#summary-2608.19965"},"2608.20093":{"status":"ready","url":"notes/3d-generation.html#summary-2608.20093"},"2608.20277":{"status":"ready","url":"notes/3d-generation.html#summary-2608.20277"},"2608.20305":{"status":"ready","url":"notes/3d-generation.html#summary-2608.20305"},"2608.20308":{"status":"ready","url":"notes/3d-generation.html#summary-2608.20308"},"2608.20639":{"status":"ready","url":"notes/3d-generation.html#summary-2608.20639"},"2608.20659":{"status":"ready","url":"notes/3d-generation.html#summary-2608.20659"},"2608.20691":{"status":"ready","url":"notes/3d-generation.html#summary-2608.20691"},"2608.20699":{"status":"ready","url":"notes/3d-generation.html#summary-2608.20699"},"2608.20720":{"status":"ready","url":"notes/3d-generation.html#summary-2608.20720"},"2608.20740":{"status":"ready","url":"notes/3d-generation.html#summary-2608.20740"},"2608.20748":{"status":"ready","url":"notes/3d-generation.html#summary-2608.20748"},"2608.20759":{"status":"ready","url":"notes/3d-generation.html#summary-2608.20759"},"2608.20775":{"status":"ready","url":"notes/3d-generation.html#summary-2608.20775"},"2608.20891":{"status":"ready","url":"notes/3d-generation.html#summary-2608.20891"},"2608.22821":{"status":"ready","url":"notes/3d-generation.html#summary-2608.22821"},"2608.22833":{"status":"ready","url":"notes/3d-generation.html#summary-2608.22833"},"2608.22888":{"status":"ready","url":"notes/3d-generation.html#summary-2608.22888"},"2608.22906":{"status":"ready","url":"notes/3d-generation.html#summary-2608.22906"},"2608.23014":{"status":"ready","url":"notes/3d-generation.html#summary-2608.23014"},"2608.23140":{"status":"ready","url":"notes/3d-generation.html#summary-2608.23140"},"2608.23206":{"status":"ready","url":"notes/3d-generation.html#summary-2608.23206"},"2608.23210":{"status":"ready","url":"notes/3d-generation.html#summary-2608.23210"},"2608.23410":{"status":"ready","url":"notes/3d-generation.html#summary-2608.23410"},"2608.23549":{"status":"ready","url":"notes/3d-generation.html#summary-2608.23549"},"2608.24039":{"status":"ready","url":"notes/3d-generation.html#summary-2608.24039"},"2608.24130":{"status":"ready","url":"notes/3d-generation.html#summary-2608.24130"},"2608.24169":{"status":"ready","url":"notes/3d-generation.html#summary-2608.24169"},"2608.24182":{"status":"ready","url":"notes/3d-generation.html#summary-2608.24182"},"2608.24212":{"status":"ready","url":"notes/3d-generation.html#summary-2608.24212"},"2608.24333":{"status":"ready","url":"notes/3d-generation.html#summary-2608.24333"},"2608.24343":{"status":"ready","url":"notes/3d-generation.html#summary-2608.24343"},"2608.24364":{"status":"ready","url":"notes/3d-generation.html#summary-2608.24364"},"2608.24714":{"status":"ready","url":"notes/3d-generation.html#summary-2608.24714"},"2608.24760":{"status":"ready","url":"notes/3d-generation.html#summary-2608.24760"},"2608.25461":{"status":"ready","url":"notes/3d-generation.html#summary-2608.25461"},"2608.26656":{"status":"ready","url":"notes/3d-generation.html#summary-2608.26656"},"2608.27073":{"status":"ready","url":"notes/3d-generation.html#summary-2608.27073"},"2608.27407":{"status":"ready","url":"notes/3d-generation.html#summary-2608.27407"},"2608.28288":{"status":"ready","url":"notes/3d-generation.html#summary-2608.28288"},"2608.28386":{"status":"ready","url":"notes/3d-generation.html#summary-2608.28386"},"2608.28534":{"status":"ready","url":"notes/3d-generation.html#summary-2608.28534"},"2608.30617":{"status":"ready","url":"notes/3d-generation.html#summary-2608.30617"},"2608.30821":{"status":"ready","url":"notes/3d-generation.html#summary-2608.30821"},"2608.31113":{"status":"ready","url":"notes/3d-generation.html#summary-2608.31113"},"2609.00923":{"status":"ready","url":"notes/3d-generation.html#summary-2609.00923"},"2609.00995":{"status":"ready","url":"notes/3d-generation.html#summary-2609.00995"},"2609.01276":{"status":"ready","url":"notes/3d-generation.html#summary-2609.01276"}},"topic":"3D Generation","version":1}</script>
+  <script type="application/json" id="summary-catalog">{"papers":{"2512.23628":{"status":"ready","url":"notes/3d-generation.html#summary-2512.23628"},"2601.02103":{"status":"ready","url":"notes/3d-generation.html#summary-2601.02103"},"2601.07143":{"status":"ready","url":"notes/3d-generation.html#summary-2601.07143"},"2601.12234":{"status":"ready","url":"notes/3d-generation.html#summary-2601.12234"},"2601.16148":{"status":"ready","url":"notes/3d-generation.html#summary-2601.16148"},"2601.19433":{"status":"ready","url":"notes/3d-generation.html#summary-2601.19433"},"2601.19785":{"status":"ready","url":"notes/3d-generation.html#summary-2601.19785"},"2601.21314":{"status":"ready","url":"notes/3d-generation.html#summary-2601.21314"},"2601.21798":{"status":"ready","url":"notes/3d-generation.html#summary-2601.21798"},"2602.04271":{"status":"ready","url":"notes/3d-generation.html#summary-2602.04271"},"2602.10116":{"status":"ready","url":"notes/3d-generation.html#summary-2602.10116"},"2602.11706":{"status":"ready","url":"notes/3d-generation.html#summary-2602.11706"},"2602.13818":{"status":"ready","url":"notes/3d-generation.html#summary-2602.13818"},"2602.17033":{"status":"ready","url":"notes/3d-generation.html#summary-2602.17033"},"2602.19542":{"status":"ready","url":"notes/3d-generation.html#summary-2602.19542"},"2602.22629":{"status":"ready","url":"notes/3d-generation.html#summary-2602.22629"},"2602.22785":{"status":"ready","url":"notes/3d-generation.html#summary-2602.22785"},"2603.01594":{"status":"ready","url":"notes/3d-generation.html#summary-2603.01594"},"2603.01601":{"status":"ready","url":"notes/3d-generation.html#summary-2603.01601"},"2603.02619":{"status":"ready","url":"notes/3d-generation.html#summary-2603.02619"},"2603.05081":{"status":"ready","url":"notes/3d-generation.html#summary-2603.05081"},"2603.05425":{"status":"ready","url":"notes/3d-generation.html#summary-2603.05425"},"2603.05522":{"status":"ready","url":"notes/3d-generation.html#summary-2603.05522"},"2603.05607":{"status":"ready","url":"notes/3d-generation.html#summary-2603.05607"},"2603.05845":{"status":"ready","url":"notes/3d-generation.html#summary-2603.05845"},"2603.05908":{"status":"ready","url":"notes/3d-generation.html#summary-2603.05908"},"2603.08060":{"status":"ready","url":"notes/3d-generation.html#summary-2603.08060"},"2603.09266":{"status":"ready","url":"notes/3d-generation.html#summary-2603.09266"},"2603.11554":{"status":"ready","url":"notes/3d-generation.html#summary-2603.11554"},"2603.11831":{"status":"ready","url":"notes/3d-generation.html#summary-2603.11831"},"2603.12238":{"status":"ready","url":"notes/3d-generation.html#summary-2603.12238"},"2603.12820":{"status":"ready","url":"notes/3d-generation.html#summary-2603.12820"},"2603.13098":{"status":"ready","url":"notes/3d-generation.html#summary-2603.13098"},"2603.14152":{"status":"ready","url":"notes/3d-generation.html#summary-2603.14152"},"2603.16085":{"status":"ready","url":"notes/3d-generation.html#summary-2603.16085"},"2603.17841":{"status":"ready","url":"notes/3d-generation.html#summary-2603.17841"},"2603.18532":{"status":"ready","url":"notes/3d-generation.html#summary-2603.18532"},"2603.18782":{"status":"ready","url":"notes/3d-generation.html#summary-2603.18782"},"2603.19216":{"status":"ready","url":"notes/3d-generation.html#summary-2603.19216"},"2603.21557":{"status":"ready","url":"notes/3d-generation.html#summary-2603.21557"},"2603.21611":{"status":"ready","url":"notes/3d-generation.html#summary-2603.21611"},"2603.22782":{"status":"ready","url":"notes/3d-generation.html#summary-2603.22782"},"2603.26512":{"status":"ready","url":"notes/3d-generation.html#summary-2603.26512"},"2603.27084":{"status":"ready","url":"notes/3d-generation.html#summary-2603.27084"},"2603.29387":{"status":"ready","url":"notes/3d-generation.html#summary-2603.29387"},"2603.29592":{"status":"ready","url":"notes/3d-generation.html#summary-2603.29592"},"2604.04425":{"status":"ready","url":"notes/3d-generation.html#summary-2604.04425"},"2604.07960":{"status":"ready","url":"notes/3d-generation.html#summary-2604.07960"},"2604.08760":{"status":"ready","url":"notes/3d-generation.html#summary-2604.08760"},"2604.09100":{"status":"ready","url":"notes/3d-generation.html#summary-2604.09100"},"2604.10772":{"status":"ready","url":"notes/3d-generation.html#summary-2604.10772"},"2604.10789":{"status":"ready","url":"notes/3d-generation.html#summary-2604.10789"},"2604.13036":{"status":"ready","url":"notes/3d-generation.html#summary-2604.13036"},"2604.13688":{"status":"ready","url":"notes/3d-generation.html#summary-2604.13688"},"2604.13730":{"status":"ready","url":"notes/3d-generation.html#summary-2604.13730"},"2604.13905":{"status":"ready","url":"notes/3d-generation.html#summary-2604.13905"},"2604.19773":{"status":"ready","url":"notes/3d-generation.html#summary-2604.19773"},"2604.20038":{"status":"ready","url":"notes/3d-generation.html#summary-2604.20038"},"2604.22828":{"status":"ready","url":"notes/3d-generation.html#summary-2604.22828"},"2604.23629":{"status":"ready","url":"notes/3d-generation.html#summary-2604.23629"},"2604.26509":{"status":"ready","url":"notes/3d-generation.html#summary-2604.26509"},"2604.26943":{"status":"ready","url":"notes/3d-generation.html#summary-2604.26943"},"2604.27106":{"status":"ready","url":"notes/3d-generation.html#summary-2604.27106"},"2605.00345":{"status":"ready","url":"notes/3d-generation.html#summary-2605.00345"},"2605.07971":{"status":"ready","url":"notes/3d-generation.html#summary-2605.07971"},"2605.09071":{"status":"ready","url":"notes/3d-generation.html#summary-2605.09071"},"2605.10922":{"status":"ready","url":"notes/3d-generation.html#summary-2605.10922"},"2605.11367":{"status":"ready","url":"notes/3d-generation.html#summary-2605.11367"},"2605.13129":{"status":"ready","url":"notes/3d-generation.html#summary-2605.13129"},"2605.13293":{"status":"ready","url":"notes/3d-generation.html#summary-2605.13293"},"2605.13838":{"status":"ready","url":"notes/3d-generation.html#summary-2605.13838"},"2605.13852":{"status":"ready","url":"notes/3d-generation.html#summary-2605.13852"},"2605.13862":{"status":"ready","url":"notes/3d-generation.html#summary-2605.13862"},"2605.14984":{"status":"ready","url":"notes/3d-generation.html#summary-2605.14984"},"2605.15187":{"status":"ready","url":"notes/3d-generation.html#summary-2605.15187"},"2605.15398":{"status":"ready","url":"notes/3d-generation.html#summary-2605.15398"},"2605.16813":{"status":"ready","url":"notes/3d-generation.html#summary-2605.16813"},"2605.17448":{"status":"ready","url":"notes/3d-generation.html#summary-2605.17448"},"2605.18451":{"status":"ready","url":"notes/3d-generation.html#summary-2605.18451"},"2605.19748":{"status":"pending"},"2605.19786":{"status":"ready","url":"notes/3d-generation.html#summary-2605.19786"},"2605.21121":{"status":"ready","url":"notes/3d-generation.html#summary-2605.21121"},"2605.21472":{"status":"ready","url":"notes/3d-generation.html#summary-2605.21472"},"2605.26137":{"status":"ready","url":"notes/3d-generation.html#summary-2605.26137"},"2605.27351":{"status":"ready","url":"notes/3d-generation.html#summary-2605.27351"},"2605.28763":{"status":"ready","url":"notes/3d-generation.html#summary-2605.28763"},"2605.28995":{"status":"ready","url":"notes/3d-generation.html#summary-2605.28995"},"2605.30268":{"status":"ready","url":"notes/3d-generation.html#summary-2605.30268"},"2606.02491":{"status":"ready","url":"notes/3d-generation.html#summary-2606.02491"},"2606.02573":{"status":"ready","url":"notes/3d-generation.html#summary-2606.02573"},"2606.04108":{"status":"ready","url":"notes/3d-generation.html#summary-2606.04108"},"2606.04621":{"status":"ready","url":"notes/3d-generation.html#summary-2606.04621"},"2606.04688":{"status":"ready","url":"notes/3d-generation.html#summary-2606.04688"},"2606.05162":{"status":"ready","url":"notes/3d-generation.html#summary-2606.05162"},"2606.06390":{"status":"ready","url":"notes/3d-generation.html#summary-2606.06390"},"2606.07115":{"status":"ready","url":"notes/3d-generation.html#summary-2606.07115"},"2606.08402":{"status":"ready","url":"notes/3d-generation.html#summary-2606.08402"},"2606.08957":{"status":"ready","url":"notes/3d-generation.html#summary-2606.08957"},"2606.09187":{"status":"ready","url":"notes/3d-generation.html#summary-2606.09187"},"2606.09273":{"status":"ready","url":"notes/3d-generation.html#summary-2606.09273"},"2606.09967":{"status":"ready","url":"notes/3d-generation.html#summary-2606.09967"},"2606.10601":{"status":"ready","url":"notes/3d-generation.html#summary-2606.10601"},"2606.11152":{"status":"ready","url":"notes/3d-generation.html#summary-2606.11152"},"2606.11446":{"status":"ready","url":"notes/3d-generation.html#summary-2606.11446"},"2606.11805":{"status":"ready","url":"notes/3d-generation.html#summary-2606.11805"},"2606.12099":{"status":"ready","url":"notes/3d-generation.html#summary-2606.12099"},"2606.13652":{"status":"ready","url":"notes/3d-generation.html#summary-2606.13652"},"2606.14168":{"status":"ready","url":"notes/3d-generation.html#summary-2606.14168"},"2606.18451":{"status":"ready","url":"notes/3d-generation.html#summary-2606.18451"},"2606.20563":{"status":"ready","url":"notes/3d-generation.html#summary-2606.20563"},"2606.23489":{"status":"ready","url":"notes/3d-generation.html#summary-2606.23489"},"2606.24257":{"status":"ready","url":"notes/3d-generation.html#summary-2606.24257"},"2606.24301":{"status":"ready","url":"notes/3d-generation.html#summary-2606.24301"},"2606.26850":{"status":"ready","url":"notes/3d-generation.html#summary-2606.26850"},"2606.27305":{"status":"ready","url":"notes/3d-generation.html#summary-2606.27305"},"2606.27738":{"status":"ready","url":"notes/3d-generation.html#summary-2606.27738"},"2606.27923":{"status":"ready","url":"notes/3d-generation.html#summary-2606.27923"},"2606.29301":{"status":"ready","url":"notes/3d-generation.html#summary-2606.29301"},"2606.29395":{"status":"ready","url":"notes/3d-generation.html#summary-2606.29395"},"2606.29964":{"status":"ready","url":"notes/3d-generation.html#summary-2606.29964"},"2606.30673":{"status":"ready","url":"notes/3d-generation.html#summary-2606.30673"},"2606.31777":{"status":"ready","url":"notes/3d-generation.html#summary-2606.31777"},"2607.00382":{"status":"ready","url":"notes/3d-generation.html#summary-2607.00382"},"2607.00832":{"status":"ready","url":"notes/3d-generation.html#summary-2607.00832"},"2607.01222":{"status":"ready","url":"notes/3d-generation.html#summary-2607.01222"},"2607.01766":{"status":"ready","url":"notes/3d-generation.html#summary-2607.01766"},"2607.01803":{"status":"ready","url":"notes/3d-generation.html#summary-2607.01803"},"2607.02045":{"status":"ready","url":"notes/3d-generation.html#summary-2607.02045"},"2607.02407":{"status":"ready","url":"notes/3d-generation.html#summary-2607.02407"},"2607.02516":{"status":"ready","url":"notes/3d-generation.html#summary-2607.02516"},"2607.02674":{"status":"ready","url":"notes/3d-generation.html#summary-2607.02674"},"2607.03731":{"status":"ready","url":"notes/3d-generation.html#summary-2607.03731"},"2607.03819":{"status":"ready","url":"notes/3d-generation.html#summary-2607.03819"},"2607.03990":{"status":"ready","url":"notes/3d-generation.html#summary-2607.03990"},"2607.04540":{"status":"ready","url":"notes/3d-generation.html#summary-2607.04540"},"2607.05373":{"status":"ready","url":"notes/3d-generation.html#summary-2607.05373"},"2607.05392":{"status":"ready","url":"notes/3d-generation.html#summary-2607.05392"},"2607.05573":{"status":"ready","url":"notes/3d-generation.html#summary-2607.05573"},"2607.06565":{"status":"ready","url":"notes/3d-generation.html#summary-2607.06565"},"2607.07187":{"status":"ready","url":"notes/3d-generation.html#summary-2607.07187"},"2607.07459":{"status":"ready","url":"notes/3d-generation.html#summary-2607.07459"},"2607.07749":{"status":"ready","url":"notes/3d-generation.html#summary-2607.07749"},"2607.07817":{"status":"ready","url":"notes/3d-generation.html#summary-2607.07817"},"2607.08246":{"status":"ready","url":"notes/3d-generation.html#summary-2607.08246"},"2607.08891":{"status":"ready","url":"notes/3d-generation.html#summary-2607.08891"},"2607.10560":{"status":"ready","url":"notes/3d-generation.html#summary-2607.10560"},"2607.10623":{"status":"ready","url":"notes/3d-generation.html#summary-2607.10623"},"2607.10826":{"status":"ready","url":"notes/3d-generation.html#summary-2607.10826"},"2607.11673":{"status":"ready","url":"notes/3d-generation.html#summary-2607.11673"},"2607.12193":{"status":"ready","url":"notes/3d-generation.html#summary-2607.12193"},"2607.12752":{"status":"ready","url":"notes/3d-generation.html#summary-2607.12752"},"2607.13365":{"status":"ready","url":"notes/3d-generation.html#summary-2607.13365"},"2607.13468":{"status":"ready","url":"notes/3d-generation.html#summary-2607.13468"},"2607.13563":{"status":"ready","url":"notes/3d-generation.html#summary-2607.13563"},"2607.13654":{"status":"ready","url":"notes/3d-generation.html#summary-2607.13654"},"2607.14927":{"status":"ready","url":"notes/3d-generation.html#summary-2607.14927"},"2607.16352":{"status":"ready","url":"notes/3d-generation.html#summary-2607.16352"},"2607.16577":{"status":"ready","url":"notes/3d-generation.html#summary-2607.16577"},"2607.16805":{"status":"ready","url":"notes/3d-generation.html#summary-2607.16805"},"2607.17093":{"status":"ready","url":"notes/3d-generation.html#summary-2607.17093"},"2607.17145":{"status":"ready","url":"notes/3d-generation.html#summary-2607.17145"},"2607.19120":{"status":"ready","url":"notes/3d-generation.html#summary-2607.19120"},"2607.19777":{"status":"ready","url":"notes/3d-generation.html#summary-2607.19777"},"2607.20660":{"status":"ready","url":"notes/3d-generation.html#summary-2607.20660"},"2607.20789":{"status":"ready","url":"notes/3d-generation.html#summary-2607.20789"},"2607.22738":{"status":"ready","url":"notes/3d-generation.html#summary-2607.22738"},"2607.24298":{"status":"ready","url":"notes/3d-generation.html#summary-2607.24298"},"2607.24721":{"status":"ready","url":"notes/3d-generation.html#summary-2607.24721"},"2607.26646":{"status":"ready","url":"notes/3d-generation.html#summary-2607.26646"},"2607.28164":{"status":"ready","url":"notes/3d-generation.html#summary-2607.28164"},"2607.28581":{"status":"ready","url":"notes/3d-generation.html#summary-2607.28581"},"2607.28675":{"status":"ready","url":"notes/3d-generation.html#summary-2607.28675"},"2608.00094":{"status":"ready","url":"notes/3d-generation.html#summary-2608.00094"},"2608.00891":{"status":"ready","url":"notes/3d-generation.html#summary-2608.00891"},"2608.01335":{"status":"ready","url":"notes/3d-generation.html#summary-2608.01335"},"2608.01605":{"status":"ready","url":"notes/3d-generation.html#summary-2608.01605"},"2608.02016":{"status":"ready","url":"notes/3d-generation.html#summary-2608.02016"},"2608.02711":{"status":"ready","url":"notes/3d-generation.html#summary-2608.02711"},"2608.03062":{"status":"ready","url":"notes/3d-generation.html#summary-2608.03062"},"2608.03179":{"status":"ready","url":"notes/3d-generation.html#summary-2608.03179"},"2608.05248":{"status":"ready","url":"notes/3d-generation.html#summary-2608.05248"},"2608.05714":{"status":"ready","url":"notes/3d-generation.html#summary-2608.05714"},"2608.05879":{"status":"ready","url":"notes/3d-generation.html#summary-2608.05879"},"2608.06161":{"status":"ready","url":"notes/3d-generation.html#summary-2608.06161"},"2608.08053":{"status":"ready","url":"notes/3d-generation.html#summary-2608.08053"},"2608.09110":{"status":"ready","url":"notes/3d-generation.html#summary-2608.09110"},"2608.09186":{"status":"ready","url":"notes/3d-generation.html#summary-2608.09186"},"2608.10744":{"status":"ready","url":"notes/3d-generation.html#summary-2608.10744"},"2608.11876":{"status":"ready","url":"notes/3d-generation.html#summary-2608.11876"},"2608.12175":{"status":"ready","url":"notes/3d-generation.html#summary-2608.12175"},"2608.12997":{"status":"ready","url":"notes/3d-generation.html#summary-2608.12997"},"2608.13541":{"status":"ready","url":"notes/3d-generation.html#summary-2608.13541"},"2608.14783":{"status":"ready","url":"notes/3d-generation.html#summary-2608.14783"},"2608.15749":{"status":"ready","url":"notes/3d-generation.html#summary-2608.15749"},"2608.16234":{"status":"ready","url":"notes/3d-generation.html#summary-2608.16234"},"2608.17988":{"status":"ready","url":"notes/3d-generation.html#summary-2608.17988"},"2608.18616":{"status":"ready","url":"notes/3d-generation.html#summary-2608.18616"},"2608.18627":{"status":"ready","url":"notes/3d-generation.html#summary-2608.18627"},"2608.18711":{"status":"ready","url":"notes/3d-generation.html#summary-2608.18711"},"2608.18734":{"status":"ready","url":"notes/3d-generation.html#summary-2608.18734"},"2608.18750":{"status":"ready","url":"notes/3d-generation.html#summary-2608.18750"},"2608.18840":{"status":"ready","url":"notes/3d-generation.html#summary-2608.18840"},"2608.18948":{"status":"ready","url":"notes/3d-generation.html#summary-2608.18948"},"2608.19036":{"status":"ready","url":"notes/3d-generation.html#summary-2608.19036"},"2608.19063":{"status":"ready","url":"notes/3d-generation.html#summary-2608.19063"},"2608.19177":{"status":"ready","url":"notes/3d-generation.html#summary-2608.19177"},"2608.19756":{"status":"ready","url":"notes/3d-generation.html#summary-2608.19756"},"2608.19769":{"status":"ready","url":"notes/3d-generation.html#summary-2608.19769"},"2608.19823":{"status":"ready","url":"notes/3d-generation.html#summary-2608.19823"},"2608.19900":{"status":"ready","url":"notes/3d-generation.html#summary-2608.19900"},"2608.19934":{"status":"ready","url":"notes/3d-generation.html#summary-2608.19934"},"2608.19965":{"status":"ready","url":"notes/3d-generation.html#summary-2608.19965"},"2608.20093":{"status":"ready","url":"notes/3d-generation.html#summary-2608.20093"},"2608.20277":{"status":"ready","url":"notes/3d-generation.html#summary-2608.20277"},"2608.20305":{"status":"ready","url":"notes/3d-generation.html#summary-2608.20305"},"2608.20308":{"status":"ready","url":"notes/3d-generation.html#summary-2608.20308"},"2608.20639":{"status":"ready","url":"notes/3d-generation.html#summary-2608.20639"},"2608.20659":{"status":"ready","url":"notes/3d-generation.html#summary-2608.20659"},"2608.20691":{"status":"ready","url":"notes/3d-generation.html#summary-2608.20691"},"2608.20699":{"status":"ready","url":"notes/3d-generation.html#summary-2608.20699"},"2608.20720":{"status":"ready","url":"notes/3d-generation.html#summary-2608.20720"},"2608.20740":{"status":"ready","url":"notes/3d-generation.html#summary-2608.20740"},"2608.20748":{"status":"ready","url":"notes/3d-generation.html#summary-2608.20748"},"2608.20759":{"status":"ready","url":"notes/3d-generation.html#summary-2608.20759"},"2608.20775":{"status":"ready","url":"notes/3d-generation.html#summary-2608.20775"},"2608.20891":{"status":"ready","url":"notes/3d-generation.html#summary-2608.20891"},"2608.22821":{"status":"ready","url":"notes/3d-generation.html#summary-2608.22821"},"2608.22833":{"status":"ready","url":"notes/3d-generation.html#summary-2608.22833"},"2608.22888":{"status":"ready","url":"notes/3d-generation.html#summary-2608.22888"},"2608.22906":{"status":"ready","url":"notes/3d-generation.html#summary-2608.22906"},"2608.23014":{"status":"ready","url":"notes/3d-generation.html#summary-2608.23014"},"2608.23140":{"status":"ready","url":"notes/3d-generation.html#summary-2608.23140"},"2608.23206":{"status":"ready","url":"notes/3d-generation.html#summary-2608.23206"},"2608.23210":{"status":"ready","url":"notes/3d-generation.html#summary-2608.23210"},"2608.23410":{"status":"ready","url":"notes/3d-generation.html#summary-2608.23410"},"2608.23549":{"status":"ready","url":"notes/3d-generation.html#summary-2608.23549"},"2608.24039":{"status":"ready","url":"notes/3d-generation.html#summary-2608.24039"},"2608.24130":{"status":"ready","url":"notes/3d-generation.html#summary-2608.24130"},"2608.24169":{"status":"ready","url":"notes/3d-generation.html#summary-2608.24169"},"2608.24182":{"status":"ready","url":"notes/3d-generation.html#summary-2608.24182"},"2608.24212":{"status":"ready","url":"notes/3d-generation.html#summary-2608.24212"},"2608.24333":{"status":"ready","url":"notes/3d-generation.html#summary-2608.24333"},"2608.24343":{"status":"ready","url":"notes/3d-generation.html#summary-2608.24343"},"2608.24364":{"status":"ready","url":"notes/3d-generation.html#summary-2608.24364"},"2608.24714":{"status":"ready","url":"notes/3d-generation.html#summary-2608.24714"},"2608.24760":{"status":"ready","url":"notes/3d-generation.html#summary-2608.24760"},"2608.25461":{"status":"ready","url":"notes/3d-generation.html#summary-2608.25461"},"2608.26656":{"status":"ready","url":"notes/3d-generation.html#summary-2608.26656"},"2608.27073":{"status":"ready","url":"notes/3d-generation.html#summary-2608.27073"},"2608.27407":{"status":"ready","url":"notes/3d-generation.html#summary-2608.27407"},"2608.28288":{"status":"ready","url":"notes/3d-generation.html#summary-2608.28288"},"2608.28386":{"status":"ready","url":"notes/3d-generation.html#summary-2608.28386"},"2608.28534":{"status":"ready","url":"notes/3d-generation.html#summary-2608.28534"},"2608.30617":{"status":"ready","url":"notes/3d-generation.html#summary-2608.30617"},"2608.30821":{"status":"ready","url":"notes/3d-generation.html#summary-2608.30821"},"2608.31113":{"status":"ready","url":"notes/3d-generation.html#summary-2608.31113"},"2609.00923":{"status":"ready","url":"notes/3d-generation.html#summary-2609.00923"},"2609.00995":{"status":"ready","url":"notes/3d-generation.html#summary-2609.00995"},"2609.01276":{"status":"ready","url":"notes/3d-generation.html#summary-2609.01276"}},"topic":"3D Generation","version":1}</script>
 </body>
 </html>
