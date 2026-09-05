@@ -25,6 +25,8 @@ DEFAULT_LEDGER = PROJECT_ROOT / "data" / "arxiv-candidates.json"
 DEFAULT_DOCS = PROJECT_ROOT / "docs"
 DEFAULT_ARCHIVE = DEFAULT_DOCS / "togos-papers.json"
 DEFAULT_MILESTONES = PROJECT_ROOT / "config" / "milestone_models.yaml"
+DEFAULT_SITE_CONFIG = PROJECT_ROOT / "config" / "site.yaml"
+DEFAULT_ANNOTATIONS = PROJECT_ROOT / "data" / "paper-annotations.json"
 REPORT_VERSION = 1
 
 
@@ -281,6 +283,8 @@ def _regenerate_site(
         DEFAULT_MILESTONES,
         output_root=docs_root,
         search_index_path=docs_root / "search-index.json",
+        config_path=DEFAULT_SITE_CONFIG,
+        annotation_path=DEFAULT_ANNOTATIONS,
         writings_source_root=PROJECT_ROOT / "content" / "writings",
         writings_report_path=PROJECT_ROOT / "build" / "reports" / "writings.json",
     )

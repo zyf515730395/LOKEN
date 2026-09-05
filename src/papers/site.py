@@ -10,6 +10,8 @@ import re
 import unicodedata
 
 from milestones.catalog import load_milestone_catalog
+from papers.annotations.catalog import load_annotation_catalog, load_label_definitions
+from papers.annotations.models import LabelDefinition, PaperAnnotation
 from shared.rendering import atomic_write_text
 from shared.search_index import SearchDocument, serialize_search_index
 from shared.site_shell import (
@@ -31,6 +33,8 @@ NOTES_DIRECTORY_NAME = "notes"
 SHOW_BOOK_NOTES_NAV = False
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_MILESTONE_CATALOG = PROJECT_ROOT / "config" / "milestone_models.yaml"
+DEFAULT_SITE_CONFIG = PROJECT_ROOT / "config" / "site.yaml"
+DEFAULT_ANNOTATION_CATALOG = PROJECT_ROOT / "data" / "paper-annotations.json"
 
 
 def slugify(value: str) -> str:
@@ -57,16 +61,59 @@ def parse_entry(paper_id: str, entry: str) -> dict:
     }
 
 
-def build_archive(data: dict) -> tuple[list[dict], OrderedDict]:
+def _annotation_values(value: PaperAnnotation | dict) -> tuple[tuple[str, ...], str]:
+    if isinstance(value, PaperAnnotation):
+        return value.tags, value.paper_type
+    return tuple(value["tags"]), value["paper_type"]
+
+
+def build_archive(
+    data: dict,
+    labels: tuple[LabelDefinition, ...] | None = None,
+    annotations: dict[str, PaperAnnotation | dict] | None = None,
+) -> tuple[list[dict], OrderedDict]:
     categories = []
     themes = OrderedDict()
 
+    if labels is None:
+        labels = tuple(
+            LabelDefinition(topic, topic, slugify(topic)) for topic in data
+        )
+    annotations = annotations or {}
+    paper_rows: dict[str, dict] = {}
+    legacy_topics: dict[str, list[str]] = {}
     for topic, entries in data.items():
-        rows = [parse_entry(paper_id, entry) for paper_id, entry in entries.items()]
+        for paper_id, entry in entries.items():
+            row = parse_entry(paper_id, entry)
+            paper_rows.setdefault(paper_id, row)
+            legacy_topics.setdefault(paper_id, [])
+            if topic not in legacy_topics[paper_id]:
+                legacy_topics[paper_id].append(topic)
+
+    configured_names = {label.name for label in labels}
+    for paper_id, row in paper_rows.items():
+        annotation = annotations.get(paper_id)
+        if annotation is None:
+            tags = tuple(topic for topic in legacy_topics[paper_id] if topic in configured_names)
+            paper_type = "paper"
+            annotation_status = "pending"
+        else:
+            tags, paper_type = _annotation_values(annotation)
+            annotation_status = "ready"
+        row.update(tags=tags, paper_type=paper_type, annotation_status=annotation_status)
+
+    for label in labels:
+        topic = label.name
+        rows = [row.copy() for row in paper_rows.values() if topic in row["tags"]]
         rows.sort(key=lambda row: (row["date"], row["id"]), reverse=True)
 
         grouped_years = {}
         for row in rows:
+            if row["paper_type"] == "survey":
+                grouped_years.setdefault(
+                    row["date"].year, {"surveys": [], "months": {}}
+                )["surveys"].append(row)
+                continue
             week_start, _ = week_bounds(row["date"])
             if week_start.year == row["date"].year:
                 year = week_start.year
@@ -76,26 +123,33 @@ def build_archive(data: dict) -> tuple[list[dict], OrderedDict]:
                 # week starts in the previous December.
                 year = row["date"].year
                 month = row["date"].month
-            grouped_years.setdefault(year, {}).setdefault(month, {}).setdefault(
-                week_start, []
-            ).append(row)
+            grouped_years.setdefault(year, {"surveys": [], "months": {}})[
+                "months"
+            ].setdefault(month, {}).setdefault(week_start, []).append(row)
 
         years = OrderedDict()
         for year in sorted(grouped_years, reverse=True):
             months = OrderedDict()
-            for month in sorted(grouped_years[year], reverse=True):
-                weeks = grouped_years[year][month]
+            for month in sorted(grouped_years[year]["months"], reverse=True):
+                weeks = grouped_years[year]["months"][month]
                 months[month] = OrderedDict(
                     (week_start, weeks[week_start])
                     for week_start in sorted(weeks, reverse=True)
                 )
-            years[year] = months
+            years[year] = {
+                "surveys": sorted(
+                    grouped_years[year]["surveys"],
+                    key=lambda row: (row["date"], row["id"]),
+                    reverse=True,
+                ),
+                "months": months,
+            }
 
         category = {
             "topic": topic,
             "theme": topic,
             "subtype": None,
-            "slug": slugify(topic),
+            "slug": label.slug,
             "count": len(rows),
             "years": years,
         }
@@ -107,6 +161,10 @@ def build_archive(data: dict) -> tuple[list[dict], OrderedDict]:
 
 def month_anchor(category: dict, year: int, month: int) -> str:
     return f'{category["slug"]}-{year}-{month:02d}'
+
+
+def survey_anchor(category: dict, year: int) -> str:
+    return f'{category["slug"]}-{year}-surveys'
 
 
 def week_anchor(category: dict, year: int, month: int, week_start: datetime.date) -> str:
@@ -136,8 +194,10 @@ def month_paper_count(weeks: OrderedDict) -> int:
     return sum(len(rows) for rows in weeks.values())
 
 
-def year_paper_count(months: OrderedDict) -> int:
-    return sum(month_paper_count(weeks) for weeks in months.values())
+def year_paper_count(year_data: dict) -> int:
+    return len(year_data["surveys"]) + sum(
+        month_paper_count(weeks) for weeks in year_data["months"].values()
+    )
 
 
 def filter_recent_archive(
@@ -149,16 +209,14 @@ def filter_recent_archive(
 
     for category in categories:
         years = OrderedDict(
-            (year, months)
-            for year, months in category["years"].items()
+            (year, year_data)
+            for year, year_data in category["years"].items()
             if earliest_year <= year <= current_year
         )
-        if not years:
-            continue
 
         recent_category = {
             **category,
-            "count": sum(year_paper_count(months) for months in years.values()),
+            "count": sum(year_paper_count(year_data) for year_data in years.values()),
             "years": years,
         }
         recent_categories.append(recent_category)
@@ -168,10 +226,19 @@ def filter_recent_archive(
 
 
 def _iter_category_rows(category: dict):
-    for months in category["years"].values():
-        for weeks in months.values():
+    for year_data in category["years"].values():
+        yield from year_data["surveys"]
+        for weeks in year_data["months"].values():
             for rows in weeks.values():
                 yield from rows
+
+
+def _summary_for_paper(summary_catalog: dict[str, dict], paper_id: str) -> dict:
+    for topic_summaries in summary_catalog.values():
+        summary = topic_summaries.get(paper_id)
+        if summary:
+            return summary
+    return {}
 
 
 def build_paper_search_documents(
@@ -180,10 +247,9 @@ def build_paper_search_documents(
     """Create one public result per canonical paper, preferring ready summaries."""
     documents: dict[str, SearchDocument] = {}
     for category in categories:
-        topic_summaries = summary_catalog.get(category["topic"], {})
         for row in _iter_category_rows(category):
             paper_id = row["id"]
-            summary = topic_summaries.get(paper_id, {})
+            summary = _summary_for_paper(summary_catalog, paper_id)
             ready_summary = summary.get("status") == "ready" and summary.get("url")
             url = (
                 summary["url"]
@@ -237,8 +303,8 @@ def render_sidebar(
                 )
 
             indent = "        " if has_subtype else "      "
-            for year_index, (year, months) in enumerate(category["years"].items()):
-                year_count = year_paper_count(months)
+            for year_index, (year, year_data) in enumerate(category["years"].items()):
+                year_count = year_paper_count(year_data)
                 year_open = " open" if theme_index == 0 and category_index == 0 and year_index == 0 else ""
                 output.append(f'{indent}<details class="nav-year"{year_open}>')
                 output.append(
@@ -246,7 +312,14 @@ def render_sidebar(
                     f'<span class="nav-count">{year_count}</span></summary>'
                 )
                 output.append(f'{indent}  <ul>')
-                for month, weeks in months.items():
+                if year_data["surveys"]:
+                    anchor = survey_anchor(category, year)
+                    output.append(
+                        f'{indent}    <li><a href="#{anchor}">'
+                        f'<span>Surveys</span><span class="nav-count">'
+                        f'{len(year_data["surveys"])}</span></a></li>'
+                    )
+                for month, weeks in year_data["months"].items():
                     anchor = month_anchor(category, year, month)
                     output.append(
                         f'{indent}    <li><a href="#{anchor}">'
@@ -297,6 +370,7 @@ def render_table(
     summary_catalog: dict[str, dict],
     candidate_statuses: dict[str, str] | None = None,
     anchored_papers: set[str] | None = None,
+    label_slugs: dict[str, str] | None = None,
 ) -> str:
     output = [
         '<div class="table-scroll">',
@@ -304,12 +378,12 @@ def render_table(
         '    <thead><tr><th>Arxiv ID</th><th>Paper</th><th>Authors</th><th>Summary</th></tr></thead>',
         '    <tbody>',
     ]
-    topic_summaries = summary_catalog.get(topic, {})
     candidate_statuses = candidate_statuses or {}
     anchored_papers = anchored_papers if anchored_papers is not None else set()
+    label_slugs = label_slugs or {}
     for row in rows:
         paper_url = html.escape(row["paper_url"], quote=True)
-        summary = topic_summaries.get(row["id"], {})
+        summary = _summary_for_paper(summary_catalog, row["id"])
         summary_cell = '<span class="muted">—</span>'
         if summary.get("status") == "pending":
             summary_cell = '<span class="summary-pending">待生成</span>'
@@ -327,12 +401,20 @@ def render_table(
         if row["id"] not in anchored_papers:
             anchor = f' id="paper-{html.escape(row["id"], quote=True)}"'
             anchored_papers.add(row["id"])
+        tags = "".join(
+            f'<a class="paper-tag" href="?tag={html.escape(label_slugs.get(tag, slugify(tag)), quote=True)}'
+            f'#{html.escape(label_slugs.get(tag, slugify(tag)), quote=True)}" '
+            f'data-paper-tag="{html.escape(label_slugs.get(tag, slugify(tag)), quote=True)}">'
+            f'{html.escape(tag)}</a>'
+            for tag in row.get("tags", ())
+        )
+        tag_markup = f'<span class="paper-tags">{tags}</span>' if tags else ""
         output.append(
             f"      <tr{anchor}>"
             f'<td class="paper-id" data-label="Arxiv ID"><a href="{paper_url}" target="_blank" rel="noopener">'
             f'{html.escape(row["id"])}</a></td>'
-            f'<td class="paper-title" data-label="Paper"><a href="{paper_url}" target="_blank" rel="noopener">'
-            f'{html.escape(row["title"])}</a></td>'
+            f'<td class="paper-title" data-label="Paper"><a class="paper-title-link" href="{paper_url}" target="_blank" rel="noopener">'
+            f'{html.escape(row["title"])}</a>{tag_markup}</td>'
             f'<td data-label="Authors">{html.escape(row["authors"])}</td>'
             f'<td class="paper-summary" data-label="Summary">{summary_cell}</td>'
             "</tr>"
@@ -345,6 +427,7 @@ def render_content(
     categories: list[dict],
     summary_catalog: dict[str, dict],
     candidate_statuses: dict[str, str] | None = None,
+    label_slugs: dict[str, str] | None = None,
 ) -> str:
     output = []
     anchored_papers: set[str] = set()
@@ -361,11 +444,15 @@ def render_content(
             f'    <span>{category["count"]} papers</span>',
             '  </header>',
         ])
-        for year_index, (year, months) in enumerate(category["years"].items()):
-            year_count = year_paper_count(months)
+        if not category["years"]:
+            output.append('  <p class="archive-empty">No papers in the current archive window.</p>')
+        for year_index, (year, year_data) in enumerate(category["years"].items()):
+            surveys = year_data["surveys"]
+            months = year_data["months"]
+            year_count = year_paper_count(year_data)
             year_id = f'{category["slug"]}-{year}-content'
             year_expanded = "true" if year_index == 0 else "false"
-            selected_month = next(iter(months))
+            selected_period = "surveys" if surveys else next(iter(months))
             output.append(
                 f'  <section class="archive-year" data-archive-year '
                 f'data-expanded="{year_expanded}">'
@@ -377,8 +464,22 @@ def render_content(
                 f'        <span>{year}</span>',
                 '      </button>',
                 f'      <div class="archive-month-tabs" role="tablist" '
-                f'aria-label="{year} months">',
+                f'aria-label="{year} paper periods">',
             ])
+            surveys_anchor = survey_anchor(category, year)
+            survey_selected = selected_period == "surveys"
+            if surveys:
+                output.append(
+                    f'        <button id="{surveys_anchor}-tab" type="button" role="tab" '
+                    f'aria-controls="{surveys_anchor}" aria-selected="{str(survey_selected).lower()}" '
+                    f'tabindex="{0 if survey_selected else -1}" data-period-target="{surveys_anchor}">'
+                    f'Surveys <span>{len(surveys)}</span></button>'
+                )
+            else:
+                output.append(
+                    '        <button type="button" role="tab" disabled aria-disabled="true" '
+                    'aria-selected="false">Surveys <span>0</span></button>'
+                )
             for month in range(1, 13):
                 weeks = months.get(month)
                 month_name = calendar.month_abbr[month]
@@ -389,13 +490,13 @@ def render_content(
                     )
                     continue
                 anchor = month_anchor(category, year, month)
-                is_selected = month == selected_month
+                is_selected = month == selected_period
                 selected = "true" if is_selected else "false"
                 tabindex = "0" if is_selected else "-1"
                 output.append(
                     f'        <button id="{anchor}-tab" type="button" role="tab" '
                     f'aria-controls="{anchor}" aria-selected="{selected}" '
-                    f'tabindex="{tabindex}" data-month-target="{anchor}">{month_name}</button>'
+                    f'tabindex="{tabindex}" data-period-target="{anchor}">{month_name}</button>'
                 )
             output.extend([
                 '      </div>',
@@ -403,12 +504,30 @@ def render_content(
                 '    </div>',
                 f'    <div class="archive-year-content" id="{year_id}">',
             ])
+            if surveys:
+                output.append(
+                    f'      <section class="archive-period-panel archive-survey-panel" '
+                    f'id="{surveys_anchor}" role="tabpanel" aria-labelledby="{surveys_anchor}-tab" '
+                    f'aria-hidden="{"false" if survey_selected else "true"}" '
+                    f'data-active="{str(survey_selected).lower()}" data-period="surveys">'
+                )
+                output.append(
+                    render_table(
+                        surveys,
+                        category["topic"],
+                        summary_catalog,
+                        candidate_statuses,
+                        anchored_papers,
+                        label_slugs,
+                    )
+                )
+                output.append("      </section>")
             for month, weeks in months.items():
                 anchor = month_anchor(category, year, month)
-                is_active = month == selected_month
+                is_active = month == selected_period
                 active = "true" if is_active else "false"
                 output.append(
-                    f'      <section class="archive-month-panel" id="{anchor}" '
+                    f'      <section class="archive-period-panel archive-month-panel" id="{anchor}" '
                     f'role="tabpanel" aria-labelledby="{anchor}-tab" '
                     f'aria-hidden="{"false" if is_active else "true"}" data-active="{active}">'
                 )
@@ -429,6 +548,7 @@ def render_content(
                             summary_catalog,
                             candidate_statuses,
                             anchored_papers,
+                            label_slugs,
                         )
                     )
                     output.append("        </details>")
@@ -452,7 +572,7 @@ def render_content(
 def render_paper_navigation(categories: list[dict]) -> str:
     """Render full paper-topic names as the learning archive switcher."""
     links = tuple(
-        (category["topic"], f'?topic={category["slug"]}#{category["slug"]}')
+        (category["topic"], f'?tag={category["slug"]}#{category["slug"]}')
         for category in categories
     )
     filter_keys = tuple(category["slug"] for category in categories)
@@ -481,16 +601,21 @@ def generate_site(
     output_root: str | Path | None = None,
     search_index_path: str | Path | None = None,
     generated_on: datetime.date | None = None,
+    config_path: str | Path = DEFAULT_SITE_CONFIG,
+    annotation_path: str | Path = DEFAULT_ANNOTATION_CATALOG,
     writings_source_root: str | Path = PROJECT_ROOT / "content" / "writings",
     writings_report_path: str | Path = PROJECT_ROOT / "build" / "reports" / "writings.json",
 ) -> None:
     data = json.loads(Path(json_path).read_text(encoding="utf-8"))
+    labels = load_label_definitions(config_path)
+    annotations = load_annotation_catalog(annotation_path, labels)
     milestone_catalog = load_milestone_catalog(milestone_catalog_path)
-    all_categories, _ = build_archive(data)
+    all_categories, _ = build_archive(data, labels, annotations)
     today = generated_on or datetime.date.today()
     categories, themes = filter_recent_archive(all_categories, today.year)
     summary_catalog = load_summary_catalog(output_path)
     candidate_statuses = load_candidate_statuses(candidate_path)
+    label_slugs = {label.name: label.slug for label in labels}
     updated = today.isoformat()
 
     page_output = Path(output_path)
@@ -511,7 +636,7 @@ def generate_site(
     </header>
 {render_paper_navigation(categories)}
     </div>
-{render_content(categories, summary_catalog, candidate_statuses)}
+{render_content(categories, summary_catalog, candidate_statuses, label_slugs)}
     <footer>Generated from arXiv metadata · Source: <a href="https://github.com/zyf515730395/TOGOS">{SITE_NAME}</a></footer>
 """
     document = render_site_page(

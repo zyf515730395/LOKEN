@@ -248,6 +248,8 @@ def collect(config_path: str | Path) -> dict[str, int]:
         milestone_catalog_path,
         output_root=output_root,
         search_index_path=search_index_path,
+        config_path=config_path,
+        annotation_path=Path(config_path).parent.parent / "data" / "paper-annotations.json",
     )
     result = {
         "collected": len(records),

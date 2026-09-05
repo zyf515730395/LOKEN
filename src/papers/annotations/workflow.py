@@ -144,21 +144,6 @@ def run_annotations(
                     records[paper_id] = AnnotationRunRecord(paper_id, "failed", "unexpected_failure", "paper failed without changing public output")
                 else:
                     records[paper_id] = AnnotationRunRecord(paper_id, "succeeded")
-        if completed:
-            write_annotation_catalog(catalog_path, {**annotations, **completed})
-            publication_root = Path(docs_root).resolve().parent
-            generate_site(
-                archive_path,
-                Path(docs_root) / "index.html",
-                DEFAULT_LEDGER,
-                DEFAULT_MILESTONES,
-                output_root=docs_root,
-                search_index_path=Path(docs_root) / "search-index.json",
-                config_path=config_path,
-                annotation_path=catalog_path,
-                writings_source_root=publication_root / "content" / "writings",
-                writings_report_path=publication_root / "build" / "reports" / "writings.json",
-            )
         ordered_records = tuple(records[paper_id] for paper_id in selected)
         result = AnnotationRunResult(
             len(selected),
@@ -184,4 +169,25 @@ def run_annotations(
                 ],
             },
         )
+        if completed:
+            write_annotation_catalog(catalog_path, {**annotations, **completed})
+            publication_root = Path(docs_root).resolve().parent
+            try:
+                generate_site(
+                    archive_path,
+                    Path(docs_root) / "index.html",
+                    DEFAULT_LEDGER,
+                    DEFAULT_MILESTONES,
+                    output_root=docs_root,
+                    search_index_path=Path(docs_root) / "search-index.json",
+                    config_path=config_path,
+                    annotation_path=catalog_path,
+                    writings_source_root=publication_root / "content" / "writings",
+                    writings_report_path=publication_root / "build" / "reports" / "writings.json",
+                )
+            except Exception:
+                raise PaperAnnotationError(
+                    "site_build_failed",
+                    "annotations were preserved; rerun the site build after fixing its input",
+                ) from None
         return result

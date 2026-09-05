@@ -28,7 +28,8 @@ function selectTopic(topic, { updateLocation = false, scroll = false } = {}) {
 
   if (updateLocation) {
     const url = new URL(window.location.href);
-    url.searchParams.set("topic", topic);
+    url.searchParams.set("tag", topic);
+    url.searchParams.delete("topic");
     url.hash = selected.id;
     window.history.replaceState(null, "", url);
   }
@@ -41,7 +42,8 @@ function selectTopic(topic, { updateLocation = false, scroll = false } = {}) {
 
 function syncTopicFromLocation({ scroll = false } = {}) {
   if (!topicNavigation || !topicSections.length) return;
-  const requested = new URL(window.location.href).searchParams.get("topic");
+  const url = new URL(window.location.href);
+  const requested = url.searchParams.get("tag") || url.searchParams.get("topic");
   const topic = topicForHash() || requested || topicSections[0].dataset.topicSection;
   if (!selectTopic(topic, { scroll })) selectTopic(topicSections[0].dataset.topicSection, { scroll });
 }
@@ -75,17 +77,17 @@ function revealMonthTab(tab) {
   }
 }
 
-function selectMonth(tab, { updateHash = false, focus = false } = {}) {
-  const targetId = tab?.dataset.monthTarget;
+function selectPeriod(tab, { updateHash = false, focus = false } = {}) {
+  const targetId = tab?.dataset.periodTarget;
   const yearArchive = tab?.closest("[data-archive-year]");
   if (!targetId || !yearArchive || tab.disabled) return;
 
-  yearArchive.querySelectorAll("[data-month-target]").forEach((candidate) => {
+  yearArchive.querySelectorAll("[data-period-target]").forEach((candidate) => {
     const selected = candidate === tab;
     candidate.setAttribute("aria-selected", String(selected));
     candidate.tabIndex = selected ? 0 : -1;
   });
-  yearArchive.querySelectorAll(".archive-month-panel").forEach((panel) => {
+  yearArchive.querySelectorAll(".archive-period-panel").forEach((panel) => {
     const active = panel.id === targetId;
     panel.dataset.active = String(active);
     panel.setAttribute("aria-hidden", String(!active));
@@ -104,11 +106,11 @@ document.querySelectorAll("[data-archive-year]").forEach((yearArchive) => {
     setYearExpanded(yearArchive, yearArchive.dataset.expanded !== "true");
   });
 
-  const tabs = [...yearArchive.querySelectorAll("[data-month-target]")];
+  const tabs = [...yearArchive.querySelectorAll("[data-period-target]")];
   const selectedTab = tabs.find((tab) => tab.getAttribute("aria-selected") === "true");
   window.requestAnimationFrame(() => revealMonthTab(selectedTab));
   tabs.forEach((tab) => {
-    tab.addEventListener("click", () => selectMonth(tab, { updateHash: true }));
+    tab.addEventListener("click", () => selectPeriod(tab, { updateHash: true }));
     tab.addEventListener("keydown", (event) => {
       const currentIndex = tabs.indexOf(tab);
       let nextIndex = null;
@@ -118,7 +120,7 @@ document.querySelectorAll("[data-archive-year]").forEach((yearArchive) => {
       if (event.key === "End") nextIndex = tabs.length - 1;
       if (nextIndex === null) return;
       event.preventDefault();
-      selectMonth(tabs[nextIndex], { updateHash: true, focus: true });
+      selectPeriod(tabs[nextIndex], { updateHash: true, focus: true });
     });
   });
 });
@@ -129,12 +131,12 @@ function revealHashTarget({ scroll = false } = {}) {
   const target = document.getElementById(id);
   if (!target) return;
 
-  const monthPanel = target.matches(".archive-month-panel")
+  const monthPanel = target.matches(".archive-period-panel")
     ? target
-    : target.closest(".archive-month-panel");
+    : target.closest(".archive-period-panel");
   if (monthPanel) {
-    const tab = document.querySelector(`[data-month-target="${monthPanel.id}"]`);
-    selectMonth(tab);
+    const tab = document.querySelector(`[data-period-target="${monthPanel.id}"]`);
+    selectPeriod(tab);
   }
   setYearExpanded(target.closest("[data-archive-year]"), true);
 
@@ -160,6 +162,13 @@ window.addEventListener("hashchange", () => {
   revealHashTarget({ scroll: true });
 });
 revealHashTarget({ scroll: true });
+
+document.addEventListener("click", (event) => {
+  const link = event.target.closest("[data-paper-tag]");
+  if (!link) return;
+  event.preventDefault();
+  selectTopic(link.dataset.paperTag, { updateLocation: true, scroll: true });
+});
 
 const summaryPanel = document.querySelector("#paper-summary-panel");
 const summaryPanelHome = document.querySelector("[data-summary-panel-home]");
@@ -245,7 +254,7 @@ async function openSummaryPanel(link) {
   if (!summaryPanel || !summaryPanelContent) return;
   const requestId = ++summaryRequest;
   summaryTrigger = link;
-  const paperTitle = link.closest("tr")?.querySelector(".paper-title")?.textContent?.trim();
+  const paperTitle = link.closest("tr")?.querySelector(".paper-title-link")?.textContent?.trim();
   if (summaryPanelTitle) summaryPanelTitle.textContent = paperTitle || "论文要点";
   if (summaryDirectLink) {
     summaryDirectLink.href = link.href;
