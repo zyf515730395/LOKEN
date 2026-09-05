@@ -115,14 +115,8 @@ def build_archive(
                 )["surveys"].append(row)
                 continue
             week_start, _ = week_bounds(row["date"])
-            if week_start.year == row["date"].year:
-                year = week_start.year
-                month = week_start.month
-            else:
-                # Keep January papers in their publication year when a natural
-                # week starts in the previous December.
-                year = row["date"].year
-                month = row["date"].month
+            year = row["date"].year
+            month = row["date"].month
             grouped_years.setdefault(year, {"surveys": [], "months": {}})[
                 "months"
             ].setdefault(month, {}).setdefault(week_start, []).append(row)
