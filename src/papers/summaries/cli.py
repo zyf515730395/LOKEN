@@ -44,6 +44,12 @@ def build_parser() -> argparse.ArgumentParser:
     run.add_argument("--refresh", action="store_true")
     status = commands.add_parser("status", help="show accepted summary coverage")
     status.add_argument("--json", action="store_true", dest="as_json")
+    offline = commands.add_parser(
+        "import-offline", help="publish locally reviewed archive summary caches"
+    )
+    offline.add_argument(
+        "--dry-run", action="store_true", help="validate and count without public writes"
+    )
     return parser
 
 
@@ -58,6 +64,15 @@ def _execute(argv: list[str] | None = None) -> int:
                 f"accepted={snapshot['accepted']} ready={snapshot['ready']} "
                 f"pending={snapshot['pending']}"
             )
+        return 0
+    if arguments.command == "import-offline":
+        from .offline import publish_offline_summaries
+
+        result = publish_offline_summaries(dry_run=arguments.dry_run)
+        print(
+            f"selected={result.selected} skipped={result.skipped} "
+            f"published={result.published}"
+        )
         return 0
     if not isinstance(arguments.model, str) or not arguments.model.strip():
         raise PaperSummaryError(
