@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Qwen-Image 官方模型版本时间线与技术对比。">
+  <title>Qwen-Image · 身经百战</title>
+  <script>
+    (() => {
+      document.documentElement.classList.add("js");
+      let theme = null;
+      let contextOpen = null;
+      try {
+        theme = window.localStorage.getItem("arxiv-theme");
+        contextOpen = window.localStorage.getItem("togos-secondary-sidebar-collapsed");
+      } catch (error) { /* Storage can be unavailable. */ }
+      if (theme !== "light" && theme !== "dark") {
+        theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      }
+      document.documentElement.dataset.theme = theme;
+      if (contextOpen === "false") document.documentElement.dataset.contextOpen = "true";
+    })();
+  </script>
+  <link rel="stylesheet" href="../assets/css/site.css?v=12">
+  <script src="../assets/js/site-shell.js?v=12" defer></script>
+  <script src="../assets/js/search-core.js?v=12" defer></script>
+  <script src="../assets/js/search.js?v=12" defer></script>
+  <script src="../assets/js/sidebar.js?v=12" defer></script>
+</head>
+<body data-site-root="../" data-active-section="milestones" class="milestone-page">
+  <header class="site-utility" aria-label="页面工具">
+    <button class="sidebar-toggle" type="button" aria-controls="navigation-shell" aria-expanded="false">
+      <span aria-hidden="true" data-sidebar-toggle-icon>☰</span><span data-sidebar-toggle-label>导航</span>
+    </button>
+    <div class="site-search" data-search-root>
+      <label class="site-search-field" for="search-input">
+        <span aria-hidden="true">⌕</span>
+        <input id="search-input" type="search" placeholder="搜索文章标题"
+               aria-label="搜索文章标题" role="combobox"
+               autocomplete="off" aria-autocomplete="list" aria-controls="search-results" aria-expanded="false">
+        <kbd aria-hidden="true">Ctrl K</kbd>
+      </label>
+      <div class="search-popover" data-search-popover hidden>
+        <p class="search-status" data-search-status aria-live="polite">输入标题关键词开始搜索</p>
+        <div id="search-results" class="search-results" data-search-results role="listbox"></div>
+      </div>
+    </div>
+    <button class="theme-toggle" type="button" aria-label="切换颜色主题" aria-pressed="false">
+      <span data-theme-icon aria-hidden="true"></span>
+    </button>
+  </header>
+  <div class="sidebar-scrim" data-sidebar-close></div>
+<div class="navigation-shell" id="navigation-shell">
+  <button class="navigation-close" type="button" data-navigation-close
+          aria-label="关闭导航" hidden>×</button>
+  <aside class="primary-sidebar" aria-label="知识主题">
+    <a class="primary-brand" href="../index.html" aria-label="LOKEN 首页"><img class="brand-logo" src="../assets/images/loken-logo.png" width="1990" height="329" alt=""></a>
+    <div class="primary-menu" aria-hidden="true"><span>MENU</span><span>☰</span></div>
+    <nav class="primary-navigation" aria-label="知识主题">
+      <a class="primary-nav-item" href="../index.html"><span class="primary-nav-copy"><span class="primary-nav-label">学习一个</span><span class="primary-nav-meta">01 / PAPERS</span></span></a>
+      <a class="primary-nav-item is-active" href="../milestone-models/flux.html" aria-current="page"><span class="primary-nav-copy"><span class="primary-nav-label">身经百战</span><span class="primary-nav-meta">02 / CLASSIC MODELS</span></span></a>
+      <a class="primary-nav-item" href="../writings/index.html"><span class="primary-nav-copy"><span class="primary-nav-label">谈笑风生</span><span class="primary-nav-meta">03 / ARTICLES</span></span></a>
+      <a class="primary-nav-item" href="../journeys/index.html"><span class="primary-nav-copy"><span class="primary-nav-label">跑得还快</span><span class="primary-nav-meta">04 / TRAVELS</span></span></a>
+    </nav>
+    <div class="primary-sidebar-status"><span>LAST SYNC</span><strong>AUTOMATED / WEEKDAYS</strong></div>
+  </aside>
+</div>
+  <main class="page-content" id="top">
+    <div class="section-sticky-header">
+    <header class="milestone-hero section-header">
+      <div class="section-intro">
+        <h1 class="section-intro-title" id="section-milestones-title">MODELS</h1>
+        <p class="section-intro-description">这些模型是身经百战了</p>
+      </div>
+    </header>
+<nav class="context-strip" aria-label="模型系列">
+    <a class="context-strip-link" href="flux.html">FLUX</a>
+    <a class="context-strip-link is-active" href="qwen-image.html" aria-current="location">Qwen-Image</a>
+    <span class="context-strip-link is-disabled" aria-disabled="true">Seedream</span>
+    <span class="context-strip-link is-disabled" aria-disabled="true">Z-Image</span>
+    <span class="context-strip-link is-disabled" aria-disabled="true">Wan</span>
+    <span class="context-strip-link is-disabled" aria-disabled="true">Hunyuan3D</span>
+    <span class="context-strip-link is-disabled" aria-disabled="true">VGGT</span>
+  </nav>
+    </div>
+    <div class="milestone-workspace">
+      <header class="milestone-family-header">
+      <div class="milestone-title-block">
+        <p>Image Generation · Alibaba Cloud</p>
+        <h2>Qwen-Image</h2>
+        <span>官方模型版本演进与核心技术对比</span>
+      </div>
+      <div class="milestone-hero-meta">
+        <ul class="status-legend" aria-label="发布状态图例"><li><span class="release-status status-released">已发布</span><span>已发布</span></li><li><span class="release-status status-early-access">Early Access</span><span>Early Access</span></li><li><span class="release-status status-announced">已宣布</span><span>已宣布</span></li></ul>
+        <p>Updated 2026-09-06</p>
+      </div>
+      </header>
+      <div class="milestone-overview">
+<section class="milestone-panel timeline-panel" aria-labelledby="timeline-heading">
+  <div class="milestone-panel-heading">
+    <div><p>ROADMAP</p><h2 id="timeline-heading">时间线</h2></div>
+    <span>可横向拖动</span>
+  </div>
+  <div class="milestone-timeline-viewport" data-drag-scroll tabindex="0" aria-label="Qwen-Image 时间线，使用左右方向键或拖动浏览">
+    <ol class="milestone-timeline">
+      <li class="timeline-release status-released">
+        <span class="timeline-dot" aria-hidden="true"></span>
+        <time datetime="2025-08-04">2025-08-04</time>
+        <h3>Qwen-Image</h3>
+        <span class="release-status status-released">已发布</span>
+        <ul><li>Qwen-Image</li></ul>
+      </li>
+      <li class="timeline-release status-released">
+        <span class="timeline-dot" aria-hidden="true"></span>
+        <time datetime="2025-08-18">2025-08-18</time>
+        <h3>Qwen-Image-Edit</h3>
+        <span class="release-status status-released">已发布</span>
+        <ul><li>Qwen-Image-Edit</li></ul>
+      </li>
+      <li class="timeline-release status-released">
+        <span class="timeline-dot" aria-hidden="true"></span>
+        <time datetime="2025-09-22">2025-09-22</time>
+        <h3>Qwen-Image-Edit-2509</h3>
+        <span class="release-status status-released">已发布</span>
+        <ul><li>Qwen-Image-Edit-2509</li></ul>
+      </li>
+      <li class="timeline-release status-released">
+        <span class="timeline-dot" aria-hidden="true"></span>
+        <time datetime="2025-12-19">2025-12-19</time>
+        <h3>Qwen-Image-Layered</h3>
+        <span class="release-status status-released">已发布</span>
+        <ul><li>Qwen-Image-Layered</li></ul>
+      </li>
+      <li class="timeline-release status-released">
+        <span class="timeline-dot" aria-hidden="true"></span>
+        <time datetime="2025-12-23">2025-12-23</time>
+        <h3>Qwen-Image-Edit-2511</h3>
+        <span class="release-status status-released">已发布</span>
+        <ul><li>Qwen-Image-Edit-2511</li></ul>
+      </li>
+      <li class="timeline-release status-released">
+        <span class="timeline-dot" aria-hidden="true"></span>
+        <time datetime="2025-12-31">2025-12-31</time>
+        <h3>Qwen-Image-2512</h3>
+        <span class="release-status status-released">已发布</span>
+        <ul><li>Qwen-Image-2512</li></ul>
+      </li>
+      <li class="timeline-release status-released">
+        <span class="timeline-dot" aria-hidden="true"></span>
+        <time datetime="2026-02-10">2026-02-10</time>
+        <h3>Qwen-Image 2.0</h3>
+        <span class="release-status status-released">已发布</span>
+        <ul><li>Qwen-Image-2.0</li><li>Qwen-Image-2.0-Pro</li></ul>
+      </li>
+      <li class="timeline-release status-released">
+        <span class="timeline-dot" aria-hidden="true"></span>
+        <time datetime="2026-07-20">2026-07-20</time>
+        <h3>Qwen-Image 3.0 Pro · API 上线</h3>
+        <span class="release-status status-released">已发布</span>
+        <ul><li>Qwen-Image-3.0-Pro</li></ul>
+      </li>
+      <li class="timeline-release status-released">
+        <span class="timeline-dot" aria-hidden="true"></span>
+        <time datetime="2026-08-04">2026-08-04</time>
+        <h3>Qwen-Image 3.0 · API 上线</h3>
+        <span class="release-status status-released">已发布</span>
+        <ul><li>Qwen-Image-3.0</li></ul>
+      </li>
+    </ol>
+  </div>
+</section>
+<section class="model-specimen" aria-labelledby="model-specimen-heading">
+  <div class="model-specimen-heading">
+    <p>SELECTED SPECIMEN</p>
+    <h2 id="model-specimen-heading">最新发布节点</h2>
+  </div>
+  <div class="model-specimen-graphic" aria-hidden="true">
+    <span></span><span></span><span></span>
+  </div>
+  <dl class="model-specimen-data">
+    <div><dt>MODEL</dt><dd>Qwen-Image 3.0 · API 上线</dd></div>
+    <div><dt>RELEASED</dt><dd><time datetime="2026-08-04">2026-08-04</time></dd></div>
+    <div><dt>ORGANIZATION</dt><dd>Alibaba Cloud</dd></div>
+    <div><dt>STATUS</dt><dd><span class="release-status status-released">已发布</span></dd></div>
+    <div><dt>READING</dt><dd>精读已就绪</dd></div>
+  </dl>
+</section>
+      </div>
+<section class="milestone-panel comparison-panel" aria-labelledby="comparison-heading">
+  <div class="milestone-panel-heading">
+    <div><p>COMPARISON</p><h2 id="comparison-heading">模型对比</h2></div>
+    <span>内容来自本地 Markdown 精读</span>
+  </div>
+  <div class="milestone-table-scroll">
+    <table class="milestone-comparison-table">
+      <thead><tr><th scope="col">对比项</th>
+        <th scope="col" class="milestone-version-heading">
+          <time datetime="2025-08-04">2025-08-04 — 2025-12-31</time>
+          <strong>Qwen-Image</strong>
+          <span class="release-status status-released">已发布</span>
+          <span class="milestone-release-count">2 个官方发布节点</span>
+          <div class="milestone-source-links"><a href="https://arxiv.org/abs/2508.02324" target="_blank" rel="noopener">官方资料 1</a> · <a href="https://github.com/QwenLM/Qwen-Image" target="_blank" rel="noopener">官方资料 2</a></div>
+          <a class="milestone-note-link" href="qwen-image-notes.html#milestone-qwen-image">查看代际精读</a>
+        </th>
+        <th scope="col" class="milestone-version-heading">
+          <time datetime="2025-08-18">2025-08-18 — 2025-12-23</time>
+          <strong>Qwen-Image-Edit</strong>
+          <span class="release-status status-released">已发布</span>
+          <span class="milestone-release-count">3 个官方发布节点</span>
+          <div class="milestone-source-links"><a href="https://github.com/QwenLM/Qwen-Image" target="_blank" rel="noopener">官方资料 1</a> · <a href="https://qwenlm.github.io/blog/qwen-image-edit/" target="_blank" rel="noopener">官方资料 2</a></div>
+          <a class="milestone-note-link" href="qwen-image-notes.html#milestone-qwen-image-edit">查看代际精读</a>
+        </th>
+        <th scope="col" class="milestone-version-heading">
+          <time datetime="2025-12-19">2025-12-19</time>
+          <strong>Qwen-Image-Layered</strong>
+          <span class="release-status status-released">已发布</span>
+          <span class="milestone-release-count">1 个官方发布节点</span>
+          <div class="milestone-source-links"><a href="https://arxiv.org/abs/2512.15603" target="_blank" rel="noopener">官方资料 1</a> · <a href="https://github.com/QwenLM/Qwen-Image" target="_blank" rel="noopener">官方资料 2</a></div>
+          <a class="milestone-note-link" href="qwen-image-notes.html#milestone-qwen-image-layered">查看代际精读</a>
+        </th>
+        <th scope="col" class="milestone-version-heading">
+          <time datetime="2026-02-10">2026-02-10</time>
+          <strong>Qwen-Image 2.0</strong>
+          <span class="release-status status-released">已发布</span>
+          <span class="milestone-release-count">1 个官方发布节点</span>
+          <div class="milestone-source-links"><a href="https://arxiv.org/abs/2605.10730" target="_blank" rel="noopener">官方资料 1</a> · <a href="https://github.com/QwenLM/Qwen-Image" target="_blank" rel="noopener">官方资料 2</a> · <a href="https://www.alibabacloud.com/help/en/model-studio/newly-released-models" target="_blank" rel="noopener">官方资料 3</a></div>
+          <a class="milestone-note-link" href="qwen-image-notes.html#milestone-qwen-image-2">查看代际精读</a>
+        </th>
+        <th scope="col" class="milestone-version-heading">
+          <time datetime="2026-07-20">2026-07-20 — 2026-08-04</time>
+          <strong>Qwen-Image 3.0 Pro</strong>
+          <span class="release-status status-released">已发布</span>
+          <span class="milestone-release-count">2 个官方发布节点</span>
+          <div class="milestone-source-links"><a href="https://www.alibabacloud.com/help/en/model-studio/newly-released-models" target="_blank" rel="noopener">官方资料 1</a></div>
+          <a class="milestone-note-link" href="qwen-image-notes.html#milestone-qwen-image-3-pro">查看代际精读</a>
+        </th>
+      </tr></thead>
+      <tbody>
+        <tr><th scope="row">版本</th>
+          <td><section class="milestone-minor-release"><header><strong>Qwen-Image</strong><a href="qwen-image-notes.html#milestone-qwen-image">精读</a></header><ul>
+<li><strong>Qwen-Image</strong>：20B 文字到图像基线，重点覆盖中英文文字绘制与复杂排版。</li>
+</ul></section><section class="milestone-minor-release"><header><strong>Qwen-Image-2512</strong><a href="qwen-image-notes.html#milestone-qwen-image-2512">精读</a></header><ul>
+<li><strong>Qwen-Image-2512</strong>：更新文生图基线，集中改善真实人物、自然纹理与文字排版。</li>
+</ul></section></td>
+          <td><section class="milestone-minor-release"><header><strong>Qwen-Image-Edit</strong><a href="qwen-image-notes.html#milestone-qwen-image-edit">精读</a></header><ul>
+<li><strong>Qwen-Image-Edit</strong>：在 Qwen-Image 上扩展单图编辑；同时支持语义改动、外观保持和图内文字编辑。</li>
+</ul></section><section class="milestone-minor-release"><header><strong>Qwen-Image-Edit-2509</strong><a href="qwen-image-notes.html#milestone-qwen-image-edit-2509">精读</a></header><ul>
+<li><strong>Qwen-Image-Edit-2509</strong>：从单图扩展到多图编辑，强化人物与商品一致性；参考图可以组合使用。</li>
+</ul></section><section class="milestone-minor-release"><header><strong>Qwen-Image-Edit-2511</strong><a href="qwen-image-notes.html#milestone-qwen-image-edit-2511">精读</a></header><ul>
+<li><strong>Qwen-Image-Edit-2511</strong>：改善多人编辑一致性、工业设计和几何推理；官方发布时间为 12 月 23 日，不能从 2511 后缀推断发布日期。</li>
+</ul></section></td>
+          <td><section class="milestone-minor-release"><header><strong>Qwen-Image-Layered</strong><a href="qwen-image-notes.html#milestone-qwen-image-layered">精读</a></header><ul>
+<li><strong>Qwen-Image-Layered</strong>：将单张 RGB 图分解为数量可变的 RGBA 图层；每层可分别移动、缩放和编辑。</li>
+</ul></section></td>
+          <td><section class="milestone-minor-release"><header><strong>Qwen-Image 2.0</strong><a href="qwen-image-notes.html#milestone-qwen-image-2">精读</a></header><ul>
+<li><strong>Qwen-Image-2.0</strong>：统一生成与编辑，原生 2K，支持更长指令；此节点采用官方发布日，技术报告于 5 月补充。</li>
+<li><strong>Qwen-Image-2.0-Pro</strong>：官方 API 提供的 Pro 变体；独立参数规模、训练差异与本体结构差异：/。</li>
+</ul></section></td>
+          <td><section class="milestone-minor-release"><header><strong>Qwen-Image 3.0 Pro · API 上线</strong><a href="qwen-image-notes.html#milestone-qwen-image-3-pro">精读</a></header><ul>
+<li><strong>Qwen-Image-3.0-Pro</strong>：官方 API 更新表记录 7 月 20 日上线；扩展长指令、密集信息排版与多语言图中文字。</li>
+</ul></section><section class="milestone-minor-release"><header><strong>Qwen-Image 3.0 · API 上线</strong><a href="qwen-image-notes.html#milestone-qwen-image-3">精读</a></header><ul>
+<li><strong>Qwen-Image-3.0</strong>：标准版在官方 API 表于 8 月 4 日上线，面向持续创作和批量图像输出；与 Pro 的结构差异：/。</li>
+</ul></section></td>
+        </tr>
+        <tr><th scope="row">训练数据</th>
+          <td><p>包含自然图像、人物、设计和合成数据的大规模图文语料；通过分类清洗、重标注与逐步增加文本复杂度的课程训练，覆盖视觉与文字两类能力。</p></td>
+          <td><p>/</p></td>
+          <td><p>使用原生多图层设计文件建立分层数据，并构造 RGB、RGBA 与多图层条件任务；训练覆盖最多 20 层的分解。</p></td>
+          <td><p>按任务构造图文描述与编辑数据，结合高分辨率数据和合成样本；通过错误归因与反馈补充能力缺口。</p></td>
+          <td><p>/</p></td>
+        </tr>
+        <tr><th scope="row">VAE 结构</th>
+          <td><p>图像 VAE 在空间维度压缩 8 倍，潜变量为 16 通道。</p></td>
+          <td><p>/</p></td>
+          <td><p>RGBA-VAE 共用 RGB/RGBA 潜空间；输入和输出卷积由 3 通道扩到 4 通道，显式保存 alpha，图层维度不做压缩。</p></td>
+          <td><p>空间压缩由上一代 8 倍提高到 16 倍，减少高分辨率输出的潜变量数量。</p></td>
+          <td><p>/</p></td>
+        </tr>
+        <tr><th scope="row">Text Encoder</th>
+          <td><p>Qwen2.5-VL-7B 提供文本与视觉语义条件；编辑任务还使用 VAE 图像编码保留外观。</p></td>
+          <td><p>输入图像分别进入 Qwen2.5-VL 和 VAE，提供语义与外观条件。</p></td>
+          <td><p>沿用 Qwen 系列视觉语言条件编码；输入图像提供分层所需语义。</p></td>
+          <td><p>冻结的 Qwen3-VL 作为多模态条件编码器。</p></td>
+          <td><p>/</p></td>
+        </tr>
+        <tr><th scope="row">生成主体网络</th>
+          <td><p>20B MMDiT：图像与文本各有参数，在联合注意力中交互；60 层主干使用多模态位置编码 MSRoPE。</p></td>
+          <td><p>基于 Qwen-Image 的 MMDiT 图像编辑模型。</p></td>
+          <td><p>VLD-MMDiT 在可变数量的图层潜变量上联合去噪，Layer3D RoPE 显式表示图层位置。</p></td>
+          <td><p>MMDiT 主干使用 MSRoPE、QK RMSNorm、LayerNorm 和 SwiGLU；在统一框架中处理生成与编辑。</p></td>
+          <td><p>/</p></td>
+        </tr>
+        <tr><th scope="row">训练 Trick</th>
+          <td><ul>
+<li>逐步提高分辨率与文字难度；把 T2I、I2I、TI2I 任务纳入训练。</li>
+<li>高质量监督微调与强化学习用于改善审美和指令遵循。</li>
+</ul></td>
+          <td><ul>
+<li>/</li>
+</ul></td>
+          <td><ul>
+<li>按文本到 RGB、文本到 RGBA、文本到多层 RGBA、图像到多层 RGBA 逐步训练。</li>
+<li>使用流匹配训练分层生成过程。</li>
+</ul></td>
+          <td><ul>
+<li>多阶段、多分辨率训练逐步扩展生成与编辑能力。</li>
+<li>自动错误归因连接评估和数据改进，形成数据反馈循环。</li>
+</ul></td>
+          <td><ul>
+<li>/</li>
+</ul></td>
+        </tr>
+        <tr><th scope="row">新提出的创新点</th>
+          <td><ul>
+<li>将语义理解与视觉重建两条条件路径结合，兼顾编辑含义和输入外观。</li>
+<li>通过文字专门数据与课程学习加强中英文精确绘制。</li>
+</ul></td>
+          <td><ul>
+<li>语义条件与外观条件并行注入，使语义级和外观级编辑共享模型。</li>
+</ul></td>
+          <td><ul>
+<li>共享 RGB/RGBA 表征，避免把透明度视为后处理结果。</li>
+<li>可变图层数量的扩散建模允许一次生成结构化图层。</li>
+</ul></td>
+          <td><ul>
+<li>提高潜空间压缩率，以控制原生 2K 的计算量。</li>
+<li>生成与编辑统一建模，数据改进围绕具体失败类型展开。</li>
+</ul></td>
+          <td><ul>
+<li>公开能力变化（实现未披露）：支持更长的图文指令和复杂版面；官方披露的能力变化不等于公开了训练架构。</li>
+</ul></td>
+        </tr>
+        <tr><th scope="row">局限性</th>
+          <td><ul>
+<li>/</li>
+</ul></td>
+          <td><ul>
+<li>/</li>
+</ul></td>
+          <td><ul>
+<li>/</li>
+</ul></td>
+          <td><ul>
+<li>/</li>
+</ul></td>
+          <td><ul>
+<li>/</li>
+</ul></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+    </div>
+    <footer>仅收录官方发布 · 未披露的技术信息以 / 表示</footer>
+
+  </main>
+
+</body>
+</html>
