@@ -25,7 +25,7 @@ function topicForHash() {
 
 function revealTopicLink(link) {
   const strip = link?.parentElement;
-  if (!strip) return;
+  if (!strip || link.classList.contains("conference-navigation-link")) return;
   const linkRect = link.getBoundingClientRect();
   const stripRect = strip.getBoundingClientRect();
   if (linkRect.left < stripRect.left) {
@@ -59,6 +59,19 @@ function selectTopic(topic, { updateLocation = false, scroll = false } = {}) {
   learningWorkspace?.classList.toggle(
     "is-conference-active", selected.classList.contains("conference-section"),
   );
+  if (selected.classList.contains("conference-section")) {
+    window.requestAnimationFrame(() => {
+      const viewport = selected.querySelector("[data-conference-current-year]");
+      const firstCurrent = viewport?.querySelector(
+        `[data-conference-year="${viewport.dataset.conferenceCurrentYear}"]`,
+      );
+      if (viewport && firstCurrent) {
+        const inset = parseFloat(window.getComputedStyle(viewport).paddingLeft) || 0;
+        viewport.scrollLeft += firstCurrent.getBoundingClientRect().left
+          - viewport.getBoundingClientRect().left - inset;
+      } else if (viewport) viewport.scrollLeft = 0;
+    });
+  }
 
   if (updateLocation) {
     const url = new URL(window.location.href);

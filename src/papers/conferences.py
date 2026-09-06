@@ -15,7 +15,7 @@ import yaml
 CONFERENCE_ID_PATTERN = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 CONFERENCE_FIELDS = {"id", "name", "enabled", "homepage", "meetings"}
 MEETING_FIELDS = {
-    "edition", "status", "start_date", "end_date", "location", "source_url", "verified_on"
+    "edition", "status", "start_date", "end_date", "location", "source_url", "verified_on", "website", "proceedings_url"
 }
 MEETING_STATUSES = {"confirmed", "dates_pending"}
 
@@ -29,6 +29,8 @@ class ConferenceMeeting:
     location: str
     source_url: str
     verified_on: datetime.date
+    website: str | None = None
+    proceedings_url: str | None = None
 
 
 @dataclass(frozen=True, slots=True)
@@ -110,13 +112,15 @@ def _load_meeting(payload: object, context: str, as_of: datetime.date) -> Confer
         location=_text(data.get("location"), f"{context}.location"),
         source_url=_https_url(data.get("source_url"), f"{context}.source_url"),
         verified_on=verified_on,
+        website=_https_url(data["website"], f"{context}.website") if data.get("website") is not None else None,
+        proceedings_url=_https_url(data["proceedings_url"], f"{context}.proceedings_url") if data.get("proceedings_url") is not None else None,
     )
 
 
 def load_conferences(
     path: str | Path, *, as_of: datetime.date | None = None
 ) -> tuple[Conference, ...]:
-    """Load enabled conferences and retain only current or future confirmed meetings."""
+    """Load enabled conferences without discarding historical or future editions."""
     config_path = Path(path)
     payload = yaml.safe_load(config_path.read_text(encoding="utf-8"))
     root = _mapping(payload, f"conference config {config_path}")
@@ -154,25 +158,12 @@ def load_conferences(
         editions = [meeting.edition for meeting in meetings]
         if len(editions) != len(set(editions)):
             raise ValueError(f"{context}.meetings contains duplicate editions")
-        future_meetings = tuple(
-            sorted(
-                (
-                    meeting for meeting in meetings
-                    if meeting.end_date is None or meeting.end_date >= today
-                ),
-                key=lambda meeting: (
-                    meeting.start_date is None,
-                    meeting.start_date or datetime.date.max,
-                    meeting.edition,
-                ),
-            )
-        )
         if enabled:
             conferences.append(Conference(
                 id=conference_id,
                 name=_text(data.get("name"), f"{context}.name"),
                 homepage=_https_url(data.get("homepage"), f"{context}.homepage"),
-                meetings=future_meetings,
+                meetings=meetings,
             ))
     return tuple(conferences)
 
@@ -191,50 +182,73 @@ def _meeting_date_label(meeting: ConferenceMeeting) -> str:
     return f"{start.strftime('%Y.%m.%d')}–{end.strftime('%Y.%m.%d')}"
 
 
-def render_conference_section(conferences: tuple[Conference, ...]) -> str:
-    """Render the conference timeline as the final learning-topic panel."""
+def _meeting_year(meeting: ConferenceMeeting) -> int:
+    if meeting.start_date is not None:
+        return meeting.start_date.year
+    year = re.search(r"\b(20\d{2})\b", meeting.edition)
+    if year is None:
+        raise ValueError(f"Pending meeting edition must include its year: {meeting.edition}")
+    return int(year.group(1))
+
+
+def render_conference_section(
+    conferences: tuple[Conference, ...], *, as_of: datetime.date | None = None
+) -> str:
+    """Render the current calendar year and two preceding years in chronological order."""
+    today = as_of or datetime.date.today()
+    first_year = today.year - 2
     meetings = sorted(
         (
             (conference, meeting)
             for conference in conferences
             for meeting in conference.meetings
+            if first_year <= _meeting_year(meeting) <= today.year
         ),
         key=lambda item: (
-            item[1].start_date is None,
-            item[1].start_date or datetime.date.max,
+            _meeting_year(item[1]),
+            item[1].start_date or datetime.date(_meeting_year(item[1]), 12, 31),
             item[0].name,
-            item[1].edition,
         ),
     )
     cards = []
     for conference, meeting in meetings:
-        pending_class = " is-pending" if meeting.status == "dates_pending" else ""
-        status_label = "待确认" if meeting.status == "dates_pending" else "已确认"
-        cards.append(f"""    <article class="conference-card{pending_class}" role="listitem">
-      <div class="conference-card-marker" aria-hidden="true"></div>
-      <p class="conference-status">{status_label}</p>
-      <p class="conference-date">{html.escape(_meeting_date_label(meeting))}</p>
-      <h3><a href="{html.escape(conference.homepage, quote=True)}">{html.escape(meeting.edition)}</a></h3>
-      <p class="conference-name">{html.escape(conference.name)}</p>
-      <p class="conference-location">{html.escape(meeting.location)}</p>
-      <footer><a href="{html.escape(meeting.source_url, quote=True)}">官方来源</a><span>核验于 {meeting.verified_on.strftime('%Y.%m.%d')}</span></footer>
-    </article>""")
+        year = _meeting_year(meeting)
+        pending = meeting.status == "dates_pending"
+        state = "status-announced" if pending else "status-released"
+        status_label = "日期未公布" if pending else ("已举办" if meeting.end_date < today else "已确认")
+        date_label = html.escape(_meeting_date_label(meeting))
+        date_markup = date_label if pending else f'<time datetime="{meeting.start_date.isoformat()}">{date_label}</time>'
+        website = html.escape(meeting.website or meeting.source_url, quote=True)
+        proceedings = (
+            f'<a href="{html.escape(meeting.proceedings_url, quote=True)}">录用论文</a>'
+            if meeting.proceedings_url else '<span>论文库待公布</span>'
+        )
+        cards.append(f"""      <li class="timeline-release conference-release {state}" data-conference-year="{year}">
+        <span class="timeline-dot" aria-hidden="true"></span>
+        <p class="conference-year">{year}</p>
+        {date_markup}
+        <h3><a href="{website}">{html.escape(meeting.edition)}</a></h3>
+        <p class="conference-location">{html.escape(meeting.location)}</p>
+        <p class="conference-status">{status_label}</p>
+        <div class="conference-links"><a href="{website}">官网</a>{proceedings}</div>
+        <footer><a href="{html.escape(meeting.source_url, quote=True)}">官方来源</a><span>核验于 {meeting.verified_on.strftime('%Y.%m.%d')}</span></footer>
+      </li>""")
     if cards:
         timeline = (
-            '<div class="conference-timeline" role="list" tabindex="0" '
-            'aria-label="未来顶会时间线" data-drag-scroll>\n'
+            '<div class="milestone-timeline-viewport conference-timeline" tabindex="0" '
+            'aria-label="会议时间线，可使用左右方向键浏览" data-drag-scroll '
+            f'data-conference-current-year="{today.year}">\n'
+            '    <ol class="milestone-timeline">\n'
             + "\n".join(cards)
-            + "\n  </div>"
+            + "\n    </ol>\n  </div>"
         )
     else:
-        timeline = '<p class="conference-empty">暂无已确认的未来会议信息。</p>'
-    tracked_count = len(conferences)
+        timeline = '<p class="conference-empty">近三年暂无会议信息。</p>'
     return f"""<section class="topic-section conference-section" id="conferences" data-topic-section="conferences" data-topic-aliases="">
   <header class="topic-header">
-    <p>会议日历</p>
-    <h2>顶会时间线</h2>
-    <span>{tracked_count} 个会议</span>
+    <p>Conference</p>
+    <h2>Timeline</h2>
+    <span>{first_year}–{today.year} · {len(conferences)} 个会议</span>
   </header>
-  <p class="conference-intro">仅收录官网已确认信息。</p>
   {timeline}
 </section>"""

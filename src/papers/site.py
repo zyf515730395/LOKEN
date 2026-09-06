@@ -595,10 +595,16 @@ def render_paper_navigation(
         for category in categories
     )
     filter_keys = [category["slug"] for category in categories]
-    if include_conferences:
-        links.append(("顶会时间线", "?tag=conferences#conferences"))
-        filter_keys.append("conferences")
-    return render_context_strip(tuple(links), filter_keys=tuple(filter_keys))
+    topic_strip = render_context_strip(tuple(links), filter_keys=tuple(filter_keys))
+    if not include_conferences:
+        return topic_strip
+    return (
+        '<div class="paper-context-navigation">'
+        + topic_strip
+        + '<a class="context-strip-link conference-navigation-link" '
+        'href="?tag=conferences#conferences" data-topic-filter="conferences">Conference</a>'
+        '</div>'
+    )
 
 
 def load_candidate_statuses(
@@ -690,7 +696,7 @@ def generate_site(
     </header>
 {render_paper_navigation(categories, include_conferences=bool(conferences))}
     </div>
-{render_content(categories, summary_catalog, candidate_statuses, label_slugs, conference_section=render_conference_section(conferences) if conferences else "")}
+{render_content(categories, summary_catalog, candidate_statuses, label_slugs, conference_section=render_conference_section(conferences, as_of=today) if conferences else "")}
     <footer>Generated from arXiv metadata · Source: <a href="https://github.com/zyf515730395/LOKEN">{SITE_NAME}</a></footer>
 """
     document = render_site_page(
