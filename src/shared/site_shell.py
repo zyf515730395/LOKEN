@@ -48,7 +48,7 @@ SECTIONS = (
 )
 SECTIONS_BY_KEY = {section.key: section for section in SECTIONS}
 SITE_NAME = "LOKEN"
-ASSET_VERSION = "12"
+ASSET_VERSION = "13"
 SECTION_METADATA = {
     "learning": "01 / PAPERS",
     "milestones": "02 / CLASSIC MODELS",

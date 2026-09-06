@@ -110,14 +110,29 @@
 
     function syncActiveContextLink() {
       if (!contextLinks.length) return;
+      const currentUrl = new URL(window.location.href);
       const currentHash = window.location.hash || "#top";
-      const matchingLink = contextLinks.find((link) => {
+      const samePageLinks = contextLinks.filter((link) => {
+        const target = new URL(link.href, currentUrl);
+        return target.origin === currentUrl.origin && target.pathname === currentUrl.pathname;
+      });
+      const matchingLink = samePageLinks.find((link) => {
         const targetHash = new URL(link.href, window.location.href).hash || "#top";
         return targetHash === currentHash || (
           targetHash !== "#top" && currentHash.startsWith(`${targetHash}-`)
         );
       });
-      setActiveContextLink(matchingLink || contextLinks[0]);
+      const activeLink = matchingLink || samePageLinks[0]
+        || contextLinks.find((link) => link.classList.contains("is-active")) || contextLinks[0];
+      setActiveContextLink(activeLink);
+      window.requestAnimationFrame(() => {
+        const strip = activeLink.closest(".context-strip");
+        if (!strip) return;
+        const linkRect = activeLink.getBoundingClientRect();
+        const stripRect = strip.getBoundingClientRect();
+        if (linkRect.left < stripRect.left) strip.scrollLeft -= stripRect.left - linkRect.left;
+        else if (linkRect.right > stripRect.right) strip.scrollLeft += linkRect.right - stripRect.right;
+      });
     }
 
     setDrawer(false);
