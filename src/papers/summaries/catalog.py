@@ -8,17 +8,21 @@ from pathlib import Path
 import re
 
 from papers.candidate_ledger import load_candidate_ledger, normalize_arxiv_id
+from papers.annotations.catalog import label_slug, load_label_definitions
 
 from .models import PaperSummaryError
 
 
-TOPIC_SLUGS = {
-    "Image Generation": "image-generation",
-    "Video Generation": "video-generation",
-    "3D Generation": "3d-generation",
-    "Neural Rendering": "neural-rendering",
-    "Depth Estimation": "depth-estimation",
-}
+def load_topic_slugs(config_path: str | Path) -> dict[str, str]:
+    """Keep alias URLs stable while new topics use their configured names."""
+    return {
+        name: label_slug(name)
+        for label in load_label_definitions(config_path)
+        for name in (label.name, *getattr(label, "aliases", ()))
+    }
+
+
+TOPIC_SLUGS = load_topic_slugs(Path(__file__).resolve().parents[3] / "config" / "site.yaml")
 ARXIV_ID = re.compile(r"^\d{4}\.\d{4,5}$")
 
 

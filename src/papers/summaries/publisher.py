@@ -7,7 +7,7 @@ import json
 from pathlib import Path
 import re
 
-from shared.rendering import atomic_write_text
+from shared.rendering import atomic_write_bytes, atomic_write_text
 
 from .catalog import TOPIC_SLUGS, PaperCandidate, notes_path
 from .models import PaperSummary, PaperSummaryError
@@ -25,6 +25,17 @@ ARTICLE_PATTERN = re.compile(
     r'data-status="ready">\n.*?</article>\n',
     re.DOTALL,
 )
+
+
+def restore_topic_document(docs_root: Path, topic: str, original: bytes | None) -> None:
+    """Restore an existing page or remove only a newly created topic page."""
+    path = notes_path(docs_root, topic)
+    if original is None:
+        if path.resolve().parent != (docs_root / "notes").resolve():
+            raise PaperSummaryError("unsafe_summary_path", "summary rollback escaped notes directory")
+        path.unlink(missing_ok=True)
+    else:
+        atomic_write_bytes(path, original)
 
 
 def _manifest(document: str, path: Path) -> tuple[re.Match[str], dict]:
@@ -142,6 +153,32 @@ def build_topic_document(
 ) -> str:
     try:
         document = path.read_text(encoding="utf-8")
+    except FileNotFoundError:
+        if path.name != f"{TOPIC_SLUGS.get(topic, '')}.html":
+            raise PaperSummaryError("invalid_topic", "paper topic is not publishable") from None
+        title = html.escape(topic)
+        slug = TOPIC_SLUGS[topic]
+        payload = json.dumps({"version": 1, "topic": topic, "papers": {}}, ensure_ascii=False).replace("<", "\\u003c")
+        document = f'''<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{title} · 论文要点</title>
+  <link rel="stylesheet" href="../assets/css/site.css?v=12">
+</head>
+<body class="summary-page">
+  <main class="summary-page-shell">
+    <header class="summary-topic-header">
+      <a class="summary-back" href="../index.html#{slug}">← 返回论文列表</a>
+      <h1>{title} · 论文要点</h1>
+    </header>
+{LIST_MARKER}    </div>
+  </main>
+  <script type="application/json" id="summary-catalog">{payload}</script>
+</body>
+</html>
+'''
     except OSError:
         raise PaperSummaryError("summary_page_missing", f"summary page is unavailable: {path.name}") from None
     manifest, articles = _validate(document, path, topic)
