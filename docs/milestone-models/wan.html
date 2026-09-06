@@ -1,0 +1,426 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Wan 官方模型版本时间线与技术对比。">
+  <title>Wan · 身经百战</title>
+  <script>
+    (() => {
+      document.documentElement.classList.add("js");
+      let theme = null;
+      let contextOpen = null;
+      try {
+        theme = window.localStorage.getItem("arxiv-theme");
+        contextOpen = window.localStorage.getItem("togos-secondary-sidebar-collapsed");
+      } catch (error) { /* Storage can be unavailable. */ }
+      if (theme !== "light" && theme !== "dark") {
+        theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      }
+      document.documentElement.dataset.theme = theme;
+      if (contextOpen === "false") document.documentElement.dataset.contextOpen = "true";
+    })();
+  </script>
+  <link rel="stylesheet" href="../assets/css/site.css?v=12">
+  <script src="../assets/js/site-shell.js?v=12" defer></script>
+  <script src="../assets/js/search-core.js?v=12" defer></script>
+  <script src="../assets/js/search.js?v=12" defer></script>
+  <script src="../assets/js/sidebar.js?v=12" defer></script>
+</head>
+<body data-site-root="../" data-active-section="milestones" class="milestone-page">
+  <header class="site-utility" aria-label="页面工具">
+    <button class="sidebar-toggle" type="button" aria-controls="navigation-shell" aria-expanded="false">
+      <span aria-hidden="true" data-sidebar-toggle-icon>☰</span><span data-sidebar-toggle-label>导航</span>
+    </button>
+    <div class="site-search" data-search-root>
+      <label class="site-search-field" for="search-input">
+        <span aria-hidden="true">⌕</span>
+        <input id="search-input" type="search" placeholder="搜索文章标题"
+               aria-label="搜索文章标题" role="combobox"
+               autocomplete="off" aria-autocomplete="list" aria-controls="search-results" aria-expanded="false">
+        <kbd aria-hidden="true">Ctrl K</kbd>
+      </label>
+      <div class="search-popover" data-search-popover hidden>
+        <p class="search-status" data-search-status aria-live="polite">输入标题关键词开始搜索</p>
+        <div id="search-results" class="search-results" data-search-results role="listbox"></div>
+      </div>
+    </div>
+    <button class="theme-toggle" type="button" aria-label="切换颜色主题" aria-pressed="false">
+      <span data-theme-icon aria-hidden="true"></span>
+    </button>
+  </header>
+  <div class="sidebar-scrim" data-sidebar-close></div>
+<div class="navigation-shell" id="navigation-shell">
+  <button class="navigation-close" type="button" data-navigation-close
+          aria-label="关闭导航" hidden>×</button>
+  <aside class="primary-sidebar" aria-label="知识主题">
+    <a class="primary-brand" href="../index.html" aria-label="LOKEN 首页"><img class="brand-logo" src="../assets/images/loken-logo.png" width="1990" height="329" alt=""></a>
+    <div class="primary-menu" aria-hidden="true"><span>MENU</span><span>☰</span></div>
+    <nav class="primary-navigation" aria-label="知识主题">
+      <a class="primary-nav-item" href="../index.html"><span class="primary-nav-copy"><span class="primary-nav-label">学习一个</span><span class="primary-nav-meta">01 / PAPERS</span></span></a>
+      <a class="primary-nav-item is-active" href="../milestone-models/flux.html" aria-current="page"><span class="primary-nav-copy"><span class="primary-nav-label">身经百战</span><span class="primary-nav-meta">02 / CLASSIC MODELS</span></span></a>
+      <a class="primary-nav-item" href="../writings/index.html"><span class="primary-nav-copy"><span class="primary-nav-label">谈笑风生</span><span class="primary-nav-meta">03 / ARTICLES</span></span></a>
+      <a class="primary-nav-item" href="../journeys/index.html"><span class="primary-nav-copy"><span class="primary-nav-label">跑得还快</span><span class="primary-nav-meta">04 / TRAVELS</span></span></a>
+    </nav>
+    <div class="primary-sidebar-status"><span>LAST SYNC</span><strong>AUTOMATED / WEEKDAYS</strong></div>
+  </aside>
+</div>
+  <main class="page-content" id="top">
+    <div class="section-sticky-header">
+    <header class="milestone-hero section-header">
+      <div class="section-intro">
+        <h1 class="section-intro-title" id="section-milestones-title">MODELS</h1>
+        <p class="section-intro-description">这些模型是身经百战了</p>
+      </div>
+    </header>
+<nav class="context-strip" aria-label="模型系列">
+    <a class="context-strip-link" href="flux.html">FLUX</a>
+    <a class="context-strip-link" href="qwen-image.html">Qwen-Image</a>
+    <a class="context-strip-link" href="seedream.html">Seedream</a>
+    <a class="context-strip-link" href="stable-diffusion.html">Stable Diffusion</a>
+    <a class="context-strip-link" href="z-image.html">Z-Image</a>
+    <a class="context-strip-link is-active" href="wan.html" aria-current="location">Wan</a>
+    <span class="context-strip-link is-disabled" aria-disabled="true">Hunyuan3D</span>
+    <span class="context-strip-link is-disabled" aria-disabled="true">VGGT</span>
+  </nav>
+    </div>
+    <div class="milestone-workspace">
+      <header class="milestone-family-header">
+      <div class="milestone-title-block">
+        <p>Video Generation · Alibaba Cloud · Tongyi Lab</p>
+        <h2>Wan</h2>
+        <span>官方模型版本演进与核心技术对比</span>
+      </div>
+      <div class="milestone-hero-meta">
+        <ul class="status-legend" aria-label="发布状态图例"><li><span class="release-status status-released">已发布</span><span>已发布</span></li><li><span class="release-status status-early-access">Early Access</span><span>Early Access</span></li><li><span class="release-status status-announced">已宣布</span><span>已宣布</span></li></ul>
+        <p>Updated 2026-09-06</p>
+      </div>
+      </header>
+      <div class="milestone-overview">
+<section class="milestone-panel timeline-panel" aria-labelledby="timeline-heading">
+  <div class="milestone-panel-heading">
+    <div><p>ROADMAP</p><h2 id="timeline-heading">时间线</h2></div>
+    <span>可横向拖动</span>
+  </div>
+  <div class="milestone-timeline-viewport" data-drag-scroll tabindex="0" aria-label="Wan 时间线，使用左右方向键或拖动浏览">
+    <ol class="milestone-timeline">
+      <li class="timeline-release status-released">
+        <span class="timeline-dot" aria-hidden="true"></span>
+        <time datetime="2025-02-25">2025-02-25</time>
+        <h3>Wan 2.1</h3>
+        <span class="release-status status-released">已发布</span>
+        <ul><li>Wan2.1 T2V-1.3B</li><li>Wan2.1 T2V-14B</li><li>Wan2.1 I2V-14B 480P / 720P</li></ul>
+      </li>
+      <li class="timeline-release status-released">
+        <span class="timeline-dot" aria-hidden="true"></span>
+        <time datetime="2025-04-17">2025-04-17</time>
+        <h3>Wan2.1 First-Last-Frame-to-Video</h3>
+        <span class="release-status status-released">已发布</span>
+        <ul><li>Wan2.1 FLF2V-14B</li></ul>
+      </li>
+      <li class="timeline-release status-released">
+        <span class="timeline-dot" aria-hidden="true"></span>
+        <time datetime="2025-05-14">2025-05-14</time>
+        <h3>Wan2.1 VACE</h3>
+        <span class="release-status status-released">已发布</span>
+        <ul><li>Wan2.1 VACE-1.3B</li><li>Wan2.1 VACE-14B</li></ul>
+      </li>
+      <li class="timeline-release status-released">
+        <span class="timeline-dot" aria-hidden="true"></span>
+        <time datetime="2025-07-28">2025-07-28</time>
+        <h3>Wan 2.2</h3>
+        <span class="release-status status-released">已发布</span>
+        <ul><li>Wan2.2 T2V-A14B</li><li>Wan2.2 I2V-A14B</li><li>Wan2.2 TI2V-5B</li></ul>
+      </li>
+      <li class="timeline-release status-released">
+        <span class="timeline-dot" aria-hidden="true"></span>
+        <time datetime="2025-08-26">2025-08-26</time>
+        <h3>Wan2.2 S2V</h3>
+        <span class="release-status status-released">已发布</span>
+        <ul><li>Wan2.2 S2V-14B</li></ul>
+      </li>
+      <li class="timeline-release status-released">
+        <span class="timeline-dot" aria-hidden="true"></span>
+        <time datetime="2025-09-19">2025-09-19</time>
+        <h3>Wan-Animate</h3>
+        <span class="release-status status-released">已发布</span>
+        <ul><li>Wan2.2 Animate-14B</li></ul>
+      </li>
+      <li class="timeline-release status-early-access">
+        <span class="timeline-dot" aria-hidden="true"></span>
+        <time datetime="2025-09-19">2025-09-19</time>
+        <h3>Wan 2.5 Preview · API 上线</h3>
+        <span class="release-status status-early-access">Early Access</span>
+        <ul><li>Wan2.5 T2V Preview</li><li>Wan2.5 I2V Preview</li></ul>
+      </li>
+      <li class="timeline-release status-released">
+        <span class="timeline-dot" aria-hidden="true"></span>
+        <time datetime="2025-12-03">2025-12-03</time>
+        <h3>Wan 2.6 · API 上线</h3>
+        <span class="release-status status-released">已发布</span>
+        <ul><li>Wan2.6 T2V</li><li>Wan2.6 I2V</li></ul>
+      </li>
+      <li class="timeline-release status-released">
+        <span class="timeline-dot" aria-hidden="true"></span>
+        <time datetime="2025-12-16">2025-12-16</time>
+        <h3>Wan 2.6 Reference-to-Video</h3>
+        <span class="release-status status-released">已发布</span>
+        <ul><li>Wan2.6 R2V</li></ul>
+      </li>
+      <li class="timeline-release status-released">
+        <span class="timeline-dot" aria-hidden="true"></span>
+        <time datetime="2026-04-03">2026-04-03</time>
+        <h3>Wan 2.7 · API 上线</h3>
+        <span class="release-status status-released">已发布</span>
+        <ul><li>Wan2.7 T2V / I2V</li><li>Wan2.7 R2V / Video Edit</li></ul>
+      </li>
+      <li class="timeline-release status-released">
+        <span class="timeline-dot" aria-hidden="true"></span>
+        <time datetime="2026-08-06">2026-08-06</time>
+        <h3>Wan 3.0 · API 上线</h3>
+        <span class="release-status status-released">已发布</span>
+        <ul><li>Wan3.0 Video</li></ul>
+      </li>
+      <li class="timeline-release status-released">
+        <span class="timeline-dot" aria-hidden="true"></span>
+        <time datetime="2026-08-07">2026-08-07</time>
+        <h3>Wan-Animate-2</h3>
+        <span class="release-status status-released">已发布</span>
+        <ul><li>Wan-Animate-2 Base</li><li>Wan-Animate-2 Distillation</li></ul>
+      </li>
+      <li class="timeline-release status-released">
+        <span class="timeline-dot" aria-hidden="true"></span>
+        <time datetime="2026-08-20">2026-08-20</time>
+        <h3>Wan 3.0 Prime · API 上线</h3>
+        <span class="release-status status-released">已发布</span>
+        <ul><li>Wan3.0 Video Prime</li></ul>
+      </li>
+    </ol>
+  </div>
+</section>
+<section class="model-specimen" aria-labelledby="model-specimen-heading">
+  <div class="model-specimen-heading">
+    <p>SELECTED SPECIMEN</p>
+    <h2 id="model-specimen-heading">最新发布节点</h2>
+  </div>
+  <div class="model-specimen-graphic" aria-hidden="true">
+    <span></span><span></span><span></span>
+  </div>
+  <dl class="model-specimen-data">
+    <div><dt>MODEL</dt><dd>Wan 3.0 Prime · API 上线</dd></div>
+    <div><dt>RELEASED</dt><dd><time datetime="2026-08-20">2026-08-20</time></dd></div>
+    <div><dt>ORGANIZATION</dt><dd>Alibaba Cloud · Tongyi Lab</dd></div>
+    <div><dt>STATUS</dt><dd><span class="release-status status-released">已发布</span></dd></div>
+    <div><dt>READING</dt><dd>精读已就绪</dd></div>
+  </dl>
+</section>
+      </div>
+<section class="milestone-panel comparison-panel" aria-labelledby="comparison-heading">
+  <div class="milestone-panel-heading">
+    <div><p>COMPARISON</p><h2 id="comparison-heading">模型对比</h2></div>
+    <span>内容来自本地 Markdown 精读</span>
+  </div>
+  <div class="milestone-table-scroll">
+    <table class="milestone-comparison-table">
+      <thead><tr><th scope="col">对比项</th>
+        <th scope="col" class="milestone-version-heading">
+          <time datetime="2025-02-25">2025-02-25 — 2025-04-17</time>
+          <strong>Wan 2.1</strong>
+          <span class="release-status status-released">已发布</span>
+          <span class="milestone-release-count">2 个官方发布节点</span>
+          <div class="milestone-source-links"><a href="https://arxiv.org/abs/2503.20314" target="_blank" rel="noopener">官方资料 1</a> · <a href="https://github.com/Wan-Video/Wan2.1" target="_blank" rel="noopener">官方资料 2</a></div>
+          <a class="milestone-note-link" href="wan-notes.html#milestone-wan-2-1">查看代际精读</a>
+        </th>
+        <th scope="col" class="milestone-version-heading">
+          <time datetime="2025-07-28">2025-07-28 — 2025-08-26</time>
+          <strong>Wan 2.2</strong>
+          <span class="release-status status-released">已发布</span>
+          <span class="milestone-release-count">2 个官方发布节点</span>
+          <div class="milestone-source-links"><a href="https://github.com/Wan-Video/Wan2.2" target="_blank" rel="noopener">官方资料 1</a></div>
+          <a class="milestone-note-link" href="wan-notes.html#milestone-wan-2-2">查看代际精读</a>
+        </th>
+        <th scope="col" class="milestone-version-heading">
+          <time datetime="2025-09-19">2025-09-19 — 2026-08-07</time>
+          <strong>Wan-Animate</strong>
+          <span class="release-status status-released">已发布</span>
+          <span class="milestone-release-count">2 个官方发布节点</span>
+          <div class="milestone-source-links"><a href="https://github.com/Wan-Video/Wan2.2" target="_blank" rel="noopener">官方资料 1</a></div>
+          <a class="milestone-note-link" href="wan-notes.html#milestone-wan-animate">查看代际精读</a>
+        </th>
+        <th scope="col" class="milestone-version-heading">
+          <time datetime="2025-09-19">2025-09-19 — 2026-04-03</time>
+          <strong>Wan 2.5 Preview</strong>
+          <span class="release-status status-early-access">Early Access</span>
+          <span class="milestone-release-count">4 个官方发布节点</span>
+          <div class="milestone-source-links"><a href="https://www.alibabacloud.com/help/en/model-studio/newly-released-models" target="_blank" rel="noopener">官方资料 1</a></div>
+          <a class="milestone-note-link" href="wan-notes.html#milestone-wan-2-5">查看代际精读</a>
+        </th>
+        <th scope="col" class="milestone-version-heading">
+          <time datetime="2026-08-06">2026-08-06 — 2026-08-20</time>
+          <strong>Wan 3.0</strong>
+          <span class="release-status status-released">已发布</span>
+          <span class="milestone-release-count">2 个官方发布节点</span>
+          <div class="milestone-source-links"><a href="https://www.alibabacloud.com/help/en/model-studio/newly-released-models" target="_blank" rel="noopener">官方资料 1</a> · <a href="https://modelstudio.alibabacloud.com/intl/blog/wan3-ai-video-generation-model/" target="_blank" rel="noopener">官方资料 2</a> · <a href="https://help.aliyun.com/en/model-studio/wan3-video-generation-api-reference" target="_blank" rel="noopener">官方资料 3</a></div>
+          <a class="milestone-note-link" href="wan-notes.html#milestone-wan-3">查看代际精读</a>
+        </th>
+        <th scope="col" class="milestone-version-heading">
+          <time datetime="2025-05-14">2025-05-14</time>
+          <strong>Wan2.1 VACE</strong>
+          <span class="release-status status-released">已发布</span>
+          <span class="milestone-release-count">1 个官方发布节点</span>
+          <div class="milestone-source-links"><a href="https://arxiv.org/abs/2503.07598" target="_blank" rel="noopener">官方资料 1</a> · <a href="https://github.com/Wan-Video/Wan2.1" target="_blank" rel="noopener">官方资料 2</a> · <a href="https://github.com/ali-vilab/VACE" target="_blank" rel="noopener">官方资料 3</a></div>
+          <a class="milestone-note-link" href="wan-notes.html#milestone-wan-vace">查看代际精读</a>
+        </th>
+      </tr></thead>
+      <tbody>
+        <tr><th scope="row">版本</th>
+          <td><section class="milestone-minor-release"><header><strong>Wan 2.1</strong><a href="wan-notes.html#milestone-wan-2-1">精读</a></header><ul>
+<li><strong>Wan2.1 T2V-1.3B</strong>：较小的文生视频模型，面向更低计算成本。</li>
+<li><strong>Wan2.1 T2V-14B</strong>：较大的文生视频模型，覆盖更高质量与分辨率。</li>
+<li><strong>Wan2.1 I2V-14B 480P / 720P</strong>：以输入图像为条件的两个分辨率档。</li>
+</ul></section><section class="milestone-minor-release"><header><strong>Wan2.1 First-Last-Frame-to-Video</strong><a href="wan-notes.html#milestone-wan-flf2v">精读</a></header><ul>
+<li><strong>Wan2.1 FLF2V-14B</strong>：14B 首尾帧控制模型，官方提供 720P 权重与推理代码。</li>
+</ul></section></td>
+          <td><section class="milestone-minor-release"><header><strong>Wan 2.2</strong><a href="wan-notes.html#milestone-wan-2-2">精读</a></header><ul>
+<li><strong>Wan2.2 T2V-A14B</strong>：文生视频 MoE，总参数 27B、每阶段激活约 14B。</li>
+<li><strong>Wan2.2 I2V-A14B</strong>：图生视频 MoE，同样按去噪阶段选择专家。</li>
+<li><strong>Wan2.2 TI2V-5B</strong>：5B 稠密模型统一文生与图生视频，使用更高压缩率 VAE，支持 720P。</li>
+</ul></section><section class="milestone-minor-release"><header><strong>Wan2.2 S2V</strong><a href="wan-notes.html#milestone-wan-s2v">精读</a></header><ul>
+<li><strong>Wan2.2 S2V-14B</strong>：以语音等音频信号驱动角色视频的官方模型。</li>
+</ul></section></td>
+          <td><section class="milestone-minor-release"><header><strong>Wan-Animate</strong><a href="wan-notes.html#milestone-wan-animate">精读</a></header><ul>
+<li><strong>Wan2.2 Animate-14B</strong>：统一角色动画与角色替换，利用参考视频的动作和表情驱动目标角色。</li>
+</ul></section><section class="milestone-minor-release"><header><strong>Wan-Animate-2</strong><a href="wan-notes.html#milestone-wan-animate-2">精读</a></header><ul>
+<li><strong>Wan-Animate-2 Base</strong>：官方于 8 月 7 日发布基础权重及推理脚本。</li>
+<li><strong>Wan-Animate-2 Distillation</strong>：同日发布的蒸馏权重；官方推理示例使用 10 步且不启用 CFG。</li>
+</ul></section></td>
+          <td><section class="milestone-minor-release"><header><strong>Wan 2.5 Preview · API 上线</strong><a href="wan-notes.html#milestone-wan-2-5">精读</a></header><ul>
+<li><strong>Wan2.5 T2V Preview</strong>：北京 API 在 9 月 19 日上线，国际区 9 月 23 日；支持原生音视频生成。</li>
+<li><strong>Wan2.5 I2V Preview</strong>：同代图生视频服务，输入图像与提示共同约束有声视频。</li>
+</ul></section><section class="milestone-minor-release"><header><strong>Wan 2.6 · API 上线</strong><a href="wan-notes.html#milestone-wan-2-6">精读</a></header><ul>
+<li><strong>Wan2.6 T2V</strong>：官方 API 表记录 12 月 3 日上线，支持多镜头叙事与更长有声片段。</li>
+<li><strong>Wan2.6 I2V</strong>：图生视频版本，强化声音、镜头安排和多人物对话。</li>
+</ul></section><section class="milestone-minor-release"><header><strong>Wan 2.6 Reference-to-Video</strong><a href="wan-notes.html#milestone-wan-2-6-r2v">精读</a></header><ul>
+<li><strong>Wan2.6 R2V</strong>：使用参考视频保持角色外观和声音，支持多角色共同演出。</li>
+</ul></section><section class="milestone-minor-release"><header><strong>Wan 2.7 · API 上线</strong><a href="wan-notes.html#milestone-wan-2-7">精读</a></header><ul>
+<li><strong>Wan2.7 T2V / I2V</strong>：文生和图生视频服务更新；后续 4 月 25 日及 6 月 12 日快照不能替代该代 API 上线日。</li>
+<li><strong>Wan2.7 R2V / Video Edit</strong>：同代参考生视频与视频编辑服务，扩展参考控制与修改能力。</li>
+</ul></section></td>
+          <td><section class="milestone-minor-release"><header><strong>Wan 3.0 · API 上线</strong><a href="wan-notes.html#milestone-wan-3">精读</a></header><ul>
+<li><strong>Wan3.0 Video</strong>：统一参考、编辑、复刻与驱动，支持文本、图像、音频、视频四模态参考及最长 30 秒生成。</li>
+</ul></section><section class="milestone-minor-release"><header><strong>Wan 3.0 Prime · API 上线</strong><a href="wan-notes.html#milestone-wan-3-prime">精读</a></header><ul>
+<li><strong>Wan3.0 Video Prime</strong>：3.0 的速度档，保留四模态参考与最长 30 秒生成；具体架构和训练差异：/。</li>
+</ul></section></td>
+          <td><section class="milestone-minor-release"><header><strong>Wan2.1 VACE</strong><a href="wan-notes.html#milestone-wan-vace">精读</a></header><ul>
+<li><strong>Wan2.1 VACE-1.3B</strong>：480P 小型视频创建与编辑模型。</li>
+<li><strong>Wan2.1 VACE-14B</strong>：支持 480P / 720P 的较大模型，使用同一条件接口完成不同任务。</li>
+</ul></section></td>
+        </tr>
+        <tr><th scope="row">训练数据</th>
+          <td><p>大规模图像与视频经过质量、运动、文字和语义筛选及重描述；分阶段先学习图像，再联合视频训练。</p></td>
+          <td><p>官方说明扩大训练数据并引入更系统的美学标注，包括光照、构图、色彩等属性。</p></td>
+          <td><p>/</p></td>
+          <td><p>/</p></td>
+          <td><p>/</p></td>
+          <td><p>/</p></td>
+        </tr>
+        <tr><th scope="row">VAE 结构</th>
+          <td><p>因果 3D Wan-VAE 在时间维压缩 4 倍、空间维压缩 8 倍，可按块编码和解码视频。</p></td>
+          <td><p>TI2V-5B 的 Wan2.2-VAE 时间压缩 4 倍、空间压缩 16 倍；不能把这一配置套用到所有 A14B 模型。</p></td>
+          <td><p>/</p></td>
+          <td><p>/</p></td>
+          <td><p>/</p></td>
+          <td><p>/</p></td>
+        </tr>
+        <tr><th scope="row">Text Encoder</th>
+          <td><p>多语言 UMT5 提供文本条件。</p></td>
+          <td><p>/</p></td>
+          <td><p>/</p></td>
+          <td><p>/</p></td>
+          <td><p>/</p></td>
+          <td><p>/</p></td>
+        </tr>
+        <tr><th scope="row">生成主体网络</th>
+          <td><p>视频 DiT 使用完整时空注意力和文本交叉注意力，在视频潜变量上训练流匹配；模型提供 1.3B 与 14B 档。</p></td>
+          <td><p>A14B 使用高噪声与低噪声两个 DiT 专家；TI2V-5B 则为稠密模型。</p></td>
+          <td><p>/</p></td>
+          <td><p>/</p></td>
+          <td><p>/</p></td>
+          <td><p>在视频 DiT 上引入 Context Adapter，以标准化时空表示注入任务条件。</p></td>
+        </tr>
+        <tr><th scope="row">训练 Trick</th>
+          <td><ul>
+<li>图像预训练后联合图像与视频，并逐步增加分辨率与时长。</li>
+<li>高质量 SFT、数据清洗与视频描述改善运动和语义。</li>
+</ul></td>
+          <td><ul>
+<li>按扩散时间步切换高噪声与低噪声专家。</li>
+<li>通过美学数据和较大训练集改善镜头、动作与视觉表现。</li>
+</ul></td>
+          <td><ul>
+<li>/</li>
+</ul></td>
+          <td><ul>
+<li>/</li>
+</ul></td>
+          <td><ul>
+<li>/</li>
+</ul></td>
+          <td><ul>
+<li>/</li>
+</ul></td>
+        </tr>
+        <tr><th scope="row">新提出的创新点</th>
+          <td><ul>
+<li>因果视频 VAE 与时空 Transformer 组成可扩展的视频生成主线。</li>
+</ul></td>
+          <td><ul>
+<li>噪声阶段 MoE 将布局建构与细节复原分配给不同专家。</li>
+<li>高压缩潜空间使较小模型支持统一文生和图生视频。</li>
+</ul></td>
+          <td><ul>
+<li>公开能力变化（实现未披露）：统一角色动画与替换任务，以动作和表情驱动目标角色。</li>
+</ul></td>
+          <td><ul>
+<li>公开能力变化（实现未披露）：将声音与视频作为同一次生成结果。</li>
+</ul></td>
+          <td><ul>
+<li>公开能力变化（实现未披露）：统一多种视频创作操作，并支持四模态参考。</li>
+</ul></td>
+          <td><ul>
+<li>Video Condition Unit 将参考、编辑和掩码统一成输入接口。</li>
+<li>Context Adapter 支持多任务组合，复用视频生成主干。</li>
+</ul></td>
+        </tr>
+        <tr><th scope="row">局限性</th>
+          <td><ul>
+<li>论文明确指出大幅运动中的精细细节仍可能丢失；14B 模型推理计算开销较高。</li>
+</ul></td>
+          <td><ul>
+<li>/</li>
+</ul></td>
+          <td><ul>
+<li>/</li>
+</ul></td>
+          <td><ul>
+<li>/</li>
+</ul></td>
+          <td><ul>
+<li>官方说明音频质感与画面中文字的渲染准确性仍在改进。</li>
+<li>含视频输入时，输入与输出视频总时长需要控制在 30 秒内。</li>
+</ul></td>
+          <td><ul>
+<li>/</li>
+</ul></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+    </div>
+    <footer>仅收录官方发布 · 未披露的技术信息以 / 表示</footer>
+
+  </main>
+
+</body>
+</html>

@@ -1,0 +1,658 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Wan 版本文章精读。">
+  <title>Wan · 文章精读</title>
+  <script>
+    (() => {
+      document.documentElement.classList.add("js");
+      let theme = null;
+      let contextOpen = null;
+      try {
+        theme = window.localStorage.getItem("arxiv-theme");
+        contextOpen = window.localStorage.getItem("togos-secondary-sidebar-collapsed");
+      } catch (error) { /* Storage can be unavailable. */ }
+      if (theme !== "light" && theme !== "dark") {
+        theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      }
+      document.documentElement.dataset.theme = theme;
+      if (contextOpen === "false") document.documentElement.dataset.contextOpen = "true";
+    })();
+  </script>
+  <link rel="stylesheet" href="../assets/css/site.css?v=12">
+  <script src="../assets/js/site-shell.js?v=12" defer></script>
+  <script src="../assets/js/search-core.js?v=12" defer></script>
+  <script src="../assets/js/search.js?v=12" defer></script>
+  <script src="../assets/js/sidebar.js?v=12" defer></script>
+</head>
+<body data-site-root="../" data-active-section="milestones" class="summary-page milestone-notes-page">
+  <header class="site-utility" aria-label="页面工具">
+    <button class="sidebar-toggle" type="button" aria-controls="navigation-shell" aria-expanded="false">
+      <span aria-hidden="true" data-sidebar-toggle-icon>☰</span><span data-sidebar-toggle-label>导航</span>
+    </button>
+    <div class="site-search" data-search-root>
+      <label class="site-search-field" for="search-input">
+        <span aria-hidden="true">⌕</span>
+        <input id="search-input" type="search" placeholder="搜索文章标题"
+               aria-label="搜索文章标题" role="combobox"
+               autocomplete="off" aria-autocomplete="list" aria-controls="search-results" aria-expanded="false">
+        <kbd aria-hidden="true">Ctrl K</kbd>
+      </label>
+      <div class="search-popover" data-search-popover hidden>
+        <p class="search-status" data-search-status aria-live="polite">输入标题关键词开始搜索</p>
+        <div id="search-results" class="search-results" data-search-results role="listbox"></div>
+      </div>
+    </div>
+    <button class="theme-toggle" type="button" aria-label="切换颜色主题" aria-pressed="false">
+      <span data-theme-icon aria-hidden="true"></span>
+    </button>
+  </header>
+  <div class="sidebar-scrim" data-sidebar-close></div>
+<div class="navigation-shell" id="navigation-shell">
+  <button class="navigation-close" type="button" data-navigation-close
+          aria-label="关闭导航" hidden>×</button>
+  <aside class="primary-sidebar" aria-label="知识主题">
+    <a class="primary-brand" href="../index.html" aria-label="LOKEN 首页"><img class="brand-logo" src="../assets/images/loken-logo.png" width="1990" height="329" alt=""></a>
+    <div class="primary-menu" aria-hidden="true"><span>MENU</span><span>☰</span></div>
+    <nav class="primary-navigation" aria-label="知识主题">
+      <a class="primary-nav-item" href="../index.html"><span class="primary-nav-copy"><span class="primary-nav-label">学习一个</span><span class="primary-nav-meta">01 / PAPERS</span></span></a>
+      <a class="primary-nav-item is-active" href="../milestone-models/flux.html" aria-current="page"><span class="primary-nav-copy"><span class="primary-nav-label">身经百战</span><span class="primary-nav-meta">02 / CLASSIC MODELS</span></span></a>
+      <a class="primary-nav-item" href="../writings/index.html"><span class="primary-nav-copy"><span class="primary-nav-label">谈笑风生</span><span class="primary-nav-meta">03 / ARTICLES</span></span></a>
+      <a class="primary-nav-item" href="../journeys/index.html"><span class="primary-nav-copy"><span class="primary-nav-label">跑得还快</span><span class="primary-nav-meta">04 / TRAVELS</span></span></a>
+    </nav>
+    <div class="primary-sidebar-status"><span>LAST SYNC</span><strong>AUTOMATED / WEEKDAYS</strong></div>
+  </aside>
+</div>
+  <main class="page-content" id="top">
+<section class="summary-page-shell" aria-labelledby="notes-page-title">
+      <header class="summary-topic-header">
+        <a class="summary-back" href="wan.html">← 返回版本对比</a>
+        <h1 id="notes-page-title">Wan · 文章精读</h1>
+      </header>
+<nav class="context-strip" aria-label="模型系列">
+    <a class="context-strip-link" href="flux.html">FLUX</a>
+    <a class="context-strip-link" href="qwen-image.html">Qwen-Image</a>
+    <a class="context-strip-link" href="seedream.html">Seedream</a>
+    <a class="context-strip-link" href="stable-diffusion.html">Stable Diffusion</a>
+    <a class="context-strip-link" href="z-image.html">Z-Image</a>
+    <a class="context-strip-link is-active" href="wan.html" aria-current="location">Wan</a>
+    <span class="context-strip-link is-disabled" aria-disabled="true">Hunyuan3D</span>
+    <span class="context-strip-link is-disabled" aria-disabled="true">VGGT</span>
+  </nav>
+      <details class="content-tools" open>
+        <summary>版本精读目录</summary>
+        <nav class="content-tools-navigation" aria-label="版本精读目录">
+<a class="context-filter" href="#milestone-wan-2-1">Wan 2.1</a>
+<a class="context-filter" href="#milestone-wan-flf2v">Wan2.1 First-Last-Frame-to-Video</a>
+<a class="context-filter" href="#milestone-wan-vace">Wan2.1 VACE</a>
+<a class="context-filter" href="#milestone-wan-2-2">Wan 2.2</a>
+<a class="context-filter" href="#milestone-wan-s2v">Wan2.2 S2V</a>
+<a class="context-filter" href="#milestone-wan-animate">Wan-Animate</a>
+<a class="context-filter" href="#milestone-wan-2-5">Wan 2.5 Preview · API 上线</a>
+<a class="context-filter" href="#milestone-wan-2-6">Wan 2.6 · API 上线</a>
+<a class="context-filter" href="#milestone-wan-2-6-r2v">Wan 2.6 Reference-to-Video</a>
+<a class="context-filter" href="#milestone-wan-2-7">Wan 2.7 · API 上线</a>
+<a class="context-filter" href="#milestone-wan-3">Wan 3.0 · API 上线</a>
+<a class="context-filter" href="#milestone-wan-animate-2">Wan-Animate-2</a>
+<a class="context-filter" href="#milestone-wan-3-prime">Wan 3.0 Prime · API 上线</a>
+        </nav>
+      </details>
+      <div class="summary-topic-list">
+    <article class="summary-article summary-topic-entry" id="milestone-wan-2-1">
+<h1>[2503.20314] Wan · Wan 2.1</h1>
+<h2>一句话结论</h2>
+<p>建立包含小型和大型权重的视频基础模型，以时空潜空间扩散覆盖文生与图生视频。</p>
+<h2>解决的问题</h2>
+<p>视频需要同时维持运动、外观和长时间一致性，像素空间训练与采样成本过高。</p>
+<h2>创新点</h2>
+<ul>
+<li>因果视频 VAE 与时空 Transformer 组成可扩展的视频生成主线。</li>
+</ul>
+<h2>文章精读</h2>
+<h3>版本</h3>
+<ul>
+<li><strong>Wan2.1 T2V-1.3B</strong>：较小的文生视频模型，面向更低计算成本。</li>
+<li><strong>Wan2.1 T2V-14B</strong>：较大的文生视频模型，覆盖更高质量与分辨率。</li>
+<li><strong>Wan2.1 I2V-14B 480P / 720P</strong>：以输入图像为条件的两个分辨率档。</li>
+</ul>
+<h3>训练数据</h3>
+<p>大规模图像与视频经过质量、运动、文字和语义筛选及重描述；分阶段先学习图像，再联合视频训练。</p>
+<h3>VAE 结构</h3>
+<p>因果 3D Wan-VAE 在时间维压缩 4 倍、空间维压缩 8 倍，可按块编码和解码视频。</p>
+<h3>Text Encoder</h3>
+<p>多语言 UMT5 提供文本条件。</p>
+<h3>生成主体网络</h3>
+<p>视频 DiT 使用完整时空注意力和文本交叉注意力，在视频潜变量上训练流匹配；模型提供 1.3B 与 14B 档。</p>
+<h3>训练 Trick</h3>
+<ul>
+<li>图像预训练后联合图像与视频，并逐步增加分辨率与时长。</li>
+<li>高质量 SFT、数据清洗与视频描述改善运动和语义。</li>
+</ul>
+<h3>新提出的创新点</h3>
+<ul>
+<li>因果视频 VAE 与时空 Transformer 组成可扩展的视频生成主线。</li>
+</ul>
+<h3>局限性</h3>
+<ul>
+<li>论文明确指出大幅运动中的精细细节仍可能丢失；14B 模型推理计算开销较高。</li>
+</ul>
+<h2>资料来源</h2>
+<ul>
+<li><a href="https://arxiv.org/abs/2503.20314" rel="nofollow">arxiv</a></li>
+<li><a href="https://github.com/Wan-Video/Wan2.1" rel="nofollow">official_repository</a></li>
+</ul>
+    </article>
+    <article class="summary-article summary-topic-entry" id="milestone-wan-flf2v">
+<h1>[2504.17XXX] Wan · Wan2.1 First-Last-Frame-to-Video</h1>
+<h2>一句话结论</h2>
+<p>通过同时固定开头和结尾图像，提高视频过渡的边界可控性。</p>
+<h2>解决的问题</h2>
+<p>只有首帧条件不能直接规定片段最终状态。</p>
+<h2>创新点</h2>
+<ul>
+<li>公开能力变化（实现未披露）：首尾帧联合约束视频生成。</li>
+</ul>
+<h2>文章精读</h2>
+<h3>版本</h3>
+<ul>
+<li><strong>Wan2.1 FLF2V-14B</strong>：14B 首尾帧控制模型，官方提供 720P 权重与推理代码。</li>
+</ul>
+<h3>训练数据</h3>
+<p>/</p>
+<h3>VAE 结构</h3>
+<p>/</p>
+<h3>Text Encoder</h3>
+<p>/</p>
+<h3>生成主体网络</h3>
+<p>/</p>
+<h3>训练 Trick</h3>
+<ul>
+<li>/</li>
+</ul>
+<h3>新提出的创新点</h3>
+<ul>
+<li>公开能力变化（实现未披露）：首尾帧联合约束视频生成。</li>
+</ul>
+<h3>局限性</h3>
+<ul>
+<li>/</li>
+</ul>
+<h2>资料来源</h2>
+<ul>
+<li><a href="https://github.com/Wan-Video/Wan2.1" rel="nofollow">official_repository</a></li>
+</ul>
+    </article>
+    <article class="summary-article summary-topic-entry" id="milestone-wan-vace">
+<h1>[2503.07598] Wan · Wan2.1 VACE</h1>
+<p>日期口径：Wan2.1 官方权重与代码发布日；VACE 方法报告较早于 3 月公开。</p>
+<h2>一句话结论</h2>
+<p>将参考图、源视频和编辑掩码组织为统一条件，再通过适配器接入视频 DiT。</p>
+<h2>解决的问题</h2>
+<p>参考生成、视频修改与区域编辑需要不同条件，但可以共享时空生成能力。</p>
+<h2>创新点</h2>
+<ul>
+<li>Video Condition Unit 将参考、编辑和掩码统一成输入接口。</li>
+<li>Context Adapter 支持多任务组合，复用视频生成主干。</li>
+</ul>
+<h2>文章精读</h2>
+<h3>版本</h3>
+<ul>
+<li><strong>Wan2.1 VACE-1.3B</strong>：480P 小型视频创建与编辑模型。</li>
+<li><strong>Wan2.1 VACE-14B</strong>：支持 480P / 720P 的较大模型，使用同一条件接口完成不同任务。</li>
+</ul>
+<h3>训练数据</h3>
+<p>/</p>
+<h3>VAE 结构</h3>
+<p>/</p>
+<h3>Text Encoder</h3>
+<p>/</p>
+<h3>生成主体网络</h3>
+<p>在视频 DiT 上引入 Context Adapter，以标准化时空表示注入任务条件。</p>
+<h3>训练 Trick</h3>
+<ul>
+<li>/</li>
+</ul>
+<h3>新提出的创新点</h3>
+<ul>
+<li>Video Condition Unit 将参考、编辑和掩码统一成输入接口。</li>
+<li>Context Adapter 支持多任务组合，复用视频生成主干。</li>
+</ul>
+<h3>局限性</h3>
+<ul>
+<li>/</li>
+</ul>
+<h2>资料来源</h2>
+<ul>
+<li><a href="https://arxiv.org/abs/2503.07598" rel="nofollow">arxiv</a></li>
+<li><a href="https://github.com/Wan-Video/Wan2.1" rel="nofollow">official_repository</a></li>
+<li><a href="https://github.com/ali-vilab/VACE" rel="nofollow">official_repository</a></li>
+</ul>
+    </article>
+    <article class="summary-article summary-topic-entry" id="milestone-wan-2-2">
+<h1>[2507.28XXX] Wan · Wan 2.2</h1>
+<h2>一句话结论</h2>
+<p>用噪声阶段专家分工扩展视频模型，并通过高压缩 VAE 提供较轻的统一生成档。</p>
+<h2>解决的问题</h2>
+<p>去噪早期的布局与后期的细节目标不同，单一网络需要同时承担两类职责。</p>
+<h2>创新点</h2>
+<ul>
+<li>噪声阶段 MoE 将布局建构与细节复原分配给不同专家。</li>
+<li>高压缩潜空间使较小模型支持统一文生和图生视频。</li>
+</ul>
+<h2>文章精读</h2>
+<h3>版本</h3>
+<ul>
+<li><strong>Wan2.2 T2V-A14B</strong>：文生视频 MoE，总参数 27B、每阶段激活约 14B。</li>
+<li><strong>Wan2.2 I2V-A14B</strong>：图生视频 MoE，同样按去噪阶段选择专家。</li>
+<li><strong>Wan2.2 TI2V-5B</strong>：5B 稠密模型统一文生与图生视频，使用更高压缩率 VAE，支持 720P。</li>
+</ul>
+<h3>训练数据</h3>
+<p>官方说明扩大训练数据并引入更系统的美学标注，包括光照、构图、色彩等属性。</p>
+<h3>VAE 结构</h3>
+<p>TI2V-5B 的 Wan2.2-VAE 时间压缩 4 倍、空间压缩 16 倍；不能把这一配置套用到所有 A14B 模型。</p>
+<h3>Text Encoder</h3>
+<p>/</p>
+<h3>生成主体网络</h3>
+<p>A14B 使用高噪声与低噪声两个 DiT 专家；TI2V-5B 则为稠密模型。</p>
+<h3>训练 Trick</h3>
+<ul>
+<li>按扩散时间步切换高噪声与低噪声专家。</li>
+<li>通过美学数据和较大训练集改善镜头、动作与视觉表现。</li>
+</ul>
+<h3>新提出的创新点</h3>
+<ul>
+<li>噪声阶段 MoE 将布局建构与细节复原分配给不同专家。</li>
+<li>高压缩潜空间使较小模型支持统一文生和图生视频。</li>
+</ul>
+<h3>局限性</h3>
+<ul>
+<li>/</li>
+</ul>
+<h2>资料来源</h2>
+<ul>
+<li><a href="https://github.com/Wan-Video/Wan2.2" rel="nofollow">official_repository</a></li>
+</ul>
+    </article>
+    <article class="summary-article summary-topic-entry" id="milestone-wan-s2v">
+<h1>[2508.26XXX] Wan · Wan2.2 S2V</h1>
+<h2>一句话结论</h2>
+<p>在 2.2 主线上扩展声音驱动的人物视频生成。</p>
+<h2>解决的问题</h2>
+<p>角色运动与画面表达需要与输入声音保持一致。</p>
+<h2>创新点</h2>
+<ul>
+<li>公开能力变化（实现未披露）：将音频驱动作为独立的视频生成条件。</li>
+</ul>
+<h2>文章精读</h2>
+<h3>版本</h3>
+<ul>
+<li><strong>Wan2.2 S2V-14B</strong>：以语音等音频信号驱动角色视频的官方模型。</li>
+</ul>
+<h3>训练数据</h3>
+<p>/</p>
+<h3>VAE 结构</h3>
+<p>/</p>
+<h3>Text Encoder</h3>
+<p>/</p>
+<h3>生成主体网络</h3>
+<p>/</p>
+<h3>训练 Trick</h3>
+<ul>
+<li>/</li>
+</ul>
+<h3>新提出的创新点</h3>
+<ul>
+<li>公开能力变化（实现未披露）：将音频驱动作为独立的视频生成条件。</li>
+</ul>
+<h3>局限性</h3>
+<ul>
+<li>/</li>
+</ul>
+<h2>资料来源</h2>
+<ul>
+<li><a href="https://github.com/Wan-Video/Wan2.2" rel="nofollow">official_repository</a></li>
+</ul>
+    </article>
+    <article class="summary-article summary-topic-entry" id="milestone-wan-animate">
+<h1>[2509.19XXX] Wan · Wan-Animate</h1>
+<h2>一句话结论</h2>
+<p>把参考角色的动作迁移与视频中的角色替换放入统一模型。</p>
+<h2>解决的问题</h2>
+<p>动画生成既要保持目标角色身份，也要保留驱动视频的运动表达。</p>
+<h2>创新点</h2>
+<ul>
+<li>公开能力变化（实现未披露）：统一角色动画与替换任务，以动作和表情驱动目标角色。</li>
+</ul>
+<h2>文章精读</h2>
+<h3>版本</h3>
+<ul>
+<li><strong>Wan2.2 Animate-14B</strong>：统一角色动画与角色替换，利用参考视频的动作和表情驱动目标角色。</li>
+</ul>
+<h3>训练数据</h3>
+<p>/</p>
+<h3>VAE 结构</h3>
+<p>/</p>
+<h3>Text Encoder</h3>
+<p>/</p>
+<h3>生成主体网络</h3>
+<p>/</p>
+<h3>训练 Trick</h3>
+<ul>
+<li>/</li>
+</ul>
+<h3>新提出的创新点</h3>
+<ul>
+<li>公开能力变化（实现未披露）：统一角色动画与替换任务，以动作和表情驱动目标角色。</li>
+</ul>
+<h3>局限性</h3>
+<ul>
+<li>/</li>
+</ul>
+<h2>资料来源</h2>
+<ul>
+<li><a href="https://github.com/Wan-Video/Wan2.2" rel="nofollow">official_repository</a></li>
+</ul>
+    </article>
+    <article class="summary-article summary-topic-entry" id="milestone-wan-2-5">
+<h1>[2509.19XXX] Wan · Wan 2.5 Preview · API 上线</h1>
+<p>日期口径：Model Studio 北京 API 首次上线日；国际区域另列。</p>
+<h2>一句话结论</h2>
+<p>API 主线进入音视频同步生成阶段，与 2.2 开放权重主线分开记录。</p>
+<h2>解决的问题</h2>
+<p>视频结果需要带有与动作、场景一致的声音。</p>
+<h2>创新点</h2>
+<ul>
+<li>公开能力变化（实现未披露）：将声音与视频作为同一次生成结果。</li>
+</ul>
+<h2>文章精读</h2>
+<h3>版本</h3>
+<ul>
+<li><strong>Wan2.5 T2V Preview</strong>：北京 API 在 9 月 19 日上线，国际区 9 月 23 日；支持原生音视频生成。</li>
+<li><strong>Wan2.5 I2V Preview</strong>：同代图生视频服务，输入图像与提示共同约束有声视频。</li>
+</ul>
+<h3>训练数据</h3>
+<p>/</p>
+<h3>VAE 结构</h3>
+<p>/</p>
+<h3>Text Encoder</h3>
+<p>/</p>
+<h3>生成主体网络</h3>
+<p>/</p>
+<h3>训练 Trick</h3>
+<ul>
+<li>/</li>
+</ul>
+<h3>新提出的创新点</h3>
+<ul>
+<li>公开能力变化（实现未披露）：将声音与视频作为同一次生成结果。</li>
+</ul>
+<h3>局限性</h3>
+<ul>
+<li>/</li>
+</ul>
+<h2>资料来源</h2>
+<ul>
+<li><a href="https://www.alibabacloud.com/help/en/model-studio/newly-released-models" rel="nofollow">official_release_notes</a></li>
+</ul>
+    </article>
+    <article class="summary-article summary-topic-entry" id="milestone-wan-2-6">
+<h1>[2512.03XXX] Wan · Wan 2.6 · API 上线</h1>
+<p>日期口径：Model Studio API 上线日；非 12 月 16 日系列宣传活动日。</p>
+<h2>一句话结论</h2>
+<p>通过多镜头组织和音画一致性扩展有声视频创作。</p>
+<h2>解决的问题</h2>
+<p>完整片段需要在镜头切换后保持主体、场景和叙事连续。</p>
+<h2>创新点</h2>
+<ul>
+<li>公开能力变化（实现未披露）：支持多镜头叙事与更完整的音画生成。</li>
+</ul>
+<h2>文章精读</h2>
+<h3>版本</h3>
+<ul>
+<li><strong>Wan2.6 T2V</strong>：官方 API 表记录 12 月 3 日上线，支持多镜头叙事与更长有声片段。</li>
+<li><strong>Wan2.6 I2V</strong>：图生视频版本，强化声音、镜头安排和多人物对话。</li>
+</ul>
+<h3>训练数据</h3>
+<p>/</p>
+<h3>VAE 结构</h3>
+<p>/</p>
+<h3>Text Encoder</h3>
+<p>/</p>
+<h3>生成主体网络</h3>
+<p>/</p>
+<h3>训练 Trick</h3>
+<ul>
+<li>/</li>
+</ul>
+<h3>新提出的创新点</h3>
+<ul>
+<li>公开能力变化（实现未披露）：支持多镜头叙事与更完整的音画生成。</li>
+</ul>
+<h3>局限性</h3>
+<ul>
+<li>/</li>
+</ul>
+<h2>资料来源</h2>
+<ul>
+<li><a href="https://www.alibabacloud.com/help/en/model-studio/newly-released-models" rel="nofollow">official_release_notes</a></li>
+</ul>
+    </article>
+    <article class="summary-article summary-topic-entry" id="milestone-wan-2-6-r2v">
+<h1>[2512.16XXX] Wan · Wan 2.6 Reference-to-Video</h1>
+<p>日期口径：Model Studio R2V API 上线日。</p>
+<h2>一句话结论</h2>
+<p>参考条件从静态形象扩展到包含音色的角色视频。</p>
+<h2>解决的问题</h2>
+<p>角色在新场景中演出时，需要同时延续视觉身份和声音特征。</p>
+<h2>创新点</h2>
+<ul>
+<li>公开能力变化（实现未披露）：参考视频同时提供外观与声音条件。</li>
+</ul>
+<h2>文章精读</h2>
+<h3>版本</h3>
+<ul>
+<li><strong>Wan2.6 R2V</strong>：使用参考视频保持角色外观和声音，支持多角色共同演出。</li>
+</ul>
+<h3>训练数据</h3>
+<p>/</p>
+<h3>VAE 结构</h3>
+<p>/</p>
+<h3>Text Encoder</h3>
+<p>/</p>
+<h3>生成主体网络</h3>
+<p>/</p>
+<h3>训练 Trick</h3>
+<ul>
+<li>/</li>
+</ul>
+<h3>新提出的创新点</h3>
+<ul>
+<li>公开能力变化（实现未披露）：参考视频同时提供外观与声音条件。</li>
+</ul>
+<h3>局限性</h3>
+<ul>
+<li>/</li>
+</ul>
+<h2>资料来源</h2>
+<ul>
+<li><a href="https://www.alibabacloud.com/help/en/model-studio/newly-released-models" rel="nofollow">official_release_notes</a></li>
+</ul>
+    </article>
+    <article class="summary-article summary-topic-entry" id="milestone-wan-2-7">
+<h1>[2604.03XXX] Wan · Wan 2.7 · API 上线</h1>
+<p>日期口径：Model Studio API 上线日。</p>
+<h2>一句话结论</h2>
+<p>把参考生成与视频编辑纳入更完整的同代 API 能力集合。</p>
+<h2>解决的问题</h2>
+<p>创作者需要从已有素材延续生成，并对结果进行内容修改。</p>
+<h2>创新点</h2>
+<ul>
+<li>公开能力变化（实现未披露）：文生、图生、参考生成和编辑形成同代服务组合。</li>
+</ul>
+<h2>文章精读</h2>
+<h3>版本</h3>
+<ul>
+<li><strong>Wan2.7 T2V / I2V</strong>：文生和图生视频服务更新；后续 4 月 25 日及 6 月 12 日快照不能替代该代 API 上线日。</li>
+<li><strong>Wan2.7 R2V / Video Edit</strong>：同代参考生视频与视频编辑服务，扩展参考控制与修改能力。</li>
+</ul>
+<h3>训练数据</h3>
+<p>/</p>
+<h3>VAE 结构</h3>
+<p>/</p>
+<h3>Text Encoder</h3>
+<p>/</p>
+<h3>生成主体网络</h3>
+<p>/</p>
+<h3>训练 Trick</h3>
+<ul>
+<li>/</li>
+</ul>
+<h3>新提出的创新点</h3>
+<ul>
+<li>公开能力变化（实现未披露）：文生、图生、参考生成和编辑形成同代服务组合。</li>
+</ul>
+<h3>局限性</h3>
+<ul>
+<li>/</li>
+</ul>
+<h2>资料来源</h2>
+<ul>
+<li><a href="https://www.alibabacloud.com/help/en/model-studio/newly-released-models" rel="nofollow">official_release_notes</a></li>
+</ul>
+    </article>
+    <article class="summary-article summary-topic-entry" id="milestone-wan-3">
+<h1>[2608.06XXX] Wan · Wan 3.0 · API 上线</h1>
+<p>日期口径：Model Studio API 上线日。</p>
+<h2>一句话结论</h2>
+<p>把四模态参考和多种视频操作集中进同一创作模型。</p>
+<h2>解决的问题</h2>
+<p>连续视频创作需要联合处理视觉、声音和已有片段，保持角色与音画表达。</p>
+<h2>创新点</h2>
+<ul>
+<li>公开能力变化（实现未披露）：统一多种视频创作操作，并支持四模态参考。</li>
+</ul>
+<h2>文章精读</h2>
+<h3>版本</h3>
+<ul>
+<li><strong>Wan3.0 Video</strong>：统一参考、编辑、复刻与驱动，支持文本、图像、音频、视频四模态参考及最长 30 秒生成。</li>
+</ul>
+<h3>训练数据</h3>
+<p>/</p>
+<h3>VAE 结构</h3>
+<p>/</p>
+<h3>Text Encoder</h3>
+<p>/</p>
+<h3>生成主体网络</h3>
+<p>/</p>
+<h3>训练 Trick</h3>
+<ul>
+<li>/</li>
+</ul>
+<h3>新提出的创新点</h3>
+<ul>
+<li>公开能力变化（实现未披露）：统一多种视频创作操作，并支持四模态参考。</li>
+</ul>
+<h3>局限性</h3>
+<ul>
+<li>官方说明音频质感与画面中文字的渲染准确性仍在改进。</li>
+<li>含视频输入时，输入与输出视频总时长需要控制在 30 秒内。</li>
+</ul>
+<h2>资料来源</h2>
+<ul>
+<li><a href="https://www.alibabacloud.com/help/en/model-studio/newly-released-models" rel="nofollow">official_release_notes</a></li>
+<li><a href="https://modelstudio.alibabacloud.com/intl/blog/wan3-ai-video-generation-model/" rel="nofollow">official_blog</a></li>
+<li><a href="https://help.aliyun.com/en/model-studio/wan3-video-generation-api-reference" rel="nofollow">official_blog</a></li>
+</ul>
+    </article>
+    <article class="summary-article summary-topic-entry" id="milestone-wan-animate-2">
+<h1>[2608.07XXX] Wan · Wan-Animate-2</h1>
+<h2>一句话结论</h2>
+<p>第二代角色动画提供基础与蒸馏两种权重档。</p>
+<h2>解决的问题</h2>
+<p>角色驱动需要在身份、运动保持与实时处理之间协调。</p>
+<h2>创新点</h2>
+<ul>
+<li>直接从驱动视频端到端学习角色运动，避免依赖中间动作提取。</li>
+<li>文字视角控制把输出相机与驱动视频的相机解耦。</li>
+</ul>
+<h2>文章精读</h2>
+<h3>版本</h3>
+<ul>
+<li><strong>Wan-Animate-2 Base</strong>：官方于 8 月 7 日发布基础权重及推理脚本。</li>
+<li><strong>Wan-Animate-2 Distillation</strong>：同日发布的蒸馏权重；官方推理示例使用 10 步且不启用 CFG。</li>
+</ul>
+<h3>训练数据</h3>
+<p>/</p>
+<h3>VAE 结构</h3>
+<p>/</p>
+<h3>Text Encoder</h3>
+<p>/</p>
+<h3>生成主体网络</h3>
+<p>重新设计的 DiT 直接消费驱动视频，省去中间动作提取器；文字控制输出视角，使视角不必跟随驱动视频。</p>
+<h3>训练 Trick</h3>
+<ul>
+<li>提供蒸馏模型；具体蒸馏目标和数据：/。</li>
+</ul>
+<h3>新提出的创新点</h3>
+<ul>
+<li>直接从驱动视频端到端学习角色运动，避免依赖中间动作提取。</li>
+<li>文字视角控制把输出相机与驱动视频的相机解耦。</li>
+</ul>
+<h3>局限性</h3>
+<ul>
+<li>/</li>
+</ul>
+<h2>资料来源</h2>
+<ul>
+<li><a href="https://github.com/Wan-Video/Wan-Animate-2" rel="nofollow">official_repository</a></li>
+</ul>
+    </article>
+    <article class="summary-article summary-topic-entry" id="milestone-wan-3-prime">
+<h1>[2608.20XXX] Wan · Wan 3.0 Prime · API 上线</h1>
+<p>日期口径：Model Studio API 上线日。</p>
+<h2>一句话结论</h2>
+<p>为 3.0 的统一视频能力增加更低端到端延迟的官方档位。</p>
+<h2>解决的问题</h2>
+<p>复杂参考条件下的视频生成也需要适应快速迭代。</p>
+<h2>创新点</h2>
+<ul>
+<li>公开能力变化（实现未披露）：同代视频能力增加官方高速变体。</li>
+</ul>
+<h2>文章精读</h2>
+<h3>版本</h3>
+<ul>
+<li><strong>Wan3.0 Video Prime</strong>：3.0 的速度档，保留四模态参考与最长 30 秒生成；具体架构和训练差异：/。</li>
+</ul>
+<h3>训练数据</h3>
+<p>/</p>
+<h3>VAE 结构</h3>
+<p>/</p>
+<h3>Text Encoder</h3>
+<p>/</p>
+<h3>生成主体网络</h3>
+<p>/</p>
+<h3>训练 Trick</h3>
+<ul>
+<li>/</li>
+</ul>
+<h3>新提出的创新点</h3>
+<ul>
+<li>公开能力变化（实现未披露）：同代视频能力增加官方高速变体。</li>
+</ul>
+<h3>局限性</h3>
+<ul>
+<li>/</li>
+</ul>
+<h2>资料来源</h2>
+<ul>
+<li><a href="https://www.alibabacloud.com/help/en/model-studio/newly-released-models" rel="nofollow">official_release_notes</a></li>
+</ul>
+    </article>
+      </div>
+    </section>
+  </main>
+
+</body>
+</html>
