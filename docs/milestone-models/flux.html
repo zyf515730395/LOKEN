@@ -92,7 +92,7 @@
       </div>
       <div class="milestone-hero-meta">
         <ul class="status-legend" aria-label="发布状态图例"><li><span class="release-status status-released">已发布</span><span>已发布</span></li><li><span class="release-status status-early-access">Early Access</span><span>Early Access</span></li><li><span class="release-status status-announced">已宣布</span><span>已宣布</span></li></ul>
-        <p>Updated 2026-09-03</p>
+        <p>Updated 2026-09-06</p>
       </div>
       </header>
       <div class="milestone-overview">
@@ -395,40 +395,34 @@
         </tr>
         <tr><th scope="row">局限性</th>
           <td><ul>
-<li>FLUX.1 [dev] 仅限非商业应用</li>
-<li>FLUX.1 [pro] 需通过 API 或企业联系访问</li>
-<li>文本到视频模型尚未发布</li>
-<li>商业使用需许可及用量追踪</li>
+<li>FLUX.1 [dev] 与 FLUX.1 [schnell] 的官方模型卡明确指出，模型不适合提供事实信息，并可能放大训练数据中的社会偏见。</li>
+<li>两份官方模型卡都记录了 prompt-following 失败：输出可能不符合 prompt，且结果明显受 prompting style 影响。</li>
 </ul></td>
           <td><ul>
-<li>官方资料未披露具体的训练数据规模、清洗细节及标注方法。</li>
-<li>未披露 VAE、Text Encoder 的具体结构及名称。</li>
-<li>未披露具体的训练技巧（如 loss 函数、采样策略等）。</li>
+<li>连续多轮编辑会累积视觉伪影并降低图像质量；官方示例在六轮编辑后出现明显退化。</li>
+<li>模型偶尔会忽略 prompt 中的特定要求，不能保证每次准确遵循编辑指令。</li>
+<li>世界知识仍然有限，可能生成与上下文事实不符的内容。</li>
+<li>distillation 过程可能引入影响输出保真度的视觉伪影。</li>
 </ul></td>
           <td><ul>
-<li>未披露具体的训练数据规模、清洗与标注细节。</li>
-<li>未披露 VAE、Text Encoder 及生成主干网络的具体结构参数。</li>
-<li>未披露具体的训练技巧（如 Loss 函数、蒸馏策略等）。</li>
-<li>作为开源权重版本，其商业使用需通过 BFL Licensing Portal 获取许可，且官方资料未明确说明是否完全免版税用于商业。</li>
+<li>“Opinionated”训练目标会主动偏向独特且特定的审美，官方也承认模型存在 idiosyncrasies，因此它并不以风格中性为目标。</li>
+<li>官方只报告了总体 human-preference 对比，没有给出 prompt-following、文字渲染、组合关系或跨域失败案例的分项结果，实验不足以说明这些维度的泛化。</li>
 </ul></td>
           <td><ul>
-<li>FLUX.2 [dev] 版本需要大量显存（H100 等效 GPU），未量化版本难以在消费级硬件上直接运行。</li>
-<li>FLUX.2 [dev] 仅开放非商业许可（FLUX Non-Commercial License），商业使用受限。</li>
-<li>FLUX.2 [klein] 9B 版本使用非商业许可，而 4B 版本使用 Apache-2.0 许可，许可策略存在差异。</li>
-<li>FLUX.2 [dev] 的推理脚本需要 considerable amount of VRAM，且官方推荐配合远程文本编码器或量化版本才能在消费级硬件（如 RTX 4090）上运行。</li>
+<li>未量化的 32B FLUX.2 [dev] 推理脚本需要 H100 级显存；消费级 RTX 4090/5090 部署示例依赖 4-bit 量化与远程 text encoder，显示其完整精度本地推理的显存门槛很高。</li>
+<li>FLUX.2 [dev] 官方仓库明确称其显著受益于 prompt upsampling；本地 upsampling 示例还要运行 Mistral-Small-3.2-24B-Instruct-2506，进一步增加计算与内存负担。</li>
+<li>多参考输入存在明确规模边界：官方建议 FLUX.2 [dev] 最多使用 6 张参考图，超过该范围未被推荐或验证。</li>
 </ul></td>
           <td><ul>
-<li>Base 变体未进行蒸馏，推理约需 50 步，延迟高于 4-step 蒸馏变体。</li>
-<li>9B 系列模型受限于 FLUX Non-Commercial License（NCL），商业使用需另行协商。</li>
-<li>多参考图像编辑功能在 Base 变体中同样可用，但推理速度较慢。</li>
-<li>官方资料未披露具体的训练数据集构成、清洗流程及标注细节。</li>
+<li>Distilled 变体以 4-step 推理换取实时速度；Base 变体保留完整训练信号但需要约 50 steps，推理成本明显更高。</li>
+<li>该系列为速度而非最高细节优化，且不提供 prompt upsampling；输出质量更依赖用户自行写出充分描述的 prompt。</li>
+<li>多参考编辑最多支持 4 张参考图，不能覆盖 FLUX.2 大型号支持的 8 至 10 张参考输入。</li>
+<li>4B 版本在消费级 GPU 上运行仍约需 13GB VRAM，低显存设备需要额外量化或卸载方案。</li>
 </ul></td>
           <td><ul>
-<li>目前仅处于 Early Access 阶段，官方明确表示评估结果为初步的，预期在早期访问期间会有进一步改进。</li>
-<li>视频生成单次最长仅支持 20 秒，长序列需通过代理式编排多个片段实现。</li>
-<li>FLUX 3 Image、Action 及 Dev 版本尚未完全开放，部分能力仅限特定合作伙伴或未来发布。</li>
-<li>Draft 模式仅支持 HD 分辨率，全分辨率 FHD 需额外增强步骤。</li>
-<li>未公开具体的训练数据规模、清洗细节及 VAE/Text Encoder 等底层架构参数。</li>
+<li>单次原生视频生成最长为 20 秒；更长序列需要把多个片段串联，超出单次生成的时序建模范围。</li>
+<li>原生输出为 HD（720p），Full HD（1080p）通过 upscaling 获得，因此 FHD 不是模型直接生成的原生分辨率。</li>
+<li>Self-Flow 的公开量化证据只包含各模态归一化 generation error，以及四组 manipulation task 的微调成功率；尚未覆盖长时序一致性、广泛物理场景和跨域动作泛化。</li>
 </ul></td>
         </tr>
       </tbody>
