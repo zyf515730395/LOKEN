@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Seedream 版本文章精读。">
+  <title>Seedream · 文章精读</title>
+  <script>
+    (() => {
+      document.documentElement.classList.add("js");
+      let theme = null;
+      let contextOpen = null;
+      try {
+        theme = window.localStorage.getItem("arxiv-theme");
+        contextOpen = window.localStorage.getItem("togos-secondary-sidebar-collapsed");
+      } catch (error) { /* Storage can be unavailable. */ }
+      if (theme !== "light" && theme !== "dark") {
+        theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      }
+      document.documentElement.dataset.theme = theme;
+      if (contextOpen === "false") document.documentElement.dataset.contextOpen = "true";
+    })();
+  </script>
+  <link rel="stylesheet" href="../assets/css/site.css?v=12">
+  <script src="../assets/js/site-shell.js?v=12" defer></script>
+  <script src="../assets/js/search-core.js?v=12" defer></script>
+  <script src="../assets/js/search.js?v=12" defer></script>
+  <script src="../assets/js/sidebar.js?v=12" defer></script>
+</head>
+<body data-site-root="../" data-active-section="milestones" class="summary-page milestone-notes-page">
+  <header class="site-utility" aria-label="页面工具">
+    <button class="sidebar-toggle" type="button" aria-controls="navigation-shell" aria-expanded="false">
+      <span aria-hidden="true" data-sidebar-toggle-icon>☰</span><span data-sidebar-toggle-label>导航</span>
+    </button>
+    <div class="site-search" data-search-root>
+      <label class="site-search-field" for="search-input">
+        <span aria-hidden="true">⌕</span>
+        <input id="search-input" type="search" placeholder="搜索文章标题"
+               aria-label="搜索文章标题" role="combobox"
+               autocomplete="off" aria-autocomplete="list" aria-controls="search-results" aria-expanded="false">
+        <kbd aria-hidden="true">Ctrl K</kbd>
+      </label>
+      <div class="search-popover" data-search-popover hidden>
+        <p class="search-status" data-search-status aria-live="polite">输入标题关键词开始搜索</p>
+        <div id="search-results" class="search-results" data-search-results role="listbox"></div>
+      </div>
+    </div>
+    <button class="theme-toggle" type="button" aria-label="切换颜色主题" aria-pressed="false">
+      <span data-theme-icon aria-hidden="true"></span>
+    </button>
+  </header>
+  <div class="sidebar-scrim" data-sidebar-close></div>
+<div class="navigation-shell" id="navigation-shell">
+  <button class="navigation-close" type="button" data-navigation-close
+          aria-label="关闭导航" hidden>×</button>
+  <aside class="primary-sidebar" aria-label="知识主题">
+    <a class="primary-brand" href="../index.html" aria-label="LOKEN 首页"><img class="brand-logo" src="../assets/images/loken-logo.png" width="1990" height="329" alt=""></a>
+    <div class="primary-menu" aria-hidden="true"><span>MENU</span><span>☰</span></div>
+    <nav class="primary-navigation" aria-label="知识主题">
+      <a class="primary-nav-item" href="../index.html"><span class="primary-nav-copy"><span class="primary-nav-label">学习一个</span><span class="primary-nav-meta">01 / PAPERS</span></span></a>
+      <a class="primary-nav-item is-active" href="../milestone-models/flux.html" aria-current="page"><span class="primary-nav-copy"><span class="primary-nav-label">身经百战</span><span class="primary-nav-meta">02 / CLASSIC MODELS</span></span></a>
+      <a class="primary-nav-item" href="../writings/index.html"><span class="primary-nav-copy"><span class="primary-nav-label">谈笑风生</span><span class="primary-nav-meta">03 / ARTICLES</span></span></a>
+      <a class="primary-nav-item" href="../journeys/index.html"><span class="primary-nav-copy"><span class="primary-nav-label">跑得还快</span><span class="primary-nav-meta">04 / TRAVELS</span></span></a>
+    </nav>
+    <div class="primary-sidebar-status"><span>LAST SYNC</span><strong>AUTOMATED / WEEKDAYS</strong></div>
+  </aside>
+</div>
+  <main class="page-content" id="top">
+<section class="summary-page-shell" aria-labelledby="notes-page-title">
+      <header class="summary-topic-header">
+        <a class="summary-back" href="seedream.html">← 返回版本对比</a>
+        <h1 id="notes-page-title">Seedream · 文章精读</h1>
+      </header>
+<nav class="context-strip" aria-label="模型系列">
+    <a class="context-strip-link" href="flux.html">FLUX</a>
+    <a class="context-strip-link" href="qwen-image.html">Qwen-Image</a>
+    <a class="context-strip-link is-active" href="seedream.html" aria-current="location">Seedream</a>
+    <span class="context-strip-link is-disabled" aria-disabled="true">Z-Image</span>
+    <span class="context-strip-link is-disabled" aria-disabled="true">Wan</span>
+    <span class="context-strip-link is-disabled" aria-disabled="true">Hunyuan3D</span>
+    <span class="context-strip-link is-disabled" aria-disabled="true">VGGT</span>
+  </nav>
+      <details class="content-tools" open>
+        <summary>版本精读目录</summary>
+        <nav class="content-tools-navigation" aria-label="版本精读目录">
+<a class="context-filter" href="#milestone-seedream-2">Seedream 2.0 · 技术报告</a>
+<a class="context-filter" href="#milestone-seedream-3">Seedream 3.0 · 技术报告</a>
+<a class="context-filter" href="#milestone-seededit-3">SeedEdit 3.0</a>
+<a class="context-filter" href="#milestone-seedream-4">Seedream 4.0</a>
+<a class="context-filter" href="#milestone-seedream-4-5">Seedream 4.5</a>
+<a class="context-filter" href="#milestone-seedream-5-lite">Seedream 5.0 Lite</a>
+<a class="context-filter" href="#milestone-seedream-5-pro">Seedream 5.0 Pro</a>
+        </nav>
+      </details>
+      <div class="summary-topic-list">
+    <article class="summary-article summary-topic-entry" id="milestone-seedream-2">
+<h1>[2503.07703] Seedream · Seedream 2.0 · 技术报告</h1>
+<p>日期口径：arXiv 首次提交日；不是模型初始上线日。</p>
+<h2>一句话结论</h2>
+<p>以双语数据、字形条件和完整后训练流程共同改善中文图文生成。</p>
+<h2>解决的问题</h2>
+<p>中文文字绘制与视觉质量需要同时优化，单靠扩大模型不足以覆盖字形和排版问题。</p>
+<h2>创新点</h2>
+<ul>
+<li>把语义编码和字形编码组合，改善中英文文本可读性。</li>
+</ul>
+<h2>文章精读</h2>
+<h3>版本</h3>
+<ul>
+<li><strong>Seedream 2.0</strong>：中英双语文生图基线；报告说明 2024 年 12 月初已投入服务，本节点日期是技术报告提交日。</li>
+</ul>
+<h3>训练数据</h3>
+<p>双语图文数据经过质量清洗、重新描述与主动学习筛选；合成文字样本补充真实图片中的字形监督。</p>
+<h3>VAE 结构</h3>
+<p>采用自研图像 VAE；具体压缩倍率与潜变量通道：/。</p>
+<h3>Text Encoder</h3>
+<p>双语 decoder-only 语言模型与经过字形对齐的 ByT5 条件结合。</p>
+<h3>生成主体网络</h3>
+<p>MMDiT 联合注意力连接图像与文本，各模态保留独立 MLP；使用 AdaLN、QK Norm 与 Scaling RoPE。</p>
+<h3>训练 Trick</h3>
+<ul>
+<li>持续训练、高质量 SFT 与 RLHF 串联优化。</li>
+<li>提示词增强与图像 refiner 用于提升最终输出。</li>
+</ul>
+<h3>新提出的创新点</h3>
+<ul>
+<li>把语义编码和字形编码组合，改善中英文文本可读性。</li>
+</ul>
+<h3>局限性</h3>
+<ul>
+<li>后续 3.0 技术报告明确指出 2.0 的计数、空间关系、小字号和多行文字仍有不足；高分辨率依赖 refiner。</li>
+</ul>
+<h2>资料来源</h2>
+<ul>
+<li><a href="https://arxiv.org/abs/2503.07703" rel="nofollow">arxiv</a></li>
+<li><a href="https://arxiv.org/abs/2504.11346" rel="nofollow">arxiv</a></li>
+</ul>
+    </article>
+    <article class="summary-article summary-topic-entry" id="milestone-seedream-3">
+<h1>[2504.11346] Seedream · Seedream 3.0 · 技术报告</h1>
+<p>日期口径：arXiv 首次提交日；不是模型初始上线日。</p>
+<h2>一句话结论</h2>
+<p>通过数据重采样、混合分辨率训练和少步蒸馏，减少对单独超分 refiner 的依赖。</p>
+<h2>解决的问题</h2>
+<p>提升原生细节和文字准确率时，也需要控制出图延迟。</p>
+<h2>创新点</h2>
+<ul>
+<li>从丢弃整图转为对局部缺陷屏蔽梯度。</li>
+<li>原生高分辨率生成减少多模型级联。</li>
+</ul>
+<h2>文章精读</h2>
+<h3>版本</h3>
+<ul>
+<li><strong>Seedream 3.0</strong>：转向原生高分辨率生成与更高效采样；报告描述 4 月初已投入服务，4 月 15 日为报告日期。</li>
+</ul>
+<h3>训练数据</h3>
+<p>训练数据相较 2.0 大幅扩展；缺陷感知训练屏蔽局部水印等区域的梯度，视觉与语义双重重采样改善覆盖。</p>
+<h3>VAE 结构</h3>
+<p>/</p>
+<h3>Text Encoder</h3>
+<p>/</p>
+<h3>生成主体网络</h3>
+<p>沿用并扩展 2.0 的 MMDiT 主线；混合分辨率建模支持原生高分辨率图像。</p>
+<h3>训练 Trick</h3>
+<ul>
+<li>缺陷区域梯度屏蔽使部分有缺陷图片仍能提供有效训练信号。</li>
+<li>跨模态 RoPE、分辨率相关时间步与表征对齐配合多分辨率训练。</li>
+<li>基于一致噪声期望与重要性时间步采样开展少步生成优化。</li>
+</ul>
+<h3>新提出的创新点</h3>
+<ul>
+<li>从丢弃整图转为对局部缺陷屏蔽梯度。</li>
+<li>原生高分辨率生成减少多模型级联。</li>
+</ul>
+<h3>局限性</h3>
+<ul>
+<li>/</li>
+</ul>
+<h2>资料来源</h2>
+<ul>
+<li><a href="https://arxiv.org/abs/2504.11346" rel="nofollow">arxiv</a></li>
+</ul>
+    </article>
+    <article class="summary-article summary-topic-entry" id="milestone-seededit-3">
+<h1>[2506.06XXX] Seedream · SeedEdit 3.0</h1>
+<h2>一句话结论</h2>
+<p>把 Seedream 3.0 的生成能力扩展到保持原图内容的指令编辑。</p>
+<h2>解决的问题</h2>
+<p>编辑应完成目标变化，同时保留未被指定修改的主体和细节。</p>
+<h2>创新点</h2>
+<ul>
+<li>将编辑指令遵循与原图一致性共同作为优化目标。</li>
+</ul>
+<h2>文章精读</h2>
+<h3>版本</h3>
+<ul>
+<li><strong>SeedEdit 3.0</strong>：以 Seedream 3.0 为基础的官方图像编辑模型，改善编辑后的一致性。</li>
+</ul>
+<h3>训练数据</h3>
+<p>官方说明使用多样化编辑数据。</p>
+<h3>VAE 结构</h3>
+<p>/</p>
+<h3>Text Encoder</h3>
+<p>/</p>
+<h3>生成主体网络</h3>
+<p>基于 Seedream 3.0 的编辑模型。</p>
+<h3>训练 Trick</h3>
+<ul>
+<li>使用面向编辑任务的奖励模型优化。</li>
+</ul>
+<h3>新提出的创新点</h3>
+<ul>
+<li>将编辑指令遵循与原图一致性共同作为优化目标。</li>
+</ul>
+<h3>局限性</h3>
+<ul>
+<li>/</li>
+</ul>
+<h2>资料来源</h2>
+<ul>
+<li><a href="https://seed.bytedance.com/zh/blog/bytedance-released-image-editing-model-seededit-3-0-enhanced-image-consistency-and-usability-rate" rel="nofollow">official_blog</a></li>
+</ul>
+    </article>
+    <article class="summary-article summary-topic-entry" id="milestone-seedream-4">
+<h1>[2509.20427] Seedream · Seedream 4.0</h1>
+<h2>一句话结论</h2>
+<p>把文生图和多参考图编辑合并到同一生成体系。</p>
+<h2>解决的问题</h2>
+<p>工作流需要在生成、参考图融合和局部修改之间切换，独立模型难以保持连续性。</p>
+<h2>创新点</h2>
+<ul>
+<li>统一生成与编辑，并支持多图条件与成组图像输出。</li>
+</ul>
+<h2>文章精读</h2>
+<h3>版本</h3>
+<ul>
+<li><strong>Seedream 4.0</strong>：统一图像生成和编辑，支持多图输入输出与高分辨率创作。</li>
+</ul>
+<h3>训练数据</h3>
+<p>/</p>
+<h3>VAE 结构</h3>
+<p>/</p>
+<h3>Text Encoder</h3>
+<p>/</p>
+<h3>生成主体网络</h3>
+<p>统一生成与编辑的 Diffusion Transformer。</p>
+<h3>训练 Trick</h3>
+<ul>
+<li>通过高效蒸馏降低生成延迟。</li>
+</ul>
+<h3>新提出的创新点</h3>
+<ul>
+<li>统一生成与编辑，并支持多图条件与成组图像输出。</li>
+</ul>
+<h3>局限性</h3>
+<ul>
+<li>/</li>
+</ul>
+<h2>资料来源</h2>
+<ul>
+<li><a href="https://arxiv.org/abs/2509.20427" rel="nofollow">arxiv</a></li>
+<li><a href="https://seed.bytedance.com/en/blog/seedream-4-0-officially-released-beyond-drawing-into-imagination" rel="nofollow">official_blog</a></li>
+<li><a href="https://seed.bytedance.com/en/seedream4_0" rel="nofollow">official_blog</a></li>
+</ul>
+    </article>
+    <article class="summary-article summary-topic-entry" id="milestone-seedream-4-5">
+<h1>[2512.03XXX] Seedream · Seedream 4.5</h1>
+<h2>一句话结论</h2>
+<p>在统一生成编辑主线上改善人物、商品与排版的一致性。</p>
+<h2>解决的问题</h2>
+<p>多参考图和商业排版需要同时保留关键细节、身份和图中文字。</p>
+<h2>创新点</h2>
+<ul>
+<li>公开能力变化（实现未披露）：围绕参考保持与密集文字进行版本更新。</li>
+</ul>
+<h2>文章精读</h2>
+<h3>版本</h3>
+<ul>
+<li><strong>Seedream 4.5</strong>：强化参考图主体、细节保持和密集文字；公开页面未披露相对 4.0 的具体网络改动。</li>
+</ul>
+<h3>训练数据</h3>
+<p>/</p>
+<h3>VAE 结构</h3>
+<p>/</p>
+<h3>Text Encoder</h3>
+<p>/</p>
+<h3>生成主体网络</h3>
+<p>/</p>
+<h3>训练 Trick</h3>
+<ul>
+<li>/</li>
+</ul>
+<h3>新提出的创新点</h3>
+<ul>
+<li>公开能力变化（实现未披露）：围绕参考保持与密集文字进行版本更新。</li>
+</ul>
+<h3>局限性</h3>
+<ul>
+<li>/</li>
+</ul>
+<h2>资料来源</h2>
+<ul>
+<li><a href="https://www.byteplus.com/en/blog/seedream4-5" rel="nofollow">official_blog</a></li>
+<li><a href="https://seed.bytedance.com/en/seedream4_5" rel="nofollow">official_blog</a></li>
+</ul>
+    </article>
+    <article class="summary-article summary-topic-entry" id="milestone-seedream-5-lite">
+<h1>[2602.13XXX] Seedream · Seedream 5.0 Lite</h1>
+<h2>一句话结论</h2>
+<p>把知识检索和推理加入图像创作链路，让生成内容能够响应更新的事实。</p>
+<h2>解决的问题</h2>
+<p>依赖世界知识的图像指令需要先理解事实和关系，再安排画面内容。</p>
+<h2>创新点</h2>
+<ul>
+<li>公开能力变化（实现未披露）：结合实时搜索与推理处理依赖外部知识的图像指令。</li>
+</ul>
+<h2>文章精读</h2>
+<h3>版本</h3>
+<ul>
+<li><strong>Seedream 5.0 Lite</strong>：引入更强的视觉推理、世界知识与实时搜索能力。</li>
+</ul>
+<h3>训练数据</h3>
+<p>/</p>
+<h3>VAE 结构</h3>
+<p>/</p>
+<h3>Text Encoder</h3>
+<p>/</p>
+<h3>生成主体网络</h3>
+<p>官方披露统一多模态架构；具体模块结构：/。</p>
+<h3>训练 Trick</h3>
+<ul>
+<li>/</li>
+</ul>
+<h3>新提出的创新点</h3>
+<ul>
+<li>公开能力变化（实现未披露）：结合实时搜索与推理处理依赖外部知识的图像指令。</li>
+</ul>
+<h3>局限性</h3>
+<ul>
+<li>/</li>
+</ul>
+<h2>资料来源</h2>
+<ul>
+<li><a href="https://seed.bytedance.com/en/blog/deeper-thinking-more-accurate-generation-introducing-seedream-5-0-lite" rel="nofollow">official_blog</a></li>
+</ul>
+    </article>
+    <article class="summary-article summary-topic-entry" id="milestone-seedream-5-pro">
+<h1>[2607.08XXX] Seedream · Seedream 5.0 Pro</h1>
+<h2>一句话结论</h2>
+<p>把设计意图和区域级交互纳入模型原生输入，支持更精细的素材组织。</p>
+<h2>解决的问题</h2>
+<p>复杂设计不仅是文字描述，还包含位置、选区、结构与可复用图层。</p>
+<h2>创新点</h2>
+<ul>
+<li>公开能力变化（实现未披露）：点、框、套索和草图可直接表达视觉意图。</li>
+<li>公开能力变化（实现未披露）：支持图层分离、透明素材与区域级编辑。</li>
+</ul>
+<h2>文章精读</h2>
+<h3>版本</h3>
+<ul>
+<li><strong>Seedream 5.0 Pro</strong>：面向复杂设计，扩展点选、框选、涂画等视觉交互及图层分离。</li>
+</ul>
+<h3>训练数据</h3>
+<p>/</p>
+<h3>VAE 结构</h3>
+<p>/</p>
+<h3>Text Encoder</h3>
+<p>/</p>
+<h3>生成主体网络</h3>
+<p>官方说明采用多模态模型；具体主干参数与模块：/。</p>
+<h3>训练 Trick</h3>
+<ul>
+<li>/</li>
+</ul>
+<h3>新提出的创新点</h3>
+<ul>
+<li>公开能力变化（实现未披露）：点、框、套索和草图可直接表达视觉意图。</li>
+<li>公开能力变化（实现未披露）：支持图层分离、透明素材与区域级编辑。</li>
+</ul>
+<h3>局限性</h3>
+<ul>
+<li>官方发布说明指出细粒度文字渲染和像素级编辑一致性仍需要改善。</li>
+</ul>
+<h2>资料来源</h2>
+<ul>
+<li><a href="https://seed.bytedance.com/en/blog/beyond-generation-it-understands-design-introducing-seedream-5-0-pro" rel="nofollow">official_blog</a></li>
+</ul>
+    </article>
+      </div>
+    </section>
+  </main>
+
+</body>
+</html>
