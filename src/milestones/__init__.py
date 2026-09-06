@@ -1,1 +1,1 @@
-"""TOGOS classic-model catalog and publishing theme."""
+"""LOKEN classic-model catalog and publishing theme."""

@@ -119,7 +119,7 @@ class ArxivSourceClient:
                     url,
                     headers={
                         "Accept": "text/html,application/pdf;q=.9",
-                        "User-Agent": "TOGOS-local-paper-summaries/1.0",
+                        "User-Agent": "LOKEN-local-paper-summaries/1.0",
                     },
                     timeout=(CONNECT_TIMEOUT, READ_TIMEOUT),
                     allow_redirects=False,

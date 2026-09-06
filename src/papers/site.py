@@ -631,7 +631,7 @@ def generate_site(
 {render_paper_navigation(categories)}
     </div>
 {render_content(categories, summary_catalog, candidate_statuses, label_slugs)}
-    <footer>Generated from arXiv metadata · Source: <a href="https://github.com/zyf515730395/TOGOS">{SITE_NAME}</a></footer>
+    <footer>Generated from arXiv metadata · Source: <a href="https://github.com/zyf515730395/LOKEN">{SITE_NAME}</a></footer>
 """
     document = render_site_page(
         output_file=page_output,
@@ -639,8 +639,8 @@ def generate_site(
         active_section="learning",
         page_title=SITE_NAME,
         meta_description=(
-            "A daily index of image, video, and 3D generation, neural rendering, "
-            "and depth estimation papers from arXiv."
+            "A daily, multi-label index of research papers from arXiv, with "
+            "survey and publication-month browsing."
         ),
         main_content=main_content,
         body_class="learning-page",
