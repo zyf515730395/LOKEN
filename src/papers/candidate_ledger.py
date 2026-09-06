@@ -25,7 +25,12 @@ def normalize_arxiv_id(paper_id: str) -> str:
 
 
 def empty_ledger() -> dict[str, Any]:
-    return {"version": LEDGER_VERSION, "updated_at": None, "papers": {}}
+    return {
+        "version": LEDGER_VERSION,
+        "updated_at": None,
+        "papers": {},
+        "collection_cursors": {},
+    }
 
 
 def load_candidate_ledger(path: str | Path) -> dict[str, Any]:
@@ -43,6 +48,8 @@ def load_candidate_ledger(path: str | Path) -> dict[str, Any]:
     for paper_id, entry in ledger["papers"].items():
         if not isinstance(entry, dict) or entry.get("status") not in VALID_STATUSES:
             raise ValueError(f"Invalid candidate ledger entry: {paper_id}")
+    if not isinstance(ledger.get("collection_cursors", {}), dict):
+        raise ValueError(f"Invalid collection cursors: {ledger_path}")
     return ledger
 
 
@@ -140,11 +147,6 @@ def merge_collected_candidates(
             **entry.get("archive_rows", {}),
             **record["archive_rows"],
         }
-
-        if entry["status"] != "pending":
-            continue
-        for topic, archive_row in record["archive_rows"].items():
-            next_archive[topic][paper_id] = archive_row
 
     next_ledger["updated_at"] = collected_at
     return next_archive, next_ledger, added

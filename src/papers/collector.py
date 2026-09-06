@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import datetime as dt
 import json
 import logging
 from pathlib import Path
@@ -167,7 +168,7 @@ def paper_record(result: arxiv.Result, topic: str) -> dict:
 
 
 def fetch_topic(
-    client: arxiv.Client, topic: str, query: str, max_results: int
+    client: arxiv.Client, topic: str, query: str, max_results: int | None = None
 ) -> list[dict]:
     search = arxiv.Search(
         query=query,
@@ -187,6 +188,55 @@ def fetch_topic(
             record["authors"],
         )
     return records
+
+
+def fetch_collection(
+    config: dict, ledger: dict, *, now: dt.datetime | None = None
+) -> tuple[list[dict], list[str], dict[str, str]]:
+    """Read every page in each topic's UTC window; advance only complete topics."""
+    settings = config.get("collection", {})
+    lookback_days = max(1, int(settings.get("lookback_days", 7)))
+    overlap_days = max(2, int(settings.get("overlap_days", 2)))
+    batch_size = max(1, int(settings.get("query_batch_size", 8)))
+    page_size = min(2000, max(1, int(settings.get("page_size", 100))))
+    end = now or dt.datetime.now(dt.timezone.utc)
+    if end.tzinfo is None:
+        raise ValueError("Collection time must include a timezone")
+    end = end.astimezone(dt.timezone.utc).replace(microsecond=0)
+    cursors = dict(ledger.get("collection_cursors", {}))
+    client = make_arxiv_client(page_size)
+    records: list[dict] = []
+    failed_topics: list[str] = []
+    for topic, keyword_settings in config["keywords"].items():
+        start = end - dt.timedelta(days=lookback_days)
+        if topic in cursors:
+            cursor = dt.datetime.fromisoformat(cursors[topic])
+            if cursor.tzinfo is None or cursor > end:
+                raise ValueError(f"Invalid collection cursor for {topic!r}")
+            start = cursor.astimezone(dt.timezone.utc) - dt.timedelta(days=overlap_days)
+        window = f"submittedDate:[{start:%Y%m%d%H%M} TO {end:%Y%m%d%H%M}]"
+        filters = keyword_settings["filters"]
+        if not filters:
+            raise ValueError(f"Keyword filters must not be empty: {topic}")
+        topic_records: dict[str, dict] = {}
+        try:
+            for offset in range(0, len(filters), batch_size):
+                query = build_filter_query(
+                    filters[offset : offset + batch_size],
+                    fields=keyword_settings.get("fields"),
+                    categories=keyword_settings.get("categories"),
+                )
+                for record in fetch_topic(client, topic, f"({query}) AND {window}"):
+                    topic_records[record["id"]] = record
+        except (ArxivRetryExhausted, arxiv.ArxivError, requests.RequestException) as error:
+            logging.error("Preserving cursor for failed topic %s: %s", topic, error)
+            failed_topics.append(topic)
+            continue
+        records.extend(topic_records.values())
+        cursors[topic] = end.isoformat()
+    if failed_topics and len(failed_topics) == len(config["keywords"]):
+        raise RuntimeError("All arXiv topics failed: " + ", ".join(failed_topics))
+    return records, failed_topics, cursors
 
 
 def fetch_all_topics(queries: dict[str, str], max_results: int) -> tuple[list, list]:
@@ -231,15 +281,13 @@ def collect(config_path: str | Path) -> dict[str, int]:
     ledger_path = config["candidate_ledger_path"]
     milestone_catalog_path = config["milestone_catalog_path"]
     topics = list(config["queries"])
-    records, failed_topics = fetch_all_topics(
-        config["queries"], int(config["max_results"])
-    )
     archive = load_archive(archive_path)
     ledger = load_candidate_ledger(ledger_path)
-    next_archive, next_ledger, added = merge_collected_candidates(
+    records, failed_topics, cursors = fetch_collection(config, ledger)
+    _, next_ledger, added = merge_collected_candidates(
         archive, ledger, records, topics
     )
-    atomic_write_json(archive_path, next_archive, pretty=False)
+    next_ledger["collection_cursors"] = cursors
     atomic_write_json(ledger_path, next_ledger)
     generate_site(
         archive_path,
