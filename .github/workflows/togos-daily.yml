@@ -1,4 +1,4 @@
-# Collect candidates, publish the default Summary state, and deploy every day.
+# Collect paper candidates and refresh the public site every day.
 
 name: Run LOKEN Daily
 
@@ -17,7 +17,7 @@ concurrency:
 
 jobs:
   collect:
-    name: collect-and-publish-candidates
+    name: collect-candidates-and-refresh-site
     runs-on: ubuntu-latest
     timeout-minutes: 60
 
@@ -40,7 +40,7 @@ jobs:
       - name: Collect candidates and generate the site
         run: python -m papers.collector
 
-      - name: Commit candidate pages
+      - name: Commit candidate state and generated pages
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
