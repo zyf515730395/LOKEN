@@ -18,6 +18,7 @@ from papers.annotations.catalog import (
     load_label_definitions,
 )
 from papers.annotations.models import LabelDefinition, PaperAnnotation
+from papers.conferences import load_conferences, render_conference_section
 from shared.rendering import atomic_write_text
 from shared.search_index import SearchDocument, serialize_search_index
 from shared.site_shell import (
@@ -40,6 +41,7 @@ SHOW_BOOK_NOTES_NAV = False
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_MILESTONE_CATALOG = PROJECT_ROOT / "config" / "milestone_models.yaml"
 DEFAULT_SITE_CONFIG = PROJECT_ROOT / "config" / "site.yaml"
+DEFAULT_CONFERENCE_CONFIG = PROJECT_ROOT / "config" / "conferences.yaml"
 DEFAULT_ANNOTATION_CATALOG = PROJECT_ROOT / "content" / "papers" / "paper-annotations.json"
 
 
@@ -441,6 +443,7 @@ def render_content(
     summary_catalog: dict[str, dict],
     candidate_statuses: dict[str, str] | None = None,
     label_slugs: dict[str, str] | None = None,
+    conference_section: str = "",
 ) -> str:
     output = []
     anchored_papers: set[str] = set()
@@ -573,6 +576,7 @@ def render_content(
     return f"""<div class="learning-workspace">
   <div class="learning-archive">
 {archive}
+{conference_section}
   </div>
   <div data-summary-panel-home></div>
   <aside class="paper-summary-panel" id="paper-summary-panel" aria-live="polite">
@@ -582,14 +586,19 @@ def render_content(
 </div>"""
 
 
-def render_paper_navigation(categories: list[dict]) -> str:
+def render_paper_navigation(
+    categories: list[dict], *, include_conferences: bool = False
+) -> str:
     """Render full paper-topic names as the learning archive switcher."""
-    links = tuple(
+    links = list(
         (category["topic"], f'?tag={category["slug"]}#{category["slug"]}')
         for category in categories
     )
-    filter_keys = tuple(category["slug"] for category in categories)
-    return render_context_strip(links, filter_keys=filter_keys)
+    filter_keys = [category["slug"] for category in categories]
+    if include_conferences:
+        links.append(("顶会时间线", "?tag=conferences#conferences"))
+        filter_keys.append("conferences")
+    return render_context_strip(tuple(links), filter_keys=tuple(filter_keys))
 
 
 def load_candidate_statuses(
@@ -639,6 +648,7 @@ def generate_site(
     search_index_path: str | Path | None = None,
     generated_on: datetime.date | None = None,
     config_path: str | Path = DEFAULT_SITE_CONFIG,
+    conference_config_path: str | Path = DEFAULT_CONFERENCE_CONFIG,
     annotation_path: str | Path = DEFAULT_ANNOTATION_CATALOG,
     writings_source_root: str | Path = PROJECT_ROOT / "content" / "writings",
     writings_report_path: str | Path = PROJECT_ROOT / "build" / "reports" / "writings.json",
@@ -657,6 +667,7 @@ def generate_site(
     )
     all_categories, _ = build_archive(data, labels, annotations, candidate_statuses)
     today = generated_on or datetime.date.today()
+    conferences = load_conferences(conference_config_path, as_of=today)
     categories, themes = filter_recent_archive(all_categories, today.year)
     label_slugs = {label.name: label.slug for label in labels}
     updated = today.isoformat()
@@ -677,9 +688,9 @@ def generate_site(
         <div><strong>{archive_count:,}</strong><span>ARCHIVED</span></div>
       </div>
     </header>
-{render_paper_navigation(categories)}
+{render_paper_navigation(categories, include_conferences=bool(conferences))}
     </div>
-{render_content(categories, summary_catalog, candidate_statuses, label_slugs)}
+{render_content(categories, summary_catalog, candidate_statuses, label_slugs, conference_section=render_conference_section(conferences) if conferences else "")}
     <footer>Generated from arXiv metadata · Source: <a href="https://github.com/zyf515730395/LOKEN">{SITE_NAME}</a></footer>
 """
     document = render_site_page(

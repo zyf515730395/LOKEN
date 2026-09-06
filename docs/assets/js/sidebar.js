@@ -2,6 +2,7 @@ const sidebar = document.querySelector("#paper-sidebar");
 const topicNavigation = document.querySelector("[data-topic-navigation]");
 const topicLinks = [...document.querySelectorAll("[data-topic-filter]")];
 const topicSections = [...document.querySelectorAll("[data-topic-section]")];
+const learningWorkspace = document.querySelector(".learning-workspace");
 const topicAliases = topicSections.flatMap((section) =>
   (section.dataset.topicAliases || "").split(/\s+/).filter(Boolean)
     .map((alias) => [alias, section.dataset.topicSection]),
@@ -22,6 +23,18 @@ function topicForHash() {
       || id.startsWith(`${section.dataset.topicSection}-`))?.dataset.topicSection || null;
 }
 
+function revealTopicLink(link) {
+  const strip = link?.parentElement;
+  if (!strip) return;
+  const linkRect = link.getBoundingClientRect();
+  const stripRect = strip.getBoundingClientRect();
+  if (linkRect.left < stripRect.left) {
+    strip.scrollLeft -= stripRect.left - linkRect.left;
+  } else if (linkRect.right > stripRect.right) {
+    strip.scrollLeft += linkRect.right - stripRect.right;
+  }
+}
+
 function selectTopic(topic, { updateLocation = false, scroll = false } = {}) {
   topic = normalizeTopicAnchor(topic);
   const selected = topicSections.find((section) => section.dataset.topicSection === topic);
@@ -32,12 +45,20 @@ function selectTopic(topic, { updateLocation = false, scroll = false } = {}) {
     section.hidden = false;
     section.classList.toggle("is-topic-active", section === selected);
   });
+  let activeTopicLink = null;
   topicLinks.forEach((link) => {
     const active = link.dataset.topicFilter === topic;
     link.classList.toggle("is-active", active);
-    if (active) link.setAttribute("aria-current", "location");
+    if (active) {
+      link.setAttribute("aria-current", "location");
+      activeTopicLink = link;
+    }
     else link.removeAttribute("aria-current");
   });
+  window.requestAnimationFrame(() => revealTopicLink(activeTopicLink));
+  learningWorkspace?.classList.toggle(
+    "is-conference-active", selected.classList.contains("conference-section"),
+  );
 
   if (updateLocation) {
     const url = new URL(window.location.href);
