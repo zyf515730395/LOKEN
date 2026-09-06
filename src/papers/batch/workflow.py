@@ -15,6 +15,7 @@ import sys
 from uuid import uuid4
 
 from papers.paths import ARCHIVE, CONFIG, DOCS, LEDGER
+from papers.model_runtime import DEFAULT_MODEL_TIMEOUT_SECONDS, DEFAULT_MODEL_WORKERS, MAX_MODEL_WORKERS
 from papers.summaries.acquisition import ArxivSourceClient
 from papers.annotations.catalog import load_annotation_definitions, annotation_value
 from papers.annotations.classifier import classify_paper, taxonomy_hash
@@ -317,17 +318,18 @@ def run(args, *, report_sink=None):
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("mode", choices=("download", "summarize"))
-    parser.add_argument("--workers", type=int, default=os.environ.get("TOGOS_WSL_LLM_WORKERS", "2"))
+    parser.add_argument("--workers", type=int,
+                        default=os.environ.get("TOGOS_WSL_LLM_WORKERS", str(DEFAULT_MODEL_WORKERS)))
     parser.add_argument("--limit", type=int, help="maximum unique papers; default is all unfinished archive papers across all years")
     parser.add_argument("--paper", action="append", default=[], help="archived arXiv ID, repeatable; includes every missing topic")
     parser.add_argument("--dry-run", action="store_true", help="list candidates; no download, inference or writes")
     parser.add_argument("--model", default=os.environ.get("TOGOS_WSL_LLM_MODEL", "PaperReader-Qwen3.5"))
     parser.add_argument("--base-url", default=os.environ.get("TOGOS_WSL_LLM_BASE_URL", "http://127.0.0.1:8000/v1"))
-    parser.add_argument("--timeout", type=float, default=180.0)
+    parser.add_argument("--timeout", type=float, default=DEFAULT_MODEL_TIMEOUT_SECONDS)
     args = parser.parse_args(argv)
     try:
-        if not 1 <= args.workers <= 8:
-            raise PaperSummaryError("invalid_workers", "workers must be 1-8")
+        if not 1 <= args.workers <= MAX_MODEL_WORKERS:
+            raise PaperSummaryError("invalid_workers", f"workers must be 1-{MAX_MODEL_WORKERS}")
         if args.limit is not None and args.limit < 1:
             raise PaperSummaryError("invalid_limit", "limit must be positive")
         if not math.isfinite(args.timeout) or args.timeout <= 0:

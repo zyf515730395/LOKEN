@@ -16,6 +16,7 @@ import urllib.request
 from zoneinfo import ZoneInfo
 
 from papers import paths
+from papers.model_runtime import DEFAULT_MODEL_TIMEOUT_SECONDS, DEFAULT_MODEL_WORKERS, MAX_MODEL_WORKERS
 
 PUBLIC = ('content/papers/archive.json', 'content/papers/arxiv-candidates.json',
           'content/papers/paper-annotations.json', 'docs/notes/', 'docs/index.html',
@@ -138,7 +139,7 @@ def in_weekend_window(now=None):
 def execute(mode, args):
     clean_pull()
     with model_service(args.service) as model:
-        common = ['--model', model, '--workers', str(args.workers)]
+        common = ['--model', model, '--workers', str(args.workers), '--timeout', str(args.timeout)]
         if mode == 'daily':
             result = command(sys.executable, '-m', 'papers', 'daily', *common, '--limit', str(args.limit), check=False)
         else:
@@ -159,14 +160,16 @@ def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('mode', choices=['daily', 'weekend'])
     parser.add_argument('--service', default='vllm-paper.service')
-    parser.add_argument('--workers', type=int, default=2)
+    parser.add_argument('--workers', type=int, default=DEFAULT_MODEL_WORKERS)
+    parser.add_argument('--timeout', type=float, default=DEFAULT_MODEL_TIMEOUT_SECONDS)
     parser.add_argument('--limit', type=int, default=100)
     parser.add_argument('--dry-run', action='store_true')
     args = parser.parse_args(argv)
-    if not 1 <= args.workers <= 8 or args.limit < 1 or args.service != 'vllm-paper.service':
-        parser.error('workers 1-8, positive limit and configured model service required')
+    if (not 1 <= args.workers <= MAX_MODEL_WORKERS or args.limit < 1 or args.timeout <= 0
+            or args.service != 'vllm-paper.service'):
+        parser.error(f'workers 1-{MAX_MODEL_WORKERS}, positive limit/timeout and configured model service required')
     if args.dry_run:
-        print(json.dumps({'mode': args.mode, 'workers': args.workers, 'limit': args.limit,
+        print(json.dumps({'mode': args.mode, 'workers': args.workers, 'timeout': args.timeout, 'limit': args.limit,
                           'weekend_window': in_weekend_window(), 'public_paths': PUBLIC}))
         return 0
     if sys.platform != 'linux':
