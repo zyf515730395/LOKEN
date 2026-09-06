@@ -1,0 +1,575 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Hunyuan3D 版本文章精读。">
+  <title>Hunyuan3D · 文章精读</title>
+  <script>
+    (() => {
+      document.documentElement.classList.add("js");
+      let theme = null;
+      let contextOpen = null;
+      try {
+        theme = window.localStorage.getItem("arxiv-theme");
+        contextOpen = window.localStorage.getItem("togos-secondary-sidebar-collapsed");
+      } catch (error) { /* Storage can be unavailable. */ }
+      if (theme !== "light" && theme !== "dark") {
+        theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      }
+      document.documentElement.dataset.theme = theme;
+      if (contextOpen === "false") document.documentElement.dataset.contextOpen = "true";
+    })();
+  </script>
+  <link rel="stylesheet" href="../assets/css/site.css?v=12">
+  <script src="../assets/js/site-shell.js?v=12" defer></script>
+  <script src="../assets/js/search-core.js?v=12" defer></script>
+  <script src="../assets/js/search.js?v=12" defer></script>
+  <script src="../assets/js/sidebar.js?v=12" defer></script>
+</head>
+<body data-site-root="../" data-active-section="milestones" class="summary-page milestone-notes-page">
+  <header class="site-utility" aria-label="页面工具">
+    <button class="sidebar-toggle" type="button" aria-controls="navigation-shell" aria-expanded="false">
+      <span aria-hidden="true" data-sidebar-toggle-icon>☰</span><span data-sidebar-toggle-label>导航</span>
+    </button>
+    <div class="site-search" data-search-root>
+      <label class="site-search-field" for="search-input">
+        <span aria-hidden="true">⌕</span>
+        <input id="search-input" type="search" placeholder="搜索文章标题"
+               aria-label="搜索文章标题" role="combobox"
+               autocomplete="off" aria-autocomplete="list" aria-controls="search-results" aria-expanded="false">
+        <kbd aria-hidden="true">Ctrl K</kbd>
+      </label>
+      <div class="search-popover" data-search-popover hidden>
+        <p class="search-status" data-search-status aria-live="polite">输入标题关键词开始搜索</p>
+        <div id="search-results" class="search-results" data-search-results role="listbox"></div>
+      </div>
+    </div>
+    <button class="theme-toggle" type="button" aria-label="切换颜色主题" aria-pressed="false">
+      <span data-theme-icon aria-hidden="true"></span>
+    </button>
+  </header>
+  <div class="sidebar-scrim" data-sidebar-close></div>
+<div class="navigation-shell" id="navigation-shell">
+  <button class="navigation-close" type="button" data-navigation-close
+          aria-label="关闭导航" hidden>×</button>
+  <aside class="primary-sidebar" aria-label="知识主题">
+    <a class="primary-brand" href="../index.html" aria-label="LOKEN 首页"><img class="brand-logo" src="../assets/images/loken-logo.png" width="1990" height="329" alt=""></a>
+    <div class="primary-menu" aria-hidden="true"><span>MENU</span><span>☰</span></div>
+    <nav class="primary-navigation" aria-label="知识主题">
+      <a class="primary-nav-item" href="../index.html"><span class="primary-nav-copy"><span class="primary-nav-label">学习一个</span><span class="primary-nav-meta">01 / PAPERS</span></span></a>
+      <a class="primary-nav-item is-active" href="../milestone-models/flux.html" aria-current="page"><span class="primary-nav-copy"><span class="primary-nav-label">身经百战</span><span class="primary-nav-meta">02 / CLASSIC MODELS</span></span></a>
+      <a class="primary-nav-item" href="../writings/index.html"><span class="primary-nav-copy"><span class="primary-nav-label">谈笑风生</span><span class="primary-nav-meta">03 / ARTICLES</span></span></a>
+      <a class="primary-nav-item" href="../journeys/index.html"><span class="primary-nav-copy"><span class="primary-nav-label">跑得还快</span><span class="primary-nav-meta">04 / TRAVELS</span></span></a>
+    </nav>
+    <div class="primary-sidebar-status"><span>LAST SYNC</span><strong>AUTOMATED / WEEKDAYS</strong></div>
+  </aside>
+</div>
+  <main class="page-content" id="top">
+<section class="summary-page-shell" aria-labelledby="notes-page-title">
+      <header class="summary-topic-header">
+        <a class="summary-back" href="hunyuan3d.html">← 返回版本对比</a>
+        <h1 id="notes-page-title">Hunyuan3D · 文章精读</h1>
+      </header>
+<nav class="context-strip" aria-label="模型系列">
+    <a class="context-strip-link" href="flux.html">FLUX</a>
+    <a class="context-strip-link" href="qwen-image.html">Qwen-Image</a>
+    <a class="context-strip-link" href="seedream.html">Seedream</a>
+    <a class="context-strip-link" href="stable-diffusion.html">Stable Diffusion</a>
+    <a class="context-strip-link" href="z-image.html">Z-Image</a>
+    <a class="context-strip-link" href="wan.html">Wan</a>
+    <a class="context-strip-link" href="seedance.html">Seedance</a>
+    <a class="context-strip-link is-active" href="hunyuan3d.html" aria-current="location">Hunyuan3D</a>
+    <span class="context-strip-link is-disabled" aria-disabled="true">VGGT</span>
+  </nav>
+      <details class="content-tools" open>
+        <summary>版本精读目录</summary>
+        <nav class="content-tools-navigation" aria-label="版本精读目录">
+<a class="context-filter" href="#milestone-hunyuan3d-1">Hunyuan3D 1.0</a>
+<a class="context-filter" href="#milestone-hunyuan3d-2">Hunyuan3D 2.0</a>
+<a class="context-filter" href="#milestone-hunyuan3d-2-fast">Hunyuan3D 2.0 Fast</a>
+<a class="context-filter" href="#milestone-hunyuan3d-2-mini-mv">Hunyuan3D 2 Mini / Multi-view</a>
+<a class="context-filter" href="#milestone-hunyuan3d-2-turbo">Hunyuan3D 2 Turbo</a>
+<a class="context-filter" href="#milestone-hunyuan3d-2-1">Hunyuan3D 2.1</a>
+<a class="context-filter" href="#milestone-hunyuan3d-2-5">Hunyuan3D 2.5 · 技术报告</a>
+<a class="context-filter" href="#milestone-hunyuan3d-3">Hunyuan3D 3.0</a>
+<a class="context-filter" href="#milestone-hunyuan3d-omni">Hunyuan3D-Omni · 技术报告</a>
+<a class="context-filter" href="#milestone-hunyuan3d-3-1">Hunyuan3D 3.1</a>
+<a class="context-filter" href="#milestone-hunyuan3d-buffalo">Hunyuan3D-Buffalo 1.0 · 技术报告</a>
+        </nav>
+      </details>
+      <div class="summary-topic-list">
+    <article class="summary-article summary-topic-entry" id="milestone-hunyuan3d-1">
+<h1>[2411.02293] Hunyuan3D · Hunyuan3D 1.0</h1>
+<h2>一句话结论</h2>
+<p>先生成六个一致视图，再一次性重建三维网格，把二维生成先验接到三维重建模型。</p>
+<h2>解决的问题</h2>
+<p>逐物体优化三维表示速度慢，多视图图像不一致又会破坏重建。</p>
+<h2>创新点</h2>
+<ul>
+<li>把多视图生成和稀疏视图重建联合设计。</li>
+<li>零仰角相机布置与视图感知引导改善重建条件。</li>
+</ul>
+<h2>文章精读</h2>
+<h3>版本</h3>
+<ul>
+<li><strong>Hunyuan3D 1.0 Lite</strong>：较小多视图生成档，生成视图组成 960×640 网格，再重建三维。</li>
+<li><strong>Hunyuan3D 1.0 Standard</strong>：更大多视图生成档，使用 1536×1024 视图网格；两档都支持文字或图像条件。</li>
+</ul>
+<h3>训练数据</h3>
+<p>内部三维资产数据经过场景复杂度、纹理与变形筛选，归一化后渲染 24 个零仰角视图；训练和目标视图组合从中构造。</p>
+<h3>VAE 结构</h3>
+<p>/</p>
+<h3>Text Encoder</h3>
+<p>/</p>
+<h3>生成主体网络</h3>
+<p>Lite 的多视图扩散主干来自 SD 2.1，Standard 来自 SDXL，均使用参考注意力；第二阶段以 DINO 提取图像特征，再由 Transformer 融合已知与未知姿态图像并预测 triplane。</p>
+<h3>训练 Trick</h3>
+<ul>
+<li>按视图调整 classifier-free guidance，协调几何稳定性与纹理细节。</li>
+<li>多视图扩散与重建分别训练；重建从 256 级输入训练后，以 512 级输入微调。</li>
+</ul>
+<h3>新提出的创新点</h3>
+<ul>
+<li>把多视图生成和稀疏视图重建联合设计。</li>
+<li>零仰角相机布置与视图感知引导改善重建条件。</li>
+</ul>
+<h3>局限性</h3>
+<ul>
+<li>/</li>
+</ul>
+<h2>资料来源</h2>
+<ul>
+<li><a href="https://arxiv.org/abs/2411.02293" rel="nofollow">arxiv</a></li>
+<li><a href="https://github.com/Tencent-Hunyuan/Hunyuan3D-1" rel="nofollow">official_repository</a></li>
+</ul>
+    </article>
+    <article class="summary-article summary-topic-entry" id="milestone-hunyuan3d-2">
+<h1>[2501.12202] Hunyuan3D · Hunyuan3D 2.0</h1>
+<h2>一句话结论</h2>
+<p>从先画视图再重建，转向直接生成形状潜变量，并把纹理作为独立阶段。</p>
+<h2>解决的问题</h2>
+<p>几何与纹理需求不同，分开建模可以避免两者互相干扰并提高资产可编辑性。</p>
+<h2>创新点</h2>
+<ul>
+<li>直接对紧凑三维形状表示建模，替代纯多视图重建路径。</li>
+<li>解耦几何和纹理，使网格可单独生成或重绘材质。</li>
+</ul>
+<h2>文章精读</h2>
+<h3>版本</h3>
+<ul>
+<li><strong>Hunyuan3D-DiT v2.0</strong>：直接在三维形状潜空间进行流式扩散，先生成无纹理网格。</li>
+<li><strong>Hunyuan3D-Paint v2.0</strong>：以形状和参考图为条件生成多视图纹理，再烘焙回网格。</li>
+</ul>
+<h3>训练数据</h3>
+<p>清洗后的三维资产提供表面点、法向、SDF 和多视图渲染监督；几何与纹理分别准备训练目标。</p>
+<h3>VAE 结构</h3>
+<p>ShapeVAE 以表面点坐标和法向编码为连续向量集合，解码器预测 SDF，再用 marching cubes 得到三角网格。</p>
+<h3>Text Encoder</h3>
+<p>/</p>
+<h3>生成主体网络</h3>
+<p>形状阶段为基于流匹配的 Hunyuan3D-DiT；Paint 阶段采用参考图与几何条件约束的多视图扩散。</p>
+<h3>训练 Trick</h3>
+<ul>
+<li>重要性采样突出形状复杂区域，改善 ShapeVAE 细节重建。</li>
+<li>形状与纹理分阶段训练和推理。</li>
+</ul>
+<h3>新提出的创新点</h3>
+<ul>
+<li>直接对紧凑三维形状表示建模，替代纯多视图重建路径。</li>
+<li>解耦几何和纹理，使网格可单独生成或重绘材质。</li>
+</ul>
+<h3>局限性</h3>
+<ul>
+<li>/</li>
+</ul>
+<h2>资料来源</h2>
+<ul>
+<li><a href="https://arxiv.org/abs/2501.12202" rel="nofollow">arxiv</a></li>
+<li><a href="https://github.com/Tencent-Hunyuan/Hunyuan3D-2" rel="nofollow">official_repository</a></li>
+</ul>
+    </article>
+    <article class="summary-article summary-topic-entry" id="milestone-hunyuan3d-2-fast">
+<h1>[2502.03XXX] Hunyuan3D · Hunyuan3D 2.0 Fast</h1>
+<h2>一句话结论</h2>
+<p>在 2.0 形状模型上加入引导蒸馏，提高同代模型的生成速度。</p>
+<h2>解决的问题</h2>
+<p>分类器自由引导需要额外网络计算，蒸馏可降低这部分成本。</p>
+<h2>创新点</h2>
+<ul>
+<li>把引导效果压入学生网络，减少条件与无条件路径的额外计算。</li>
+</ul>
+<h2>文章精读</h2>
+<h3>版本</h3>
+<ul>
+<li><strong>Hunyuan3D-DiT v2.0 Fast</strong>：官方 guidance-distilled 版本，通过引导蒸馏减少推理开销。</li>
+</ul>
+<h3>训练数据</h3>
+<p>/</p>
+<h3>VAE 结构</h3>
+<p>/</p>
+<h3>Text Encoder</h3>
+<p>/</p>
+<h3>生成主体网络</h3>
+<p>由 Hunyuan3D 2.0 形状模型蒸馏。</p>
+<h3>训练 Trick</h3>
+<ul>
+<li>Guidance distillation。</li>
+</ul>
+<h3>新提出的创新点</h3>
+<ul>
+<li>把引导效果压入学生网络，减少条件与无条件路径的额外计算。</li>
+</ul>
+<h3>局限性</h3>
+<ul>
+<li>/</li>
+</ul>
+<h2>资料来源</h2>
+<ul>
+<li><a href="https://github.com/Tencent-Hunyuan/Hunyuan3D-2" rel="nofollow">official_repository</a></li>
+</ul>
+    </article>
+    <article class="summary-article summary-topic-entry" id="milestone-hunyuan3d-2-mini-mv">
+<h1>[2503.18XXX] Hunyuan3D · Hunyuan3D 2 Mini / Multi-view</h1>
+<h2>一句话结论</h2>
+<p>在同一形状生成主线上补齐更小参数和多视图输入两种档位。</p>
+<h2>解决的问题</h2>
+<p>单图的背面歧义和大模型的部署成本，需要不同的模型变体处理。</p>
+<h2>创新点</h2>
+<ul>
+<li>以多视图输入约束不可见区域，同时提供更低资源的 Mini 档。</li>
+</ul>
+<h2>文章精读</h2>
+<h3>版本</h3>
+<ul>
+<li><strong>Hunyuan3D-2mini</strong>：0.6B 小型形状模型，降低模型规模。</li>
+<li><strong>Hunyuan3D-2mv</strong>：支持多视图条件的 1.1B 形状模型，利用多个角度约束几何。</li>
+</ul>
+<h3>训练数据</h3>
+<p>/</p>
+<h3>VAE 结构</h3>
+<p>/</p>
+<h3>Text Encoder</h3>
+<p>/</p>
+<h3>生成主体网络</h3>
+<p>2.x 形状扩散主线；Mini 调整规模，MV 扩展多视图条件。</p>
+<h3>训练 Trick</h3>
+<ul>
+<li>/</li>
+</ul>
+<h3>新提出的创新点</h3>
+<ul>
+<li>以多视图输入约束不可见区域，同时提供更低资源的 Mini 档。</li>
+</ul>
+<h3>局限性</h3>
+<ul>
+<li>/</li>
+</ul>
+<h2>资料来源</h2>
+<ul>
+<li><a href="https://github.com/Tencent-Hunyuan/Hunyuan3D-2" rel="nofollow">official_repository</a></li>
+</ul>
+    </article>
+    <article class="summary-article summary-topic-entry" id="milestone-hunyuan3d-2-turbo">
+<h1>[2503.19XXX] Hunyuan3D · Hunyuan3D 2 Turbo</h1>
+<h2>一句话结论</h2>
+<p>把少步蒸馏扩展到标准、Mini 与多视图模型。</p>
+<h2>解决的问题</h2>
+<p>不同条件与部署档位都需要减少三维生成的采样步骤。</p>
+<h2>创新点</h2>
+<ul>
+<li>为三类官方形状模型提供统一的速度变体。</li>
+</ul>
+<h2>文章精读</h2>
+<h3>版本</h3>
+<ul>
+<li><strong>Hunyuan3D-2 Turbo</strong>：2.0 形状主线的少步蒸馏版本。</li>
+<li><strong>Hunyuan3D-2mini Turbo</strong>：Mini 主线的少步蒸馏版本。</li>
+<li><strong>Hunyuan3D-2mv Turbo</strong>：多视图主线的少步蒸馏版本。</li>
+</ul>
+<h3>训练数据</h3>
+<p>/</p>
+<h3>VAE 结构</h3>
+<p>/</p>
+<h3>Text Encoder</h3>
+<p>/</p>
+<h3>生成主体网络</h3>
+<p>各自从对应的 2.x 形状模型派生。</p>
+<h3>训练 Trick</h3>
+<ul>
+<li>Step distillation 减少去噪步骤。</li>
+</ul>
+<h3>新提出的创新点</h3>
+<ul>
+<li>为三类官方形状模型提供统一的速度变体。</li>
+</ul>
+<h3>局限性</h3>
+<ul>
+<li>/</li>
+</ul>
+<h2>资料来源</h2>
+<ul>
+<li><a href="https://github.com/Tencent-Hunyuan/Hunyuan3D-2" rel="nofollow">official_repository</a></li>
+</ul>
+    </article>
+    <article class="summary-article summary-topic-entry" id="milestone-hunyuan3d-2-1">
+<h1>[2506.15442] Hunyuan3D · Hunyuan3D 2.1</h1>
+<h2>一句话结论</h2>
+<p>在几何生成之外补齐可用于物理渲染的材质，让结果更接近可用三维资产。</p>
+<h2>解决的问题</h2>
+<p>单张 RGB 纹理混合材质与光照，难以在新环境下获得一致的渲染效果。</p>
+<h2>创新点</h2>
+<ul>
+<li>将外观分解为可重光照的 PBR 材质通道。</li>
+</ul>
+<h2>文章精读</h2>
+<h3>版本</h3>
+<ul>
+<li><strong>Hunyuan3D-Shape 2.1</strong>：升级三维形状生成，并公开训练相关能力。</li>
+<li><strong>Hunyuan3D-Paint 2.1</strong>：将纹理升级为 PBR 材质，生成 albedo、metallic 和 roughness。</li>
+</ul>
+<h3>训练数据</h3>
+<p>三维资产提供几何表面、法线和渲染材质监督；PBR 训练分别监督反照率与金属度、粗糙度。</p>
+<h3>VAE 结构</h3>
+<p>ShapeVAE 以带法向的表面点压缩为向量集合，解码 SDF 后提取网格。</p>
+<h3>Text Encoder</h3>
+<p>/</p>
+<h3>生成主体网络</h3>
+<p>形状部分为潜空间流式 DiT；Paint 使用并行双分支 U-Net，通过跨视图和参考注意力生成 albedo 与 metallic-roughness。</p>
+<h3>训练 Trick</h3>
+<ul>
+<li>几何与材质分阶段训练。</li>
+<li>多视图与参考注意力约束不同视角的材质一致性。</li>
+</ul>
+<h3>新提出的创新点</h3>
+<ul>
+<li>将外观分解为可重光照的 PBR 材质通道。</li>
+</ul>
+<h3>局限性</h3>
+<ul>
+<li>/</li>
+</ul>
+<h2>资料来源</h2>
+<ul>
+<li><a href="https://arxiv.org/abs/2506.15442" rel="nofollow">arxiv</a></li>
+<li><a href="https://github.com/Tencent-Hunyuan/Hunyuan3D-2.1" rel="nofollow">official_repository</a></li>
+</ul>
+    </article>
+    <article class="summary-article summary-topic-entry" id="milestone-hunyuan3d-2-5">
+<h1>[2506.16504] Hunyuan3D · Hunyuan3D 2.5 · 技术报告</h1>
+<p>日期口径：arXiv 首次提交日，明确技术报告节点。</p>
+<h2>一句话结论</h2>
+<p>扩大形状基础模型，并让多通道 PBR 共享空间对应关系以减少材质错位。</p>
+<h2>解决的问题</h2>
+<p>复杂网格需要同时保持细节、光滑表面和锐利边缘，纹理也必须准确贴合几何。</p>
+<h2>创新点</h2>
+<ul>
+<li>让 albedo 与金属度、粗糙度共享注意力位置关系，减少跨通道错位。</li>
+<li>形状模型规模扩展与材质空间对齐共同提高资产细节。</li>
+</ul>
+<h2>文章精读</h2>
+<h3>版本</h3>
+<ul>
+<li><strong>Hunyuan3D 2.5 LATTICE</strong>：形状基础模型扩展到报告中的最大 10B 规模，支持单图或四视图输入。</li>
+<li><strong>Hunyuan3D 2.5 PBR Paint</strong>：扩展多视图 PBR，增强通道间对齐及材质与几何的对应。</li>
+</ul>
+<h3>训练数据</h3>
+<p>扩大高质量复杂三维资产的数据、模型与计算规模；材质阶段使用多视图几何与 PBR 监督。</p>
+<h3>VAE 结构</h3>
+<p>/</p>
+<h3>Text Encoder</h3>
+<p>/</p>
+<h3>生成主体网络</h3>
+<p>LATTICE 为大规模形状扩散模型；纹理框架继承多视图 PBR 路线，使用 3D-aware RoPE 和双通道注意力。</p>
+<h3>训练 Trick</h3>
+<ul>
+<li>形状模型使用 guidance 与 step distillation。</li>
+<li>材质通道共享参考注意力的空间权重，但保留各自的 value 表征。</li>
+<li>光照不变一致性损失和两阶段分辨率提升，改善材质解耦与几何对齐。</li>
+</ul>
+<h3>新提出的创新点</h3>
+<ul>
+<li>让 albedo 与金属度、粗糙度共享注意力位置关系，减少跨通道错位。</li>
+<li>形状模型规模扩展与材质空间对齐共同提高资产细节。</li>
+</ul>
+<h3>局限性</h3>
+<ul>
+<li>/</li>
+</ul>
+<h2>资料来源</h2>
+<ul>
+<li><a href="https://arxiv.org/abs/2506.16504" rel="nofollow">arxiv</a></li>
+<li><a href="https://github.com/Tencent-Hunyuan/Hunyuan3D-2" rel="nofollow">official_repository</a></li>
+</ul>
+    </article>
+    <article class="summary-article summary-topic-entry" id="milestone-hunyuan3d-3">
+<h1>[2509.16XXX] Hunyuan3D · Hunyuan3D 3.0</h1>
+<h2>一句话结论</h2>
+<p>服务主线进入 3.0，官方记录强调几何和纹理生成质量更新。</p>
+<h2>解决的问题</h2>
+<p>更复杂的资产需要更高质量的白模和纹理结果。</p>
+<h2>创新点</h2>
+<ul>
+<li>公开能力变化（实现未披露）：更新三维白模与纹理生成质量。</li>
+</ul>
+<h2>文章精读</h2>
+<h3>版本</h3>
+<ul>
+<li><strong>Hunyuan3D 3.0</strong>：腾讯云发布记录明确 9 月 16 日上线新代三维生成能力；模型内部结构未披露。</li>
+</ul>
+<h3>训练数据</h3>
+<p>/</p>
+<h3>VAE 结构</h3>
+<p>/</p>
+<h3>Text Encoder</h3>
+<p>/</p>
+<h3>生成主体网络</h3>
+<p>/</p>
+<h3>训练 Trick</h3>
+<ul>
+<li>/</li>
+</ul>
+<h3>新提出的创新点</h3>
+<ul>
+<li>公开能力变化（实现未披露）：更新三维白模与纹理生成质量。</li>
+</ul>
+<h3>局限性</h3>
+<ul>
+<li>/</li>
+</ul>
+<h2>资料来源</h2>
+<ul>
+<li><a href="https://cloud.tencent.com/document/product/1804/120694" rel="nofollow">official_release_notes</a></li>
+</ul>
+    </article>
+    <article class="summary-article summary-topic-entry" id="milestone-hunyuan3d-omni">
+<h1>[2509.21245] Hunyuan3D · Hunyuan3D-Omni · 技术报告</h1>
+<p>日期口径：arXiv 首次提交日，明确技术报告节点。</p>
+<h2>一句话结论</h2>
+<p>把不同粒度的三维控制条件接到统一形状生成模型，增加构型可控性。</p>
+<h2>解决的问题</h2>
+<p>单张图片不能完整表达形状布局，设计过程还会给出局部点、体块和姿态约束。</p>
+<h2>创新点</h2>
+<ul>
+<li>统一多种三维条件，允许从粗布局到细结构表达生成约束。</li>
+</ul>
+<h2>文章精读</h2>
+<h3>版本</h3>
+<ul>
+<li><strong>Hunyuan3D-Omni</strong>：以统一框架接收点、体素、三维包围盒与人体姿态等多种控制条件。</li>
+</ul>
+<h3>训练数据</h3>
+<p>/</p>
+<h3>VAE 结构</h3>
+<p>/</p>
+<h3>Text Encoder</h3>
+<p>/</p>
+<h3>生成主体网络</h3>
+<p>基于 Hunyuan3D 2.1 扩展统一条件注入，使三维结构信号与形状扩散协同建模。</p>
+<h3>训练 Trick</h3>
+<ul>
+<li>/</li>
+</ul>
+<h3>新提出的创新点</h3>
+<ul>
+<li>统一多种三维条件，允许从粗布局到细结构表达生成约束。</li>
+</ul>
+<h3>局限性</h3>
+<ul>
+<li>/</li>
+</ul>
+<h2>资料来源</h2>
+<ul>
+<li><a href="https://arxiv.org/abs/2509.21245" rel="nofollow">arxiv</a></li>
+</ul>
+    </article>
+    <article class="summary-article summary-topic-entry" id="milestone-hunyuan3d-3-1">
+<h1>[2601.16XXX] Hunyuan3D · Hunyuan3D 3.1</h1>
+<h2>一句话结论</h2>
+<p>在 3.x 服务主线上加强多视图输入和资产细节。</p>
+<h2>解决的问题</h2>
+<p>增加参考视角可帮助表达单图没有呈现的结构，但具体网络如何处理仍未公开。</p>
+<h2>创新点</h2>
+<ul>
+<li>公开能力变化（实现未披露）：扩展多视图参考并改善几何、纹理。</li>
+</ul>
+<h2>文章精读</h2>
+<h3>版本</h3>
+<ul>
+<li><strong>Hunyuan3D 3.1</strong>：腾讯云发布记录明确 1 月 16 日上线；支持更多视图条件，升级几何与纹理表现。</li>
+</ul>
+<h3>训练数据</h3>
+<p>/</p>
+<h3>VAE 结构</h3>
+<p>/</p>
+<h3>Text Encoder</h3>
+<p>/</p>
+<h3>生成主体网络</h3>
+<p>/</p>
+<h3>训练 Trick</h3>
+<ul>
+<li>/</li>
+</ul>
+<h3>新提出的创新点</h3>
+<ul>
+<li>公开能力变化（实现未披露）：扩展多视图参考并改善几何、纹理。</li>
+</ul>
+<h3>局限性</h3>
+<ul>
+<li>/</li>
+</ul>
+<h2>资料来源</h2>
+<ul>
+<li><a href="https://cloud.tencent.com/document/product/1804/120694" rel="nofollow">official_release_notes</a></li>
+</ul>
+    </article>
+    <article class="summary-article summary-topic-entry" id="milestone-hunyuan3d-buffalo">
+<h1>[2608.02711] Hunyuan3D · Hunyuan3D-Buffalo 1.0 · 技术报告</h1>
+<p>日期口径：arXiv 首次提交日，明确技术报告节点。</p>
+<h2>一句话结论</h2>
+<p>让理解三维内容的视觉语言模型通过连接器指导形状扩散，连接生成、理解与编辑。</p>
+<h2>解决的问题</h2>
+<p>三维模型既要可生成，也需要能被语言理解和修改，分离的任务模型难以共享语义。</p>
+<h2>创新点</h2>
+<ul>
+<li>把三维视觉语言理解结果用作扩散条件。</li>
+<li>统一三维任务数据及训练，允许语言驱动编辑。</li>
+</ul>
+<h2>文章精读</h2>
+<h3>版本</h3>
+<ul>
+<li><strong>Hunyuan3D-Buffalo 1.0</strong>：统一三维理解、文字到三维与编辑的多模态模型；此节点采用报告日，不宣称权重已开放。</li>
+</ul>
+<h3>训练数据</h3>
+<p>Nano3D v2 统一三维语料包含约 8700 万样本：2500 万理解、5000 万文字到三维、1200 万编辑对。</p>
+<h3>VAE 结构</h3>
+<p>形状生成分支沿用 Hunyuan3D 2.1 的三维潜表示路线。</p>
+<h3>Text Encoder</h3>
+<p>Hunyuan3D-VLM 建立多模态语义，三维结构与 RGB 外观经不同路径编码后与语言表征对齐。</p>
+<h3>生成主体网络</h3>
+<p>Hunyuan3D-VLM 与由 2.1 初始化的 3D-DiT 通过 MLP connector 连接；视觉语言语义作为三维生成条件。</p>
+<h3>训练 Trick</h3>
+<ul>
+<li>先冻结视觉语言模型对齐连接器，再进行联合指令微调。</li>
+<li>结构和外观分别编码，统一训练三维理解、生成与编辑。</li>
+</ul>
+<h3>新提出的创新点</h3>
+<ul>
+<li>把三维视觉语言理解结果用作扩散条件。</li>
+<li>统一三维任务数据及训练，允许语言驱动编辑。</li>
+</ul>
+<h3>局限性</h3>
+<ul>
+<li>/</li>
+</ul>
+<h2>资料来源</h2>
+<ul>
+<li><a href="https://arxiv.org/abs/2608.02711" rel="nofollow">arxiv</a></li>
+</ul>
+    </article>
+      </div>
+    </section>
+  </main>
+
+</body>
+</html>

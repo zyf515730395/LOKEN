@@ -1,0 +1,434 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Hunyuan3D 官方模型版本时间线与技术对比。">
+  <title>Hunyuan3D · 身经百战</title>
+  <script>
+    (() => {
+      document.documentElement.classList.add("js");
+      let theme = null;
+      let contextOpen = null;
+      try {
+        theme = window.localStorage.getItem("arxiv-theme");
+        contextOpen = window.localStorage.getItem("togos-secondary-sidebar-collapsed");
+      } catch (error) { /* Storage can be unavailable. */ }
+      if (theme !== "light" && theme !== "dark") {
+        theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      }
+      document.documentElement.dataset.theme = theme;
+      if (contextOpen === "false") document.documentElement.dataset.contextOpen = "true";
+    })();
+  </script>
+  <link rel="stylesheet" href="../assets/css/site.css?v=12">
+  <script src="../assets/js/site-shell.js?v=12" defer></script>
+  <script src="../assets/js/search-core.js?v=12" defer></script>
+  <script src="../assets/js/search.js?v=12" defer></script>
+  <script src="../assets/js/sidebar.js?v=12" defer></script>
+</head>
+<body data-site-root="../" data-active-section="milestones" class="milestone-page">
+  <header class="site-utility" aria-label="页面工具">
+    <button class="sidebar-toggle" type="button" aria-controls="navigation-shell" aria-expanded="false">
+      <span aria-hidden="true" data-sidebar-toggle-icon>☰</span><span data-sidebar-toggle-label>导航</span>
+    </button>
+    <div class="site-search" data-search-root>
+      <label class="site-search-field" for="search-input">
+        <span aria-hidden="true">⌕</span>
+        <input id="search-input" type="search" placeholder="搜索文章标题"
+               aria-label="搜索文章标题" role="combobox"
+               autocomplete="off" aria-autocomplete="list" aria-controls="search-results" aria-expanded="false">
+        <kbd aria-hidden="true">Ctrl K</kbd>
+      </label>
+      <div class="search-popover" data-search-popover hidden>
+        <p class="search-status" data-search-status aria-live="polite">输入标题关键词开始搜索</p>
+        <div id="search-results" class="search-results" data-search-results role="listbox"></div>
+      </div>
+    </div>
+    <button class="theme-toggle" type="button" aria-label="切换颜色主题" aria-pressed="false">
+      <span data-theme-icon aria-hidden="true"></span>
+    </button>
+  </header>
+  <div class="sidebar-scrim" data-sidebar-close></div>
+<div class="navigation-shell" id="navigation-shell">
+  <button class="navigation-close" type="button" data-navigation-close
+          aria-label="关闭导航" hidden>×</button>
+  <aside class="primary-sidebar" aria-label="知识主题">
+    <a class="primary-brand" href="../index.html" aria-label="LOKEN 首页"><img class="brand-logo" src="../assets/images/loken-logo.png" width="1990" height="329" alt=""></a>
+    <div class="primary-menu" aria-hidden="true"><span>MENU</span><span>☰</span></div>
+    <nav class="primary-navigation" aria-label="知识主题">
+      <a class="primary-nav-item" href="../index.html"><span class="primary-nav-copy"><span class="primary-nav-label">学习一个</span><span class="primary-nav-meta">01 / PAPERS</span></span></a>
+      <a class="primary-nav-item is-active" href="../milestone-models/flux.html" aria-current="page"><span class="primary-nav-copy"><span class="primary-nav-label">身经百战</span><span class="primary-nav-meta">02 / CLASSIC MODELS</span></span></a>
+      <a class="primary-nav-item" href="../writings/index.html"><span class="primary-nav-copy"><span class="primary-nav-label">谈笑风生</span><span class="primary-nav-meta">03 / ARTICLES</span></span></a>
+      <a class="primary-nav-item" href="../journeys/index.html"><span class="primary-nav-copy"><span class="primary-nav-label">跑得还快</span><span class="primary-nav-meta">04 / TRAVELS</span></span></a>
+    </nav>
+    <div class="primary-sidebar-status"><span>LAST SYNC</span><strong>AUTOMATED / WEEKDAYS</strong></div>
+  </aside>
+</div>
+  <main class="page-content" id="top">
+    <div class="section-sticky-header">
+    <header class="milestone-hero section-header">
+      <div class="section-intro">
+        <h1 class="section-intro-title" id="section-milestones-title">MODELS</h1>
+        <p class="section-intro-description">这些模型是身经百战了</p>
+      </div>
+    </header>
+<nav class="context-strip" aria-label="模型系列">
+    <a class="context-strip-link" href="flux.html">FLUX</a>
+    <a class="context-strip-link" href="qwen-image.html">Qwen-Image</a>
+    <a class="context-strip-link" href="seedream.html">Seedream</a>
+    <a class="context-strip-link" href="stable-diffusion.html">Stable Diffusion</a>
+    <a class="context-strip-link" href="z-image.html">Z-Image</a>
+    <a class="context-strip-link" href="wan.html">Wan</a>
+    <a class="context-strip-link" href="seedance.html">Seedance</a>
+    <a class="context-strip-link is-active" href="hunyuan3d.html" aria-current="location">Hunyuan3D</a>
+    <span class="context-strip-link is-disabled" aria-disabled="true">VGGT</span>
+  </nav>
+    </div>
+    <div class="milestone-workspace">
+      <header class="milestone-family-header">
+      <div class="milestone-title-block">
+        <p>3D Generation · Tencent Hunyuan</p>
+        <h2>Hunyuan3D</h2>
+        <span>官方模型版本演进与核心技术对比</span>
+      </div>
+      <div class="milestone-hero-meta">
+        <ul class="status-legend" aria-label="发布状态图例"><li><span class="release-status status-released">已发布</span><span>已发布</span></li><li><span class="release-status status-early-access">Early Access</span><span>Early Access</span></li><li><span class="release-status status-announced">已宣布</span><span>已宣布</span></li></ul>
+        <p>Updated 2026-09-06</p>
+      </div>
+      </header>
+      <div class="milestone-overview">
+<section class="milestone-panel timeline-panel" aria-labelledby="timeline-heading">
+  <div class="milestone-panel-heading">
+    <div><p>ROADMAP</p><h2 id="timeline-heading">时间线</h2></div>
+    <span>可横向拖动</span>
+  </div>
+  <div class="milestone-timeline-viewport" data-drag-scroll tabindex="0" aria-label="Hunyuan3D 时间线，使用左右方向键或拖动浏览">
+    <ol class="milestone-timeline">
+      <li class="timeline-release status-released">
+        <span class="timeline-dot" aria-hidden="true"></span>
+        <time datetime="2024-11-05">2024-11-05</time>
+        <h3>Hunyuan3D 1.0</h3>
+        <span class="release-status status-released">已发布</span>
+        <ul><li>Hunyuan3D 1.0 Lite</li><li>Hunyuan3D 1.0 Standard</li></ul>
+      </li>
+      <li class="timeline-release status-released">
+        <span class="timeline-dot" aria-hidden="true"></span>
+        <time datetime="2025-01-21">2025-01-21</time>
+        <h3>Hunyuan3D 2.0</h3>
+        <span class="release-status status-released">已发布</span>
+        <ul><li>Hunyuan3D-DiT v2.0</li><li>Hunyuan3D-Paint v2.0</li></ul>
+      </li>
+      <li class="timeline-release status-released">
+        <span class="timeline-dot" aria-hidden="true"></span>
+        <time datetime="2025-02-03">2025-02-03</time>
+        <h3>Hunyuan3D 2.0 Fast</h3>
+        <span class="release-status status-released">已发布</span>
+        <ul><li>Hunyuan3D-DiT v2.0 Fast</li></ul>
+      </li>
+      <li class="timeline-release status-released">
+        <span class="timeline-dot" aria-hidden="true"></span>
+        <time datetime="2025-03-18">2025-03-18</time>
+        <h3>Hunyuan3D 2 Mini / Multi-view</h3>
+        <span class="release-status status-released">已发布</span>
+        <ul><li>Hunyuan3D-2mini</li><li>Hunyuan3D-2mv</li></ul>
+      </li>
+      <li class="timeline-release status-released">
+        <span class="timeline-dot" aria-hidden="true"></span>
+        <time datetime="2025-03-19">2025-03-19</time>
+        <h3>Hunyuan3D 2 Turbo</h3>
+        <span class="release-status status-released">已发布</span>
+        <ul><li>Hunyuan3D-2 Turbo</li><li>Hunyuan3D-2mini Turbo</li><li>Hunyuan3D-2mv Turbo</li></ul>
+      </li>
+      <li class="timeline-release status-released">
+        <span class="timeline-dot" aria-hidden="true"></span>
+        <time datetime="2025-06-13">2025-06-13</time>
+        <h3>Hunyuan3D 2.1</h3>
+        <span class="release-status status-released">已发布</span>
+        <ul><li>Hunyuan3D-Shape 2.1</li><li>Hunyuan3D-Paint 2.1</li></ul>
+      </li>
+      <li class="timeline-release status-released">
+        <span class="timeline-dot" aria-hidden="true"></span>
+        <time datetime="2025-06-19">2025-06-19</time>
+        <h3>Hunyuan3D 2.5 · 技术报告</h3>
+        <span class="release-status status-released">已发布</span>
+        <ul><li>Hunyuan3D 2.5 LATTICE</li><li>Hunyuan3D 2.5 PBR Paint</li></ul>
+      </li>
+      <li class="timeline-release status-released">
+        <span class="timeline-dot" aria-hidden="true"></span>
+        <time datetime="2025-09-16">2025-09-16</time>
+        <h3>Hunyuan3D 3.0</h3>
+        <span class="release-status status-released">已发布</span>
+        <ul><li>Hunyuan3D 3.0</li></ul>
+      </li>
+      <li class="timeline-release status-released">
+        <span class="timeline-dot" aria-hidden="true"></span>
+        <time datetime="2025-09-25">2025-09-25</time>
+        <h3>Hunyuan3D-Omni · 技术报告</h3>
+        <span class="release-status status-released">已发布</span>
+        <ul><li>Hunyuan3D-Omni</li></ul>
+      </li>
+      <li class="timeline-release status-released">
+        <span class="timeline-dot" aria-hidden="true"></span>
+        <time datetime="2026-01-16">2026-01-16</time>
+        <h3>Hunyuan3D 3.1</h3>
+        <span class="release-status status-released">已发布</span>
+        <ul><li>Hunyuan3D 3.1</li></ul>
+      </li>
+      <li class="timeline-release status-released">
+        <span class="timeline-dot" aria-hidden="true"></span>
+        <time datetime="2026-08-03">2026-08-03</time>
+        <h3>Hunyuan3D-Buffalo 1.0 · 技术报告</h3>
+        <span class="release-status status-released">已发布</span>
+        <ul><li>Hunyuan3D-Buffalo 1.0</li></ul>
+      </li>
+    </ol>
+  </div>
+</section>
+<section class="model-specimen" aria-labelledby="model-specimen-heading">
+  <div class="model-specimen-heading">
+    <p>SELECTED SPECIMEN</p>
+    <h2 id="model-specimen-heading">最新发布节点</h2>
+  </div>
+  <div class="model-specimen-graphic" aria-hidden="true">
+    <span></span><span></span><span></span>
+  </div>
+  <dl class="model-specimen-data">
+    <div><dt>MODEL</dt><dd>Hunyuan3D-Buffalo 1.0 · 技术报告</dd></div>
+    <div><dt>RELEASED</dt><dd><time datetime="2026-08-03">2026-08-03</time></dd></div>
+    <div><dt>ORGANIZATION</dt><dd>Tencent Hunyuan</dd></div>
+    <div><dt>STATUS</dt><dd><span class="release-status status-released">已发布</span></dd></div>
+    <div><dt>READING</dt><dd>精读已就绪</dd></div>
+  </dl>
+</section>
+      </div>
+<section class="milestone-panel comparison-panel" aria-labelledby="comparison-heading">
+  <div class="milestone-panel-heading">
+    <div><p>COMPARISON</p><h2 id="comparison-heading">模型对比</h2></div>
+    <span>内容来自本地 Markdown 精读</span>
+  </div>
+  <div class="milestone-table-scroll">
+    <table class="milestone-comparison-table">
+      <thead><tr><th scope="col">对比项</th>
+        <th scope="col" class="milestone-version-heading">
+          <time datetime="2024-11-05">2024-11-05</time>
+          <strong>Hunyuan3D 1.0</strong>
+          <span class="release-status status-released">已发布</span>
+          <span class="milestone-release-count">1 个官方发布节点</span>
+          <div class="milestone-source-links"><a href="https://arxiv.org/abs/2411.02293" target="_blank" rel="noopener">官方资料 1</a> · <a href="https://github.com/Tencent-Hunyuan/Hunyuan3D-1" target="_blank" rel="noopener">官方资料 2</a></div>
+          <a class="milestone-note-link" href="hunyuan3d-notes.html#milestone-hunyuan3d-1">查看代际精读</a>
+        </th>
+        <th scope="col" class="milestone-version-heading">
+          <time datetime="2025-01-21">2025-01-21 — 2025-03-19</time>
+          <strong>Hunyuan3D 2.0</strong>
+          <span class="release-status status-released">已发布</span>
+          <span class="milestone-release-count">4 个官方发布节点</span>
+          <div class="milestone-source-links"><a href="https://arxiv.org/abs/2501.12202" target="_blank" rel="noopener">官方资料 1</a> · <a href="https://github.com/Tencent-Hunyuan/Hunyuan3D-2" target="_blank" rel="noopener">官方资料 2</a></div>
+          <a class="milestone-note-link" href="hunyuan3d-notes.html#milestone-hunyuan3d-2">查看代际精读</a>
+        </th>
+        <th scope="col" class="milestone-version-heading">
+          <time datetime="2025-06-13">2025-06-13</time>
+          <strong>Hunyuan3D 2.1</strong>
+          <span class="release-status status-released">已发布</span>
+          <span class="milestone-release-count">1 个官方发布节点</span>
+          <div class="milestone-source-links"><a href="https://arxiv.org/abs/2506.15442" target="_blank" rel="noopener">官方资料 1</a> · <a href="https://github.com/Tencent-Hunyuan/Hunyuan3D-2.1" target="_blank" rel="noopener">官方资料 2</a></div>
+          <a class="milestone-note-link" href="hunyuan3d-notes.html#milestone-hunyuan3d-2-1">查看代际精读</a>
+        </th>
+        <th scope="col" class="milestone-version-heading">
+          <time datetime="2025-06-19">2025-06-19</time>
+          <strong>Hunyuan3D 2.5</strong>
+          <span class="release-status status-released">已发布</span>
+          <span class="milestone-release-count">1 个官方发布节点</span>
+          <div class="milestone-source-links"><a href="https://arxiv.org/abs/2506.16504" target="_blank" rel="noopener">官方资料 1</a> · <a href="https://github.com/Tencent-Hunyuan/Hunyuan3D-2" target="_blank" rel="noopener">官方资料 2</a></div>
+          <a class="milestone-note-link" href="hunyuan3d-notes.html#milestone-hunyuan3d-2-5">查看代际精读</a>
+        </th>
+        <th scope="col" class="milestone-version-heading">
+          <time datetime="2025-09-16">2025-09-16 — 2026-01-16</time>
+          <strong>Hunyuan3D 3.0</strong>
+          <span class="release-status status-released">已发布</span>
+          <span class="milestone-release-count">2 个官方发布节点</span>
+          <div class="milestone-source-links"><a href="https://cloud.tencent.com/document/product/1804/120694" target="_blank" rel="noopener">官方资料 1</a></div>
+          <a class="milestone-note-link" href="hunyuan3d-notes.html#milestone-hunyuan3d-3">查看代际精读</a>
+        </th>
+        <th scope="col" class="milestone-version-heading">
+          <time datetime="2025-09-25">2025-09-25</time>
+          <strong>Hunyuan3D-Omni</strong>
+          <span class="release-status status-released">已发布</span>
+          <span class="milestone-release-count">1 个官方发布节点</span>
+          <div class="milestone-source-links"><a href="https://arxiv.org/abs/2509.21245" target="_blank" rel="noopener">官方资料 1</a></div>
+          <a class="milestone-note-link" href="hunyuan3d-notes.html#milestone-hunyuan3d-omni">查看代际精读</a>
+        </th>
+        <th scope="col" class="milestone-version-heading">
+          <time datetime="2026-08-03">2026-08-03</time>
+          <strong>Hunyuan3D-Buffalo 1.0</strong>
+          <span class="release-status status-released">已发布</span>
+          <span class="milestone-release-count">1 个官方发布节点</span>
+          <div class="milestone-source-links"><a href="https://arxiv.org/abs/2608.02711" target="_blank" rel="noopener">官方资料 1</a></div>
+          <a class="milestone-note-link" href="hunyuan3d-notes.html#milestone-hunyuan3d-buffalo">查看代际精读</a>
+        </th>
+      </tr></thead>
+      <tbody>
+        <tr><th scope="row">版本</th>
+          <td><section class="milestone-minor-release"><header><strong>Hunyuan3D 1.0</strong><a href="hunyuan3d-notes.html#milestone-hunyuan3d-1">精读</a></header><ul>
+<li><strong>Hunyuan3D 1.0 Lite</strong>：较小多视图生成档，生成视图组成 960×640 网格，再重建三维。</li>
+<li><strong>Hunyuan3D 1.0 Standard</strong>：更大多视图生成档，使用 1536×1024 视图网格；两档都支持文字或图像条件。</li>
+</ul></section></td>
+          <td><section class="milestone-minor-release"><header><strong>Hunyuan3D 2.0</strong><a href="hunyuan3d-notes.html#milestone-hunyuan3d-2">精读</a></header><ul>
+<li><strong>Hunyuan3D-DiT v2.0</strong>：直接在三维形状潜空间进行流式扩散，先生成无纹理网格。</li>
+<li><strong>Hunyuan3D-Paint v2.0</strong>：以形状和参考图为条件生成多视图纹理，再烘焙回网格。</li>
+</ul></section><section class="milestone-minor-release"><header><strong>Hunyuan3D 2.0 Fast</strong><a href="hunyuan3d-notes.html#milestone-hunyuan3d-2-fast">精读</a></header><ul>
+<li><strong>Hunyuan3D-DiT v2.0 Fast</strong>：官方 guidance-distilled 版本，通过引导蒸馏减少推理开销。</li>
+</ul></section><section class="milestone-minor-release"><header><strong>Hunyuan3D 2 Mini / Multi-view</strong><a href="hunyuan3d-notes.html#milestone-hunyuan3d-2-mini-mv">精读</a></header><ul>
+<li><strong>Hunyuan3D-2mini</strong>：0.6B 小型形状模型，降低模型规模。</li>
+<li><strong>Hunyuan3D-2mv</strong>：支持多视图条件的 1.1B 形状模型，利用多个角度约束几何。</li>
+</ul></section><section class="milestone-minor-release"><header><strong>Hunyuan3D 2 Turbo</strong><a href="hunyuan3d-notes.html#milestone-hunyuan3d-2-turbo">精读</a></header><ul>
+<li><strong>Hunyuan3D-2 Turbo</strong>：2.0 形状主线的少步蒸馏版本。</li>
+<li><strong>Hunyuan3D-2mini Turbo</strong>：Mini 主线的少步蒸馏版本。</li>
+<li><strong>Hunyuan3D-2mv Turbo</strong>：多视图主线的少步蒸馏版本。</li>
+</ul></section></td>
+          <td><section class="milestone-minor-release"><header><strong>Hunyuan3D 2.1</strong><a href="hunyuan3d-notes.html#milestone-hunyuan3d-2-1">精读</a></header><ul>
+<li><strong>Hunyuan3D-Shape 2.1</strong>：升级三维形状生成，并公开训练相关能力。</li>
+<li><strong>Hunyuan3D-Paint 2.1</strong>：将纹理升级为 PBR 材质，生成 albedo、metallic 和 roughness。</li>
+</ul></section></td>
+          <td><section class="milestone-minor-release"><header><strong>Hunyuan3D 2.5 · 技术报告</strong><a href="hunyuan3d-notes.html#milestone-hunyuan3d-2-5">精读</a></header><ul>
+<li><strong>Hunyuan3D 2.5 LATTICE</strong>：形状基础模型扩展到报告中的最大 10B 规模，支持单图或四视图输入。</li>
+<li><strong>Hunyuan3D 2.5 PBR Paint</strong>：扩展多视图 PBR，增强通道间对齐及材质与几何的对应。</li>
+</ul></section></td>
+          <td><section class="milestone-minor-release"><header><strong>Hunyuan3D 3.0</strong><a href="hunyuan3d-notes.html#milestone-hunyuan3d-3">精读</a></header><ul>
+<li><strong>Hunyuan3D 3.0</strong>：腾讯云发布记录明确 9 月 16 日上线新代三维生成能力；模型内部结构未披露。</li>
+</ul></section><section class="milestone-minor-release"><header><strong>Hunyuan3D 3.1</strong><a href="hunyuan3d-notes.html#milestone-hunyuan3d-3-1">精读</a></header><ul>
+<li><strong>Hunyuan3D 3.1</strong>：腾讯云发布记录明确 1 月 16 日上线；支持更多视图条件，升级几何与纹理表现。</li>
+</ul></section></td>
+          <td><section class="milestone-minor-release"><header><strong>Hunyuan3D-Omni · 技术报告</strong><a href="hunyuan3d-notes.html#milestone-hunyuan3d-omni">精读</a></header><ul>
+<li><strong>Hunyuan3D-Omni</strong>：以统一框架接收点、体素、三维包围盒与人体姿态等多种控制条件。</li>
+</ul></section></td>
+          <td><section class="milestone-minor-release"><header><strong>Hunyuan3D-Buffalo 1.0 · 技术报告</strong><a href="hunyuan3d-notes.html#milestone-hunyuan3d-buffalo">精读</a></header><ul>
+<li><strong>Hunyuan3D-Buffalo 1.0</strong>：统一三维理解、文字到三维与编辑的多模态模型；此节点采用报告日，不宣称权重已开放。</li>
+</ul></section></td>
+        </tr>
+        <tr><th scope="row">训练数据</th>
+          <td><p>内部三维资产数据经过场景复杂度、纹理与变形筛选，归一化后渲染 24 个零仰角视图；训练和目标视图组合从中构造。</p></td>
+          <td><p>清洗后的三维资产提供表面点、法向、SDF 和多视图渲染监督；几何与纹理分别准备训练目标。</p></td>
+          <td><p>三维资产提供几何表面、法线和渲染材质监督；PBR 训练分别监督反照率与金属度、粗糙度。</p></td>
+          <td><p>扩大高质量复杂三维资产的数据、模型与计算规模；材质阶段使用多视图几何与 PBR 监督。</p></td>
+          <td><p>/</p></td>
+          <td><p>/</p></td>
+          <td><p>Nano3D v2 统一三维语料包含约 8700 万样本：2500 万理解、5000 万文字到三维、1200 万编辑对。</p></td>
+        </tr>
+        <tr><th scope="row">VAE 结构</th>
+          <td><p>/</p></td>
+          <td><p>ShapeVAE 以表面点坐标和法向编码为连续向量集合，解码器预测 SDF，再用 marching cubes 得到三角网格。</p></td>
+          <td><p>ShapeVAE 以带法向的表面点压缩为向量集合，解码 SDF 后提取网格。</p></td>
+          <td><p>/</p></td>
+          <td><p>/</p></td>
+          <td><p>/</p></td>
+          <td><p>形状生成分支沿用 Hunyuan3D 2.1 的三维潜表示路线。</p></td>
+        </tr>
+        <tr><th scope="row">Text Encoder</th>
+          <td><p>/</p></td>
+          <td><p>/</p></td>
+          <td><p>/</p></td>
+          <td><p>/</p></td>
+          <td><p>/</p></td>
+          <td><p>/</p></td>
+          <td><p>Hunyuan3D-VLM 建立多模态语义，三维结构与 RGB 外观经不同路径编码后与语言表征对齐。</p></td>
+        </tr>
+        <tr><th scope="row">生成主体网络</th>
+          <td><p>Lite 的多视图扩散主干来自 SD 2.1，Standard 来自 SDXL，均使用参考注意力；第二阶段以 DINO 提取图像特征，再由 Transformer 融合已知与未知姿态图像并预测 triplane。</p></td>
+          <td><p>形状阶段为基于流匹配的 Hunyuan3D-DiT；Paint 阶段采用参考图与几何条件约束的多视图扩散。</p></td>
+          <td><p>形状部分为潜空间流式 DiT；Paint 使用并行双分支 U-Net，通过跨视图和参考注意力生成 albedo 与 metallic-roughness。</p></td>
+          <td><p>LATTICE 为大规模形状扩散模型；纹理框架继承多视图 PBR 路线，使用 3D-aware RoPE 和双通道注意力。</p></td>
+          <td><p>/</p></td>
+          <td><p>基于 Hunyuan3D 2.1 扩展统一条件注入，使三维结构信号与形状扩散协同建模。</p></td>
+          <td><p>Hunyuan3D-VLM 与由 2.1 初始化的 3D-DiT 通过 MLP connector 连接；视觉语言语义作为三维生成条件。</p></td>
+        </tr>
+        <tr><th scope="row">训练 Trick</th>
+          <td><ul>
+<li>按视图调整 classifier-free guidance，协调几何稳定性与纹理细节。</li>
+<li>多视图扩散与重建分别训练；重建从 256 级输入训练后，以 512 级输入微调。</li>
+</ul></td>
+          <td><ul>
+<li>重要性采样突出形状复杂区域，改善 ShapeVAE 细节重建。</li>
+<li>形状与纹理分阶段训练和推理。</li>
+</ul></td>
+          <td><ul>
+<li>几何与材质分阶段训练。</li>
+<li>多视图与参考注意力约束不同视角的材质一致性。</li>
+</ul></td>
+          <td><ul>
+<li>形状模型使用 guidance 与 step distillation。</li>
+<li>材质通道共享参考注意力的空间权重，但保留各自的 value 表征。</li>
+<li>光照不变一致性损失和两阶段分辨率提升，改善材质解耦与几何对齐。</li>
+</ul></td>
+          <td><ul>
+<li>/</li>
+</ul></td>
+          <td><ul>
+<li>/</li>
+</ul></td>
+          <td><ul>
+<li>先冻结视觉语言模型对齐连接器，再进行联合指令微调。</li>
+<li>结构和外观分别编码，统一训练三维理解、生成与编辑。</li>
+</ul></td>
+        </tr>
+        <tr><th scope="row">新提出的创新点</th>
+          <td><ul>
+<li>把多视图生成和稀疏视图重建联合设计。</li>
+<li>零仰角相机布置与视图感知引导改善重建条件。</li>
+</ul></td>
+          <td><ul>
+<li>直接对紧凑三维形状表示建模，替代纯多视图重建路径。</li>
+<li>解耦几何和纹理，使网格可单独生成或重绘材质。</li>
+</ul></td>
+          <td><ul>
+<li>将外观分解为可重光照的 PBR 材质通道。</li>
+</ul></td>
+          <td><ul>
+<li>让 albedo 与金属度、粗糙度共享注意力位置关系，减少跨通道错位。</li>
+<li>形状模型规模扩展与材质空间对齐共同提高资产细节。</li>
+</ul></td>
+          <td><ul>
+<li>公开能力变化（实现未披露）：更新三维白模与纹理生成质量。</li>
+</ul></td>
+          <td><ul>
+<li>统一多种三维条件，允许从粗布局到细结构表达生成约束。</li>
+</ul></td>
+          <td><ul>
+<li>把三维视觉语言理解结果用作扩散条件。</li>
+<li>统一三维任务数据及训练，允许语言驱动编辑。</li>
+</ul></td>
+        </tr>
+        <tr><th scope="row">局限性</th>
+          <td><ul>
+<li>/</li>
+</ul></td>
+          <td><ul>
+<li>/</li>
+</ul></td>
+          <td><ul>
+<li>/</li>
+</ul></td>
+          <td><ul>
+<li>/</li>
+</ul></td>
+          <td><ul>
+<li>/</li>
+</ul></td>
+          <td><ul>
+<li>/</li>
+</ul></td>
+          <td><ul>
+<li>/</li>
+</ul></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+    </div>
+    <footer>仅收录官方发布 · 未披露的技术信息以 / 表示</footer>
+
+  </main>
+
+</body>
+</html>
