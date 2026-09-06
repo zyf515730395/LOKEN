@@ -1,6 +1,6 @@
 # 论文分类模块规则
 
-- 本目录只负责配置驱动的论文多标签与 `paper`/`survey` 分类，不负责论文筛选决定或摘要正文生成。
+- 本目录只负责配置驱动的论文主题、细节标签、`paper`/`survey` 分类与有证据的机构提取，不负责论文筛选决定或摘要正文生成。
 - 模型只能通过共享 loopback transport 调用；原始输入、响应、缓存和报告只能写入已忽略的 `build/paper-summaries/`。
 - 公开分类真源固定为 `data/paper-annotations.json`，写入前必须完成严格 schema 校验并使用原子替换。
 - 标签名称、顺序和判定说明只来自 `config/site.yaml`；代码不得硬编码可选标签。
