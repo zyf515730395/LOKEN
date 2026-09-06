@@ -1,0 +1,491 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Stable Diffusion 版本文章精读。">
+  <title>Stable Diffusion · 文章精读</title>
+  <script>
+    (() => {
+      document.documentElement.classList.add("js");
+      let theme = null;
+      let contextOpen = null;
+      try {
+        theme = window.localStorage.getItem("arxiv-theme");
+        contextOpen = window.localStorage.getItem("togos-secondary-sidebar-collapsed");
+      } catch (error) { /* Storage can be unavailable. */ }
+      if (theme !== "light" && theme !== "dark") {
+        theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      }
+      document.documentElement.dataset.theme = theme;
+      if (contextOpen === "false") document.documentElement.dataset.contextOpen = "true";
+    })();
+  </script>
+  <link rel="stylesheet" href="../assets/css/site.css?v=12">
+  <script src="../assets/js/site-shell.js?v=12" defer></script>
+  <script src="../assets/js/search-core.js?v=12" defer></script>
+  <script src="../assets/js/search.js?v=12" defer></script>
+  <script src="../assets/js/sidebar.js?v=12" defer></script>
+</head>
+<body data-site-root="../" data-active-section="milestones" class="summary-page milestone-notes-page">
+  <header class="site-utility" aria-label="页面工具">
+    <button class="sidebar-toggle" type="button" aria-controls="navigation-shell" aria-expanded="false">
+      <span aria-hidden="true" data-sidebar-toggle-icon>☰</span><span data-sidebar-toggle-label>导航</span>
+    </button>
+    <div class="site-search" data-search-root>
+      <label class="site-search-field" for="search-input">
+        <span aria-hidden="true">⌕</span>
+        <input id="search-input" type="search" placeholder="搜索文章标题"
+               aria-label="搜索文章标题" role="combobox"
+               autocomplete="off" aria-autocomplete="list" aria-controls="search-results" aria-expanded="false">
+        <kbd aria-hidden="true">Ctrl K</kbd>
+      </label>
+      <div class="search-popover" data-search-popover hidden>
+        <p class="search-status" data-search-status aria-live="polite">输入标题关键词开始搜索</p>
+        <div id="search-results" class="search-results" data-search-results role="listbox"></div>
+      </div>
+    </div>
+    <button class="theme-toggle" type="button" aria-label="切换颜色主题" aria-pressed="false">
+      <span data-theme-icon aria-hidden="true"></span>
+    </button>
+  </header>
+  <div class="sidebar-scrim" data-sidebar-close></div>
+<div class="navigation-shell" id="navigation-shell">
+  <button class="navigation-close" type="button" data-navigation-close
+          aria-label="关闭导航" hidden>×</button>
+  <aside class="primary-sidebar" aria-label="知识主题">
+    <a class="primary-brand" href="../index.html" aria-label="LOKEN 首页"><img class="brand-logo" src="../assets/images/loken-logo.png" width="1990" height="329" alt=""></a>
+    <div class="primary-menu" aria-hidden="true"><span>MENU</span><span>☰</span></div>
+    <nav class="primary-navigation" aria-label="知识主题">
+      <a class="primary-nav-item" href="../index.html"><span class="primary-nav-copy"><span class="primary-nav-label">学习一个</span><span class="primary-nav-meta">01 / PAPERS</span></span></a>
+      <a class="primary-nav-item is-active" href="../milestone-models/flux.html" aria-current="page"><span class="primary-nav-copy"><span class="primary-nav-label">身经百战</span><span class="primary-nav-meta">02 / CLASSIC MODELS</span></span></a>
+      <a class="primary-nav-item" href="../writings/index.html"><span class="primary-nav-copy"><span class="primary-nav-label">谈笑风生</span><span class="primary-nav-meta">03 / ARTICLES</span></span></a>
+      <a class="primary-nav-item" href="../journeys/index.html"><span class="primary-nav-copy"><span class="primary-nav-label">跑得还快</span><span class="primary-nav-meta">04 / TRAVELS</span></span></a>
+    </nav>
+    <div class="primary-sidebar-status"><span>LAST SYNC</span><strong>AUTOMATED / WEEKDAYS</strong></div>
+  </aside>
+</div>
+  <main class="page-content" id="top">
+<section class="summary-page-shell" aria-labelledby="notes-page-title">
+      <header class="summary-topic-header">
+        <a class="summary-back" href="stable-diffusion.html">← 返回版本对比</a>
+        <h1 id="notes-page-title">Stable Diffusion · 文章精读</h1>
+      </header>
+<nav class="context-strip" aria-label="模型系列">
+    <a class="context-strip-link" href="flux.html">FLUX</a>
+    <a class="context-strip-link" href="qwen-image.html">Qwen-Image</a>
+    <a class="context-strip-link" href="seedream.html">Seedream</a>
+    <a class="context-strip-link is-active" href="stable-diffusion.html" aria-current="location">Stable Diffusion</a>
+    <span class="context-strip-link is-disabled" aria-disabled="true">Z-Image</span>
+    <span class="context-strip-link is-disabled" aria-disabled="true">Wan</span>
+    <span class="context-strip-link is-disabled" aria-disabled="true">Hunyuan3D</span>
+    <span class="context-strip-link is-disabled" aria-disabled="true">VGGT</span>
+  </nav>
+      <details class="content-tools" open>
+        <summary>版本精读目录</summary>
+        <nav class="content-tools-navigation" aria-label="版本精读目录">
+<a class="context-filter" href="#milestone-sd-1">Stable Diffusion 1.x</a>
+<a class="context-filter" href="#milestone-sd-2">Stable Diffusion 2.0</a>
+<a class="context-filter" href="#milestone-sd-2-1">Stable Diffusion 2.1</a>
+<a class="context-filter" href="#milestone-sdxl">SDXL 1.0</a>
+<a class="context-filter" href="#milestone-sdxl-turbo">SDXL Turbo / SD-Turbo</a>
+<a class="context-filter" href="#milestone-sd-3">Stable Diffusion 3 · API 上线</a>
+<a class="context-filter" href="#milestone-sd-3-medium">Stable Diffusion 3 Medium</a>
+<a class="context-filter" href="#milestone-sd-3-5-large">Stable Diffusion 3.5 Large</a>
+<a class="context-filter" href="#milestone-sd-3-5-medium">Stable Diffusion 3.5 Medium</a>
+        </nav>
+      </details>
+      <div class="summary-topic-list">
+    <article class="summary-article summary-topic-entry" id="milestone-sd-1">
+<h1>[2112.10752] Stable Diffusion · Stable Diffusion 1.x</h1>
+<p>日期口径：1.x 官方公开发布日；1.5 只作代内变体，不虚构其精确日期。</p>
+<h2>一句话结论</h2>
+<p>把扩散过程移入压缩潜空间，使高质量文生图能在更有限的算力上运行。</p>
+<h2>解决的问题</h2>
+<p>直接在像素空间反复去噪开销高，需要保留图像细节而显著缩小扩散状态。</p>
+<h2>创新点</h2>
+<ul>
+<li>将感知压缩与语义生成分开，减少高分辨率扩散的计算负担。</li>
+</ul>
+<h2>文章精读</h2>
+<h3>版本</h3>
+<ul>
+<li><strong>Stable Diffusion 1.4</strong>：2022 年 8 月公开发布的 1.x 主线权重，采用 512 级图像训练。</li>
+<li><strong>Stable Diffusion 1.5</strong>：官方后续 1.x 检查点，由 1.2 继续训练；此处作为同代变体比较，不把 8 月 22 日当作 1.5 的发布日期。</li>
+</ul>
+<h3>训练数据</h3>
+<p>使用 LAION 图文数据及其高分辨率、美学筛选子集，逐阶段提高训练分辨率和图像质量。</p>
+<h3>VAE 结构</h3>
+<p>自编码器把 RGB 图像压缩为空间缩小 8 倍、4 通道的潜表示；扩散完成后解码回图像。</p>
+<h3>Text Encoder</h3>
+<p>冻结的 CLIP ViT-L/14 文本编码器，通过交叉注意力给去噪网络提供条件。</p>
+<h3>生成主体网络</h3>
+<p>潜空间 U-Net，卷积层处理局部结构，注意力与交叉注意力连接全局及文本条件。</p>
+<h3>训练 Trick</h3>
+<ul>
+<li>阶段性训练和文本条件随机丢弃支持 classifier-free guidance。</li>
+</ul>
+<h3>新提出的创新点</h3>
+<ul>
+<li>将感知压缩与语义生成分开，减少高分辨率扩散的计算负担。</li>
+</ul>
+<h3>局限性</h3>
+<ul>
+<li>/</li>
+</ul>
+<h2>资料来源</h2>
+<ul>
+<li><a href="https://arxiv.org/abs/2112.10752" rel="nofollow">arxiv</a></li>
+<li><a href="https://stability.ai/news-updates/stable-diffusion-public-release" rel="nofollow">official_blog</a></li>
+<li><a href="https://github.com/CompVis/stable-diffusion" rel="nofollow">official_repository</a></li>
+</ul>
+    </article>
+    <article class="summary-article summary-topic-entry" id="milestone-sd-2">
+<h1>[2211.24XXX] Stable Diffusion · Stable Diffusion 2.0</h1>
+<h2>一句话结论</h2>
+<p>第二代保留潜空间扩散路线，更换文本条件并扩展分辨率与专用生成任务。</p>
+<h2>解决的问题</h2>
+<p>基础生成之外，还需要在更高分辨率下保留语义，并支持结构控制、放大和修复。</p>
+<h2>创新点</h2>
+<ul>
+<li>OpenCLIP 条件与更高原生分辨率扩展了基础生成主线。</li>
+</ul>
+<h2>文章精读</h2>
+<h3>版本</h3>
+<ul>
+<li><strong>Stable Diffusion 2.0 Base</strong>：512 级文生图，使用 OpenCLIP 条件。</li>
+<li><strong>Stable Diffusion 2.0 768-v</strong>：768 级生成，采用 v-prediction。</li>
+<li><strong>Stable Diffusion 2 Depth-to-Image</strong>：以预测深度作为附加条件，支持保持结构的图像变化。</li>
+<li><strong>Stable Diffusion 2 Upscaler / Inpainting</strong>：官方同时提供放大和局部重绘的专用模型。</li>
+</ul>
+<h3>训练数据</h3>
+<p>使用经过过滤的 LAION 数据训练，官方发布说明强调新的数据处理与文本编码。</p>
+<h3>VAE 结构</h3>
+<p>/</p>
+<h3>Text Encoder</h3>
+<p>OpenCLIP 替代 1.x 的 CLIP 文本编码器。</p>
+<h3>生成主体网络</h3>
+<p>潜空间扩散 U-Net；768-v 与 512 Base 的预测目标不同。</p>
+<h3>训练 Trick</h3>
+<ul>
+<li>768 模型使用 v-prediction；专用模型引入深度、低分辨率图像或重绘条件。</li>
+</ul>
+<h3>新提出的创新点</h3>
+<ul>
+<li>OpenCLIP 条件与更高原生分辨率扩展了基础生成主线。</li>
+</ul>
+<h3>局限性</h3>
+<ul>
+<li>/</li>
+</ul>
+<h2>资料来源</h2>
+<ul>
+<li><a href="https://stability.ai/news-updates/stable-diffusion-v2-release" rel="nofollow">official_blog</a></li>
+</ul>
+    </article>
+    <article class="summary-article summary-topic-entry" id="milestone-sd-2-1">
+<h1>[2212.07XXX] Stable Diffusion · Stable Diffusion 2.1</h1>
+<h2>一句话结论</h2>
+<p>通过数据处理和继续训练修正 2.0 的部分生成表现，架构仍属于第二代。</p>
+<h2>解决的问题</h2>
+<p>训练数据筛选会改变模型可表达的主体和风格，需要与视觉质量一起调整。</p>
+<h2>创新点</h2>
+<ul>
+<li>用数据筛选调整和继续训练迭代同代模型。</li>
+</ul>
+<h2>文章精读</h2>
+<h3>版本</h3>
+<ul>
+<li><strong>Stable Diffusion 2.1 Base</strong>：512 级后续检查点，延续 2.0 架构。</li>
+<li><strong>Stable Diffusion 2.1 768</strong>：768 级后续检查点，主要更新训练数据过滤与生成表现。</li>
+</ul>
+<h3>训练数据</h3>
+<p>官方说明调整数据过滤策略并继续训练。</p>
+<h3>VAE 结构</h3>
+<p>/</p>
+<h3>Text Encoder</h3>
+<p>延续 2.0 的 OpenCLIP 条件编码。</p>
+<h3>生成主体网络</h3>
+<p>延续 2.0 潜空间扩散主干。</p>
+<h3>训练 Trick</h3>
+<ul>
+<li>/</li>
+</ul>
+<h3>新提出的创新点</h3>
+<ul>
+<li>用数据筛选调整和继续训练迭代同代模型。</li>
+</ul>
+<h3>局限性</h3>
+<ul>
+<li>/</li>
+</ul>
+<h2>资料来源</h2>
+<ul>
+<li><a href="https://stability.ai/news-updates/stablediffusion2-1-release7-dec-2022" rel="nofollow">official_blog</a></li>
+</ul>
+    </article>
+    <article class="summary-article summary-topic-entry" id="milestone-sdxl">
+<h1>[2307.01952] Stable Diffusion · SDXL 1.0</h1>
+<h2>一句话结论</h2>
+<p>扩展 U-Net、文本条件与分辨率条件，使潜空间扩散更适合高分辨率和多种宽高比。</p>
+<h2>解决的问题</h2>
+<p>放大旧模型容易暴露裁切和比例偏差，需要让训练时的图像尺寸、裁切位置进入条件。</p>
+<h2>创新点</h2>
+<ul>
+<li>把数据预处理中的尺寸和裁切信息显式作为生成条件。</li>
+<li>Base 与 Refiner 分工，且基础模型不依赖 Refiner 才能出图。</li>
+</ul>
+<h2>文章精读</h2>
+<h3>版本</h3>
+<ul>
+<li><strong>SDXL 1.0 Base</strong>：1024 级基础生成模型，可独立完成生成。</li>
+<li><strong>SDXL 1.0 Refiner</strong>：可选的低噪声精修模型，接续 Base 潜变量细化图像。</li>
+</ul>
+<h3>训练数据</h3>
+<p>高质量图文数据按多分辨率、多宽高比训练，并区分基础模型与精修阶段。</p>
+<h3>VAE 结构</h3>
+<p>沿用潜空间自编码器路线，改进训练以提高重建质量。</p>
+<h3>Text Encoder</h3>
+<p>CLIP ViT-L 与 OpenCLIP ViT-bigG 双编码器；序列特征与 pooled 文本特征共同提供条件。</p>
+<h3>生成主体网络</h3>
+<p>显著增大的 U-Net；Base 负责主要生成，可选 Refiner 在低噪声阶段细化局部。</p>
+<h3>训练 Trick</h3>
+<ul>
+<li>原始尺寸、裁切坐标和目标尺寸的 micro-conditioning 减少训练裁切偏差。</li>
+<li>多宽高比训练与分阶段精修改善高分辨率输出。</li>
+</ul>
+<h3>新提出的创新点</h3>
+<ul>
+<li>把数据预处理中的尺寸和裁切信息显式作为生成条件。</li>
+<li>Base 与 Refiner 分工，且基础模型不依赖 Refiner 才能出图。</li>
+</ul>
+<h3>局限性</h3>
+<ul>
+<li>/</li>
+</ul>
+<h2>资料来源</h2>
+<ul>
+<li><a href="https://arxiv.org/abs/2307.01952" rel="nofollow">arxiv</a></li>
+<li><a href="https://stability.ai/news-updates/stable-diffusion-sdxl-1-announcement" rel="nofollow">official_blog</a></li>
+</ul>
+    </article>
+    <article class="summary-article summary-topic-entry" id="milestone-sdxl-turbo">
+<h1>[2311.17042] Stable Diffusion · SDXL Turbo / SD-Turbo</h1>
+<h2>一句话结论</h2>
+<p>用对抗式扩散蒸馏把多步生成压到极少步骤，同时保留教师模型的视觉先验。</p>
+<h2>解决的问题</h2>
+<p>多步扩散的交互延迟较高，单纯减少采样步数会损失质量。</p>
+<h2>创新点</h2>
+<ul>
+<li>将扩散蒸馏的语义先验与对抗训练的锐利细节结合。</li>
+</ul>
+<h2>文章精读</h2>
+<h3>版本</h3>
+<ul>
+<li><strong>SDXL Turbo</strong>：由 SDXL 蒸馏的 ADD 模型，面向 1–4 步快速生成。</li>
+<li><strong>SD-Turbo</strong>：同一官方加速路线下由 SD 2.1 蒸馏的较小模型，并非 SDXL 检查点。 此节点日对应 SDXL Turbo 公告，不据此推定 SD-Turbo 的精确发布日。</li>
+</ul>
+<h3>训练数据</h3>
+<p>/</p>
+<h3>VAE 结构</h3>
+<p>/</p>
+<h3>Text Encoder</h3>
+<p>/</p>
+<h3>生成主体网络</h3>
+<p>学生沿用对应教师的潜空间扩散结构；SDXL Turbo 与 SD-Turbo 分别来自不同教师。</p>
+<h3>训练 Trick</h3>
+<ul>
+<li>ADD 联合扩散教师监督与对抗损失，使学生在少步采样下仍产生清晰图像。</li>
+</ul>
+<h3>新提出的创新点</h3>
+<ul>
+<li>将扩散蒸馏的语义先验与对抗训练的锐利细节结合。</li>
+</ul>
+<h3>局限性</h3>
+<ul>
+<li>/</li>
+</ul>
+<h2>资料来源</h2>
+<ul>
+<li><a href="https://arxiv.org/abs/2311.17042" rel="nofollow">arxiv</a></li>
+<li><a href="https://stability.ai/news-updates/stability-ai-sdxl-turbo" rel="nofollow">official_blog</a></li>
+<li><a href="https://huggingface.co/stabilityai/sdxl-turbo" rel="nofollow">official_model_page</a></li>
+<li><a href="https://huggingface.co/stabilityai/sd-turbo" rel="nofollow">official_model_page</a></li>
+</ul>
+    </article>
+    <article class="summary-article summary-topic-entry" id="milestone-sd-3">
+<h1>[2403.03206] Stable Diffusion · Stable Diffusion 3 · API 上线</h1>
+<p>日期口径：官方 API 开放日；另明确记录预告日。</p>
+<h2>一句话结论</h2>
+<p>从 U-Net 转向多模态 Diffusion Transformer，用 rectified flow 统一学习图像与文本的生成关系。</p>
+<h2>解决的问题</h2>
+<p>复杂指令与文字绘制需要更充分的跨模态交互，也需要能随规模扩展的主干。</p>
+<h2>创新点</h2>
+<ul>
+<li>扩展 MMDiT 和流匹配，使架构更适合统一图文与规模扩展。</li>
+</ul>
+<h2>文章精读</h2>
+<h3>版本</h3>
+<ul>
+<li><strong>Stable Diffusion 3</strong>：官方 API 基础版本；2 月 22 日为预告，4 月 17 日为 API 开放。</li>
+<li><strong>Stable Diffusion 3 Turbo</strong>：同日开放的速度档，具体独立训练和结构差异：/。</li>
+</ul>
+<h3>训练数据</h3>
+<p>大规模图文数据经过过滤与重新描述；论文研究数据、模型规模和采样目标对高分辨率合成的影响。</p>
+<h3>VAE 结构</h3>
+<p>空间压缩 8 倍、16 通道的图像潜变量，增加每个潜空间位置的信息容量。</p>
+<h3>Text Encoder</h3>
+<p>CLIP-L、OpenCLIP-G 与 T5-XXL 三路文本编码。</p>
+<h3>生成主体网络</h3>
+<p>MMDiT 为文本和图像保留独立参数，再进行联合注意力；采用 rectified flow 建模噪声到图像的运输。</p>
+<h3>训练 Trick</h3>
+<ul>
+<li>研究时间步分布重加权以集中学习较有效的噪声阶段。</li>
+<li>图文各自变换与联合注意力兼顾模态特性和交互。</li>
+</ul>
+<h3>新提出的创新点</h3>
+<ul>
+<li>扩展 MMDiT 和流匹配，使架构更适合统一图文与规模扩展。</li>
+</ul>
+<h3>局限性</h3>
+<ul>
+<li>/</li>
+</ul>
+<h2>资料来源</h2>
+<ul>
+<li><a href="https://arxiv.org/abs/2403.03206" rel="nofollow">arxiv</a></li>
+<li><a href="https://stability.ai/news-updates/stable-diffusion-3" rel="nofollow">official_blog</a></li>
+<li><a href="https://stability.ai/news-updates/stable-diffusion-3-api" rel="nofollow">official_blog</a></li>
+</ul>
+    </article>
+    <article class="summary-article summary-topic-entry" id="milestone-sd-3-medium">
+<h1>[2406.12XXX] Stable Diffusion · Stable Diffusion 3 Medium</h1>
+<h2>一句话结论</h2>
+<p>将第三代 MMDiT 主线落实为可本地运行的中型权重。</p>
+<h2>解决的问题</h2>
+<p>API 上线不等于可获取权重，本地部署需要独立的模型发布节点。</p>
+<h2>创新点</h2>
+<ul>
+<li>以中等规模权重提供本地第三代生成能力。</li>
+</ul>
+<h2>文章精读</h2>
+<h3>版本</h3>
+<ul>
+<li><strong>Stable Diffusion 3 Medium</strong>：公开的 2B 权重档，面向本地运行与定制；与 API 服务版本分开记录。</li>
+</ul>
+<h3>训练数据</h3>
+<p>/</p>
+<h3>VAE 结构</h3>
+<p>/</p>
+<h3>Text Encoder</h3>
+<p>CLIP-L、OpenCLIP-G 和 T5-XXL 三路条件。</p>
+<h3>生成主体网络</h3>
+<p>2B MMDiT，属于 SD3 的 rectified flow 路线。</p>
+<h3>训练 Trick</h3>
+<ul>
+<li>/</li>
+</ul>
+<h3>新提出的创新点</h3>
+<ul>
+<li>以中等规模权重提供本地第三代生成能力。</li>
+</ul>
+<h3>局限性</h3>
+<ul>
+<li>/</li>
+</ul>
+<h2>资料来源</h2>
+<ul>
+<li><a href="https://stability.ai/news-updates/stable-diffusion-3-medium" rel="nofollow">official_blog</a></li>
+</ul>
+    </article>
+    <article class="summary-article summary-topic-entry" id="milestone-sd-3-5-large">
+<h1>[2410.22XXX] Stable Diffusion · Stable Diffusion 3.5 Large</h1>
+<h2>一句话结论</h2>
+<p>用更稳定的 MMDiT 训练与独立速度档，改善第三代模型的质量和定制体验。</p>
+<h2>解决的问题</h2>
+<p>扩大模型和进行下游微调时，需要兼顾训练稳定性、输出多样性与推理成本。</p>
+<h2>创新点</h2>
+<ul>
+<li>在高质量基础模型之外提供明确的少步速度变体。</li>
+</ul>
+<h2>文章精读</h2>
+<h3>版本</h3>
+<ul>
+<li><strong>Stable Diffusion 3.5 Large</strong>：8.1B 模型，面向高质量与可定制性。</li>
+<li><strong>Stable Diffusion 3.5 Large Turbo</strong>：Large 的少步蒸馏版本，4 步生成以降低延迟。</li>
+</ul>
+<h3>训练数据</h3>
+<p>官方模型卡说明使用合成数据和过滤后的公开数据。</p>
+<h3>VAE 结构</h3>
+<p>/</p>
+<h3>Text Encoder</h3>
+<p>CLIP-L、OpenCLIP-G、T5-XXL 三个固定文本编码器。</p>
+<h3>生成主体网络</h3>
+<p>8.1B MMDiT；引入 QK normalization 以改善注意力训练稳定性。</p>
+<h3>训练 Trick</h3>
+<ul>
+<li>QK normalization 稳定训练与微调。</li>
+<li>Turbo 通过蒸馏缩短到 4 步。</li>
+</ul>
+<h3>新提出的创新点</h3>
+<ul>
+<li>在高质量基础模型之外提供明确的少步速度变体。</li>
+</ul>
+<h3>局限性</h3>
+<ul>
+<li>官方说明在提示不充分时，较大的生成多样性也可能带来不确定性和审美变化。</li>
+</ul>
+<h2>资料来源</h2>
+<ul>
+<li><a href="https://stability.ai/news-updates/introducing-stable-diffusion-3-5" rel="nofollow">official_blog</a></li>
+<li><a href="https://huggingface.co/stabilityai/stable-diffusion-3.5-large" rel="nofollow">official_model_page</a></li>
+<li><a href="https://github.com/Stability-AI/sd3.5" rel="nofollow">official_repository</a></li>
+</ul>
+    </article>
+    <article class="summary-article summary-topic-entry" id="milestone-sd-3-5-medium">
+<h1>[2410.29XXX] Stable Diffusion · Stable Diffusion 3.5 Medium</h1>
+<h2>一句话结论</h2>
+<p>以不同规模与 MMDiT-X 结构提供第三代的中型部署档。</p>
+<h2>解决的问题</h2>
+<p>较小模型需要在显存成本、语义表达和不同输出分辨率之间取舍。</p>
+<h2>创新点</h2>
+<ul>
+<li>在 3.5 主线中提供中型网络和更灵活的分辨率档位。</li>
+</ul>
+<h2>文章精读</h2>
+<h3>版本</h3>
+<ul>
+<li><strong>Stable Diffusion 3.5 Medium</strong>：2.5B MMDiT-X，面向较低资源部署，支持从约 0.25 到 2 百万像素的生成范围。</li>
+</ul>
+<h3>训练数据</h3>
+<p>/</p>
+<h3>VAE 结构</h3>
+<p>/</p>
+<h3>Text Encoder</h3>
+<p>CLIP-L、OpenCLIP-G 与 T5-XXL 条件编码。</p>
+<h3>生成主体网络</h3>
+<p>2.5B MMDiT-X；区别于 Large 的模型规模与主干配置。</p>
+<h3>训练 Trick</h3>
+<ul>
+<li>/</li>
+</ul>
+<h3>新提出的创新点</h3>
+<ul>
+<li>在 3.5 主线中提供中型网络和更灵活的分辨率档位。</li>
+</ul>
+<h3>局限性</h3>
+<ul>
+<li>/</li>
+</ul>
+<h2>资料来源</h2>
+<ul>
+<li><a href="https://stability.ai/news-updates/introducing-stable-diffusion-3-5" rel="nofollow">official_blog</a></li>
+<li><a href="https://huggingface.co/stabilityai/stable-diffusion-3.5-medium" rel="nofollow">official_model_page</a></li>
+</ul>
+    </article>
+      </div>
+    </section>
+  </main>
+
+</body>
+</html>

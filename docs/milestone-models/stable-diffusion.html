@@ -1,0 +1,389 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Stable Diffusion 官方模型版本时间线与技术对比。">
+  <title>Stable Diffusion · 身经百战</title>
+  <script>
+    (() => {
+      document.documentElement.classList.add("js");
+      let theme = null;
+      let contextOpen = null;
+      try {
+        theme = window.localStorage.getItem("arxiv-theme");
+        contextOpen = window.localStorage.getItem("togos-secondary-sidebar-collapsed");
+      } catch (error) { /* Storage can be unavailable. */ }
+      if (theme !== "light" && theme !== "dark") {
+        theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      }
+      document.documentElement.dataset.theme = theme;
+      if (contextOpen === "false") document.documentElement.dataset.contextOpen = "true";
+    })();
+  </script>
+  <link rel="stylesheet" href="../assets/css/site.css?v=12">
+  <script src="../assets/js/site-shell.js?v=12" defer></script>
+  <script src="../assets/js/search-core.js?v=12" defer></script>
+  <script src="../assets/js/search.js?v=12" defer></script>
+  <script src="../assets/js/sidebar.js?v=12" defer></script>
+</head>
+<body data-site-root="../" data-active-section="milestones" class="milestone-page">
+  <header class="site-utility" aria-label="页面工具">
+    <button class="sidebar-toggle" type="button" aria-controls="navigation-shell" aria-expanded="false">
+      <span aria-hidden="true" data-sidebar-toggle-icon>☰</span><span data-sidebar-toggle-label>导航</span>
+    </button>
+    <div class="site-search" data-search-root>
+      <label class="site-search-field" for="search-input">
+        <span aria-hidden="true">⌕</span>
+        <input id="search-input" type="search" placeholder="搜索文章标题"
+               aria-label="搜索文章标题" role="combobox"
+               autocomplete="off" aria-autocomplete="list" aria-controls="search-results" aria-expanded="false">
+        <kbd aria-hidden="true">Ctrl K</kbd>
+      </label>
+      <div class="search-popover" data-search-popover hidden>
+        <p class="search-status" data-search-status aria-live="polite">输入标题关键词开始搜索</p>
+        <div id="search-results" class="search-results" data-search-results role="listbox"></div>
+      </div>
+    </div>
+    <button class="theme-toggle" type="button" aria-label="切换颜色主题" aria-pressed="false">
+      <span data-theme-icon aria-hidden="true"></span>
+    </button>
+  </header>
+  <div class="sidebar-scrim" data-sidebar-close></div>
+<div class="navigation-shell" id="navigation-shell">
+  <button class="navigation-close" type="button" data-navigation-close
+          aria-label="关闭导航" hidden>×</button>
+  <aside class="primary-sidebar" aria-label="知识主题">
+    <a class="primary-brand" href="../index.html" aria-label="LOKEN 首页"><img class="brand-logo" src="../assets/images/loken-logo.png" width="1990" height="329" alt=""></a>
+    <div class="primary-menu" aria-hidden="true"><span>MENU</span><span>☰</span></div>
+    <nav class="primary-navigation" aria-label="知识主题">
+      <a class="primary-nav-item" href="../index.html"><span class="primary-nav-copy"><span class="primary-nav-label">学习一个</span><span class="primary-nav-meta">01 / PAPERS</span></span></a>
+      <a class="primary-nav-item is-active" href="../milestone-models/flux.html" aria-current="page"><span class="primary-nav-copy"><span class="primary-nav-label">身经百战</span><span class="primary-nav-meta">02 / CLASSIC MODELS</span></span></a>
+      <a class="primary-nav-item" href="../writings/index.html"><span class="primary-nav-copy"><span class="primary-nav-label">谈笑风生</span><span class="primary-nav-meta">03 / ARTICLES</span></span></a>
+      <a class="primary-nav-item" href="../journeys/index.html"><span class="primary-nav-copy"><span class="primary-nav-label">跑得还快</span><span class="primary-nav-meta">04 / TRAVELS</span></span></a>
+    </nav>
+    <div class="primary-sidebar-status"><span>LAST SYNC</span><strong>AUTOMATED / WEEKDAYS</strong></div>
+  </aside>
+</div>
+  <main class="page-content" id="top">
+    <div class="section-sticky-header">
+    <header class="milestone-hero section-header">
+      <div class="section-intro">
+        <h1 class="section-intro-title" id="section-milestones-title">MODELS</h1>
+        <p class="section-intro-description">这些模型是身经百战了</p>
+      </div>
+    </header>
+<nav class="context-strip" aria-label="模型系列">
+    <a class="context-strip-link" href="flux.html">FLUX</a>
+    <a class="context-strip-link" href="qwen-image.html">Qwen-Image</a>
+    <a class="context-strip-link" href="seedream.html">Seedream</a>
+    <a class="context-strip-link is-active" href="stable-diffusion.html" aria-current="location">Stable Diffusion</a>
+    <span class="context-strip-link is-disabled" aria-disabled="true">Z-Image</span>
+    <span class="context-strip-link is-disabled" aria-disabled="true">Wan</span>
+    <span class="context-strip-link is-disabled" aria-disabled="true">Hunyuan3D</span>
+    <span class="context-strip-link is-disabled" aria-disabled="true">VGGT</span>
+  </nav>
+    </div>
+    <div class="milestone-workspace">
+      <header class="milestone-family-header">
+      <div class="milestone-title-block">
+        <p>Image Generation · Stability AI · CompVis · Runway</p>
+        <h2>Stable Diffusion</h2>
+        <span>官方模型版本演进与核心技术对比</span>
+      </div>
+      <div class="milestone-hero-meta">
+        <ul class="status-legend" aria-label="发布状态图例"><li><span class="release-status status-released">已发布</span><span>已发布</span></li><li><span class="release-status status-early-access">Early Access</span><span>Early Access</span></li><li><span class="release-status status-announced">已宣布</span><span>已宣布</span></li></ul>
+        <p>Updated 2026-09-06</p>
+      </div>
+      </header>
+      <div class="milestone-overview">
+<section class="milestone-panel timeline-panel" aria-labelledby="timeline-heading">
+  <div class="milestone-panel-heading">
+    <div><p>ROADMAP</p><h2 id="timeline-heading">时间线</h2></div>
+    <span>可横向拖动</span>
+  </div>
+  <div class="milestone-timeline-viewport" data-drag-scroll tabindex="0" aria-label="Stable Diffusion 时间线，使用左右方向键或拖动浏览">
+    <ol class="milestone-timeline">
+      <li class="timeline-release status-released">
+        <span class="timeline-dot" aria-hidden="true"></span>
+        <time datetime="2022-08-22">2022-08-22</time>
+        <h3>Stable Diffusion 1.x</h3>
+        <span class="release-status status-released">已发布</span>
+        <ul><li>Stable Diffusion 1.4</li><li>Stable Diffusion 1.5</li></ul>
+      </li>
+      <li class="timeline-release status-released">
+        <span class="timeline-dot" aria-hidden="true"></span>
+        <time datetime="2022-11-24">2022-11-24</time>
+        <h3>Stable Diffusion 2.0</h3>
+        <span class="release-status status-released">已发布</span>
+        <ul><li>Stable Diffusion 2.0 Base</li><li>Stable Diffusion 2.0 768-v</li><li>Stable Diffusion 2 Depth-to-Image</li><li>Stable Diffusion 2 Upscaler / Inpainting</li></ul>
+      </li>
+      <li class="timeline-release status-released">
+        <span class="timeline-dot" aria-hidden="true"></span>
+        <time datetime="2022-12-07">2022-12-07</time>
+        <h3>Stable Diffusion 2.1</h3>
+        <span class="release-status status-released">已发布</span>
+        <ul><li>Stable Diffusion 2.1 Base</li><li>Stable Diffusion 2.1 768</li></ul>
+      </li>
+      <li class="timeline-release status-released">
+        <span class="timeline-dot" aria-hidden="true"></span>
+        <time datetime="2023-07-26">2023-07-26</time>
+        <h3>SDXL 1.0</h3>
+        <span class="release-status status-released">已发布</span>
+        <ul><li>SDXL 1.0 Base</li><li>SDXL 1.0 Refiner</li></ul>
+      </li>
+      <li class="timeline-release status-released">
+        <span class="timeline-dot" aria-hidden="true"></span>
+        <time datetime="2023-11-28">2023-11-28</time>
+        <h3>SDXL Turbo / SD-Turbo</h3>
+        <span class="release-status status-released">已发布</span>
+        <ul><li>SDXL Turbo</li><li>SD-Turbo</li></ul>
+      </li>
+      <li class="timeline-release status-released">
+        <span class="timeline-dot" aria-hidden="true"></span>
+        <time datetime="2024-04-17">2024-04-17</time>
+        <h3>Stable Diffusion 3 · API 上线</h3>
+        <span class="release-status status-released">已发布</span>
+        <ul><li>Stable Diffusion 3</li><li>Stable Diffusion 3 Turbo</li></ul>
+      </li>
+      <li class="timeline-release status-released">
+        <span class="timeline-dot" aria-hidden="true"></span>
+        <time datetime="2024-06-12">2024-06-12</time>
+        <h3>Stable Diffusion 3 Medium</h3>
+        <span class="release-status status-released">已发布</span>
+        <ul><li>Stable Diffusion 3 Medium</li></ul>
+      </li>
+      <li class="timeline-release status-released">
+        <span class="timeline-dot" aria-hidden="true"></span>
+        <time datetime="2024-10-22">2024-10-22</time>
+        <h3>Stable Diffusion 3.5 Large</h3>
+        <span class="release-status status-released">已发布</span>
+        <ul><li>Stable Diffusion 3.5 Large</li><li>Stable Diffusion 3.5 Large Turbo</li></ul>
+      </li>
+      <li class="timeline-release status-released">
+        <span class="timeline-dot" aria-hidden="true"></span>
+        <time datetime="2024-10-29">2024-10-29</time>
+        <h3>Stable Diffusion 3.5 Medium</h3>
+        <span class="release-status status-released">已发布</span>
+        <ul><li>Stable Diffusion 3.5 Medium</li></ul>
+      </li>
+    </ol>
+  </div>
+</section>
+<section class="model-specimen" aria-labelledby="model-specimen-heading">
+  <div class="model-specimen-heading">
+    <p>SELECTED SPECIMEN</p>
+    <h2 id="model-specimen-heading">最新发布节点</h2>
+  </div>
+  <div class="model-specimen-graphic" aria-hidden="true">
+    <span></span><span></span><span></span>
+  </div>
+  <dl class="model-specimen-data">
+    <div><dt>MODEL</dt><dd>Stable Diffusion 3.5 Medium</dd></div>
+    <div><dt>RELEASED</dt><dd><time datetime="2024-10-29">2024-10-29</time></dd></div>
+    <div><dt>ORGANIZATION</dt><dd>Stability AI · CompVis · Runway</dd></div>
+    <div><dt>STATUS</dt><dd><span class="release-status status-released">已发布</span></dd></div>
+    <div><dt>READING</dt><dd>精读已就绪</dd></div>
+  </dl>
+</section>
+      </div>
+<section class="milestone-panel comparison-panel" aria-labelledby="comparison-heading">
+  <div class="milestone-panel-heading">
+    <div><p>COMPARISON</p><h2 id="comparison-heading">模型对比</h2></div>
+    <span>内容来自本地 Markdown 精读</span>
+  </div>
+  <div class="milestone-table-scroll">
+    <table class="milestone-comparison-table">
+      <thead><tr><th scope="col">对比项</th>
+        <th scope="col" class="milestone-version-heading">
+          <time datetime="2022-08-22">2022-08-22</time>
+          <strong>Stable Diffusion 1.x</strong>
+          <span class="release-status status-released">已发布</span>
+          <span class="milestone-release-count">1 个官方发布节点</span>
+          <div class="milestone-source-links"><a href="https://arxiv.org/abs/2112.10752" target="_blank" rel="noopener">官方资料 1</a> · <a href="https://stability.ai/news-updates/stable-diffusion-public-release" target="_blank" rel="noopener">官方资料 2</a> · <a href="https://github.com/CompVis/stable-diffusion" target="_blank" rel="noopener">官方资料 3</a></div>
+          <a class="milestone-note-link" href="stable-diffusion-notes.html#milestone-sd-1">查看代际精读</a>
+        </th>
+        <th scope="col" class="milestone-version-heading">
+          <time datetime="2022-11-24">2022-11-24 — 2022-12-07</time>
+          <strong>Stable Diffusion 2.0</strong>
+          <span class="release-status status-released">已发布</span>
+          <span class="milestone-release-count">2 个官方发布节点</span>
+          <div class="milestone-source-links"><a href="https://stability.ai/news-updates/stable-diffusion-v2-release" target="_blank" rel="noopener">官方资料 1</a></div>
+          <a class="milestone-note-link" href="stable-diffusion-notes.html#milestone-sd-2">查看代际精读</a>
+        </th>
+        <th scope="col" class="milestone-version-heading">
+          <time datetime="2023-07-26">2023-07-26</time>
+          <strong>SDXL 1.0</strong>
+          <span class="release-status status-released">已发布</span>
+          <span class="milestone-release-count">1 个官方发布节点</span>
+          <div class="milestone-source-links"><a href="https://arxiv.org/abs/2307.01952" target="_blank" rel="noopener">官方资料 1</a> · <a href="https://stability.ai/news-updates/stable-diffusion-sdxl-1-announcement" target="_blank" rel="noopener">官方资料 2</a></div>
+          <a class="milestone-note-link" href="stable-diffusion-notes.html#milestone-sdxl">查看代际精读</a>
+        </th>
+        <th scope="col" class="milestone-version-heading">
+          <time datetime="2023-11-28">2023-11-28</time>
+          <strong>SDXL Turbo / SD-Turbo</strong>
+          <span class="release-status status-released">已发布</span>
+          <span class="milestone-release-count">1 个官方发布节点</span>
+          <div class="milestone-source-links"><a href="https://arxiv.org/abs/2311.17042" target="_blank" rel="noopener">官方资料 1</a> · <a href="https://stability.ai/news-updates/stability-ai-sdxl-turbo" target="_blank" rel="noopener">官方资料 2</a> · <a href="https://huggingface.co/stabilityai/sdxl-turbo" target="_blank" rel="noopener">官方资料 3</a> · <a href="https://huggingface.co/stabilityai/sd-turbo" target="_blank" rel="noopener">官方资料 4</a></div>
+          <a class="milestone-note-link" href="stable-diffusion-notes.html#milestone-sdxl-turbo">查看代际精读</a>
+        </th>
+        <th scope="col" class="milestone-version-heading">
+          <time datetime="2024-04-17">2024-04-17 — 2024-06-12</time>
+          <strong>Stable Diffusion 3</strong>
+          <span class="release-status status-released">已发布</span>
+          <span class="milestone-release-count">2 个官方发布节点</span>
+          <div class="milestone-source-links"><a href="https://arxiv.org/abs/2403.03206" target="_blank" rel="noopener">官方资料 1</a> · <a href="https://stability.ai/news-updates/stable-diffusion-3" target="_blank" rel="noopener">官方资料 2</a> · <a href="https://stability.ai/news-updates/stable-diffusion-3-api" target="_blank" rel="noopener">官方资料 3</a></div>
+          <a class="milestone-note-link" href="stable-diffusion-notes.html#milestone-sd-3">查看代际精读</a>
+        </th>
+        <th scope="col" class="milestone-version-heading">
+          <time datetime="2024-10-22">2024-10-22 — 2024-10-29</time>
+          <strong>Stable Diffusion 3.5 Large</strong>
+          <span class="release-status status-released">已发布</span>
+          <span class="milestone-release-count">2 个官方发布节点</span>
+          <div class="milestone-source-links"><a href="https://stability.ai/news-updates/introducing-stable-diffusion-3-5" target="_blank" rel="noopener">官方资料 1</a> · <a href="https://huggingface.co/stabilityai/stable-diffusion-3.5-large" target="_blank" rel="noopener">官方资料 2</a> · <a href="https://github.com/Stability-AI/sd3.5" target="_blank" rel="noopener">官方资料 3</a></div>
+          <a class="milestone-note-link" href="stable-diffusion-notes.html#milestone-sd-3-5-large">查看代际精读</a>
+        </th>
+      </tr></thead>
+      <tbody>
+        <tr><th scope="row">版本</th>
+          <td><section class="milestone-minor-release"><header><strong>Stable Diffusion 1.x</strong><a href="stable-diffusion-notes.html#milestone-sd-1">精读</a></header><ul>
+<li><strong>Stable Diffusion 1.4</strong>：2022 年 8 月公开发布的 1.x 主线权重，采用 512 级图像训练。</li>
+<li><strong>Stable Diffusion 1.5</strong>：官方后续 1.x 检查点，由 1.2 继续训练；此处作为同代变体比较，不把 8 月 22 日当作 1.5 的发布日期。</li>
+</ul></section></td>
+          <td><section class="milestone-minor-release"><header><strong>Stable Diffusion 2.0</strong><a href="stable-diffusion-notes.html#milestone-sd-2">精读</a></header><ul>
+<li><strong>Stable Diffusion 2.0 Base</strong>：512 级文生图，使用 OpenCLIP 条件。</li>
+<li><strong>Stable Diffusion 2.0 768-v</strong>：768 级生成，采用 v-prediction。</li>
+<li><strong>Stable Diffusion 2 Depth-to-Image</strong>：以预测深度作为附加条件，支持保持结构的图像变化。</li>
+<li><strong>Stable Diffusion 2 Upscaler / Inpainting</strong>：官方同时提供放大和局部重绘的专用模型。</li>
+</ul></section><section class="milestone-minor-release"><header><strong>Stable Diffusion 2.1</strong><a href="stable-diffusion-notes.html#milestone-sd-2-1">精读</a></header><ul>
+<li><strong>Stable Diffusion 2.1 Base</strong>：512 级后续检查点，延续 2.0 架构。</li>
+<li><strong>Stable Diffusion 2.1 768</strong>：768 级后续检查点，主要更新训练数据过滤与生成表现。</li>
+</ul></section></td>
+          <td><section class="milestone-minor-release"><header><strong>SDXL 1.0</strong><a href="stable-diffusion-notes.html#milestone-sdxl">精读</a></header><ul>
+<li><strong>SDXL 1.0 Base</strong>：1024 级基础生成模型，可独立完成生成。</li>
+<li><strong>SDXL 1.0 Refiner</strong>：可选的低噪声精修模型，接续 Base 潜变量细化图像。</li>
+</ul></section></td>
+          <td><section class="milestone-minor-release"><header><strong>SDXL Turbo / SD-Turbo</strong><a href="stable-diffusion-notes.html#milestone-sdxl-turbo">精读</a></header><ul>
+<li><strong>SDXL Turbo</strong>：由 SDXL 蒸馏的 ADD 模型，面向 1–4 步快速生成。</li>
+<li><strong>SD-Turbo</strong>：同一官方加速路线下由 SD 2.1 蒸馏的较小模型，并非 SDXL 检查点。 此节点日对应 SDXL Turbo 公告，不据此推定 SD-Turbo 的精确发布日。</li>
+</ul></section></td>
+          <td><section class="milestone-minor-release"><header><strong>Stable Diffusion 3 · API 上线</strong><a href="stable-diffusion-notes.html#milestone-sd-3">精读</a></header><ul>
+<li><strong>Stable Diffusion 3</strong>：官方 API 基础版本；2 月 22 日为预告，4 月 17 日为 API 开放。</li>
+<li><strong>Stable Diffusion 3 Turbo</strong>：同日开放的速度档，具体独立训练和结构差异：/。</li>
+</ul></section><section class="milestone-minor-release"><header><strong>Stable Diffusion 3 Medium</strong><a href="stable-diffusion-notes.html#milestone-sd-3-medium">精读</a></header><ul>
+<li><strong>Stable Diffusion 3 Medium</strong>：公开的 2B 权重档，面向本地运行与定制；与 API 服务版本分开记录。</li>
+</ul></section></td>
+          <td><section class="milestone-minor-release"><header><strong>Stable Diffusion 3.5 Large</strong><a href="stable-diffusion-notes.html#milestone-sd-3-5-large">精读</a></header><ul>
+<li><strong>Stable Diffusion 3.5 Large</strong>：8.1B 模型，面向高质量与可定制性。</li>
+<li><strong>Stable Diffusion 3.5 Large Turbo</strong>：Large 的少步蒸馏版本，4 步生成以降低延迟。</li>
+</ul></section><section class="milestone-minor-release"><header><strong>Stable Diffusion 3.5 Medium</strong><a href="stable-diffusion-notes.html#milestone-sd-3-5-medium">精读</a></header><ul>
+<li><strong>Stable Diffusion 3.5 Medium</strong>：2.5B MMDiT-X，面向较低资源部署，支持从约 0.25 到 2 百万像素的生成范围。</li>
+</ul></section></td>
+        </tr>
+        <tr><th scope="row">训练数据</th>
+          <td><p>使用 LAION 图文数据及其高分辨率、美学筛选子集，逐阶段提高训练分辨率和图像质量。</p></td>
+          <td><p>使用经过过滤的 LAION 数据训练，官方发布说明强调新的数据处理与文本编码。</p></td>
+          <td><p>高质量图文数据按多分辨率、多宽高比训练，并区分基础模型与精修阶段。</p></td>
+          <td><p>/</p></td>
+          <td><p>大规模图文数据经过过滤与重新描述；论文研究数据、模型规模和采样目标对高分辨率合成的影响。</p></td>
+          <td><p>官方模型卡说明使用合成数据和过滤后的公开数据。</p></td>
+        </tr>
+        <tr><th scope="row">VAE 结构</th>
+          <td><p>自编码器把 RGB 图像压缩为空间缩小 8 倍、4 通道的潜表示；扩散完成后解码回图像。</p></td>
+          <td><p>/</p></td>
+          <td><p>沿用潜空间自编码器路线，改进训练以提高重建质量。</p></td>
+          <td><p>/</p></td>
+          <td><p>空间压缩 8 倍、16 通道的图像潜变量，增加每个潜空间位置的信息容量。</p></td>
+          <td><p>/</p></td>
+        </tr>
+        <tr><th scope="row">Text Encoder</th>
+          <td><p>冻结的 CLIP ViT-L/14 文本编码器，通过交叉注意力给去噪网络提供条件。</p></td>
+          <td><p>OpenCLIP 替代 1.x 的 CLIP 文本编码器。</p></td>
+          <td><p>CLIP ViT-L 与 OpenCLIP ViT-bigG 双编码器；序列特征与 pooled 文本特征共同提供条件。</p></td>
+          <td><p>/</p></td>
+          <td><p>CLIP-L、OpenCLIP-G 与 T5-XXL 三路文本编码。</p></td>
+          <td><p>CLIP-L、OpenCLIP-G、T5-XXL 三个固定文本编码器。</p></td>
+        </tr>
+        <tr><th scope="row">生成主体网络</th>
+          <td><p>潜空间 U-Net，卷积层处理局部结构，注意力与交叉注意力连接全局及文本条件。</p></td>
+          <td><p>潜空间扩散 U-Net；768-v 与 512 Base 的预测目标不同。</p></td>
+          <td><p>显著增大的 U-Net；Base 负责主要生成，可选 Refiner 在低噪声阶段细化局部。</p></td>
+          <td><p>学生沿用对应教师的潜空间扩散结构；SDXL Turbo 与 SD-Turbo 分别来自不同教师。</p></td>
+          <td><p>MMDiT 为文本和图像保留独立参数，再进行联合注意力；采用 rectified flow 建模噪声到图像的运输。</p></td>
+          <td><p>8.1B MMDiT；引入 QK normalization 以改善注意力训练稳定性。</p></td>
+        </tr>
+        <tr><th scope="row">训练 Trick</th>
+          <td><ul>
+<li>阶段性训练和文本条件随机丢弃支持 classifier-free guidance。</li>
+</ul></td>
+          <td><ul>
+<li>768 模型使用 v-prediction；专用模型引入深度、低分辨率图像或重绘条件。</li>
+</ul></td>
+          <td><ul>
+<li>原始尺寸、裁切坐标和目标尺寸的 micro-conditioning 减少训练裁切偏差。</li>
+<li>多宽高比训练与分阶段精修改善高分辨率输出。</li>
+</ul></td>
+          <td><ul>
+<li>ADD 联合扩散教师监督与对抗损失，使学生在少步采样下仍产生清晰图像。</li>
+</ul></td>
+          <td><ul>
+<li>研究时间步分布重加权以集中学习较有效的噪声阶段。</li>
+<li>图文各自变换与联合注意力兼顾模态特性和交互。</li>
+</ul></td>
+          <td><ul>
+<li>QK normalization 稳定训练与微调。</li>
+<li>Turbo 通过蒸馏缩短到 4 步。</li>
+</ul></td>
+        </tr>
+        <tr><th scope="row">新提出的创新点</th>
+          <td><ul>
+<li>将感知压缩与语义生成分开，减少高分辨率扩散的计算负担。</li>
+</ul></td>
+          <td><ul>
+<li>OpenCLIP 条件与更高原生分辨率扩展了基础生成主线。</li>
+</ul></td>
+          <td><ul>
+<li>把数据预处理中的尺寸和裁切信息显式作为生成条件。</li>
+<li>Base 与 Refiner 分工，且基础模型不依赖 Refiner 才能出图。</li>
+</ul></td>
+          <td><ul>
+<li>将扩散蒸馏的语义先验与对抗训练的锐利细节结合。</li>
+</ul></td>
+          <td><ul>
+<li>扩展 MMDiT 和流匹配，使架构更适合统一图文与规模扩展。</li>
+</ul></td>
+          <td><ul>
+<li>在高质量基础模型之外提供明确的少步速度变体。</li>
+</ul></td>
+        </tr>
+        <tr><th scope="row">局限性</th>
+          <td><ul>
+<li>/</li>
+</ul></td>
+          <td><ul>
+<li>/</li>
+</ul></td>
+          <td><ul>
+<li>/</li>
+</ul></td>
+          <td><ul>
+<li>/</li>
+</ul></td>
+          <td><ul>
+<li>/</li>
+</ul></td>
+          <td><ul>
+<li>官方说明在提示不充分时，较大的生成多样性也可能带来不确定性和审美变化。</li>
+</ul></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+    </div>
+    <footer>仅收录官方发布 · 未披露的技术信息以 / 表示</footer>
+
+  </main>
+
+</body>
+</html>
