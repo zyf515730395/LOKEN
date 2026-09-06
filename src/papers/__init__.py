@@ -1,1 +1,1 @@
-"""TOGOS paper collection and archive theme."""
+"""LOKEN paper collection and archive theme."""
