@@ -13,6 +13,284 @@
       <h1>Relighting · 论文要点</h1>
     </header>
     <div class="summary-topic-list">
+    <article class="summary-article summary-topic-entry" id="summary-2412.11224" data-arxiv-id="2412.11224" data-status="ready">
+<h1>[2412.11224] GenLit: Reformulating Single-Image Relighting as Video Generation</h1>
+<p><a href="https://arxiv.org/abs/2412.11224" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 GenLit 框架，利用视频扩散模型将单图像重光照问题转化为视频生成任务，通过可解释控制信号实现点光源自由运动，无需显式重建 PBR 资产即可在真实场景上生成逼真的光照效果。</p>
+<h2>解决的问题</h2>
+<p>单图像重光照是一个病态问题，存在光源、反照率、深度和材质的多重歧义；传统逆渲染框架需显式恢复 3D 资产，计算昂贵且易错；近场重光照（添加局部光源）关注较少，需要精细控制局部光照效果如阴影和高光。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出 GenLit 框架，利用视频扩散模型将单图像重光照重构为视频生成任务，利用视频扩散模型的隐式 3D 表示能力。</li>
+<li>设计可解释控制信号（5D 光照向量），实现点光源位置、强度及环境光强度的自由控制。</li>
+<li>无需显式重建 PBR 资产（几何、材质、光照），通过预训练图像到视频模型直接生成，降低计算成本。</li>
+<li>在合成数据集和真实世界图像（如 MIT Multi-Illumination Dataset）上验证，能合成逼真的直接阴影和间接漫反射效果。</li>
+<li>支持点光源在场景中的自由运动（FlyingLight），提供比现有方法更强的控制灵活性和泛化能力。</li>
+<li>证明了视频基础模型具备足够丰富的光、材质和形状理解能力，支持无需显式物理表示的单图像可控重光照。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2412.12083" data-arxiv-id="2412.12083" data-status="ready">
+<h1>[2412.12083] IDArb: Intrinsic Decomposition for Arbitrary Number of Input Views and Illuminations</h1>
+<p><a href="https://arxiv.org/abs/2412.12083" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 IDArb 模型，通过跨视图注意力机制和自定义数据集，实现任意数量输入视图和光照条件下的内在属性分解。</p>
+<h2>解决的问题</h2>
+<p>逆渲染过程本质模糊且欠约束，现有优化方法耗时且易收敛至次优解，而学习基方法在单视图分解时难以利用多视图信息，导致跨视图不一致且难以处理复杂光照。</p>
+<h2>创新点</h2>
+<ul>
+<li>采用跨视图、跨组件注意力模块融合信息，实现无需相机姿态的任意数量输入图像分解。</li>
+<li>创建基于 Objaverse 的自定义数据集 ARB-Objaverse，包含 5.7M 多视图 RGB 图像及内在组件以支持训练。</li>
+<li>设计光照增强和视图适应的训练策略，利用多视图线索和通用物体材质先验提升鲁棒性。</li>
+<li>提供统一解决方案，为下游任务如材质编辑、重光照等提供实用价值，并可作为优化方法的强先验。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2412.14214" data-arxiv-id="2412.14214" data-status="ready">
+<h1>[2412.14214] GraphicsDreamer: Image to 3D Generation with Physical Consistency</h1>
+<p><a href="https://arxiv.org/abs/2412.14214" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>GraphicsDreamer 提出了一种结合 PBR 条件的多视图扩散模型和基于深度学习的逆渲染方法，实现了从图像到具有物理一致性和高质量拓扑结构的 3D 模型生成。</p>
+<h2>解决的问题</h2>
+<p>现有图像到 3D 生成方法存在推理速度慢、Janus 问题、几何纹理细节丢失、缺乏完整 PBR 材质图以及难以直接导入渲染引擎等问题。</p>
+<h2>创新点</h2>
+<ul>
+<li>将几何和材质生成集成到多视图扩散模型中，并通过 PBR 条件（环境光近似为球状高斯）增强。</li>
+<li>提出了一种基于深度学习的逆渲染方法，包含混合表面表示和 PBR 约束的内禀材质增强。</li>
+<li>集成了拓扑优化和 UV 展开能力，解决了学术 3D 生成方法中常被忽视的问题。</li>
+<li>生成的 3D 模型具有平滑几何和清晰纹理，可直接导入 Blender、Unreal Engine 和 Unity 等渲染引擎。</li>
+<li>实验表明在几何和纹理细节方面处于领先地位。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2412.13734" data-arxiv-id="2412.13734" data-status="ready">
+<h1>[2412.13734] Text2Relight: Creative Portrait Relighting with Text Guidance</h1>
+<p><a href="https://arxiv.org/abs/2412.13734" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了 Text2Relight，一种光照特定的基础模型，通过文本引导实现单张肖像图像的重光照，解决了通用模型在光照特定数据上相关性弱及重光照数据缺乏的问题。</p>
+<h2>解决的问题</h2>
+<p>通用基础模型从未学习光照特定数据导致文本与光照关联弱且产生内容失真，且缺乏成对的肖像重光照数据限制了模型开发。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种用于文本引导肖像重光照的光照特定基础模型的新公式。</li>
+<li>提出了一种新颖且可扩展的数据模拟管道，用于合成重光照图像及相关文本提示。</li>
+<li>提出了一种通过精心设计的层次结构生成广泛分布的光感知文本提示的方法。</li>
+<li>通过联合训练辅助任务（阴影移除和光照定位）实现性能增强。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2412.15211" data-arxiv-id="2412.15211" data-status="ready">
+<h1>[2412.15211] Generative Multiview Relighting for 3D Reconstruction under Extreme Illumination Variation</h1>
+<p><a href="https://arxiv.org/abs/2412.15211" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种利用多视角图像扩散模型联合重光照输入图像，并结合基于 NeRF 的 3D 重建模型，以解决极端光照变化下 3D 重建问题的方法。</p>
+<h2>解决的问题</h2>
+<p>现有视图合成方法通常假设输入图像光照条件相同，但在实际采集（尤其是互联网抓取）中光照变化严重；使用每图像潜在代码会抹除视图依赖的外观，导致非漫射物体重建不真实；基于物理的逆渲染存在光照与视角变化的歧义性；单图像重光照扩散模型是病态的，独立应用于多图像会导致材质解释不一致。</p>
+<h2>创新点</h2>
+<ul>
+<li>使用多视角图像扩散模型联合重光照所有输入图像以匹配参考图像光照，解决了单图像重光照样本不一致的问题。</li>
+<li>设计基于 NeRF 的新型 3D 重建模型来拟合重光照图像，实现新视角渲染。</li>
+<li>该 3D 重建模型被设计为对重光照样本中可能存在的残留不一致性具有鲁棒性。</li>
+<li>引入“着色嵌入”（shading embedding）向量编码每图像表面法线扰动，以修正扩散模型形状估计错误导致的高光位置偏差。</li>
+<li>在合成（Objaverse）和真实（NAVI）数据集上验证了方法在极端光照变化下重建准确几何和视图依赖外观的能力。</li>
+<li>广泛的定量和定性评估显示，该方法在质量和数量上显著优于最先进方法。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2504.16086" data-arxiv-id="2504.16086" data-status="ready">
+<h1>[2504.16086] Digital Kitchen Remodeling: Editing and Relighting Intricate Indoor Scenes from a Single Panorama</h1>
+<p><a href="https://arxiv.org/abs/2504.16086" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种基于单全景图编辑和重光照复杂室内场景的虚拟置景应用，利用单相机捕获配对室内外 HDR 全景图并引入低成本光度校准方法实现高质量渲染。</p>
+<h2>解决的问题</h2>
+<p>现有虚拟置景技术面临室内外光照变化导致重光照困难，且针对复杂空间（如厨房）的编辑和重光照极具挑战性，同时现有方法通常需要双相机及高成本校准。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种使用单相机（Ricoh Theta Z1）捕获配对室内外 HDR 全景图以重光照复杂室内场景的逆向渲染管线。</li>
+<li>提出了一种低成本光度校准方法，通过线性缩放每个 HDR 全景图以显示实际场景辐射度。</li>
+<li>构建了一个包含 141 组配对室内外全景图的校准 HDR 数据集，每个场景均标注了光度测量值（室内照度、室外照度和室内亮度）及房间朝向。</li>
+<li>开发了一个厨房改造应用，可自动转换现有厨房空间并允许自定义新虚拟物体的材质属性，并附带一个新的虚拟厨房组件 3D 数据集。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2502.08297" data-arxiv-id="2502.08297" data-status="ready">
+<h1>[2502.08297] BEAM: Bridging Physically-based Rendering and Gaussian Modeling for Relightable Volumetric Video</h1>
+<p><a href="https://arxiv.org/abs/2502.08297" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 BEAM 管道，通过桥接 4D 高斯与精确的基于物理的渲染（PBR），从多视角 RGB 素材中生成可重光照的体素视频。</p>
+<h2>解决的问题</h2>
+<p>传统体素视频受限于固定光照条件，现有重光照工作流依赖网格序列和纹理视频导致重建伪影且重光照质量受限；神经隐式表示方法难以平衡训练效率、渲染速度与输出质量；动态 3DGS 虽能生成高质量视频但缺乏重光照所需的详细几何；现有将基于物理的渲染集成到 3DGS 的方法计算昂贵且仅限静态场景，限制了工业工作流中 4D 内容的高效生产。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出 BEAM 管道，桥接 4D 高斯与精确的基于物理的渲染（PBR），从多视角 RGB 素材中生成可重光照的体素视频。</li>
+<li>设计粗到细优化框架，结合高斯性能跟踪与几何感知高斯光栅化，恢复详细且时空一致的几何结构。</li>
+<li>解耦 PBR 属性（粗糙度、环境光遮蔽、基础色），通过 2D 到 3D 策略及光线追踪可见性信息实现高质量材质分解。</li>
+<li>开发 Unity 插件，支持 4D 资产无缝集成到传统 CG 引擎，支持实时延迟着色与离线光线追踪渲染。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2503.14485" data-arxiv-id="2503.14485" data-status="ready">
+<h1>[2503.14485] Lux Post Facto: Learning Portrait Performance Relighting with Conditional Video Diffusion and a Hybrid Dataset</h1>
+<p><a href="https://arxiv.org/abs/2503.14485" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 Lux Post Facto，一种利用条件视频扩散模型和混合数据集实现任意肖像视频高保真重光照及时序一致性的新方法。</p>
+<h2>解决的问题</h2>
+<p>现有视频重光照方法存在时序一致性差、缺乏照片级真实感或需要难以获取的 OLAT 视频数据的问题，同时视频扩散模型缺乏细粒度光照控制能力，传统条件方法难以表示 HDR 像素值或需要显式代理几何。</p>
+<h2>创新点</h2>
+<ul>
+<li>一种用于肖像重光照的新型视频扩散模型，能够在任意肖像视频上生成高保真光照效果，并达到最先进的性能。</li>
+<li>一种新型光照控制模块，改进了光照信息的编码并实现了精确的光照控制。</li>
+<li>一种新的混合数据集及相关训练方法，允许在统一框架下使用静态 OLAT 图像和野外视频数据训练视频重光照模型。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2503.18408" data-arxiv-id="2503.18408" data-status="ready">
+<h1>[2503.18408] Fast and Physically-based Neural Explicit Surface for Relightable Human Avatars</h1>
+<p><a href="https://arxiv.org/abs/2503.18408" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 PhyNES 方法，通过结合神经显式表面和光栅化渲染机制，实现基于稀疏视频输入的动态人体模型物理属性重建与实时重光照。</p>
+<h2>解决的问题</h2>
+<p>传统方法依赖昂贵设备且泛化性有限，隐式表示渲染效率低且计算需求高，显式表示存在显存问题，参数化模型难以处理衣物，且现有重光照方法依赖隐式表示导致训练成本高或光照适应性差。</p>
+<h2>创新点</h2>
+<ul>
+<li>引入 PhyNES 增强基于 NES 的稀疏视图动态头像建模框架，用于物理渲染和重光照应用，通过稀疏视频输入有效解耦动态头像几何、表面纹理和材料信息。</li>
+<li>提出基于光栅化的神经渲染器，高效光栅化所有屏幕像素的 uv 坐标，实现几何、纹理和材料网络的并行查询，显著提高渲染和重光照效率。</li>
+<li>进行综合实验，证实 PhyNES 在动态人体建模和重光照方面相比现有框架具有更优越的效率。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2505.24227" data-arxiv-id="2505.24227" data-status="ready">
+<h1>[2505.24227] Light as Deception: GPT-driven Natural Relighting Against Vision-Language Pre-training Models</h1>
+<p><a href="https://arxiv.org/abs/2505.24227" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种名为 LightD 的 GPT 驱动对抗重光照框架，旨在通过调整清洁图像的照明来欺骗视觉语言预训练模型，同时保持高视觉自然性。</p>
+<h2>解决的问题</h2>
+<p>现有针对视觉语言预训练模型的对抗攻击多依赖人眼不可感知扰动且易受去噪影响，而针对非可疑攻击（如光照调整）在 VLP 模型上的有效性及视觉自然性难以同时平衡。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种将非可疑对抗攻击从图像分类任务迁移到视觉语言预训练模型的一般框架，揭示了这些攻击难以平衡有效性与视觉自然性。</li>
+<li>引入了一种针对视觉语言预训练模型的新型 GPT 驱动对抗重光照技术 LightD。</li>
+<li>通过基于 GPT 的初始点选择和基于 SGA 的协作优化增强方法，对光照参数和参考光照图像引入扰动。</li>
+<li>在图像描述和视觉问答任务上进行了大量实验，验证了 LightD 在攻击视觉语言预训练模型时保持高视觉自然性的优越有效性。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2507.17613" data-arxiv-id="2507.17613" data-status="ready">
+<h1>[2507.17613] InvRGB+L: Inverse Rendering of Complex Scenes with Unified Color and LiDAR Reflectance Modeling</h1>
+<p><a href="https://arxiv.org/abs/2507.17613" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>InvRGB+L 是一个新颖的逆渲染框架，通过结合 RGB 和 LiDAR 强度观测来重建大型、可重光照和动态场景，并提出了基于物理的 LiDAR 反射模型和联合 RGB-LiDAR 材料一致性损失。</p>
+<h2>解决的问题</h2>
+<p>逆渲染具有挑战性，因为图像观测存在极大的歧义性，导致材料恢复错误，即使使用强材料先验也只能部分缓解这些歧义。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种新颖的逆渲染框架 InvRGB+L，能够从单个 RGB+LiDAR 序列中重建大型、可重光照和动态场景。</li>
+<li>提出了一个基于物理的 LiDAR 反射模型，该模型明确考虑了表面光泽度，不同于传统反射模型。</li>
+<li>提出了一个联合 RGB-LiDAR 材料一致性损失，用于建模可见光与 LiDAR 红外观测之间的关系。</li>
+<li>证明了 LiDAR 强度是强大的线索，能够以互补的方式分离材料属性和光照效应。</li>
+<li>该方法在场景级城市逆渲染和新视角 LiDAR 模拟的定性和定量比较中超越了当前的最先进方法。</li>
+<li>该方法支持真实的重光照、夜间模拟和动态物体插入。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2508.06494" data-arxiv-id="2508.06494" data-status="ready">
+<h1>[2508.06494] LightSwitch: Multi-view Relighting with Material-guided Diffusion</h1>
+<p><a href="https://arxiv.org/abs/2508.06494" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 LightSwitch 框架，通过结合多视图一致性和预测的材料属性，实现了一种基于扩散的高效多视图重光照方法。</p>
+<h2>解决的问题</h2>
+<p>现有的 3D 表示方法将光照烘焙其中无法在新环境中重光照；基于逆渲染的方法速度慢且难以建模复杂光照；现有的学习式重光照方法仅针对单视图，导致跨视图不一致。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出 LightSwitch 框架，将重光照任务定义为一致地重光照多个输入视图，以解决单视图方法跨视图不一致的问题。</li>
+<li>利用预测的材料属性（内禀属性和反照率）作为额外输入，结合多视图线索提升重光照性能。</li>
+<li>设计分布式推理方案，以高效处理需要合成和一致重光照大量查询视图的 3D 重光照任务。</li>
+<li>在合成和真实世界数据上验证，证明利用多视图和预测材料线索相比先前的学习式重光照方法有显著提升。</li>
+<li>与最先进的逆渲染方法相比，LightSwitch 实现了改进或相当的重光照效果，同时速度显著更快。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2508.08384" data-arxiv-id="2508.08384" data-status="ready">
+<h1>[2508.08384] Spatiotemporally Consistent Indoor Lighting Estimation with Diffusion Priors</h1>
+<p><a href="https://arxiv.org/abs/2508.08384" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种基于扩散先验的方法，通过训练多层感知机（MLP）表示的六维光场，实现从单张图像或视频中估计具有时空一致性的室内光照。</p>
+<h2>解决的问题</h2>
+<p>从单张图像或视频中估计室内场景的高动态范围（HDR）环境图具有高度病态性，且现有方法无法有效估计光照条件在空间和时间上动态变化的视频中的时空一致光照。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种从输入视频中估计连续时空光场的方法，该光场由多层感知机（MLP）表示，近似六维光场函数。</li>
+<li>利用 2D 扩散先验来训练 6D MLP，通过联合 inpainting 多个受相对深度和背景场景条件约束的铬球来实现空间一致的光照预测。</li>
+<li>基于 Infinigen Indoors 构建训练数据集，通过渲染不同空间位置的真实环境图来支持扩散模型的训练。</li>
+<li>该方法支持从单张图像或视频中估计光照，在光照条件随空间和时间变化的情况下表现出优于对比方法的性能。</li>
+<li>在野外视频（in-the-wild videos）的时空光照估计任务上展示了结果，这是先前作品中难以实现的。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2508.14563" data-arxiv-id="2508.14563" data-status="ready">
+<h1>[2508.14563] GOGS: High-Fidelity Geometry and Relighting for Glossy Objects via Gaussian Surfels</h1>
+<p><a href="https://arxiv.org/abs/2508.14563" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种基于 2D Gaussian surfels 的 GOGS 框架，通过几何先验引导和物理渲染技术解决了高光泽物体逆向渲染中的几何重建和材质分解难题。</p>
+<h2>解决的问题</h2>
+<p>高光泽物体逆向渲染因视角依赖效应（如高光、反射）破坏多视图一致性而面临挑战，导致几何重建和材质属性恢复困难；现有方法存在计算效率低、几何重建受镜面反射干扰产生噪声、材质分解因简化渲染方程导致结果模糊等问题。</p>
+<h2>创新点</h2>
+<ul>
+<li>一种针对高光泽物体的鲁棒几何重建方法，通过利用几何先验和分求和近似来减轻几何歧义。</li>
+<li>基于完整渲染方程评估和蒙特卡洛重要性采样的物理材质分解。</li>
+<li>一种自适应镜面补偿机制，通过方向性地细化高频细节来减轻镜面渲染中的保真度限制。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2509.18497" data-arxiv-id="2509.18497" data-status="ready">
+<h1>[2509.18497] Differentiable Light Transport with Gaussian Surfels via Adapted Radiosity for Efficient Relighting and Geometry Reconstruction</h1>
+<p><a href="https://arxiv.org/abs/2509.18497" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种基于高斯面片（Gaussian surfels）和辐射度理论（radiosity）的可微光传输框架，旨在解决现有辐射场方法在材料编辑、重光照和几何重建方面的局限性，支持直接和间接光照。</p>
+<h2>解决的问题</h2>
+<p>现有辐射场方法牺牲了材料可编辑性、存在几何模糊且无法进行重光照；基于物理的渲染全局光照计算成本高昂；现有方法常采用简化假设或需要密集数据集；缺乏针对高斯面片的可微全局光照求解器。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种受辐射度理论启发的正向渲染框架，针对高斯面片支持直接和间接光照，并支持视图独立渲染和视图相关效果。</li>
+<li>推导了框架内可微渲染的高效梯度计算方法，相比自动微分实现了约 10 倍的速度提升和更小的内存占用。</li>
+<li>提出了用于高效求解全局光照的新求解器以及促进优化的有用近似方法。</li>
+<li>在常见基准测试上实现了带有全局光照效果的高质量重光照结果和准确的几何重建。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2511.02483" data-arxiv-id="2511.02483" data-status="ready">
+<h1>[2511.02483] OLATverse: A Large-scale Real-world Object Dataset with Precise Lighting Control</h1>
+<p><a href="https://arxiv.org/abs/2511.02483" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了 OLATverse，这是首个大规模真实世界物体数据集，包含在精确光照控制下捕获的高保真图像，旨在解决现有数据集在规模、质量或光照控制方面的局限性。</p>
+<h2>解决的问题</h2>
+<p>现有计算机视觉和图形学技术因缺乏高保真大规模真实世界数据集，大多在合成数据上训练或在小规模真实数据上评估，导致合成结果缺乏真实感且性能评估不可靠；现有数据集在质量、规模或精确光照控制方面存在至少一个方面的限制，尚无数据集能同时提供大规模覆盖和高保真外观。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出 OLATverse，这是首个公开可用的大规模真实世界数据集，包含约 900 万张图像和 765765 个物体，涵盖多种材质和物体类别，并在精确光照控制下捕获。</li>
+<li>每个物体均在精确控制的光照条件下捕获，包括均匀照明、逐光照明（OLAT）、环境照明和渐变照明。</li>
+<li>提供辅助数据，包括经过校准的相机参数、准确的物体掩码、通过偏振梯度照明恢复的漫反射反照率和表面法线。</li>
+<li>建立 OLATverse 作为多个任务（如逆渲染、重光照、视图合成和法线估计）的综合真实世界基准，并强调其作为生成先验学习有价值资源的潜力。</li>
+<li>利用光舞台设置实现逐光（OLAT）捕获，包含 35 台校准 DSLR 相机和 331 个独立控制的光源，模拟多种照明条件。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2511.06271" data-arxiv-id="2511.06271" data-status="ready">
+<h1>[2511.06271] RelightMaster: Precise Video Relighting with Multi-plane Light Images</h1>
+<p><a href="https://arxiv.org/abs/2511.06271" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 RelightMaster 框架，通过多平面光图像（MPLI）表示和光图像适配器，实现了精确且可控的视频重光照，并构建了首个渲染相同动态内容不同光照条件的视频数据集 RelightVideo。</p>
+<h2>解决的问题</h2>
+<p>视频生成模型难以支持准确、细粒度的光照控制，高质量可控光照训练数据稀缺且合成数据存在外观差异，文本提示无法有效描述细粒度光照细节（如位置、强度分布）。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出多平面光图像（MPLI）表示，显式编码 3D 光源空间属性并与视频模态自然对齐，支持动态多光源控制并具备强泛化性。</li>
+<li>提出轻量高效的光图像适配器，将 MPLI 条件无缝注入预训练视频 DiT 模型，实现精确光照控制同时利用基模型生成先验，避免灾难性遗忘和全量重训练。</li>
+<li>构建了 RelightVideo 数据集，这是首个渲染相同动态内容但具有不同光照条件的视频数据集，推动视频生成中的光照控制研究。</li>
+<li>提出了 RelightMaster 框架，用于准确可控的视频重光照，能在整个场景生成物理合理的光照和阴影效果，同时保留原始背景内容。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2511.13684" data-arxiv-id="2511.13684" data-status="ready">
+<h1>[2511.13684] Training-Free Multi-View Extension of IC-Light for Textual Position-Aware Scene Relighting</h1>
+<p><a href="https://arxiv.org/abs/2511.13684" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了 GS-Light，一种训练免费的、支持文本位置感知的高斯泼溅多视图场景重光照扩展方法。</p>
+<h2>解决的问题</h2>
+<p>现有方法难以将 2D 图像重光照模型（如 IC-Light）扩展到 3D 多视图一致的场景编辑，且现有模型对文本提示中的位置信息不敏感，导致多视图编辑不一致及与用户意图对齐困难。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出 GS-Light，首个支持高斯泼溅场景文本位置感知重光照且具备多视图一致性的方法。</li>
+<li>开发通过询问 LVLM 结合几何与语义估计器生成视图级光照和潜在初始化的光照先验提取方案。</li>
+<li>使用高级视差约束强制视图间一致性，确保重光照视图和潜在空间的一致性。</li>
+<li>扩展框架兼容其他扩散模型（如 DiT），确保方法的可扩展性。</li>
+<li>在多种场景（室内和室外）上验证 GS-Light，在客观和感知指标上优于基线，同时保持快速推理。</li>
+</ul>
+</article>
     <article class="summary-article summary-topic-entry" id="summary-2512.13192" data-arxiv-id="2512.13192" data-status="ready">
 <h1>[2512.13192] POLAR: A Portrait OLAT Dataset and Generative Framework for Illumination-Aware Face Modeling</h1>
 <p><a href="https://arxiv.org/abs/2512.13192" rel="nofollow">arXiv 原文</a></p>
@@ -438,6 +716,6 @@
 </article>
     </div>
   </main>
-  <script type="application/json" id="summary-catalog">{"papers":{"2512.13192":{"status":"ready","url":"notes/relighting.html#summary-2512.13192"},"2601.03357":{"status":"ready","url":"notes/relighting.html#summary-2601.03357"},"2601.15283":{"status":"ready","url":"notes/relighting.html#summary-2601.15283"},"2601.16272":{"status":"ready","url":"notes/relighting.html#summary-2601.16272"},"2601.16981":{"status":"ready","url":"notes/relighting.html#summary-2601.16981"},"2602.04300":{"status":"ready","url":"notes/relighting.html#summary-2602.04300"},"2602.21820":{"status":"ready","url":"notes/relighting.html#summary-2602.21820"},"2602.22025":{"status":"ready","url":"notes/relighting.html#summary-2602.22025"},"2604.03462":{"status":"ready","url":"notes/relighting.html#summary-2604.03462"},"2604.13425":{"status":"ready","url":"notes/relighting.html#summary-2604.13425"},"2604.24407":{"status":"ready","url":"notes/relighting.html#summary-2604.24407"},"2604.24877":{"status":"ready","url":"notes/relighting.html#summary-2604.24877"},"2605.11696":{"status":"ready","url":"notes/relighting.html#summary-2605.11696"},"2605.21766":{"status":"ready","url":"notes/relighting.html#summary-2605.21766"},"2605.28401":{"status":"ready","url":"notes/relighting.html#summary-2605.28401"},"2606.09606":{"status":"ready","url":"notes/relighting.html#summary-2606.09606"},"2606.26715":{"status":"ready","url":"notes/relighting.html#summary-2606.26715"},"2606.28144":{"status":"ready","url":"notes/relighting.html#summary-2606.28144"},"2606.31065":{"status":"ready","url":"notes/relighting.html#summary-2606.31065"},"2607.02301":{"status":"ready","url":"notes/relighting.html#summary-2607.02301"},"2607.09329":{"status":"ready","url":"notes/relighting.html#summary-2607.09329"},"2607.17803":{"status":"ready","url":"notes/relighting.html#summary-2607.17803"},"2607.17833":{"status":"ready","url":"notes/relighting.html#summary-2607.17833"},"2607.25362":{"status":"ready","url":"notes/relighting.html#summary-2607.25362"},"2608.01771":{"status":"ready","url":"notes/relighting.html#summary-2608.01771"},"2608.06075":{"status":"ready","url":"notes/relighting.html#summary-2608.06075"},"2608.18215":{"status":"ready","url":"notes/relighting.html#summary-2608.18215"},"2608.24109":{"status":"ready","url":"notes/relighting.html#summary-2608.24109"}},"topic":"Relighting","version":1}</script>
+  <script type="application/json" id="summary-catalog">{"papers":{"2412.11224":{"status":"ready","url":"notes/relighting.html#summary-2412.11224"},"2412.12083":{"status":"ready","url":"notes/relighting.html#summary-2412.12083"},"2412.13734":{"status":"ready","url":"notes/relighting.html#summary-2412.13734"},"2412.14214":{"status":"ready","url":"notes/relighting.html#summary-2412.14214"},"2412.15211":{"status":"ready","url":"notes/relighting.html#summary-2412.15211"},"2502.08297":{"status":"ready","url":"notes/relighting.html#summary-2502.08297"},"2503.14485":{"status":"ready","url":"notes/relighting.html#summary-2503.14485"},"2503.18408":{"status":"ready","url":"notes/relighting.html#summary-2503.18408"},"2504.16086":{"status":"ready","url":"notes/relighting.html#summary-2504.16086"},"2505.24227":{"status":"ready","url":"notes/relighting.html#summary-2505.24227"},"2507.17613":{"status":"ready","url":"notes/relighting.html#summary-2507.17613"},"2508.06494":{"status":"ready","url":"notes/relighting.html#summary-2508.06494"},"2508.08384":{"status":"ready","url":"notes/relighting.html#summary-2508.08384"},"2508.14563":{"status":"ready","url":"notes/relighting.html#summary-2508.14563"},"2509.18497":{"status":"ready","url":"notes/relighting.html#summary-2509.18497"},"2511.02483":{"status":"ready","url":"notes/relighting.html#summary-2511.02483"},"2511.06271":{"status":"ready","url":"notes/relighting.html#summary-2511.06271"},"2511.13684":{"status":"ready","url":"notes/relighting.html#summary-2511.13684"},"2512.13192":{"status":"ready","url":"notes/relighting.html#summary-2512.13192"},"2601.03357":{"status":"ready","url":"notes/relighting.html#summary-2601.03357"},"2601.15283":{"status":"ready","url":"notes/relighting.html#summary-2601.15283"},"2601.16272":{"status":"ready","url":"notes/relighting.html#summary-2601.16272"},"2601.16981":{"status":"ready","url":"notes/relighting.html#summary-2601.16981"},"2602.04300":{"status":"ready","url":"notes/relighting.html#summary-2602.04300"},"2602.21820":{"status":"ready","url":"notes/relighting.html#summary-2602.21820"},"2602.22025":{"status":"ready","url":"notes/relighting.html#summary-2602.22025"},"2604.03462":{"status":"ready","url":"notes/relighting.html#summary-2604.03462"},"2604.13425":{"status":"ready","url":"notes/relighting.html#summary-2604.13425"},"2604.24407":{"status":"ready","url":"notes/relighting.html#summary-2604.24407"},"2604.24877":{"status":"ready","url":"notes/relighting.html#summary-2604.24877"},"2605.11696":{"status":"ready","url":"notes/relighting.html#summary-2605.11696"},"2605.21766":{"status":"ready","url":"notes/relighting.html#summary-2605.21766"},"2605.28401":{"status":"ready","url":"notes/relighting.html#summary-2605.28401"},"2606.09606":{"status":"ready","url":"notes/relighting.html#summary-2606.09606"},"2606.26715":{"status":"ready","url":"notes/relighting.html#summary-2606.26715"},"2606.28144":{"status":"ready","url":"notes/relighting.html#summary-2606.28144"},"2606.31065":{"status":"ready","url":"notes/relighting.html#summary-2606.31065"},"2607.02301":{"status":"ready","url":"notes/relighting.html#summary-2607.02301"},"2607.09329":{"status":"ready","url":"notes/relighting.html#summary-2607.09329"},"2607.17803":{"status":"ready","url":"notes/relighting.html#summary-2607.17803"},"2607.17833":{"status":"ready","url":"notes/relighting.html#summary-2607.17833"},"2607.25362":{"status":"ready","url":"notes/relighting.html#summary-2607.25362"},"2608.01771":{"status":"ready","url":"notes/relighting.html#summary-2608.01771"},"2608.06075":{"status":"ready","url":"notes/relighting.html#summary-2608.06075"},"2608.18215":{"status":"ready","url":"notes/relighting.html#summary-2608.18215"},"2608.24109":{"status":"ready","url":"notes/relighting.html#summary-2608.24109"}},"topic":"Relighting","version":1}</script>
 </body>
 </html>
