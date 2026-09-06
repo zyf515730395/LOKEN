@@ -118,7 +118,7 @@ def extract_deep_reading(body: str) -> dict[str, str] | None:
 
 def render_cell(markdown_content: str) -> str:
     if not markdown_content.strip():
-        return '<span class="milestone-value is-undisclosed">未披露</span>'
+        return '<span class="milestone-value is-undisclosed">/</span>'
     rendered = markdown.markdown(markdown_content, extensions=["extra", "sane_lists"])
     cleaned = bleach.clean(
         rendered,
@@ -421,7 +421,7 @@ def render_family_page(
       </div>
 {render_comparison_table(family, notes)}
     </div>
-    <footer>仅收录官方发布 · 未公开的信息明确标记为“未披露”</footer>
+    <footer>仅收录官方发布 · 未披露的技术信息以 / 表示</footer>
 """
     return render_site_page(
         output_file=output_file,
