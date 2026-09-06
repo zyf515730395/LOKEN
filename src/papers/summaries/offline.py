@@ -16,7 +16,7 @@ from .cache import PaperSummaryCache, cache_key
 from .catalog import PaperCandidate, TOPIC_SLUGS, notes_path
 from .models import PaperSummary, PaperSummaryError
 from .paths import PRIVATE_ROOT, normalize_arxiv_id, run_lock
-from .publisher import load_ready_keys, publish_summaries
+from .publisher import load_ready_keys, publish_summaries, restore_topic_document
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[3]
@@ -29,6 +29,7 @@ DEFAULT_CONFIG = PROJECT_ROOT / "config" / "site.yaml"
 DEFAULT_ANNOTATIONS = PROJECT_ROOT / "data" / "paper-annotations.json"
 OFFLINE_STATE = PRIVATE_ROOT / "offline-import-state.json"
 REVIEW_POLICY = "archive-topic-review-v1"
+SUPPORTED_REVIEW_POLICIES = (REVIEW_POLICY, "archive-topic-review-v2")
 CACHE_PATH = re.compile(r"cache/(?P<prefix>[0-9a-f]{2})/(?P<key>[0-9a-f]{64})\.json")
 REPORT_FIELDS = {
     "id", "topic", "title", "historical", "accept", "accept_reason",
@@ -122,7 +123,7 @@ def _load_reviewed(
             "reject_candidates", "needs_review",
         }
         or payload["version"] != 1
-        or payload["policy_version"] != REVIEW_POLICY
+        or payload["policy_version"] not in SUPPORTED_REVIEW_POLICIES
         or payload["action"] != "review_only_no_deletion"
         or not all(isinstance(payload[name], list) for name in (
             "accept_candidates", "reject_candidates", "needs_review"
@@ -192,7 +193,7 @@ def _load_reviewed(
                 "review_origin", "source", "summary_cache", "public_url",
             ))
             or receipt.get("updated") != row["date"].isoformat()
-            or receipt.get("review_policy") != REVIEW_POLICY
+            or receipt.get("review_policy") != payload["policy_version"]
             or not isinstance(receipt.get("model"), str)
             or not receipt["model"].strip()
             or acquired is None
@@ -269,7 +270,12 @@ def publish_offline_summaries(
             return OfflineImportResult(0, skipped, 0)
         topics = tuple(dict.fromkeys(candidate.topic for candidate, _ in results))
         try:
-            originals = {topic: notes_path(docs, topic).read_bytes() for topic in topics}
+            originals = {}
+            for topic in topics:
+                try:
+                    originals[topic] = notes_path(docs, topic).read_bytes()
+                except FileNotFoundError:
+                    originals[topic] = None
         except OSError:
             raise PaperSummaryError("summary_page_missing", "summary page is unavailable for safe publication") from None
 
@@ -280,7 +286,7 @@ def publish_offline_summaries(
         except Exception as error:
             try:
                 for topic, content in originals.items():
-                    atomic_write_bytes(notes_path(docs, topic), content)
+                    restore_topic_document(docs, topic, content)
                 regenerate()
                 _clear_transaction_state()
             except Exception:

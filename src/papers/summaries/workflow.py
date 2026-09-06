@@ -11,13 +11,12 @@ from pathlib import Path
 
 from papers.site import generate_site
 from shared.loopback_chat import LoopbackChatError, validate_loopback_base_url
-from shared.rendering import atomic_write_bytes
 
 from .acquisition import ArxivSourceClient
 from .catalog import PaperCandidate, load_candidates, notes_path
 from .models import PaperSummary, PaperSummaryError
 from .paths import PROJECT_ROOT, private_path, run_lock
-from .publisher import load_ready_keys, publish_summaries
+from .publisher import load_ready_keys, publish_summaries, restore_topic_document
 from .summarizer import summarize_paper
 
 
@@ -296,10 +295,10 @@ def _restore_public_notes(
     ledger_path: Path,
     archive_path: Path,
     topics: list[str],
-    originals: dict[str, bytes],
+    originals: dict[str, bytes | None],
 ) -> None:
     for topic in topics:
-        atomic_write_bytes(notes_path(docs_root, topic), originals[topic])
+        restore_topic_document(docs_root, topic, originals[topic])
     _regenerate_site(
         docs_root=docs_root, ledger_path=ledger_path, archive_path=archive_path
     )
@@ -481,12 +480,14 @@ def _run_summaries_locked(
                 "state_unavailable",
                 "publication transaction state cannot be written safely",
             ) from None
-    originals: dict[str, bytes] = {}
+    originals: dict[str, bytes | None] = {}
     published_topics: list[str] = []
     for topic, topic_results in grouped.items():
         target = notes_path(docs, topic)
         try:
             originals[topic] = target.read_bytes()
+        except FileNotFoundError:
+            originals[topic] = None
         except OSError:
             records.extend(
                 PaperRunRecord(
