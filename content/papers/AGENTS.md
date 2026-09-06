@@ -3,5 +3,8 @@
 - `archive.json` is the canonical historical/public paper archive. Preserve every existing historical entry.
 - `arxiv-candidates.json` owns collection cursors and pending/accepted/rejected decisions; only pending candidates are reviewed.
 - `paper-annotations.json` owns validated public topic/tag/type/affiliation metadata.
-- Models, source documents, responses, caches, receipts, reports and queue checkpoints never belong here; they remain under ignored `build/paper-summaries/`.
+- Inference source documents, responses, caches, receipts, reports and queue checkpoints never belong here; they remain under ignored `build/paper-summaries/`. Models remain in the configured private runtime location.
 - `docs/togos-papers.json` is a generated compatibility export, not an editable input.
+- Curated-list refreshes verify paper identity, authors and publication dates against primary sources; list titles and displayed IDs may be wrong or renamed. Reuse existing archive rows and preserve review decisions and collection cursors; unresolved IDs stay in local audit reports.
+- The offline pipeline supports modern numeric arXiv IDs only. Do not invent IDs for non-arXiv papers. Archive topic membership does not override validated annotation topics or a ledger's selected topic.
+- Apply archive/ledger pairs with the existing lock, concurrent-edit checks and recoverable curation journal. Rebuild with `python -m papers build`; source snapshots and import evidence stay in ignored `build/reports/`, never in public data.
