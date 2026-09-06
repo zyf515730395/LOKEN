@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Z-Image 版本文章精读。">
-  <title>Z-Image · 文章精读</title>
+  <meta name="description" content="VGGT 版本文章精读。">
+  <title>VGGT · 文章精读</title>
   <script>
     (() => {
       document.documentElement.classList.add("js");
@@ -68,104 +68,63 @@
   <main class="page-content" id="top">
 <section class="summary-page-shell" aria-labelledby="notes-page-title">
       <header class="summary-topic-header">
-        <a class="summary-back" href="z-image.html">← 返回版本对比</a>
-        <h1 id="notes-page-title">Z-Image · 文章精读</h1>
+        <a class="summary-back" href="vggt.html">← 返回版本对比</a>
+        <h1 id="notes-page-title">VGGT · 文章精读</h1>
       </header>
 <nav class="context-strip" aria-label="模型系列">
     <a class="context-strip-link" href="flux.html">FLUX</a>
     <a class="context-strip-link" href="qwen-image.html">Qwen-Image</a>
     <a class="context-strip-link" href="seedream.html">Seedream</a>
     <a class="context-strip-link" href="stable-diffusion.html">Stable Diffusion</a>
-    <a class="context-strip-link is-active" href="z-image.html" aria-current="location">Z-Image</a>
+    <a class="context-strip-link" href="z-image.html">Z-Image</a>
     <a class="context-strip-link" href="wan.html">Wan</a>
     <a class="context-strip-link" href="seedance.html">Seedance</a>
     <a class="context-strip-link" href="hunyuan3d.html">Hunyuan3D</a>
-    <a class="context-strip-link" href="vggt.html">VGGT</a>
+    <a class="context-strip-link is-active" href="vggt.html" aria-current="location">VGGT</a>
   </nav>
       <details class="content-tools" open>
         <summary>版本精读目录</summary>
         <nav class="content-tools-navigation" aria-label="版本精读目录">
-<a class="context-filter" href="#milestone-z-image-turbo">Z-Image-Turbo</a>
-<a class="context-filter" href="#milestone-z-image-base">Z-Image Base</a>
+<a class="context-filter" href="#milestone-vggt">VGGT</a>
+<a class="context-filter" href="#milestone-vggt-omega">VGGT-Ω</a>
         </nav>
       </details>
       <div class="summary-topic-list">
-    <article class="summary-article summary-topic-entry" id="milestone-z-image-turbo">
-<h1>[2511.22699] Z-Image · Z-Image-Turbo</h1>
+    <article class="summary-article summary-topic-entry" id="milestone-vggt">
+<h1>[2503.11651] VGGT · VGGT</h1>
+<p>日期口径：原始论文首次提交日；Commercial 增发日期在变体中单列。</p>
 <h2>一句话结论</h2>
-<p>通过单流主干和后训练蒸馏，用较小模型实现少步图像生成。</p>
+<p>用单次前馈网络联合恢复多视图几何，将传统重建流程中的多种估计任务共享建模。</p>
 <h2>解决的问题</h2>
-<p>快速出图需要减少网络评估次数，同时保留双语文字与语义遵循。</p>
+<p>相机、深度和对应关系互相依赖，独立估计再优化会增加复杂度和计算成本。</p>
 <h2>创新点</h2>
 <ul>
-<li>单流设计共享模态间计算，以提高参数利用率。</li>
-<li>区分 CFG 增强和分布匹配的作用，再联合 DMD 与 RL 优化。</li>
+<li>帧内与跨帧注意力交替，让局部图像特征直接交换多视图几何信息。</li>
+<li>多任务监督共享主干，避免将几何估计拆成独立模型。</li>
 </ul>
 <h2>文章精读</h2>
 <h3>版本</h3>
 <ul>
-<li><strong>Z-Image-Turbo</strong>：6B 少步蒸馏版本，8 次网络评估，无 CFG；官方模型表将其定位为高质量、较低多样性的快速生成档。</li>
+<li><strong>VGGT-1B</strong>：原始前馈几何模型，同时预测相机、深度、点图与轨迹；论文模型总规模约 1.2B。</li>
+<li><strong>VGGT-1B-Commercial</strong>：官方于 2025 年 7 月 29 日增发的检查点，声明性能与原版本近似；具体结构变化：/。</li>
 </ul>
 <h3>训练数据</h3>
-<p>分阶段训练使用清洗的图文数据，配合 Z-Captioner、OCR 与知识增强描述；从低分辨率逐渐扩展到更完整的生成任务。</p>
-<h3>VAE 结构</h3>
-<p>采用 FLUX VAE 将图像编码为潜变量。</p>
-<h3>Text Encoder</h3>
-<p>Qwen3-4B 编码文本；编辑路线额外使用 SigLIP2 视觉语义条件。</p>
-<h3>生成主体网络</h3>
-<p>6B S3-DiT 将文本、视觉语义和 VAE 图像 token 串接为统一序列；采用统一三维 RoPE。</p>
-<h3>训练 Trick</h3>
-<ul>
-<li>Decoupled-DMD 分离 CFG augmentation 与 distribution matching；DMDR 联合 DMD 与 RL 后训练。</li>
-<li>分阶段预训练、SFT 和后训练逐步扩展质量与指令能力。</li>
-</ul>
-<h3>新提出的创新点</h3>
-<ul>
-<li>单流设计共享模态间计算，以提高参数利用率。</li>
-<li>区分 CFG 增强和分布匹配的作用，再联合 DMD 与 RL 优化。</li>
-</ul>
-<h3>局限性</h3>
-<ul>
-<li>技术报告指出紧凑模型的世界知识、意图理解和复杂推理有限，需要提示词增强补偿。</li>
-</ul>
-<h2>资料来源</h2>
-<ul>
-<li><a href="https://arxiv.org/abs/2511.22699" rel="nofollow">arxiv</a></li>
-<li><a href="https://github.com/Tongyi-MAI/Z-Image" rel="nofollow">official_repository</a></li>
-</ul>
-    </article>
-    <article class="summary-article summary-topic-entry" id="milestone-z-image-base">
-<h1>[2601.27XXX] Z-Image · Z-Image Base</h1>
-<h2>一句话结论</h2>
-<p>基础权重补齐可微调、高多样性生成档；编辑相关变体仍按官方待发布状态列出。</p>
-<h2>解决的问题</h2>
-<p>少步蒸馏模型与需要 CFG、负向提示及进一步训练的使用场景并不相同。</p>
-<h2>创新点</h2>
-<ul>
-<li>同一家族区分基础生成、少步生成与计划中的编辑训练阶段。</li>
-</ul>
-<h2>文章精读</h2>
-<h3>版本</h3>
-<ul>
-<li><strong>Z-Image</strong>：未经 Turbo 少步蒸馏的基础生成模型；官方建议 50 步、支持 CFG 与负向提示，便于多样化创作和微调。</li>
-<li><strong>Z-Image-Omni-Base · Announced</strong>：官方仓库列为待发布，面向生成与编辑的预训练基础模型；不把待发布说明当作权重已发布。</li>
-<li><strong>Z-Image-Edit · Announced</strong>：官方仓库列为待发布的编辑微调模型；实际发布日与新增技术细节：/。</li>
-</ul>
-<h3>训练数据</h3>
-<p>/</p>
+<p>混合真实与合成几何数据，包括 Co3Dv2、BlendMVS、DL3DV、MegaDepth、ScanNet、Hypersim 等；监督来自传感器、渲染和 SfM。</p>
 <h3>VAE 结构</h3>
 <p>/</p>
 <h3>Text Encoder</h3>
 <p>/</p>
 <h3>生成主体网络</h3>
-<p>6B S3-DiT；该节点的主模型是 Turbo 的基础生成模型。</p>
+<p>DINOv2 图像 token 加相机及寄存器 token，交替执行帧内与全局注意力，再由任务头预测相机、深度、点图和跟踪特征。这里是几何估计网络，不是扩散生成器。</p>
 <h3>训练 Trick</h3>
 <ul>
-<li>官方模型表说明基础版经过预训练和 SFT，未经过 Turbo 的 RL。</li>
+<li>联合相机、深度、三维点和跟踪损失；对真值坐标统一尺度。</li>
+<li>随机抽取不同数量帧、宽高比和图像增强，训练可变长度输入。</li>
 </ul>
 <h3>新提出的创新点</h3>
 <ul>
-<li>同一家族区分基础生成、少步生成与计划中的编辑训练阶段。</li>
+<li>帧内与跨帧注意力交替，让局部图像特征直接交换多视图几何信息。</li>
+<li>多任务监督共享主干，避免将几何估计拆成独立模型。</li>
 </ul>
 <h3>局限性</h3>
 <ul>
@@ -173,7 +132,54 @@
 </ul>
 <h2>资料来源</h2>
 <ul>
-<li><a href="https://github.com/Tongyi-MAI/Z-Image" rel="nofollow">official_repository</a></li>
+<li><a href="https://arxiv.org/abs/2503.11651" rel="nofollow">arxiv</a></li>
+<li><a href="https://github.com/facebookresearch/vggt" rel="nofollow">official_repository</a></li>
+</ul>
+    </article>
+    <article class="summary-article summary-topic-entry" id="milestone-vggt-omega">
+<h1>[2605.15195] VGGT · VGGT-Ω</h1>
+<h2>一句话结论</h2>
+<p>减少几何重建训练的显存开销，用更大规模的真实与动态视频数据扩展空间理解。</p>
+<h2>解决的问题</h2>
+<p>全局注意力和高分辨率预测头占用大量显存，限制模型和数据规模。</p>
+<h2>创新点</h2>
+<ul>
+<li>寄存器聚合跨视图信息，部分替代昂贵的全局 token 交互。</li>
+<li>用紧凑的相机和深度目标表达重建，减少预测头显存。</li>
+</ul>
+<h2>文章精读</h2>
+<h3>版本</h3>
+<ul>
+<li><strong>VGGT-Ω 1B</strong>：报告中的基础规模，使用寄存器注意力、精简预测头和扩大训练数据。</li>
+<li><strong>VGGT-Ω 10B</strong>：报告中的扩大规模模型；作为论文官方模型比较，不将论文评测等同于已开放全部权重。</li>
+</ul>
+<h3>训练数据</h3>
+<p>约 300 万有监督序列覆盖公开及内部静态、动态数据；另收集约 4000 万网络风格视频，筛选后用于自监督及几何伪标注。</p>
+<h3>VAE 结构</h3>
+<p>/</p>
+<h3>Text Encoder</h3>
+<p>/</p>
+<h3>生成主体网络</h3>
+<p>以 DINOv3 初始化，图像 patch 为 16；默认将 25% 全局注意力替换为仅寄存器间的注意力，使用轻量 MLP 与 pixel shuffle 预测头，直接输出相机和深度。</p>
+<h3>训练 Trick</h3>
+<ul>
+<li>保留点图与匹配监督，但去掉其独立预测输出，减少冗余。</li>
+<li>监督训练结合未标注视频的自监督和动态场景标注流水线。</li>
+</ul>
+<h3>新提出的创新点</h3>
+<ul>
+<li>寄存器聚合跨视图信息，部分替代昂贵的全局 token 交互。</li>
+<li>用紧凑的相机和深度目标表达重建，减少预测头显存。</li>
+</ul>
+<h3>局限性</h3>
+<ul>
+<li>论文消融显示，把全部全局注意力替换为寄存器注意力虽更快，却会降低重建精度；默认只替换部分层。</li>
+</ul>
+<h2>资料来源</h2>
+<ul>
+<li><a href="https://arxiv.org/abs/2605.15195" rel="nofollow">arxiv</a></li>
+<li><a href="https://github.com/facebookresearch/vggt" rel="nofollow">official_repository</a></li>
+<li><a href="https://vggt-omega.github.io/" rel="nofollow">official_blog</a></li>
 </ul>
     </article>
       </div>
