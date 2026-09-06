@@ -1,6 +1,6 @@
 # Paper pipeline rules
 
-- `docs/togos-papers.json` is the canonical public archive input. Candidate decisions remain in `data/arxiv-candidates.json`; paper topics, detail tags, institutions, and `paper`/`survey` types remain in `data/paper-annotations.json`.
+- `content/papers/archive.json` is the canonical public archive input. Candidate decisions remain in `content/papers/arxiv-candidates.json`; paper topics, detail tags, institutions, and `paper`/`survey` types remain in `content/papers/paper-annotations.json`.
 - The ordered label taxonomy and model-facing descriptions come only from `config/site.yaml`. New labels must not be hard-coded in Python or JavaScript.
 - `src/papers/site.py` owns the paper archive view. `docs/index.html` and `docs/search-index.json` are generated outputs and must not be edited by hand.
 - Ordinary papers are grouped into year and month by their publication date. The Monday-to-Sunday week label may cross month or year boundaries without changing that ownership.
@@ -8,6 +8,11 @@
 - Preserve existing historical archive visibility and review decisions. New daily candidates collected since collection.review_required_since must be explicitly accepted before appearing in public lists, counts or search; pending candidates stay in the ledger.
 - Topic navigation comes from `paper_labels`; detail tags come from `paper_tag_groups` in the same config. Topics and tags are independent. Topic aliases preserve historical archive and summary URLs; removed topics have no navigation entry.
 - Institutions are evidence-backed author affiliations; missing or unreliable evidence renders as `-`. Annotation inference must not guess affiliations from author names.
-- The current learning-taxonomy contract lives in `docs/superpowers/specs/2026-09-06-learning-taxonomy.md`; implementation plans remain historical records. Local validation scripts and reports live under ignored `build/` and are deleted after verification.
+- The current learning-taxonomy contract is defined by this file and config/site.yaml; superseded plans are available in Git history. Local validation scripts and reports live under ignored `build/` and are deleted after verification.
 - Keep model calls loopback-only and private inputs, responses, caches, reports, and test artifacts below ignored `build/`. Follow the narrower rules in `annotations/` and `summaries/` when editing those modules.
 - When publishing a paper-pipeline change, commit the relevant source/config/data together with every affected generated page or index; never stage local test or cache artifacts.
+- `python -m papers` is the public command entry; `python -m papers.runtime` owns WSL scheduling, model lifecycle, batch priority and restricted Git publication. Root-level legacy scripts are retired.
+- Collection writes only the candidate ledger. Daily curation processes pending IDs using title/abstract/config only; concurrent public edits abort application. Public pair updates use a recoverable private journal.
+- Daily summary and annotation selection prioritizes unattempted work, then rotates retries using private attempt counters so repeated failures cannot block the queue.
+- Weekend batches preserve the existing v1 checkpoint and caches, yield to daily requests between batches, and publish validated missing annotations only after their summaries are publicly ready.
+- `config/conferences.yaml` defines enabled meetings; confirmed future meeting dates require an official source and verification date. Unannounced dates must remain visibly pending.

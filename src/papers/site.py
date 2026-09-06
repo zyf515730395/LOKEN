@@ -40,7 +40,7 @@ SHOW_BOOK_NOTES_NAV = False
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_MILESTONE_CATALOG = PROJECT_ROOT / "config" / "milestone_models.yaml"
 DEFAULT_SITE_CONFIG = PROJECT_ROOT / "config" / "site.yaml"
-DEFAULT_ANNOTATION_CATALOG = PROJECT_ROOT / "data" / "paper-annotations.json"
+DEFAULT_ANNOTATION_CATALOG = PROJECT_ROOT / "content" / "papers" / "paper-annotations.json"
 
 
 def slugify(value: str) -> str:
@@ -642,6 +642,7 @@ def generate_site(
     annotation_path: str | Path = DEFAULT_ANNOTATION_CATALOG,
     writings_source_root: str | Path = PROJECT_ROOT / "content" / "writings",
     writings_report_path: str | Path = PROJECT_ROOT / "build" / "reports" / "writings.json",
+    refresh_related: bool = True,
 ) -> None:
     data = json.loads(Path(json_path).read_text(encoding="utf-8"))
     labels = load_label_definitions(config_path)
@@ -695,6 +696,15 @@ def generate_site(
         sidebar_status=f"{updated.replace('-', '.')} / DAILY",
     )
     atomic_write_text(page_output, document)
+
+    if not refresh_related:
+        # Paper jobs preserve other sections and their search entries verbatim.
+        index_path = Path(search_index_path or site_root / "search-index.json")
+        existing = json.loads(index_path.read_text(encoding="utf-8")) if index_path.exists() else {"documents": []}
+        documents = [SearchDocument(**item) for item in existing["documents"] if item["section"] != "learning"]
+        documents.extend(build_paper_search_documents(categories, summary_catalog))
+        atomic_write_text(index_path, serialize_search_index(documents, generated_on=today))
+        return
 
     journey_destination = site_root / "journeys" / "index.html"
     atomic_write_text(

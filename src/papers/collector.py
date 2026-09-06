@@ -18,7 +18,6 @@ from .candidate_ledger import (
     load_candidate_ledger,
     merge_collected_candidates,
 )
-from .site import generate_site
 
 
 logging.basicConfig(
@@ -289,16 +288,6 @@ def collect(config_path: str | Path) -> dict[str, int]:
     )
     next_ledger["collection_cursors"] = cursors
     atomic_write_json(ledger_path, next_ledger)
-    generate_site(
-        archive_path,
-        html_path,
-        ledger_path,
-        milestone_catalog_path,
-        output_root=output_root,
-        search_index_path=search_index_path,
-        config_path=config_path,
-        annotation_path=Path(config_path).parent.parent / "data" / "paper-annotations.json",
-    )
     result = {
         "collected": len(records),
         "new_candidates": added,

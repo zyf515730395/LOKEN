@@ -16,9 +16,9 @@ def build_site(*, generated_on: date | None = None) -> BuildSummary:
     project = Path(PROJECT_ROOT)
     try:
         generate_site(
-            project / "docs" / "togos-papers.json",
+            project / "content" / "papers" / "archive.json",
             project / "docs" / "index.html",
-            project / "data" / "arxiv-candidates.json",
+            project / "content" / "papers" / "arxiv-candidates.json",
             project / "config" / "milestone_models.yaml",
             output_root=project / "docs",
             search_index_path=project / "docs" / "search-index.json",
