@@ -113,6 +113,10 @@ class ArxivSourceClient:
         self.sleeper = sleeper
 
     def _download(self, url: str, *, limit: int) -> tuple[int, str, bytes]:
+        # Share the fixed arXiv proxy route with daily and historical downloads.
+        # trust_env remains false: never import netrc authentication or CA overrides.
+        if url.startswith(ARXIV_ORIGIN + "/"):
+            self.session.proxies = requests.utils.get_environ_proxies(url)
         for attempt in range(1, RETRY_ATTEMPTS + 1):
             try:
                 response = self.session.get(

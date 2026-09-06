@@ -22,11 +22,11 @@ from .publisher import load_ready_keys, publish_summaries, restore_topic_documen
 PROJECT_ROOT = Path(__file__).resolve().parents[3]
 DEFAULT_REVIEW = PRIVATE_ROOT / "batch" / "topic-review.json"
 DEFAULT_DOCS = PROJECT_ROOT / "docs"
-DEFAULT_ARCHIVE = DEFAULT_DOCS / "togos-papers.json"
-DEFAULT_LEDGER = PROJECT_ROOT / "data" / "arxiv-candidates.json"
+DEFAULT_ARCHIVE = PROJECT_ROOT / "content" / "papers" / "archive.json"
+DEFAULT_LEDGER = PROJECT_ROOT / "content" / "papers" / "arxiv-candidates.json"
 DEFAULT_MILESTONES = PROJECT_ROOT / "config" / "milestone_models.yaml"
 DEFAULT_CONFIG = PROJECT_ROOT / "config" / "site.yaml"
-DEFAULT_ANNOTATIONS = PROJECT_ROOT / "data" / "paper-annotations.json"
+DEFAULT_ANNOTATIONS = PROJECT_ROOT / "content" / "papers" / "paper-annotations.json"
 OFFLINE_STATE = PRIVATE_ROOT / "offline-import-state.json"
 REVIEW_POLICY = "archive-topic-review-v1"
 SUPPORTED_REVIEW_POLICIES = (REVIEW_POLICY, "archive-topic-review-v2")
@@ -246,6 +246,7 @@ def publish_offline_summaries(
                 annotation_path=DEFAULT_ANNOTATIONS,
                 writings_source_root=site_project_root / "content" / "writings",
                 writings_report_path=site_project_root / "build" / "reports" / "writings.json",
+                refresh_related=False,
             )
 
         identity = _transaction_identity(docs, archive, ledger)

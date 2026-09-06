@@ -10,6 +10,7 @@ import os
 from pathlib import Path
 
 from papers.site import generate_site
+from papers.retries import select_attempts
 from shared.loopback_chat import LoopbackChatError, validate_loopback_base_url
 
 from .acquisition import ArxivSourceClient
@@ -20,12 +21,12 @@ from .publisher import load_ready_keys, publish_summaries, restore_topic_documen
 from .summarizer import summarize_paper
 
 
-DEFAULT_LEDGER = PROJECT_ROOT / "data" / "arxiv-candidates.json"
+DEFAULT_LEDGER = PROJECT_ROOT / "content" / "papers" / "arxiv-candidates.json"
 DEFAULT_DOCS = PROJECT_ROOT / "docs"
-DEFAULT_ARCHIVE = DEFAULT_DOCS / "togos-papers.json"
+DEFAULT_ARCHIVE = PROJECT_ROOT / "content" / "papers" / "archive.json"
 DEFAULT_MILESTONES = PROJECT_ROOT / "config" / "milestone_models.yaml"
 DEFAULT_SITE_CONFIG = PROJECT_ROOT / "config" / "site.yaml"
-DEFAULT_ANNOTATIONS = PROJECT_ROOT / "data" / "paper-annotations.json"
+DEFAULT_ANNOTATIONS = PROJECT_ROOT / "content" / "papers" / "paper-annotations.json"
 REPORT_VERSION = 1
 
 
@@ -286,6 +287,7 @@ def _regenerate_site(
         annotation_path=DEFAULT_ANNOTATIONS,
         writings_source_root=PROJECT_ROOT / "content" / "writings",
         writings_report_path=PROJECT_ROOT / "build" / "reports" / "writings.json",
+        refresh_related=False,
     )
 
 
@@ -378,9 +380,12 @@ def _run_summaries_locked(
         ledger,
         ready_ids=ready,
         paper_ids=paper_ids,
-        limit=limit,
+        limit=limit if paper_ids else None,
         refresh=refresh,
     )
+    if not paper_ids:
+        candidates = tuple(select_attempts(list(reversed(candidates)), key=lambda item: item.arxiv_id,
+                                           namespace="summary", limit=limit))
     if not candidates:
         result = RunResult(0, 0, 0, 0, ())
         try:

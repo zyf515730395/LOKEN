@@ -8,6 +8,7 @@ import json
 from pathlib import Path
 
 from papers.site import generate_site, load_candidate_statuses
+from papers.retries import select_attempts
 import yaml
 from papers.candidate_ledger import atomic_write_json, normalize_arxiv_id
 from papers.summaries.acquisition import ArxivSourceClient
@@ -26,9 +27,9 @@ from .models import PaperAnnotation, PaperAnnotationError
 
 
 DEFAULT_CONFIG = PROJECT_ROOT / "config" / "site.yaml"
-DEFAULT_ARCHIVE = PROJECT_ROOT / "docs" / "togos-papers.json"
-DEFAULT_CATALOG = PROJECT_ROOT / "data" / "paper-annotations.json"
-DEFAULT_LEDGER = PROJECT_ROOT / "data" / "arxiv-candidates.json"
+DEFAULT_ARCHIVE = PROJECT_ROOT / "content" / "papers" / "archive.json"
+DEFAULT_CATALOG = PROJECT_ROOT / "content" / "papers" / "paper-annotations.json"
+DEFAULT_LEDGER = PROJECT_ROOT / "content" / "papers" / "arxiv-candidates.json"
 DEFAULT_MILESTONES = PROJECT_ROOT / "config" / "milestone_models.yaml"
 DEFAULT_DOCS = PROJECT_ROOT / "docs"
 
@@ -119,7 +120,10 @@ def run_annotations(
             statuses = load_candidate_statuses(ledger_path, review_required_since=cutoff)
             selected = [paper_id for paper_id in sorted(candidates)
                         if paper_id not in annotations and statuses.get(paper_id) == "accepted"]
-        if limit is not None:
+        if not requested:
+            selected = select_attempts(list(reversed(selected)), key=lambda item: item,
+                                       namespace="annotation", limit=limit)
+        elif limit is not None:
             if limit < 1:
                 raise PaperAnnotationError("invalid_limit", "limit must be at least one")
             selected = selected[:limit]
@@ -190,6 +194,7 @@ def run_annotations(
                     annotation_path=catalog_path,
                     writings_source_root=publication_root / "content" / "writings",
                     writings_report_path=publication_root / "build" / "reports" / "writings.json",
+                    refresh_related=False,
                 )
             except Exception:
                 raise PaperAnnotationError(
