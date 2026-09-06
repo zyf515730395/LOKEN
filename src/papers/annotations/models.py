@@ -20,9 +20,13 @@ class LabelDefinition:
     name: str
     description: str
     slug: str
+    group: str = "topic"
+    aliases: tuple[str, ...] = ()
 
 
 @dataclass(frozen=True, slots=True)
 class PaperAnnotation:
+    topics: tuple[str, ...]
     tags: tuple[str, ...]
     paper_type: Literal["paper", "survey"]
+    institutions: tuple[str, ...] = ()

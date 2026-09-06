@@ -7,7 +7,8 @@ from dataclasses import dataclass
 import json
 from pathlib import Path
 
-from papers.site import generate_site
+from papers.site import generate_site, load_candidate_statuses
+import yaml
 from papers.candidate_ledger import atomic_write_json, normalize_arxiv_id
 from papers.summaries.acquisition import ArxivSourceClient
 from papers.summaries.paths import PROJECT_ROOT, private_path, run_lock
@@ -17,7 +18,7 @@ from .catalog import (
     annotation_coverage,
     archive_titles,
     load_annotation_catalog,
-    load_label_definitions,
+    load_annotation_definitions,
     write_annotation_catalog,
 )
 from .classifier import classify_paper
@@ -68,7 +69,7 @@ def status_snapshot(
     archive_path: str | Path = DEFAULT_ARCHIVE,
     catalog_path: str | Path = DEFAULT_CATALOG,
 ) -> dict[str, int]:
-    labels = load_label_definitions(config_path)
+    labels = load_annotation_definitions(config_path)
     archive = _read_archive(Path(archive_path))
     annotations = load_annotation_catalog(catalog_path, labels)
     return annotation_coverage(archive, annotations)
@@ -87,6 +88,7 @@ def run_annotations(
     archive_path: str | Path = DEFAULT_ARCHIVE,
     catalog_path: str | Path = DEFAULT_CATALOG,
     docs_root: str | Path = DEFAULT_DOCS,
+    ledger_path: str | Path = DEFAULT_LEDGER,
 ) -> AnnotationRunResult:
     if not isinstance(model, str) or not model.strip():
         raise PaperAnnotationError("model_required", "local model name is required")
@@ -101,7 +103,7 @@ def run_annotations(
     except LoopbackChatError as error:
         raise PaperAnnotationError(error.code, error.message) from None
     with run_lock():
-        labels = load_label_definitions(config_path)
+        labels = load_annotation_definitions(config_path)
         archive = _read_archive(Path(archive_path))
         candidates = archive_titles(archive)
         annotations = load_annotation_catalog(catalog_path, labels)
@@ -112,7 +114,11 @@ def run_annotations(
                 raise PaperAnnotationError("paper_not_archived", f"paper is not archived: {missing[0]}")
             selected = list(requested)
         else:
-            selected = [paper_id for paper_id in sorted(candidates) if paper_id not in annotations]
+            settings = yaml.safe_load(Path(config_path).read_text(encoding="utf-8"))
+            cutoff = settings.get("collection", {}).get("review_required_since")
+            statuses = load_candidate_statuses(ledger_path, review_required_since=cutoff)
+            selected = [paper_id for paper_id in sorted(candidates)
+                        if paper_id not in annotations and statuses.get(paper_id) == "accepted"]
         if limit is not None:
             if limit < 1:
                 raise PaperAnnotationError("invalid_limit", "limit must be at least one")
@@ -176,7 +182,7 @@ def run_annotations(
                 generate_site(
                     archive_path,
                     Path(docs_root) / "index.html",
-                    DEFAULT_LEDGER,
+                    ledger_path,
                     DEFAULT_MILESTONES,
                     output_root=docs_root,
                     search_index_path=Path(docs_root) / "search-index.json",

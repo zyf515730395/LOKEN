@@ -9,8 +9,14 @@ from pathlib import Path
 import re
 import unicodedata
 
+import yaml
+
 from milestones.catalog import load_milestone_catalog
-from papers.annotations.catalog import load_annotation_catalog, load_label_definitions
+from papers.annotations.catalog import (
+    load_annotation_catalog,
+    load_annotation_definitions,
+    load_label_definitions,
+)
 from papers.annotations.models import LabelDefinition, PaperAnnotation
 from shared.rendering import atomic_write_text
 from shared.search_index import SearchDocument, serialize_search_index
@@ -61,50 +67,65 @@ def parse_entry(paper_id: str, entry: str) -> dict:
     }
 
 
-def _annotation_values(value: PaperAnnotation | dict) -> tuple[tuple[str, ...], str]:
+def _annotation_values(value: PaperAnnotation | dict) -> tuple:
     if isinstance(value, PaperAnnotation):
-        return value.tags, value.paper_type
-    return tuple(value["tags"]), value["paper_type"]
+        return value.topics, value.tags, value.paper_type, value.institutions
+    return (
+        tuple(value.get("topics", ())), tuple(value.get("tags", ())),
+        value["paper_type"], tuple(value.get("institutions", ())),
+    )
 
 
 def build_archive(
     data: dict,
     labels: tuple[LabelDefinition, ...] | None = None,
     annotations: dict[str, PaperAnnotation | dict] | None = None,
+    candidate_statuses: dict[str, str] | None = None,
 ) -> tuple[list[dict], OrderedDict]:
     categories = []
     themes = OrderedDict()
 
     if labels is None:
-        labels = tuple(
-            LabelDefinition(topic, topic, slugify(topic)) for topic in data
-        )
+        labels = load_label_definitions(DEFAULT_SITE_CONFIG)
     annotations = annotations or {}
     paper_rows: dict[str, dict] = {}
     legacy_topics: dict[str, list[str]] = {}
     for topic, entries in data.items():
         for paper_id, entry in entries.items():
+            if (candidate_statuses or {}).get(paper_id) in {"pending", "rejected"}:
+                continue
             row = parse_entry(paper_id, entry)
             paper_rows.setdefault(paper_id, row)
             legacy_topics.setdefault(paper_id, [])
             if topic not in legacy_topics[paper_id]:
                 legacy_topics[paper_id].append(topic)
 
-    configured_names = {label.name for label in labels}
+    topic_names = {
+        name: label.name
+        for label in labels
+        for name in (label.name, *getattr(label, "aliases", ()))
+    }
     for paper_id, row in paper_rows.items():
+        fallback_topics = tuple(dict.fromkeys(
+            topic_names[topic] for topic in legacy_topics[paper_id] if topic in topic_names
+        ))
         annotation = annotations.get(paper_id)
         if annotation is None:
-            tags = tuple(topic for topic in legacy_topics[paper_id] if topic in configured_names)
+            topics = fallback_topics
+            tags = ()
+            institutions = ()
             paper_type = "paper"
             annotation_status = "pending"
         else:
-            tags, paper_type = _annotation_values(annotation)
+            topics, tags, paper_type, institutions = _annotation_values(annotation)
+            topics = topics or fallback_topics
             annotation_status = "ready"
-        row.update(tags=tags, paper_type=paper_type, annotation_status=annotation_status)
+        row.update(topics=topics, tags=tags, institutions=institutions,
+                   paper_type=paper_type, annotation_status=annotation_status)
 
     for label in labels:
         topic = label.name
-        rows = [row.copy() for row in paper_rows.values() if topic in row["tags"]]
+        rows = [row.copy() for row in paper_rows.values() if topic in row["topics"]]
         rows.sort(key=lambda row: (row["date"], row["id"]), reverse=True)
 
         grouped_years = {}
@@ -144,6 +165,7 @@ def build_archive(
             "theme": topic,
             "subtype": None,
             "slug": label.slug,
+            "alias_slugs": tuple(slugify(alias) for alias in label.aliases),
             "count": len(rows),
             "years": years,
         }
@@ -369,7 +391,7 @@ def render_table(
     output = [
         '<div class="table-scroll">',
         '  <table class="paper-table">',
-        '    <thead><tr><th>Arxiv ID</th><th>Paper</th><th>Authors</th><th>Summary</th></tr></thead>',
+        '    <thead><tr><th>Arxiv ID</th><th>Paper</th><th>Institutions</th><th>Summary</th></tr></thead>',
         '    <tbody>',
     ]
     candidate_statuses = candidate_statuses or {}
@@ -396,10 +418,7 @@ def render_table(
             anchor = f' id="paper-{html.escape(row["id"], quote=True)}"'
             anchored_papers.add(row["id"])
         tags = "".join(
-            f'<a class="paper-tag" href="?tag={html.escape(label_slugs.get(tag, slugify(tag)), quote=True)}'
-            f'#{html.escape(label_slugs.get(tag, slugify(tag)), quote=True)}" '
-            f'data-paper-tag="{html.escape(label_slugs.get(tag, slugify(tag)), quote=True)}">'
-            f'{html.escape(tag)}</a>'
+            f'<span class="paper-tag">{html.escape(tag)}</span>'
             for tag in row.get("tags", ())
         )
         tag_markup = f'<span class="paper-tags">{tags}</span>' if tags else ""
@@ -409,7 +428,7 @@ def render_table(
             f'{html.escape(row["id"])}</a></td>'
             f'<td class="paper-title" data-label="Paper"><a class="paper-title-link" href="{paper_url}" target="_blank" rel="noopener">'
             f'{html.escape(row["title"])}</a>{tag_markup}</td>'
-            f'<td data-label="Authors">{html.escape(row["authors"])}</td>'
+            f'<td data-label="Institutions">{html.escape("; ".join(row.get("institutions", ())) or "-")}</td>'
             f'<td class="paper-summary" data-label="Summary">{summary_cell}</td>'
             "</tr>"
         )
@@ -431,7 +450,8 @@ def render_content(
         active_class = " is-topic-active" if category_index == 0 else ""
         output.extend([
             f'<section class="topic-section{active_class}" id="{category["slug"]}" '
-            f'data-topic-section="{category["slug"]}">',
+            f'data-topic-section="{category["slug"]}" '
+            f'data-topic-aliases="{html.escape(" ".join(category.get("alias_slugs", ())), quote=True)}">',
             '  <header class="topic-header">',
             f'    <p>{html.escape(eyebrow)}</p>',
             f'    <h2>{html.escape(heading)}</h2>',
@@ -448,7 +468,7 @@ def render_content(
             year_expanded = "true" if year_index == 0 else "false"
             selected_period = "surveys" if surveys else next(iter(months))
             output.append(
-                f'  <section class="archive-year" data-archive-year '
+                f'  <section class="archive-year" id="{category["slug"]}-{year}" data-archive-year '
                 f'data-expanded="{year_expanded}">'
             )
             output.extend([
@@ -558,7 +578,6 @@ def render_content(
   <aside class="paper-summary-panel" id="paper-summary-panel" aria-live="polite">
     <header class="paper-summary-header"><h2 data-summary-title>论文要点</h2></header>
     <div data-summary-content><p>选择一篇已有摘要的论文查看要点。</p></div>
-    <a data-summary-direct hidden>打开完整总结 →</a>
   </aside>
 </div>"""
 
@@ -573,16 +592,40 @@ def render_paper_navigation(categories: list[dict]) -> str:
     return render_context_strip(links, filter_keys=filter_keys)
 
 
-def load_candidate_statuses(candidate_path: str | Path | None) -> dict[str, str]:
+def load_candidate_statuses(
+    candidate_path: str | Path | None, *, review_required_since: str | None = None
+) -> dict[str, str]:
     if candidate_path is None or not Path(candidate_path).is_file():
         return {}
     payload = json.loads(Path(candidate_path).read_text(encoding="utf-8"))
     if payload.get("version") != 1 or not isinstance(payload.get("papers"), dict):
         raise ValueError(f"Invalid candidate ledger schema: {candidate_path}")
+    cutoff = (
+        datetime.datetime.fromisoformat(str(review_required_since).replace("Z", "+00:00"))
+        if review_required_since is not None else None
+    )
+    if cutoff is not None and cutoff.tzinfo is None:
+        cutoff = cutoff.replace(tzinfo=datetime.timezone.utc)
+
+    def is_new_candidate(entry: dict) -> bool:
+        if cutoff is None:
+            return True
+        collected_at = entry.get("collected_at")
+        if not isinstance(collected_at, str):
+            return False
+        try:
+            collected = datetime.datetime.fromisoformat(collected_at.replace("Z", "+00:00"))
+            if collected.tzinfo is None:
+                collected = collected.replace(tzinfo=datetime.timezone.utc)
+            return collected >= cutoff
+        except (ValueError, TypeError):
+            return False
+
     return {
-        paper_id: entry.get("status")
+        paper_id: entry.get("status") if entry.get("status") in {"accepted", "rejected"} else "pending"
         for paper_id, entry in payload["papers"].items()
-        if isinstance(entry, dict) and entry.get("status") in {"pending", "accepted"}
+        if isinstance(entry, dict)
+        and is_new_candidate(entry)
     }
 
 
@@ -602,21 +645,26 @@ def generate_site(
 ) -> None:
     data = json.loads(Path(json_path).read_text(encoding="utf-8"))
     labels = load_label_definitions(config_path)
-    annotations = load_annotation_catalog(annotation_path, labels)
+    annotations = load_annotation_catalog(annotation_path, load_annotation_definitions(config_path))
     milestone_catalog = load_milestone_catalog(milestone_catalog_path)
-    all_categories, _ = build_archive(data, labels, annotations)
+    summary_catalog = load_summary_catalog(output_path)
+    site_config = yaml.safe_load(Path(config_path).read_text(encoding="utf-8"))
+    cutoff = site_config.get("collection", {}).get("review_required_since")
+    candidate_statuses = (
+        load_candidate_statuses(candidate_path, review_required_since=str(cutoff))
+        if cutoff is not None else {}
+    )
+    all_categories, _ = build_archive(data, labels, annotations, candidate_statuses)
     today = generated_on or datetime.date.today()
     categories, themes = filter_recent_archive(all_categories, today.year)
-    summary_catalog = load_summary_catalog(output_path)
-    candidate_statuses = load_candidate_statuses(candidate_path)
     label_slugs = {label.name: label.slug for label in labels}
     updated = today.isoformat()
 
     page_output = Path(output_path)
     site_root = Path(output_root) if output_root is not None else page_output.parent
-    archive_rows = [
-        row for category in categories for row in _iter_category_rows(category)
-    ]
+    archive_rows = list({
+        row["id"]: row for category in categories for row in _iter_category_rows(category)
+    }.values())
     latest_date = max((row["date"] for row in archive_rows), default=today)
     latest_count = sum(row["date"] == latest_date for row in archive_rows)
     archive_count = len(archive_rows)

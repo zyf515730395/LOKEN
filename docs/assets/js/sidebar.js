@@ -2,15 +2,28 @@ const sidebar = document.querySelector("#paper-sidebar");
 const topicNavigation = document.querySelector("[data-topic-navigation]");
 const topicLinks = [...document.querySelectorAll("[data-topic-filter]")];
 const topicSections = [...document.querySelectorAll("[data-topic-section]")];
+const topicAliases = topicSections.flatMap((section) =>
+  (section.dataset.topicAliases || "").split(/\s+/).filter(Boolean)
+    .map((alias) => [alias, section.dataset.topicSection]),
+).sort((left, right) => right[0].length - left[0].length);
+
+function normalizeTopicAnchor(value) {
+  if (!value) return value;
+  const match = topicAliases.find(([alias]) => value === alias || value.startsWith(`${alias}-`));
+  return match ? match[1] + value.slice(match[0].length) : value;
+}
 
 function topicForHash() {
-  const id = decodeURIComponent(window.location.hash.slice(1));
+  const id = normalizeTopicAnchor(decodeURIComponent(window.location.hash.slice(1)));
   if (!id) return null;
   const target = document.getElementById(id);
-  return target?.closest("[data-topic-section]")?.dataset.topicSection || null;
+  return target?.closest("[data-topic-section]")?.dataset.topicSection
+    || topicSections.find((section) => id === section.dataset.topicSection
+      || id.startsWith(`${section.dataset.topicSection}-`))?.dataset.topicSection || null;
 }
 
 function selectTopic(topic, { updateLocation = false, scroll = false } = {}) {
+  topic = normalizeTopicAnchor(topic);
   const selected = topicSections.find((section) => section.dataset.topicSection === topic);
   if (!selected) return false;
   const previousTopic = topicSections.find((section) => section.classList.contains("is-topic-active"))?.dataset.topicSection;
@@ -126,7 +139,7 @@ document.querySelectorAll("[data-archive-year]").forEach((yearArchive) => {
 });
 
 function revealHashTarget({ scroll = false } = {}) {
-  const id = decodeURIComponent(window.location.hash.slice(1));
+  const id = normalizeTopicAnchor(decodeURIComponent(window.location.hash.slice(1)));
   if (!id) return;
   const target = document.getElementById(id);
   if (!target) return;
@@ -163,18 +176,10 @@ window.addEventListener("hashchange", () => {
 });
 revealHashTarget({ scroll: true });
 
-document.addEventListener("click", (event) => {
-  const link = event.target.closest("[data-paper-tag]");
-  if (!link) return;
-  event.preventDefault();
-  selectTopic(link.dataset.paperTag, { updateLocation: true, scroll: true });
-});
-
 const summaryPanel = document.querySelector("#paper-summary-panel");
 const summaryPanelHome = document.querySelector("[data-summary-panel-home]");
 const summaryPanelTitle = summaryPanel?.querySelector("[data-summary-title]");
 const summaryPanelContent = summaryPanel?.querySelector("[data-summary-content]");
-const summaryDirectLink = summaryPanel?.querySelector("[data-summary-direct]");
 const summaryDocumentCache = new Map();
 let summaryTrigger = null;
 let summaryRequest = 0;
@@ -195,7 +200,6 @@ document.addEventListener("loken:paper-topic-change", () => {
     summaryPanelContent.classList.remove("has-error");
     summaryPanelContent.innerHTML = "<p>选择一篇已有摘要的论文查看要点。</p>";
   }
-  if (summaryDirectLink) summaryDirectLink.hidden = true;
 });
 
 function setSummaryPanelContent(markup, { error = false } = {}) {
@@ -256,10 +260,6 @@ async function openSummaryPanel(link) {
   summaryTrigger = link;
   const paperTitle = link.closest("tr")?.querySelector(".paper-title-link")?.textContent?.trim();
   if (summaryPanelTitle) summaryPanelTitle.textContent = paperTitle || "论文要点";
-  if (summaryDirectLink) {
-    summaryDirectLink.href = link.href;
-    summaryDirectLink.hidden = false;
-  }
   setSummaryActive(link);
   moveSummaryPanel();
   setSummaryPanelContent('<p class="muted">正在加载…</p>');
@@ -277,7 +277,7 @@ async function openSummaryPanel(link) {
   } catch (error) {
     if (requestId !== summaryRequest) return;
     setSummaryPanelContent(
-      '<p>要点加载失败，请稍后重试，或使用链接直接打开总结页面。</p>',
+      '<p>要点加载失败，请再次点击当前论文的「要点」重试。</p>',
       { error: true },
     );
   }

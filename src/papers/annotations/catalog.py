@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
+from dataclasses import replace
 import re
 import unicodedata
 
@@ -14,7 +15,7 @@ from papers.candidate_ledger import atomic_write_json, normalize_arxiv_id
 from .models import LabelDefinition, PaperAnnotation, PaperAnnotationError
 
 
-CATALOG_VERSION = 1
+CATALOG_VERSION = 2
 ARXIV_ID = re.compile(r"^\d{4}\.\d{4,5}$")
 ARCHIVE_TITLE = re.compile(r"^\|\*\*[^*]+\*\*\|\*\*(?P<title>.*?)\*\*\|")
 
@@ -31,7 +32,7 @@ def parse_label_definitions(raw: object) -> tuple[LabelDefinition, ...]:
     names: set[str] = set()
     slugs: set[str] = set()
     for item in raw:
-        if not isinstance(item, dict) or set(item) != {"name", "description"}:
+        if not isinstance(item, dict) or not {"name", "description"} <= set(item) or set(item) - {"name", "description", "aliases"}:
             raise PaperAnnotationError("invalid_label_config", "each paper label needs name and description")
         name = item["name"]
         description = item["description"]
@@ -51,7 +52,10 @@ def parse_label_definitions(raw: object) -> tuple[LabelDefinition, ...]:
             raise PaperAnnotationError("invalid_label_config", "paper label names and slugs must be unique")
         names.add(name)
         slugs.add(slug)
-        labels.append(LabelDefinition(name, description, slug))
+        aliases = item.get("aliases", [])
+        if not isinstance(aliases, list) or any(not isinstance(a, str) or not a.strip() for a in aliases):
+            raise PaperAnnotationError("invalid_label_config", "topic aliases must be strings")
+        labels.append(LabelDefinition(name, description, slug, aliases=tuple(aliases)))
     return tuple(labels)
 
 
@@ -65,24 +69,62 @@ def load_label_definitions(config_path: str | Path) -> tuple[LabelDefinition, ..
     return parse_label_definitions(payload.get("paper_labels"))
 
 
+def load_annotation_definitions(config_path: str | Path) -> tuple[LabelDefinition, ...]:
+    topics = load_label_definitions(config_path)
+    payload = yaml.safe_load(Path(config_path).read_text(encoding="utf-8"))
+    groups = payload.get("paper_tag_groups", {})
+    if not isinstance(groups, dict) or set(groups) - {"method", "task", "representation"}:
+        raise PaperAnnotationError("invalid_label_config", "invalid tag groups")
+    details = tuple(replace(label, group=group) for group, raw in groups.items()
+                    for label in parse_label_definitions(raw))
+    # A task may intentionally share a topic name (Depth Estimation/Relighting).
+    if len({x.name for x in details}) != len(details) or len({x.slug for x in details}) != len(details):
+        raise PaperAnnotationError("invalid_label_config", "duplicate detail tags")
+    alias_owners = {}
+    for topic in topics:
+        for name in (topic.name, *topic.aliases):
+            if name in alias_owners and alias_owners[name] != topic.name:
+                raise PaperAnnotationError("invalid_label_config", "ambiguous topic alias")
+            alias_owners[name] = topic.name
+    return (*topics, *details)
+
+
+def migrate_annotation(value: dict, labels: tuple[LabelDefinition, ...]) -> dict:
+    aliases = {alias: x.name for x in labels if x.group == "topic" for alias in (x.name, *x.aliases)}
+    return {"topics": list(dict.fromkeys(aliases[t] for t in value["tags"] if t in aliases)),
+            "tags": [], "paper_type": value["paper_type"], "institutions": []}
+
+
+def annotation_value(value: PaperAnnotation) -> dict:
+    return {"topics": list(value.topics), "tags": list(value.tags),
+            "paper_type": value.paper_type, "institutions": list(value.institutions)}
+
+
 def annotation_from_value(
     paper_id: str,
     value: object,
     labels: tuple[LabelDefinition, ...],
 ) -> PaperAnnotation:
-    allowed = {label.name for label in labels}
-    if (
-        not isinstance(value, dict)
-        or set(value) != {"tags", "paper_type"}
-        or not isinstance(value["tags"], list)
-        or not value["tags"]
-        or any(not isinstance(tag, str) or tag not in allowed for tag in value["tags"])
-        or len(value["tags"]) != len(set(value["tags"]))
-        or value["paper_type"] not in {"paper", "survey"}
-    ):
+    def fail():
         raise PaperAnnotationError("invalid_annotation_catalog", f"invalid annotation: {paper_id}")
-    ordered = tuple(label.name for label in labels if label.name in value["tags"])
-    return PaperAnnotation(ordered, value["paper_type"])
+    if not isinstance(value, dict) or set(value) != {"topics", "tags", "paper_type", "institutions"}:
+        fail()
+    for field, allowed in (("topics", {x.name for x in labels if x.group == "topic"}),
+                           ("tags", {x.name for x in labels if x.group != "topic"})):
+        values = value[field]
+        if not isinstance(values, list) or any(not isinstance(t, str) or t not in allowed for t in values) or len(values) != len(set(values)):
+            fail()
+    if value["paper_type"] not in ("paper", "survey"):
+        fail()
+    institutions = value["institutions"]
+    if not isinstance(institutions, list) or len(institutions) > 30 or any(
+        not isinstance(x, str) or not 1 <= len(x.strip()) <= 400 or x != " ".join(x.split())
+        or any(c in x for c in "<>\r\n") for x in institutions
+    ) or len(institutions) != len(set(institutions)):
+        fail()
+    topics = tuple(x.name for x in labels if x.group == "topic" and x.name in value["topics"])
+    tags = tuple(x.name for x in labels if x.group != "topic" and x.name in value["tags"])
+    return PaperAnnotation(topics, tags, value["paper_type"], tuple(institutions))
 
 
 def load_annotation_catalog(
@@ -96,12 +138,16 @@ def load_annotation_catalog(
         payload = json.loads(source.read_text(encoding="utf-8"))
     except (OSError, UnicodeError, json.JSONDecodeError, RecursionError):
         raise PaperAnnotationError("invalid_annotation_catalog", "annotation catalog cannot be read") from None
-    if not isinstance(payload, dict) or set(payload) != {"version", "papers"} or payload["version"] != CATALOG_VERSION or not isinstance(payload["papers"], dict):
+    if not isinstance(payload, dict) or set(payload) != {"version", "papers"} or payload["version"] not in (1, CATALOG_VERSION) or not isinstance(payload["papers"], dict):
         raise PaperAnnotationError("invalid_annotation_catalog", "annotation catalog schema is invalid")
     result: dict[str, PaperAnnotation] = {}
     for paper_id, value in payload["papers"].items():
         if normalize_arxiv_id(paper_id) != paper_id or not ARXIV_ID.fullmatch(paper_id):
             raise PaperAnnotationError("invalid_annotation_catalog", f"invalid arXiv ID: {paper_id}")
+        if payload["version"] == 1:
+            if not isinstance(value, dict) or set(value) != {"tags", "paper_type"} or not isinstance(value["tags"], list) or any(not isinstance(t, str) for t in value["tags"]):
+                raise PaperAnnotationError("invalid_annotation_catalog", f"invalid legacy annotation: {paper_id}")
+            value = migrate_annotation(value, labels)
         result[paper_id] = annotation_from_value(paper_id, value, labels)
     return result
 
@@ -112,7 +158,7 @@ def write_annotation_catalog(path: str | Path, annotations: dict[str, PaperAnnot
         {
             "version": CATALOG_VERSION,
             "papers": {
-                paper_id: {"tags": list(value.tags), "paper_type": value.paper_type}
+                paper_id: annotation_value(value)
                 for paper_id, value in sorted(annotations.items())
             },
         },
