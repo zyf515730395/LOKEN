@@ -8,12 +8,15 @@ import math
 import os
 import time
 from types import SimpleNamespace
+from datetime import datetime, timezone
+from uuid import uuid4
 
 import requests
 
 from . import workflow as batch
 from papers.summaries.models import PaperSummaryError
 from papers.summaries.paths import normalize_arxiv_id, private_path, run_lock
+from papers.model_runtime import DEFAULT_MODEL_TIMEOUT_SECONDS, DEFAULT_MODEL_WORKERS, MAX_MODEL_WORKERS
 from shared.loopback_chat import LoopbackChatError, validate_loopback_base_url
 from shared.rendering import atomic_write_text
 
@@ -107,6 +110,45 @@ def cycle_state_path():
 def save_state(state):
     atomic_write_text(cycle_state_path(),
                       json.dumps(state, ensure_ascii=False, indent=2) + '\n')
+
+
+def prioritized_queue(selected, priority_topic='Relighting'):
+    """Deduplicate a date-sorted selection while putting one topic first."""
+    items = [item for item, _ in selected]
+    items.sort(key=lambda item: (-item.updated.toordinal(), item.arxiv_id))
+    priority_ids = {item.arxiv_id for item in items if item.topic == priority_topic}
+    priority = [item.arxiv_id for item in items if item.arxiv_id in priority_ids]
+    remainder = [item.arxiv_id for item in items if item.arxiv_id not in priority_ids]
+    return list(dict.fromkeys(priority + remainder))
+
+
+def reorder_checkpoint(args, *, apply):
+    """Preview or atomically replace the active queue from current durable results."""
+    old = _read_state(include_complete=True)
+    selected, skipped = batch.select_items(stage_args(args, 'summarize', []))
+    queue = prioritized_queue(selected)
+    relighting = {item.arxiv_id for item, _ in selected if item.topic == 'Relighting'}
+    summary = {
+        'action': 'apply' if apply else 'dry-run',
+        'old_total': len(old['queue']) if old else 0,
+        'old_processed': old['offset'] if old else 0,
+        'new_pending': len(queue),
+        'completed_skipped': skipped,
+        'relighting_pending': len(relighting),
+        'next_papers': queue[:20],
+    }
+    if apply:
+        stamp = datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')
+        backup = batch.ROOT / 'build' / 'reports' / f'cycle-state-before-reorder-{stamp}-{uuid4().hex[:8]}.json'
+        history = old.get('history', []) if old else []
+        if old is not None:
+            atomic_write_text(backup, json.dumps(old, ensure_ascii=False, indent=2) + '\n')
+            summary['backup'] = str(backup)
+        state = {'version': 1, 'queue': queue, 'offset': 0, 'batch_ids': [],
+                 'phase': 'download' if queue else 'complete', 'history': history}
+        save_state(state)
+        summary['checkpoint'] = str(cycle_state_path())
+    return summary
 
 
 def _read_state(*, include_complete):
@@ -247,17 +289,20 @@ def parse_args(argv=None):
     parser.add_argument('--batch-size', type=int, default=100, help='unique papers per batch, 1-100')
     parser.add_argument('--download-interval', type=float, default=5, help='minimum seconds between requests, at least 3')
     parser.add_argument('--batch-pause', type=float, default=60, help='pause after summary and before next download batch')
-    parser.add_argument('--workers', type=int, default=2, help='summary workers, 1-8; downloads are always serial')
+    parser.add_argument('--workers', type=int, default=DEFAULT_MODEL_WORKERS,
+                        help=f'summary workers, 1-{MAX_MODEL_WORKERS}; downloads are always serial')
     parser.add_argument('--max-batches', type=int, help='stop after N batches, keep checkpoint; default runs entire queue')
     parser.add_argument('--model', default=os.environ.get('TOGOS_WSL_LLM_MODEL', 'PaperReader-Qwen3.5'))
     parser.add_argument('--base-url', default=os.environ.get('TOGOS_WSL_LLM_BASE_URL', 'http://127.0.0.1:8000/v1'))
-    parser.add_argument('--timeout', type=float, default=180)
+    parser.add_argument('--timeout', type=float, default=DEFAULT_MODEL_TIMEOUT_SECONDS)
+    parser.add_argument('--reorder-checkpoint', choices=('dry-run', 'apply'),
+                        help='rebuild pending queue with Relighting first, then global newest-first')
     parser.add_argument('--dry-run', action='store_true', help='show next batch without download, inference or writes')
     parser.add_argument('--status', action='store_true', help='print checkpoint status as JSON; no writes')
     args = parser.parse_args(argv)
     if args.status:
         return args
-    if (not 1 <= args.batch_size <= 100 or not 1 <= args.workers <= 8
+    if (not 1 <= args.batch_size <= 100 or not 1 <= args.workers <= MAX_MODEL_WORKERS
             or not math.isfinite(args.download_interval) or args.download_interval < 3
             or not math.isfinite(args.batch_pause) or args.batch_pause < 0
             or not math.isfinite(args.timeout) or args.timeout <= 0
@@ -272,6 +317,11 @@ def main(argv=None):
         args = parse_args(argv)
         if args.status:
             print(json.dumps(get_cycle_status().to_dict(), ensure_ascii=False, sort_keys=True))
+            return 0
+        if args.reorder_checkpoint:
+            with run_lock():
+                print(json.dumps(reorder_checkpoint(args, apply=args.reorder_checkpoint == 'apply'),
+                                 ensure_ascii=False, sort_keys=True))
             return 0
         if args.dry_run:
             return run_cycle(args)
