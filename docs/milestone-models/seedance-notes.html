@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Seedance 版本文章精读。">
+  <title>Seedance · 文章精读</title>
+  <script>
+    (() => {
+      document.documentElement.classList.add("js");
+      let theme = null;
+      let contextOpen = null;
+      try {
+        theme = window.localStorage.getItem("arxiv-theme");
+        contextOpen = window.localStorage.getItem("togos-secondary-sidebar-collapsed");
+      } catch (error) { /* Storage can be unavailable. */ }
+      if (theme !== "light" && theme !== "dark") {
+        theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      }
+      document.documentElement.dataset.theme = theme;
+      if (contextOpen === "false") document.documentElement.dataset.contextOpen = "true";
+    })();
+  </script>
+  <link rel="stylesheet" href="../assets/css/site.css?v=12">
+  <script src="../assets/js/site-shell.js?v=12" defer></script>
+  <script src="../assets/js/search-core.js?v=12" defer></script>
+  <script src="../assets/js/search.js?v=12" defer></script>
+  <script src="../assets/js/sidebar.js?v=12" defer></script>
+</head>
+<body data-site-root="../" data-active-section="milestones" class="summary-page milestone-notes-page">
+  <header class="site-utility" aria-label="页面工具">
+    <button class="sidebar-toggle" type="button" aria-controls="navigation-shell" aria-expanded="false">
+      <span aria-hidden="true" data-sidebar-toggle-icon>☰</span><span data-sidebar-toggle-label>导航</span>
+    </button>
+    <div class="site-search" data-search-root>
+      <label class="site-search-field" for="search-input">
+        <span aria-hidden="true">⌕</span>
+        <input id="search-input" type="search" placeholder="搜索文章标题"
+               aria-label="搜索文章标题" role="combobox"
+               autocomplete="off" aria-autocomplete="list" aria-controls="search-results" aria-expanded="false">
+        <kbd aria-hidden="true">Ctrl K</kbd>
+      </label>
+      <div class="search-popover" data-search-popover hidden>
+        <p class="search-status" data-search-status aria-live="polite">输入标题关键词开始搜索</p>
+        <div id="search-results" class="search-results" data-search-results role="listbox"></div>
+      </div>
+    </div>
+    <button class="theme-toggle" type="button" aria-label="切换颜色主题" aria-pressed="false">
+      <span data-theme-icon aria-hidden="true"></span>
+    </button>
+  </header>
+  <div class="sidebar-scrim" data-sidebar-close></div>
+<div class="navigation-shell" id="navigation-shell">
+  <button class="navigation-close" type="button" data-navigation-close
+          aria-label="关闭导航" hidden>×</button>
+  <aside class="primary-sidebar" aria-label="知识主题">
+    <a class="primary-brand" href="../index.html" aria-label="LOKEN 首页"><img class="brand-logo" src="../assets/images/loken-logo.png" width="1990" height="329" alt=""></a>
+    <div class="primary-menu" aria-hidden="true"><span>MENU</span><span>☰</span></div>
+    <nav class="primary-navigation" aria-label="知识主题">
+      <a class="primary-nav-item" href="../index.html"><span class="primary-nav-copy"><span class="primary-nav-label">学习一个</span><span class="primary-nav-meta">01 / PAPERS</span></span></a>
+      <a class="primary-nav-item is-active" href="../milestone-models/flux.html" aria-current="page"><span class="primary-nav-copy"><span class="primary-nav-label">身经百战</span><span class="primary-nav-meta">02 / CLASSIC MODELS</span></span></a>
+      <a class="primary-nav-item" href="../writings/index.html"><span class="primary-nav-copy"><span class="primary-nav-label">谈笑风生</span><span class="primary-nav-meta">03 / ARTICLES</span></span></a>
+      <a class="primary-nav-item" href="../journeys/index.html"><span class="primary-nav-copy"><span class="primary-nav-label">跑得还快</span><span class="primary-nav-meta">04 / TRAVELS</span></span></a>
+    </nav>
+    <div class="primary-sidebar-status"><span>LAST SYNC</span><strong>AUTOMATED / WEEKDAYS</strong></div>
+  </aside>
+</div>
+  <main class="page-content" id="top">
+<section class="summary-page-shell" aria-labelledby="notes-page-title">
+      <header class="summary-topic-header">
+        <a class="summary-back" href="seedance.html">← 返回版本对比</a>
+        <h1 id="notes-page-title">Seedance · 文章精读</h1>
+      </header>
+<nav class="context-strip" aria-label="模型系列">
+    <a class="context-strip-link" href="flux.html">FLUX</a>
+    <a class="context-strip-link" href="qwen-image.html">Qwen-Image</a>
+    <a class="context-strip-link" href="seedream.html">Seedream</a>
+    <a class="context-strip-link" href="stable-diffusion.html">Stable Diffusion</a>
+    <a class="context-strip-link" href="z-image.html">Z-Image</a>
+    <a class="context-strip-link" href="wan.html">Wan</a>
+    <a class="context-strip-link is-active" href="seedance.html" aria-current="location">Seedance</a>
+    <span class="context-strip-link is-disabled" aria-disabled="true">Hunyuan3D</span>
+    <span class="context-strip-link is-disabled" aria-disabled="true">VGGT</span>
+  </nav>
+      <details class="content-tools" open>
+        <summary>版本精读目录</summary>
+        <nav class="content-tools-navigation" aria-label="版本精读目录">
+<a class="context-filter" href="#milestone-seedance-1">Seedance 1.0 · 技术报告发布</a>
+<a class="context-filter" href="#milestone-seedance-1-5">Seedance 1.5 Pro</a>
+<a class="context-filter" href="#milestone-seedance-2">Seedance 2.0</a>
+<a class="context-filter" href="#milestone-seedance-2-5">Seedance 2.5</a>
+        </nav>
+      </details>
+      <div class="summary-topic-list">
+    <article class="summary-article summary-topic-entry" id="milestone-seedance-1">
+<h1>[2506.09113] Seedance · Seedance 1.0 · 技术报告发布</h1>
+<p>日期口径：官方技术报告公告日，报告 arXiv 首次提交为 6 月 10 日。</p>
+<h2>一句话结论</h2>
+<p>通过高压缩视频 VAE、时空分工主干和多镜头数据，在统一流程中生成连贯片段。</p>
+<h2>解决的问题</h2>
+<p>视频生成需要兼顾高清细节、自然运动和跨镜头主体连续性。</p>
+<h2>创新点</h2>
+<ul>
+<li>高压缩 VAE 控制高清长视频的 token 成本。</li>
+<li>多镜头训练直接学习跨镜头一致性。</li>
+</ul>
+<h2>文章精读</h2>
+<h3>版本</h3>
+<ul>
+<li><strong>Seedance 1.0 Pro</strong>：第一代视频生成主线，支持原生多镜头与 1080P 输出；6 月 11 日为官方技术报告发布公告日期。</li>
+</ul>
+<h3>训练数据</h3>
+<p>经质量与运动筛选的视频数据配合精细描述；构造多镜头叙事数据，使镜头切换也参与训练。</p>
+<h3>VAE 结构</h3>
+<p>因果视频 VAE 以时间 4 倍、空间 16 倍压缩，潜变量 48 通道；主干无需额外图像 patchification。</p>
+<h3>Text Encoder</h3>
+<p>经微调的 decoder-only 语言模型；官方未公开具体型号。</p>
+<h3>生成主体网络</h3>
+<p>MMDiT 风格主干区分空间和时间层：空间层联合视觉与文本 token，时间层只处理视觉，按空间窗口分组进行时间交互。</p>
+<h3>训练 Trick</h3>
+<ul>
+<li>渐进式图像和视频训练配合流匹配。</li>
+<li>级联蒸馏减少推理次数，轻量 VAE 解码器进一步降低延迟。</li>
+</ul>
+<h3>新提出的创新点</h3>
+<ul>
+<li>高压缩 VAE 控制高清长视频的 token 成本。</li>
+<li>多镜头训练直接学习跨镜头一致性。</li>
+</ul>
+<h3>局限性</h3>
+<ul>
+<li>/</li>
+</ul>
+<h2>资料来源</h2>
+<ul>
+<li><a href="https://arxiv.org/abs/2506.09113" rel="nofollow">arxiv</a></li>
+<li><a href="https://seed.bytedance.com/en/blog/tech-report-of-seedance-1-0-is-now-publicly-available" rel="nofollow">official_blog</a></li>
+</ul>
+    </article>
+    <article class="summary-article summary-topic-entry" id="milestone-seedance-1-5">
+<h1>[2512.13507] Seedance · Seedance 1.5 Pro</h1>
+<h2>一句话结论</h2>
+<p>用音视频双分支扩散和跨模态交互同步生成视觉、对白与环境声音。</p>
+<h2>解决的问题</h2>
+<p>事后配音容易错开口型与动作，需要在生成阶段共同建模音频和视频。</p>
+<h2>创新点</h2>
+<ul>
+<li>原生音视频联合生成把时间同步与语义一致性纳入同一网络。</li>
+<li>视觉运动、审美和声音质量共同参与后训练。</li>
+</ul>
+<h2>文章精读</h2>
+<h3>版本</h3>
+<ul>
+<li><strong>Seedance 1.5 Pro</strong>：原生音视频联合生成；从无声视频主线扩展到多语种、方言与口型同步。</li>
+</ul>
+<h3>训练数据</h3>
+<p>多阶段音视频清洗和描述流水线，优先筛选音画一致、运动表达清楚的数据，按课程调度混合模态训练。</p>
+<h3>VAE 结构</h3>
+<p>/</p>
+<h3>Text Encoder</h3>
+<p>/</p>
+<h3>生成主体网络</h3>
+<p>双分支 MMDiT 与跨模态联合模块连接音频和视频表征；支持有声与无声的文生、图生任务。</p>
+<h3>训练 Trick</h3>
+<ul>
+<li>高质量 SFT 后使用多维奖励模型开展音视频 RLHF。</li>
+<li>多阶段蒸馏与量化、并行等推理优化共同降低延迟。</li>
+</ul>
+<h3>新提出的创新点</h3>
+<ul>
+<li>原生音视频联合生成把时间同步与语义一致性纳入同一网络。</li>
+<li>视觉运动、审美和声音质量共同参与后训练。</li>
+</ul>
+<h3>局限性</h3>
+<ul>
+<li>官方发布总结指出，复杂运动的物理稳定性、多角色对白与歌唱表现仍待改进。</li>
+</ul>
+<h2>资料来源</h2>
+<ul>
+<li><a href="https://arxiv.org/abs/2512.13507" rel="nofollow">arxiv</a></li>
+<li><a href="https://seed.bytedance.com/en/blog/sound-and-vision-all-in-one-take-the-official-release-of-seedance-1-5-pro" rel="nofollow">official_blog</a></li>
+</ul>
+    </article>
+    <article class="summary-article summary-topic-entry" id="milestone-seedance-2">
+<h1>[2604.14148] Seedance · Seedance 2.0</h1>
+<h2>一句话结论</h2>
+<p>把参考素材和音视频联合生成统一，支持更复杂的视听场景与内容修改。</p>
+<h2>解决的问题</h2>
+<p>创作者需要同时约束角色、动作、镜头和声音，仅靠文字或单图条件不足。</p>
+<h2>创新点</h2>
+<ul>
+<li>统一接收四类参考输入，支持参考驱动生成与编辑。</li>
+</ul>
+<h2>文章精读</h2>
+<h3>版本</h3>
+<ul>
+<li><strong>Seedance 2.0</strong>：文本、图片、音频与视频四模态参考进入统一生成框架，强化内容编辑和复杂场景生成。</li>
+</ul>
+<h3>训练数据</h3>
+<p>/</p>
+<h3>VAE 结构</h3>
+<p>/</p>
+<h3>Text Encoder</h3>
+<p>/</p>
+<h3>生成主体网络</h3>
+<p>官方报告披露统一的大规模多模态音视频联合生成架构；具体 VAE、文本编码和主干层配置未披露。</p>
+<h3>训练 Trick</h3>
+<ul>
+<li>/</li>
+</ul>
+<h3>新提出的创新点</h3>
+<ul>
+<li>统一接收四类参考输入，支持参考驱动生成与编辑。</li>
+</ul>
+<h3>局限性</h3>
+<ul>
+<li>报告的细分评测指出，物理模拟中的运动稳定性仍然具有挑战，日常物理反馈表现仍有改进空间。</li>
+</ul>
+<h2>资料来源</h2>
+<ul>
+<li><a href="https://arxiv.org/abs/2604.14148" rel="nofollow">arxiv</a></li>
+<li><a href="https://seed.bytedance.com/en/blog/seedance-2-0-%E6%AD%A3%E5%BC%8F%E5%8F%91%E5%B8%83" rel="nofollow">official_blog</a></li>
+</ul>
+    </article>
+    <article class="summary-article summary-topic-entry" id="milestone-seedance-2-5">
+<h1>[2607.31XXX] Seedance · Seedance 2.5</h1>
+<h2>一句话结论</h2>
+<p>在统一音视频架构上扩展长片段、参考规模和时间定位编辑。</p>
+<h2>解决的问题</h2>
+<p>连续创作需要更长片段、多种素材共同参考，并能在指定时间修改结果。</p>
+<h2>创新点</h2>
+<ul>
+<li>公开能力变化（实现未披露）：更长单次生成、多轮延长和时间点编辑。</li>
+<li>公开能力变化（实现未披露）：扩展多图、多视频、多音频联合参考。</li>
+</ul>
+<h2>文章精读</h2>
+<h3>版本</h3>
+<ul>
+<li><strong>Seedance 2.5</strong>：支持单次 30 秒生成、多轮延长、更大量参考素材及时间点编辑；发布时先面向即梦和豆包产品。</li>
+</ul>
+<h3>训练数据</h3>
+<p>/</p>
+<h3>VAE 结构</h3>
+<p>/</p>
+<h3>Text Encoder</h3>
+<p>/</p>
+<h3>生成主体网络</h3>
+<p>官方说明延续 2.0 的统一音视频架构；新增内部实现：/。</p>
+<h3>训练 Trick</h3>
+<ul>
+<li>/</li>
+</ul>
+<h3>新提出的创新点</h3>
+<ul>
+<li>公开能力变化（实现未披露）：更长单次生成、多轮延长和时间点编辑。</li>
+<li>公开能力变化（实现未披露）：扩展多图、多视频、多音频联合参考。</li>
+</ul>
+<h3>局限性</h3>
+<ul>
+<li>/</li>
+</ul>
+<h2>资料来源</h2>
+<ul>
+<li><a href="https://seed.bytedance.com/en/blog/one-take-creation-flexible-referencing-introducing-seedance-2-5" rel="nofollow">official_blog</a></li>
+</ul>
+    </article>
+      </div>
+    </section>
+  </main>
+
+</body>
+</html>
