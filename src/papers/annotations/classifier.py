@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from dataclasses import replace
 import hashlib
 import hmac
 import json
@@ -13,12 +14,13 @@ from papers.summaries.models import AcquiredPaper
 from papers.summaries.paths import private_path
 from shared.loopback_chat import LoopbackChatError, LoopbackChatTransport
 
-from .catalog import annotation_from_value
+from .catalog import annotation_from_value, annotation_value
+from .institutions import extract_institutions
 from .models import LabelDefinition, PaperAnnotation, PaperAnnotationError
 from .prompts import PROMPT_VERSION, TRANSPORT_VERSION, annotation_messages
 
 
-CACHE_VERSION = 1
+CACHE_VERSION = 2
 
 
 def _canonical(value: object) -> bytes:
@@ -46,7 +48,7 @@ def parse_annotation(raw: str, labels: tuple[LabelDefinition, ...]) -> PaperAnno
 
 def taxonomy_hash(labels: tuple[LabelDefinition, ...]) -> str:
     return hashlib.sha256(
-        _canonical([{"name": label.name, "description": label.description} for label in labels])
+        _canonical([{"name": label.name, "description": label.description, "group": label.group, "aliases": label.aliases} for label in labels])
     ).hexdigest()
 
 
@@ -86,7 +88,7 @@ class PaperAnnotationCache:
             return None
 
     def store(self, key: str, annotation: PaperAnnotation) -> Path:
-        result = {"tags": list(annotation.tags), "paper_type": annotation.paper_type}
+        result = annotation_value(annotation)
         body = {"version": CACHE_VERSION, "key": key, "result": result}
         envelope = {**body, "checksum": hashlib.sha256(_canonical(body)).hexdigest()}
         path = self.path_for(key)
@@ -132,6 +134,6 @@ def classify_paper(
         )
     except LoopbackChatError as error:
         raise PaperAnnotationError(error.code, error.message) from None
-    annotation = parse_annotation(raw, labels)
+    annotation = replace(parse_annotation(raw, labels), institutions=extract_institutions(paper))
     annotation_cache.store(key, annotation)
     return annotation

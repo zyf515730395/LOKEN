@@ -1,46 +1,371 @@
-max_results: 10
-
-# Ordered paper taxonomy used by local annotation inference and the learning UI.
-# Add new entries here; names must remain unique after slugification.
 paper_labels:
-    - name: "Image Generation"
-      description: "Image synthesis, text-to-image, image editing, personalization, controllable generation, diffusion, flow-matching, or autoregressive image generation methods."
-    - name: "Video Generation"
-      description: "Video synthesis, text-to-video, image-to-video, video editing, animation, or generative audio-video methods."
-    - name: "3D Generation"
-      description: "Generative 3D or 4D objects, shapes, humans, assets, scenes, worlds, meshes, CAD, or 3D editing."
-    - name: "Neural Rendering"
-      description: "NeRF, Gaussian Splatting, radiance fields, neural fields, neural scene representations, novel-view synthesis, or differentiable rendering."
-    - name: "Depth Estimation"
-      description: "Monocular, stereo, multi-view, metric, relative, or completed depth estimation and prediction."
-    - name: "Relighting"
-      description: "Estimating, transferring, editing, or generating illumination, reflectance, shadows, or appearance under novel lighting."
-    - name: "Unified Model"
-      description: "A single generative model intentionally unifying multiple modalities, generation tasks, or understanding and generation capabilities."
-    - name: "World Model"
-      description: "Learned generative or predictive models of environments, physical dynamics, interactive worlds, or action-conditioned future states."
-
-# file paths
-json_gitpage_path: './docs/togos-papers.json'
-html_gitpage_path: './docs/index.html'
-output_root: './docs'
-search_index_path: './docs/search-index.json'
-candidate_ledger_path: './data/arxiv-candidates.json'
-milestone_catalog_path: './config/milestone_models.yaml'
-
-# keywords to search
+- name: Image Gen&Edit
+  description: Image synthesis, text-to-image, image editing, personalization, controllable generation, diffusion,
+    flow-matching, or autoregressive image generation methods.
+  aliases:
+  - Image Generation
+- name: Video Gen&Edit
+  description: Video synthesis, text-to-video, image-to-video, video editing, animation, or generative audio-video
+    methods.
+  aliases:
+  - Video Generation
+- name: 3D Gen&Recon
+  description: Generation, reconstruction or editing of 3D/4D objects, shapes, humans, assets, scenes, meshes or
+    CAD. Includes single-view and multi-view reconstruction, structure from motion, surface reconstruction, neural
+    rendering, novel-view synthesis, NeRF, Gaussian Splatting, radiance fields and differentiable rendering.
+  aliases:
+  - 3D Generation
+  - Neural Rendering
+- name: World Model
+  description: Learned generative or predictive models of environments, physical dynamics, interactive worlds, or
+    action-conditioned future states.
+  aliases: []
+- name: Relighting
+  description: Estimating, transferring, editing, or generating illumination, reflectance, shadows, or appearance
+    under novel lighting.
+  aliases: []
+- name: Depth Estimation
+  description: Monocular, stereo, multi-view, metric, relative, or completed depth estimation and prediction.
+  aliases: []
+json_gitpage_path: ./docs/togos-papers.json
+html_gitpage_path: ./docs/index.html
+output_root: ./docs
+search_index_path: ./docs/search-index.json
+candidate_ledger_path: ./data/arxiv-candidates.json
+milestone_catalog_path: ./config/milestone_models.yaml
 keywords:
-    "Image Generation":
-        filters: ["Text-to-Image Generation", "Image Generation Model", "Generative Image Model", "Image Synthesis", "Image Editing", "Image Personalization", "Autoregressive Image Generation", "Flow Matching Image Generation", "Image Diffusion Model", "Diffusion Image Generation", "Stable Diffusion", "Diffusion Transformer Image"]
-    "Video Generation":
-        filters: ["Text-to-Video Generation", "Image-to-Video Generation", "Video Generation Model", "Generative Video Model", "Video Synthesis", "Video Editing", "Video Personalization", "Autoregressive Video Generation", "Flow Matching Video Generation", "Video Diffusion Model", "Diffusion Video Generation", "Video Diffusion Transformer"]
-    "3D Generation":
-        filters: ["Text-to-3D", "Image-to-3D", "Video-to-3D", "3D Generation", "Generative 3D", "Generative 3D Model", "3D Model Generation", "3D Object Generation", "3D Shape Generation", "3D Asset Generation", "3D Scene Generation", "3D World Generation", "3D Human Generation", "3D Content Generation", "3D Content Creation", "3DGS Generation", "3D Editing", "Mesh Generation", "CAD Generation", "4D Generation"]
-    "Neural Rendering":
-        fields: ["ti", "abs"]
-        categories: ["cs.CV", "cs.GR", "cs.RO", "eess.IV"]
-        filters: ["Neural Rendering", "Novel View Synthesis", "Neural Radiance Field", "Neural Radiance Fields", "NeRF", "Gaussian Splatting", "Radiance Field", "Neural Implicit Surface", "Neural Signed Distance Field", "Differentiable Rendering"]
-    "Depth Estimation":
-        fields: ["ti", "abs"]
-        categories: ["cs.CV", "cs.GR", "cs.RO", "eess.IV"]
-        filters: ["Depth Estimation", "Monocular Depth", "Metric Depth", "Stereo Depth Estimation", "Stereo Matching", "Multi-View Stereo", "Depth Completion", "Depth Prediction", "Disparity Estimation"]
+  Image Gen&Edit:
+    fields:
+    - ti
+    - abs
+    filters:
+    - Text-to-Image Generation
+    - Image Generation Model
+    - Generative Image Model
+    - Image Synthesis
+    - Image Editing
+    - Image Personalization
+    - Autoregressive Image Generation
+    - Flow Matching Image Generation
+    - Image Diffusion Model
+    - Diffusion Image Generation
+    - Stable Diffusion
+    - Diffusion Transformer Image
+    - text to image
+    - text-to-image
+    - image generation
+    - image synthesis
+    - image editing
+    - image-to-image
+    - image translation
+    - image inpainting
+    - image outpainting
+    - image personalization
+    - subject-driven generation
+    - concept-driven generation
+    - personalized generation
+    - controllable image
+    - visual generation
+    - visual autoregressive
+    - masked image modeling
+    - rectified flow
+    - flow matching
+    - diffusion transformer
+    - diffusion model
+    - score-based generative
+    - consistency model
+    - generative adversarial
+    - image tokenizer
+  Video Gen&Edit:
+    fields:
+    - ti
+    - abs
+    filters:
+    - Text-to-Video Generation
+    - Image-to-Video Generation
+    - Video Generation Model
+    - Generative Video Model
+    - Video Synthesis
+    - Video Editing
+    - Video Personalization
+    - Autoregressive Video Generation
+    - Flow Matching Video Generation
+    - Video Diffusion Model
+    - Diffusion Video Generation
+    - Video Diffusion Transformer
+    - text to video
+    - text-to-video
+    - image to video
+    - image-to-video
+    - video generation
+    - video synthesis
+    - video editing
+    - video-to-video
+    - video inpainting
+    - video outpainting
+    - video prediction
+    - video continuation
+    - video interpolation
+    - video diffusion
+    - video flow matching
+    - autoregressive video
+    - video tokenization
+    - video tokenizer
+    - controllable video
+    - video personalization
+    - motion generation
+    - talking head
+    - talking portrait
+    - audio-driven animation
+    - audio-visual generation
+  3D Gen&Recon:
+    fields:
+    - ti
+    - abs
+    filters:
+    - Text-to-3D
+    - Image-to-3D
+    - Video-to-3D
+    - 3D Generation
+    - Generative 3D
+    - Generative 3D Model
+    - 3D Model Generation
+    - 3D Object Generation
+    - 3D Shape Generation
+    - 3D Asset Generation
+    - 3D Scene Generation
+    - 3D World Generation
+    - 3D Human Generation
+    - 3D Content Generation
+    - 3D Content Creation
+    - 3DGS Generation
+    - 3D Editing
+    - Mesh Generation
+    - CAD Generation
+    - 4D Generation
+    - Neural Rendering
+    - Novel View Synthesis
+    - Neural Radiance Field
+    - Neural Radiance Fields
+    - NeRF
+    - Gaussian Splatting
+    - Radiance Field
+    - Neural Implicit Surface
+    - Neural Signed Distance Field
+    - Differentiable Rendering
+    - text to 3D
+    - text-to-3D
+    - image to 3D
+    - image-to-3D
+    - 3D generation
+    - 3D reconstruction
+    - 3D synthesis
+    - 3D generative
+    - 3D foundation model
+    - 4D generation
+    - 4D reconstruction
+    - 4D synthesis
+    - scene generation
+    - scene reconstruction
+    - shape generation
+    - shape synthesis
+    - mesh generation
+    - CAD generation
+    - point cloud generation
+    - 3D editing
+    - 3D content creation
+    - neural rendering
+    - novel view synthesis
+    - novel-view synthesis
+    - view synthesis
+    - radiance field
+    - Gaussian splatting
+    - 3DGS
+    - 2DGS
+    - Gaussian surfels
+    - neural field
+    - implicit surface
+    - signed distance field
+    - differentiable rendering
+    - inverse graphics
+    - score distillation
+    - single-view reconstruction
+    - multi-view reconstruction
+    - structure from motion
+    - surface reconstruction
+    - neural reconstruction
+  World Model:
+    fields:
+    - ti
+    - abs
+    filters:
+    - world model
+    - world modeling
+    - world modelling
+    - world simulator
+    - world simulation
+    - generative simulation
+    - neural simulator
+    - learned simulator
+    - environment model
+    - environment simulation
+    - action-conditioned
+    - action conditioned
+    - action-controllable
+    - interactive video
+    - interactive world
+    - physical dynamics
+    - latent dynamics
+    - dynamics model
+    - future state prediction
+    - visual planning
+    - model-based reinforcement learning
+    - embodied prediction
+    - joint embedding predictive
+    - JEPA
+  Relighting:
+    fields:
+    - ti
+    - abs
+    filters:
+    - relighting
+    - re-lighting
+    - reillumination
+    - re-illumination
+    - illumination editing
+    - illumination estimation
+    - lighting estimation
+    - lighting editing
+    - lighting transfer
+    - light transport
+    - inverse rendering
+    - inverse graphics
+    - reflectance estimation
+    - reflectance field
+    - intrinsic decomposition
+    - intrinsic image
+    - material estimation
+    - material decomposition
+    - BRDF estimation
+    - SVBRDF
+    - shadow generation
+    - shadow editing
+    - shadow removal
+    - environment map estimation
+    - illumination harmonization
+  Depth Estimation:
+    fields:
+    - ti
+    - abs
+    filters:
+    - Depth Estimation
+    - Monocular Depth
+    - Metric Depth
+    - Stereo Depth Estimation
+    - Stereo Matching
+    - Multi-View Stereo
+    - Depth Completion
+    - Depth Prediction
+    - Disparity Estimation
+    - depth estimation
+    - depth prediction
+    - depth reconstruction
+    - monocular depth
+    - metric depth
+    - relative depth
+    - dense depth
+    - depth completion
+    - depth refinement
+    - depth super-resolution
+    - depth enhancement
+    - depth from
+    - stereo matching
+    - stereo correspondence
+    - stereo depth
+    - multi-view stereo
+    - multiview stereo
+    - disparity estimation
+    - disparity prediction
+    - disparity matching
+    - depth foundation model
+    - depth anything
+    - zero-shot depth
+    - video depth
+    - surface normal estimation
+collection:
+  lookback_days: 7
+  overlap_days: 2
+  query_batch_size: 8
+  page_size: 100
+  review_required_since: '2026-09-06T03:15:20.116692+00:00'
+paper_tag_groups:
+  method:
+  - name: Diffusion
+    description: Denoising or score-based diffusion is a central method; not merely a baseline.
+  - name: Flow Matching
+    description: Flow matching or rectified flow, including continuous flow generation.
+  - name: Autoregressive
+    description: Sequential next-token, next-scale or next-frame generation; may coexist with diffusion.
+  - name: Masked Modeling
+    description: Masked token prediction or iterative masked generation is a central method.
+  - name: GAN
+    description: Adversarial generator/discriminator training is a central method.
+  - name: VAE
+    description: Variational latent-variable learning is a central contribution, not only a frozen tokenizer.
+  - name: Consistency Model
+    description: Consistency training or distillation enables few-step generation.
+  - name: Score Distillation
+    description: SDS, VSD or related diffusion-prior optimization for generation or reconstruction.
+  - name: Inverse Rendering
+    description: Explicit recovery of scene geometry, materials or lighting through image formation.
+  - name: Differentiable Rendering
+    description: Differentiable image formation is a central optimization mechanism.
+  - name: Direct Regression
+    description: Direct discriminative depth or geometry regression, rather than sampling a generative model.
+  - name: Geometric Matching
+    description: Stereo/multi-view correspondence, cost-volume matching or triangulation.
+  - name: Latent Dynamics
+    description: Learned transitions in a latent environment state for prediction or planning.
+  - name: Joint Embedding Prediction
+    description: Predicting target representations in embedding space, e.g. JEPA.
+  task:
+  - name: Relighting
+    description: Changing illumination of a scene or subject while preserving its content.
+  - name: Depth Estimation
+    description: Predicting, completing or refining metric/relative depth or stereo disparity.
+  - name: Neural Rendering
+    description: Rendering novel views using learned scene representations.
+  - name: 3D Reconstruction
+    description: Recovering 3D/4D geometry or scenes from observations.
+  representation:
+  - name: NeRF
+    description: Neural radiance field representation.
+  - name: Gaussian Splatting
+    description: Explicit 2D/3D/4D Gaussian or Gaussian surfel representation.
+  - name: Mesh
+    description: Explicit triangle/polygon mesh or CAD surface representation.
+  - name: Point Cloud
+    description: Explicit point-set representation.
+  - name: Implicit Field
+    description: Implicit occupancy, signed distance or other continuous neural field.
+  - name: Discrete Tokens
+    description: Discrete visual tokens or codebook representation is central.
+  - name: Continuous Latents
+    description: A continuous latent representation is central to the method.
+taxonomy_sources:
+- title: 'Autoregressive Models in Vision: A Survey'
+  url: https://arxiv.org/abs/2411.05902
+- title: 'Diffusion Models: A Comprehensive Survey of Methods and Applications'
+  url: https://arxiv.org/abs/2209.00796
+- title: Advances in Neural Rendering
+  url: https://arxiv.org/abs/2111.05849
+- title: 'Deep Neural Models for Illumination Estimation and Relighting: A Survey'
+  url: https://diglib.eg.org/items/bb70977e-9af7-49ca-bc2b-e446bc2401e4
+- title: 'Deep Learning-based Depth Estimation Methods from Monocular Image and Videos: A Comprehensive Survey'
+  url: https://doi.org/10.1145/3677327
+- title: '3D and 4D World Modeling: A Survey'
+  url: https://worldbench.github.io/survey
+- title: 'Flow Matching for Visual Generation: A Comprehensive Survey (author-uploaded preprint)'
+  url: https://www.researchgate.net/publication/407042767_Flow_Matching_for_Visual_Generation_A_Comprehensive_Survey/download
+- title: 'World Models and World-Action Models: An Accessible and Comprehensive Survey'
+  url: https://www.chefrobotics.ai/post/world-models-and-world-action-models-an-accessible-and-comprehensive-survey

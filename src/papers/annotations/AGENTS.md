@@ -4,5 +4,8 @@
 - 模型只能通过共享 loopback transport 调用；原始输入、响应、缓存和报告只能写入已忽略的 `build/paper-summaries/`。
 - 公开分类真源固定为 `data/paper-annotations.json`，写入前必须完成严格 schema 校验并使用原子替换。
 - 标签名称、顺序和判定说明只来自 `config/site.yaml`；代码不得硬编码可选标签。
+- v2 分类将导航 `topics` 与细节 `tags` 分开；细节标签按配置中的 method/task/representation 组校验。v1 分类只迁移主题，不据此编造技术标签。
+- `institutions` 仅记录原文署名区域明确提供的机构。无法核验时保留空列表，界面显示 `-`；不得根据作者姓名或摘要猜测。
+- 本模块可从已获取的 HTML 署名元数据提取机构；PDF 无可靠署名结构时保持缺失。推理提示只读取标题、摘要和配置词表。
 - 单篇失败必须与其他论文隔离；历史 archive、候选 ledger 和摘要页面不得因分类失败被修改。
 - 所有新增测试、fixture 和 mock 仅放在 `build/`，验证后删除且不得提交。

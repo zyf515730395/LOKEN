@@ -471,9 +471,6 @@ img { max-width: 100%; }
 [data-summary-content] li { margin: .35rem 0; font-size: .8rem; line-height: 1.6; }
 [data-summary-content] code { font-family: var(--mono); font-size: .76em; }
 [data-summary-content].has-error { color: var(--error); }
-[data-summary-direct] { display: block; margin: 0 1.2rem 1.4rem; color: var(--accent); font-size: .8rem; font-weight: 700; text-decoration: none; }
-[data-summary-direct][hidden] { display: none; }
-[data-summary-direct]:hover { text-decoration: underline; text-underline-offset: .2em; }
 .archive-year { margin: 0; border-block: 1px solid var(--line); overflow: clip; }
 .archive-year + .archive-year { border-top: 0; }
 .archive-year-header { display: grid; min-width: 0; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; }
@@ -501,7 +498,6 @@ img { max-width: 100%; }
 .archive-empty { margin: 0; border-block: 1px solid var(--line); padding: 1.2rem; color: var(--muted); }
 .paper-tags { display: flex; flex-wrap: wrap; gap: .28rem; margin-top: .45rem; }
 .paper-tag { border: 1px solid var(--line); border-radius: 999px; padding: .12rem .42rem; color: var(--muted); font-family: var(--mono); font-size: .58rem; font-weight: 600; line-height: 1.35; text-decoration: none; }
-.paper-tag:hover { border-color: var(--accent); color: var(--accent); }
 .table-scroll { overflow-x: auto; border-top: 1px solid var(--line); scrollbar-width: thin; }
 .paper-table { width: 100%; border-collapse: collapse; font-size: .84rem; }
 .paper-table th { color: var(--muted); font-family: var(--mono); font-size: .61rem; font-weight: 650; letter-spacing: .1em; text-align: left; text-transform: uppercase; }
@@ -750,8 +746,10 @@ footer { padding: 2.2rem clamp(1.25rem, 2.6vw, 2.5rem); color: var(--muted); fon
   .page-content { margin-left: 0; }
   .learning-workspace { display: block; }
   .paper-summary-panel { position: static; max-height: none; border: 1px solid var(--line); }
+  .table-scroll { container-type: inline-size; }
+  .mobile-summary-row .paper-summary-panel { position: sticky; left: 0; top: auto; width: 100cqw; max-width: 100%; box-sizing: border-box; }
   .mobile-summary-row { display: table-row !important; border: 0 !important; padding: 0 !important; }
-  .mobile-summary-row > td { display: table-cell !important; width: auto !important; padding: 0 !important; }
+  .paper-table .mobile-summary-row > td { display: table-cell !important; width: auto !important; padding: 0 !important; white-space: normal; overflow-wrap: anywhere; }
   .mobile-summary-row > td::before { content: none !important; }
   .sidebar-scrim { position: fixed; inset: 0; z-index: 39; background: var(--scrim); }
   body.sidebar-open .navigation-shell { transform: translateX(0); }

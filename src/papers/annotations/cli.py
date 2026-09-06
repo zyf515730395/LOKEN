@@ -17,7 +17,7 @@ DEFAULT_BASE_URL = "http://127.0.0.1:11434/v1"
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="python -m papers.annotations")
     commands = parser.add_subparsers(dest="command", required=True)
-    run = commands.add_parser("run", help="classify missing archived papers")
+    run = commands.add_parser("run", help="classify newly accepted papers; --paper explicitly selects an archived paper")
     run.add_argument("--model", default=os.environ.get("TOGOS_WSL_LLM_MODEL"))
     run.add_argument("--base-url", default=os.environ.get("TOGOS_WSL_LLM_BASE_URL", DEFAULT_BASE_URL))
     run.add_argument("--timeout", type=float, default=180.0)
