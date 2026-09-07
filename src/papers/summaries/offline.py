@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import copy
 from dataclasses import dataclass
 import hashlib
 import json
@@ -30,6 +31,8 @@ DEFAULT_ANNOTATIONS = PROJECT_ROOT / "content" / "papers" / "paper-annotations.j
 OFFLINE_STATE = PRIVATE_ROOT / "offline-import-state.json"
 REVIEW_POLICY = "archive-topic-review-v1"
 SUPPORTED_REVIEW_POLICIES = (REVIEW_POLICY, "archive-topic-review-v2")
+REMOVAL_REVIEW_ACTION = "remove_rejected_topic_entries"
+SUPPORTED_REVIEW_ACTIONS = ("review_only_no_deletion", REMOVAL_REVIEW_ACTION)
 CACHE_PATH = re.compile(r"cache/(?P<prefix>[0-9a-f]{2})/(?P<key>[0-9a-f]{64})\.json")
 REPORT_FIELDS = {
     "id", "topic", "title", "historical", "accept", "accept_reason",
@@ -42,6 +45,7 @@ class OfflineImportResult:
     selected: int
     skipped: int
     published: int
+    removed: int
 
 
 def _unique_object(pairs):
@@ -108,9 +112,23 @@ def _clear_transaction_state() -> None:
         raise PaperSummaryError("state_write_failed", "offline publication state could not be cleared") from None
 
 
+def _prune_rejected_topics(
+    archive: dict[str, object], rejected: tuple[tuple[str, str], ...]
+) -> tuple[dict[str, object], int]:
+    """Return a copy without the rejected topic memberships."""
+    updated = copy.deepcopy(archive)
+    removed = 0
+    for topic, paper_id in rejected:
+        entries = updated.get(topic)
+        if isinstance(entries, dict) and paper_id in entries:
+            del entries[paper_id]
+            removed += 1
+    return updated, removed
+
+
 def _load_reviewed(
     review_path: Path, docs_root: Path, archive_path: Path
-) -> tuple[tuple[PaperCandidate, PaperSummary], int]:
+) -> tuple[tuple[PaperCandidate, PaperSummary], int, tuple[tuple[str, str], ...], dict[str, object]]:
     private_root = PRIVATE_ROOT.resolve()
     review = review_path.resolve()
     if not review.is_relative_to(private_root):
@@ -124,7 +142,7 @@ def _load_reviewed(
         }
         or payload["version"] != 1
         or payload["policy_version"] not in SUPPORTED_REVIEW_POLICIES
-        or payload["action"] != "review_only_no_deletion"
+        or payload["action"] not in SUPPORTED_REVIEW_ACTIONS
         or not all(isinstance(payload[name], list) for name in (
             "accept_candidates", "reject_candidates", "needs_review"
         ))
@@ -145,34 +163,42 @@ def _load_reviewed(
 
     ready = load_ready_keys(docs_root)
     results = []
+    rejected = []
     skipped = 0
     seen = set()
     cache = PaperSummaryCache()
-    for item in payload["accept_candidates"]:
+    review_items = [(item, True) for item in payload["accept_candidates"]]
+    if payload["action"] == REMOVAL_REVIEW_ACTION:
+        review_items.extend((item, False) for item in payload["reject_candidates"])
+    for item, expected_accept in review_items:
         if not isinstance(item, dict) or set(item) != REPORT_FIELDS:
-            raise PaperSummaryError("invalid_offline_review", "accepted review entry is invalid")
+            raise PaperSummaryError("invalid_offline_review", "review entry is invalid")
         paper_id = item["id"]
         topic = item["topic"]
         try:
             normalized = normalize_arxiv_id(paper_id)
         except PaperSummaryError:
-            raise PaperSummaryError("invalid_offline_review", "accepted paper id is invalid") from None
+            raise PaperSummaryError("invalid_offline_review", "reviewed paper id is invalid") from None
         key = (topic, paper_id)
         row = archived.get(key)
         expected_url = f"notes/{TOPIC_SLUGS.get(topic, '')}.html#summary-{paper_id}"
         if (
             normalized != paper_id
             or key in seen
-            or row is None
-            or item["accept"] is not True
+            or (row is None and expected_accept)
+            or item["accept"] is not expected_accept
             or type(item["historical"]) is not bool
             or item["review_origin"] not in {"ledger", "local_model"}
             or not isinstance(item["accept_reason"], str)
             or not item["accept_reason"].strip()
-            or " ".join(str(item["title"]).split()) != " ".join(row["title"].split())
             or item["public_url"] != expected_url
         ):
-            raise PaperSummaryError("invalid_offline_review", "accepted review entry does not match archive")
+            raise PaperSummaryError("invalid_offline_review", "review entry does not match archive")
+        if row is None:
+            seen.add(key)
+            continue
+        if " ".join(str(item["title"]).split()) != " ".join(row["title"].split()):
+            raise PaperSummaryError("invalid_offline_review", "review entry does not match archive")
         cache_path = item["summary_cache"]
         match = CACHE_PATH.fullmatch(cache_path) if isinstance(cache_path, str) else None
         if match is None or match.group("prefix") != match.group("key")[:2]:
@@ -210,11 +236,14 @@ def _load_reviewed(
         if summary is None:
             raise PaperSummaryError("offline_cache_missing", "reviewed summary cache is missing or invalid")
         seen.add(key)
+        if not expected_accept:
+            rejected.append(key)
+            continue
         if key in ready:
             skipped += 1
             continue
         results.append((PaperCandidate(paper_id, " ".join(row["title"].split()), topic, row["date"]), summary))
-    return tuple(results), skipped
+    return tuple(results), skipped, tuple(rejected), archive
 
 
 def publish_offline_summaries(
@@ -230,8 +259,9 @@ def publish_offline_summaries(
     archive = Path(archive_path)
     ledger = Path(ledger_path)
     if dry_run:
-        results, skipped = _load_reviewed(Path(review_path), docs, archive)
-        return OfflineImportResult(len(results), skipped, 0)
+        results, skipped, rejected, current_archive = _load_reviewed(Path(review_path), docs, archive)
+        _, removed = _prune_rejected_topics(current_archive, rejected)
+        return OfflineImportResult(len(results), skipped, 0, removed)
     with run_lock():
         def regenerate() -> None:
             site_project_root = docs.resolve().parent
@@ -266,11 +296,13 @@ def publish_offline_summaries(
                     "recovery_failed", "interrupted offline publication could not be recovered"
                 ) from None
 
-        results, skipped = _load_reviewed(Path(review_path), docs, archive)
-        if not results:
-            return OfflineImportResult(0, skipped, 0)
+        results, skipped, rejected, current_archive = _load_reviewed(Path(review_path), docs, archive)
+        next_archive, removed = _prune_rejected_topics(current_archive, rejected)
+        if not results and not removed:
+            return OfflineImportResult(0, skipped, 0, 0)
         topics = tuple(dict.fromkeys(candidate.topic for candidate, _ in results))
         try:
+            original_archive = archive.read_bytes()
             originals = {}
             for topic in topics:
                 try:
@@ -282,10 +314,17 @@ def publish_offline_summaries(
 
         _write_transaction_state(identity)
         try:
-            publish_summaries(docs, results)
+            if removed:
+                atomic_write_bytes(
+                    archive,
+                    (json.dumps(next_archive, ensure_ascii=False) + "\n").encode("utf-8"),
+                )
+            if results:
+                publish_summaries(docs, results)
             regenerate()
         except Exception as error:
             try:
+                atomic_write_bytes(archive, original_archive)
                 for topic, content in originals.items():
                     restore_topic_document(docs, topic, content)
                 regenerate()
@@ -300,4 +339,4 @@ def publish_offline_summaries(
                 "offline_publish_failed", "offline summaries could not be published safely"
             ) from None
         _clear_transaction_state()
-    return OfflineImportResult(len(results), skipped, len(results))
+    return OfflineImportResult(len(results), skipped, len(results), removed)

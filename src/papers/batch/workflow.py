@@ -39,6 +39,7 @@ DEFAULT_LEDGER = LEDGER
 DEFAULT_DOCS = DOCS
 DEFAULT_CONFIG = CONFIG
 PAPER_LABELS = load_annotation_definitions(DEFAULT_CONFIG)
+TOPIC_REVIEW_ACTION = "remove_rejected_topic_entries"
 
 
 def note_paths(item):
@@ -100,7 +101,7 @@ def save_note(item, summary, source, model, decision, annotation):
         f"## 一句话总结\n\n{summary.one_sentence}\n\n"
         f"## 解决的问题\n\n{summary.problem}\n\n"
         f"## 创新点\n\n{contributions}\n\n"
-        f"## 主题适用性（本地审阅，未执行删除）\n\n"
+        f"## 主题适用性（本地审阅）\n\n"
         f"- accept: {json.dumps(decision['accept'])}\n"
         f"- 历史归档：{'是' if item.historical else '否'}\n"
         f"- 判断理由：{decision['reason']}\n"
@@ -202,7 +203,7 @@ def select_items(args):
 def write_topic_review():
     """Aggregate verified local receipts, including successes from earlier batches."""
     result = {"version": 1, "policy_version": POLICY_VERSION,
-              "action": "review_only_no_deletion", "accept_candidates": [],
+              "action": TOPIC_REVIEW_ACTION, "accept_candidates": [],
               "reject_candidates": [], "needs_review": []}
     existing_notes = existing_note_keys()
     for item in archive_candidates(DEFAULT_ARCHIVE, DEFAULT_LEDGER):
