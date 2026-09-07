@@ -13,6 +13,290 @@
       <h1>World Model · 论文要点</h1>
     </header>
     <div class="summary-topic-list">
+    <article class="summary-article summary-topic-entry" id="summary-2601.16163" data-arxiv-id="2601.16163" data-status="ready">
+<h1>[2601.16163] Cosmos Policy: Fine-Tuning Video Models for Visuomotor Control and Planning</h1>
+<p><a href="https://arxiv.org/abs/2601.16163" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>Cosmos Policy 通过单阶段微调将预训练视频模型（Cosmos-Predict2-2B）转化为机器人策略，无需修改架构即可同时生成机器人动作、未来状态图像和预期累积奖励，从而实现视觉运动控制与基于模型的规划。</p>
+<h2>解决的问题</h2>
+<p>现有工作要么需要多阶段训练并引入新的架构组件（如独立动作扩散器或逆动力学模型），要么为了避免复杂性而采用自定义设计，导致无法利用预训练视频模型中蕴含的时空先验知识。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出 Cosmos Policy 方法，通过单阶段后训练将预训练视频模型适配为机器人策略，无需任何架构修改即可利用其核心学习机制捕捉动作分布。</li>
+<li>将机器人动作、未来状态图像和未来状态值（预期总累积奖励）编码为模型潜在扩散序列中的潜在帧，使模型能同时生成多模态信息。</li>
+<li>实现基于模型的规划功能，利用最佳-N 采样生成候选动作、想象其未来状态并根据预测值排序，从而执行高价值动作以产生更可能成功的轨迹。</li>
+<li>在 LIBERO 和 RoboCasa 仿真基准测试中取得最先进的直接策略性能（平均成功率分别为 98.5% 和 67.1%），并超越其他扩散策略、视频策略及微调后的 VLA 模型。</li>
+<li>在具有挑战性的双手动真实世界操作任务中取得最高的平均成功率（93.6%），并在结合基于模型的规划后，两项任务的平均完成率提升了 12.5%。</li>
+<li>通过对比基于模型的规划方法与无模型变体，展示了利用策略回滚数据细化世界模型和价值函数以提升规划有效性的优势。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2601.20540" data-arxiv-id="2601.20540" data-status="ready">
+<h1>[2601.20540] Advancing Open-source World Models</h1>
+<p><a href="https://arxiv.org/abs/2601.20540" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了 LingBot-World，这是一个开源的、支持实时交互的大规模世界模型框架，旨在解决从视频生成到世界模拟过渡中的数据稀缺、长序列一致性及计算效率等挑战。</p>
+<h2>解决的问题</h2>
+<p>现有视频生成模型缺乏对物理因果律和物体永存性的理解，仅能生成被动片段而非可交互环境；高质量交互数据稀缺且难以扩展；标准扩散架构难以维持分钟级轨迹的叙事与结构一致性；传统扩散采样计算成本过高导致无法实时控制；且最先进方案多为专有闭源，阻碍社区创新。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种可扩展的数据引擎，通过混合真实世界 footage、游戏引擎录制和 Unreal Engine 合成数据，并引入分层描述策略（叙事、场景静态、密集时间描述）以解耦运动控制与静态场景生成。</li>
+<li>设计了一个多阶段进化训练管道，包含预训练（建立高保真纹理先验）、中间训练（利用 MoE 架构增强世界知识和长期记忆）以及后训练（通过因果注意力适配和少步蒸馏将双向扩散模型转化为低延迟自回归系统）。</li>
+<li>构建了适用于具身 AI 的通用测试床，支持通过文本提示引导世界事件、训练动作代理，并实现从生成视频的一致 3D 重建。</li>
+<li>发布了完全开源的 LingBot-World 框架（包括模型权重和推理代码），在通用领域能力、长生成视界、高动态度及实时交互方面超越了现有系统（如 Genie 3 和 Mirage 2）。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2601.21998" data-arxiv-id="2601.21998" data-status="ready">
+<h1>[2601.21998] Causal World Modeling for Robot Control</h1>
+<p><a href="https://arxiv.org/abs/2601.21998" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 LingBot-VA，一种基于自回归扩散的因果世界模型，通过交织视频与动作 token 的统一序列，解决了现有视觉 - 语言 - 动作（VLA）模型中的表示纠缠、反应延迟及因果不一致问题。</p>
+<h2>解决的问题</h2>
+<p>现有 VLA 模型存在表示纠缠问题，难以同时学习视觉理解、物理动力学和运动控制，导致样本效率低和泛化能力差。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出自回归视频 - 动作世界建模框架，在单一交织序列中统一视觉动力学预测与动作推理，同时保持概念上的区分，支持通过 KV 缓存的持久记忆和通过注意力掩码的因果一致性。</li>
+<li>设计混合 Transformer（MoT）架构并引入异步执行机制，结合部分去噪策略，实现了高效的机器人控制，解决了大规模自回归视频 - 动作模型的推理延迟问题。</li>
+<li>在仿真和真实世界环境中进行了广泛评估，展示了在长视界任务和高精度操作任务上优于最先进 VLA 策略的性能，显著提升了样本效率和泛化能力。</li>
+<li>通过引入噪声历史增强训练方案和重叠计算与执行的异步协调管道，实现了无需牺牲预测质量的高频闭环控制。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2602.03604" data-arxiv-id="2602.03604" data-status="ready">
+<h1>[2602.03604] A Lightweight Library for Energy-Based Joint-Embedding Predictive Architectures</h1>
+<p><a href="https://arxiv.org/abs/2602.03604" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文介绍了 EB-JEPA，一个开源库，旨在通过模块化、文档完善且易于在小型规模上训练的 JEPA 模型实现，降低该架构的入门门槛并促进教育与快速实验。</p>
+<h2>解决的问题</h2>
+<p>尽管联合嵌入预测架构（JEPAs）在视觉表示学习和世界建模方面展现出巨大潜力，但目前缺乏可访问的实现方案，现有的生产级实现难以导航且依赖特定设置，导致入门门槛过高。</p>
+<h2>创新点</h2>
+<ul>
+<li>提供了三个逐步复杂的可访问实现示例（图像表示学习、视频预测和动作条件规划），每个示例均可在单个 GPU 上几小时内完成训练。</li>
+<li>设计了模块化架构，包含可重用的组件（编码器、预测器、正则化器和规划器），便于轻松重组以应用于新场景。</li>
+<li>进行了全面的评估，包括系统性的实验和消融研究，证明了每个组件的重要性，并提供了超参数选择的实用指导。</li>
+<li>作为教育资源，提供了清晰的文档和代码结构，帮助研究人员理解 JEPA 原理。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2602.07050" data-arxiv-id="2602.07050" data-status="ready">
+<h1>[2602.07050] Interpreting Physics in Video World Models</h1>
+<p><a href="https://arxiv.org/abs/2602.07050" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文通过分层探测、子空间分析和针对性消融实验，首次对视频世界模型中的物理变量进行了可解释性分析，揭示了物理信息在模型内部的涌现位置、结构形式及计算基础。</p>
+<h2>解决的问题</h2>
+<p>尽管视频建模进展迅速，但目前尚不清楚视频世界模型如何在内部表示物理信息，且现有工作多将模型视为黑盒，缺乏对物理信息在网络中何处构建、如何组织以及采取何种几何形式的回答。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了“物理涌现区”（Physics Emergence Zone）概念，发现物理相关信息的表示在模型深度约三分之一处急剧涌现，并在中间层达到峰值。</li>
+<li>发现标量物理量（如速度和加速度）可在最早层访问，而方向信息仅在物理涌现区变得可访问，且加速度无需显式的速度中间变量即可近似。</li>
+<li>揭示了方向信息与可能/不可能物理判断占据近乎正交的子空间，表明物理表征更倾向于任务特定表示而非紧凑的可复用状态变量。</li>
+<li>证明物理推理和时序推理依赖于物理涌现区内具有局部时空处理能力的注意力头，抑制这些头会显著降低相关任务性能。</li>
+<li>发现运动方向以高维群体编码形式表示，具有圆形几何特征，需要协调数十个维度进行干预，这与语言模型中的低维转向形成对比。</li>
+<li>在两个最先进的视频编码器（V-JEPA 2 和 VideoMAE-v2 G）上验证了上述发现，确认了物理信息结构的普遍性。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2602.09600" data-arxiv-id="2602.09600" data-status="ready">
+<h1>[2602.09600] Hand2World: Autoregressive Egocentric Interaction Generation via Free-Space Hand Gestures</h1>
+<p><a href="https://arxiv.org/abs/2602.09600" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了 Hand2World，这是一个统一的框架，用于通过自由空间手势、显式相机控制和自回归（AR）合成来生成逼真的以自我为中心的手 - 物体交互视频。</p>
+<h2>解决的问题</h2>
+<p>现有基于单目视频的方法在自由空间手势控制下存在三个根本局限性：(i) 基于 2D 掩码的条件化导致分布偏移，产生错误的遮挡和深度排序；(ii) 缺乏显式相机条件导致背景漂移；(iii) 缺乏支持在线部署的因果端到端流式处理管道。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了首个单目框架，能够从单张场景图像中合成逼真的以自我为中心的手 - 物体交互视频，由不受约束的自由空间手势驱动，并具备显式相机控制和任意长度的自回归合成能力。</li>
+<li>设计了基于投影 3D 手网（silhouette-and-wireframe）的遮挡不变手条件化方法，该表示编码了独立于可见性的完整手部几何信息，从而消除了掩码分布偏移问题。</li>
+<li>通过轻量级适配器将每像素 Plücker 射线嵌入注入视频扩散模型，实现了显式相机建模，将相机运动与手部运动解耦，有效防止了背景漂移。</li>
+<li>开发了一套完全自动化的单目标注管道，能够从原始视频中提取时间一致的手部网和近似相机轨迹，避免了手动标注和多视图设备的需求，并验证了其在三个数据集上的可扩展性。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2602.11291" data-arxiv-id="2602.11291" data-status="ready">
+<h1>[2602.11291] H-WM: Robotic Task and Motion Planning Guided by Hierarchical World Model</h1>
+<p><a href="https://arxiv.org/abs/2602.11291" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种分层世界模型（H-WM），通过统一框架联合预测逻辑和视觉状态转换，以解决现有 VLA 方法在长视界任务中因端到端范式导致的性能下降问题。</p>
+<h2>解决的问题</h2>
+<p>现有 VLA 方法大多采用端到端范式，导致在长视界任务上性能下降，具体原因包括累积的执行错误、模糊的目标规范、有限的中间监督以及过度拟合以代理为中心的表现。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种分层世界模型框架，用于对齐长视界的逻辑转换与视觉动态，以实现连贯的未来预测和任务执行。</li>
+<li>引入了一种逻辑世界模型，作为微调后的 LLM，通过预测结构化逻辑状态转换和行动序列来提供全局一致的任务级指导。</li>
+<li>引入了一种基于潜在特征的视觉世界模型，该模型以逻辑状态和行动为条件，生成一系列潜在视觉子目标以将逻辑中间状态锚定到感知空间。</li>
+<li>设计了一种系统化的流水线，将逻辑和视觉指导整合到 VLA 模型中，从而实现物理基础的执行。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2602.11075" data-arxiv-id="2602.11075" data-status="ready">
+<h1>[2602.11075] RISE: Self-Improving Robot Policy with Compositional World Model</h1>
+<p><a href="https://arxiv.org/abs/2602.11075" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>RISE 是一个通过组合世界模型在想象空间中实现策略自我改进的机器人强化学习框架，旨在解决真实物理环境中试错成本高和离线数据分布偏移的问题。</p>
+<h2>解决的问题</h2>
+<p>现有的视觉 - 语言 - 动作（VLA）模型在复杂物理动态下的鲁棒操作能力不足，主要受限于模仿学习对专家演示质量和覆盖率的依赖以及暴露偏差问题。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了 RISE 框架，这是一种原则性的机器人强化学习框架，通过将机器人交互从物理环境转移到想象空间，实现了可扩展的在线自主自我改进。</li>
+<li>构建了一个基于组合世界模型的在线学习环境，该模型将模拟问题分解为动力学预测和价值估计两个目标，并揭示了为策略改进提供稳定学习信号的关键设计选择。</li>
+<li>利用任务中心批处理策略在大规模机器人数据集上预训练基于视频扩散的动力学模型，以提高动作可控性并支持有效的微调。</li>
+<li>通过结合进度估计和时序差分学习目标来初始化价值模型，为想象状态提供密集且对失败敏感的评价，从而通过优势条件训练实现稳定的策略改进。</li>
+<li>在灵巧任务上进行了广泛的实验，证明 RISE 在动态适应性和精度方面显著优于现有的强化学习方法，且避免了昂贵的真实世界试错。</li>
+<li>将本研究视为首次利用世界模型作为有效学习环境来应对需要高动态、灵巧性和精度的挑战性真实世界操作任务的研究。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2602.12215" data-arxiv-id="2602.12215" data-status="ready">
+<h1>[2602.12215] LDA-1B: Scaling Latent Dynamics Action Model via Universal Embodied Data Ingestion</h1>
+<p><a href="https://arxiv.org/abs/2602.12215" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>LDA-1B 是一种通过通用具身数据摄入进行扩展的机器人基础模型，利用结构化 DINO 潜在空间和统一潜在动力学预训练来学习可泛化的交互动力学。</p>
+<h2>解决的问题</h2>
+<p>现有方法主要依赖行为克隆（BC），限制了高质量演示的学习并浪费了包含丰富物理交互动力学的大规模异构具身数据。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了 LDA-1B，一种可扩展的机器人基础模型，通过统一潜在动力学预训练学习可泛化的交互动力学。</li>
+<li>构建了 EI-30k 大规模具身交互数据集，涵盖多样化的具身形式、环境、数据质量，并具备对齐的末端执行器坐标系。</li>
+<li>证明了 LDA-1B 在仿真和真实世界环境、接触丰富操作、灵巧操作及长视界操作等广泛设置中实现了卓越的泛化能力和鲁棒性。</li>
+<li>展示了 LDA-1B 在混合质量微调设置下，通过利用对基线方法有害的低质量轨迹，将数据效率提高了 10%。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2602.12099" data-arxiv-id="2602.12099" data-status="ready">
+<h1>[2602.12099] GigaBrain-0.5M*: a VLA That Learns From World Model-Based Reinforcement Learning</h1>
+<p><a href="https://arxiv.org/abs/2602.12099" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 GigaBrain-0.5M*，这是一种通过基于世界模型的强化学习（RAMP 框架）训练的视觉 - 语言 - 动作（VLA）模型，旨在解决主流 VLA 架构因依赖短视观察而缺乏长期规划能力的根本局限。</p>
+<h2>解决的问题</h2>
+<p>片段未提供</p>
+<h2>创新点</h2>
+<ul>
+<li>提出 GigaBrain-0.5M*，该模型在 GigaBrain-0.5M 基础上扩展了 RAMP（Reinforcement leArning via world Model-conditioned Policy）框架，利用世界模型预测的未来状态和价值来增强 VLA 的长期规划能力。</li>
+<li>设计了 RAMP 的四阶段迭代训练范式：首先在世界模型上预训练以预测未来状态和价值，其次微调策略以基于这些预测进行选择，接着在真实环境中部署收集人机协作的轨迹数据，最后联合持续训练世界模型和策略以实现自我改进。</li>
+<li>理论上验证了 RAMP 是 RECAP 方法的特例，并指出 RAMP 利用世界模型预测的未来状态比 RECAP 仅使用的稀疏优势信号提供了更丰富的信息增益。</li>
+<li>在内部评估和 RoboChallenge 基准测试中展示了 SOTA 表现，特别是在可变形物体操作和长视界程序化任务上具有显著优势，并证明了其在洗衣折叠、装箱和制作咖啡等复杂序列任务中的鲁棒性。</li>
+<li>通过广泛的消融研究证明，相较于 AWR 和 RECAP 等其他强化学习方法，RAMP 在真实机器人性能、多任务泛化能力和样本效率方面均表现更优。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2602.15922" data-arxiv-id="2602.15922" data-status="ready">
+<h1>[2602.15922] World Action Models are Zero-shot Policies</h1>
+<p><a href="https://arxiv.org/abs/2602.15922" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了 DreamZero，一种基于预训练图像 - 视频扩散骨干的 14B 世界动作模型（WAM），通过联合预测动作和视觉未来状态，实现了从非重复性机器人数据中有效学习及零样本泛化到新任务和新环境的能力。</p>
+<h2>解决的问题</h2>
+<p>现有的视觉 - 语言动作模型（VLAs）虽然继承了语言先验，但在泛化到新环境、新动作或新技能（如解鞋带）时表现有限，且缺乏与几何、动力学及运动控制对齐的精确空间感知表示，难以在不收集大规模特定任务数据的情况下适应新环境。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了 DreamZero，一种 14B 世界动作模型（WAM），能够联合预测视频和动作，从而有效利用现实世界中收集的异构、非重复性机器人轨迹数据进行学习，而不再依赖精心设计的重复演示。</li>
+<li>展示了 DreamZero 在零样本泛化方面的显著优势，在环境和任务泛化基准测试中，相比最先进的预训练 VLAs，平均任务进度提升了超过 2 倍，实现了跨环境、跨任务和跨具身的泛化。</li>
+<li>证明了通用策略可以从多样化的异构数据中有效学习，打破了通用机器人策略需要每个任务多次重复演示的传统认知，即使在任务特定后训练后，其环境泛化能力仍优于最先进的 VLAs。</li>
+<li>演示了两种形式的跨具身迁移：利用来自其他机器人或人类的纯视频演示，仅需 10-20 分钟数据即可使目标机器人性能提升超过 42%；并实现了少样本具身适应，仅需 30 分钟游戏数据即可将预训练模型适配到全新机器人并保留零样本泛化能力。</li>
+<li>介绍了模型和系统优化技术，包括解耦的视频与动作去噪调度、系统级并行与缓存策略以及量化等底层优化，实现了 38 倍的推理加速，支持约 7Hz 的实时闭环控制。</li>
+<li>开源了模型权重、推理代码以及运行公开现实世界（RoboArena）和仿真基准（PolaRiS 和 Genie Sim 3.0）的代码。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2602.22208" data-arxiv-id="2602.22208" data-status="ready">
+<h1>[2602.22208] Solaris: Building a Multiplayer Video World Model in Minecraft</h1>
+<p><a href="https://arxiv.org/abs/2602.22208" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了 Solaris，一个能够模拟 Minecraft 中多个玩家视角一致性的多智能体视频世界模型，并配套开发了 SolarisEngine 数据收集系统、大规模训练数据集、评估系统以及一种名为 Checkpointed Self Forcing 的内存高效训练技术。</p>
+<h2>解决的问题</h2>
+<p>现有的视频世界模型仅能模拟单个智能体的观测，无法同时模拟环境中所有智能体的视角，难以准确捕捉多智能体环境下的世界状态。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了 SolarisEngine，一个可扩展的系统，用于收集由预编程机器人执行的非平凡且真实的多人 Minecraft 游戏数据。</li>
+<li>构建了一个包含 1264 万帧（每位玩家 632 万帧）的多人游戏训练数据集，并开发了用于测试多人移动、记忆、定位、建造和视角一致性的评估系统。</li>
+<li>设计了 Solaris 模型，这是一种通过最小修改即可将单智能体预训练视频 DiT 适配为模拟多视角的通用架构视频扩散模型。</li>
+<li>将 Self Forcing 范式扩展至允许学生模型从长上下文教师中受益，并提出了 Checkpointed Self Forcing 技术以解决滑动窗口生成导致的内存使用过高的问题。</li>
+<li>发现可以使用简单的因果掩码微调来替代 CausVid 的初始化方法，从而简化学生模型的初始化过程。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2603.00585" data-arxiv-id="2603.00585" data-status="ready">
+<h1>[2603.00585] MicroVerse: A Preliminary Exploration Toward a Micro-World Simulation</h1>
+<p><a href="https://arxiv.org/abs/2603.00585" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文针对现有视频生成模型在微观尺度模拟中缺乏生物物理合理性的问题，提出了 MicroVerse 框架，包括首个微观模拟基准 MicroWorldBench、专家验证数据集 MicroSim-10K 以及基于该数据集微调的视频生成模型 MicroVerse。</p>
+<h2>解决的问题</h2>
+<p>现有视频生成模型主要聚焦于宏观尺度，在微观尺度（如原子、分子和细胞交互）模拟中无法产生物理上合理或具有生物学意义的动态，且缺乏对生物医学知识的整合。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了微观世界模拟（Micro-World Simulation）的概念，并提供了包含明确目标、专用基准、训练数据集和定制模型的可行性证明。</li>
+<li>提出了 MicroWorldBench，这是首个专门用于评估视频生成中微观模拟任务的基于评分标准的基准，包含 459 个涵盖器官、细胞和亚细胞过程的真实世界任务。</li>
+<li>构建了 MicroSim-10K，这是首个包含 9,601 个专家验证场景的大规模微观模拟视频数据集，强调物理合理性和生物保真度。</li>
+<li>引入了 MicroVerse，这是一个基于 MicroSim-10K 微调的视频生成模型，通过减少违反科学约束的情况并改善时空一致性，在 MicroWorldBench 上实现了具有竞争力的性能。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2603.02765" data-arxiv-id="2603.02765" data-status="ready">
+<h1>[2603.02765] Next Embedding Prediction Makes World Models Stronger</h1>
+<p><a href="https://arxiv.org/abs/2603.02765" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种名为 NE-Dreamer 的无解码器世界模型，通过直接优化潜在表示中的时序预测对齐（利用因果时序 Transformer 预测下一时刻的编码器嵌入）来替代像素重建，从而在部分可观测环境中实现更强大的长期预测和控制能力。</p>
+<h2>解决的问题</h2>
+<p>片段未提供</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种基于下一嵌入预测的无解码器世界模型目标，显式地强制学习到的表示具有时序预测性。</li>
+<li>将轻量级的因果时序 Transformer 集成到 Dreamer 风格的 MBRL 流程中，以在标准的 RSSM 训练内实现基于历史信息的下一步预测。</li>
+<li>在 DeepMind Control Suite 和 DeepMind Lab 上评估了 NE-Dreamer，展示了在 DMC 上的强性能以及在内存和导航密集型 DMLab Rooms 任务中的显著增益。</li>
+<li>通过针对性的消融实验和表示诊断，将性能提升归因于预测序列建模（因果 Transformer + 下一步目标偏移），而非重建或辅助技巧。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2603.10448" data-arxiv-id="2603.10448" data-status="ready">
+<h1>[2603.10448] DiT4DiT: Jointly Modeling Video Dynamics and Actions for Generalizable Robot Control</h1>
+<p><a href="https://arxiv.org/abs/2603.10448" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种名为 DiT4DiT 的统一端到端视频 - 动作模型（VAM），通过双 DiT 架构和联合训练范式，将视频生成作为有效的无监督预训练目标，以解决现有 VLA 模型在时空结构和物理动力学学习上的不足。</p>
+<h2>解决的问题</h2>
+<p>现有 VLA 系统主要基于静态图像 - 文本数据预训练的骨干网络，导致时空结构和物理动力学仅在下游策略训练中学习，且依赖动作标签数据限制了模型的扩展性。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出视频生成本身可作为策略学习的有效代理目标，发现其作为无监督预训练信号比基于视觉监督的辅助任务（如 Grounding 和 FLARE）收敛更快且最终成功率更高。</li>
+<li>引入 DiT4DiT 统一端到端视频 - 动作模型（VAM），采用双向视频扩散 Transformer（DiT）架构，在去噪过程中提取未来帧生成的紧凑潜在特征来条件化动作学习。</li>
+<li>提出基于双流匹配的联合训练范式，通过为视频和动作模块分配独立的时间步和噪声尺度，实现多阶段视频潜变量向动作潜变量空间的转移，从而避免分段优化并缩短收敛周期。</li>
+<li>在 LIBERO 和 RoboCasa-GR1 仿真基准上实现了新的最先进性能，平均成功率分别达到 98.6% 和 50.8%，并在 Unitree G1 真实世界部署中展现出优于预训练基线的优势。</li>
+<li>展示了模型在严重分布偏移下的鲁棒零样本泛化能力，能够适应未见过的物体、类别变化和数量变化，仅凭单目自眼相机即可实现高精度的空间推理任务。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2603.19312" data-arxiv-id="2603.19312" data-status="ready">
+<h1>[2603.19312] LeWorldModel: Stable End-to-End Joint-Embedding Predictive Architecture from Pixels</h1>
+<p><a href="https://arxiv.org/abs/2603.19312" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>LeWorldModel (LeWM) 是一种首个能够从原始像素端到端学习稳定联合嵌入预测架构（JEPA）世界模型的方法，无需启发式正则化或外部信息，仅使用简单的双项目标函数即可在单 GPU 上实现高效训练。</p>
+<h2>解决的问题</h2>
+<p>现有的 JEPA 方法虽然概念简单，但极易发生崩溃（collapse），即模型将所有输入映射为几乎相同的表示以 trivially 满足时间预测目标，导致生成的表示不可用；此外，现有的防崩溃方法通常依赖启发式正则化、多目标损失函数、外部信息或架构简化，在实践中往往引入额外的不稳定性或显著增加训练复杂度。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了 LeWorldModel (LeWM)，这是首个能够从原始像素端到端学习稳定 JEPA 世界模型的方法，无需启发式正则化、多目标损失或外部信息，仅依靠简单且稳定的双项目标函数。</li>
+<li>该方法在单 GPU 上即可运行，支持高效的对数时间超参数搜索，且对架构选择和超参数选择具有鲁棒性。</li>
+<li>实验表明，LeWM 仅需 1500 万参数的紧凑模型，即可在多样化的 2D 和 3D 操作、导航和运动任务中实现具有竞争力的控制性能，超越了现有的端到端 JEPA 方法，并在成本上远低于基于基础模型的世界模型。</li>
+<li>LeWM 支持高达 48 倍的规划加速，同时通过潜空间中的物理量探测和违反期望测试，验证了其对物理现象的直观理解能力。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2603.14482" data-arxiv-id="2603.14482" data-status="ready">
+<h1>[2603.14482] V-JEPA 2.1: Unlocking Dense Features in Video Self-Supervised Learning</h1>
+<p><a href="https://arxiv.org/abs/2603.14482" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>V-JEPA 2.1 通过在全量 token（包括可见上下文和掩码 token）上应用密集预测损失、实施深层自监督以及使用模态特定 tokenizer，成功解锁了视频自监督学习中的密集特征，从而在细粒度空间结构保持和动态捕捉方面实现了统一且高性能的图像与视频表示。</p>
+<h2>解决的问题</h2>
+<p>现有的视频自监督学习方法（如 V-JEPA 系列）虽然擅长全局理解，但其学习到的表示难以提取细粒度的局部空间结构，无法同时满足定位、几何、跟踪等需要密集特征的任务需求。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种基于潜在掩码去噪目标的自监督学习框架，核心发现是将预测损失从仅应用于掩码区域扩展到整个输入（包括可见和掩码段）能显著提升低层密集特征的质量。</li>
+<li>引入了 V-JEPA 2.1，通过在全量 token 上应用密集预测损失，使每个 token 都能基于其时空位置进行 grounding，防止可见 token 充当全局聚合器，从而有效改善了密集特征。</li>
+<li>发现并实施了深层自监督策略，即在编码器中间层等多个层级应用损失函数，为网络提供贯穿始终的训练信号，从而在密集和全局下游任务上获得一致的性能提升。</li>
+<li>设计了原生支持多模态联合训练的架构，利用图像和视频的模态特定学习 tokenizer 在单一共享编码器中进行训练，实现了跨模态的无缝集成。</li>
+<li>展示了该方法在数据规模和模型容量上的可扩展性，通过扩大图像组件数据量（从 1M 到 142M）和增加模型参数量（从 300M 到 2B），实现了系统性的下游任务增益。</li>
+<li>在广泛的基准测试中取得了最先进的性能，包括细粒度预测（如 Ego4D 和 EPIC-KITCHENS-100）、世界建模任务（如 Franka 机械臂抓取和 Tartan Drive 导航）以及密集和全局理解任务（如深度估计、分割、动作识别和 VQA）。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2603.22078" data-arxiv-id="2603.22078" data-status="ready">
+<h1>[2603.22078] Do World Action Models Generalize Better than VLAs? A Robustness Study</h1>
+<p><a href="https://arxiv.org/abs/2603.22078" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文通过对比研究，评估了世界动作模型（WAMs）与视觉 - 语言 - 动作模型（VLAs）在多种扰动下的鲁棒性，发现 WAMs 虽具备更强的噪声和布局扰动鲁棒性且训练更简单，但推理延迟较高且部分方法对训练数据多样性依赖严重。</p>
+<h2>解决的问题</h2>
+<p>片段未提供</p>
+<h2>创新点</h2>
+<ul>
+<li>构建了两个增强的操作基准（LIBERO-Plus 和 RoboTwin 2.0-Plus），引入了七种类型的扰动以评估策略模型的鲁棒性。</li>
+<li>发现世界动作模型（WAMs）在单臂和双臂设置下，对噪声、光照和布局扰动表现出比经典 VLA 更强的鲁棒性，这归因于其世界模型骨干网络继承的时空先验。</li>
+<li>指出虽然部分经典 VLA（如 π0.5）和混合方法（如 MOTUS、VLA-JEPA）能达到相当的鲁棒性，但它们通常需要精心策划的多样化数据集和显式的动态预测目标。</li>
+<li>揭示了 WAMs 的主要挑战在于高推理开销（比 π0.5 慢至少 4.8 倍），并分析了 Fast-WAM 等改进方法在训练数据缺乏多样性时鲁棒性急剧下降的问题。</li>
+<li>强调了 WAMs 在具身预训练阶段的简单性是其相对于经典 VLAs 的关键优势，同时指出了未来需要更高效地利用世界模型骨干的动态先验并提升训练与推理效率。</li>
+</ul>
+</article>
     <article class="summary-article summary-topic-entry" id="summary-2604.08995" data-arxiv-id="2604.08995" data-status="ready">
 <h1>[2604.08995] Matrix-Game 3.0: Real-Time and Streaming Interactive World Model with Long-Horizon Memory</h1>
 <p><a href="https://arxiv.org/abs/2604.08995" rel="nofollow">arXiv 原文</a></p>
@@ -863,6 +1147,6 @@
 </article>
     </div>
   </main>
-  <script type="application/json" id="summary-catalog">{"papers":{"2604.08995":{"status":"ready","url":"notes/world-model.html#summary-2604.08995"},"2605.00080":{"status":"ready","url":"notes/world-model.html#summary-2605.00080"},"2605.06388":{"status":"ready","url":"notes/world-model.html#summary-2605.06388"},"2605.07514":{"status":"ready","url":"notes/world-model.html#summary-2605.07514"},"2605.15178":{"status":"ready","url":"notes/world-model.html#summary-2605.15178"},"2605.20811":{"status":"ready","url":"notes/world-model.html#summary-2605.20811"},"2605.21800":{"status":"ready","url":"notes/world-model.html#summary-2605.21800"},"2605.22882":{"status":"ready","url":"notes/world-model.html#summary-2605.22882"},"2605.23220":{"status":"ready","url":"notes/world-model.html#summary-2605.23220"},"2605.23345":{"status":"ready","url":"notes/world-model.html#summary-2605.23345"},"2605.23699":{"status":"ready","url":"notes/world-model.html#summary-2605.23699"},"2605.25874":{"status":"ready","url":"notes/world-model.html#summary-2605.25874"},"2605.30263":{"status":"ready","url":"notes/world-model.html#summary-2605.30263"},"2606.00267":{"status":"ready","url":"notes/world-model.html#summary-2606.00267"},"2606.02800":{"status":"ready","url":"notes/world-model.html#summary-2606.02800"},"2606.03159":{"status":"ready","url":"notes/world-model.html#summary-2606.03159"},"2606.09803":{"status":"ready","url":"notes/world-model.html#summary-2606.09803"},"2606.11187":{"status":"ready","url":"notes/world-model.html#summary-2606.11187"},"2606.13672":{"status":"ready","url":"notes/world-model.html#summary-2606.13672"},"2606.16993":{"status":"ready","url":"notes/world-model.html#summary-2606.16993"},"2606.24597":{"status":"ready","url":"notes/world-model.html#summary-2606.24597"},"2606.28128":{"status":"ready","url":"notes/world-model.html#summary-2606.28128"},"2606.30534":{"status":"ready","url":"notes/world-model.html#summary-2606.30534"},"2606.31734":{"status":"ready","url":"notes/world-model.html#summary-2606.31734"},"2606.32026":{"status":"ready","url":"notes/world-model.html#summary-2606.32026"},"2607.00678":{"status":"ready","url":"notes/world-model.html#summary-2607.00678"},"2607.02642":{"status":"ready","url":"notes/world-model.html#summary-2607.02642"},"2607.04988":{"status":"ready","url":"notes/world-model.html#summary-2607.04988"},"2607.06558":{"status":"ready","url":"notes/world-model.html#summary-2607.06558"},"2607.06559":{"status":"ready","url":"notes/world-model.html#summary-2607.06559"},"2607.06988":{"status":"ready","url":"notes/world-model.html#summary-2607.06988"},"2607.07534":{"status":"ready","url":"notes/world-model.html#summary-2607.07534"},"2607.08436":{"status":"ready","url":"notes/world-model.html#summary-2607.08436"},"2607.08639":{"status":"ready","url":"notes/world-model.html#summary-2607.08639"},"2607.11643":{"status":"ready","url":"notes/world-model.html#summary-2607.11643"},"2607.13017":{"status":"ready","url":"notes/world-model.html#summary-2607.13017"},"2607.13960":{"status":"ready","url":"notes/world-model.html#summary-2607.13960"},"2607.15065":{"status":"ready","url":"notes/world-model.html#summary-2607.15065"},"2607.19343":{"status":"ready","url":"notes/world-model.html#summary-2607.19343"},"2607.22535":{"status":"ready","url":"notes/world-model.html#summary-2607.22535"},"2607.23783":{"status":"ready","url":"notes/world-model.html#summary-2607.23783"},"2607.28243":{"status":"ready","url":"notes/world-model.html#summary-2607.28243"},"2608.02603":{"status":"ready","url":"notes/world-model.html#summary-2608.02603"},"2608.07408":{"status":"ready","url":"notes/world-model.html#summary-2608.07408"},"2608.13489":{"status":"ready","url":"notes/world-model.html#summary-2608.13489"},"2608.13546":{"status":"ready","url":"notes/world-model.html#summary-2608.13546"},"2608.14022":{"status":"ready","url":"notes/world-model.html#summary-2608.14022"},"2608.15869":{"status":"ready","url":"notes/world-model.html#summary-2608.15869"},"2608.18077":{"status":"ready","url":"notes/world-model.html#summary-2608.18077"},"2608.23070":{"status":"ready","url":"notes/world-model.html#summary-2608.23070"},"2608.23189":{"status":"ready","url":"notes/world-model.html#summary-2608.23189"},"2608.23383":{"status":"ready","url":"notes/world-model.html#summary-2608.23383"},"2608.26239":{"status":"ready","url":"notes/world-model.html#summary-2608.26239"},"2608.27033":{"status":"ready","url":"notes/world-model.html#summary-2608.27033"},"2608.27549":{"status":"ready","url":"notes/world-model.html#summary-2608.27549"}},"topic":"World Model","version":1}</script>
+  <script type="application/json" id="summary-catalog">{"papers":{"2601.16163":{"status":"ready","url":"notes/world-model.html#summary-2601.16163"},"2601.20540":{"status":"ready","url":"notes/world-model.html#summary-2601.20540"},"2601.21998":{"status":"ready","url":"notes/world-model.html#summary-2601.21998"},"2602.03604":{"status":"ready","url":"notes/world-model.html#summary-2602.03604"},"2602.07050":{"status":"ready","url":"notes/world-model.html#summary-2602.07050"},"2602.09600":{"status":"ready","url":"notes/world-model.html#summary-2602.09600"},"2602.11075":{"status":"ready","url":"notes/world-model.html#summary-2602.11075"},"2602.11291":{"status":"ready","url":"notes/world-model.html#summary-2602.11291"},"2602.12099":{"status":"ready","url":"notes/world-model.html#summary-2602.12099"},"2602.12215":{"status":"ready","url":"notes/world-model.html#summary-2602.12215"},"2602.15922":{"status":"ready","url":"notes/world-model.html#summary-2602.15922"},"2602.22208":{"status":"ready","url":"notes/world-model.html#summary-2602.22208"},"2603.00585":{"status":"ready","url":"notes/world-model.html#summary-2603.00585"},"2603.02765":{"status":"ready","url":"notes/world-model.html#summary-2603.02765"},"2603.10448":{"status":"ready","url":"notes/world-model.html#summary-2603.10448"},"2603.14482":{"status":"ready","url":"notes/world-model.html#summary-2603.14482"},"2603.19312":{"status":"ready","url":"notes/world-model.html#summary-2603.19312"},"2603.22078":{"status":"ready","url":"notes/world-model.html#summary-2603.22078"},"2604.08995":{"status":"ready","url":"notes/world-model.html#summary-2604.08995"},"2605.00080":{"status":"ready","url":"notes/world-model.html#summary-2605.00080"},"2605.06388":{"status":"ready","url":"notes/world-model.html#summary-2605.06388"},"2605.07514":{"status":"ready","url":"notes/world-model.html#summary-2605.07514"},"2605.15178":{"status":"ready","url":"notes/world-model.html#summary-2605.15178"},"2605.20811":{"status":"ready","url":"notes/world-model.html#summary-2605.20811"},"2605.21800":{"status":"ready","url":"notes/world-model.html#summary-2605.21800"},"2605.22882":{"status":"ready","url":"notes/world-model.html#summary-2605.22882"},"2605.23220":{"status":"ready","url":"notes/world-model.html#summary-2605.23220"},"2605.23345":{"status":"ready","url":"notes/world-model.html#summary-2605.23345"},"2605.23699":{"status":"ready","url":"notes/world-model.html#summary-2605.23699"},"2605.25874":{"status":"ready","url":"notes/world-model.html#summary-2605.25874"},"2605.30263":{"status":"ready","url":"notes/world-model.html#summary-2605.30263"},"2606.00267":{"status":"ready","url":"notes/world-model.html#summary-2606.00267"},"2606.02800":{"status":"ready","url":"notes/world-model.html#summary-2606.02800"},"2606.03159":{"status":"ready","url":"notes/world-model.html#summary-2606.03159"},"2606.09803":{"status":"ready","url":"notes/world-model.html#summary-2606.09803"},"2606.11187":{"status":"ready","url":"notes/world-model.html#summary-2606.11187"},"2606.13672":{"status":"ready","url":"notes/world-model.html#summary-2606.13672"},"2606.16993":{"status":"ready","url":"notes/world-model.html#summary-2606.16993"},"2606.24597":{"status":"ready","url":"notes/world-model.html#summary-2606.24597"},"2606.28128":{"status":"ready","url":"notes/world-model.html#summary-2606.28128"},"2606.30534":{"status":"ready","url":"notes/world-model.html#summary-2606.30534"},"2606.31734":{"status":"ready","url":"notes/world-model.html#summary-2606.31734"},"2606.32026":{"status":"ready","url":"notes/world-model.html#summary-2606.32026"},"2607.00678":{"status":"ready","url":"notes/world-model.html#summary-2607.00678"},"2607.02642":{"status":"ready","url":"notes/world-model.html#summary-2607.02642"},"2607.04988":{"status":"ready","url":"notes/world-model.html#summary-2607.04988"},"2607.06558":{"status":"ready","url":"notes/world-model.html#summary-2607.06558"},"2607.06559":{"status":"ready","url":"notes/world-model.html#summary-2607.06559"},"2607.06988":{"status":"ready","url":"notes/world-model.html#summary-2607.06988"},"2607.07534":{"status":"ready","url":"notes/world-model.html#summary-2607.07534"},"2607.08436":{"status":"ready","url":"notes/world-model.html#summary-2607.08436"},"2607.08639":{"status":"ready","url":"notes/world-model.html#summary-2607.08639"},"2607.11643":{"status":"ready","url":"notes/world-model.html#summary-2607.11643"},"2607.13017":{"status":"ready","url":"notes/world-model.html#summary-2607.13017"},"2607.13960":{"status":"ready","url":"notes/world-model.html#summary-2607.13960"},"2607.15065":{"status":"ready","url":"notes/world-model.html#summary-2607.15065"},"2607.19343":{"status":"ready","url":"notes/world-model.html#summary-2607.19343"},"2607.22535":{"status":"ready","url":"notes/world-model.html#summary-2607.22535"},"2607.23783":{"status":"ready","url":"notes/world-model.html#summary-2607.23783"},"2607.28243":{"status":"ready","url":"notes/world-model.html#summary-2607.28243"},"2608.02603":{"status":"ready","url":"notes/world-model.html#summary-2608.02603"},"2608.07408":{"status":"ready","url":"notes/world-model.html#summary-2608.07408"},"2608.13489":{"status":"ready","url":"notes/world-model.html#summary-2608.13489"},"2608.13546":{"status":"ready","url":"notes/world-model.html#summary-2608.13546"},"2608.14022":{"status":"ready","url":"notes/world-model.html#summary-2608.14022"},"2608.15869":{"status":"ready","url":"notes/world-model.html#summary-2608.15869"},"2608.18077":{"status":"ready","url":"notes/world-model.html#summary-2608.18077"},"2608.23070":{"status":"ready","url":"notes/world-model.html#summary-2608.23070"},"2608.23189":{"status":"ready","url":"notes/world-model.html#summary-2608.23189"},"2608.23383":{"status":"ready","url":"notes/world-model.html#summary-2608.23383"},"2608.26239":{"status":"ready","url":"notes/world-model.html#summary-2608.26239"},"2608.27033":{"status":"ready","url":"notes/world-model.html#summary-2608.27033"},"2608.27549":{"status":"ready","url":"notes/world-model.html#summary-2608.27549"}},"topic":"World Model","version":1}</script>
 </body>
 </html>
