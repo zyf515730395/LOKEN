@@ -1,0 +1,686 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>World Model · 论文要点</title>
+  <link rel="stylesheet" href="../assets/css/site.css?v=12">
+</head>
+<body class="summary-page">
+  <main class="summary-page-shell">
+    <header class="summary-topic-header">
+      <a class="summary-back" href="../index.html#world-model">← 返回论文列表</a>
+      <h1>World Model · 论文要点</h1>
+    </header>
+    <div class="summary-topic-list">
+    <article class="summary-article summary-topic-entry" id="summary-2605.30263" data-arxiv-id="2605.30263" data-status="ready">
+<h1>[2605.30263] minWM: A Full-Stack Open-Source Framework for Real-Time Interactive Video World Models</h1>
+<p><a href="https://arxiv.org/abs/2605.30263" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>minWM 是一个全栈开源框架，旨在将现有的文本到视频（T2V）或文本及图像到视频（TI2V）基础模型转化为支持低延迟、相机可控的少步自回归视频世界模型。</p>
+<h2>解决的问题</h2>
+<p>尽管基于扩散的视频生成模型质量很高，但它们并非交互式世界模型；现有的将离线生成器转化为实时交互式世界模型的技术分散在不同流程中，导致构建过程需要大量人工干预，且缺乏统一、可复现且可扩展的完整框架。</p>
+<h2>创新点</h2>
+<ul>
+<li>发布了 minWM，这是一个完全开源的端到端流程，涵盖了相机条件数据构建、双向视频扩散模型的可控微调以及 Causal Forcing/Causal Forcing++ 蒸馏（包括 AR 扩散训练、因果 ODE 或因果一致性蒸馏初始化、非对称 DMD 后训练和低延迟推理）。</li>
+<li>证明了 minWM 具有架构通用性，能够将多种类型的视频基础模型（如 Wan2.1-T2V-1.3B 和 HY1.5-TI2V-8B）转化为相机可控的少步自回归世界模型。</li>
+<li>支持对现有的视频世界模型（如 HY-WorldPlay）进行适配，使其适应新的数据分布、训练配方或延迟目标。</li>
+<li>提供了关于相机轨迹质量、可控性训练步骤和最小批次大小要求的实际消融实验，为可复现的交互式世界模型训练提供了可操作的指导。</li>
+<li>通过发布每个训练阶段的中间检查点，允许研究人员从任何阶段恢复、修改或扩展流程，增强了框架的可复现性和可扩展性。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2606.00267" data-arxiv-id="2606.00267" data-status="ready">
+<h1>[2606.00267] StressDream: Steering Video World Models for Robust Policy Evaluation and Improvement</h1>
+<p><a href="https://arxiv.org/abs/2606.00267" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>StressDream 是一种针对基于扩散的视频世界模型（Video World Models）的推理时引导方法，通过优化高维初始噪声并结合语义目标与合理性目标，旨在高效地想象出既合理又具有高影响力的结果，从而提升策略评估与改进的鲁棒性。</p>
+<h2>解决的问题</h2>
+<p>现有的视频世界模型在策略评估和改进中通常依赖名义想象（nominal imaginations），即从模型中简单采样，这种方法难以在不过度消耗样本的情况下探索到关键的高影响力结果，导致无法有效区分不同动作下可能发生的多样化后果。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了 StressDream，这是一种新颖的推理时引导方法，专门用于基于扩散的视频世界模型，能够优化高维高斯初始噪声以引导生成朝向高影响力事件，同时保持生成的合理性。</li>
+<li>在受控设置中验证了 StressDream 仅在目标任务失败结果属于合理分布范围内时，才会将世界模型的想象引导至这些目标事件，避免了生成出不合理的内容。</li>
+<li>在自动驾驶和机器人操作领域的最先进视频世界模型上进行了实验，展示了 StressDream 通过检测高影响力结果（如任务失败），将策略评估的召回率从 54% 显著提升至 94%。</li>
+<li>证明了这种鲁棒的评估机制能够促进采取避免潜在失败的稳健动作，从而将视觉 - 语言 - 动作（VLA）策略的成功率从 39% 提升至 71%。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2606.02800" data-arxiv-id="2606.02800" data-status="ready">
+<h1>[2606.02800] Cosmos 3: Omnimodal World Models for Physical AI</h1>
+<p><a href="https://arxiv.org/abs/2606.02800" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>Cosmos 3 是一个全模态世界模型，旨在通过统一理解与生成能力来解决物理 AI 中感知、推理与行动分离的架构局限，从而支持安全、可扩展的模拟世界训练。</p>
+<h2>解决的问题</h2>
+<p>现有物理 AI 研究将理解（感知与推理）与生成（世界模拟与行动预测）视为独立支柱，导致需要拼接 VLM、VLA、WAM 及动力学模型等碎片化架构，造成计算浪费且难以扩展。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出 Cosmos 3 框架，将语言、图像、视频、音频和行动等全模态数据统一建模，实现理解与生成能力的原生融合。</li>
+<li>设计支持多种操作模式的单一架构，可根据输入输出配置无缝切换为 VLM、文生图、视频生成、未来预测或世界 - 行动模型，无需修改架构。</li>
+<li>提供三种解决物理 AI 训练瓶颈的策略：合成数据生成、针对特定任务与具身化的后训练专业化，以及用于加速研究的复杂训练环境生成。</li>
+<li>在广泛的基准测试中评估了 Cosmos 3 及其变体，结果显示其在大多数物理 AI 核心能力上达到了新的最先进水平，优于专用模型。</li>
+<li>开源了代码、模型检查点、精选的合成数据集以及评估基准，以促进物理 AI 领域的开放研究与部署。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2606.03159" data-arxiv-id="2606.03159" data-status="ready">
+<h1>[2606.03159] NVIDIA OmniDreams: Real-Time Generative World Model for Closed-Loop Autonomous Vehicle Simulation</h1>
+<p><a href="https://arxiv.org/abs/2606.03159" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>NVIDIA OmniDreams 是一个基于动作条件的生成式世界模型，旨在通过实时闭环仿真解决自动驾驶策略在安全关键场景下的测试难题，并证明世界 - 动作模型（WAMs）在特定任务上优于视觉 - 语言 - 动作模型（VLAs）。</p>
+<h2>解决的问题</h2>
+<p>片段未提供</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了 OmniDreams，这是一个基于自回归扩散视频生成的动作条件生成式世界模型，能够与开源策略模型 Alpamayo 1 和仿真编排器 NVIDIA AlpaSim 进行实时闭环交互。</li>
+<li>实现了高效的实时渲染能力，单摄像头版本的 2B 模型可在单张 GB300 GPU 上以 720p 分辨率渲染 68 FPS 的视频，四摄像头版本可在 16 张 GB300 GPU 上达到 105 FPS。</li>
+<li>展示了 OmniDreams 内部表示的下游价值，通过在其基础上微调策略模型，在 PAI 自动驾驶数据集上将碰撞率从 6.9% 降低至 4.2%，且参数量仅为对比模型 Alpamayo 1.5 的五分之一。</li>
+<li>验证了世界 - 动作模型（WAMs）在自动驾驶领域可以提供优于视觉 - 语言 - 动作模型（VLAs）的解决方案，特别是在处理动态天气、变形物体及复杂代理行为方面。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2606.09803" data-arxiv-id="2606.09803" data-status="ready">
+<h1>[2606.09803] Echo-Memory: A Controlled Study of Memory in Action World Models</h1>
+<p><a href="https://arxiv.org/abs/2606.09803" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文通过控制变量法，在固定视频扩散 - Transformer 骨干网络及评估流程下，系统对比了四种不同记忆表示方法在动作世界模型中的表现，揭示了存储机制与读取机制对长程一致性的独立影响。</p>
+<h2>解决的问题</h2>
+<p>现有动作世界模型在生成受控世界推演时，常出现相机回到起始姿态但场景已静默变化、显著物体被替换或上下文在块边界丢失等记忆失效问题，且现有研究因混合了骨干网络、训练配方及评估协议等变量，难以区分是记忆机制本身的问题还是其他系统变更带来的增益。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种受控的、以视觉为中心的研究框架，通过固定视频扩散 - Transformer 骨干网络、数据接口、相机动作编码、采样器及评估流程，仅改变记忆表示形式，从而将记忆设计转化为一个通用的接口问题。</li>
+<li>建立了包含三个分支的评估体系（真实重放、域内闭环、开放域返回），以分离存储与读取过程，并证明仅靠重放指标（如 PSNR）不足以衡量开放域下的记忆质量。</li>
+<li>发现原始上下文是强大的容量基线，但紧凑记忆并不自动等同于语义记忆，空间记忆在重放任务上表现尚可但在开放域返回任务上较弱。</li>
+<li>证实读取机制与存储机制同等重要，存储令牌不足以保证生成器在返回时刻能利用它们，专门的读取变体揭示了这一差异。</li>
+<li>指出结构化循环（如块状状态空间记忆）是目前最强的开放域偏差来源，其开放域 VLM 得分高达 69.00，尽管其重放 PSNR 较低，这说明了重放指标在评估记忆时的局限性。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2606.11187" data-arxiv-id="2606.11187" data-status="ready">
+<h1>[2606.11187] Next Forcing: Causal World Modeling with Multi-Chunk Prediction</h1>
+<p><a href="https://arxiv.org/abs/2606.11187" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>Next Forcing 提出了一种多块预测（MCP）框架，通过辅助模块在多个未来时间步上同时预测视频块并构建因果链，以解决自回归视频世界模型中因局部监督导致的“近视”问题，从而实现更高效的因果世界建模。</p>
+<h2>解决的问题</h2>
+<p>现有的世界动作模型（WAMs）主要采用教师强制的下一块去噪训练目标，这本质上是一个局部任务，容易让模型利用相邻视频块视觉相似性学习“近恒等映射”的捷径（appearance shortcut），导致模型难以捕捉长程时间演化动力学，且在高分帧率下收敛更慢、最终精度更低。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了 Next Forcing 框架，通过引入辅助的多块预测（MCP）模块，将局部单块预测目标转化为长程多块预测目标，迫使模型学习潜在的动力学而非依赖外观捷径。</li>
+<li>在 RoboTwin 基准测试上取得了新的最先进结果（Clean/Random 准确率分别为 94.1%/93.5%），并在 50 fps 下实现了 2.3 倍的训练收敛加速和更高的最终精度。</li>
+<li>设计了可保留至推理阶段的 MCP 模块，使其能够并行预测下一个视频块，从而实现了 2 倍的推理加速。</li>
+<li>提供了系统性的消融实验，验证了将多块预测从离散令牌迁移到连续视频潜变量所需的关键设计选择，包括时间步偏移（timestep shift）、多层特征融合以及因果 MCP 链。</li>
+<li>证明了该方法不仅适用于机器人特定数据，在通用视频预训练任务（3.5M 内部视频片段）上也能显著降低 FVD 超过 50%，并在 PhyWorld 基准上取得实质性增益。</li>
+<li>表明 Next Forcing 与现有的上下文构建和噪声调度类的 forcing 方法正交，可以与其他方法组合使用，为自回归视频生成提供了新的训练目标研究方向。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2606.13672" data-arxiv-id="2606.13672" data-status="ready">
+<h1>[2606.13672] WEAVER, Better, Faster, Longer: An Effective World Model for Robotic Manipulation</h1>
+<p><a href="https://arxiv.org/abs/2606.13672" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>WEAVER 是一种针对机器人操作任务设计的世界模型架构，通过融合扩散/流匹配、预训练编码器、奖励预测头及多视图生成等关键技术，同时实现了高保真度、长视界一致性和高效生成，从而在策略评估、改进和测试时规划中达到最先进性能。</p>
+<h2>解决的问题</h2>
+<p>现有的机器人世界模型难以同时满足高保真度、长视界一致性和高效生成这三个核心需求，导致无法有效支持策略评估、改进及实时规划，特别是在处理机器人操作的多视图场景和遮挡推理时，往往以牺牲效率为代价。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出 WEAVER 架构，首次实现了高保真度、长视界一致性和高效生成三者的统一，解决了现有模型无法同时满足这些核心需求的痛点。</li>
+<li>从视频生成社区引入扩散强制和流匹配技术，并结合预训练编码器，以在保持长视界生成的同时实现快速推理和分布外鲁棒性。</li>
+<li>借鉴潜在世界模型和 JEPA 方法，采用奖励预测头进行高效评估，并将未来潜在预测作为主要训练目标，替代图像重建。</li>
+<li>针对机器人操作复杂性，采用多视图生成和记忆架构，能够处理多视角场景并推断被遮挡物体，确保预测世界状态的高保真度。</li>
+<li>在五个真实硬件操作任务上验证了 WEAVER 的有效性，展示了与真实世界成功率的高度相关性（ρ=0.870），并将策略改进成功率提升了 38%。</li>
+<li>在测试时规划任务中，WEAVER 的速度比最先进模型 Ctrl-World 快 5-10 倍，显著降低了计算挑战并满足了实时性要求。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2606.16993" data-arxiv-id="2606.16993" data-status="ready">
+<h1>[2606.16993] DreamX-World 1.0: A General-Purpose Interactive World Model</h1>
+<p><a href="https://arxiv.org/abs/2606.16993" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>DreamX-World 1.0 是一个通用的交互式世界模型，旨在解决跨视觉域（照片级真实、游戏风格、风格化）的长视界交互模拟问题，通过结合合成、游戏和真实世界数据，并引入高效的相机控制、非局部场景记忆、事件指令微调及流式生成技术来实现。</p>
+<h2>解决的问题</h2>
+<p>片段未提供明确的单一问题陈述，但指出了交互式世界模型面临的三大耦合技术挑战：1) 相机控制需在不同尺度和运动分布的场景中实现一致的视角变化；2) 交互式生成需保持超出局部上下文窗口的场景内容一致性，避免自回归生成导致的漂移；3) 连续交互对延迟有严格要求，需在减少扩散步数以提升吞吐量的同时保持视觉质量和稳定性。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了 DreamX-World 1.0 架构，该模型基于 Wan2.2 初始化，通过渐进式训练管线依次引入相机条件化、非局部场景记忆、事件交互及自回归长视频生成，最后进行后蒸馏对齐。</li>
+<li>构建了混合数据引擎，结合 Unreal Engine 轨迹、游戏录制和真实世界视频，并通过几何过滤和归一化，为不同视觉域提供了统一的训练表示。</li>
+<li>设计了 E-PRoPE 方法，作为 PRoPE 的高效变体，通过在空间缩减的 token 上计算投影注意力，在保持轨迹跟随性能的同时将推理延迟降低了约 30%。</li>
+<li>开发了基于相机几何的检索机制和残差回收策略，以解决先前观察到的内容在离开局部上下文窗口后发生变化的问题，增强了非局部视觉证据的利用和鲁棒性。</li>
+<li>实现了从双向视频模型到少步自回归生成器的转换，利用因果强制、DMD 和长学生卷出（long student rollouts）技术，并通过强化学习优化蒸馏模型，以平衡视觉多样性、运动质量和相机可控性。</li>
+<li>通过混合精度 DiT 执行、残差复用、修剪后的 VAE 解码及异步流水线并行，实现了在八张 RTX 5090 GPU 上高达 16 FPS 的流式生成能力。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2606.24597" data-arxiv-id="2606.24597" data-status="ready">
+<h1>[2606.24597] Qwen-AgentWorld: Language World Models for General Agents</h1>
+<p><a href="https://arxiv.org/abs/2606.24597" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>Qwen-AgentWorld 是首个通过长链式思维推理模拟七个代理环境（MCP、搜索、终端、软件工程、Android、Web 和 OS）的语言世界模型，旨在解决大语言模型代理缺乏通用世界模型的问题。</p>
+<h2>解决的问题</h2>
+<p>当前大语言模型代理的研究几乎完全集中在策略（policy）侧，而忽略了代理 - 环境交互循环中至关重要的世界模型（world model）组件，导致缺乏能够进行通用代理所需的环境模拟能力。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了语言世界模型（LWM）作为代理环境模拟的基础模型，并开发了 Qwen-AgentWorld 来模拟七个不同的代理环境。</li>
+<li>构建了 AgentWorldBench 基准测试，涵盖七个领域，利用前沿模型的真实环境交互数据进行完全分布外的评估，并通过开放式评分和基于规则的验证器评估模拟质量。</li>
+<li>展示了 Qwen-AgentWorld 作为环境模拟器在代理强化学习中的优势，能够在 OpenClaw 环境中进行 4k 次模拟并在多个基准测试中取得显著提升。</li>
+<li>证明了 LWM 训练可作为下游代理强化学习的有效预热或辅助阶段，帮助代理熟悉环境动态和下一状态预测，从而提升整体性能。</li>
+<li>设计了包含 CPT 注入、SFT 激活和混合奖励 RL 的三阶段训练流程，以增强世界模型的模拟保真度。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2606.28128" data-arxiv-id="2606.28128" data-status="ready">
+<h1>[2606.28128] PhysisForcing: Physics Reinforced World Simulator for Robotic Manipulation</h1>
+<p><a href="https://arxiv.org/abs/2606.28128" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>PhysisForcing 提出了一种区域聚焦的分层物理对齐框架，通过识别机器人操作中的关键区域并应用像素级和语义级互补损失，解决了现有视频生成模型在接触丰富操作任务中物理合理性不足的问题。</p>
+<h2>解决的问题</h2>
+<p>现有视频生成模型在接触丰富的机器人操作任务中，往往产生局部动态错误（如轨迹不连续、物体穿透）和全局关系错误（如被推物体静止、被抓物体漂移），且现有方法缺乏统一机制来同时对齐局部动态和全局交互结果。</p>
+<h2>创新点</h2>
+<ul>
+<li>将机器人视频生成中的物理合理性问题形式化为一个分层且区域聚焦的对齐问题。</li>
+<li>提出了 PhysisForcing 框架，该框架在训练时将物理监督聚焦于交互关键区域，并分别在像素级运动（通过点跟踪监督 DiT 特征轨迹）和语义级区域关系（通过冻结视频理解编码器对齐 token 相似度矩阵）上进行对齐。</li>
+<li>在 Wan2.2-I2V-A14B 和 Cosmos3-Nano 等不同规模和家族的扩散视频骨干网络上，于 R-Bench、PAI-Bench 和 EZS-Bench 上展示了 PhysisForcing 的一致性能提升，并通过消融实验验证了分层物理监督的重要性。</li>
+<li>证明了 PhysisForcing 对具身决策的益处，包括在 WorldArena 协议下将闭环成功率从 16.0% 提升至 24.0%，以及作为世界动作模型的骨干时提升下游策略成功率。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2606.30534" data-arxiv-id="2606.30534" data-status="ready">
+<h1>[2606.30534] Orca: The World is in Your Mind</h1>
+<p><a href="https://arxiv.org/abs/2606.30534" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>Orca 是一个世界学习者，旨在通过无意识学习和有意识学习两种范式构建世界潜在空间，以支持多模态下游任务。</p>
+<h2>解决的问题</h2>
+<p>片段未提供</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了 Orca，一种从多模态世界信号中学习世界潜在空间的模型，该潜在空间可作为多模态下游读出的通用接口。</li>
+<li>设计了两种互补的学习范式：无意识学习用于从连续视频中捕捉自然的密集状态转换，而有意识学习利用文本约束学习有意义的稀疏状态转换。</li>
+<li>构建了一个大规模数据集以支持 Orca 的学习范式，包含 12.5 万小时的视频和 1.6 亿个事件标注，涵盖以自我为中心的交互、以他人为中心的操作、无动作机器人执行及事件级转换。</li>
+<li>通过实验证明 Orca 学习了有效的世界潜在空间，展示了所提范式的可扩展性，并表明更强的世界建模能带来更强的下游能力。</li>
+<li>在文本生成、现实世界交互式图像预测和具身动作生成任务中，Orca 在相当规模下优于专用基线模型。</li>
+<li>提供了对其当前局限性的详细分析，旨在为社区未来的可持续发展提供见解和灵感。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2606.32026" data-arxiv-id="2606.32026" data-status="ready">
+<h1>[2606.32026] AdaJEPA: An Adaptive Latent World Model</h1>
+<p><a href="https://arxiv.org/abs/2606.32026" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>AdaJEPA 提出了一种在 MPC 闭环中运行的测试时自适应框架，利用执行动作后的观测作为自监督信号来持续更新世界模型，以解决冻结模型在测试时分布偏移下预测不准确导致规划失败的问题。</p>
+<h2>解决的问题</h2>
+<p>片段未提供</p>
+<h2>创新点</h2>
+<ul>
+<li>片段未提供</li>
+<li>片段未提供</li>
+<li>片段未提供</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2606.31734" data-arxiv-id="2606.31734" data-status="ready">
+<h1>[2606.31734] MemLearner: Learning to Query Context memory for Video World Models</h1>
+<p><a href="https://arxiv.org/abs/2606.31734" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>MemLearner 提出了一种基于学习自适应查询上下文记忆的方法，利用查询令牌（Q tokens）从上下文令牌中提取有效信息，以解决视频世界模型在长序列中场景一致性的问题。</p>
+<h2>解决的问题</h2>
+<p>现有视频世界模型在长持续时间下面临场景一致性的挑战，主要源于有限的上下文窗口和基于规则（如 FOV 重叠或点云匹配）的上下文检索方法无法有效处理遮挡和动态物体。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出 MemLearner，一种基于学习的自适应上下文查询方法，利用查询令牌从上下文令牌中提取有效记忆，从而增强视频世界模型的场景一致性和泛化能力。</li>
+<li>收集了一个基于 Unreal Engine 定制的渲染数据集，该数据集包含遮挡和动态物体，以支持需要精确相机姿态标注的训练需求。</li>
+<li>提出了一种多数据集训练策略，为不同类型的视频数据（渲染视频和真实视频）分配专用的相机编码器，从而在不相互干扰的情况下利用多样化数据源的优势。</li>
+<li>通过端到端训练使网络能够自适应地从历史帧中查询信息，替代了传统的手动设计检索规则，解决了复杂场景中遮挡和动态物体的处理难题。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2607.00678" data-arxiv-id="2607.00678" data-status="ready">
+<h1>[2607.00678] ABot-M0.5: Unified Mobility-and-Manipulation World Action Model</h1>
+<p><a href="https://arxiv.org/abs/2607.00678" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>ABot-M0.5 是一个统一的移动操作世界动作模型，通过帧级潜在动作、双层级混合 Transformer 架构和 Dream Forcing 训练策略，解决了现有方法在时间粒度、动作结构和训练 - 推理一致性上的结构性不匹配问题。</p>
+<h2>解决的问题</h2>
+<p>片段未提供关于具体实验数据缺失或特定场景失败等问题的明确描述，仅指出当前 embodied learning paradigms 在移动操作任务中普遍存在反应式 VLA 策略缺乏显式世界建模和长程记忆，以及新兴世界模型方法在结构上无法匹配移动操作需求的问题。</p>
+<h2>创新点</h2>
+<ul>
+<li>识别出限制现有世界动作模型（WAMs）在移动操作中表现的三个核心结构性瓶颈：粗粒度视频预测与细粒度控制之间的时间粒度不匹配、异构移动与操作行为之间的动作结构不匹配，以及训练与自回归推理之间的上下文不匹配。</li>
+<li>提出 ABot-M0.5 新架构，引入帧级潜在动作将视频到动作的映射分解为视频到潜在动作再到动作的管道，以捕捉局部视觉状态转换并实现细粒度运动抽象。</li>
+<li>采用双层级混合 Transformer 设计，解耦模态特定表示和异构动作子空间，使基础运动和手臂操作能够在统一系统内被分别建模。</li>
+<li>实施 Dream Forcing 训练策略，让逆动力学学习暴露于自生成的视频中，从而将训练时的条件上下文与推理时对齐，提高对预测误差的鲁棒性。</li>
+<li>在具有挑战性的移动操作和操作基准上展示了强大的性能，特别是在长程任务成功率和细粒度操作精度方面取得了显著提升，并通过广泛的消融实验验证了各组件的贡献。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2607.02642" data-arxiv-id="2607.02642" data-status="ready">
+<h1>[2607.02642] GigaWorld-1: A Roadmap to Build World Models for Robot Policy Evaluation</h1>
+<p><a href="https://arxiv.org/abs/2607.02642" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 GigaWorld-1 作为机器人策略评估的世界模型路线图，通过构建 WMBench 基准和大规模实证研究，揭示了动作保真度、预训练知识保留及架构设计对评估可靠性的关键影响。</p>
+<h2>解决的问题</h2>
+<p>机器人策略模型的迭代改进严重受限于评估瓶颈，因为验证策略通常需要耗时且依赖人工监控的物理机器人重复执行，而现有仿真方法受限于 Sim-to-Real 差距和数字孪生构建的高昂开销。</p>
+<h2>创新点</h2>
+<ul>
+<li>将世界模型作为策略评估器确立为一类核心研究问题，并识别出决定世界模型能否准确预测策略质量的关键因素。</li>
+<li>引入 WMBench 基准，该基准包含人类遥操作轨迹和机器人策略执行数据，覆盖八类任务家族及超过 324,000 次评估执行。</li>
+<li>提供了一项系统性的实证研究，展示了评估器可靠性如何受指标设计、预训练与数据组成以及架构选择（如动作表示、记忆和基于强化学习的后训练）的影响。</li>
+<li>总结发现并制定了实用的设计地图，实例化为 GigaWorld-1，该模型利用超过 12,000 小时的数据训练，在核心评估器对齐指标上比竞争性基线提升了 14.9%。</li>
+<li>为了促进后续关于具身基础模型可扩展评估管道的研究，完全开源了代码、预训练模型权重、 curated 数据集和辅助工具包。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2607.04988" data-arxiv-id="2607.04988" data-status="ready">
+<h1>[2607.04988] InternVLA-A1.5: Unifying Understanding, Latent Foresight, and Action for Compositional Generalization</h1>
+<p><a href="https://arxiv.org/abs/2607.04988" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>InternVLA-A1.5 通过构建基于原生视觉语言模型（VLM）的策略并引入潜变量前瞻（latent foresight）机制，统一了语义理解、动态预测与动作控制，旨在解决现有统一模型中语义漂移、异构目标干扰及未利用预训练视频生成先验的问题。</p>
+<h2>解决的问题</h2>
+<p>片段未提供</p>
+<h2>创新点</h2>
+<ul>
+<li>构建基于原生视觉语言模型（Qwen Team, 2026）的策略，并在策略学习过程中持续进行 VQA、子任务预测和离散动作标记训练，以保留并增强底层 VLM 的语义和指令遵循能力。</li>
+<li>将未来预测重构为潜变量查询问题，利用少量潜变量前瞻查询从共享多模态上下文中读取紧凑的潜变量代码，作为冻结预训练视频生成模型的输入条件。</li>
+<li>通过冻结的生成器反向传播视频预测损失至前瞻查询，使策略继承预训练模型中的时空动态先验，同时避免像素级生成的计算成本，并将前瞻目标与动作学习统一为一致的训练框架。</li>
+<li>在部署时仅使用动作预测而不调用生成器，从而保持策略的实时推理速度，同时生成分支仅用于训练和可视化阶段。</li>
+<li>在六个仿真基准测试（包括 LIBERO、RoboTwin 2.0、EBench 等）及零样本泛化测试中取得最佳结果，并在真实世界任务中展现出最强的组合泛化能力和长视界执行效果。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2607.06559" data-arxiv-id="2607.06559" data-status="ready">
+<h1>[2607.06559] RynnWorld-4D: 4D Embodied World Models for Robotic Manipulation</h1>
+<p><a href="https://arxiv.org/abs/2607.06559" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>RynnWorld-4D 提出了一种轻量级投影 4D 表示（RGB-DF），通过协同生成 RGB、深度和光流视频，解决了传统 2D 视频模型缺乏几何感知和物理一致性的问题，并构建了大规模数据集与策略模型以支持机器人操作。</p>
+<h2>解决的问题</h2>
+<p>现有生成式视频模型受限于 2D 投影性质，导致关键空间关系丢失，无法进行精确的 6-DoF 姿态估计和深度感知交互，且常因缺乏几何基础而出现物体尺度波动和形状形变等时间不一致性。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种协同生成 RGB、深度和光流的轻量级投影 4D 表示（RGB-DF），该表示具有自然的 3D 场景流解读能力，在使几何和运动显式化的同时兼容大规模视频扩散模型先验。</li>
+<li>开发了 RynnWorld-4D，这是一个三分支 4D 世界模型，通过共享交叉注意力键值和多模态联合交叉注意力模块，在单一去噪循环中协同生成物理一致的 RGB-DF 序列。</li>
+<li>构建了 Rynn4DDataset 1.0，这是一个包含超过 2.54 亿视频帧的大规模混合数据集，源自人类活动数据和机器人操作数据，并富含高质量的深度和光流伪标注。</li>
+<li>提出了 RynnWorld-4D-Policy，这是一个逆动力学头，利用 RynnWorld-4D 的内部 4D 表示直接提取机器人动作，通过单次前向传递绕过迭代去噪瓶颈，从而实现高频闭环控制。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2607.06558" data-arxiv-id="2607.06558" data-status="ready">
+<h1>[2607.06558] RynnWorld-Teleop: An Action-Conditioned World Model for Digital Teleoperation</h1>
+<p><a href="https://arxiv.org/abs/2607.06558" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>RynnWorld-Teleop 提出了一种以动作为条件的世界模型，通过操作员的手部姿态流生成机器人视角视频，实现了无需物理机器人即可进行数字遥操作并生成高质量训练数据的新范式。</p>
+<h2>解决的问题</h2>
+<p>现有的机器人自主系统受限于大规模数据稀缺，传统遥操作因依赖固定实验室环境和繁琐的重置流程，无法捕捉长尾分布的交互，难以实现非结构化环境下的鲁棒泛化。</p>
+<h2>创新点</h2>
+<ul>
+<li>形式化了数字遥操作作为机器人数据生成的新范式，明确了其实用化必须满足的三个核心要求：以机器人为中心、以动作为依据以及实时性。</li>
+<li>提出了 RynnWorld-Teleop 系统，这是一个满足上述所有要求的以动作为条件的自我中心世界模型，集成了深度感知骨骼表示、渐进式跨域训练和流式自回归蒸馏技术，实现了 40+ FPS 的实时交互。</li>
+<li>将 RynnWorld-Teleop 扩展为完整的数字遥操作系统，能够基于单张参考图像实例化任意操作场景，并通过重定位、骨骼条件合成和分块重锚定生成无界的操作条件化轨迹。</li>
+<li>展示了仅使用该系统生成的数据进行策略训练即可实现零样本 Sim2Real 迁移，并证明用数字遥操作数据增强真实演示能显著提升任务成功率，提供了数字遥操作作为高保真数据引擎的首个实证证据。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2607.08436" data-arxiv-id="2607.08436" data-status="ready">
+<h1>[2607.08436] EgoWAM: World Action Models Beyond Pixels with In-the-Wild Egocentric Human Data</h1>
+<p><a href="https://arxiv.org/abs/2607.08436" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 EgoWAM 框架，通过解耦监督信号并研究不同的世界表示（如 DINO 特征和 3D 运动流），证明了基于世界动作模型（WAM）的协同训练能更有效地利用大规模野外人类数据实现机器人操作泛化。</p>
+<h2>解决的问题</h2>
+<p>片段未提供</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了 EgoWAM 框架，该框架基于异构预训练 Transformer 骨干网络，配备可互换的世界模型头，支持在相同动作监督和数据混合下对世界表示进行受控比较。</li>
+<li>提供了证据表明 WAM 协同训练能解锁人类数据规模，证明在动作监督饱和的情况下，未来动态监督是缺失的关键通道，能比行为克隆（BC）协同训练更一致地实现大规模自然自中心人类数据的扩展和迁移。</li>
+<li>确立了世界表示作为下一个关键研究轴心，发现 DINO 特征和 3D 运动流均显著优于像素 VAE 基线，其中 DINO 的语义先验在物体和场景泛化上最强，而 3D 流的几何接地在空间泛化上最强且总体得分最高。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2607.07534" data-arxiv-id="2607.07534" data-status="ready">
+<h1>[2607.07534] Infinite Worlds with Versatile Interactions</h1>
+<p><a href="https://arxiv.org/abs/2607.07534" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种具有无限持久性和高保真交互能力的交互式世界模型，通过改进因果视频生成模型的稳定性并引入代理架构，实现了无需脚本驱动的开放世界生成。</p>
+<h2>解决的问题</h2>
+<p>现有交互式世界模型面临两个主要限制：一是长视界稳定性差，由于帧间误差累积导致纹理模糊和几何形变，无法维持长时间生成；二是高保真交互计算成本高昂，现有系统通常通过牺牲分辨率、流畅度或控制能力来换取实时性。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种开放且最先进的因果世界模型，其关键优势在于耐用性，能够保持领先的视觉质量并强烈抵抗漂移，为社区提供了可用的骨干模型和强大的蒸馏教师。</li>
+<li>开发了一种实时蒸馏模型，能够在 720p 分辨率和 60 fps 帧率下渲染无界且无漂移的交互式世界，并通过超过一小时的连续生成且无质量损失得到了验证。</li>
+<li>构建了一个丰富的可控动作空间，超越了单纯的导航，涵盖了战斗、射箭、施法和射击等角色动作，以及按需即时改变环境（如召唤雨雪天气）。</li>
+<li>设计了一套飞行员和导演代理架构（agentic harness），用于编排模型以创造生动的交互式体验，使系统具备自我维持、目标导向和开放结束的特性。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2607.06988" data-arxiv-id="2607.06988" data-status="ready">
+<h1>[2607.06988] WAM-TTT: Steering World-Action Models by Watching Human Play at Test Time</h1>
+<p><a href="https://arxiv.org/abs/2607.06988" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>WAM-TTT 是一种测试时训练框架，通过视频预测将人类演示作为部署时记忆融入冻结的世界 - 动作模型（WAM），从而无需机器人动作或额外标注即可高效引导模型适应新任务。</p>
+<h2>解决的问题</h2>
+<p>片段未提供</p>
+<h2>创新点</h2>
+<ul>
+<li>将基于人类视频的世界动作模型引导问题形式化为测试时训练问题，实现了无需机器人动作即可从原始人类演示中进行部署时适应。</li>
+<li>提出了 WAM-TTT，这是一种即插即用的测试时训练记忆机制，通过自监督视频预测将人类视频吸收进冻结的 WAM，并结合人 - 机器人对齐目标使学习到的记忆对机器人控制有效。</li>
+<li>证明了 WAM-TTT 能够高效且可复用地从人类演示中进行引导，在避免额外人类侧标注和全模型微调的同时，优于基于上下文学习的视频条件基线。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2607.08639" data-arxiv-id="2607.08639" data-status="ready">
+<h1>[2607.08639] Native Video-Action Pretraining for Generalizable Robot Control</h1>
+<p><a href="https://arxiv.org/abs/2607.08639" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 LingBot-VA 2.0，通过原生视频动作预训练（包含语义视觉动作分词器和因果扩散 Transformer）解决现有模型在表示对齐、推理速度和预训练信号扩展方面的局限，实现了基于网络规模数据的通用、快速且精确的机器人控制。</p>
+<h2>解决的问题</h2>
+<p>片段明确指出当前视频动作模型存在三个具体局限性：1. 表示优化侧重于外观而非动力学，导致世界状态与动作空间对齐不佳；2. 推理速度过慢，无法满足闭环控制的高频需求；3. 预训练信号无法向控制任务扩展，导致控制知识仍依赖昂贵的机器人数据。</p>
+<h2>创新点</h2>
+<ul>
+<li>原生视频动作预训练：预训练完整的视频动作堆栈（包括语义视觉动作分词器和因果 DiT），利用可扩展的自监督信号而非适配通用视频生成组件。</li>
+<li>共享语义视频动作表示：将世界状态和潜在动作置于单一语义潜在空间中，该空间锚定于语言对齐的视觉基础模型，以加强视觉 - 语言 - 动作的对齐。</li>
+<li>通用、快速且精确的机器人控制：支持少样本和零样本泛化，并通过稀疏 MoE 推理、少步蒸馏、前瞻推理（Foresight Reasoning）和量化部署实现实时闭环执行。</li>
+<li>闭环重校准与分层规划：利用策略自身的向前动力学步骤对预测进行实时重校准，并结合分层 VLM 规划器以维持细粒度、长视界的操作。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2607.11643" data-arxiv-id="2607.11643" data-status="ready">
+<h1>[2607.11643] Xiaomi-Robotics-U0: Unified Embodied Synthesis with World Foundation Model</h1>
+<p><a href="https://arxiv.org/abs/2607.11643" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>Xiaomi-Robotics-U0 是一个统一的具身合成模型，它在一个自回归框架内无缝集成了基础图像生成、图像编辑、具身场景生成、具身转移和具身视频生成，通过统一的持续训练范式将基础世界模型的泛化能力有效转移至具身生成任务。</p>
+<h2>解决的问题</h2>
+<p>直接将现有的基础图像或视频生成模型应用于具身场景会导致几何不一致、机器人状态不合理以及与机器人控制兼容性差的问题，而现有的具身世界模型通过仅在机器人特定数据集上进行后训练，削弱了基础模型的泛化能力并限制了生成的多样性、可控性和可扩展性。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了 Xiaomi-Robotics-U0，这是首个在单一自回归框架内无缝整合基础图像生成、图像编辑、具身场景生成、具身转移和具身视频生成的统一具身合成模型。</li>
+<li>通过联合优化通用域和具身生成任务，在统一的持续训练范式下，有效将基础世界模型的泛化能力转移至具身生成，同时保留了其原有的视觉生成能力。</li>
+<li>提出了首个多视图具身生成统一框架（包括具身场景生成和可控具身转移），通过大规模文本到图像和图像编辑数据的联合训练，实现了优于 GPT-Image-2.0 的多视图一致性、细粒度可控性和指令遵循能力。</li>
+<li>引入了一种结构化控制公式，将工作区、背景、无关前景物体、目标物体和光照解耦为独立的控制维度，从而在保持几何一致性和交互动态的同时实现可扩展的具身视频增强。</li>
+<li>将具身生成从静态场景合成扩展到顺序具身世界建模，通过交错子任务 - 子目标学习和多帧率具身视频生成，在 World Arena 基准上实现了最先进性能并展示了强大的零样本多视图具身视频生成能力。</li>
+<li>通过使合成的具身场景能够直接展开为时间连贯的操作视频，将基础世界模型转化为可扩展的具身数据引擎，为下游策略学习提供了丰富的合成轨迹。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2607.13017" data-arxiv-id="2607.13017" data-status="ready">
+<h1>[2607.13017] FlowWAM: Optical Flow as a Unified Action Representation for World Action Models</h1>
+<p><a href="https://arxiv.org/abs/2607.13017" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>FlowWAM 提出了一种基于光流的统一动作表示方法，将其作为世界动作模型（WAMs）的原生视频模态，通过双流扩散框架联合实现动作预测与世界建模。</p>
+<h2>解决的问题</h2>
+<p>现有世界动作模型（WAMs）的动作表示存在局限性：数值动作令牌难以跨机器人迁移，学习到的潜在动作过于抽象且缺乏密集的空间运动线索，而图像空间动作（如动作射线图或掩码）主要提供静态空间线索，无法捕捉跨帧的密集运动演化，导致难以在保持视频原生格式的同时保留控制所需的密集跨帧运动线索。</p>
+<h2>创新点</h2>
+<ul>
+<li>首次将光学流引入作为世界动作模型（WAMs）的统一动作表示，提供了一种密集的视频原生运动信号，该信号可从无动作标签的自中心视频中预测、条件化及学习。</li>
+<li>提出了 FlowWAM，这是一种双流扩散框架，利用共享的预训练视频生成器联合建模 RGB 和光流视频，仅需轻量级适配器，从而将动作预测和世界建模统一为一致的视频到视频生成任务。</li>
+<li>在 RoboTwin 基准上展示了 FlowWAM 的策略性能，在 Clean 和 Random 任务中分别取得了 92.94% 和 92.14% 的成功率，优于 VLA 和 WAM 基线。</li>
+<li>在 WorldArena 基准上展示了 FlowWAM 的世界模型性能，取得了 63.71 的最优 EWMScore，并在基于动作的条件轨迹建模方面取得了显著增益。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2607.13960" data-arxiv-id="2607.13960" data-status="ready">
+<h1>[2607.13960] GigaWorld-Policy-0.5: A Faster and Stronger WAM Empowered by AutoResearch</h1>
+<p><a href="https://arxiv.org/abs/2607.13960" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>GigaWorld-Policy-0.5 是一种结合了混合 Transformer 架构、混合训练策略及基于 AutoResearch 的自动化实验流程的高效世界动作模型（WAM），旨在在保留密集监督带来的泛化能力的同时，通过动作中心解码实现低延迟推理。</p>
+<h2>解决的问题</h2>
+<p>现有世界动作模型（WAM）在推理阶段通常需调用与训练相同的联合建模过程（如显式生成未来视频或迭代去噪），导致计算开销巨大且限制了实时闭环控制，同时未来帧的预测误差可能在长视界下累积。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了 GigaWorld-Policy-0.5，继承并优化了 GigaWorld-Policy 的核心公式，通过动作中心因果令牌结构将动作预测与未来视频预测解耦，确保推理时仅需动作解码即可跳过昂贵的未来视频生成。</li>
+<li>采用了混合 Transformer（MoT）架构，将视觉动力学建模与动作生成分离至专用专家，虽然增加了总参数量，但实现了无需计算视觉动力学的纯动作推理路径，在 NVIDIA RTX 4090 上实现了约 85ms 的低延迟。</li>
+<li>在预训练阶段引入了混合训练策略，结合动作条件世界建模（AC-WM）与世界动作模型训练，使模型能同时捕捉通用场景演化与动作诱导的未来变化，从而增强动作建模能力。</li>
+<li>应用了基于代理的 AutoResearch 管道来系统化实验搜索过程，自动执行试点运行、监控指标并迭代优化配置，从而以较少的人工干预导出了可靠的训练配方。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2607.15065" data-arxiv-id="2607.15065" data-status="ready">
+<h1>[2607.15065] DriftWorld: Fast World Modeling through Drifting</h1>
+<p><a href="https://arxiv.org/abs/2607.15065" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>DriftWorld 是一种基于漂移生成模型的单步动作条件世界模型，通过单次前向传播生成高质量未来帧，解决了扩散模型推理速度慢于实时规划需求的瓶颈。</p>
+<h2>解决的问题</h2>
+<p>现有的预测世界模型大多基于扩散模型，依赖迭代的多步去噪过程，导致推理速度过慢（如生成一次 rollout 需 3 秒以上），无法满足机器人实时规划所需的数百次模拟需求。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出 DriftWorld，这是一种单步动作条件世界模型，能在单次前向传播中生成未来帧，平均速度比扩散基线快 17 倍。</li>
+<li>首次将漂移生成模型适配到条件视频预测任务，引入了强调动作跟随的漂移场、利用 DINOv2/v3 的漂移特征空间损失以及逐帧动作条件的 U-Net 架构。</li>
+<li>在 Bridge-V2、RT-1、Language Table、Push-T 和 Robomimic 等五个基准上验证了 DriftWorld，其在 SSIM、PSNR、FID 等指标上的 rollout 质量匹配或优于基线。</li>
+<li>证明了 DriftWorld 能显著提升在线控制性能（如 Push-T 任务 IoU 从 0.635 提升至 0.781）并作为高效的离线模拟器用于策略排名（与真实性能的相关系数高达 0.95 以上）。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2607.19343" data-arxiv-id="2607.19343" data-status="ready">
+<h1>[2607.19343] Masked Visual Actions for Unified World Modeling</h1>
+<p><a href="https://arxiv.org/abs/2607.19343" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种名为 Masked Visual Actions 的方法，通过将动作重构为预训练视频模型原生像素空间中的视觉原语，实现了单一预测框架下的前向与逆向机器人世界建模。</p>
+<h2>解决的问题</h2>
+<p>片段未提供</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种名为 Masked Visual Actions 的像素空间控制接口，用于预训练视频模型，并基于来自真实和模拟数据的掩码示例提供高效的适配方案。</li>
+<li>展示了前向和逆向机器人世界建模问题可以转化为同一视频模型中通过揭示场景中不同实体而获得的互补条件预测问题。</li>
+<li>在机器人操作领域的三个应用（策略评估、基于模型的规划和逆向建模）中，于模拟环境和真实世界中验证了该框架的有效性。</li>
+<li>证明了该框架仅需使用微调了最少 15 小时机器人交互数据的单个模型检查点，即可在策略评估中提供与真实世界结果一致的相关性，并在规划任务中带来一致的性能提升。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2607.22535" data-arxiv-id="2607.22535" data-status="ready">
+<h1>[2607.22535] Robot-Factored World Models via Robot Rendering</h1>
+<p><a href="https://arxiv.org/abs/2607.22535" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种基于机器人渲染的视觉世界模型接口，通过将动作序列转化为相机对齐的机器人几何渲染（名义轨迹），实现了机器人动作与场景响应预测的解耦。</p>
+<h2>解决的问题</h2>
+<p>现有机器人视频世界模型通常直接将机器人特定的控制信号作为条件输入，导致模型需要同时学习信号到运动的实现过程以及场景对运动的响应，且这种基于具体机器人实现的信号表示限制了模型的泛化能力。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种部署现实的视觉世界模型接口，该接口将动作序列通过机器人控制器和运动学转化为名义轨迹，并渲染为相机对齐的 URDF 网格 RGB 图像和末端执行器深度，同时结合相机感知的静态 RGB/深度上下文以分离场景外观和视角。</li>
+<li>通过为接口添加末端执行器和场景深度信息，使其具备深度感知能力，从而提供超越 RGB 图像平面重叠的关于接近度、遮挡和潜在接触等几何线索。</li>
+<li>证明了该渲染接口可在不同机器人本体和运动源之间共享，从而支持对未见机器人的本体泛化，并能够从重定向的人类演示中生成基于真实交互的机器人视频。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2607.23783" data-arxiv-id="2607.23783" data-status="ready">
+<h1>[2607.23783] $N_0$-TWAM: Scaling Tactile-Native World-Action Model for Contact-Rich Manipulation</h1>
+<p><a href="https://arxiv.org/abs/2607.23783" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>N0-TWAM 是一种触觉原生世界动作模型，它通过混合 Transformer 架构将触觉作为预测未来的核心模态，而非仅作为输入，从而在富接触操作任务中实现了最先进的性能。</p>
+<h2>解决的问题</h2>
+<p>现有的视觉语言动作（VLA）模型缺乏对交互未来的显式预测能力，而现有的视频世界模型虽然能预测未来但通常仅包含视觉信息，且现有的触觉相关方法要么不预测触觉，要么将触觉处理为侧输入或独立模块，未能实现触觉与视觉在同一目标下联合预测并指导动作。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种触觉原生世界动作模型（N0-TWAM），其混合 Transformer（MoT）主干包含专用的触觉专家，能够在单一共享自注意力机制下与视觉共同预测未来的触觉状态，而非将其作为侧输入。</li>
+<li>设计了双路径预测触觉架构，包含一条作为前瞻性目标的预测触觉流，以及一条用于条件化动作生成的观测触觉流，后者在微调阶段通过 NeoForce 提取力表征。</li>
+<li>开发了一套触觉感知的子任务系统，利用触觉接触事件（如抓取或释放）将长时程演示分割为子任务片段，并在推理阶段根据预测触觉触发子任务切换及观测触觉确认执行阶段。</li>
+<li>在大规模真实机器人数据（涵盖 6 种具身智能体和 450 个任务）上进行预训练，并在模拟环境和真实机器人基准测试中取得了优于现有视觉语言动作模型及视觉世界动作模型的最先进结果。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2607.28243" data-arxiv-id="2607.28243" data-status="ready">
+<h1>[2607.28243] EgoGenesis: Egocentric World-Action Modeling with Online Anchored Projective Memory and Action-3D RoPE</h1>
+<p><a href="https://arxiv.org/abs/2607.28243" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>EgoGenesis 是一种自中心世界 - 动作模型，通过在线锚定投影记忆（OAPM）和动作 -3D 旋转位置编码（A3D-RoPE）生成可控的视频 - 动作对，以解决现有自中心视频生成器在模拟连贯、可控交互时的几何失败模式。</p>
+<h2>解决的问题</h2>
+<p>片段未提供</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了 OAPM（在线锚定投影记忆），这是一种具有在线刷新机制的锚定投影 3D 场景记忆，用于自回归自中心生成，以保持场景持久性。</li>
+<li>提出了 A3D-RoPE（动作 -3D 旋转位置编码），将相机感知的度量骨架和末端执行器几何信息注入到交叉注意力中，以实现可控的动作对齐视频生成。</li>
+<li>展示了使用 EgoGenesis 生成的轨迹增强真实机器人数据，能够提高双臂和单臂操作任务上的分布外（OOD）泛化能力。</li>
+<li>通过在涵盖人手、灵巧手、平行夹爪和机械臂末端执行器的源平衡集合上进行训练，防止了模型对特定场景或末端执行器的过拟合。</li>
+<li>证明了生成的视频 - 动作对可以增强稀缺的具身数据，从而提升下游世界 - 动作模型和操纵策略在真实世界中的泛化性能。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2608.02603" data-arxiv-id="2608.02603" data-status="ready">
+<h1>[2608.02603] WorldExam: Benchmarking World Models from Apparent Appearance to Inherent Reactivity</h1>
+<p><a href="https://arxiv.org/abs/2608.02603" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>WorldExam 是一个分层诊断基准，旨在评估可控视频生成模型从“外观表现”到“内在反应性”的能力，通过区分明确指令的履行与场景条件引发的隐含后果来揭示模型的推理能力。</p>
+<h2>解决的问题</h2>
+<p>现有基准大多仅评估模型对预先指定指令（如布局、轨迹或交互结果）的显式履行情况，而忽视了模型从初始场景状态推断并生成未明确描述但在物理或逻辑上隐含的额外后果（即内在反应性）的能力。</p>
+<h2>创新点</h2>
+<ul>
+<li>将世界模型评估从单纯的外观表现扩展到内在反应性，即评估模型从场景状态推断世界应如何反应并生成合理后果（即使这些后果未出现在输入中）的能力。</li>
+<li>提出了 WorldExam 基准，包含 1,474 个案例和八个任务，支持对相机驱动、动作驱动和语言驱动三种模型范式的统一评估。</li>
+<li>评估了 20 个代表性模型，揭示了不同范式间的能力差异，表明高视觉质量和显式指令履行并不保证内在反应性。</li>
+<li>设计了包含四个诊断层级（视觉质量、控制遵循、空间一致性、世界反应性）和八项具体任务的评估体系，并针对静态场景和动态交互分别设立轨道以避免评估偏差。</li>
+<li>将公开基准数据和评估工具包，以促进视频世界模型社区的系统性评估和持续进步。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2608.07408" data-arxiv-id="2608.07408" data-status="ready">
+<h1>[2608.07408] Addressable Memory for Video World Models</h1>
+<p><a href="https://arxiv.org/abs/2608.07408" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>现有自回归视频世界模型在生成跨度超过训练上下文长度时，因位置编码查询超出训练范围导致注意力检索性能下降，从而无法维持视觉持久性。</p>
+<h2>解决的问题</h2>
+<p>片段未提供</p>
+<h2>创新点</h2>
+<ul>
+<li>片段未提供</li>
+<li>片段未提供</li>
+<li>片段未提供</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2608.13546" data-arxiv-id="2608.13546" data-status="ready">
+<h1>[2608.13546] Alaya-EVOKE: From Linear-Scaling Supervision to Endless World</h1>
+<p><a href="https://arxiv.org/abs/2608.13546" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>Alaya-EVOKE 提出了一种将持久世界状态与交互式生成解耦的框架，通过外部世界状态银行和专为长视界监督设计的教师模型，实现了低成本、长时长的开放世界生成。</p>
+<h2>解决的问题</h2>
+<p>现有的交互式世界模型难以同时满足持久记忆、即时响应和长视界生成的需求，主要受限于随着会话历史增长而增加的推理成本以及蒸馏学生模型在时间视界和条件能力上的局限性。</p>
+<h2>创新点</h2>
+<ul>
+<li>将交互式世界生成形式化为有界递归过程，通过外部相机索引的世界状态银行维护场景几何，使去噪器的上下文和位置范围独立于会话时长。</li>
+<li>重新设计了支持长视界交互监督的教师模型，采用分块稀疏注意力和每块独立文本条件，以高效覆盖长时序视界并暴露长程内容漂移及序列中指令变化。</li>
+<li>利用 30 秒长视界分布匹配目标将这些能力转移至三步无分类器自由引导（CFG-free）的学生模型，实现了具有强长程一致性和响应式中期控制的有界成本开放生成。</li>
+<li>在单张 H200 显卡上实现了仅需三步采样即可生成 1.5 秒视频片段的能力，并展示了连续两小时无中断的相控生成效果。</li>
+<li>在 WBench 上达到了最先进性能，同时在 VBench-2.0 和 VBench-Long 上与多步系统保持竞争力，且无需分类器自由引导。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2608.13489" data-arxiv-id="2608.13489" data-status="ready">
+<h1>[2608.13489] DreamX-Phi 1.0: Action-Conditioned Video World Model for Robotic Manipulation</h1>
+<p><a href="https://arxiv.org/abs/2608.13489" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>DreamX-Phi 1.0 是一种基于 Wan2.2-TI2V-5B 的几何感知动作条件视频世界模型，旨在通过结合 SE(3) 轨迹和图像空间运动提示，实现机器人操作中对物理交互的忠实预测。</p>
+<h2>解决的问题</h2>
+<p>现有视频生成模型虽然外观逼真，但生成的预测结果往往无法忠实反映给定的动作条件，导致机器人运动与物体交互出现偏差，且缺乏对刚体几何结构和操作对象状态的显式建模。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种几何感知的动作表示方法，通过结合结构化的 SE(3) 轨迹和图像空间运动提示，显式编码末端执行器的 3D 运动及其在预测视频中的视觉影响位置。</li>
+<li>提出了操作感知监督机制，通过强调深度结构和物体演化，将学习重点集中在场景几何和操作对象状态上，以鼓励物理连贯的机器人 - 物体交互。</li>
+<li>构建了包含真实和模拟环境的异构训练语料库，整合了以自我为中心的视频和机器人交互数据，并利用 DreamX-Refiner 提升 RoboTwin 数据的分辨率和视觉质量。</li>
+<li>在 WorldArena 1.0 和 2.0 基准测试中进行了广泛评估，结果显示该模型在 WorldArena 2.0 Track 1 排名第一，在 Track 2 并列第二，并在 WorldArena 1.0 Track 1 上取得了 76.88 的离线 EWMScore-P 成绩。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2608.14022" data-arxiv-id="2608.14022" data-status="ready">
+<h1>[2608.14022] ForgeWM: Progressive Causal Training for Few-Step Action-Conditioned Video World Models</h1>
+<p><a href="https://arxiv.org/abs/2608.14022" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>ForgeWM 提出了一种渐进式四阶段框架，旨在将双向动作条件生成器转换为预算专用的少步因果视频世界模型，同时保留帧对齐的离散和连续游戏原生控制。</p>
+<h2>解决的问题</h2>
+<p>片段未提供</p>
+<h2>创新点</h2>
+<ul>
+<li>引入一个四阶段框架，将双向动作条件生成器转换为预算专用的少步因果世界模型。</li>
+<li>在潜在压缩、因果训练和自回归展开过程中，保留了帧对齐的离散和连续游戏原生控制。</li>
+<li>提供了 1 步、2 步和 4 步的操作点，并开发了一种同检查点回放协议，在保留体验轨迹的同时提高了离线质量。</li>
+<li>通过模块化动作接口，在整个训练过程中保持了键盘和鼠标条件的对齐。</li>
+<li>训练了预算专用的 1 步、2 步和 4 步学生模型，提供了不同的质量 - 延迟工作点。</li>
+<li>评估了 ForgeWM 与交互式世界模型基线在其原生操作点上的表现，并隔离了测试时求解器扩展。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2608.15869" data-arxiv-id="2608.15869" data-status="ready">
+<h1>[2608.15869] Beyond Visual CoT: Internalized Visual Thinking for Proactive Video Reasoning</h1>
+<p><a href="https://arxiv.org/abs/2608.15869" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种名为内部化视觉思维（IVT）的后期训练框架，旨在让多模态大语言模型在训练期间学习预测性的世界表征，从而在推理阶段无需显式生成中间图像即可实现高效的主动视频推理。</p>
+<h2>解决的问题</h2>
+<p>现有的视觉思维链（Visual CoT）方法虽然在推理中通过显式生成未来图像提供了直观的视觉前瞻机制，但将思维过程外部化导致了巨大的计算负担和推理延迟，这对于对延迟敏感的主动视频推理任务（如早期事件预测和下一事件预测）尤为不利。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了内部化视觉思维（IVT）框架，该框架通过联合训练模型预测未来帧的潜在嵌入并生成对应的文本预测，将视觉前瞻能力内化为模型内部表征，从而避免了推理时显式生成图像的高昂成本。</li>
+<li>实验表明，基于下一嵌入预测的内部化视觉思维方法在主动视频推理任务上显著优于仅使用文本的后期训练方法，证明了生成能力的价值在于学习预测性表征而非合成高质量图像。</li>
+<li>在匹配基模型、训练数据和评估协议的情况下，IVT 在 6 个基准测试中的 4 个上超越了强大的显式视觉思维链（Visual CoT）方法，表明显式的视觉思维链对于主动视频推理任务并非必要。</li>
+<li>系统分析了影响 IVT 效果的关键设计选择，发现共享语言模型解码器、控制视觉预测与文本生成的数据混合比例、选择合适的预测视界以及引入适当的课程学习是获得性能增益的必要条件。</li>
+<li>确立了训练时间替代方案的原则，即通过编码预测性视觉知识来构建高效的多模态推理器，既保留了视觉世界建模的前瞻优势，又满足了主动推理任务对推理效率的要求。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2608.18077" data-arxiv-id="2608.18077" data-status="ready">
+<h1>[2608.18077] Hydra-0: Action Flow for Generalist World Modeling and Control</h1>
+<p><a href="https://arxiv.org/abs/2608.18077" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>Hydra-0 提出了一种名为“动作流（action flow）”的共享图像平面运动表示，旨在解决现有世界模型因依赖原生机器人命令而无法跨不同机器人本体（embodiments）泛化的问题，从而支持通用的世界建模与控制。</p>
+<h2>解决的问题</h2>
+<p>片段未提供</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了“动作流（action flow）”这一共享的图像平面运动表示，能够同时描述机器人本体运动和任务意图，解决了不同机器人本体间运动表示不一致的问题。</li>
+<li>设计了基于动作流的前向动力学预测模式（kinematically grounded video prediction），通过执行候选电机命令并投影可见轨迹来预测命令后果。</li>
+<li>构建了基于动作流逆模式的“世界动作模型（world action model）”，能够从期望的对象流推断兼容的机器人运动，并通过目标本体读出解码为可执行动作。</li>
+<li>利用成对的真实世界 rollout 数据（包含成功和失败案例）进行训练，实现了跨本体的通用预测模型，并在不同视频生成骨干网络上验证了动作流作为可移植条件接口的有效性。</li>
+<li>展示了显著的量化改进，其最佳配置在机器人运动误差和物体运动误差上分别比动作条件的 Cosmos 2.5 基线降低了 90.40% 和 60.16%。</li>
+<li>验证了该方法的实际效用，包括在变形物体交互上的零样本迁移、对 5 个 RoboLab 策略的无环策略评估（皮尔逊相关系数 r=0.96）以及将人类演示的对象流转换为可执行动作的真实机器人控制。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2608.23383" data-arxiv-id="2608.23383" data-status="ready">
+<h1>[2608.23383] Long-Horizon Audio-Visual Generation for Persistent Stories and Interactive Worlds</h1>
+<p><a href="https://arxiv.org/abs/2608.23383" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>JoyAI-Echo-1.5 是一个包含长视频生成和世界建模两个版本的技术系统，旨在通过跨镜头记忆和几何感知控制突破现有视频模型在长时序连续性和交互稳定性上的局限。</p>
+<h2>解决的问题</h2>
+<p>现有视频模型主要围绕固定时间窗口设计，导致在长形式创作中遗忘角色身份、在自生成历史条件下出现漂移，且难以将异构动作输入转化为一致的运动。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种长视频系统，利用经过语音过滤的语音表示、分离的位置区域以及可组合的文本、图像和记忆条件，实现跨镜头的身份保持。</li>
+<li>建立了一种响应式世界模型，基于校准的度量 6-DoF 轨迹创建了与控制器无关的动作接口，支持在不同数据源、环境和视角下实现精确的相机控制。</li>
+<li>开发了一种专为延续性设计的生成器，结合音频 - 视觉教师强制与短/长视界自梯度强制，使模型能够从自身的生成分布中学习并保持长期生成的稳定性。</li>
+<li>通过训练模型生成的历史数据，使系统能够暴露于累积的生成错误中，从而在有限的计算预算内保持同步的音视频动态并维持长流序列。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2608.23189" data-arxiv-id="2608.23189" data-status="ready">
+<h1>[2608.23189] EchoWM: Open and Enterable Omnimodal World Models</h1>
+<p><a href="https://arxiv.org/abs/2608.23189" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>EchoWM 提出了一种可进入的全模态世界模型，通过统一的相机意图接口（相对 6-DoF 轨迹）和渐进式训练策略，实现了视频、环境音效和语音的连续多轮生成与交互。</p>
+<h2>解决的问题</h2>
+<p>现有生成式视频模型主要依赖被动提示，缺乏对连续用户输入的响应能力，且大多仅生成无声视觉内容或依赖僵化的特定动作空间，难以在通用场景下实现包含音频反馈的连续多模态交互。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了可进入的全模态世界建模框架，结合连续用户导航与视频、环境音效及语音的原生联合生成，支持第一人称和第三人称交互并通过同步多轮延续扩展生成范围。</li>
+<li>设计了统一的相机意图接口，将异构的离散命令和连续相机姿态映射为共享的相对 6-DoF 轨迹，利用数据集级度量校准和相对 UCPE 实现跨数据源的一致几何条件，并支持无需特定视角控制器的观察者运动与相机 - 主体演化。</li>
+<li>构建了能力对齐的世界数据引擎，整合内部游戏、互联网游戏、UE 仿真及通用网络视频，将数据组织为音频视觉丰富、控制清洁和平衡的高质量混合集，以在各自监督最可靠的子集中分别训练音频视觉生成与轨迹跟随。</li>
+<li>引入了渐进式训练策略，首先进行音视频连续预训练以建立动态和声学先验，随后冻结骨干网络仅训练轻量级轨迹路径以学习控制敏感性，接着在平衡数据上联合微调，最后通过自回归后训练适应自生成上下文以支持长视界推理。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2608.23070" data-arxiv-id="2608.23070" data-status="ready">
+<h1>[2608.23070] From Generation to Simulation: How Far Are World Models from Being True Simulators?</h1>
+<p><a href="https://arxiv.org/abs/2608.23070" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>该综述通过对比生成式世界模型与传统模拟器在八项关键能力上的差异，论证了当前世界模型虽在视觉真实性和可学习性上具有潜力，但因缺乏物理演化求解器机制而在可控性、状态反馈和可验证性方面存在显著差距，尚未成为严格意义上的模拟器。</p>
+<h2>解决的问题</h2>
+<p>片段未提供关于具体研究问题（problem）的独立描述，相关背景仅包含在引言对世界模型定义及与传统模拟器差距的讨论中。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种基于传统模拟器能力的统一分析框架，建立了包含资产构建、物理引擎、交互、可控性、稳定性、状态反馈、多样性和评估指标八个维度的比较系统。</li>
+<li>构建了可复现的全语料证据图谱，通过对精选的 200 篇论文进行逐篇编码，量化了各技术路线在各项能力上的进展与关键短板。</li>
+<li>量化了状态反馈这一结构性缺陷，将其识别为模拟器不可或缺但被严重忽视的能力，并通过五级标注方案（B1–B5）对其缺失程度进行了度量。</li>
+<li>提供了一条可操作的研究路线图，提炼出六个清晰且可行的未来研究方向，并辅以新兴工作作为其可行性的证据。</li>
+<li>通过逐能力对比分析，揭示了当前世界模型在可控性、交互和稳定性方面相对较强，而在资产构建、物理引擎和状态反馈方面仍存在结构性差距的核心发现。</li>
+<li>公开了支持本研究的所有语料标注、证据地图和分析脚本，项目页面地址为 https://github.com/AtongWang/world-model-simulators。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2608.26239" data-arxiv-id="2608.26239" data-status="ready">
+<h1>[2608.26239] WALL-SS: Scaling Long-horizon World Models via Next-Scale Autoregression</h1>
+<p><a href="https://arxiv.org/abs/2608.26239" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>WALL-SS 是一种基于下一尺度自回归（next-scale autoregression）的机器人世界模型，旨在通过统一的多尺度预测框架解决长视界下的动作可控性、记忆一致性及误差累积问题。</p>
+<h2>解决的问题</h2>
+<p>片段未提供</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了首个基于下一尺度自回归的机器人世界模型，并引入尺度对齐的动作条件化来引导从粗到细的世界生成，以支持包含成功和失败行为的多样化未来预测。</li>
+<li>设计了用于长视界世界建模的尺度压缩记忆机制，将短期和长期记忆的时间层级与下一尺度预测的表示层级对齐，并通过尺度级梦境强制（scale-wise dream forcing）提升对自生成上下文的鲁棒性。</li>
+<li>将下一尺度视觉生成形式化为随机策略，在固定机器人动作条件下利用动作跟随和长期一致性奖励对新鲜 rollout 进行优化，同时通过自回归重放和参考模型正则化保持预训练的视觉分布。</li>
+<li>在系统层面部署外部机器人策略进行闭环测试，验证了 WALL-SS 在减少动作漂移、提高长视界轨迹准确性以及保持与物理世界一致的任务结果方面的有效性。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2608.27549" data-arxiv-id="2608.27549" data-status="ready">
+<h1>[2608.27549] Code as Worlds: Agentic Discovery of Executable World Representations for Physical Reasoning</h1>
+<p><a href="https://arxiv.org/abs/2608.27549" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 Code-as-World 范式，将物理世界表示为可执行的代码，并通过代理发现循环从多模态证据中逆向推导物理机制，从而为视觉语言模型提供定量物理推理的规模化监督。</p>
+<h2>解决的问题</h2>
+<p>片段未提供</p>
+<h2>创新点</h2>
+<ul>
+<li>提出 Code-as-World 范式，将任务相关的物理世界表示为涵盖物理组成、动态演化和视觉外观的可执行代码。</li>
+<li>将世界表示过程形式化为代理发现问题，开发了提出 - 实例化 - 执行 - 渲染 - 验证的循环以迭代搜索与语言或视觉证据一致的世界表示。</li>
+<li>利用验证后的可执行世界为定量物理推理提供可扩展的监督信号，训练出的 Code-as-World-VL 在 QuantiPhy 基准上取得了优于领先专有模型的最先进性能。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2608.27033" data-arxiv-id="2608.27033" data-status="ready">
+<h1>[2608.27033] Riemann-1.0: An Embodied World Action Model for Physical AI</h1>
+<p><a href="https://arxiv.org/abs/2608.27033" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>Riemann-1.0 提出了一种全因果自回归世界动作模型（Fully Causal Autoregressive World Action Model）和渐进式具身预训练框架，旨在通过统一多视图视觉观测、机器人状态和具身特定动作，将大规模异构具身经验转化为可泛化的长视界机器人操作能力。</p>
+<h2>解决的问题</h2>
+<p>现有世界动作模型（WAMs）在充分利用大规模具身经验方面存在局限：首先，现有预训练策略与机器人轨迹紧密耦合，无法有效利用大规模弱监督的人类数据，限制了跨异构具身的知识迁移；其次，现有模型未能在一个统一的因果过程中联合建模观测、机器人状态、动作和世界演化，导致无法同时支持高效的机器人策略学习和因果一致的动作条件世界模拟。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了全因果自回归世界动作模型，该模型在多视图视觉观测、机器人状态和具身特定动作的统一因果序列中联合建模，将可执行的机器人策略学习与动作条件的视觉世界模拟统一在单个模型中。</li>
+<li>开发了渐进式具身预训练框架，通过三阶段课程（从弱监督具身知识学习到可执行动作对齐，再到具身特定策略增强），将大规模具身经验中的知识逐步迁移至可执行的机器人控制。</li>
+<li>构建了包含超过 200200K+ 小时数据的大型具身经验语料库，涵盖以第一人称视角的人类视频、手持夹爪演示和异构机器人轨迹，实现了数千种不同交互技能的统一建模。</li>
+<li>在多个仿真基准和长视界真实世界操作任务上进行了全面评估，结果显示 Riemann-1.0 在 RoboTwin2.0、LIBERO 和 RoboCasa-365 等基准上取得了最先进的性能，并在真实世界任务中显著超越了最强的开源基线。</li>
+</ul>
+</article>
+    </div>
+  </main>
+  <script type="application/json" id="summary-catalog">{"papers":{"2605.30263":{"status":"ready","url":"notes/world-model.html#summary-2605.30263"},"2606.00267":{"status":"ready","url":"notes/world-model.html#summary-2606.00267"},"2606.02800":{"status":"ready","url":"notes/world-model.html#summary-2606.02800"},"2606.03159":{"status":"ready","url":"notes/world-model.html#summary-2606.03159"},"2606.09803":{"status":"ready","url":"notes/world-model.html#summary-2606.09803"},"2606.11187":{"status":"ready","url":"notes/world-model.html#summary-2606.11187"},"2606.13672":{"status":"ready","url":"notes/world-model.html#summary-2606.13672"},"2606.16993":{"status":"ready","url":"notes/world-model.html#summary-2606.16993"},"2606.24597":{"status":"ready","url":"notes/world-model.html#summary-2606.24597"},"2606.28128":{"status":"ready","url":"notes/world-model.html#summary-2606.28128"},"2606.30534":{"status":"ready","url":"notes/world-model.html#summary-2606.30534"},"2606.31734":{"status":"ready","url":"notes/world-model.html#summary-2606.31734"},"2606.32026":{"status":"ready","url":"notes/world-model.html#summary-2606.32026"},"2607.00678":{"status":"ready","url":"notes/world-model.html#summary-2607.00678"},"2607.02642":{"status":"ready","url":"notes/world-model.html#summary-2607.02642"},"2607.04988":{"status":"ready","url":"notes/world-model.html#summary-2607.04988"},"2607.06558":{"status":"ready","url":"notes/world-model.html#summary-2607.06558"},"2607.06559":{"status":"ready","url":"notes/world-model.html#summary-2607.06559"},"2607.06988":{"status":"ready","url":"notes/world-model.html#summary-2607.06988"},"2607.07534":{"status":"ready","url":"notes/world-model.html#summary-2607.07534"},"2607.08436":{"status":"ready","url":"notes/world-model.html#summary-2607.08436"},"2607.08639":{"status":"ready","url":"notes/world-model.html#summary-2607.08639"},"2607.11643":{"status":"ready","url":"notes/world-model.html#summary-2607.11643"},"2607.13017":{"status":"ready","url":"notes/world-model.html#summary-2607.13017"},"2607.13960":{"status":"ready","url":"notes/world-model.html#summary-2607.13960"},"2607.15065":{"status":"ready","url":"notes/world-model.html#summary-2607.15065"},"2607.19343":{"status":"ready","url":"notes/world-model.html#summary-2607.19343"},"2607.22535":{"status":"ready","url":"notes/world-model.html#summary-2607.22535"},"2607.23783":{"status":"ready","url":"notes/world-model.html#summary-2607.23783"},"2607.28243":{"status":"ready","url":"notes/world-model.html#summary-2607.28243"},"2608.02603":{"status":"ready","url":"notes/world-model.html#summary-2608.02603"},"2608.07408":{"status":"ready","url":"notes/world-model.html#summary-2608.07408"},"2608.13489":{"status":"ready","url":"notes/world-model.html#summary-2608.13489"},"2608.13546":{"status":"ready","url":"notes/world-model.html#summary-2608.13546"},"2608.14022":{"status":"ready","url":"notes/world-model.html#summary-2608.14022"},"2608.15869":{"status":"ready","url":"notes/world-model.html#summary-2608.15869"},"2608.18077":{"status":"ready","url":"notes/world-model.html#summary-2608.18077"},"2608.23070":{"status":"ready","url":"notes/world-model.html#summary-2608.23070"},"2608.23189":{"status":"ready","url":"notes/world-model.html#summary-2608.23189"},"2608.23383":{"status":"ready","url":"notes/world-model.html#summary-2608.23383"},"2608.26239":{"status":"ready","url":"notes/world-model.html#summary-2608.26239"},"2608.27033":{"status":"ready","url":"notes/world-model.html#summary-2608.27033"},"2608.27549":{"status":"ready","url":"notes/world-model.html#summary-2608.27549"}},"topic":"World Model","version":1}</script>
+</body>
+</html>
