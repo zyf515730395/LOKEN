@@ -27,6 +27,13 @@ BACKFILL_BATCH_SIZE = 100
 BACKFILL_PAPERS_PER_PUBLISH = 500
 BACKFILL_BATCHES_PER_PUBLISH = BACKFILL_PAPERS_PER_PUBLISH // BACKFILL_BATCH_SIZE
 BACKFILL_REST_SECONDS = 30 * 60
+GIT_PUSH_TIMEOUT_SECONDS = 5 * 60
+GIT_PUSH_RETRY_SECONDS = 60
+GIT_SSH_COMMAND = 'ssh -o ServerAliveInterval=15 -o ServerAliveCountMax=4'
+
+
+class RetryableGitPush(RuntimeError):
+    """A transient push failure that must not discard completed publication work."""
 
 
 def command(*args, capture=False, check=True, timeout=None):
@@ -39,15 +46,57 @@ def git(*args, capture=False):
     return result.stdout.strip() if capture else ''
 
 
+def _origin_is_ancestor():
+    return command('git', 'merge-base', '--is-ancestor', 'origin/main', 'HEAD',
+                   check=False).returncode == 0
+
+
+def _push_main_once(*, timeout=GIT_PUSH_TIMEOUT_SECONDS):
+    environment = os.environ.copy()
+    environment['GIT_SSH_COMMAND'] = GIT_SSH_COMMAND
+    process = subprocess.Popen(
+        ('git', 'push', 'origin', 'main'), cwd=paths.ROOT, env=environment,
+        start_new_session=True,
+    )
+    try:
+        return_code = process.wait(timeout=timeout)
+    except subprocess.TimeoutExpired:
+        try:
+            os.killpg(process.pid, signal.SIGKILL)
+        except ProcessLookupError:
+            pass
+        process.wait()
+        raise RetryableGitPush(
+            f'git push timed out after {timeout:g}s; completed commit retained for retry'
+        ) from None
+    if return_code:
+        raise RetryableGitPush(
+            f'git push failed: exit={return_code}; completed commit retained for retry'
+        )
+
+
+def _push_main():
+    _push_main_once()
+    git('fetch', 'origin', 'main')
+    if git('rev-parse', 'HEAD', capture=True) != git('rev-parse', 'origin/main', capture=True):
+        raise RetryableGitPush('git push was not confirmed by origin/main; completed commit retained for retry')
+
+
 def clean_pull():
     if git('branch', '--show-current', capture=True) != 'main':
         raise RuntimeError('runtime requires main; integrate the reviewed migration first')
     if git('status', '--porcelain', capture=True):
         raise RuntimeError('worktree is not clean; preserve changes and resolve before retry')
     git('pull', '--ff-only', 'origin', 'main')
+    recovered = False
     if git('rev-parse', 'HEAD', capture=True) != git('rev-parse', 'origin/main', capture=True):
-        raise RuntimeError('local main has unpublished commits; publish the reviewed code before automatic jobs')
+        if not _origin_is_ancestor():
+            raise RuntimeError('local main and origin/main diverged; preserve both histories for review')
+        print('Recovering clean local commits that were not confirmed by origin/main', flush=True)
+        _push_main()
+        recovered = True
     git('var', 'GIT_AUTHOR_IDENT', capture=True)
+    return recovered
 
 
 def allowed_path(path):
@@ -84,7 +133,7 @@ def publish(mode):
         print('No public changes', flush=True)
         return
     git('commit', '-m', f'Publish {mode} paper results for {datetime.now(ZONE):%Y-%m-%d}')
-    git('push', 'origin', 'main')
+    _push_main()
 
 
 @contextmanager
@@ -147,7 +196,10 @@ def in_weekend_window(now=None):
 
 
 def execute(mode, args):
-    clean_pull()
+    recovered_push = clean_pull()
+    if mode == 'backfill' and recovered_push:
+        print('Recovered prior publication push; preserving the normal backfill rest boundary', flush=True)
+        return 0
     with model_service(args.service) as model:
         common = ['--model', model, '--workers', str(args.workers), '--timeout', str(args.timeout)]
         if mode == 'daily':
@@ -214,10 +266,15 @@ def main(argv=None):
                 if daily_waiting():
                     time.sleep(5)
                     continue
-                with lock('runtime.lock'):
-                    if daily_waiting():
-                        continue
-                    result = execute('backfill', args)
+                try:
+                    with lock('runtime.lock'):
+                        if daily_waiting():
+                            continue
+                        result = execute('backfill', args)
+                except RetryableGitPush as error:
+                    print(f'{error}; retrying in {GIT_PUSH_RETRY_SECONDS}s', file=sys.stderr, flush=True)
+                    time.sleep(GIT_PUSH_RETRY_SECONDS)
+                    continue
                 from papers.batch.cycle import load_state
                 state = load_state()
                 if state is None:
