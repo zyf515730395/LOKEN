@@ -23,6 +23,10 @@ PUBLIC = ('content/papers/archive.json', 'content/papers/arxiv-candidates.json',
           'docs/search-index.json', 'docs/togos-papers.json')
 PRIVATE = paths.ROOT / 'build/paper-summaries'
 ZONE = ZoneInfo('Asia/Shanghai')
+BACKFILL_BATCH_SIZE = 100
+BACKFILL_PAPERS_PER_PUBLISH = 300
+BACKFILL_BATCHES_PER_PUBLISH = BACKFILL_PAPERS_PER_PUBLISH // BACKFILL_BATCH_SIZE
+BACKFILL_REST_SECONDS = 30 * 60
 
 
 def command(*args, capture=False, check=True, timeout=None):
@@ -107,18 +111,24 @@ def daily_waiting():
 @contextmanager
 def model_service(service):
     started = False
+    opener = urllib.request.build_opener(urllib.request.ProxyHandler({}))
+
+    def registered_model():
+        try:
+            with opener.open('http://127.0.0.1:8000/v1/models', timeout=5) as response:
+                model = json.load(response)['data'][0]['id']
+            return model if isinstance(model, str) and model else None
+        except (OSError, ValueError, KeyError, IndexError):
+            return None
+
     try:
-        if command('systemctl', 'is-active', '--quiet', service, check=False).returncode:
+        model = registered_model()
+        if model is None and command('systemctl', 'is-active', '--quiet', service, check=False).returncode:
             command('sudo', '-n', '/usr/bin/systemctl', 'start', service)
             started = True
-        opener = urllib.request.build_opener(urllib.request.ProxyHandler({}))
         for attempt in range(60):
-            try:
-                with opener.open('http://127.0.0.1:8000/v1/models', timeout=5) as response:
-                    model = json.load(response)['data'][0]['id']
-                if not isinstance(model, str) or not model:
-                    raise ValueError('invalid model registry')
-            except (OSError, ValueError, KeyError, IndexError):
+            model = registered_model()
+            if model is None:
                 if attempt == 59:
                     raise RuntimeError('model readiness timed out') from None
                 time.sleep(5)
@@ -145,9 +155,17 @@ def execute(mode, args):
         else:
             from datetime import timedelta
             now = datetime.now(ZONE)
-            end = (now + timedelta(days=6 - now.weekday())).replace(hour=23, minute=30, second=0, microsecond=0)
-            result = command(sys.executable, '-m', 'papers', 'batch', '--max-batches', '1', *common,
-                             check=False, timeout=max(1, (end - now).total_seconds()))
+            batch_count = BACKFILL_BATCHES_PER_PUBLISH if mode == 'backfill' else 1
+            command_args = [sys.executable, '-m', 'papers', 'batch',
+                            '--batch-size', str(BACKFILL_BATCH_SIZE),
+                            '--max-batches', str(batch_count), '--batch-pause', '0', *common]
+            if mode == 'weekend':
+                end = (now + timedelta(days=6 - now.weekday())).replace(
+                    hour=23, minute=30, second=0, microsecond=0)
+                result = command(*command_args, check=False,
+                                 timeout=max(1, (end - now).total_seconds()))
+            else:
+                result = command(*command_args, check=False)
             if result.returncode in (0, 3):
                 command(sys.executable, '-m', 'papers', 'publish-offline')
         if result.returncode not in (0, 3):
@@ -158,25 +176,29 @@ def execute(mode, args):
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('mode', choices=['daily', 'weekend'])
+    parser.add_argument('mode', choices=['daily', 'weekend', 'backfill'])
     parser.add_argument('--service', default='vllm-paper.service')
     parser.add_argument('--workers', type=int, default=DEFAULT_MODEL_WORKERS)
     parser.add_argument('--timeout', type=float, default=DEFAULT_MODEL_TIMEOUT_SECONDS)
     parser.add_argument('--limit', type=int, default=100)
     parser.add_argument('--dry-run', action='store_true')
     args = parser.parse_args(argv)
+    effective_mode = 'backfill' if args.mode == 'weekend' else args.mode
     if (not 1 <= args.workers <= MAX_MODEL_WORKERS or args.limit < 1 or args.timeout <= 0
             or args.service != 'vllm-paper.service'):
         parser.error(f'workers 1-{MAX_MODEL_WORKERS}, positive limit/timeout and configured model service required')
     if args.dry_run:
-        print(json.dumps({'mode': args.mode, 'workers': args.workers, 'timeout': args.timeout, 'limit': args.limit,
-                          'weekend_window': in_weekend_window(), 'public_paths': PUBLIC}))
+        print(json.dumps({'mode': effective_mode, 'workers': args.workers, 'timeout': args.timeout,
+                          'limit': args.limit, 'weekend_window': in_weekend_window(),
+                          'papers_per_publish': BACKFILL_PAPERS_PER_PUBLISH,
+                          'batches_per_publish': BACKFILL_BATCHES_PER_PUBLISH,
+                          'rest_seconds': BACKFILL_REST_SECONDS, 'public_paths': PUBLIC}))
         return 0
     if sys.platform != 'linux':
         parser.error('run this command inside WSL')
     signal.signal(signal.SIGTERM, lambda *_: (_ for _ in ()).throw(KeyboardInterrupt()))
     try:
-        if args.mode == 'daily':
+        if effective_mode == 'daily':
             with lock('daily-request.lock', blocking=False) as acquired:
                 if not acquired:
                     print('Daily job already queued or running')
@@ -188,21 +210,21 @@ def main(argv=None):
             if not acquired:
                 print('Weekend job already running')
                 return 0
-            while in_weekend_window():
+            while True:
                 if daily_waiting():
                     time.sleep(5)
                     continue
                 with lock('runtime.lock'):
                     if daily_waiting():
                         continue
-                    result = execute('weekend', args)
+                    result = execute('backfill', args)
                 from papers.batch.cycle import load_state
                 state = load_state()
                 if state is None:
                     return result
                 if state.get('network_paused') or state['phase'] == 'summarize':
                     return 3
-                time.sleep(5)
+                time.sleep(BACKFILL_REST_SECONDS)
         return 0
     except KeyboardInterrupt:
         print('Stopped; completed caches and batch checkpoint retained', flush=True)
