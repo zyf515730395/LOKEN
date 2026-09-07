@@ -79,7 +79,10 @@ def _cached_samples(limit):
             seen.add(item.arxiv_id)
             source = client._load_cached(item.arxiv_id, item.title)
             if source is not None:
-                chunks = build_chunks(source.document)
+                try:
+                    chunks = build_chunks(source.document)
+                except PaperSummaryError:
+                    continue
                 available.append((len(chunks), item.arxiv_id, source.document.title,
                                   chunks[len(chunks) // 2]))
     finally:

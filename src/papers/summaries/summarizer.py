@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 
+from papers.model_runtime import DEFAULT_MODEL_MAX_TOKENS
 from shared.loopback_chat import LoopbackChatError, LoopbackChatTransport
 
 from .cache import PaperSummaryCache, cache_key
@@ -53,7 +54,10 @@ def _complete(
     timeout: float,
 ) -> PaperSummary:
     try:
-        return parse_summary(transport.complete(messages, model=model, timeout=timeout))
+        return parse_summary(transport.complete(
+            messages, model=model, timeout=timeout,
+            max_tokens=DEFAULT_MODEL_MAX_TOKENS, enable_thinking=False,
+        ))
     except LoopbackChatError as error:
         raise PaperSummaryError(error.code, error.message) from None
 

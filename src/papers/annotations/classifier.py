@@ -11,6 +11,7 @@ from pathlib import Path
 import threading
 
 from papers.summaries.models import AcquiredPaper
+from papers.model_runtime import DEFAULT_MODEL_MAX_TOKENS
 from papers.summaries.paths import private_path
 from shared.loopback_chat import LoopbackChatError, LoopbackChatTransport
 
@@ -131,6 +132,8 @@ def classify_paper(
             annotation_messages(paper.document.title, abstract, labels),
             model=model,
             timeout=timeout,
+            max_tokens=DEFAULT_MODEL_MAX_TOKENS,
+            enable_thinking=False,
         )
     except LoopbackChatError as error:
         raise PaperAnnotationError(error.code, error.message) from None

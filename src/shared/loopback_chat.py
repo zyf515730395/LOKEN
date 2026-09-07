@@ -105,6 +105,8 @@ class LoopbackChatTransport:
         *,
         model: str,
         timeout: float,
+        max_tokens: int | None = None,
+        enable_thinking: bool | None = None,
     ) -> str:
         if not isinstance(model, str) or not model.strip():
             raise LoopbackChatError(
@@ -113,6 +115,14 @@ class LoopbackChatTransport:
         if not isinstance(timeout, (int, float)) or timeout <= 0:
             raise LoopbackChatError(
                 "invalid_model_request", "timeout must be positive"
+            )
+        if max_tokens is not None and (type(max_tokens) is not int or max_tokens < 1):
+            raise LoopbackChatError(
+                "invalid_model_request", "max tokens must be a positive integer"
+            )
+        if enable_thinking is not None and type(enable_thinking) is not bool:
+            raise LoopbackChatError(
+                "invalid_model_request", "enable thinking must be boolean"
             )
         normalized_messages: list[dict[str, str]] = []
         for message in messages:
@@ -134,13 +144,18 @@ class LoopbackChatTransport:
                 "model_request_too_large",
                 "local model request exceeds the message boundary",
             )
+        request = {
+            "model": model,
+            "messages": normalized_messages,
+            "temperature": 0,
+            "stream": False,
+        }
+        if max_tokens is not None:
+            request["max_tokens"] = max_tokens
+        if enable_thinking is not None:
+            request["chat_template_kwargs"] = {"enable_thinking": enable_thinking}
         payload = json.dumps(
-            {
-                "model": model,
-                "messages": normalized_messages,
-                "temperature": 0,
-                "stream": False,
-            },
+            request,
             ensure_ascii=False,
             separators=(",", ":"),
         ).encode("utf-8")
