@@ -137,21 +137,21 @@ def build_archive(
                     row["date"].year, {"surveys": [], "months": {}}
                 )["surveys"].append(row)
                 continue
-            week_start, _ = week_bounds(row["date"])
+            day_range = day_range_bounds(row["date"])
             year = row["date"].year
             month = row["date"].month
             grouped_years.setdefault(year, {"surveys": [], "months": {}})[
                 "months"
-            ].setdefault(month, {}).setdefault(week_start, []).append(row)
+            ].setdefault(month, {}).setdefault(day_range, []).append(row)
 
         years = OrderedDict()
         for year in sorted(grouped_years, reverse=True):
             months = OrderedDict()
             for month in sorted(grouped_years[year]["months"], reverse=True):
-                weeks = grouped_years[year]["months"][month]
+                day_ranges = grouped_years[year]["months"][month]
                 months[month] = OrderedDict(
-                    (week_start, weeks[week_start])
-                    for week_start in sorted(weeks, reverse=True)
+                    (day_range, day_ranges[day_range])
+                    for day_range in sorted(day_ranges, reverse=True)
                 )
             years[year] = {
                 "surveys": sorted(
@@ -185,36 +185,32 @@ def survey_anchor(category: dict, year: int) -> str:
     return f'{category["slug"]}-{year}-surveys'
 
 
-def week_anchor(category: dict, year: int, month: int, week_start: datetime.date) -> str:
-    return f'{month_anchor(category, year, month)}-week-{week_start.isoformat()}'
+def day_range_anchor(
+    category: dict, year: int, month: int, day_range: tuple[int, int]
+) -> str:
+    return f'{month_anchor(category, year, month)}-days-{day_range[0]:02d}-{day_range[1]:02d}'
 
 
-def week_bounds(published: datetime.date) -> tuple[datetime.date, datetime.date]:
-    week_start = published - datetime.timedelta(days=published.weekday())
-    return week_start, week_start + datetime.timedelta(days=6)
+def day_range_bounds(published: datetime.date) -> tuple[int, int]:
+    if published.day <= 10:
+        return 1, 10
+    if published.day <= 20:
+        return 11, 20
+    return 21, calendar.monthrange(published.year, published.month)[1]
 
 
-def week_label(week_start: datetime.date) -> str:
-    week_end = week_start + datetime.timedelta(days=6)
-    start_month = calendar.month_abbr[week_start.month]
-    end_month = calendar.month_abbr[week_end.month]
-    if week_start.year != week_end.year:
-        return (
-            f"{start_month} {week_start.day}, {week_start.year}"
-            f"–{end_month} {week_end.day}, {week_end.year}"
-        )
-    if week_start.month != week_end.month:
-        return f"{start_month} {week_start.day}–{end_month} {week_end.day}"
-    return f"{start_month} {week_start.day}–{week_end.day}"
+def day_range_label(month: int, day_range: tuple[int, int]) -> str:
+    return f"{calendar.month_abbr[month]} {day_range[0]}–{day_range[1]}"
 
 
-def month_paper_count(weeks: OrderedDict) -> int:
-    return sum(len(rows) for rows in weeks.values())
+def month_paper_count(day_ranges: OrderedDict) -> int:
+    return sum(len(rows) for rows in day_ranges.values())
 
 
 def year_paper_count(year_data: dict) -> int:
     return len(year_data["surveys"]) + sum(
-        month_paper_count(weeks) for weeks in year_data["months"].values()
+        month_paper_count(day_ranges)
+        for day_ranges in year_data["months"].values()
     )
 
 
@@ -246,8 +242,8 @@ def filter_recent_archive(
 def _iter_category_rows(category: dict):
     for year_data in category["years"].values():
         yield from year_data["surveys"]
-        for weeks in year_data["months"].values():
-            for rows in weeks.values():
+        for day_ranges in year_data["months"].values():
+            for rows in day_ranges.values():
                 yield from rows
 
 
@@ -337,12 +333,12 @@ def render_sidebar(
                         f'<span>Surveys</span><span class="nav-count">'
                         f'{len(year_data["surveys"])}</span></a></li>'
                     )
-                for month, weeks in year_data["months"].items():
+                for month, day_ranges in year_data["months"].items():
                     anchor = month_anchor(category, year, month)
                     output.append(
                         f'{indent}    <li><a href="#{anchor}">'
                         f'<span>{calendar.month_name[month]}</span>'
-                        f'<span class="nav-count">{month_paper_count(weeks)}</span></a></li>'
+                        f'<span class="nav-count">{month_paper_count(day_ranges)}</span></a></li>'
                     )
                 output.append(f'{indent}  </ul>')
                 output.append(f'{indent}</details>')
@@ -498,9 +494,9 @@ def render_content(
                     'aria-selected="false">Surveys <span>0</span></button>'
                 )
             for month in range(1, 13):
-                weeks = months.get(month)
+                day_ranges = months.get(month)
                 month_name = calendar.month_abbr[month]
-                if weeks is None:
+                if day_ranges is None:
                     output.append(
                         f'        <button type="button" role="tab" disabled '
                         f'aria-disabled="true" aria-selected="false">{month_name}</button>'
@@ -539,7 +535,7 @@ def render_content(
                     )
                 )
                 output.append("      </section>")
-            for month, weeks in months.items():
+            for month, day_ranges in months.items():
                 anchor = month_anchor(category, year, month)
                 is_active = month == selected_period
                 active = "true" if is_active else "false"
@@ -548,14 +544,14 @@ def render_content(
                     f'role="tabpanel" aria-labelledby="{anchor}-tab" '
                     f'aria-hidden="{"false" if is_active else "true"}" data-active="{active}">'
                 )
-                for week_index, (week_start, rows) in enumerate(weeks.items()):
-                    anchor_id = week_anchor(category, year, month, week_start)
-                    week_open = " open" if week_index == 0 else ""
+                for range_index, (day_range, rows) in enumerate(day_ranges.items()):
+                    anchor_id = day_range_anchor(category, year, month, day_range)
+                    range_open = " open" if range_index == 0 else ""
                     output.append(
-                        f'        <details class="archive-week" id="{anchor_id}"{week_open}>'
+                        f'        <details class="archive-week" id="{anchor_id}"{range_open}>'
                     )
                     output.append(
-                        f'          <summary><span>{week_label(week_start)}</span>'
+                        f'          <summary><span>{day_range_label(month, day_range)}</span>'
                         f'<span>{len(rows)} papers</span></summary>'
                     )
                     output.append(
