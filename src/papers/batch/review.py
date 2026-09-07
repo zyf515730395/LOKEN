@@ -5,6 +5,7 @@ import json
 from pathlib import Path
 
 from papers.annotations.catalog import load_label_definitions
+from papers.model_runtime import DEFAULT_MODEL_MAX_TOKENS
 from papers.paths import CONFIG
 
 from papers.summaries.models import PaperSummaryError
@@ -111,7 +112,10 @@ def review_topics(items, source, model, base_url, timeout):
              '每个请求主题恰好一条。证据不足用 null，不猜测。\n' + RULES},
             {'role': 'user', 'content': canonical(material)},
         )
-        raw = LoopbackChatTransport(base_url).complete(messages, model=model, timeout=timeout)
+        raw = LoopbackChatTransport(base_url).complete(
+            messages, model=model, timeout=timeout,
+            max_tokens=DEFAULT_MODEL_MAX_TOKENS, enable_thinking=False,
+        )
         decisions = parse_decisions(raw, unresolved)
         payload = {'decisions': [{'topic': topic, **decisions[topic]} for topic in unresolved]}
         raw = canonical(payload)

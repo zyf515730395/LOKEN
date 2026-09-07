@@ -7,6 +7,7 @@ import json
 
 from papers import paths
 from papers.annotations.catalog import load_label_definitions
+from papers.model_runtime import DEFAULT_MODEL_MAX_TOKENS
 from papers.candidate_ledger import atomic_write_json, load_candidate_ledger, utc_now
 from papers.summaries.paths import private_path, run_lock
 from shared.loopback_chat import LoopbackChatTransport, LoopbackChatError
@@ -117,7 +118,11 @@ def run(*, model, base_url, timeout=180, dry_run=False):
                 failures.append({'id': paper_id, 'code': 'review_input_too_large'})
                 continue
             try:
-                raw = client.complete(({'role': 'system', 'content': system}, {'role': 'user', 'content': payload}), model=model, timeout=timeout)
+                raw = client.complete(
+                    ({'role': 'system', 'content': system}, {'role': 'user', 'content': payload}),
+                    model=model, timeout=timeout, max_tokens=DEFAULT_MODEL_MAX_TOKENS,
+                    enable_thinking=False,
+                )
                 items = parse_decisions(raw, {paper_id})
                 apply_decisions(archive, ledger, items, topics)
                 decisions.extend(items)
