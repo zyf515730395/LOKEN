@@ -24,7 +24,7 @@ PUBLIC = ('content/papers/archive.json', 'content/papers/arxiv-candidates.json',
 PRIVATE = paths.ROOT / 'build/paper-summaries'
 ZONE = ZoneInfo('Asia/Shanghai')
 BACKFILL_BATCH_SIZE = 100
-BACKFILL_PAPERS_PER_PUBLISH = 300
+BACKFILL_PAPERS_PER_PUBLISH = 500
 BACKFILL_BATCHES_PER_PUBLISH = BACKFILL_PAPERS_PER_PUBLISH // BACKFILL_BATCH_SIZE
 BACKFILL_REST_SECONDS = 30 * 60
 
