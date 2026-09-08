@@ -37,12 +37,50 @@ def _strict_object(pairs: list[tuple[str, object]]) -> dict[str, object]:
     return result
 
 
+def _repair_label_fields(
+    value: object,
+    labels: tuple[LabelDefinition, ...],
+) -> object:
+    """Put known labels back in the field dictated by their configured group."""
+    if not isinstance(value, dict) or set(value) != {"topics", "tags", "paper_type", "institutions"}:
+        return value
+    topics = value["topics"]
+    tags = value["tags"]
+    if (
+        not isinstance(topics, list)
+        or not isinstance(tags, list)
+        or any(not isinstance(label, str) for label in (*topics, *tags))
+        or len(topics) != len(set(topics))
+        or len(tags) != len(set(tags))
+        or set(topics).intersection(tags)
+    ):
+        return value
+    topic_names = {label.name for label in labels if label.group == "topic"}
+    tag_names = {label.name for label in labels if label.group != "topic"}
+    known_names = topic_names | tag_names
+    if any(label not in known_names for label in topics):
+        return value
+    tags = [label for label in tags if label in known_names]
+    ambiguous = topic_names & tag_names
+    repaired_topics = [
+        label
+        for label in (*topics, *tags)
+        if label in topic_names and (label not in ambiguous or label in topics)
+    ]
+    repaired_tags = [
+        label
+        for label in (*topics, *tags)
+        if label in tag_names and (label not in ambiguous or label in tags)
+    ]
+    return {**value, "topics": repaired_topics, "tags": repaired_tags}
+
+
 def parse_annotation(raw: str, labels: tuple[LabelDefinition, ...]) -> PaperAnnotation:
     try:
         value = json.loads(raw, object_pairs_hook=_strict_object)
         if not isinstance(value, dict):
             raise ValueError("not an object")
-        return annotation_from_value("model output", value, labels)
+        return annotation_from_value("model output", _repair_label_fields(value, labels), labels)
     except (json.JSONDecodeError, TypeError, ValueError, RecursionError, PaperAnnotationError):
         raise PaperAnnotationError("invalid_annotation", "model output violates the annotation contract") from None
 
