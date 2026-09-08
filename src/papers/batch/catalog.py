@@ -19,7 +19,8 @@ class ArchiveCandidate(PaperCandidate):
     abstract: str
 
 
-def archive_candidates(archive_path, ledger_path, paper_ids=(), *, docs_root=DOCS):
+def archive_candidates(archive_path, ledger_path, paper_ids=(), *, docs_root=DOCS,
+                       include_ready=False):
     try:
         archive = json.loads(archive_path.read_text(encoding='utf-8'))
         ledger = load_candidate_ledger(ledger_path)['papers']
@@ -51,7 +52,8 @@ def archive_candidates(archive_path, ledger_path, paper_ids=(), *, docs_root=DOC
         if requested - {item.arxiv_id for item in all_items.values()}:
             raise PaperSummaryError('paper_not_archived', 'requested paper is not in the full archive')
         return sorted((item for key, item in all_items.items()
-                       if key not in ready and (not requested or item.arxiv_id in requested)),
+                       if (include_ready or key not in ready or item.arxiv_id in requested)
+                       and (not requested or item.arxiv_id in requested)),
                       key=lambda item: (-item.updated.toordinal(), item.arxiv_id,
                                         list(TOPIC_SLUGS).index(item.topic)))
     except PaperSummaryError:
