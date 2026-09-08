@@ -10,6 +10,7 @@ from pathlib import Path
 from papers.annotations.catalog import (
     annotation_labels_for_topics,
     annotation_from_value,
+    filter_annotation_for_topics,
     load_annotation_catalog,
     load_annotation_definitions,
     load_topic_tag_allowlists,
@@ -37,6 +38,26 @@ class AnnotationPublishResult:
     existing: int
     invalid: int
     published: int
+
+
+def sanitize_annotation_catalog(
+    annotations: dict[str, PaperAnnotation],
+    labels,
+    allowlists,
+    topics_by_id: dict[str, set[str]],
+) -> tuple[dict[str, PaperAnnotation], set[str]]:
+    """Preserve catalog records while removing tags outside current archive topics."""
+    result = dict(annotations)
+    changed: set[str] = set()
+    for paper_id, annotation in annotations.items():
+        topics = topics_by_id.get(paper_id)
+        if not topics:
+            continue
+        filtered = filter_annotation_for_topics(annotation, labels, allowlists, topics)
+        if filtered != annotation:
+            result[paper_id] = filtered
+            changed.add(paper_id)
+    return result, changed
 
 
 def _load_archive_items(archive_path: Path, ledger_path: Path):
@@ -151,6 +172,9 @@ def publish_annotations(
         topics_by_id: dict[str, set[str]] = {}
         for topic, paper_id in archive_items:
             topics_by_id.setdefault(paper_id, set()).add(topic)
+        annotations, sanitized_ids = sanitize_annotation_catalog(
+            annotations, labels, allowlists, topics_by_id,
+        )
         ready = load_ready_keys(docs_root)
         note_keys = workflow.existing_note_keys()
         candidate_keys = sorted(ready & note_keys)
@@ -180,7 +204,6 @@ def publish_annotations(
             eligible_ids.add(paper_id)
             if paper_id in annotations:
                 existing_ids.add(paper_id)
-                continue
             if paper_id in conflicted_ids:
                 continue
             previous = additions.get(paper_id)
@@ -191,12 +214,16 @@ def publish_annotations(
                 continue
             additions[paper_id] = annotation
 
-        if additions and not dry_run:
+        changed_ids = sanitized_ids | {
+            paper_id for paper_id, annotation in additions.items()
+            if annotations.get(paper_id) != annotation
+        }
+        if changed_ids and not dry_run:
             write_annotation_catalog(catalog_path, {**annotations, **additions})
         return AnnotationPublishResult(
             scanned=len(candidate_keys),
             eligible=len(eligible_ids),
             existing=len(existing_ids),
             invalid=invalid,
-            published=0 if dry_run else len(additions),
+            published=0 if dry_run else len(changed_ids),
         )
