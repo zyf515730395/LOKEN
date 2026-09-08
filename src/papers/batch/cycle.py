@@ -209,6 +209,30 @@ def needs_recovery_cycle(state):
                 and state.get('cycle_kind') != 'recovery')
 
 
+def reordered_cycle_state(old, queue):
+    """Reset queue progress without turning an active recovery into a regular cycle."""
+    state = {
+        'version': 1,
+        'queue': list(queue),
+        'offset': 0,
+        'batch_ids': [],
+        'phase': 'download' if queue else 'complete',
+        'history': old.get('history', []) if old else [],
+    }
+    if old:
+        for field in ('cycle_kind', 'recovery', 'previous_checkpoint_backup'):
+            if field in old:
+                state[field] = old[field]
+    return state
+
+
+def reorder_requested_ids(old):
+    """A recovery policy refresh must reconsider every original recovery target."""
+    if old and old.get('cycle_kind') == 'recovery':
+        return list(old['queue'])
+    return []
+
+
 def recovery_cycle_pending():
     return needs_recovery_cycle(_read_state(include_complete=True))
 
@@ -276,7 +300,9 @@ def _initial_state(args, *, apply):
 def reorder_checkpoint(args, *, apply):
     """Preview or atomically replace the active queue from current durable results."""
     old = _read_state(include_complete=True)
-    selected, skipped = batch.select_items(stage_args(args, 'summarize', []))
+    selected, skipped = batch.select_items(
+        stage_args(args, 'summarize', reorder_requested_ids(old)),
+    )
     queue = prioritized_queue(selected)
     relighting = {item.arxiv_id for item, _ in selected if item.topic == 'Relighting'}
     summary = {
@@ -291,12 +317,10 @@ def reorder_checkpoint(args, *, apply):
     if apply:
         stamp = datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')
         backup = batch.ROOT / 'build' / 'reports' / f'cycle-state-before-reorder-{stamp}-{uuid4().hex[:8]}.json'
-        history = old.get('history', []) if old else []
         if old is not None:
             atomic_write_text(backup, json.dumps(old, ensure_ascii=False, indent=2) + '\n')
             summary['backup'] = str(backup)
-        state = {'version': 1, 'queue': queue, 'offset': 0, 'batch_ids': [],
-                 'phase': 'download' if queue else 'complete', 'history': history}
+        state = reordered_cycle_state(old, queue)
         save_state(state)
         summary['checkpoint'] = str(cycle_state_path())
     return summary
