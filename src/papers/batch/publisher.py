@@ -8,9 +8,11 @@ import json
 from pathlib import Path
 
 from papers.annotations.catalog import (
+    annotation_labels_for_topics,
     annotation_from_value,
     load_annotation_catalog,
     load_annotation_definitions,
+    load_topic_tag_allowlists,
     write_annotation_catalog,
 )
 from papers.annotations.models import PaperAnnotation, PaperAnnotationError
@@ -143,8 +145,12 @@ def publish_annotations(
     context = nullcontext() if dry_run else run_lock()
     with context:
         labels = load_annotation_definitions(config_path)
+        allowlists = load_topic_tag_allowlists(config_path, labels)
         annotations = load_annotation_catalog(catalog_path, labels)
         archive_items = _load_archive_items(Path(archive_path), Path(ledger_path))
+        topics_by_id: dict[str, set[str]] = {}
+        for topic, paper_id in archive_items:
+            topics_by_id.setdefault(paper_id, set()).add(topic)
         ready = load_ready_keys(docs_root)
         note_keys = workflow.existing_note_keys()
         candidate_keys = sorted(ready & note_keys)
@@ -159,13 +165,18 @@ def publish_annotations(
             if item is None:
                 invalid += 1
                 continue
-            annotation, receipt_invalid = _receipt_annotation(item, labels)
+            paper_id = item.arxiv_id
+            allowed_labels = annotation_labels_for_topics(
+                labels,
+                allowlists,
+                topics_by_id[paper_id],
+            )
+            annotation, receipt_invalid = _receipt_annotation(item, allowed_labels)
             if receipt_invalid:
                 invalid += 1
                 continue
             if annotation is None:
                 continue
-            paper_id = item.arxiv_id
             eligible_ids.add(paper_id)
             if paper_id in annotations:
                 existing_ids.add(paper_id)

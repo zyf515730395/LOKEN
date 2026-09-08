@@ -17,7 +17,12 @@ from uuid import uuid4
 from papers.paths import ARCHIVE, CONFIG, DOCS, LEDGER
 from papers.model_runtime import DEFAULT_MODEL_TIMEOUT_SECONDS, DEFAULT_MODEL_WORKERS, MAX_MODEL_WORKERS
 from papers.summaries.acquisition import ArxivSourceClient
-from papers.annotations.catalog import load_annotation_definitions, annotation_value
+from papers.annotations.catalog import (
+    annotation_labels_for_topics,
+    annotation_value,
+    load_annotation_definitions,
+    load_topic_tag_allowlists,
+)
 from papers.annotations.classifier import classify_paper, taxonomy_hash
 from papers.annotations.models import PaperAnnotationError
 from papers.annotations.prompts import PROMPT_VERSION as ANNOTATION_PROMPT_VERSION
@@ -39,7 +44,21 @@ DEFAULT_LEDGER = LEDGER
 DEFAULT_DOCS = DOCS
 DEFAULT_CONFIG = CONFIG
 PAPER_LABELS = load_annotation_definitions(DEFAULT_CONFIG)
+TOPIC_TAG_ALLOWLISTS = load_topic_tag_allowlists(DEFAULT_CONFIG, PAPER_LABELS)
 TOPIC_REVIEW_ACTION = "remove_rejected_topic_entries"
+
+
+def annotation_policy_hash():
+    payload = {
+        "taxonomy": taxonomy_hash(PAPER_LABELS),
+        "topic_tag_allowlists": TOPIC_TAG_ALLOWLISTS,
+    }
+    return hashlib.sha256(
+        json.dumps(payload, ensure_ascii=False, sort_keys=True).encode("utf-8")
+    ).hexdigest()
+
+
+ANNOTATION_POLICY_HASH = annotation_policy_hash()
 
 
 def note_paths(item):
@@ -75,7 +94,7 @@ def note_status(item):
             return "conflict"
         if (metadata.get("annotation_schema_version") != 2
                 or metadata.get("annotation_prompt_version") != ANNOTATION_PROMPT_VERSION
-                or metadata.get("annotation_taxonomy_hash") != taxonomy_hash(PAPER_LABELS)):
+                or metadata.get("annotation_taxonomy_hash") != ANNOTATION_POLICY_HASH):
             return "needs_review"
         if ("accept" not in metadata or metadata.get("review_policy") != POLICY_VERSION
                 or metadata.get("review_input") != review_identity(item)):
@@ -119,7 +138,7 @@ def save_note(item, summary, source, model, decision, annotation):
                 "review_input": review_identity(item),
                 **annotation_value(annotation), "annotation_schema_version": 2,
                 "annotation_prompt_version": ANNOTATION_PROMPT_VERSION,
-                "annotation_taxonomy_hash": taxonomy_hash(PAPER_LABELS),
+                "annotation_taxonomy_hash": ANNOTATION_POLICY_HASH,
                 "source_sha256": source.source_sha256,
                 "source": source.source_path.relative_to(private_path()).as_posix(),
                 "summary_cache": PaperSummaryCache().path_for(
@@ -155,10 +174,15 @@ def process(items, args):
                               timeout=args.timeout, refresh=False)
     decisions = review_topics(items, source, args.model, args.base_url, args.timeout)
     annotation = classify_paper(
-        source, PAPER_LABELS, model=args.model, base_url=args.base_url,
+        source, annotation_labels_for_items(items), model=args.model, base_url=args.base_url,
         timeout=args.timeout, refresh=False,
     )
     return source, summary, decisions, annotation
+
+
+def annotation_labels_for_items(items):
+    topics = tuple(dict.fromkeys(item.topic for item in items))
+    return annotation_labels_for_topics(PAPER_LABELS, TOPIC_TAG_ALLOWLISTS, topics)
 
 
 def existing_note_keys():
