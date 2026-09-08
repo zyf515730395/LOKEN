@@ -22,6 +22,7 @@ from papers.annotations.catalog import (
     annotation_value,
     load_annotation_definitions,
     load_topic_tag_allowlists,
+    load_topic_tag_dimensions,
 )
 from papers.annotations.classifier import classify_paper, taxonomy_hash
 from papers.annotations.models import PaperAnnotationError
@@ -44,6 +45,7 @@ DEFAULT_LEDGER = LEDGER
 DEFAULT_DOCS = DOCS
 DEFAULT_CONFIG = CONFIG
 PAPER_LABELS = load_annotation_definitions(DEFAULT_CONFIG)
+TOPIC_TAG_DIMENSIONS = load_topic_tag_dimensions(DEFAULT_CONFIG, PAPER_LABELS)
 TOPIC_TAG_ALLOWLISTS = load_topic_tag_allowlists(DEFAULT_CONFIG, PAPER_LABELS)
 TOPIC_REVIEW_ACTION = "remove_rejected_topic_entries"
 
@@ -51,7 +53,7 @@ TOPIC_REVIEW_ACTION = "remove_rejected_topic_entries"
 def annotation_policy_hash():
     payload = {
         "taxonomy": taxonomy_hash(PAPER_LABELS),
-        "topic_tag_allowlists": TOPIC_TAG_ALLOWLISTS,
+        "topic_tag_dimensions": TOPIC_TAG_DIMENSIONS,
     }
     return hashlib.sha256(
         json.dumps(payload, ensure_ascii=False, sort_keys=True).encode("utf-8")

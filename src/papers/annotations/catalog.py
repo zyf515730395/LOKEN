@@ -73,7 +73,9 @@ def load_annotation_definitions(config_path: str | Path) -> tuple[LabelDefinitio
     topics = load_label_definitions(config_path)
     payload = yaml.safe_load(Path(config_path).read_text(encoding="utf-8"))
     groups = payload.get("paper_tag_groups", {})
-    if not isinstance(groups, dict) or set(groups) - {"method", "task", "representation"}:
+    if (not isinstance(groups, dict) or not groups
+            or any(not isinstance(group, str) or not re.fullmatch(r"[a-z][a-z0-9_-]{1,39}", group)
+                   for group in groups)):
         raise PaperAnnotationError("invalid_label_config", "invalid tag groups")
     details = tuple(replace(label, group=group) for group, raw in groups.items()
                     for label in parse_label_definitions(raw))
@@ -89,35 +91,58 @@ def load_annotation_definitions(config_path: str | Path) -> tuple[LabelDefinitio
     return (*topics, *details)
 
 
-def load_topic_tag_allowlists(
+def load_topic_tag_dimensions(
     config_path: str | Path,
     labels: tuple[LabelDefinition, ...] | None = None,
-) -> dict[str, tuple[str, ...]]:
-    """Load the complete per-topic allowlist of detail-tag names."""
+) -> dict[str, dict[str, tuple[str, ...]]]:
+    """Load and validate the closed, dimensioned taxonomy for every topic."""
     definitions = labels or load_annotation_definitions(config_path)
     topics = {label.name for label in definitions if label.group == "topic"}
-    details = {label.name for label in definitions if label.group != "topic"}
+    details = {label.name: label.group for label in definitions if label.group != "topic"}
     try:
         payload = yaml.safe_load(Path(config_path).read_text(encoding="utf-8"))
-        raw = payload.get("paper_topic_tag_allowlists") if isinstance(payload, dict) else None
+        raw = payload.get("paper_topic_tag_dimensions") if isinstance(payload, dict) else None
     except (OSError, UnicodeError, yaml.YAMLError):
         raise PaperAnnotationError("invalid_label_config", "site configuration cannot be read") from None
     if not isinstance(raw, dict) or set(raw) != topics:
         raise PaperAnnotationError(
             "invalid_label_config",
-            "paper_topic_tag_allowlists must define every configured topic exactly once",
+            "paper_topic_tag_dimensions must define every configured topic exactly once",
         )
-    result: dict[str, tuple[str, ...]] = {}
-    for topic, values in raw.items():
-        if (not isinstance(values, list) or not values
-                or any(not isinstance(value, str) or value not in details for value in values)
-                or len(values) != len(set(values))):
+    result: dict[str, dict[str, tuple[str, ...]]] = {}
+    for topic, dimensions in raw.items():
+        if not isinstance(dimensions, dict) or len(dimensions) < 4:
             raise PaperAnnotationError(
                 "invalid_label_config",
-                f"invalid detail-tag allowlist for topic: {topic}",
+                f"topic taxonomy needs at least four dimensions: {topic}",
             )
-        result[topic] = tuple(values)
+        assigned: set[str] = set()
+        normalized: dict[str, tuple[str, ...]] = {}
+        for dimension, values in dimensions.items():
+            if (not isinstance(dimension, str) or dimension not in set(details.values())
+                    or not isinstance(values, list) or not values
+                    or any(not isinstance(value, str) or details.get(value) != dimension for value in values)
+                    or len(values) != len(set(values)) or assigned.intersection(values)):
+                raise PaperAnnotationError(
+                    "invalid_label_config",
+                    f"invalid tag dimension for topic: {topic}/{dimension}",
+                )
+            normalized[dimension] = tuple(values)
+            assigned.update(values)
+        result[topic] = normalized
     return result
+
+
+def load_topic_tag_allowlists(
+    config_path: str | Path,
+    labels: tuple[LabelDefinition, ...] | None = None,
+) -> dict[str, tuple[str, ...]]:
+    """Flatten dimensioned taxonomies for inference and schema validation."""
+    dimensions = load_topic_tag_dimensions(config_path, labels)
+    return {
+        topic: tuple(label for values in topic_dimensions.values() for label in values)
+        for topic, topic_dimensions in dimensions.items()
+    }
 
 
 def annotation_labels_for_topics(
@@ -140,6 +165,21 @@ def annotation_labels_for_topics(
         raise PaperAnnotationError("invalid_label_config", "paper topics have no configured tag allowlist")
     allowed = {name for topic in requested for name in allowlists[topic]}
     return tuple(label for label in labels if label.group == "topic" or label.name in allowed)
+
+
+def filter_annotation_for_topics(
+    annotation: PaperAnnotation,
+    labels: tuple[LabelDefinition, ...],
+    allowlists: dict[str, tuple[str, ...]],
+    topics: tuple[str, ...] | list[str] | set[str],
+) -> PaperAnnotation:
+    """Drop legacy detail tags that are outside the paper's current topic taxonomy."""
+    allowed = {
+        label.name
+        for label in annotation_labels_for_topics(labels, allowlists, topics)
+        if label.group != "topic"
+    }
+    return replace(annotation, tags=tuple(tag for tag in annotation.tags if tag in allowed))
 
 
 def migrate_annotation(value: dict, labels: tuple[LabelDefinition, ...]) -> dict:

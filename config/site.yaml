@@ -299,145 +299,367 @@ collection:
   page_size: 100
   review_required_since: '2026-09-06T03:15:20.116692+00:00'
 paper_tag_groups:
+  task:
+  - name: Image Generation
+    description: Generates new still images rather than only modifying an input image.
+  - name: Image Editing
+    description: Modifies an existing image while preserving specified content or identity.
+  - name: Inpainting & Outpainting
+    description: Fills masked regions or extends content beyond the original image boundary.
+  - name: Personalization
+    description: Adapts generation or editing to a specific subject, identity, object or style.
+  - name: Video Generation
+    description: Generates a video sequence from a condition or learned distribution.
+  - name: Video Editing
+    description: Modifies an existing video with temporal consistency.
+  - name: Video Prediction
+    description: Predicts future or missing frames from observed video context.
+  - name: 3D Generation
+    description: Synthesizes new 3D assets, objects or scenes.
+  - name: 3D Reconstruction
+    description: Recovers 3D or 4D geometry and appearance from observations.
+  - name: Novel View Synthesis
+    description: Renders unseen viewpoints from learned scene observations.
+  - name: Illumination Estimation
+    description: Recovers explicit or implicit scene lighting from observations.
+  - name: Scene Relighting
+    description: Changes scene or subject illumination while preserving content.
+  - name: Lighting Harmonization
+    description: Matches foreground or inserted content lighting to a target scene.
   method:
   - name: Diffusion
-    description: Denoising or score-based diffusion is a central method; not merely a baseline.
+    description: Denoising or score-based diffusion is a central generation mechanism.
   - name: Flow Matching
-    description: Flow matching or rectified flow, including continuous flow generation.
+    description: Flow matching or rectified flow is a central generation mechanism.
   - name: Autoregressive
-    description: Sequential next-token, next-scale or next-frame generation; may coexist with diffusion.
-  - name: Masked Modeling
-    description: Masked token prediction or iterative masked generation is a central method.
+    description: Sequential next-token, next-scale or next-frame prediction is central.
   - name: GAN
-    description: Adversarial generator/discriminator training is a central method.
-  - name: VAE
-    description: Variational latent-variable learning is a central contribution, not only a frozen tokenizer.
-  - name: Consistency Model
-    description: Consistency training or distillation enables few-step generation.
-  - name: Score Distillation
-    description: SDS, VSD or related diffusion-prior optimization for generation or reconstruction.
+    description: Adversarial generator and discriminator training is central.
+  - name: State-Space/Recurrent
+    description: Recurrent or state-space transitions form the core world-model dynamics.
+  - name: Transformer
+    description: Transformer sequence modeling forms the core world-model methodology.
+  - name: Physics-Informed/Structured
+    description: Explicit physical laws, entities or relational structure constrain the model.
+  - name: Language-Augmented Multimodal
+    description: Language is integrated with multiple modalities in the world model.
   - name: Inverse Rendering
-    description: Explicit recovery of scene geometry, materials or lighting through image formation.
-  - name: Differentiable Rendering
-    description: Differentiable image formation is a central optimization mechanism.
+    description: Relighting explicitly recovers geometry, material or illumination factors.
+  - name: Reflectance-Aware Representation
+    description: A scene-specific representation explicitly models reflectance for relighting.
+  - name: Image-to-Image Relighting
+    description: Relighting is learned as a direct image transformation without explicit factors.
+  - name: Generative-Prior Relighting
+    description: A pretrained generative prior is central to producing the relit result.
   - name: Direct Regression
-    description: Direct discriminative depth or geometry regression, rather than sampling a generative model.
+    description: Depth is predicted directly by a discriminative regression model.
   - name: Geometric Matching
-    description: Stereo/multi-view correspondence, cost-volume matching or triangulation.
-  - name: Latent Dynamics
-    description: Learned transitions in a latent environment state for prediction or planning.
-  - name: Joint Embedding Prediction
-    description: Predicting target representations in embedding space, e.g. JEPA.
-  task:
-  - name: Relighting
-    description: Changing illumination of a scene or subject while preserving its content.
-  - name: Depth Estimation
-    description: Predicting, completing or refining metric/relative depth or stereo disparity.
-  - name: Neural Rendering
-    description: Rendering novel views using learned scene representations.
-  - name: 3D Reconstruction
-    description: Recovering 3D/4D geometry or scenes from observations.
+    description: Correspondence, cost volumes or triangulation are central to depth estimation.
+  - name: Generative Prior
+    description: A diffusion or other generative prior is central to depth inference.
+  - name: Optimization/Rendering-Based
+    description: Depth is recovered through explicit optimization or rendering consistency.
+  condition:
+  - name: Text Conditioning
+    description: Natural-language prompts are the primary image condition.
+  - name: Reference Conditioning
+    description: One or more reference images provide appearance, identity or content control.
+  - name: Structural Conditioning
+    description: Pose, edge, depth, segmentation or layout provides structural control.
+  - name: Multi-Condition Control
+    description: Multiple distinct control signals are jointly supported.
+  - name: Text Conditioned
+    description: Text is the primary condition for video generation or editing.
+  - name: Image Conditioned
+    description: A still image is the primary condition for video synthesis.
+  - name: Video Conditioned
+    description: An input video is transformed, continued or otherwise conditioned upon.
+  - name: Audio/Multimodal Conditioned
+    description: Audio or multiple modalities directly condition video synthesis.
+  - name: Text-to-3D
+    description: Text is the primary input for producing a 3D result.
+  - name: Single-Image-to-3D
+    description: A single image is the primary observation for producing a 3D result.
+  - name: Multi-View-to-3D
+    description: Multiple views or video observations are used to produce a 3D result.
+  - name: Unconditional 3D Generation
+    description: New 3D content is sampled without an instance-specific input condition.
   representation:
-  - name: NeRF
-    description: Neural radiance field representation.
-  - name: Gaussian Splatting
-    description: Explicit 2D/3D/4D Gaussian or Gaussian surfel representation.
-  - name: Mesh
-    description: Explicit triangle/polygon mesh or CAD surface representation.
-  - name: Point Cloud
-    description: Explicit point-set representation.
-  - name: Implicit Field
-    description: Implicit occupancy, signed distance or other continuous neural field.
+  - name: Pixel Space
+    description: Images or videos are generated or modeled directly in observation space.
   - name: Discrete Tokens
-    description: Discrete visual tokens or codebook representation is central.
+    description: A discrete visual tokenizer or codebook representation is central.
   - name: Continuous Latents
-    description: A continuous latent representation is central to the method.
-paper_topic_tag_allowlists:
+    description: A continuous learned latent representation is central.
+  - name: NeRF
+    description: A neural radiance field represents 3D geometry and appearance.
+  - name: Gaussian Splatting
+    description: Explicit Gaussian primitives represent a 3D or 4D scene.
+  - name: Mesh
+    description: Triangle, polygon or CAD surfaces form the primary 3D representation.
+  - name: Point Cloud
+    description: Explicit point sets form the primary 3D representation.
+  - name: Implicit Field
+    description: Occupancy, signed-distance or another continuous field represents geometry.
+  - name: Voxel/Grid
+    description: Voxels, feature grids or triplanes form the primary 3D representation.
+  - name: Pixel/Observation Space
+    description: A world model predicts raw observations such as images or video frames.
+  - name: Joint Embedding
+    description: A world model predicts target representations in an embedding space.
+  - name: Object-Centric
+    description: Entities, slots or compositional objects structure the world state.
+  - name: 3D/Occupancy
+    description: Geometry, BEV, occupancy or another explicit spatial state represents the world.
+  temporal:
+  - name: Joint Spatiotemporal
+    description: Space and time are modeled jointly with 3D or unified spatiotemporal operations.
+  - name: Factorized Spatial-Temporal
+    description: Spatial and temporal modeling are explicitly separated or factorized.
+  - name: Latent Dynamics
+    description: Temporal evolution is predicted in a learned latent state.
+  - name: Long-Horizon Generation
+    description: The method explicitly targets long-duration generation or drift control.
+  pipeline:
+  - name: Feed-Forward
+    description: A trained network produces the 3D result in one or a few direct passes.
+  - name: Optimization-Based
+    description: Per-instance optimization directly constructs the 3D result.
+  - name: Generative-Prior Optimization
+    description: A pretrained image or video generator guides 3D optimization.
+  - name: Procedural
+    description: Rules, programs or procedural structure are central to 3D generation.
+  reasoning:
+  - name: Imagination-Based Planning
+    description: The model rolls out imagined futures to select or improve actions.
+  - name: World-Model Policy Learning
+    description: Policies or value functions are learned using predicted world trajectories.
+  - name: Counterfactual Reasoning
+    description: The model evaluates interventions or alternative possible futures.
+  - name: Planning Under Uncertainty
+    description: Planning explicitly represents uncertainty over states, dynamics or outcomes.
+  application:
+  - name: Robotics
+    description: The world model supports robot perception, manipulation or control.
+  - name: Autonomous Driving
+    description: The world model supports driving prediction, simulation or planning.
+  - name: Video Prediction & Scene Understanding
+    description: The world model predicts visual futures or structured scene evolution.
+  - name: Multimodal Agents
+    description: The world model supports language-grounded or multimodal agents.
+  - name: RL/Games
+    description: The world model supports reinforcement learning, games or interactive environments.
+  - name: Scientific Modeling
+    description: The world model simulates physical, biological or other scientific systems.
+  scene:
+  - name: Portrait
+    description: Human faces, heads or bodies are the relighting target.
+  - name: Object
+    description: A foreground object or asset is the relighting target.
+  - name: Indoor Scene
+    description: Indoor environment lighting is estimated or changed.
+  - name: Outdoor Scene
+    description: Outdoor or natural illumination is estimated or changed.
+  - name: Relightable 3D Scene
+    description: A multi-view or 3D scene representation supports novel illumination.
+  control:
+  - name: Parametric Lighting
+    description: Explicit light direction, position, color or intensity controls the result.
+  - name: Environment Map
+    description: An HDR or LDR environment map specifies or represents illumination.
+  - name: Reference-Guided
+    description: A guide image supplies the target illumination appearance.
+  - name: Text-Guided
+    description: Natural language specifies the target lighting change.
+  - name: Spatially-Varying Lighting
+    description: Illumination varies spatially across the scene or target.
+  setup:
+  - name: Monocular
+    description: Depth is estimated from one RGB image.
+  - name: Stereo
+    description: A calibrated or uncalibrated stereo pair provides depth evidence.
+  - name: Multi-View
+    description: More than two views provide geometric depth evidence.
+  - name: Video
+    description: Temporal image sequences provide depth evidence or consistency.
+  - name: Depth Completion
+    description: Sparse or partial depth is completed into a dense estimate.
+  output:
+  - name: Metric Depth
+    description: Predictions target depth in an absolute physical scale.
+  - name: Relative Depth
+    description: Predictions preserve ordinal or scale-and-shift-invariant depth relations.
+  - name: Disparity
+    description: The primary prediction is inverse depth or stereo disparity.
+  learning:
+  - name: Supervised
+    description: Ground-truth depth directly supervises training.
+  - name: Self-Supervised
+    description: Geometry, reconstruction or temporal consistency supplies supervision.
+  - name: Weak/Semi-Supervised
+    description: Training combines limited labels with weak, pseudo or unlabeled supervision.
+  - name: Zero-Shot/Foundation Model
+    description: Large-scale pretraining targets cross-domain zero-shot depth generalization.
+  legacy:
+  - name: Masked Modeling
+    description: Legacy tag retained only so existing public annotations remain readable.
+  - name: VAE
+    description: Legacy tag retained only so existing public annotations remain readable.
+  - name: Consistency Model
+    description: Legacy tag retained only so existing public annotations remain readable.
+  - name: Score Distillation
+    description: Legacy tag retained only so existing public annotations remain readable.
+  - name: Differentiable Rendering
+    description: Legacy tag retained only so existing public annotations remain readable.
+  - name: Joint Embedding Prediction
+    description: Legacy tag retained only so existing public annotations remain readable.
+  - name: Relighting
+    description: Legacy tag retained only so existing public annotations remain readable.
+  - name: Depth Estimation
+    description: Legacy tag retained only so existing public annotations remain readable.
+  - name: Neural Rendering
+    description: Legacy tag retained only so existing public annotations remain readable.
+paper_topic_tag_dimensions:
   Image Gen&Edit:
-  - Diffusion
-  - Flow Matching
-  - Autoregressive
-  - Masked Modeling
-  - GAN
-  - VAE
-  - Consistency Model
-  - Discrete Tokens
-  - Continuous Latents
+    task:
+    - Image Generation
+    - Image Editing
+    - Inpainting & Outpainting
+    - Personalization
+    method:
+    - Diffusion
+    - Flow Matching
+    - Autoregressive
+    - GAN
+    condition:
+    - Text Conditioning
+    - Reference Conditioning
+    - Structural Conditioning
+    - Multi-Condition Control
+    representation:
+    - Pixel Space
+    - Discrete Tokens
+    - Continuous Latents
   Video Gen&Edit:
-  - Diffusion
-  - Flow Matching
-  - Autoregressive
-  - Masked Modeling
-  - GAN
-  - VAE
-  - Consistency Model
-  - Latent Dynamics
-  - Discrete Tokens
-  - Continuous Latents
+    task:
+    - Video Generation
+    - Video Editing
+    - Video Prediction
+    method:
+    - Diffusion
+    - Flow Matching
+    - Autoregressive
+    - GAN
+    condition:
+    - Text Conditioned
+    - Image Conditioned
+    - Video Conditioned
+    - Audio/Multimodal Conditioned
+    temporal:
+    - Joint Spatiotemporal
+    - Factorized Spatial-Temporal
+    - Latent Dynamics
+    - Long-Horizon Generation
   3D Gen&Recon:
-  - Diffusion
-  - Flow Matching
-  - Autoregressive
-  - Masked Modeling
-  - GAN
-  - VAE
-  - Score Distillation
-  - Inverse Rendering
-  - Differentiable Rendering
-  - Direct Regression
-  - Geometric Matching
-  - Relighting
-  - Depth Estimation
-  - Neural Rendering
-  - 3D Reconstruction
-  - NeRF
-  - Gaussian Splatting
-  - Mesh
-  - Point Cloud
-  - Implicit Field
-  - Discrete Tokens
-  - Continuous Latents
+    task:
+    - 3D Generation
+    - 3D Reconstruction
+    - Novel View Synthesis
+    condition:
+    - Text-to-3D
+    - Single-Image-to-3D
+    - Multi-View-to-3D
+    - Unconditional 3D Generation
+    pipeline:
+    - Feed-Forward
+    - Optimization-Based
+    - Generative-Prior Optimization
+    - Procedural
+    representation:
+    - NeRF
+    - Gaussian Splatting
+    - Mesh
+    - Point Cloud
+    - Implicit Field
+    - Voxel/Grid
   World Model:
-  - Diffusion
-  - Flow Matching
-  - Autoregressive
-  - Masked Modeling
-  - VAE
-  - Consistency Model
-  - Latent Dynamics
-  - Joint Embedding Prediction
-  - Discrete Tokens
-  - Continuous Latents
+    representation:
+    - Pixel/Observation Space
+    - Continuous Latents
+    - Discrete Tokens
+    - Joint Embedding
+    - Object-Centric
+    - 3D/Occupancy
+    method:
+    - State-Space/Recurrent
+    - Transformer
+    - Diffusion
+    - Physics-Informed/Structured
+    - Language-Augmented Multimodal
+    reasoning:
+    - Imagination-Based Planning
+    - World-Model Policy Learning
+    - Counterfactual Reasoning
+    - Planning Under Uncertainty
+    application:
+    - Robotics
+    - Autonomous Driving
+    - Video Prediction & Scene Understanding
+    - Multimodal Agents
+    - RL/Games
+    - Scientific Modeling
   Relighting:
-  - Diffusion
-  - Flow Matching
-  - GAN
-  - Inverse Rendering
-  - Differentiable Rendering
-  - Direct Regression
-  - Relighting
-  - Neural Rendering
-  - NeRF
-  - Gaussian Splatting
-  - Mesh
-  - Implicit Field
-  - Continuous Latents
+    task:
+    - Illumination Estimation
+    - Scene Relighting
+    - Lighting Harmonization
+    method:
+    - Inverse Rendering
+    - Reflectance-Aware Representation
+    - Image-to-Image Relighting
+    - Generative-Prior Relighting
+    scene:
+    - Portrait
+    - Object
+    - Indoor Scene
+    - Outdoor Scene
+    - Relightable 3D Scene
+    control:
+    - Parametric Lighting
+    - Environment Map
+    - Reference-Guided
+    - Text-Guided
+    - Spatially-Varying Lighting
   Depth Estimation:
-  - Diffusion
-  - Autoregressive
-  - Inverse Rendering
-  - Differentiable Rendering
-  - Direct Regression
-  - Geometric Matching
-  - Depth Estimation
-  - 3D Reconstruction
-  - NeRF
-  - Gaussian Splatting
-  - Mesh
-  - Point Cloud
-  - Implicit Field
-  - Continuous Latents
+    setup:
+    - Monocular
+    - Stereo
+    - Multi-View
+    - Video
+    - Depth Completion
+    output:
+    - Metric Depth
+    - Relative Depth
+    - Disparity
+    learning:
+    - Supervised
+    - Self-Supervised
+    - Weak/Semi-Supervised
+    - Zero-Shot/Foundation Model
+    method:
+    - Direct Regression
+    - Geometric Matching
+    - Generative Prior
+    - Optimization/Rendering-Based
 taxonomy_sources:
+- title: 'Text to Image Generation and Editing: A Survey'
+  url: https://arxiv.org/abs/2505.02527
+- title: 'Video Diffusion Models: A Survey'
+  url: https://arxiv.org/abs/2405.03150
+- title: 'Advances in 3D Generation: A Survey'
+  url: https://arxiv.org/abs/2401.17807
+- title: 'World Models: A Comprehensive Survey of Architectures, Methodologies, Reasoning Paradigms, and Applications'
+  url: https://arxiv.org/abs/2606.00133
 - title: 'Autoregressive Models in Vision: A Survey'
   url: https://arxiv.org/abs/2411.05902
 - title: 'Diffusion Models: A Comprehensive Survey of Methods and Applications'
