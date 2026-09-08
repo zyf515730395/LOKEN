@@ -13,6 +13,97 @@
       <h1>3D Gen&amp;Recon · 论文要点</h1>
     </header>
     <div class="summary-topic-list">
+    <article class="summary-article summary-topic-entry" id="summary-2608.29905" data-arxiv-id="2608.29905" data-status="ready">
+<h1>[2608.29905] OrnaStyler: Ornament-Aware Latent Editing for Content-Preserving 3D Stylization</h1>
+<p><a href="https://arxiv.org/abs/2608.29905" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>OrnaStyler 是一种基于预训练整流流（RF）的无训练文本引导框架，通过显式建模装饰结构的体素空间配置和采用邻接感知的 3D 修复策略，实现了在保留原始内容几何的同时进行装饰感知的 3D 风格化编辑。</p>
+<h2>解决的问题</h2>
+<p>现有 3D 风格化技术主要依赖 UV 纹理映射或 2D 编辑 -3D 重建范式，导致 2D 与 3D 域差距引发几何伪影、重建过程忽略原始几何约束造成结构偏差，且均未显式建模装饰结构的空间配置，导致内容与装饰间出现不合理的几何关系。</p>
+<h2>创新点</h2>
+<ul>
+<li>识别了现有 3D 风格化范式在受限空间容量内平衡风格元素（即装饰）与内容几何的内在局限性。</li>
+<li>提出了名为 OrnaStyler 的新型零样本框架，该框架显式建模增强几何的装饰空间配置，并利用基于反转的机制推导用于内容保留风格化的种子潜变量。</li>
+<li>开发了一种受 3D 修复启发的特征生成策略，通过针对边界的邻接感知掩码实现风格与内容之间的无缝外观和谐化。</li>
+<li>提出了一种显式分配装饰独占活性体素的方法，以缓解内容与风格结构之间的空间竞争，从而在不损害原始几何完整性的情况下引入风格元素。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2608.29793" data-arxiv-id="2608.29793" data-status="ready">
+<h1>[2608.29793] GridFlow: Structured Latent Flow for Seamless City-Scale 3D Point Cloud Generation</h1>
+<p><a href="https://arxiv.org/abs/2608.29793" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>GridFlow 提出了一种基于结构化隐式表示的多阶段框架，旨在解决从遥感数据生成城市级密集彩色点云时面临的规模、无缝拼接和部分可观测性三大核心挑战。</p>
+<h2>解决的问题</h2>
+<p>片段明确指出，从遥感数据生成城市级密集彩色点云面临三个核心挑战：(i) 规模问题——单个图块包含约 10^5 个点，直接生成不可行，且现有方法在细节或密度上存在妥协；(ii) 无缝拼接问题——独立生成的图块必须无缝连接，但匹配数百万边界点成本过高，现有方法缺乏拼接能力或依赖后期混合；(iii) 部分可观测性问题——卫星传感器仅能观测水平表面而无法观测垂直立面，需要复杂的独立着色策略。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种网格对齐的变分自编码器（Grid-Aligned VAE），将城市场景映射到具有显式 token 到区域对应关系的空间锚定 2D 隐式网格中，从而支持跨模态条件输入和无缝边界感知生成。</li>
+<li>设计了一种隐空间边缘一致性机制，通过约束相邻图块的隐式潜变量而非解码后的点云来限制边界，将匹配问题的维度降低了两个数量级，从而实现了无缝无限扩展的城市级生成。</li>
+<li>开发了一种方向感知的扩散着色模型，通过双路径条件处理卫星图像的部分可观测性问题，分别处理直接可见的水平表面和从学习到的立面模式库中合成的被遮挡垂直立面。</li>
+<li>构建了一个大规模基准 City3D-MultiGen，包含来自墨尔本和伦敦两个城市的 16.3 万个密集标注图块，并提供了对齐的点云、卫星图像、语义分割和数字表面模型（DSM）数据，以及用于可重复评估的完全自动化处理管道。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2608.29733" data-arxiv-id="2608.29733" data-status="ready">
+<h1>[2608.29733] XDG: Accelerated Visual Disambiguation</h1>
+<p><a href="https://arxiv.org/abs/2608.29733" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>XDG 是一种高效的几何感知双重者分类器，旨在通过参数高效的 LoRA 适配和轻量级 MLP 头直接从 3D 骨干网络的相机令牌进行分类，从而在保持与 DG++ 相当准确性的同时将成对推理时间减少 3 倍以上。</p>
+<h2>解决的问题</h2>
+<p>片段未提供</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了 XDG，这是一种用于从 SfM 匹配图中移除双重者边的有效几何感知分类器。</li>
+<li>证明了双重者分类不需要在冻结的 3D 基础模型之上使用重型转换器分类器，而是可以通过参数高效的 LoRA 适配和简单的 MLP 头直接适配骨干网络。</li>
+<li>展示了 XDG 在成对去歧义和下游 SfM 重建方面具有竞争力的性能，同时显著降低了去歧义成本，这对于大规模场景重建是一个关键优势。</li>
+<li>通过实验表明，仅替换骨干网络是不够的，主要的效率增益来自于直接从骨干网络原生相机令牌进行分类的模块、通过对称令牌聚合强制顺序一致性以及使用轻量级 MLP 头进行最终预测。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2608.29680" data-arxiv-id="2608.29680" data-status="ready">
+<h1>[2608.29680] GeoRay: Gauge-Aware Feed-Forward Satellite 3D Reconstruction in the Geodetic Frame</h1>
+<p><a href="https://arxiv.org/abs/2608.29680" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>GeoRay 是一种面向卫星摄影测量的前馈 3D 重建模型，通过引入射线场可观测性、高度 - 基准规范机制及条件增益律，在绝对大地坐标系下实现了高精度、高完整性的数字表面模型生成。</p>
+<h2>解决的问题</h2>
+<p>现有前馈 3D 重建模型主要基于中心透视成像训练，难以直接应用于无单投影中心的推扫式卫星传感器（RPC 成像），且难以保证绝对高程精度、完整性及校准后的不确定性。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出 RPC 射线场可观测性概念，并通过轻量级射线一致低秩模块恢复前馈特征在原生 RPC 高度射线上的定位能力。</li>
+<li>形式化了低阶高度 - 基准规范问题，将其转化为显式的基准机制，以支持零控制、单高度控制及稀疏仿射控制等多种控制模式。</li>
+<li>推导并验证了连接多视图证据价值与预测单目不确定性的条件增益律，实现了基于校准逆方差的融合策略。</li>
+<li>提出了 SatGauge 评估协议，在公开卫星数据集上对十八个系统进行了包含泄漏控制和完整性指标的统一绝对框架评估。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2608.30307" data-arxiv-id="2608.30307" data-status="ready">
+<h1>[2608.30307] ScenePilot: Grow-and-Repair Policy for Text-Driven 3D Indoor Scene Generation</h1>
+<p><a href="https://arxiv.org/abs/2608.30307" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>ScenePilot 提出了一种检索增强的“生长与修复”策略，通过分阶段检索空间先验、逐组生长场景并在每一步进行局部修复，最后进行全局修复，以解决文本驱动的 3D 室内场景生成中的过程感知问题。</p>
+<h2>解决的问题</h2>
+<p>现有方法主要将室内场景生成视为最终布局预测或事后优化问题，忽视了场景构建的内在序列性和路径依赖性，导致早期错误（如锚点物体放置不当）会传播并引发全局结构或功能失败。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了 ScenePilot 框架，将中间场景状态作为规划、观察、修正和监督的一级目标，而非仅仅是通往最终布局的瞬态副产品。</li>
+<li>设计了分层检索增强规划模块，从离线空间记忆中检索房间级、组级和锚点级的布局先验，以丰富用户提示并支持连贯的物体组推理。</li>
+<li>引入了基于强化学习的多模态修复策略，在生成循环的每一步插入功能组后，通过观察渲染视图和场景状态预测可执行的移动、旋转和缩放编辑，对无效中间布局进行针对性修正。</li>
+<li>构建了 SceneReverse-17k 过程导向修复轨迹数据集，通过从高质量 3D 场景中合成可恢复的退化中间状态及其反向修正序列，为修复策略提供步级监督。</li>
+<li>实施了最终全局修复阶段，在所有功能组放置完成后重新审视完整场景，以解决跨组冲突、改善动线并增强整体结构连贯性。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2608.30218" data-arxiv-id="2608.30218" data-status="ready">
+<h1>[2608.30218] Amortized Anchor Refinement for Deployable Continuous-Time 4D Gaussian Reconstruction</h1>
+<p><a href="https://arxiv.org/abs/2608.30218" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种名为“摊销锚点细化”（Amortized Anchor Refinement）的方法，旨在解决在独立 XR 头显资源受限条件下进行可部署的连续时间 4D 高斯重建问题，通过结合前馈预测锚点与预算受限的优化细化，实现了在单消费级 GPU 上高效重建并支持任意时间查询。</p>
+<h2>解决的问题</h2>
+<p>片段未提供</p>
+<h2>创新点</h2>
+<ul>
+<li>识别出预算受限的连续时间 4D 重建是一个独立问题而非简单缩放问题，并表征了其两种基本失效模式：前馈预测的精度上限以及无锚点优化导致的崩溃。</li>
+<li>提出了“摊销锚点细化”方法，该方法结合了基于地面的前馈锚点、镜像对称先验和容量受限的细化策略，从而实现了无需任务特定预训练的稳定消费级预算优化。</li>
+<li>引入了基于持久同调的“持久同调剪枝与压缩”方法，这是首个在压缩过程中保留拓扑重要结构的高斯剪枝方法，并将量化的高斯轨迹作为紧凑的连续时间场景流表示进行传输。</li>
+<li>在 Stage-Capture 基准测试上验证了该方法，并通过受控消融实验证明性能提升源于所提出的设计而非模型容量或规模的增加。</li>
+</ul>
+</article>
     <article class="summary-article summary-topic-entry" id="summary-2609.01823" data-arxiv-id="2609.01823" data-status="ready">
 <h1>[2609.01823] Kirin: Animal Motion Generation from In-the-Wild Video</h1>
 <p><a href="https://arxiv.org/abs/2609.01823" rel="nofollow">arXiv 原文</a></p>
@@ -389,6 +480,6 @@
 </article>
     </div>
   </main>
-  <script type="application/json" id="summary-catalog">{"papers":{"2609.01823":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.01823"},"2609.03304":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03304"},"2609.03334":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03334"},"2609.03341":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03341"},"2609.03349":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03349"},"2609.03447":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03447"},"2609.03534":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03534"},"2609.03613":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03613"},"2609.03639":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03639"},"2609.03657":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03657"},"2609.03824":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03824"},"2609.03897":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03897"},"2609.03919":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03919"},"2609.03956":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03956"},"2609.04174":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.04174"},"2609.04196":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.04196"},"2609.04201":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.04201"},"2609.04942":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.04942"},"2609.04984":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.04984"},"2609.05127":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.05127"},"2609.05210":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.05210"},"2609.05382":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.05382"},"2609.05415":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.05415"},"2609.05416":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.05416"}},"topic":"3D Gen&Recon","version":1}</script>
+  <script type="application/json" id="summary-catalog">{"papers":{"2608.29680":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.29680"},"2608.29733":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.29733"},"2608.29793":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.29793"},"2608.29905":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.29905"},"2608.30218":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.30218"},"2608.30307":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.30307"},"2609.01823":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.01823"},"2609.03304":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03304"},"2609.03334":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03334"},"2609.03341":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03341"},"2609.03349":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03349"},"2609.03447":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03447"},"2609.03534":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03534"},"2609.03613":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03613"},"2609.03639":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03639"},"2609.03657":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03657"},"2609.03824":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03824"},"2609.03897":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03897"},"2609.03919":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03919"},"2609.03956":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03956"},"2609.04174":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.04174"},"2609.04196":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.04196"},"2609.04201":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.04201"},"2609.04942":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.04942"},"2609.04984":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.04984"},"2609.05127":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.05127"},"2609.05210":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.05210"},"2609.05382":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.05382"},"2609.05415":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.05415"},"2609.05416":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.05416"}},"topic":"3D Gen&Recon","version":1}</script>
 </body>
 </html>

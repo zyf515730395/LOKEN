@@ -13,6 +13,52 @@
       <h1>Video Gen&amp;Edit · 论文要点</h1>
     </header>
     <div class="summary-topic-list">
+    <article class="summary-article summary-topic-entry" id="summary-2608.29904" data-arxiv-id="2608.29904" data-status="ready">
+<h1>[2608.29904] Off-Manifold Refinement: Guiding Video Generators with a Frozen World Model</h1>
+<p><a href="https://arxiv.org/abs/2608.29904" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种推理时方法 Off-Manifold Refinement (OMR)，利用冻结的视频世界模型作为可微引导信号，在单次采样轨迹的特定步骤中通过适配器空间计算惊喜梯度，从而在不进行像素解码或多次候选生成的情况下修正视频生成中的物理不一致性。</p>
+<h2>解决的问题</h2>
+<p>当前最先进的视频生成器虽然视觉质量高，但生成的视频经常违反基本物理定律（如物体违反重力、流体不连续、碰撞忽略材料属性等），且现有标准目标函数仅重建视觉统计信息而未显式惩罚这些物理违规。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了 Off-Manifold Refinement (OMR)，一种在单次采样轨迹中利用冻结世界模型进行物理引导的推理时程序，旨在改善生成轨迹内部的局部物理交互而非仅优化外观。</li>
+<li>设计了一种适配器空间机制，将生成器潜在变量映射到 V-JEPA 嵌入空间，使得可以在不解码像素或不运行世界模型编码器的情况下计算惊喜梯度。</li>
+<li>证明了该方法仅在调度步骤中应用梯度修正，其余步骤仅使用冻结生成器速度，从而避免了候选选择方法中因多次完整生成带来的计算成本。</li>
+<li>实验表明 OMR 在固定提示效率子集上的相对运行时间为 1.71 倍，显著优于需要多次生成或重复解码的传统推理时物理一致性方法。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2608.29621" data-arxiv-id="2608.29621" data-status="ready">
+<h1>[2608.29621] CineForge: Self-Improving Agents for Long-Horizon Video Generation</h1>
+<p><a href="https://arxiv.org/abs/2608.29621" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了 CineForge，一个用于长视界故事驱动视频生成的自我改进智能体框架，通过 CineForge-Produce 和 CineForge-Evolve 两个组件实现从视频生产到持续智能体进化的闭环，并引入了 CineScope 评估框架来衡量故事级质量。</p>
+<h2>解决的问题</h2>
+<p>片段未提供</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了 CineForge 框架，统一了 CineForge-Produce 和 CineForge-Evolve 组件，将结构化的长视界视频生产与跨故事的持续策略改进相结合。</li>
+<li>开发了案例到模式再到策略的进化（CPPE）方法，通过重放门控部署和置信度控制分析，将生产轨迹中的发现转化为可复用的模式和本地化策略补丁。</li>
+<li>引入了 CineScope 评估框架，包含涵盖 100 个剧本的 CineScope-Data 套件和基于人类对齐的多尺度 CineScope-Metric，用于评估完整的叙事驱动视频。</li>
+<li>在 CineScope 及公开基准上的实验证明了该方法在视频质量、累积进化增益、新故事迁移能力以及降低生产审查工作量方面的有效性。</li>
+<li>实验结果显示，进化后的 CineForge 策略在 CineScope-Metric 上达到 4.380 分，相比初始版本提升了 8.8%，并显著减少了审查 LLM 调用次数和检测到的问题数量。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.04120" data-arxiv-id="2609.04120" data-status="ready">
+<h1>[2609.04120] BooM-VVT: Boosting Mask-Free Video Virtual Try-On with Image-Level Pseudo Data</h1>
+<p><a href="https://arxiv.org/abs/2609.04120" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>BooM-VVT 是一种基于关键帧驱动的无掩膜视频虚拟试穿框架，通过多阶段训练策略利用图像级伪数据、提出服装敏感关键帧采样（GSKS）和帧共享 3D-RoPE 技术，并构建了大规模多视角试穿数据集 OmniView，以解决现有方法在数据依赖、试穿区域定位、服装一致性及多视角覆盖方面的挑战。</p>
+<h2>解决的问题</h2>
+<p>现有视频虚拟试穿方法严重依赖稀缺的成对服装 - 视频数据，导致在真实场景中难以保持服装保真度和时间一致性；关键帧驱动方法虽能利用未配对数据，但仍面临依赖难以估计的显式掩膜（易受姿态变化和遮挡影响）、关键帧选择策略未能充分捕捉目标服装外观、以及多视角试穿数据集规模有限导致挑战性视角生成效果不佳等问题。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出 BooM-VVT 框架，采用多阶段训练策略，使模型能够利用更易获取的图像级伪数据学习鲁棒的无掩膜试穿区域定位，从而大幅降低对昂贵视频级伪数据的依赖。</li>
+<li>提出服装敏感关键帧采样（GSKS）策略，根据与目标服装最相关的身体区域选择关键帧，确保选定的关键帧能更好地捕捉目标服装的外观特征。</li>
+<li>引入帧共享 3D-RoPE 技术，通过对关键帧试穿图像及其对应的目标视频帧分配相同的空间位置编码，显式建立时空对应关系，从而实现更准确的服装外观迁移。</li>
+<li>构建了 OmniView 大规模多视角试穿数据集，该数据集在服装类别多样性、完整性及规模上均优于现有数据集，支持在不同视角和试穿任务下生成可靠的试穿结果。</li>
+</ul>
+</article>
     <article class="summary-article summary-topic-entry" id="summary-2609.01252" data-arxiv-id="2609.01252" data-status="ready">
 <h1>[2609.01252] MeRoPE: Metric Rotary Position Embedding for Camera-Controlled Video Generation</h1>
 <p><a href="https://arxiv.org/abs/2609.01252" rel="nofollow">arXiv 原文</a></p>
@@ -205,6 +251,6 @@
 </article>
     </div>
   </main>
-  <script type="application/json" id="summary-catalog">{"papers":{"2609.01252":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.01252"},"2609.01277":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.01277"},"2609.01551":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.01551"},"2609.02664":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.02664"},"2609.03528":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.03528"},"2609.03563":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.03563"},"2609.03586":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.03586"},"2609.03629":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.03629"},"2609.03820":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.03820"},"2609.04031":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.04031"},"2609.04190":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.04190"},"2609.04903":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.04903"}},"topic":"Video Gen&Edit","version":1}</script>
+  <script type="application/json" id="summary-catalog">{"papers":{"2608.29621":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.29621"},"2608.29904":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.29904"},"2609.01252":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.01252"},"2609.01277":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.01277"},"2609.01551":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.01551"},"2609.02664":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.02664"},"2609.03528":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.03528"},"2609.03563":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.03563"},"2609.03586":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.03586"},"2609.03629":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.03629"},"2609.03820":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.03820"},"2609.04031":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.04031"},"2609.04120":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.04120"},"2609.04190":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.04190"},"2609.04903":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.04903"}},"topic":"Video Gen&Edit","version":1}</script>
 </body>
 </html>
