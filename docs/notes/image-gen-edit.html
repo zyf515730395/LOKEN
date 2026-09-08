@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Image Gen&amp;Edit · 论文要点</title>
+  <link rel="stylesheet" href="../assets/css/site.css?v=12">
+</head>
+<body class="summary-page">
+  <main class="summary-page-shell">
+    <header class="summary-topic-header">
+      <a class="summary-back" href="../index.html#image-gen-edit">← 返回论文列表</a>
+      <h1>Image Gen&amp;Edit · 论文要点</h1>
+    </header>
+    <div class="summary-topic-list">
+    <article class="summary-article summary-topic-entry" id="summary-2609.01370" data-arxiv-id="2609.01370" data-status="ready">
+<h1>[2609.01370] Diffusion Based Unpaired Data Learning for Inverse Problems</h1>
+<p><a href="https://arxiv.org/abs/2609.01370" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种名为 LUD-DIF 的方法，利用扩散模型从完全无配对的边际数据中解决逆问题，通过扩散对齐构建代理配对并推导可训练的双路径条件扩散目标，同时显式量化了弱耦合近似带来的偏差。</p>
+<h2>解决的问题</h2>
+<p>解决逆问题通常需要大量成对样本 {(x_i, y_i)} 进行监督训练，但在医疗或天文成像等实际场景中，获取成对数据成本极高或完全不可行，导致现有成对学习方法难以广泛应用。</p>
+<h2>创新点</h2>
+<ul>
+<li>从变分推断的角度出发，在合理的数据先验假设下，将联合分布的证据下界（ELBO）进行解耦，为使用扩散模型解决无配对数据的逆问题提供了可行的训练算法。</li>
+<li>定量分析了假设引入的理论误差界限，并据此提出了一种基于定理启发式的超参数（S, V）选择策略，建立了具有理论依据且实用的模型调优方案。</li>
+<li>在自然图像去噪和超分辨率数据集上验证了所提方法，实验结果表明 LUD-DIF 在这些任务中均取得了卓越的性能。</li>
+<li>该方法仅依赖无配对的边际样本，并通过边际 - 条件分解构建了双路径条件扩散目标，无需依赖成对数据即可同时利用 p(x) 和 p(y) 的信息。</li>
+<li>该方法显式量化了由弱耦合近似引起的偏差，弥补了现有无配对学习框架在原理性推导和偏差量化方面的不足。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.01409" data-arxiv-id="2609.01409" data-status="ready">
+<h1>[2609.01409] EdiTikZ: Scientific Figure Editing from Revision Trajectories</h1>
+<p><a href="https://arxiv.org/abs/2609.01409" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>EdiTikZ 提出了一种利用真实世界中科学图表的修订轨迹来生成大规模编辑数据集（DaEdiTikZ）并训练专用模型的方法，旨在解决现有视觉语言模型难以在保留图表大部分内容的同时根据自然语言指令进行精确修改的问题。</p>
+<h2>解决的问题</h2>
+<p>尽管视觉语言模型（VLMs）在生成科学图表方面取得了进展，但根据自然语言指令对现有图表进行精确修改的能力仍被严重忽视，且现有的图形编程语言（如 TikZ）因语法复杂和学习曲线陡峭而难以被人类和模型掌握。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种可扩展的框架，能够从自然发生的科学图表集合中恢复合理的编辑对，解决了大规模高质量编辑监督数据稀缺的问题。</li>
+<li>发布了 DaEdiTikZ 数据集，包含 39.1 万个源自真实修订的 TikZ 编辑对（78.1 万个编辑实例），以及 DaEdiTikZ-Bench 基准，包含 790 个经人工完善的编辑实例。</li>
+<li>提出了一种结合微调（SFT）和基于奖励的优化（GDPO）的特定于编辑的后训练方法，联合学习图表重建和编辑，并使用互补奖励来优化渲染保真度和编辑应用。</li>
+<li>训练了两个紧凑型的 EdiTikZ 模型（4B 和 9B 参数），其中 9B 模型在人类评估中超越了 GPT-5.6-Sol 并媲美 Gemini-3.1-Pro，且具备向更复杂分布外（OOD）图表迁移的能力。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.01607" data-arxiv-id="2609.01607" data-status="ready">
+<h1>[2609.01607] Uncovering Understanding-Generation Synergy in Native Unified Multimodal Models: From Representation, Task to System</h1>
+<p><a href="https://arxiv.org/abs/2609.01607" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>该研究在原生多模态设置下，从表示、任务和系统三个层面系统揭示了理解与生成能力之间的协同效应及其条件依赖性。</p>
+<h2>解决的问题</h2>
+<p>现有统一多模态模型（UMMs）虽然证明了理解与生成能力的共存，但缺乏关于两者联合学习如何相互影响（是相互促进还是产生干扰）的明确证据，且现有架构往往导致目标冲突或能力退化。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种原生多模态设置（像素输入、像素输出），通过控制路由和参数共享策略，在表示、任务和系统三个层面隔离并研究了理解与生成之间的相互作用。</li>
+<li>揭示了理解与生成之间存在双向有益信号，但联合训练的效果取决于架构设计：密集共享模型会导致目标竞争，而任务解耦的 MoT 架构能实现两者的软对齐与共存。</li>
+<li>通过几何推理、矢量图形和 3D 空间智能等案例研究证明，当理解与生成任务依赖共享领域知识或能力时，联合训练能产生显著的任务级协同效应。</li>
+<li>在系统层面证实，对于需要紧密交互的复杂任务（如推理密集型图像编辑），端到端的统一多模态模型在性能上优于由独立理解和生成模型组成的代理管道。</li>
+<li>总结指出统一理解与生成的益处是条件性的，并据此提出了构建 UMMs 的具体指导原则：当学习目标冲突时应专门化计算，当知识与决策共享时应统一训练与推理。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.01746" data-arxiv-id="2609.01746" data-status="ready">
+<h1>[2609.01746] CAT-Flow: Curvature-Adaptive sTeps for Flow Matching</h1>
+<p><a href="https://arxiv.org/abs/2609.01746" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种将流匹配（Flow Matching）重构为梯度流的理论框架，并据此设计了两种无需额外训练且计算高效的自适应步长求解器 CAT-OT 和 CAT-OV，通过利用向量场的曲率信息来优化生成过程中的步长选择。</p>
+<h2>解决的问题</h2>
+<p>流匹配（Flow Matching）生成的样本质量高度依赖于积分区间的离散化方式，即步长的选择，而现有方法存在以下局限：固定均匀步长忽略了轨迹在不同时间步的难易程度变化；启发式动态调整或基于神经网络的步长调度方法要么缺乏对轨迹几何形状的考量，要么需要额外的训练开销或导致过拟合；传统的自适应 ODE 求解器虽然能调整步长，但在每一步需要多次神经网络函数评估，对于大规模模型而言计算成本过高；步长跳过方法仅能从预定义的离散集合中选择步长，适应性有限。</p>
+<h2>创新点</h2>
+<ul>
+<li>建立了流匹配（在直流假设下）与梯度流之间的形式化联系，证明了在相同初始条件下两者具有相同的解，从而为借用优化领域的自适应步长直觉提供了理论依据。</li>
+<li>提出了两种自适应步长方法：基于时间曲率的 CAT-OT 和基于历史值曲率的 CAT-OV，它们分别通过向量场的时间导数有限差分近似和方差来估计曲率。</li>
+<li>设计了高效的实现方案，利用生成过程中已有的向量场信息来调整步长，无需额外的神经网络函数评估或训练过程，同时保证了截断误差为常数阶。</li>
+<li>在图像生成任务中验证了方法的有效性，证明在达到与基线方法相同图像质量分数的情况下，所需步数（或 NFEs）显著减少，且几乎不增加墙钟时间和额外 FLOPs。</li>
+<li>展示了在相同步数下，所提方法能获得比基线方法更高的图像质量分数，特别是在步数较少时性能提升更为明显。</li>
+<li>在多样化的真实用户提示（DiffDB）和三种互补的质量指标（提示对齐、美学质量、人类偏好）上进行了广泛实验，证实了该方法在效率和生成质量上的优越性。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2608.30081" data-arxiv-id="2608.30081" data-status="ready">
+<h1>[2608.30081] Tracing Generated Samples to Training-Data Clusters in Flow-Matching Models</h1>
+<p><a href="https://arxiv.org/abs/2608.30081" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种基于流匹配（Flow Matching）闭式解的簇级训练数据归因方法，通过留一簇（LOCO）模型评估移除训练簇对生成样本的反事实影响，揭示了归因取决于整个轨迹动力学而非仅端点相似性或局部速度场扰动。</p>
+<h2>解决的问题</h2>
+<p>片段未提供</p>
+<h2>创新点</h2>
+<ul>
+<li>引入流匹配模型中的簇级训练数据归因，并提出由留一簇（LOCO）模型定义的簇级归因设置。</li>
+<li>推导了一种结合流匹配闭式解与训练模型轨迹的归因方法。</li>
+<li>针对现有的梯度基方法和语义相似性基线进行了评估，并发现归因依赖于整个轨迹动力学、反事实指标及流匹配潜在表示。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.01997" data-arxiv-id="2609.01997" data-status="ready">
+<h1>[2609.01997] Linear Fusion MultiDiffusion for Fast Training-Free Spherical Panorama Generation</h1>
+<p><a href="https://arxiv.org/abs/2609.01997" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种名为 Linear Fusion MultiDiffusion (LF-MultiDiffusion) 的方法，通过支持任意线性投影和引入 Krylov 迭代求解器，解决了现有无训练全景生成方法因依赖直接像素采样而导致计算成本高昂且需要大量重叠视角的问题。</p>
+<h2>解决的问题</h2>
+<p>片段未提供</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了 Linear Fusion MultiDiffusion (LF-MultiDiffusion)，扩展了 MultiDiffusion 以支持目标图像空间与参考图像空间之间的任意线性投影。</li>
+<li>将潜在聚合问题建模为正则化最小二乘问题，并针对显式计算不可行的情况，在去噪循环中集成了基于 Krylov 的迭代求解器。</li>
+<li>证明了该迭代更新的高效性，其额外计算成本仅占去噪步骤成本的 20%。</li>
+<li>通过支持任意线性投影，实现了全景视图与透视视图之间更密集和自然的映射，从而在极少的透视视图下也能稳定生成。</li>
+<li>实验表明，该方法在视觉质量、文本对齐和几何一致性方面优于现有的无训练方法，同时相比最佳基线实现了 15.36 倍的速度提升。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.02004" data-arxiv-id="2609.02004" data-status="ready">
+<h1>[2609.02004] InstEditSeg: Instruction-Driven Image Editing for Polyp and Skin Lesion Segmentation</h1>
+<p><a href="https://arxiv.org/abs/2609.02004" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>InstEditSeg 是一种统一的生成式框架，将医学图像分割重构为指令驱动的彩色编码图像编辑，以解决自然图像先验与医学数据之间的分布差距及文本空间引导不足的问题。</p>
+<h2>解决的问题</h2>
+<p>片段未提供</p>
+<h2>创新点</h2>
+<ul>
+<li>提出 InstEditSeg，一种统一的生成式框架，将医学图像分割重构为指令驱动的彩色编码图像编辑，消除了任务特定的头部并使其输出与潜在扩散先验对齐。</li>
+<li>开发了一种基于指令的数据管道，通过文本指令和随机颜色将分割注释转换为统一的图像 - 文本样本。</li>
+<li>设计了一个由 DINOv3 引导的多尺度特征金字塔，将分层判别性先验注入扩散 U-Net，从而改善病变定位和边界描绘。</li>
+<li>在息肉和皮肤病变基准上的实验表明，该方法在未见数据上具有更好的跨域泛化能力，并在多病变完整性和指令条件任务控制方面具有具体优势。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.02748" data-arxiv-id="2609.02748" data-status="ready">
+<h1>[2609.02748] Balancing Frequencies and Pixels in Flow Matching</h1>
+<p><a href="https://arxiv.org/abs/2609.02748" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种名为 Focal Log-Frequency Loss (f\bm{f}-loss) 的频率域目标函数，通过平衡频谱中的训练信号来纠正自然图像功率谱与像素空间训练目标之间的不匹配，从而在无需修改模型架构的情况下显著提升流匹配模型的收敛速度和生成质量。</p>
+<h2>解决的问题</h2>
+<p>自然图像的功率谱遵循 1/f^2 分布，导致信号能量主要集中在低频部分，而感知上至关重要的细节（高频）能量稀疏；现有的像素空间训练目标受此主导，优化过程偏向低频残差，导致模型难以在训练早期捕捉到高频的结构模式和精细纹理。</p>
+<h2>创新点</h2>
+<ul>
+<li>识别了自然图像的频谱结构与像素空间训练目标之间的根本性不匹配，证明了标准损失函数会偏向低频分量，尽管高频细节在感知质量中至关重要。</li>
+<li>提出了一种频谱平衡的目标函数，即 Focal Log-Frequency Loss (f\bm{f}-loss)，通过对数压缩的频谱误差应用焦点加权，使模型能够同时学习全局结构和细粒度模式。</li>
+<li>展示了一种简单的两阶段训练策略，先使用 f\bm{f}-loss 学习频谱结构，再使用标准像素损失 v\bm{v}-loss 细化空间一致性，显著加速了收敛并提升了生成质量。</li>
+<li>证明了该方法作为标准流匹配目标的即插即用替代方案，无需任何架构修改，即可在定量（FID）和定性指标上实现最先进的性能。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.03415" data-arxiv-id="2609.03415" data-status="ready">
+<h1>[2609.03415] Mudragen: Geometrically Supervised Generation of Interacting Two-Hand Mudras for Preserving Indian Classical Dance Heritage</h1>
+<p><a href="https://arxiv.org/abs/2609.03415" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>MudraGen 是一个几何感知的条件扩散框架，旨在通过手势类别标签生成具有照片级真实感的印度古典舞蹈 Bharatanatyam 中交互双手手势（Samyukta Hasta）的 RGB 图像。</p>
+<h2>解决的问题</h2>
+<p>现有基于自然语言提示的生成方法难以准确生成 Bharatanatyam 手势，因为许多手势缺乏精确的英文描述且存在语义歧义，同时交互双手的生成面临严重的自遮挡和复杂手指交互挑战，导致生成的图像可能在视觉上逼真但解剖结构或空间关系无效。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了首个用于从手势类别标签生成 Bharatanatyam Samyukta Hasta 手势照片级 RGB 图像的几何感知条件扩散框架。</li>
+<li>引入基于预训练重建网络的 3D 手网格监督，通过关键点损失（Keypoint Loss）、关节偏移损失（Joint Offset Loss）和形状一致性正则化（Shape Consistency regularization）来确保手势的解剖合理性和结构连贯性。</li>
+<li>将手势合成形式化为标签条件图像生成问题，利用 Bharatanatyam 的结构化分类体系替代模糊的文本描述，以解决语义歧义。</li>
+<li>进行了广泛的定量评估、多视图 3D 几何分析以及与受过训练的专业人士的专家研究，验证了生成手势在视觉真实性、解剖准确性和文化忠实性方面的优越性。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.03443" data-arxiv-id="2609.03443" data-status="ready">
+<h1>[2609.03443] Beyond Straightness: Non-Crossing Flow Matching via Quantile AlignTree Coupling</h1>
+<p><a href="https://arxiv.org/abs/2609.03443" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种基于二叉树结构分位数对齐的高效半离散传输构建方法（QAT），旨在解决流匹配中路径交叉、路径分离不足及条件一致性难以兼顾的问题，实现了非交叉路径、增强的路径分离以及连续高斯先验对齐。</p>
+<h2>解决的问题</h2>
+<p>现有流匹配方法在训练路径交叉或过于接近时会产生局部速度模糊，导致拟合困难；同时，现有的耦合策略（如重流、最优传输等）往往在计算效率、非交叉路径结构、路径分离度以及条件生成的一致性之间存在难以调和的权衡。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了分位数对齐树（QAT），这是一种基于二叉树结构分位数对齐的高效半离散传输构建方法，能够以 O(Nd log N) 的构建复杂度和 O(d) 的每对采样复杂度，在大规模高维生成任务中实现经验数据分布与连续高斯先验之间的精确耦合。</li>
+<li>设计了支持多种树分裂策略的 QAT 耦合机制，能够自然地将条件信息整合到树构建和耦合过程中，从而在无条件生成和条件生成（包括离散类别条件和连续文本条件）中均保持条件一致性。</li>
+<li>证明了 QAT 诱导的路径结构具有优越性：生成的线性插值路径满足非交叉属性，且中间时刻的路径分离度均匀优于标准独立耦合流匹配，有效缓解了局部速度模糊问题。</li>
+<li>在低维合成数据、无条件生成、离散类别条件生成、连续文本条件生成及大规模图像合成等任务上进行了系统实验，结果表明 QAT-FM 在保持具有竞争力的生成质量的同时，其耦合构建复杂度显著低于基于最优传输的方法。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.03585" data-arxiv-id="2609.03585" data-status="ready">
+<h1>[2609.03585] Text2Thermal: Physics-Aware Thermal Image Synthesis from Textual Priors</h1>
+<p><a href="https://arxiv.org/abs/2609.03585" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>Text2Thermal 是一个利用热物理感知文本先验和参数高效微调技术，将预训练文本到图像扩散模型适配到热成像领域的框架，旨在解决可见光到热成像映射的歧义性问题并实现高质量合成。</p>
+<h2>解决的问题</h2>
+<p>片段未提供</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种物理感知的文本到热成像图像合成框架，证明语言条件化可以解决可见光到热成像映射中固有的歧义性。</li>
+<li>通过热物理感知文本先验和参数高效微调，将大型预训练文本到图像扩散模型适配到热成像领域，从而将大规模可见光预训练的语义知识转移到缺乏可比语料的热成像模态。</li>
+<li>扩展了框架并添加了空间控制分支，允许在有配对的几何信息时进行结构条件化，以实现高保真热成像合成，并分析了哪种空间模态最有效。</li>
+<li>在 M3FD、FLIR 和 FMB 三个基准测试上实现了最先进的 FID 分数，优于先前的热成像合成方法，并通过消融实验隔离了每个文本属性贡献和每个架构组件的贡献。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.03688" data-arxiv-id="2609.03688" data-status="ready">
+<h1>[2609.03688] ToPO: Token-Conditioned Preference Routing for Attention-Based Latent Diffusion Models</h1>
+<p><a href="https://arxiv.org/abs/2609.03688" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>ToPO 提出了一种基于 token 的条件化偏好路由方法，旨在解决固定离线输赢配对中图像级偏好信号如何分配至扩散模型局部去噪坐标的未定义问题，通过分支残差对比和 token 调权实现样本依赖的局部更新。</p>
+<h2>解决的问题</h2>
+<p>在固定离线输赢配对（pair-only offline）的扩散模型 DPO 中，图像级的偏好信号仅确定了偏好方向，但未指定样本依赖的局部去噪坐标（空间 - 时间坐标）上的更新分布，即“路由分配问题”（route-allocation problem）。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了针对仅配对离线扩散 DPO 的路由分配问题，指出图像级输赢比较虽固定了偏好方向，却无法确定样本依赖的局部去噪坐标分布。</li>
+<li>引入了 ToPO 方法，这是一种解耦的、基于 token 条件化的、可分离的空间 - 时间重加权机制，用于优化 Diffusion-DPO。</li>
+<li>利用冻结参考去噪器生成残差对比路由，并通过优选分支的交叉注意力为空间因子提供内容 token 调制，同时引入路由后的像素中点项作为辅助对称排序约束。</li>
+<li>在附录中分析了声明的解耦更新和冻结诊断在既定假设下的有效性。</li>
+<li>实验发现，在相等的更新和共享超参数 U-Net 协议下，锁定路由的 ToPO 在五个 SD-1.5 指标以及 SDXL 的 HPSv2、ImageReward 和 CLIP 指标上均表现出相对于 Diffusion-DPO 的积极终点差异。</li>
+<li>通过描述性检查点、组合性、人类偏好、路由排列和留出评估，绘制了完整目标函数在其各自协议下的实证特征图谱。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.03740" data-arxiv-id="2609.03740" data-status="ready">
+<h1>[2609.03740] Fill My Mirror: Geometry-Constrained Mirror Inpainting</h1>
+<p><a href="https://arxiv.org/abs/2609.03740" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种无需训练的几何约束镜面修复方法，通过将任务分解为确定性几何投影和生成式补全两部分，利用双掩码扩散策略在保持物理一致性的同时修复镜面内容。</p>
+<h2>解决的问题</h2>
+<p>现有镜面修复方法主要依赖模型先验进行幻觉生成，导致生成的反射内容缺乏物理一致性且无法适应视角变化；虽然已有工作引入深度信息作为辅助条件，但未将场景几何显式投影到镜面以直接约束生成内容，且合成数据训练限制了其在真实场景中的泛化能力。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种无需训练的几何约束镜面修复方法，首次将镜面生成任务显式分解为确定性几何场景投影和剩余区域的生成式补全，而非仅将深度作为辅助信号。</li>
+<li>提出了一种基于双掩码分解的鲁棒扩散策略，利用互补掩码平衡几何约束与模型先验，在不重新训练或修改底层扩散模型的情况下，有效缓解了深度误差、遮挡歧义和投影不完美带来的伪影。</li>
+<li>引入了一种无需真实几何真值即可评估镜面反射质量的指标，专注于由可见场景决定的镜面区域，从而能够在无真值条件下评估真实图像中的镜面修复效果。</li>
+<li>在 MirrorBench-V2 基准及真实图像上进行了广泛评估，证明了显式结合场景几何能显著提升镜面反射的物理一致性和视觉质量。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.03796" data-arxiv-id="2609.03796" data-status="ready">
+<h1>[2609.03796] LLaDA-Image: Building Strong Image Generators with Fully Open Training Recipes</h1>
+<p><a href="https://arxiv.org/abs/2609.03796" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>LLaDA-Image 提出了一种完全开放的训练方案，通过解耦视觉先学习与语言对齐、采用以真实数据为主的渐进式训练管道以及 TwinFlow 蒸馏技术，构建了兼具高质量生成、统一理解/生成/编辑能力及高效推理的 6B 参数扩散模型。</p>
+<h2>解决的问题</h2>
+<p>现有专有系统数据与训练配方不透明，而开源模型面临生成质量、数据预算、训练稳定性及部署效率之间的多重瓶颈，且传统范式依赖昂贵的成对图文数据并在低分辨率下丢失细节。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出数据高效的图像仅预训练与中训练策略，通过冻结的 dLLM 模块从图像区域直接推导条件，避免早期阶段依赖大规模成对图文监督，使图像仅训练占比超过 90%。</li>
+<li>设计统一的 dLLM 理解、生成与编辑框架，利用残差查询适配器将多模态语义与像素级参考信号整合至单流 DiT 中，实现文本生成与参考保持编辑在同一检查点完成。</li>
+<li>构建稳定的真实数据主导渐进式训练管道，从 256x256 图像预训练逐步过渡到高分辨率成对对齐与联合训练，全程保持真实数据占比高于 70% 以提升收敛后的真实感。</li>
+<li>实现参数免费的 RMSNorm 与 Muon 优化器以稳定全量训练，并结合 TwinFlow 蒸馏技术推出仅需 2-4 步采样的 LLaDA-Image Turbo 变体，显著降低推理成本。</li>
+<li>全面开源模型权重、推理代码及详细的训练与数据构建配方，提供标准 Base、Turbo 及其 FP8 变体，支持高保真生成与低成本部署两种场景。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.03813" data-arxiv-id="2609.03813" data-status="ready">
+<h1>[2609.03813] SPARK: Input-Conditioned Sparse Activation Modulation for Frozen DiT-based Super-Resolution</h1>
+<p><a href="https://arxiv.org/abs/2609.03813" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 SPARK，一种针对冻结 DiT 超分模型的轻量级激活空间调制框架，通过在线识别并仅调制每个块中少数主导通道来提升感知质量。</p>
+<h2>解决的问题</h2>
+<p>在现实世界复杂退化场景下，如何有效控制在基于 DiT 的生成式超分模型中的感知质量，以及是否可以通过作用于表示的小子集而非修改整个网络来实现这一目标。</p>
+<h2>创新点</h2>
+<ul>
+<li>分析了 DiT 超分模型中的大规模激活现象，证明主导通道在统计上显著且对重建质量具有关键功能影响。</li>
+<li>提出了 SPARK 框架，该方法结合在线稳定性终止的通道选择过程与输入条件化的有界仿射参数预测器，仅调制选定通道。</li>
+<li>在三个不同的 DiT 超分骨干网络和多个基准测试上展示了 SPARK 的一致性改进，并隔离了通道选择、参数预算和调制机制的作用。</li>
+<li>验证了该方法在冻结骨干网络和 VAE 的情况下，仅优化预测器即可实现从 DIV2K 训练数据到 RealSR 和 DRealSR 测试数据的泛化。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.04090" data-arxiv-id="2609.04090" data-status="ready">
+<h1>[2609.04090] Conditioning Degenerate Diffusion Models</h1>
+<p><a href="https://arxiv.org/abs/2609.04090" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>该片段介绍了在物理化学、遗传学等领域中，如何从无条件过程构建带有终端条件的退化扩散过程，并指出当扩散系数矩阵不满秩且终端条件导致条件分布奇异时，传统的 Doob h-变换和 Föllmer 漂移方法面临控制需适应路径（closed-loop）及漂移计算困难等挑战。</p>
+<h2>解决的问题</h2>
+<p>片段未提供明确列出的具体研究问题（如具体的数学难题或待解决的工程痛点），仅描述了退化扩散模型在构建条件过程时面临的理论困难，包括：1. 扩散系数不满秩导致控制需为闭回路适应（F-适应）；2. 终端条件为 Dirac 测度时条件分布奇异而非光滑，使得标准变换失效。</p>
+<h2>创新点</h2>
+<ul>
+<li>片段未提供关于本文具体贡献（如提出的新算法、新理论框架或实验结果）的描述，仅阐述了背景问题和现有方法的局限性。</li>
+<li>片段未提供关于本文具体贡献的描述，未提及如何解决退化情形下的闭回路控制问题。</li>
+<li>片段未提供关于本文具体贡献的描述，未提及如何处理终端条件为奇异测度时的条件分布估计问题。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.04151" data-arxiv-id="2609.04151" data-status="ready">
+<h1>[2609.04151] Persistent Identity Preservation in Generative Image Models: A Benchmark and Evaluation System</h1>
+<p><a href="https://arxiv.org/abs/2609.04151" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>该论文片段指出，尽管生成式图像模型已能合成逼真场景并执行复杂编辑，但在保持特定人物、动物或角色身份（即主体身份）方面仍不可靠，尤其是在面对姿态、表情、光照等大幅变化时。</p>
+<h2>解决的问题</h2>
+<p>片段未提供关于具体技术问题的详细描述，仅指出当前模型在主体身份保持方面存在不可靠性。</p>
+<h2>创新点</h2>
+<ul>
+<li>片段未提供关于具体贡献的详细信息，仅提及将现有方法组织为三种范式：模型特定身份、上下文身份和持久身份。</li>
+<li>片段未提供关于具体贡献的详细信息，未说明提出的基准或评估系统的具体内容。</li>
+<li>片段未提供关于具体贡献的详细信息，未说明提出的持久身份保持方法的具体技术细节。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.04837" data-arxiv-id="2609.04837" data-status="ready">
+<h1>[2609.04837] PAPT++: Risk-Aware Adversarial Tuning and Generation for Single Domain Generalization</h1>
+<p><a href="https://arxiv.org/abs/2609.04837" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>PAPT++ 提出了一种风险感知对抗生成训练框架，利用预训练文本到图像扩散模型构建类条件语义模糊集，通过交替进行高难度样本生成与分类器训练，在保持核心语义的同时暴露模型未覆盖的复杂变化以提升单域泛化性能。</p>
+<h2>解决的问题</h2>
+<p>现有的单域泛化（SDG）方法通常依赖数据增强或对抗扰动，但这些方法往往局限于预定义的变换空间，难以覆盖风格、背景等复杂的未见变化；此外，单纯增加生成多样性并不足以保证鲁棒性，因为缺乏语义约束的高风险搜索容易产生伪影或纹理偏差，导致生成的样本偏离核心类别语义。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了 PAPT++ 框架，将基于多样性的提示生成扩展为风险感知的扩散合成，利用当前分类器在类条件生成空间中搜索具有高风险的样本，并交替执行困难样本生成与分类器训练。</li>
+<li>开发了两个互补模块以实现语义约束的风险搜索：类级语义参考学习（CSRL）通过图像 - 文本对齐和类内多样性正则化学习多样化的语义参考图像；分类器引导对抗扩散合成（CADS）利用这些参考图像作为去噪目标，在增加分类损失的同时防止语义漂移和视觉伪影。</li>
+<li>引入了一种渐进式去噪优化策略，将梯度引导扩展至去噪轨迹，从而提高了生成样本的质量。</li>
+<li>建立了 PAPT++ 与分布鲁棒优化（DRO）的理论联系，证明了参考去噪目标控制平滑参考分布与生成分布之间的 KL 散度上界，并推导了考虑模糊集覆盖、有限搜索间隙和有限样本估计误差的目标域风险界。</li>
+<li>在单域泛化和多源域泛化基准上进行了广泛的实验，验证了 PAPT++ 达到了最先进性能，并通过消融研究分析了各组件的有效性。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.04939" data-arxiv-id="2609.04939" data-status="ready">
+<h1>[2609.04939] LensStyle: Learning the Optical Aesthetics for Controllable Stylized Lens Effect Rendering</h1>
+<p><a href="https://arxiv.org/abs/2609.04939" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>LensStyle 是一个统一的基于流的框架，用于可控的光学风格渲染，能够联合控制连续光学参数（如焦距和模糊强度）与离散镜头风格（如散景形状和衍射效果），并提出了 MultiLens 数据集作为基准。</p>
+<h2>解决的问题</h2>
+<p>现有镜头效果渲染方法主要关注散景合成中的模糊量模拟，通常生成均匀的圆形散景，而忽略了由光圈叶片数量、形状及光学像差决定的散景纹理、形状和亮点分布等风格特征，同时也未能解决小光圈下产生的星芒衍射效果。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了 LensStyle，这是一个统一的基于流的框架，能够在单一生成架构内联合建模连续光学参数和离散镜头风格类别。</li>
+<li>引入了双路径控制器（Dual Path Controller），将连续光学参数调制与离散镜头风格条件解耦，实现了对焦距、模糊强度及多样化光学风格的精细、可解释且照片级的控制。</li>
+<li>构建了 MultiLens 数据集，这是一个大规模、基于物理的镜头效果基准，提供了对焦距和模糊强度的连续控制，并涵盖了圆形、多边形、甜甜圈、猫眼散景以及衍射星芒等多种镜头风格。</li>
+<li>设计了连续光学参数调制分支，通过光学校正器将用户指定的参数编码为嵌入，进而转化为自适应缩放和平移因子来调制流匹配网络中的中间图像特征。</li>
+<li>设计了离散镜头风格交叉注意力分支，将选定的镜头风格编码为文本嵌入并通过交叉注意力注入生成骨干网络，以引导模型合成特定的光学特征。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.04976" data-arxiv-id="2609.04976" data-status="ready">
+<h1>[2609.04976] RefDiT: Local Attribute Guidance in Reference-Based Image Generation</h1>
+<p><a href="https://arxiv.org/abs/2609.04976" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>RefDiT 提出了一种基于多模态大语言模型提取对象三元组信息的方法，通过属性感知标识符令牌构建全局与局部引导信号，并利用三元组条件 LoRA 训练 DiT 模型以实现参考图像中局部属性对生成过程的精确指导。</p>
+<h2>解决的问题</h2>
+<p>现有参考引导生成方法主要依赖全局图像条件或单一标识符，缺乏对局部区域及属性级细节的控制能力，导致在处理包含多个物体的复杂场景时无法有效利用参考图像中的局部元素属性进行生成。</p>
+<h2>创新点</h2>
+<ul>
+<li>识别并展示了现有参考引导生成方法在提供属性感知、局部层级引导方面的关键局限性，特别是在参考图像包含多个具有不同属性特性的物体时。</li>
+<li>提出了 RefDiT 方法，利用多模态大语言模型从参考图像中提取结构化对象三元组，以捕获对象级属性和物体间关系，从而构建无需显式空间监督的语义表示。</li>
+<li>引入了一种属性感知标识符令牌机制，利用提取的三元组级信息构建全局和局部引导信号，使生成模型能够根据参考图像中的特定局部元素属性（如颜色、材质、外观和尺寸）进行生成。</li>
+<li>提出了一种三元组条件的 LoRA 训练方法，用于更新多模态 DiT 权重，以建立标识符令牌与其在参考图像中对应局部区域之间的对应关系。</li>
+<li>通过广泛的定性定量对比分析，证明了 RefDiT 在参考引导图像生成任务上相较于基于 LoRA 的个人化方法、基于 DiT 的编辑方法以及商业图像生成模型均能带来一致的性能提升。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.05028" data-arxiv-id="2609.05028" data-status="ready">
+<h1>[2609.05028] Compositional Reward Models for Conditional Medical Image Generation</h1>
+<p><a href="https://arxiv.org/abs/2609.05028" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种名为 PRISM 的组合奖励模型（CRM），通过分层约束传播（HCP）框架将图像质量评估分解为基于验证器的子奖励，以解决现有标量奖励在医学图像生成中无法兼顾强度保真度、纹理真实性和结构对齐等细粒度属性的问题。</p>
+<h2>解决的问题</h2>
+<p>片段未提供</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种组合奖励模型（CRM），将图像质量评估分解为多个基于验证器的子奖励，而非单一的标量分数。</li>
+<li>设计了分层约束传播（HCP）框架，强制要求低级属性（如强度和纹理）在高级属性（如结构和语义正确性）之前得到满足，防止简单目标掩盖关键组件的失败。</li>
+<li>展示了该方法在三个医学成像基准任务（细胞分割、隐窝检测与测量、皮肤病变分类）上的一致性改进，显著提升了下游模型的性能。</li>
+<li>利用生成的组合奖励（CRM）结合 GDPO 强化学习优化条件扩散模型，有效改善了图像生成质量并提升了下游任务表现。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.05234" data-arxiv-id="2609.05234" data-status="ready">
+<h1>[2609.05234] Measured Sliders: Learning Continuous Controls from Differentiable Image Measurements</h1>
+<p><a href="https://arxiv.org/abs/2609.05234" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 Measured Sliders 框架，通过解码图像测量值将连续控制统一在可评估的测量空间中，解决了现有方法中控制系数与图像变化关系隐式且不可比的问题。</p>
+<h2>解决的问题</h2>
+<p>现有可复用滑块方法（如基于参数、嵌入或分数空间）中，原始系数与实现的图像变化之间的关系是隐式的，导致相同系数在不同属性或方法间不代表可比的效果，且难以保证响应的有序性和可预测性。</p>
+<h2>创新点</h2>
+<ul>
+<li>定义了一种基于解码图像测量值的连续滑块，并通过联合学习多个 LoRA 分支，使用同时指定目标效应和非目标静止的优化目标进行训练。</li>
+<li>利用预训练可观测性分析来识别可用的测量值，采用自然变异缩放来平衡优化过程，并使用解码校准将生成的控制表达为可比较的效果单位。</li>
+<li>在 SDXL 和 FLUX.1-dev 模型上评估了学习到的控制，涵盖了解码效应、漂移、排序、一致性和零样本组合等多个维度。</li>
+<li>实验表明 Measured Sliders 在光照方向上达到了 0.995 的相关系数，单调扫掠率达到 98.9%，且在选择性上比最强外部滑块高出 3.3 倍。</li>
+<li>预训练可观测性能够预测所有六个评估的学习结果，而解码校准将端点离散度从 63.2 倍降低至 2.2 倍。</li>
+</ul>
+</article>
+    </div>
+  </main>
+  <script type="application/json" id="summary-catalog">{"papers":{"2608.30081":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.30081"},"2609.01370":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.01370"},"2609.01409":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.01409"},"2609.01607":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.01607"},"2609.01746":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.01746"},"2609.01997":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.01997"},"2609.02004":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.02004"},"2609.02748":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.02748"},"2609.03415":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.03415"},"2609.03443":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.03443"},"2609.03585":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.03585"},"2609.03688":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.03688"},"2609.03740":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.03740"},"2609.03796":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.03796"},"2609.03813":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.03813"},"2609.04090":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.04090"},"2609.04151":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.04151"},"2609.04837":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.04837"},"2609.04939":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.04939"},"2609.04976":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.04976"},"2609.05028":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.05028"},"2609.05234":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.05234"}},"topic":"Image Gen&Edit","version":1}</script>
+</body>
+</html>
