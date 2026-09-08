@@ -6,6 +6,7 @@ from dataclasses import dataclass
 import json
 import math
 import os
+from pathlib import Path
 import time
 from types import SimpleNamespace
 from datetime import datetime, timezone
@@ -14,11 +15,19 @@ from uuid import uuid4
 import requests
 
 from . import workflow as batch
+from papers.annotations.catalog import archive_paper_ids, load_annotation_catalog
+from papers.paths import ANNOTATIONS
 from papers.summaries.models import PaperSummaryError
 from papers.summaries.paths import normalize_arxiv_id, private_path, run_lock
 from papers.model_runtime import DEFAULT_MODEL_TIMEOUT_SECONDS, DEFAULT_MODEL_WORKERS, MAX_MODEL_WORKERS
 from shared.loopback_chat import LoopbackChatError, validate_loopback_base_url
 from shared.rendering import atomic_write_text
+
+
+NON_RETRYABLE_RECOVERY_ERRORS = frozenset({
+    'invalid_topic_review',
+    'local_note_conflict',
+})
 
 
 @dataclass(frozen=True, slots=True)
@@ -122,6 +131,148 @@ def prioritized_queue(selected, priority_topic='Relighting'):
     return list(dict.fromkeys(priority + remainder))
 
 
+def retryable_failure_ids(history):
+    """Return prior-cycle failed papers that are safe to retry automatically."""
+    result = set()
+    for batch_record in history:
+        for field in ('download_report', 'summary_report'):
+            raw_path = batch_record.get(field)
+            if not raw_path:
+                continue
+            try:
+                path = Path(raw_path)
+                if path.stat().st_size > 2 * 1024 * 1024:
+                    raise ValueError('oversize report')
+                report = json.loads(path.read_text(encoding='utf-8'))
+                records = report['records']
+                if not isinstance(records, list):
+                    raise ValueError('invalid records')
+                for record in records:
+                    if (not isinstance(record, dict) or 'id' not in record
+                            or record.get('status') not in {'succeeded', 'failed'}):
+                        raise ValueError('invalid record')
+                    if (record['status'] == 'failed'
+                            and record.get('error') not in NON_RETRYABLE_RECOVERY_ERRORS):
+                        result.add(normalize_arxiv_id(record['id']))
+            except (OSError, ValueError, TypeError, KeyError, json.JSONDecodeError):
+                raise PaperSummaryError(
+                    'invalid_cycle_history',
+                    'completed batch reports are missing or invalid; preserve the checkpoint and inspect',
+                ) from None
+    return result
+
+
+def current_archive_ids():
+    try:
+        archive = json.loads(batch.DEFAULT_ARCHIVE.read_text(encoding='utf-8'))
+        if not isinstance(archive, dict):
+            raise ValueError('invalid archive')
+        return archive_paper_ids(archive)
+    except (OSError, ValueError, TypeError, json.JSONDecodeError):
+        raise PaperSummaryError(
+            'invalid_recovery_inputs',
+            'archive cannot be read safely for recovery',
+        ) from None
+
+
+def missing_annotation_ids(*, archived_ids=None):
+    """Return archived papers with no public annotation record."""
+    archived = current_archive_ids() if archived_ids is None else set(archived_ids)
+    try:
+        annotations = load_annotation_catalog(ANNOTATIONS, batch.PAPER_LABELS)
+        return archived - set(annotations)
+    except (OSError, ValueError, TypeError):
+        raise PaperSummaryError(
+            'invalid_recovery_inputs',
+            'public annotation catalog cannot be read safely',
+        ) from None
+
+
+def existing_recovery_targets(*, retryable_ids, missing_annotation_ids, archived_ids):
+    """Never resurrect a paper removed from every current archive topic."""
+    return (set(retryable_ids) | set(missing_annotation_ids)) & set(archived_ids)
+
+
+def ordered_recovery_queue(selected, *, retryable_ids, missing_annotation_ids):
+    """Retry failures first, then unlabelled papers; prioritize Relighting in each group."""
+    retryable = [(item, state) for item, state in selected if item.arxiv_id in retryable_ids]
+    retry_queue = prioritized_queue(retryable)
+    retry_set = set(retry_queue)
+    missing = [(item, state) for item, state in selected
+               if item.arxiv_id in missing_annotation_ids and item.arxiv_id not in retry_set]
+    return retry_queue + prioritized_queue(missing)
+
+
+def needs_recovery_cycle(state):
+    """A regular completed checkpoint is followed by exactly one recovery cycle."""
+    return bool(state and state.get('phase') == 'complete'
+                and state.get('cycle_kind') != 'recovery')
+
+
+def recovery_cycle_pending():
+    return needs_recovery_cycle(_read_state(include_complete=True))
+
+
+def _recovery_state(args, completed, *, apply):
+    raw_retryable = retryable_failure_ids(completed.get('history', []))
+    archived = current_archive_ids()
+    missing = missing_annotation_ids(archived_ids=archived)
+    targets = existing_recovery_targets(
+        retryable_ids=raw_retryable,
+        missing_annotation_ids=missing,
+        archived_ids=archived,
+    )
+    retryable = raw_retryable & targets
+    selected = []
+    skipped = 0
+    if targets:
+        selected, skipped = batch.select_items(stage_args(args, 'summarize', sorted(targets)))
+    queue = ordered_recovery_queue(
+        selected,
+        retryable_ids=retryable,
+        missing_annotation_ids=missing,
+    )
+    state = {
+        'version': 1,
+        'cycle_kind': 'recovery',
+        'queue': queue,
+        'offset': 0,
+        'batch_ids': [],
+        'phase': 'download' if queue else 'complete',
+        'history': [],
+        'recovery': {
+            'retryable_failures': len(retryable),
+            'removed_failures_excluded': len(raw_retryable - archived),
+            'missing_annotations': len(missing),
+            'selected': len(queue),
+            'completed_skipped': skipped,
+        },
+    }
+    if apply:
+        stamp = datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')
+        backup = batch.ROOT / 'build' / 'reports' / f'cycle-state-before-recovery-{stamp}-{uuid4().hex[:8]}.json'
+        atomic_write_text(backup, json.dumps(completed, ensure_ascii=False, indent=2) + '\n')
+        state['previous_checkpoint_backup'] = str(backup)
+        save_state(state)
+        print(json.dumps({'event': 'recovery_cycle_started', **state['recovery'],
+                          'checkpoint_backup': str(backup)}, ensure_ascii=False, sort_keys=True), flush=True)
+    return state
+
+
+def _initial_state(args, *, apply):
+    completed = _read_state(include_complete=True)
+    if needs_recovery_cycle(completed):
+        return _recovery_state(args, completed, apply=apply)
+    if completed is not None:
+        return None
+    selected, _ = batch.select_items(stage_args(args, 'summarize', []))
+    state = {'version': 1, 'queue': prioritized_queue(selected), 'offset': 0,
+             'batch_ids': [], 'phase': 'download', 'history': []}
+    if apply:
+        save_state(state)
+    return state
+
+
 def reorder_checkpoint(args, *, apply):
     """Preview or atomically replace the active queue from current durable results."""
     old = _read_state(include_complete=True)
@@ -205,8 +356,8 @@ def _run_cycle(args, *, max_batches):
     state = load_state()
     if args.dry_run:
         if state is None:
-            selected, _ = batch.select_items(stage_args(args, 'summarize', []))
-            queue = list(dict.fromkeys(item.arxiv_id for item, _ in selected))
+            preview = _initial_state(args, apply=False)
+            queue = preview['queue'] if preview else []
         else:
             queue = state['queue'][state['offset']:]
         print(f'pending_unique={len(queue)} batch_size={args.batch_size} '
@@ -214,10 +365,10 @@ def _run_cycle(args, *, max_batches):
         print('next_batch=' + ','.join(queue[:args.batch_size]))
         return 0
     if state is None:
-        selected, _ = batch.select_items(stage_args(args, 'summarize', []))
-        state = {'version': 1, 'queue': list(dict.fromkeys(item.arxiv_id for item, _ in selected)),
-                 'offset': 0, 'batch_ids': [], 'phase': 'download', 'history': []}
-        save_state(state)
+        state = _initial_state(args, apply=True)
+        if state is None:
+            print(f'cycle=complete processed=0/0 checkpoint={cycle_state_path()}', flush=True)
+            return 0
     gate = DownloadGate(args.download_interval)
     completed = 0
     while state['offset'] < len(state['queue']):

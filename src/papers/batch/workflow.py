@@ -200,13 +200,24 @@ def select_items(args):
     return selected, skipped
 
 
+def context_candidates(paper_ids):
+    """Load every archived topic for explicitly selected papers, including public-ready ones."""
+    requested = tuple(paper_ids)
+    if not requested:
+        return {}
+    result = {}
+    for item in archive_candidates(DEFAULT_ARCHIVE, DEFAULT_LEDGER, requested):
+        result.setdefault(item.arxiv_id, []).append(item)
+    return result
+
+
 def write_topic_review():
     """Aggregate verified local receipts, including successes from earlier batches."""
     result = {"version": 1, "policy_version": POLICY_VERSION,
               "action": TOPIC_REVIEW_ACTION, "accept_candidates": [],
               "reject_candidates": [], "needs_review": []}
     existing_notes = existing_note_keys()
-    for item in archive_candidates(DEFAULT_ARCHIVE, DEFAULT_LEDGER):
+    for item in archive_candidates(DEFAULT_ARCHIVE, DEFAULT_LEDGER, include_ready=True):
         if (item.topic, item.arxiv_id) not in existing_notes or note_status(item) != "ready":
             continue
         _, receipt = note_paths(item)
@@ -268,10 +279,7 @@ def run(args, *, report_sink=None):
         else:
             groups.setdefault(item.arxiv_id, []).append((index, item))
     # Include already completed siblings in the judgment context after partial failures.
-    contexts = {}
-    for item in archive_candidates(DEFAULT_ARCHIVE, DEFAULT_LEDGER):
-        if item.arxiv_id in groups:
-            contexts.setdefault(item.arxiv_id, []).append(item)
+    contexts = context_candidates(groups)
     with batch_executor(args.workers) as executor:
         futures = {executor.submit(process, contexts[paper_id], args): group
                    for paper_id, group in groups.items()}

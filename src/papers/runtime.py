@@ -275,9 +275,12 @@ def main(argv=None):
                     print(f'{error}; retrying in {GIT_PUSH_RETRY_SECONDS}s', file=sys.stderr, flush=True)
                     time.sleep(GIT_PUSH_RETRY_SECONDS)
                     continue
-                from papers.batch.cycle import load_state
+                from papers.batch.cycle import load_state, recovery_cycle_pending
                 state = load_state()
                 if state is None:
+                    if recovery_cycle_pending():
+                        time.sleep(BACKFILL_REST_SECONDS)
+                        continue
                     return result
                 if state.get('network_paused') or state['phase'] == 'summarize':
                     return 3
