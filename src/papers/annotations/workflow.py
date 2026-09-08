@@ -16,10 +16,12 @@ from papers.summaries.paths import PROJECT_ROOT, private_path, run_lock
 from shared.loopback_chat import LoopbackChatError, validate_loopback_base_url
 
 from .catalog import (
+    annotation_labels_for_topics,
     annotation_coverage,
     archive_titles,
     load_annotation_catalog,
     load_annotation_definitions,
+    load_topic_tag_allowlists,
     write_annotation_catalog,
 )
 from .classifier import classify_paper
@@ -105,6 +107,7 @@ def run_annotations(
         raise PaperAnnotationError(error.code, error.message) from None
     with run_lock():
         labels = load_annotation_definitions(config_path)
+        allowlists = load_topic_tag_allowlists(config_path, labels)
         archive = _read_archive(Path(archive_path))
         candidates = archive_titles(archive)
         annotations = load_annotation_catalog(catalog_path, labels)
@@ -131,11 +134,11 @@ def run_annotations(
         completed: dict[str, PaperAnnotation] = {}
 
         def process(paper_id: str) -> PaperAnnotation:
-            title, _ = candidates[paper_id]
+            title, topics = candidates[paper_id]
             source = ArxivSourceClient().acquire(paper_id, title)
             return classify_paper(
                 source,
-                labels,
+                annotation_labels_for_topics(labels, allowlists, topics),
                 model=model.strip(),
                 base_url=base_url,
                 timeout=timeout,

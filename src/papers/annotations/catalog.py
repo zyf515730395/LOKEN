@@ -89,6 +89,59 @@ def load_annotation_definitions(config_path: str | Path) -> tuple[LabelDefinitio
     return (*topics, *details)
 
 
+def load_topic_tag_allowlists(
+    config_path: str | Path,
+    labels: tuple[LabelDefinition, ...] | None = None,
+) -> dict[str, tuple[str, ...]]:
+    """Load the complete per-topic allowlist of detail-tag names."""
+    definitions = labels or load_annotation_definitions(config_path)
+    topics = {label.name for label in definitions if label.group == "topic"}
+    details = {label.name for label in definitions if label.group != "topic"}
+    try:
+        payload = yaml.safe_load(Path(config_path).read_text(encoding="utf-8"))
+        raw = payload.get("paper_topic_tag_allowlists") if isinstance(payload, dict) else None
+    except (OSError, UnicodeError, yaml.YAMLError):
+        raise PaperAnnotationError("invalid_label_config", "site configuration cannot be read") from None
+    if not isinstance(raw, dict) or set(raw) != topics:
+        raise PaperAnnotationError(
+            "invalid_label_config",
+            "paper_topic_tag_allowlists must define every configured topic exactly once",
+        )
+    result: dict[str, tuple[str, ...]] = {}
+    for topic, values in raw.items():
+        if (not isinstance(values, list) or not values
+                or any(not isinstance(value, str) or value not in details for value in values)
+                or len(values) != len(set(values))):
+            raise PaperAnnotationError(
+                "invalid_label_config",
+                f"invalid detail-tag allowlist for topic: {topic}",
+            )
+        result[topic] = tuple(values)
+    return result
+
+
+def annotation_labels_for_topics(
+    labels: tuple[LabelDefinition, ...],
+    allowlists: dict[str, tuple[str, ...]],
+    topics: tuple[str, ...] | list[str] | set[str],
+) -> tuple[LabelDefinition, ...]:
+    """Keep all navigation topics and only detail tags allowed by active archive topics."""
+    aliases = {
+        alias: label.name
+        for label in labels
+        if label.group == "topic"
+        for alias in (label.name, *label.aliases)
+    }
+    try:
+        requested = tuple(dict.fromkeys(aliases[topic] for topic in topics))
+    except (KeyError, TypeError):
+        raise PaperAnnotationError("invalid_label_config", "paper topics have no configured tag allowlist") from None
+    if not requested or any(topic not in allowlists for topic in requested):
+        raise PaperAnnotationError("invalid_label_config", "paper topics have no configured tag allowlist")
+    allowed = {name for topic in requested for name in allowlists[topic]}
+    return tuple(label for label in labels if label.group == "topic" or label.name in allowed)
+
+
 def migrate_annotation(value: dict, labels: tuple[LabelDefinition, ...]) -> dict:
     aliases = {alias: x.name for x in labels if x.group == "topic" for alias in (x.name, *x.aliases)}
     return {"topics": list(dict.fromkeys(aliases[t] for t in value["tags"] if t in aliases)),
