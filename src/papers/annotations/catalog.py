@@ -16,6 +16,8 @@ from .models import LabelDefinition, PaperAnnotation, PaperAnnotationError
 
 
 CATALOG_VERSION = 2
+MAX_DETAIL_TAGS = 5
+MAX_DETAIL_TAGS_PER_DIMENSION = 2
 ARXIV_ID = re.compile(r"^\d{4}\.\d{4,5}$")
 ARCHIVE_TITLE = re.compile(r"^\|\*\*[^*]+\*\*\|\*\*(?P<title>.*?)\*\*\|")
 
@@ -179,7 +181,8 @@ def filter_annotation_for_topics(
         for label in annotation_labels_for_topics(labels, allowlists, topics)
         if label.group != "topic"
     }
-    return replace(annotation, tags=tuple(tag for tag in annotation.tags if tag in allowed))
+    filtered = tuple(tag for tag in annotation.tags if tag in allowed)
+    return replace(annotation, tags=limit_detail_tags(filtered, labels))
 
 
 def migrate_annotation(value: dict, labels: tuple[LabelDefinition, ...]) -> dict:
@@ -191,6 +194,25 @@ def migrate_annotation(value: dict, labels: tuple[LabelDefinition, ...]) -> dict
 def annotation_value(value: PaperAnnotation) -> dict:
     return {"topics": list(value.topics), "tags": list(value.tags),
             "paper_type": value.paper_type, "institutions": list(value.institutions)}
+
+
+def limit_detail_tags(
+    tags: list[str] | tuple[str, ...],
+    labels: tuple[LabelDefinition, ...],
+) -> tuple[str, ...]:
+    """Keep the most relevant tags within global and per-dimension limits."""
+    groups = {label.name: label.group for label in labels if label.group != "topic"}
+    selected: list[str] = []
+    counts: dict[str, int] = {}
+    for tag in tags:
+        group = groups[tag]
+        if counts.get(group, 0) >= MAX_DETAIL_TAGS_PER_DIMENSION:
+            continue
+        selected.append(tag)
+        counts[group] = counts.get(group, 0) + 1
+        if len(selected) == MAX_DETAIL_TAGS:
+            break
+    return tuple(selected)
 
 
 def annotation_from_value(
@@ -216,7 +238,7 @@ def annotation_from_value(
     ) or len(institutions) != len(set(institutions)):
         fail()
     topics = tuple(x.name for x in labels if x.group == "topic" and x.name in value["topics"])
-    tags = tuple(x.name for x in labels if x.group != "topic" and x.name in value["tags"])
+    tags = limit_detail_tags(value["tags"], labels)
     return PaperAnnotation(topics, tags, value["paper_type"], tuple(institutions))
 
 

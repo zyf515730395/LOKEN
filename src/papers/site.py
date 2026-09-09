@@ -417,7 +417,7 @@ def render_table(
             anchored_papers.add(row["id"])
         tags = "".join(
             f'<span class="paper-tag">{html.escape(tag)}</span>'
-            for tag in row.get("tags", ())
+            for tag in row.get("tags", ())[:5]
         )
         tag_markup = f'<span class="paper-tags">{tags}</span>' if tags else ""
         output.append(
