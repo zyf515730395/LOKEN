@@ -19,7 +19,7 @@ _WORD = re.compile(r"[a-z0-9]+", re.IGNORECASE)
 _REFERENCE_HEADING = re.compile(r"(?im)^\s*(?:references|bibliography)\s*$")
 _INTRODUCTION_HEADING = re.compile(
     r"^(?:(?P<marker>\d+(?:\.\d+)*|[ivxlcdm]+)\.?\s+)?"
-    r"introduction(?:\s*(?:and|&)\s*related\s+works?)?\s*[:.]*$",
+    r"(?:introduction|introdution)(?:\s*(?:and|&)\s*related\s+works?)?\s*[:.]*$",
     re.IGNORECASE,
 )
 _NUMBERED_SECTION = re.compile(
@@ -422,7 +422,7 @@ def extract_pdf_document(raw: bytes, expected_title: str) -> PaperDocument:
     pages: list[str] = []
     try:
         for page in reader.pages:
-            raw_page = unicodedata.normalize("NFKC", page.extract_text() or "")
+            raw_page = unicodedata.normalize("NFKC", re.sub(r'[\ud800-\udfff]', '\ufffd', page.extract_text() or ""))
             reference_start = _REFERENCE_HEADING.search(raw_page)
             if reference_start is not None:
                 prefix = _clean(raw_page[: reference_start.start()])
