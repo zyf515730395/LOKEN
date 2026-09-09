@@ -1,0 +1,426 @@
+"""Explicit full-archive recheck, newest arXiv ID first, with durable local receipts."""
+from __future__ import annotations
+
+import argparse
+import copy
+from dataclasses import asdict
+from datetime import date
+import hashlib
+import json
+import math
+import os
+import signal
+import sys
+import time
+
+from papers import paths
+from papers.annotations.catalog import (
+    annotation_from_value, annotation_labels_for_topics, annotation_value,
+    filter_annotation_for_topics, load_annotation_definitions, load_topic_tag_allowlists,
+)
+from papers.annotations.classifier import extract_institutions
+from papers.annotations.models import PaperAnnotationError
+from papers.annotations.prompts import annotation_messages
+from papers.batch.review import unique_object
+from papers.batch.cycle import DownloadGate
+from papers.candidate_ledger import utc_now
+from papers.model_runtime import DEFAULT_MODEL_TIMEOUT_SECONDS, DEFAULT_MODEL_MAX_TOKENS
+from papers.site import parse_entry
+from papers.summaries.acquisition import ArxivSourceClient
+from papers.summaries.catalog import PaperCandidate
+from papers.summaries.models import PaperSummary, PaperSummaryError
+from papers.summaries.paths import private_path, normalize_arxiv_id, run_lock
+from papers.summaries.publisher import load_ready_keys, publish_summaries
+from papers.summaries.summarizer import summarize_paper
+from shared.loopback_chat import LoopbackChatError, LoopbackChatTransport, validate_loopback_base_url
+from shared.rendering import atomic_write_bytes
+
+POLICY = 'full-archive-recheck-v1'
+DOWNLOADS = DownloadGate(5)
+
+
+def sync_parent(path):
+    if os.name != 'nt':
+        descriptor = os.open(path.parent, os.O_RDONLY | os.O_DIRECTORY)
+        try:
+            os.fsync(descriptor)
+        finally:
+            os.close(descriptor)
+
+
+def atomic_write_json(path, value, *, pretty=True):
+    atomic_write_bytes(path, (json.dumps(value, ensure_ascii=False, sort_keys=pretty,
+                                       indent=2 if pretty else None) + '\n').encode('utf-8'))
+    sync_parent(path)
+
+
+def location(name):
+    return private_path('recheck', name)
+
+
+def read(path):
+    return json.loads(path.read_text(encoding='utf-8'), object_pairs_hook=unique_object)
+
+
+def digest(value):
+    return hashlib.sha256(json.dumps(value, ensure_ascii=False, sort_keys=True).encode()).hexdigest()
+
+
+def ordered_ids(archive):
+    ids = {normalize_arxiv_id(key) for rows in archive.values() for key in rows}
+    return sorted(ids, key=lambda value: tuple(map(int, value.split('.'))), reverse=True)
+
+
+def taxonomy():
+    labels = load_annotation_definitions(paths.CONFIG)
+    aliases = {name: label.name for label in labels if label.group == 'topic'
+               for name in (label.name, *label.aliases)}
+    return labels, load_topic_tag_allowlists(paths.CONFIG, labels), aliases
+
+
+def validate_decisions(decisions, expected):
+    if not isinstance(decisions, dict) or set(decisions) != set(expected):
+        raise ValueError('recheck decisions must cover every archived canonical topic')
+    for value in decisions.values():
+        if (not isinstance(value, dict) or set(value) != {'accept', 'reason'}
+                or (value['accept'] is not None and type(value['accept']) is not bool)
+                or not isinstance(value['reason'], str) or not 1 <= len(value['reason'].strip()) <= 800
+                or '<' in value['reason'] or '>' in value['reason']):
+            raise ValueError('invalid recheck decision')
+
+
+def apply_records(archive, ledger, annotations, records):
+    """Pure transformation: validate first; unknown never means rejected."""
+    labels, allowlists, aliases = taxonomy()
+    next_archive, next_ledger, result = copy.deepcopy((archive, ledger, annotations))
+    for record in records:
+        paper_id = record['id']
+        memberships = [topic for topic, rows in next_archive.items() if paper_id in rows]
+        validate_decisions(record['decisions'], {aliases[t] for t in memberships})
+        decisions = record['decisions']
+        retained = [t for t in memberships if decisions[aliases[t]]['accept'] is not False]
+        previous = result.get(paper_id)
+        if retained:
+            value = copy.deepcopy(record.get('annotation') or previous)
+            if value is not None:
+                value['topics'] = list(dict.fromkeys(aliases[t] for t in retained))
+                if previous and not value['institutions']:
+                    value['institutions'] = previous['institutions']
+                annotation = annotation_from_value(paper_id, value, labels)
+                result[paper_id] = annotation_value(filter_annotation_for_topics(annotation, labels, allowlists, retained))
+        else:
+            result.pop(paper_id, None)
+        original_rows = {t: next_archive[t][paper_id] for t in memberships}
+        for topic in memberships:
+            if topic not in retained:
+                del next_archive[topic][paper_id]
+        # Persist rejection tombstones so future collection cannot resurrect removed history.
+        entry = next_ledger['papers'].get(paper_id)
+        if memberships:
+            if entry is None:
+                entry = {'id': paper_id, 'archive_rows': original_rows,
+                         **record.get('metadata', {}), 'status': 'accepted',
+                         'selected_topic': aliases[retained[0]] if retained else None}
+                next_ledger['papers'][paper_id] = entry
+            if not retained:
+                entry.update(status='rejected', selected_topic=None)
+            elif any(d['accept'] is True for d in decisions.values()):
+                accepted = [aliases[t] for t in retained if decisions[aliases[t]]['accept'] is True]
+                selected = aliases.get(entry.get('selected_topic'))
+                entry.update(status='accepted', selected_topic=selected if selected in accepted else accepted[0])
+            elif entry.get('selected_topic') not in retained and aliases.get(entry.get('selected_topic')) not in {aliases[t] for t in retained}:
+                # An uncertain surviving membership must not hide an already visible paper.
+                entry['selected_topic'] = aliases[retained[0]] if entry.get('status') == 'accepted' else None
+            entry.update(decision_reason='二次复核：' + '; '.join(f'{t}: {d["reason"]}' for t, d in decisions.items()),
+                         reviewed_at=utc_now(), recheck_decisions=copy.deepcopy(decisions))
+            next_ledger['updated_at'] = utc_now()
+    return next_archive, next_ledger, result
+
+
+def parse_review(raw, paper_id, topics, labels):
+    value = json.loads(raw, object_pairs_hook=unique_object)
+    if not isinstance(value, dict) or set(value) != {'decisions', 'annotation'}:
+        raise ValueError('invalid recheck response')
+    validate_decisions(value['decisions'], topics)
+    annotation = annotation_from_value(paper_id, value['annotation'], labels)
+    return value['decisions'], annotation
+
+
+def infer_review(system, material, labels, args, record_attempt=None):
+    """Retry malformed output once without guessing or repairing model judgments."""
+    messages = [{'role': 'system', 'content': system},
+                {'role': 'user', 'content': json.dumps(material, ensure_ascii=False)}]
+    attempts = []
+    for attempt in range(2):
+        raw = LoopbackChatTransport(args.base_url).complete(
+            tuple(messages), model=args.model, timeout=args.timeout,
+            max_tokens=DEFAULT_MODEL_MAX_TOKENS, enable_thinking=False)
+        attempts.append(raw)
+        if record_attempt is not None:
+            record_attempt(attempts)
+        try:
+            decisions, annotation = parse_review(raw, material['id'], material['requested_topics'], labels)
+            return decisions, annotation, attempts
+        except (ValueError, PaperAnnotationError):
+            if attempt:
+                raise PaperSummaryError('invalid_review', 'model JSON failed validation twice') from None
+            example = {'decisions': {t: {'accept': None, 'reason': '填写证据判断理由'} for t in material['requested_topics']},
+                       'annotation': {'topics': [], 'tags': [], 'paper_type': 'paper', 'institutions': []}}
+            messages.append({'role': 'user', 'content': '上次响应格式不合法。请重新判断并输出合法 JSON；decisions 和 annotation 必须是两个并列顶层字段。结构示例（示例值不是判断结果）：' + json.dumps(example, ensure_ascii=False)})
+
+
+def process(paper_id, archive, ledger, annotations, ready, args):
+    rows = {t: entries[paper_id] for t, entries in archive.items() if paper_id in entries}
+    labels, allowlists, aliases = taxonomy()
+    topics = list(dict.fromkeys(aliases[t] for t in rows))
+    fingerprint = digest({'rows': rows, 'ledger': ledger['papers'].get(paper_id),
+                          'annotation': annotations.get(paper_id), 'policy': POLICY,
+                          'config': paths.CONFIG.read_text(encoding='utf-8'), 'model': args.model})
+    receipt = location(paper_id + '.json')
+    if receipt.exists():
+        record = read(receipt)
+        if record.get('fingerprint') == fingerprint and record.get('status') == 'ready' and not record.get('summary_error') and not any(d['accept'] is None for d in record['decisions'].values()):
+            validate_decisions(record['decisions'], topics)
+            return record
+    parsed = parse_entry(paper_id, next(iter(rows.values())))
+    title = parsed['title']
+    entry = ledger['papers'].get(paper_id, {})
+    abstract = entry.get('abstract', '').strip()
+    client = ArxivSourceClient(session=DOWNLOADS.session())
+    source = None
+    try:
+        source = client._load_cached(paper_id, title)
+        if source:
+            abstract = source.document.abstract.strip() or abstract
+        if len(abstract) < 40:
+            source = client.acquire(paper_id, title)
+            abstract = source.document.abstract.strip()
+        if not 40 <= len(abstract) <= 16000:
+            raise PaperSummaryError('annotation_evidence_invalid', 'abstract unavailable; preserve paper')
+        allowed = annotation_labels_for_topics(labels, allowlists, topics)
+        system = annotation_messages(title, abstract, allowed)[0]['content']
+        system += (
+            '\n这是用户授权的全量二次复核，不沿用任何历史筛选决定。'
+            '同时判断 requested_topics 中每个主题。只有研究核心方法或主要贡献匹配才接受；'
+            '关键词命中、仅使用现有技术的下游应用不足以接受。多个主题可同时接受。'
+            '不相关为 false；证据不足为 null，禁止把不确定当作不相关。'
+            '综述判断依据主要贡献，不能仅凭标题含 review、survey 或 taxonomy。'
+            '使用完整证据给所有论文重新分类与标注。'
+            '本次输出格式替换为严格 JSON：'
+            '{"decisions":{"每个请求主题":{"accept":true或false或null,"reason":"中文依据"}},'
+            '"annotation":{"topics":[],"tags":[],"paper_type":"paper或survey","institutions":[]}}。'
+            'annotation 仍遵守上面的白名单、维度和数量规则。'
+        )
+        material = {'id': paper_id, 'title': title, 'abstract': abstract, 'requested_topics': topics}
+        atomic_write_json(location(paper_id + '-input.json'), {'fingerprint': fingerprint, 'material': material, 'system': system})
+        def save_attempts(attempts):
+            atomic_write_json(location(paper_id + '-response.json'), {'fingerprint': fingerprint, 'attempts': attempts})
+        decisions, annotation, attempts = infer_review(system, material, allowed, args, save_attempts)
+        value = annotation_value(annotation)
+        if source:
+            value['institutions'] = list(extract_institutions(source))
+        retained = [t for t in rows if decisions[aliases[t]]['accept'] is not False]
+        missing = [t for t in retained if (t, paper_id) not in ready]
+        summaries = []
+        summary_error = None
+        if missing:
+            try:
+                source = source or client.acquire(paper_id, title)
+                for attempt in range(2):
+                    try:
+                        summary = summarize_paper(source, model=args.model, base_url=args.base_url,
+                                                  timeout=args.timeout, refresh=False)
+                        break
+                    except PaperSummaryError as error:
+                        if error.code != 'invalid_summary' or attempt:
+                            raise
+                summaries = [{'id': paper_id, 'title': title, 'topic': t,
+                              'updated': parse_entry(paper_id, rows[t])['date'].isoformat(),
+                              'summary': asdict(summary)} for t in missing]
+            except (PaperSummaryError, LoopbackChatError) as error:
+                summary_error = error.code
+        record = {'id': paper_id, 'fingerprint': fingerprint, 'status': 'ready',
+                  'model': args.model, 'policy': POLICY, 'reviewed_at': utc_now(), 'original_rows': rows,
+                  'metadata': {'title': title, 'abstract': abstract, 'updated': parsed['date'].isoformat(),
+                               'paper_url': f'https://arxiv.org/abs/{paper_id}',
+                               'pdf_url': f'https://arxiv.org/pdf/{paper_id}.pdf', 'matched_topics': topics},
+                  'decisions': decisions, 'annotation': value, 'summaries': summaries,
+                  'summary_error': summary_error}
+        atomic_write_json(receipt, record)
+        return record
+    finally:
+        client.session.close()
+
+
+def targets():
+    return {'archive': paths.ARCHIVE, 'ledger': paths.LEDGER, 'annotations': paths.ANNOTATIONS}
+
+
+def recover():
+    """Replay a prepared transaction only if every public file is unchanged or already applied."""
+    journal = location('transaction.json')
+    if not journal.exists():
+        return
+    tx = read(journal)
+    for name, path in targets().items():
+        current = read(path)
+        if digest(current) != tx['before'][name] and current != tx['after'][name]:
+            raise ValueError('public state changed; preserve recheck journal and resolve concurrent edits')
+    # All preconditions checked before the first write; repeatable after interruption.
+    for name, path in targets().items():
+        atomic_write_json(path, tx['after'][name], pretty=name != 'archive')
+    ready = load_ready_keys(paths.DOCS)
+    results = []
+    for item in tx['summaries']:
+        if (item['topic'], item['id']) in ready:
+            continue
+        value = item['summary']
+        summary = PaperSummary(value['one_sentence'], value['problem'], tuple(value['contributions']))
+        results.append((PaperCandidate(item['id'], item['title'], item['topic'], date.fromisoformat(item['updated'])), summary))
+    if results:
+        publish_summaries(paths.DOCS, tuple(results))
+    from papers.__main__ import build
+    build()
+    # Builders fsync files; flush the directories before advancing the checkpoint.
+    for path in (paths.DOCS / 'index.html', paths.DOCS / 'notes' / 'placeholder'):
+        if path.parent.exists():
+            sync_parent(path)
+    atomic_write_json(location('state.json'), tx['state'])
+    journal.unlink()
+    sync_parent(journal)
+
+
+def run_batch(args):
+    with run_lock():
+        if not location('local-only.json').exists():
+            atomic_write_json(location('local-only.json'), {'reason': 'Full recheck awaits explicit remote publication authorization', 'created_at': utc_now()})
+        recover()
+        current = {name: read(path) for name, path in targets().items()}
+        before = {name: digest(value) for name, value in current.items()}
+        state_path = location('state.json')
+        state = read(state_path) if state_path.exists() else {
+            'policy': POLICY, 'config': digest(paths.CONFIG.read_text(encoding='utf-8')), 'model': args.model,
+            'queue': ordered_ids(current['archive']), 'offset': 0, 'failed': {}, 'reviewed': 0,
+            'removed': 0, 'removed_memberships': 0, 'summaries_added': 0, 'uncertain': 0,
+            'uncertain_ids': [], 'initial_total': len(ordered_ids(current['archive'])), 'round': 0,
+        }
+        if state['policy'] != POLICY or state['model'] != args.model or state['config'] != digest(paths.CONFIG.read_text(encoding='utf-8')):
+            raise ValueError('recheck policy changed; preserve checkpoint and start a separate reviewed run')
+        state.setdefault('uncertain_ids', [])
+        state.setdefault('initial_total', len(state['queue']))
+        state.setdefault('round', 0)
+        if args.retry_failures and state['offset'] >= len(state['queue']):
+            pending = set(state['failed']) | set(state['uncertain_ids'])
+            retry = [paper_id for paper_id in ordered_ids(current['archive']) if paper_id in pending]
+            if retry:
+                atomic_write_json(location(f'round-{state["round"]}.json'), state)
+                state.update(queue=retry, offset=0, round=state['round'] + 1)
+            args.retry_failures = False
+        atomic_write_json(state_path, state)
+        ids = state['queue'][state['offset']:state['offset'] + args.batch_size]
+        if not ids:
+            return state
+        ready = load_ready_keys(paths.DOCS)
+        records = []
+        for paper_id in ids:
+            if not any(paper_id in rows for rows in current['archive'].values()):
+                state['offset'] += 1
+                state['failed'].pop(paper_id, None)
+                continue
+            try:
+                record = process(paper_id, current['archive'], current['ledger'], current['annotations']['papers'], ready, args)
+                records.append(record)
+                if record['summary_error']:
+                    state['failed'][paper_id] = record['summary_error']
+                else:
+                    state['failed'].pop(paper_id, None)
+                state['reviewed'] += 1
+                unknown = set(state['uncertain_ids'])
+                if any(d['accept'] is None for d in record['decisions'].values()):
+                    unknown.add(paper_id)
+                else:
+                    unknown.discard(paper_id)
+                state['uncertain_ids'] = sorted(unknown)
+                state['uncertain'] = len(unknown)
+                state['summaries_added'] += len(record['summaries'])
+                print(json.dumps({'id': paper_id, 'decisions': record['decisions'], 'type': record['annotation']['paper_type'],
+                                  'tags': record['annotation']['tags'], 'summary_error': record['summary_error']}, ensure_ascii=False), flush=True)
+            except (PaperSummaryError, PaperAnnotationError, LoopbackChatError, ValueError) as error:
+                code = getattr(error, 'code', 'invalid_review')
+                state['failed'][paper_id] = code
+                print(f'{paper_id} failed={code}; preserved', flush=True)
+                if code in {'model_unavailable', 'model_http_error'}:
+                    break
+            state['offset'] += 1
+        a, l, annotations = apply_records(current['archive'], current['ledger'], current['annotations']['papers'], records)
+        state['removed'] += len(ordered_ids(current['archive'])) - len(ordered_ids(a))
+        state['removed_memberships'] += sum(map(len, current['archive'].values())) - sum(map(len, a.values()))
+        state['updated_at'] = utc_now()
+        if before != {name: digest(read(path)) for name, path in targets().items()}:
+            raise ValueError('public files changed during inference; preserved results, retry against latest inputs')
+        atomic_write_json(location('transaction.json'), {'before': before,
+            'after': {'archive': a, 'ledger': l, 'annotations': {'version': 2, 'papers': annotations}},
+            'summaries': [s for record in records for s in record['summaries']], 'state': state})
+        recover()
+        print(json.dumps({k: v for k, v in state.items() if k != 'queue'}, ensure_ascii=False), flush=True)
+        return state
+
+
+def main(argv=None):
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--model', default='PaperReader-Qwen3.5')
+    parser.add_argument('--base-url', default='http://127.0.0.1:8000/v1')
+    parser.add_argument('--timeout', type=float, default=DEFAULT_MODEL_TIMEOUT_SECONDS)
+    parser.add_argument('--batch-size', type=int, default=20)
+    parser.add_argument('--max-batches', type=int)
+    parser.add_argument('--status', action='store_true')
+    parser.add_argument('--dry-run', action='store_true')
+    parser.add_argument('--retry-failures', action='store_true', help='after current pass finishes, retry failed and uncertain papers in descending ID order')
+    args = parser.parse_args(argv)
+    if args.status or args.dry_run:
+        state = read(location('state.json')) if location('state.json').exists() else {'queue': ordered_ids(read(paths.ARCHIVE)), 'offset': 0}
+        print(json.dumps({**{k: v for k, v in state.items() if k != 'queue'}, 'total': len(state['queue']),
+                          'next': state['queue'][state['offset']:state['offset'] + 10]}, ensure_ascii=False))
+        return 0
+    if not 1 <= args.batch_size <= 100 or not math.isfinite(args.timeout) or args.timeout <= 0 or not args.model.strip() or (args.max_batches is not None and args.max_batches < 1):
+        parser.error('invalid batch size, timeout, model or max-batches')
+    validate_loopback_base_url(args.base_url)
+    if sys.platform != 'linux':
+        parser.error('run recheck inside WSL to share the runtime lock')
+    from papers.runtime import daily_waiting, lock, model_service
+    signal.signal(signal.SIGTERM, lambda *_: (_ for _ in ()).throw(KeyboardInterrupt()))
+    try:
+        with lock('recheck-owner.lock', blocking=False) as acquired:
+            if not acquired:
+                raise ValueError('another full recheck is active')
+            completed = 0
+            while args.max_batches is None or completed < args.max_batches:
+                if daily_waiting():
+                    time.sleep(5)
+                    continue
+                with lock('runtime.lock'):
+                    if daily_waiting():
+                        continue
+                    previous = read(location('state.json'))['offset'] if location('state.json').exists() else -1
+                    with model_service('vllm-paper.service') as registered:
+                        if registered != args.model:
+                            raise ValueError('registered local model differs from the recheck model')
+                        state = run_batch(args)
+                completed += 1
+                if state['offset'] >= len(state['queue']):
+                    if args.retry_failures and (state['failed'] or state['uncertain']):
+                        continue
+                    return 3 if state['failed'] or state['uncertain'] else 0
+                if state['offset'] == previous:
+                    return 3
+            return 0
+    except KeyboardInterrupt:
+        print('Interrupted; receipts and checkpoint preserved. Rerun to resume.', flush=True)
+        return 130
+    except (ValueError, OSError, PaperSummaryError, PaperAnnotationError, LoopbackChatError) as error:
+        print(str(error), file=sys.stderr, flush=True)
+        return 2
+
+
+if __name__ == '__main__':
+    raise SystemExit(main())

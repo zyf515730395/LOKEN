@@ -22,6 +22,9 @@ def build():
 
 def main(argv=None):
     argv = list(sys.argv[1:] if argv is None else argv)
+    if argv and argv[0] == 'recheck':
+        from papers.recheck import main as recheck_main
+        return recheck_main(argv[1:])
     if argv and argv[0] == 'batch':
         from papers.batch.cycle import main as batch_main
         return batch_main(argv[1:])

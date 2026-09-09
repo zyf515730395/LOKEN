@@ -6,4 +6,5 @@
 - 只允许固定 `https://arxiv.org/html/<id>` 和 `https://arxiv.org/pdf/<id>.pdf`，不得跟随跨站重定向或读取 ledger 中的任意下载 URL。
 - 每篇论文失败后记录安全错误并继续；私有根、历史页面、manifest 或事务证据不安全时停止对应提交范围。
 - 端侧模型只能通过共享 loopback transport 访问，浏览器与公共构建不得发起模型请求。
+- 兼容离线发布器读取旧批次回执时，必须先遵守候选账本的 `recheck_decisions`：旧回执不得覆盖全量复核的新决定，不能删除复核保留或证据不足的主题。全量复核本身的归档事务由上层 `papers.recheck` 负责。
 - 所有测试、fixture、mock 服务仅限本地，验证后删除；原文下载、缓存、状态和事务证据按根目录 AGENTS.md 保留，不得因提交或收尾清空。

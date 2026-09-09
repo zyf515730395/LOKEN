@@ -10,6 +10,7 @@ from pathlib import Path
 import re
 
 from papers.site import generate_site, parse_entry
+from papers.candidate_ledger import load_candidate_ledger
 from shared.rendering import atomic_write_bytes
 
 from .acquisition import ArxivSourceClient
@@ -127,7 +128,7 @@ def _prune_rejected_topics(
 
 
 def _load_reviewed(
-    review_path: Path, docs_root: Path, archive_path: Path
+    review_path: Path, docs_root: Path, archive_path: Path, ledger_path: Path = DEFAULT_LEDGER
 ) -> tuple[tuple[PaperCandidate, PaperSummary], int, tuple[tuple[str, str], ...], dict[str, object]]:
     private_root = PRIVATE_ROOT.resolve()
     review = review_path.resolve()
@@ -162,6 +163,8 @@ def _load_reviewed(
         raise PaperSummaryError("invalid_archive", "paper archive is invalid") from None
 
     ready = load_ready_keys(docs_root)
+    ledger = load_candidate_ledger(ledger_path)['papers']
+    from papers.batch.catalog import TOPIC_NAMES
     results = []
     rejected = []
     skipped = 0
@@ -196,6 +199,13 @@ def _load_reviewed(
             raise PaperSummaryError("invalid_offline_review", "review entry does not match archive")
         if row is None:
             seen.add(key)
+            continue
+        current_decisions = ledger.get(paper_id, {}).get('recheck_decisions', {})
+        canonical_topic = TOPIC_NAMES.get(topic)
+        if canonical_topic in current_decisions and current_decisions[canonical_topic]['accept'] is not expected_accept:
+            # Old receipts cannot reverse a newer full recheck, including uncertainty.
+            seen.add(key)
+            skipped += 1
             continue
         if " ".join(str(item["title"]).split()) != " ".join(row["title"].split()):
             raise PaperSummaryError("invalid_offline_review", "review entry does not match archive")
@@ -259,7 +269,7 @@ def publish_offline_summaries(
     archive = Path(archive_path)
     ledger = Path(ledger_path)
     if dry_run:
-        results, skipped, rejected, current_archive = _load_reviewed(Path(review_path), docs, archive)
+        results, skipped, rejected, current_archive = _load_reviewed(Path(review_path), docs, archive, ledger)
         _, removed = _prune_rejected_topics(current_archive, rejected)
         return OfflineImportResult(len(results), skipped, 0, removed)
     with run_lock():
@@ -296,7 +306,7 @@ def publish_offline_summaries(
                     "recovery_failed", "interrupted offline publication could not be recovered"
                 ) from None
 
-        results, skipped, rejected, current_archive = _load_reviewed(Path(review_path), docs, archive)
+        results, skipped, rejected, current_archive = _load_reviewed(Path(review_path), docs, archive, ledger)
         next_archive, removed = _prune_rejected_topics(current_archive, rejected)
         if not results and not removed:
             return OfflineImportResult(0, skipped, 0, 0)
