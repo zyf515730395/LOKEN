@@ -22,3 +22,4 @@
 - `config/conferences.yaml` defines enabled conferences and actual editions, including historical and future records; each edition retains an official source and verification date. Optional `website` links to the edition homepage and `proceedings_url` to its accepted papers or proceedings. Missing proceedings remain visibly pending. The Conference Timeline displays the current calendar year and preceding two years in chronological order, initially positioned at the current year. Unannounced dates remain visibly pending; biennial meetings must not invent off-year editions.
 - 改进复核必须把公开归档中缺少技术标签的文章加入恢复队列；已接受论文仍返回空标签时，要求模型依据现有白名单和证据重试一次，仍为空则记录 annotation_tags_missing，不能把漏标算作成功，也不能猜测标签。
 - 恢复复核可补充已通过相同身份验证的缓存原文引言，最多18000字符并明确标记截断；不得用任意正文冒充引言。全部主题被拒绝时无须进行保留主题标签过滤。轮次进度比较必须同时比较 round 和 offset。
+- 两次综合复核仍漏标时，可独立调用本地模型提取标签；每个标签必须附所给标题、摘要或引言中连续的原文证据并通过匹配验证，仍遵守保留主题白名单与数量限制。私有证据回执必须保留，不允许把模型生成的判断理由当原文证据。
