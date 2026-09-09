@@ -13,6 +13,627 @@
       <h1>Relighting · 论文要点</h1>
     </header>
     <div class="summary-topic-list">
+    <article class="summary-article summary-topic-entry" id="summary-2311.16937" data-arxiv-id="2311.16937" data-status="ready">
+<h1>[2311.16937] The Sky&#x27;s the Limit: Re-lightable Outdoor Scenes via a Sky-pixel Constrained Illumination Prior and Outside-In Visibility</h1>
+<p><a href="https://arxiv.org/abs/2311.16937" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 NeuSky 方法，通过利用天空像素对光照环境的直接约束、HDR 神经场自然光照模型及新颖的“由外向内”可见性表示，解决了户外场景逆渲染中光照估计模糊及阴影处理困难的问题。</p>
+<h2>解决的问题</h2>
+<p>户外场景逆渲染本质上是一个病态问题，难以准确估计产生图像的场景模型，且自然光照具有巨大的动态范围，导致强烈的投射阴影，这些遮挡是非局部且不连续的，难以在可微渲染器中处理。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出关键观察：图像中任何观测到天空的像素都为该方向的光照环境提供了直接约束。</li>
+<li>结合 HDR 神经场自然光照模型与天空观测约束，以推断合理的补全光照。</li>
+<li>提出“由外向内”可见性（outside-in visibility），这是一种新颖的、可微的、通过单次前向传播计算天空可见性的神经近似方法。</li>
+<li>利用该可见性表示实现端到端训练，消除了分阶段训练的需求，使阴影能通过外观损失反向传播来影响光照和几何估计。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2406.06527" data-arxiv-id="2406.06527" data-status="ready">
+<h1>[2406.06527] IllumiNeRF: 3D Relighting without Inverse Rendering</h1>
+<p><a href="https://arxiv.org/abs/2406.06527" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种无需逆向渲染的 3D 重光照新范式，通过单图像 2D 重光照扩散模型生成样本，并将其蒸馏到 3D 潜在 NeRF 表示中以实现一致的重光照 3D 重建。</p>
+<h2>解决的问题</h2>
+<p>现有的重光照视图合成方法通常将任务视为逆向渲染，依赖基于梯度的优化来估计几何、材质和光照，这种方法不仅计算昂贵且噪声大，而且由于问题本身的模糊性，容易得到在新型光照下渲染效果不合理的错误解释。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种替代 3D 逆向渲染的新范式，利用微调后的单图像 2D 重光照扩散模型生成重光照图像样本。</li>
+<li>将扩散模型生成的多个合理样本视为未观测潜在变量的采样，通过训练&#x27;潜在 NeRF&#x27;将所有视角的样本融合为单一的 3D 表示。</li>
+<li>该方法避免了逆向渲染中常见的优化不稳定性和歧义性问题，能够生成在新型光照下合理的 3D 渲染结果。</li>
+<li>在 TensoIR 和 Stanford-ORB 等基准测试中，该方法的表现与现有的大多数 3D 逆向渲染基线相当甚至更优。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2409.19702" data-arxiv-id="2409.19702" data-status="ready">
+<h1>[2409.19702] RNG: Relightable Neural Gaussians</h1>
+<p><a href="https://arxiv.org/abs/2409.19702" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种基于 3D 高斯泼溅（3DGS）的框架 RNG，旨在通过多视角图像重建可重光照的 3D 资产，能够同时处理具有清晰表面和软边界的物体，并避免了传统表面着色模型的解析假设。</p>
+<h2>解决的问题</h2>
+<p>从多视角重建可重光照的 3D 资产具有病态性质，特别是对于复杂非光滑材料，传统的基于表面着色模型的方法难以分解光、材质和几何，且现有方法（如 NRHints 和 GS3）分别存在训练渲染时间长、细节过平滑或阴影质量较低的问题。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种可重光照的神经高斯框架（RNG），能够在任意视角和光照方向下渲染具有清晰表面或软边界的物体，且无需对着色模型进行解析假设。</li>
+<li>引入了一种阴影提示（shadow cue）技术和深度细化网络，用于条件化神经高斯解码器，从而显著提升了阴影的捕捉质量。</li>
+<li>设计了一种混合（前向延迟）优化管道，以更好地生成阴影外观并提高重建质量。</li>
+<li>实现了高效的训练和渲染性能，在 RTX 4090 GPU 上训练仅需约 1.3 小时，渲染速度达到 6060 fps，优于基于 NeRF 的方法 NRHints 并可与 GS3 相媲美。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2409.20140" data-arxiv-id="2409.20140" data-status="ready">
+<h1>[2409.20140] RISE-SDF: a Relightable Information-Shared Signed Distance Field for Glossy Object Inverse Rendering</h1>
+<p><a href="https://arxiv.org/abs/2409.20140" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种名为 RISE-SDF 的端到端可重光照逆渲染系统，旨在解决高光泽物体在几何重建、材质参数恢复及光照条件重构方面的挑战。</p>
+<h2>解决的问题</h2>
+<p>现有的逆渲染方法难以同时实现高质场景参数重建、新视角合成及高光泽物体的重光照能力，且缺乏提供真实材质参数和重光照信息的评估数据集。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种端到端的可重光照逆渲染系统，专门针对高光泽物体进行几何、材质及光照条件的联合重建。</li>
+<li>探索并构建了一种基于加速 NeuS 和反射感知辐射场的方案，以生成高质量的高光泽物体几何结构。</li>
+<li>设计了一种信息共享的多层感知机（MLP）结构，利用预积分的迪士尼 BRDF 和可微多级 mipmap 环境图来学习外观参数和环境光照。</li>
+<li>提出了一种改进的分裂求和算法，通过在次级射线上进行评估，实现了能够考虑场景间接光照的一致重光照效果。</li>
+<li>引入了一套新的合成数据集，该数据集包含高光泽物体的真实重光照信息和材质贴图，用于模型性能评估。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2410.02619" data-arxiv-id="2410.02619" data-status="ready">
+<h1>[2410.02619] GI-GS: Global Illumination Decomposition on Gaussian Splatting for Inverse Rendering</h1>
+<p><a href="https://arxiv.org/abs/2410.02619" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>GI-GS 是一种基于 3D 高斯泼溅（3DGS）的新型逆向渲染框架，通过结合延迟着色技术与高效路径追踪，实现了在未知自然光照下对复杂真实场景的高保真几何、材质重建及全局光照分解。</p>
+<h2>解决的问题</h2>
+<p>现有的基于 3DGS 的逆向渲染方法通常将间接光照静态存储或烘焙在体积中，忽略了光照的动态特性，导致无法在重新渲染（relighting）过程中准确模拟间接光照。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了 GI-GS，一种基于 3DGS 的新型逆向渲染框架，实现了物体和场景的先进内在分解及渲染结果。</li>
+<li>提出了一种基于延迟着色的高效瓦片路径追踪方法，能够从 G-buffer 中存储的渲染结果中准确计算遮挡和间接光照。</li>
+<li>将基于路径追踪的间接光照计算从屏幕空间扩展到了世界空间，从而在场景级数据集上实现了更自然的遮挡和间接光照效果。</li>
+<li>该方法能够在未知自然光照条件下重建复杂真实场景的高保真几何和材质，实现了最先进的新型视图合成，并支持重新渲染等额外应用。</li>
+<li>据作者所知，这是首个能够在重新渲染过程中建模间接光照的基于 3DGS 的逆向渲染框架。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2410.06231" data-arxiv-id="2410.06231" data-status="ready">
+<h1>[2410.06231] RelitLRM: Generative Relightable Radiance for Large Reconstruction Models</h1>
+<p><a href="https://arxiv.org/abs/2410.06231" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>RelitLRM 是一种基于生成式的大型重建模型，利用 Transformer 架构和去噪扩散概率模型，仅需 4-8 张未知光照条件下的图像即可高效重建高质量的可重光照 3D 对象。</p>
+<h2>解决的问题</h2>
+<p>现有的逆渲染方法通常存在需要密集采集、逐场景优化缓慢、无法建模复杂光传输（因使用解析 BRDF）以及在静态未知光照下无法解决着色与光照歧义等局限性。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种新颖的基于 Transformer 的生成式重光照架构，结合回归几何重建器和扩散外观合成器，实现了几何与外观的有效解耦，从而更好地建模重光照中的不确定性。</li>
+<li>在大规模 3D 对象数据集上训练后，该方法在性能上匹配或超越了领先的逆渲染方法，同时显著减少了所需输入图像的数量和计算时间，展现了卓越的泛化能力和实用性。</li>
+<li>不依赖固定的解析反射率模型，从而在处理多样化材质属性时具有更大的灵活性，并能准确捕捉高光物体在高频新型光照下的多模态外观。</li>
+<li>实现了极高的处理效率，能够在单张 A100 GPU 上约一秒钟内解码 3D 高斯原语参数，完成了几何、外观和光照的解耦，支持在新型光照和视角下进行照片级渲染。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2410.11419" data-arxiv-id="2410.11419" data-status="ready">
+<h1>[2410.11419] GS^3: Efficient Relighting with Triple Gaussian Splatting</h1>
+<p><a href="https://arxiv.org/abs/2410.11419" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>GS3 提出了一种基于空间和高斯混合的新颖表示方法，通过三重光栅化过程实现了从多视角输入图像到实时、高质量的新光照和新视角合成的效率与质量平衡。</p>
+<h2>解决的问题</h2>
+<p>片段未提供</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种基于空间和高斯混合的新颖表示方法，用于实现实时、高质量的新光照和新视角合成。</li>
+<li>用朗伯体和角高斯混合替换了传统空间高斯关联的球谐函数，以描述复杂的各向异性外观（第一重光栅化）。</li>
+<li>通过将空间高斯向光源方向光栅化并复用屏幕空间光栅化管道，有效支持了自阴影计算（第二重光栅化）。</li>
+<li>引入额外的多层感知机（MLP）为每个空间高斯计算 RGB 元组以补偿全局光照等其他效果（第三重光栅化）。</li>
+<li>采用端到端、完全可微的方式，利用合成图像与输入照片的差异来优化表示，支持从合成渲染图到专业光舞台等多种输入数据。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2410.18355" data-arxiv-id="2410.18355" data-status="ready">
+<h1>[2410.18355] Real-time 3D-aware Portrait Video Relighting</h1>
+<p><a href="https://arxiv.org/abs/2410.18355" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种新颖的实时 3D 感知人像视频重光照方法，能够在实时生成新视角下逼真且一致的重光照结果，以支持 AR/VR 应用。</p>
+<h2>解决的问题</h2>
+<p>现有的人像视频重光照方法存在以下局限性：1. 大多数方法仅能从输入视角重光照，限制了用户改变相机角度或视角的自由度；2. 许多针对单目图像输入的方法直接应用于视频时会产生闪烁或不自然的结果；3. 部分方法在训练和推理上耗时过长，难以在质量与效率之间取得平衡。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种新颖的方法，在实现实时性能的同时，能够生成逼真且一致的重光照结果。</li>
+<li>提出了使用双前馈编码器来捕捉人像内的反照率和阴影信息，其中阴影编码器以反照率编码器为条件，以确保反照率和阴影的空间对齐。</li>
+<li>提出了一种新颖的时间一致性网络，以解决视频数据中的时间不一致性问题，减少闪烁伪影并确保帧之间的无缝过渡。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2410.24204" data-arxiv-id="2410.24204" data-status="ready">
+<h1>[2410.24204] GeoSplatting: Towards Geometry Guided Gaussian Splatting for Physically-based Inverse Rendering</h1>
+<p><a href="https://arxiv.org/abs/2410.24204" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>GeoSplatting 通过引入可优化的显式三角网格作为几何引导，利用 Mesh-to-Gaussian 适配器构建表面对齐的高斯点，解决了传统 3DGS 因缺乏明确几何边界和法线而导致的光传输建模不准及材质 - 光照解耦困难的问题。</p>
+<h2>解决的问题</h2>
+<p>片段未提供</p>
+<h2>创新点</h2>
+<ul>
+<li>提出 GeoSplatting 框架，通过引入可优化的显式三角网格作为几何引导，增强 3DGS 以支持基于物理的逆渲染。</li>
+<li>设计 Mesh-to-Gaussian 适配器（MGadapter），能够可微分地构建基于网格几何的结构化高斯点，从而利用明确的网格法线和不透明表面进行更准确的光传输建模。</li>
+<li>实现完全可微的端到端优化流程，确保几何引导与 3DGS 的一致性，并支持基于网格的光线追踪技术以高效计算阴影和互反射效果。</li>
+<li>在广泛的实验中验证了该方法在几何精度、材质 - 光照解耦质量以及优化效率方面均显著优于现有的基于 3DGS 和隐式场的逆渲染基线方法。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2412.15867" data-arxiv-id="2412.15867" data-status="ready">
+<h1>[2412.15867] IRGS: Inter-Reflective Gaussian Splatting with 2D Gaussian Ray Tracing</h1>
+<p><a href="https://arxiv.org/abs/2412.15867" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了 IRGS，一种利用 2D 高斯光线追踪技术将完整渲染方程集成到高斯泼溅中的逆渲染框架，旨在准确捕捉互反射效果。</p>
+<h2>解决的问题</h2>
+<p>现有 3DGS 方法依赖光栅化限制了模拟光线效果的能力，且现有逆渲染方法简化了渲染方程或近似间接辐射，无法准确捕捉互反射。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了 2D 高斯光线追踪技术，可在预训练 2D 高斯泼溅上直接进行光线追踪且质量损失最小。</li>
+<li>提出了 IRGS 逆渲染框架，利用 2D 高斯光线追踪计算实时入射辐射，集成完整渲染方程。</li>
+<li>提出了一种优化方案，管理渲染方程评估的计算需求。</li>
+<li>引入了一种新策略，在重光照期间查询间接辐射。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2412.19282" data-arxiv-id="2412.19282" data-status="ready">
+<h1>[2412.19282] Reflective Gaussian Splatting</h1>
+<p><a href="https://arxiv.org/abs/2412.19282" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种名为 Reflective Gaussian splatting (Ref-Gaussian) 的框架，通过物理基础延迟渲染和高斯基底的互反射技术，实现了包含复杂互反射效应的反射物体实时高质量渲染。</p>
+<h2>解决的问题</h2>
+<p>现有 NeRF 和 3DGS 难以建模反射表面，现有反射方法存在无法分解环境光照、计算成本高、简化着色函数导致噪声或无法处理复杂互反射现象等问题。</p>
+<h2>创新点</h2>
+<ul>
+<li>实现 3D 空间中带有互反射效应的反射物体实时高质量渲染。</li>
+<li>创新了具有物理基础延迟渲染和高斯基底互反射的通用 3D 重建框架 Reflective Gaussian splatting (Ref-Gaussian)，并通过几何聚焦优化（如 2D 高斯原语、材料感知法线传播等）增强。</li>
+<li>通过定量指标、视觉质量和计算效率的广泛实验证明，Ref-Gaussian 在反射和非反射场景中优于先前方法，并支持下游应用如重光照和编辑。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2501.03717" data-arxiv-id="2501.03717" data-status="ready">
+<h1>[2501.03717] Materialist: Physically Based Editing Using Single-Image Inverse Rendering</h1>
+<p><a href="https://arxiv.org/abs/2501.03717" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种名为 Materialist 的方法，通过结合神经先验与基于物理的渲染，实现了单视图图像的物理一致材料编辑及透明度编辑。</p>
+<h2>解决的问题</h2>
+<p>现有扩散模型难以精确编辑材料属性且缺乏物理一致性，单视图逆渲染存在病态问题且难以准确处理阴影和折射，而多视图方法受限于输入要求。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种利用神经先验初始化严格可微光线追踪优化的新型逆渲染管道，确保最终输出由物理引擎生成。</li>
+<li>利用 MaterialNet 的材料属性预测，实现了单视图可微蒙特卡洛光线追踪中环境图的更好估计。</li>
+<li>采用基于物理的渲染器而非神经渲染器，确保严格基于物理的材料编辑，包括全局光照、阴影和物体环境交互。</li>
+<li>提出了一种单视图、基于物理的透明度编辑方法，通过光线追踪重建网格实现真实的折射畸变，无需完整场景几何。</li>
+<li>材料预测模型在合成数据集上表现优异且运行速度快于基于扩散的估计器，支持快速直接推理模式。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2502.07531" data-arxiv-id="2502.07531" data-status="ready">
+<h1>[2502.07531] VidCRAFT3: Camera, Object, and Lighting Control for Image-to-Video Generation</h1>
+<p><a href="https://arxiv.org/abs/2502.07531" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 VidCRAFT3 框架，通过联合建模相机运动、物体运动和光照方向，解决了可控图像到视频生成中的物理一致性问题，并构建了 VLD 数据集。</p>
+<h2>解决的问题</h2>
+<p>实现相机运动、物体运动和光照方向的精确联合控制具有显著挑战，因为这些因素通过图像形成过程物理耦合，独立处理常导致视觉不一致，且现有方法缺乏通用性、依赖特定类别或外部信号，同时高质量联合标注数据集稀缺。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出一个统一的可控 I2V 生成框架，显式建模几何、运动和光照之间的交叉因子相互作用，实现相机运动、物体运动和光照方向的可组合和一致控制。</li>
+<li>引入新的条件设计和三阶段渐进式训练策略，支持独立和联合控制信号，实现多因素灵活组合同时保持时间一致性和物理一致性。</li>
+<li>构建了 VLD 数据集，提供具有准确每帧光照方向标注的合成视频，解决了学习光照感知视频生成的数据集缺乏问题。</li>
+<li>大量实验表明 VidCRAFT3 在控制精度、视觉质量和泛化能力方面达到了最先进的性能。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2502.19894" data-arxiv-id="2502.19894" data-status="ready">
+<h1>[2502.19894] High-Fidelity Relightable Monocular Portrait Animation with Lighting-Controllable Video Diffusion Model</h1>
+<p><a href="https://arxiv.org/abs/2502.19894" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种名为 LCVD 的基于扩散模型的视频生成框架，旨在实现高保真、可重光照的单目肖像动画，通过分离内在和外在特征子空间来解决现有方法无法控制光照的问题。</p>
+<h2>解决的问题</h2>
+<p>现有肖像动画方法虽然能生成说话人脸，但缺乏在动画过程中操纵光照的能力，且无法有效分离肖像的内在特征（身份和外观）与外在特征（姿态和光照），导致难以在不同光照条件下与背景无缝融合。</p>
+<h2>创新点</h2>
+<ul>
+<li>引入 Lighting Controllable Video Diffusion model (LCVD)，这是一个用于可重光照肖像动画的基于扩散的框架，克服了现有方法无法在动画时操纵光照的局限性。</li>
+<li>提出着色适配器（shading adapter）和参考适配器（reference adapter），以构建用于外在和内在面部特征的子空间。</li>
+<li>通过合并这两个子空间，引导 I2V 模型实现可重光照的肖像动画。</li>
+<li>大量实验表明，LCVD 优于最先进的方法，在光照效果、图像质量和视频一致性相关指标上显示出显著改进。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2503.07535" data-arxiv-id="2503.07535" data-status="ready">
+<h1>[2503.07535] LBM: Latent Bridge Matching for Fast Image-to-Image Translation</h1>
+<p><a href="https://arxiv.org/abs/2503.07535" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种基于桥匹配的 Latent Bridge Matching (LBM) 方法，旨在实现各种图像翻译任务的一步推理。</p>
+<h2>解决的问题</h2>
+<p>扩散模型固有的迭代生成过程阻碍了实时应用，现有加速方法多限于文本到图像或难以实现一步生成，且桥匹配方法在图像到图像翻译中的可用性、可扩展性和效率仍是开放问题。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种基于桥匹配的新型、通用且可扩展的方法 LBM，在各种图像到图像任务（包括高分辨率图像）中表现有效。</li>
+<li>展示了该方法在物体移除、深度和表面估计以及物体重光照任务上具有竞争力或达到最先进性能，优于多步采样扩散模型和流匹配模型。</li>
+<li>推导了该方法的条件框架，并将其应用于可控物体重光照和阴影生成。</li>
+<li>进行了广泛的消融研究以理解方法不同组件的影响。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2503.08224" data-arxiv-id="2503.08224" data-status="ready">
+<h1>[2503.08224] HRAvatar: High-Quality and Relightable Gaussian Head Avatar</h1>
+<p><a href="https://arxiv.org/abs/2503.08224" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 HRAvatar，一种利用 3D 高斯点从单目视频中重建头部虚拟形象的方法，解决了现有方法在变形灵活性、表情跟踪和重光照方面的不足。</p>
+<h2>解决的问题</h2>
+<p>现有头部虚拟形象重建方法存在局限性，包括 3DMM 固定拓扑限制复杂头发建模、NeRF 渲染慢训练时间长，以及 3DGS 方法在变形灵活性、表情跟踪准确性和真实重光照能力方面的不足。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出 HRAvatar，一种利用 3D 高斯点从单目视频中重建头部虚拟形象的方法，利用可学习 blendshapes 和线性混合蒙皮实现灵活精确的几何变形。</li>
+<li>利用表情编码器以端到端训练方式提取准确的面部表情参数，减少跟踪误差并提高泛化性。</li>
+<li>采用基于物理的着色模型结合内蕴先验（如反照率、粗糙度）来解耦外观，实现真实的重光照效果。</li>
+<li>采用反照率伪先验更好地解耦反照率，以配合基于物理的着色模型实现真实重光照。</li>
+<li>实验结果表明该方法在整体质量、实时重光照和简单材质编辑方面优于现有方法。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2504.06815" data-arxiv-id="2504.06815" data-status="ready">
+<h1>[2504.06815] SVG-IR: Spatially-Varying Gaussian Splatting for Inverse Rendering</h1>
+<p><a href="https://arxiv.org/abs/2504.06815" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种名为 SVG-IR 的逆渲染框架，通过引入空间变化高斯表示和基于物理的间接光照模型，显著提升了新视图合成和重光照质量。</p>
+<h2>解决的问题</h2>
+<p>现有基于 3D 高斯泼溅的逆渲染方法虽然速度快，但重光照质量常出现伪影，原因是高斯具有恒定的材质参数导致无法表示像素颜色变化，且间接光照建模缺乏物理约束导致光照不自然。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种新颖的表示方法——空间变化高斯（Spatially-Varying Gaussian），允许在单个原子上编码空间变化的材质属性。</li>
+<li>提出了一种新颖的渲染方案——SVG 泼溅（SVG splatting），类比于计算机图形学中的顶点/片段着色。</li>
+<li>构建了一个新的逆渲染框架——SVG-IR，基于空间变化高斯表示，提升了新视图合成和重光照质量。</li>
+<li>引入了一种基于物理的间接光照模型，显式地对光传输进行建模，实现更合理的光照与材质解耦。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2504.10486" data-arxiv-id="2504.10486" data-status="ready">
+<h1>[2504.10486] DNF-Avatar: Distilling Neural Fields for Real-time Animatable Avatar Relighting</h1>
+<p><a href="https://arxiv.org/abs/2504.10486" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 DNF-Avatar 框架，通过从神经场到 2D 高斯泼溅的知识蒸馏及预计算探针技术，实现了高质量且实时的可动画化人像重光照。</p>
+<h2>解决的问题</h2>
+<p>传统方法成本高且复杂，基于神经场的方法渲染速度慢，而基于高斯泼溅的方法在几何细节重建和实时 PBR 计算方面存在挑战，难以实现实时可重光照的人像渲染。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种基于近似 PBR 流程的框架，用于创建可动画化和可重光照的实时渲染人像。</li>
+<li>提出了隐式神经场与显式 2DGS 表示之间用于人像重建的知识蒸馏策略。</li>
+<li>提出了新颖的预计算部分环境光遮蔽探针，以实现快速且高保真的阴影建模。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2504.20026" data-arxiv-id="2504.20026" data-status="ready">
+<h1>[2504.20026] LIRM: Large Inverse Rendering Model for Progressive Reconstruction of Shape, Materials and View-dependent Radiance Fields</h1>
+<p><a href="https://arxiv.org/abs/2504.20026" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了 LIRM，这是首个能在不到 1 秒内从稀疏输入中联合重建高质量形状、材质和视角相关辐射场的前馈 Transformer 模型，支持渐进式细化且无需增加 GPU 显存。</p>
+<h2>解决的问题</h2>
+<p>现有基于优化的逆渲染方法重建时间长且需要密集图像，缺乏解耦光照、材质和几何的归纳偏置；现有大重建模型缺乏视角相关效果，难以重建未见部分，且无法完全分解几何、材质和光照以支持可重光照内容。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出首个能在不到 1 秒内从稀疏输入中联合重建高质量形状、材质和视角相关辐射场的前馈 Transformer 模型</li>
+<li>开发新型网络模块实现渐进式更新，在增加输入视图时不增加 GPU 显存消耗</li>
+<li>提出新型六面体平面神经 SDF 表示，更好地重建纹理细节并记忆先验重建结果</li>
+<li>采用神经方向编码到前馈 Transformer 架构中以恢复视角相关效果</li>
+<li>构建包含真实材质和真实外观的新大规模 3D 数据集</li>
+<li>提出精细的由粗到细训练范式以平衡计算成本和效果</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2505.08889" data-arxiv-id="2505.08889" data-status="ready">
+<h1>[2505.08889] IntrinsicEdit: Precise generative image manipulation in intrinsic space</h1>
+<p><a href="https://arxiv.org/abs/2505.08889" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种在内在图像空间中进行精确生成式图像操纵的方法，通过解决身份保持和通道纠缠问题，实现了无需额外训练即可进行物体插入/移除、材质操纵和重新布光等任务。</p>
+<h2>解决的问题</h2>
+<p>现有图像编辑方法难以在保持图像内容完整的同时精确定义编辑，且基于内在图像分解的方法面临身份保持困难和通道纠缠（编辑一个通道需更新其他通道）的挑战。</p>
+<h2>创新点</h2>
+<ul>
+<li>一种通过内在通道条件针对可编辑性的扩散模型反转方法</li>
+<li>用于简化编辑的内在通道解耦</li>
+<li>应用于多种任务，包括外观编辑、物体插入和移除以及室内场景重新布光，展示了自动解决全局光照效果</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2505.20582" data-arxiv-id="2505.20582" data-status="ready">
+<h1>[2505.20582] Total-Editing: Head Avatar with Editable Appearance, Motion, and Lighting</h1>
+<p><a href="https://arxiv.org/abs/2505.20582" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了 Total-Editing 框架，将面部重演和肖像重光照整合到端到端管道中，以实现具有可编辑外观、运动和光照的头部虚拟形象生成。</p>
+<h2>解决的问题</h2>
+<p>面部重演和肖像重光照通常被作为独立任务处理，且现有面部重演方法难以在无明确指导的情况下建模光照变化，导致光照固定，同时基于 3DMM 的运动编辑方法依赖表面场导致特征传播不连续。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了 Total-Editing 框架，在给定外观、运动和光照源的情况下进行 3D 感知的肖像生成。</li>
+<li>引入了内在分解的 NeRF 解码器，使用估计或预过滤的光照图来表示光照条件，允许通过源图像或 HDR 环境图灵活控制肖像光照。</li>
+<li>提出了基于 MLS 的变形场，支持包括平移和旋转在内的一般仿射变形，相比基于 SF 的方法产生更好的时空一致性。</li>
+<li>贡献了一个用于通用肖像编辑的物理渲染合成数据集，包含 200 万帧，捕捉了多样的主体、视角、姿势、表情和光照环境。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2505.21502" data-arxiv-id="2505.21502" data-status="ready">
+<h1>[2505.21502] Generalizable and Relightable Gaussian Splatting for Human Novel View Synthesis</h1>
+<p><a href="https://arxiv.org/abs/2505.21502" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种名为 GRGS 的通用且可重光照的 3D 高斯框架，通过前馈方式将多视图 2D 观察中的几何、材质和光照线索投影到 3D 高斯属性上，实现了在各种光照条件下的高保真人物新视角合成。</p>
+<h2>解决的问题</h2>
+<p>现有方法存在多种问题：基于网格的方法重建流程复杂且难以生成准确平滑的表面；基于 NeRF 的方法需要耗时的逐人物优化且计算成本高；基于 3DGS 的方法依赖迭代逆渲染导致几何和材质估计不准确且无法泛化；基于 2D 图像的方法缺乏 3D 一致性约束导致闪烁伪影且缺乏物理可解释性。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出 GRGS 框架，通过前馈方式将多视图 2D 观察中的几何、材质和光照线索投影到 3D 高斯属性上，实现新光照条件下未见数据的高保真新视角合成。</li>
+<li>提出光照鲁棒的几何细化模块，在合成重光照多视图数据上训练以估计准确的深度和表面法线，有效减轻不均匀照明引起的几何误差。</li>
+<li>设计物理基础神经渲染模块，结合物理渲染与神经渲染，实现高质量的着色效果并提高计算效率。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2506.03150" data-arxiv-id="2506.03150" data-status="ready">
+<h1>[2506.03150] IllumiCraft: Unified Geometry and Illumination Diffusion for Controllable Video Generation</h1>
+<p><a href="https://arxiv.org/abs/2506.03150" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 IllumiCraft，一种统一的扩散架构，通过融合精确的 3D 几何轨迹和详细的照明线索，实现可控视频生成和高质量视频重光照。</p>
+<h2>解决的问题</h2>
+<p>现有视频生成模型将光照视为不可控的隐式因素，且缺乏显式的几何引导，导致在场景几何变化时出现光照保真度和一致性丢失的问题。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出一种统一扩散架构，联合整合光照和几何引导，实现高质量视频重光照。</li>
+<li>支持基于文本和背景条件的视频重光照。</li>
+<li>引入包含 20,170 对视频的高质量数据集，包含原始视频、同步重光照视频、HDR 图和 3D 跟踪视频。</li>
+<li>进行了广泛评估，证明模型在视频重光照任务上优于最先进方法。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2506.13110" data-arxiv-id="2506.13110" data-status="ready">
+<h1>[2506.13110] GS-2DGS: Geometrically Supervised 2DGS for Reflective Object Reconstruction</h1>
+<p><a href="https://arxiv.org/abs/2506.13110" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种利用基础模型在基于物理的高斯泼溅中建模反光物体重建的新框架，通过结合表面信息和延迟着色技术，解决了表面属性和光照条件两方面的问题，实现了比高斯泼溅方法更优且比 NeRF 方法快一个数量级的结果。</p>
+<h2>解决的问题</h2>
+<p>从多视图图像中建模高光物体的 3D 资产是一个长期且具有挑战性的任务，因为高光反射是视图依赖的，违反了大多数重建方法采用的多视图一致性假设，且反光物体重建问题本质上是病态的，因为表面外观由表面属性（材质和几何）和环境光照条件共同决定，而现有方法通常只考虑其中一方面。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种利用基础模型在基于物理的高斯泼溅中建模反光物体重建的新框架。</li>
+<li>引入延迟着色技术以提高环境光照的估计。</li>
+<li>通过解决表面相关属性和光照条件两方面的问题，在反光物体重建上实现了最先进的结果。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2506.23854" data-arxiv-id="2506.23854" data-status="ready">
+<h1>[2506.23854] HiNeuS: High-fidelity Neural Surface Mitigating Low-texture and Reflective Ambiguity</h1>
+<p><a href="https://arxiv.org/abs/2506.23854" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 HiNeuS 框架，通过 SDF 引导的多视图一致性、局部几何约束正则化和渲染优先的 Eikonal 松弛，统一解决了低纹理和反射模糊下的神经表面重建挑战。</p>
+<h2>解决的问题</h2>
+<p>现有方法孤立解决反射、低纹理和细节问题，导致多视图不一致、低纹理表面过正则化以及细节几何冲突，难以同时恢复高保真几何与处理视差效应。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出 SDF 引导的多视图一致性机制，利用连续 SDF 评估计算可见性因子以解决反射模糊问题。</li>
+<li>设计局部几何约束正则化方法，通过射线对齐平面约束自适应正则化低纹理区域并保留边缘。</li>
+<li>实现渲染优先的 Eikonal 松弛策略，通过自适应权重方案平衡几何保真度与渲染精度以保留细节。</li>
+<li>实验证明该方法在合成和真实世界数据集上达到 SOTA 性能，反射表面 Chamfer 距离提升 21.4%。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2507.07733" data-arxiv-id="2507.07733" data-status="ready">
+<h1>[2507.07733] RTR-GS: 3D Gaussian Splatting for Inverse Rendering with Radiance Transfer and Reflection</h1>
+<p><a href="https://arxiv.org/abs/2507.07733" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种名为 RTR-GS 的基于 3D 高斯泼溅的逆渲染框架，旨在从多视角图像中准确估计表面法线、双向反射分布函数和环境光照。</p>
+<h2>解决的问题</h2>
+<p>逆渲染面临属性间复杂交互及未知光照导致的欠约束问题，现有基于 MLP 的方法存在表达力有限和计算成本高，而基于 3D 高斯泼溅的方法在处理高光反射时缺乏方向分辨率且易产生漂浮伪影。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一个基于 3D 高斯泼溅的逆渲染框架 RTR-GS，能够从多视角图像中准确估计表面法线、BRDF 和环境光照。</li>
+<li>提出了一种结合反射图与辐射传输的 3DGS 混合渲染模型，有效分离高低频外观，减少漂浮伪影并提高几何结构恢复质量。</li>
+<li>通过双分支渲染方法增强外观分解，利用理性光照建模和烘焙到 3D 体素中的遮挡数据实现高效准确的材质与光照分解。</li>
+<li>在新型视图合成和重光照任务中实现了最先进的性能，为漫反射和高光物体均产生了可信的结果。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2507.15629" data-arxiv-id="2507.15629" data-status="ready">
+<h1>[2507.15629] Gaussian Splatting with Discretized SDF for Relightable Assets</h1>
+<p><a href="https://arxiv.org/abs/2507.15629" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种基于离散化符号距离场（SDF）的 3D 高斯泼溅（Gaussian Splatting）方法，通过在每个高斯中编码采样值来实现连续 SDF 的离散表示，从而在保持简单性和内存效率的同时，实现了高质量且鲁棒的几何与材质分解及重光照。</p>
+<h2>解决的问题</h2>
+<p>片段未提供</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种在 3D 高斯泼溅框架中的新颖正则化方法，利用离散化 SDF 来改善几何与材质的分解质量。</li>
+<li>设计了一种基于投影的一致性损失（projection-based consistency loss），用于正则化离散化 SDF，并证明其是 Eikonal 损失的有效近似。</li>
+<li>提出了一种专为高斯泼溅设计的球形初始化策略，以避免陷入局部极小值并提高模型的鲁棒性。</li>
+<li>通过统一 SDF 与高斯的表示，实现了仅使用 20% 内存即可进行真实感重光照，同时简化了优化过程。</li>
+<li>展示了广泛的实验结果，证明该方法在多种指标上优于现有的基于高斯的方法，并能处理各种材质的物体。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2507.18231" data-arxiv-id="2507.18231" data-status="ready">
+<h1>[2507.18231] PS-GS: Gaussian Splatting for Multi-View Photometric Stereo</h1>
+<p><a href="https://arxiv.org/abs/2507.18231" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种基于 2D 高斯泼溅（2DGS）的逆渲染方法 PS-GS，将其扩展至基于多视图光度立体（MVPS）的物理基础延迟渲染，以联合优化几何、材质和光照。</p>
+<h2>解决的问题</h2>
+<p>片段未提供</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种高效的基于物理的延迟逆渲染方法，该方法基于 2DGS 对多视图光度立体进行联合优化，同时处理几何、材质和光照。</li>
+<li>提出利用未标定光度立体（UPS）估计的法线来细化高斯模型渲染的法线贴图，从而显著增强表面估计的质量。</li>
+<li>修改了 2D 高斯光线追踪技术以适应单方向光（SDL）场景，并利用其可见性结果来正则化由 MLP 计算的光照，从而改善光照重建效果。</li>
+<li>该方法在包括稀疏视图输入在内的多种任务中取得了令人信服的结果，涵盖了新视图合成、重光照以及形状和材质编辑。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2508.12945" data-arxiv-id="2508.12945" data-status="ready">
+<h1>[2508.12945] Lumen: Consistent Video Relighting and Harmonious Background Replacement with Video Generative Models</h1>
+<p><a href="https://arxiv.org/abs/2508.12945" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>Lumen 是一个基于大规模视频生成模型的视频重光照与和谐背景替换模型，通过构建包含合成和真实域数据的多域联合训练数据集及引入风格适配器，解决了视频重光照中的时序一致性和前景保持问题。</p>
+<h2>解决的问题</h2>
+<p>现有工作主要集中在图像域，将重光照任务扩展到视频域面临巨大挑战，主要体现在难以在所有帧间传播重光照修改以保持时序一致性，以及缺乏包含高质量前景对齐视频对的大规模数据集。</p>
+<h2>创新点</h2>
+<ul>
+<li>构建了大规模视频重光照数据集，整合了遵循物理规则的合成域数据（Unreal Engine 渲染）和模拟光照变化的真实域数据（基于视频法线提取与 HDR 图模拟），以弥补高质量前景对齐视频对的稀缺。</li>
+<li>提出了 Lumen 模型，该模型基于大规模视频生成模型开发，具备超写实美学和一致的时间运动特性，能够同时实现视频重光照与和谐背景替换。</li>
+<li>设计了一种多域联合训练课程，通过注入风格适配器生成 3D 风格视频，并在混合采样合成与真实数据时仅对合成数据激活适配器，从而解耦多域风格分布并实现自然输出。</li>
+<li>提出了名为“内在一致性”（intrinsic consistency）的新评估方法，通过将视频转换为统一光照来测量相似度，以补充现有的相似性测量和质量评估指标。</li>
+<li>建立了包含真实和合成视频输入的综合基准，并通过广泛实验证明了 Lumen 在视频重光照性能、时序一致性以及前景保持方面优于现有方法。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2509.11275" data-arxiv-id="2509.11275" data-status="ready">
+<h1>[2509.11275] ROSGS: Relightable Outdoor Scenes With Gaussian Splatting</h1>
+<p><a href="https://arxiv.org/abs/2509.11275" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 ROS-GS 框架，利用 2D 高斯泼溅的高效渲染与基于物理的渲染技术，实现了户外场景的可重光照与实时动态阴影合成。</p>
+<h2>解决的问题</h2>
+<p>户外场景重光照面临自然光照复杂、动态因素多变及场景规模大等挑战，现有方法在渲染效率、多未知光照条件处理或高频光照效果（如阴影）建模上存在局限。</p>
+<h2>创新点</h2>
+<ul>
+<li>利用 2DGS 表示和单目法线估计融入逆渲染流程，产生更忠实的几何和纹理估计。</li>
+<li>结合混合光照表示与高斯泼溅表示，实现真实重光照和实时动态阴影合成。</li>
+<li>定性和定量结果表明，ROS-GS 在户外场景分解和重光照任务上优于基线方法。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2509.22112" data-arxiv-id="2509.22112" data-status="ready">
+<h1>[2509.22112] Large Material Gaussian Model for Relightable 3D Generation</h1>
+<p><a href="https://arxiv.org/abs/2509.22112" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种从文本提示生成具有物理基础渲染（PBR）材料属性的高分辨率 3D 高斯模型的新框架，支持在渲染时进行动态重光照。</p>
+<h2>解决的问题</h2>
+<p>现有基于 3D 高斯泼溅的方法难以控制光照着色且未考虑 3D 物体的材料属性（如 PBR 材料），导致纹理中出现未受控的光烘焙，缺乏真实的渲染效果，无法适应不同的环境光照条件。</p>
+<h2>创新点</h2>
+<ul>
+<li>本文首创提出了一种从文本提示生成具有材料属性的高分辨率高斯模型的新框架，能够通过物理基础渲染进行动态重光照。</li>
+<li>本文引入了专为可重光照高斯设计的原则性模型，包括可控的多视图 PBR 模型和统一的材质高斯重建模型。</li>
+<li>大量实验表明，该方法在外观和材质质量方面均表现出色，同时具有高效性。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2512.09162" data-arxiv-id="2512.09162" data-status="ready">
+<h1>[2512.09162] GTAvatar: Bridging Gaussian Splatting and Texture Mapping for Relightable and Editable Gaussian Avatars</h1>
+<p><a href="https://arxiv.org/abs/2512.09162" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 GTAvatar，通过结合高斯泼溅和纹理映射，实现了从单目 RGB 视频中重建可实时渲染、可重光照且支持直观纹理编辑的高斯头像。</p>
+<h2>解决的问题</h2>
+<p>基于高斯泼溅的头像虽然具有照片级真实感和实时渲染能力，但缺乏传统纹理映射模型那样的直观外观编辑灵活性，且直接嵌入 UV 域会导致纹理不连续。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出 GTAvatar 方法，旨在从单目 RGB 视频重建头像，支持实时渲染、重光照、动画及通过纹理映射直接编辑。</li>
+<li>利用 2DGS 变体定义局部坐标系，通过近似正交投影将射线 - 泼溅交点映射到 UV 域，解决高斯属性孤立导致的编辑困难。</li>
+<li>引入新颖的 UV 正则化技术，强制给定射线的射线 - 泼溅交点 UV 坐标对齐，以维持表示完整性。</li>
+<li>实现基于 UV 的语义控制，支持内在材质监督、测试时模型压缩以及在 FLAME UV 域内直观编辑材质和法线。</li>
+<li>采用 PBR 材质属性采样和 Cook-Torrance BRDF，在延迟着色框架下实现可微分的出射辐射率表达。</li>
+<li>相比现有方法，该方法在保持高重建质量的同时，提供了更小的模型尺寸和更高的编辑灵活性。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2602.07101" data-arxiv-id="2602.07101" data-status="ready">
+<h1>[2602.07101] Zero-Shot UAV Navigation in Forests via Relightable 3D Gaussian Splatting</h1>
+<p><a href="https://arxiv.org/abs/2602.07101" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种利用可重光照 3D 高斯泼溅技术构建高保真仿真环境的端到端深度强化学习框架，实现了无人机在复杂森林环境中的零样本导航。</p>
+<h2>解决的问题</h2>
+<p>现有无人机导航系统依赖主动感知设备导致系统负担重，且基于单目视觉的导航在无序户外环境（如森林）中难以实现零样本迁移，同时标准 3D 高斯泼溅难以处理不可控光照导致的几何与光照解耦问题。</p>
+<h2>创新点</h2>
+<ul>
+<li>开发了一种用于视觉无人机导航的新型端到端深度强化学习框架，直接将原始视觉观察映射为连续控制命令，无需依赖手工特征或模块化组件即可实现敏捷自主飞行。</li>
+<li>利用可重光照 3D 高斯泼溅构建具有多样化光照合成的高保真仿真环境，以实现向无序户外环境的有效零样本迁移，确保策略对现实世界不同光照条件的鲁棒性。</li>
+<li>通过广泛的飞行实验验证了系统，证明该策略在复杂森林环境及变化的现实光照条件下，实现了最高达 10 米/秒的鲁棒、无碰撞自主导航。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2603.14241" data-arxiv-id="2603.14241" data-status="ready">
+<h1>[2603.14241] CamLit: Unified Video Diffusion with Explicit Camera and Lighting Control</h1>
+<p><a href="https://arxiv.org/abs/2603.14241" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了 CamLit，一个统一的视频扩散模型，能够将单张静态图像转换为具有明确相机轨迹和光照控制的光真实视频序列，实现了新视角合成与重光照的统一。</p>
+<h2>解决的问题</h2>
+<p>收集具有多样相机运动和光照条件的视频成本高昂，且联合去噪公式面临缺乏成对多视角、多光照视频三元组用于训练的挑战。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了 CamLit，一个统一的视频扩散模型，实现相机运动和光照的显式控制。</li>
+<li>是首个在单个模型中联合执行新视角合成（NVS）和重光照的框架。</li>
+<li>模型输入单张 RGB 图像、相机轨迹和环境图，输出 RGB 新视角序列、重光照序列和反照率序列。</li>
+<li>利用 RealEstate10K 和 DiffusionRenderer 构建了大规模成对视频数据集，解决了训练数据缺乏的问题。</li>
+<li>实验表明模型在室内和室外场景上实现了高质量生成，同时保持两个任务的保真度。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2603.23637" data-arxiv-id="2603.23637" data-status="ready">
+<h1>[2603.23637] Stochastic Ray Tracing for the Reconstruction of 3D Gaussian Splatting</h1>
+<p><a href="https://arxiv.org/abs/2603.23637" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种用于 3D 高斯泼溅（3DGS）场景重建和渲染的可微分随机光线追踪框架，这是首个利用随机光线追踪同时重建和渲染标准及重光照 3DGS 场景的框架。</p>
+<h2>解决的问题</h2>
+<p>现有基于光栅化的 3DGS 缺乏物理准确的光影效果，而基于光线追踪的方法因排序成本高导致速度慢，且现有随机光线追踪方法不可微分无法用于重建，也不支持重光照场景。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种无偏、无需排序的随机算法来估计所有高斯参数相对于像素颜色梯度的值，实现了 3DGS 场景的高效可微分光线追踪。</li>
+<li>将该公式扩展至可重光照的 3DGS，使用相同的随机估计器驱动阴影射线评估和环境贴图集成，取代了先前工作使用的近似阴影映射管道。</li>
+<li>在标准和可重光照基准测试中，该方法的速度与基于光栅化的 3DGS 相当，同时大幅优于基于排序的光线追踪。</li>
+<li>对于可重光照场景，通过带有准确光线追踪阴影和反射的高斯逐像素着色，提供了显著更高的重建保真度。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2603.26067" data-arxiv-id="2603.26067" data-status="ready">
+<h1>[2603.26067] R-PGA: Robust Physical Adversarial Camouflage Generation via Relightable 3D Gaussian Splatting</h1>
+<p><a href="https://arxiv.org/abs/2603.26067" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种基于可重光照 3D 高斯泼溅（3DGS）的鲁棒物理对抗伪装生成框架 R-PGA，旨在解决现有物理攻击在场景建模、物理属性简化及优化目标上的局限性，以提升自动驾驶系统中的车辆检测安全性。</p>
+<h2>解决的问题</h2>
+<p>现有物理对抗伪装方法在真实环境中的鲁棒性和对抗有效性有限，主要受限于场景建模依赖合成环境、物理属性简化（忽略光照和材质）以及优化策略导致损失景观崎岖且对物理配置变化敏感。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了首个基于 3DGS 的物理对抗攻击框架，利用高保真重建减少数字 - 物理域差距，并通过快速可微渲染支持高效迭代优化。</li>
+<li>引入了物理解耦表示和基于物理的渲染（PBR）流程，将表面颜色与光照解耦，实现优化过程中的重光照并解决跨视角纹理不一致问题。</li>
+<li>设计了结合前景 PBR-3DGS 与基于流匹配的背景翻译的混合渲染流程，避免了病态的全局分解并实现了无缝全场景重光照。</li>
+<li>提出了硬物理配置挖掘（HPCM）模块，主动挖掘并抑制最坏物理配置，平坦化崎岖的损失景观，保证对抗环境变化的一致性鲁棒性。</li>
+<li>在数字和物理领域进行了广泛实验，证明 R-PGA 在对抗有效性和鲁棒性方面显著优于最先进方法。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.07414" data-arxiv-id="2609.07414" data-status="ready">
+<h1>[2609.07414] RelightFormer: Feed-forward Generative Transformer for Multiview Object Relighting</h1>
+<p><a href="https://arxiv.org/abs/2609.07414" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>RelightFormer 是一种基于前馈生成 Transformer 的直推式图像重光照方法，通过融合多视图输入与目标光照，在无需显式逆渲染的情况下直接合成重光照图像。</p>
+<h2>解决的问题</h2>
+<p>传统逆渲染方法依赖耗时优化且存在病态问题，而现有的基于生成模型的重光照方法主要局限于单视图或仅将多视图信息编码为通道维度，导致无法有效利用多视图几何线索并限制了全局光照先验的捕捉能力。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了 RelightFormer，一种大型前馈生成 Transformer，支持从单视图或多视图输入进行直接图像重光照，从而避开了显式逆渲染的病态步骤。</li>
+<li>引入了一种潜在光照模块（latent illumination module），通过交叉注意力机制将目标环境图注入图像特征，以有效适配视频基础模型用于图像重光照任务。</li>
+<li>采用置换不变的位置编码（permutation-invariant positional encoding）消除序列偏差，确保所有输入视图在融合全局环境图时被对称对待，从而提升重光照质量。</li>
+<li>构建了大规模且完全开源的多视图重光照数据集 Laval Objaverse Dataset (LOD)，涵盖来自 Objaverse 的 90,545 个 3D 物体和 Laval Database 的 39,008 种独特光照。</li>
+<li>在单视图和多视图物体重光照任务中展示了最先进的性能，在视觉质量上超越了现有的基线方法。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2605.09024" data-arxiv-id="2605.09024" data-status="ready">
+<h1>[2605.09024] Relightable Gaussian Splatting for Virtual Production Using Image-Based Illumination</h1>
+<p><a href="https://arxiv.org/abs/2605.09024" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种基于图像照明的可重光照高斯泼溅方法，用于虚拟制作，解决了传统 LED 背景与光照耦合限制后期灵活性的问题，无需深度先验或光传输模拟即可实现光照修改和背景替换。</p>
+<h2>解决的问题</h2>
+<p>虚拟制作中背景影像与光照在拍摄时紧密耦合，限制了后期灵活性，导致偏差需重拍；现有 2D 重光照无法合成新 3D 视角；现有逆渲染方法假设远场光照，不适用于近场 LED 墙，且依赖深度数据和专用硬件，增加复杂度。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种无需深度先验、辅助几何、光传输模拟或自定义 CUDA/GPU 代码的几何无关重光照流水线。</li>
+<li>提出了一种新颖的 3D 高斯泼溅参数化方法，直接采样已知图像光源以建模照片级真实、视角相关的光照，无需环境贴图。</li>
+<li>提供了首个用于 3D 重建和重光照的公开多相机虚拟制作数据集，并附带高效的采集协议。</li>
+<li>该方法在客观和感知质量上优于所有基线，同时保持轻量级、训练速度快，并能渲染深度、XYZ、光照残差和无光照渲染等 AOV。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2606.09018" data-arxiv-id="2606.09018" data-status="ready">
+<h1>[2606.09018] MaterialClusterGS: Palette-Based Material Decomposition and Physically-Based Relighting with 2D Gaussian Splatting</h1>
+<p><a href="https://arxiv.org/abs/2606.09018" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种名为 MaterialClusterGS 的基于调色板的材料分解框架，用于 2D Gaussian Splatting，通过共享 BRDF 原型实现全局材料一致性并支持物理基础重光照。</p>
+<h2>解决的问题</h2>
+<p>现有 3D Gaussian Splatting 将外观存储为辐射度而非物理材料属性，导致高斯颜色非物理且每个高斯独立调整 BRDF 参数造成纠缠，使得逆渲染和编辑困难；现有方法要么分解空间不一致，要么仅在 RGB 层面聚类无法分解反射率，均不支持可靠的下游编辑。</p>
+<h2>创新点</h2>
+<ul>
+<li>识别出过度的材料自由度是可编辑逆渲染的关键障碍，并通过基于调色板的材料表示解决该问题，用共享的 BRDF 原型集替换无约束的每个高斯 BRDF。</li>
+<li>引入紧凑的 BRDF 调色板和连续的空间材料场，将 3D 位置映射到共享材料分配，将材料恢复从局部外观拟合转变为全局材料解释，无需成对正则化。</li>
+<li>提出基于学习到的 BRDF 调色板、残差权重估计和稀疏每个高斯细化的调色板级材料编辑框架，实现一致的材料编辑、材料转移和编辑后的前向路径追踪重光照。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2606.20233" data-arxiv-id="2606.20233" data-status="ready">
+<h1>[2606.20233] Cinematic Compositing Using Character-Environment-Harmonized Video Generation Models</h1>
+<p><a href="https://arxiv.org/abs/2606.20233" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种端到端的生成框架，利用统一视频扩散模型同时解决角色 - 环境物理交互和光照和谐问题，以实现电影级动态视频合成。</p>
+<h2>解决的问题</h2>
+<p>现有合成方法依赖 alpha 通道抠像，无法建模角色与环境的复杂物理和光度交互；现有方法使用单一二进制掩码，无法灵活处理保留、替换或生成道具的不同意图；现有视频修复和重光照模型孤立处理任务，缺乏统一的角色 - 环境双向和谐处理。</p>
+<h2>创新点</h2>
+<ul>
+<li>将绿幕合成形式化为统一框架内的双向角色 - 环境生成，联合建模 C2E 物理交互和 E2C 光照和谐。</li>
+<li>引入面向生产的三掩码引导架构，将不同的道具处理意图转换为 RGB 和深度条件，并结合联合 RGB-D 去噪以改善物理一致的背景交互合成。</li>
+<li>提出一种由先验驱动的数据构建管道，无需昂贵的渲染管道即可高效生成高质量的多光照数据。</li>
+<li>设计一种参考条件化机制，实现可定制的环境合成和对交互道具的细粒度控制。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2607.08016" data-arxiv-id="2607.08016" data-status="ready">
+<h1>[2607.08016] LightCrafter: PBR-Conditioned Video Diffusion Refinement for Controllable and Consistent Relighting</h1>
+<p><a href="https://arxiv.org/abs/2607.08016" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>视频重光照旨在编辑场景外观同时保留内容、几何、材质和运动，但面临阴影和高光需保持时间连贯性与物理一致性的挑战。</p>
+<h2>解决的问题</h2>
+<p>视频重光照中场景外观属性（几何、材质、反射率等）的纠缠性质导致几何、材质、反射率、可见性和照明共同决定视频，使得阴影、高光和着色必须保持时间连贯且与相机运动及动态物体物理一致。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出 PBR-Conditioned Video Diffusion Refinement 方法</li>
+<li>实现照片级真实感</li>
+<li>实现忠实的光照控制</li>
+<li>实现时间上稳定的场景外观交互</li>
+<li>解决场景外观属性的纠缠性质问题</li>
+<li>保持阴影、高光和着色的时间连贯性</li>
+</ul>
+</article>
     <article class="summary-article summary-topic-entry" id="summary-2304.12461" data-arxiv-id="2304.12461" data-status="ready">
 <h1>[2304.12461] TensoIR: Tensorial Inverse Rendering</h1>
 <p><a href="https://arxiv.org/abs/2304.12461" rel="nofollow">arXiv 原文</a></p>
@@ -3400,6 +4021,6 @@
 </article>
     </div>
   </main>
-  <script type="application/json" id="summary-catalog">{"papers":{"1905.00824":{"status":"ready","url":"notes/relighting.html#summary-1905.00824"},"1906.03355":{"status":"ready","url":"notes/relighting.html#summary-1906.03355"},"1910.08131":{"status":"ready","url":"notes/relighting.html#summary-1910.08131"},"2008.02796":{"status":"ready","url":"notes/relighting.html#summary-2008.02796"},"2012.11116":{"status":"ready","url":"notes/relighting.html#summary-2012.11116"},"2102.10244":{"status":"ready","url":"notes/relighting.html#summary-2102.10244"},"2104.00484":{"status":"ready","url":"notes/relighting.html#summary-2104.00484"},"2107.03106":{"status":"ready","url":"notes/relighting.html#summary-2107.03106"},"2108.07920":{"status":"ready","url":"notes/relighting.html#summary-2108.07920"},"2110.07272":{"status":"ready","url":"notes/relighting.html#summary-2110.07272"},"2203.16681":{"status":"ready","url":"notes/relighting.html#summary-2203.16681"},"2204.00644":{"status":"ready","url":"notes/relighting.html#summary-2204.00644"},"2204.06837":{"status":"ready","url":"notes/relighting.html#summary-2204.06837"},"2204.09341":{"status":"ready","url":"notes/relighting.html#summary-2204.09341"},"2205.10351":{"status":"ready","url":"notes/relighting.html#summary-2205.10351"},"2206.03380":{"status":"ready","url":"notes/relighting.html#summary-2206.03380"},"2207.02774":{"status":"ready","url":"notes/relighting.html#summary-2207.02774"},"2207.04750":{"status":"ready","url":"notes/relighting.html#summary-2207.04750"},"2207.10582":{"status":"ready","url":"notes/relighting.html#summary-2207.10582"},"2207.14811":{"status":"ready","url":"notes/relighting.html#summary-2207.14811"},"2209.09898":{"status":"ready","url":"notes/relighting.html#summary-2209.09898"},"2209.10510":{"status":"ready","url":"notes/relighting.html#summary-2209.10510"},"2303.12950":{"status":"ready","url":"notes/relighting.html#summary-2303.12950"},"2303.13852":{"status":"ready","url":"notes/relighting.html#summary-2303.13852"},"2304.09479":{"status":"ready","url":"notes/relighting.html#summary-2304.09479"},"2304.12461":{"status":"ready","url":"notes/relighting.html#summary-2304.12461"},"2304.13445":{"status":"ready","url":"notes/relighting.html#summary-2304.13445"},"2308.07903":{"status":"ready","url":"notes/relighting.html#summary-2308.07903"},"2311.08843":{"status":"ready","url":"notes/relighting.html#summary-2311.08843"},"2311.16043":{"status":"ready","url":"notes/relighting.html#summary-2311.16043"},"2311.16473":{"status":"ready","url":"notes/relighting.html#summary-2311.16473"},"2312.03704":{"status":"ready","url":"notes/relighting.html#summary-2312.03704"},"2312.04334":{"status":"ready","url":"notes/relighting.html#summary-2312.04334"},"2312.06886":{"status":"ready","url":"notes/relighting.html#summary-2312.06886"},"2312.09398":{"status":"ready","url":"notes/relighting.html#summary-2312.09398"},"2312.11587":{"status":"ready","url":"notes/relighting.html#summary-2312.11587"},"2312.12274":{"status":"ready","url":"notes/relighting.html#summary-2312.12274"},"2312.12877":{"status":"ready","url":"notes/relighting.html#summary-2312.12877"},"2401.09126":{"status":"ready","url":"notes/relighting.html#summary-2401.09126"},"2401.12977":{"status":"ready","url":"notes/relighting.html#summary-2401.12977"},"2402.11929":{"status":"ready","url":"notes/relighting.html#summary-2402.11929"},"2402.13251":{"status":"ready","url":"notes/relighting.html#summary-2402.13251"},"2402.18848":{"status":"ready","url":"notes/relighting.html#summary-2402.18848"},"2403.09632":{"status":"ready","url":"notes/relighting.html#summary-2403.09632"},"2403.10615":{"status":"ready","url":"notes/relighting.html#summary-2403.10615"},"2404.09918":{"status":"ready","url":"notes/relighting.html#summary-2404.09918"},"2405.00666":{"status":"ready","url":"notes/relighting.html#summary-2405.00666"},"2405.20791":{"status":"ready","url":"notes/relighting.html#summary-2405.20791"},"2405.21074":{"status":"ready","url":"notes/relighting.html#summary-2405.21074"},"2406.07520":{"status":"ready","url":"notes/relighting.html#summary-2406.07520"},"2407.10487":{"status":"ready","url":"notes/relighting.html#summary-2407.10487"},"2408.13252":{"status":"ready","url":"notes/relighting.html#summary-2408.13252"},"2408.13922":{"status":"ready","url":"notes/relighting.html#summary-2408.13922"},"2409.00674":{"status":"ready","url":"notes/relighting.html#summary-2409.00674"},"2409.07441":{"status":"ready","url":"notes/relighting.html#summary-2409.07441"},"2409.08947":{"status":"ready","url":"notes/relighting.html#summary-2409.08947"},"2409.10335":{"status":"ready","url":"notes/relighting.html#summary-2409.10335"},"2409.12957":{"status":"ready","url":"notes/relighting.html#summary-2409.12957"},"2409.13591":{"status":"ready","url":"notes/relighting.html#summary-2409.13591"},"2409.15273":{"status":"ready","url":"notes/relighting.html#summary-2409.15273"},"2409.18770":{"status":"ready","url":"notes/relighting.html#summary-2409.18770"},"2410.05322":{"status":"ready","url":"notes/relighting.html#summary-2410.05322"},"2410.05525":{"status":"ready","url":"notes/relighting.html#summary-2410.05525"},"2410.08188":{"status":"ready","url":"notes/relighting.html#summary-2410.08188"},"2410.22979":{"status":"ready","url":"notes/relighting.html#summary-2410.22979"},"2410.24223":{"status":"ready","url":"notes/relighting.html#summary-2410.24223"},"2411.00356":{"status":"ready","url":"notes/relighting.html#summary-2411.00356"},"2411.02179":{"status":"ready","url":"notes/relighting.html#summary-2411.02179"},"2411.10189":{"status":"ready","url":"notes/relighting.html#summary-2411.10189"},"2411.10825":{"status":"ready","url":"notes/relighting.html#summary-2411.10825"},"2411.17696":{"status":"ready","url":"notes/relighting.html#summary-2411.17696"},"2411.17994":{"status":"ready","url":"notes/relighting.html#summary-2411.17994"},"2411.18665":{"status":"ready","url":"notes/relighting.html#summary-2411.18665"},"2411.19292":{"status":"ready","url":"notes/relighting.html#summary-2411.19292"},"2412.00177":{"status":"ready","url":"notes/relighting.html#summary-2412.00177"},"2412.05278":{"status":"ready","url":"notes/relighting.html#summary-2412.05278"},"2412.07534":{"status":"ready","url":"notes/relighting.html#summary-2412.07534"},"2412.09593":{"status":"ready","url":"notes/relighting.html#summary-2412.09593"},"2412.11224":{"status":"ready","url":"notes/relighting.html#summary-2412.11224"},"2412.12083":{"status":"ready","url":"notes/relighting.html#summary-2412.12083"},"2412.13734":{"status":"ready","url":"notes/relighting.html#summary-2412.13734"},"2412.14148":{"status":"ready","url":"notes/relighting.html#summary-2412.14148"},"2412.14214":{"status":"ready","url":"notes/relighting.html#summary-2412.14214"},"2412.15050":{"status":"ready","url":"notes/relighting.html#summary-2412.15050"},"2412.15211":{"status":"ready","url":"notes/relighting.html#summary-2412.15211"},"2501.08649":{"status":"ready","url":"notes/relighting.html#summary-2501.08649"},"2501.09756":{"status":"ready","url":"notes/relighting.html#summary-2501.09756"},"2501.14726":{"status":"ready","url":"notes/relighting.html#summary-2501.14726"},"2501.16330":{"status":"ready","url":"notes/relighting.html#summary-2501.16330"},"2501.17159":{"status":"ready","url":"notes/relighting.html#summary-2501.17159"},"2502.08297":{"status":"ready","url":"notes/relighting.html#summary-2502.08297"},"2502.08590":{"status":"ready","url":"notes/relighting.html#summary-2502.08590"},"2503.10597":{"status":"ready","url":"notes/relighting.html#summary-2503.10597"},"2503.14485":{"status":"ready","url":"notes/relighting.html#summary-2503.14485"},"2503.18408":{"status":"ready","url":"notes/relighting.html#summary-2503.18408"},"2504.01008":{"status":"ready","url":"notes/relighting.html#summary-2504.01008"},"2504.03011":{"status":"ready","url":"notes/relighting.html#summary-2504.03011"},"2504.08022":{"status":"ready","url":"notes/relighting.html#summary-2504.08022"},"2504.09671":{"status":"ready","url":"notes/relighting.html#summary-2504.09671"},"2504.12273":{"status":"ready","url":"notes/relighting.html#summary-2504.12273"},"2504.16086":{"status":"ready","url":"notes/relighting.html#summary-2504.16086"},"2505.09608":{"status":"ready","url":"notes/relighting.html#summary-2505.09608"},"2505.19751":{"status":"ready","url":"notes/relighting.html#summary-2505.19751"},"2505.24227":{"status":"ready","url":"notes/relighting.html#summary-2505.24227"},"2506.05347":{"status":"ready","url":"notes/relighting.html#summary-2506.05347"},"2506.06271":{"status":"ready","url":"notes/relighting.html#summary-2506.06271"},"2506.14549":{"status":"ready","url":"notes/relighting.html#summary-2506.14549"},"2506.15673":{"status":"ready","url":"notes/relighting.html#summary-2506.15673"},"2506.18882":{"status":"ready","url":"notes/relighting.html#summary-2506.18882"},"2506.18904":{"status":"ready","url":"notes/relighting.html#summary-2506.18904"},"2507.17613":{"status":"ready","url":"notes/relighting.html#summary-2507.17613"},"2507.20512":{"status":"ready","url":"notes/relighting.html#summary-2507.20512"},"2508.05626":{"status":"ready","url":"notes/relighting.html#summary-2508.05626"},"2508.06494":{"status":"ready","url":"notes/relighting.html#summary-2508.06494"},"2508.08384":{"status":"ready","url":"notes/relighting.html#summary-2508.08384"},"2508.09137":{"status":"ready","url":"notes/relighting.html#summary-2508.09137"},"2508.14563":{"status":"ready","url":"notes/relighting.html#summary-2508.14563"},"2508.14814":{"status":"ready","url":"notes/relighting.html#summary-2508.14814"},"2509.01837":{"status":"ready","url":"notes/relighting.html#summary-2509.01837"},"2509.03680":{"status":"ready","url":"notes/relighting.html#summary-2509.03680"},"2509.18497":{"status":"ready","url":"notes/relighting.html#summary-2509.18497"},"2509.23769":{"status":"ready","url":"notes/relighting.html#summary-2509.23769"},"2510.02069":{"status":"ready","url":"notes/relighting.html#summary-2510.02069"},"2510.03163":{"status":"ready","url":"notes/relighting.html#summary-2510.03163"},"2510.07729":{"status":"ready","url":"notes/relighting.html#summary-2510.07729"},"2510.15846":{"status":"ready","url":"notes/relighting.html#summary-2510.15846"},"2510.23494":{"status":"ready","url":"notes/relighting.html#summary-2510.23494"},"2511.02483":{"status":"ready","url":"notes/relighting.html#summary-2511.02483"},"2511.06271":{"status":"ready","url":"notes/relighting.html#summary-2511.06271"},"2511.08169":{"status":"ready","url":"notes/relighting.html#summary-2511.08169"},"2511.13684":{"status":"ready","url":"notes/relighting.html#summary-2511.13684"},"2511.18346":{"status":"ready","url":"notes/relighting.html#summary-2511.18346"},"2512.00255":{"status":"ready","url":"notes/relighting.html#summary-2512.00255"},"2512.04267":{"status":"ready","url":"notes/relighting.html#summary-2512.04267"},"2512.05115":{"status":"ready","url":"notes/relighting.html#summary-2512.05115"},"2512.07107":{"status":"ready","url":"notes/relighting.html#summary-2512.07107"},"2512.09335":{"status":"ready","url":"notes/relighting.html#summary-2512.09335"},"2512.13192":{"status":"ready","url":"notes/relighting.html#summary-2512.13192"},"2512.13597":{"status":"ready","url":"notes/relighting.html#summary-2512.13597"},"2512.18314":{"status":"ready","url":"notes/relighting.html#summary-2512.18314"},"2601.02103":{"status":"ready","url":"notes/relighting.html#summary-2601.02103"},"2601.03357":{"status":"ready","url":"notes/relighting.html#summary-2601.03357"},"2601.12329":{"status":"ready","url":"notes/relighting.html#summary-2601.12329"},"2601.15283":{"status":"ready","url":"notes/relighting.html#summary-2601.15283"},"2601.16272":{"status":"ready","url":"notes/relighting.html#summary-2601.16272"},"2601.16981":{"status":"ready","url":"notes/relighting.html#summary-2601.16981"},"2601.22135":{"status":"ready","url":"notes/relighting.html#summary-2601.22135"},"2601.23167":{"status":"ready","url":"notes/relighting.html#summary-2601.23167"},"2602.01118":{"status":"ready","url":"notes/relighting.html#summary-2602.01118"},"2602.01391":{"status":"ready","url":"notes/relighting.html#summary-2602.01391"},"2602.04300":{"status":"ready","url":"notes/relighting.html#summary-2602.04300"},"2602.08724":{"status":"ready","url":"notes/relighting.html#summary-2602.08724"},"2602.11769":{"status":"ready","url":"notes/relighting.html#summary-2602.11769"},"2602.15900":{"status":"ready","url":"notes/relighting.html#summary-2602.15900"},"2602.21820":{"status":"ready","url":"notes/relighting.html#summary-2602.21820"},"2602.22025":{"status":"ready","url":"notes/relighting.html#summary-2602.22025"},"2603.01491":{"status":"ready","url":"notes/relighting.html#summary-2603.01491"},"2603.02801":{"status":"ready","url":"notes/relighting.html#summary-2603.02801"},"2603.13859":{"status":"ready","url":"notes/relighting.html#summary-2603.13859"},"2603.15555":{"status":"ready","url":"notes/relighting.html#summary-2603.15555"},"2603.24086":{"status":"ready","url":"notes/relighting.html#summary-2603.24086"},"2603.27083":{"status":"ready","url":"notes/relighting.html#summary-2603.27083"},"2603.27209":{"status":"ready","url":"notes/relighting.html#summary-2603.27209"},"2604.03462":{"status":"ready","url":"notes/relighting.html#summary-2604.03462"},"2604.10994":{"status":"ready","url":"notes/relighting.html#summary-2604.10994"},"2604.13333":{"status":"ready","url":"notes/relighting.html#summary-2604.13333"},"2604.13425":{"status":"ready","url":"notes/relighting.html#summary-2604.13425"},"2604.15310":{"status":"ready","url":"notes/relighting.html#summary-2604.15310"},"2604.20715":{"status":"ready","url":"notes/relighting.html#summary-2604.20715"},"2604.23094":{"status":"ready","url":"notes/relighting.html#summary-2604.23094"},"2604.24407":{"status":"ready","url":"notes/relighting.html#summary-2604.24407"},"2604.24877":{"status":"ready","url":"notes/relighting.html#summary-2604.24877"},"2604.27871":{"status":"ready","url":"notes/relighting.html#summary-2604.27871"},"2605.05636":{"status":"ready","url":"notes/relighting.html#summary-2605.05636"},"2605.05876":{"status":"ready","url":"notes/relighting.html#summary-2605.05876"},"2605.06658":{"status":"ready","url":"notes/relighting.html#summary-2605.06658"},"2605.09039":{"status":"ready","url":"notes/relighting.html#summary-2605.09039"},"2605.11696":{"status":"ready","url":"notes/relighting.html#summary-2605.11696"},"2605.18735":{"status":"ready","url":"notes/relighting.html#summary-2605.18735"},"2605.21766":{"status":"ready","url":"notes/relighting.html#summary-2605.21766"},"2605.24700":{"status":"ready","url":"notes/relighting.html#summary-2605.24700"},"2605.25975":{"status":"ready","url":"notes/relighting.html#summary-2605.25975"},"2605.28401":{"status":"ready","url":"notes/relighting.html#summary-2605.28401"},"2605.28811":{"status":"ready","url":"notes/relighting.html#summary-2605.28811"},"2606.02292":{"status":"ready","url":"notes/relighting.html#summary-2606.02292"},"2606.02919":{"status":"ready","url":"notes/relighting.html#summary-2606.02919"},"2606.09606":{"status":"ready","url":"notes/relighting.html#summary-2606.09606"},"2606.16323":{"status":"ready","url":"notes/relighting.html#summary-2606.16323"},"2606.17049":{"status":"ready","url":"notes/relighting.html#summary-2606.17049"},"2606.22718":{"status":"ready","url":"notes/relighting.html#summary-2606.22718"},"2606.26715":{"status":"ready","url":"notes/relighting.html#summary-2606.26715"},"2606.28144":{"status":"ready","url":"notes/relighting.html#summary-2606.28144"},"2606.29095":{"status":"ready","url":"notes/relighting.html#summary-2606.29095"},"2606.29379":{"status":"ready","url":"notes/relighting.html#summary-2606.29379"},"2606.29461":{"status":"ready","url":"notes/relighting.html#summary-2606.29461"},"2606.30677":{"status":"ready","url":"notes/relighting.html#summary-2606.30677"},"2606.31018":{"status":"ready","url":"notes/relighting.html#summary-2606.31018"},"2606.31065":{"status":"ready","url":"notes/relighting.html#summary-2606.31065"},"2607.02301":{"status":"ready","url":"notes/relighting.html#summary-2607.02301"},"2607.04674":{"status":"ready","url":"notes/relighting.html#summary-2607.04674"},"2607.08879":{"status":"ready","url":"notes/relighting.html#summary-2607.08879"},"2607.09329":{"status":"ready","url":"notes/relighting.html#summary-2607.09329"},"2607.13656":{"status":"ready","url":"notes/relighting.html#summary-2607.13656"},"2607.17411":{"status":"ready","url":"notes/relighting.html#summary-2607.17411"},"2607.17803":{"status":"ready","url":"notes/relighting.html#summary-2607.17803"},"2607.17833":{"status":"ready","url":"notes/relighting.html#summary-2607.17833"},"2607.20889":{"status":"ready","url":"notes/relighting.html#summary-2607.20889"},"2607.21562":{"status":"ready","url":"notes/relighting.html#summary-2607.21562"},"2607.25362":{"status":"ready","url":"notes/relighting.html#summary-2607.25362"},"2607.26203":{"status":"ready","url":"notes/relighting.html#summary-2607.26203"},"2607.26715":{"status":"ready","url":"notes/relighting.html#summary-2607.26715"},"2608.01761":{"status":"ready","url":"notes/relighting.html#summary-2608.01761"},"2608.01771":{"status":"ready","url":"notes/relighting.html#summary-2608.01771"},"2608.06075":{"status":"ready","url":"notes/relighting.html#summary-2608.06075"},"2608.06240":{"status":"ready","url":"notes/relighting.html#summary-2608.06240"},"2608.14713":{"status":"ready","url":"notes/relighting.html#summary-2608.14713"},"2608.18215":{"status":"ready","url":"notes/relighting.html#summary-2608.18215"},"2608.23943":{"status":"ready","url":"notes/relighting.html#summary-2608.23943"},"2608.24109":{"status":"ready","url":"notes/relighting.html#summary-2608.24109"},"2609.00901":{"status":"ready","url":"notes/relighting.html#summary-2609.00901"},"2609.01806":{"status":"ready","url":"notes/relighting.html#summary-2609.01806"}},"topic":"Relighting","version":1}</script>
+  <script type="application/json" id="summary-catalog">{"papers":{"1905.00824":{"status":"ready","url":"notes/relighting.html#summary-1905.00824"},"1906.03355":{"status":"ready","url":"notes/relighting.html#summary-1906.03355"},"1910.08131":{"status":"ready","url":"notes/relighting.html#summary-1910.08131"},"2008.02796":{"status":"ready","url":"notes/relighting.html#summary-2008.02796"},"2012.11116":{"status":"ready","url":"notes/relighting.html#summary-2012.11116"},"2102.10244":{"status":"ready","url":"notes/relighting.html#summary-2102.10244"},"2104.00484":{"status":"ready","url":"notes/relighting.html#summary-2104.00484"},"2107.03106":{"status":"ready","url":"notes/relighting.html#summary-2107.03106"},"2108.07920":{"status":"ready","url":"notes/relighting.html#summary-2108.07920"},"2110.07272":{"status":"ready","url":"notes/relighting.html#summary-2110.07272"},"2203.16681":{"status":"ready","url":"notes/relighting.html#summary-2203.16681"},"2204.00644":{"status":"ready","url":"notes/relighting.html#summary-2204.00644"},"2204.06837":{"status":"ready","url":"notes/relighting.html#summary-2204.06837"},"2204.09341":{"status":"ready","url":"notes/relighting.html#summary-2204.09341"},"2205.10351":{"status":"ready","url":"notes/relighting.html#summary-2205.10351"},"2206.03380":{"status":"ready","url":"notes/relighting.html#summary-2206.03380"},"2207.02774":{"status":"ready","url":"notes/relighting.html#summary-2207.02774"},"2207.04750":{"status":"ready","url":"notes/relighting.html#summary-2207.04750"},"2207.10582":{"status":"ready","url":"notes/relighting.html#summary-2207.10582"},"2207.14811":{"status":"ready","url":"notes/relighting.html#summary-2207.14811"},"2209.09898":{"status":"ready","url":"notes/relighting.html#summary-2209.09898"},"2209.10510":{"status":"ready","url":"notes/relighting.html#summary-2209.10510"},"2303.12950":{"status":"ready","url":"notes/relighting.html#summary-2303.12950"},"2303.13852":{"status":"ready","url":"notes/relighting.html#summary-2303.13852"},"2304.09479":{"status":"ready","url":"notes/relighting.html#summary-2304.09479"},"2304.12461":{"status":"ready","url":"notes/relighting.html#summary-2304.12461"},"2304.13445":{"status":"ready","url":"notes/relighting.html#summary-2304.13445"},"2308.07903":{"status":"ready","url":"notes/relighting.html#summary-2308.07903"},"2311.08843":{"status":"ready","url":"notes/relighting.html#summary-2311.08843"},"2311.16043":{"status":"ready","url":"notes/relighting.html#summary-2311.16043"},"2311.16473":{"status":"ready","url":"notes/relighting.html#summary-2311.16473"},"2311.16937":{"status":"ready","url":"notes/relighting.html#summary-2311.16937"},"2312.03704":{"status":"ready","url":"notes/relighting.html#summary-2312.03704"},"2312.04334":{"status":"ready","url":"notes/relighting.html#summary-2312.04334"},"2312.06886":{"status":"ready","url":"notes/relighting.html#summary-2312.06886"},"2312.09398":{"status":"ready","url":"notes/relighting.html#summary-2312.09398"},"2312.11587":{"status":"ready","url":"notes/relighting.html#summary-2312.11587"},"2312.12274":{"status":"ready","url":"notes/relighting.html#summary-2312.12274"},"2312.12877":{"status":"ready","url":"notes/relighting.html#summary-2312.12877"},"2401.09126":{"status":"ready","url":"notes/relighting.html#summary-2401.09126"},"2401.12977":{"status":"ready","url":"notes/relighting.html#summary-2401.12977"},"2402.11929":{"status":"ready","url":"notes/relighting.html#summary-2402.11929"},"2402.13251":{"status":"ready","url":"notes/relighting.html#summary-2402.13251"},"2402.18848":{"status":"ready","url":"notes/relighting.html#summary-2402.18848"},"2403.09632":{"status":"ready","url":"notes/relighting.html#summary-2403.09632"},"2403.10615":{"status":"ready","url":"notes/relighting.html#summary-2403.10615"},"2404.09918":{"status":"ready","url":"notes/relighting.html#summary-2404.09918"},"2405.00666":{"status":"ready","url":"notes/relighting.html#summary-2405.00666"},"2405.20791":{"status":"ready","url":"notes/relighting.html#summary-2405.20791"},"2405.21074":{"status":"ready","url":"notes/relighting.html#summary-2405.21074"},"2406.06527":{"status":"ready","url":"notes/relighting.html#summary-2406.06527"},"2406.07520":{"status":"ready","url":"notes/relighting.html#summary-2406.07520"},"2407.10487":{"status":"ready","url":"notes/relighting.html#summary-2407.10487"},"2408.13252":{"status":"ready","url":"notes/relighting.html#summary-2408.13252"},"2408.13922":{"status":"ready","url":"notes/relighting.html#summary-2408.13922"},"2409.00674":{"status":"ready","url":"notes/relighting.html#summary-2409.00674"},"2409.07441":{"status":"ready","url":"notes/relighting.html#summary-2409.07441"},"2409.08947":{"status":"ready","url":"notes/relighting.html#summary-2409.08947"},"2409.10335":{"status":"ready","url":"notes/relighting.html#summary-2409.10335"},"2409.12957":{"status":"ready","url":"notes/relighting.html#summary-2409.12957"},"2409.13591":{"status":"ready","url":"notes/relighting.html#summary-2409.13591"},"2409.15273":{"status":"ready","url":"notes/relighting.html#summary-2409.15273"},"2409.18770":{"status":"ready","url":"notes/relighting.html#summary-2409.18770"},"2409.19702":{"status":"ready","url":"notes/relighting.html#summary-2409.19702"},"2409.20140":{"status":"ready","url":"notes/relighting.html#summary-2409.20140"},"2410.02619":{"status":"ready","url":"notes/relighting.html#summary-2410.02619"},"2410.05322":{"status":"ready","url":"notes/relighting.html#summary-2410.05322"},"2410.05525":{"status":"ready","url":"notes/relighting.html#summary-2410.05525"},"2410.06231":{"status":"ready","url":"notes/relighting.html#summary-2410.06231"},"2410.08188":{"status":"ready","url":"notes/relighting.html#summary-2410.08188"},"2410.11419":{"status":"ready","url":"notes/relighting.html#summary-2410.11419"},"2410.18355":{"status":"ready","url":"notes/relighting.html#summary-2410.18355"},"2410.22979":{"status":"ready","url":"notes/relighting.html#summary-2410.22979"},"2410.24204":{"status":"ready","url":"notes/relighting.html#summary-2410.24204"},"2410.24223":{"status":"ready","url":"notes/relighting.html#summary-2410.24223"},"2411.00356":{"status":"ready","url":"notes/relighting.html#summary-2411.00356"},"2411.02179":{"status":"ready","url":"notes/relighting.html#summary-2411.02179"},"2411.10189":{"status":"ready","url":"notes/relighting.html#summary-2411.10189"},"2411.10825":{"status":"ready","url":"notes/relighting.html#summary-2411.10825"},"2411.17696":{"status":"ready","url":"notes/relighting.html#summary-2411.17696"},"2411.17994":{"status":"ready","url":"notes/relighting.html#summary-2411.17994"},"2411.18665":{"status":"ready","url":"notes/relighting.html#summary-2411.18665"},"2411.19292":{"status":"ready","url":"notes/relighting.html#summary-2411.19292"},"2412.00177":{"status":"ready","url":"notes/relighting.html#summary-2412.00177"},"2412.05278":{"status":"ready","url":"notes/relighting.html#summary-2412.05278"},"2412.07534":{"status":"ready","url":"notes/relighting.html#summary-2412.07534"},"2412.09593":{"status":"ready","url":"notes/relighting.html#summary-2412.09593"},"2412.11224":{"status":"ready","url":"notes/relighting.html#summary-2412.11224"},"2412.12083":{"status":"ready","url":"notes/relighting.html#summary-2412.12083"},"2412.13734":{"status":"ready","url":"notes/relighting.html#summary-2412.13734"},"2412.14148":{"status":"ready","url":"notes/relighting.html#summary-2412.14148"},"2412.14214":{"status":"ready","url":"notes/relighting.html#summary-2412.14214"},"2412.15050":{"status":"ready","url":"notes/relighting.html#summary-2412.15050"},"2412.15211":{"status":"ready","url":"notes/relighting.html#summary-2412.15211"},"2412.15867":{"status":"ready","url":"notes/relighting.html#summary-2412.15867"},"2412.19282":{"status":"ready","url":"notes/relighting.html#summary-2412.19282"},"2501.03717":{"status":"ready","url":"notes/relighting.html#summary-2501.03717"},"2501.08649":{"status":"ready","url":"notes/relighting.html#summary-2501.08649"},"2501.09756":{"status":"ready","url":"notes/relighting.html#summary-2501.09756"},"2501.14726":{"status":"ready","url":"notes/relighting.html#summary-2501.14726"},"2501.16330":{"status":"ready","url":"notes/relighting.html#summary-2501.16330"},"2501.17159":{"status":"ready","url":"notes/relighting.html#summary-2501.17159"},"2502.07531":{"status":"ready","url":"notes/relighting.html#summary-2502.07531"},"2502.08297":{"status":"ready","url":"notes/relighting.html#summary-2502.08297"},"2502.08590":{"status":"ready","url":"notes/relighting.html#summary-2502.08590"},"2502.19894":{"status":"ready","url":"notes/relighting.html#summary-2502.19894"},"2503.07535":{"status":"ready","url":"notes/relighting.html#summary-2503.07535"},"2503.08224":{"status":"ready","url":"notes/relighting.html#summary-2503.08224"},"2503.10597":{"status":"ready","url":"notes/relighting.html#summary-2503.10597"},"2503.14485":{"status":"ready","url":"notes/relighting.html#summary-2503.14485"},"2503.18408":{"status":"ready","url":"notes/relighting.html#summary-2503.18408"},"2504.01008":{"status":"ready","url":"notes/relighting.html#summary-2504.01008"},"2504.03011":{"status":"ready","url":"notes/relighting.html#summary-2504.03011"},"2504.06815":{"status":"ready","url":"notes/relighting.html#summary-2504.06815"},"2504.08022":{"status":"ready","url":"notes/relighting.html#summary-2504.08022"},"2504.09671":{"status":"ready","url":"notes/relighting.html#summary-2504.09671"},"2504.10486":{"status":"ready","url":"notes/relighting.html#summary-2504.10486"},"2504.12273":{"status":"ready","url":"notes/relighting.html#summary-2504.12273"},"2504.16086":{"status":"ready","url":"notes/relighting.html#summary-2504.16086"},"2504.20026":{"status":"ready","url":"notes/relighting.html#summary-2504.20026"},"2505.08889":{"status":"ready","url":"notes/relighting.html#summary-2505.08889"},"2505.09608":{"status":"ready","url":"notes/relighting.html#summary-2505.09608"},"2505.19751":{"status":"ready","url":"notes/relighting.html#summary-2505.19751"},"2505.20582":{"status":"ready","url":"notes/relighting.html#summary-2505.20582"},"2505.21502":{"status":"ready","url":"notes/relighting.html#summary-2505.21502"},"2505.24227":{"status":"ready","url":"notes/relighting.html#summary-2505.24227"},"2506.03150":{"status":"ready","url":"notes/relighting.html#summary-2506.03150"},"2506.05347":{"status":"ready","url":"notes/relighting.html#summary-2506.05347"},"2506.06271":{"status":"ready","url":"notes/relighting.html#summary-2506.06271"},"2506.13110":{"status":"ready","url":"notes/relighting.html#summary-2506.13110"},"2506.14549":{"status":"ready","url":"notes/relighting.html#summary-2506.14549"},"2506.15673":{"status":"ready","url":"notes/relighting.html#summary-2506.15673"},"2506.18882":{"status":"ready","url":"notes/relighting.html#summary-2506.18882"},"2506.18904":{"status":"ready","url":"notes/relighting.html#summary-2506.18904"},"2506.23854":{"status":"ready","url":"notes/relighting.html#summary-2506.23854"},"2507.07733":{"status":"ready","url":"notes/relighting.html#summary-2507.07733"},"2507.15629":{"status":"ready","url":"notes/relighting.html#summary-2507.15629"},"2507.17613":{"status":"ready","url":"notes/relighting.html#summary-2507.17613"},"2507.18231":{"status":"ready","url":"notes/relighting.html#summary-2507.18231"},"2507.20512":{"status":"ready","url":"notes/relighting.html#summary-2507.20512"},"2508.05626":{"status":"ready","url":"notes/relighting.html#summary-2508.05626"},"2508.06494":{"status":"ready","url":"notes/relighting.html#summary-2508.06494"},"2508.08384":{"status":"ready","url":"notes/relighting.html#summary-2508.08384"},"2508.09137":{"status":"ready","url":"notes/relighting.html#summary-2508.09137"},"2508.12945":{"status":"ready","url":"notes/relighting.html#summary-2508.12945"},"2508.14563":{"status":"ready","url":"notes/relighting.html#summary-2508.14563"},"2508.14814":{"status":"ready","url":"notes/relighting.html#summary-2508.14814"},"2509.01837":{"status":"ready","url":"notes/relighting.html#summary-2509.01837"},"2509.03680":{"status":"ready","url":"notes/relighting.html#summary-2509.03680"},"2509.11275":{"status":"ready","url":"notes/relighting.html#summary-2509.11275"},"2509.18497":{"status":"ready","url":"notes/relighting.html#summary-2509.18497"},"2509.22112":{"status":"ready","url":"notes/relighting.html#summary-2509.22112"},"2509.23769":{"status":"ready","url":"notes/relighting.html#summary-2509.23769"},"2510.02069":{"status":"ready","url":"notes/relighting.html#summary-2510.02069"},"2510.03163":{"status":"ready","url":"notes/relighting.html#summary-2510.03163"},"2510.07729":{"status":"ready","url":"notes/relighting.html#summary-2510.07729"},"2510.15846":{"status":"ready","url":"notes/relighting.html#summary-2510.15846"},"2510.23494":{"status":"ready","url":"notes/relighting.html#summary-2510.23494"},"2511.02483":{"status":"ready","url":"notes/relighting.html#summary-2511.02483"},"2511.06271":{"status":"ready","url":"notes/relighting.html#summary-2511.06271"},"2511.08169":{"status":"ready","url":"notes/relighting.html#summary-2511.08169"},"2511.13684":{"status":"ready","url":"notes/relighting.html#summary-2511.13684"},"2511.18346":{"status":"ready","url":"notes/relighting.html#summary-2511.18346"},"2512.00255":{"status":"ready","url":"notes/relighting.html#summary-2512.00255"},"2512.04267":{"status":"ready","url":"notes/relighting.html#summary-2512.04267"},"2512.05115":{"status":"ready","url":"notes/relighting.html#summary-2512.05115"},"2512.07107":{"status":"ready","url":"notes/relighting.html#summary-2512.07107"},"2512.09162":{"status":"ready","url":"notes/relighting.html#summary-2512.09162"},"2512.09335":{"status":"ready","url":"notes/relighting.html#summary-2512.09335"},"2512.13192":{"status":"ready","url":"notes/relighting.html#summary-2512.13192"},"2512.13597":{"status":"ready","url":"notes/relighting.html#summary-2512.13597"},"2512.18314":{"status":"ready","url":"notes/relighting.html#summary-2512.18314"},"2601.02103":{"status":"ready","url":"notes/relighting.html#summary-2601.02103"},"2601.03357":{"status":"ready","url":"notes/relighting.html#summary-2601.03357"},"2601.12329":{"status":"ready","url":"notes/relighting.html#summary-2601.12329"},"2601.15283":{"status":"ready","url":"notes/relighting.html#summary-2601.15283"},"2601.16272":{"status":"ready","url":"notes/relighting.html#summary-2601.16272"},"2601.16981":{"status":"ready","url":"notes/relighting.html#summary-2601.16981"},"2601.22135":{"status":"ready","url":"notes/relighting.html#summary-2601.22135"},"2601.23167":{"status":"ready","url":"notes/relighting.html#summary-2601.23167"},"2602.01118":{"status":"ready","url":"notes/relighting.html#summary-2602.01118"},"2602.01391":{"status":"ready","url":"notes/relighting.html#summary-2602.01391"},"2602.04300":{"status":"ready","url":"notes/relighting.html#summary-2602.04300"},"2602.07101":{"status":"ready","url":"notes/relighting.html#summary-2602.07101"},"2602.08724":{"status":"ready","url":"notes/relighting.html#summary-2602.08724"},"2602.11769":{"status":"ready","url":"notes/relighting.html#summary-2602.11769"},"2602.15900":{"status":"ready","url":"notes/relighting.html#summary-2602.15900"},"2602.21820":{"status":"ready","url":"notes/relighting.html#summary-2602.21820"},"2602.22025":{"status":"ready","url":"notes/relighting.html#summary-2602.22025"},"2603.01491":{"status":"ready","url":"notes/relighting.html#summary-2603.01491"},"2603.02801":{"status":"ready","url":"notes/relighting.html#summary-2603.02801"},"2603.13859":{"status":"ready","url":"notes/relighting.html#summary-2603.13859"},"2603.14241":{"status":"ready","url":"notes/relighting.html#summary-2603.14241"},"2603.15555":{"status":"ready","url":"notes/relighting.html#summary-2603.15555"},"2603.23637":{"status":"ready","url":"notes/relighting.html#summary-2603.23637"},"2603.24086":{"status":"ready","url":"notes/relighting.html#summary-2603.24086"},"2603.26067":{"status":"ready","url":"notes/relighting.html#summary-2603.26067"},"2603.27083":{"status":"ready","url":"notes/relighting.html#summary-2603.27083"},"2603.27209":{"status":"ready","url":"notes/relighting.html#summary-2603.27209"},"2604.03462":{"status":"ready","url":"notes/relighting.html#summary-2604.03462"},"2604.10994":{"status":"ready","url":"notes/relighting.html#summary-2604.10994"},"2604.13333":{"status":"ready","url":"notes/relighting.html#summary-2604.13333"},"2604.13425":{"status":"ready","url":"notes/relighting.html#summary-2604.13425"},"2604.15310":{"status":"ready","url":"notes/relighting.html#summary-2604.15310"},"2604.20715":{"status":"ready","url":"notes/relighting.html#summary-2604.20715"},"2604.23094":{"status":"ready","url":"notes/relighting.html#summary-2604.23094"},"2604.24407":{"status":"ready","url":"notes/relighting.html#summary-2604.24407"},"2604.24877":{"status":"ready","url":"notes/relighting.html#summary-2604.24877"},"2604.27871":{"status":"ready","url":"notes/relighting.html#summary-2604.27871"},"2605.05636":{"status":"ready","url":"notes/relighting.html#summary-2605.05636"},"2605.05876":{"status":"ready","url":"notes/relighting.html#summary-2605.05876"},"2605.06658":{"status":"ready","url":"notes/relighting.html#summary-2605.06658"},"2605.09024":{"status":"ready","url":"notes/relighting.html#summary-2605.09024"},"2605.09039":{"status":"ready","url":"notes/relighting.html#summary-2605.09039"},"2605.11696":{"status":"ready","url":"notes/relighting.html#summary-2605.11696"},"2605.18735":{"status":"ready","url":"notes/relighting.html#summary-2605.18735"},"2605.21766":{"status":"ready","url":"notes/relighting.html#summary-2605.21766"},"2605.24700":{"status":"ready","url":"notes/relighting.html#summary-2605.24700"},"2605.25975":{"status":"ready","url":"notes/relighting.html#summary-2605.25975"},"2605.28401":{"status":"ready","url":"notes/relighting.html#summary-2605.28401"},"2605.28811":{"status":"ready","url":"notes/relighting.html#summary-2605.28811"},"2606.02292":{"status":"ready","url":"notes/relighting.html#summary-2606.02292"},"2606.02919":{"status":"ready","url":"notes/relighting.html#summary-2606.02919"},"2606.09018":{"status":"ready","url":"notes/relighting.html#summary-2606.09018"},"2606.09606":{"status":"ready","url":"notes/relighting.html#summary-2606.09606"},"2606.16323":{"status":"ready","url":"notes/relighting.html#summary-2606.16323"},"2606.17049":{"status":"ready","url":"notes/relighting.html#summary-2606.17049"},"2606.20233":{"status":"ready","url":"notes/relighting.html#summary-2606.20233"},"2606.22718":{"status":"ready","url":"notes/relighting.html#summary-2606.22718"},"2606.26715":{"status":"ready","url":"notes/relighting.html#summary-2606.26715"},"2606.28144":{"status":"ready","url":"notes/relighting.html#summary-2606.28144"},"2606.29095":{"status":"ready","url":"notes/relighting.html#summary-2606.29095"},"2606.29379":{"status":"ready","url":"notes/relighting.html#summary-2606.29379"},"2606.29461":{"status":"ready","url":"notes/relighting.html#summary-2606.29461"},"2606.30677":{"status":"ready","url":"notes/relighting.html#summary-2606.30677"},"2606.31018":{"status":"ready","url":"notes/relighting.html#summary-2606.31018"},"2606.31065":{"status":"ready","url":"notes/relighting.html#summary-2606.31065"},"2607.02301":{"status":"ready","url":"notes/relighting.html#summary-2607.02301"},"2607.04674":{"status":"ready","url":"notes/relighting.html#summary-2607.04674"},"2607.08016":{"status":"ready","url":"notes/relighting.html#summary-2607.08016"},"2607.08879":{"status":"ready","url":"notes/relighting.html#summary-2607.08879"},"2607.09329":{"status":"ready","url":"notes/relighting.html#summary-2607.09329"},"2607.13656":{"status":"ready","url":"notes/relighting.html#summary-2607.13656"},"2607.17411":{"status":"ready","url":"notes/relighting.html#summary-2607.17411"},"2607.17803":{"status":"ready","url":"notes/relighting.html#summary-2607.17803"},"2607.17833":{"status":"ready","url":"notes/relighting.html#summary-2607.17833"},"2607.20889":{"status":"ready","url":"notes/relighting.html#summary-2607.20889"},"2607.21562":{"status":"ready","url":"notes/relighting.html#summary-2607.21562"},"2607.25362":{"status":"ready","url":"notes/relighting.html#summary-2607.25362"},"2607.26203":{"status":"ready","url":"notes/relighting.html#summary-2607.26203"},"2607.26715":{"status":"ready","url":"notes/relighting.html#summary-2607.26715"},"2608.01761":{"status":"ready","url":"notes/relighting.html#summary-2608.01761"},"2608.01771":{"status":"ready","url":"notes/relighting.html#summary-2608.01771"},"2608.06075":{"status":"ready","url":"notes/relighting.html#summary-2608.06075"},"2608.06240":{"status":"ready","url":"notes/relighting.html#summary-2608.06240"},"2608.14713":{"status":"ready","url":"notes/relighting.html#summary-2608.14713"},"2608.18215":{"status":"ready","url":"notes/relighting.html#summary-2608.18215"},"2608.23943":{"status":"ready","url":"notes/relighting.html#summary-2608.23943"},"2608.24109":{"status":"ready","url":"notes/relighting.html#summary-2608.24109"},"2609.00901":{"status":"ready","url":"notes/relighting.html#summary-2609.00901"},"2609.01806":{"status":"ready","url":"notes/relighting.html#summary-2609.01806"},"2609.07414":{"status":"ready","url":"notes/relighting.html#summary-2609.07414"}},"topic":"Relighting","version":1}</script>
 </body>
 </html>

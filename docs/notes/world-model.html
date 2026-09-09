@@ -13,6 +13,826 @@
       <h1>World Model · 论文要点</h1>
     </header>
     <div class="summary-topic-list">
+    <article class="summary-article summary-topic-entry" id="summary-2301.04104" data-arxiv-id="2301.04104" data-status="ready">
+<h1>[2301.04104] Mastering Diverse Domains through World Models</h1>
+<p><a href="https://arxiv.org/abs/2301.04104" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了 Dreamer，一种基于世界模型的通用强化学习算法，它通过归一化、平衡和变换等鲁棒性技术，在无需调整超参数的情况下，在包括 Minecraft 在内的 150 多个不同领域任务中超越了专用专家算法。</p>
+<h2>解决的问题</h2>
+<p>将强化学习算法应用于全新的任务（如从视频游戏迁移到机器人任务）需要大量的人力、专业知识和计算资源来调整超参数，这种脆弱性限制了其在计算昂贵或难以调优的任务中的应用。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了 Dreamer 算法，这是一种通用的强化学习算法，能够在无需重新配置超参数的情况下，在广泛的领域内超越专用专家算法。</li>
+<li>基于世界模型构建 Dreamer，该模型包含预测动作结果的预测器、评估结果价值的评论家网络以及选择最佳动作的演员网络。</li>
+<li>引入了一系列基于归一化、平衡和变换的鲁棒性技术，以解决稳健地学习和利用世界模型来实现强任务性能的开放性问题。</li>
+<li>在超过 150 个来自不同领域的任务、不同的模型大小和训练预算上观察到了鲁棒的学习效果，并证明了增大模型规模不仅能提高分数，还能减少完成任务所需的交互次数。</li>
+<li>在 Minecraft 这一具有稀疏奖励、探索困难和长时间跨度的开放世界游戏中，Dreamer 是首个无需人类数据即可从头开始收集钻石的算法。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2409.11356" data-arxiv-id="2409.11356" data-status="ready">
+<h1>[2409.11356] RenderWorld: World Model with Self-Supervised 3D Label</h1>
+<p><a href="https://arxiv.org/abs/2409.11356" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>RenderWorld 是一个纯 2D 自动驾驶框架，利用基于高斯图像的 3D 占用预测模块（Img2Occ）生成世界模型所需的 3D 标签，并通过引入空气掩码变分自编码器（AM-VAE）提升场景表示的粒度以优化预测和规划能力。</p>
+<h2>解决的问题</h2>
+<p>片段未提供</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了 RenderWorld，这是一个纯 2D 自动驾驶框架，使用标记的 2D 图像训练基于高斯的占用预测模块（Img2Occ），以生成世界模型所需的 3D 标签。</li>
+<li>设计了一种自监督的 Img2Occ 模块，结合高斯泼溅（Gaussian Splatting）技术，利用 2D 多视角深度和语义图像生成 3D 占用标签。</li>
+<li>提出了空气掩码变分自编码器（AM-VAE），该模块基于向量量化变分自编码器（VQ-VAE），通过分别编码空气和非空气体素来增强场景表示的粒度。</li>
+<li>通过 AM-VAE 提高了世界模型的推理能力，在提升预测和规划性能的同时降低了内存消耗。</li>
+<li>在 NuScenes 数据集上分别评估了 3D 占用生成和运动规划的有效性，验证了框架的效率与可靠性。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2410.13571" data-arxiv-id="2410.13571" data-status="ready">
+<h1>[2410.13571] DriveDreamer4D: World Models Are Effective Data Machines for 4D Driving Scene Representation</h1>
+<p><a href="https://arxiv.org/abs/2410.13571" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>DriveDreamer4D 是一个首个利用自动驾驶世界模型先验来提升 4D 场景重建质量的框架，通过生成新颖轨迹视频数据来增强真实驾驶数据集的密度，并提出了新颖轨迹生成模块（NTGM）和表亲数据训练策略（CDTS）以解决动态交互场景中的时空一致性问题。</p>
+<h2>解决的问题</h2>
+<p>现有的闭环评估方法在自动驾驶端到端规划中不足，且依赖 NeRF 和 3DGS 的场景重建技术受限于输入数据密度，难以在复杂机动（如变道、加速、减速）中准确渲染非训练分布的场景；现有的生成式方法（如 SGD、GGS）主要补充稀疏图像或静态背景，无法有效建模动态交互场景；现有的自动驾驶世界模型仍局限于 2D 视频，缺乏对复杂驾驶场景建模所需的时空一致性。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了 DriveDreamer4D，这是首个利用自动驾驶世界模型先验来推进自动驾驶中 4D 场景重建质量的框架，为变道、加速和减速等场景提供了丰富多样的视点数据。</li>
+<li>提出了新颖轨迹生成模块（NTGM），用于自动化生成结构化交通条件，使模型能够创建包含复杂机动的新型轨迹视频，同时确保空间和时间的一致性。</li>
+<li>提出了表亲数据训练策略（CDTS），用于合并时间对齐的真实和合成数据以训练 4DGS，并引入正则化损失以保持感知一致性。</li>
+<li>进行了全面的实验验证，证明 DriveDreamer4D 显著提升了新颖轨迹视点的生成质量以及驾驶场景元素（前景和背景）的时空一致性，在 FID 和 NTA-IoU 指标上均取得了显著改进。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2411.19548" data-arxiv-id="2411.19548" data-status="ready">
+<h1>[2411.19548] ReconDreamer: Crafting World Models for Driving Scene Reconstruction via Online Restoration</h1>
+<p><a href="https://arxiv.org/abs/2411.19548" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>ReconDreamer 通过增量整合自动驾驶世界模型知识，利用 DriveRestorer 进行在线修复和渐进式数据更新策略，解决了现有方法在处理大视角变化（如多车道切换）时渲染质量差和出现鬼影伪影的问题。</p>
+<h2>解决的问题</h2>
+<p>现有的开环评估方法无法准确评估端到端规划算法，而闭环仿真依赖的场景重建技术（如 NeRF 和 3DGS）受限于训练数据的密度和多样性，难以处理复杂多变的高难度驾驶动作；此外，虽然 DriveDreamer4D 等世界模型能生成多样化视频，但其直接扩展新轨迹视图的设计在执行大动作（如多车道变道）时仍面临挑战，容易出现鬼影伪影且渲染质量下降。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了 ReconDreamer，该方法通过增量整合自动驾驶世界模型知识来增强动态驾驶场景重建，据作者所知，这是首个能有效渲染大视角变化（例如跨度达 6 米的多车道切换）的方法。</li>
+<li>提出了 DriveRestorer，用于通过在线修复机制减轻复杂动作渲染中的鬼影伪影，并引入了渐进式数据更新策略（PDUS）以维持大动作下的高质量渲染。</li>
+<li>引入了掩码策略以强调对天空和远处等挑战性区域的修复，并通过渐进式数据更新策略逐步修复伪影，降低了视频修复的复杂性。</li>
+<li>进行了全面的实验验证，证明 ReconDreamer 能显著提升大动作下的渲染质量及时空连贯性，在平均 NTA-IoU、NTL-IoU 和 FID 指标上分别取得了 24.87%、6.72% 和 29.97% 的相对提升。</li>
+<li>在用户研究中，ReconDreamer 在较大动作场景下优于 DriveDreamer4D，胜率达到 96.88%，且在 NTA-IoU 指标上实现了 195.87% 的相对提升。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2412.07772" data-arxiv-id="2412.07772" data-status="ready">
+<h1>[2412.07772] From Slow Bidirectional to Fast Causal Video Generators</h1>
+<p><a href="https://arxiv.org/abs/2412.07772" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了 CausVid，这是一种专为快速交互式因果视频生成设计的自回归扩散 Transformer 架构，通过因果依赖、KV 缓存及非对称蒸馏策略，在保持与双向扩散模型相当质量的同时显著降低了延迟并支持长视频生成。</p>
+<h2>解决的问题</h2>
+<p>现有基于双向注意力的视频扩散模型生成单帧需处理整个视频，导致高延迟且无法应用于交互式场景；同时其计算和内存成本随帧数平方增长，使得长视频生成极其缓慢且昂贵。</p>
+<h2>创新点</h2>
+<ul>
+<li>设计了具有帧间因果依赖的自回归扩散 Transformer 架构，利用所有输入帧的监督实现样本高效训练，并通过 KV 缓存实现高效的自回归推理。</li>
+<li>将分布匹配蒸馏（DMD）方法适配至视频数据，并提出非对称蒸馏策略，将双向注意力预训练教师模型的知识蒸馏至因果学生模型，以显著减少自回归推理中的误差累积。</li>
+<li>证明了该方法能生成远超训练长度的长视频，且在视频质量上可与最先进的双向扩散模型相媲美，同时提供增强的交互性和速度。</li>
+<li>展示了该方法在图像到视频生成、视频到视频翻译及动态提示等任务中的多功能性，并能以极低延迟实现。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2503.15875" data-arxiv-id="2503.15875" data-status="ready">
+<h1>[2503.15875] MiLA: Multi-view Intensive-fidelity Long-term Video Generation World Model for Autonomous Driving</h1>
+<p><a href="https://arxiv.org/abs/2503.15875" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>MiLA 是一个基于潜在扩散模型（LDM）的高保真长时视频生成世界模型框架，旨在解决自动驾驶场景中长视频生成的累积误差和场景一致性丢失问题。</p>
+<h2>解决的问题</h2>
+<p>片段未提供关于具体技术问题的详细定义，仅概括性地指出当前方法存在累积误差导致质量下降以及初始条件控制力随时间减弱导致场景退化两个主要挑战。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了 MiLA 框架，这是一个高保真长时视频生成世界模型，能够仅依靠简单的场景描述或航点作为控制信号，紧密结合控制信号和先前帧来维持长期一致性。</li>
+<li>设计了从粗略到精细（Coarse-to-(Re)fine）的生成流程，通过该流程成功生成了长达一分钟且无保真度下降的扩展驾驶场景，其中 (Re) 代表对锚帧的修正，fine 代表高分帧的生成。</li>
+<li>引入了联合去噪与校正流（JDC）方法，用于解决预测锚帧中的瑕疵，同时优化整体视频的平滑度。</li>
+<li>提出了时间渐进式去噪调度器（TPD）模块，利用批次内先前生成的帧作为指导，增强最终帧的保真度。</li>
+<li>通过全面的实验验证了该方法在 nuScenes 数据集上短视频和长视频生成任务中的最先进性能。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2504.16693" data-arxiv-id="2504.16693" data-status="ready">
+<h1>[2504.16693] PIN-WM: Learning Physics-INformed World Models for Non-Prehensile Manipulation</h1>
+<p><a href="https://arxiv.org/abs/2504.16693" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>PIN-WM 是一种端到端的物理信息世界模型，通过可微渲染损失直接从视觉观测中识别 3D 刚体动力学参数，并利用物理感知的参数扰动生成数字孪生体群，以解决非抓持操作中的 Sim2Real 迁移难题。</p>
+<h2>解决的问题</h2>
+<p>非抓持操作（如推或戳）因摩擦、恢复系数和惯性等复杂动力学因素，导致运动预测和规划困难；现有方法依赖昂贵的专家演示或面临仿真与现实的差距（Sim2Real gap），且纯数据驱动的世界模型难以泛化到分布外（OOD）场景。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出 PIN-WM，实现了一种端到端的 3D 刚体动力学系统物理参数识别方法，仅需少量且与任务无关的物理交互轨迹，无需额外的状态估计模块。</li>
+<li>利用 3D Gaussian Splatting 场景表示优化渲染损失，直接从 RGB 图像中学习物理参数，解决了现有方法中物理参数识别过程不可微或依赖高质量轨迹的问题。</li>
+<li>通过围绕识别出的均值对物理和渲染参数进行物理感知的扰动，将单一数字孪生体转化为多个数字孪生体群（digital cousins），以增强对未建模差异的鲁棒性并支持 Sim2Real 迁移。</li>
+<li>在真实机器人上进行了实验验证，证明该方法无需真实世界微调即可实现高效的 Real2Sim2Real 策略迁移，在 Push 和 Flip 任务中分别取得了 75% 和 65% 的高成功率。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2505.19386" data-arxiv-id="2505.19386" data-status="ready">
+<h1>[2505.19386] Force Prompting: Video Generation Models Can Learn and Generalize Physics-based Control Signals</h1>
+<p><a href="https://arxiv.org/abs/2505.19386" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>Force Prompting 通过利用物理模拟器生成的合成数据，使视频生成模型能够学习并泛化基于物理的控制信号，从而实现对局部点力和全局风力的精确控制。</p>
+<h2>解决的问题</h2>
+<p>片段未提供</p>
+<h2>创新点</h2>
+<ul>
+<li>引入物理力作为视频生成的条件信号，通过两个模型分别实现局部点力和全局风力的控制。</li>
+<li>发现视频生成模型在极少量训练数据（1.5 万视频）和有限计算资源（四张 A100 GPU 训练一天）下，仍能对不同的设置、物体、几何形状和用途表现出广泛的泛化能力。</li>
+<li>通过消融实验确定了实现强泛化性的两个关键要素：训练数据中相对于控制信号的视觉多样性，以及训练时使用的特定文本关键词。</li>
+<li>展示了力条件模型具备一定程度的质量理解能力，即相同的力会导致较轻的物体移动得更远。</li>
+<li>证明了该方法在遵循物理指令的同时保持逼真的运动和视觉质量方面，优于基于文本的条件基线及最先进的轨迹控制视频生成方法。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2505.21996" data-arxiv-id="2505.21996" data-status="ready">
+<h1>[2505.21996] VRAG: Learning World Models for Interactive Video Generation</h1>
+<p><a href="https://arxiv.org/abs/2505.21996" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>VRAG 通过引入显式全局状态条件（如世界地图和对象状态）来解决自回归视频生成中累积误差和记忆机制不足的问题，从而提升长时交互视频生成的时空一致性。</p>
+<h2>解决的问题</h2>
+<p>片段未提供</p>
+<h2>创新点</h2>
+<ul>
+<li>系统性地解耦并分析了自回归视频生成中累积误差和记忆机制不足这两个挑战。</li>
+<li>提出了带有显式全局状态条件的视频检索增强生成（VRAG）方法，显著提升了长时时空一致性并减少了累积误差。</li>
+<li>与多种源自大语言模型的长上下文方法（如位置插值、神经记忆增强和历史帧检索）进行了全面比较，证明了由于视频扩散模型固有的弱上下文学习能力，这些方法效果有限。</li>
+<li>指出了现有评估指标往往混淆累积误差和长期一致性（记忆忠实度）的问题，并倡导引入解耦的评估策略以分别量化这两类问题。</li>
+<li>论证了仅依靠自回归预测学习世界一致性是不够的，必须引入显式的全局状态条件作为生成一致长时交互模拟的必要基础。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2506.01600" data-arxiv-id="2506.01600" data-status="ready">
+<h1>[2506.01600] WoMAP: World Models For Embodied Open-Vocabulary Object Localization</h1>
+<p><a href="https://arxiv.org/abs/2506.01600" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>WoMAP 提出了一种无需专家演示或在线环境交互即可训练的高效主动物体定位方法，通过结合高斯泼溅数据生成、无重建训练框架及推理时规划方案，实现了在未见环境中的开放词汇物体定位。</p>
+<h2>解决的问题</h2>
+<p>在未见环境中实现开放词汇物体定位需要语义理解和常识推理，但现有方法存在以下挑战：1) 视觉 - 语言模型（VLMs）的高层动作提议难以有效映射到物理执行；2) 模仿学习需要大规模专家演示且泛化能力受限；3) 强化学习依赖准确的模拟环境且难以部署。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种名为 WoMAP 的新颖配方，实现了无需专家演示或在线环境交互即可训练的高效主动物体定位。</li>
+<li>引入了一种基于高斯泼溅（Gaussian Splatting）的可扩展数据生成管道，利用真实世界视频生成具有广泛覆盖率的逼真数据。</li>
+<li>提出了一种无重建训练框架，利用开放词汇物体检测器的置信度输出构建密集奖励并蒸馏到世界模型的潜在空间，避免了图像重建带来的泛化差、训练不稳定和样本效率低的问题。</li>
+<li>展示了一种推理时规划方案，利用训练好的世界模型优化来自 VLM 的高层动作提议。</li>
+<li>在模拟和真实世界的物体定位任务上验证了该方法，相比仅利用模仿学习或 VLM 的基线方法，成功率提高了 2 倍至 9 倍。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2506.03079" data-arxiv-id="2506.03079" data-status="ready">
+<h1>[2506.03079] ORV: 4D Occupancy-centric Robot Video Generation</h1>
+<p><a href="https://arxiv.org/abs/2506.03079" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 ORV，一种以 4D 语义占据为中心的机器人视频生成框架，通过结合 4D 占据几何先验与现代视频基础模型的生成能力，解决了现有方法在视觉保真度、动作对齐及多视角一致性方面的局限。</p>
+<h2>解决的问题</h2>
+<p>现有基于动作条件的视频生成模型在作为可靠机器人模拟器时存在三个关键局限：(p1) 视觉保真度不足且缺乏时间一致性；(p2) 未来预测漂移或错位，无法忠实反映操作控制；(p3) 局限于单视角观察，未强制多视角一致性。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出 ORV 框架，一种以 4D 语义占据为中心的机器人视频生成方法，通过注入占据衍生的几何先验到扩散噪声中，实现了时间一致且几何连贯的多视角视频生成及仿真到现实的视觉迁移。</li>
+<li>构建了 ORV-Data 数据集，这是一个大规模、高质量的机器人操作 4D 语义占据数据集，包含丰富的几何和语义标注，以支持大规模训练。</li>
+<li>证明了 ORV 在多样化数据集和下游任务（如可控视频生成、视觉规划和数据驱动的策略学习）中表现优异，显著提升了性能并达到最先进水平。</li>
+<li>展示了 4D 占据场对几何噪声的鲁棒性，使其成为连接仿真场景与现实世界的自然桥梁，并验证了基于占据表示的域不变性在跨域视觉转移中的有效性。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2506.08009" data-arxiv-id="2506.08009" data-status="ready">
+<h1>[2506.08009] Self Forcing: Bridging the Train-Test Gap in Autoregressive Video Diffusion</h1>
+<p><a href="https://arxiv.org/abs/2506.08009" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>Self Forcing (SF) 是一种新颖算法，通过在训练阶段显式地展开自回归生成过程（即利用模型自身生成的帧作为条件而非真实帧），旨在解决自回归视频生成中的暴露偏差（exposure bias）问题，从而弥合训练与测试之间的分布差距。</p>
+<h2>解决的问题</h2>
+<p>现有的自回归视频扩散模型在训练时通常依赖真实帧（Teacher Forcing）或独立采样的噪声帧（Diffusion Forcing），导致训练分布与推理时依赖模型自身预测的分布不匹配，引发暴露偏差和误差累积，进而降低生成视频质量；此外，现有的缓解方案往往以牺牲时间一致性、增加延迟或复杂化 KV-cache 设计为代价。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出 Self Forcing (SF) 算法，通过在训练阶段显式地利用模型自身生成的帧作为条件来预测下一帧，从而直接弥合训练与测试之间的分布差距，有效缓解暴露偏差并减少误差累积。</li>
+<li>设计了一种高效的实现策略，结合多步扩散骨干网络和精心设计的梯度截断策略，克服了自回归训练通常无法并行化的计算瓶颈，在相同的墙钟时间内实现了优于并行策略的效率。</li>
+<li>引入了一种滚动 KV cache 机制，显著提升了视频外推（extrapolation）的效率，支持在单张 H100 GPU 上实现 17 FPS 的实时视频生成且延迟低于 1 秒。</li>
+<li>通过广泛的实验证明，该方法在保持实时生成能力的同时，其生成质量与甚至优于现有的双向和自回归视频扩散模型，为直播、游戏和仿真等低延迟交互场景打开了大门。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2506.19842" data-arxiv-id="2506.19842" data-status="ready">
+<h1>[2506.19842] ManiGaussian++: General Robotic Bimanual Manipulation with Hierarchical Gaussian World Model</h1>
+<p><a href="https://arxiv.org/abs/2506.19842" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>ManiGaussian++ 提出了一种利用分层高斯世界模型来编码双臂系统中多物体时空动态的通用双手操作智能体，通过区分执行臂和稳定臂的角色并预测未来场景，显著提升了在模拟和真实环境中的任务成功率。</p>
+<h2>解决的问题</h2>
+<p>现有方法在双臂操作场景中面临严峻挑战，导致性能大幅下降，具体原因包括：1. 传统视觉表示在多任务双手操作场景中泛化能力不足；2. 基于 2D 的预训练表示缺乏对遮挡等几何特征的理解；3. 现有 3D 重建方法难以有效学习双臂系统中的多物体时空动态。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种名为 ManiGaussian++ 的通用机器人双手操作智能体，通过引入分层高斯世界模型来学习专为双手任务设计的多物体时空动态。</li>
+<li>生成了面向任务的高斯泼溅（Gaussian Splatting）表示，以区分执行臂和稳定臂的角色，从而实现对多物体时空动态的建模。</li>
+<li>提出了一种具有未来场景预测能力的分层高斯世界模型，采用领导者 - 跟随者架构来挖掘多物体动态，其中领导者预测稳定臂运动引起的高斯泼溅形变，跟随者生成执行臂运动导致的物理后果。</li>
+<li>在 RLBench2 的 1010 个模拟任务上进行了全面实验，结果显示该方法在成功率上比最先进方法高出 131.17%。</li>
+<li>在 99 个真实世界的双手操作任务中评估了 ManiGaussian++，获得了 60% 的成功率，验证了其在真实环境中的有效性。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2506.23919" data-arxiv-id="2506.23919" data-status="ready">
+<h1>[2506.23919] Goal-VLA: Image-Generative VLMs as Object-Centric World Models Empowering Zero-shot Robot Manipulation</h1>
+<p><a href="https://arxiv.org/abs/2506.23919" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>Goal-VLA 是一种零样本机器人操作框架，利用图像生成式 VLM 作为以物体为中心的世界模型来生成目标图像，并通过反射 - 合成机制进行迭代优化，从而将语义目标转化为精确的空间位姿以指导低层策略。</p>
+<h2>解决的问题</h2>
+<p>现有的端到端 VLA 方法严重依赖昂贵的成对指令 - 视觉 - 动作数据且泛化能力差；分层 VLA 方法中，稀疏符号表示缺乏几何细节，而稠密视觉表示（如目标图像）通常需要低层策略进行成对动作训练，难以实现零样本目标；此外，其他 VLM 生成的引导信息（如价值图）在精确空间推理方面存在固有弱点。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种解耦的分层框架 Goal-VLA，利用图像生成式 VLM 作为以物体为中心的世界模型来生成目标物体状态，以此连接高层语义推理与低层动作控制。</li>
+<li>提出了一种名为“通过合成进行反思”（Reflection-through-Synthesis）的迭代优化过程，通过合成并叠加目标物体的虚拟图像到当前观测中，对生成的视觉目标进行视觉检查和改进。</li>
+<li>展示了 Goal-VLA 在模拟和真实世界中的多样化操作任务、环境、物体类别和机器人形态上均具有令人鼓舞的零样本泛化能力，且无需任何任务特定的微调。</li>
+<li>该方法仅需用户的任务描述和单目 RGB-D 输入即可运行，无需预先的场景知识（如预扫描地图或物体网格），并通过提供富含空间信息的明确物体位姿有效指导低层策略执行零样本操作。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2507.07978" data-arxiv-id="2507.07978" data-status="ready">
+<h1>[2507.07978] Martian World Model: Controllable Video Synthesis with Physically Accurate 3D Reconstructions</h1>
+<p><a href="https://arxiv.org/abs/2507.07978" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>该论文提出了一种名为 M3arsSynth 的多模态数据引擎和名为 MarsGen 的视频生成器，旨在解决火星域数据稀疏、几何精度不足及域差异大等问题，从而实现基于物理准确 3D 重建的可控火星视频合成。</p>
+<h2>解决的问题</h2>
+<p>当前火星探测领域缺乏能够合成真实动态数据的平台，阻碍了自主任务规划和导航；现有公开火星图像多为稀疏分布的静态立体对，受限于带宽和采集条件，难以直接用于高质量重建；大多数基于地球大规模数据集训练的现有视频生成模型难以泛化到火星域，且火星数据固有的 3D 重建挑战导致几何模型精度不足，无法支持高保真、3D 一致的视频合成。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了 M3arsSynth，这是一个多模态数据引擎，能够将具有挑战性的火星车立体导航图像转化为高质量合成资产，有效解决了稀疏视角覆盖和光度不一致等关键问题。</li>
+<li>利用几何基础模型，M3arsSynth 创建了度量尺度的 3D 环境，生成了超过 10,000 个物理准确的火星表面模型，为后续视频合成提供了坚实基础。</li>
+<li>开发了 MarsGen，这是一个基于视频的火星地形生成器，支持从单视图图像输入出发，并通过相机姿态或文本提示进行条件控制，生成具有照片级真实感和 3D 一致性的新视频序列。</li>
+<li>构建了一个大规模、多功能的多模态数据集，包含合成的视频、相机运动轨迹、深度图等详细几何信息以及文本描述，专为多样化的火星应用设计。</li>
+<li>在视觉保真度、3D 视频一致性和相机可控性等关键指标上对生成的可控视频进行了全面评估，证明了该方法在火星域任务中的有效性。</li>
+<li>实验结果表明，该方法在生成的火星视频视觉质量、3D 一致性和相机可控性方面显著优于主要基于地球数据训练的现有开源和闭源模型。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2507.07982" data-arxiv-id="2507.07982" data-status="ready">
+<h1>[2507.07982] Geometry Forcing: Marrying Video Diffusion and 3D Representation for Consistent World Modeling</h1>
+<p><a href="https://arxiv.org/abs/2507.07982" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 Geometry Forcing (GF)，通过强制视频扩散模型与预训练 3D 基础模型的几何表示对齐，以解决仅基于像素生成的模型在长时一致性上的不足。</p>
+<h2>解决的问题</h2>
+<p>现有视频生成方法通常仅关注像素分布，忽略了视频是动态 3D 世界 2D 投影这一基本原理，导致在自回归设置下难以维持几何一致性和长期稳定性。</p>
+<h2>创新点</h2>
+<ul>
+<li>分析了预训练视频扩散模型在缺乏额外引导时，其学习到的特征无法产生有意义的几何表示，揭示了视频扩散模型在几何理解上的潜在差距。</li>
+<li>提出了 Geometry Forcing (GF) 方法，通过引入深度头（DPT head）将视频扩散模型的中间特征映射为深度图，并分析其几何表征能力的局限性。</li>
+<li>设计了两种互补的对齐目标（Angular Alignment 和 Scale Alignment），分别用于最大化特征方向余弦相似性和预测归一化后的几何特征，以同时捕捉几何的方向和尺度信息。</li>
+<li>在 RealEstate10K 和 Minecraft 两个基准上进行了广泛评估，证明 GF 方法在几何一致性和视觉质量上显著优于基线方法（例如在 RealEstate10K 上将 FVD 从 364 降低至 243）。</li>
+<li>展示了推理阶段显式重建几何结构的能力，为将结构化记忆集成到长期世界建模中提供了新的机会。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2508.08086" data-arxiv-id="2508.08086" data-status="ready">
+<h1>[2508.08086] Matrix-3D: Omnidirectional Explorable 3D World Generation</h1>
+<p><a href="https://arxiv.org/abs/2508.08086" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>Matrix-3D 提出了一种基于全景视频生成和两种重建管线（基于 3DGS 的优化与基于潜变量的前馈重建）的框架，旨在解决现有方法受限于窄视角并产生边界伪影的问题，从而实现全向可探索的高质量 3D 世界生成。</p>
+<h2>解决的问题</h2>
+<p>现有基于单张图像或点云渲染的 3D 场景生成方法通常受限于窄视角（perspective images），导致生成的 3D 场景在特定角度下出现明显的边界伪影，限制了沉浸式体验和下游应用。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了 Matrix-Pano Dataset，这是一个包含 116,759 个高质量静态全景视频序列的合成数据集，提供了精确的相机姿态、深度图和文本标注，专门用于轨迹引导的全景视频生成和全覆盖 3D 世界重建。</li>
+<li>提出了一种新颖的由场景网格渲染（scene mesh renders）引导的轨迹视频扩散模型，有效缓解了传统点云渲染中常见的莫尔条纹（Moiré patterns）和错误遮挡关系问题，从而提升了生成内容的视觉质量。</li>
+<li>提出了一种基于 3D Gaussian Splatting (3DGS) 优化的直观全景 3D 重建管线，通过从生成的全景视频中选择关键帧进行裁剪和优化，以生成高质量且细节丰富的 3D 场景。</li>
+<li>提出了一种基于潜变量的前馈全景 3D 重建管线，利用 Transformer 架构直接从全景视频潜变量和相机轨迹预测 3D GS 属性，显著提高了 3D 世界生成的效率。</li>
+<li>设计了一种两阶段训练策略，首先训练全景深度预测，随后训练全景高斯预测，以促进模型的有效收敛并支持光度损失计算。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2508.21058" data-arxiv-id="2508.21058" data-status="ready">
+<h1>[2508.21058] Mixture of Contexts for Long Video Generation</h1>
+<p><a href="https://arxiv.org/abs/2508.21058" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种自适应混合上下文（MoC）框架，通过可学习的稀疏注意力路由机制，将长视频生成重构为内部信息检索过程，从而在保持高保真度的同时显著降低计算成本并实现分钟级长上下文生成。</p>
+<h2>解决的问题</h2>
+<p>现有基于 Transformer 的扩散模型在处理分钟或小时级长视频时面临深层挑战：长程记忆困难（需跨长时间线保留关键事件且无漂移或身份丢失）、密集自注意力计算成本随序列增长而变得不可行，以及现有压缩或固定稀疏策略无法动态适应每一步所需的关键上下文，导致长程依赖和叙事连贯性受限。</p>
+<h2>创新点</h2>
+<ul>
+<li>将长上下文视频生成重构为内部信息检索过程，提出自适应混合上下文（MoC）框架，利用参数化但可训练的最多 k 个（top-kk）路由器，使每个查询动态选择视频序列中最相关的片段，替代了均匀或静态的稀疏注意力策略。</li>
+<li>设计了多模态分块机制，将多模态令牌流按帧、镜头和字幕划分为内容对齐的块，并激活跨模态链接（连接所有文本令牌）和镜头内局部窗口链接作为强制锚点，以在保留路由容量用于真正长程召回的同时稳定局部保真度。</li>
+<li>引入了因果路由掩码以防止病态循环闭合，通过强制有向无环交互图来提升分钟级序列生成的滚出（roll-out）鲁棒性，并直接利用支持可变序列长度和高吞吐量的 Flash Attention 内核处理选定的关键令牌以实现高效实现。</li>
+<li>在训练过程中逐步调整分块粒度和路由机制的选择性，实现渐进式稀疏化，鼓励模型随着训练进展专注于最具信息量的上下文，最终在不修改扩散主干网络或其训练方案的情况下，将注意力 FLOPs 预算减少高达 7 倍，并在分钟级场景上实现了 2.2 倍的端到端生成速度提升。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2509.09737" data-arxiv-id="2509.09737" data-status="ready">
+<h1>[2509.09737] World Modeling with Probabilistic Structure Integration</h1>
+<p><a href="https://arxiv.org/abs/2509.09737" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种名为概率结构集成（PSI）的通用过程，旨在通过从低级非语言输入数据开始，构建具有丰富可控性和灵活查询能力的世界模型。</p>
+<h2>解决的问题</h2>
+<p>现有的世界模型存在关键局限性，包括缺乏丰富的可控性和灵活的查询能力，其交互接口（如视觉、运动或记忆组件）通常粗糙且不自然，难以像语言模型那样通过统一提示进行任意灵活的交互。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了概率结构集成（PSI）框架，这是一个包含三个步骤的良性循环过程，能够从低级非语言输入数据构建具有丰富可控性和真正交互性的世界模型。</li>
+<li>设计了概率预测器（Ψ），使其能够以可扩展的方式从原始视频数据中学习，通过随机访问自回归 Transformer 学习局部变量在任意子集条件下的完整条件分布。</li>
+<li>提出了一种零样本结构提取机制，利用反事实提示从概率预测器中揭示自然中间特征（如光流、深度和分割），这些特征作为低维正则性暴露了现实世界的底层结构。</li>
+<li>开发了一种通用的新令牌类型集成机制，将提取的结构作为新条件源和预测目标混合回预测器中，从而在不扩展架构的情况下实现模型自我丰富和迭代增强。</li>
+<li>展示了 PSI 框架如何通过自增强循环从像素推进到物理规律，最终支持日益精确的局部操纵和广泛的场景理解，实现了统一模型在生成、判别和推理任务上的能力。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2509.21027" data-arxiv-id="2509.21027" data-status="ready">
+<h1>[2509.21027] KeyWorld: Key Frame Reasoning Enables Effective and Efficient World Models</h1>
+<p><a href="https://arxiv.org/abs/2509.21027" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>KeyWorld 通过引入关键帧推理范式，将计算资源集中在语义关键帧的生成上，并利用轻量级模型进行中间帧插值，从而显著提升了机器人世界模型的推理效率与物理一致性。</p>
+<h2>解决的问题</h2>
+<p>片段未提供</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了 KeyWorld 框架，将基于文本的机器人世界模型推理解耦为基于扩散的关键帧生成和轻量级中间帧插值，显著降低了视频生成成本并增强了关键帧的语义理解能力。</li>
+<li>引入了一种运动感知关键帧检测范式，直接从机器人姿态轨迹中选择具有语义意义的状态，使模型能够更聚焦于物理动态的表示。</li>
+<li>构建了基于 Ramer-Douglas-Peucker 算法的运动感知关键帧数据集，保留了显著的运动转换并剔除了平稳运动，确保关键帧捕捉了本质语义且间隔适合轻量级插值。</li>
+<li>训练了基于 Diffusion Transformer (DiT) 的模型以从任务描述和初始状态推理关键运动并合成关键帧，并通过微调使其专注于生成具有物理交互的语义关键锚点。</li>
+<li>采用轻量级卷积神经网络 (CNN) 模型预测关键帧之间的帧间隙并生成中间帧，在消除重型计算开销的同时实现了完整视频序列的重建。</li>
+<li>在 LIBERO 基准测试上进行了广泛评估，证明了该方法在保持优越视频质量的同时实现了高达 5.68 倍的加速，验证了其在时间敏感和物理敏感应用中的可行性。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2509.24527" data-arxiv-id="2509.24527" data-status="ready">
+<h1>[2509.24527] Training Agents Inside of Scalable World Models</h1>
+<p><a href="https://arxiv.org/abs/2509.24527" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文介绍了 Dreamer 4，这是一个可扩展的智能体，它通过在快速且准确的世界模型内部进行想象训练来解决复杂的控制任务。</p>
+<h2>解决的问题</h2>
+<p>片段未提供</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了 Dreamer 4，这是一个可扩展的智能体，能够通过在世界模型内部进行想象训练来解决具有挑战性的控制任务。</li>
+<li>Dreamer 4 是首个仅从标准离线数据集（无需环境交互）中就在 Minecraft 游戏中收集到钻石的智能体，其数据效率比 OpenAI 的 VPT 离线智能体高出 100 倍。</li>
+<li>引入了一种高容量的世界模型，该模型通过捷径强制目标（shortcut forcing objective）和高效的 Transformer 架构，实现了单 GPU 上的实时推理。</li>
+<li>展示了该世界模型能够准确预测 Minecraft 中广泛的物体交互和游戏机制，大幅优于之前的世界模型。</li>
+<li>证明了该世界模型可以从大量未标记视频中学习，并且仅需少量配对动作的视频即可学习动作条件化，展现出强大的泛化能力。</li>
+<li>进行了广泛的消融研究，以衡量所提出的目标和架构带来的改进。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2510.04290" data-arxiv-id="2510.04290" data-status="ready">
+<h1>[2510.04290] ChronoEdit: Towards Temporal Reasoning for Image Editing and World Simulation</h1>
+<p><a href="https://arxiv.org/abs/2510.04290" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>ChronoEdit 是一个基础模型，通过将图像编辑重构为两帧视频生成问题并利用预训练视频模型的时序先验，旨在解决现有数据驱动方法在物理一致性方面的不足。</p>
+<h2>解决的问题</h2>
+<p>片段未提供</p>
+<h2>创新点</h2>
+<ul>
+<li>提出 ChronoEdit，一个旨在保持物理一致性的图像编辑基础模型。</li>
+<li>展示了一种有效的设计，将预训练的视频生成模型转化为图像编辑模型。</li>
+<li>开发了一种新颖的时序推理推理阶段，以进一步强制物理一致性。</li>
+<li>证明 ChronoEdit 在开源模型中达到最先进性能，并与领先的专有系统具有竞争力。</li>
+<li>提出了一个专为世界模拟应用定制的基准测试 PBench-Edit。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2603.04379" data-arxiv-id="2603.04379" data-status="ready">
+<h1>[2603.04379] Helios: Real Real-Time Long Video Generation Model</h1>
+<p><a href="https://arxiv.org/abs/2603.04379" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了 Helios，一个 14B 实时长视频生成模型，通过统一历史注入、漂移模拟训练及多术语记忆分块等技术，在单张 H100 GPU 上实现 19.5 FPS 的生成速度并构建了 HeliosBench 基准。</p>
+<h2>解决的问题</h2>
+<p>主流视频生成模型难以实现实时且无限长的生成，通常仅支持 5-10 秒且合成耗时数十分钟；现有方法依赖小模型导致复杂运动表现差，或依赖训练即推理策略导致训练成本高且易出现漂移；因果掩码可能限制模型质量。</p>
+<h2>创新点</h2>
+<ul>
+<li>在不使用常见防漂移策略（如 Self-Forcing、错误银行等）的情况下，生成高质量且强一致性的分钟级视频。</li>
+<li>在不使用标准加速技术（如 KV-cache、因果掩码等）的情况下，在单张 H100 GPU 上实现 14B 模型 19.5 FPS 的端到端推理。</li>
+<li>引入优化措施提高训练和推理吞吐量并减少内存消耗，使 14B 模型无需并行或分片基础设施即可训练。</li>
+<li>针对实时长视频生成缺乏标准化基准的问题，发布包含 240 个提示词和四种时长区间的 HeliosBench。</li>
+<li>实验表明 Helios 在质量上显著优于现有方法，且推理速度超越部分 1.3B 蒸馏模型。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.01215" data-arxiv-id="2609.01215" data-status="ready">
+<h1>[2609.01215] REFACTOR-VLA: Unsupervised Library Learning of Typed Motor Programs</h1>
+<p><a href="https://arxiv.org/abs/2609.01215" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>REFACTOR-VLA 是一个统一框架，结合了 VLA 模型的系统优势与 wake-sleep 库学习的形式化保证，通过行为等价核（BEK）聚类轨迹片段并蒸馏为带类型的 Lambda 程序，以解决连续动作机器人策略中的行为等价识别难题。</p>
+<h2>解决的问题</h2>
+<p>片段指出，在应用 wake-sleep 框架到连续动作机器人策略时，识别行为等价性是一个严重障碍，因为物理演示很少共享完全相同的动作轨迹，且现有方法缺乏对动态感知的等价性校准，无法区分产生相同物理效果但路径不同的轨迹片段，也无法将表面形式相似但动力学后果不同的片段正确分组。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种基于状态级双模拟度量的行为等价核（BEK），用于量化在相同初始状态下轨迹片段之间的发散度，从而在连续轨迹片段上建立数学严谨的行为等价基础。</li>
+<li>引入了一个统一的 REFACTOR-VLA 框架，在睡眠阶段利用 BEK 聚类轨迹片段并蒸馏为 Siamese 片段编码器，随后通过语法反统一提取公共语法子结构并编译为带类型的 Lambda 程序。</li>
+<li>设计了严格的抽象采纳标准，仅当抽象满足联合最小描述长度（MDL）和回报保持标准时才被采纳，从而确保策略重构将性能损失限制在可接受范围内。</li>
+<li>在唤醒阶段实现了 Typed Program Emitter（TPE）和库条件化校正流动作解码器（LCAD），在 Hindley-Milner 约束下协调库条件的动作解码，实现了从抽象到具体动作的生成。</li>
+<li>揭示了世界模型容量与训练目标之间的反直觉关系，证明在 World Model 热身阶段添加辅助监督对比 InfoNCE 损失是恢复性能的关键因素，而非单纯增加模型参数。</li>
+<li>在 LIBERO 基准测试上实现了首个真实的任务语言库（包含 3 个抽象和 1211 个 nat），并通过多种子实验验证了该方法在跨提供者种子收敛下的鲁棒性和优越性。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.06578" data-arxiv-id="2609.06578" data-status="ready">
+<h1>[2609.06578] Learning to Use Imagination: Progress-Conditioned Future Utilization for World Action Models</h1>
+<p><a href="https://arxiv.org/abs/2609.06578" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种名为 ProWAM 的进度条件化世界动作模型，通过引入自监督双时态进度编码器和分层进度条件化想象调节机制，使机器人能够根据任务执行进度的变化自适应地利用想象的未来信息，从而在模拟和真实机器人平台上显著优于现有的 VLA 和 WAM 基线。</p>
+<h2>解决的问题</h2>
+<p>现有的世界动作模型（WAMs）虽然将未来视觉动态纳入动作生成，但主要关注如何建模未来信息，而较少关注如何根据任务执行进度的演变来自适应地利用这些想象的未来，导致在任务不同阶段（如搜索/接近阶段与抓取/放置阶段）使用固定的想象模式可能引入干扰或不准确的预测线索。</p>
+<h2>创新点</h2>
+<ul>
+<li>识别并验证了未来效用中两种未被充分探索的非均匀性形式：跨执行阶段的进度间变化（inter-progress variation）和同一进度状态下未来潜变量之间的异质性（intra-progress heterogeneity）。</li>
+<li>提出了自监督双时态进度编码器（SS-DTPE），该编码器结合短时动作 - 观察证据和长时循环历史，利用内在语义进展和时间顺序学习结构化进度表示，无需人工进度标注。</li>
+<li>提出了分层进度条件化想象调节机制（HPIM），通过进度间全局门控和进度内未来潜变量相关性机制，将固定的想象使用模式转变为随执行进度自适应调节的未来利用。</li>
+<li>在五个模拟基准测试和两个真实机器人平台上进行了广泛评估，证明 ProWAM 在进度感知和长视界操作任务中相比强大的 VLA 和 WAM 基线具有持续的性能提升。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.06647" data-arxiv-id="2609.06647" data-status="ready">
+<h1>[2609.06647] SerenAI: State-transition system inspired by text-based world AI models</h1>
+<p><a href="https://arxiv.org/abs/2609.06647" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>SerenAI 是一种受文本世界 AI 模型启发的状态转换系统，旨在通过结构化推理解决生成式语言模型在事实性、一致性和合规性方面的幻觉问题，特别适用于法律等受监管环境。</p>
+<h2>解决的问题</h2>
+<p>生成式语言模型的预测目标函数无法保证输出内容的真实性、内部一致性或合规性，导致在高 stakes 操作中可能出现幻觉（如错过截止日期、引用错误的法规或插入错误条款），而现有的提示词 elicitation 等技术不足以完全解决这一问题。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种四字段转换表示法，用于明确指定状态变化内容、下一状态、有效性及完成情况。</li>
+<li>设计了两阶段训练方案，将参数高效的监督微调与自动结构化输出验证器及强化学习相结合。</li>
+<li>提供了初步内部基准结果的透明报告，并明确指出了限制其宣称法律级可靠性的因素。</li>
+<li>构建了一个部署与验证框架，旨在为受监管的专业实践提供基于主权和证据的 AI 解决方案。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.06820" data-arxiv-id="2609.06820" data-status="ready">
+<h1>[2609.06820] Diagnosing and Dynamically Filtering Occupancy World Models for Active Mapping</h1>
+<p><a href="https://arxiv.org/abs/2609.06820" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种基于观测的门控动态滤波器，用于在主动建图过程中动态过滤占用网络预测，以解决因预测错误导致的规划效率低下问题。</p>
+<h2>解决的问题</h2>
+<p>片段未提供</p>
+<h2>创新点</h2>
+<ul>
+<li>提供了一种受控的诊断方法，结合决策级增益分解与固定规划器的占用干预，分析占用补全及其错误对主动建图的影响。</li>
+<li>证明了占用精度与规划性能并不等价，其影响取决于初始条件，且在轨迹效率与最终覆盖率之间存在差异。</li>
+<li>引入了一种无需地面真值或重新训练的观测门控动态滤波器，利用在线 RGB-D 观测抑制重复未支持的占用预测。</li>
+<li>在两个易崩溃的初始场景上，该方法相较于三次重复实验，将平均最终覆盖率分别提高了 0.163 和 0.122。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.07002" data-arxiv-id="2609.07002" data-status="ready">
+<h1>[2609.07002] WM-Craftnet: World Synesthesia Model for Generalizable and Robust Dexterous In-Hand Manipulation</h1>
+<p><a href="https://arxiv.org/abs/2609.07002" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>WM-Craftnet 提出了一种基于世界联觉模型（World Synesthesia Model）的框架，通过整合本体感觉、噪声深度、触觉感知及动作历史来学习动作条件化的循环表示，以解决灵巧手在部分可观测环境下的鲁棒操作问题。</p>
+<h2>解决的问题</h2>
+<p>基于狭窄物体集或固定初始姿态训练的策略容易过拟合特定手指步态，导致对姿态偏移、力扰动和物体漂移脆弱；现有方法添加物体身份或形状嵌入限制了通用性，且简单拼接深度和触觉传感器流无法有效从噪声融合观测中学习时间接触动力学。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了 WM-Craftnet 框架，利用世界联觉模型从本体感觉、噪声深度、触觉感知、动作及多模态预测目标中学习动作条件化的循环表示，以支持接触丰富的灵巧操作。</li>
+<li>分析了 WSM 与循环历史基线、辅助头与模态头消融、潜在状态诊断、清洁深度重建及预训练的效果，证明预测性表示可作为下游 4949 个物体控制的可重用先验。</li>
+<li>进行了定量仿真和真实世界评估，展示了 WSM 在物体变化、未见物体、扰动下的单策略操作改进能力，并实现了在 2222 自由度五指灵巧手上的仿真到现实迁移。</li>
+<li>通过训练期间使用噪声增强深度作为输入并以清洁腕部深度监督重建，鼓励生成去噪几何信息，从而提升了下游控制的鲁棒性。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.07051" data-arxiv-id="2609.07051" data-status="ready">
+<h1>[2609.07051] TrojanWorld: Backdooring World-Model Agents via Imagination Steering</h1>
+<p><a href="https://arxiv.org/abs/2609.07051" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了 TrojanWorld，一种针对世界模型智能体的供应链后门框架，该框架在上游训练期间植入后门，并通过物理触发器引导智能体内部的想象过程，从而在部署后诱导其执行攻击者指定的行为。</p>
+<h2>解决的问题</h2>
+<p>现有针对世界模型的安全研究主要关注推理时的输入操纵或导致任务失败的降级攻击，缺乏能够植入上游、通过物理触发激活且能诱导特定恶意行为（而非单纯失败）的后门攻击方法。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了 TrojanWorld 框架，这是一种针对世界模型智能体系统的供应链后门框架，它在上游训练期间嵌入后门，并利用物理触发器在部署后引导内部想象以执行攻击者指定的动作。</li>
+<li>开发了三个互补的目标：决策反思诱导（Decision-Reflective Induction）、清洁行为锚定（Clean Behavior Anchoring）和因果传播（Causal Propagation），分别用于将反馈转化为训练信号、保持无触发时的预测保真度以及维持触发移除后的诱导偏好。</li>
+<li>在三个代表性的世界模型智能体系统（TD-MPC2、DreamerV3、R2-Dreamer）和四个基准测试上评估了 TrojanWorld，展示了其在保持至少 98.8% 清洁性能的同时，能将目标动作偏差低至 0.026。</li>
+<li>验证了攻击的持久性和鲁棒性，证明即使物理触发器移除，受污染的想象仍能维持恶意行为，且现有的缓解程序（如 Fine-Pruning、SHINE、Neural Cleanse）无法在保留清洁效用的同时完全消除该攻击。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.07096" data-arxiv-id="2609.07096" data-status="ready">
+<h1>[2609.07096] RoboDreamer: Anticipatory Humanoid Locomotion with Predictive State-Space Models</h1>
+<p><a href="https://arxiv.org/abs/2609.07096" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>RoboDreamer 提出了一种基于掩码预测蒸馏的两阶段框架，利用 Mamba 作为时间骨干网络，通过随机掩码历史观测和下一观测一致性目标，显式训练机器人控制器从时间上下文中推断缺失状态并进行短时预测，从而在观测中断或延迟时实现鲁棒的人形机器人运动控制。</p>
+<h2>解决的问题</h2>
+<p>现有的人形机器人控制策略通常仅基于当前可用观测进行反应式映射，缺乏对缺失信息的显式推理能力，导致在传感器丢失、通信延迟或数据损坏时表现脆弱；此外，MLP 缺乏时序推理能力，而 Transformer 因二次方复杂度难以满足高频控制需求，简单的架构替换无法解决缺失观测下的控制问题。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种两阶段掩码预测蒸馏框架，通过清洁教师策略监督在随机连续时间掩码下训练的学生策略，显式教导控制器从时间上下文中推断缺失的当前信息，而非仅对可用观测做出反应。</li>
+<li>将时间掩码与下一观测一致性目标相结合，并在推理阶段复用学习到的掩码语义，以支持隐式闭环动作 refinement 和可选的多步动作分块，从而在统一框架中连接时间状态推断与短时预测控制。</li>
+<li>采用 Mamba 作为高效的时间骨干网络，并在匹配的历史和训练设置下与 MLP、Transformer、GRU 和 LSTM 策略进行了受控比较，证明掩码机制是鲁棒性提升的主要驱动力，而 Mamba 提供了额外的跟踪 - 延迟优势。</li>
+<li>在 Unitree G1 机器人上进行了 IsaacLab、MuJoCo 及真实机器人部署的评估，证明该方法在观测掩码和感知不确定性下比反应式基线实现了更稳健的运动跟踪，同时保持了实时控制能力。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.07126" data-arxiv-id="2609.07126" data-status="ready">
+<h1>[2609.07126] Beyond Task Success: Stage-Wise Reliability of World Model Planning under Sensing Degradation</h1>
+<p><a href="https://arxiv.org/abs/2609.07126" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种分阶段评估框架，用于分析世界模型规划器在视觉和时序感知退化下的可靠性，发现单一的任务结果指标无法完全表征感知退化在整个管道中的传播特性。</p>
+<h2>解决的问题</h2>
+<p>片段未提供</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了配对的分阶段评估方法，追踪感知扰动从表示层到未来预测、规划器偏好及任务结果的传播，以比较不同退化下的下游传播效应。</li>
+<li>揭示了感知退化的相对影响在管道中并非保持有序，某些扰动在表示层后显著衰减，而另一些则持续至预测和规划阶段，且大的规划器响应并不一定对应较低的成功率估计。</li>
+<li>指出随机帧丢失、历史替换和固定延迟产生了不同的传播特征，表明时序退化需要综合考虑信息位置、新鲜度以及规划器的实际暴露情况，而不仅仅是聚合的历史变化或名义上的损坏。</li>
+<li>通过控制实验将 10 种视觉和时序感知退化应用于同一世界模型规划器，并对比了其与配对清洁条件下的下游变化。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.07299" data-arxiv-id="2609.07299" data-status="ready">
+<h1>[2609.07299] World Models Under Asynchronous Sensor Observations</h1>
+<p><a href="https://arxiv.org/abs/2609.07299" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文研究了在异步传感器观测下，世界模型中采样调度信息的两种形式（staleness 和 time-to-refresh）对预测的贡献差异，发现仅在刷新事件控制执行器更新时，time-to-refresh 才具有显著价值。</p>
+<h2>解决的问题</h2>
+<p>现有世界模型大多假设同步观测，而物理系统中传感器以异构速率运行，导致观测既不同步也不均匀，现有处理方法（如插值或降采样）存在权衡或信息丢失。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种基于零阶保持（ZOH）的替代方案，利用已知的传感器刷新调度直接推导 staleness 和 time-to-refresh 两个特征。</li>
+<li>构建了一个包含三种变体（A-ZOH、F-blind、F）的 Transformer 世界模型阶梯，以隔离并评估调度信息中不同特征对预测的贡献。</li>
+<li>在三种设置下进行了广泛评估：包括 MuJoCo 环境中的开环卷出、固定模型预测控制器中的闭环控制，以及区分刷新仅提供观测与刷新决定执行器更新的因果线性系统。</li>
+<li>实验结果表明，在开环预测和标准模型预测控制中，time-to-refresh 未带来可测量的性能提升，但在刷新事件控制执行器更新的因果设置中，它能恢复约 80% 的系统发散。</li>
+<li>确立了判断前瞻性调度信息何时对世界模型有用的因果标准，并为设计超越标准同步观测假设的世界模型提供了基础。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.07328" data-arxiv-id="2609.07328" data-status="ready">
+<h1>[2609.07328] PV-WM: A Heterogeneous Micro-Macro World Model for Articulated Pedestrian-Vehicle Co-Rollout</h1>
+<p><a href="https://arxiv.org/abs/2609.07328" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>PV-WM 是一种异质微 - 宏观世界模型，用于对具有关节的人 - 车协同进行滚动预测，通过联合预测行人根运动与 15 关节姿态以及学习到的车辆状态，在结构化感知轨迹上实现同步的 P-V 几何演化。</p>
+<h2>解决的问题</h2>
+<p>现有预测范式通常仅保留行人代理级分辨率或仅关注局部姿态，导致无法同时解决行人身体构型与周围车辆未来的预测问题，且缺乏将行人状态、车辆运动、定向范围及同步 P-V 几何整合在单一循环局部状态中的完整模型。</p>
+<h2>创新点</h2>
+<ul>
+<li>将行人 - 车辆预测形式化为对异质状态的循环预测，该状态涵盖行人运输与关节、学习到的车辆动力学、定向范围以及同步的对几何。</li>
+<li>引入了一种生成状态协同滚动方法，结合了类型特定的端点动力学和持久对状态，并在匹配条件下隔离了对端点路由的影响。</li>
+<li>隔离了循环执行、类型动力学和持久对分支的贡献，证明了生成关节的功能复用，并展示了比验证选定的模块化专家更准确高效的完整状态系统。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.07532" data-arxiv-id="2609.07532" data-status="ready">
+<h1>[2609.07532] PhysReal: Learning Real-World Deformable Object Physics via Hybrid Constitutive Modeling</h1>
+<p><a href="https://arxiv.org/abs/2609.07532" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>PhysReal 是一个视频驱动的框架，旨在通过混合本构建模从单视角交互视频中恢复真实世界可变形物体的复杂且异质材料行为的物理动力学。</p>
+<h2>解决的问题</h2>
+<p>片段未提供</p>
+<h2>创新点</h2>
+<ul>
+<li>提出 PhysReal，这是一个新颖的视频驱动框架，能够恢复具有复杂和异质材料行为的真实世界可变形物体的动力学。</li>
+<li>提出一种空间变化的混合专家 - 神经本构模型，以捕捉超越解析公式的复杂局部材料响应。</li>
+<li>开发了一种包含互补运动和掩码监督的课程学习策略，用于从单视角视觉观察中恢复物理属性。</li>
+<li>通过广泛的实验展示了该方法在重建和未来预测方面的优越性能，并证明了其在下游机器人应用中的潜力。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.07719" data-arxiv-id="2609.07719" data-status="ready">
+<h1>[2609.07719] A radiographic world model for clinical reasoning and evidence generation</h1>
+<p><a href="https://arxiv.org/abs/2609.07719" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了 MedDream，一种放射学世界模型，通过共享预训练视觉路径联合优化临床图像 - 文本对齐与掩码潜在生成，旨在解决罕见表型下诊断推理与证据生成分离的问题。</p>
+<h2>解决的问题</h2>
+<p>现有医学影像 AI 面临两大挑战：一是长尾临床队列中罕见表型数据稀缺，导致模型在稀疏设置下依赖不稳定线索；二是诊断表征学习与医学图像生成通常作为独立能力发展，难以在单一视觉路径中联合学习，且两者对预训练存在竞争需求（诊断需保留细微特征而生成需强腐蚀恢复）。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了 MedDream 模型，实现了诊断推理与报告条件图像生成在单一预训练视觉路径中的紧密耦合，共享连续视觉令牌。</li>
+<li>设计了渐进式掩码课程（progressive masking curriculum），利用低掩码保留疾病语义线索以支持对齐，同时利用高掩码驱动解剖结构和病理特征的恢复以支持生成。</li>
+<li>在胸部 X 光数据集上进行了系统性评估，验证了该模型在冻结表征迁移（涵盖常见、长尾及标签稀缺场景）和报告条件生成（包含分布一致性、病理一致性及专家盲审）方面的有效性。</li>
+<li>证明了共享放射学状态能够支持在真实观察稀缺、长尾分布或不均匀分布的情况下，同时进行临床解读和合成诊断证据的构建。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.07874" data-arxiv-id="2609.07874" data-status="ready">
+<h1>[2609.07874] InfluenceField: A Differentiable Field with Interventionally Identifiable Causal Structure for Multimodal World Modeling</h1>
+<p><a href="https://arxiv.org/abs/2609.07874" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>InfluenceField 是一种可微分影响场，它被插入在视觉编码器和语言解码器之间，旨在通过统一连续空间建模、多步定向影响传播和局部场空间干预，解决多模态系统中依赖表面相关性而缺乏因果解释和反事实推理能力的问题。</p>
+<h2>解决的问题</h2>
+<p>现有的多模态系统严重依赖表面相关性，在上下文变化时不可靠，且在反事实推理中容易混淆相关性与因果关系，同时现有方法未能联合提供显式的空间状态以支持局部干预效果在多步推理中的传播，且未解决学习到的因果表示和结构的可识别性这一关键理论问题。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了连续场与定向传播机制，将补丁特征提升为可在任意位置查询的连续潜在场，并利用状态依赖的定向影响矩阵和迭代传播算子，使局部干预能够诱导多步长程效应。</li>
+<li>进行了可识别性分析，证明了在非线性有限基种群模型中，目标对齐的干预一致性能够保留完整的转换图，同时确定了表示在位置内的微分同胚意义下的唯一性，并给出了线性特化下的精确部分覆盖表征和有限损失稳定性界限。</li>
+<li>设计了容量匹配和结构破坏控制策略，通过参数/FLOP 匹配的非因果控制、影响矩阵转置/对称化以及打乱的反事实监督来隔离因果贡献，并利用覆盖曲线、跨种子稳定性等指标验证了理论动机预测。</li>
+<li>进行了广泛的实证验证，表明 InfluenceField 在因果视频问答、多模态因果发现、分布外泛化和反事实一致性等任务上均优于强基线模型，特别是在规划和假设性问题上的提升最为显著。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.08162" data-arxiv-id="2609.08162" data-status="ready">
+<h1>[2609.08162] WorldAgen: Unified State-Action Prediction with Test-Time World Model Training</h1>
+<p><a href="https://arxiv.org/abs/2609.08162" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>WorldAgen 提出了一种统一框架，将联合状态 - 动作预测与测试时训练（TTT）相结合，使视觉 - 语言 - 动作（VLA）模型能够在部署时通过轻量级更新主动适应新环境。</p>
+<h2>解决的问题</h2>
+<p>现有的 VLA 模型主要基于静态数据集进行预训练，导致其内部世界动态表示缺乏适应机制，无法应对部署时出现的新物体布局、光照条件或物理属性等分布偏移。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种统一的基于 Transformer 的架构，整合了世界建模与动作预测，并通过混合单向注意力掩码实现共享表示与独立工作。</li>
+<li>引入了一种测试时训练（TTT）范式，将世界建模从静态预训练转变为主动的测试时适应机制，允许 VLA 模型实时细化场景理解。</li>
+<li>在 CALVIN 和 LIBERO 等具有挑战性的基准测试上进行了实证验证，展示了该方法在测试时仅需少量样本微调即可达到最先进性能。</li>
+<li>证明了测试时的持续适应（而非单纯扩大模型规模或增加预训练数据）是实现鲁棒且可泛化的机器人操作的关键要素。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.08230" data-arxiv-id="2609.08230" data-status="ready">
+<h1>[2609.08230] ActionSplice: In-Flight Action Editing for Interactive World Models</h1>
+<p><a href="https://arxiv.org/abs/2609.08230" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>ActionSplice 提出了一种基于反事实状态传输（CST）的推理框架，旨在解决交互式视频世界模型中因等待下一个数据块而导致的控制延迟问题，实现了在采样过程中对动作的实时编辑。</p>
+<h2>解决的问题</h2>
+<p>现有的块自回归（chunk-autoregressive）世界模型虽然支持实时流生成，但高帧吞吐量并不等同于低控制延迟，因为一旦新动作到达，系统必须等待当前数据块完成所有求解步骤才能显示，这限制了控制的响应速度。</p>
+<h2>创新点</h2>
+<ul>
+<li>将飞行中动作编辑（in-flight action editing）形式化为可恢复采样器状态之间的匹配反事实传输问题。</li>
+<li>引入了针对冻结世界模型的整块重定向（whole-chunk retargeting）和块内时间拼接（within-chunk temporal splicing）两种变体，允许在更细的时间粒度上改变控制。</li>
+<li>建立了一种跨两个独立实现骨干网络（minWM–Wan Action2V 和 HY-WM1.5）的匹配评估协议，涵盖了动作接收步骤、定向动作转换、时间边界和重复中断等场景。</li>
+<li>证明了相对于直接条件交换方法，提出的 CSTR 变体在两个骨干网络上显著降低了回滚相关的 LPIPS 分数，而 CSTT 变体在提供像素就绪加速的同时大幅降低了后缀 LPIPS。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.08342" data-arxiv-id="2609.08342" data-status="ready">
+<h1>[2609.08342] VeriScene: Reconstructing Crime Scenes from Legal Evidence via World-Model Agent</h1>
+<p><a href="https://arxiv.org/abs/2609.08342" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>VeriScene 是一个智能体系统，通过编排世界模型来融合多模态法律证据，生成符合物理定律且可审计的犯罪现场重演视频。</p>
+<h2>解决的问题</h2>
+<p>现有的直接提示生成模型方法在处理犯罪现场重建时存在缺陷：证据输入无序且缺乏组织，导致模型无法建模证据间的关系（如证词与照片的对应、痕迹对冲突的仲裁），输出结果往往丢失证据、忽略矛盾，并倾向于视觉吸引力而非物理正确性，且缺乏将错误回溯到诱导证据的审计机制。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了将犯罪现场重建定义为在物理和证据约束下编排世界模型以融合多模态法律证据的新问题。</li>
+<li>设计了 VeriScene 系统，这是一个包含迭代证据融合、世界模型物理推理和物理标注重演渲染的智能体流水线，每个阶段均配有独立的验证循环。</li>
+<li>构建了一个包含 25 个场景、7 种案件类型的多模态法律证据基准，并定义了五个小数值的评估指标，验证了 VeriScene 相对于基线模型及五个不同 LLM 后端的表现。</li>
+<li>验证了 VeriScene 在 20 个测试场景中实现了 0.9014 的证据覆盖率和 0.7217 的事实一致性，在事实一致性上比端到端多模态 LLM 基线高出 20.35%，在时间连贯性上高出 34.88%。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.08796" data-arxiv-id="2609.08796" data-status="ready">
+<h1>[2609.08796] Hi-FLoop: Hierarchical State-Feedback Loops for Multi-Timescale World Modeling</h1>
+<p><a href="https://arxiv.org/abs/2609.08796" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>Hi-FLoop 提出了一种分层状态反馈循环框架，通过解耦长期联合意图、中期交互计划和短期可执行运动，解决了多时间尺度世界建模中的跨尺度决策一致性与动态适应性问题。</p>
+<h2>解决的问题</h2>
+<p>片段未提供</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种多时间尺度解耦状态反馈闭环生成框架，将长期行为意图、中期交互和短期运动演化定义为具有异质性预测视界、生命周期和因果范围的生成状态，并通过执行状态反馈实现闭环。</li>
+<li>构建了时间一致的联合未来分支表示，将多智能体多模态提升为场景级联合世界假设，显式建模离散分支身份在智能体和滚动时间上的持久性，同时允许分支内状态随新事实连续演化。</li>
+<li>设计了由 Preview 驱动的交替结构 - 属性交互推理机制，在滚动预览中交替重建稀疏有向关系拓扑和更新连续冲突及时间属性，使中期协调成为短期运动生成的显式条件。</li>
+<li>实施了针对生成状态分布的时间专业化学习，将已学习前缀的生成与其生成的延续的恢复分离，通过冻结前缀模型诱导输入分布并由独立参数化的恢复模型优化，防止后缀优化改变已学习的前缀。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.08853" data-arxiv-id="2609.08853" data-status="ready">
+<h1>[2609.08853] CAST: Alternating State-Value Targets and Expanded Policy Gradients for Model-Based Reinforcement Learning</h1>
+<p><a href="https://arxiv.org/abs/2609.08853" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>CAST 提出了一种基于模型强化学习算法，通过交替使用行为策略（规划器）和目标策略的状态价值目标，并构建正则化混合贝尔曼目标与 k 步模型策略改进机制，以解决分布不匹配和训练不稳定的问题。</p>
+<h2>解决的问题</h2>
+<p>片段未提供</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种正则化的混合贝尔曼目标构建方法，该目标结合了行为策略下的真实过渡和目标策略下的想象过渡，并证明了在固定策略和精确动力学下其具有唯一的固定点。</li>
+<li>设计了一种 k 步基于模型的政策改进目标，通过在学习到的动力学模型中展开目标策略来重构一步动作价值估计，从而在状态价值批评的基础上进行策略优化。</li>
+<li>将上述机制整合到 TD-MPC2 框架中，构建了 CAST 算法，即用训练向行为策略价值对齐的集成状态价值批评替代了传统的动作价值批评。</li>
+<li>在仿真环境中与五个代表性强化学习基线进行了对比，并在 14 个高维控制任务上验证了算法的有效性。</li>
+<li>在物理硬件上部署了 CAST 算法，具体应用于 Unitree Go2 四足机器人，验证了其在真实世界中的可行性。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.08855" data-arxiv-id="2609.08855" data-status="ready">
+<h1>[2609.08855] Earth System World Model for What-If Simulations: A Case Study for Terrestrial Ecosystems</h1>
+<p><a href="https://arxiv.org/abs/2609.08855" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本研究提出了一种用于地球系统模拟的交互式世界模型，通过重构被动输入输出监督为动作条件状态转换建模，实现了针对明确的用户编辑系统状态及其耦合响应的快速假设分析。</p>
+<h2>解决的问题</h2>
+<p>大多数地球系统模拟器被设计为被动预报器，仅能复现给定强迫下的模型输出，缺乏支持用户指定交互或干预（如火灾、采伐等）的显式模型设计，限制了其在交互式科学工作流中的应用。</p>
+<h2>创新点</h2>
+<ul>
+<li>引入了转换 - 动作预训练（transition-action pretraining），从自然观察到的状态变化中推导出无标签的动作监督。</li>
+<li>集成了掩码响应学习（masked response learning）作为必要步骤，以提高模型在部分未观测变量下的稳定性，从而支持部分状态编辑。</li>
+<li>在来自 6 个大陆的异质区域代表性生态系统轨迹上进行了实验。</li>
+<li>将模拟器训练从被动输入输出监督重构为动作条件状态转换建模，以支持对明确的用户编辑系统状态及其耦合响应的快速假设分析。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.09119" data-arxiv-id="2609.09119" data-status="ready">
+<h1>[2609.09119] DeCAL: Towards Physically-Grounded Dexterous Vision-Language-Action Models via Contact-Aware Latent Co-Imagination</h1>
+<p><a href="https://arxiv.org/abs/2609.09119" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>DeCAL 是一个基于物理的灵巧视觉 - 语言 - 动作模型，通过接触感知的潜在共想象机制，有效利用触觉信号以应对富接触和精细的灵巧操作任务。</p>
+<h2>解决的问题</h2>
+<p>现有方法主要将触觉输入作为辅助信号进行同质化多模态融合，缺乏自适应的触觉交互建模，且大多为反应式，无法显式地对未来的交互进行建模，从而限制了其在操作过程中推理不断演变的接触转换的能力。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了 DeCAL，一个统一的灵巧视觉 - 触觉 - 语言 - 动作框架，整合了理解、生成和动作，以实现有效的视觉 - 触觉表征学习。</li>
+<li>引入了自适应视觉 - 触觉融合机制和视觉 - 触觉潜在共想象机制，以促进富接触和精细的灵巧操作。</li>
+<li>通过一系列真实世界的实验，展示了该方法的有效性和泛化能力，并在多种接触丰富的灵巧操作任务中取得了最先进的性能。</li>
+<li>验证了所提出的每个组件的有效性，证明了有效利用触觉信息进行灵巧操作的潜力。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.09155" data-arxiv-id="2609.09155" data-status="ready">
+<h1>[2609.09155] SyncWorld: Visual Calibration Enables World Models as Zero-Shot Simulators</h1>
+<p><a href="https://arxiv.org/abs/2609.09155" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>SyncWorld 是一种视觉校准的动作条件世界模型，它通过引入视觉校准片段作为上下文，能够在无需额外训练的情况下，实现跨不同相机视角和单臂机器人形态的零样本模拟。</p>
+<h2>解决的问题</h2>
+<p>片段未提供</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了 SyncWorld，一种视觉校准的细粒度动作条件世界模型，能够跨异构机器人数据扩展，并通过条件化短视觉校准片段实现零样本泛化到未见过的相机视角和单臂形态。</li>
+<li>通过训练时注入视觉校准，实现了基于历史的上下文适应（calibration distillation），使模型能够从现成的交互历史中近似特定的动作 - 视觉映射，从而提升无需显式校准片段的灵活上下文泛化能力。</li>
+<li>展示了 SyncWorld 的零样本模拟能力可转化为决策时的实际增益：通过在模拟器中进行候选动作块的测试时扩展（test-time scaling），利用想象出的轨迹选择更优动作，从而在不进行任何训练的情况下改善新环境中的策略。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2606.17030" data-arxiv-id="2606.17030" data-status="ready">
+<h1>[2606.17030] Qwen-RobotWorld Technical Report: Unifying Embodied World Modeling through Language-Conditioned Video Generation</h1>
+<p><a href="https://arxiv.org/abs/2606.17030" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>Qwen-RobotWorld 是一个基于语言条件的视频世界模型，通过统一自然语言作为动作接口，联合训练操作、驾驶、导航及人机转移等多领域数据，实现了跨场景和跨任务的具身智能能力。</p>
+<h2>解决的问题</h2>
+<p>现有的通用视频生成模型无法准确建模具身物理（如接触动力学和刚体约束），而领域特定的具身模型依赖机器人特定的动作表示，导致无法在不同具身平台或任务类别之间泛化。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了 Qwen-RobotWorld，一种将自然语言作为通用动作接口的语言条件视频世界模型，通过联合训练多领域数据实现了互补的物理泛化能力。</li>
+<li>提出了动作 - 语言映射框架，将 20 多种机器人形态和 500 多种动作类别标准化为统一的自然语言接口，构建了包含约 860 万对高质量视频 - 文本对的具身世界知识（EWK）数据集。</li>
+<li>提出了一种通用 + 专家联合训练范式，在统一自然语言接口下，使模型同时具备广泛的世界建模能力和深度的具身领域专业知识，支持跨场景和任务的稳定协同训练。</li>
+<li>在多个基准测试中取得了全面性能提升，在 EWMBench 和 DreamGen Bench 上排名第一，并在 WorldModelBench 和 PBench 上优于所有开源模型。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2606.18610" data-arxiv-id="2606.18610" data-status="ready">
+<h1>[2606.18610] SC3-Eval: Evaluating Robot Foundation Models via Self-Consistent Video Generation</h1>
+<p><a href="https://arxiv.org/abs/2606.18610" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>SC3-Eval 是一种基于自洽视频生成的评估框架，通过强制前向 - 逆向动力学一致性、跨视角一致性和测试时一致性，将预训练视频基础模型转化为可靠的闭环机器人策略评估器。</p>
+<h2>解决的问题</h2>
+<p>片段未提供</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了 SC3-Eval，这是一种自洽视频生成配方，通过三个互补的一致性目标（前向 - 逆向动力学一致性、跨视角一致性、测试时一致性）将预训练视频基础模型转化为准确的闭环策略评估器。</li>
+<li>引入了一种源自逆向动力学模式的、无需修改训练过程即可实现的基于不确定性的早期终止标准，从而在不增加额外监督的情况下提高了闭环可靠性。</li>
+<li>在七个 VLA 策略检查点上的真实世界实验中，SC3-Eval 实现了最先进的策略评估性能，能够泛化到训练数据中未见的分布外任务语义，并复现轨迹层面的失败模式而非仅预测聚合成功率。</li>
+<li>在 381381 小时的真实世界餐桌整理操作数据集上训练了统一的动力学模型，并在包含 12 种不同物体的任务上验证了其对策略评估的忠实度。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2607.26056" data-arxiv-id="2607.26056" data-status="ready">
+<h1>[2607.26056] INTACT: Isomorphic Intent-to-Action Learning for Search-Free World Models</h1>
+<p><a href="https://arxiv.org/abs/2607.26056" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 INTACT 架构，通过定义状态条件动作商空间并引入同构隐式训练机制，将观测到的物理过渡与部署时的意图条件家族对齐，实现了无需搜索的直接控制与高效的闭环性能。</p>
+<h2>解决的问题</h2>
+<p>现有潜在世界模型在训练时动作塑造潜在表示，但在部署时（如 CEM 或 MPPI）从通用随机动作开始，导致表示与控制之间存在不对称性，且前向预测器未明确指定实现所需潜在变化的具体动作语义。</p>
+<h2>创新点</h2>
+<ul>
+<li>定义了状态条件动作商空间，其类别与可实现的行动律图像规范同构，并通过潜在位移坐标表示端点请求。</li>
+<li>引入端到端同构隐式训练架构，利用共享的正确似然函数对齐观测过渡和部署意图条件家族，采用非对称梯度路由且不强制潜在端点重合。</li>
+<li>识别了 INTACT 头所需的互补匹配内部调用语法，即一阶意图必须与其匹配的状态 - 意图双线性交互配对，以形成状态条件的逆控制因子。</li>
+<li>开发了非扩散、自回归的意图 - 前向控制器，发射状态条件的动作分布而非单一静态答案，支持零搜索直接控制和以计划为中心的地方 CEM。</li>
+<li>引入了原生坐标动作家族诊断方法（预测 - 专家 CKA 和 kNN 重叠），证明其与传统点动作 R2 相比更能揭示意图到动作的保持机制。</li>
+<li>展示了联合意图监督不仅改善部署后的演员，还优化了共享表示，并通过移除 INTACT 预测器后的演员禁用纯 CEM 性能提升及冷冻探针证据得到证实。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2608.30530" data-arxiv-id="2608.30530" data-status="ready">
+<h1>[2608.30530] WebWorld: The Browser as a World Model for Self-Improving Web Code</h1>
+<p><a href="https://arxiv.org/abs/2608.30530" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>WebWorld 将浏览器作为无需训练的现成世界模型，通过引入交互合同、接受证书和质量棘轮机制，实现了 VLM 提议与浏览器执行验证的闭环，从而显著提升了网页代码的自改进能力。</p>
+<h2>解决的问题</h2>
+<p>现有的 VLM 批判 - 重写循环存在结构性缺陷，因为 VLM 同时充当提议者和裁判，仅基于截图进行视觉判断，无法有效识别行为层面的功能失效（如按钮无效或忽略输入），导致改进过程充满噪声且效果有限。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出将浏览器作为现成的世界模型来重构自主 HTML 改进问题，将监督单元从最终截图或标量偏好转变为经过验证的状态转换，且无需训练世界模型。</li>
+<li>设计了三种耦合的工件（交互合同、接受证书和质量棘轮）以建立 VLM 先验与浏览器世界模型之间的通信机制，确保修复仅在重新执行证明目标进展和保留先前能力时才被采纳。</li>
+<li>实验证明浏览器作为认证世界模型的有效性：WebWorld-27B 在 HTMLBench 和 MiniAppBench 上分别取得 52.7 和 85.5 的高分，显著优于无证书循环的基线（仅提升 0.4 分）。</li>
+<li>通过消融实验证实重新执行是核心要素，表明浏览器作为主动认证者而非被动查看者对于消除监督污染和提升代码质量至关重要。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2608.30692" data-arxiv-id="2608.30692" data-status="ready">
+<h1>[2608.30692] Can Video World Models Track Unobserved World States?</h1>
+<p><a href="https://arxiv.org/abs/2608.30692" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文通过视频 Shell Game 实验表明，仅监督可见内容的当前视频模型骨干网络无法携带未观测状态，并提出了两种能实现长度外推的解决方案：扩展循环过渡以允许负特征值，以及利用测试时训练（TTT）的快权重进行非线性特征图更新。</p>
+<h2>解决的问题</h2>
+<p>片段未提供</p>
+<h2>创新点</h2>
+<ul>
+<li>证明了当前仅监督可见内容的视频模型骨干网络无法携带未观测状态，从而确立了状态追踪讨论的相关性。</li>
+<li>发现了一种通过扩展循环过渡以允许负特征值（实现类似反射的交换操作）从而在 Shell Game 上实现长度外推的方法。</li>
+<li>发现了一种利用测试时训练（TTT）快权重进行在线非线性特征图更新的方法，使有效核变为历史依赖型，从而超越普通线性注意力并实现长度外推。</li>
+<li>讨论了这些发现对静态和动态世界探索等更广泛场景的启示，即状态必须从观测中进行修正。</li>
+<li>指出了当前研究中仍存在的开放性问题。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.00161" data-arxiv-id="2609.00161" data-status="ready">
+<h1>[2609.00161] IMPACT: Attention Is the Interaction Map for Scalable Interaction-Aware World Model Training</h1>
+<p><a href="https://arxiv.org/abs/2609.00161" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>IMPACT 是一种可扩展的交互感知世界模型训练框架，它利用对象条件化交叉注意力的先验来重新加权去噪监督，从而解决训练中的监督分配不匹配问题，无需外部密集表示即可提升交互生成的物理合理性和视觉质量。</p>
+<h2>解决的问题</h2>
+<p>现有世界模型方法通常依赖外部交互动态表示（如光流、深度或重建场景）来约束生成，但这需要昂贵的辅助估计器或人工标注，且受限于外部信号的准确性，导致训练可扩展性和交互质量受限。</p>
+<h2>创新点</h2>
+<ul>
+<li>识别出世界模型训练中存在的监督分配不匹配问题，即全局平均均方误差（MSE）目标根据空间范围而非功能重要性均匀加权，导致稀疏的动态交互区域监督不足。</li>
+<li>提出利用预训练视频生成骨干网络中对象条件化交叉注意力作为时空先验，将其转化为交互图以重新加权去噪监督，从而无需外部密集表示即可优化交互区域。</li>
+<li>引入注意力分布采样（ADS）模块，通过聚合被操作对象的交叉注意力并基于解耦的局部预测误差进行加权，校准注意力先验以形成精确的交互图。</li>
+<li>设计交互加权监督（IWS）机制，利用交互图增强交互区域的去噪监督，同时保持全局目标并解耦区域估计与区域优化，防止先验信号坍缩。</li>
+<li>在 WorldArena 机器人臂操作和 EgoDex 人手操作两个设置上进行了广泛评估，证明 IMPACT 在相同骨干网络下优于标准均匀监督训练及各类基线，显著提升了交互保真度和物理合理性。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.00188" data-arxiv-id="2609.00188" data-status="ready">
+<h1>[2609.00188] ZimaBlue: Evolving Generalizable World Action Models through Scalable Video Pre-training</h1>
+<p><a href="https://arxiv.org/abs/2609.00188" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>ZimaBlue 提出了一种通过大规模第一人称视频预训练来增强通用世界动作模型（WAM）可扩展性的框架，旨在解决通用机器人缺乏可扩展具身经验来源的核心障碍。</p>
+<h2>解决的问题</h2>
+<p>现有视觉 - 语言 - 动作（VLA）模型的泛化能力受限于用于策略学习的动作标记机器人数据，导致其在面对场景布局、视角或动力学变化时缺乏必要的空间、动态和运动知识。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了 ZimaBlue 框架，将视频扩展确立为通向可泛化世界动作模型（WAM）的实用途径，并提供了大规模视频预训练能显著提升零样本泛化能力和在挑战性操作基准上表现的实证证据。</li>
+<li>引入了一种三阶段训练框架，包括以眼为中心的视频预训练、多具身视频 - 动作中期训练和目标机器人后期训练，并配合统一的状态 - 动作表示，以利用不同数据源的自然角色。</li>
+<li>提出了一种慢 - 快（Slow-Fast）WAM 架构，通过重用大型世界模型的浅层表示，实现了在 NVIDIA RTX 4090 上 30 Hz 的闭环物理机器人控制，解决了生成式模型通常存在的延迟问题。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.00455" data-arxiv-id="2609.00455" data-status="ready">
+<h1>[2609.00455] Towards a Belief-Based World Model for LLM Agents</h1>
+<p><a href="https://arxiv.org/abs/2609.00455" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种基于信念的世界模型（BB-WMs），旨在通过向 LLM 代理直接暴露当前状态信念，以区分并优化处理认知性行动（信息收集）与务实性行动（目标推进）的决策过程。</p>
+<h2>解决的问题</h2>
+<p>现有方法通常仅通过模拟未来轨迹间接传达状态不确定性，导致认知性行动（减少不确定性）与务实性行动（评估后果）所需的接口信息混淆，且随着规划视界增加，从未来预测中恢复当前状态信念变得样本效率低下。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了基于信念的世界模型（BB-WMs）框架，该框架能够维护、更新并向前传播当前状态信念，而非仅依赖动作条件化的未来模拟。</li>
+<li>论证了将信念建模职责从 LLM 代理卸载到世界模型中，并通过自然语言接口直接暴露信念，可以优化 LLM 在部分可观测任务中的决策能力。</li>
+<li>设计了互补的交互接口：利用自然语言查询处理认知性行动以获取当前信念，同时利用模拟接口处理务实性行动以评估行动后果。</li>
+<li>指出当前主流方法让 LLM 代理隐式维护不确定性同时处理动作选择是一种次优的责任划分，而模块化分离能更好地利用预训练 LLM 的推理能力。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.00776" data-arxiv-id="2609.00776" data-status="ready">
+<h1>[2609.00776] Solaris: Towards Interfaces That Are Generated, Not Coded</h1>
+<p><a href="https://arxiv.org/abs/2609.00776" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>Solaris 是一个实时交互式模型，它通过联合处理渲染和交互，直接生成界面帧以消除传统软件中视觉设计与代码实现之间的中间表示转换，从而提供无损耗、动态且开放式的交互体验。</p>
+<h2>解决的问题</h2>
+<p>片段未提供</p>
+<h2>创新点</h2>
+<ul>
+<li>提出 Solaris 作为首个“界面世界模型”（interface world model），能够实时逐帧生成界面并直接响应用户交互，无需将视觉设计转换为中间表示（如代码）。</li>
+<li>实现完全视觉化的应用构建，使图像本身即成为可交互的应用程序，支持如虚拟试衣、场景重排等自然交互，消除了视觉设计与功能实现之间的二次实施步骤。</li>
+<li>创造“活”的软件体验，通过持续渲染使界面元素（如光影反射、物体位置）能根据用户指令或环境变化实时动态演化，而非依赖预设的脚本页面。</li>
+<li>提供开放式的交互能力，允许同一场景内支持开发者未预先定义的全新行为，打破传统接口对固定工作流的限制，由底层世界模型实时决定交互可能性。</li>
+<li>为智能体（agents）训练提供动态环境，通过生成可能从未存在过的界面布局，解决传统基于代码训练的 LLM 难以适应不同界面布局的问题。</li>
+</ul>
+</article>
     <article class="summary-article summary-topic-entry" id="summary-2404.15109" data-arxiv-id="2404.15109" data-status="ready">
 <h1>[2404.15109] Compete and Compose: Learning Independent Mechanisms for Modular World Models</h1>
 <p><a href="https://arxiv.org/abs/2404.15109" rel="nofollow">arXiv 原文</a></p>
@@ -8048,6 +8868,6 @@
 </article>
     </div>
   </main>
-  <script type="application/json" id="summary-catalog">{"papers":{"1612.00341":{"status":"ready","url":"notes/world-model.html#summary-1612.00341"},"1803.10122":{"status":"ready","url":"notes/world-model.html#summary-1803.10122"},"1912.01603":{"status":"ready","url":"notes/world-model.html#summary-1912.01603"},"2010.02193":{"status":"ready","url":"notes/world-model.html#summary-2010.02193"},"2104.05859":{"status":"ready","url":"notes/world-model.html#summary-2104.05859"},"2202.05333":{"status":"ready","url":"notes/world-model.html#summary-2202.05333"},"2205.09991":{"status":"ready","url":"notes/world-model.html#summary-2205.09991"},"2206.14244":{"status":"ready","url":"notes/world-model.html#summary-2206.14244"},"2210.04017":{"status":"ready","url":"notes/world-model.html#summary-2210.04017"},"2210.05861":{"status":"ready","url":"notes/world-model.html#summary-2210.05861"},"2211.15657":{"status":"ready","url":"notes/world-model.html#summary-2211.15657"},"2301.06294":{"status":"ready","url":"notes/world-model.html#summary-2301.06294"},"2301.08243":{"status":"ready","url":"notes/world-model.html#summary-2301.08243"},"2302.05543":{"status":"ready","url":"notes/world-model.html#summary-2302.05543"},"2305.15260":{"status":"ready","url":"notes/world-model.html#summary-2305.15260"},"2306.09205":{"status":"ready","url":"notes/world-model.html#summary-2306.09205"},"2307.07176":{"status":"ready","url":"notes/world-model.html#summary-2307.07176"},"2307.12698":{"status":"ready","url":"notes/world-model.html#summary-2307.12698"},"2309.08587":{"status":"ready","url":"notes/world-model.html#summary-2309.08587"},"2309.09777":{"status":"ready","url":"notes/world-model.html#summary-2309.09777"},"2309.17080":{"status":"ready","url":"notes/world-model.html#summary-2309.17080"},"2310.00344":{"status":"ready","url":"notes/world-model.html#summary-2310.00344"},"2310.02601":{"status":"ready","url":"notes/world-model.html#summary-2310.02601"},"2310.05167":{"status":"ready","url":"notes/world-model.html#summary-2310.05167"},"2310.06114":{"status":"ready","url":"notes/world-model.html#summary-2310.06114"},"2310.07771":{"status":"ready","url":"notes/world-model.html#summary-2310.07771"},"2310.16828":{"status":"ready","url":"notes/world-model.html#summary-2310.16828"},"2311.01017":{"status":"ready","url":"notes/world-model.html#summary-2311.01017"},"2311.01450":{"status":"ready","url":"notes/world-model.html#summary-2311.01450"},"2311.09064":{"status":"ready","url":"notes/world-model.html#summary-2311.09064"},"2311.16038":{"status":"ready","url":"notes/world-model.html#summary-2311.16038"},"2311.16813":{"status":"ready","url":"notes/world-model.html#summary-2311.16813"},"2311.17663":{"status":"ready","url":"notes/world-model.html#summary-2311.17663"},"2311.17918":{"status":"ready","url":"notes/world-model.html#summary-2311.17918"},"2312.17655":{"status":"ready","url":"notes/world-model.html#summary-2312.17655"},"2401.09985":{"status":"ready","url":"notes/world-model.html#summary-2401.09985"},"2402.01103":{"status":"ready","url":"notes/world-model.html#summary-2402.01103"},"2402.05290":{"status":"ready","url":"notes/world-model.html#summary-2402.05290"},"2402.05643":{"status":"ready","url":"notes/world-model.html#summary-2402.05643"},"2402.08268":{"status":"ready","url":"notes/world-model.html#summary-2402.08268"},"2402.16720":{"status":"ready","url":"notes/world-model.html#summary-2402.16720"},"2402.17139":{"status":"ready","url":"notes/world-model.html#summary-2402.17139"},"2403.00504":{"status":"ready","url":"notes/world-model.html#summary-2403.00504"},"2403.02622":{"status":"ready","url":"notes/world-model.html#summary-2403.02622"},"2403.04253":{"status":"ready","url":"notes/world-model.html#summary-2403.04253"},"2403.06845":{"status":"ready","url":"notes/world-model.html#summary-2403.06845"},"2403.08321":{"status":"ready","url":"notes/world-model.html#summary-2403.08321"},"2403.09630":{"status":"ready","url":"notes/world-model.html#summary-2403.09630"},"2403.09631":{"status":"ready","url":"notes/world-model.html#summary-2403.09631"},"2403.09976":{"status":"ready","url":"notes/world-model.html#summary-2403.09976"},"2403.10967":{"status":"ready","url":"notes/world-model.html#summary-2403.10967"},"2403.19438":{"status":"ready","url":"notes/world-model.html#summary-2403.19438"},"2404.02903":{"status":"ready","url":"notes/world-model.html#summary-2404.02903"},"2404.08471":{"status":"ready","url":"notes/world-model.html#summary-2404.08471"},"2404.10775":{"status":"ready","url":"notes/world-model.html#summary-2404.10775"},"2404.12377":{"status":"ready","url":"notes/world-model.html#summary-2404.12377"},"2404.15109":{"status":"ready","url":"notes/world-model.html#summary-2404.15109"},"2405.03520":{"status":"ready","url":"notes/world-model.html#summary-2405.03520"},"2405.04390":{"status":"ready","url":"notes/world-model.html#summary-2405.04390"},"2405.05941":{"status":"ready","url":"notes/world-model.html#summary-2405.05941"},"2405.05956":{"status":"ready","url":"notes/world-model.html#summary-2405.05956"},"2405.06263":{"status":"ready","url":"notes/world-model.html#summary-2405.06263"},"2405.09111":{"status":"ready","url":"notes/world-model.html#summary-2405.09111"},"2405.12399":{"status":"ready","url":"notes/world-model.html#summary-2405.12399"},"2405.14205":{"status":"ready","url":"notes/world-model.html#summary-2405.14205"},"2405.14475":{"status":"ready","url":"notes/world-model.html#summary-2405.14475"},"2405.15223":{"status":"ready","url":"notes/world-model.html#summary-2405.15223"},"2405.17398":{"status":"ready","url":"notes/world-model.html#summary-2405.17398"},"2405.18418":{"status":"ready","url":"notes/world-model.html#summary-2405.18418"},"2405.20180":{"status":"ready","url":"notes/world-model.html#summary-2405.20180"},"2405.20337":{"status":"ready","url":"notes/world-model.html#summary-2405.20337"},"2406.01349":{"status":"ready","url":"notes/world-model.html#summary-2406.01349"},"2406.03689":{"status":"ready","url":"notes/world-model.html#summary-2406.03689"},"2406.04089":{"status":"ready","url":"notes/world-model.html#summary-2406.04089"},"2406.06370":{"status":"ready","url":"notes/world-model.html#summary-2406.06370"},"2406.07381":{"status":"ready","url":"notes/world-model.html#summary-2406.07381"},"2406.08481":{"status":"ready","url":"notes/world-model.html#summary-2406.08481"},"2406.08691":{"status":"ready","url":"notes/world-model.html#summary-2406.08691"},"2406.08862":{"status":"ready","url":"notes/world-model.html#summary-2406.08862"},"2406.09386":{"status":"ready","url":"notes/world-model.html#summary-2406.09386"},"2406.09394":{"status":"ready","url":"notes/world-model.html#summary-2406.09394"},"2406.09455":{"status":"ready","url":"notes/world-model.html#summary-2406.09455"},"2406.10714":{"status":"ready","url":"notes/world-model.html#summary-2406.10714"},"2406.10788":{"status":"ready","url":"notes/world-model.html#summary-2406.10788"},"2406.13945":{"status":"ready","url":"notes/world-model.html#summary-2406.13945"},"2406.14540":{"status":"ready","url":"notes/world-model.html#summary-2406.14540"},"2406.18043":{"status":"ready","url":"notes/world-model.html#summary-2406.18043"},"2406.19320":{"status":"ready","url":"notes/world-model.html#summary-2406.19320"},"2407.00959":{"status":"ready","url":"notes/world-model.html#summary-2407.00959"},"2407.01392":{"status":"ready","url":"notes/world-model.html#summary-2407.01392"},"2407.02466":{"status":"ready","url":"notes/world-model.html#summary-2407.02466"},"2407.05679":{"status":"ready","url":"notes/world-model.html#summary-2407.05679"},"2407.06169":{"status":"ready","url":"notes/world-model.html#summary-2407.06169"},"2407.06886":{"status":"ready","url":"notes/world-model.html#summary-2407.06886"},"2407.11965":{"status":"ready","url":"notes/world-model.html#summary-2407.11965"},"2407.15843":{"status":"ready","url":"notes/world-model.html#summary-2407.15843"},"2408.09807":{"status":"ready","url":"notes/world-model.html#summary-2408.09807"},"2408.11816":{"status":"ready","url":"notes/world-model.html#summary-2408.11816"},"2408.14197":{"status":"ready","url":"notes/world-model.html#summary-2408.14197"},"2408.14472":{"status":"ready","url":"notes/world-model.html#summary-2408.14472"},"2408.14837":{"status":"ready","url":"notes/world-model.html#summary-2408.14837"},"2408.15511":{"status":"ready","url":"notes/world-model.html#summary-2408.15511"},"2408.16647":{"status":"ready","url":"notes/world-model.html#summary-2408.16647"},"2409.03272":{"status":"ready","url":"notes/world-model.html#summary-2409.03272"},"2409.08750":{"status":"ready","url":"notes/world-model.html#summary-2409.08750"},"2409.12005":{"status":"ready","url":"notes/world-model.html#summary-2409.12005"},"2409.12278":{"status":"ready","url":"notes/world-model.html#summary-2409.12278"},"2409.15730":{"status":"ready","url":"notes/world-model.html#summary-2409.15730"},"2409.16663":{"status":"ready","url":"notes/world-model.html#summary-2409.16663"},"2409.16784":{"status":"ready","url":"notes/world-model.html#summary-2409.16784"},"2409.18341":{"status":"ready","url":"notes/world-model.html#summary-2409.18341"},"2409.18869":{"status":"ready","url":"notes/world-model.html#summary-2409.18869"},"2410.00564":{"status":"ready","url":"notes/world-model.html#summary-2410.00564"},"2410.02664":{"status":"ready","url":"notes/world-model.html#summary-2410.02664"},"2410.03618":{"status":"ready","url":"notes/world-model.html#summary-2410.03618"},"2410.10076":{"status":"ready","url":"notes/world-model.html#summary-2410.10076"},"2410.10394":{"status":"ready","url":"notes/world-model.html#summary-2410.10394"},"2410.10429":{"status":"ready","url":"notes/world-model.html#summary-2410.10429"},"2410.12822":{"status":"ready","url":"notes/world-model.html#summary-2410.12822"},"2410.13232":{"status":"ready","url":"notes/world-model.html#summary-2410.13232"},"2410.14081":{"status":"ready","url":"notes/world-model.html#summary-2410.14081"},"2410.14673":{"status":"ready","url":"notes/world-model.html#summary-2410.14673"},"2410.17491":{"status":"ready","url":"notes/world-model.html#summary-2410.17491"},"2410.18072":{"status":"ready","url":"notes/world-model.html#summary-2410.18072"},"2410.18084":{"status":"ready","url":"notes/world-model.html#summary-2410.18084"},"2410.19923":{"status":"ready","url":"notes/world-model.html#summary-2410.19923"},"2410.22689":{"status":"ready","url":"notes/world-model.html#summary-2410.22689"},"2410.23156":{"status":"ready","url":"notes/world-model.html#summary-2410.23156"},"2411.01342":{"status":"ready","url":"notes/world-model.html#summary-2411.01342"},"2411.02914":{"status":"ready","url":"notes/world-model.html#summary-2411.02914"},"2411.04434":{"status":"ready","url":"notes/world-model.html#summary-2411.04434"},"2411.04983":{"status":"ready","url":"notes/world-model.html#summary-2411.04983"},"2411.05619":{"status":"ready","url":"notes/world-model.html#summary-2411.05619"},"2411.06559":{"status":"ready","url":"notes/world-model.html#summary-2411.06559"},"2411.06890":{"status":"ready","url":"notes/world-model.html#summary-2411.06890"},"2411.07223":{"status":"ready","url":"notes/world-model.html#summary-2411.07223"},"2411.07690":{"status":"ready","url":"notes/world-model.html#summary-2411.07690"},"2411.08794":{"status":"ready","url":"notes/world-model.html#summary-2411.08794"},"2411.10171":{"status":"ready","url":"notes/world-model.html#summary-2411.10171"},"2411.14499":{"status":"ready","url":"notes/world-model.html#summary-2411.14499"},"2412.03572":{"status":"ready","url":"notes/world-model.html#summary-2412.03572"},"2412.03934":{"status":"ready","url":"notes/world-model.html#summary-2412.03934"},"2412.05337":{"status":"ready","url":"notes/world-model.html#summary-2412.05337"},"2412.07446":{"status":"ready","url":"notes/world-model.html#summary-2412.07446"},"2412.08410":{"status":"ready","url":"notes/world-model.html#summary-2412.08410"},"2412.09600":{"status":"ready","url":"notes/world-model.html#summary-2412.09600"},"2412.10373":{"status":"ready","url":"notes/world-model.html#summary-2412.10373"},"2412.11198":{"status":"ready","url":"notes/world-model.html#summary-2412.11198"},"2412.11673":{"status":"ready","url":"notes/world-model.html#summary-2412.11673"},"2412.11867":{"status":"ready","url":"notes/world-model.html#summary-2412.11867"},"2412.13772":{"status":"ready","url":"notes/world-model.html#summary-2412.13772"},"2412.14803":{"status":"ready","url":"notes/world-model.html#summary-2412.14803"},"2412.14957":{"status":"ready","url":"notes/world-model.html#summary-2412.14957"},"2412.18607":{"status":"ready","url":"notes/world-model.html#summary-2412.18607"},"2412.19505":{"status":"ready","url":"notes/world-model.html#summary-2412.19505"},"2501.01895":{"status":"ready","url":"notes/world-model.html#summary-2501.01895"},"2501.03575":{"status":"ready","url":"notes/world-model.html#summary-2501.03575"},"2501.04969":{"status":"ready","url":"notes/world-model.html#summary-2501.04969"},"2501.06605":{"status":"ready","url":"notes/world-model.html#summary-2501.06605"},"2501.08325":{"status":"ready","url":"notes/world-model.html#summary-2501.08325"},"2501.10100":{"status":"ready","url":"notes/world-model.html#summary-2501.10100"},"2501.11260":{"status":"ready","url":"notes/world-model.html#summary-2501.11260"},"2501.13072":{"status":"ready","url":"notes/world-model.html#summary-2501.13072"},"2501.14729":{"status":"ready","url":"notes/world-model.html#summary-2501.14729"},"2501.16443":{"status":"ready","url":"notes/world-model.html#summary-2501.16443"},"2501.16733":{"status":"ready","url":"notes/world-model.html#summary-2501.16733"},"2501.18867":{"status":"ready","url":"notes/world-model.html#summary-2501.18867"},"2502.00622":{"status":"ready","url":"notes/world-model.html#summary-2502.00622"},"2502.01366":{"status":"ready","url":"notes/world-model.html#summary-2502.01366"},"2502.04728":{"status":"ready","url":"notes/world-model.html#summary-2502.04728"},"2502.05857":{"status":"ready","url":"notes/world-model.html#summary-2502.05857"},"2502.05907":{"status":"ready","url":"notes/world-model.html#summary-2502.05907"},"2502.07309":{"status":"ready","url":"notes/world-model.html#summary-2502.07309"},"2502.07591":{"status":"ready","url":"notes/world-model.html#summary-2502.07591"},"2502.07825":{"status":"ready","url":"notes/world-model.html#summary-2502.07825"},"2502.09297":{"status":"ready","url":"notes/world-model.html#summary-2502.09297"},"2502.09775":{"status":"ready","url":"notes/world-model.html#summary-2502.09775"},"2502.10012":{"status":"ready","url":"notes/world-model.html#summary-2502.10012"},"2502.11167":{"status":"ready","url":"notes/world-model.html#summary-2502.11167"},"2502.11537":{"status":"ready","url":"notes/world-model.html#summary-2502.11537"},"2502.11663":{"status":"ready","url":"notes/world-model.html#summary-2502.11663"},"2502.13092":{"status":"ready","url":"notes/world-model.html#summary-2502.13092"},"2502.13200":{"status":"ready","url":"notes/world-model.html#summary-2502.13200"},"2502.16230":{"status":"ready","url":"notes/world-model.html#summary-2502.16230"},"2502.19544":{"status":"ready","url":"notes/world-model.html#summary-2502.19544"},"2502.20168":{"status":"ready","url":"notes/world-model.html#summary-2502.20168"},"2502.20694":{"status":"ready","url":"notes/world-model.html#summary-2502.20694"},"2502.21142":{"status":"ready","url":"notes/world-model.html#summary-2502.21142"},"2503.00200":{"status":"ready","url":"notes/world-model.html#summary-2503.00200"},"2503.00653":{"status":"ready","url":"notes/world-model.html#summary-2503.00653"},"2503.00713":{"status":"ready","url":"notes/world-model.html#summary-2503.00713"},"2503.01584":{"status":"ready","url":"notes/world-model.html#summary-2503.01584"},"2503.01837":{"status":"ready","url":"notes/world-model.html#summary-2503.01837"},"2503.02247":{"status":"ready","url":"notes/world-model.html#summary-2503.02247"},"2503.02904":{"status":"ready","url":"notes/world-model.html#summary-2503.02904"},"2503.04416":{"status":"ready","url":"notes/world-model.html#summary-2503.04416"},"2503.04421":{"status":"ready","url":"notes/world-model.html#summary-2503.04421"},"2503.05573":{"status":"ready","url":"notes/world-model.html#summary-2503.05573"},"2503.06170":{"status":"ready","url":"notes/world-model.html#summary-2503.06170"},"2503.06669":{"status":"ready","url":"notes/world-model.html#summary-2503.06669"},"2503.07338":{"status":"ready","url":"notes/world-model.html#summary-2503.07338"},"2503.08122":{"status":"ready","url":"notes/world-model.html#summary-2503.08122"},"2503.09215":{"status":"ready","url":"notes/world-model.html#summary-2503.09215"},"2503.10370":{"status":"ready","url":"notes/world-model.html#summary-2503.10370"},"2503.10480":{"status":"ready","url":"notes/world-model.html#summary-2503.10480"},"2503.11647":{"status":"ready","url":"notes/world-model.html#summary-2503.11647"},"2503.12531":{"status":"ready","url":"notes/world-model.html#summary-2503.12531"},"2503.13587":{"status":"ready","url":"notes/world-model.html#summary-2503.13587"},"2503.13952":{"status":"ready","url":"notes/world-model.html#summary-2503.13952"},"2503.16806":{"status":"ready","url":"notes/world-model.html#summary-2503.16806"},"2503.17973":{"status":"ready","url":"notes/world-model.html#summary-2503.17973"},"2503.18938":{"status":"ready","url":"notes/world-model.html#summary-2503.18938"},"2503.18945":{"status":"ready","url":"notes/world-model.html#summary-2503.18945"},"2503.20124":{"status":"ready","url":"notes/world-model.html#summary-2503.20124"},"2503.20523":{"status":"ready","url":"notes/world-model.html#summary-2503.20523"},"2503.21232":{"status":"ready","url":"notes/world-model.html#summary-2503.21232"},"2503.22020":{"status":"ready","url":"notes/world-model.html#summary-2503.22020"},"2503.24320":{"status":"ready","url":"notes/world-model.html#summary-2503.24320"},"2504.00983":{"status":"ready","url":"notes/world-model.html#summary-2504.00983"},"2504.01014":{"status":"ready","url":"notes/world-model.html#summary-2504.01014"},"2504.01941":{"status":"ready","url":"notes/world-model.html#summary-2504.01941"},"2504.02252":{"status":"ready","url":"notes/world-model.html#summary-2504.02252"},"2504.02792":{"status":"ready","url":"notes/world-model.html#summary-2504.02792"},"2504.07095":{"status":"ready","url":"notes/world-model.html#summary-2504.07095"},"2504.08388":{"status":"ready","url":"notes/world-model.html#summary-2504.08388"},"2504.10157":{"status":"ready","url":"notes/world-model.html#summary-2504.10157"},"2504.12369":{"status":"ready","url":"notes/world-model.html#summary-2504.12369"},"2504.13065":{"status":"ready","url":"notes/world-model.html#summary-2504.13065"},"2504.13820":{"status":"ready","url":"notes/world-model.html#summary-2504.13820"},"2504.13936":{"status":"ready","url":"notes/world-model.html#summary-2504.13936"},"2504.16464":{"status":"ready","url":"notes/world-model.html#summary-2504.16464"},"2504.16680":{"status":"ready","url":"notes/world-model.html#summary-2504.16680"},"2504.18576":{"status":"ready","url":"notes/world-model.html#summary-2504.18576"},"2504.19077":{"status":"ready","url":"notes/world-model.html#summary-2504.19077"},"2504.20995":{"status":"ready","url":"notes/world-model.html#summary-2504.20995"},"2504.21024":{"status":"ready","url":"notes/world-model.html#summary-2504.21024"},"2505.01712":{"status":"ready","url":"notes/world-model.html#summary-2505.01712"},"2505.01729":{"status":"ready","url":"notes/world-model.html#summary-2505.01729"},"2505.02228":{"status":"ready","url":"notes/world-model.html#summary-2505.02228"},"2505.03176":{"status":"ready","url":"notes/world-model.html#summary-2505.03176"},"2505.05495":{"status":"ready","url":"notes/world-model.html#summary-2505.05495"},"2505.05512":{"status":"ready","url":"notes/world-model.html#summary-2505.05512"},"2505.09694":{"status":"ready","url":"notes/world-model.html#summary-2505.09694"},"2505.10075":{"status":"ready","url":"notes/world-model.html#summary-2505.10075"},"2505.10819":{"status":"ready","url":"notes/world-model.html#summary-2505.10819"},"2505.11528":{"status":"ready","url":"notes/world-model.html#summary-2505.11528"},"2505.12705":{"status":"ready","url":"notes/world-model.html#summary-2505.12705"},"2505.13934":{"status":"ready","url":"notes/world-model.html#summary-2505.13934"},"2505.14357":{"status":"ready","url":"notes/world-model.html#summary-2505.14357"},"2505.15589":{"status":"ready","url":"notes/world-model.html#summary-2505.15589"},"2505.15659":{"status":"ready","url":"notes/world-model.html#summary-2505.15659"},"2505.16394":{"status":"ready","url":"notes/world-model.html#summary-2505.16394"},"2505.16422":{"status":"ready","url":"notes/world-model.html#summary-2505.16422"},"2505.16474":{"status":"ready","url":"notes/world-model.html#summary-2505.16474"},"2505.17685":{"status":"ready","url":"notes/world-model.html#summary-2505.17685"},"2505.19017":{"status":"ready","url":"notes/world-model.html#summary-2505.19017"},"2505.20171":{"status":"ready","url":"notes/world-model.html#summary-2505.20171"},"2505.20425":{"status":"ready","url":"notes/world-model.html#summary-2505.20425"},"2505.22246":{"status":"ready","url":"notes/world-model.html#summary-2505.22246"},"2505.22421":{"status":"ready","url":"notes/world-model.html#summary-2505.22421"},"2505.22976":{"status":"ready","url":"notes/world-model.html#summary-2505.22976"},"2506.00320":{"status":"ready","url":"notes/world-model.html#summary-2506.00320"},"2506.00613":{"status":"ready","url":"notes/world-model.html#summary-2506.00613"},"2506.01103":{"status":"ready","url":"notes/world-model.html#summary-2506.01103"},"2506.01182":{"status":"ready","url":"notes/world-model.html#summary-2506.01182"},"2506.01392":{"status":"ready","url":"notes/world-model.html#summary-2506.01392"},"2506.01529":{"status":"ready","url":"notes/world-model.html#summary-2506.01529"},"2506.01546":{"status":"ready","url":"notes/world-model.html#summary-2506.01546"},"2506.01622":{"status":"ready","url":"notes/world-model.html#summary-2506.01622"},"2506.02327":{"status":"ready","url":"notes/world-model.html#summary-2506.02327"},"2506.04363":{"status":"ready","url":"notes/world-model.html#summary-2506.04363"},"2506.05284":{"status":"ready","url":"notes/world-model.html#summary-2506.05284"},"2506.06199":{"status":"ready","url":"notes/world-model.html#summary-2506.06199"},"2506.06355":{"status":"ready","url":"notes/world-model.html#summary-2506.06355"},"2506.06725":{"status":"ready","url":"notes/world-model.html#summary-2506.06725"},"2506.07280":{"status":"ready","url":"notes/world-model.html#summary-2506.07280"},"2506.08006":{"status":"ready","url":"notes/world-model.html#summary-2506.08006"},"2506.08149":{"status":"ready","url":"notes/world-model.html#summary-2506.08149"},"2506.08441":{"status":"ready","url":"notes/world-model.html#summary-2506.08441"},"2506.09042":{"status":"ready","url":"notes/world-model.html#summary-2506.09042"},"2506.09981":{"status":"ready","url":"notes/world-model.html#summary-2506.09981"},"2506.09985":{"status":"ready","url":"notes/world-model.html#summary-2506.09985"},"2506.13138":{"status":"ready","url":"notes/world-model.html#summary-2506.13138"},"2506.13260":{"status":"ready","url":"notes/world-model.html#summary-2506.13260"},"2506.13761":{"status":"ready","url":"notes/world-model.html#summary-2506.13761"},"2506.14135":{"status":"ready","url":"notes/world-model.html#summary-2506.14135"},"2506.16565":{"status":"ready","url":"notes/world-model.html#summary-2506.16565"},"2506.17967":{"status":"ready","url":"notes/world-model.html#summary-2506.17967"},"2506.18701":{"status":"ready","url":"notes/world-model.html#summary-2506.18701"},"2506.18897":{"status":"ready","url":"notes/world-model.html#summary-2506.18897"},"2506.18901":{"status":"ready","url":"notes/world-model.html#summary-2506.18901"},"2506.18903":{"status":"ready","url":"notes/world-model.html#summary-2506.18903"},"2506.19055":{"status":"ready","url":"notes/world-model.html#summary-2506.19055"},"2506.19850":{"status":"ready","url":"notes/world-model.html#summary-2506.19850"},"2506.20134":{"status":"ready","url":"notes/world-model.html#summary-2506.20134"},"2506.21539":{"status":"ready","url":"notes/world-model.html#summary-2506.21539"},"2506.21552":{"status":"ready","url":"notes/world-model.html#summary-2506.21552"},"2506.21876":{"status":"ready","url":"notes/world-model.html#summary-2506.21876"},"2506.21976":{"status":"ready","url":"notes/world-model.html#summary-2506.21976"},"2506.22355":{"status":"ready","url":"notes/world-model.html#summary-2506.22355"},"2506.23126":{"status":"ready","url":"notes/world-model.html#summary-2506.23126"},"2506.23135":{"status":"ready","url":"notes/world-model.html#summary-2506.23135"},"2506.23434":{"status":"ready","url":"notes/world-model.html#summary-2506.23434"},"2506.23468":{"status":"ready","url":"notes/world-model.html#summary-2506.23468"},"2506.24113":{"status":"ready","url":"notes/world-model.html#summary-2506.24113"},"2507.00603":{"status":"ready","url":"notes/world-model.html#summary-2507.00603"},"2507.04002":{"status":"ready","url":"notes/world-model.html#summary-2507.04002"},"2507.04370":{"status":"ready","url":"notes/world-model.html#summary-2507.04370"},"2507.04447":{"status":"ready","url":"notes/world-model.html#summary-2507.04447"},"2507.04898":{"status":"ready","url":"notes/world-model.html#summary-2507.04898"},"2507.05169":{"status":"ready","url":"notes/world-model.html#summary-2507.05169"},"2507.05198":{"status":"ready","url":"notes/world-model.html#summary-2507.05198"},"2507.06952":{"status":"ready","url":"notes/world-model.html#summary-2507.06952"},"2507.08800":{"status":"ready","url":"notes/world-model.html#summary-2507.08800"},"2507.09082":{"status":"ready","url":"notes/world-model.html#summary-2507.09082"},"2507.09177":{"status":"ready","url":"notes/world-model.html#summary-2507.09177"},"2507.10539":{"status":"ready","url":"notes/world-model.html#summary-2507.10539"},"2507.12508":{"status":"ready","url":"notes/world-model.html#summary-2507.12508"},"2507.12762":{"status":"ready","url":"notes/world-model.html#summary-2507.12762"},"2507.12898":{"status":"ready","url":"notes/world-model.html#summary-2507.12898"},"2507.13162":{"status":"ready","url":"notes/world-model.html#summary-2507.13162"},"2507.13340":{"status":"ready","url":"notes/world-model.html#summary-2507.13340"},"2507.17744":{"status":"ready","url":"notes/world-model.html#summary-2507.17744"},"2507.19468":{"status":"ready","url":"notes/world-model.html#summary-2507.19468"},"2507.21513":{"status":"ready","url":"notes/world-model.html#summary-2507.21513"},"2507.21809":{"status":"ready","url":"notes/world-model.html#summary-2507.21809"},"2507.23325":{"status":"ready","url":"notes/world-model.html#summary-2507.23325"},"2508.01922":{"status":"ready","url":"notes/world-model.html#summary-2508.01922"},"2508.02159":{"status":"ready","url":"notes/world-model.html#summary-2508.02159"},"2508.03645":{"status":"ready","url":"notes/world-model.html#summary-2508.03645"},"2508.03692":{"status":"ready","url":"notes/world-model.html#summary-2508.03692"},"2508.05635":{"status":"ready","url":"notes/world-model.html#summary-2508.05635"},"2508.06571":{"status":"ready","url":"notes/world-model.html#summary-2508.06571"},"2508.06990":{"status":"ready","url":"notes/world-model.html#summary-2508.06990"},"2508.09822":{"status":"ready","url":"notes/world-model.html#summary-2508.09822"},"2508.11836":{"status":"ready","url":"notes/world-model.html#summary-2508.11836"},"2508.17588":{"status":"ready","url":"notes/world-model.html#summary-2508.17588"},"2508.17600":{"status":"ready","url":"notes/world-model.html#summary-2508.17600"},"2508.20294":{"status":"ready","url":"notes/world-model.html#summary-2508.20294"},"2509.00559":{"status":"ready","url":"notes/world-model.html#summary-2509.00559"},"2509.02722":{"status":"ready","url":"notes/world-model.html#summary-2509.02722"},"2509.03956":{"status":"ready","url":"notes/world-model.html#summary-2509.03956"},"2509.05263":{"status":"ready","url":"notes/world-model.html#summary-2509.05263"},"2509.12201":{"status":"ready","url":"notes/world-model.html#summary-2509.12201"},"2509.12437":{"status":"ready","url":"notes/world-model.html#summary-2509.12437"},"2509.13095":{"status":"ready","url":"notes/world-model.html#summary-2509.13095"},"2509.13903":{"status":"ready","url":"notes/world-model.html#summary-2509.13903"},"2509.15155":{"status":"ready","url":"notes/world-model.html#summary-2509.15155"},"2509.15536":{"status":"ready","url":"notes/world-model.html#summary-2509.15536"},"2509.18428":{"status":"ready","url":"notes/world-model.html#summary-2509.18428"},"2509.19080":{"status":"ready","url":"notes/world-model.html#summary-2509.19080"},"2509.20328":{"status":"ready","url":"notes/world-model.html#summary-2509.20328"},"2509.22353":{"status":"ready","url":"notes/world-model.html#summary-2509.22353"},"2509.22642":{"status":"ready","url":"notes/world-model.html#summary-2509.22642"},"2509.23958":{"status":"ready","url":"notes/world-model.html#summary-2509.23958"},"2509.24804":{"status":"ready","url":"notes/world-model.html#summary-2509.24804"},"2509.24948":{"status":"ready","url":"notes/world-model.html#summary-2509.24948"},"2509.25681":{"status":"ready","url":"notes/world-model.html#summary-2509.25681"},"2509.26339":{"status":"ready","url":"notes/world-model.html#summary-2509.26339"},"2510.00406":{"status":"ready","url":"notes/world-model.html#summary-2510.00406"},"2510.00855":{"status":"ready","url":"notes/world-model.html#summary-2510.00855"},"2510.01183":{"status":"ready","url":"notes/world-model.html#summary-2510.01183"},"2510.02387":{"status":"ready","url":"notes/world-model.html#summary-2510.02387"},"2510.02538":{"status":"ready","url":"notes/world-model.html#summary-2510.02538"},"2510.04020":{"status":"ready","url":"notes/world-model.html#summary-2510.04020"},"2510.04390":{"status":"ready","url":"notes/world-model.html#summary-2510.04390"},"2510.05865":{"status":"ready","url":"notes/world-model.html#summary-2510.05865"},"2510.06492":{"status":"ready","url":"notes/world-model.html#summary-2510.06492"},"2510.07313":{"status":"ready","url":"notes/world-model.html#summary-2510.07313"},"2510.08398":{"status":"ready","url":"notes/world-model.html#summary-2510.08398"},"2510.08558":{"status":"ready","url":"notes/world-model.html#summary-2510.08558"},"2510.08673":{"status":"ready","url":"notes/world-model.html#summary-2510.08673"},"2510.08713":{"status":"ready","url":"notes/world-model.html#summary-2510.08713"},"2510.09036":{"status":"ready","url":"notes/world-model.html#summary-2510.09036"},"2510.10125":{"status":"ready","url":"notes/world-model.html#summary-2510.10125"},"2510.11682":{"status":"ready","url":"notes/world-model.html#summary-2510.11682"},"2510.11892":{"status":"ready","url":"notes/world-model.html#summary-2510.11892"},"2510.12088":{"status":"ready","url":"notes/world-model.html#summary-2510.12088"},"2510.12796":{"status":"ready","url":"notes/world-model.html#summary-2510.12796"},"2510.14977":{"status":"ready","url":"notes/world-model.html#summary-2510.14977"},"2510.16732":{"status":"ready","url":"notes/world-model.html#summary-2510.16732"},"2510.16907":{"status":"ready","url":"notes/world-model.html#summary-2510.16907"},"2510.17482":{"status":"ready","url":"notes/world-model.html#summary-2510.17482"},"2510.17731":{"status":"ready","url":"notes/world-model.html#summary-2510.17731"},"2510.18135":{"status":"ready","url":"notes/world-model.html#summary-2510.18135"},"2510.18313":{"status":"ready","url":"notes/world-model.html#summary-2510.18313"},"2510.19195":{"status":"ready","url":"notes/world-model.html#summary-2510.19195"},"2510.19270":{"status":"ready","url":"notes/world-model.html#summary-2510.19270"},"2510.19364":{"status":"ready","url":"notes/world-model.html#summary-2510.19364"},"2510.19430":{"status":"ready","url":"notes/world-model.html#summary-2510.19430"},"2510.19654":{"status":"ready","url":"notes/world-model.html#summary-2510.19654"},"2510.19818":{"status":"ready","url":"notes/world-model.html#summary-2510.19818"},"2510.20884":{"status":"ready","url":"notes/world-model.html#summary-2510.20884"},"2510.21232":{"status":"ready","url":"notes/world-model.html#summary-2510.21232"},"2510.21682":{"status":"ready","url":"notes/world-model.html#summary-2510.21682"},"2510.23258":{"status":"ready","url":"notes/world-model.html#summary-2510.23258"},"2510.23880":{"status":"ready","url":"notes/world-model.html#summary-2510.23880"},"2510.26583":{"status":"ready","url":"notes/world-model.html#summary-2510.26583"},"2511.01718":{"status":"ready","url":"notes/world-model.html#summary-2511.01718"},"2511.07732":{"status":"ready","url":"notes/world-model.html#summary-2511.07732"},"2511.09057":{"status":"ready","url":"notes/world-model.html#summary-2511.09057"},"2511.09515":{"status":"ready","url":"notes/world-model.html#summary-2511.09515"},"2512.06963":{"status":"ready","url":"notes/world-model.html#summary-2512.06963"},"2512.06983":{"status":"ready","url":"notes/world-model.html#summary-2512.06983"},"2512.10958":{"status":"ready","url":"notes/world-model.html#summary-2512.10958"},"2512.13030":{"status":"ready","url":"notes/world-model.html#summary-2512.13030"},"2512.13644":{"status":"ready","url":"notes/world-model.html#summary-2512.13644"},"2512.15840":{"status":"ready","url":"notes/world-model.html#summary-2512.15840"},"2512.17661":{"status":"ready","url":"notes/world-model.html#summary-2512.17661"},"2512.25075":{"status":"ready","url":"notes/world-model.html#summary-2512.25075"},"2601.00393":{"status":"ready","url":"notes/world-model.html#summary-2601.00393"},"2601.03782":{"status":"ready","url":"notes/world-model.html#summary-2601.03782"},"2601.12277":{"status":"ready","url":"notes/world-model.html#summary-2601.12277"},"2601.15533":{"status":"ready","url":"notes/world-model.html#summary-2601.15533"},"2601.16163":{"status":"ready","url":"notes/world-model.html#summary-2601.16163"},"2601.20540":{"status":"ready","url":"notes/world-model.html#summary-2601.20540"},"2601.21998":{"status":"ready","url":"notes/world-model.html#summary-2601.21998"},"2602.03604":{"status":"ready","url":"notes/world-model.html#summary-2602.03604"},"2602.07050":{"status":"ready","url":"notes/world-model.html#summary-2602.07050"},"2602.09600":{"status":"ready","url":"notes/world-model.html#summary-2602.09600"},"2602.11075":{"status":"ready","url":"notes/world-model.html#summary-2602.11075"},"2602.11291":{"status":"ready","url":"notes/world-model.html#summary-2602.11291"},"2602.12099":{"status":"ready","url":"notes/world-model.html#summary-2602.12099"},"2602.12215":{"status":"ready","url":"notes/world-model.html#summary-2602.12215"},"2602.15922":{"status":"ready","url":"notes/world-model.html#summary-2602.15922"},"2602.22208":{"status":"ready","url":"notes/world-model.html#summary-2602.22208"},"2603.00585":{"status":"ready","url":"notes/world-model.html#summary-2603.00585"},"2603.02765":{"status":"ready","url":"notes/world-model.html#summary-2603.02765"},"2603.10448":{"status":"ready","url":"notes/world-model.html#summary-2603.10448"},"2603.14482":{"status":"ready","url":"notes/world-model.html#summary-2603.14482"},"2603.19312":{"status":"ready","url":"notes/world-model.html#summary-2603.19312"},"2603.22078":{"status":"ready","url":"notes/world-model.html#summary-2603.22078"},"2604.08995":{"status":"ready","url":"notes/world-model.html#summary-2604.08995"},"2605.00080":{"status":"ready","url":"notes/world-model.html#summary-2605.00080"},"2605.06388":{"status":"ready","url":"notes/world-model.html#summary-2605.06388"},"2605.07514":{"status":"ready","url":"notes/world-model.html#summary-2605.07514"},"2605.15178":{"status":"ready","url":"notes/world-model.html#summary-2605.15178"},"2605.20811":{"status":"ready","url":"notes/world-model.html#summary-2605.20811"},"2605.21800":{"status":"ready","url":"notes/world-model.html#summary-2605.21800"},"2605.22882":{"status":"ready","url":"notes/world-model.html#summary-2605.22882"},"2605.23220":{"status":"ready","url":"notes/world-model.html#summary-2605.23220"},"2605.23345":{"status":"ready","url":"notes/world-model.html#summary-2605.23345"},"2605.23699":{"status":"ready","url":"notes/world-model.html#summary-2605.23699"},"2605.25874":{"status":"ready","url":"notes/world-model.html#summary-2605.25874"},"2605.30263":{"status":"ready","url":"notes/world-model.html#summary-2605.30263"},"2606.00267":{"status":"ready","url":"notes/world-model.html#summary-2606.00267"},"2606.02800":{"status":"ready","url":"notes/world-model.html#summary-2606.02800"},"2606.03159":{"status":"ready","url":"notes/world-model.html#summary-2606.03159"},"2606.09803":{"status":"ready","url":"notes/world-model.html#summary-2606.09803"},"2606.11187":{"status":"ready","url":"notes/world-model.html#summary-2606.11187"},"2606.13672":{"status":"ready","url":"notes/world-model.html#summary-2606.13672"},"2606.16533":{"status":"ready","url":"notes/world-model.html#summary-2606.16533"},"2606.16993":{"status":"ready","url":"notes/world-model.html#summary-2606.16993"},"2606.24597":{"status":"ready","url":"notes/world-model.html#summary-2606.24597"},"2606.28128":{"status":"ready","url":"notes/world-model.html#summary-2606.28128"},"2606.30534":{"status":"ready","url":"notes/world-model.html#summary-2606.30534"},"2606.31734":{"status":"ready","url":"notes/world-model.html#summary-2606.31734"},"2606.32026":{"status":"ready","url":"notes/world-model.html#summary-2606.32026"},"2607.00678":{"status":"ready","url":"notes/world-model.html#summary-2607.00678"},"2607.02642":{"status":"ready","url":"notes/world-model.html#summary-2607.02642"},"2607.04988":{"status":"ready","url":"notes/world-model.html#summary-2607.04988"},"2607.06558":{"status":"ready","url":"notes/world-model.html#summary-2607.06558"},"2607.06559":{"status":"ready","url":"notes/world-model.html#summary-2607.06559"},"2607.06988":{"status":"ready","url":"notes/world-model.html#summary-2607.06988"},"2607.07534":{"status":"ready","url":"notes/world-model.html#summary-2607.07534"},"2607.08436":{"status":"ready","url":"notes/world-model.html#summary-2607.08436"},"2607.08639":{"status":"ready","url":"notes/world-model.html#summary-2607.08639"},"2607.11643":{"status":"ready","url":"notes/world-model.html#summary-2607.11643"},"2607.13017":{"status":"ready","url":"notes/world-model.html#summary-2607.13017"},"2607.13960":{"status":"ready","url":"notes/world-model.html#summary-2607.13960"},"2607.15065":{"status":"ready","url":"notes/world-model.html#summary-2607.15065"},"2607.19343":{"status":"ready","url":"notes/world-model.html#summary-2607.19343"},"2607.22535":{"status":"ready","url":"notes/world-model.html#summary-2607.22535"},"2607.23783":{"status":"ready","url":"notes/world-model.html#summary-2607.23783"},"2607.28243":{"status":"ready","url":"notes/world-model.html#summary-2607.28243"},"2608.02603":{"status":"ready","url":"notes/world-model.html#summary-2608.02603"},"2608.07408":{"status":"ready","url":"notes/world-model.html#summary-2608.07408"},"2608.13489":{"status":"ready","url":"notes/world-model.html#summary-2608.13489"},"2608.13546":{"status":"ready","url":"notes/world-model.html#summary-2608.13546"},"2608.14022":{"status":"ready","url":"notes/world-model.html#summary-2608.14022"},"2608.15869":{"status":"ready","url":"notes/world-model.html#summary-2608.15869"},"2608.18077":{"status":"ready","url":"notes/world-model.html#summary-2608.18077"},"2608.23070":{"status":"ready","url":"notes/world-model.html#summary-2608.23070"},"2608.23189":{"status":"ready","url":"notes/world-model.html#summary-2608.23189"},"2608.23383":{"status":"ready","url":"notes/world-model.html#summary-2608.23383"},"2608.26239":{"status":"ready","url":"notes/world-model.html#summary-2608.26239"},"2608.27033":{"status":"ready","url":"notes/world-model.html#summary-2608.27033"},"2608.27549":{"status":"ready","url":"notes/world-model.html#summary-2608.27549"},"2608.29749":{"status":"ready","url":"notes/world-model.html#summary-2608.29749"},"2608.29910":{"status":"ready","url":"notes/world-model.html#summary-2608.29910"},"2608.29937":{"status":"ready","url":"notes/world-model.html#summary-2608.29937"},"2608.29998":{"status":"ready","url":"notes/world-model.html#summary-2608.29998"},"2608.30067":{"status":"ready","url":"notes/world-model.html#summary-2608.30067"},"2608.30237":{"status":"ready","url":"notes/world-model.html#summary-2608.30237"},"2608.30378":{"status":"ready","url":"notes/world-model.html#summary-2608.30378"},"2609.01560":{"status":"ready","url":"notes/world-model.html#summary-2609.01560"},"2609.01861":{"status":"ready","url":"notes/world-model.html#summary-2609.01861"},"2609.02046":{"status":"ready","url":"notes/world-model.html#summary-2609.02046"},"2609.02159":{"status":"ready","url":"notes/world-model.html#summary-2609.02159"},"2609.02542":{"status":"ready","url":"notes/world-model.html#summary-2609.02542"},"2609.02811":{"status":"ready","url":"notes/world-model.html#summary-2609.02811"},"2609.02885":{"status":"ready","url":"notes/world-model.html#summary-2609.02885"},"2609.02886":{"status":"ready","url":"notes/world-model.html#summary-2609.02886"},"2609.03067":{"status":"ready","url":"notes/world-model.html#summary-2609.03067"},"2609.03153":{"status":"ready","url":"notes/world-model.html#summary-2609.03153"},"2609.03225":{"status":"ready","url":"notes/world-model.html#summary-2609.03225"},"2609.03294":{"status":"ready","url":"notes/world-model.html#summary-2609.03294"},"2609.03565":{"status":"ready","url":"notes/world-model.html#summary-2609.03565"},"2609.03572":{"status":"ready","url":"notes/world-model.html#summary-2609.03572"},"2609.03602":{"status":"ready","url":"notes/world-model.html#summary-2609.03602"},"2609.03673":{"status":"ready","url":"notes/world-model.html#summary-2609.03673"},"2609.03681":{"status":"ready","url":"notes/world-model.html#summary-2609.03681"},"2609.03952":{"status":"ready","url":"notes/world-model.html#summary-2609.03952"},"2609.04193":{"status":"ready","url":"notes/world-model.html#summary-2609.04193"},"2609.04851":{"status":"ready","url":"notes/world-model.html#summary-2609.04851"},"2609.04911":{"status":"ready","url":"notes/world-model.html#summary-2609.04911"},"2609.05266":{"status":"ready","url":"notes/world-model.html#summary-2609.05266"}},"topic":"World Model","version":1}</script>
+  <script type="application/json" id="summary-catalog">{"papers":{"1612.00341":{"status":"ready","url":"notes/world-model.html#summary-1612.00341"},"1803.10122":{"status":"ready","url":"notes/world-model.html#summary-1803.10122"},"1912.01603":{"status":"ready","url":"notes/world-model.html#summary-1912.01603"},"2010.02193":{"status":"ready","url":"notes/world-model.html#summary-2010.02193"},"2104.05859":{"status":"ready","url":"notes/world-model.html#summary-2104.05859"},"2202.05333":{"status":"ready","url":"notes/world-model.html#summary-2202.05333"},"2205.09991":{"status":"ready","url":"notes/world-model.html#summary-2205.09991"},"2206.14244":{"status":"ready","url":"notes/world-model.html#summary-2206.14244"},"2210.04017":{"status":"ready","url":"notes/world-model.html#summary-2210.04017"},"2210.05861":{"status":"ready","url":"notes/world-model.html#summary-2210.05861"},"2211.15657":{"status":"ready","url":"notes/world-model.html#summary-2211.15657"},"2301.04104":{"status":"ready","url":"notes/world-model.html#summary-2301.04104"},"2301.06294":{"status":"ready","url":"notes/world-model.html#summary-2301.06294"},"2301.08243":{"status":"ready","url":"notes/world-model.html#summary-2301.08243"},"2302.05543":{"status":"ready","url":"notes/world-model.html#summary-2302.05543"},"2305.15260":{"status":"ready","url":"notes/world-model.html#summary-2305.15260"},"2306.09205":{"status":"ready","url":"notes/world-model.html#summary-2306.09205"},"2307.07176":{"status":"ready","url":"notes/world-model.html#summary-2307.07176"},"2307.12698":{"status":"ready","url":"notes/world-model.html#summary-2307.12698"},"2309.08587":{"status":"ready","url":"notes/world-model.html#summary-2309.08587"},"2309.09777":{"status":"ready","url":"notes/world-model.html#summary-2309.09777"},"2309.17080":{"status":"ready","url":"notes/world-model.html#summary-2309.17080"},"2310.00344":{"status":"ready","url":"notes/world-model.html#summary-2310.00344"},"2310.02601":{"status":"ready","url":"notes/world-model.html#summary-2310.02601"},"2310.05167":{"status":"ready","url":"notes/world-model.html#summary-2310.05167"},"2310.06114":{"status":"ready","url":"notes/world-model.html#summary-2310.06114"},"2310.07771":{"status":"ready","url":"notes/world-model.html#summary-2310.07771"},"2310.16828":{"status":"ready","url":"notes/world-model.html#summary-2310.16828"},"2311.01017":{"status":"ready","url":"notes/world-model.html#summary-2311.01017"},"2311.01450":{"status":"ready","url":"notes/world-model.html#summary-2311.01450"},"2311.09064":{"status":"ready","url":"notes/world-model.html#summary-2311.09064"},"2311.16038":{"status":"ready","url":"notes/world-model.html#summary-2311.16038"},"2311.16813":{"status":"ready","url":"notes/world-model.html#summary-2311.16813"},"2311.17663":{"status":"ready","url":"notes/world-model.html#summary-2311.17663"},"2311.17918":{"status":"ready","url":"notes/world-model.html#summary-2311.17918"},"2312.17655":{"status":"ready","url":"notes/world-model.html#summary-2312.17655"},"2401.09985":{"status":"ready","url":"notes/world-model.html#summary-2401.09985"},"2402.01103":{"status":"ready","url":"notes/world-model.html#summary-2402.01103"},"2402.05290":{"status":"ready","url":"notes/world-model.html#summary-2402.05290"},"2402.05643":{"status":"ready","url":"notes/world-model.html#summary-2402.05643"},"2402.08268":{"status":"ready","url":"notes/world-model.html#summary-2402.08268"},"2402.16720":{"status":"ready","url":"notes/world-model.html#summary-2402.16720"},"2402.17139":{"status":"ready","url":"notes/world-model.html#summary-2402.17139"},"2403.00504":{"status":"ready","url":"notes/world-model.html#summary-2403.00504"},"2403.02622":{"status":"ready","url":"notes/world-model.html#summary-2403.02622"},"2403.04253":{"status":"ready","url":"notes/world-model.html#summary-2403.04253"},"2403.06845":{"status":"ready","url":"notes/world-model.html#summary-2403.06845"},"2403.08321":{"status":"ready","url":"notes/world-model.html#summary-2403.08321"},"2403.09630":{"status":"ready","url":"notes/world-model.html#summary-2403.09630"},"2403.09631":{"status":"ready","url":"notes/world-model.html#summary-2403.09631"},"2403.09976":{"status":"ready","url":"notes/world-model.html#summary-2403.09976"},"2403.10967":{"status":"ready","url":"notes/world-model.html#summary-2403.10967"},"2403.19438":{"status":"ready","url":"notes/world-model.html#summary-2403.19438"},"2404.02903":{"status":"ready","url":"notes/world-model.html#summary-2404.02903"},"2404.08471":{"status":"ready","url":"notes/world-model.html#summary-2404.08471"},"2404.10775":{"status":"ready","url":"notes/world-model.html#summary-2404.10775"},"2404.12377":{"status":"ready","url":"notes/world-model.html#summary-2404.12377"},"2404.15109":{"status":"ready","url":"notes/world-model.html#summary-2404.15109"},"2405.03520":{"status":"ready","url":"notes/world-model.html#summary-2405.03520"},"2405.04390":{"status":"ready","url":"notes/world-model.html#summary-2405.04390"},"2405.05941":{"status":"ready","url":"notes/world-model.html#summary-2405.05941"},"2405.05956":{"status":"ready","url":"notes/world-model.html#summary-2405.05956"},"2405.06263":{"status":"ready","url":"notes/world-model.html#summary-2405.06263"},"2405.09111":{"status":"ready","url":"notes/world-model.html#summary-2405.09111"},"2405.12399":{"status":"ready","url":"notes/world-model.html#summary-2405.12399"},"2405.14205":{"status":"ready","url":"notes/world-model.html#summary-2405.14205"},"2405.14475":{"status":"ready","url":"notes/world-model.html#summary-2405.14475"},"2405.15223":{"status":"ready","url":"notes/world-model.html#summary-2405.15223"},"2405.17398":{"status":"ready","url":"notes/world-model.html#summary-2405.17398"},"2405.18418":{"status":"ready","url":"notes/world-model.html#summary-2405.18418"},"2405.20180":{"status":"ready","url":"notes/world-model.html#summary-2405.20180"},"2405.20337":{"status":"ready","url":"notes/world-model.html#summary-2405.20337"},"2406.01349":{"status":"ready","url":"notes/world-model.html#summary-2406.01349"},"2406.03689":{"status":"ready","url":"notes/world-model.html#summary-2406.03689"},"2406.04089":{"status":"ready","url":"notes/world-model.html#summary-2406.04089"},"2406.06370":{"status":"ready","url":"notes/world-model.html#summary-2406.06370"},"2406.07381":{"status":"ready","url":"notes/world-model.html#summary-2406.07381"},"2406.08481":{"status":"ready","url":"notes/world-model.html#summary-2406.08481"},"2406.08691":{"status":"ready","url":"notes/world-model.html#summary-2406.08691"},"2406.08862":{"status":"ready","url":"notes/world-model.html#summary-2406.08862"},"2406.09386":{"status":"ready","url":"notes/world-model.html#summary-2406.09386"},"2406.09394":{"status":"ready","url":"notes/world-model.html#summary-2406.09394"},"2406.09455":{"status":"ready","url":"notes/world-model.html#summary-2406.09455"},"2406.10714":{"status":"ready","url":"notes/world-model.html#summary-2406.10714"},"2406.10788":{"status":"ready","url":"notes/world-model.html#summary-2406.10788"},"2406.13945":{"status":"ready","url":"notes/world-model.html#summary-2406.13945"},"2406.14540":{"status":"ready","url":"notes/world-model.html#summary-2406.14540"},"2406.18043":{"status":"ready","url":"notes/world-model.html#summary-2406.18043"},"2406.19320":{"status":"ready","url":"notes/world-model.html#summary-2406.19320"},"2407.00959":{"status":"ready","url":"notes/world-model.html#summary-2407.00959"},"2407.01392":{"status":"ready","url":"notes/world-model.html#summary-2407.01392"},"2407.02466":{"status":"ready","url":"notes/world-model.html#summary-2407.02466"},"2407.05679":{"status":"ready","url":"notes/world-model.html#summary-2407.05679"},"2407.06169":{"status":"ready","url":"notes/world-model.html#summary-2407.06169"},"2407.06886":{"status":"ready","url":"notes/world-model.html#summary-2407.06886"},"2407.11965":{"status":"ready","url":"notes/world-model.html#summary-2407.11965"},"2407.15843":{"status":"ready","url":"notes/world-model.html#summary-2407.15843"},"2408.09807":{"status":"ready","url":"notes/world-model.html#summary-2408.09807"},"2408.11816":{"status":"ready","url":"notes/world-model.html#summary-2408.11816"},"2408.14197":{"status":"ready","url":"notes/world-model.html#summary-2408.14197"},"2408.14472":{"status":"ready","url":"notes/world-model.html#summary-2408.14472"},"2408.14837":{"status":"ready","url":"notes/world-model.html#summary-2408.14837"},"2408.15511":{"status":"ready","url":"notes/world-model.html#summary-2408.15511"},"2408.16647":{"status":"ready","url":"notes/world-model.html#summary-2408.16647"},"2409.03272":{"status":"ready","url":"notes/world-model.html#summary-2409.03272"},"2409.08750":{"status":"ready","url":"notes/world-model.html#summary-2409.08750"},"2409.11356":{"status":"ready","url":"notes/world-model.html#summary-2409.11356"},"2409.12005":{"status":"ready","url":"notes/world-model.html#summary-2409.12005"},"2409.12278":{"status":"ready","url":"notes/world-model.html#summary-2409.12278"},"2409.15730":{"status":"ready","url":"notes/world-model.html#summary-2409.15730"},"2409.16663":{"status":"ready","url":"notes/world-model.html#summary-2409.16663"},"2409.16784":{"status":"ready","url":"notes/world-model.html#summary-2409.16784"},"2409.18341":{"status":"ready","url":"notes/world-model.html#summary-2409.18341"},"2409.18869":{"status":"ready","url":"notes/world-model.html#summary-2409.18869"},"2410.00564":{"status":"ready","url":"notes/world-model.html#summary-2410.00564"},"2410.02664":{"status":"ready","url":"notes/world-model.html#summary-2410.02664"},"2410.03618":{"status":"ready","url":"notes/world-model.html#summary-2410.03618"},"2410.10076":{"status":"ready","url":"notes/world-model.html#summary-2410.10076"},"2410.10394":{"status":"ready","url":"notes/world-model.html#summary-2410.10394"},"2410.10429":{"status":"ready","url":"notes/world-model.html#summary-2410.10429"},"2410.12822":{"status":"ready","url":"notes/world-model.html#summary-2410.12822"},"2410.13232":{"status":"ready","url":"notes/world-model.html#summary-2410.13232"},"2410.13571":{"status":"ready","url":"notes/world-model.html#summary-2410.13571"},"2410.14081":{"status":"ready","url":"notes/world-model.html#summary-2410.14081"},"2410.14673":{"status":"ready","url":"notes/world-model.html#summary-2410.14673"},"2410.17491":{"status":"ready","url":"notes/world-model.html#summary-2410.17491"},"2410.18072":{"status":"ready","url":"notes/world-model.html#summary-2410.18072"},"2410.18084":{"status":"ready","url":"notes/world-model.html#summary-2410.18084"},"2410.19923":{"status":"ready","url":"notes/world-model.html#summary-2410.19923"},"2410.22689":{"status":"ready","url":"notes/world-model.html#summary-2410.22689"},"2410.23156":{"status":"ready","url":"notes/world-model.html#summary-2410.23156"},"2411.01342":{"status":"ready","url":"notes/world-model.html#summary-2411.01342"},"2411.02914":{"status":"ready","url":"notes/world-model.html#summary-2411.02914"},"2411.04434":{"status":"ready","url":"notes/world-model.html#summary-2411.04434"},"2411.04983":{"status":"ready","url":"notes/world-model.html#summary-2411.04983"},"2411.05619":{"status":"ready","url":"notes/world-model.html#summary-2411.05619"},"2411.06559":{"status":"ready","url":"notes/world-model.html#summary-2411.06559"},"2411.06890":{"status":"ready","url":"notes/world-model.html#summary-2411.06890"},"2411.07223":{"status":"ready","url":"notes/world-model.html#summary-2411.07223"},"2411.07690":{"status":"ready","url":"notes/world-model.html#summary-2411.07690"},"2411.08794":{"status":"ready","url":"notes/world-model.html#summary-2411.08794"},"2411.10171":{"status":"ready","url":"notes/world-model.html#summary-2411.10171"},"2411.14499":{"status":"ready","url":"notes/world-model.html#summary-2411.14499"},"2411.19548":{"status":"ready","url":"notes/world-model.html#summary-2411.19548"},"2412.03572":{"status":"ready","url":"notes/world-model.html#summary-2412.03572"},"2412.03934":{"status":"ready","url":"notes/world-model.html#summary-2412.03934"},"2412.05337":{"status":"ready","url":"notes/world-model.html#summary-2412.05337"},"2412.07446":{"status":"ready","url":"notes/world-model.html#summary-2412.07446"},"2412.07772":{"status":"ready","url":"notes/world-model.html#summary-2412.07772"},"2412.08410":{"status":"ready","url":"notes/world-model.html#summary-2412.08410"},"2412.09600":{"status":"ready","url":"notes/world-model.html#summary-2412.09600"},"2412.10373":{"status":"ready","url":"notes/world-model.html#summary-2412.10373"},"2412.11198":{"status":"ready","url":"notes/world-model.html#summary-2412.11198"},"2412.11673":{"status":"ready","url":"notes/world-model.html#summary-2412.11673"},"2412.11867":{"status":"ready","url":"notes/world-model.html#summary-2412.11867"},"2412.13772":{"status":"ready","url":"notes/world-model.html#summary-2412.13772"},"2412.14803":{"status":"ready","url":"notes/world-model.html#summary-2412.14803"},"2412.14957":{"status":"ready","url":"notes/world-model.html#summary-2412.14957"},"2412.18607":{"status":"ready","url":"notes/world-model.html#summary-2412.18607"},"2412.19505":{"status":"ready","url":"notes/world-model.html#summary-2412.19505"},"2501.01895":{"status":"ready","url":"notes/world-model.html#summary-2501.01895"},"2501.03575":{"status":"ready","url":"notes/world-model.html#summary-2501.03575"},"2501.04969":{"status":"ready","url":"notes/world-model.html#summary-2501.04969"},"2501.06605":{"status":"ready","url":"notes/world-model.html#summary-2501.06605"},"2501.08325":{"status":"ready","url":"notes/world-model.html#summary-2501.08325"},"2501.10100":{"status":"ready","url":"notes/world-model.html#summary-2501.10100"},"2501.11260":{"status":"ready","url":"notes/world-model.html#summary-2501.11260"},"2501.13072":{"status":"ready","url":"notes/world-model.html#summary-2501.13072"},"2501.14729":{"status":"ready","url":"notes/world-model.html#summary-2501.14729"},"2501.16443":{"status":"ready","url":"notes/world-model.html#summary-2501.16443"},"2501.16733":{"status":"ready","url":"notes/world-model.html#summary-2501.16733"},"2501.18867":{"status":"ready","url":"notes/world-model.html#summary-2501.18867"},"2502.00622":{"status":"ready","url":"notes/world-model.html#summary-2502.00622"},"2502.01366":{"status":"ready","url":"notes/world-model.html#summary-2502.01366"},"2502.04728":{"status":"ready","url":"notes/world-model.html#summary-2502.04728"},"2502.05857":{"status":"ready","url":"notes/world-model.html#summary-2502.05857"},"2502.05907":{"status":"ready","url":"notes/world-model.html#summary-2502.05907"},"2502.07309":{"status":"ready","url":"notes/world-model.html#summary-2502.07309"},"2502.07591":{"status":"ready","url":"notes/world-model.html#summary-2502.07591"},"2502.07825":{"status":"ready","url":"notes/world-model.html#summary-2502.07825"},"2502.09297":{"status":"ready","url":"notes/world-model.html#summary-2502.09297"},"2502.09775":{"status":"ready","url":"notes/world-model.html#summary-2502.09775"},"2502.10012":{"status":"ready","url":"notes/world-model.html#summary-2502.10012"},"2502.11167":{"status":"ready","url":"notes/world-model.html#summary-2502.11167"},"2502.11537":{"status":"ready","url":"notes/world-model.html#summary-2502.11537"},"2502.11663":{"status":"ready","url":"notes/world-model.html#summary-2502.11663"},"2502.13092":{"status":"ready","url":"notes/world-model.html#summary-2502.13092"},"2502.13200":{"status":"ready","url":"notes/world-model.html#summary-2502.13200"},"2502.16230":{"status":"ready","url":"notes/world-model.html#summary-2502.16230"},"2502.19544":{"status":"ready","url":"notes/world-model.html#summary-2502.19544"},"2502.20168":{"status":"ready","url":"notes/world-model.html#summary-2502.20168"},"2502.20694":{"status":"ready","url":"notes/world-model.html#summary-2502.20694"},"2502.21142":{"status":"ready","url":"notes/world-model.html#summary-2502.21142"},"2503.00200":{"status":"ready","url":"notes/world-model.html#summary-2503.00200"},"2503.00653":{"status":"ready","url":"notes/world-model.html#summary-2503.00653"},"2503.00713":{"status":"ready","url":"notes/world-model.html#summary-2503.00713"},"2503.01584":{"status":"ready","url":"notes/world-model.html#summary-2503.01584"},"2503.01837":{"status":"ready","url":"notes/world-model.html#summary-2503.01837"},"2503.02247":{"status":"ready","url":"notes/world-model.html#summary-2503.02247"},"2503.02904":{"status":"ready","url":"notes/world-model.html#summary-2503.02904"},"2503.04416":{"status":"ready","url":"notes/world-model.html#summary-2503.04416"},"2503.04421":{"status":"ready","url":"notes/world-model.html#summary-2503.04421"},"2503.05573":{"status":"ready","url":"notes/world-model.html#summary-2503.05573"},"2503.06170":{"status":"ready","url":"notes/world-model.html#summary-2503.06170"},"2503.06669":{"status":"ready","url":"notes/world-model.html#summary-2503.06669"},"2503.07338":{"status":"ready","url":"notes/world-model.html#summary-2503.07338"},"2503.08122":{"status":"ready","url":"notes/world-model.html#summary-2503.08122"},"2503.09215":{"status":"ready","url":"notes/world-model.html#summary-2503.09215"},"2503.10370":{"status":"ready","url":"notes/world-model.html#summary-2503.10370"},"2503.10480":{"status":"ready","url":"notes/world-model.html#summary-2503.10480"},"2503.11647":{"status":"ready","url":"notes/world-model.html#summary-2503.11647"},"2503.12531":{"status":"ready","url":"notes/world-model.html#summary-2503.12531"},"2503.13587":{"status":"ready","url":"notes/world-model.html#summary-2503.13587"},"2503.13952":{"status":"ready","url":"notes/world-model.html#summary-2503.13952"},"2503.15875":{"status":"ready","url":"notes/world-model.html#summary-2503.15875"},"2503.16806":{"status":"ready","url":"notes/world-model.html#summary-2503.16806"},"2503.17973":{"status":"ready","url":"notes/world-model.html#summary-2503.17973"},"2503.18938":{"status":"ready","url":"notes/world-model.html#summary-2503.18938"},"2503.18945":{"status":"ready","url":"notes/world-model.html#summary-2503.18945"},"2503.20124":{"status":"ready","url":"notes/world-model.html#summary-2503.20124"},"2503.20523":{"status":"ready","url":"notes/world-model.html#summary-2503.20523"},"2503.21232":{"status":"ready","url":"notes/world-model.html#summary-2503.21232"},"2503.22020":{"status":"ready","url":"notes/world-model.html#summary-2503.22020"},"2503.24320":{"status":"ready","url":"notes/world-model.html#summary-2503.24320"},"2504.00983":{"status":"ready","url":"notes/world-model.html#summary-2504.00983"},"2504.01014":{"status":"ready","url":"notes/world-model.html#summary-2504.01014"},"2504.01941":{"status":"ready","url":"notes/world-model.html#summary-2504.01941"},"2504.02252":{"status":"ready","url":"notes/world-model.html#summary-2504.02252"},"2504.02792":{"status":"ready","url":"notes/world-model.html#summary-2504.02792"},"2504.07095":{"status":"ready","url":"notes/world-model.html#summary-2504.07095"},"2504.08388":{"status":"ready","url":"notes/world-model.html#summary-2504.08388"},"2504.10157":{"status":"ready","url":"notes/world-model.html#summary-2504.10157"},"2504.12369":{"status":"ready","url":"notes/world-model.html#summary-2504.12369"},"2504.13065":{"status":"ready","url":"notes/world-model.html#summary-2504.13065"},"2504.13820":{"status":"ready","url":"notes/world-model.html#summary-2504.13820"},"2504.13936":{"status":"ready","url":"notes/world-model.html#summary-2504.13936"},"2504.16464":{"status":"ready","url":"notes/world-model.html#summary-2504.16464"},"2504.16680":{"status":"ready","url":"notes/world-model.html#summary-2504.16680"},"2504.16693":{"status":"ready","url":"notes/world-model.html#summary-2504.16693"},"2504.18576":{"status":"ready","url":"notes/world-model.html#summary-2504.18576"},"2504.19077":{"status":"ready","url":"notes/world-model.html#summary-2504.19077"},"2504.20995":{"status":"ready","url":"notes/world-model.html#summary-2504.20995"},"2504.21024":{"status":"ready","url":"notes/world-model.html#summary-2504.21024"},"2505.01712":{"status":"ready","url":"notes/world-model.html#summary-2505.01712"},"2505.01729":{"status":"ready","url":"notes/world-model.html#summary-2505.01729"},"2505.02228":{"status":"ready","url":"notes/world-model.html#summary-2505.02228"},"2505.03176":{"status":"ready","url":"notes/world-model.html#summary-2505.03176"},"2505.05495":{"status":"ready","url":"notes/world-model.html#summary-2505.05495"},"2505.05512":{"status":"ready","url":"notes/world-model.html#summary-2505.05512"},"2505.09694":{"status":"ready","url":"notes/world-model.html#summary-2505.09694"},"2505.10075":{"status":"ready","url":"notes/world-model.html#summary-2505.10075"},"2505.10819":{"status":"ready","url":"notes/world-model.html#summary-2505.10819"},"2505.11528":{"status":"ready","url":"notes/world-model.html#summary-2505.11528"},"2505.12705":{"status":"ready","url":"notes/world-model.html#summary-2505.12705"},"2505.13934":{"status":"ready","url":"notes/world-model.html#summary-2505.13934"},"2505.14357":{"status":"ready","url":"notes/world-model.html#summary-2505.14357"},"2505.15589":{"status":"ready","url":"notes/world-model.html#summary-2505.15589"},"2505.15659":{"status":"ready","url":"notes/world-model.html#summary-2505.15659"},"2505.16394":{"status":"ready","url":"notes/world-model.html#summary-2505.16394"},"2505.16422":{"status":"ready","url":"notes/world-model.html#summary-2505.16422"},"2505.16474":{"status":"ready","url":"notes/world-model.html#summary-2505.16474"},"2505.17685":{"status":"ready","url":"notes/world-model.html#summary-2505.17685"},"2505.19017":{"status":"ready","url":"notes/world-model.html#summary-2505.19017"},"2505.19386":{"status":"ready","url":"notes/world-model.html#summary-2505.19386"},"2505.20171":{"status":"ready","url":"notes/world-model.html#summary-2505.20171"},"2505.20425":{"status":"ready","url":"notes/world-model.html#summary-2505.20425"},"2505.21996":{"status":"ready","url":"notes/world-model.html#summary-2505.21996"},"2505.22246":{"status":"ready","url":"notes/world-model.html#summary-2505.22246"},"2505.22421":{"status":"ready","url":"notes/world-model.html#summary-2505.22421"},"2505.22976":{"status":"ready","url":"notes/world-model.html#summary-2505.22976"},"2506.00320":{"status":"ready","url":"notes/world-model.html#summary-2506.00320"},"2506.00613":{"status":"ready","url":"notes/world-model.html#summary-2506.00613"},"2506.01103":{"status":"ready","url":"notes/world-model.html#summary-2506.01103"},"2506.01182":{"status":"ready","url":"notes/world-model.html#summary-2506.01182"},"2506.01392":{"status":"ready","url":"notes/world-model.html#summary-2506.01392"},"2506.01529":{"status":"ready","url":"notes/world-model.html#summary-2506.01529"},"2506.01546":{"status":"ready","url":"notes/world-model.html#summary-2506.01546"},"2506.01600":{"status":"ready","url":"notes/world-model.html#summary-2506.01600"},"2506.01622":{"status":"ready","url":"notes/world-model.html#summary-2506.01622"},"2506.02327":{"status":"ready","url":"notes/world-model.html#summary-2506.02327"},"2506.03079":{"status":"ready","url":"notes/world-model.html#summary-2506.03079"},"2506.04363":{"status":"ready","url":"notes/world-model.html#summary-2506.04363"},"2506.05284":{"status":"ready","url":"notes/world-model.html#summary-2506.05284"},"2506.06199":{"status":"ready","url":"notes/world-model.html#summary-2506.06199"},"2506.06355":{"status":"ready","url":"notes/world-model.html#summary-2506.06355"},"2506.06725":{"status":"ready","url":"notes/world-model.html#summary-2506.06725"},"2506.07280":{"status":"ready","url":"notes/world-model.html#summary-2506.07280"},"2506.08006":{"status":"ready","url":"notes/world-model.html#summary-2506.08006"},"2506.08009":{"status":"ready","url":"notes/world-model.html#summary-2506.08009"},"2506.08149":{"status":"ready","url":"notes/world-model.html#summary-2506.08149"},"2506.08441":{"status":"ready","url":"notes/world-model.html#summary-2506.08441"},"2506.09042":{"status":"ready","url":"notes/world-model.html#summary-2506.09042"},"2506.09981":{"status":"ready","url":"notes/world-model.html#summary-2506.09981"},"2506.09985":{"status":"ready","url":"notes/world-model.html#summary-2506.09985"},"2506.13138":{"status":"ready","url":"notes/world-model.html#summary-2506.13138"},"2506.13260":{"status":"ready","url":"notes/world-model.html#summary-2506.13260"},"2506.13761":{"status":"ready","url":"notes/world-model.html#summary-2506.13761"},"2506.14135":{"status":"ready","url":"notes/world-model.html#summary-2506.14135"},"2506.16565":{"status":"ready","url":"notes/world-model.html#summary-2506.16565"},"2506.17967":{"status":"ready","url":"notes/world-model.html#summary-2506.17967"},"2506.18701":{"status":"ready","url":"notes/world-model.html#summary-2506.18701"},"2506.18897":{"status":"ready","url":"notes/world-model.html#summary-2506.18897"},"2506.18901":{"status":"ready","url":"notes/world-model.html#summary-2506.18901"},"2506.18903":{"status":"ready","url":"notes/world-model.html#summary-2506.18903"},"2506.19055":{"status":"ready","url":"notes/world-model.html#summary-2506.19055"},"2506.19842":{"status":"ready","url":"notes/world-model.html#summary-2506.19842"},"2506.19850":{"status":"ready","url":"notes/world-model.html#summary-2506.19850"},"2506.20134":{"status":"ready","url":"notes/world-model.html#summary-2506.20134"},"2506.21539":{"status":"ready","url":"notes/world-model.html#summary-2506.21539"},"2506.21552":{"status":"ready","url":"notes/world-model.html#summary-2506.21552"},"2506.21876":{"status":"ready","url":"notes/world-model.html#summary-2506.21876"},"2506.21976":{"status":"ready","url":"notes/world-model.html#summary-2506.21976"},"2506.22355":{"status":"ready","url":"notes/world-model.html#summary-2506.22355"},"2506.23126":{"status":"ready","url":"notes/world-model.html#summary-2506.23126"},"2506.23135":{"status":"ready","url":"notes/world-model.html#summary-2506.23135"},"2506.23434":{"status":"ready","url":"notes/world-model.html#summary-2506.23434"},"2506.23468":{"status":"ready","url":"notes/world-model.html#summary-2506.23468"},"2506.23919":{"status":"ready","url":"notes/world-model.html#summary-2506.23919"},"2506.24113":{"status":"ready","url":"notes/world-model.html#summary-2506.24113"},"2507.00603":{"status":"ready","url":"notes/world-model.html#summary-2507.00603"},"2507.04002":{"status":"ready","url":"notes/world-model.html#summary-2507.04002"},"2507.04370":{"status":"ready","url":"notes/world-model.html#summary-2507.04370"},"2507.04447":{"status":"ready","url":"notes/world-model.html#summary-2507.04447"},"2507.04898":{"status":"ready","url":"notes/world-model.html#summary-2507.04898"},"2507.05169":{"status":"ready","url":"notes/world-model.html#summary-2507.05169"},"2507.05198":{"status":"ready","url":"notes/world-model.html#summary-2507.05198"},"2507.06952":{"status":"ready","url":"notes/world-model.html#summary-2507.06952"},"2507.07978":{"status":"ready","url":"notes/world-model.html#summary-2507.07978"},"2507.07982":{"status":"ready","url":"notes/world-model.html#summary-2507.07982"},"2507.08800":{"status":"ready","url":"notes/world-model.html#summary-2507.08800"},"2507.09082":{"status":"ready","url":"notes/world-model.html#summary-2507.09082"},"2507.09177":{"status":"ready","url":"notes/world-model.html#summary-2507.09177"},"2507.10539":{"status":"ready","url":"notes/world-model.html#summary-2507.10539"},"2507.12508":{"status":"ready","url":"notes/world-model.html#summary-2507.12508"},"2507.12762":{"status":"ready","url":"notes/world-model.html#summary-2507.12762"},"2507.12898":{"status":"ready","url":"notes/world-model.html#summary-2507.12898"},"2507.13162":{"status":"ready","url":"notes/world-model.html#summary-2507.13162"},"2507.13340":{"status":"ready","url":"notes/world-model.html#summary-2507.13340"},"2507.17744":{"status":"ready","url":"notes/world-model.html#summary-2507.17744"},"2507.19468":{"status":"ready","url":"notes/world-model.html#summary-2507.19468"},"2507.21513":{"status":"ready","url":"notes/world-model.html#summary-2507.21513"},"2507.21809":{"status":"ready","url":"notes/world-model.html#summary-2507.21809"},"2507.23325":{"status":"ready","url":"notes/world-model.html#summary-2507.23325"},"2508.01922":{"status":"ready","url":"notes/world-model.html#summary-2508.01922"},"2508.02159":{"status":"ready","url":"notes/world-model.html#summary-2508.02159"},"2508.03645":{"status":"ready","url":"notes/world-model.html#summary-2508.03645"},"2508.03692":{"status":"ready","url":"notes/world-model.html#summary-2508.03692"},"2508.05635":{"status":"ready","url":"notes/world-model.html#summary-2508.05635"},"2508.06571":{"status":"ready","url":"notes/world-model.html#summary-2508.06571"},"2508.06990":{"status":"ready","url":"notes/world-model.html#summary-2508.06990"},"2508.08086":{"status":"ready","url":"notes/world-model.html#summary-2508.08086"},"2508.09822":{"status":"ready","url":"notes/world-model.html#summary-2508.09822"},"2508.11836":{"status":"ready","url":"notes/world-model.html#summary-2508.11836"},"2508.17588":{"status":"ready","url":"notes/world-model.html#summary-2508.17588"},"2508.17600":{"status":"ready","url":"notes/world-model.html#summary-2508.17600"},"2508.20294":{"status":"ready","url":"notes/world-model.html#summary-2508.20294"},"2508.21058":{"status":"ready","url":"notes/world-model.html#summary-2508.21058"},"2509.00559":{"status":"ready","url":"notes/world-model.html#summary-2509.00559"},"2509.02722":{"status":"ready","url":"notes/world-model.html#summary-2509.02722"},"2509.03956":{"status":"ready","url":"notes/world-model.html#summary-2509.03956"},"2509.05263":{"status":"ready","url":"notes/world-model.html#summary-2509.05263"},"2509.09737":{"status":"ready","url":"notes/world-model.html#summary-2509.09737"},"2509.12201":{"status":"ready","url":"notes/world-model.html#summary-2509.12201"},"2509.12437":{"status":"ready","url":"notes/world-model.html#summary-2509.12437"},"2509.13095":{"status":"ready","url":"notes/world-model.html#summary-2509.13095"},"2509.13903":{"status":"ready","url":"notes/world-model.html#summary-2509.13903"},"2509.15155":{"status":"ready","url":"notes/world-model.html#summary-2509.15155"},"2509.15536":{"status":"ready","url":"notes/world-model.html#summary-2509.15536"},"2509.18428":{"status":"ready","url":"notes/world-model.html#summary-2509.18428"},"2509.19080":{"status":"ready","url":"notes/world-model.html#summary-2509.19080"},"2509.20328":{"status":"ready","url":"notes/world-model.html#summary-2509.20328"},"2509.21027":{"status":"ready","url":"notes/world-model.html#summary-2509.21027"},"2509.22353":{"status":"ready","url":"notes/world-model.html#summary-2509.22353"},"2509.22642":{"status":"ready","url":"notes/world-model.html#summary-2509.22642"},"2509.23958":{"status":"ready","url":"notes/world-model.html#summary-2509.23958"},"2509.24527":{"status":"ready","url":"notes/world-model.html#summary-2509.24527"},"2509.24804":{"status":"ready","url":"notes/world-model.html#summary-2509.24804"},"2509.24948":{"status":"ready","url":"notes/world-model.html#summary-2509.24948"},"2509.25681":{"status":"ready","url":"notes/world-model.html#summary-2509.25681"},"2509.26339":{"status":"ready","url":"notes/world-model.html#summary-2509.26339"},"2510.00406":{"status":"ready","url":"notes/world-model.html#summary-2510.00406"},"2510.00855":{"status":"ready","url":"notes/world-model.html#summary-2510.00855"},"2510.01183":{"status":"ready","url":"notes/world-model.html#summary-2510.01183"},"2510.02387":{"status":"ready","url":"notes/world-model.html#summary-2510.02387"},"2510.02538":{"status":"ready","url":"notes/world-model.html#summary-2510.02538"},"2510.04020":{"status":"ready","url":"notes/world-model.html#summary-2510.04020"},"2510.04290":{"status":"ready","url":"notes/world-model.html#summary-2510.04290"},"2510.04390":{"status":"ready","url":"notes/world-model.html#summary-2510.04390"},"2510.05865":{"status":"ready","url":"notes/world-model.html#summary-2510.05865"},"2510.06492":{"status":"ready","url":"notes/world-model.html#summary-2510.06492"},"2510.07313":{"status":"ready","url":"notes/world-model.html#summary-2510.07313"},"2510.08398":{"status":"ready","url":"notes/world-model.html#summary-2510.08398"},"2510.08558":{"status":"ready","url":"notes/world-model.html#summary-2510.08558"},"2510.08673":{"status":"ready","url":"notes/world-model.html#summary-2510.08673"},"2510.08713":{"status":"ready","url":"notes/world-model.html#summary-2510.08713"},"2510.09036":{"status":"ready","url":"notes/world-model.html#summary-2510.09036"},"2510.10125":{"status":"ready","url":"notes/world-model.html#summary-2510.10125"},"2510.11682":{"status":"ready","url":"notes/world-model.html#summary-2510.11682"},"2510.11892":{"status":"ready","url":"notes/world-model.html#summary-2510.11892"},"2510.12088":{"status":"ready","url":"notes/world-model.html#summary-2510.12088"},"2510.12796":{"status":"ready","url":"notes/world-model.html#summary-2510.12796"},"2510.14977":{"status":"ready","url":"notes/world-model.html#summary-2510.14977"},"2510.16732":{"status":"ready","url":"notes/world-model.html#summary-2510.16732"},"2510.16907":{"status":"ready","url":"notes/world-model.html#summary-2510.16907"},"2510.17482":{"status":"ready","url":"notes/world-model.html#summary-2510.17482"},"2510.17731":{"status":"ready","url":"notes/world-model.html#summary-2510.17731"},"2510.18135":{"status":"ready","url":"notes/world-model.html#summary-2510.18135"},"2510.18313":{"status":"ready","url":"notes/world-model.html#summary-2510.18313"},"2510.19195":{"status":"ready","url":"notes/world-model.html#summary-2510.19195"},"2510.19270":{"status":"ready","url":"notes/world-model.html#summary-2510.19270"},"2510.19364":{"status":"ready","url":"notes/world-model.html#summary-2510.19364"},"2510.19430":{"status":"ready","url":"notes/world-model.html#summary-2510.19430"},"2510.19654":{"status":"ready","url":"notes/world-model.html#summary-2510.19654"},"2510.19818":{"status":"ready","url":"notes/world-model.html#summary-2510.19818"},"2510.20884":{"status":"ready","url":"notes/world-model.html#summary-2510.20884"},"2510.21232":{"status":"ready","url":"notes/world-model.html#summary-2510.21232"},"2510.21682":{"status":"ready","url":"notes/world-model.html#summary-2510.21682"},"2510.23258":{"status":"ready","url":"notes/world-model.html#summary-2510.23258"},"2510.23880":{"status":"ready","url":"notes/world-model.html#summary-2510.23880"},"2510.26583":{"status":"ready","url":"notes/world-model.html#summary-2510.26583"},"2511.01718":{"status":"ready","url":"notes/world-model.html#summary-2511.01718"},"2511.07732":{"status":"ready","url":"notes/world-model.html#summary-2511.07732"},"2511.09057":{"status":"ready","url":"notes/world-model.html#summary-2511.09057"},"2511.09515":{"status":"ready","url":"notes/world-model.html#summary-2511.09515"},"2512.06963":{"status":"ready","url":"notes/world-model.html#summary-2512.06963"},"2512.06983":{"status":"ready","url":"notes/world-model.html#summary-2512.06983"},"2512.10958":{"status":"ready","url":"notes/world-model.html#summary-2512.10958"},"2512.13030":{"status":"ready","url":"notes/world-model.html#summary-2512.13030"},"2512.13644":{"status":"ready","url":"notes/world-model.html#summary-2512.13644"},"2512.15840":{"status":"ready","url":"notes/world-model.html#summary-2512.15840"},"2512.17661":{"status":"ready","url":"notes/world-model.html#summary-2512.17661"},"2512.25075":{"status":"ready","url":"notes/world-model.html#summary-2512.25075"},"2601.00393":{"status":"ready","url":"notes/world-model.html#summary-2601.00393"},"2601.03782":{"status":"ready","url":"notes/world-model.html#summary-2601.03782"},"2601.12277":{"status":"ready","url":"notes/world-model.html#summary-2601.12277"},"2601.15533":{"status":"ready","url":"notes/world-model.html#summary-2601.15533"},"2601.16163":{"status":"ready","url":"notes/world-model.html#summary-2601.16163"},"2601.20540":{"status":"ready","url":"notes/world-model.html#summary-2601.20540"},"2601.21998":{"status":"ready","url":"notes/world-model.html#summary-2601.21998"},"2602.03604":{"status":"ready","url":"notes/world-model.html#summary-2602.03604"},"2602.07050":{"status":"ready","url":"notes/world-model.html#summary-2602.07050"},"2602.09600":{"status":"ready","url":"notes/world-model.html#summary-2602.09600"},"2602.11075":{"status":"ready","url":"notes/world-model.html#summary-2602.11075"},"2602.11291":{"status":"ready","url":"notes/world-model.html#summary-2602.11291"},"2602.12099":{"status":"ready","url":"notes/world-model.html#summary-2602.12099"},"2602.12215":{"status":"ready","url":"notes/world-model.html#summary-2602.12215"},"2602.15922":{"status":"ready","url":"notes/world-model.html#summary-2602.15922"},"2602.22208":{"status":"ready","url":"notes/world-model.html#summary-2602.22208"},"2603.00585":{"status":"ready","url":"notes/world-model.html#summary-2603.00585"},"2603.02765":{"status":"ready","url":"notes/world-model.html#summary-2603.02765"},"2603.04379":{"status":"ready","url":"notes/world-model.html#summary-2603.04379"},"2603.10448":{"status":"ready","url":"notes/world-model.html#summary-2603.10448"},"2603.14482":{"status":"ready","url":"notes/world-model.html#summary-2603.14482"},"2603.19312":{"status":"ready","url":"notes/world-model.html#summary-2603.19312"},"2603.22078":{"status":"ready","url":"notes/world-model.html#summary-2603.22078"},"2604.08995":{"status":"ready","url":"notes/world-model.html#summary-2604.08995"},"2605.00080":{"status":"ready","url":"notes/world-model.html#summary-2605.00080"},"2605.06388":{"status":"ready","url":"notes/world-model.html#summary-2605.06388"},"2605.07514":{"status":"ready","url":"notes/world-model.html#summary-2605.07514"},"2605.15178":{"status":"ready","url":"notes/world-model.html#summary-2605.15178"},"2605.20811":{"status":"ready","url":"notes/world-model.html#summary-2605.20811"},"2605.21800":{"status":"ready","url":"notes/world-model.html#summary-2605.21800"},"2605.22882":{"status":"ready","url":"notes/world-model.html#summary-2605.22882"},"2605.23220":{"status":"ready","url":"notes/world-model.html#summary-2605.23220"},"2605.23345":{"status":"ready","url":"notes/world-model.html#summary-2605.23345"},"2605.23699":{"status":"ready","url":"notes/world-model.html#summary-2605.23699"},"2605.25874":{"status":"ready","url":"notes/world-model.html#summary-2605.25874"},"2605.30263":{"status":"ready","url":"notes/world-model.html#summary-2605.30263"},"2606.00267":{"status":"ready","url":"notes/world-model.html#summary-2606.00267"},"2606.02800":{"status":"ready","url":"notes/world-model.html#summary-2606.02800"},"2606.03159":{"status":"ready","url":"notes/world-model.html#summary-2606.03159"},"2606.09803":{"status":"ready","url":"notes/world-model.html#summary-2606.09803"},"2606.11187":{"status":"ready","url":"notes/world-model.html#summary-2606.11187"},"2606.13672":{"status":"ready","url":"notes/world-model.html#summary-2606.13672"},"2606.16533":{"status":"ready","url":"notes/world-model.html#summary-2606.16533"},"2606.16993":{"status":"ready","url":"notes/world-model.html#summary-2606.16993"},"2606.17030":{"status":"ready","url":"notes/world-model.html#summary-2606.17030"},"2606.18610":{"status":"ready","url":"notes/world-model.html#summary-2606.18610"},"2606.24597":{"status":"ready","url":"notes/world-model.html#summary-2606.24597"},"2606.28128":{"status":"ready","url":"notes/world-model.html#summary-2606.28128"},"2606.30534":{"status":"ready","url":"notes/world-model.html#summary-2606.30534"},"2606.31734":{"status":"ready","url":"notes/world-model.html#summary-2606.31734"},"2606.32026":{"status":"ready","url":"notes/world-model.html#summary-2606.32026"},"2607.00678":{"status":"ready","url":"notes/world-model.html#summary-2607.00678"},"2607.02642":{"status":"ready","url":"notes/world-model.html#summary-2607.02642"},"2607.04988":{"status":"ready","url":"notes/world-model.html#summary-2607.04988"},"2607.06558":{"status":"ready","url":"notes/world-model.html#summary-2607.06558"},"2607.06559":{"status":"ready","url":"notes/world-model.html#summary-2607.06559"},"2607.06988":{"status":"ready","url":"notes/world-model.html#summary-2607.06988"},"2607.07534":{"status":"ready","url":"notes/world-model.html#summary-2607.07534"},"2607.08436":{"status":"ready","url":"notes/world-model.html#summary-2607.08436"},"2607.08639":{"status":"ready","url":"notes/world-model.html#summary-2607.08639"},"2607.11643":{"status":"ready","url":"notes/world-model.html#summary-2607.11643"},"2607.13017":{"status":"ready","url":"notes/world-model.html#summary-2607.13017"},"2607.13960":{"status":"ready","url":"notes/world-model.html#summary-2607.13960"},"2607.15065":{"status":"ready","url":"notes/world-model.html#summary-2607.15065"},"2607.19343":{"status":"ready","url":"notes/world-model.html#summary-2607.19343"},"2607.22535":{"status":"ready","url":"notes/world-model.html#summary-2607.22535"},"2607.23783":{"status":"ready","url":"notes/world-model.html#summary-2607.23783"},"2607.26056":{"status":"ready","url":"notes/world-model.html#summary-2607.26056"},"2607.28243":{"status":"ready","url":"notes/world-model.html#summary-2607.28243"},"2608.02603":{"status":"ready","url":"notes/world-model.html#summary-2608.02603"},"2608.07408":{"status":"ready","url":"notes/world-model.html#summary-2608.07408"},"2608.13489":{"status":"ready","url":"notes/world-model.html#summary-2608.13489"},"2608.13546":{"status":"ready","url":"notes/world-model.html#summary-2608.13546"},"2608.14022":{"status":"ready","url":"notes/world-model.html#summary-2608.14022"},"2608.15869":{"status":"ready","url":"notes/world-model.html#summary-2608.15869"},"2608.18077":{"status":"ready","url":"notes/world-model.html#summary-2608.18077"},"2608.23070":{"status":"ready","url":"notes/world-model.html#summary-2608.23070"},"2608.23189":{"status":"ready","url":"notes/world-model.html#summary-2608.23189"},"2608.23383":{"status":"ready","url":"notes/world-model.html#summary-2608.23383"},"2608.26239":{"status":"ready","url":"notes/world-model.html#summary-2608.26239"},"2608.27033":{"status":"ready","url":"notes/world-model.html#summary-2608.27033"},"2608.27549":{"status":"ready","url":"notes/world-model.html#summary-2608.27549"},"2608.29749":{"status":"ready","url":"notes/world-model.html#summary-2608.29749"},"2608.29910":{"status":"ready","url":"notes/world-model.html#summary-2608.29910"},"2608.29937":{"status":"ready","url":"notes/world-model.html#summary-2608.29937"},"2608.29998":{"status":"ready","url":"notes/world-model.html#summary-2608.29998"},"2608.30067":{"status":"ready","url":"notes/world-model.html#summary-2608.30067"},"2608.30237":{"status":"ready","url":"notes/world-model.html#summary-2608.30237"},"2608.30378":{"status":"ready","url":"notes/world-model.html#summary-2608.30378"},"2608.30530":{"status":"ready","url":"notes/world-model.html#summary-2608.30530"},"2608.30692":{"status":"ready","url":"notes/world-model.html#summary-2608.30692"},"2609.00161":{"status":"ready","url":"notes/world-model.html#summary-2609.00161"},"2609.00188":{"status":"ready","url":"notes/world-model.html#summary-2609.00188"},"2609.00455":{"status":"ready","url":"notes/world-model.html#summary-2609.00455"},"2609.00776":{"status":"ready","url":"notes/world-model.html#summary-2609.00776"},"2609.01215":{"status":"ready","url":"notes/world-model.html#summary-2609.01215"},"2609.01560":{"status":"ready","url":"notes/world-model.html#summary-2609.01560"},"2609.01861":{"status":"ready","url":"notes/world-model.html#summary-2609.01861"},"2609.02046":{"status":"ready","url":"notes/world-model.html#summary-2609.02046"},"2609.02159":{"status":"ready","url":"notes/world-model.html#summary-2609.02159"},"2609.02542":{"status":"ready","url":"notes/world-model.html#summary-2609.02542"},"2609.02811":{"status":"ready","url":"notes/world-model.html#summary-2609.02811"},"2609.02885":{"status":"ready","url":"notes/world-model.html#summary-2609.02885"},"2609.02886":{"status":"ready","url":"notes/world-model.html#summary-2609.02886"},"2609.03067":{"status":"ready","url":"notes/world-model.html#summary-2609.03067"},"2609.03153":{"status":"ready","url":"notes/world-model.html#summary-2609.03153"},"2609.03225":{"status":"ready","url":"notes/world-model.html#summary-2609.03225"},"2609.03294":{"status":"ready","url":"notes/world-model.html#summary-2609.03294"},"2609.03565":{"status":"ready","url":"notes/world-model.html#summary-2609.03565"},"2609.03572":{"status":"ready","url":"notes/world-model.html#summary-2609.03572"},"2609.03602":{"status":"ready","url":"notes/world-model.html#summary-2609.03602"},"2609.03673":{"status":"ready","url":"notes/world-model.html#summary-2609.03673"},"2609.03681":{"status":"ready","url":"notes/world-model.html#summary-2609.03681"},"2609.03952":{"status":"ready","url":"notes/world-model.html#summary-2609.03952"},"2609.04193":{"status":"ready","url":"notes/world-model.html#summary-2609.04193"},"2609.04851":{"status":"ready","url":"notes/world-model.html#summary-2609.04851"},"2609.04911":{"status":"ready","url":"notes/world-model.html#summary-2609.04911"},"2609.05266":{"status":"ready","url":"notes/world-model.html#summary-2609.05266"},"2609.06578":{"status":"ready","url":"notes/world-model.html#summary-2609.06578"},"2609.06647":{"status":"ready","url":"notes/world-model.html#summary-2609.06647"},"2609.06820":{"status":"ready","url":"notes/world-model.html#summary-2609.06820"},"2609.07002":{"status":"ready","url":"notes/world-model.html#summary-2609.07002"},"2609.07051":{"status":"ready","url":"notes/world-model.html#summary-2609.07051"},"2609.07096":{"status":"ready","url":"notes/world-model.html#summary-2609.07096"},"2609.07126":{"status":"ready","url":"notes/world-model.html#summary-2609.07126"},"2609.07299":{"status":"ready","url":"notes/world-model.html#summary-2609.07299"},"2609.07328":{"status":"ready","url":"notes/world-model.html#summary-2609.07328"},"2609.07532":{"status":"ready","url":"notes/world-model.html#summary-2609.07532"},"2609.07719":{"status":"ready","url":"notes/world-model.html#summary-2609.07719"},"2609.07874":{"status":"ready","url":"notes/world-model.html#summary-2609.07874"},"2609.08162":{"status":"ready","url":"notes/world-model.html#summary-2609.08162"},"2609.08230":{"status":"ready","url":"notes/world-model.html#summary-2609.08230"},"2609.08342":{"status":"ready","url":"notes/world-model.html#summary-2609.08342"},"2609.08796":{"status":"ready","url":"notes/world-model.html#summary-2609.08796"},"2609.08853":{"status":"ready","url":"notes/world-model.html#summary-2609.08853"},"2609.08855":{"status":"ready","url":"notes/world-model.html#summary-2609.08855"},"2609.09119":{"status":"ready","url":"notes/world-model.html#summary-2609.09119"},"2609.09155":{"status":"ready","url":"notes/world-model.html#summary-2609.09155"}},"topic":"World Model","version":1}</script>
 </body>
 </html>

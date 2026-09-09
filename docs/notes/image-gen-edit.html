@@ -13,6 +13,431 @@
       <h1>Image Gen&amp;Edit · 论文要点</h1>
     </header>
     <div class="summary-topic-list">
+    <article class="summary-article summary-topic-entry" id="summary-2609.01433" data-arxiv-id="2609.01433" data-status="ready">
+<h1>[2609.01433] Gaussian Core LoRA: Distribution-Aware Dynamic Adaptation for Broad Concept Erasure</h1>
+<p><a href="https://arxiv.org/abs/2609.01433" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>Gaussian Core LoRA 提出了一种分布感知的动态低秩适应方法，通过高斯支持门、高斯混合模型责任分配和动态核心机制，在共享 LoRA 空间中根据提示词在特征分布中的位置动态重构秩空间，以解决传统静态 LoRA 在宽泛概念擦除中存在的模式平均、覆盖不全及语义干扰问题。</p>
+<h2>解决的问题</h2>
+<p>现有基于 LoRA 的概念擦除方法多采用概念级静态建模，即针对人工定义的目标概念学习固定的低秩更新并应用于所有相关提示，这种方法忽略了扩散模型在特征空间中代表同一宽泛概念时的内部多样性（如不同身份实例、视觉模式或语义子类别占据不同区域），导致固定更新无法覆盖所有模式（模式平均）、难以处理困难模式或干扰邻近的良性语义。</p>
+<h2>创新点</h2>
+<ul>
+<li>从特征分布视角重新定义概念擦除问题，论证了多模态概念分布使得静态 LoRA 容易陷入模式平均、模式覆盖不全以及语义干扰的困境。</li>
+<li>提出了 Gaussian Core LoRA，这是一种包含高斯支持门（用于粗粒度激活筛选）、高斯混合模型后验责任（用于软性潜在模式路由）和动态核心（用于提示条件化的秩空间重构）的动态低秩适应框架。</li>
+<li>验证了该方法能够利用单个共享适配器覆盖每个宽泛目标概念内的异构模式，而无需为特定模式进行单独的模型训练。</li>
+<li>证明了该设计可扩展至联合擦除多达 50 个身份/风格，并在对抗性提示和跨架构评估（SDXL 和 FLUX）下保持了良好的擦除与保留权衡。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.01479" data-arxiv-id="2609.01479" data-status="ready">
+<h1>[2609.01479] CameraEditor: Camera-Controlled Image Editing via Video-Prior Sequential Modeling</h1>
+<p><a href="https://arxiv.org/abs/2609.01479" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>CameraEditor 通过将相机控制的图像编辑任务重构为基于视频先验的序列预测问题，利用动态视觉参考和帧间插值解决了现有方法在几何精度、参数解释和身份保持方面的局限性。</p>
+<h2>解决的问题</h2>
+<p>现有图像编辑模型在通过相机参数（如焦距、姿态）进行精确控制时存在三个关键缺陷：术语误读（缺乏几何理解）、参数不精确（无法执行细粒度旋转）以及身份保持冲突（大视角变换下结构撕裂或保守输出）。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出 CameraEditor 框架，将相机控制的图像编辑重构为序列预测任务，利用视频先验和动态视觉参考路由来消除文本提示的歧义并防止大视角变换下的结构坍塌。</li>
+<li>引入帧间插值机制，通过为参考和目标图像对插入过渡帧并逐帧对齐，将大幅度的几何变换分解为可追踪的轨迹，从而实现平滑且一致的变换效果。</li>
+<li>构建包含 5,760 个实例的训练数据集，该数据集整合了真实世界图像和 Unreal Engine 5 生成的合成场景，并提供了详细的相机参数标注。</li>
+<li>推出 CamEditor-Bench 评估套件，包含 462 个严格隔离的测试实例，并首创基于透视场（Perspective Fields）的无优化几何评估协议，以实现对绝对几何精度的显式评估。</li>
+<li>通过自动和人工评估证明，CameraEditor 在几何对齐和内容保持方面达到最先进水平，其性能提升源于显式的几何条件和顺序视觉参考，而非仅依赖骨干网络能力。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.01582" data-arxiv-id="2609.01582" data-status="ready">
+<h1>[2609.01582] SpatialGuard: Harness-Guided Verifiable Spatial Reasoning for Text-to-Image Generation</h1>
+<p><a href="https://arxiv.org/abs/2609.01582" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>SpatialGuard 是一个结构化的布局引导生成框架，旨在通过可验证的布局表示和持久约束执行机制，解决复杂 3D 空间文本到图像生成中缺乏显式空间载体和长链交互中约束衰减的问题。</p>
+<h2>解决的问题</h2>
+<p>现有方法在关系密集、视角敏感和布局受限的场景中，往往只能满足局部语义而难以维持全局空间一致性。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了 SpatialGuard，这是一个代理布局生成框架，实现了从文本空间意图到可验证视觉生成的闭环建模。</li>
+<li>首次将代理 harness（代理驾驭机制）的概念引入文本到图像管道，构建了跨轮次空间约束执行机制，以缓解大模型在复杂空间生成中的记忆衰减问题。</li>
+<li>设计了空间布局架构师模块，将输入文本解析为图像合成导向的 3D 结构化布局，提供采样前可检查和可编辑的空间意图表示。</li>
+<li>设计了视觉实现器模块，将布局转换为视觉条件并合成图像，将空间目标带入像素空间。</li>
+<li>设计了视觉对齐批评模块，评估文本、布局和图像之间的一致性，并将偏差反馈给后续规划，同时引入了规则约束、工具调用、共享知识和反馈循环四种核心机制。</li>
+<li>通过全面的定量和定性实验证明，SpatialGuard 在复杂 3D 空间文本到图像生成任务中取得了新的最先进性能，并显著优于现有的文本到图像和布局控制基线。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.02348" data-arxiv-id="2609.02348" data-status="ready">
+<h1>[2609.02348] Structured-Prior-Guided Diffusion Inpainting with Physical Consistency for Traffic Sign Augmentation</h1>
+<p><a href="https://arxiv.org/abs/2609.02348" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种结构化先验引导的扩散图像修复框架，通过将交通标志的语义、外观和几何先验分别注入到扩散模型的不同路径中，解决了通用生成模型在文本、几何和颜色一致性上的缺陷，实现了高质量的交通标志合成以增强长尾类别检测。</p>
+<h2>解决的问题</h2>
+<p>交通标志检测在长尾类别上受限，常规增强无法创造新类别，通用扩散模型直接应用于标志时存在文本扭曲、几何透视破坏和颜色不一致问题，且自然语言条件无法准确传达标志的结构化先验。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出结构化先验引导的扩散图像修复框架，将语义、外观和几何先验拆分并通过独立路径注入，利用 SAM 2、几何拟合和颜色聚类构建条件，添加 CIELAB 和 Sobel 损失进行自监督训练。</li>
+<li>在 TT100K 统一评估协议下实现生成质量和可控性的全面领先，在所有九个指标中排名第一，证明结构化先验建模优于通用模型扩展。</li>
+<li>验证合成数据在罕见类别检测上的显著增益，在 TT100K 罕见类别上使用 YOLO26 验证，合成数据将 AP50 提升 1.23 倍至 7.40 倍，仅使用 10% 真实数据时增益达 7.40 倍。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.02349" data-arxiv-id="2609.02349" data-status="ready">
+<h1>[2609.02349] GlyphAnchor: Enhancing Visual Text Rendering via Position-Anchored Glyph Priors</h1>
+<p><a href="https://arxiv.org/abs/2609.02349" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 GlyphAnchor 方法，通过位置锚定的字形先验增强视觉文本渲染，旨在解决长、复杂、密集排列文本及罕见字符的渲染难题。</p>
+<h2>解决的问题</h2>
+<p>现代文本到图像和图像编辑基础模型的准确视觉文本渲染已成为关键瓶颈，特别是在处理长、复杂、密集排列的文本和罕见字符时可靠性较低，且错误会损害文本丰富应用的使用性。</p>
+<h2>创新点</h2>
+<ul>
+<li>通过位置锚定的设计利用字形先验，提供字形指导且额外 token 少，易于跨扩散 - 变换器骨干网络适配。</li>
+<li>设计了位置锚定字形先验的专用训练方案，包括分阶段监督微调、用于 NFT 后训练的文字感知奖励以及训练时的字形增强。</li>
+<li>构建了 InfoTextBench 用于文本丰富视觉文本渲染评估，并在涵盖长、复杂、密集排列文本及罕见字符的基准测试上展示了相对于基础模型的持续改进。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.02616" data-arxiv-id="2609.02616" data-status="ready">
+<h1>[2609.02616] AffectDelta: Beyond Emotion Labels for Image Editing</h1>
+<p><a href="https://arxiv.org/abs/2609.02616" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 AffectDelta，一种将情感图像编辑建模为八个情感类别全分布之间有符号转换的统一编辑器，通过构建 AffectPair-249K 数据集和源感知扩散模型，解决了单一标签无法表示混合情感状态及语言中介导致的问题。</p>
+<h2>解决的问题</h2>
+<p>现有情感图像编辑方法存在两个未解决的挑战：首先，单一目标标签无法表示源图像已激发的混合情感状态及情感变化的分量方向和幅度；其次，视觉实现常由语言中介，现有指令未显式编码各情感成分的变化，且同一情感转换在不同场景中可能需要不同的视觉实现。</p>
+<h2>创新点</h2>
+<ul>
+<li>将场景级情感图像编辑形式化为八个情感类别全分布之间的有符号转换，保留混合源和目标状态，并明确表示超出单一标签的请求变化的方向和幅度。</li>
+<li>构建 AffectPair-249K，一个包含 248,841 个任务过滤源 - 目标对的分布感知数据集，涵盖跨类别转换和相同 Top-1 分布偏移，并在适应期间建立无需编辑文本监督的成对视觉学习设置。</li>
+<li>开发 AffectDelta，一种统一的源感知扩散编辑器，联合学习转换编码和场景依赖的视觉实现，实验显示在所有六个指标上表现最佳。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.02683" data-arxiv-id="2609.02683" data-status="ready">
+<h1>[2609.02683] Genesis: A Generative Engine for Hierarchical Satellite Image Synthesis</h1>
+<p><a href="https://arxiv.org/abs/2609.02683" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 Genesis 生成引擎，旨在解决多尺度卫星图像金字塔合成中的联合一致性挑战，通过垂直超分辨率与水平外绘算子实现稀疏种子瓦片到完整多分辨率地图的生成。</p>
+<h2>解决的问题</h2>
+<p>现有卫星图像生成模型仅处理金字塔结构的单一维度（水平外绘或垂直超分），缺乏同时满足垂直一致性与水平连续性的能力，难以生成完整的多分辨率地图。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出多尺度瓦片补全（multi-scale tile completion）这一新任务。</li>
+<li>引入 Genesis 生成引擎，通过垂直超分辨率和水平外绘算子完成金字塔合成。</li>
+<li>发布 dense500 全观测金字塔基准数据集及金字塔级别评估协议。</li>
+<li>在垂直超分辨率和水平外绘子任务上达到最先进性能。</li>
+<li>将稀疏种子配置传播为任意其他瓦片的无缝多分辨率地图。</li>
+<li>为社区探索物理世界的多尺度生成建模提供基础。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.02813" data-arxiv-id="2609.02813" data-status="ready">
+<h1>[2609.02813] GDB-Reward: From Evaluation Metrics to Training Rewards for Graphic Design</h1>
+<p><a href="https://arxiv.org/abs/2609.02813" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 GDB-Reward 框架，通过将异构的设计评估指标转化为统一的强化学习奖励，在冻结图像生成器的情况下优化提示词以增强图形设计生成的规范遵循度。</p>
+<h2>解决的问题</h2>
+<p>图形设计生成需要满足精确的结构化约束（如排版、布局、颜色一致性），这比生成自然图像更具挑战性；同时微调图像生成器成本高昂，且现有评估指标多为非可微且异构，难以直接作为学习优化目标。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出 GDB-Reward，一种复合的非可微奖励，将涵盖感知质量、渲染保真度和空间准确性的图形设计评估指标转化为统一的优化目标。</li>
+<li>将图形设计生成表述为冻结文本到图像模型上的提示优化问题，通过强化学习避免扩散模型微调。</li>
+<li>开发一个设计意图描述模型，评估生成的设计是否保留潜在的沟通目标，提供与优化奖励互补的独立语义评估。</li>
+<li>证明使用 GDB-Reward 的强化学习能显著提高设计规范遵循度（特别是排版、颜色保真度和布局结构），同时仅训练轻量级 LoRA 适配器并完全冻结图像生成器。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.06490" data-arxiv-id="2609.06490" data-status="ready">
+<h1>[2609.06490] OracleZoom: On-Policy Self-Distillation Inspired Reference-Constrained Recursive Image Super Resolution</h1>
+<p><a href="https://arxiv.org/abs/2609.06490" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>Oracle Zoom 是一种基于同策略自蒸馏和参考约束的递归图像超分辨率框架，旨在解决深层递归放大中因缺乏逐尺度真值而导致的监督缺失问题。</p>
+<h2>解决的问题</h2>
+<p>片段未提供</p>
+<h2>创新点</h2>
+<ul>
+<li>识别并形式化了递归超分辨率中的监督差距问题：在深层放大中获取真值成本过高，而模型在缺乏直接视觉监督的情况下越来越依赖自身的预测。</li>
+<li>提出了 Oracle Zoom 框架，这是一种受同策略自蒸馏启发、参考约束的递归超分辨率方法，能够在无需深层标注的情况下将最后一个真值信息延伸至监督边界之外。</li>
+<li>将目标不可用的合成过程分离为可验证和未解析两部分：跨尺度一致性保留可观测的真值证据，质量引导提供未解析细节，并通过 KL 约束的预训练先验与 EMA 一致性限制生成漂移。</li>
+<li>在七个数据集上实现了最先进的质量与保真度且幻觉更少：平均 CLIPIQA 达到 0.713，在 4 倍和 256 倍放大下分别取得了最佳的 LPIPS 和 DISTS 分数，且在独立跨家族视觉 - 语言评估中显著优于 CoZ 方法。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.06491" data-arxiv-id="2609.06491" data-status="ready">
+<h1>[2609.06491] Diffuse2Seg: Diffusion Models Can Segment Anything Without Supervision</h1>
+<p><a href="https://arxiv.org/abs/2609.06491" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>Diffuse2Seg 是一种无需监督的实体分割方法，它利用预训练的扩散模型通过非线性的 p-Laplacian 传播和自注意力矩阵，从密集的点提示中生成无监督的多粒度实例标签，并展示了其在伪标签训练和半监督学习中的有效性。</p>
+<h2>解决的问题</h2>
+<p>片段未提供</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种无需训练（Training-free）的多粒度实例分割方法，利用冻结的扩散模型通过传播点提示和自注意力矩阵生成无监督的密集实例掩码，在五个领域的 AR1000 指标上超越了之前的无监督最先进方法 UnSAM。</li>
+<li>提出了一种基于伪标签的训练方法，仅使用扩散模型生成的伪标签训练轻量级实例分割模型，在更少的训练图像预算和更小的骨干网络下，在 stuff+things/things/parts 数据集上优于最强的无检测器基线 SOHES，并提升了 UnSAM 的性能。</li>
+<li>提出了半监督 Diffuse2Seg-Semi 方法，通过简单的监督微调将无监督模型应用于数据高效的半监督学习，仅需 100 张微调图像即可恢复 93.5% 的全监督参考模型性能，并在 10k 图像时超越全监督参考模型。</li>
+<li>证明了生成的无监督标签是宝贵的监督信号，通过蒸馏到轻量级分割模型可实现强大的零样本泛化能力。</li>
+<li>展示了该无监督模型在仅有少量真实数据时，通过简单的 Decoder-only 微调即可用于数据高效的半监督学习。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.06602" data-arxiv-id="2609.06602" data-status="ready">
+<h1>[2609.06602] Multi-History-Step SDE Inversion for Image Editing with Superior Regional Awareness</h1>
+<p><a href="https://arxiv.org/abs/2609.06602" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种基于任意多历史步扩散随机微分方程（SDE）反演的图像编辑方法 MIEdit，该方法集成了预测 - 校正机制和反演时自动语义角度掩码（IASM），旨在实现无需调参的精确重构、高质量生成以及非编辑区域的精细控制。</p>
+<h2>解决的问题</h2>
+<p>现有基于确定性常微分方程（ODE）反演的方法在引入条件时容易产生严重的重构误差，且耗时较长；现有的随机微分方程（SDE）反演方法主要关注低阶采样器，导致收敛速度和生成质量（如编辑可塑性）不足，甚至出现伪影；此外，现有方法在保留非编辑区域方面表现较弱，难以精确处理不同修改程度的编辑任务。</p>
+<h2>创新点</h2>
+<ul>
+<li>将 DDPM 反演统一在 SDE 反演框架下，并提出了一种基于预测 - 校正两阶段、多历史步 SDE 的反演与生成图像编辑方法，显著提升了当前免训练图像编辑的效率与生成质量。</li>
+<li>解决了由条件引起的噪声部分与梯度项之间的失配与干扰问题，显著提高了多历史步 SDE 反演的可塑性，并有效缓解了 SDE 反演中的伪影问题。</li>
+<li>提出了一种反演时自动语义角度掩码（IASM）技术，利用反演过程中的分类器自由引导（CFG）生成精确的语义掩码以指导整个生成过程，无需额外输入或独立的推理分支。</li>
+<li>引入了一项新的基准测试 EditEval++，将原有的 7 个任务扩展至 30 个细粒度编辑任务，包含 1000 多个图像 - 文本 - 掩码三元组，以评估方法在更多样化场景下的表现。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.06651" data-arxiv-id="2609.06651" data-status="ready">
+<h1>[2609.06651] SwiftExplorer: Training-free Diffusion Model Alignment with Swift Diversity Exploration</h1>
+<p><a href="https://arxiv.org/abs/2609.06651" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>SwiftExplorer 是一种无需训练的扩散模型对齐插件，通过引入继承重启探索机制和质量效率筛选机制，解决了现有方法生成分布过窄和引导信号低效的问题，从而在保持高保真度的同时提升了生成多样性和计算效率。</p>
+<h2>解决的问题</h2>
+<p>现有无训练扩散模型对齐方法存在两个典型局限性：(1) 生成分布过窄，过度依赖一致的引导方向导致奖励黑客（reward hacking）现象，降低了图像多样性；(2) 引导不具选择性且效率低下，在整个生成过程中 indiscriminately 应用引导项，造成计算浪费并可能引入噪声干扰。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出继承重启（Inheritance-Restart）探索机制，通过概率扰动和路径筛选防止生成轨迹过早收敛到单一模式，从而增强现有方法的生成多样性。</li>
+<li>引入质量效率（Quality-Efficiency）筛选机制，过滤无效信号以确保每个引导步骤都有意义贡献，有效降低计算开销并维持对齐质量。</li>
+<li>实现生成过程中的多样性与保真度权衡，通过进度感知自适应策略在早期促进探索以发现高奖励轨迹，在后期鼓励收敛以保留预训练分布。</li>
+<li>实现质量与效率的权衡调整，结合自适应因子和奖励边际效用递减原理，在生成后期动态切断引导以避免冗余优化。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.06947" data-arxiv-id="2609.06947" data-status="ready">
+<h1>[2609.06947] Particle Dynamics of Flow Matching and Classifier-Free Guidance from a Stagewise Geometry Perspective</h1>
+<p><a href="https://arxiv.org/abs/2609.06947" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文从分阶段几何视角出发，建立了无条件流匹配和分类器自由引导（CFG）的统一度量几何理论，揭示了数据几何如何逐步约束轨迹以及 CFG 如何在采样过程中重塑相关几何结构。</p>
+<h2>解决的问题</h2>
+<p>现有理论主要关注分布层面的收敛性，缺乏对单个数值轨迹几何演变的理解；同时，尚不清楚 CFG 如何在不同采样阶段重塑流匹配轨迹的几何结构，以及引导动力学与目标数据附近的普通条件流匹配有何关联。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了无条件流匹配的分阶段几何理论，将其演进刻画为三个时间缩放的数据几何阶段：以全局均值为中心的球体、数据凸包以及在局部条件下可能非凸的局部簇邻域，并建立了向这些几何结构的吸引力和吸收机制。</li>
+<li>建立了分类器自由引导（CFG）的分阶段几何理论，描述了引导如何重塑相关几何：从早期的外推均值，到中间阶段的膨胀条件凸包，再到最终恢复的条件流匹配局部几何。</li>
+<li>为连续时间的无条件流匹配和 CFG 建立了精确的显式欧拉离散化对应关系，将连续的吸引 - 吸收图景直接映射到实际采样中产生的有限步轨迹上。</li>
+<li>证明了在一般时间调度下，理想连续轨迹的空间路径保持不变，同时将最终阶段的衰减速率从 O(1-t) 改进为 O(1-a(t))。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.07012" data-arxiv-id="2609.07012" data-status="ready">
+<h1>[2609.07012] AstraMoE-SR: Trajectory-Guided Diffusion for Blind Satellite Jitter Deblurring and Super-Resolution</h1>
+<p><a href="https://arxiv.org/abs/2609.07012" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>AstraMoE-SR 提出了一种基于轨迹引导的扩散模型，旨在解决单幅图像中因推扫式传感器平台抖动引起的空间变化模糊与超分辨率重建问题。</p>
+<h2>解决的问题</h2>
+<p>片段未提供</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种基于物理的推扫式退化建模方法，利用局部曝光轨迹和场依赖的透视几何来描述空间变化的退化，而非传统的空间不变模糊核。</li>
+<li>开发了 AstraMoE-SR 框架，该框架通过条件扩散模型估计潜在运动分布，并利用预测的轨迹引导几何对齐及空间自适应的潜在扩散重建（包含区域感知的混合专家潜在扩散重建）。</li>
+<li>进行了可识别性分析，证明逐点轨迹恢复受限于抖动相位模糊性，并通过实验展示了尽管存在这种内在模糊性，该方法仍能实现有效的图像恢复。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.07853" data-arxiv-id="2609.07853" data-status="ready">
+<h1>[2609.07853] Foundation Models for Generalizable Semantic and Goal-Oriented Communication</h1>
+<p><a href="https://arxiv.org/abs/2609.07853" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种名为 FMSGOC 的新架构，通过解耦目标驱动的语义选择与生成式重建，利用基础模型（VLM 和 LoRA 微调的扩散模型）在极低比特率下实现鲁棒的零样本泛化和高保真场景重建。</p>
+<h2>解决的问题</h2>
+<p>现有的端到端（E2E）神经通信系统（如 DeepJSCC）存在结构限制，其单一模型将语义特征提取与压缩重建耦合，导致在严格速率预算下效率低下、泛化能力差以及在超低比特率下关键语义丢失。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种新颖的语义通信架构，将目标驱动的语义选择与生成式重建解耦，实现了高效的潜在空间操作和鲁棒的泛化能力。</li>
+<li>设计了一种由 VLM 引导的语义编码器，利用预训练 VLM 基于开放世界先验显式识别稀疏的“语义锚点”，从而实现面向目标的速率分配。</li>
+<li>开发了一种使用硬重注入技术的 LoRA 微调扩散解码器，执行锚点保持的掩码补全，能够从稀疏输入中鲁棒地重建场景。</li>
+<li>在 CIFAR-10 和 ImageNet 数据集上的实验表明，FMSGOC 在超低比特率下实现了具有竞争力的速率 - 失真 - 语义（R-D-S）性能，优于传统 E2E 系统并具备对未见数据的泛化能力。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.08253" data-arxiv-id="2609.08253" data-status="ready">
+<h1>[2609.08253] Revisiting Spectral Representations in Generative Diffusion Models</h1>
+<p><a href="https://arxiv.org/abs/2609.08253" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种新的训练策略，通过正则化扩散模型的中间表示以与由共享扩散扰动核定义的时变核积分算子的特征函数对齐，从而在图像和点云生成任务上提升了性能。</p>
+<h2>解决的问题</h2>
+<p>片段未提供</p>
+<h2>创新点</h2>
+<ul>
+<li>通过扰动核的视角，在共享随机过程参数化下回顾并统一了扩散模型与自监督表示学习（SRL）的公式（Section 3.1 和 Section 3.2）。</li>
+<li>提出了一种新颖的扩散模型训练策略，将扩散模型的中间表示正则化以与由共享扩散扰动核定义的时变核积分算子的特征函数对齐（Section 4.2）。</li>
+<li>建立了表示学习与生成建模之间的理论对偶性，证明优化提出的谱自监督目标在梯度上等价于通过 KL 散度公式化的扩散分数蒸馏（Section 4.3）。</li>
+<li>在四个具有不同数据多样性、规模和领域的图像数据集上，实验表明所提出的自监督谱表示对齐策略能带来一致的增益。</li>
+<li>在缺乏预训练编码器的点云生成任务上，该方法优于基线方法，证明了其在编码器预训练不切实际的复杂生成设置中的潜力。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.08282" data-arxiv-id="2609.08282" data-status="ready">
+<h1>[2609.08282] Dreaming in Flow: Generative Grounding Feedback for Self-Evolving Unified Multimodal Models</h1>
+<p><a href="https://arxiv.org/abs/2609.08282" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种名为生成性接地反馈（GGF）的框架，旨在通过双向接地循环实现统一多模态模型的自我进化，即利用生成分支产生的图像作为理解分支的接地经验，同时利用理解分支提取的语义证据来优化生成轨迹。</p>
+<h2>解决的问题</h2>
+<p>片段未提供</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了生成性接地反馈（GGF）框架，该框架通过共享视觉体验和双向接地循环将理解与生成能力耦合在一起。</li>
+<li>开发了两种互补的反馈机制：流级反馈将理解编码的视觉证据转化为提示条件生成，而梦境重播接地则利用源恢复、重播一致性和语义分离来提升视觉理解。</li>
+<li>在三个不同架构家族的统一多模态骨干网络上验证了 GGF 的有效性，展示了其在文本到图像生成和视觉理解方面的改进。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.08722" data-arxiv-id="2609.08722" data-status="ready">
+<h1>[2609.08722] Inverse Digital Marbling: Recovering Gesture Programs with a Replay Adjoint</h1>
+<p><a href="https://arxiv.org/abs/2609.08722" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种名为“逆数字大理石纹”的方法，通过可回放伴随（replay adjoint）技术从最终图像中恢复出由有序手势组成的程序，解决了传统基于笔触渲染无法处理颜料位移以及现有可微分模拟无法恢复离散手势序列的问题。</p>
+<h2>解决的问题</h2>
+<p>片段未提供</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种逆数字大理石纹模型，能够恢复出由有序、类型化的手势组成的程序，而非仅优化连续场或固定位置的笔触。</li>
+<li>设计了一种可回放伴随（replay adjoint）机制，通过记录沉积材料外的异常坐标并再生外部状态，解决了在沉积区域坐标映射不可逆导致的存储与计算难题。</li>
+<li>构建了基于胶囊手势的封闭形式前向与逆向映射，使得手势的运输操作在平行集区域坐标中具有可计算的反函数，从而支持高效的优化。</li>
+<li>实现了一个系统，能够联合优化 2000 个手势的几何形状、宽度和调色板分配，并验证了恢复程序在分辨率变化下的可重放性及手势级别的编辑能力。</li>
+<li>通过多种评估策略（包括平坦色底、消融实验、已知生成程序的合成目标等）证明了该方法在捕捉运输贡献方面的有效性，并对比了其与基于笔触渲染及现有数字大理石纹技术的差异。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.00476" data-arxiv-id="2609.00476" data-status="ready">
+<h1>[2609.00476] Less Is More: Balancing Positive and Negative Space in Visual Concept Blending</h1>
+<p><a href="https://arxiv.org/abs/2609.00476" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种自动视觉概念融合框架，通过结合几何约束、多模态代理规划及混合像素 - 向量表示，解决了概念融合中“在哪里融合”和“如何融合”以平衡正负空间的关键挑战。</p>
+<h2>解决的问题</h2>
+<p>现有方法主要关注融合什么（如寻找匹配形状或诱导感知歧义），而忽视了空间与构图（在哪里和如何融合）对平衡表现力、创造力和可识别性的关键作用。</p>
+<h2>创新点</h2>
+<ul>
+<li>通过分析现实世界的艺术和几何视角，推导出一套关于空间构图的设计指南。</li>
+<li>实例化了一套支持自动概念融合的一般化流程，分阶段解决“在哪里融合”和“如何融合”的问题。</li>
+<li>在第一阶段，利用源自设计原则的几何约束识别候选轮廓段，并采用多模态代理作为规划器，结合语义理解对候选段进行灵活的合并与拆分。</li>
+<li>在第二阶段，采用混合像素 - 向量表示，利用基于像素的生成实现快速灵活变形，同时利用向量表示提供精确的点级轮廓控制。</li>
+<li>通过优化几何目标（如 Chamfer loss 和 bending loss）将像素结果转换为向量，并利用多模态代理评估及分数蒸馏损失优化向量化形状，以实现高度可编辑且易于融入实际设计工作的输出。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.00525" data-arxiv-id="2609.00525" data-status="ready">
+<h1>[2609.00525] GenScale: A Benchmark for Relative Object Scale in Image Generation and Editing</h1>
+<p><a href="https://arxiv.org/abs/2609.00525" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>GenScale 是一个针对图像生成和编辑中相对物体尺度的基准，旨在解决现有模型在渲染物体间合理比例方面的系统性失败，并提出了配套的评估协议和修正工具。</p>
+<h2>解决的问题</h2>
+<p>现有的文本到图像生成模型虽然视觉保真度高，但无法保证物理现实性，常出现物体相对尺度不合理（如小物体过大、大物体过小）的问题，且现有基准未将相对物体尺度作为独立的细粒度关系进行评估。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了 GenScale，这是首个专门针对图像生成和编辑中相对物体尺度的基准，涵盖了常见物体尺度先验、人 - 产品度量尺度以及生成后尺度修正三种模式。</li>
+<li>开发了一种基于人类校准的序数评估协议，用于对成对尺度判断进行可扩展的可靠评估，以检验生成的物体间比例是否符合现实世界的大小关系。</li>
+<li>提出了 Rescale，一种模型无关的尺度修正代理，利用结构化的尺度元数据执行局部化、几何感知的编辑，而无需修改源生成器。</li>
+<li>对最先进的图像生成器和编辑器进行了基准测试，揭示了它们在观察相对尺度方面的持续失败，并证明 Rescale 能一致地提高生成和编辑图像的尺度合理性。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.00708" data-arxiv-id="2609.00708" data-status="ready">
+<h1>[2609.00708] Differentially Private Paired Table-Image Multimodal Synthesis</h1>
+<p><a href="https://arxiv.org/abs/2609.00708" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文针对差分隐私下配对表 - 图像多模态合成中难以同时保留模态特定优势与跨模态依赖的挑战，提出了 DP-TabImage 框架。</p>
+<h2>解决的问题</h2>
+<p>片段未提供</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了端到端的差分隐私配对图像与多变量表格记录合成问题形式化，要求同时保持表格保真度、图像保真度及跨模态对应关系。</li>
+<li>提出了 DP-TabImage 框架，利用因子化 p(x,y)=p_T(y)p_I(x|y) 结合基于 AIM 的私有 PGM 和表条件扩散模型，在保留依赖的同时利用模态特定的合成机制。</li>
+<li>构建了对齐的私有表 - 图像原型作为初始化信号，通过已私有 PGM 生成的软表格摘要与属性条件图像聚合，在不增加额外隐私成本的前提下减轻条件学习的负担。</li>
+<li>在三个真实世界数据集上进行了系统性评估与消融实验，验证了该方法在三项目标上的平衡性，并揭示了图像仅初始化与表 - 图像初始化对跨模态对齐的不同影响。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.00798" data-arxiv-id="2609.00798" data-status="ready">
+<h1>[2609.00798] Advanced Pixel Diffusion Model with Guided Sparse Global Refinement</h1>
+<p><a href="https://arxiv.org/abs/2609.00798" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>PixSGR 是一种新颖的像素扩散框架，通过结合低通道瓶颈以捕捉自然图像的流形结构，并利用基于粗粒度注意力图预稀疏化的稀疏全局细化机制来恢复细粒度空间细节，从而在 ImageNet 上实现了最先进的生成质量。</p>
+<h2>解决的问题</h2>
+<p>片段未提供</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了 PixSGR 框架，该框架结合了用于建模自然图像低维流形的低通道瓶颈和用于恢复细粒度空间细节的细粒度细化机制。</li>
+<li>引入了注意力预稀疏化技术用于细粒度细化，利用粗粒度注意力图预先选择全局相关的 token，从而实现了超越孤立补丁的高效非局部交互。</li>
+<li>在 ImageNet 上进行了广泛的实验，验证了所提出框架及其各个组件的有效性，并在最近的像素空间扩散方法中取得了最先进的生成质量。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.00885" data-arxiv-id="2609.00885" data-status="ready">
+<h1>[2609.00885] Denoising Diffusion Generative Models Secretly Calculate Attentions</h1>
+<p><a href="https://arxiv.org/abs/2609.00885" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文证明了去噪扩散概率生成模型（DDPM）的去噪原理在数学上等价于注意力机制，并进一步建立了注意力机制、扩散系统与自编码器（AE）三者之间的等价关系。</p>
+<h2>解决的问题</h2>
+<p>现有的扩散系统（如 DDPM）在训练和生成阶段计算量巨大，需要运行编码器数百次，且缺乏对扩散原理与注意力机制之间内在联系的明确理论解释。</p>
+<h2>创新点</h2>
+<ul>
+<li>证明了扩散去噪概率生成模型（DDPM）的去噪原理在数学上等价于注意力机制，为注意力机制提供了基于高斯噪声信号恢复问题的统计理论基础。</li>
+<li>提出了一种基于扩散损失函数和凸优化的新方法，推导出了扩散系统的闭式解，并扩展了分析以包含与 Transformer 和自编码器（AE）的相似性。</li>
+<li>论证了注意力机制、扩散系统与自编码器（AE）三者之间的等价性，指出它们最终都将随机输入投影到学习的数据流形上。</li>
+<li>提出了一种无需训练内部 AE 网络即可生成逼真图像的生成系统，通过数据集图像的插值结合外部 AE 的递归投影来实现，显著降低了计算复杂度。</li>
+<li>展示了所提出的低复杂度生成网络在图像生成任务中具有良好的质量，同时大幅减少了训练和生成所需的计算资源。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.00955" data-arxiv-id="2609.00955" data-status="ready">
+<h1>[2609.00955] ASSERT: Adaptive Stochastic Sampling for Robust Diffusion Models on Analog Compute-in-Memory Hardware</h1>
+<p><a href="https://arxiv.org/abs/2609.00955" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>ASSERT 是一种针对模拟存内计算硬件噪声的免训练采样方法，通过自适应地在随机和确定性 DDIM 更新之间插值，解决了扩散模型在硬件 imperfections 下性能下降的问题。</p>
+<h2>解决的问题</h2>
+<p>存内计算（CIM）架构固有的硬件缺陷（如器件变异性、编程不确定性等）会扰动存储权重，导致扩散模型在迭代推理过程中生成质量显著下降，而现有解决方案依赖昂贵的重训练或微调，且未针对扩散采样的独特迭代特性。</p>
+<h2>创新点</h2>
+<ul>
+<li>使用多芯片校准的噪声模型表征扩散模型的鲁棒性，发现早期高噪声去噪阶段比最终细化阶段更脆弱。</li>
+<li>推导了持续空间权重噪声的一阶误差递归公式，揭示了噪声传播的规律。</li>
+<li>提出了 ASSERT 方法，该方法通过结合早期的随机探索与确定性的细化，减少跨步误差对齐，无需重新训练。</li>
+<li>在多个数据集上的实验表明，该方法在高分辨率和 CIFAR-10 步数评估中，FID 分别降低了 2.58 倍和 7.68 倍。</li>
+<li>片段未提供关于具体实验设置细节或与其他基线方法详细对比的额外贡献描述。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.00956" data-arxiv-id="2609.00956" data-status="ready">
+<h1>[2609.00956] PredErase: Training-Free Object-and-Effect Removal with Predictive Latent Guidance</h1>
+<p><a href="https://arxiv.org/abs/2609.00956" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>PredErase 提出了一种无需训练的物体及效果移除方法，通过预测潜在引导对冻结的 Fill 模型进行轨迹 steering，在仅实例掩码下同时移除物体及其几何耦合的残留痕迹（如阴影）。</p>
+<h2>解决的问题</h2>
+<p>现有的无训练物体移除方法通常仅编辑掩码内的区域，导致物体周围的接触阴影、反射等物理痕迹（效果）被保留，未能实现真正的物体及效果移除。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种无需训练的物体及效果移除过程，该过程在仅实例掩码下编辑冻结的 Fill 潜在变量，无需成对的清洁图像且无需更新权重。</li>
+<li>将可编辑支持区域 M_flux 与 I-JEPA 的孔洞预测进行因子化，并将投影后的解码器端更新限制在打包的潜在掩码内。</li>
+<li>进行了与冻结 Fill 模型和无训练移除器对齐的协议比较，并在相同分割上报告了监督擦除器的结果，同时提供了组件和先验交换的消融实验。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.00968" data-arxiv-id="2609.00968" data-status="ready">
+<h1>[2609.00968] ReFlowSET: Representation-Aligned Latent Flow Matching for SAR-to-EO Image Translation</h1>
+<p><a href="https://arxiv.org/abs/2609.00968" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>ReFlowSET 提出了一种表示对齐的潜在流匹配框架，通过评估预训练 VAE 的模态特定重建上限、从头训练双流条件 DiT 以及利用冻结视觉基础模型进行训练时的潜在特征对齐，解决了 SAR 到 EO 图像翻译中的模态统计差异和空间错位问题。</p>
+<h2>解决的问题</h2>
+<p>片段未提供</p>
+<h2>创新点</h2>
+<ul>
+<li>系统评估了多个预训练 VAE 在 SAR 和 EO 图像上的表现，揭示了其模态依赖的重建上限，并确定了适合 SAR 到 EO 图像翻译的潜在空间。</li>
+<li>提出了一种包含双流 SAR 条件机制的潜在流匹配框架，在通道融合前保留模态特定的处理流程。</li>
+<li>引入了一种仅在训练阶段应用的、基于冻结视觉基础模型（VFM）的 EO 衍生潜在特征表示对齐方法，无需额外标注或推理开销。</li>
+<li>通过从头训练条件 DiT 而非继承预训练生成器，避免了语义先验的干扰，并验证了该方法在 QXS-SAROPT 和 SAR2Opt 数据集上的领先性能。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.00984" data-arxiv-id="2609.00984" data-status="ready">
+<h1>[2609.00984] Semi-Supervised Virtual Staining via Morphology Preservation and Histopathological Realism Constraints</h1>
+<p><a href="https://arxiv.org/abs/2609.00984" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种半监督虚拟染色框架，通过结合 Hessian 导出的形态保持约束和基于 CONCH 模型的病理真实性约束，利用有限的配对数据和丰富的未配对数据实现稳定的跨染色翻译。</p>
+<h2>解决的问题</h2>
+<p>片段未提供</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种稳定的半监督虚拟染色框架，联合利用有限的注册源 - 目标配对数据和丰富的未配对源图像，解决了因缺乏对应目标而导致的优化不稳定性问题。</li>
+<li>引入了基于 Hessian 导出的形态保持方法，直接从源图像中提取结构监督，从而在染色转换过程中减少了对组织界面、细胞边界和细胞核轮廓的形变。</li>
+<li>开发了基于冻结 CONCH 视觉模型的病理真实性约束（HRC），以促进逼真的目标染色特征，并防止源图像导出的结构监督退化为单纯的轮廓增强或颜色变换。</li>
+<li>在三种不同的虚拟染色任务（Ki67、HER2 及 FFPE 到 H&amp;E 转换）下，针对不同未配对与配对数据比例进行了验证，证明了该方法在染色质量、形态保持、鲁棒性及下游诊断性能方面的提升。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.01148" data-arxiv-id="2609.01148" data-status="ready">
+<h1>[2609.01148] Dotting the Eye: An Intent-Driven Image Retouching Agent for Visual Focus Enhancement</h1>
+<p><a href="https://arxiv.org/abs/2609.01148" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种名为 EyeControl 的意图驱动图像修图代理，旨在通过稀疏的空间交互信号（如点击或粗略笔触）增强视觉焦点，解决了现有模型无法显式建模视觉引导意图的问题。</p>
+<h2>解决的问题</h2>
+<p>现有图像修图模型虽然支持局部编辑，但无法显式建模将用户意图转化为视觉焦点增强的机制，且文本提示缺乏精确的空间定位，导致难以实现目的性强的视觉引导。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了以视觉焦点为中心的图像修图视角，通过修图手段增强视觉焦点，生成了比现有方法更具表现力和视觉吸引力的结果。</li>
+<li>提出了 EyeControl 框架，该框架集成了意图推理、注意力级别的焦点调节和跨尺度协调，实现了可控且稳定的视觉焦点增强，同时保持全局一致性和感知自然性。</li>
+<li>引入了 ControlArt-Bench，这是首个针对视觉焦点增强的图像修图基准，包含成对的空间用户意图标注和面向焦点的评估指标。</li>
+<li>提出了伪意图注意力对齐（PAA）机制，利用显著性差异图生成的伪意图标签显式监督模型内部注意力，使焦点调节在生成过程中学习而非依赖间接的颜色扰动。</li>
+<li>引入了操作一致性约束，将视觉焦点增强的指导分解为全局和局部操作，并强制联合应用与顺序应用结果之间的一致性，以促进更自然和连贯的增强效果。</li>
+</ul>
+</article>
     <article class="summary-article summary-topic-entry" id="summary-2608.30087" data-arxiv-id="2608.30087" data-status="ready">
 <h1>[2608.30087] The Nearest Target Is the Wrong One: Target Separation in Arc2Face Identity Unlearning</h1>
 <p><a href="https://arxiv.org/abs/2608.30087" rel="nofollow">arXiv 原文</a></p>
@@ -369,6 +794,6 @@
 </article>
     </div>
   </main>
-  <script type="application/json" id="summary-catalog">{"papers":{"2608.30081":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.30081"},"2608.30087":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.30087"},"2609.01370":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.01370"},"2609.01409":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.01409"},"2609.01607":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.01607"},"2609.01746":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.01746"},"2609.01997":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.01997"},"2609.02004":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.02004"},"2609.02748":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.02748"},"2609.03415":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.03415"},"2609.03443":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.03443"},"2609.03585":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.03585"},"2609.03688":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.03688"},"2609.03740":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.03740"},"2609.03796":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.03796"},"2609.03813":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.03813"},"2609.04090":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.04090"},"2609.04151":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.04151"},"2609.04837":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.04837"},"2609.04939":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.04939"},"2609.04976":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.04976"},"2609.05028":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.05028"},"2609.05234":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.05234"}},"topic":"Image Gen&Edit","version":1}</script>
+  <script type="application/json" id="summary-catalog">{"papers":{"2608.30081":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.30081"},"2608.30087":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.30087"},"2609.00476":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.00476"},"2609.00525":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.00525"},"2609.00708":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.00708"},"2609.00798":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.00798"},"2609.00885":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.00885"},"2609.00955":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.00955"},"2609.00956":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.00956"},"2609.00968":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.00968"},"2609.00984":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.00984"},"2609.01148":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.01148"},"2609.01370":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.01370"},"2609.01409":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.01409"},"2609.01433":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.01433"},"2609.01479":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.01479"},"2609.01582":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.01582"},"2609.01607":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.01607"},"2609.01746":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.01746"},"2609.01997":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.01997"},"2609.02004":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.02004"},"2609.02348":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.02348"},"2609.02349":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.02349"},"2609.02616":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.02616"},"2609.02683":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.02683"},"2609.02748":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.02748"},"2609.02813":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.02813"},"2609.03415":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.03415"},"2609.03443":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.03443"},"2609.03585":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.03585"},"2609.03688":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.03688"},"2609.03740":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.03740"},"2609.03796":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.03796"},"2609.03813":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.03813"},"2609.04090":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.04090"},"2609.04151":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.04151"},"2609.04837":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.04837"},"2609.04939":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.04939"},"2609.04976":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.04976"},"2609.05028":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.05028"},"2609.05234":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.05234"},"2609.06490":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.06490"},"2609.06491":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.06491"},"2609.06602":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.06602"},"2609.06651":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.06651"},"2609.06947":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.06947"},"2609.07012":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.07012"},"2609.07853":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.07853"},"2609.08253":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.08253"},"2609.08282":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.08282"},"2609.08722":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.08722"}},"topic":"Image Gen&Edit","version":1}</script>
 </body>
 </html>
