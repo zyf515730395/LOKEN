@@ -403,6 +403,8 @@ paper_tag_groups:
     description: Occupancy, signed-distance or another continuous field represents geometry.
   - name: Voxel/Grid
     description: Voxels, feature grids or triplanes form the primary 3D representation.
+  - name: Relightable 3D Scene
+    description: A multi-view or 3D scene representation explicitly supports novel illumination.
   - name: Pixel/Observation Space
     description: A world model predicts raw observations such as images or video frames.
   - name: Joint Embedding
@@ -451,17 +453,6 @@ paper_tag_groups:
     description: The world model supports reinforcement learning, games or interactive environments.
   - name: Scientific Modeling
     description: The world model simulates physical, biological or other scientific systems.
-  scene:
-  - name: Portrait
-    description: Human faces, heads or bodies are the relighting target.
-  - name: Object
-    description: A foreground object or asset is the relighting target.
-  - name: Indoor Scene
-    description: Indoor environment lighting is estimated or changed.
-  - name: Outdoor Scene
-    description: Outdoor or natural illumination is estimated or changed.
-  - name: Relightable 3D Scene
-    description: A multi-view or 3D scene representation supports novel illumination.
   control:
   - name: Parametric Lighting
     description: Explicit light direction, position, color or intensity controls the result.
@@ -618,11 +609,11 @@ paper_topic_tag_dimensions:
     - Reflectance-Aware Representation
     - Image-to-Image Relighting
     - Generative-Prior Relighting
-    scene:
-    - Portrait
-    - Object
-    - Indoor Scene
-    - Outdoor Scene
+    representation:
+    - NeRF
+    - Gaussian Splatting
+    - Mesh
+    - Implicit Field
     - Relightable 3D Scene
     control:
     - Parametric Lighting
