@@ -13,6 +13,248 @@
       <h1>Video Gen&amp;Edit · 论文要点</h1>
     </header>
     <div class="summary-topic-list">
+    <article class="summary-article summary-topic-entry" id="summary-2609.00610" data-arxiv-id="2609.00610" data-status="ready">
+<h1>[2609.00610] Streaming4D: Accelerate 4D World Models via Block-wise Video Generation and Incremental Reconstruction</h1>
+<p><a href="https://arxiv.org/abs/2609.00610" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>Streaming4D 提出了一种同步流式管道，通过将块级自回归视频生成与增量 3D 重建紧密集成，实现了低延迟的 4D 重建。</p>
+<h2>解决的问题</h2>
+<p>现有 4D 系统大多遵循离线解耦工作流（先生成完整视频序列，后重建几何），这种顺序依赖引入了 prohibitive latency，阻碍了真正的交互式 4D 合成。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了紧密耦合的同步架构，统一了自回归视频生成与增量 4D 重建。</li>
+<li>设计了块级管道执行策略，通过重叠生成与重建过程来降低端到端延迟。</li>
+<li>证明了所提出的设计在保持几何质量和多视图一致性的同时，持续提高了运行时效率。</li>
+<li>在单张 RTX 4090 上实现了 1.21 倍至 1.24 倍的速度提升，同时保持了高保真的 4D 几何质量。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.02367" data-arxiv-id="2609.02367" data-status="ready">
+<h1>[2609.02367] The Missing Temporal Link: Temporal Context Routing for Script-Driven Audio-Video Generation</h1>
+<p><a href="https://arxiv.org/abs/2609.02367" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 Temporal Context Routing (TCR) 方法，通过扩展时间对齐至结构化脚本，解决了脚本驱动音视频生成中模态间同步但偏离脚本时间线的问题。</p>
+<h2>解决的问题</h2>
+<p>现有联合音视频生成器虽然实现了模态间的时间对齐，但仅将脚本指定的镜头和对话时间编码在文本中，未显式关联到模态的时间位置，导致生成内容虽模态同步但偏离脚本时间线。</p>
+<h2>创新点</h2>
+<ul>
+<li>识别出脚本驱动生成中的时间差距：视频和音频可能保持相互同步，但无法遵循脚本时间线。</li>
+<li>提出关键见解，将时间对齐扩展到结构化脚本，使每个提示的指定时间成为两种模态的显式控制信号。</li>
+<li>引入 Temporal Context Routing (TCR)，将脚本时间映射到共享的音视频时间轴上，并独立路由每个提示的引导。</li>
+<li>开发了一种粗到细的数据构建管道，利用 Gemini 进行语义标注和粗略时间，并在 0.1 秒网格上细化镜头和对话时间。</li>
+<li>在 200 个测试脚本上评估了 TCR，相比最强开源基线显著降低了镜头边界误差并提高了对话时间准确性，且保持了视觉质量和音视频同步。</li>
+<li>用户研究表明 TCR 在所有五个评估维度上均优于现有方法。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.06478" data-arxiv-id="2609.06478" data-status="ready">
+<h1>[2609.06478] MVWeaver: A Hierarchical Music Video Generation Agent with a Learned Song-to-Visual Bridge</h1>
+<p><a href="https://arxiv.org/abs/2609.06478" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>MVWeaver 是一个端到端的分层代理系统，通过结合全面的歌曲分析、多级视觉规划以及下游生成，实现了从歌曲到完整音乐视频（MV）的自动化创作。</p>
+<h2>解决的问题</h2>
+<p>片段未提供</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了 MVWeaver，这是一个端到端的分层代理，能够连接全面的歌曲分析、多级视觉规划以及下游生成，以创建完整的歌曲音乐视频。</li>
+<li>构建了一个包含 1,861 对真实世界歌曲-MV 的数据集，该数据集包含歌曲侧、MV 侧以及教师推断的推理标注，并训练了一个基于 LoRA 的 SFT 模型来生成分层 MV 规划所需的全局和局部桥梁。</li>
+<li>实验结果表明，该方法在基于歌曲的视觉翻译、视觉发展以及长距离的概念和镜头级连贯性方面取得了改进，并通过消融实验验证了桥梁监督和条件化的效果。</li>
+<li>设计了分层规划机制，将概念发展与可执行实现分离，通过逐步扩展 MV 简报为有序的视觉发展、场景和镜头，并在各级之间传播可重用资产。</li>
+<li>训练了一个基于教师推断推理的桥梁模型，利用 1,841 对歌曲-MV 对数据，揭示视觉决策背后的中间关联，从而从真实 MV 中蒸馏出歌曲到视觉的知识。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.06628" data-arxiv-id="2609.06628" data-status="ready">
+<h1>[2609.06628] GeoCo-SAVi: Geometry-Consistent Slot Attention for Explicitly Editable Object Representations</h1>
+<p><a href="https://arxiv.org/abs/2609.06628" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>GeoCo-SAVi 通过架构设计和事实校准，解决了现有 Slot 模型中外观与几何混合导致编辑不可预测的问题，实现了显式可编辑的对象表示。</p>
+<h2>解决的问题</h2>
+<p>片段未提供</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种对象级受控解码器，利用尺度引导的每槽 alpha 渲染，使改变位置或尺度参数能直接移动或调整对象支撑区域。</li>
+<li>建立了理想连续协方差表征及显式有限网格限制，以完善空间操作的空间等变性。</li>
+<li>设计了事实对齐和移植目标，用于校准位置语义、跨对象几何语义并抑制重复分配。</li>
+<li>提供了可选的终端外观读出和教师选择器，旨在提升重建质量和更准确的物体 - 身体掩码。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.06712" data-arxiv-id="2609.06712" data-status="ready">
+<h1>[2609.06712] RoLA: Rotary-Positioned Low-Rank Linear Attention for Efficient Diffusion Transformers</h1>
+<p><a href="https://arxiv.org/abs/2609.06712" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>RoLA 通过在后非线性低秩特征上应用旋转位置编码（RoPE）并复用预训练的低秩旋转调度，解决了视频扩散 Transformer 中相对位置几何与可复用线性全局摘要之间的结构性兼容问题。</p>
+<h2>解决的问题</h2>
+<p>在 3D-RoPE 视频扩散 Transformer 中，传统的线性注意力机制要求全局分支为查询无关的可复用摘要，而 RoPE 通过位置依赖的旋转编码相对几何，两者在通常的非线性线性注意力公式下存在冲突（即 RoPE 困境），导致旋转与非线性不交换，使得全局摘要与绝对位置纠缠。</p>
+<h2>创新点</h2>
+<ul>
+<li>揭示了 3D-RoPE 视频 DiT 中的结构性兼容问题：即真正的低秩全局分支必须同时保持相对位置几何结构并作为查询无关的可复用线性摘要，而这两者在常规非线性线性注意力公式下是相互冲突的。</li>
+<li>提出了一种兼容的旋转低秩分支，该方法在非线性低秩特征图之后应用 RoPE，并复用预训练旋转调度中截断的子集，从而在交互层面保留相对位置结构的同时，保持了线性时间复杂度的可复用全局摘要，且无需引入新的位置参数。</li>
+<li>提供了机制层面的验证和实证分析，通过在主流开源视频模型的真实特征上进行机制实验，验证了该分支的相对位置行为，并在代表性骨干网络上通过生成实验展示了在高稀疏度和全栈推理下的有利质量 - 效率权衡。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.06948" data-arxiv-id="2609.06948" data-status="ready">
+<h1>[2609.06948] PRG-Fusion: Orchestrating Generative Priors with Reconstruction Evidence for Driving View Synthesis</h1>
+<p><a href="https://arxiv.org/abs/2609.06948" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>PRG-Fusion 是一种区域感知的视频生成框架，通过结合重建证据（3DGS 和 LiDAR）与生成先验，解决了自动驾驶闭环仿真中新型轨迹视频合成时几何一致性与泛化能力难以平衡的问题。</p>
+<h2>解决的问题</h2>
+<p>片段未提供</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了 PRG-Fusion 框架，通过像素级的 Preserve、Repair 和 Generate (PRG) 标签，显式地量化了偏离轨迹的 3DGS 渲染的空间变化可靠性，使重建证据能直接指导新型轨迹视频合成。</li>
+<li>设计了双分支控制架构并采用两阶段渐进式训练策略，有效整合了稠密的 3DGS 外观信息和稀疏的 LiDAR 几何信息，促进了外观与几何控制的互补性，避免了模型过度依赖视觉条件导致渲染伪影复现的问题。</li>
+<li>在 Waymo 数据集上进行了广泛实验，证明 PRG-Fusion 在新型轨迹视频合成任务中优于现有方法，在视觉质量、几何保真度和视图一致性方面均取得了更优的性能。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.07720" data-arxiv-id="2609.07720" data-status="ready">
+<h1>[2609.07720] Better Call CineCrew: Consistent Ultra-Long Narrative-to-Film Generation</h1>
+<p><a href="https://arxiv.org/abs/2609.07720" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种基于 FilmDSL 的有结构编排层和多智能体框架，旨在解决超长叙事到电影生成中的外观一致性和角色一致性难题。</p>
+<h2>解决的问题</h2>
+<p>现有将电影分解为多个场景并分别生成的方法，难以在长叙事中保持跨片段的外观一致性（如身份、道具、视觉属性）和角色一致性（如行为与性格特征对齐）。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种面向电影的有结构编排层，用于连接长格式剧本与现成的视频模型，通过显式建模电影结构和连续性约束，实现可控且一致的长格式视频合成。</li>
+<li>设计了 FilmDSL，这是一种专为电影生成设计的领域特定语言，能将剧本转换为包含镜头结构、相机指令、资产、连续性链接和角色方向信号的机器可操作表示。</li>
+<li>构建了一个由 FilmDSL 统一的多智能体电影生成框架，该框架作为所有智能体的共享操作协议，统筹规划、生成、批评和细化流程。</li>
+<li>开发了针对电影风格可控性和连续性的评估工具集，提供了身份一致性、故事板/关键帧遵循度、时间稳定性及道具持久性等自动测量指标。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.08108" data-arxiv-id="2609.08108" data-status="ready">
+<h1>[2609.08108] SynthGait-19K: A Physically Grounded Synthetic Video Dataset for Gait Parameter Estimation</h1>
+<p><a href="https://arxiv.org/abs/2609.08108" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>SynthGait-19K 是一个基于物理的大规模合成视频数据集，旨在解决现有步态参数估计数据集在环境单一、视角受限及难以独立研究视觉因素方面的局限性，通过从真实动作捕捉数据生成多样化的合成视频来支持更鲁棒的评估。</p>
+<h2>解决的问题</h2>
+<p>现有步态评估方法依赖 IMU 或标记式动作捕捉，限制了其在日常临床工作流中的应用且难以捕捉真实生活场景；基于视频的步态评估受限于现有数据集规模小、采集环境单一、视角有限以及外观变化不足，导致难以评估方法的泛化能力及独立分析特定视觉因素（如视角、场景）的影响。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了 SynthGait-19K，一个包含 19,273 个 RGB 行走视频的大规模合成数据集，这些数据源自 6,427 个真实动作捕捉序列，涵盖 437 名受试者及六种临床相关的步态参数标注。</li>
+<li>开发了 Gait2Vid 合成视频生成管道，该管道将异构的动作捕捉记录转换为标准 SMPL 表示，利用可控虚拟相机和深度条件视频扩散模型，在室内外场景中生成多样化的 RGB 视频。</li>
+<li>构建了支持独立研究视角、场景变化及合成到真实视觉域偏移的数据集架构，其中源数据跨越五个独立队列，包含健康人群及临床人群，并提供了多种相机配置和视觉外观。</li>
+<li>引入了 GaitXFormer，一种基于 Video-ViT 的直接 RGB 参考模型，用于从单目视频中直接预测步态参数，并验证了合成监督在不同表示形式下向真实视频的有效迁移。</li>
+<li>通过评估多种方法（包括人体网格恢复、生物力学、基于姿态及直接 RGB 方法），揭示了仅改进中间人体网格重建并不必然提升下游步态估计性能，并量化了视角依赖性和缩放行为。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.08215" data-arxiv-id="2609.08215" data-status="ready">
+<h1>[2609.08215] PhysFlow: Physics-Aware Optical Flow for Motion Controllable Video Generation</h1>
+<p><a href="https://arxiv.org/abs/2609.08215" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>PhysFlow 是一种两阶段物理感知视频生成框架，通过解耦运动与外观合成，利用光学流作为密集 2D 运动表示，结合物理属性条件生成更逼真的动态视频。</p>
+<h2>解决的问题</h2>
+<p>现有视频生成模型缺乏对底层物理原理的鲁棒理解，导致生成的视频常出现物体形变不一致、碰撞不真实等物理上不可能的动态，限制了其在具身智能和自动驾驶等需要准确物理推理场景的应用。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种名为 PhysFlow 的物理感知动态视频生成框架，采用两阶段架构以解耦运动合成与纹理合成。</li>
+<li>引入了 PA-Flow 模块，这是一个物理感知的图像到光流生成模型，通过物理注意力机制建模运动属性（如速度、加速度）和材料属性（如密度、杨氏模量）对全局运动和局部形变的影响。</li>
+<li>开发了 FlowRender 模块，这是一种光流引导的视频生成模型，能够在光学流序列的引导下合成具有真实纹理的动态 RGB 视频。</li>
+<li>构建了 PhysVideo 数据集，该数据集基于物理引擎和 3D-GS 渲染，包含超过 10,000 个刚体、弹性体和柔性体对象及 50,000 个视频序列，并标注了运动属性和材料属性，为物理感知视频生成提供了全面的训练数据。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.08275" data-arxiv-id="2609.08275" data-status="ready">
+<h1>[2609.08275] Beyond Coherence: Benchmarking Professional Editing-Technique Execution in Multi-Shot Audio-Video Generation</h1>
+<p><a href="https://arxiv.org/abs/2609.08275" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了 CutCraft，这是首个专注于多镜头音视频生成中编辑技术执行的基准测试，旨在评估模型在镜头结构、转场类型及音画关系等具体编辑指令上的遵循能力，而非仅关注全局连贯性。</p>
+<h2>解决的问题</h2>
+<p>现有评估主要关注音视频生成的全局连贯性和语义合理性，却忽略了多镜头生成中关键的编辑技术执行能力，导致模型虽能生成视觉上合理的视频，却无法可靠地实现非顺序蒙太奇、稳定的镜头结构划分以及精细的音画转场（如 J-cut 和 L-cut）等专业编辑逻辑。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了 CutCraft，这是首个专门针对多镜头音视频生成中编辑技术执行的基准测试，其结构化提示词涵盖了镜头结构、转场关系、音画切割逻辑及蒙太奇设计。</li>
+<li>设计了一种分层混合评估框架，包含镜头对齐层、结合专家模型与工具 grounded 判断的混合指标栈，以及一个基于在线策略蒸馏（OPD）训练的轻量级 MLLM 裁判。</li>
+<li>开发了一个代理式（agentic）编辑基线，将多镜头生成分解为规划、镜头级合成和后处理组合三个阶段，以显式实现专业编辑语义。</li>
+<li>对 13 个主流音视频生成模型进行了系统性实证研究，揭示了当前系统在镜头结构控制、受控音画异步、蒙太奇执行以及美学质量与编辑合规性弱相关等方面的根本局限性。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.08496" data-arxiv-id="2609.08496" data-status="ready">
+<h1>[2609.08496] SignRefine: Adapting Foundational Video Models for Sign Language Generation</h1>
+<p><a href="https://arxiv.org/abs/2609.08496" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>SignRefine 通过引入带有空间定位的局部适配器，将大规模视频扩散 Transformer（DiT）前适应用于手语视频生成，解决了通用模型在手部与面部细节上的分布外问题，并提出了 DATASET 数据集以提升生成内容的可理解性与多样性。</p>
+<h2>解决的问题</h2>
+<p>现有的通用视频扩散模型（VDMs）因训练数据分布差异，无法生成具有合理手部动作和面部表情的手语视频，导致输出模糊或细节丢失；同时，现有的专用手语模型通常在小规模数据集上从头训练，存在过拟合特定 signer 外观、泛化能力差及输出分辨率低的问题。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了首个旨在提升生成手语内容可理解性的通用姿态到视频生成方法，能够针对不同外观生成解剖学精确且富有表现力的手语视频。</li>
+<li>开发了一种基于局部适配器和空间定位的 DiT 条件化方案，能够在不降低骨干模型质量和泛化性的前提下，针对性地优化手部和面部区域的生成质量。</li>
+<li>引入了 DATASET，这是一个大规模的原生手语多模态数据集，提供了多样化的 signer 外观、动态视觉环境和相机构图，解决了现有数据集视觉贫乏和语言偏见的问题。</li>
+<li>通过严格的定量评估和不同水平手语用户的用户研究，证明了该方法在生成可理解且多样化的手语视频方面优于现有基线方法。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.08505" data-arxiv-id="2609.08505" data-status="ready">
+<h1>[2609.08505] Temporal State Transport in Video Generation: Diagnosing and Correcting Spectral Imbalance</h1>
+<p><a href="https://arxiv.org/abs/2609.08505" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种名为“频谱张力”的诊断方法和“频谱传输稳态”的无训练增强方法，旨在解决长视界视频生成中因时间注意力机制失衡导致的身份漂移和背景闪烁问题。</p>
+<h2>解决的问题</h2>
+<p>片段未提供</p>
+<h2>创新点</h2>
+<ul>
+<li>将视频生成的可靠性通过“时间状态传输”（Temporal State Transport）进行框架化，强调时间注意力应保持在平衡的传输机制中，而不仅仅是增加跨帧交互。</li>
+<li>引入了“频谱张力”（Spectral Tension）这一简洁的诊断指标，能够揭示两种时间传输失败模式：碎片化传输（fragmented transport）和过度混合热点（over-mixing hotspots）。</li>
+<li>提出了“频谱传输稳态”（Spectral Transport Homeostasis），这是一种无训练的查询温度调节器，能够选择性地纠正病态的时间状态并提升视频质量。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.09123" data-arxiv-id="2609.09123" data-status="ready">
+<h1>[2609.09123] Mask Forcing: Improving Autoregressive Video Diffusion Distillation via Dual-Noise Masking Rollout</h1>
+<p><a href="https://arxiv.org/abs/2609.09123" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>Mask Forcing 通过双噪声掩码展开策略，在不依赖真实数据策展或额外后训练阶段的情况下，显著提升了自回归视频扩散蒸馏的视觉质量与收敛速度。</p>
+<h2>解决的问题</h2>
+<p>片段未提供</p>
+<h2>创新点</h2>
+<ul>
+<li>提出 Mask Forcing，一种简单有效的方法，通过缓解自回归视频扩散蒸馏中自展开 DMD 训练的反向 KL 目标的模式寻求行为来提升质量，且无需真实视频数据或额外后训练阶段。</li>
+<li>引入双噪声掩码展开策略，通过沿空间和时间轴随机掩码将低噪声信号注入噪声展开输入，从而多样化学生展开轨迹以覆盖更多教师模式，并提供更清晰的上下文以减少误差累积。</li>
+<li>在多种自回归视频蒸馏方法的块级和帧级设置中进行了广泛实验，验证了 Mask Forcing 在显著提升视觉质量（增强真实感和高频细节）和加快收敛方面的有效性。</li>
+<li>通过全面的消融实验进一步验证了不同掩码机制对模型性能的具体影响。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2608.30450" data-arxiv-id="2608.30450" data-status="ready">
+<h1>[2608.30450] FlowVVTON: Flow-Guided Mask-Free Video Virtual Try-On</h1>
+<p><a href="https://arxiv.org/abs/2608.30450" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>FlowVVTON 提出了一种无需掩码的视频虚拟试穿框架，利用光流作为训练时的监督信号来增强时间一致性，从而解决了传统方法对掩码依赖导致的边界伪影及大运动场景下的不稳定问题。</p>
+<h2>解决的问题</h2>
+<p>现有视频虚拟试穿方法严重依赖人体解析掩码或姿态关键点，这些预处理工具在快速运动、自遮挡或复杂光照下不可靠，导致错误传播并产生锯齿边缘和纹理溢出。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种针对大运动场景的无掩码视频试穿框架，消除了对解析掩码的依赖，避免了掩码诱导的边界伪影，并在大人体运动下实现了鲁棒性能。</li>
+<li>将光流仅作为训练时的损失信号使用，通过逐层光流扭曲潜在特征损失（flow-warped latent loss），在所有生成模型层上施加多尺度时间一致性监督。</li>
+<li>设计了一种两阶段训练策略，首先通过微调视频帧建立无掩码的空间对齐，随后通过光流引导的时间监督强制跨帧一致性，使模型无需预处理掩码即可处理大运动并减少伪影。</li>
+<li>在 TikTokDress 合成配对数据上进行了广泛实验，证明 FlowVVTON 在重建质量和时间一致性方面显著优于现有基线，相比 SwiftTry 实现了 5.7 倍的 VFID-R 改进。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.00656" data-arxiv-id="2609.00656" data-status="ready">
+<h1>[2609.00656] Physically Plausible Video Generation via Visual-Semantic Chain-of-Events Conditioning</h1>
+<p><a href="https://arxiv.org/abs/2609.00656" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种以事件为中心的思维链（CoT）框架，通过结合物理感知因果推理与视觉及语义条件，解决了现有文本到视频模型在生成物理合理动态时面临的非结构化因果建模、缺乏过渡视觉锚点以及语义判别力有限三大挑战。</p>
+<h2>解决的问题</h2>
+<p>现有文本到视频（T2V）模型虽能生成逼真场景，但难以保持物理合理性，无法完整复现复杂的物理现象及其随时间演变的因果过程。</p>
+<h2>创新点</h2>
+<ul>
+<li>将物理可解释视频生成（PPVG）重构为以事件为中心的生成任务，将物理现象表示为因果连接的事件链，而非单一的全局场景快照。</li>
+<li>设计了物理驱动的事件链推理（PECR）模块，通过构建演化的场景图链并结合公式推导的物理量，对事件边界和过渡动态进行结构化因果建模。</li>
+<li>提出了过渡感知的路由关键帧条件（TRKC）模块，为每个中间状态提供专用的视觉锚点，利用时间变化的软引导弥合离散边界状态与连续视频动态之间的差距。</li>
+<li>开发了物理注入的对比语义引导（PCSG）模块，通过对比物理合理动态与其违反物理约束的反事实变体，增强语义条件的判别力以区分细微的物理差异。</li>
+<li>在 PhyGenBench、VideoPhy、PhyWorldBench 和 Physics-IQ 四个基准上进行了广泛评估，证明该方法在多种物理域和交互类型中均优于现有方法，并保持了事件的时间顺序和中间状态的完整性。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.00919" data-arxiv-id="2609.00919" data-status="ready">
+<h1>[2609.00919] HyperSketch: Controllable Video Sketching in a Style Hyperspace</h1>
+<p><a href="https://arxiv.org/abs/2609.00919" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>HyperSketch 提出了一种基于多元 Bernstein 基多项式的向量草图动画生成方法，首次在多维风格超空间中实现了连续可调且时空可控的风格变化。</p>
+<h2>解决的问题</h2>
+<p>现有方法在风格可控性方面存在三个关键局限性：首先，风格维度单一且离散，无法支持跨多个维度的连续微调；其次，风格表达缺乏时间动态性，动画在整个序列中保持统一风格，无法随内容动态演变；最后，缺乏用户交互或实时编辑支持，用户无法即时调整风格参数或编辑特定时间片段。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种基于多元 Bernstein 基多项式的向量草图动画表示方法，联合参数化时间轴和多个风格维度的笔触控制点，确保多维风格空间中的连续性和可微性。</li>
+<li>设计了一种多风格草图动画生成解决方案，包含端到端优化框架（集成语义损失、墨迹密度损失、文本引导损失、时间一致性损失和跨风格一致性损失）以及多阶段维度增量优化策略。</li>
+<li>开发了一个基于 Web 的可视化交互界面，允许用户通过编辑随时间变化的风格参数曲线来直观定义动态风格演变，并实时预览生成结果。</li>
+<li>构建了四维连续风格超空间模型，将保真度、简洁性和文本引导强度三个语义可解释的维度与时间维度结合，使每个参数组合对应具有特定风格的草图动画帧。</li>
+</ul>
+</article>
     <article class="summary-article summary-topic-entry" id="summary-2608.29904" data-arxiv-id="2608.29904" data-status="ready">
 <h1>[2608.29904] Off-Manifold Refinement: Guiding Video Generators with a Frozen World Model</h1>
 <p><a href="https://arxiv.org/abs/2608.29904" rel="nofollow">arXiv 原文</a></p>
@@ -251,6 +493,6 @@
 </article>
     </div>
   </main>
-  <script type="application/json" id="summary-catalog">{"papers":{"2608.29621":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.29621"},"2608.29904":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.29904"},"2609.01252":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.01252"},"2609.01277":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.01277"},"2609.01551":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.01551"},"2609.02664":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.02664"},"2609.03528":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.03528"},"2609.03563":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.03563"},"2609.03586":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.03586"},"2609.03629":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.03629"},"2609.03820":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.03820"},"2609.04031":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.04031"},"2609.04120":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.04120"},"2609.04190":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.04190"},"2609.04903":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.04903"}},"topic":"Video Gen&Edit","version":1}</script>
+  <script type="application/json" id="summary-catalog">{"papers":{"2608.29621":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.29621"},"2608.29904":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.29904"},"2608.30450":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.30450"},"2609.00610":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.00610"},"2609.00656":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.00656"},"2609.00919":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.00919"},"2609.01252":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.01252"},"2609.01277":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.01277"},"2609.01551":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.01551"},"2609.02367":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.02367"},"2609.02664":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.02664"},"2609.03528":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.03528"},"2609.03563":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.03563"},"2609.03586":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.03586"},"2609.03629":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.03629"},"2609.03820":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.03820"},"2609.04031":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.04031"},"2609.04120":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.04120"},"2609.04190":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.04190"},"2609.04903":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.04903"},"2609.06478":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.06478"},"2609.06628":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.06628"},"2609.06712":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.06712"},"2609.06948":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.06948"},"2609.07720":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.07720"},"2609.08108":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.08108"},"2609.08215":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.08215"},"2609.08275":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.08275"},"2609.08496":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.08496"},"2609.08505":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.08505"},"2609.09123":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.09123"}},"topic":"Video Gen&Edit","version":1}</script>
 </body>
 </html>
