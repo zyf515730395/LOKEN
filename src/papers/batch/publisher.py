@@ -25,7 +25,7 @@ from papers.summaries.paths import run_lock
 from papers.summaries.publisher import load_ready_keys
 
 from . import workflow
-from .catalog import ArchiveCandidate
+from .catalog import ArchiveCandidate, archive_review_state
 
 
 ROOT = Path(__file__).resolve().parents[3]
@@ -76,9 +76,7 @@ def _load_archive_items(archive_path: Path, ledger_path: Path):
                 parsed = parse_entry(paper_id, row)
                 ledger_entry = ledger.get(paper_id, {})
                 historical = not bool(ledger_entry)
-                review_state = ledger_entry.get("status", "unreviewed")
-                if review_state == "accepted" and ledger_entry.get("selected_topic") != topic:
-                    review_state = "accepted_elsewhere"
+                review_state = archive_review_state(ledger_entry, topic)
                 title = ledger_entry.get("title") or parsed["title"]
                 abstract = ledger_entry.get("abstract") or ""
                 if not isinstance(title, str) or not isinstance(abstract, str):
@@ -168,6 +166,8 @@ def publish_annotations(
         labels = load_annotation_definitions(config_path)
         allowlists = load_topic_tag_allowlists(config_path, labels)
         annotations = load_annotation_catalog(catalog_path, labels)
+        rechecked_ids = {paper_id for paper_id, entry in load_candidate_ledger(ledger_path)['papers'].items()
+                         if entry.get('recheck_decisions')}
         archive_items = _load_archive_items(Path(archive_path), Path(ledger_path))
         topics_by_id: dict[str, set[str]] = {}
         for topic, paper_id in archive_items:
@@ -190,6 +190,9 @@ def publish_annotations(
                 invalid += 1
                 continue
             paper_id = item.arxiv_id
+            if paper_id in rechecked_ids and paper_id in annotations:
+                existing_ids.add(paper_id)
+                continue
             allowed_labels = annotation_labels_for_topics(
                 labels,
                 allowlists,

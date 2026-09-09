@@ -1,6 +1,6 @@
 # Public paper data
 
-- `archive.json` is the canonical historical/public paper archive. Preserve every existing historical entry.
+- `archive.json` is the canonical historical/public paper archive. Preserve historical entries except during an explicitly authorized full recheck: remove only explicitly rejected topic memberships, retain uncertain memberships, and record reasons and original rows in private recheck receipts. Synchronize ledger decisions and annotations through a recoverable, concurrency-checked transaction.
 - `arxiv-candidates.json` owns collection cursors and pending/accepted/rejected decisions; only pending candidates are reviewed.
 - `paper-annotations.json` owns validated public topic/tag/type/affiliation metadata.
 - Inference source documents, responses, caches, receipts, reports and queue checkpoints never belong here; they remain under ignored `build/paper-summaries/`. Models remain in the configured private runtime location.

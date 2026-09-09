@@ -71,6 +71,9 @@ def review_topics(items, source, model, base_url, timeout):
     result = {}
     unresolved = []
     for item in items:
+        if item.review_state == 'recheck_uncertain':
+            result[item.topic] = {'accept': None, 'reason': '全量复核证据不足，保留此主题并等待复核。', 'origin': 'ledger'}
+            continue
         if item.review_state in {'accepted', 'rejected', 'accepted_elsewhere'}:
             result[item.topic] = {'accept': item.review_state == 'accepted',
                                   'reason': ('正式筛选账本已将此论文归入其他主题。'

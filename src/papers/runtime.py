@@ -76,6 +76,8 @@ def _push_main_once(*, timeout=GIT_PUSH_TIMEOUT_SECONDS):
 
 
 def _push_main():
+    if (PRIVATE / 'recheck/local-only.json').exists():
+        raise RuntimeError('local recheck review is active; remote publication is disabled')
     _push_main_once()
     git('fetch', 'origin', 'main')
     if git('rev-parse', 'HEAD', capture=True) != git('rev-parse', 'origin/main', capture=True):
@@ -83,6 +85,8 @@ def _push_main():
 
 
 def clean_pull():
+    if (PRIVATE / 'recheck/local-only.json').exists():
+        return False
     if git('branch', '--show-current', capture=True) != 'main':
         raise RuntimeError('runtime requires main; integrate the reviewed migration first')
     if git('status', '--porcelain', capture=True):
@@ -105,6 +109,10 @@ def allowed_path(path):
 
 
 def publish(mode):
+    if (PRIVATE / 'recheck/local-only.json').exists():
+        command(sys.executable, '-m', 'papers', 'build')
+        print('Local review: built results; Git publication remains disabled', flush=True)
+        return
     # No untracked or unrelated file can hitchhike in an automatic commit.
     names = git('diff', '--name-only', capture=True).splitlines()
     staged = git('diff', '--cached', '--name-only', capture=True).splitlines()
