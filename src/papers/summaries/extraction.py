@@ -19,7 +19,7 @@ _WORD = re.compile(r"[a-z0-9]+", re.IGNORECASE)
 _REFERENCE_HEADING = re.compile(r"(?im)^\s*(?:references|bibliography)\s*$")
 _INTRODUCTION_HEADING = re.compile(
     r"^(?:(?P<marker>\d+(?:\.\d+)*|[ivxlcdm]+)\.?\s+)?"
-    r"introduction\s*[:.]*$",
+    r"introduction(?:\s*(?:and|&)\s*related\s+works?)?\s*[:.]*$",
     re.IGNORECASE,
 )
 _NUMBERED_SECTION = re.compile(
@@ -75,11 +75,16 @@ def _clean(value: str) -> str:
 
 
 def _is_introduction_heading(value: str) -> bool:
-    match = _INTRODUCTION_HEADING.fullmatch(_clean(value))
+    match = _INTRODUCTION_HEADING.fullmatch(_clean_heading(value))
     if match is None:
         return False
     marker = match.group("marker")
     return marker is None or _section_number_from_marker(marker) is not None
+
+
+def _clean_heading(value: str) -> str:
+    # Some documents include the same automatic and handwritten section number.
+    return re.sub(r'^(\d+)\s+\1\.?\s+', r'\1 ', _clean(value))
 
 
 def _section_number_from_marker(marker: str) -> tuple[str, tuple[int, ...]] | None:
@@ -101,7 +106,7 @@ def _section_number_from_marker(marker: str) -> tuple[str, tuple[int, ...]] | No
 
 
 def _section_number(value: str) -> tuple[str, tuple[int, ...]] | None:
-    match = _NUMBERED_SECTION.fullmatch(_clean(value))
+    match = _NUMBERED_SECTION.fullmatch(_clean_heading(value))
     if match is None:
         return None
     marker = match.group("decimal") or match.group("roman")
@@ -248,6 +253,7 @@ class _ArxivHTMLParser(HTMLParser):
         super().__init__(convert_charrefs=True)
         self.capture_depth = 0
         self.skip_depth = 0
+        self.abstract_depth = 0
         self.current_tag: str | None = None
         self.current_classes = ""
         self.current: list[str] = []
@@ -268,9 +274,13 @@ class _ArxivHTMLParser(HTMLParser):
             self.skip_depth += 1
         elif self.skip_depth and tag not in self._VOID_TAGS:
             self.skip_depth += 1
+        if self.capture_depth and 'ltx_abstract' in classes.split():
+            self.abstract_depth += 1
+        elif self.abstract_depth and tag not in self._VOID_TAGS:
+            self.abstract_depth += 1
         if self.capture_depth and not self.skip_depth and tag in self._BLOCK_TAGS:
             self.current_tag = tag
-            self.current_classes = classes
+            self.current_classes = classes + (' ltx_abstract' if self.abstract_depth else '')
             self.current = []
 
     def handle_data(self, data: str) -> None:
@@ -289,6 +299,8 @@ class _ArxivHTMLParser(HTMLParser):
             self.current = []
         if self.skip_depth:
             self.skip_depth -= 1
+        if self.abstract_depth:
+            self.abstract_depth -= 1
         if self.capture_depth:
             self.capture_depth -= 1
 
@@ -317,6 +329,8 @@ def extract_html_document(raw: bytes, expected_title: str) -> PaperDocument:
     heading = "正文"
     paragraphs: list[str] = []
     in_abstract = False
+    has_abstract_container = any('ltx_abstract' in classes.split() for _, classes, _ in parser.blocks)
+    introduction_level = None
     for tag, classes, value in parser.blocks:
         class_set = set(classes.split())
         if tag == "h1" and not title:
@@ -325,13 +339,19 @@ def extract_html_document(raw: bytes, expected_title: str) -> PaperDocument:
         if "ltx_abstract" in class_set or "ltx_title_abstract" in class_set:
             in_abstract = True
         if tag.startswith("h"):
+            level = int(tag[1])
+            if introduction_level is not None and level > introduction_level:
+                paragraphs.append(value)
+                continue
             if paragraphs:
                 sections.append(PaperSection(heading, "\n".join(paragraphs)))
                 paragraphs = []
-            heading = value
-            in_abstract = "abstract" in value.casefold()
+            heading = _clean_heading(value)
+            introduction_level = level if _is_introduction_heading(heading) else None
+            in_abstract = ('ltx_abstract' in class_set or 'ltx_title_abstract' in class_set
+                           or "abstract" in value.casefold())
             continue
-        if in_abstract:
+        if ('ltx_abstract' in class_set) if has_abstract_container else in_abstract:
             abstract_parts.append(value)
         else:
             paragraphs.append(value)
@@ -343,6 +363,47 @@ def extract_html_document(raw: bytes, expected_title: str) -> PaperDocument:
         sections=tuple(sections),
     )
     return _validate_document(document, expected_title)
+
+
+class _AbstractPageParser(HTMLParser):
+    def __init__(self):
+        super().__init__(convert_charrefs=True)
+        self.metadata = {}
+        self.depth = 0
+        self.parts = []
+
+    def handle_starttag(self, tag, attrs):
+        attrs = dict(attrs)
+        if tag == 'meta' and attrs.get('name', '').startswith('citation_'):
+            self.metadata[attrs['name']] = attrs.get('content', '')
+        if tag == 'blockquote' and 'abstract' in attrs.get('class', '').split():
+            self.depth = 1
+        elif self.depth and tag not in _ArxivHTMLParser._VOID_TAGS:
+            self.depth += 1
+
+    def handle_endtag(self, tag):
+        if self.depth and tag not in _ArxivHTMLParser._VOID_TAGS:
+            self.depth -= 1
+
+    def handle_data(self, value):
+        if self.depth:
+            self.parts.append(value)
+
+
+def extract_abstract_page(raw: bytes, paper_id: str, expected_title: str) -> str:
+    parser = _AbstractPageParser()
+    parser.feed(raw.decode('utf-8', errors='strict'))
+    meta = parser.metadata
+    identity = meta.get('citation_arxiv_id', '')
+    pdf = re.fullmatch(r'https://arxiv\.org/pdf/(\d{4}\.\d{4,5})(?:v[1-9]\d*)?(?:\.pdf)?', meta.get('citation_pdf_url', ''))
+    if (not identity and pdf is None or identity and re.sub(r'v[1-9]\d*$', '', identity) != paper_id
+            or pdf is not None and pdf.group(1) != paper_id
+            or _title_similarity(meta.get('citation_title', ''), expected_title) < .45):
+        raise PaperSummaryError('paper_identity_mismatch', 'official abstract metadata does not match the paper')
+    abstract = re.sub(r'^abstract\s*[:.—-]*\s*', '', _clean(' '.join(parser.parts)), flags=re.I)
+    if not 40 <= len(abstract) <= 16000:
+        raise PaperSummaryError('annotation_evidence_invalid', 'official abstract block is unavailable')
+    return abstract
 
 
 def extract_pdf_document(raw: bytes, expected_title: str) -> PaperDocument:
