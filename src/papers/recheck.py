@@ -37,7 +37,7 @@ from shared.loopback_chat import LoopbackChatError, LoopbackChatTransport, valid
 from shared.rendering import atomic_write_bytes
 
 POLICY = 'full-archive-recheck-v1'
-INFERENCE_REVISION = 'constrained-recovery-v4'
+INFERENCE_REVISION = 'constrained-recovery-v5'
 DOWNLOADS = DownloadGate(5)
 
 
@@ -185,7 +185,17 @@ def infer_review(system, material, labels, args, record_attempt=None):
             decisions, annotation = parse_review(raw, material['id'], material['requested_topics'], labels)
             if any(len(value['reason'].strip()) < 40 for value in decisions.values()):
                 raise ValueError('incomplete review rationale')
+            _, allowlists, _ = taxonomy()
+            retained_topics = [topic for topic, value in decisions.items() if value['accept'] is not False]
+            annotation = filter_annotation_for_topics(annotation, labels, allowlists, retained_topics)
+            if any(value['accept'] is True for value in decisions.values()) and not annotation.tags:
+                if attempt:
+                    raise PaperSummaryError('annotation_tags_missing', 'accepted paper still has no evidence-backed technical tags')
+                messages.append({'role': 'user', 'content': '上次接受了论文却没有技术标签。重新逐项检查 taxonomy 中任务、方法、表示等维度，以摘要明确陈述的核心贡献选择已有技术标签，最多5个且每维度最多2个。不得照抄示例空列表，不得猜测；确实没有任何支持证据时仍留空。重新输出完整 decisions 和 annotation JSON。'})
+                continue
             return decisions, annotation, attempts
+        except PaperSummaryError:
+            raise
         except (ValueError, PaperAnnotationError):
             if attempt:
                 raise PaperSummaryError('invalid_review', 'model JSON failed validation twice') from None
@@ -340,8 +350,10 @@ def recover():
     sync_parent(journal)
 
 
-def recovery_ids(state, archive):
+def recovery_ids(state, archive, annotations=None):
     pending = set(state['failed']) | set(state['uncertain_ids']) | set(state['queue'][state['offset']:])
+    if annotations is not None:
+        pending.update(paper_id for paper_id in ordered_ids(archive) if not annotations.get(paper_id, {}).get('tags'))
     return [paper_id for paper_id in ordered_ids(archive) if paper_id in pending]
 
 
@@ -367,7 +379,7 @@ def run_batch(args):
         if args.retry_failures and (state['offset'] >= len(state['queue']) or args.restart_recovery):
             if state['round'] == 0 and state['offset'] < len(state['queue']):
                 raise ValueError('finish first pass before restarting recovery')
-            retry = recovery_ids(state, current['archive'])
+            retry = recovery_ids(state, current['archive'], current['annotations']['papers'])
             if retry:
                 atomic_write_json(location(f'round-{state["round"]}.json'), state)
                 state.update(queue=retry, offset=0, round=state['round'] + 1, inference_revision=INFERENCE_REVISION)
