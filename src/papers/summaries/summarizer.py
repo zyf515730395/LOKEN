@@ -11,6 +11,17 @@ from .cache import PaperSummaryCache, cache_key
 from .models import AcquiredPaper, PaperSummary, PaperSummaryError
 from .prompts import build_chunks, map_messages, reduce_messages
 
+SUMMARY_SCHEMA = {
+    'type': 'object', 'additionalProperties': False,
+    'required': ['one_sentence', 'problem', 'contributions'],
+    'properties': {
+        'one_sentence': {'type': 'string', 'minLength': 1, 'maxLength': 600, 'pattern': r'^[^"\\<>]*$'},
+        'problem': {'type': 'string', 'minLength': 1, 'maxLength': 1600, 'pattern': r'^[^"\\<>]*$'},
+        'contributions': {'type': 'array', 'minItems': 3, 'maxItems': 6,
+                          'items': {'type': 'string', 'minLength': 1, 'maxLength': 1000, 'pattern': r'^[^"\\<>]*$'}},
+    },
+}
+
 
 def _strict_object(pairs: list[tuple[str, object]]) -> dict[str, object]:
     output: dict[str, object] = {}
@@ -55,8 +66,9 @@ def _complete(
 ) -> PaperSummary:
     try:
         return parse_summary(transport.complete(
-            messages, model=model, timeout=timeout,
+            (*messages, {'role': 'user', 'content': '请写完整句子。字符串内容使用中文引号或不加引号，不使用 ASCII 双引号、反斜杠或尖括号。'}), model=model, timeout=timeout,
             max_tokens=DEFAULT_MODEL_MAX_TOKENS, enable_thinking=False,
+            json_schema=SUMMARY_SCHEMA,
         ))
     except LoopbackChatError as error:
         raise PaperSummaryError(error.code, error.message) from None

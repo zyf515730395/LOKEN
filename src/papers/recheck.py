@@ -32,10 +32,12 @@ from papers.summaries.models import PaperSummary, PaperSummaryError
 from papers.summaries.paths import private_path, normalize_arxiv_id, run_lock
 from papers.summaries.publisher import load_ready_keys, publish_summaries
 from papers.summaries.summarizer import summarize_paper
+from papers.summaries.extraction import extract_html_document, extract_pdf_document, extract_introduction
 from shared.loopback_chat import LoopbackChatError, LoopbackChatTransport, validate_loopback_base_url
 from shared.rendering import atomic_write_bytes
 
 POLICY = 'full-archive-recheck-v1'
+INFERENCE_REVISION = 'constrained-recovery-v4'
 DOWNLOADS = DownloadGate(5)
 
 
@@ -146,20 +148,43 @@ def parse_review(raw, paper_id, topics, labels):
     return value['decisions'], annotation
 
 
+def review_schema(topics, labels):
+    """Closed vocabulary comes from this paper's existing configured topic dimensions."""
+    tags = [label.name for label in labels if label.group != 'topic']
+    decision = {'type': 'object', 'additionalProperties': False, 'required': ['accept', 'reason'],
+                'properties': {'accept': {'type': ['boolean', 'null']},
+                               'reason': {'type': 'string', 'minLength': 40, 'maxLength': 800, 'pattern': r'^[^"\\<>]*$'}}}
+    return {'type': 'object', 'additionalProperties': False, 'required': ['decisions', 'annotation'],
+            'properties': {
+                'decisions': {'type': 'object', 'additionalProperties': False, 'required': topics,
+                              'properties': {topic: decision for topic in topics}},
+                'annotation': {'type': 'object', 'additionalProperties': False,
+                               'required': ['topics', 'tags', 'paper_type', 'institutions'], 'properties': {
+                    'topics': {'type': 'array', 'maxItems': len(topics), 'items': {'type': 'string', 'enum': topics}},
+                    'tags': {'type': 'array', 'maxItems': 5, 'items': {'type': 'string', 'enum': tags}},
+                    'paper_type': {'type': 'string', 'enum': ['paper', 'survey']},
+                    'institutions': {'type': 'array', 'maxItems': 0, 'items': {'type': 'string'}},
+                }},
+            }}
+
+
 def infer_review(system, material, labels, args, record_attempt=None):
     """Retry malformed output once without guessing or repairing model judgments."""
-    messages = [{'role': 'system', 'content': system},
+    messages = [{'role': 'system', 'content': system + '\n主题 description 中明确 includes 的各任务是并列的纳入范围，核心贡献符合其中任何一项即可；不得额外要求同时生成新资产，不得仅因应用于机器人或定位而排除符合范围的重建或 structure from motion 方法。仅把范围内方法当工具且无对应技术贡献时才可排除；证据不能确定则 accept=null。每个 reason 至少40字，写出完整的核心贡献及其与主题的关系，不得以半句话结束。字符串内容使用中文引号或不加引号，不使用 ASCII 双引号、反斜杠或尖括号。'},
                 {'role': 'user', 'content': json.dumps(material, ensure_ascii=False)}]
     attempts = []
     for attempt in range(2):
         raw = LoopbackChatTransport(args.base_url).complete(
             tuple(messages), model=args.model, timeout=args.timeout,
-            max_tokens=DEFAULT_MODEL_MAX_TOKENS, enable_thinking=False)
+            max_tokens=DEFAULT_MODEL_MAX_TOKENS, enable_thinking=False,
+            json_schema=review_schema(material['requested_topics'], labels))
         attempts.append(raw)
         if record_attempt is not None:
             record_attempt(attempts)
         try:
             decisions, annotation = parse_review(raw, material['id'], material['requested_topics'], labels)
+            if any(len(value['reason'].strip()) < 40 for value in decisions.values()):
+                raise ValueError('incomplete review rationale')
             return decisions, annotation, attempts
         except (ValueError, PaperAnnotationError):
             if attempt:
@@ -169,12 +194,27 @@ def infer_review(system, material, labels, args, record_attempt=None):
             messages.append({'role': 'user', 'content': '上次响应格式不合法。请重新判断并输出合法 JSON；decisions 和 annotation 必须是两个并列顶层字段。结构示例（示例值不是判断结果）：' + json.dumps(example, ensure_ascii=False)})
 
 
+def refresh_source(client, source, title):
+    raw = source.source_path.read_bytes()
+    if hashlib.sha256(raw).hexdigest() != source.source_sha256:
+        raise PaperSummaryError('source_identity_changed', 'cached source changed during re-extraction')
+    previous = source.source_path.parent / 'extracted.json'
+    backup = location(source.arxiv_id + '-extraction-before.json')
+    if not backup.exists():
+        atomic_write_json(backup, read(previous))
+    extract = extract_html_document if source.kind == 'html' else extract_pdf_document
+    document = extract(raw, title)
+    return client._store_result(source.arxiv_id, source.kind, raw, document, title,
+                                source_id=read(previous).get('source_id', source.arxiv_id))
+
+
 def process(paper_id, archive, ledger, annotations, ready, args):
     rows = {t: entries[paper_id] for t, entries in archive.items() if paper_id in entries}
     labels, allowlists, aliases = taxonomy()
     topics = list(dict.fromkeys(aliases[t] for t in rows))
     fingerprint = digest({'rows': rows, 'ledger': ledger['papers'].get(paper_id),
                           'annotation': annotations.get(paper_id), 'policy': POLICY,
+                          'inference_revision': INFERENCE_REVISION,
                           'config': paths.CONFIG.read_text(encoding='utf-8'), 'model': args.model})
     receipt = location(paper_id + '.json')
     if receipt.exists():
@@ -191,10 +231,18 @@ def process(paper_id, archive, ledger, annotations, ready, args):
     try:
         source = client._load_cached(paper_id, title)
         if source:
+            needs_refresh = not source.document.abstract
+            if any((t, paper_id) not in ready for t in rows):
+                try:
+                    extract_introduction(source.document)
+                except PaperSummaryError:
+                    needs_refresh = True
+            if needs_refresh:
+                source = refresh_source(client, source, title)
             abstract = source.document.abstract.strip() or abstract
         if len(abstract) < 40:
-            source = client.acquire(paper_id, title)
-            abstract = source.document.abstract.strip()
+            source = source or client.acquire(paper_id, title)
+            abstract = source.document.abstract.strip() or client.acquire_abstract(paper_id, title)
         if not 40 <= len(abstract) <= 16000:
             raise PaperSummaryError('annotation_evidence_invalid', 'abstract unavailable; preserve paper')
         allowed = annotation_labels_for_topics(labels, allowlists, topics)
@@ -204,6 +252,7 @@ def process(paper_id, archive, ledger, annotations, ready, args):
             '同时判断 requested_topics 中每个主题。只有研究核心方法或主要贡献匹配才接受；'
             '关键词命中、仅使用现有技术的下游应用不足以接受。多个主题可同时接受。'
             '不相关为 false；证据不足为 null，禁止把不确定当作不相关。'
+            '如果摘要已明确说明核心贡献不属于所请求主题，选择 false；null 仅用于材料本身不足以作出相关性判断。'
             '综述判断依据主要贡献，不能仅凭标题含 review、survey 或 taxonomy。'
             '使用完整证据给所有论文重新分类与标注。'
             '本次输出格式替换为严格 JSON：'
@@ -241,6 +290,7 @@ def process(paper_id, archive, ledger, annotations, ready, args):
                 summary_error = error.code
         record = {'id': paper_id, 'fingerprint': fingerprint, 'status': 'ready',
                   'model': args.model, 'policy': POLICY, 'reviewed_at': utc_now(), 'original_rows': rows,
+                  'inference_revision': INFERENCE_REVISION,
                   'metadata': {'title': title, 'abstract': abstract, 'updated': parsed['date'].isoformat(),
                                'paper_url': f'https://arxiv.org/abs/{paper_id}',
                                'pdf_url': f'https://arxiv.org/pdf/{paper_id}.pdf', 'matched_topics': topics},
@@ -290,6 +340,11 @@ def recover():
     sync_parent(journal)
 
 
+def recovery_ids(state, archive):
+    pending = set(state['failed']) | set(state['uncertain_ids']) | set(state['queue'][state['offset']:])
+    return [paper_id for paper_id in ordered_ids(archive) if paper_id in pending]
+
+
 def run_batch(args):
     with run_lock():
         if not location('local-only.json').exists():
@@ -309,13 +364,15 @@ def run_batch(args):
         state.setdefault('uncertain_ids', [])
         state.setdefault('initial_total', len(state['queue']))
         state.setdefault('round', 0)
-        if args.retry_failures and state['offset'] >= len(state['queue']):
-            pending = set(state['failed']) | set(state['uncertain_ids'])
-            retry = [paper_id for paper_id in ordered_ids(current['archive']) if paper_id in pending]
+        if args.retry_failures and (state['offset'] >= len(state['queue']) or args.restart_recovery):
+            if state['round'] == 0 and state['offset'] < len(state['queue']):
+                raise ValueError('finish first pass before restarting recovery')
+            retry = recovery_ids(state, current['archive'])
             if retry:
                 atomic_write_json(location(f'round-{state["round"]}.json'), state)
-                state.update(queue=retry, offset=0, round=state['round'] + 1)
+                state.update(queue=retry, offset=0, round=state['round'] + 1, inference_revision=INFERENCE_REVISION)
             args.retry_failures = False
+            args.restart_recovery = False
         atomic_write_json(state_path, state)
         ids = state['queue'][state['offset']:state['offset'] + args.batch_size]
         if not ids:
@@ -376,6 +433,7 @@ def main(argv=None):
     parser.add_argument('--status', action='store_true')
     parser.add_argument('--dry-run', action='store_true')
     parser.add_argument('--retry-failures', action='store_true', help='after current pass finishes, retry failed and uncertain papers in descending ID order')
+    parser.add_argument('--restart-recovery', action='store_true', help='preserve and rebuild an interrupted recovery pass; requires --retry-failures')
     args = parser.parse_args(argv)
     if args.status or args.dry_run:
         state = read(location('state.json')) if location('state.json').exists() else {'queue': ordered_ids(read(paths.ARCHIVE)), 'offset': 0}
@@ -385,6 +443,8 @@ def main(argv=None):
     if not 1 <= args.batch_size <= 100 or not math.isfinite(args.timeout) or args.timeout <= 0 or not args.model.strip() or (args.max_batches is not None and args.max_batches < 1):
         parser.error('invalid batch size, timeout, model or max-batches')
     validate_loopback_base_url(args.base_url)
+    if args.restart_recovery and not args.retry_failures:
+        parser.error('--restart-recovery requires --retry-failures')
     if sys.platform != 'linux':
         parser.error('run recheck inside WSL to share the runtime lock')
     from papers.runtime import daily_waiting, lock, model_service
