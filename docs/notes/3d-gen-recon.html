@@ -13,6 +13,68 @@
       <h1>3D Gen&amp;Recon · 论文要点</h1>
     </header>
     <div class="summary-topic-list">
+    <article class="summary-article summary-topic-entry" id="summary-2609.02352" data-arxiv-id="2609.02352" data-status="ready">
+<h1>[2609.02352] Atlas: Algorithm-Hardware Co-Design for On-Device City-Scale 3D Gaussian Splatting in VR</h1>
+<p><a href="https://arxiv.org/abs/2609.02352" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>Atlas 提出了一种针对移动 VR 设备的城市级 3D 高斯泼溅算法与硬件协同设计框架，通过分层内存卸载、异步高斯管理、时序感知的 LOD 搜索及立体光栅化技术，在无需网络连接的情况下实现了大规模场景的实时渲染。</p>
+<h2>解决的问题</h2>
+<p>现有 3D 高斯泼溅加速框架难以扩展到城市级大规模场景，因为此类场景的内存需求远超典型移动 VR 设备的容量，且依赖网络连接的云渲染方案在移动场景下可靠性不足。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种专为城市级 3D 高斯泼溅设计的可扩展设备端渲染框架，解决了大规模场景内存需求与移动设备有限容量之间的矛盾。</li>
+<li>设计了一种异步运行时高斯管理机制，通过按需加载和分层存储策略，将设备内存压力降低了 7.0 倍。</li>
+<li>提出了时序感知的 LOD 搜索算法，利用帧间相关性优化数据访问，将 LOD 搜索瓶颈加速了 8.1 倍。</li>
+<li>引入了一种立体光栅化流水线，利用双目视图间的三角测量共享计算结果，将光栅化瓶颈加速了 1.9 倍。</li>
+<li>设计了轻量级行缓冲区架构，实现了左右眼渲染间的细粒度流水线并行，使整体运动到光子速度提升了 18.5 倍。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.03117" data-arxiv-id="2609.03117" data-status="ready">
+<h1>[2609.03117] Kernel Reboot: Breaking the Boundaries of Neural Tangent Kernels for Neural Fields</h1>
+<p><a href="https://arxiv.org/abs/2609.03117" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 MetaQuill-KIP 方法，通过结合 NTK-KIP 的非线性表示能力与 MetaQuill 的元学习特征，解决了传统神经切线核在神经场表示学习中存在的线性函数空间限制及无法跨任务元学习可复用特征的两大问题。</p>
+<h2>解决的问题</h2>
+<p>片段未提供关于具体实验数据缺失或特定场景下性能不足的明确描述。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出 NTK-KIP 方法，通过蒸馏紧凑的任务特定诱导点来向神经切线核注入非线性表示能力。</li>
+<li>设计 MetaQuill 方法，提供真正的特征学习和元初始化，使新任务仅需少量步骤即可适应。</li>
+<li>构建 MetaQuill-KIP 融合框架，统一上述两种效应，将神经切线风格的神经场转化为实用的快速自适应单实例重建器。</li>
+<li>证明该方法在无需大型预训练生成先验的情况下，仍能实现解析的闭式拟合控制及极快的单实例适应速度。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.03931" data-arxiv-id="2609.03931" data-status="ready">
+<h1>[2609.03931] Sparse auto-regressive modeling for scene generation from multi-view images</h1>
+<p><a href="https://arxiv.org/abs/2609.03931" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种名为 SPAR3S 的方法，通过稀疏自回归建模，利用多视图图像的测光监督直接生成稀疏对齐的 3D 潜在表示，并将其解码为 3D 高斯泼溅场景，从而解决从稀疏无约束视图生成完整 3D 场景的问题。</p>
+<h2>解决的问题</h2>
+<p>现有基于多视图扩散模型的方法需要已知相机位姿或强假设，导致相机采样与场景重建的鸡生蛋问题，且缺乏显式 3D 表示导致几何一致性不足；同时，密集体素表示在高分辨率下计算成本过高，且大规模 3D 监督数据稀缺限制了全监督 3D 生成学习的应用。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种从多视图测光监督中学习的稀疏体素对齐 3D 潜在空间，无需任何真值 3D 监督。</li>
+<li>提出了一种感知占据率的掩码自回归 Transformer，用于在该潜在空间中进行条件场景补全。</li>
+<li>在合成室内场景和真实世界数据集上验证了该方法，展示了其优于先前前馈 3DGS 生成和确定性方法的新型视图合成质量。</li>
+<li>设计了编码器 - 解码器架构，将任意多视图输入映射为稀疏紧凑的基于体素的 3D 潜在表示，并通过稀疏自回归 Transformer 预测体素占据率和潜在令牌特征。</li>
+<li>利用稀疏性、空间压缩和结构化 3D 令牌排序，实现了高效且保持体素连贯性的 3D 生成范式。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.05255" data-arxiv-id="2609.05255" data-status="ready">
+<h1>[2609.05255] Compact Neural Appearance Models for Efficient Gaussian Splatting</h1>
+<p><a href="https://arxiv.org/abs/2609.05255" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种受控的端到端比较，评估了高斯泼溅中不同视图依赖外观模型的性能，并介绍了一种基于每个原语潜在码和共享 MLP 的紧凑无基神经外观模型。</p>
+<h2>解决的问题</h2>
+<p>现有方法主要依赖低阶球谐函数（SH），导致外观参数占主导地位，增加了模型大小、优化器状态和内存流量，且低阶 SH 无法表示高频角外观；同时，近期提出的替代模型缺乏在统一优化协议下的受控评估，且现有评估多关注图像指标，忽视了外观参数化对恢复几何的影响。</p>
+<h2>创新点</h2>
+<ul>
+<li>在统一的优化管道中对球谐函数和近期参数化外观模型进行了受控比较，涵盖了质量、内存使用、优化和渲染等方面。</li>
+<li>提出了一种紧凑的无基神经外观模型，该模型基于每个原语的潜在码和共享 MLP，并融合到可微光栅化器中。</li>
+<li>分析了外观参数化如何影响优化过程，包括其对恢复几何的影响以及表达性模型吸收非静态场景内容的倾向。</li>
+<li>实现了所有评估模型的可移植 WebGL 查看器，将比较范围扩展到了笔记本电脑和移动 GPU，以评估不同的计算和内存约束。</li>
+</ul>
+</article>
     <article class="summary-article summary-topic-entry" id="summary-2608.31113" data-arxiv-id="2608.31113" data-status="ready">
 <h1>[2608.31113] BLARM: Animating 3D Objects from Video via Blending Latent Rigid Motion Primitives</h1>
 <p><a href="https://arxiv.org/abs/2608.31113" rel="nofollow">arXiv 原文</a></p>
@@ -1013,6 +1075,6 @@
 </article>
     </div>
   </main>
-  <script type="application/json" id="summary-catalog">{"papers":{"2608.29680":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.29680"},"2608.29733":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.29733"},"2608.29793":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.29793"},"2608.29905":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.29905"},"2608.29928":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.29928"},"2608.30218":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.30218"},"2608.30307":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.30307"},"2608.31113":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.31113"},"2609.00625":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.00625"},"2609.00812":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.00812"},"2609.00923":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.00923"},"2609.00994":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.00994"},"2609.01276":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.01276"},"2609.01823":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.01823"},"2609.02184":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.02184"},"2609.02543":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.02543"},"2609.02747":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.02747"},"2609.03304":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03304"},"2609.03334":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03334"},"2609.03341":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03341"},"2609.03349":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03349"},"2609.03447":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03447"},"2609.03534":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03534"},"2609.03613":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03613"},"2609.03639":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03639"},"2609.03657":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03657"},"2609.03824":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03824"},"2609.03897":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03897"},"2609.03919":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03919"},"2609.03956":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03956"},"2609.04174":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.04174"},"2609.04196":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.04196"},"2609.04201":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.04201"},"2609.04942":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.04942"},"2609.04984":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.04984"},"2609.05127":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.05127"},"2609.05210":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.05210"},"2609.05382":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.05382"},"2609.05415":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.05415"},"2609.05416":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.05416"},"2609.06436":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.06436"},"2609.06723":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.06723"},"2609.06726":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.06726"},"2609.06810":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.06810"},"2609.06955":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.06955"},"2609.07085":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.07085"},"2609.07137":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.07137"},"2609.07174":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.07174"},"2609.07231":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.07231"},"2609.07274":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.07274"},"2609.07346":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.07346"},"2609.07434":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.07434"},"2609.07557":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.07557"},"2609.07724":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.07724"},"2609.07734":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.07734"},"2609.08101":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.08101"},"2609.08148":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.08148"},"2609.08332":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.08332"},"2609.08449":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.08449"},"2609.08493":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.08493"},"2609.08730":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.08730"},"2609.08841":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.08841"},"2609.08848":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.08848"},"2609.09012":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.09012"},"2609.09145":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.09145"}},"topic":"3D Gen&Recon","version":1}</script>
+  <script type="application/json" id="summary-catalog">{"papers":{"2608.29680":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.29680"},"2608.29733":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.29733"},"2608.29793":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.29793"},"2608.29905":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.29905"},"2608.29928":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.29928"},"2608.30218":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.30218"},"2608.30307":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.30307"},"2608.31113":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.31113"},"2609.00625":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.00625"},"2609.00812":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.00812"},"2609.00923":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.00923"},"2609.00994":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.00994"},"2609.01276":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.01276"},"2609.01823":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.01823"},"2609.02184":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.02184"},"2609.02352":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.02352"},"2609.02543":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.02543"},"2609.02747":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.02747"},"2609.03117":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03117"},"2609.03304":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03304"},"2609.03334":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03334"},"2609.03341":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03341"},"2609.03349":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03349"},"2609.03447":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03447"},"2609.03534":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03534"},"2609.03613":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03613"},"2609.03639":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03639"},"2609.03657":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03657"},"2609.03824":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03824"},"2609.03897":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03897"},"2609.03919":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03919"},"2609.03931":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03931"},"2609.03956":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03956"},"2609.04174":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.04174"},"2609.04196":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.04196"},"2609.04201":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.04201"},"2609.04942":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.04942"},"2609.04984":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.04984"},"2609.05127":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.05127"},"2609.05210":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.05210"},"2609.05255":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.05255"},"2609.05382":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.05382"},"2609.05415":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.05415"},"2609.05416":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.05416"},"2609.06436":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.06436"},"2609.06723":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.06723"},"2609.06726":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.06726"},"2609.06810":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.06810"},"2609.06955":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.06955"},"2609.07085":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.07085"},"2609.07137":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.07137"},"2609.07174":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.07174"},"2609.07231":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.07231"},"2609.07274":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.07274"},"2609.07346":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.07346"},"2609.07434":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.07434"},"2609.07557":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.07557"},"2609.07724":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.07724"},"2609.07734":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.07734"},"2609.08101":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.08101"},"2609.08148":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.08148"},"2609.08332":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.08332"},"2609.08449":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.08449"},"2609.08493":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.08493"},"2609.08730":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.08730"},"2609.08841":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.08841"},"2609.08848":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.08848"},"2609.09012":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.09012"},"2609.09145":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.09145"}},"topic":"3D Gen&Recon","version":1}</script>
 </body>
 </html>
