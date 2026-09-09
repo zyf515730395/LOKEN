@@ -107,6 +107,7 @@ class LoopbackChatTransport:
         timeout: float,
         max_tokens: int | None = None,
         enable_thinking: bool | None = None,
+        json_schema: Mapping | None = None,
     ) -> str:
         if not isinstance(model, str) or not model.strip():
             raise LoopbackChatError(
@@ -124,6 +125,8 @@ class LoopbackChatTransport:
             raise LoopbackChatError(
                 "invalid_model_request", "enable thinking must be boolean"
             )
+        if json_schema is not None and (not isinstance(json_schema, Mapping) or json_schema.get('type') != 'object'):
+            raise LoopbackChatError('invalid_model_request', 'JSON schema must describe an object')
         normalized_messages: list[dict[str, str]] = []
         for message in messages:
             if (
@@ -154,6 +157,9 @@ class LoopbackChatTransport:
             request["max_tokens"] = max_tokens
         if enable_thinking is not None:
             request["chat_template_kwargs"] = {"enable_thinking": enable_thinking}
+        if json_schema is not None:
+            request['response_format'] = {'type': 'json_schema', 'json_schema': {
+                'name': 'paper_result', 'strict': True, 'schema': dict(json_schema)}}
         payload = json.dumps(
             request,
             ensure_ascii=False,
