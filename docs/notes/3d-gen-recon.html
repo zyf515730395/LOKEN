@@ -13,6 +13,759 @@
       <h1>3D Gen&amp;Recon · 论文要点</h1>
     </header>
     <div class="summary-topic-list">
+    <article class="summary-article summary-topic-entry" id="summary-2608.23014" data-arxiv-id="2608.23014" data-status="ready">
+<h1>[2608.23014] AnaDiffusion: Anatomically CompositionalLatent Diffusion for Controllable 3D Brain MRI Generation</h1>
+<p><a href="https://arxiv.org/abs/2608.23014" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>AnaDiffusion 提出了一种解剖学组合式潜在扩散框架，通过将合成过程分解为解剖部分生成与全脑潜在整合，有效解决了传统单一模型在处理大脑空间异质性时丢失细粒度局部解剖结构的问题。</p>
+<h2>解决的问题</h2>
+<p>片段未提供</p>
+<h2>创新点</h2>
+<ul>
+<li>引入 AnaDiffusion，这是一种组合式潜在扩散框架，将合成过程分解为解剖部分和全脑潜在整合过程，比单一全体积生成更有效地模拟异质性大脑结构。</li>
+<li>提出了一种从部分到整体的潜在细化方法，将独立生成的解剖部分整合为连贯的全脑体积，支持可控的部分替换，同时保持未编辑区域稳定并维持一致的部分 - 整体解剖结构。</li>
+<li>受人类大脑功能与结构双侧对称性的启发，设计了一种跨左右半球共享的半球生成器，采用左右规范化和侧向指示器条件化，以鼓励解剖学一致的左右生成并提高数据效率。</li>
+<li>展示了 AnaDiffusion 在 ADNI 测试集（与训练集不重叠）上的评估指标优于对比基线，实现了更强的区域分布保真度和基于分割的解剖对齐，并能在无需推理时密集分割图的情况下实现高目标转移率的局部部分替换。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2608.23140" data-arxiv-id="2608.23140" data-status="ready">
+<h1>[2608.23140] MIVIFI: Bridging Perspective and Fisheye Domains for Training Multi-View Fisheye Image Generation Models</h1>
+<p><a href="https://arxiv.org/abs/2608.23140" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文针对多视角鱼眼图像生成数据稀缺及域差异问题，提出了基于 3D 语义占据栅格的可控生成方法 SyntheOcc-FE 和 MIVIFI，实现了跨视角域的知识迁移与场景编辑。</p>
+<h2>解决的问题</h2>
+<p>自动驾驶感知系统严重依赖高质量训练数据，但相比普通视角相机，大规模标注的多视角鱼眼数据集极度稀缺。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了生成可控多视角鱼眼图像的新任务，该任务以 3D 语义占据栅格为条件。</li>
+<li>引入了 SyntheOcc-FE 框架，通过适配潜在扩散模型来强制鱼眼镜头特性和广角一致性，确保几何保真度。</li>
+<li>提出了 MIVIFI 统一训练策略，利用等距圆柱投影（ERP）空间融合鱼眼和普通视角数据集，实现跨域环境语义转移。</li>
+<li>实现了在原始鱼眼数据缺失的条件下，通过结构修改输入语义占据栅格来合成夜间、雨天等长尾场景。</li>
+<li>验证了两种方法均能生成高质量图像，其中 SyntheOcc-FE 侧重几何保真，MIVIFI 侧重生成多样性和语义操作。</li>
+<li>首次实现了通过从普通视角数据集转移知识，为多视角鱼眼相机可控合成从未被此类传感器捕获的角点案例（如夜间和雨天）。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2608.23206" data-arxiv-id="2608.23206" data-status="ready">
+<h1>[2608.23206] Learning Spherical Occupancy Profiles for Multi-View 3D Reconstruction and Generation</h1>
+<p><a href="https://arxiv.org/abs/2608.23206" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种球形占用轮廓（spherical occupancy profile）表示法，将其作为多视图 3D 重建与生成模型之间的统一接口，并构建了包含判别式解码器和生成式分支的完整管道，同时分析了轮廓形态学特征以解决宽度估计问题。</p>
+<h2>解决的问题</h2>
+<p>片段未提供</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了球形占用轮廓（spherical occupancy profile）表示法，作为一种统一的、从体积分离的接口，连接多视图重建与生成先验。</li>
+<li>开发了一种判别式逐射线解码器，结合了全局特征和特定于射线的图像条件（通过 FiLM 条件化），并在独立测试集上进行了广泛评估。</li>
+<li>构建了一个生成式分支（包含 VAE、潜在扩散模型和图像条件），实现了可量化的多解重建，其解的分布可通过无分类器引导连续调节。</li>
+<li>对轮廓形态学（宽度与峰值的权衡）进行了分析，解释了由逐射线 L1 目标导致的宽度伪影，并提出了通过功率锐化（power sharpening）和针对锐化目标的训练来修复该问题的方法。</li>
+<li>在真实的 DTU 场景上验证了从图像到点云的完整管道，证明了该表示法和前端处理能够迁移到非合成输入。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2608.23410" data-arxiv-id="2608.23410" data-status="ready">
+<h1>[2608.23410] Photorealistic Novel View Synthesis of Human Faces using Next-Scale Transformers</h1>
+<p><a href="https://arxiv.org/abs/2608.23410" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种基于 Next-Scale Autoregressive Transformers 的新架构，用于在数据稀缺条件下实现高分辨率、多视角的人脸逼真新视角合成，该方法无需大规模预训练或大量合成数据即可保持身份一致性和几何连贯性。</p>
+<h2>解决的问题</h2>
+<p>现有方法在高分辨率和大幅视角变化下合成逼真人脸仍具挑战性，且存在明显权衡：近正面管道（如 Splatter Image 和 VoluMe）在偏离正面视角时表现不佳，而大规模预训练系统（如 FaceLift）虽细节丰富但渲染效果不自然且依赖大量合成数据。</p>
+<h2>创新点</h2>
+<ul>
+<li>扩展了 Next-Scale Autoregressive Transformer 架构以支持多视角人脸新视角合成，能够处理多个同时输入和输出视图。</li>
+<li>引入了一种训练策略，使模型能够在高分辨率（512×512）下收敛，而无需从头重新训练，从而降低了所需的计算量和数据量。</li>
+<li>将管道与现有的基于 Transformer 的像素对齐 3D 高斯提升模型相结合，并与最先进模型进行了基准测试。</li>
+<li>展示了该方法在无需任何架构更改的情况下应用于人体重建的灵活性，为未来工作提供了潜在方向。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2608.23549" data-arxiv-id="2608.23549" data-status="ready">
+<h1>[2608.23549] FixAnything: 3D-Consistent Rendering Refinement via Video Generative Priors</h1>
+<p><a href="https://arxiv.org/abs/2608.23549" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>FixAnything 是一个通用框架，利用微调后的视频扩散模型和掩码感知条件机制，将不同 3D 表示（如 3DGS、NeRF、网格和点云）渲染视频中的伪影修复为自然视频，同时通过基于 Flow-DPO 的几何感知偏好优化确保多视图一致性。</p>
+<h2>解决的问题</h2>
+<p>现有的 3D 重建方法（如 3DGS、NeRF、网格和点云）在输入视图稀疏或新视角远离训练视图时会产生伪影（如漂浮物、雾状几何、纹理扭曲或空洞），且针对每种表示构建专用的生成式修复管道难以扩展和复用。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种通用框架，能够接受沿相机轨迹渲染的 3D 表示视频作为输入，并使用单一模型修复伪影，而无需对基础视频模型进行架构修改。</li>
+<li>设计了一种掩码感知条件机制，用于区分需要信任的干净参考帧和需要修复的退化帧，并结合数据高效训练策略，仅需少量配对数据即可实现有效修复。</li>
+<li>引入了一种几何感知偏好优化方法，利用结构从运动（SfM）恢复的相机姿态准确性作为奖励信号，通过 Flow-DPO 将多视图一致性直接烘焙到模型中。</li>
+<li>证明了稀疏点云渲染足以暴露相机路径以进行视频生成，且该方法能显著提升下游任务（如相机姿态估计）的准确性，同时保持推理成本不变。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2608.24169" data-arxiv-id="2608.24169" data-status="ready">
+<h1>[2608.24169] ViSculpt: Visual-Centric Agentic Geometry Editing</h1>
+<p><a href="https://arxiv.org/abs/2608.24169" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>ViSculpt 提出了一种视觉为中心的代理范式，通过让大语言模型代理像人类艺术家一样操作 Blender 的图形用户界面（GUI），利用多模态感知能力持续观察形状演变并基于视觉反馈执行编辑，从而实现对现有 3D 网格的本地化修改。</p>
+<h2>解决的问题</h2>
+<p>现有的基于扩散的生成方法倾向于重新生成几何体而非原位修改，难以保留实例特定细节和高保真对应关系；而基于脚本生成的范式对于缺乏清晰参数化表示的任意网格的直接感知编辑不够自然，且专业建模接口暴露的庞大异构操作空间使得直接规划变得脆弱。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种视觉为中心的范式，将语言驱动的 3D 网格编辑定义为与专业图形软件（Blender）的反馈驱动交互，以支持对现有资产的原位编辑。</li>
+<li>展示了一个无需训练的基于紧凑原始动作（Smear、Drag、Draw）的多代理系统，该代理通过直接操作 Blender 执行本地化网格编辑，并包含规划、执行和反思三个角色。</li>
+<li>提供了初步的实证证据，包括定性结果和盲测主观评估，证明该系统在保持输入网格身份的同时，能够产生与人类编辑参考具有竞争力的编辑质量。</li>
+<li>构建了一个经验数据库来存储成功的编辑轨迹（任务、动作和视觉结果），使规划代理能够检索并适应有效策略以处理未来任务。</li>
+<li>在由专业艺术家创建的基准测试集上进行了评估，并通过用户研究证明该系统能够解释自然语言指令并生成高质量的局部编辑。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2608.24212" data-arxiv-id="2608.24212" data-status="ready">
+<h1>[2608.24212] NeoWorld-Pro: Programming Interactive Scenes from Monocular Images for Embodied Simulation</h1>
+<p><a href="https://arxiv.org/abs/2608.24212" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>NeoWorld-Pro 是一个通过多模态大语言模型（MLLM）将单目图像转化为可执行程序，并利用物理引擎反馈进行闭环优化的框架，旨在构建用于具身模拟的交互式场景。</p>
+<h2>解决的问题</h2>
+<p>现有方法存在三个主要瓶颈：首先，大多数工作仅关注单资产重建，缺乏能联合捕捉具身交互及物体间空间物理依赖的场景级建模；其次，当前方法依赖大型 curated 资产库或刚性类别先验，导致数据要求高且难以泛化到分布外（OOD）场景；最后，现有流程本质上是开环的，缺乏纠正机制来解决几何、关节或场景组成中的物理不一致性。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出 NeoWorld-Pro 框架，将单目场景构建重构为 MLLM 驱动的程序合成，减少了对特定资产数据库和监督类别先验的依赖。</li>
+<li>设计了一种物理在环（physics-in-the-loop）的场景细化流程，利用仿真反馈迭代优化物体内部的关节结构和物体间的相互关系。</li>
+<li>构建了一个包含 9090 个可动物体类别和 3030 个场景的仿真基准（USD 格式），并验证了 NeoWorld-Pro 在该基准上的有效性。</li>
+<li>引入程序中心范式，利用 MLLM 的零样本空间推理和代码合成能力，将单目图像转化为显式定义几何、关节参数、物理属性和场景布局的可执行代码。</li>
+<li>开发了基于物理引擎（如 Isaac Sim）的验证与细化机制，通过收集碰撞、不稳定等动态反馈来迭代修正代码，确保生成的环境真正具备模拟就绪性。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2608.24714" data-arxiv-id="2608.24714" data-status="ready">
+<h1>[2608.24714] GaussianWAM: Distilling Geometry and Semantics from 3D Gaussian Fields into World-Action Models</h1>
+<p><a href="https://arxiv.org/abs/2608.24714" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>GaussianWAM 是一种针对世界 - 动作模型（WAM）的通用增强框架，它利用高斯场作为统一的三维空间载体，将互补的几何和视觉语义监督组织到与动作相关的潜在表示中。</p>
+<h2>解决的问题</h2>
+<p>现有的世界 - 动作模型（WAM）主要优化视觉重建或预测，其潜在表示未显式约束以保留跨视角的三维几何结构，导致几何可靠性不足；同时，这些表示也未针对保留空间局部化、与物体相关的语义信息进行优化，难以满足机器人操作对精确空间交互和动作生成的需求。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了 GaussianWAM，这是一种利用高斯场作为统一三维空间载体来组织互补几何和视觉语义监督的通用世界 - 动作模型增强框架。</li>
+<li>引入了一种基于高斯场的蒸馏机制，首先将几何和视觉语义知识绑定在统一的三维空间表示中，然后将渲染出的语义、深度和覆盖信号蒸馏到当前观测的 WAM 表示中。</li>
+<li>采用了一种仅用于训练的增强策略，在推理时完全移除高斯场和外部教师模型，从而保留了原始 WAM 的推理流程和计算成本。</li>
+<li>在 FastWAM 和 Cosmos Policy 两种代表性 WAM 架构上进行了广泛验证，并在 LIBERO、LIBERO-Plus、RoboTwin 及真实世界机器人实验中观察到一致的性能提升。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2608.24760" data-arxiv-id="2608.24760" data-status="ready">
+<h1>[2608.24760] ExpConCAD: Experience-Guided Text-to-CAD Generation from Shape Descriptions with Implicit Spatial Constraints</h1>
+<p><a href="https://arxiv.org/abs/2608.24760" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>ExpConCAD 是一个通过结合构建感知的空间约束推理和从历史 CAD 案例中提炼的可复用经验记忆，来解决文本到 CAD 生成中因用户描述过于简略而导致的隐含空间约束缺失问题的框架。</p>
+<h2>解决的问题</h2>
+<p>现有 Text-to-CAD 方法通常要求用户显式指定详细的几何参数和空间关系，这在现实中给用户带来了沉重负担，因为用户通常只进行高层级的语义描述。</p>
+<h2>创新点</h2>
+<ul>
+<li>指出了隐含空间约束是 Text-to-CAD 中的关键挑战，因为自然语言描述往往省略了构建有效 CAD 模型所需的空间关系。</li>
+<li>提出了 ExpConCAD 框架，该框架结合了构建感知的空间约束推理和从先前 CAD 案例中提取的可复用经验记忆，以改进 CadQuery 代码的生成。</li>
+<li>在 CadFusion-Hard 基准上进行了广泛的实验，验证了该方法的有效性，并分析了构建结构理解与经验记忆在解决未指定约束问题中的具体作用。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2608.25401" data-arxiv-id="2608.25401" data-status="ready">
+<h1>[2608.25401] PIVOT: A Multi-Trajectory Dataset and Testbed for Pose, Intrinsics, and Novel Viewpoint Evaluation in Real-World 3D Reconstruction</h1>
+<p><a href="https://arxiv.org/abs/2608.25401" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>PIVOT 是一个多轨迹数据集和测试床，旨在通过明确区分重建友好型、机器人型和外推型轨迹，评估 3D 重建和新型视图合成系统在真实世界部署条件下的泛化能力。</p>
+<h2>解决的问题</h2>
+<p>现有的 3D 重建实验流程通常隐含假设了难以在线复现的理想条件（如平滑轨道、全局优化的位姿和独立优化的内参），导致实验环境比实际部署系统（如机器人或无人机）遇到的条件更干净，从而无法准确评估模型在结构不同轨迹上的泛化性能。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种可复用的多轨迹场景捕获规范及处理后的数据集表示方法。</li>
+<li>实现了双位姿表示，将传感器导出的测量位姿与 COLMAP 优化的位姿并行存储。</li>
+<li>支持同时使用物理校准相机内参和场景优化的相机内参。</li>
+<li>提出了一种面向位姿空间的切分距离（directed pose-space Chamfer distance），用于量化评估轨迹相对于训练轨迹的覆盖情况。</li>
+<li>提供了一套端到端的原始数据处理、可视化、导出及 Nerfstudio 集成工具链。</li>
+<li>建立了三个基准家族，分别用于评估新型视图轨迹泛化性、位姿源敏感性和内参源敏感性。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2608.25461" data-arxiv-id="2608.25461" data-status="ready">
+<h1>[2608.25461] GLOSS: Geometric Local Self-Similarity Learning for Faithful Reference-Guided Texture Fill</h1>
+<p><a href="https://arxiv.org/abs/2608.25461" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>GLOSS 是一种利用几何局部自相似性学习，通过单视图参考引导生成高保真纹理的技术，解决了现有方法在局部细节控制、几何一致性以及小数据训练方面的局限。</p>
+<h2>解决的问题</h2>
+<p>现有基于生成模型的纹理化工作流程在控制性和灵活性上受限，难以从单视图参考构建一致且高保真的整体网格纹理。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种新颖的几何条件纹理修复模型，该模型利用批处理多注意力机制，从单个 3D 对象内部的几何 - 纹理自相似性中学习。</li>
+<li>设计了一种无需任何带纹理 3D 模型即可训练局部纹理模型的数据生成管道。</li>
+<li>支持具有紧密参考补丁粘附和强几何 - 纹理一致性的新型交互式生成纹理填充，并展示了在未见过网格和 PBR 材料上的零样本迁移能力。</li>
+<li>展示了一种基于补丁的网格纹理生成管道，该管道在保持全局一致性的同时，在与基于大型 3D 数据集训练的生成式纹理模型相比时展现出具有竞争力的结果。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2608.25483" data-arxiv-id="2608.25483" data-status="ready">
+<h1>[2608.25483] Gaussian Splatting Underwater: A Controlled Cross-Regime Study</h1>
+<p><a href="https://arxiv.org/abs/2608.25483" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文通过受控跨制度研究，评估了五种水下 3D 重建方法在不同浑浊度环境下的表现，揭示了光度质量与几何质量之间的权衡，并提出了包含几何评估的新基准协议。</p>
+<h2>解决的问题</h2>
+<p>现有水下 3D 重建方法多基于浅水或受控数据集开发，在深水高浑浊的真实 ROV 操作中，其渲染结果可能看似正确但几何结构错误，且传统光度指标无法区分外观修复与几何伪造。</p>
+<h2>创新点</h2>
+<ul>
+<li>对五种最先进的水下 3D 重建方法进行了跨制度分析，涵盖了从浅水基准、受控水箱、深潜共光环境到工业调查的四种水下制度。</li>
+<li>对其中一种方法的代码库进行了组件分析，分离了介质模型、深度先验和后向散射项的作用。</li>
+<li>建立了一个新的基准协议，在现有光度评估基础上增加了几何评估，并引入了无需真值的漂浮物质量统计量以量化面纱污染。</li>
+<li>测量了拟合的介质模型在超出其拟合场景范围时的有效性，验证了该领域假设但未测试的结论。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2608.26656" data-arxiv-id="2608.26656" data-status="ready">
+<h1>[2608.26656] CoGeo-GS: Concept-Driven and Geometry-Aware Multi-Object Removal in 3D Scenes</h1>
+<p><a href="https://arxiv.org/abs/2608.26656" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>CoGeo-GS 是一个面向 3D Gaussian Splatting 场景的概念驱动几何补全框架，旨在实现高质量的多物体移除。</p>
+<h2>解决的问题</h2>
+<p>片段指出，现有的基于 3D Gaussian Splatting 的方法在处理多物体移除时存在两个核心问题：一是依赖重复的逐物体优化，导致计算成本高昂且易产生误差累积；二是前景物体与共享背景结构纠缠，导致编辑一个物体时容易干扰其他物体，造成语义干扰、几何畸变和深度不稳定。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了 CoGeo-GS 框架，通过概念感知的语义标记实现单优化阶段内的物体级编辑，同时保持显式可编辑的 3D 表示并减少相互干扰。</li>
+<li>设计了一种混合几何补全流程，将单目深度先验锚定到场景几何上，并利用基于扩散的深度补全模块恢复缺失区域的精细深度，从而避免边界伪影。</li>
+<li>设计了一种几何正则化细化策略，通过冻结几何和信任区域裁剪将外观适应与受限的几何更新解耦，从而提升跨视图一致性和融合稳定性。</li>
+<li>在多样化场景上的广泛实验表明，CoGeo-GS 在视觉质量和重建保真度方面 consistently 优于现有的多物体移除方法。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2608.26868" data-arxiv-id="2608.26868" data-status="ready">
+<h1>[2608.26868] CGS-SLAM: Collaborative Gaussian Splatting based SLAM for Multi-Agent Reconstruction</h1>
+<p><a href="https://arxiv.org/abs/2608.26868" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>CGS-SLAM 是一种针对多智能体在 GNSS 拒止和资源受限环境下进行快速重建的协作高斯泼溅 SLAM 系统，它利用单目惯性视觉和深度估计模型生成度量尺度的 3D 高斯泼溅地图，并通过轻量级协作框架实现全局一致共享地图的实时构建。</p>
+<h2>解决的问题</h2>
+<p>现有 SLAM 系统通常依赖深度传感器或密集 SfM 流程，计算开销大且难以部署在仅配备 RGB 相机和 IMU 的资源受限战术设备上；此外，传统的点云或网格重建在探索稀疏时存在拓扑不完整和难以解释的问题。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种单目惯性本地 SLAM 系统，利用度量单目深度估计模型，从第一帧开始即可生成具有度量尺度的 3D 高斯泼溅（3DGS）地图。</li>
+<li>设计了一种面向受限网络的轻量级协作框架，提供动态关键帧功能以增强子地图的对齐效果。</li>
+<li>开发了一种快速的子地图对齐过程，利用 VGGT 生成局部子地图的即时姿态估计。</li>
+<li>构建了全局 SLAM 解决方案，能够在 GNSS 拒止和资源受限环境中为任务小组团队提供实时态势感知能力。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2608.26948" data-arxiv-id="2608.26948" data-status="ready">
+<h1>[2608.26948] KISS-GS: 3D Gaussian Splatting Compression Kept Simple</h1>
+<p><a href="https://arxiv.org/abs/2608.26948" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>KISS-GS 提出了一种模块化压缩框架，将 3D 高斯泼溅（3DGS）的压缩过程分解为紧凑化、编码和自适应三个独立阶段，以解决现有方法中增益来源不清晰的问题，并实现了基于简单图像编码格式的浏览器兼容解码。</p>
+<h2>解决的问题</h2>
+<p>现有 3DGS 压缩方法通常将多种策略（紧凑化、编码、自适应）混合使用，导致无法清晰归因各阶段的贡献（attribution gap），且许多方法将压缩与训练格式耦合，限制了新重建方法的采用。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出 KISS-GS 模块化压缩框架，将紧凑化（compaction）、编码（encoding）和自适应（adaptation）分离为独立阶段，以消除增益归因模糊并支持组件的独立替换与分析。</li>
+<li>在紧凑化阶段集成 POPSpa 模块，这是一种与重建无关的修剪方案，能在不降低重建质量的情况下显著减少原语数量，且其增益与编码增益完全解耦。</li>
+<li>设计并引入 SOG-XT 图像编码格式，通过自组织 2D 码本和平行代表性分配平滑（PRAS）技术，在保持解码器简单和浏览器兼容的同时，实现了与复杂集成方法相当的压缩率。</li>
+<li>将编码感知微调（encoding-aware fine-tuning）作为独立阶段进行系统评估，验证了在受限于简单网络友好型编解码器时，该策略仍能带来性能增益。</li>
+<li>通过回答三个研究问题（RQ1-RQ3），证明了模块化设计不仅能清晰量化各阶段贡献，还能在简单架构下实现高效的 3DGS 压缩。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2608.26951" data-arxiv-id="2608.26951" data-status="ready">
+<h1>[2608.26951] Per-View Gaussian Predictions Enable Training-Free Distractor Filtering in Feed-Forward 3DGS</h1>
+<p><a href="https://arxiv.org/abs/2608.26951" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种无需训练的过滤流程，利用前馈 3DGS 模型中预测高斯与输入视图的固有关联，通过排除特定视图的高斯并验证剩余输入的一致性，从而在冻结的模型上有效过滤瞬态干扰物。</p>
+<h2>解决的问题</h2>
+<p>前馈 3DGS 模型通常假设输入图像描绘的是静态且视角一致的场景，但在随意捕获的图像中常包含行人、车辆等仅出现在部分图像中的瞬态干扰物，导致新视角合成中出现模糊、重复外观和漂浮伪影。</p>
+<h2>创新点</h2>
+<ul>
+<li>证明了前馈 3DGS 中允许干扰物持续存在的输入视图与预测高斯之间的固有关联，可以被重新利用作为无需训练的干扰物过滤线索。</li>
+<li>提出了一种过滤流程，该流程通过排除与特定视图关联的高斯来形成移除候选项，并仅接受那些经其他输入观测验证的候选项，整个过程基于单次冻结预测执行。</li>
+<li>展示了该方法在三种重建模型和两个干扰物基准测试上（使用不同数量的输入视图）均能带来一致的改进，同时在四种模型上的干净场景重建质量上保持了良好的保留效果。</li>
+<li>验证了该方法作为一种即插即用的后处理步骤，能够增强已训练的前馈 3DGS 模型的鲁棒性，而无需修改模型架构、执行额外训练或使用预定义的干扰物类别。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2608.27407" data-arxiv-id="2608.27407" data-status="ready">
+<h1>[2608.27407] Reconstructing Humans and Objects in Interaction using Large Reconstruction Models</h1>
+<p><a href="https://arxiv.org/abs/2608.27407" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 MILO 方法，利用大型重建模型（LRM）生成的整体人 - 物交互网格来重构人类姿态和物体几何，从而在无需地面真值接触信息的情况下实现单图像人 - 物交互重建。</p>
+<h2>解决的问题</h2>
+<p>单图像人 - 物交互（HOI）重建面临物体形状与功能多样、交互模式复杂、遮挡及深度歧义等挑战，且现有方法受限于数据集特性或依赖高质量物体形状库及地面真值接触信息。</p>
+<h2>创新点</h2>
+<ul>
+<li>证明了大型重建模型（LRM）在单图像人 - 物交互重建中的强大能力，将问题重构为解释 LRM 生成的交互网格。</li>
+<li>设计了一种鲁棒的方法，通过预测的 3D 关键点将参数化人体模型拟合到 LRM 网格上，并可选择性地将物体模板对齐到该网格。</li>
+<li>在多个基准数据集（InterCap、HODome、IMHD）上实现了最先进的性能，且无需依赖地面真值接触信息。</li>
+<li>展示了 MILO 方法在野外图像上的定性结果，并证明其在不使用特权线索的情况下优于现有工作。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2608.27735" data-arxiv-id="2608.27735" data-status="ready">
+<h1>[2608.27735] ABCD: Alpha-Composited Block Coordinate Descent: Constant-VRAM Training for Large Radiance Fields</h1>
+<p><a href="https://arxiv.org/abs/2608.27735" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>ABCD 是一种针对 Alpha 合成辐射场的 principled out-of-core 训练方法，通过块坐标下降算法结合 Alpha 合成技术，将非活动参数预积分到前景和背景图像中，从而将每个更新所需的 GPU 内存限制在活跃分区及这两张图像范围内。</p>
+<h2>解决的问题</h2>
+<p>片段未提供</p>
+<h2>创新点</h2>
+<ul>
+<li>提出 ABCD 方法，一种针对 Alpha 合成辐射场的 principled out-of-core 训练方法，旨在解决大规模场景训练时现代 GPU 内存限制的问题。</li>
+<li>设计基于空间分区的块坐标下降（block coordinate descent）公式，利用 Alpha 合成特性将非活动参数预积分到前景和背景图像中。</li>
+<li>证明该方法仅需为活跃分区及前景、背景图像分配 GPU 内存，显著降低了训练大场景时的显存需求。</li>
+<li>在 3D Gaussian Splatting (3DGS) 上演示了该方法的有效性，展示了其在处理大规模场景时的潜力。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2608.27073" data-arxiv-id="2608.27073" data-status="ready">
+<h1>[2608.27073] SpatialCrafter: Single Image World Modeling with Generative 3D Proxies</h1>
+<p><a href="https://arxiv.org/abs/2608.27073" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>SpatialCrafter 提出了一种两阶段框架，利用从单张图像生成的全局生成式 3D 代理（Generative 3D Proxies）来增强视频世界模型，解决了现有重建式代理在单视图下缺乏 3D 感知、导致视角扭曲和几何不一致的问题。</p>
+<h2>解决的问题</h2>
+<p>现有基于视频扩散模型（VDMs）的世界模型缺乏显式 3D 监督，难以保持单视图下的空间一致性；采用图像作为记忆的方法缺乏 3D 感知，导致复杂相机运动下的透视失真和遮挡错误；而现有的重建式 3D 代理（如点云）仅由输入视图重建，本质上是不完整的，迫使 VDM 对未见区域进行随机幻觉，且其完整性依赖于 VDM 自身的空间感知能力，形成新的困境。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出 SpatialCrafter 框架，通过两阶段流程利用全局生成式 3D 代理实现鲁棒的空间一致性，有效解决了先验 3D 条件化技术导致的幻觉问题。</li>
+<li>引入点锚定稀疏结构流匹配（PaSS）模块以解决输入视图与随机生成的 3D 代理之间的空间错位问题，确保生成的 3D 代理与参考图像严格对齐。</li>
+<li>提出两种互补机制将粗糙的 3D 代理转化为高质量视频：平行几何注入（Parallel Geometry Injection）在保持场景拓扑的同时整合几何指导，代理感知腐蚀（Proxy-Aware Corruption）通过随机扰动防止过拟合并强制模型补全缺失细节。</li>
+<li>构建了首个用于图像到场景生成的大规模混合数据集，包含 115K 个具有精确几何标注的室内外场景，解决了大规模高质量 3D 场景数据稀缺的瓶颈。</li>
+<li>在合成和真实世界基准测试中展示了 SpatialCrafter 的优越性能，实现了最先进的视觉质量和几何一致性，即使在极端相机运动和视角变化下也能保持鲁棒的空间连贯性。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2608.28240" data-arxiv-id="2608.28240" data-status="ready">
+<h1>[2608.28240] WilLaGS: Latent-Conditional 3D Appearance Fields for Robust Gaussian Splatting In-the-Wild</h1>
+<p><a href="https://arxiv.org/abs/2608.28240" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>WilLaGS 提出了一种统一的框架，通过引入基于β-VAE 的潜在条件 3D 外观场和基于教师 - 学生架构的自监督掩码机制，解决了野外图像集合中严重的外观变化和瞬态物体遮挡问题。</p>
+<h2>解决的问题</h2>
+<p>标准 3DGS 假设场景静态且光照一致，无法处理野外图像集合中固有的多样化光照、天气及瞬态物体（如行人或车辆）带来的严重外观变化和遮挡，导致重建出现鬼影、模糊和几何失真。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了 WilLaGS，一个针对无约束条件下鲁棒场景重建的新型统一框架，能有效处理极端的外观变化和瞬态物体。</li>
+<li>引入了β-VAE 来施加概率结构并学习全局外观的共享生成流形，结合潜在条件 3D 神经场以捕捉空间变化的局部光照。</li>
+<li>提出了一种基于教师 - 学生架构的自监督感知掩码机制，利用指数移动平均（EMA）生成稳定的静态场景共识，并通过感知特征差异识别瞬态区域。</li>
+<li>该方法避免了传统离散外观嵌入的过拟合问题，同时解决了辅助网络优化与 3DGS 快速收敛之间的不匹配及预训练模型泛化能力不足的问题。</li>
+<li>在多个野外场景上的广泛实验证明了该方法在场景重建和新视角合成方面的优越性。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2608.28272" data-arxiv-id="2608.28272" data-status="ready">
+<h1>[2608.28272] Non-Uniform Quantisation for 3DGS Compression</h1>
+<p><a href="https://arxiv.org/abs/2608.28272" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种基于重要性权重的非均匀 3DGS 量化框架，旨在解决现有标准化点云编解码器中均匀量化无法适应高斯数据非均匀分布及感知重要性的问题，从而优化率失真权衡。</p>
+<h2>解决的问题</h2>
+<p>现有的 MPEG V-PCC 和 G-PCC 标准在压缩 3DGS 时采用均匀量化，未能考虑高斯数据的非均匀分布特性及单个高斯在感知上的重要性差异，导致率失真性能次优。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种新颖的非均匀量化方案，通过整合重要性指标优先处理高影响力高斯，以最小化加权重建误差并优化率失真权衡。</li>
+<li>对比分析了多种新颖的重要性加权合并方法，用于处理体素化后位置重合的高斯。</li>
+<li>在符合 MPEG 3DGS 通用测试条件（CTC）下进行了广泛的性能分析，证明该方法在多种场景类型中均优于当前最先进方法。</li>
+<li>提出的加权合并贡献已被采纳进 V-PCC Amd1 标准，且底层逻辑兼容任何基于点云的溅射表示和熵编码后端。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2608.28386" data-arxiv-id="2608.28386" data-status="ready">
+<h1>[2608.28386] GraspHOI: Full-Body 3D Human-Object Reconstruction with Finger-Level Grasps from a Single In-the-Wild Image</h1>
+<p><a href="https://arxiv.org/abs/2608.28386" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>GraspHOI 是一个首个框架，能够从单张野外图像中重建全身 3D 人机交互（HOI），并显式地针对重建的物体表面优化手指关节。</p>
+<h2>解决的问题</h2>
+<p>现有方法无法结合类别无关的物体重建与手指级抓握优化：基于模板的方法依赖预定义网格，无模板方法受限于训练类别且未显式优化手指关节，检索方法依赖数据库且不直接重建观测到的物体几何，而 CARI4D 等视频方法假设大量初始可见度且仅用两个手部关节位置表示接触。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了首个单图像框架，用于类别无关的全身 3D 人机交互重建，并显式优化手指级抓握。</li>
+<li>将物体、人体和手的重建解耦，仅优化组件间的尺度、位置和接触，从而避免在更换初始化器时重新训练整个流程。</li>
+<li>利用 SAM 3D Body 重建人体并拟合 SMPL-H，结合 WiLoR 恢复关节手，通过非模态条件和图像到 3D 先验重建物体。</li>
+<li>通过度量 RGB-D 配准和图像空间对齐恢复物体的相机空间姿态和尺度，并利用感知遮挡的掌心对应关系将物体安置在手上。</li>
+<li>使用感知接触的优化同时细化手臂和手指关节，并在相机原点周围进行有界的尺度调整以修正物体大小和抓握深度。</li>
+<li>在 ARCTIC、ProciGen-GRAB、BEHAVE 和 PICO-db 四个基准上，与 SAM 3D Objects、HOI-TG、HDM、TeHOR、EasyHOI 和 PICO 等六个基线进行了全面评估。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2608.28570" data-arxiv-id="2608.28570" data-status="ready">
+<h1>[2608.28570] ChainSplat: A Physics-Inspired Screw-Theoretic Model for Learning Deformable Linear Object Dynamics from Multi-View RGB Videos</h1>
+<p><a href="https://arxiv.org/abs/2608.28570" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>ChainSplat 是一种基于螺丝理论的物理启发式模型，它通过紧凑的开链结构联合学习可变形线性物体（DLO）的几何、外观、运动学和动力学，并直接从多视角 RGB 视频中优化以支持高效的基于模型的操控。</p>
+<h2>解决的问题</h2>
+<p>片段未提供</p>
+<h2>创新点</h2>
+<ul>
+<li>提出 ChainSplat，一种基于螺丝理论的物理启发式动力学模型，通过紧凑的开链表示法联合建模可变形线性物体（DLO）的几何、外观、运动学和动力学。</li>
+<li>开发了一种优化框架，能够直接从多视角 RGB 视频中联合恢复 ChainSplat 模型的几何结构、运动学状态和动力学参数。</li>
+<li>设计了基于优化后的 ChainSplat 模型的高效基于模型的状态估计和轨迹优化框架，实现了有效的现实世界 DLO 操控。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2608.28895" data-arxiv-id="2608.28895" data-status="ready">
+<h1>[2608.28895] ReconSplat: Generalizable 3D Scene Reconstruction Beyond Observed Views</h1>
+<p><a href="https://arxiv.org/abs/2608.28895" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>ReconSplat 是一种前馈 3D 重建框架，通过联合学习外观和几何先验，解决了稀疏视图下生成模型与几何一致性之间的权衡，实现了复杂场景的高保真新颖视图合成与多视图一致的深度预测。</p>
+<h2>解决的问题</h2>
+<p>现有稀疏视图重建方法存在根本性权衡：依赖几何推理的方法（如 DepthSplat）难以泛化到观测视图之外，而纯生成式方法（如 MVSplat360）虽能生成逼真图像但无法恢复结构连贯的 3D 几何，导致深度估计极不准确。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出 ReconSplat，一种前馈 3D 重建框架，通过联合学习外观和几何先验，解决了稀疏视图重建中生成逼真度与几何一致性之间的根本性权衡。</li>
+<li>重构多视图潜在扩散模型（MV-LDM），使其能够联合采样相互一致的外观和几何潜在对，以编码共享的 3D 场景结构。</li>
+<li>将扩散过程条件化于源自变分 3D 高斯泼溅（3DGS）表示的 2D 潜在特征，提供结构化但粗略的视觉和几何线索以指导生成。</li>
+<li>在大规模 RealEstate10K 和 DL3DV-10K 数据集上验证了该方法，在稀疏视图、宽基线外推设置下达到了新的最先进水平，并证明了其在复杂无界场景中的有效性。</li>
+<li>证明了该方法不仅能进行新颖视图合成，还能作为联合外观 - 几何生成建模的副产品，预测多视图一致的深度，从而生成稠密且几何连贯的 3D 重建。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2608.29346" data-arxiv-id="2608.29346" data-status="ready">
+<h1>[2608.29346] GSPotential: Camera Potential Field for Sparse-View 3D Gaussian Splatting</h1>
+<p><a href="https://arxiv.org/abs/2608.29346" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>GSPotential 通过引入相机势场（CPF）来解决稀疏视角 3D 高斯泼溅中的监督不平衡问题，从而提升几何稳定性并减少伪影。</p>
+<h2>解决的问题</h2>
+<p>片段指出稀疏视角下的 3D 高斯泼溅（3DGS）存在严重的过拟合和几何不稳定性，导致新视角渲染出现显著伪影，且现有方法未能有效利用几何先验。</p>
+<h2>创新点</h2>
+<ul>
+<li>识别出视角空间中的监督不平衡是导致稀疏视角 3DGS 几何不稳定性的重要因素，并分析了其如何限制几何先验的有效使用。</li>
+<li>引入了相机势场（CPF），这是一种在规范视角球上建模监督强度和置信度的连续公式，能够显式定位可靠的监督低谷区域。</li>
+<li>提出了一种势场引导的重建策略，通过从低势区域采样虚拟视角来填充监督空白，并结合基于覆盖率的修剪和保守的稠密化来调节高斯原语演化。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2608.29538" data-arxiv-id="2608.29538" data-status="ready">
+<h1>[2608.29538] As-Rigid-As-Possible Deformation of Gaussian Radiance Fields</h1>
+<p><a href="https://arxiv.org/abs/2608.29538" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种针对高斯辐射场（3DGS）的交互式刚性变形方法，通过优化辐射场一致性并引入自适应各向异性低通滤波器，解决了现有方法在非线性大变形下产生的渲染伪影问题。</p>
+<h2>解决的问题</h2>
+<p>现有高斯溅射（3DGS）变形方法仅直接编辑高斯核的几何属性，忽略了变形后高斯核与辐射场之间的不匹配，导致在非线性及大变形（尤其是模型边界处）产生严重的渲染伪影。</p>
+<h2>创新点</h2>
+<ul>
+<li>首次提出基于高斯核所代表的辐射场来优化变形高斯的方法，填补了单高斯变形与辐射场整体变形之间的差距。</li>
+<li>提出了一种无需显式表面重建即可支持大规模 ARAP 变形的交互式高斯辐射场变形方法，兼容 3DGS 和 GaMeS 等扁平高斯模型。</li>
+<li>提出了一种自适应各向异性空间低通滤波器，用于补偿变形过程中非均匀采样间隔变化引起的混叠效应，保持辐射场一致性。</li>
+<li>利用嵌入变形（embedded deformation）建模高斯核的几何变换，并提取辐射场径向特征以最小化辐射场与高斯光栅化之间的特征误差。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2608.30054" data-arxiv-id="2608.30054" data-status="ready">
+<h1>[2608.30054] When 3D Gaussian Splatting Recovers Real Surfaces</h1>
+<p><a href="https://arxiv.org/abs/2608.30054" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文从理论角度分析了 3D Gaussian Splatting (3DGS) 恢复真实表面的几何可信度，提出了一个分离几何与外观的数学框架，揭示了在角容量过大时会出现“不透明广告牌”失效模式，并证明了严格限制角容量是保证表面恢复准确性的必要条件。</p>
+<h2>解决的问题</h2>
+<p>片段未提供</p>
+<h2>创新点</h2>
+<ul>
+<li>提供了一个数学框架，清晰地将场景的空间几何与其视差外观分离，将几何可识别性问题转化为严格的频率比较问题。</li>
+<li>在该框架内数学预测了“不透明广告牌”（opaque billboard）失效模式。</li>
+<li>证明了如果角容量无界或过大，错误的表面可以通过记忆空间纹理作为视差信号来完美匹配训练图像。</li>
+<li>建立了理论可识别性窗口，证明严格限制角容量在数学上是拒绝广告牌并确保准确表面恢复的必要条件。</li>
+<li>通过受控诊断补充了理论，展示了在合成压力测试中可以确定性触发不透明广告牌失效，而在真实场景诊断中未观察到此类情况。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2608.30184" data-arxiv-id="2608.30184" data-status="ready">
+<h1>[2608.30184] ATGS: Anchored Temporal Gaussian Splatting for Long Volumetric Video Representation</h1>
+<p><a href="https://arxiv.org/abs/2608.30184" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>ATGS 提出了一种基于时间锚点的 3D 高斯泼溅方法，通过时间条件锚点、时间窗口策略及分层锚点特征表示，统一解决了长序列重建与复杂运动建模两大挑战。</p>
+<h2>解决的问题</h2>
+<p>现有体视频重建方法在扩展到具有分钟级时长和复杂运动（如快速多人移动、动态光照变化）的大规模动态场景时，面临时间不稳定、运动漂移和视觉伪影等挑战。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种基于时间锚点的 3D 高斯表示方法，利用时间条件锚点和时间窗口策略将长时动态建模分解为多个局部任务，有效支持长序列复杂运动场景。</li>
+<li>引入分层锚点特征表示，结合全局空间特征、局部空间特征和局部时间特征，逐步约束高斯生成以提升空间稳定性和时间一致性。</li>
+<li>在多个具有挑战性的基准数据集（包括 N3DV、VRU、MeetRoom 及 SelfCap）上进行了广泛实验，证明该方法在长时程和复杂运动场景下优于现有方法。</li>
+<li>通过条件化局部时间特征捕捉动态变化，同时避免引入长程时间依赖，从而在保持高视觉保真度的同时实现稳定的长时间优化。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2608.30423" data-arxiv-id="2608.30423" data-status="ready">
+<h1>[2608.30423] ObjectSplat: Improving Mesh Fidelity and Interactivity for 3D Scenes via Object-Level Mesh Splatting</h1>
+<p><a href="https://arxiv.org/abs/2608.30423" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>ObjectSplat 提出了一种基于“先分解后重建”原则的物体级网格 Splatting 方法，通过独立优化每个物体来显著提升 3D 场景的网格保真度和交互性。</p>
+<h2>解决的问题</h2>
+<p>现有方法（如 3DGS 或整体式 Splatting）将场景视为无序原语云或单一连续场，缺乏明确的物体结构，导致无法直接支持移动、复制等交互操作，且在交互暴露未观测区域时会产生噪声填充和几何损坏。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种新颖的物体级重建方法，基于“先分解后重建”原则，将场景分解为离散的语义物体进行独立重建。</li>
+<li>引入了一种利用原语不透明度进行剪枝的新优化策略，有效剔除了多余几何体，显著提升了网格保真度和新视角合成质量。</li>
+<li>通过实证分析证明，物体级优化相比整体场景优化收敛速度更快（迭代次数减少一半以上），且能生成可编辑的以物体为中心的 3D 场景。</li>
+<li>系统分析了基于分解的重建中的关键瓶颈，重点考察了分割、补全和修复模块间的跨视角一致性，并指出了当前数据集和评估指标的根本局限性。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2608.30617" data-arxiv-id="2608.30617" data-status="ready">
+<h1>[2608.30617] RealCAD: Towards Real-World Image-to-CAD Reconstruction under Domain Shift and Parameter Bias</h1>
+<p><a href="https://arxiv.org/abs/2608.30617" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>RealCAD 通过修正 DeepCAD 的参数表示以缓解参数偏差，并构建 OpenRealCAD 基准数据集，提出了一种结合几何约束合成到真实图像翻译与多正对比学习的 Sim2Real 重建框架，从而显著提升了真实图像到 CAD 的重建性能。</p>
+<h2>解决的问题</h2>
+<p>片段指出图像到 CAD 重建面临两个主要问题：一是合成到真实（Sim2Real）的域差异导致模型在真实照片上性能下降，二是 DeepCAD 表示中的局部归一化方案将大量几何尺度信息分配给独立的尺度因子 SS，导致参数分布高度集中，促使模型利用数据集特定的统计捷径而非从视觉证据中推断几何结构。</p>
+<h2>创新点</h2>
+<ul>
+<li>识别出 DeepCAD 命令序列表示中未被注意到的分布局限性，并通过将 SS 编码的尺度信息重新分配到相应的几何参数来修正其参数化，从而减轻参数集中度和基于频率的捷径学习。</li>
+<li>构建了 OpenRealCAD，这是一个包含 392 个 CAD 模型、其 3D 打印物理对象的四视图图像以及配对真实命令序列的真实图像基准，支持对 Sim2Real 重建进行定量和可复现的评估。</li>
+<li>提出了 RealCAD，这是一种 Sim2Real 图像到 CAD 重建框架，该框架结合了几何约束的合成到真实图像翻译和多正对比学习，以减少图像和特征层面的合成到真实差异。</li>
+<li>利用大规模合成数据和有限的真实图像，在图像层面和特征层面同时缓解合成到真实的差距，其中图像层面通过几何约束进行域适应，特征层面通过多正对比学习对齐不同视角和域下的表示。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2608.30821" data-arxiv-id="2608.30821" data-status="ready">
+<h1>[2608.30821] Lucida: Parse, Generate, and Place for Composable Real-to-Sim Scene Modeling</h1>
+<p><a href="https://arxiv.org/abs/2608.30821" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>Lucida 提出了一种可组合的实到仿真场景建模系统，通过解析、生成和放置三个步骤，利用多视图证据整合与闭环 GUI 交互策略，解决了现有方法在遮挡、几何不匹配及初始化精度上的局限。</p>
+<h2>解决的问题</h2>
+<p>现有可组合场景建模方法存在以下问题：1. 基于微分渲染的方法（如 NeRF）生成的场景是整体性的，无法分离为可编辑的物体资产；2. 现有的物体组合扩展方法仍依赖于观测到的几何形状，导致被遮挡表面无法恢复；3. 实到仿真系统通常使用数据库中的资产填充房间，限制了保真度；4. 交互式场景合成缺乏特定的捕捉依据；5. 现有方法无法同时提供完整、可编辑且忠实于观测的物体资产；6. 解析、生成和放置各步骤所需的输入（如精确实例重建、无遮挡中心视图、几何一致的资产）在杂乱的真实捕捉中均难以满足；7. 端到端方法因数据稀缺和泛化能力差而受限；8. 固定顺序的步骤导致任一环节未满足要求都会影响后续步骤。</p>
+<h2>创新点</h2>
+<ul>
+<li>重新设计了可组合场景建模流程，使得每一步都不依赖于真实杂乱捕捉无法提供的输入，将精度要求推迟到闭环的最后一步而非在第一步就强求。</li>
+<li>提出了一种场景级 3D 物体检测方法，该方法构建包含每实例多视图证据的场景图，在 R2S-Scene 的全标注协议下将 mAP 从 Boxer 的 0.351 提升至 0.592。</li>
+<li>提出了 GizmoAct，这是一种将资产放置视为多轮 GUI 交互的 VLM 策略，通过闭环 gizmo 操作对齐资产并自主停止；该策略通过监督微调强化学习训练，在资产几何不匹配和初始姿态粗糙的情况下，将严格对齐成功率（ADD-SB@0.05）比最强基线提高了多达 25.6 个百分点。</li>
+<li>将上述模块集成到 Lucida 系统中，并在 R2S 真实世界实到仿真基准上进行了评估，在 3D 物体检测、物体姿态估计和场景重建三个层面取得了优异表现，其中合成场景的 F-Score 达到 0.924，优于最强基线 SAM 3D 的 0.794。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2608.31023" data-arxiv-id="2608.31023" data-status="ready">
+<h1>[2608.31023] SMG: Semantic Motion Graph for Monocular Dynamic Gaussian Splatting</h1>
+<p><a href="https://arxiv.org/abs/2608.31023" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种名为 SMG（语义运动图）的机制，将高斯运动建模为语义运动图的节点变形，以解决单目动态高斯泼溅在稀疏视点下的运动不一致和过拟合问题。</p>
+<h2>解决的问题</h2>
+<p>单目视频重建动态场景时，由于缺乏密集视点和物体运动不可预测，区分相机运动与物体运动变得病态，导致严重的过拟合、表面漂移和几何不一致；现有的基于数据驱动或物理先验的方法假设运动可分解为平滑和局部刚性变换，但仅靠运动平滑性不足以处理被遮挡区域，且几何约束无法将正确运动传播到这些区域。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出 SMG，一种将高斯运动建模为语义运动图节点变形的单目动态高斯泼溅流程。</li>
+<li>开发了基于 SMG 的运动不确定性建模方法，通过在相同语义组内从可靠节点向不可见节点传播运动，以处理动态高斯优化过程中的不确定性。</li>
+<li>引入了 SMG 数据集，这是一个包含复杂相机和物体运动的挑战性多视图数据集，用于评估单目动态高斯泼溅。</li>
+<li>提出了置信度感知的尽可能刚性（C-ARAP）机制，通过引导不可靠节点来传播运动并保持拓扑结构。</li>
+<li>设计了局部刚性运动控制（LRM），以处理观测受限时的不可控节点速度变化。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.00995" data-arxiv-id="2609.00995" data-status="ready">
+<h1>[2609.00995] CQF-HMR: Continuous Quaternion Flows for Probabilistic 3D Human Mesh Recovery from a Single Image</h1>
+<p><a href="https://arxiv.org/abs/2609.00995" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种名为 CQF-HMR 的新框架，利用连续四元数归一化流（continuous quaternion normalizing flows）来学习基于 2D 输入的 SMPL 3D 关节旋转生成，以解决单目 3D 人体网格恢复中的深度歧义问题。</p>
+<h2>解决的问题</h2>
+<p>单目 3D 人体姿态估计面临深度歧义导致的严重病态问题，且传统方法在野外样本上易产生不自然姿态；同时，由于 3D 旋转的非可加性，将普通流模型直接应用于 SMPL 的关节旋转会引入不连续性和错误姿态。</p>
+<h2>创新点</h2>
+<ul>
+<li>展示了使用具有单位球约束的四元数流能够产生平滑、连续的生成轨迹，从而有效解决概率性 3D 人体网格恢复中的旋转不连续问题。</li>
+<li>将四元数微分方程的设计集成到流匹配（flow matching）流程中，利用 2D 热力图作为条件来生成 SMPL 身体关节的旋转。</li>
+<li>通过基于哈密顿积的四元数积分操作求解微分方程，确保四元数始终保持在 S3 球面上，无需像其他表示法那样进行重新归一化。</li>
+<li>通过流匹配与直线最优传输路径（straight OT path）学习 SMPL 形状参数，并探索使用更复杂的人体先验（VPoser）来采样合理的初始姿态。</li>
+<li>在 Human3.6M 基准测试（包括其模糊分割部分）上取得了新的最先进（state-of-the-art）结果。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.01516" data-arxiv-id="2609.01516" data-status="ready">
+<h1>[2609.01516] DualDiff3D: Dual Structure-Appearance Diffusion Priors for Reliability-Enhanced 3D Gaussian Splatting</h1>
+<p><a href="https://arxiv.org/abs/2609.01516" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了 DualDiff3D，一种通过解耦结构一致性与外观一致性并利用双扩散先验来增强稀疏视角下 3D 高斯泼溅（3DGS）重建可靠性的新框架。</p>
+<h2>解决的问题</h2>
+<p>基于 3DGS 的方法在稀疏输入场景下合成远离输入视角的新视角时，因信息不足而面临挑战，且现有利用扩散模型的方法存在推理延迟高或单一网络难以同时处理结构（视角一致性）与外观（内容填充）冲突的问题。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了 DualDiff，一种新颖的双分支管道，用于在参考视图引导下细化低质量渲染的新视角。</li>
+<li>首次认识到在此任务中解耦结构与外观处理的必要性，并证明了单一网络处理两者是不合适的。</li>
+<li>通过充分利用双扩散先验并引入结构 - 外观注意力（SAA）模块，使模型能够独立确保结构一致性和外观一致性。</li>
+<li>引入了 DualDiff3D，这是一个基于可靠性增强的渲染 - 细化 - 优化（RRO）循环的 3D 重建框架，集成了渐进式采样与过滤（PSF）策略和置信度驱动加权（CDW）过程。</li>
+<li>有效解决了直接将扩散模型细化输出输入 3DGS 优化所导致的临界不稳定性问题，实现了逻辑完整的闭环解决方案。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.02847" data-arxiv-id="2609.02847" data-status="ready">
+<h1>[2609.02847] RoGe: Novel View Synthesis via End-to-End Implicit Reconstruction and Generation</h1>
+<p><a href="https://arxiv.org/abs/2609.02847" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 RoGe，一种端到端的统一重建与生成框架，旨在解决稀疏视图下的新视图合成问题，通过连接前馈重建网络与视频生成模型实现几何特征与生成模型的直接信息流。</p>
+<h2>解决的问题</h2>
+<p>稀疏视图下的新视图合成（NVS）是病态的，因为场景大部分区域可能被遮挡或未观测。现有重建方法难以处理未见区域，生成方法几何一致性差，而现有混合方法存在生成与输入视图不一致或重建与生成解耦导致误差累积的问题。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出 RoGe，一种联合重建与生成框架，以前馈重建网络与视频生成模型端到端连接，使生成模型能直接消费其条件化的几何表示。</li>
+<li>通过查询隐式场景表示中的相机射线获取每视图几何特征作为生成部分的条件，消融实验表明这些特征比原始重建令牌和解码的 RGB 图更有效。</li>
+<li>在 DL3DV 数据集上进行实验，证明该方法合成的视频具有高视觉质量、强几何一致性和精确的相机可控性，优于现有重建、生成及混合方法。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.09394" data-arxiv-id="2609.09394" data-status="ready">
+<h1>[2609.09394] OmniPoint: Universal Monocular Metric Pointcloud from Any Camera</h1>
+<p><a href="https://arxiv.org/abs/2609.09394" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>OmniPoint 是一个统一的单目几何估计框架，通过相机无关的射线方向与径向距离表示、双向数据增强策略以及鲁棒的几何信息注入机制，实现了在多种相机模型和可选几何先验下的通用度量点云重建。</p>
+<h2>解决的问题</h2>
+<p>现有单目深度估计方法高度碎片化，通常绑定固定的针孔相机模型，无法灵活处理鱼眼、全景等异构传感器，且难以动态整合内参或稀疏深度等可选几何先验，导致在实际机器人或自动驾驶应用中需要维护多个孤立模型，造成巨大的内存开销并 complicates 传感器融合。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了 OmniPoint，这是首个能够有效处理异构相机模型（针孔、鱼眼、360 度）和灵活几何先验（内参、稀疏深度）的单目几何估计统一框架，且无需修改网络架构。</li>
+<li>设计了一种双向数据增强策略，通过视角到任意视角的合成投影过程以及任意视角到视角的虚拟采样过程，有效弥合了透视数据与全景数据之间的监督差距。</li>
+<li>引入了一种鲁棒的几何信息注入机制，利用全向量高斯平滑处理稀疏深度输入，防止特征分布偏移，使模型能无缝切换为零样本单目估计器或高性能深度稠密化系统。</li>
+<li>提出了解耦的训练目标，将相机相关的射线方向与相机无关的径向距离分离，确保射线方向已知后，距离预测可适用于任意相机类型，从而实现了真正的跨相机泛化。</li>
+<li>通过可学习输入状态嵌入显式信号当前激活配置，动态引导视觉Transformer解决架构歧义，成功解决了切换可选输入（如从仅 RGB 到 RGB+ 稀疏深度）导致的训练不稳定性问题。</li>
+<li>在广泛的相机模型和基准测试上实现了最先进的零样本性能，证明了该方法在统一 3D 感知系统中的卓越灵活性和实用性。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.09418" data-arxiv-id="2609.09418" data-status="ready">
+<h1>[2609.09418] Valerant: An Automatic Navigable Game Map Generator via Action-Conditioned World Model Exploration</h1>
+<p><a href="https://arxiv.org/abs/2609.09418" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>Valerant 是一个无需训练的自动游戏地图生成框架，它将预训练的动作条件世界模型转化为世界动作模型，并通过结合探索驱动的决策与基于 SLAM 的重建，将单张输入图像转化为可导航的 3D 环境。</p>
+<h2>解决的问题</h2>
+<p>现有的基于世界模型的方法主要关注视觉模拟或物理环境中的决策，无法直接生成游戏所需的持久化显式 3D 几何地图，因为游戏世界本身是需要被生成的产物，而非预先存在的物理空间。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了 Valerant，这是一个统一的无需训练框架，能够将预训练的动作条件世界模型转化为世界动作模型，并将其探索过程与基于 SLAM 的重建相结合，从而实现自动游戏地图生成。</li>
+<li>开发了一种反事实探索程序，利用替代的世界模型滚动结果来指导动作选择，并将其转换为持久的 3D 环境，从而弥合了视觉世界模拟与游戏所需显式空间实例化之间的差距。</li>
+<li>确立了一种新的游戏地图创作方向，即通过单张视觉概念扩展为可导航的 3D 几何结构，从而减少游戏开发者对劳动密集型和繁琐的地图构建工作流程的依赖。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.09491" data-arxiv-id="2609.09491" data-status="ready">
+<h1>[2609.09491] Learning Global Camera Poses from Noisy View-Graphs for Structure from Motion</h1>
+<p><a href="https://arxiv.org/abs/2609.09491" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种名为 VGPA 的排列等变图神经网络，用于从带有噪声的视图图中学习全局相机姿态，该方法仅利用成对相对姿态的一致性目标进行自监督训练，无需点轨迹或重投影损失，即可高效恢复全局一致的相机外参。</p>
+<h2>解决的问题</h2>
+<p>现有的多视图 SfM 方法在处理大规模图像集合时效率较低，且依赖处理顺序或难以处理大规模输入，而基于点轨迹的深度学习方法在缺乏点轨迹或需要重投影损失时存在局限性。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了 VGPA，这是一种排列等变的边条件图神经网络，能够从视图图的边中聚合带有噪声的成对相对相机姿态，以恢复全局一致的相机外参。</li>
+<li>该方法在无需地面真值监督的情况下，仅通过相对姿态一致性目标进行训练，且不依赖点轨迹、3D 点预测或重投影损失，同时通过三角化和鲁棒束调整恢复 3D 结构。</li>
+<li>证明了 VGPA 可以基于稀疏检索构建的视图图运行，即使将穷尽式成对匹配替换为基于 top-k 检索的图，也能在边缘密度大幅降低的情况下保持强大的配准覆盖率和精度。</li>
+<li>在 MegaDepth 和 1DSfM 等具有挑战性的数据集上进行了广泛的实验评估，结果表明该方法在相机位置和方向误差方面优于现有的深度轨迹中心方法，并能配准更多图像。</li>
+<li>展示了该方法在处理包含挑战性循环轨迹的场景时表现优异，能够解决传统重投影中心方法经常遇到的困难，并在小型校准基准测试中取得了与强经典流程相当的结果。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.09507" data-arxiv-id="2609.09507" data-status="ready">
+<h1>[2609.09507] RoMa-$Ω$: What Feed-Forward 3D Models Know About Image Matching</h1>
+<p><a href="https://arxiv.org/abs/2609.09507" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文研究了前馈 3D 模型在图像匹配方面的能力，并发现用其特性替换 RoMa v2 中的 DINOv3 主干网络可显著提升在 WxBS 和 HardMatch 数据集上的 mAA 指标。</p>
+<h2>解决的问题</h2>
+<p>现有图像匹配器（如 RoMa 和 RoMa v2）主要依赖冻结的 DINO 特性，但研究表明 DINO 特性并非图像匹配的最优选择，且前馈 3D 重建模型是否隐含学习了图像匹配能力尚不明确。</p>
+<h2>创新点</h2>
+<ul>
+<li>系统比较了前馈 3D 重建模型特性与标准图像骨干网络 DINO 的零样本图像匹配性能，并发现了特性退化模式及其与 Gram 锚定的联系。</li>
+<li>评估了 VGGT-Ω 原始几何预测的直接匹配性能，发现该免训练基线具有竞争力，但在视角和模态变化下性能显著下降。</li>
+<li>展示了通过将 RoMa v2 中的 DINOv3 主干替换为精心选择的前馈 3D 模型特性，即可实现最先进的匹配性能，并在 WxBS 和 HardMatch 数据集上分别提升了 8.1 和 3.5 的 mAA。</li>
+<li>探讨了前馈 3D 模型特性在后期层的退化现象，并分析了其与 DINOv3 中 Gram 锚定机制的关联。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.09513" data-arxiv-id="2609.09513" data-status="ready">
+<h1>[2609.09513] AnimalLift: Reconstructing Animatable 3D Animals from a Single Image by Learning Canonical Shape, Texture, and Fur Maps</h1>
+<p><a href="https://arxiv.org/abs/2609.09513" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种名为 AnimalLift 的框架，旨在通过学习规范形状、纹理和毛发图，从单张图像重建具有可动画化特性的 3D 动物资产。</p>
+<h2>解决的问题</h2>
+<p>现有的图像到 3D 重建方法通常依赖隐式场、点基表示或无约束网格，导致生成的资产缺乏共享拓扑、规范对应关系和可编辑的表面参数化，难以进行绑定和动画制作；同时，现有的参数化动物模型虽然支持动画，但其低维公式难以捕捉细粒度几何、详细纹理和高频毛发外观。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种用于联合建模动物几何、纹理和显式毛发的规范 UV 对齐表示，该表示位于结构化的可动画化空间中。</li>
+<li>开发了一个统一的前馈框架，能够从单张图像重建带有显式毛发的可动画化 3D 动物资产。</li>
+<li>引入了一种程序化数据生成管道，为不同动物物种和外观下的几何、纹理和毛发提供了对齐的监督信号。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.09606" data-arxiv-id="2609.09606" data-status="ready">
+<h1>[2609.09606] RouteBridge: Reliability-Routed Bidirectional Distillation Between Neural Radiance Fields and 3D Gaussian Splatting</h1>
+<p><a href="https://arxiv.org/abs/2609.09606" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>RouteBridge 提出了一种基于局部可靠性的双向蒸馏方法，通过路由器根据射线证据动态选择由 NeRF 还是 3DGS 为对方提供监督信号，从而在不共享参数或特征骨干网的情况下提升两种表示的渲染质量。</p>
+<h2>解决的问题</h2>
+<p>片段未提供关于具体研究问题（如现有方法在特定场景下的缺陷）的明确描述，仅提到联合优化无法确定哪种预测更可靠且相对优势取决于相机视角。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种局部可靠性路由器，能够针对每一条射线动态选择由 NeRF 向 3DGS 提供监督、由 3DGS 向 NeRF 提供监督或放弃蒸馏。</li>
+<li>设计了一种无需参数的射线空间蒸馏接口，能够在不共享潜在特征或点对应关系的情况下对齐异构渲染器。</li>
+<li>证明了该方法在 mip-NeRF 360 数据集上将 3DGS 导出质量从 27.21 dB 提升至 28.77 dB。</li>
+<li>验证了自适应路由器在感知误差更低的情况下，比固定 NeRF 教师模型在静态三视图 DTU 协议上性能提升 0.16 dB。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.09890" data-arxiv-id="2609.09890" data-status="ready">
+<h1>[2609.09890] StreetDiff: Multi-view Street Scenes Generation via Cross-view Consistent Multi-view Stable Diffusion with Structure Prompts</h1>
+<p><a href="https://arxiv.org/abs/2609.09890" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文针对现有方法在生成复杂城市街景时存在的布局简单、分辨率受限及几何结构失真等问题，提出了 StreetDiff 框架与 Street360 数据集。</p>
+<h2>解决的问题</h2>
+<p>现有文本多视角图像生成方法主要受限于室内场景或简单自然场景，缺乏城市复杂性。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了 Street360，这是一个大规模 HDR 多视角城市全景数据集，包含对齐的文本提示和密集的结构注释，旨在支持逼真的城市街景生成与评估。</li>
+<li>提出了新颖的全景 - 视角协同框架 StreetDiff，该框架有效利用结构提示（如分割图、轮廓图或用户草图）来指导生成，确保生成的街景图像准确遵循给定的结构提示。</li>
+<li>引入了全景对齐模块（PAM），该模块建立全景与视角表示之间的几何感知对应关系，以利用全局上下文信息并强制多视角间的一致性。</li>
+<li>通过广泛的实验证明，该方法在街景生成任务中取得了最佳性能，在生成质量和多视角一致性方面超越了先前的模型。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.10095" data-arxiv-id="2609.10095" data-status="ready">
+<h1>[2609.10095] LinearMask-GS: Stable-Mask Importance Pruning for Compact 3D Gaussian Splatting</h1>
+<p><a href="https://arxiv.org/abs/2609.10095" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>LinearMask-GS 提出了一种线性增量掩码激活函数，通过保持掩码值处于中间置信度区间来避免饱和，从而在 3D 高斯泼溅中实现了更稳定的重要性剪枝和更优的质量压缩权衡。</p>
+<h2>解决的问题</h2>
+<p>现有基于学习掩码的剪枝方法（如 LP-3DGS）使用的 Gumbel-Sigmoid 激活函数斜率过陡，导致掩码值在重要性排序稳定前就饱和至 0 或 1，形成双峰分布，使得剪枝决策不可靠且延长训练窗口会加剧此问题。</p>
+<h2>创新点</h2>
+<ul>
+<li>识别出学习掩码剪枝中陡峭激活函数导致掩码过早饱和并产生双峰分布的问题，且该问题会随掩码训练窗口的延长而恶化。</li>
+<li>提出线性增量掩码激活函数，其平缓的斜率能保持掩码值远离边界，生成单峰分布以保留可靠的重要性排序。</li>
+<li>在 Mip-NeRF 360、Tanks &amp; Temples 和 Deep Blending 数据集上验证了该方法在 3DGS 上优于现有基线，实现了更好的质量压缩权衡。</li>
+<li>证明了所提出的掩码模块无需修改即可无缝集成到 2DGS、DropGaussian、Octree-GS 和 FastGS 等多种高斯基线中。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.10307" data-arxiv-id="2609.10307" data-status="ready">
+<h1>[2609.10307] View-Structured Conformal Prediction for 3D Gaussian Splatting</h1>
+<p><a href="https://arxiv.org/abs/2609.10307" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种基于视图结构的不符合预测方法，旨在解决 3D 高斯泼溅渲染中像素池化评估无法反映单视图覆盖率的缺陷，并通过构建渲染器结构的尺度模型实现高效且有效的不确定性量化。</p>
+<h2>解决的问题</h2>
+<p>现有方法主要依赖像素级评估指标（如 AUSE 和秩相关系数），这些指标仅关注像素排序而忽略统计单位，导致无法准确衡量单视图内的覆盖率；此外，恒定尺度的有效区间在简单视图或观测充分区域过于宽泛，缺乏效率。</p>
+<h2>创新点</h2>
+<ul>
+<li>将可靠的 3D 高斯泼溅渲染定义为高概率单视图 RGB 覆盖事件，构建了基于视图校准而非像素池化的有限样本有效区间，揭示了像素池化无法控制该事件的局限性。</li>
+<li>构建了跨越视图和像素的渲染器结构尺度，推导了固定空间形状下的风险最优视图目标，并证明了基于对数视图因子误差的精确超额宽度分解。</li>
+<li>提出的视图因子仅需在源场景上学习一次，测试时仅需无标签特征，其训练成本仅为十模型集成尺度的十分之一，同时能匹配集成效果并超越最接近的单模型基线。</li>
+<li>该方法能够迁移至未见过的数据集家族和不同的骨干网络，并揭示了基于单视图排名指标存在的盲点。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.10322" data-arxiv-id="2609.10322" data-status="ready">
+<h1>[2609.10322] Geometry Without Coordinates: LiDAR Diffusion as a 3D Feature Bridge</h1>
+<p><a href="https://arxiv.org/abs/2609.10322" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种基于 LiDAR 条件的扩散框架，通过文本提示生成多任务模态的密集场景表示，实现了将 2D 基础模型先验伪标签化地迁移至 3D 点云，并证明了在无 3D 真值标签情况下学习到的特征仍编码了结构化的 3D 信息且在网络深度上呈现模态特异性到共享瓶颈再到任务特异性的组织规律。</p>
+<h2>解决的问题</h2>
+<p>大规模对齐的多模态 3D 数据获取仍是 LiDAR 感知的瓶颈，且 3D 领域缺乏像 2D 图像那样大规模预训练的基础模型所蕴含的丰富几何与语义先验。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种基于 LiDAR 条件的扩散框架，能够生成深度、语义分割和实例预测等多种模态的密集场景表示，并通过文本提示切换任务。</li>
+<li>设计了一种探测协议，直接在点云空间中评估扩散模型的特征，同时排除原始空间坐标的影响，从而隔离特征内容本身与投影几何带来的信息泄露。</li>
+<li>展示了尽管缺乏 3D 真值标签，学习到的特征仍能编码有意义的 3D 结构信息，线性探测在 3D 语义类别上达到约 23% 的 MIoU，远高于高斯噪声控制的 3.5%。</li>
+<li>揭示了模态条件特征在网络深度上表现出一致的组织规律：早期层保持模态特异性，中间层收敛至共享表示，后期层重新特化为任务特定输出。</li>
+<li>证明了该方法无需从头训练原生 3D 模型，即可利用 2D 基础模型先验构建 3D 特征桥梁，且 LiDAR 条件化机制确保了中间特征可直接重投影至输入点云。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.10363" data-arxiv-id="2609.10363" data-status="ready">
+<h1>[2609.10363] SceneHI: High-Resolution 3D-Consistent Scene Texturing with Controllable Illumination</h1>
+<p><a href="https://arxiv.org/abs/2609.10363" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>SceneHI 是一个无需训练的框架，统一了高分辨率纹理合成、多视图一致性和物理合理的照明，以生成完整的室内场景。</p>
+<h2>解决的问题</h2>
+<p>现有方法在复杂多物体场景中难以保持全局一致性，常因独立处理物体导致遮挡问题或破坏空间结构，且缺乏对烘焙照明的支持。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了 SceneHI，一个用于多物体室内场景的生成式框架，能够采样照片级真实的纹理。</li>
+<li>提出了一种分析性的像素到纹理单元映射，驱动图像与 UV 空间之间的渲染/逆渲染循环，以维持噪声分布并强制跨视图纹理对齐。</li>
+<li>提出了高清纹理细化（HDTR）阶段，通过基于几何的补丁扩散细化初始纹理，注入与场景几何对齐的细粒度表面细节。</li>
+<li>提出了几何一致阴影（GCS）阶段，生成由任意光源位置控制的物理合理且 3D 一致的阴影，并将全局照明直接烘焙到 UV 空间。</li>
+<li>在具有挑战性的多物体场景上的实验表明，SceneHI 在纹理保真度、一致性和真实感方面均优于现有方法。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.10376" data-arxiv-id="2609.10376" data-status="ready">
+<h1>[2609.10376] Shape-guided Gaussian Splatting for Sparse-View X-ray 3D Reconstruction</h1>
+<p><a href="https://arxiv.org/abs/2609.10376" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种形状引导的高斯泼溅框架，利用人群形状和密度信息指导稀疏视角下的 X 射线三维重建，以解决传统方法在极稀疏视角下重建质量严重下降的问题。</p>
+<h2>解决的问题</h2>
+<p>从少量二维 X 射线投影中恢复三维几何是一个病态问题，传统方法在稀疏视角下会产生条纹伪影并丢失结构细节，而现有基于神经辐射场或高斯泼溅的方法缺乏解剖学先验，导致在极稀疏视角下过度拟合并产生形态不合理的边界。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种形状引导的高斯泼溅框架，将高斯原语的位置绑定到形状模型上，从而将几何约束在解剖学有效的配置范围内。</li>
+<li>在初始化阶段，从形状模板中播种高斯位置和方向，并从强度图像的人群平均密度中播种高斯密度。</li>
+<li>在优化阶段，通过形状先验使高斯位置在解剖学合理的区域内集体变形，同时利用密度先验将重建体积限制在统计密度变化范围内。</li>
+<li>在 NMDID 数据集的股骨数据上进行了实验，证明了该方法在低至 5 视角的极端稀疏条件下相比最先进基线具有持续的性能提升。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.10456" data-arxiv-id="2609.10456" data-status="ready">
+<h1>[2609.10456] Advanced Brain Tissue Imaging with Data-Consistent Diffusion Priors in Laminographic X-Ray Nanoimaging</h1>
+<p><a href="https://arxiv.org/abs/2609.10456" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种名为 LUCID 的物理引导生成框架，该框架将数据驱动的扩散先验与测量一致的优化相结合，通过多轴向扩散策略直接嵌入迭代重建循环，以解决层析成像中因倾斜几何结构导致的缺失锥问题，从而在保持数据一致性的同时恢复精细的脑组织结构。</p>
+<h2>解决的问题</h2>
+<p>论文片段未提供关于具体研究问题（problem）的独立描述，相关背景和问题阐述已融入引言片段中，主要涉及层析成像中缺失锥导致的各向异性分辨率下降、伪影及现有方法在脑组织异质性场景下的局限性。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种名为 LUCID 的框架，该框架将数据驱动的扩散先验与测量一致的优化统一起来，以解决层析成像中的缺失锥问题。</li>
+<li>采用多轴向扩散策略，在轴向、矢状面和冠状面之间进行互补结构学习，而非独立处理单个切片。</li>
+<li>将扩散模型直接嵌入迭代层析成像重建循环中，使生成先验能够与投影域的数据一致性更新共同演化。</li>
+<li>构建了首个小鼠脑组织的纳米级相干 X 射线层析成像数据集，并公开发布以供基准测试使用。</li>
+<li>在模拟数据和真实实验数据上均展示了 LUCID 恢复结构信息、减少层间混叠并恢复因传统方法严重退化的精细特征的能力。</li>
+<li>评估了重建结果的可靠性，表明扩散先验的生成表达能力受到物理数据一致性的有效约束，确保恢复的结构紧密受限于测量投影。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.10531" data-arxiv-id="2609.10531" data-status="ready">
+<h1>[2609.10531] Guiding Image-to-3D Generation with Test-Time Partial Observations</h1>
+<p><a href="https://arxiv.org/abs/2609.10531" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种无需训练的测试时引导框架，利用推理阶段可用的部分几何观测来指导预训练的图像到 3D 生成模型，在保持视觉质量的同时显著提升了几何保真度。</p>
+<h2>解决的问题</h2>
+<p>现有的图像到 3D 生成模型仅依赖单张 RGB 图像，导致生成的几何结构主要由模型先验决定而非真实物体几何，从而产生深度错误、比例失调或幻觉表面等问题，这在需要几何精度的机器人、数字孪生等场景中尤为 problematic。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种无需训练的引导框架，能够在推理阶段将部分几何观测整合到预训练的图像到 3D 生成模型中，而无需修改或微调底层模型。</li>
+<li>从理论角度阐述了测试时证据如何变形瞬时流景观，为引导机制提供了理论支撑。</li>
+<li>构建了一种基于物理一致性的射线观测似然率的占据网格能量函数，该能量结合了占据项和自由空间约束，以强制几何一致性并合理补全未观测区域。</li>
+<li>通过广泛的实验证明，该方法在部分观测重建和新视角合成基准上显著优于现有的图像到 3D 生成方法，同时保留了生成资产的视觉质量。</li>
+</ul>
+</article>
     <article class="summary-article summary-topic-entry" id="summary-2609.02352" data-arxiv-id="2609.02352" data-status="ready">
 <h1>[2609.02352] Atlas: Algorithm-Hardware Co-Design for On-Device City-Scale 3D Gaussian Splatting in VR</h1>
 <p><a href="https://arxiv.org/abs/2609.02352" rel="nofollow">arXiv 原文</a></p>
@@ -1075,6 +1828,6 @@
 </article>
     </div>
   </main>
-  <script type="application/json" id="summary-catalog">{"papers":{"2608.29680":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.29680"},"2608.29733":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.29733"},"2608.29793":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.29793"},"2608.29905":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.29905"},"2608.29928":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.29928"},"2608.30218":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.30218"},"2608.30307":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.30307"},"2608.31113":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.31113"},"2609.00625":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.00625"},"2609.00812":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.00812"},"2609.00923":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.00923"},"2609.00994":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.00994"},"2609.01276":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.01276"},"2609.01823":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.01823"},"2609.02184":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.02184"},"2609.02352":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.02352"},"2609.02543":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.02543"},"2609.02747":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.02747"},"2609.03117":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03117"},"2609.03304":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03304"},"2609.03334":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03334"},"2609.03341":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03341"},"2609.03349":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03349"},"2609.03447":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03447"},"2609.03534":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03534"},"2609.03613":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03613"},"2609.03639":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03639"},"2609.03657":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03657"},"2609.03824":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03824"},"2609.03897":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03897"},"2609.03919":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03919"},"2609.03931":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03931"},"2609.03956":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03956"},"2609.04174":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.04174"},"2609.04196":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.04196"},"2609.04201":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.04201"},"2609.04942":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.04942"},"2609.04984":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.04984"},"2609.05127":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.05127"},"2609.05210":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.05210"},"2609.05255":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.05255"},"2609.05382":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.05382"},"2609.05415":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.05415"},"2609.05416":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.05416"},"2609.06436":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.06436"},"2609.06723":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.06723"},"2609.06726":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.06726"},"2609.06810":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.06810"},"2609.06955":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.06955"},"2609.07085":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.07085"},"2609.07137":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.07137"},"2609.07174":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.07174"},"2609.07231":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.07231"},"2609.07274":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.07274"},"2609.07346":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.07346"},"2609.07434":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.07434"},"2609.07557":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.07557"},"2609.07724":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.07724"},"2609.07734":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.07734"},"2609.08101":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.08101"},"2609.08148":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.08148"},"2609.08332":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.08332"},"2609.08449":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.08449"},"2609.08493":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.08493"},"2609.08730":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.08730"},"2609.08841":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.08841"},"2609.08848":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.08848"},"2609.09012":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.09012"},"2609.09145":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.09145"}},"topic":"3D Gen&Recon","version":1}</script>
+  <script type="application/json" id="summary-catalog">{"papers":{"2608.23014":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.23014"},"2608.23140":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.23140"},"2608.23206":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.23206"},"2608.23410":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.23410"},"2608.23549":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.23549"},"2608.24169":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.24169"},"2608.24212":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.24212"},"2608.24714":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.24714"},"2608.24760":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.24760"},"2608.25401":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.25401"},"2608.25461":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.25461"},"2608.25483":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.25483"},"2608.26656":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.26656"},"2608.26868":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.26868"},"2608.26948":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.26948"},"2608.26951":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.26951"},"2608.27073":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.27073"},"2608.27407":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.27407"},"2608.27735":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.27735"},"2608.28240":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.28240"},"2608.28272":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.28272"},"2608.28386":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.28386"},"2608.28570":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.28570"},"2608.28895":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.28895"},"2608.29346":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.29346"},"2608.29538":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.29538"},"2608.29680":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.29680"},"2608.29733":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.29733"},"2608.29793":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.29793"},"2608.29905":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.29905"},"2608.29928":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.29928"},"2608.30054":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.30054"},"2608.30184":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.30184"},"2608.30218":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.30218"},"2608.30307":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.30307"},"2608.30423":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.30423"},"2608.30617":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.30617"},"2608.30821":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.30821"},"2608.31023":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.31023"},"2608.31113":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.31113"},"2609.00625":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.00625"},"2609.00812":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.00812"},"2609.00923":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.00923"},"2609.00994":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.00994"},"2609.00995":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.00995"},"2609.01276":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.01276"},"2609.01516":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.01516"},"2609.01823":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.01823"},"2609.02184":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.02184"},"2609.02352":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.02352"},"2609.02543":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.02543"},"2609.02747":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.02747"},"2609.02847":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.02847"},"2609.03117":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03117"},"2609.03304":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03304"},"2609.03334":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03334"},"2609.03341":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03341"},"2609.03349":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03349"},"2609.03447":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03447"},"2609.03534":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03534"},"2609.03613":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03613"},"2609.03639":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03639"},"2609.03657":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03657"},"2609.03824":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03824"},"2609.03897":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03897"},"2609.03919":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03919"},"2609.03931":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03931"},"2609.03956":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03956"},"2609.04174":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.04174"},"2609.04196":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.04196"},"2609.04201":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.04201"},"2609.04942":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.04942"},"2609.04984":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.04984"},"2609.05127":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.05127"},"2609.05210":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.05210"},"2609.05255":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.05255"},"2609.05382":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.05382"},"2609.05415":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.05415"},"2609.05416":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.05416"},"2609.06436":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.06436"},"2609.06723":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.06723"},"2609.06726":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.06726"},"2609.06810":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.06810"},"2609.06955":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.06955"},"2609.07085":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.07085"},"2609.07137":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.07137"},"2609.07174":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.07174"},"2609.07231":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.07231"},"2609.07274":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.07274"},"2609.07346":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.07346"},"2609.07434":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.07434"},"2609.07557":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.07557"},"2609.07724":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.07724"},"2609.07734":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.07734"},"2609.08101":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.08101"},"2609.08148":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.08148"},"2609.08332":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.08332"},"2609.08449":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.08449"},"2609.08493":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.08493"},"2609.08730":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.08730"},"2609.08841":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.08841"},"2609.08848":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.08848"},"2609.09012":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.09012"},"2609.09145":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.09145"},"2609.09394":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.09394"},"2609.09418":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.09418"},"2609.09491":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.09491"},"2609.09507":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.09507"},"2609.09513":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.09513"},"2609.09606":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.09606"},"2609.09890":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.09890"},"2609.10095":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.10095"},"2609.10307":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.10307"},"2609.10322":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.10322"},"2609.10363":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.10363"},"2609.10376":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.10376"},"2609.10456":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.10456"},"2609.10531":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.10531"}},"topic":"3D Gen&Recon","version":1}</script>
 </body>
 </html>
