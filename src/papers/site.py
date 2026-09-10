@@ -719,12 +719,15 @@ def generate_site(
     )
     atomic_write_text(page_output, document)
 
+    from milestones.publisher import build_milestone_search_documents
+
     if not refresh_related:
-        # Paper jobs preserve other sections and their search entries verbatim.
+        # Refresh catalog-backed entries while preserving independently published sections.
         index_path = Path(search_index_path or site_root / "search-index.json")
         existing = json.loads(index_path.read_text(encoding="utf-8")) if index_path.exists() else {"documents": []}
-        documents = [SearchDocument(**item) for item in existing["documents"] if item["section"] != "learning"]
+        documents = [SearchDocument(**item) for item in existing["documents"] if item["section"] not in {"learning", "milestones"}]
         documents.extend(build_paper_search_documents(categories, summary_catalog))
+        documents.extend(build_milestone_search_documents(milestone_catalog))
         atomic_write_text(index_path, serialize_search_index(documents, generated_on=today))
         return
 
@@ -737,7 +740,6 @@ def generate_site(
         ),
     )
 
-    from milestones.publisher import build_milestone_search_documents
     from writings.publisher import (
         abort_writings_publication,
         commit_writings_and_search,
