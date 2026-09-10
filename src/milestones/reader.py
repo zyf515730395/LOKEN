@@ -18,7 +18,7 @@ from shared.loopback_chat import LoopbackChatError, LoopbackChatTransport
 from shared.rendering import atomic_write_bytes, atomic_write_text
 
 from .catalog import find_family, load_milestone_catalog
-from .publisher import extract_deep_reading, split_markdown_document
+from .publisher import MilestoneNoteError, extract_deep_reading, load_release_note, split_markdown_document
 
 
 MILESTONE_PROMPT_VERSION = "milestone-deep-reading-v3"
@@ -516,17 +516,13 @@ milestone_release: "{release['slug']}"
 
 
 def _matching_note_path(
-    notes_root: Path, topic_name: str, release: dict[str, Any]
+    notes_root: Path, topic_name: str, release: dict[str, Any], family_slug: str
 ) -> Path | None:
-    directory = notes_root / topic_name
-    prefix = f"[{release['note_id']}] "
-    matches = sorted(path for path in directory.glob("*.md") if path.name.startswith(prefix))
-    if len(matches) > 1:
-        raise MilestoneReaderError(
-            f"Multiple Markdown notes use {release['note_id']}: "
-            + ", ".join(path.name for path in matches)
-        )
-    return matches[0] if matches else None
+    try:
+        note = load_release_note(notes_root, topic_name, family_slug, release)
+    except MilestoneNoteError as error:
+        raise MilestoneReaderError(str(error)) from error
+    return note['path'] if note else None
 
 
 def _read_sources(release: dict[str, Any]) -> list[tuple[str, str]]:
@@ -580,7 +576,7 @@ def process_milestone_family(
     for release in family["releases"]:
         if release["slug"] not in selected_slugs:
             continue
-        path = _matching_note_path(root, topic["name"], release)
+        path = _matching_note_path(root, topic["name"], release, family['slug'])
         current = path.read_bytes().decode("utf-8") if path else None
         reading = None
         if current is not None:
