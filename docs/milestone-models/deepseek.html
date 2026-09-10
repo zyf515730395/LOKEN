@@ -1,0 +1,431 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="DeepSeek 官方模型版本时间线与技术对比。">
+  <title>DeepSeek · 身经百战</title>
+  <script>
+    (() => {
+      document.documentElement.classList.add("js");
+      let theme = null;
+      let contextOpen = null;
+      try {
+        theme = window.localStorage.getItem("arxiv-theme");
+        contextOpen = window.localStorage.getItem("togos-secondary-sidebar-collapsed");
+      } catch (error) { /* Storage can be unavailable. */ }
+      if (theme !== "light" && theme !== "dark") {
+        theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      }
+      document.documentElement.dataset.theme = theme;
+      if (contextOpen === "false") document.documentElement.dataset.contextOpen = "true";
+    })();
+  </script>
+  <link rel="stylesheet" href="../assets/css/site.css?v=13">
+  <script src="../assets/js/site-shell.js?v=13" defer></script>
+  <script src="../assets/js/search-core.js?v=13" defer></script>
+  <script src="../assets/js/search.js?v=13" defer></script>
+  <script src="../assets/js/sidebar.js?v=13" defer></script>
+</head>
+<body data-site-root="../" data-active-section="milestones" class="milestone-page">
+  <header class="site-utility" aria-label="页面工具">
+    <button class="sidebar-toggle" type="button" aria-controls="navigation-shell" aria-expanded="false">
+      <span aria-hidden="true" data-sidebar-toggle-icon>☰</span><span data-sidebar-toggle-label>导航</span>
+    </button>
+    <div class="site-search" data-search-root>
+      <label class="site-search-field" for="search-input">
+        <span aria-hidden="true">⌕</span>
+        <input id="search-input" type="search" placeholder="搜索文章标题"
+               aria-label="搜索文章标题" role="combobox"
+               autocomplete="off" aria-autocomplete="list" aria-controls="search-results" aria-expanded="false">
+        <kbd aria-hidden="true">Ctrl K</kbd>
+      </label>
+      <div class="search-popover" data-search-popover hidden>
+        <p class="search-status" data-search-status aria-live="polite">输入标题关键词开始搜索</p>
+        <div id="search-results" class="search-results" data-search-results role="listbox"></div>
+      </div>
+    </div>
+    <button class="theme-toggle" type="button" aria-label="切换颜色主题" aria-pressed="false">
+      <span data-theme-icon aria-hidden="true"></span>
+    </button>
+  </header>
+  <div class="sidebar-scrim" data-sidebar-close></div>
+<div class="navigation-shell" id="navigation-shell">
+  <button class="navigation-close" type="button" data-navigation-close
+          aria-label="关闭导航" hidden>×</button>
+  <aside class="primary-sidebar" aria-label="知识主题">
+    <a class="primary-brand" href="../index.html" aria-label="LOKEN 首页"><img class="brand-logo" src="../assets/images/loken-logo.png" width="1990" height="329" alt=""></a>
+    <div class="primary-menu" aria-hidden="true"><span>MENU</span><span>☰</span></div>
+    <nav class="primary-navigation" aria-label="知识主题">
+      <a class="primary-nav-item" href="../index.html"><span class="primary-nav-copy"><span class="primary-nav-label">学习一个</span><span class="primary-nav-meta">01 / PAPERS</span></span></a>
+      <a class="primary-nav-item is-active" href="../milestone-models/flux.html" aria-current="page"><span class="primary-nav-copy"><span class="primary-nav-label">身经百战</span><span class="primary-nav-meta">02 / CLASSIC MODELS</span></span></a>
+      <a class="primary-nav-item" href="../writings/index.html"><span class="primary-nav-copy"><span class="primary-nav-label">谈笑风生</span><span class="primary-nav-meta">03 / ARTICLES</span></span></a>
+      <a class="primary-nav-item" href="../journeys/index.html"><span class="primary-nav-copy"><span class="primary-nav-label">跑得还快</span><span class="primary-nav-meta">04 / TRAVELS</span></span></a>
+    </nav>
+    <div class="primary-sidebar-status"><span>LAST SYNC</span><strong>AUTOMATED / WEEKDAYS</strong></div>
+  </aside>
+</div>
+  <main class="page-content" id="top">
+    <div class="section-sticky-header">
+    <header class="milestone-hero section-header">
+      <div class="section-intro">
+        <h1 class="section-intro-title" id="section-milestones-title">MODELS</h1>
+        <p class="section-intro-description">这些模型是身经百战了</p>
+      </div>
+    </header>
+<nav class="context-strip" aria-label="模型系列">
+    <a class="context-strip-link" href="claude.html">Claude</a>
+    <a class="context-strip-link is-active" href="deepseek.html" aria-current="location">DeepSeek</a>
+    <a class="context-strip-link" href="flux.html">FLUX</a>
+    <a class="context-strip-link" href="gpt.html">GPT</a>
+    <a class="context-strip-link" href="hunyuan3d.html">Hunyuan3D</a>
+    <a class="context-strip-link" href="qwen-image.html">Qwen-Image</a>
+    <a class="context-strip-link" href="qwen-vl.html">QwenVL</a>
+    <a class="context-strip-link" href="seedance.html">Seedance</a>
+    <a class="context-strip-link" href="seedream.html">Seedream</a>
+    <a class="context-strip-link" href="stable-diffusion.html">Stable Diffusion</a>
+    <a class="context-strip-link" href="vggt.html">VGGT</a>
+    <a class="context-strip-link" href="wan.html">Wan</a>
+    <a class="context-strip-link" href="z-image.html">Z-Image</a>
+  </nav>
+    </div>
+    <div class="milestone-workspace">
+      <header class="milestone-family-header">
+      <div class="milestone-title-block">
+        <p>Language Models · DeepSeek</p>
+        <h2>DeepSeek</h2>
+        <span>官方模型版本演进与核心技术对比</span>
+      </div>
+      <div class="milestone-hero-meta">
+        <ul class="status-legend" aria-label="发布状态图例"><li><span class="release-status status-released">已发布</span><span>已发布</span></li><li><span class="release-status status-early-access">Early Access</span><span>Early Access</span></li><li><span class="release-status status-announced">已宣布</span><span>已宣布</span></li></ul>
+        <p>Updated 2026-09-11</p>
+      </div>
+      </header>
+      <div class="milestone-overview">
+<section class="milestone-panel timeline-panel" aria-labelledby="timeline-heading">
+  <div class="milestone-panel-heading">
+    <div><p>ROADMAP</p><h2 id="timeline-heading">时间线</h2></div>
+    <span>可横向拖动</span>
+  </div>
+  <div class="milestone-timeline-viewport" data-drag-scroll tabindex="0" aria-label="DeepSeek 时间线，使用左右方向键或拖动浏览">
+    <ol class="milestone-timeline">
+      <li class="timeline-release status-released">
+        <span class="timeline-dot" aria-hidden="true"></span>
+        <time datetime="2023-11-29">2023-11-29</time>
+        <h3>DeepSeek LLM</h3>
+        <span class="release-status status-released">已发布</span>
+        <ul><li>7B</li><li>67B</li></ul>
+      </li>
+      <li class="timeline-release status-released">
+        <span class="timeline-dot" aria-hidden="true"></span>
+        <time datetime="2024-05-06">2024-05-06</time>
+        <h3>DeepSeek-V2</h3>
+        <span class="release-status status-released">已发布</span>
+        <ul><li>DeepSeek-V2</li></ul>
+      </li>
+      <li class="timeline-release status-released">
+        <span class="timeline-dot" aria-hidden="true"></span>
+        <time datetime="2024-09-05">2024-09-05</time>
+        <h3>DeepSeek-V2.5</h3>
+        <span class="release-status status-released">已发布</span>
+        <ul><li>DeepSeek-V2.5</li></ul>
+      </li>
+      <li class="timeline-release status-released">
+        <span class="timeline-dot" aria-hidden="true"></span>
+        <time datetime="2024-12-10">2024-12-10</time>
+        <h3>DeepSeek-V2.5-1210</h3>
+        <span class="release-status status-released">已发布</span>
+        <ul><li>DeepSeek-V2.5-1210</li></ul>
+      </li>
+      <li class="timeline-release status-released">
+        <span class="timeline-dot" aria-hidden="true"></span>
+        <time datetime="2024-12-26">2024-12-26</time>
+        <h3>DeepSeek-V3</h3>
+        <span class="release-status status-released">已发布</span>
+        <ul><li>DeepSeek-V3</li></ul>
+      </li>
+      <li class="timeline-release status-released">
+        <span class="timeline-dot" aria-hidden="true"></span>
+        <time datetime="2025-01-20">2025-01-20</time>
+        <h3>DeepSeek-R1</h3>
+        <span class="release-status status-released">已发布</span>
+        <ul><li>DeepSeek-R1</li><li>DeepSeek-R1-Zero</li><li>R1-Distill Qwen</li><li>R1-Distill Llama</li></ul>
+      </li>
+      <li class="timeline-release status-released">
+        <span class="timeline-dot" aria-hidden="true"></span>
+        <time datetime="2025-03-24">2025-03-24</time>
+        <h3>DeepSeek-V3-0324</h3>
+        <span class="release-status status-released">已发布</span>
+        <ul><li>DeepSeek-V3-0324</li></ul>
+      </li>
+      <li class="timeline-release status-released">
+        <span class="timeline-dot" aria-hidden="true"></span>
+        <time datetime="2025-05-28">2025-05-28</time>
+        <h3>DeepSeek-R1-0528</h3>
+        <span class="release-status status-released">已发布</span>
+        <ul><li>DeepSeek-R1-0528</li></ul>
+      </li>
+      <li class="timeline-release status-released">
+        <span class="timeline-dot" aria-hidden="true"></span>
+        <time datetime="2025-08-21">2025-08-21</time>
+        <h3>DeepSeek-V3.1</h3>
+        <span class="release-status status-released">已发布</span>
+        <ul><li>DeepSeek-V3.1</li></ul>
+      </li>
+      <li class="timeline-release status-released">
+        <span class="timeline-dot" aria-hidden="true"></span>
+        <time datetime="2025-09-22">2025-09-22</time>
+        <h3>DeepSeek-V3.1-Terminus</h3>
+        <span class="release-status status-released">已发布</span>
+        <ul><li>DeepSeek-V3.1-Terminus</li></ul>
+      </li>
+      <li class="timeline-release status-early-access">
+        <span class="timeline-dot" aria-hidden="true"></span>
+        <time datetime="2025-09-29">2025-09-29</time>
+        <h3>DeepSeek-V3.2-Exp</h3>
+        <span class="release-status status-early-access">Early Access</span>
+        <ul><li>DeepSeek-V3.2-Exp</li></ul>
+      </li>
+      <li class="timeline-release status-released">
+        <span class="timeline-dot" aria-hidden="true"></span>
+        <time datetime="2025-12-01">2025-12-01</time>
+        <h3>DeepSeek-V3.2</h3>
+        <span class="release-status status-released">已发布</span>
+        <ul><li>DeepSeek-V3.2</li><li>DeepSeek-V3.2-Speciale</li></ul>
+      </li>
+      <li class="timeline-release status-early-access">
+        <span class="timeline-dot" aria-hidden="true"></span>
+        <time datetime="2026-04-24">2026-04-24</time>
+        <h3>DeepSeek-V4 Preview</h3>
+        <span class="release-status status-early-access">Early Access</span>
+        <ul><li>V4-Pro Preview</li><li>V4-Flash Preview</li></ul>
+      </li>
+      <li class="timeline-release status-early-access">
+        <span class="timeline-dot" aria-hidden="true"></span>
+        <time datetime="2026-07-31">2026-07-31</time>
+        <h3>DeepSeek-V4-Flash</h3>
+        <span class="release-status status-early-access">Early Access</span>
+        <ul><li>V4-Flash-0731</li></ul>
+      </li>
+      <li class="timeline-release status-released">
+        <span class="timeline-dot" aria-hidden="true"></span>
+        <time datetime="2026-08-13">2026-08-13</time>
+        <h3>DeepSeek-V4-Pro</h3>
+        <span class="release-status status-released">已发布</span>
+        <ul><li>V4-Pro-0813</li></ul>
+      </li>
+      <li class="timeline-release status-early-access">
+        <span class="timeline-dot" aria-hidden="true"></span>
+        <time datetime="2026-08-21">2026-08-21</time>
+        <h3>DeepSeek-V4-Flash-Vision-Exp</h3>
+        <span class="release-status status-early-access">Early Access</span>
+        <ul><li>V4-Flash-Vision-Exp</li></ul>
+      </li>
+      <li class="timeline-release status-released">
+        <span class="timeline-dot" aria-hidden="true"></span>
+        <time datetime="2026-09-10">2026-09-10</time>
+        <h3>DeepSeek-V4.1-Flash</h3>
+        <span class="release-status status-released">已发布</span>
+        <ul><li>V4.1-Flash</li></ul>
+      </li>
+    </ol>
+  </div>
+</section>
+<section class="model-specimen" aria-labelledby="model-specimen-heading">
+  <div class="model-specimen-heading">
+    <p>SELECTED SPECIMEN</p>
+    <h2 id="model-specimen-heading">最新发布节点</h2>
+  </div>
+  <div class="model-specimen-graphic" aria-hidden="true">
+    <span></span><span></span><span></span>
+  </div>
+  <dl class="model-specimen-data">
+    <div><dt>MODEL</dt><dd>DeepSeek-V4.1-Flash</dd></div>
+    <div><dt>RELEASED</dt><dd><time datetime="2026-09-10">2026-09-10</time></dd></div>
+    <div><dt>ORGANIZATION</dt><dd>DeepSeek</dd></div>
+    <div><dt>STATUS</dt><dd><span class="release-status status-released">已发布</span></dd></div>
+    <div><dt>READING</dt><dd>精读待补充</dd></div>
+  </dl>
+</section>
+      </div>
+<section class="milestone-panel comparison-panel" aria-labelledby="comparison-heading">
+  <div class="milestone-panel-heading">
+    <div><p>COMPARISON</p><h2 id="comparison-heading">模型对比</h2></div>
+    <span>内容来自本地 Markdown 精读</span>
+  </div>
+  <div class="milestone-table-scroll">
+    <table class="milestone-comparison-table">
+      <thead><tr><th scope="col">对比项</th>
+        <th scope="col" class="milestone-version-heading">
+          <time datetime="2023-11-29">2023-11-29</time>
+          <strong>DeepSeek LLM</strong>
+          <span class="release-status status-released">已发布</span>
+          <span class="milestone-release-count">1 个官方发布节点</span>
+          <div class="milestone-source-links"><a href="https://github.com/deepseek-ai/DeepSeek-LLM" target="_blank" rel="noopener">官方资料 1</a></div>
+          <span class="milestone-note-pending">待精读</span>
+        </th>
+        <th scope="col" class="milestone-version-heading">
+          <time datetime="2024-05-06">2024-05-06</time>
+          <strong>DeepSeek-V2</strong>
+          <span class="release-status status-released">已发布</span>
+          <span class="milestone-release-count">1 个官方发布节点</span>
+          <div class="milestone-source-links"><a href="https://github.com/deepseek-ai/DeepSeek-V2" target="_blank" rel="noopener">官方资料 1</a></div>
+          <span class="milestone-note-pending">待精读</span>
+        </th>
+        <th scope="col" class="milestone-version-heading">
+          <time datetime="2024-09-05">2024-09-05 — 2024-12-10</time>
+          <strong>DeepSeek-V2.5</strong>
+          <span class="release-status status-released">已发布</span>
+          <span class="milestone-release-count">2 个官方发布节点</span>
+          <div class="milestone-source-links"><a href="https://api-docs.deepseek.com/updates/" target="_blank" rel="noopener">官方资料 1</a></div>
+          <span class="milestone-note-pending">待精读</span>
+        </th>
+        <th scope="col" class="milestone-version-heading">
+          <time datetime="2024-12-26">2024-12-26 — 2025-03-24</time>
+          <strong>DeepSeek-V3</strong>
+          <span class="release-status status-released">已发布</span>
+          <span class="milestone-release-count">2 个官方发布节点</span>
+          <div class="milestone-source-links"><a href="https://api-docs.deepseek.com/updates/" target="_blank" rel="noopener">官方资料 1</a></div>
+          <span class="milestone-note-pending">待精读</span>
+        </th>
+        <th scope="col" class="milestone-version-heading">
+          <time datetime="2025-01-20">2025-01-20 — 2025-05-28</time>
+          <strong>DeepSeek-R1</strong>
+          <span class="release-status status-released">已发布</span>
+          <span class="milestone-release-count">2 个官方发布节点</span>
+          <div class="milestone-source-links"><a href="https://api-docs.deepseek.com/updates/" target="_blank" rel="noopener">官方资料 1</a></div>
+          <span class="milestone-note-pending">待精读</span>
+        </th>
+        <th scope="col" class="milestone-version-heading">
+          <time datetime="2025-08-21">2025-08-21 — 2025-09-22</time>
+          <strong>DeepSeek-V3.1</strong>
+          <span class="release-status status-released">已发布</span>
+          <span class="milestone-release-count">2 个官方发布节点</span>
+          <div class="milestone-source-links"><a href="https://api-docs.deepseek.com/updates/" target="_blank" rel="noopener">官方资料 1</a></div>
+          <span class="milestone-note-pending">待精读</span>
+        </th>
+        <th scope="col" class="milestone-version-heading">
+          <time datetime="2025-09-29">2025-09-29 — 2025-12-01</time>
+          <strong>DeepSeek-V3.2-Exp</strong>
+          <span class="release-status status-early-access">Early Access</span>
+          <span class="milestone-release-count">2 个官方发布节点</span>
+          <div class="milestone-source-links"><a href="https://api-docs.deepseek.com/updates/" target="_blank" rel="noopener">官方资料 1</a></div>
+          <span class="milestone-note-pending">待精读</span>
+        </th>
+        <th scope="col" class="milestone-version-heading">
+          <time datetime="2026-04-24">2026-04-24 — 2026-08-21</time>
+          <strong>DeepSeek-V4 Preview</strong>
+          <span class="release-status status-early-access">Early Access</span>
+          <span class="milestone-release-count">4 个官方发布节点</span>
+          <div class="milestone-source-links"><a href="https://api-docs.deepseek.com/updates/" target="_blank" rel="noopener">官方资料 1</a></div>
+          <span class="milestone-note-pending">待精读</span>
+        </th>
+        <th scope="col" class="milestone-version-heading">
+          <time datetime="2026-09-10">2026-09-10</time>
+          <strong>DeepSeek-V4.1-Flash</strong>
+          <span class="release-status status-released">已发布</span>
+          <span class="milestone-release-count">1 个官方发布节点</span>
+          <div class="milestone-source-links"><a href="https://api-docs.deepseek.com/updates/" target="_blank" rel="noopener">官方资料 1</a></div>
+          <span class="milestone-note-pending">待精读</span>
+        </th>
+      </tr></thead>
+      <tbody>
+        <tr><th scope="row">版本</th>
+          <td><section class="milestone-minor-release"><header><strong>DeepSeek LLM</strong></header><span class="milestone-value is-pending">待精读</span></section></td>
+          <td><section class="milestone-minor-release"><header><strong>DeepSeek-V2</strong></header><span class="milestone-value is-pending">待精读</span></section></td>
+          <td><section class="milestone-minor-release"><header><strong>DeepSeek-V2.5</strong></header><span class="milestone-value is-pending">待精读</span></section><section class="milestone-minor-release"><header><strong>DeepSeek-V2.5-1210</strong></header><span class="milestone-value is-pending">待精读</span></section></td>
+          <td><section class="milestone-minor-release"><header><strong>DeepSeek-V3</strong></header><span class="milestone-value is-pending">待精读</span></section><section class="milestone-minor-release"><header><strong>DeepSeek-V3-0324</strong></header><span class="milestone-value is-pending">待精读</span></section></td>
+          <td><section class="milestone-minor-release"><header><strong>DeepSeek-R1</strong></header><span class="milestone-value is-pending">待精读</span></section><section class="milestone-minor-release"><header><strong>DeepSeek-R1-0528</strong></header><span class="milestone-value is-pending">待精读</span></section></td>
+          <td><section class="milestone-minor-release"><header><strong>DeepSeek-V3.1</strong></header><span class="milestone-value is-pending">待精读</span></section><section class="milestone-minor-release"><header><strong>DeepSeek-V3.1-Terminus</strong></header><span class="milestone-value is-pending">待精读</span></section></td>
+          <td><section class="milestone-minor-release"><header><strong>DeepSeek-V3.2-Exp</strong></header><span class="milestone-value is-pending">待精读</span></section><section class="milestone-minor-release"><header><strong>DeepSeek-V3.2</strong></header><span class="milestone-value is-pending">待精读</span></section></td>
+          <td><section class="milestone-minor-release"><header><strong>DeepSeek-V4 Preview</strong></header><span class="milestone-value is-pending">待精读</span></section><section class="milestone-minor-release"><header><strong>DeepSeek-V4-Flash</strong></header><span class="milestone-value is-pending">待精读</span></section><section class="milestone-minor-release"><header><strong>DeepSeek-V4-Pro</strong></header><span class="milestone-value is-pending">待精读</span></section><section class="milestone-minor-release"><header><strong>DeepSeek-V4-Flash-Vision-Exp</strong></header><span class="milestone-value is-pending">待精读</span></section></td>
+          <td><section class="milestone-minor-release"><header><strong>DeepSeek-V4.1-Flash</strong></header><span class="milestone-value is-pending">待精读</span></section></td>
+        </tr>
+        <tr><th scope="row">训练数据</th>
+          <td><span class="milestone-value is-pending">待精读</span></td>
+          <td><span class="milestone-value is-pending">待精读</span></td>
+          <td><span class="milestone-value is-pending">待精读</span></td>
+          <td><span class="milestone-value is-pending">待精读</span></td>
+          <td><span class="milestone-value is-pending">待精读</span></td>
+          <td><span class="milestone-value is-pending">待精读</span></td>
+          <td><span class="milestone-value is-pending">待精读</span></td>
+          <td><span class="milestone-value is-pending">待精读</span></td>
+          <td><span class="milestone-value is-pending">待精读</span></td>
+        </tr>
+        <tr><th scope="row">VAE 结构</th>
+          <td><span class="milestone-value is-pending">待精读</span></td>
+          <td><span class="milestone-value is-pending">待精读</span></td>
+          <td><span class="milestone-value is-pending">待精读</span></td>
+          <td><span class="milestone-value is-pending">待精读</span></td>
+          <td><span class="milestone-value is-pending">待精读</span></td>
+          <td><span class="milestone-value is-pending">待精读</span></td>
+          <td><span class="milestone-value is-pending">待精读</span></td>
+          <td><span class="milestone-value is-pending">待精读</span></td>
+          <td><span class="milestone-value is-pending">待精读</span></td>
+        </tr>
+        <tr><th scope="row">Text Encoder</th>
+          <td><span class="milestone-value is-pending">待精读</span></td>
+          <td><span class="milestone-value is-pending">待精读</span></td>
+          <td><span class="milestone-value is-pending">待精读</span></td>
+          <td><span class="milestone-value is-pending">待精读</span></td>
+          <td><span class="milestone-value is-pending">待精读</span></td>
+          <td><span class="milestone-value is-pending">待精读</span></td>
+          <td><span class="milestone-value is-pending">待精读</span></td>
+          <td><span class="milestone-value is-pending">待精读</span></td>
+          <td><span class="milestone-value is-pending">待精读</span></td>
+        </tr>
+        <tr><th scope="row">生成主体网络</th>
+          <td><span class="milestone-value is-pending">待精读</span></td>
+          <td><span class="milestone-value is-pending">待精读</span></td>
+          <td><span class="milestone-value is-pending">待精读</span></td>
+          <td><span class="milestone-value is-pending">待精读</span></td>
+          <td><span class="milestone-value is-pending">待精读</span></td>
+          <td><span class="milestone-value is-pending">待精读</span></td>
+          <td><span class="milestone-value is-pending">待精读</span></td>
+          <td><span class="milestone-value is-pending">待精读</span></td>
+          <td><span class="milestone-value is-pending">待精读</span></td>
+        </tr>
+        <tr><th scope="row">训练 Trick</th>
+          <td><span class="milestone-value is-pending">待精读</span></td>
+          <td><span class="milestone-value is-pending">待精读</span></td>
+          <td><span class="milestone-value is-pending">待精读</span></td>
+          <td><span class="milestone-value is-pending">待精读</span></td>
+          <td><span class="milestone-value is-pending">待精读</span></td>
+          <td><span class="milestone-value is-pending">待精读</span></td>
+          <td><span class="milestone-value is-pending">待精读</span></td>
+          <td><span class="milestone-value is-pending">待精读</span></td>
+          <td><span class="milestone-value is-pending">待精读</span></td>
+        </tr>
+        <tr><th scope="row">新提出的创新点</th>
+          <td><span class="milestone-value is-pending">待精读</span></td>
+          <td><span class="milestone-value is-pending">待精读</span></td>
+          <td><span class="milestone-value is-pending">待精读</span></td>
+          <td><span class="milestone-value is-pending">待精读</span></td>
+          <td><span class="milestone-value is-pending">待精读</span></td>
+          <td><span class="milestone-value is-pending">待精读</span></td>
+          <td><span class="milestone-value is-pending">待精读</span></td>
+          <td><span class="milestone-value is-pending">待精读</span></td>
+          <td><span class="milestone-value is-pending">待精读</span></td>
+        </tr>
+        <tr><th scope="row">局限性</th>
+          <td><span class="milestone-value is-pending">待精读</span></td>
+          <td><span class="milestone-value is-pending">待精读</span></td>
+          <td><span class="milestone-value is-pending">待精读</span></td>
+          <td><span class="milestone-value is-pending">待精读</span></td>
+          <td><span class="milestone-value is-pending">待精读</span></td>
+          <td><span class="milestone-value is-pending">待精读</span></td>
+          <td><span class="milestone-value is-pending">待精读</span></td>
+          <td><span class="milestone-value is-pending">待精读</span></td>
+          <td><span class="milestone-value is-pending">待精读</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+    </div>
+    <footer>仅收录官方发布 · 未披露的技术信息以 / 表示</footer>
+
+  </main>
+
+</body>
+</html>

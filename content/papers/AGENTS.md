@@ -1,5 +1,7 @@
 # Public paper data
 
+- `conference-papers.json` stores public accepted-paper title/URL/edition metadata from official proceedings, with source and collection dates. It is independent of archive review decisions; matching never adds papers or reverses deletions. Raw downloaded HTML and maintenance reports stay in ignored `build/conferences/`.
+
 - `archive.json` is the canonical historical/public paper archive. Preserve historical entries except during an explicitly authorized full recheck: remove only explicitly rejected topic memberships, retain uncertain memberships, and record reasons and original rows in private recheck receipts. Synchronize ledger decisions and annotations through a recoverable, concurrency-checked transaction.
 - `arxiv-candidates.json` owns collection cursors and pending/accepted/rejected decisions; only pending candidates are reviewed.
 - `paper-annotations.json` owns validated public topic/tag/type/affiliation metadata.

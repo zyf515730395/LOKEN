@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Z-Image 版本文章精读。">
-  <title>Z-Image · 文章精读</title>
+  <meta name="description" content="DeepSeek 版本文章精读。">
+  <title>DeepSeek · 文章精读</title>
   <script>
     (() => {
       document.documentElement.classList.add("js");
@@ -68,12 +68,12 @@
   <main class="page-content" id="top">
 <section class="summary-page-shell" aria-labelledby="notes-page-title">
       <header class="summary-topic-header">
-        <a class="summary-back" href="z-image.html">← 返回版本对比</a>
-        <h1 id="notes-page-title">Z-Image · 文章精读</h1>
+        <a class="summary-back" href="deepseek.html">← 返回版本对比</a>
+        <h1 id="notes-page-title">DeepSeek · 文章精读</h1>
       </header>
 <nav class="context-strip" aria-label="模型系列">
     <a class="context-strip-link" href="claude.html">Claude</a>
-    <a class="context-strip-link" href="deepseek.html">DeepSeek</a>
+    <a class="context-strip-link is-active" href="deepseek.html" aria-current="location">DeepSeek</a>
     <a class="context-strip-link" href="flux.html">FLUX</a>
     <a class="context-strip-link" href="gpt.html">GPT</a>
     <a class="context-strip-link" href="hunyuan3d.html">Hunyuan3D</a>
@@ -84,102 +84,11 @@
     <a class="context-strip-link" href="stable-diffusion.html">Stable Diffusion</a>
     <a class="context-strip-link" href="vggt.html">VGGT</a>
     <a class="context-strip-link" href="wan.html">Wan</a>
-    <a class="context-strip-link is-active" href="z-image.html" aria-current="location">Z-Image</a>
+    <a class="context-strip-link" href="z-image.html">Z-Image</a>
   </nav>
-      <details class="content-tools" open>
-        <summary>版本精读目录</summary>
-        <nav class="content-tools-navigation" aria-label="版本精读目录">
-<a class="context-filter" href="#milestone-z-image-turbo">Z-Image-Turbo</a>
-<a class="context-filter" href="#milestone-z-image-base">Z-Image Base</a>
-        </nav>
-      </details>
+
       <div class="summary-topic-list">
-    <article class="summary-article summary-topic-entry" id="milestone-z-image-turbo">
-<h1>[2511.22699] Z-Image · Z-Image-Turbo</h1>
-<h2>一句话结论</h2>
-<p>通过单流主干和后训练蒸馏，用较小模型实现少步图像生成。</p>
-<h2>解决的问题</h2>
-<p>快速出图需要减少网络评估次数，同时保留双语文字与语义遵循。</p>
-<h2>创新点</h2>
-<ul>
-<li>单流设计共享模态间计算，以提高参数利用率。</li>
-<li>区分 CFG 增强和分布匹配的作用，再联合 DMD 与 RL 优化。</li>
-</ul>
-<h2>文章精读</h2>
-<h3>版本</h3>
-<ul>
-<li><strong>Z-Image-Turbo</strong>：6B 少步蒸馏版本，8 次网络评估，无 CFG；官方模型表将其定位为高质量、较低多样性的快速生成档。</li>
-</ul>
-<h3>训练数据</h3>
-<p>分阶段训练使用清洗的图文数据，配合 Z-Captioner、OCR 与知识增强描述；从低分辨率逐渐扩展到更完整的生成任务。</p>
-<h3>VAE 结构</h3>
-<p>采用 FLUX VAE 将图像编码为潜变量。</p>
-<h3>Text Encoder</h3>
-<p>Qwen3-4B 编码文本；编辑路线额外使用 SigLIP2 视觉语义条件。</p>
-<h3>生成主体网络</h3>
-<p>6B S3-DiT 将文本、视觉语义和 VAE 图像 token 串接为统一序列；采用统一三维 RoPE。</p>
-<h3>训练 Trick</h3>
-<ul>
-<li>Decoupled-DMD 分离 CFG augmentation 与 distribution matching；DMDR 联合 DMD 与 RL 后训练。</li>
-<li>分阶段预训练、SFT 和后训练逐步扩展质量与指令能力。</li>
-</ul>
-<h3>新提出的创新点</h3>
-<ul>
-<li>单流设计共享模态间计算，以提高参数利用率。</li>
-<li>区分 CFG 增强和分布匹配的作用，再联合 DMD 与 RL 优化。</li>
-</ul>
-<h3>局限性</h3>
-<ul>
-<li>技术报告指出紧凑模型的世界知识、意图理解和复杂推理有限，需要提示词增强补偿。</li>
-</ul>
-<h2>资料来源</h2>
-<ul>
-<li><a href="https://arxiv.org/abs/2511.22699" rel="nofollow">arxiv</a></li>
-<li><a href="https://github.com/Tongyi-MAI/Z-Image" rel="nofollow">official_repository</a></li>
-</ul>
-    </article>
-    <article class="summary-article summary-topic-entry" id="milestone-z-image-base">
-<h1>[2601.27XXX] Z-Image · Z-Image Base</h1>
-<h2>一句话结论</h2>
-<p>基础权重补齐可微调、高多样性生成档；编辑相关变体仍按官方待发布状态列出。</p>
-<h2>解决的问题</h2>
-<p>少步蒸馏模型与需要 CFG、负向提示及进一步训练的使用场景并不相同。</p>
-<h2>创新点</h2>
-<ul>
-<li>同一家族区分基础生成、少步生成与计划中的编辑训练阶段。</li>
-</ul>
-<h2>文章精读</h2>
-<h3>版本</h3>
-<ul>
-<li><strong>Z-Image</strong>：未经 Turbo 少步蒸馏的基础生成模型；官方建议 50 步、支持 CFG 与负向提示，便于多样化创作和微调。</li>
-<li><strong>Z-Image-Omni-Base · Announced</strong>：官方仓库列为待发布，面向生成与编辑的预训练基础模型；不把待发布说明当作权重已发布。</li>
-<li><strong>Z-Image-Edit · Announced</strong>：官方仓库列为待发布的编辑微调模型；实际发布日与新增技术细节：/。</li>
-</ul>
-<h3>训练数据</h3>
-<p>/</p>
-<h3>VAE 结构</h3>
-<p>/</p>
-<h3>Text Encoder</h3>
-<p>/</p>
-<h3>生成主体网络</h3>
-<p>6B S3-DiT；该节点的主模型是 Turbo 的基础生成模型。</p>
-<h3>训练 Trick</h3>
-<ul>
-<li>官方模型表说明基础版经过预训练和 SFT，未经过 Turbo 的 RL。</li>
-</ul>
-<h3>新提出的创新点</h3>
-<ul>
-<li>同一家族区分基础生成、少步生成与计划中的编辑训练阶段。</li>
-</ul>
-<h3>局限性</h3>
-<ul>
-<li>/</li>
-</ul>
-<h2>资料来源</h2>
-<ul>
-<li><a href="https://github.com/Tongyi-MAI/Z-Image" rel="nofollow">official_repository</a></li>
-</ul>
-    </article>
+    <p class="muted">暂无已完成的文章精读。</p>
       </div>
     </section>
   </main>

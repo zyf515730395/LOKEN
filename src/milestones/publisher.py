@@ -161,7 +161,7 @@ def load_release_note(
             and metadata.get("milestone_release") == release["slug"]
         ):
             explicit.append(item)
-        else:
+        elif not metadata.get('milestone_family') and not metadata.get('milestone_release'):
             fallback.append(item)
     selected = explicit or fallback
     if len(selected) > 1:
@@ -222,7 +222,7 @@ def _status_badge(status: str) -> str:
 def render_family_navigation(catalog: dict[str, Any], active_family: str) -> str:
     """Render every tracked model family in one horizontal strip."""
     items = []
-    for _, family in iter_families(catalog):
+    for _, family in sorted(iter_families(catalog), key=lambda item: item[1]['name'].casefold()):
         label = html.escape(family["name"])
         if family["page_status"] == "ready":
             active_class = " is-active" if family["slug"] == active_family else ""
