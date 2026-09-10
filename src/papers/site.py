@@ -389,7 +389,7 @@ def render_table(
     output = [
         '<div class="table-scroll">',
         '  <table class="paper-table">',
-        '    <thead><tr><th>Arxiv ID</th><th>Paper</th><th>Institutions</th><th>Summary</th></tr></thead>',
+        '    <thead><tr><th>Arxiv ID</th><th>Paper</th><th>Conference</th><th>Summary</th></tr></thead>',
         '    <tbody>',
     ]
     candidate_statuses = candidate_statuses or {}
@@ -420,13 +420,17 @@ def render_table(
             for tag in row.get("tags", ())[:5]
         )
         tag_markup = f'<span class="paper-tags">{tags}</span>' if tags else ""
+        conference_markup = '; '.join(
+            f'<a href="{html.escape(item["url"], quote=True)}" target="_blank" rel="noopener">'
+            f'{html.escape(item["edition"])}</a>' for item in row.get('conferences', ())
+        ) or '-'
         output.append(
             f"      <tr{anchor}>"
             f'<td class="paper-id" data-label="Arxiv ID"><a href="{paper_url}" target="_blank" rel="noopener">'
             f'{html.escape(row["id"])}</a></td>'
             f'<td class="paper-title" data-label="Paper"><a class="paper-title-link" href="{paper_url}" target="_blank" rel="noopener">'
             f'{html.escape(row["title"])}</a>{tag_markup}</td>'
-            f'<td data-label="Institutions">{html.escape("; ".join(row.get("institutions", ())) or "-")}</td>'
+            f'<td data-label="Conference">{conference_markup}</td>'
             f'<td class="paper-summary" data-label="Summary">{summary_cell}</td>'
             "</tr>"
         )
@@ -668,6 +672,11 @@ def generate_site(
         if cutoff is not None else {}
     )
     all_categories, _ = build_archive(data, labels, annotations, candidate_statuses)
+    from papers.proceedings import load_catalog, match_papers
+    all_rows = [row for category in all_categories for row in _iter_category_rows(category)]
+    conference_matches = match_papers(all_rows, load_catalog())
+    for row in all_rows:
+        row['conferences'] = conference_matches.get(row['id'], [])
     today = generated_on or datetime.date.today()
     conferences = load_conferences(conference_config_path, as_of=today)
     categories, themes = filter_recent_archive(all_categories, today.year)

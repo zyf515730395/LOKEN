@@ -15,7 +15,8 @@ import yaml
 CONFERENCE_ID_PATTERN = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 CONFERENCE_FIELDS = {"id", "name", "enabled", "homepage", "meetings"}
 MEETING_FIELDS = {
-    "edition", "status", "start_date", "end_date", "location", "source_url", "verified_on", "website", "proceedings_url"
+    "edition", "status", "start_date", "end_date", "location", "source_url", "verified_on", "website", "proceedings_url",
+    "accepted_papers_urls", "crossref_sources",
 }
 MEETING_STATUSES = {"confirmed", "dates_pending"}
 
@@ -83,6 +84,23 @@ def _reject_unknown_fields(payload: dict, allowed: set[str], context: str) -> No
 def _load_meeting(payload: object, context: str, as_of: datetime.date) -> ConferenceMeeting:
     data = _mapping(payload, context)
     _reject_unknown_fields(data, MEETING_FIELDS, context)
+    if 'accepted_papers_urls' in data:
+        sources = data['accepted_papers_urls']
+        if not isinstance(sources,list) or not sources:
+            raise ValueError(f'{context}.accepted_papers_urls must be a non-empty list')
+        for source in sources:
+            _https_url(source, f'{context}.accepted_papers_urls')
+    if 'crossref_sources' in data:
+        sources = data['crossref_sources']
+        if not isinstance(sources,list) or not sources:
+            raise ValueError(f'{context}.crossref_sources must be a non-empty list')
+        for source in sources:
+            _mapping(source, f'{context}.crossref_sources')
+            _reject_unknown_fields(source, {'filter','volume','issue'}, f'{context}.crossref_sources')
+            _text(source.get('filter'), f'{context}.crossref_sources.filter')
+            for key in ('volume','issue'):
+                if key in source:
+                    _text(source[key], f'{context}.crossref_sources.{key}')
     edition = _text(data.get("edition"), f"{context}.edition")
     status = _text(data.get("status"), f"{context}.status")
     if status not in MEETING_STATUSES:
