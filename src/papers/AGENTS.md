@@ -1,5 +1,8 @@
 # Paper pipeline rules
 
+- Conference attribution comes from `content/papers/conference-papers.json`, a versioned catalog of official accepted-paper lists from configured editions since 2024. `proceedings.py` owns collection and deterministic matching. Never infer acceptance from topic, author affiliation, submission, or fuzzy title similarity. Keep failed/pending editions explicit and preserve previously collected lists on fetch failure. Raw responses and coverage reports belong under ignored `build/conferences/`.
+- The paper table displays Conference instead of Institutions; affiliation annotations remain preserved. Render edition names linked to the official paper/list. Monthly maintenance checks edition dates and list availability before refreshing and rebuilding.
+
 - `content/papers/archive.json` is the canonical public archive input. Candidate decisions remain in `content/papers/arxiv-candidates.json`; paper topics, detail tags, institutions, and `paper`/`survey` types remain in `content/papers/paper-annotations.json`.
 - The ordered label taxonomy and model-facing descriptions come only from `config/site.yaml`. New labels must not be hard-coded in Python or JavaScript.
 - `src/papers/site.py` owns the paper archive view. `docs/index.html` and `docs/search-index.json` are generated outputs and must not be edited by hand.
