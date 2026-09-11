@@ -19,6 +19,7 @@ from papers import paths
 from papers.model_runtime import DEFAULT_MODEL_TIMEOUT_SECONDS, DEFAULT_MODEL_WORKERS, MAX_MODEL_WORKERS
 
 PUBLIC = ('content/papers/archive.json', 'content/papers/arxiv-candidates.json',
+          'content/papers/conference-library.json',
           'content/papers/paper-annotations.json', 'docs/notes/', 'docs/index.html',
           'docs/search-index.json', 'docs/togos-papers.json')
 PRIVATE = paths.ROOT / 'build/paper-summaries'
@@ -230,6 +231,14 @@ def execute(mode, args):
                 command(sys.executable, '-m', 'papers', 'publish-offline')
         if result.returncode not in (0, 3):
             raise RuntimeError(f'{mode} failed: exit={result.returncode}; preserve checkpoint and worktree')
+        if mode == 'daily':
+            from papers.conference_library import LIBRARY
+            if LIBRARY.exists():
+                from papers.conference_intake import summarize, rules
+                # The daily owner already holds runtime.lock; finish a small queue slice.
+                summarize(limit=rules()['conference_intake']['summary_batch_size'],
+                          timeout=args.timeout, model=model, runtime_owned=True)
+                command(sys.executable, '-m', 'papers', 'build')
         publish(mode)
         return result.returncode
 

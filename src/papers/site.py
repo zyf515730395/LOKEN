@@ -83,6 +83,7 @@ def build_archive(
     labels: tuple[LabelDefinition, ...] | None = None,
     annotations: dict[str, PaperAnnotation | dict] | None = None,
     candidate_statuses: dict[str, str] | None = None,
+    extra_rows: list[dict] | None = None,
 ) -> tuple[list[dict], OrderedDict]:
     categories = []
     themes = OrderedDict()
@@ -125,6 +126,9 @@ def build_archive(
         row.update(topics=topics, tags=tags, institutions=institutions,
                    paper_type=paper_type, annotation_status=annotation_status)
 
+    for row in extra_rows or ():
+        paper_rows.setdefault(row['id'], row)
+
     for label in labels:
         topic = label.name
         rows = [row.copy() for row in paper_rows.values() if topic in row["topics"]]
@@ -137,9 +141,9 @@ def build_archive(
                     row["date"].year, {"surveys": [], "months": {}}
                 )["surveys"].append(row)
                 continue
-            day_range = day_range_bounds(row["date"])
+            day_range = day_range_bounds(row["date"]) if row.get('date_precision', 3) == 3 else (0, 0)
             year = row["date"].year
-            month = row["date"].month
+            month = row["date"].month if row.get('date_precision', 3) >= 2 else 0
             grouped_years.setdefault(year, {"surveys": [], "months": {}})[
                 "months"
             ].setdefault(month, {}).setdefault(day_range, []).append(row)
@@ -200,6 +204,8 @@ def day_range_bounds(published: datetime.date) -> tuple[int, int]:
 
 
 def day_range_label(month: int, day_range: tuple[int, int]) -> str:
+    if day_range == (0, 0):
+        return '日期待确认' if month else '月份待确认'
     return f"{calendar.month_abbr[month]} {day_range[0]}–{day_range[1]}"
 
 
@@ -276,7 +282,7 @@ def build_paper_search_documents(
                 url=url,
                 section="learning",
                 kind="paper",
-                published_at=row["date"].isoformat(),
+                published_at=row["date"].isoformat() if row.get('date_precision', 3) == 3 else None,
             )
             existing = documents.get(paper_id)
             if existing is None or (
@@ -337,7 +343,7 @@ def render_sidebar(
                     anchor = month_anchor(category, year, month)
                     output.append(
                         f'{indent}    <li><a href="#{anchor}">'
-                        f'<span>{calendar.month_name[month]}</span>'
+                        f'<span>{calendar.month_name[month] if month else "月份待确认"}</span>'
                         f'<span class="nav-count">{month_paper_count(day_ranges)}</span></a></li>'
                     )
                 output.append(f'{indent}  </ul>')
@@ -409,7 +415,7 @@ def render_table(
                 f'data-summary-url="{summary_url}" data-summary-id="{summary_id}" '
                 'aria-controls="paper-summary-panel" aria-expanded="false">要点</a>'
             )
-        elif candidate_statuses.get(row["id"]) in {"pending", "accepted"}:
+        elif row.get('summary_pending') or candidate_statuses.get(row["id"]) in {"pending", "accepted"}:
             summary_cell = '<span class="summary-pending">待生成</span>'
         anchor = ""
         if row["id"] not in anchored_papers:
@@ -422,12 +428,12 @@ def render_table(
         tag_markup = f'<span class="paper-tags">{tags}</span>' if tags else ""
         conference_markup = '; '.join(
             f'<a href="{html.escape(item["url"], quote=True)}" target="_blank" rel="noopener">'
-            f'{html.escape(item["edition"])}</a>' for item in row.get('conferences', ())
+            f'{html.escape(re.sub(r"\s+\d{4}$", "", item["edition"]))}</a>' for item in row.get('conferences', ())
         ) or '-'
         output.append(
             f"      <tr{anchor}>"
             f'<td class="paper-id" data-label="Arxiv ID"><a href="{paper_url}" target="_blank" rel="noopener">'
-            f'{html.escape(row["id"])}</a></td>'
+            f'{html.escape(row.get("display_id", row["id"]))}</a></td>'
             f'<td class="paper-title" data-label="Paper"><a class="paper-title-link" href="{paper_url}" target="_blank" rel="noopener">'
             f'{html.escape(row["title"])}</a>{tag_markup}</td>'
             f'<td data-label="Conference">{conference_markup}</td>'
@@ -497,9 +503,9 @@ def render_content(
                     '        <button type="button" role="tab" disabled aria-disabled="true" '
                     'aria-selected="false">Surveys <span>0</span></button>'
                 )
-            for month in range(1, 13):
+            for month in (*range(1, 13), *((0,) if 0 in months else ())):
                 day_ranges = months.get(month)
-                month_name = calendar.month_abbr[month]
+                month_name = calendar.month_abbr[month] if month else '月份待确认'
                 if day_ranges is None:
                     output.append(
                         f'        <button type="button" role="tab" disabled '
@@ -671,12 +677,18 @@ def generate_site(
         load_candidate_statuses(candidate_path, review_required_since=str(cutoff))
         if cutoff is not None else {}
     )
-    all_categories, _ = build_archive(data, labels, annotations, candidate_statuses)
+    from papers.conference_library import load_library, library_rows, publish_library_notes
+    library = load_library()
+    ledger = json.loads(Path(candidate_path).read_text(encoding='utf-8')) if candidate_path and Path(candidate_path).exists() else {}
+    extra_rows = library_rows(library, data, ledger)
+    if library['papers']:
+        summary_catalog['conference'] = publish_library_notes(library, Path(output_root or Path(output_path).parent), {row['id'] for row in extra_rows})
+    all_categories, _ = build_archive(data, labels, annotations, candidate_statuses, extra_rows)
     from papers.proceedings import load_catalog, match_papers
     all_rows = [row for category in all_categories for row in _iter_category_rows(category)]
     conference_matches = match_papers(all_rows, load_catalog())
     for row in all_rows:
-        row['conferences'] = conference_matches.get(row['id'], [])
+        row['conferences'] = conference_matches.get(row['id'], row.get('conferences', []))
     today = generated_on or datetime.date.today()
     conferences = load_conferences(conference_config_path, as_of=today)
     categories, themes = filter_recent_archive(all_categories, today.year)
@@ -702,7 +714,7 @@ def generate_site(
 {render_paper_navigation(categories, include_conferences=bool(conferences))}
     </div>
 {render_content(categories, summary_catalog, candidate_statuses, label_slugs, conference_section=render_conference_section(conferences, as_of=today) if conferences else "")}
-    <footer>Generated from arXiv metadata · Source: <a href="https://github.com/zyf515730395/LOKEN">{SITE_NAME}</a></footer>
+    <footer>Research papers from arXiv and official proceedings · Source: <a href="https://github.com/zyf515730395/LOKEN">{SITE_NAME}</a></footer>
 """
     document = render_site_page(
         output_file=page_output,

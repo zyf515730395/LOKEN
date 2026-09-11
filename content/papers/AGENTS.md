@@ -10,3 +10,5 @@
 - Curated-list refreshes verify paper identity, authors and publication dates against primary sources; list titles and displayed IDs may be wrong or renamed. Reuse existing archive rows and preserve review decisions and collection cursors; unresolved IDs stay in local audit reports.
 - The offline pipeline supports modern numeric arXiv IDs only. Do not invent IDs for non-arXiv papers. Archive topic membership does not override validated annotation topics or a ledger's selected topic.
 - Apply archive/ledger pairs with the existing lock, concurrent-edit checks and recoverable curation journal. Rebuild with `python -m papers build`; source snapshots and import evidence stay in ignored `build/reports/`, never in public data.
+
+- `conference-library.json` is the public conference intake overlay: stable DOI/official-URL identities, title-screened topics, provenance, partial publication dates, and validated summary output. It joins the website archive without inserting synthetic IDs into the arXiv ledger. Private screening responses, source bodies and retry state remain in `build/conferences/intake/`.
