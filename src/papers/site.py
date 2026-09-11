@@ -228,11 +228,22 @@ def filter_recent_archive(
     recent_themes = OrderedDict()
 
     for category in categories:
-        years = OrderedDict(
-            (year, year_data)
-            for year, year_data in category["years"].items()
-            if earliest_year <= year <= current_year
-        )
+        years = OrderedDict()
+        for year, year_data in category["years"].items():
+            if earliest_year <= year <= current_year:
+                years[year] = year_data
+            elif year < earliest_year:
+                months = OrderedDict()
+                for month, ranges in year_data['months'].items():
+                    kept = OrderedDict((period, [row for row in rows if row.get('conference_library')])
+                                       for period, rows in ranges.items())
+                    kept = OrderedDict((period, rows) for period, rows in kept.items() if rows)
+                    if kept:
+                        months[month] = kept
+                kept_year = {**year_data, 'months': months,
+                             'surveys': [row for row in year_data['surveys'] if row.get('conference_library')]}
+                if year_paper_count(kept_year):
+                    years[year] = kept_year
 
         recent_category = {
             **category,
@@ -677,7 +688,7 @@ def generate_site(
         load_candidate_statuses(candidate_path, review_required_since=str(cutoff))
         if cutoff is not None else {}
     )
-    from papers.conference_library import load_library, library_rows, publish_library_notes
+    from papers.conference_library import load_library, library_rows, publish_library_notes, retain_library_matches
     library = load_library()
     ledger = json.loads(Path(candidate_path).read_text(encoding='utf-8')) if candidate_path and Path(candidate_path).exists() else {}
     extra_rows = library_rows(library, data, ledger)
@@ -689,6 +700,7 @@ def generate_site(
     conference_matches = match_papers(all_rows, load_catalog())
     for row in all_rows:
         row['conferences'] = conference_matches.get(row['id'], row.get('conferences', []))
+    retain_library_matches(all_rows, library, ledger)
     today = generated_on or datetime.date.today()
     conferences = load_conferences(conference_config_path, as_of=today)
     categories, themes = filter_recent_archive(all_categories, today.year)

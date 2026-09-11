@@ -69,8 +69,9 @@ def library_rows(library: dict, archive: dict, ledger: dict) -> list[dict]:
         rows.append({
             'id': record['id'], 'display_id': display_id(record), 'title': record['title'],
             'date': date(parts[0], parts[1] if len(parts) > 1 else 1, parts[2] if len(parts) > 2 else 1),
-            'date_precision': len(parts), 'published_at': record['published'],
-            'paper_url': record['url'], 'authors': record.get('authors', ''), 'code_url': None,
+            'date_precision': len(parts), 'published_at': record['published'], 'conference_library': True,
+            'paper_url': 'https://arxiv.org/abs/' + record['arxiv_id'] if record.get('arxiv_id') else record['url'],
+            'authors': record.get('authors', ''), 'code_url': None,
             'topics': tuple(record['topics']), 'tags': (), 'institutions': (),
             'paper_type': 'paper', 'annotation_status': 'pending', 'summary_pending': True,
             'conferences': record['conferences'],
@@ -79,6 +80,25 @@ def library_rows(library: dict, archive: dict, ledger: dict) -> list[dict]:
             ids.add(record['arxiv_id'])
         titles.add(title)
     return rows
+
+
+def retain_library_matches(rows: list[dict], library: dict, ledger: dict) -> None:
+    """Keep an already-visible archive duplicate browsable after metadata enrichment."""
+    rejected_ids, rejected_titles = existing_identities({}, ledger)
+    by_id, by_title = {}, {}
+    for record in library['papers'].values():
+        title = normalize_title(record['title'])
+        if record.get('arxiv_id') in rejected_ids or title in rejected_titles:
+            continue
+        if record.get('arxiv_id'):
+            by_id[record['arxiv_id']] = record
+        by_title[title] = record
+    for row in rows:
+        record = by_id.get(row['id']) or by_title.get(normalize_title(row['title']))
+        if record:
+            row['conference_library'] = True
+            row['conferences'] = list({(c['edition'], c['url']): c for c in
+                                       row.get('conferences', []) + record['conferences']}.values())
 
 
 def publish_library_notes(library: dict, output_root: Path, visible_ids: set[str]) -> dict:
