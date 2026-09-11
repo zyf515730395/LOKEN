@@ -20,7 +20,7 @@ def safe_metadata_url(url: str) -> bool:
         return bool(parts.scheme == 'https' and parts.username is None
                     and parts.password is None and parts.port in (None, 443)
                     and not any(ord(c) < 33 for c in url)
-                    and (parts.hostname in HOSTS or parts.hostname in {'ras.papercept.net', 's2024.conference-program.org'} or re.fullmatch(
+                    and (parts.hostname in HOSTS or parts.hostname in {'ras.papercept.net', 's2024.conference-program.org', 'api.github.com', 'github.com', 'raw.githubusercontent.com'} or re.fullmatch(
                         r'(?:s|sa)20\d{2}\.conference-schedule\.org', parts.hostname or '')))
     except ValueError:
         return False
@@ -99,6 +99,11 @@ def _page(raw: bytes, url: str, title: str) -> tuple[dict, str]:
         if all(selected.startswith(d) for d in dates):
             result.update(published=selected, date_source={'url': url, 'basis': 'publisher_publication'})
     authors = metadata.get('citation_author', [])
+    heading = soup.select_one('h1.event-title')
+    organizers = soup.select('.event-organizers')
+    if (not authors and urlsplit(url).hostname in {'iclr.cc','icml.cc','eccv.ecva.net','neurips.cc'}
+            and heading and normalize_title(heading.get_text(' ',strip=True)) == expected and len(organizers) == 1):
+        authors = [name.strip() for name in re.split(r'[⋅·]',organizers[0].get_text(' ',strip=True)) if name.strip()]
     if authors:
         result['authors'] = list(dict.fromkeys(a.strip() for a in authors if a.strip()))
     ids = []
