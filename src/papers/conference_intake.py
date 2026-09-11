@@ -276,7 +276,7 @@ def summarize(*, limit: int = 20, timeout: float = 900, model: str | None = None
                                                   base_url='http://127.0.0.1:8000/v1', timeout=timeout)
                     for field in ('arxiv_id', 'doi'):
                         if metadata.get(field): record[field] = metadata[field]
-                    if metadata.get('published'): record['published'] = metadata['published']
+                    # Publication dates and their provenance are owned by conference_dates.
                     display_id(record)
                     record['summary'] = asdict(summary)
                     record['summary_source'] = {'url': record['url'], 'sha256': paper.source_sha256}
