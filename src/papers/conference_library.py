@@ -70,6 +70,7 @@ def library_rows(library: dict, archive: dict, ledger: dict) -> list[dict]:
             'id': record['id'], 'display_id': display_id(record), 'title': record['title'],
             'date': date(parts[0], parts[1] if len(parts) > 1 else 1, parts[2] if len(parts) > 2 else 1),
             'date_precision': len(parts), 'published_at': record['published'], 'conference_library': True,
+            'date_source': record.get('date_source', {}),
             'paper_url': 'https://arxiv.org/abs/' + record['arxiv_id'] if record.get('arxiv_id') else record['url'],
             'authors': record.get('authors', ''), 'code_url': None,
             'topics': tuple(record['topics']), 'tags': (), 'institutions': (),
