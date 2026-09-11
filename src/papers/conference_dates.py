@@ -135,7 +135,9 @@ def merge_metadata(record: dict, metadata: dict) -> bool:
     date(*(parts + [1] * (3-len(parts))))
     source = metadata.get('date_source',{})
     arxiv = source.get('basis') == 'arxiv_first_submission'
-    if not arxiv and (record.get('date_source',{}).get('basis') == 'arxiv_first_submission'
+    upgrade = (record.get('date_source',{}).get('basis','').startswith('webpage_')
+               and source.get('basis') == 'publisher_publication' and len(published) == 10)
+    if not arxiv and not upgrade and (record.get('date_source',{}).get('basis') == 'arxiv_first_submission'
                       or len(published) <= len(record['published'])): return False
     if arxiv and not re.fullmatch(r'\d{4}\.\d{4,5}', metadata.get('arxiv_id','')): return False
     before = json.dumps(record,sort_keys=True)

@@ -441,9 +441,15 @@ def render_table(
             f'<a href="{html.escape(item["url"], quote=True)}" target="_blank" rel="noopener">'
             f'{html.escape(re.sub(r"\s+\d{4}$", "", item["edition"]))}</a>' for item in row.get('conferences', ())
         ) or '-'
+        date_basis = row.get('date_source', {}).get('basis', '')
+        date_hint = ''
+        if date_basis.startswith('webpage_'):
+            label = {'webpage_published': '网页发布日期', 'webpage_modified': '网页修改日期',
+                     'webpage_generated': '网页生成日期', 'webpage_event': '网页报告日程日期'}.get(date_basis, '网页日期')
+            date_hint = ' title="' + html.escape(label + '：' + row.get('published_at', '') + '；非论文首次发表日期', quote=True) + '"'
         output.append(
             f"      <tr{anchor}>"
-            f'<td class="paper-id" data-label="Arxiv ID"><a href="{paper_url}" target="_blank" rel="noopener">'
+            f'<td class="paper-id" data-label="Arxiv ID"><a href="{paper_url}"{date_hint} target="_blank" rel="noopener">'
             f'{html.escape(row.get("display_id", row["id"]))}</a></td>'
             f'<td class="paper-title" data-label="Paper"><a class="paper-title-link" href="{paper_url}" target="_blank" rel="noopener">'
             f'{html.escape(row["title"])}</a>{tag_markup}</td>'
