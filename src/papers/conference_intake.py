@@ -240,7 +240,7 @@ def summary_slot():
 
 
 def summarize(*, limit: int = 20, timeout: float = 900, model: str | None = None,
-              runtime_owned: bool = False) -> dict:
+              runtime_owned: bool = False, skip_failed: bool = False) -> dict:
     from papers.conference_sources import acquire_conference_paper
     from papers.runtime import model_service
     from papers.summaries.summarizer import summarize_paper
@@ -262,7 +262,8 @@ def summarize(*, limit: int = 20, timeout: float = 900, model: str | None = None
                 ledger = json.loads(paths.LEDGER.read_text(encoding='utf-8'))
                 visible = {r['id'] for r in library_rows(library, archive, ledger)}
                 state = json.loads(state_path.read_text(encoding='utf-8')) if state_path.exists() else {}
-                records = [p for p in library['papers'].values() if not p.get('summary') and p['id'] in visible and p['id'] not in attempted]
+                records = [p for p in library['papers'].values() if not p.get('summary') and p['id'] in visible and p['id'] not in attempted
+                           and not (skip_failed and state.get(p['id'], {}).get('status') == 'failed')]
                 # First attempts newest-first, then rotate failed attempts without starving the queue.
                 records.sort(key=lambda p: (state.get(p['id'], {}).get('attempts', 0), -int(re.sub(r'\D', '', p.get('order_date', p['published'])).ljust(8, '0')), p['id']))
                 if not records: break
@@ -284,7 +285,9 @@ def summarize(*, limit: int = 20, timeout: float = 900, model: str | None = None
                         raise ValueError('Conference library changed during summary; cached output retained')
                     atomic_write_json(LIBRARY, library)
                     receipt['status'] = 'ready'; counts['ready'] += 1
-                except (PaperSummaryError, ValueError, OSError) as error:
+                except MemoryError:
+                    raise
+                except Exception as error:
                     receipt.update(status='failed', error=getattr(error, 'code', type(error).__name__))
                     counts['failed'] += 1
                 state[key] = receipt
@@ -303,6 +306,7 @@ def main(argv=None) -> int:
     settings = rules()['conference_intake']
     summaries = sub.add_parser('summarize'); summaries.add_argument('--limit', type=int, default=settings['summary_batch_size'])
     summaries.add_argument('--timeout', type=float, default=settings['summary_timeout_seconds'])
+    summaries.add_argument('--skip-failed', action='store_true', help='Skip prior failed papers and continue unattempted work')
     args = parser.parse_args(argv)
     if args.command == 'summarize' and (args.limit < 1 or args.timeout <= 0):
         parser.error('limit and timeout must be positive')
@@ -310,7 +314,7 @@ def main(argv=None) -> int:
         parser.error('review limit must be nonnegative')
     if args.command == 'screen': result = screen(apply=args.apply)
     elif args.command == 'review': result = review_titles(limit=args.limit)
-    else: result = summarize(limit=args.limit, timeout=args.timeout)
+    else: result = summarize(limit=args.limit, timeout=args.timeout, skip_failed=args.skip_failed)
     print(json.dumps({k:v for k,v in result.items() if k != 'added_ids'}, ensure_ascii=False))
     return 3 if result.get('counts', {}).get('failed') or result.get('counts', {}).get('yielded_to_runtime') or (args.command == 'review' and result.get('remaining')) else 0
 
