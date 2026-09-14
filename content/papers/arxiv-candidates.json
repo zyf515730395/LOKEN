@@ -264782,7 +264782,7 @@
       },
       "authors": "Armand Mihai Nicolicioiu et.al.",
       "collected_at": "2026-09-11T05:43:26+00:00",
-      "decision_reason": "论文提出利用扩散模型将高分辨率图像细节引导至数字高程模型（DSM）的超分辨率重建，属于3D表面重建与生成方法。",
+      "decision_reason": "二次复核：Image Gen&Edit: 论文核心贡献是数字表面模型（DSM）的超分辨率重建，虽然使用了基于扩散的图像生成器作为先验和引导，但其最终输出是高程数据而非图像，不属于图像生成或编辑任务。; Video Gen&Edit: 论文处理的是静态的高程模型和光学图像，不涉及视频序列的生成、编辑或时序建模，与视频生成和编辑主题完全无关。; 3D Gen&Recon: 论文提出了一种基于扩散模型的DSM超分辨率方法，旨在从低分辨率高程图和高分辨率图像中重建高分辨率的地表几何结构，属于3D表面重建和几何细节恢复的范畴。; World Model: 论文关注的是静态地理空间数据的超分辨率重建，不涉及环境动态预测、交互式世界模拟或动作条件下的未来状态预测，不符合世界模型的定义。; Relighting: 论文目标是恢复地形和建筑物的几何高程信息，不涉及光照估计、反射率分解或在新光照条件下渲染场景，与重光照主题无关。; Depth Estimation: 虽然DSM与深度图在几何上相似，但论文明确针对的是遥感领域的数字表面模型超分辨率，而非单目或立体视觉中的深度估计任务，且未使用深度估计领域的标准范式。",
       "id": "2609.11886",
       "matched_topics": [
         "3D Gen&Recon",
@@ -264790,7 +264790,33 @@
       ],
       "paper_url": "https://arxiv.org/abs/2609.11886",
       "pdf_url": "https://arxiv.org/pdf/2609.11886v1",
-      "reviewed_at": "2026-09-13T13:39:50+00:00",
+      "recheck_decisions": {
+        "3D Gen&Recon": {
+          "accept": true,
+          "reason": "论文提出了一种基于扩散模型的DSM超分辨率方法，旨在从低分辨率高程图和高分辨率图像中重建高分辨率的地表几何结构，属于3D表面重建和几何细节恢复的范畴。"
+        },
+        "Depth Estimation": {
+          "accept": false,
+          "reason": "虽然DSM与深度图在几何上相似，但论文明确针对的是遥感领域的数字表面模型超分辨率，而非单目或立体视觉中的深度估计任务，且未使用深度估计领域的标准范式。"
+        },
+        "Image Gen&Edit": {
+          "accept": false,
+          "reason": "论文核心贡献是数字表面模型（DSM）的超分辨率重建，虽然使用了基于扩散的图像生成器作为先验和引导，但其最终输出是高程数据而非图像，不属于图像生成或编辑任务。"
+        },
+        "Relighting": {
+          "accept": false,
+          "reason": "论文目标是恢复地形和建筑物的几何高程信息，不涉及光照估计、反射率分解或在新光照条件下渲染场景，与重光照主题无关。"
+        },
+        "Video Gen&Edit": {
+          "accept": false,
+          "reason": "论文处理的是静态的高程模型和光学图像，不涉及视频序列的生成、编辑或时序建模，与视频生成和编辑主题完全无关。"
+        },
+        "World Model": {
+          "accept": false,
+          "reason": "论文关注的是静态地理空间数据的超分辨率重建，不涉及环境动态预测、交互式世界模拟或动作条件下的未来状态预测，不符合世界模型的定义。"
+        }
+      },
+      "reviewed_at": "2026-09-14T14:38:42+00:00",
       "selected_topic": "3D Gen&Recon",
       "status": "accepted",
       "title": "Guided Super-Resolution of Digital Elevation Models with Diffusion-Based Image Generators",
@@ -264824,7 +264850,7 @@
       },
       "authors": "Adnan Armouti et.al.",
       "collected_at": "2026-09-11T05:43:26+00:00",
-      "decision_reason": "论文提出3D Point Splatting，一种针对毫米波雷达的新视角合成（NVS）的可微点渲染器，属于3D重建与渲染方法，而非图像生成或编辑。",
+      "decision_reason": "二次复核：Image Gen&Edit: 论文核心贡献是毫米波雷达的新视角合成，输出为雷达信号或距离方位图，并非光学图像，不涉及图像生成或编辑技术。; Video Gen&Edit: 论文处理的是静态场景的多视角雷达数据，不涉及视频序列的生成、编辑或时序动态建模，与视频生成主题无关。; 3D Gen&Recon: 论文提出3D Point Splatting方法，通过优化3D点云场景参数实现雷达新视角合成，属于3D场景重建与神经渲染范畴，符合主题定义。; World Model: 论文关注特定传感器物理模型下的场景重建，未涉及环境动态预测、交互式世界模型或动作条件未来状态生成，不属于世界模型。; Relighting: 论文处理雷达回波信号，不涉及光照估计、反射率分解或新光照条件下的外观生成，与重光照主题无直接关联。; Depth Estimation: 虽然雷达数据包含距离信息，但论文核心任务是新视角合成而非深度图预测，未将深度估计作为主要输出或评估指标。",
       "id": "2609.11894",
       "matched_topics": [
         "3D Gen&Recon",
@@ -264832,7 +264858,33 @@
       ],
       "paper_url": "https://arxiv.org/abs/2609.11894",
       "pdf_url": "https://arxiv.org/pdf/2609.11894v1",
-      "reviewed_at": "2026-09-13T13:39:50+00:00",
+      "recheck_decisions": {
+        "3D Gen&Recon": {
+          "accept": true,
+          "reason": "论文提出3D Point Splatting方法，通过优化3D点云场景参数实现雷达新视角合成，属于3D场景重建与神经渲染范畴，符合主题定义。"
+        },
+        "Depth Estimation": {
+          "accept": false,
+          "reason": "虽然雷达数据包含距离信息，但论文核心任务是新视角合成而非深度图预测，未将深度估计作为主要输出或评估指标。"
+        },
+        "Image Gen&Edit": {
+          "accept": false,
+          "reason": "论文核心贡献是毫米波雷达的新视角合成，输出为雷达信号或距离方位图，并非光学图像，不涉及图像生成或编辑技术。"
+        },
+        "Relighting": {
+          "accept": false,
+          "reason": "论文处理雷达回波信号，不涉及光照估计、反射率分解或新光照条件下的外观生成，与重光照主题无直接关联。"
+        },
+        "Video Gen&Edit": {
+          "accept": false,
+          "reason": "论文处理的是静态场景的多视角雷达数据，不涉及视频序列的生成、编辑或时序动态建模，与视频生成主题无关。"
+        },
+        "World Model": {
+          "accept": false,
+          "reason": "论文关注特定传感器物理模型下的场景重建，未涉及环境动态预测、交互式世界模型或动作条件未来状态生成，不属于世界模型。"
+        }
+      },
+      "reviewed_at": "2026-09-14T14:38:42+00:00",
       "selected_topic": "3D Gen&Recon",
       "status": "accepted",
       "title": "3D Point Splatting for mmWave Radar Novel View Synthesis",
@@ -264929,14 +264981,40 @@
       },
       "authors": "Yu-Xuan Fu et.al.",
       "collected_at": "2026-09-11T05:43:26+00:00",
-      "decision_reason": "论文明确将 GBS 硬件重构为用于模拟物理动力学的世界模型，并对比了经典 ESN 基线，符合 World Model 主题定义。",
+      "decision_reason": "二次复核：Image Gen&Edit: 论文核心贡献是构建芯片级高斯玻色采样处理器并验证其量子计算优势，未涉及图像合成、编辑或相关生成方法。; Video Gen&Edit: 研究聚焦于光子量子硬件架构与物理动力学建模，未涉及视频生成、编辑或音视频生成技术。; 3D Gen&Recon: 论文主要解决量子采样硬件集成问题，未涉及三维物体、场景的生成、重建或神经渲染技术。; World Model: 论文将光子硬件重构为基于高斯玻色采样的世界模型，用于建模卡门涡街等物理动力学，并展示了预测能力。; Relighting: 研究内容完全集中在量子光学硬件与物理系统预测，未涉及光照估计、传输或重光照技术。; Depth Estimation: 论文未涉及单目、立体或多视图深度估计任务，其应用场景为流体动力学预测而非几何深度。",
       "id": "2609.11922",
       "matched_topics": [
         "World Model"
       ],
       "paper_url": "https://arxiv.org/abs/2609.11922",
       "pdf_url": "https://arxiv.org/pdf/2609.11922v1",
-      "reviewed_at": "2026-09-13T13:39:50+00:00",
+      "recheck_decisions": {
+        "3D Gen&Recon": {
+          "accept": false,
+          "reason": "论文主要解决量子采样硬件集成问题，未涉及三维物体、场景的生成、重建或神经渲染技术。"
+        },
+        "Depth Estimation": {
+          "accept": false,
+          "reason": "论文未涉及单目、立体或多视图深度估计任务，其应用场景为流体动力学预测而非几何深度。"
+        },
+        "Image Gen&Edit": {
+          "accept": false,
+          "reason": "论文核心贡献是构建芯片级高斯玻色采样处理器并验证其量子计算优势，未涉及图像合成、编辑或相关生成方法。"
+        },
+        "Relighting": {
+          "accept": false,
+          "reason": "研究内容完全集中在量子光学硬件与物理系统预测，未涉及光照估计、传输或重光照技术。"
+        },
+        "Video Gen&Edit": {
+          "accept": false,
+          "reason": "研究聚焦于光子量子硬件架构与物理动力学建模，未涉及视频生成、编辑或音视频生成技术。"
+        },
+        "World Model": {
+          "accept": true,
+          "reason": "论文将光子硬件重构为基于高斯玻色采样的世界模型，用于建模卡门涡街等物理动力学，并展示了预测能力。"
+        }
+      },
+      "reviewed_at": "2026-09-14T14:38:42+00:00",
       "selected_topic": "World Model",
       "status": "accepted",
       "title": "A Chip-scale Space-time Multiplexed Gaussian Boson Sampling Processor Beyond 10,000 Photons",
@@ -264950,7 +265028,7 @@
       },
       "authors": "Haiwen Diao et.al.",
       "collected_at": "2026-09-11T05:43:26+00:00",
-      "decision_reason": "论文提出了支持图像生成、编辑、多参考编辑及复杂构图的原生统一视觉模型，并包含专门的编辑专家优化与蒸馏方法，符合Image Gen&Edit主题的方法贡献。",
+      "decision_reason": "二次复核：Image Gen&Edit: 论文核心贡献是提出SenseNova-U1.5，一个原生统一多模态模型，主要能力包括图像生成、编辑、文本渲染及复杂构图，明确属于图像生成与编辑领域。; Video Gen&Edit: 摘要和引言均强调图像生成、编辑及静态视觉内容的理解与推理，未提及视频生成、视频编辑或时序动态建模，核心贡献不涉及视频领域。; 3D Gen&Recon: 论文聚焦于2D图像空间的生成与编辑，虽然提到几何一致性，但并未涉及3D对象生成、重建、NeRF或高斯泼溅等3D特定技术，不属于3D生成与重建主题。; World Model: 该模型旨在统一视觉理解与生成，并非学习环境动态、物理规律或动作条件未来状态的世界模型，其核心是视觉内容创作而非交互式环境预测。; Relighting: 论文未提及光照估计、反射率恢复或新光照条件下的图像重渲染，其编辑功能主要指内容修改而非光照属性改变，不符合重光照主题定义。; Depth Estimation: 论文核心是图像生成与编辑，未涉及单目、立体或多视角深度估计任务，也未将深度预测作为主要贡献或核心技术组件，与深度估计主题无关。",
       "id": "2609.11929",
       "matched_topics": [
         "Image Gen&Edit",
@@ -264958,13 +265036,39 @@
       ],
       "paper_url": "https://arxiv.org/abs/2609.11929",
       "pdf_url": "https://arxiv.org/pdf/2609.11929v1",
-      "reviewed_at": "2026-09-13T13:39:50+00:00",
+      "recheck_decisions": {
+        "3D Gen&Recon": {
+          "accept": false,
+          "reason": "论文聚焦于2D图像空间的生成与编辑，虽然提到几何一致性，但并未涉及3D对象生成、重建、NeRF或高斯泼溅等3D特定技术，不属于3D生成与重建主题。"
+        },
+        "Depth Estimation": {
+          "accept": false,
+          "reason": "论文核心是图像生成与编辑，未涉及单目、立体或多视角深度估计任务，也未将深度预测作为主要贡献或核心技术组件，与深度估计主题无关。"
+        },
+        "Image Gen&Edit": {
+          "accept": true,
+          "reason": "论文核心贡献是提出SenseNova-U1.5，一个原生统一多模态模型，主要能力包括图像生成、编辑、文本渲染及复杂构图，明确属于图像生成与编辑领域。"
+        },
+        "Relighting": {
+          "accept": false,
+          "reason": "论文未提及光照估计、反射率恢复或新光照条件下的图像重渲染，其编辑功能主要指内容修改而非光照属性改变，不符合重光照主题定义。"
+        },
+        "Video Gen&Edit": {
+          "accept": false,
+          "reason": "摘要和引言均强调图像生成、编辑及静态视觉内容的理解与推理，未提及视频生成、视频编辑或时序动态建模，核心贡献不涉及视频领域。"
+        },
+        "World Model": {
+          "accept": false,
+          "reason": "该模型旨在统一视觉理解与生成，并非学习环境动态、物理规律或动作条件未来状态的世界模型，其核心是视觉内容创作而非交互式环境预测。"
+        }
+      },
+      "reviewed_at": "2026-09-14T14:38:42+00:00",
       "selected_topic": "Image Gen&Edit",
       "status": "accepted",
       "title": "SenseNova-U1.5: Towards Native Unified Visual Intelligence",
       "updated": "2026-09-10"
     }
   },
-  "updated_at": "2026-09-14T13:47:50+00:00",
+  "updated_at": "2026-09-14T14:38:42+00:00",
   "version": 1
 }
