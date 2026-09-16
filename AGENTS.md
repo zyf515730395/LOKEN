@@ -1,5 +1,7 @@
 # 项目代理规则
 
+- neat-freak 的收尾报告、清理预览和清理结果默认使用中文；代码、命令、路径及 Git commit message 保留英文。
+
 ## 当前目录与运行约定
 
 - `content/` 是公开内容真源：`content/papers/` 保存候选账本、公开论文归档、标注；`content/writings/` 保存文章 bundle。不再建立根目录 `data/`。
