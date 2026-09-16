@@ -238,7 +238,7 @@ def annotation_from_value(
     ) or len(institutions) != len(set(institutions)):
         fail()
     topics = tuple(x.name for x in labels if x.group == "topic" and x.name in value["topics"])
-    tags = limit_detail_tags(value["tags"], labels)
+    tags = () if value["paper_type"] == "survey" else limit_detail_tags(value["tags"], labels)
     return PaperAnnotation(topics, tags, value["paper_type"], tuple(institutions))
 
 
