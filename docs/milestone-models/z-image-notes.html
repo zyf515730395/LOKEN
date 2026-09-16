@@ -72,7 +72,6 @@
         <h1 id="notes-page-title">Z-Image · 文章精读</h1>
       </header>
 <nav class="context-strip" aria-label="模型系列">
-    <a class="context-strip-link" href="claude.html">Claude</a>
     <a class="context-strip-link" href="deepseek.html">DeepSeek</a>
     <a class="context-strip-link" href="flux.html">FLUX</a>
     <a class="context-strip-link" href="gpt.html">GPT</a>
@@ -158,9 +157,9 @@
 <h3>训练数据</h3>
 <p>/</p>
 <h3>VAE 结构</h3>
-<p>/</p>
+<p>官方 Base 权重采用 AutoencoderKL，16 通道潜变量，通道配置 [128,256,512,512]，scaling_factor=0.3611、shift_factor=0.1159。<a href="https://huggingface.co/Tongyi-MAI/Z-Image/blob/main/vae/config.json" rel="nofollow">Base 官方 VAE 配置</a></p>
 <h3>Text Encoder</h3>
-<p>/</p>
+<p>官方 Base 权重使用 Qwen3ForCausalLM，36 层、隐藏维 2560、32 个查询头与 8 个 KV 头。<a href="https://huggingface.co/Tongyi-MAI/Z-Image/blob/main/text_encoder/config.json" rel="nofollow">Base 官方文本编码器配置</a></p>
 <h3>生成主体网络</h3>
 <p>6B S3-DiT；该节点的主模型是 Turbo 的基础生成模型。</p>
 <h3>训练 Trick</h3>
@@ -172,12 +171,16 @@
 <li>同一家族区分基础生成、少步生成与计划中的编辑训练阶段。</li>
 </ul>
 <h3>局限性</h3>
-<ul>
-<li>/</li>
-</ul>
+<p>Base 的推荐采样为 28–50 步、CFG 3–5，推理开销高于 8 步 Turbo；需按 Base 设置调整采样，不能直接沿用 Turbo 的 guidance_scale=0。<a href="https://github.com/Tongyi-MAI/Z-Image" rel="nofollow">官方 Base 推理说明</a></p>
 <h2>资料来源</h2>
 <ul>
 <li><a href="https://github.com/Tongyi-MAI/Z-Image" rel="nofollow">official_repository</a></li>
+</ul>
+<h2>补充资料（2026-09-16）</h2>
+<ul>
+<li><a href="https://huggingface.co/Tongyi-MAI/Z-Image/blob/main/vae/config.json" rel="nofollow">资料 1</a></li>
+<li><a href="https://huggingface.co/Tongyi-MAI/Z-Image/blob/main/text_encoder/config.json" rel="nofollow">资料 2</a></li>
+<li><a href="https://github.com/Tongyi-MAI/Z-Image" rel="nofollow">资料 3</a></li>
 </ul>
     </article>
       </div>

@@ -72,7 +72,6 @@
         <h1 id="notes-page-title">VGGT · 文章精读</h1>
       </header>
 <nav class="context-strip" aria-label="模型系列">
-    <a class="context-strip-link" href="claude.html">Claude</a>
     <a class="context-strip-link" href="deepseek.html">DeepSeek</a>
     <a class="context-strip-link" href="flux.html">FLUX</a>
     <a class="context-strip-link" href="gpt.html">GPT</a>
@@ -115,9 +114,9 @@
 <h3>训练数据</h3>
 <p>混合真实与合成几何数据，包括 Co3Dv2、BlendMVS、DL3DV、MegaDepth、ScanNet、Hypersim 等；监督来自传感器、渲染和 SfM。</p>
 <h3>VAE 结构</h3>
-<p>/</p>
+<p>不适用：直接从图像预测几何属性，不是潜空间生成模型。 <a href="https://github.com/facebookresearch/vggt" rel="nofollow">官方资料</a>.</p>
 <h3>Text Encoder</h3>
-<p>/</p>
+<p>不适用：核心重建网络以图像为输入，不依赖文本条件编码器。 <a href="https://github.com/facebookresearch/vggt" rel="nofollow">官方资料</a>.</p>
 <h3>生成主体网络</h3>
 <p>DINOv2 图像 token 加相机及寄存器 token，交替执行帧内与全局注意力，再由任务头预测相机、深度、点图和跟踪特征。这里是几何估计网络，不是扩散生成器。</p>
 <h3>训练 Trick</h3>
@@ -141,6 +140,11 @@
 <li><a href="https://github.com/facebookresearch/vggt" rel="nofollow">official_repository</a></li>
 <li><a href="https://arxiv.org/pdf/2503.11651" rel="nofollow">official_limitations</a></li>
 </ul>
+<h2>补充资料（2026-09-16）</h2>
+<ul>
+<li><a href="https://github.com/facebookresearch/vggt" rel="nofollow">资料 1</a></li>
+<li><a href="https://arxiv.org/abs/2503.11651" rel="nofollow">资料 2</a></li>
+</ul>
     </article>
     <article class="summary-article summary-topic-entry" id="milestone-vggt-omega">
 <h1>[2605.15195] VGGT · VGGT-Ω</h1>
@@ -162,9 +166,9 @@
 <h3>训练数据</h3>
 <p>约 300 万有监督序列覆盖公开及内部静态、动态数据；另收集约 4000 万网络风格视频，筛选后用于自监督及几何伪标注。</p>
 <h3>VAE 结构</h3>
-<p>/</p>
+<p>不适用：直接从图像预测几何属性，不是潜空间生成模型。 <a href="https://vggt-omega.github.io/" rel="nofollow">官方资料</a>.</p>
 <h3>Text Encoder</h3>
-<p>/</p>
+<p>不适用：核心重建网络以图像为输入，不依赖文本条件编码器。 <a href="https://vggt-omega.github.io/" rel="nofollow">官方资料</a>.</p>
 <h3>生成主体网络</h3>
 <p>以 DINOv3 初始化，图像 patch 为 16；默认将 25% 全局注意力替换为仅寄存器间的注意力，使用轻量 MLP 与 pixel shuffle 预测头，直接输出相机和深度。</p>
 <h3>训练 Trick</h3>
@@ -186,6 +190,12 @@
 <li><a href="https://arxiv.org/abs/2605.15195" rel="nofollow">arxiv</a></li>
 <li><a href="https://github.com/facebookresearch/vggt" rel="nofollow">official_repository</a></li>
 <li><a href="https://vggt-omega.github.io/" rel="nofollow">official_blog</a></li>
+</ul>
+<h2>补充资料（2026-09-16）</h2>
+<ul>
+<li><a href="https://vggt-omega.github.io/" rel="nofollow">资料 1</a></li>
+<li><a href="https://arxiv.org/abs/2605.15195" rel="nofollow">资料 2</a></li>
+<li><a href="https://github.com/facebookresearch/vggt" rel="nofollow">资料 3</a></li>
 </ul>
     </article>
       </div>

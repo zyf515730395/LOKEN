@@ -74,7 +74,6 @@
       </div>
     </header>
 <nav class="context-strip" aria-label="模型系列">
-    <a class="context-strip-link" href="claude.html">Claude</a>
     <a class="context-strip-link" href="deepseek.html">DeepSeek</a>
     <a class="context-strip-link" href="flux.html">FLUX</a>
     <a class="context-strip-link" href="gpt.html">GPT</a>
@@ -98,7 +97,7 @@
       </div>
       <div class="milestone-hero-meta">
         <ul class="status-legend" aria-label="发布状态图例"><li><span class="release-status status-released">已发布</span><span>已发布</span></li><li><span class="release-status status-early-access">Early Access</span><span>Early Access</span></li><li><span class="release-status status-announced">已宣布</span><span>已宣布</span></li></ul>
-        <p>Updated 2026-09-11</p>
+        <p>Updated 2026-09-16</p>
       </div>
       </header>
       <div class="milestone-overview">
@@ -277,7 +276,7 @@
         </tr>
         <tr><th scope="row">VAE 结构</th>
           <td><p>图像 VAE 在空间维度压缩 8 倍，潜变量为 16 通道。</p></td>
-          <td><p>/</p></td>
+          <td><p>官方该版本配置采用 AutoencoderKLQwenImage，16 维潜变量（z_dim=16），基础通道 96，通道倍率 [1,2,4,4]，配置 num_res_blocks=2。<a href="https://huggingface.co/Qwen/Qwen-Image-Edit/blob/main/vae/config.json" rel="nofollow">官方 VAE 配置</a></p></td>
           <td><p>RGBA-VAE 共用 RGB/RGBA 潜空间；输入和输出卷积由 3 通道扩到 4 通道，显式保存 alpha，图层维度不做压缩。</p></td>
           <td><p>空间压缩由上一代 8 倍提高到 16 倍，减少高分辨率输出的潜变量数量。</p></td>
           <td><p>/</p></td>
@@ -301,9 +300,7 @@
 <li>逐步提高分辨率与文字难度；把 T2I、I2I、TI2I 任务纳入训练。</li>
 <li>高质量监督微调与强化学习用于改善审美和指令遵循。</li>
 </ul></td>
-          <td><ul>
-<li>/</li>
-</ul></td>
+          <td><p>初代技术报告的编辑训练联合 T2I、TI2I 与 I2I 重建任务，利用输入图像的语义编码与 VAE 重建编码对齐文本、视觉和扩散空间；训练以原图细节保真与编辑指令遵循共同约束。<a href="https://arxiv.org/html/2508.02324v1" rel="nofollow">技术报告 §4.3</a></p></td>
           <td><ul>
 <li>按文本到 RGB、文本到 RGBA、文本到多层 RGBA、图像到多层 RGBA 逐步训练。</li>
 <li>使用流匹配训练分层生成过程。</li>
@@ -337,15 +334,9 @@
 </ul></td>
         </tr>
         <tr><th scope="row">局限性</th>
-          <td><ul>
-<li>/</li>
-</ul></td>
-          <td><ul>
-<li>/</li>
-</ul></td>
-          <td><ul>
-<li>/</li>
-</ul></td>
+          <td><p>构图控制仍非完全可靠：报告中基础 Qwen-Image 的 GenEval 位置关系得分 0.76、属性绑定 0.77，低于单物体 0.99；这是该基准下的薄弱项，不能等同于所有使用场景的失败率。<a href="https://arxiv.org/html/2508.02324v1" rel="nofollow">技术报告 Table 4</a></p></td>
+          <td><p>全局生成式编辑不能保证未编辑区域逐像素不变；Qwen 团队后续分层论文明确指出 Qwen-Image-Edit 的这种一致性限制。<a href="https://arxiv.org/html/2512.15603v1" rel="nofollow">Qwen-Image-Layered §2.1</a></p></td>
+          <td><p>技术分析：各 RGBA 层独立编码，层维度不压缩，且多层视觉序列共同参与注意力，增加输出层数会增加计算与存储负担；报告处理含数百层的 PSD 时合并空间不重叠层以降低复杂度。<a href="https://arxiv.org/html/2512.15603v1" rel="nofollow">论文 §3.1–3.2、§4.1</a></p></td>
           <td><ul>
 <li>/</li>
 </ul></td>
