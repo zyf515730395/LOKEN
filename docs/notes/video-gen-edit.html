@@ -13,6 +13,205 @@
       <h1>Video Gen&amp;Edit · 论文要点</h1>
     </header>
     <div class="summary-topic-list">
+    <article class="summary-article summary-topic-entry" id="summary-2602.04789" data-arxiv-id="2602.04789" data-status="ready">
+<h1>[2602.04789] Light Forcing: Accelerating Autoregressive Video Diffusion via Sparse Attention</h1>
+<p><a href="https://arxiv.org/abs/2602.04789" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>该论文提出了名为 Light Forcing 的稀疏注意力框架，通过引入块感知增长机制和分层稀疏注意力，解决了自回归视频生成模型中稀疏注意力导致的误差累积和历史信息利用不足问题，实现了生成质量与推理速度的双重提升。</p>
+<h2>解决的问题</h2>
+<p>自回归视频生成模型中时空 3D 全注意力的二次计算复杂度是高效部署的主要瓶颈，且直接应用现有为双向模型设计的稀疏注意力方法会导致生成质量显著下降，具体表现为稀疏注意力加剧了自回归模型中的误差累积（如后期块过饱和），以及不同层、头和时间步对关键历史信息的利用不足导致长程一致性和运动丰富性受损。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了首个专为自回归视频生成模型设计的稀疏注意力解决方案 Light Forcing，旨在解决现有方法在自回归场景下性能下降的问题。</li>
+<li>引入了块感知增长（CAG）机制，通过量化估计每个块的贡献，将当前块生成视为条件于前序干净块的少步去噪过程，从而根据全局累积误差动态分配稀疏度，降低早期块稀疏度并逐步增加后期块稀疏度以减少误差传播。</li>
+<li>提出了分层稀疏注意力（HSA），采用从粗到细的流水线在帧和块两个层级选择稀疏掩码，在固定计算预算下同时保留全局和局部感知能力，有效捕捉信息丰富的历史上下文。</li>
+<li>在 Self Forcing、LongLive 和 Infinite-Forcing 等三个自回归视频生成模型上进行了广泛实验，结果显示该方法在 VBench 和 VBench-Long 基准上的一致性能优于现有方法，甚至在某些指标上超越密集注意力。</li>
+<li>提供了包括 FP8 线性层、内核融合和高效 VAE 在内的互补加速技术，通过即插即用配置实现了跨多种 GPU 约 2.0 至 3.0 倍的端到端加速，支持实时视频生成。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2604.02817" data-arxiv-id="2604.02817" data-status="ready">
+<h1>[2604.02817] MMPhysVideo: Physically Plausible Video Generation Through Joint RGB-Perception Modeling</h1>
+<p><a href="https://arxiv.org/abs/2604.02817" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>MMPhysVideo 提出了一种通过联合 RGB 与感知模态建模来增强视频生成物理合理性的后训练框架，并构建了配套的数据处理流水线 MMPhysPipe。</p>
+<h2>解决的问题</h2>
+<p>现有视频生成模型在视觉美学上取得进展，但缺乏物理合理性，且现有方法如文本提示或后训练范式存在领域差距、自监督表征与物理原理关联薄弱、奖励设计复杂及训练成本高等问题。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了 MMPhysVideo 框架，这是首个通过联合多模态建模增强视频合成物理合理性的后训练框架，采用双向控制教师架构并在推理时蒸馏为单流学生模型。</li>
+<li>设计了双向控制教师（BCT）架构，通过权重共享的并行分支处理 RGB 和感知模态，并利用零初始化的双向控制链接学习像素级对齐，以减少模态间干扰。</li>
+<li>提出了 MMPhysPipe 数据策划与多模态标注流水线，利用视觉语言模型评估物理丰富度，并结合 SAM 生成语义掩码，以及进行点图标注和 3D 点跟踪以捕获空间几何和细粒度动态。</li>
+<li>构建了包含丰富物理现象和配对感知标注的 MMPhysData-36k 多模态数据集，为联合世界建模提供密集感知监督。</li>
+<li>定量和定性结果表明，MMPhysVideo 在物理合理性方面显著优于多种先进模型，并在以物理为中心的基准测试中超越了最先进的方法。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2608.00617" data-arxiv-id="2608.00617" data-status="ready">
+<h1>[2608.00617] Diagnosing Under-Development of Irreversible Processes in Video Generation</h1>
+<p><a href="https://arxiv.org/abs/2608.00617" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文指出当前视频生成模型在不可逆过程演化上的不足，通过构建鲁棒评估协议诊断该问题，并证明基于冻结读出函数的推理引导易被对抗性欺骗，进而提出在解耦潜空间中通过构造性约束实现单调性以解决该问题。</p>
+<h2>解决的问题</h2>
+<p>当前文本到视频生成系统难以渲染具有方向性的不可逆状态变化（如燃烧、生锈），且现有的训练目标和质量指标未显式奖励不可逆属性的发展，导致生成过程缺乏实际进展的压力；此外，尝试通过推理时引导冻结读出函数来强制单调性的方法存在缺陷，因为优化过程会找到能提升读出分数但不产生真实视觉属性的对抗性样本，导致评估被静默破坏。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种针对不可逆性的空值鲁棒评估协议，通过空值基线证明朴素指标在纯噪声下退化，并基于幸存的进展量和停滞率构建了有效的评估框架。</li>
+<li>完成了经人类验证的七模型诊断，通过对比生成片段与真实参考片段，证实生成内容在不可逆过程上表现为进展接近零且停滞率接近百分之百。</li>
+<li>证明了事后冻结读出函数优化在理论上可被对抗性欺骗，并通过五个读出函数和四名标注者的研究确认了这一负面结果。</li>
+<li>提出了一种互补机制，即在解耦潜空间中通过构造性约束强制不可逆属性潜变量单调演化，从而消除可被欺骗的外部读出函数。</li>
+<li>在受控和半合成设置中验证了上述构造性单调性方法的有效性，展示了其能修复注入的反转错误并保留身份特征，而不降低重建质量。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2608.00769" data-arxiv-id="2608.00769" data-status="ready">
+<h1>[2608.00769] ChordVideo: One-Step, Training-Free, Temporally Consistent Video Editing via Low-Energy Transport</h1>
+<p><a href="https://arxiv.org/abs/2608.00769" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>ChordVideo 提出了一种基于低能量传输理论的一步、免训练视频编辑框架，通过将采样时间轴的低能量平滑扩展至视频时间轴，解决了逐帧编辑导致的时序闪烁和编辑强度漂移问题。</p>
+<h2>解决的问题</h2>
+<p>现有基于扩散蒸馏的一步图像编辑方法（如 ChordEdit）在处理视频时逐帧独立操作，无法捕捉帧间时序依赖，导致独立采样的噪声和编辑场引发时序闪烁，以及编辑场幅值变化造成编辑强度漂移，缺乏显式的时序一致性。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了 ChordVideo 框架，这是首个结合一步、免训练、免反演视频编辑与显式时序稳定化的方法。</li>
+<li>推导了变形误差界，将运动残差与随机闪烁分离，并预测了随时间窗口增大而出现的收益递减现象。</li>
+<li>在低能量最优传输框架下统一了采样时间和视频时间的稳定化机制，设计了四个可消融模块。</li>
+<li>在 TGVE 和 DAVIS 数据集上使用 SD-Turbo 和 SwiftBrush-v2 进行了评估，包括与七种多步编辑器的对比、消融实验及失败案例分析。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2608.01113" data-arxiv-id="2608.01113" data-status="ready">
+<h1>[2608.01113] CoT-Edit: Let CoT Guide Instruction Video Editing</h1>
+<p><a href="https://arxiv.org/abs/2608.01113" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>该论文提出了一种名为 CoT-Edit 的指令视频编辑框架，通过引入思维链增强的多模态大语言模型进行结构化规划，将高层语义意图转化为具体的时空空间约束，从而解决了纯文本驱动方法在复杂场景下定位漂移和物理一致性缺失的问题。</p>
+<h2>解决的问题</h2>
+<p>现有基于指令的视频编辑方法主要依赖纯文本提示，在面对包含多个共存物体、密集相似实体或动态交互的复杂现实场景时，往往因缺乏明确的空间定位和物理约束而导致控制失败，具体表现为定位漂移、错误编辑以及时间不稳定性，且仅从文本生成掩码无法为物体添加任务提供可行的物理先验。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种结构化的 Plan-Guide-Edit 范式，用于指令视频编辑，该范式在编辑前解析编辑目标并在空间和运动维度上进行定位，实现了从高层指令到具体视频编辑的清晰映射。</li>
+<li>开发了一个思维链增强的多模态大语言模型规划器，该规划器通过分层分析视频关键帧和文本指令，生成关键帧边界框序列以锚定时空位置，并输出补充了目标属性、交互倾向和场景约束的增强指令。</li>
+<li>引入了一种基于边界框条件的掩码预测分支，利用规划器生成的显式空间先验来指导高质量局部掩码的生成，从而显著提高了定位准确性并为物体添加任务提供了尺度和接触关系的约束。</li>
+<li>通过解耦语义理解和空间执行，该框架建立了可靠的语义-空间链接，使得扩散模型能够整合精确的空间约束、增强的语义控制和底层视频特征，从而在复杂指令视频编辑任务中实现了比现有基线更准确的空间定位和一致的物理及时间行为。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.12769" data-arxiv-id="2609.12769" data-status="ready">
+<h1>[2609.12769] Unified Agentic Video Editing Across Levels of Complexity and Creativity</h1>
+<p><a href="https://arxiv.org/abs/2609.12769" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>该论文提出了一种统一的智能体视频编辑框架，通过利用一种层级数据结构来支持从简单预览到电影预告片等不同复杂度和创意水平的多样化编辑任务。</p>
+<h2>解决的问题</h2>
+<p>现有视频编辑智能体系统在处理不同编辑目标、复杂度和创意水平时缺乏统一视角，且真实世界后期制作中的基准测试及不同编排层级间的比较研究仍然缺失。</p>
+<h2>创新点</h2>
+<ul>
+<li>报告了来自真实世界生产环境的实验，证明一种层级数据结构能够支持从简单预览到电影预告片等多种多样的编辑任务。</li>
+<li>提供了一个统一的视角，将视频编辑视为一个前沿的多模态基准，旨在解决不同编排层级间比较缺失的问题。</li>
+<li>针对创意AI社区提供了整合性的视角，针对智能体AI社区提供了将视频编辑作为多模态基准的框架。</li>
+<li>强调了所有优质编辑都需要对源材料进行强大且结构化的理解，并以此作为高效智能体企业编辑解决方案的基础。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.13830" data-arxiv-id="2609.13830" data-status="ready">
+<h1>[2609.13830] DiVA: Enabling Interactive Digital Life Simulation via Video Models</h1>
+<p><a href="https://arxiv.org/abs/2609.13830" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>DiVA 提出了一种基于多模态大模型路由与三阶段耦合视频生成管道的深度交互式数字生命模拟器，旨在通过语言与空间交互实现长时、高动态且身份稳定的角色模拟。</p>
+<h2>解决的问题</h2>
+<p>现有工作主要采用第三人称视角并生成孤立、不连续的视频片段，导致用户难以代入角色，且限制了对话式连续视频的表达与连贯性；同时，依赖单一整体式视频生成器难以兼顾高质量表现力、长期稳定性及可控性。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了 DiVA 框架，支持通过开放式语言和空间点击进行交互，并在长时多轮互动中维持角色的高保真视觉身份与长期人格记忆。</li>
+<li>设计了由多模态大模型充当模拟路由器的机制，通过上下文学习实例化角色人格，并推理用户输入以生成包含对话响应和行为提示的结构化指令。</li>
+<li>构建了包含等待视频、动作视频和锚定视频续接的三阶段耦合视频生成管道，分别解决静态感、音视频对齐及多轮交互间的过渡问题。</li>
+<li>引入了锚定视频续接机制，通过以前序动作视频片段为条件并针对预设高质量锚定帧进行生成，以抑制身份漂移并允许更自由的动态效果。</li>
+<li>通过系统性替换核心视频模块进行基准测试，验证了 DiVA 在长时多轮数字模拟中在视觉质量、角色响应准确性和高动态行为方面的显著优势。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.14122" data-arxiv-id="2609.14122" data-status="ready">
+<h1>[2609.14122] SignMimic: Robust High-Quality Sign Language Motion Generation via Human-Shape-Oblivious Pose Transfer Guidance</h1>
+<p><a href="https://arxiv.org/abs/2609.14122" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>SignMimic 提出了一种通过解耦刚性规范化、非刚性适应和姿态补全来生成鲁棒且高质量手语动作的模块化视频生成框架。</p>
+<h2>解决的问题</h2>
+<p>现有手语视频模仿流水线通常将刚性运动、非刚性形变和视角依赖补全纠缠在单一生成器中，导致形状不一致、空间不一致和时间不一致等失败模式，损害了语言准确性和可理解性。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了 SignMimic 模块化流水线，将手语模仿解耦为刚性规范化、非刚性适应和姿态补全，以改善一致性。</li>
+<li>引入了几何和时间正则化器（如 SE(3) 平滑度），以抑制形状漂移并稳定协同发音。</li>
+<li>建立了一个涵盖视频质量、帧连续性、身份保真度和通过回译评估语言准确性的综合评估协议。</li>
+<li>在四个大规模数据集上展示了最先进的结果，证实了因子化条件方法的有效性。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.14725" data-arxiv-id="2609.14725" data-status="ready">
+<h1>[2609.14725] CrossDistill: Balancing Quality and Diversity via Trajectory-Level Hybrid Few-Step Distillation</h1>
+<p><a href="https://arxiv.org/abs/2609.14725" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>CrossDistill 提出了一种基于噪声水平混合少步蒸馏的轨迹级调度框架，通过在高噪声区间应用轨迹保持目标、在低噪声区间应用分布匹配目标并经由交叉状态耦合，有效平衡了生成质量与多样性。</p>
+<h2>解决的问题</h2>
+<p>现有少步蒸馏方法中，基于轨迹的目标虽能保持多样性但易导致样本模糊，而基于分布匹配的目标虽能提升清晰度但可能降低随机多样性；现有方法通常隐式处理各目标的噪声支持范围，或在训练时间而非噪声水平上分离目标，导致无法明确区分高噪声下的模式选择与低噪声下的细节精化，难以同时优化质量与多样性。</p>
+<h2>创新点</h2>
+<ul>
+<li>将噪声水平的目标分配确立为少步扩散蒸馏中的显式设计轴，并论证了沿噪声轴的目标顺序对生成效果的重要性。</li>
+<li>提出了 CrossDistill 轨迹级调度策略，通过交叉状态将高噪声区间的轨迹保持阶段与低噪声区间的分布匹配阶段耦合起来。</li>
+<li>实现了调度决策与具体轨迹保持或分布匹配实例的解耦，允许灵活组合如 PCM 或 DFD 用于高噪声区间，TDM 或 DMD 用于低噪声区间。</li>
+<li>在文本到视频扩散模型及图像到视频任务上的实验表明，CrossDistill 相较于单体基线和损失级混合方法，提升了质量与多样性的前沿表现。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.15863" data-arxiv-id="2609.15863" data-status="ready">
+<h1>[2609.15863] LynnReal-Omni: Native multi-modal Video Generation for Agentic Visual Workflows</h1>
+<p><a href="https://arxiv.org/abs/2609.15863" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>LynnReal-Omni 是一个基于共享多模态扩散变换器的原生多模态视频生成框架，旨在通过统一多种视频生成任务、引入原生任务表示、构建系统化数据管道以及提出 MSAVP 基准测试，解决现有视频扩散模型在可控性、长时一致性、评估协议完整性及解码瓶颈方面的局限。</p>
+<h2>解决的问题</h2>
+<p>现有视频扩散模型虽然视觉保真度高，但生成过程具有随机性且难以精确控制，长时场景容易出现外观漂移、物体交互及时间连贯性问题，导致其难以作为可靠引擎用于需要显式且可重复控制的代理式视觉工作流；此外，现有方法存在任务特定流水线碎片化、长视频不一致、评估协议不全面以及解码瓶颈未被有效解决等缺陷。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了 LynnReal-Omni 框架，在单一模型中统一了文本到视频、图像条件生成、参考引导生成、结构控制、编辑及长视频生成等任务，取代了碎片化的任务特定堆栈。</li>
+<li>设计了原生任务表示，显式编码模态身份、时间坐标、噪声水平和输出目标，使外观参考、帧对齐控制、可编辑 3D 渲染、游戏录制及因果历史能在共享多模态变换器中保留其独特角色。</li>
+<li>构建了系统化的数据管道，用于视频清洗、主体关联、多模态标注及对齐控制构建，生成了包含多镜头音视频片段的精选语料库，提供具有验证条件资产的源链接训练单元。</li>
+<li>引入了 MSAVP 基准测试，这是一个包含 100 个提示和 25 个指标的评估协议，用于全面评估语义对齐、视觉质量、时间一致性、物理合理性、可控性及音频质量，并将语义合规性与观察到的物理现象分离。</li>
+<li>优化了实际部署性能，通过模型和解码加速（包括轻量级 VAE 解码器）推出了 LynnReal-Omni-Flash，显著降低了推理成本，实现了在单张 H100 上快速生成 22 帧 540p 视频。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.16475" data-arxiv-id="2609.16475" data-status="ready">
+<h1>[2609.16475] MDN-Control: Mask-Depth-Noise Guided Region Control for Multi-Subject Video Editing</h1>
+<p><a href="https://arxiv.org/abs/2609.16475" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>该论文提出了一种名为MDN-Control的免训练框架，通过结合掩码定位、深度引导的遮挡推理以及噪声潜变量提示，解决了多主体视频编辑中因主体相邻或遮挡导致的定位漂移和属性泄漏问题。</p>
+<h2>解决的问题</h2>
+<p>在多主体视频编辑中，当主体相邻或存在遮挡时，精确控制编辑区域非常困难。现有的二元掩码无法编码重叠主体的前后顺序，且跟踪误差和不确定边界会降低定位精度，导致编辑意图意外影响邻近主体，产生目标漂移和跨主体属性泄漏。此外，即使定位准确，不同的初始噪声潜变量也可能导致生成结果与编辑提示不对齐，因此需要协同控制目标定位、遮挡几何和外观初始化。</p>
+<h2>创新点</h2>
+<ul>
+<li>将多主体视频编辑形式化为涉及目标定位、遮挡几何和外观初始化的控制问题，并提出了一种联合解决这些因素的免训练框架。</li>
+<li>结合基于掩码的定位与深度引导的遮挡推理，以减少目标漂移和跨主体干扰，特别是在重叠主体之间的模糊边界处。</li>
+<li>引入噪声潜变量提示技术，从离线噪声外观库中检索与提示相关的初始高斯分布，从而在不更新模型参数的情况下提供可控的外观先验。</li>
+<li>在MSVBench上的实验表明，MDN-Control在评估方法中实现了最低的CM-Err和最高的Q Edit，同时保持了具有竞争力的文本对齐度和时间一致性。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.16878" data-arxiv-id="2609.16878" data-status="ready">
+<h1>[2609.16878] VOR-Bench: A Human Perception-Driven Benchmark for Video Object Removal</h1>
+<p><a href="https://arxiv.org/abs/2609.16878" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>该论文提出了一个名为VOR-Bench的视频对象移除评估基准，包含首个具备配对编辑视频和涂鸦掩码的数据集VORD、用于生成配对视频的框架rMPAF以及基于视觉语言模型的人类感知驱动评分模型VOR-MDSM，以解决现有评估在数据多样性和指标与人类感知一致性方面的不足。</p>
+<h2>解决的问题</h2>
+<p>现有视频对象移除评估面临两大挑战：一是数据集缺乏配对编辑视频且掩码多为精确分割而非用户涂鸦，导致评估参考不可靠且场景同质化；二是传统图像级指标如PSNR和SSIM依赖配对参考且仅衡量像素或结构保真度，无法捕捉语义意义和人类感知，导致高分结果与可见伪影并存。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了VORD数据集，这是首个同时包含配对编辑视频和涂鸦掩码的视频对象移除评估数据集，涵盖模型生成、相机拍摄和工具渲染三种数据类型，并支持多种移除对象类型和真实场景。</li>
+<li>设计了rMPAF（具备运动能力的配对视频获取框架），利用图像移除模型和训练后的视频生成模型生成高质量配对编辑视频，解决了真实视频缺乏移除参考及静态或渲染视频场景多样性受限的问题。</li>
+<li>提出了VOR-MDSM，一种基于视觉语言模型（VLM）的人类感知驱动视频移除质量评分模型，将评估转化为问答任务，通过利用时空视频信息输出与人类感知对齐的多维度分数。</li>
+<li>定义了三个评估维度：对象移除完整性、掩码背景一致性和逻辑合理性，旨在全面覆盖视频对象移除任务的核心方面，并验证了该模型与人类偏好判断具有更强的相关性。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.17414" data-arxiv-id="2609.17414" data-status="ready">
+<h1>[2609.17414] SlotDiT: Object-Centric Representations for Diffusion Transformers</h1>
+<p><a href="https://arxiv.org/abs/2609.17414" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>该论文提出了SlotDiT，一种在物体中心槽位潜在空间中运行的文本引导扩散Transformer，旨在通过紧凑且结构化的表示提升机器人场景下的生成建模效率与任务成功率。</p>
+<h2>解决的问题</h2>
+<p>现有扩散模型主要依赖基于VAE的重建驱动潜在空间或高维语义对齐表示，前者侧重视觉保真度而缺乏语义结构，后者在高维特征空间中训练困难且需要额外架构适配，导致这些潜在空间在机器人应用中未能有效平衡视觉质量与任务完成能力，且物体中心表示在扩散模型中的潜在应用尚未被探索。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了SlotDiT，一种在物体中心潜在空间中运行的文本引导扩散Transformer，实现了机器人场景下的物体中心生成建模。</li>
+<li>开展了一项关于扩散Transformer潜在空间的受控研究，在统一框架内对比了基于槽位、基于VAE和语义对齐的潜在表示。</li>
+<li>证明了基于槽位的表示在文本引导视频生成和机器人控制中一致地提高了下游任务成功率，同时提供了比基于VAE和语义对齐替代方案更高效紧凑的潜在空间。</li>
+</ul>
+</article>
     <article class="summary-article summary-topic-entry" id="summary-2607.27110" data-arxiv-id="2607.27110" data-status="ready">
 <h1>[2607.27110] FreqForcing: Autoregressive Long Video Generation via Spectral Self-Anchoring</h1>
 <p><a href="https://arxiv.org/abs/2607.27110" rel="nofollow">arXiv 原文</a></p>
@@ -2043,6 +2242,6 @@
 </article>
     </div>
   </main>
-  <script type="application/json" id="summary-catalog">{"papers":{"2602.13185":{"status":"ready","url":"notes/video-gen-edit.html#summary-2602.13185"},"2602.19161":{"status":"ready","url":"notes/video-gen-edit.html#summary-2602.19161"},"2603.17555":{"status":"ready","url":"notes/video-gen-edit.html#summary-2603.17555"},"2603.17889":{"status":"ready","url":"notes/video-gen-edit.html#summary-2603.17889"},"2603.26154":{"status":"ready","url":"notes/video-gen-edit.html#summary-2603.26154"},"2604.02979":{"status":"ready","url":"notes/video-gen-edit.html#summary-2604.02979"},"2604.23586":{"status":"ready","url":"notes/video-gen-edit.html#summary-2604.23586"},"2604.23789":{"status":"ready","url":"notes/video-gen-edit.html#summary-2604.23789"},"2605.10723":{"status":"ready","url":"notes/video-gen-edit.html#summary-2605.10723"},"2605.14382":{"status":"ready","url":"notes/video-gen-edit.html#summary-2605.14382"},"2605.14513":{"status":"ready","url":"notes/video-gen-edit.html#summary-2605.14513"},"2605.18736":{"status":"ready","url":"notes/video-gen-edit.html#summary-2605.18736"},"2606.08260":{"status":"ready","url":"notes/video-gen-edit.html#summary-2606.08260"},"2606.10671":{"status":"ready","url":"notes/video-gen-edit.html#summary-2606.10671"},"2606.16278":{"status":"ready","url":"notes/video-gen-edit.html#summary-2606.16278"},"2606.27345":{"status":"ready","url":"notes/video-gen-edit.html#summary-2606.27345"},"2606.27741":{"status":"ready","url":"notes/video-gen-edit.html#summary-2606.27741"},"2607.02075":{"status":"ready","url":"notes/video-gen-edit.html#summary-2607.02075"},"2607.26694":{"status":"ready","url":"notes/video-gen-edit.html#summary-2607.26694"},"2607.27110":{"status":"ready","url":"notes/video-gen-edit.html#summary-2607.27110"},"2607.27380":{"status":"ready","url":"notes/video-gen-edit.html#summary-2607.27380"},"2608.01942":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.01942"},"2608.01944":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.01944"},"2608.02474":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.02474"},"2608.02504":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.02504"},"2608.03046":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.03046"},"2608.03335":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.03335"},"2608.03974":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.03974"},"2608.04412":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.04412"},"2608.05237":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.05237"},"2608.05485":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.05485"},"2608.05648":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.05648"},"2608.05976":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.05976"},"2608.06231":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.06231"},"2608.07463":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.07463"},"2608.08820":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.08820"},"2608.09355":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.09355"},"2608.09637":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.09637"},"2608.10439":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.10439"},"2608.10519":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.10519"},"2608.10933":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.10933"},"2608.11745":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.11745"},"2608.12032":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.12032"},"2608.12203":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.12203"},"2608.12290":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.12290"},"2608.13028":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.13028"},"2608.13037":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.13037"},"2608.13043":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.13043"},"2608.13049":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.13049"},"2608.13205":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.13205"},"2608.13368":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.13368"},"2608.13391":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.13391"},"2608.13460":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.13460"},"2608.14043":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.14043"},"2608.14391":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.14391"},"2608.14706":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.14706"},"2608.14740":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.14740"},"2608.14790":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.14790"},"2608.15818":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.15818"},"2608.16143":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.16143"},"2608.16154":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.16154"},"2608.16220":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.16220"},"2608.16328":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.16328"},"2608.16513":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.16513"},"2608.16585":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.16585"},"2608.16717":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.16717"},"2608.16745":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.16745"},"2608.17426":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.17426"},"2608.17559":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.17559"},"2608.17566":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.17566"},"2608.17695":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.17695"},"2608.17973":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.17973"},"2608.18607":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.18607"},"2608.18948":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.18948"},"2608.19583":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.19583"},"2608.20749":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.20749"},"2608.20910":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.20910"},"2608.22819":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.22819"},"2608.23090":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.23090"},"2608.24293":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.24293"},"2608.24329":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.24329"},"2608.24680":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.24680"},"2608.25479":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.25479"},"2608.26101":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.26101"},"2608.26671":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.26671"},"2608.26809":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.26809"},"2608.26902":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.26902"},"2608.27123":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.27123"},"2608.27922":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.27922"},"2608.28404":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.28404"},"2608.29264":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.29264"},"2608.29322":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.29322"},"2608.29598":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.29598"},"2608.29621":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.29621"},"2608.29904":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.29904"},"2608.30194":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.30194"},"2608.30450":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.30450"},"2609.00610":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.00610"},"2609.00656":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.00656"},"2609.00919":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.00919"},"2609.01252":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.01252"},"2609.01277":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.01277"},"2609.01551":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.01551"},"2609.02367":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.02367"},"2609.02664":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.02664"},"2609.03528":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.03528"},"2609.03563":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.03563"},"2609.03586":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.03586"},"2609.03629":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.03629"},"2609.03820":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.03820"},"2609.04031":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.04031"},"2609.04120":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.04120"},"2609.04190":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.04190"},"2609.04903":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.04903"},"2609.06478":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.06478"},"2609.06628":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.06628"},"2609.06712":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.06712"},"2609.06948":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.06948"},"2609.07720":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.07720"},"2609.08108":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.08108"},"2609.08215":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.08215"},"2609.08275":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.08275"},"2609.08496":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.08496"},"2609.08505":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.08505"},"2609.09123":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.09123"},"2609.10317":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.10317"},"2609.10943":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.10943"},"2609.11242":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.11242"},"2609.11265":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.11265"},"2609.11507":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.11507"},"2609.11638":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.11638"}},"topic":"Video Gen&Edit","version":1}</script>
+  <script type="application/json" id="summary-catalog">{"papers":{"2602.04789":{"status":"ready","url":"notes/video-gen-edit.html#summary-2602.04789"},"2602.13185":{"status":"ready","url":"notes/video-gen-edit.html#summary-2602.13185"},"2602.19161":{"status":"ready","url":"notes/video-gen-edit.html#summary-2602.19161"},"2603.17555":{"status":"ready","url":"notes/video-gen-edit.html#summary-2603.17555"},"2603.17889":{"status":"ready","url":"notes/video-gen-edit.html#summary-2603.17889"},"2603.26154":{"status":"ready","url":"notes/video-gen-edit.html#summary-2603.26154"},"2604.02817":{"status":"ready","url":"notes/video-gen-edit.html#summary-2604.02817"},"2604.02979":{"status":"ready","url":"notes/video-gen-edit.html#summary-2604.02979"},"2604.23586":{"status":"ready","url":"notes/video-gen-edit.html#summary-2604.23586"},"2604.23789":{"status":"ready","url":"notes/video-gen-edit.html#summary-2604.23789"},"2605.10723":{"status":"ready","url":"notes/video-gen-edit.html#summary-2605.10723"},"2605.14382":{"status":"ready","url":"notes/video-gen-edit.html#summary-2605.14382"},"2605.14513":{"status":"ready","url":"notes/video-gen-edit.html#summary-2605.14513"},"2605.18736":{"status":"ready","url":"notes/video-gen-edit.html#summary-2605.18736"},"2606.08260":{"status":"ready","url":"notes/video-gen-edit.html#summary-2606.08260"},"2606.10671":{"status":"ready","url":"notes/video-gen-edit.html#summary-2606.10671"},"2606.16278":{"status":"ready","url":"notes/video-gen-edit.html#summary-2606.16278"},"2606.27345":{"status":"ready","url":"notes/video-gen-edit.html#summary-2606.27345"},"2606.27741":{"status":"ready","url":"notes/video-gen-edit.html#summary-2606.27741"},"2607.02075":{"status":"ready","url":"notes/video-gen-edit.html#summary-2607.02075"},"2607.26694":{"status":"ready","url":"notes/video-gen-edit.html#summary-2607.26694"},"2607.27110":{"status":"ready","url":"notes/video-gen-edit.html#summary-2607.27110"},"2607.27380":{"status":"ready","url":"notes/video-gen-edit.html#summary-2607.27380"},"2608.00617":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.00617"},"2608.00769":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.00769"},"2608.01113":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.01113"},"2608.01942":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.01942"},"2608.01944":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.01944"},"2608.02474":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.02474"},"2608.02504":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.02504"},"2608.03046":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.03046"},"2608.03335":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.03335"},"2608.03974":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.03974"},"2608.04412":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.04412"},"2608.05237":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.05237"},"2608.05485":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.05485"},"2608.05648":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.05648"},"2608.05976":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.05976"},"2608.06231":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.06231"},"2608.07463":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.07463"},"2608.08820":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.08820"},"2608.09355":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.09355"},"2608.09637":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.09637"},"2608.10439":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.10439"},"2608.10519":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.10519"},"2608.10933":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.10933"},"2608.11745":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.11745"},"2608.12032":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.12032"},"2608.12203":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.12203"},"2608.12290":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.12290"},"2608.13028":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.13028"},"2608.13037":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.13037"},"2608.13043":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.13043"},"2608.13049":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.13049"},"2608.13205":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.13205"},"2608.13368":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.13368"},"2608.13391":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.13391"},"2608.13460":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.13460"},"2608.14043":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.14043"},"2608.14391":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.14391"},"2608.14706":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.14706"},"2608.14740":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.14740"},"2608.14790":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.14790"},"2608.15818":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.15818"},"2608.16143":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.16143"},"2608.16154":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.16154"},"2608.16220":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.16220"},"2608.16328":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.16328"},"2608.16513":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.16513"},"2608.16585":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.16585"},"2608.16717":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.16717"},"2608.16745":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.16745"},"2608.17426":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.17426"},"2608.17559":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.17559"},"2608.17566":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.17566"},"2608.17695":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.17695"},"2608.17973":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.17973"},"2608.18607":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.18607"},"2608.18948":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.18948"},"2608.19583":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.19583"},"2608.20749":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.20749"},"2608.20910":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.20910"},"2608.22819":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.22819"},"2608.23090":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.23090"},"2608.24293":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.24293"},"2608.24329":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.24329"},"2608.24680":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.24680"},"2608.25479":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.25479"},"2608.26101":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.26101"},"2608.26671":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.26671"},"2608.26809":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.26809"},"2608.26902":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.26902"},"2608.27123":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.27123"},"2608.27922":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.27922"},"2608.28404":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.28404"},"2608.29264":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.29264"},"2608.29322":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.29322"},"2608.29598":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.29598"},"2608.29621":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.29621"},"2608.29904":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.29904"},"2608.30194":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.30194"},"2608.30450":{"status":"ready","url":"notes/video-gen-edit.html#summary-2608.30450"},"2609.00610":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.00610"},"2609.00656":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.00656"},"2609.00919":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.00919"},"2609.01252":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.01252"},"2609.01277":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.01277"},"2609.01551":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.01551"},"2609.02367":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.02367"},"2609.02664":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.02664"},"2609.03528":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.03528"},"2609.03563":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.03563"},"2609.03586":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.03586"},"2609.03629":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.03629"},"2609.03820":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.03820"},"2609.04031":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.04031"},"2609.04120":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.04120"},"2609.04190":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.04190"},"2609.04903":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.04903"},"2609.06478":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.06478"},"2609.06628":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.06628"},"2609.06712":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.06712"},"2609.06948":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.06948"},"2609.07720":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.07720"},"2609.08108":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.08108"},"2609.08215":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.08215"},"2609.08275":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.08275"},"2609.08496":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.08496"},"2609.08505":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.08505"},"2609.09123":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.09123"},"2609.10317":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.10317"},"2609.10943":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.10943"},"2609.11242":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.11242"},"2609.11265":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.11265"},"2609.11507":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.11507"},"2609.11638":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.11638"},"2609.12769":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.12769"},"2609.13830":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.13830"},"2609.14122":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.14122"},"2609.14725":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.14725"},"2609.15863":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.15863"},"2609.16475":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.16475"},"2609.16878":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.16878"},"2609.17414":{"status":"ready","url":"notes/video-gen-edit.html#summary-2609.17414"}},"topic":"Video Gen&Edit","version":1}</script>
 </body>
 </html>
