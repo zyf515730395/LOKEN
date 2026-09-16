@@ -7,7 +7,7 @@ import json
 from .models import LabelDefinition
 
 
-PROMPT_VERSION = "paper-annotation-v7-methods-only"
+PROMPT_VERSION = "paper-annotation-v8-surveys-without-tags"
 TRANSPORT_VERSION = "loopback-chat-v1"
 
 
@@ -37,6 +37,7 @@ def annotation_messages(
                 "paper_type 只能是 paper 或 survey。仅当论文主要贡献是系统综述、survey、"
                 "review、taxonomy、meta-analysis 或领域 overview 时选择 survey；"
                 "普通 benchmark、dataset、shared task 或带 related-work 总结的研究论文仍是 paper。"
+                "若 paper_type=survey，tags 必须为空列表，不为综述生成技术标签。"
                 "输出严格 JSON，字段必须且只能是 topics、tags、paper_type、institutions，不要 Markdown。\n"
                 f"taxonomy={json.dumps(taxonomy, ensure_ascii=False, separators=(',', ':'))}"
             ),
