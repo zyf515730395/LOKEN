@@ -166,15 +166,16 @@ def classify_paper(
         raise PaperAnnotationError("annotation_evidence_invalid", "paper abstract is unavailable or outside limits")
     try:
         transport = LoopbackChatTransport(base_url)
-        raw = transport.complete(
-            annotation_messages(paper.document.title, abstract, labels),
-            model=model,
-            timeout=timeout,
-            max_tokens=DEFAULT_MODEL_MAX_TOKENS,
-            enable_thinking=False,
-        )
+        messages = annotation_messages(paper.document.title, abstract, labels)
+        for attempt in range(2):
+            raw = transport.complete(messages, model=model, timeout=timeout,
+                                     max_tokens=DEFAULT_MODEL_MAX_TOKENS, enable_thinking=False)
+            annotation = parse_annotation(raw, labels)
+            if annotation.paper_type == 'survey' or annotation.tags:
+                break
+            messages += ({'role':'user','content':'请再核对一次核心技术证据；没有可靠标签仍返回空tags，不要猜测。'},)
     except LoopbackChatError as error:
         raise PaperAnnotationError(error.code, error.message) from None
-    annotation = replace(parse_annotation(raw, labels), institutions=extract_institutions(paper))
+    annotation = replace(annotation, institutions=extract_institutions(paper))
     annotation_cache.store(key, annotation)
     return annotation

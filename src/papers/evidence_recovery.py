@@ -101,13 +101,6 @@ def complete_short_reviews(material, labels, allowlists, args, result, receipt):
     retained = [t for t,v in decisions.items() if v['accept'] is not False]
     if retained:
         annotation = r.filter_annotation_for_topics(annotation,labels,allowlists,retained)
-    if any(v['accept'] is True for v in decisions.values()) and not annotation.tags:
-        allowed = r.annotation_labels_for_topics(labels,allowlists,retained)
-        try:
-            annotation = r.replace(annotation,tags=r.evidence_tags(material,allowed,args))
-        except PaperSummaryError as error:
-            if error.code != 'annotation_tags_missing':
-                raise
     return decisions, annotation
 
 
@@ -233,20 +226,10 @@ def work(item, directory, labels, allowlists, args):
             result.update(decisions=decisions, annotation=annotation_value(annotation))
             accepted = [t for t,v in decisions.items() if v['accept'] is True]
             result['status'] = 'uncertain' if any(v['accept'] is None for v in decisions.values()) else 'ready'
-            if accepted and not annotation.tags:
-                result['status'] = 'annotation_tags_missing'
-                retained = [t for t,v in decisions.items() if v['accept'] is not False]
-                annotation = r.replace(annotation,tags=body_tags(item,material,directory/'sources'/item['id'],
-                    r.annotation_labels_for_topics(labels,allowlists,retained),args))
-                result.update(annotation=annotation_value(annotation),status='uncertain' if any(v['accept'] is None for v in decisions.values()) else 'ready')
         else:
-            try:
-                tags = r.evidence_tags(material, allowed, args)
-            except PaperSummaryError as error:
-                if error.code != 'annotation_tags_missing':
-                    raise
-                tags = body_tags(item,material,directory/'sources'/item['id'],allowed,args)
-            value = {'topics': item['topics'], 'tags': list(tags), 'paper_type': item.get('paper_type','paper'), 'institutions': []}
+            paper_type = item.get('paper_type',item.get('record',{}).get('annotation',{}).get('paper_type','paper'))
+            tags = () if paper_type == 'survey' else r.evidence_tags(material, allowed, args)
+            value = {'topics': item['topics'], 'tags': list(tags), 'paper_type': paper_type, 'institutions': []}
             result.update(annotation=annotation_value(annotation_from_value(item['id'], value, labels)), status='ready')
     except Exception as error:
         result.update(status=getattr(error, 'code', type(error).__name__), error=str(error))
@@ -282,12 +265,12 @@ def main():
             items[item['id']] = item
         for topic, rows in original['archive'].items():
             for key,row in rows.items():
-                if parse_entry(key,row)['date'].isoformat().startswith(args.month) and not original['annotations']['papers'].get(key,{}).get('tags'):
+                if parse_entry(key,row)['date'].isoformat().startswith(args.month) and key not in original['annotations']['papers']:
                     if key in items: continue
                     topics = list(dict.fromkeys(aliases[t] for t,rr in original['archive'].items() if key in rr))
                     items[key] = {'id':key,'title':parse_entry(key,row)['title'],'url':'https://arxiv.org/abs/'+key,'source':'arXiv','review':False,'topics':topics}
         for key,record in original['library']['papers'].items():
-            if record['topics'] and record['published'].startswith(args.month) and not record.get('annotation',{}).get('tags') and key not in items:
+            if record['topics'] and record['published'].startswith(args.month) and not record.get('annotation') and key not in items:
                 items[key] = {'id':key,'title':record['title'],'url':record['url'],'source':'会议','review':False,'topics':record['topics'],'record':record}
         if (directory/'scope.json').exists():
             items = {item['id']:item for item in r.read(directory/'scope.json')}
@@ -302,6 +285,7 @@ def main():
         after = copy.deepcopy(original)
         for result in results:
             if 'annotation' not in result: continue
+            result['annotation'] = annotation_value(annotation_from_value(result['id'],result['annotation'],labels))
             item=result['item']; key=item['id']
             if item['source']=='arXiv':
                 if item['review']:

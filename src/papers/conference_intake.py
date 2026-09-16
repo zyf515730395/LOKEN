@@ -345,14 +345,6 @@ def classify_conference_paper(paper, record: dict, *, model: str, timeout: float
     annotation = run_classifier(paper, allowed, model=model,
                                 base_url='http://127.0.0.1:8000/v1', timeout=timeout)
     annotation = filter_annotation_for_topics(annotation, labels, allowlists, record['topics'])
-    if not annotation.tags:
-        annotation = run_classifier(paper, allowed, model=model,
-                                    base_url='http://127.0.0.1:8000/v1', timeout=timeout,
-                                    refresh=True)
-        annotation = filter_annotation_for_topics(annotation, labels, allowlists, record['topics'])
-    if not annotation.tags:
-        raise PaperAnnotationError('annotation_tags_missing',
-                                   'accepted conference paper has no validated technical tags')
     value = annotation_value(annotation)
     value['topics'] = list(record['topics'])
     return annotation_value(annotation_from_value(record['id'], value, labels))
@@ -365,7 +357,7 @@ def conference_work_records(records, visible: set[str], state: dict, *, attempte
         record for record in records
         if record['id'] in visible and record['id'] not in attempted
         and (not record.get('summary') or _source_refresh_pending(record, 'summary')
-             or not (record.get('annotation') or {}).get('tags')
+             or not record.get('annotation')
              or _source_refresh_pending(record, 'annotation'))
         and not (skip_failed and state.get(record['id'], {}).get('status') == 'failed')
     ]
@@ -383,11 +375,11 @@ def conference_remaining(records, visible: set[str]) -> dict[str, int]:
     return {
         'summary_remaining': sum(not paper.get('summary') or _source_refresh_pending(paper, 'summary')
                                  for paper in eligible),
-        'annotation_remaining': sum(not (paper.get('annotation') or {}).get('tags')
+        'annotation_remaining': sum(not paper.get('annotation')
                                     or _source_refresh_pending(paper, 'annotation')
                                     for paper in eligible),
         'remaining': sum(not paper.get('summary') or _source_refresh_pending(paper, 'summary')
-                         or not (paper.get('annotation') or {}).get('tags')
+                         or not paper.get('annotation')
                          or _source_refresh_pending(paper, 'annotation')
                          for paper in eligible),
     }
@@ -442,7 +434,7 @@ def summarize(*, limit: int | None = 20, timeout: float = 900, model: str | None
                                 raise
                             except Exception as error:
                                 failures['summary'] = getattr(error, 'code', type(error).__name__)
-                        if not (record.get('annotation') or {}).get('tags') or refresh_annotation:
+                        if not record.get('annotation') or refresh_annotation:
                             try:
                                 record['annotation'] = classify_conference_paper(
                                     paper, record, model=selected_model, timeout=timeout)
