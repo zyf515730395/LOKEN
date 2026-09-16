@@ -438,8 +438,8 @@ def render_table(
         )
         tag_markup = f'<span class="paper-tags">{tags}</span>' if tags else ""
         conference_markup = '; '.join(
-            f'<a href="{html.escape(item["url"], quote=True)}" target="_blank" rel="noopener">'
-            f'{html.escape(re.sub(r"\s+\d{4}$", "", item["edition"]))}</a>' for item in row.get('conferences', ())
+            html.escape(re.sub(r"\s+\d{4}$", "", item["edition"]))
+            for item in row.get('conferences', ())
         ) or '-'
         date_basis = row.get('date_source', {}).get('basis', '')
         date_hint = ''
