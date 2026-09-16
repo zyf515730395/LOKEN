@@ -74,7 +74,6 @@
       </div>
     </header>
 <nav class="context-strip" aria-label="模型系列">
-    <a class="context-strip-link" href="claude.html">Claude</a>
     <a class="context-strip-link" href="deepseek.html">DeepSeek</a>
     <a class="context-strip-link" href="flux.html">FLUX</a>
     <a class="context-strip-link" href="gpt.html">GPT</a>
@@ -98,7 +97,7 @@
       </div>
       <div class="milestone-hero-meta">
         <ul class="status-legend" aria-label="发布状态图例"><li><span class="release-status status-released">已发布</span><span>已发布</span></li><li><span class="release-status status-early-access">Early Access</span><span>Early Access</span></li><li><span class="release-status status-announced">已宣布</span><span>已宣布</span></li></ul>
-        <p>Updated 2026-09-11</p>
+        <p>Updated 2026-09-16</p>
       </div>
       </header>
       <div class="milestone-overview">
@@ -324,31 +323,31 @@
         <tr><th scope="row">训练数据</th>
           <td><p>大规模图像与视频经过质量、运动、文字和语义筛选及重描述；分阶段先学习图像，再联合视频训练。</p></td>
           <td><p>官方说明扩大训练数据并引入更系统的美学标注，包括光照、构图、色彩等属性。</p></td>
+          <td><p>单一一致人物的视频，覆盖说话、表情和肢体动作；骨骼作动作监督，SAM2 提取替换掩码，Qwen2.5-VL-72B 生成描述。 <a href="https://arxiv.org/html/2509.14055" rel="nofollow">来源</a></p></td>
           <td><p>/</p></td>
           <td><p>/</p></td>
-          <td><p>/</p></td>
-          <td><p>/</p></td>
+          <td><p>从筛选视频提取深度、涂鸦、姿态、光流与主体参考；在线生成灰度、布局及随机掩码，并组合任务构造监督。 <a href="https://arxiv.org/html/2503.07598" rel="nofollow">来源</a></p></td>
         </tr>
         <tr><th scope="row">VAE 结构</th>
           <td><p>因果 3D Wan-VAE 在时间维压缩 4 倍、空间维压缩 8 倍，可按块编码和解码视频。</p></td>
           <td><p>TI2V-5B 的 Wan2.2-VAE 时间压缩 4 倍、空间压缩 16 倍；不能把这一配置套用到所有 A14B 模型。</p></td>
+          <td><p>加载 Wan2.1_VAE.pth，时空步幅为 (4, 8, 8)。 <a href="https://raw.githubusercontent.com/Wan-Video/Wan2.2/main/wan/configs/wan_animate_14B.py" rel="nofollow">来源</a></p></td>
           <td><p>/</p></td>
           <td><p>/</p></td>
-          <td><p>/</p></td>
-          <td><p>/</p></td>
+          <td><p>官方 VACE-14B 与 VACE-1.3B 权重均包含 Wan2.1_VAE.pth；不要套用论文另一分支 LTX-Video 的 VAE。 <a href="https://huggingface.co/Wan-AI/Wan2.1-VACE-14B/tree/main" rel="nofollow">来源</a> <a href="https://huggingface.co/Wan-AI/Wan2.1-VACE-1.3B/tree/main" rel="nofollow">1.3B 权重</a></p></td>
         </tr>
         <tr><th scope="row">Text Encoder</th>
           <td><p>多语言 UMT5 提供文本条件。</p></td>
+          <td><p>T2V-A14B、I2V-A14B 与 TI2V-5B 配置均使用 UMT5-XXL，文本长度上限为 512 token。 <a href="https://raw.githubusercontent.com/Wan-Video/Wan2.2/main/wan/configs/shared_config.py" rel="nofollow">来源</a></p></td>
+          <td><p>UMT5-XXL；另加载 CLIP 图像条件，文字控制为辅助信号，动作驱动占主导。 <a href="https://raw.githubusercontent.com/Wan-Video/Wan2.2/main/wan/configs/wan_animate_14B.py" rel="nofollow">来源</a> <a href="https://arxiv.org/html/2509.14055" rel="nofollow">技术报告</a></p></td>
           <td><p>/</p></td>
           <td><p>/</p></td>
-          <td><p>/</p></td>
-          <td><p>/</p></td>
-          <td><p>/</p></td>
+          <td><p>Wan2.1 VACE 的 1.3B/14B 发布权重均提供 UMT5-XXL 编码器。 <a href="https://huggingface.co/Wan-AI/Wan2.1-VACE-14B/tree/main" rel="nofollow">来源</a> <a href="https://huggingface.co/Wan-AI/Wan2.1-VACE-1.3B/tree/main" rel="nofollow">1.3B 权重</a></p></td>
         </tr>
         <tr><th scope="row">生成主体网络</th>
           <td><p>视频 DiT 使用完整时空注意力和文本交叉注意力，在视频潜变量上训练流匹配；模型提供 1.3B 与 14B 档。</p></td>
           <td><p>A14B 使用高噪声与低噪声两个 DiT 专家；TI2V-5B 则为稠密模型。</p></td>
-          <td><p>/</p></td>
+          <td><p>40 层 Wan-14B 主干；骨骼信号作空间对齐融合，Face Adapter 经时间对齐 cross-attention 注入 8 个 Face Blocks；替换模式加 Relighting LoRA。 <a href="https://arxiv.org/html/2509.14055" rel="nofollow">来源</a></p></td>
           <td><p>/</p></td>
           <td><p>/</p></td>
           <td><p>在视频 DiT 上引入 Context Adapter，以标准化时空表示注入任务条件。</p></td>
@@ -362,18 +361,14 @@
 <li>按扩散时间步切换高噪声与低噪声专家。</li>
 <li>通过美学数据和较大训练集改善镜头、动作与视觉表现。</li>
 </ul></td>
+          <td><p>依次训练身体控制、脸部控制、联合控制和双模式，最后独立训练重光照 LoRA；对头、眼、嘴区域提高损失权重，并增强脸部输入以减少身份泄漏。 <a href="https://arxiv.org/html/2509.14055" rel="nofollow">来源</a></p></td>
           <td><ul>
 <li>/</li>
 </ul></td>
           <td><ul>
 <li>/</li>
 </ul></td>
-          <td><ul>
-<li>/</li>
-</ul></td>
-          <td><ul>
-<li>/</li>
-</ul></td>
+          <td><p>先学补绘/扩展，再从单参考、单任务扩展至多参考、组合任务，最后用高质量长序列微调；Wan14B 通过在主干层间隔布置 Context Adapter 注入控制。 <a href="https://arxiv.org/html/2503.07598" rel="nofollow">来源</a></p></td>
         </tr>
         <tr><th scope="row">新提出的创新点</th>
           <td><ul>
@@ -404,9 +399,7 @@
           <td><ul>
 <li>/</li>
 </ul></td>
-          <td><ul>
-<li>/</li>
-</ul></td>
+          <td><p>替换体型差异明显的人物可能发生变形；二维骨骼重定向受姿态影响，官方不建议在人物替换模式下使用重定向。 <a href="https://arxiv.org/html/2509.14055" rel="nofollow">来源</a></p></td>
           <td><ul>
 <li>/</li>
 </ul></td>
@@ -414,9 +407,7 @@
 <li>官方说明音频质感与画面中文字的渲染准确性仍在改进。</li>
 <li>含视频输入时，输入与输出视频总时长需要控制在 30 秒内。</li>
 </ul></td>
-          <td><ul>
-<li>/</li>
-</ul></td>
+          <td><p>参考生成仍可能丢失主体身份，组合任务无法完全遵循控制；大模型提高质量但增加推理时间与资源开销。 <a href="https://arxiv.org/html/2503.07598" rel="nofollow">来源</a></p></td>
         </tr>
       </tbody>
     </table>

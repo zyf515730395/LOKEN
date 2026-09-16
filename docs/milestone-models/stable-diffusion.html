@@ -74,7 +74,6 @@
       </div>
     </header>
 <nav class="context-strip" aria-label="模型系列">
-    <a class="context-strip-link" href="claude.html">Claude</a>
     <a class="context-strip-link" href="deepseek.html">DeepSeek</a>
     <a class="context-strip-link" href="flux.html">FLUX</a>
     <a class="context-strip-link" href="gpt.html">GPT</a>
@@ -98,7 +97,7 @@
       </div>
       <div class="milestone-hero-meta">
         <ul class="status-legend" aria-label="发布状态图例"><li><span class="release-status status-released">已发布</span><span>已发布</span></li><li><span class="release-status status-early-access">Early Access</span><span>Early Access</span></li><li><span class="release-status status-announced">已宣布</span><span>已宣布</span></li></ul>
-        <p>Updated 2026-09-11</p>
+        <p>Updated 2026-09-16</p>
       </div>
       </header>
       <div class="milestone-overview">
@@ -297,15 +296,17 @@
           <td><p>自编码器把 RGB 图像压缩为空间缩小 8 倍、4 通道的潜表示；扩散完成后解码回图像。</p></td>
           <td><p>/</p></td>
           <td><p>沿用潜空间自编码器路线，改进训练以提高重建质量。</p></td>
-          <td><p>/</p></td>
+          <td><p>SDXL-Turbo：AutoencoderKL，4 通道潜变量，通道配置 [128,256,512,512]，scaling_factor=0.13025。<a href="https://huggingface.co/stabilityai/sdxl-turbo/blob/main/vae/config.json" rel="nofollow">官方配置</a></p>
+<p>SD-Turbo：同为 4 通道 AutoencoderKL，scaling_factor=0.18215；两者的 VAE 配置不可混用。<a href="https://huggingface.co/stabilityai/sd-turbo/blob/main/vae/config.json" rel="nofollow">官方配置</a></p></td>
           <td><p>空间压缩 8 倍、16 通道的图像潜变量，增加每个潜空间位置的信息容量。</p></td>
-          <td><p>/</p></td>
+          <td><p>官方参考实现使用 16 通道 VAE 解码器，去掉 post-quant convolution；同一仓库明确列出该版本权重及对应推理入口。<a href="https://github.com/Stability-AI/sd3.5" rel="nofollow">Stability AI 官方参考实现</a></p></td>
         </tr>
         <tr><th scope="row">Text Encoder</th>
           <td><p>冻结的 CLIP ViT-L/14 文本编码器，通过交叉注意力给去噪网络提供条件。</p></td>
           <td><p>OpenCLIP 替代 1.x 的 CLIP 文本编码器。</p></td>
           <td><p>CLIP ViT-L 与 OpenCLIP ViT-bigG 双编码器；序列特征与 pooled 文本特征共同提供条件。</p></td>
-          <td><p>/</p></td>
+          <td><p>SDXL-Turbo 使用双 CLIP 文本编码器：CLIPTextModel（768 隐藏维）与 CLIPTextModelWithProjection（1280 隐藏维），上下文均为 77 tokens。<a href="https://huggingface.co/stabilityai/sdxl-turbo/blob/main/text_encoder/config.json" rel="nofollow">编码器 1</a>、<a href="https://huggingface.co/stabilityai/sdxl-turbo/blob/main/text_encoder_2/config.json" rel="nofollow">编码器 2</a></p>
+<p>SD-Turbo 使用单 CLIPTextModel，1024 隐藏维、23 层、77 tokens。<a href="https://huggingface.co/stabilityai/sd-turbo/blob/main/text_encoder/config.json" rel="nofollow">官方配置</a></p></td>
           <td><p>CLIP-L、OpenCLIP-G 与 T5-XXL 三路文本编码。</p></td>
           <td><p>CLIP-L、OpenCLIP-G、T5-XXL 三个固定文本编码器。</p></td>
         </tr>

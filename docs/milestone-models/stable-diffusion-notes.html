@@ -72,7 +72,6 @@
         <h1 id="notes-page-title">Stable Diffusion · 文章精读</h1>
       </header>
 <nav class="context-strip" aria-label="模型系列">
-    <a class="context-strip-link" href="claude.html">Claude</a>
     <a class="context-strip-link" href="deepseek.html">DeepSeek</a>
     <a class="context-strip-link" href="flux.html">FLUX</a>
     <a class="context-strip-link" href="gpt.html">GPT</a>
@@ -297,9 +296,11 @@
 <h3>训练数据</h3>
 <p>/</p>
 <h3>VAE 结构</h3>
-<p>/</p>
+<p>SDXL-Turbo：AutoencoderKL，4 通道潜变量，通道配置 [128,256,512,512]，scaling_factor=0.13025。<a href="https://huggingface.co/stabilityai/sdxl-turbo/blob/main/vae/config.json" rel="nofollow">官方配置</a></p>
+<p>SD-Turbo：同为 4 通道 AutoencoderKL，scaling_factor=0.18215；两者的 VAE 配置不可混用。<a href="https://huggingface.co/stabilityai/sd-turbo/blob/main/vae/config.json" rel="nofollow">官方配置</a></p>
 <h3>Text Encoder</h3>
-<p>/</p>
+<p>SDXL-Turbo 使用双 CLIP 文本编码器：CLIPTextModel（768 隐藏维）与 CLIPTextModelWithProjection（1280 隐藏维），上下文均为 77 tokens。<a href="https://huggingface.co/stabilityai/sdxl-turbo/blob/main/text_encoder/config.json" rel="nofollow">编码器 1</a>、<a href="https://huggingface.co/stabilityai/sdxl-turbo/blob/main/text_encoder_2/config.json" rel="nofollow">编码器 2</a></p>
+<p>SD-Turbo 使用单 CLIPTextModel，1024 隐藏维、23 层、77 tokens。<a href="https://huggingface.co/stabilityai/sd-turbo/blob/main/text_encoder/config.json" rel="nofollow">官方配置</a></p>
 <h3>生成主体网络</h3>
 <p>学生沿用对应教师的潜空间扩散结构；SDXL Turbo 与 SD-Turbo 分别来自不同教师。</p>
 <h3>训练 Trick</h3>
@@ -321,6 +322,18 @@
 <li><a href="https://stability.ai/news-updates/stability-ai-sdxl-turbo" rel="nofollow">official_blog</a></li>
 <li><a href="https://huggingface.co/stabilityai/sdxl-turbo" rel="nofollow">official_model_page</a></li>
 <li><a href="https://huggingface.co/stabilityai/sd-turbo" rel="nofollow">official_model_page</a></li>
+</ul>
+<h2>补充资料（2026-09-16）</h2>
+<ul>
+<li><a href="https://huggingface.co/stabilityai/sdxl-turbo/blob/main/vae/config.json" rel="nofollow">资料 1</a></li>
+<li><a href="https://huggingface.co/stabilityai/sd-turbo/blob/main/vae/config.json" rel="nofollow">资料 2</a></li>
+<li><a href="https://huggingface.co/stabilityai/sdxl-turbo/blob/main/text_encoder/config.json" rel="nofollow">资料 3</a></li>
+<li><a href="https://huggingface.co/stabilityai/sdxl-turbo/blob/main/text_encoder_2/config.json" rel="nofollow">资料 4</a></li>
+<li><a href="https://huggingface.co/stabilityai/sd-turbo/blob/main/text_encoder/config.json" rel="nofollow">资料 5</a></li>
+<li><a href="https://arxiv.org/abs/2311.17042" rel="nofollow">资料 6</a></li>
+<li><a href="https://stability.ai/news-updates/stability-ai-sdxl-turbo" rel="nofollow">资料 7</a></li>
+<li><a href="https://huggingface.co/stabilityai/sdxl-turbo" rel="nofollow">资料 8</a></li>
+<li><a href="https://huggingface.co/stabilityai/sd-turbo" rel="nofollow">资料 9</a></li>
 </ul>
     </article>
     <article class="summary-article summary-topic-entry" id="milestone-sd-3">
@@ -384,9 +397,9 @@
 <li><strong>Stable Diffusion 3 Medium</strong>：公开的 2B 权重档，面向本地运行与定制；与 API 服务版本分开记录。</li>
 </ul>
 <h3>训练数据</h3>
-<p>/</p>
+<p>合成数据与经过筛选的公开数据；预训练使用 10 亿张图像，微调包括 3000 万张高质量美学图像及 300 万张偏好数据图像。<a href="https://huggingface.co/stabilityai/stable-diffusion-3-medium-diffusers" rel="nofollow">官方模型卡</a></p>
 <h3>VAE 结构</h3>
-<p>/</p>
+<p>官方参考实现使用 16 通道 VAE 解码器，去掉 post-quant convolution；同一仓库明确列出该版本权重及对应推理入口。<a href="https://github.com/Stability-AI/sd3.5" rel="nofollow">Stability AI 官方参考实现</a></p>
 <h3>Text Encoder</h3>
 <p>CLIP-L、OpenCLIP-G 和 T5-XXL 三路条件。</p>
 <h3>生成主体网络</h3>
@@ -400,12 +413,16 @@
 <li>以中等规模权重提供本地第三代生成能力。</li>
 </ul>
 <h3>局限性</h3>
-<ul>
-<li>/</li>
-</ul>
+<p>并非以真实还原人物或事件为训练目标；仍可能产生不准确或带偏见的内容，官方安全测试主要覆盖英语。<a href="https://huggingface.co/stabilityai/stable-diffusion-3-medium-diffusers" rel="nofollow">官方模型卡</a></p>
 <h2>资料来源</h2>
 <ul>
 <li><a href="https://stability.ai/news-updates/stable-diffusion-3-medium" rel="nofollow">official_blog</a></li>
+</ul>
+<h2>补充资料（2026-09-16）</h2>
+<ul>
+<li><a href="https://huggingface.co/stabilityai/stable-diffusion-3-medium-diffusers" rel="nofollow">资料 1</a></li>
+<li><a href="https://github.com/Stability-AI/sd3.5" rel="nofollow">资料 2</a></li>
+<li><a href="https://stability.ai/news-updates/stable-diffusion-3-medium" rel="nofollow">资料 3</a></li>
 </ul>
     </article>
     <article class="summary-article summary-topic-entry" id="milestone-sd-3-5-large">
@@ -427,7 +444,7 @@
 <h3>训练数据</h3>
 <p>官方模型卡说明使用合成数据和过滤后的公开数据。</p>
 <h3>VAE 结构</h3>
-<p>/</p>
+<p>官方参考实现使用 16 通道 VAE 解码器，去掉 post-quant convolution；同一仓库明确列出该版本权重及对应推理入口。<a href="https://github.com/Stability-AI/sd3.5" rel="nofollow">Stability AI 官方参考实现</a></p>
 <h3>Text Encoder</h3>
 <p>CLIP-L、OpenCLIP-G、T5-XXL 三个固定文本编码器。</p>
 <h3>生成主体网络</h3>
@@ -451,6 +468,12 @@
 <li><a href="https://huggingface.co/stabilityai/stable-diffusion-3.5-large" rel="nofollow">official_model_page</a></li>
 <li><a href="https://github.com/Stability-AI/sd3.5" rel="nofollow">official_repository</a></li>
 </ul>
+<h2>补充资料（2026-09-16）</h2>
+<ul>
+<li><a href="https://github.com/Stability-AI/sd3.5" rel="nofollow">资料 1</a></li>
+<li><a href="https://stability.ai/news-updates/introducing-stable-diffusion-3-5" rel="nofollow">资料 2</a></li>
+<li><a href="https://huggingface.co/stabilityai/stable-diffusion-3.5-large" rel="nofollow">资料 3</a></li>
+</ul>
     </article>
     <article class="summary-article summary-topic-entry" id="milestone-sd-3-5-medium">
 <h1>[2410.29XXX] Stable Diffusion · Stable Diffusion 3.5 Medium</h1>
@@ -468,29 +491,31 @@
 <li><strong>Stable Diffusion 3.5 Medium</strong>：2.5B MMDiT-X，面向较低资源部署，支持从约 0.25 到 2 百万像素的生成范围。</li>
 </ul>
 <h3>训练数据</h3>
-<p>/</p>
+<p>包含合成数据及经过筛选的公开数据；Medium 的训练分布与 Large 不同，官方未在该模型卡公开规模或完整配比。<a href="https://huggingface.co/stabilityai/stable-diffusion-3.5-medium" rel="nofollow">官方模型卡</a></p>
 <h3>VAE 结构</h3>
-<p>/</p>
+<p>官方参考实现使用 16 通道 VAE 解码器，去掉 post-quant convolution；同一仓库明确列出该版本权重及对应推理入口。<a href="https://github.com/Stability-AI/sd3.5" rel="nofollow">Stability AI 官方参考实现</a></p>
 <h3>Text Encoder</h3>
 <p>CLIP-L、OpenCLIP-G 与 T5-XXL 条件编码。</p>
 <h3>生成主体网络</h3>
 <p>2.5B MMDiT-X；区别于 Large 的模型规模与主干配置。</p>
 <h3>训练 Trick</h3>
-<ul>
-<li>/</li>
-</ul>
+<p>QK normalization 稳定训练；分辨率按 256→512→768→1024→1440 渐进提升，最后混合多尺度训练；扩大位置嵌入范围，并随机裁剪位置嵌入以增强对分辨率和宽高比的适应性。<a href="https://huggingface.co/stabilityai/stable-diffusion-3.5-medium" rel="nofollow">官方 Implementation Details</a></p>
 <h3>新提出的创新点</h3>
 <ul>
 <li>在 3.5 主线中提供中型网络和更灵活的分辨率档位。</li>
 </ul>
 <h3>局限性</h3>
-<ul>
-<li>/</li>
-</ul>
+<p>T5 提示词超过 256 tokens 时可能出现图像边缘伪影；与 Large 的训练分布不同，同一提示词不保证相同响应，官方建议用 Skip Layer Guidance 改善结构和人体一致性。<a href="https://huggingface.co/stabilityai/stable-diffusion-3.5-medium" rel="nofollow">官方 Usage &amp; Limitations</a></p>
 <h2>资料来源</h2>
 <ul>
 <li><a href="https://stability.ai/news-updates/introducing-stable-diffusion-3-5" rel="nofollow">official_blog</a></li>
 <li><a href="https://huggingface.co/stabilityai/stable-diffusion-3.5-medium" rel="nofollow">official_model_page</a></li>
+</ul>
+<h2>补充资料（2026-09-16）</h2>
+<ul>
+<li><a href="https://huggingface.co/stabilityai/stable-diffusion-3.5-medium" rel="nofollow">资料 1</a></li>
+<li><a href="https://github.com/Stability-AI/sd3.5" rel="nofollow">资料 2</a></li>
+<li><a href="https://stability.ai/news-updates/introducing-stable-diffusion-3-5" rel="nofollow">资料 3</a></li>
 </ul>
     </article>
       </div>

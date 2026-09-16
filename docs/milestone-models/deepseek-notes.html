@@ -72,7 +72,6 @@
         <h1 id="notes-page-title">DeepSeek · 文章精读</h1>
       </header>
 <nav class="context-strip" aria-label="模型系列">
-    <a class="context-strip-link" href="claude.html">Claude</a>
     <a class="context-strip-link is-active" href="deepseek.html" aria-current="location">DeepSeek</a>
     <a class="context-strip-link" href="flux.html">FLUX</a>
     <a class="context-strip-link" href="gpt.html">GPT</a>
@@ -86,9 +85,448 @@
     <a class="context-strip-link" href="wan.html">Wan</a>
     <a class="context-strip-link" href="z-image.html">Z-Image</a>
   </nav>
-
+      <details class="content-tools" open>
+        <summary>版本精读目录</summary>
+        <nav class="content-tools-navigation" aria-label="版本精读目录">
+<a class="context-filter" href="#milestone-deepseek-llm">DeepSeek LLM</a>
+<a class="context-filter" href="#milestone-deepseek-v2">DeepSeek-V2</a>
+<a class="context-filter" href="#milestone-deepseek-v2-5">DeepSeek-V2.5</a>
+<a class="context-filter" href="#milestone-deepseek-v2-5-1210">DeepSeek-V2.5-1210</a>
+<a class="context-filter" href="#milestone-deepseek-v3">DeepSeek-V3</a>
+<a class="context-filter" href="#milestone-deepseek-r1">DeepSeek-R1</a>
+<a class="context-filter" href="#milestone-deepseek-v3-0324">DeepSeek-V3-0324</a>
+<a class="context-filter" href="#milestone-deepseek-r1-0528">DeepSeek-R1-0528</a>
+<a class="context-filter" href="#milestone-deepseek-v3-1">DeepSeek-V3.1</a>
+<a class="context-filter" href="#milestone-deepseek-v3-1-terminus">DeepSeek-V3.1-Terminus</a>
+<a class="context-filter" href="#milestone-deepseek-v3-2-exp">DeepSeek-V3.2-Exp</a>
+<a class="context-filter" href="#milestone-deepseek-v3-2">DeepSeek-V3.2</a>
+<a class="context-filter" href="#milestone-deepseek-v4-preview">DeepSeek-V4 Preview</a>
+<a class="context-filter" href="#milestone-deepseek-v4-flash">DeepSeek-V4-Flash</a>
+<a class="context-filter" href="#milestone-deepseek-v4-pro">DeepSeek-V4-Pro</a>
+<a class="context-filter" href="#milestone-deepseek-v4-vision">DeepSeek-V4-Flash-Vision-Exp</a>
+<a class="context-filter" href="#milestone-deepseek-v4-1">DeepSeek-V4.1-Flash</a>
+        </nav>
+      </details>
       <div class="summary-topic-list">
-    <p class="muted">暂无已完成的文章精读。</p>
+    <article class="summary-article summary-topic-entry" id="milestone-deepseek-llm">
+<h1>DeepSeek · DeepSeek LLM</h1>
+<h2>文章精读</h2>
+<h3>版本</h3>
+<p>DeepSeek LLM；发布节点 2023-11-29；变体：7B、67B。<a href="https://github.com/deepseek-ai/DeepSeek-LLM" rel="nofollow">资料</a></p>
+<h3>训练数据</h3>
+<p>2T 中英文 token；网页语料经过过滤和去重。 <a href="https://github.com/deepseek-ai/DeepSeek-LLM" rel="nofollow">官方资料</a>.</p>
+<h3>VAE 结构</h3>
+<p>不适用：自回归语言生成不使用图像潜空间 VAE。 <a href="https://github.com/deepseek-ai/DeepSeek-LLM" rel="nofollow">官方资料</a>.</p>
+<h3>Text Encoder</h3>
+<p>不适用：文本由语言模型自身的词嵌入与解码器处理，无独立扩散条件文本编码器。 <a href="https://github.com/deepseek-ai/DeepSeek-LLM" rel="nofollow">官方资料</a>.</p>
+<h3>生成主体网络</h3>
+<p>自回归 Transformer decoder；7B 使用 MHA，67B 使用 GQA。 <a href="https://github.com/deepseek-ai/DeepSeek-LLM" rel="nofollow">官方资料</a>.</p>
+<h3>训练 Trick</h3>
+<p>AdamW、多阶段学习率衰减；预训练上下文 4096。 <a href="https://github.com/deepseek-ai/DeepSeek-LLM" rel="nofollow">官方资料</a>.</p>
+<h3>新提出的创新点</h3>
+<p>系统探索数据与模型规模扩展，并公开中间训练检查点。 <a href="https://github.com/deepseek-ai/DeepSeek-LLM" rel="nofollow">官方资料</a>.</p>
+<h3>局限性</h3>
+<p>公开模型上下文为 4096 token。 <a href="https://github.com/deepseek-ai/DeepSeek-LLM" rel="nofollow">官方资料</a>.</p>
+<h2>补充资料（2026-09-16）</h2>
+<ul>
+<li><a href="https://github.com/deepseek-ai/DeepSeek-LLM" rel="nofollow">资料 1</a></li>
+</ul>
+    </article>
+    <article class="summary-article summary-topic-entry" id="milestone-deepseek-v2">
+<h1>DeepSeek · DeepSeek-V2</h1>
+<h2>文章精读</h2>
+<h3>版本</h3>
+<p>DeepSeek-V2；发布节点 2024-05-06；变体：DeepSeek-V2。<a href="https://github.com/deepseek-ai/DeepSeek-V2" rel="nofollow">资料</a></p>
+<h3>训练数据</h3>
+<p>8.1T token，随后 SFT 与 RL。 <a href="https://github.com/deepseek-ai/DeepSeek-V2" rel="nofollow">官方资料</a>.</p>
+<h3>VAE 结构</h3>
+<p>不适用：自回归语言生成不使用图像潜空间 VAE。 <a href="https://github.com/deepseek-ai/DeepSeek-V2" rel="nofollow">官方资料</a>.</p>
+<h3>Text Encoder</h3>
+<p>不适用：文本由语言模型自身的词嵌入与解码器处理，无独立扩散条件文本编码器。 <a href="https://github.com/deepseek-ai/DeepSeek-V2" rel="nofollow">官方资料</a>.</p>
+<h3>生成主体网络</h3>
+<p>236B 总参数、每 token 激活 21B；MLA 与 DeepSeekMoE。 <a href="https://github.com/deepseek-ai/DeepSeek-V2" rel="nofollow">官方资料</a>.</p>
+<h3>训练 Trick</h3>
+<p>预训练后进行监督微调与强化学习。 <a href="https://github.com/deepseek-ai/DeepSeek-V2" rel="nofollow">官方资料</a>.</p>
+<h3>新提出的创新点</h3>
+<p>MLA 压缩 KV 缓存，细粒度 MoE 降低每 token 计算量。 <a href="https://github.com/deepseek-ai/DeepSeek-V2" rel="nofollow">官方资料</a>.</p>
+<h3>局限性</h3>
+<p>官方提示通用 Hugging Face 实现速度低于内部实现。 <a href="https://github.com/deepseek-ai/DeepSeek-V2" rel="nofollow">官方资料</a>.</p>
+<h2>补充资料（2026-09-16）</h2>
+<ul>
+<li><a href="https://github.com/deepseek-ai/DeepSeek-V2" rel="nofollow">资料 1</a></li>
+</ul>
+    </article>
+    <article class="summary-article summary-topic-entry" id="milestone-deepseek-v2-5">
+<h1>DeepSeek · DeepSeek-V2.5</h1>
+<h2>文章精读</h2>
+<h3>版本</h3>
+<p>DeepSeek-V2.5；发布节点 2024-09-05；变体：DeepSeek-V2.5。<a href="https://huggingface.co/deepseek-ai/DeepSeek-V2.5" rel="nofollow">资料</a></p>
+<h3>训练数据</h3>
+<p>/</p>
+<h3>VAE 结构</h3>
+<p>不适用：自回归语言生成不使用图像潜空间 VAE。 <a href="https://huggingface.co/deepseek-ai/DeepSeek-V2.5" rel="nofollow">官方资料</a>.</p>
+<h3>Text Encoder</h3>
+<p>不适用：文本由语言模型自身的词嵌入与解码器处理，无独立扩散条件文本编码器。 <a href="https://huggingface.co/deepseek-ai/DeepSeek-V2.5" rel="nofollow">官方资料</a>.</p>
+<h3>生成主体网络</h3>
+<p>融合 V2-Chat 与 Coder-V2-Instruct 的语言模型；模型细节指向 V2。 <a href="https://huggingface.co/deepseek-ai/DeepSeek-V2.5" rel="nofollow">官方资料</a>.</p>
+<h3>训练 Trick</h3>
+<p>/</p>
+<h3>新提出的创新点</h3>
+<p>把通用对话和代码能力整合进同一模型，改进写作与指令遵循。 <a href="https://huggingface.co/deepseek-ai/DeepSeek-V2.5" rel="nofollow">官方资料</a>.</p>
+<h3>局限性</h3>
+<p>官方 BF16 本地部署示例要求 8×80GB GPU。 <a href="https://huggingface.co/deepseek-ai/DeepSeek-V2.5" rel="nofollow">官方资料</a>.</p>
+<h2>补充资料（2026-09-16）</h2>
+<ul>
+<li><a href="https://huggingface.co/deepseek-ai/DeepSeek-V2.5" rel="nofollow">资料 1</a></li>
+<li><a href="https://api-docs.deepseek.com/updates/" rel="nofollow">资料 2</a></li>
+</ul>
+    </article>
+    <article class="summary-article summary-topic-entry" id="milestone-deepseek-v2-5-1210">
+<h1>DeepSeek · DeepSeek-V2.5-1210</h1>
+<h2>文章精读</h2>
+<h3>版本</h3>
+<p>DeepSeek-V2.5-1210；发布节点 2024-12-10；变体：DeepSeek-V2.5-1210。<a href="https://huggingface.co/deepseek-ai/DeepSeek-V2.5-1210" rel="nofollow">资料</a></p>
+<h3>训练数据</h3>
+<p>/</p>
+<h3>VAE 结构</h3>
+<p>不适用：自回归语言生成不使用图像潜空间 VAE。 <a href="https://huggingface.co/deepseek-ai/DeepSeek-V2.5-1210" rel="nofollow">官方资料</a>.</p>
+<h3>Text Encoder</h3>
+<p>不适用：文本由语言模型自身的词嵌入与解码器处理，无独立扩散条件文本编码器。 <a href="https://huggingface.co/deepseek-ai/DeepSeek-V2.5-1210" rel="nofollow">官方资料</a>.</p>
+<h3>生成主体网络</h3>
+<p>/</p>
+<h3>训练 Trick</h3>
+<p>/</p>
+<h3>新提出的创新点</h3>
+<p>V2.5 的能力更新：数学、代码、写作及网页摘要体验改善；未披露独立架构创新。 <a href="https://huggingface.co/deepseek-ai/DeepSeek-V2.5-1210" rel="nofollow">官方资料</a>.</p>
+<h3>局限性</h3>
+<p>官方 BF16 本地部署示例要求 8×80GB GPU。 <a href="https://huggingface.co/deepseek-ai/DeepSeek-V2.5-1210" rel="nofollow">官方资料</a>.</p>
+<h2>补充资料（2026-09-16）</h2>
+<ul>
+<li><a href="https://huggingface.co/deepseek-ai/DeepSeek-V2.5-1210" rel="nofollow">资料 1</a></li>
+<li><a href="https://api-docs.deepseek.com/updates/" rel="nofollow">资料 2</a></li>
+</ul>
+    </article>
+    <article class="summary-article summary-topic-entry" id="milestone-deepseek-v3">
+<h1>DeepSeek · DeepSeek-V3</h1>
+<h2>文章精读</h2>
+<h3>版本</h3>
+<p>DeepSeek-V3；发布节点 2024-12-26；变体：DeepSeek-V3。<a href="https://github.com/deepseek-ai/DeepSeek-V3" rel="nofollow">资料</a></p>
+<h3>训练数据</h3>
+<p>14.8T 高质量 token。 <a href="https://github.com/deepseek-ai/DeepSeek-V3" rel="nofollow">官方资料</a>.</p>
+<h3>VAE 结构</h3>
+<p>不适用：自回归语言生成不使用图像潜空间 VAE。 <a href="https://github.com/deepseek-ai/DeepSeek-V3" rel="nofollow">官方资料</a>.</p>
+<h3>Text Encoder</h3>
+<p>不适用：文本由语言模型自身的词嵌入与解码器处理，无独立扩散条件文本编码器。 <a href="https://github.com/deepseek-ai/DeepSeek-V3" rel="nofollow">官方资料</a>.</p>
+<h3>生成主体网络</h3>
+<p>671B 总参数、37B 激活；MLA 与 DeepSeekMoE。 <a href="https://github.com/deepseek-ai/DeepSeek-V3" rel="nofollow">官方资料</a>.</p>
+<h3>训练 Trick</h3>
+<p>FP8 混合精度、SFT/RL、从 R1 系列蒸馏推理模式。 <a href="https://github.com/deepseek-ai/DeepSeek-V3" rel="nofollow">官方资料</a>.</p>
+<h3>新提出的创新点</h3>
+<p>无辅助损失负载均衡与多 token 预测（MTP）。 <a href="https://github.com/deepseek-ai/DeepSeek-V3" rel="nofollow">官方资料</a>.</p>
+<h3>局限性</h3>
+<p>/</p>
+<h2>补充资料（2026-09-16）</h2>
+<ul>
+<li><a href="https://github.com/deepseek-ai/DeepSeek-V3" rel="nofollow">资料 1</a></li>
+<li><a href="https://api-docs.deepseek.com/updates/" rel="nofollow">资料 2</a></li>
+</ul>
+    </article>
+    <article class="summary-article summary-topic-entry" id="milestone-deepseek-r1">
+<h1>DeepSeek · DeepSeek-R1</h1>
+<h2>文章精读</h2>
+<h3>版本</h3>
+<p>DeepSeek-R1；发布节点 2025-01-20；变体：DeepSeek-R1、DeepSeek-R1-Zero、R1-Distill Qwen、R1-Distill Llama。<a href="https://arxiv.org/html/2501.12948v1" rel="nofollow">资料</a></p>
+<h3>训练数据</h3>
+<p>R1 以 V3-Base 为起点；拒绝采样构建约 600K 推理和 200K 非推理样本。 <a href="https://arxiv.org/html/2501.12948v1" rel="nofollow">官方资料</a>.</p>
+<h3>VAE 结构</h3>
+<p>不适用：自回归语言生成不使用图像潜空间 VAE。 <a href="https://arxiv.org/html/2501.12948v1" rel="nofollow">官方资料</a>.</p>
+<h3>Text Encoder</h3>
+<p>不适用：文本由语言模型自身的词嵌入与解码器处理，无独立扩散条件文本编码器。 <a href="https://arxiv.org/html/2501.12948v1" rel="nofollow">官方资料</a>.</p>
+<h3>生成主体网络</h3>
+<p>R1/R1-Zero 基于 V3-Base；蒸馏版分别以 Qwen、Llama 为底座，不共享参数规模。 <a href="https://arxiv.org/html/2501.12948v1" rel="nofollow">官方资料</a>.</p>
+<h3>训练 Trick</h3>
+<p>R1-Zero 直接 RL；R1 加入冷启动数据、推理 RL、拒绝采样 SFT 与最终 RL；采用 GRPO。 <a href="https://arxiv.org/html/2501.12948v1" rel="nofollow">官方资料</a>.</p>
+<h3>新提出的创新点</h3>
+<p>展示纯 RL 诱发自验证和长思维链，并把推理能力蒸馏至较小模型。 <a href="https://arxiv.org/html/2501.12948v1" rel="nofollow">官方资料</a>.</p>
+<h3>局限性</h3>
+<p>R1-Zero 有可读性和语言混杂问题；R1 仍有语言混杂及提示敏感性限制。 <a href="https://arxiv.org/html/2501.12948v1" rel="nofollow">官方论文</a>。</p>
+<h2>补充资料（2026-09-16）</h2>
+<ul>
+<li><a href="https://arxiv.org/html/2501.12948v1" rel="nofollow">资料 1</a></li>
+<li><a href="https://api-docs.deepseek.com/updates/" rel="nofollow">资料 2</a></li>
+</ul>
+    </article>
+    <article class="summary-article summary-topic-entry" id="milestone-deepseek-v3-0324">
+<h1>DeepSeek · DeepSeek-V3-0324</h1>
+<h2>文章精读</h2>
+<h3>版本</h3>
+<p>DeepSeek-V3-0324；发布节点 2025-03-24；变体：DeepSeek-V3-0324。<a href="https://huggingface.co/deepseek-ai/DeepSeek-V3-0324" rel="nofollow">资料</a></p>
+<h3>训练数据</h3>
+<p>/</p>
+<h3>VAE 结构</h3>
+<p>不适用：自回归语言生成不使用图像潜空间 VAE。 <a href="https://huggingface.co/deepseek-ai/DeepSeek-V3-0324" rel="nofollow">官方资料</a>.</p>
+<h3>Text Encoder</h3>
+<p>不适用：文本由语言模型自身的词嵌入与解码器处理，无独立扩散条件文本编码器。 <a href="https://huggingface.co/deepseek-ai/DeepSeek-V3-0324" rel="nofollow">官方资料</a>.</p>
+<h3>生成主体网络</h3>
+<p>官方明确模型结构与 DeepSeek-V3 完全相同。 <a href="https://huggingface.co/deepseek-ai/DeepSeek-V3-0324" rel="nofollow">官方模型卡</a>。</p>
+<h3>训练 Trick</h3>
+<p>/</p>
+<h3>新提出的创新点</h3>
+<p>改进推理、前端代码、中文写作与 Function Calling；新增技术配方未单独披露。 <a href="https://huggingface.co/deepseek-ai/DeepSeek-V3-0324" rel="nofollow">官方资料</a>.</p>
+<h3>局限性</h3>
+<p>/</p>
+<h2>补充资料（2026-09-16）</h2>
+<ul>
+<li><a href="https://huggingface.co/deepseek-ai/DeepSeek-V3-0324" rel="nofollow">资料 1</a></li>
+<li><a href="https://api-docs.deepseek.com/updates/" rel="nofollow">资料 2</a></li>
+</ul>
+    </article>
+    <article class="summary-article summary-topic-entry" id="milestone-deepseek-r1-0528">
+<h1>DeepSeek · DeepSeek-R1-0528</h1>
+<h2>文章精读</h2>
+<h3>版本</h3>
+<p>DeepSeek-R1-0528；发布节点 2025-05-28；变体：DeepSeek-R1-0528。<a href="https://huggingface.co/deepseek-ai/DeepSeek-R1-0528" rel="nofollow">资料</a></p>
+<h3>训练数据</h3>
+<p>/</p>
+<h3>VAE 结构</h3>
+<p>不适用：自回归语言生成不使用图像潜空间 VAE。 <a href="https://huggingface.co/deepseek-ai/DeepSeek-R1-0528" rel="nofollow">官方资料</a>.</p>
+<h3>Text Encoder</h3>
+<p>不适用：文本由语言模型自身的词嵌入与解码器处理，无独立扩散条件文本编码器。 <a href="https://huggingface.co/deepseek-ai/DeepSeek-R1-0528" rel="nofollow">官方资料</a>.</p>
+<h3>生成主体网络</h3>
+<p>/</p>
+<h3>训练 Trick</h3>
+<p>增加后训练计算，并进行算法优化；更细配方未公开。 <a href="https://huggingface.co/deepseek-ai/DeepSeek-R1-0528" rel="nofollow">官方资料</a>.</p>
+<h3>新提出的创新点</h3>
+<p>增强推理深度并降低幻觉；支持 JSON 和 Function Calling。 <a href="https://api-docs.deepseek.com/updates/" rel="nofollow">官方更新日志</a>。</p>
+<h3>局限性</h3>
+<p>更深推理增加 token 消耗：官方 AIME 对比中平均由 12K 增至 23K token。 <a href="https://huggingface.co/deepseek-ai/DeepSeek-R1-0528" rel="nofollow">官方资料</a>.</p>
+<h2>补充资料（2026-09-16）</h2>
+<ul>
+<li><a href="https://huggingface.co/deepseek-ai/DeepSeek-R1-0528" rel="nofollow">资料 1</a></li>
+<li><a href="https://api-docs.deepseek.com/updates/" rel="nofollow">资料 2</a></li>
+</ul>
+    </article>
+    <article class="summary-article summary-topic-entry" id="milestone-deepseek-v3-1">
+<h1>DeepSeek · DeepSeek-V3.1</h1>
+<h2>文章精读</h2>
+<h3>版本</h3>
+<p>DeepSeek-V3.1；发布节点 2025-08-21；变体：DeepSeek-V3.1。<a href="https://huggingface.co/deepseek-ai/DeepSeek-V3.1" rel="nofollow">资料</a></p>
+<h3>训练数据</h3>
+<p>在原 V3 底座上扩充长文档；32K 阶段 630B token，128K 阶段 209B token。 <a href="https://huggingface.co/deepseek-ai/DeepSeek-V3.1" rel="nofollow">官方资料</a>.</p>
+<h3>VAE 结构</h3>
+<p>不适用：自回归语言生成不使用图像潜空间 VAE。 <a href="https://huggingface.co/deepseek-ai/DeepSeek-V3.1" rel="nofollow">官方资料</a>.</p>
+<h3>Text Encoder</h3>
+<p>不适用：文本由语言模型自身的词嵌入与解码器处理，无独立扩散条件文本编码器。 <a href="https://huggingface.co/deepseek-ai/DeepSeek-V3.1" rel="nofollow">官方资料</a>.</p>
+<h3>生成主体网络</h3>
+<p>671B 总参数、37B 激活、128K 上下文；单模型支持思考与非思考模式。 <a href="https://huggingface.co/deepseek-ai/DeepSeek-V3.1" rel="nofollow">官方资料</a>.</p>
+<h3>训练 Trick</h3>
+<p>两阶段长上下文扩展；权重与激活采用 UE8M0 FP8 scale 格式。 <a href="https://huggingface.co/deepseek-ai/DeepSeek-V3.1" rel="nofollow">官方资料</a>.</p>
+<h3>新提出的创新点</h3>
+<p>混合思考模式与工具/Agent 后训练优化。 <a href="https://huggingface.co/deepseek-ai/DeepSeek-V3.1" rel="nofollow">官方资料</a>.</p>
+<h3>局限性</h3>
+<p>/</p>
+<h2>补充资料（2026-09-16）</h2>
+<ul>
+<li><a href="https://huggingface.co/deepseek-ai/DeepSeek-V3.1" rel="nofollow">资料 1</a></li>
+<li><a href="https://api-docs.deepseek.com/updates/" rel="nofollow">资料 2</a></li>
+</ul>
+    </article>
+    <article class="summary-article summary-topic-entry" id="milestone-deepseek-v3-1-terminus">
+<h1>DeepSeek · DeepSeek-V3.1-Terminus</h1>
+<h2>文章精读</h2>
+<h3>版本</h3>
+<p>DeepSeek-V3.1-Terminus；发布节点 2025-09-22；变体：DeepSeek-V3.1-Terminus。<a href="https://huggingface.co/deepseek-ai/DeepSeek-V3.1-Terminus" rel="nofollow">资料</a></p>
+<h3>训练数据</h3>
+<p>/</p>
+<h3>VAE 结构</h3>
+<p>不适用：自回归语言生成不使用图像潜空间 VAE。 <a href="https://huggingface.co/deepseek-ai/DeepSeek-V3.1-Terminus" rel="nofollow">官方资料</a>.</p>
+<h3>Text Encoder</h3>
+<p>不适用：文本由语言模型自身的词嵌入与解码器处理，无独立扩散条件文本编码器。 <a href="https://huggingface.co/deepseek-ai/DeepSeek-V3.1-Terminus" rel="nofollow">官方资料</a>.</p>
+<h3>生成主体网络</h3>
+<p>官方明确模型结构与 V3 相同。 <a href="https://huggingface.co/deepseek-ai/DeepSeek-V3.1-Terminus" rel="nofollow">官方资料</a>.</p>
+<h3>训练 Trick</h3>
+<p>/</p>
+<h3>新提出的创新点</h3>
+<p>减少中英文混杂与异常字符，优化 Code/Search Agent。 <a href="https://huggingface.co/deepseek-ai/DeepSeek-V3.1-Terminus" rel="nofollow">官方资料</a>.</p>
+<h3>局限性</h3>
+<p>该检查点的 self_attn.o_proj 不符合 UE8M0 FP8 scale 格式，官方列为已知问题。 <a href="https://huggingface.co/deepseek-ai/DeepSeek-V3.1-Terminus" rel="nofollow">官方资料</a>.</p>
+<h2>补充资料（2026-09-16）</h2>
+<ul>
+<li><a href="https://huggingface.co/deepseek-ai/DeepSeek-V3.1-Terminus" rel="nofollow">资料 1</a></li>
+<li><a href="https://api-docs.deepseek.com/updates/" rel="nofollow">资料 2</a></li>
+</ul>
+    </article>
+    <article class="summary-article summary-topic-entry" id="milestone-deepseek-v3-2-exp">
+<h1>DeepSeek · DeepSeek-V3.2-Exp</h1>
+<h2>文章精读</h2>
+<h3>版本</h3>
+<p>DeepSeek-V3.2-Exp；发布节点 2025-09-29；变体：DeepSeek-V3.2-Exp。<a href="https://huggingface.co/deepseek-ai/DeepSeek-V3.2-Exp" rel="nofollow">资料</a></p>
+<h3>训练数据</h3>
+<p>/</p>
+<h3>VAE 结构</h3>
+<p>不适用：自回归语言生成不使用图像潜空间 VAE。 <a href="https://huggingface.co/deepseek-ai/DeepSeek-V3.2-Exp" rel="nofollow">官方资料</a>.</p>
+<h3>Text Encoder</h3>
+<p>不适用：文本由语言模型自身的词嵌入与解码器处理，无独立扩散条件文本编码器。 <a href="https://huggingface.co/deepseek-ai/DeepSeek-V3.2-Exp" rel="nofollow">官方资料</a>.</p>
+<h3>生成主体网络</h3>
+<p>在 V3.1-Terminus 上引入 DeepSeek Sparse Attention（DSA）的 Transformer。 <a href="https://huggingface.co/deepseek-ai/DeepSeek-V3.2-Exp" rel="nofollow">官方资料</a>.</p>
+<h3>训练 Trick</h3>
+<p>为隔离稀疏注意力效果，训练配置与 V3.1-Terminus 对齐。 <a href="https://huggingface.co/deepseek-ai/DeepSeek-V3.2-Exp" rel="nofollow">官方资料</a>.</p>
+<h3>新提出的创新点</h3>
+<p>细粒度稀疏注意力提升长上下文训练与推理效率。 <a href="https://huggingface.co/deepseek-ai/DeepSeek-V3.2-Exp" rel="nofollow">官方资料</a>.</p>
+<h3>局限性</h3>
+<p>实验版本，目标是维持原模型质量并验证效率；官方基准并非所有任务均提升。 <a href="https://huggingface.co/deepseek-ai/DeepSeek-V3.2-Exp" rel="nofollow">官方资料</a>.</p>
+<h2>补充资料（2026-09-16）</h2>
+<ul>
+<li><a href="https://huggingface.co/deepseek-ai/DeepSeek-V3.2-Exp" rel="nofollow">资料 1</a></li>
+<li><a href="https://api-docs.deepseek.com/updates/" rel="nofollow">资料 2</a></li>
+</ul>
+    </article>
+    <article class="summary-article summary-topic-entry" id="milestone-deepseek-v3-2">
+<h1>DeepSeek · DeepSeek-V3.2</h1>
+<h2>文章精读</h2>
+<h3>版本</h3>
+<p>DeepSeek-V3.2；发布节点 2025-12-01；变体：DeepSeek-V3.2、DeepSeek-V3.2-Speciale。<a href="https://huggingface.co/deepseek-ai/DeepSeek-V3.2" rel="nofollow">资料</a></p>
+<h3>训练数据</h3>
+<p>引入大规模 Agent 任务合成数据；完整数据组成与数量未披露。 <a href="https://huggingface.co/deepseek-ai/DeepSeek-V3.2" rel="nofollow">官方资料</a>.</p>
+<h3>VAE 结构</h3>
+<p>不适用：自回归语言生成不使用图像潜空间 VAE。 <a href="https://huggingface.co/deepseek-ai/DeepSeek-V3.2" rel="nofollow">官方资料</a>.</p>
+<h3>Text Encoder</h3>
+<p>不适用：文本由语言模型自身的词嵌入与解码器处理，无独立扩散条件文本编码器。 <a href="https://huggingface.co/deepseek-ai/DeepSeek-V3.2" rel="nofollow">官方资料</a>.</p>
+<h3>生成主体网络</h3>
+<p>官方明确 V3.2 与 Speciale 的结构均与 V3.2-Exp 相同。 <a href="https://huggingface.co/deepseek-ai/DeepSeek-V3.2" rel="nofollow">官方资料</a>.</p>
+<h3>训练 Trick</h3>
+<p>扩大 RL 后训练计算，并通过任务合成整合工具使用与推理。 <a href="https://huggingface.co/deepseek-ai/DeepSeek-V3.2" rel="nofollow">官方资料</a>.</p>
+<h3>新提出的创新点</h3>
+<p>可扩展 RL 与大规模 Agent 任务合成管线；支持 thinking with tools。 <a href="https://huggingface.co/deepseek-ai/DeepSeek-V3.2" rel="nofollow">官方资料</a>.</p>
+<h3>局限性</h3>
+<p>Speciale 变体不支持工具调用。 <a href="https://huggingface.co/deepseek-ai/DeepSeek-V3.2" rel="nofollow">官方模型卡</a></p>
+<h2>补充资料（2026-09-16）</h2>
+<ul>
+<li><a href="https://huggingface.co/deepseek-ai/DeepSeek-V3.2" rel="nofollow">资料 1</a></li>
+<li><a href="https://api-docs.deepseek.com/updates/" rel="nofollow">资料 2</a></li>
+</ul>
+    </article>
+    <article class="summary-article summary-topic-entry" id="milestone-deepseek-v4-preview">
+<h1>DeepSeek · DeepSeek-V4 Preview</h1>
+<h2>文章精读</h2>
+<h3>版本</h3>
+<p>DeepSeek-V4 Preview；发布节点 2026-04-24；变体：V4-Pro Preview、V4-Flash Preview。<a href="https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro" rel="nofollow">资料</a></p>
+<h3>训练数据</h3>
+<p>Pro 与 Flash 均预训练超过 32T token。 <a href="https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro" rel="nofollow">官方资料</a>.</p>
+<h3>VAE 结构</h3>
+<p>不适用：自回归语言生成不使用图像潜空间 VAE。 <a href="https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro" rel="nofollow">官方资料</a>.</p>
+<h3>Text Encoder</h3>
+<p>不适用：文本由语言模型自身的词嵌入与解码器处理，无独立扩散条件文本编码器。 <a href="https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro" rel="nofollow">官方资料</a>.</p>
+<h3>生成主体网络</h3>
+<p>MoE：Pro 1.6T/激活49B，Flash 284B/激活13B；1M上下文；CSA+HCA 混合注意力。 <a href="https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro" rel="nofollow">官方资料</a>.</p>
+<h3>训练 Trick</h3>
+<p>Muon；领域专家先分别 SFT/GRPO，再 on-policy 蒸馏整合。 <a href="https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro" rel="nofollow">官方资料</a>.</p>
+<h3>新提出的创新点</h3>
+<p>压缩注意力与 mHC 超连接，提高长上下文效率和跨层稳定性。 <a href="https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro" rel="nofollow">官方资料</a>.</p>
+<h3>局限性</h3>
+<p>官方指出 Flash 在纯知识及最复杂 Agent 任务上弱于 Pro。 <a href="https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro" rel="nofollow">官方资料</a>.</p>
+<h2>补充资料（2026-09-16）</h2>
+<ul>
+<li><a href="https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro" rel="nofollow">资料 1</a></li>
+<li><a href="https://api-docs.deepseek.com/updates/" rel="nofollow">资料 2</a></li>
+</ul>
+    </article>
+    <article class="summary-article summary-topic-entry" id="milestone-deepseek-v4-flash">
+<h1>DeepSeek · DeepSeek-V4-Flash</h1>
+<h2>文章精读</h2>
+<h3>版本</h3>
+<p>DeepSeek-V4-Flash；发布节点 2026-07-31；变体：V4-Flash-0731。<a href="https://api-docs.deepseek.com/updates/" rel="nofollow">资料</a></p>
+<h3>训练数据</h3>
+<p>/</p>
+<h3>VAE 结构</h3>
+<p>不适用：自回归语言生成不使用图像潜空间 VAE。 <a href="https://api-docs.deepseek.com/updates/" rel="nofollow">官方资料</a>.</p>
+<h3>Text Encoder</h3>
+<p>不适用：文本由语言模型自身的词嵌入与解码器处理，无独立扩散条件文本编码器。 <a href="https://api-docs.deepseek.com/updates/" rel="nofollow">官方资料</a>.</p>
+<h3>生成主体网络</h3>
+<p>官方明确 0731 与 V4-Flash-Preview 结构及尺寸保持一致，仅重新后训练。 <a href="https://api-docs.deepseek.com/updates/" rel="nofollow">官方资料</a>.</p>
+<h3>训练 Trick</h3>
+<p>重新进行后训练；具体数据与优化配方未披露。 <a href="https://api-docs.deepseek.com/updates/" rel="nofollow">官方资料</a>.</p>
+<h3>新提出的创新点</h3>
+<p>强化 Agent 能力，原生支持 Responses API；这属于后训练和接口更新。 <a href="https://api-docs.deepseek.com/updates/" rel="nofollow">官方资料</a>.</p>
+<h3>局限性</h3>
+<p>/</p>
+<h2>补充资料（2026-09-16）</h2>
+<ul>
+<li><a href="https://api-docs.deepseek.com/updates/" rel="nofollow">资料 1</a></li>
+</ul>
+    </article>
+    <article class="summary-article summary-topic-entry" id="milestone-deepseek-v4-pro">
+<h1>DeepSeek · DeepSeek-V4-Pro</h1>
+<h2>文章精读</h2>
+<h3>版本</h3>
+<p>DeepSeek-V4-Pro；发布节点 2026-08-13；变体：V4-Pro-0813。<a href="https://api-docs.deepseek.com/updates/" rel="nofollow">资料</a></p>
+<h3>训练数据</h3>
+<p>/</p>
+<h3>VAE 结构</h3>
+<p>/</p>
+<h3>Text Encoder</h3>
+<p>/</p>
+<h3>生成主体网络</h3>
+<p>/</p>
+<h3>训练 Trick</h3>
+<p>/</p>
+<h3>新提出的创新点</h3>
+<p>0813 正式版强化生产场景 Agent 能力，增加 low/high/max 思考控制；独立架构创新未披露。 <a href="https://api-docs.deepseek.com/updates/" rel="nofollow">官方资料</a>.</p>
+<h3>局限性</h3>
+<p>/</p>
+<h2>补充资料（2026-09-16）</h2>
+<ul>
+<li><a href="https://api-docs.deepseek.com/updates/" rel="nofollow">资料 1</a></li>
+</ul>
+    </article>
+    <article class="summary-article summary-topic-entry" id="milestone-deepseek-v4-vision">
+<h1>DeepSeek · DeepSeek-V4-Flash-Vision-Exp</h1>
+<h2>文章精读</h2>
+<h3>版本</h3>
+<p>DeepSeek-V4-Flash-Vision-Exp；发布节点 2026-08-21；变体：V4-Flash-Vision-Exp。<a href="https://api-docs.deepseek.com/updates/" rel="nofollow">资料</a></p>
+<h3>训练数据</h3>
+<p>/</p>
+<h3>VAE 结构</h3>
+<p>/</p>
+<h3>Text Encoder</h3>
+<p>/</p>
+<h3>生成主体网络</h3>
+<p>/</p>
+<h3>训练 Trick</h3>
+<p>/</p>
+<h3>新提出的创新点</h3>
+<p>实验性视觉理解版本，在文本能力基础上增加多模态 Agent 能力；视觉模块结构未披露。 <a href="https://api-docs.deepseek.com/updates/" rel="nofollow">官方资料</a>.</p>
+<h3>局限性</h3>
+<p>/</p>
+<h2>补充资料（2026-09-16）</h2>
+<ul>
+<li><a href="https://api-docs.deepseek.com/updates/" rel="nofollow">资料 1</a></li>
+</ul>
+    </article>
+    <article class="summary-article summary-topic-entry" id="milestone-deepseek-v4-1">
+<h1>DeepSeek · DeepSeek-V4.1-Flash</h1>
+<h2>文章精读</h2>
+<h3>版本</h3>
+<p>DeepSeek-V4.1-Flash；发布节点 2026-09-10；变体：V4.1-Flash。<a href="https://api-docs.deepseek.com/updates/" rel="nofollow">资料</a></p>
+<h3>训练数据</h3>
+<p>/</p>
+<h3>VAE 结构</h3>
+<p>/</p>
+<h3>Text Encoder</h3>
+<p>/</p>
+<h3>生成主体网络</h3>
+<p>/</p>
+<h3>训练 Trick</h3>
+<p>/</p>
+<h3>新提出的创新点</h3>
+<p>新架构系列的最小模型，原生支持视觉理解；具体网络、参数量及训练配方未披露。 <a href="https://api-docs.deepseek.com/updates/" rel="nofollow">官方资料</a>.</p>
+<h3>局限性</h3>
+<p>/</p>
+<h2>补充资料（2026-09-16）</h2>
+<ul>
+<li><a href="https://api-docs.deepseek.com/updates/" rel="nofollow">资料 1</a></li>
+</ul>
+    </article>
       </div>
     </section>
   </main>

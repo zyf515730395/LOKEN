@@ -72,7 +72,6 @@
         <h1 id="notes-page-title">QwenVL · 文章精读</h1>
       </header>
 <nav class="context-strip" aria-label="模型系列">
-    <a class="context-strip-link" href="claude.html">Claude</a>
     <a class="context-strip-link" href="deepseek.html">DeepSeek</a>
     <a class="context-strip-link" href="flux.html">FLUX</a>
     <a class="context-strip-link" href="gpt.html">GPT</a>
@@ -86,9 +85,296 @@
     <a class="context-strip-link" href="wan.html">Wan</a>
     <a class="context-strip-link" href="z-image.html">Z-Image</a>
   </nav>
-
+      <details class="content-tools" open>
+        <summary>版本精读目录</summary>
+        <nav class="content-tools-navigation" aria-label="版本精读目录">
+<a class="context-filter" href="#milestone-qwen-vl">Qwen-VL</a>
+<a class="context-filter" href="#milestone-qwen-vl-chat-update">Qwen-VL-Chat update</a>
+<a class="context-filter" href="#milestone-qwen-vl-max">Qwen-VL-Max</a>
+<a class="context-filter" href="#milestone-qwen2-vl">Qwen2-VL</a>
+<a class="context-filter" href="#milestone-qwen2-vl-72b">Qwen2-VL-72B</a>
+<a class="context-filter" href="#milestone-qwen2-5-vl">Qwen2.5-VL</a>
+<a class="context-filter" href="#milestone-qwen2-5-vl-32b">Qwen2.5-VL-32B</a>
+<a class="context-filter" href="#milestone-qwen3-vl">Qwen3-VL</a>
+<a class="context-filter" href="#milestone-qwen3-vl-30b">Qwen3-VL-30B-A3B</a>
+<a class="context-filter" href="#milestone-qwen3-vl-4b-8b">Qwen3-VL-4B / 8B</a>
+<a class="context-filter" href="#milestone-qwen3-vl-2b-32b">Qwen3-VL-2B / 32B</a>
+        </nav>
+      </details>
       <div class="summary-topic-list">
-    <p class="muted">暂无已完成的文章精读。</p>
+    <article class="summary-article summary-topic-entry" id="milestone-qwen-vl">
+<h1>QwenVL · Qwen-VL</h1>
+<h2>文章精读</h2>
+<h3>版本</h3>
+<p>Qwen-VL；发布节点 2023-08-24；变体：Qwen-VL、Qwen-VL-Chat。<a href="https://arxiv.org/html/2308.12966" rel="nofollow">资料</a></p>
+<h3>训练数据</h3>
+<p>清洗后 1.4B 图文对；英文 77.3%、中文 22.7%。 <a href="https://arxiv.org/html/2308.12966" rel="nofollow">官方资料</a>.</p>
+<h3>VAE 结构</h3>
+<p>不适用：视觉理解与自回归文本输出，不使用图像生成 VAE。 <a href="https://arxiv.org/html/2308.12966" rel="nofollow">官方资料</a>.</p>
+<h3>Text Encoder</h3>
+<p>无独立条件文本编码器；文本进入语言模型词嵌入及解码器。 <a href="https://arxiv.org/html/2308.12966" rel="nofollow">官方资料</a>.</p>
+<h3>生成主体网络</h3>
+<p>Qwen-7B 中间检查点 + ViT 视觉编码器 + 跨模态适配器。 <a href="https://arxiv.org/html/2308.12966" rel="nofollow">官方资料</a>.</p>
+<h3>训练 Trick</h3>
+<p>先冻结 LLM 进行图文预训练，再联合多任务训练与 SFT；分辨率从224升至448。 <a href="https://arxiv.org/html/2308.12966" rel="nofollow">官方资料</a>.</p>
+<h3>新提出的创新点</h3>
+<p>将图文对话、文字识别和带位置的 grounding 统一到语言模型。 <a href="https://arxiv.org/html/2308.12966" rel="nofollow">官方资料</a>.</p>
+<h3>局限性</h3>
+<p>该版本尚未覆盖语音、视频及图像生成，论文将这些列为后续工作。 <a href="https://arxiv.org/html/2308.12966" rel="nofollow">官方资料</a>.</p>
+<h2>补充资料（2026-09-16）</h2>
+<ul>
+<li><a href="https://arxiv.org/html/2308.12966" rel="nofollow">资料 1</a></li>
+<li><a href="https://github.com/QwenLM/Qwen-VL" rel="nofollow">资料 2</a></li>
+</ul>
+    </article>
+    <article class="summary-article summary-topic-entry" id="milestone-qwen-vl-chat-update">
+<h1>QwenVL · Qwen-VL-Chat update</h1>
+<h2>文章精读</h2>
+<h3>版本</h3>
+<p>Qwen-VL-Chat update；发布节点 2023-09-25；变体：Qwen-VL-Chat。<a href="https://github.com/QwenLM/Qwen-VL" rel="nofollow">资料</a></p>
+<h3>训练数据</h3>
+<p>/</p>
+<h3>VAE 结构</h3>
+<p>/</p>
+<h3>Text Encoder</h3>
+<p>/</p>
+<h3>生成主体网络</h3>
+<p>/</p>
+<h3>训练 Trick</h3>
+<p>/</p>
+<h3>新提出的创新点</h3>
+<p>2023-09-25 更新加强中文指令遵循、网页/表格图像理解及对话；未披露独立训练细节。 <a href="https://github.com/QwenLM/Qwen-VL" rel="nofollow">官方资料</a>.</p>
+<h3>局限性</h3>
+<p>/</p>
+<h2>补充资料（2026-09-16）</h2>
+<ul>
+<li><a href="https://github.com/QwenLM/Qwen-VL" rel="nofollow">资料 1</a></li>
+</ul>
+    </article>
+    <article class="summary-article summary-topic-entry" id="milestone-qwen-vl-max">
+<h1>QwenVL · Qwen-VL-Max</h1>
+<h2>文章精读</h2>
+<h3>版本</h3>
+<p>Qwen-VL-Max；发布节点 2024-01-18；变体：Qwen-VL-Max。<a href="https://github.com/QwenLM/Qwen-VL" rel="nofollow">资料</a></p>
+<h3>训练数据</h3>
+<p>/</p>
+<h3>VAE 结构</h3>
+<p>/</p>
+<h3>Text Encoder</h3>
+<p>/</p>
+<h3>生成主体网络</h3>
+<p>/</p>
+<h3>训练 Trick</h3>
+<p>/</p>
+<h3>新提出的创新点</h3>
+<p>强化视觉推理、指令遵循、文字细节与百万像素及极端宽高比图像理解。 <a href="https://github.com/QwenLM/Qwen-VL" rel="nofollow">官方资料</a>.</p>
+<h3>局限性</h3>
+<p>/</p>
+<h2>补充资料（2026-09-16）</h2>
+<ul>
+<li><a href="https://github.com/QwenLM/Qwen-VL" rel="nofollow">资料 1</a></li>
+</ul>
+    </article>
+    <article class="summary-article summary-topic-entry" id="milestone-qwen2-vl">
+<h1>QwenVL · Qwen2-VL</h1>
+<h2>文章精读</h2>
+<h3>版本</h3>
+<p>Qwen2-VL；发布节点 2024-08-30；变体：2B、7B。<a href="https://arxiv.org/html/2409.12191" rel="nofollow">资料</a></p>
+<h3>训练数据</h3>
+<p>预训练累计 1.4T token，含文本和图像 token，仅监督文本。 <a href="https://arxiv.org/html/2409.12191" rel="nofollow">官方资料</a>.</p>
+<h3>VAE 结构</h3>
+<p>不适用：视觉理解与自回归文本输出，不使用图像生成 VAE。 <a href="https://arxiv.org/html/2409.12191" rel="nofollow">官方资料</a>.</p>
+<h3>Text Encoder</h3>
+<p>无独立条件文本编码器；文本进入语言模型词嵌入及解码器。 <a href="https://arxiv.org/html/2409.12191" rel="nofollow">官方资料</a>.</p>
+<h3>生成主体网络</h3>
+<p>视觉 Transformer + Qwen2 语言模型；初次公开2B/7B，72B后续开放。 <a href="https://arxiv.org/html/2409.12191" rel="nofollow">官方资料</a>.</p>
+<h3>训练 Trick</h3>
+<p>视觉预训练、全参数多模态预训练、指令微调。 <a href="https://arxiv.org/html/2409.12191" rel="nofollow">官方资料</a>.</p>
+<h3>新提出的创新点</h3>
+<p>Naive Dynamic Resolution 动态分辨率与分解时间/空间的 M-RoPE。 <a href="https://arxiv.org/html/2409.12191" rel="nofollow">官方资料</a>.</p>
+<h3>局限性</h3>
+<p>/</p>
+<h2>补充资料（2026-09-16）</h2>
+<ul>
+<li><a href="https://arxiv.org/html/2409.12191" rel="nofollow">资料 1</a></li>
+<li><a href="https://github.com/QwenLM/Qwen3-VL" rel="nofollow">资料 2</a></li>
+</ul>
+    </article>
+    <article class="summary-article summary-topic-entry" id="milestone-qwen2-vl-72b">
+<h1>QwenVL · Qwen2-VL-72B</h1>
+<h2>文章精读</h2>
+<h3>版本</h3>
+<p>Qwen2-VL-72B；发布节点 2024-09-19；变体：72B。<a href="https://arxiv.org/html/2409.12191" rel="nofollow">资料</a></p>
+<h3>训练数据</h3>
+<p>该系列预训练累计1.4T图文 token；72B独立数据配比未披露。 <a href="https://arxiv.org/html/2409.12191" rel="nofollow">官方资料</a>.</p>
+<h3>VAE 结构</h3>
+<p>不适用：视觉理解与自回归文本输出，不使用图像生成 VAE。 <a href="https://arxiv.org/html/2409.12191" rel="nofollow">官方资料</a>.</p>
+<h3>Text Encoder</h3>
+<p>无独立条件文本编码器；文本进入语言模型词嵌入及解码器。 <a href="https://arxiv.org/html/2409.12191" rel="nofollow">官方资料</a>.</p>
+<h3>生成主体网络</h3>
+<p>Qwen2-VL 的72B语言骨干版本，使用视觉编码器及 M-RoPE。 <a href="https://arxiv.org/html/2409.12191" rel="nofollow">官方资料</a>.</p>
+<h3>训练 Trick</h3>
+<p>沿用报告中的三阶段视觉与语言训练框架。 <a href="https://arxiv.org/html/2409.12191" rel="nofollow">官方资料</a>.</p>
+<h3>新提出的创新点</h3>
+<p>扩大语言骨干规模的开放版本；不把系列共有 M-RoPE 算作72B新增发明。 <a href="https://arxiv.org/html/2409.12191" rel="nofollow">官方资料</a>.</p>
+<h3>局限性</h3>
+<p>/</p>
+<h2>补充资料（2026-09-16）</h2>
+<ul>
+<li><a href="https://arxiv.org/html/2409.12191" rel="nofollow">资料 1</a></li>
+<li><a href="https://github.com/QwenLM/Qwen3-VL" rel="nofollow">资料 2</a></li>
+</ul>
+    </article>
+    <article class="summary-article summary-topic-entry" id="milestone-qwen2-5-vl">
+<h1>QwenVL · Qwen2.5-VL</h1>
+<h2>文章精读</h2>
+<h3>版本</h3>
+<p>Qwen2.5-VL；发布节点 2025-01-28；变体：3B、7B、72B。<a href="https://arxiv.org/html/2502.13923v1" rel="nofollow">资料</a></p>
+<h3>训练数据</h3>
+<p>预训练扩大至4.1T token；包含图文、OCR、定位、文档、视频及Agent数据。 <a href="https://arxiv.org/html/2502.13923v1" rel="nofollow">官方资料</a>.</p>
+<h3>VAE 结构</h3>
+<p>不适用：视觉理解与自回归文本输出，不使用图像生成 VAE。 <a href="https://arxiv.org/html/2502.13923v1" rel="nofollow">官方资料</a>.</p>
+<h3>Text Encoder</h3>
+<p>无独立条件文本编码器；文本进入语言模型词嵌入及解码器。 <a href="https://arxiv.org/html/2502.13923v1" rel="nofollow">官方资料</a>.</p>
+<h3>生成主体网络</h3>
+<p>Qwen2.5 LLM + 动态分辨率 ViT + 两层 MLP merger。 <a href="https://arxiv.org/html/2502.13923v1" rel="nofollow">官方资料</a>.</p>
+<h3>训练 Trick</h3>
+<p>分阶段预训练，动态 FPS 采样；指令数据过滤与拒绝采样。 <a href="https://arxiv.org/html/2502.13923v1" rel="nofollow">官方资料</a>.</p>
+<h3>新提出的创新点</h3>
+<p>视觉窗口注意力与绝对时间对齐 MRoPE，支持细粒度定位和长视频理解。 <a href="https://arxiv.org/html/2502.13923v1" rel="nofollow">官方资料</a>.</p>
+<h3>局限性</h3>
+<p>/</p>
+<h2>补充资料（2026-09-16）</h2>
+<ul>
+<li><a href="https://arxiv.org/html/2502.13923v1" rel="nofollow">资料 1</a></li>
+<li><a href="https://github.com/QwenLM/Qwen3-VL" rel="nofollow">资料 2</a></li>
+</ul>
+    </article>
+    <article class="summary-article summary-topic-entry" id="milestone-qwen2-5-vl-32b">
+<h1>QwenVL · Qwen2.5-VL-32B</h1>
+<h2>文章精读</h2>
+<h3>版本</h3>
+<p>Qwen2.5-VL-32B；发布节点 2025-03-25；变体：32B。<a href="https://qwenlm.github.io/blog/qwen2.5-vl-32b/" rel="nofollow">资料</a></p>
+<h3>训练数据</h3>
+<p>/</p>
+<h3>VAE 结构</h3>
+<p>不适用：视觉理解与自回归文本输出，不使用图像生成 VAE。 <a href="https://qwenlm.github.io/blog/qwen2.5-vl-32b/" rel="nofollow">官方资料</a>.</p>
+<h3>Text Encoder</h3>
+<p>无独立条件文本编码器；文本进入语言模型词嵌入及解码器。 <a href="https://qwenlm.github.io/blog/qwen2.5-vl-32b/" rel="nofollow">官方资料</a>.</p>
+<h3>生成主体网络</h3>
+<p>Qwen2.5-VL 系列的32B版本。 <a href="https://qwenlm.github.io/blog/qwen2.5-vl-32b/" rel="nofollow">官方资料</a>.</p>
+<h3>训练 Trick</h3>
+<p>强化学习优化主观回答体验及数学推理。 <a href="https://qwenlm.github.io/blog/qwen2.5-vl-32b/" rel="nofollow">官方资料</a>.</p>
+<h3>新提出的创新点</h3>
+<p>新增32B规模并改善符合人类偏好的回答。 <a href="https://qwenlm.github.io/blog/qwen2.5-vl-32b/" rel="nofollow">官方资料</a>.</p>
+<h3>局限性</h3>
+<p>仍定位于快思考范式；长链、多步复杂视觉推理被列为后续研究方向。 <a href="https://qwenlm.github.io/blog/qwen2.5-vl-32b/" rel="nofollow">官方资料</a>.</p>
+<h2>补充资料（2026-09-16）</h2>
+<ul>
+<li><a href="https://qwenlm.github.io/blog/qwen2.5-vl-32b/" rel="nofollow">资料 1</a></li>
+<li><a href="https://github.com/QwenLM/Qwen3-VL" rel="nofollow">资料 2</a></li>
+</ul>
+    </article>
+    <article class="summary-article summary-topic-entry" id="milestone-qwen3-vl">
+<h1>QwenVL · Qwen3-VL</h1>
+<h2>文章精读</h2>
+<h3>版本</h3>
+<p>Qwen3-VL；发布节点 2025-09-23；变体：235B-A22B Instruct、235B-A22B Thinking。<a href="https://arxiv.org/html/2511.21631v2" rel="nofollow">资料</a></p>
+<h3>训练数据</h3>
+<p>图文与纯文本混合；S1约1T token，另有长文档、视频及GUI数据。 <a href="https://arxiv.org/html/2511.21631v2" rel="nofollow">官方资料</a>.</p>
+<h3>VAE 结构</h3>
+<p>不适用：视觉理解与自回归文本输出，不使用图像生成 VAE。 <a href="https://arxiv.org/html/2511.21631v2" rel="nofollow">官方资料</a>.</p>
+<h3>Text Encoder</h3>
+<p>无独立条件文本编码器；文本进入语言模型词嵌入及解码器。 <a href="https://arxiv.org/html/2511.21631v2" rel="nofollow">官方资料</a>.</p>
+<h3>生成主体网络</h3>
+<p>Qwen3-235B-A22B MoE + ViT + MLP merger；提供 Instruct/Thinking。 <a href="https://arxiv.org/html/2511.21631v2" rel="nofollow">官方资料</a>.</p>
+<h3>训练 Trick</h3>
+<p>先训merger，再8K/32K/256K全参训练；平方根归一化loss，SFT/蒸馏/RL。 <a href="https://arxiv.org/html/2511.21631v2" rel="nofollow">官方资料</a>.</p>
+<h3>新提出的创新点</h3>
+<p>交错 MRoPE、多层视觉特征 DeepStack 融合及显式视频时间戳。 <a href="https://arxiv.org/html/2511.21631v2" rel="nofollow">官方资料</a>.</p>
+<h3>局限性</h3>
+<p>/</p>
+<h2>补充资料（2026-09-16）</h2>
+<ul>
+<li><a href="https://arxiv.org/html/2511.21631v2" rel="nofollow">资料 1</a></li>
+<li><a href="https://github.com/QwenLM/Qwen3-VL" rel="nofollow">资料 2</a></li>
+</ul>
+    </article>
+    <article class="summary-article summary-topic-entry" id="milestone-qwen3-vl-30b">
+<h1>QwenVL · Qwen3-VL-30B-A3B</h1>
+<h2>文章精读</h2>
+<h3>版本</h3>
+<p>Qwen3-VL-30B-A3B；发布节点 2025-10-04；变体：30B-A3B Instruct、30B-A3B Thinking。<a href="https://arxiv.org/html/2511.21631v2" rel="nofollow">资料</a></p>
+<h3>训练数据</h3>
+<p>/</p>
+<h3>VAE 结构</h3>
+<p>不适用：视觉理解与自回归文本输出，不使用图像生成 VAE。 <a href="https://arxiv.org/html/2511.21631v2" rel="nofollow">官方资料</a>.</p>
+<h3>Text Encoder</h3>
+<p>无独立条件文本编码器；文本进入语言模型词嵌入及解码器。 <a href="https://arxiv.org/html/2511.21631v2" rel="nofollow">官方资料</a>.</p>
+<h3>生成主体网络</h3>
+<p>30B-A3B MoE + ViT/MLP；Instruct与Thinking两类。 <a href="https://arxiv.org/html/2511.21631v2" rel="nofollow">官方资料</a>.</p>
+<h3>训练 Trick</h3>
+<p>/</p>
+<h3>新提出的创新点</h3>
+<p>Qwen3-VL规模扩展；共有交错MRoPE与DeepStack，不宣称该版本单独发明。 <a href="https://arxiv.org/html/2511.21631v2" rel="nofollow">官方资料</a>.</p>
+<h3>局限性</h3>
+<p>/</p>
+<h2>补充资料（2026-09-16）</h2>
+<ul>
+<li><a href="https://arxiv.org/html/2511.21631v2" rel="nofollow">资料 1</a></li>
+<li><a href="https://github.com/QwenLM/Qwen3-VL" rel="nofollow">资料 2</a></li>
+</ul>
+    </article>
+    <article class="summary-article summary-topic-entry" id="milestone-qwen3-vl-4b-8b">
+<h1>QwenVL · Qwen3-VL-4B / 8B</h1>
+<h2>文章精读</h2>
+<h3>版本</h3>
+<p>Qwen3-VL-4B / 8B；发布节点 2025-10-15；变体：4B Instruct、4B Thinking、8B Instruct、8B Thinking。<a href="https://arxiv.org/html/2511.21631v2" rel="nofollow">资料</a></p>
+<h3>训练数据</h3>
+<p>/</p>
+<h3>VAE 结构</h3>
+<p>不适用：视觉理解与自回归文本输出，不使用图像生成 VAE。 <a href="https://arxiv.org/html/2511.21631v2" rel="nofollow">官方资料</a>.</p>
+<h3>Text Encoder</h3>
+<p>无独立条件文本编码器；文本进入语言模型词嵌入及解码器。 <a href="https://arxiv.org/html/2511.21631v2" rel="nofollow">官方资料</a>.</p>
+<h3>生成主体网络</h3>
+<p>4B/8B Dense + ViT/MLP；Instruct与Thinking两类。 <a href="https://arxiv.org/html/2511.21631v2" rel="nofollow">官方资料</a>.</p>
+<h3>训练 Trick</h3>
+<p>/</p>
+<h3>新提出的创新点</h3>
+<p>Qwen3-VL规模扩展；共有交错MRoPE与DeepStack，不宣称该版本单独发明。 <a href="https://arxiv.org/html/2511.21631v2" rel="nofollow">官方资料</a>.</p>
+<h3>局限性</h3>
+<p>/</p>
+<h2>补充资料（2026-09-16）</h2>
+<ul>
+<li><a href="https://arxiv.org/html/2511.21631v2" rel="nofollow">资料 1</a></li>
+<li><a href="https://github.com/QwenLM/Qwen3-VL" rel="nofollow">资料 2</a></li>
+</ul>
+    </article>
+    <article class="summary-article summary-topic-entry" id="milestone-qwen3-vl-2b-32b">
+<h1>QwenVL · Qwen3-VL-2B / 32B</h1>
+<h2>文章精读</h2>
+<h3>版本</h3>
+<p>Qwen3-VL-2B / 32B；发布节点 2025-10-21；变体：2B Instruct、2B Thinking、32B Instruct、32B Thinking。<a href="https://arxiv.org/html/2511.21631v2" rel="nofollow">资料</a></p>
+<h3>训练数据</h3>
+<p>/</p>
+<h3>VAE 结构</h3>
+<p>不适用：视觉理解与自回归文本输出，不使用图像生成 VAE。 <a href="https://arxiv.org/html/2511.21631v2" rel="nofollow">官方资料</a>.</p>
+<h3>Text Encoder</h3>
+<p>无独立条件文本编码器；文本进入语言模型词嵌入及解码器。 <a href="https://arxiv.org/html/2511.21631v2" rel="nofollow">官方资料</a>.</p>
+<h3>生成主体网络</h3>
+<p>2B/32B Dense + ViT/MLP；Instruct与Thinking两类。 <a href="https://arxiv.org/html/2511.21631v2" rel="nofollow">官方资料</a>.</p>
+<h3>训练 Trick</h3>
+<p>/</p>
+<h3>新提出的创新点</h3>
+<p>Qwen3-VL规模扩展；共有交错MRoPE与DeepStack，不宣称该版本单独发明。 <a href="https://arxiv.org/html/2511.21631v2" rel="nofollow">官方资料</a>.</p>
+<h3>局限性</h3>
+<p>/</p>
+<h2>补充资料（2026-09-16）</h2>
+<ul>
+<li><a href="https://arxiv.org/html/2511.21631v2" rel="nofollow">资料 1</a></li>
+<li><a href="https://github.com/QwenLM/Qwen3-VL" rel="nofollow">资料 2</a></li>
+</ul>
+    </article>
       </div>
     </section>
   </main>

@@ -72,7 +72,6 @@
         <h1 id="notes-page-title">Hunyuan3D · 文章精读</h1>
       </header>
 <nav class="context-strip" aria-label="模型系列">
-    <a class="context-strip-link" href="claude.html">Claude</a>
     <a class="context-strip-link" href="deepseek.html">DeepSeek</a>
     <a class="context-strip-link" href="flux.html">FLUX</a>
     <a class="context-strip-link" href="gpt.html">GPT</a>
@@ -252,7 +251,7 @@
 <h3>训练数据</h3>
 <p>/</p>
 <h3>VAE 结构</h3>
-<p>/</p>
+<p>Mini 为 512×64 的 ShapeVAE 潜变量；Multi-view 为 3072×64；两者解码器均为 16 层、宽度 1024。 <a href="https://huggingface.co/tencent/Hunyuan3D-2mini/raw/main/hunyuan3d-dit-v2-mini/config.yaml" rel="nofollow">Mini 配置</a> · <a href="https://huggingface.co/tencent/Hunyuan3D-2mv/raw/main/hunyuan3d-dit-v2-mv/config.yaml" rel="nofollow">Multi-view 配置</a></p>
 <h3>Text Encoder</h3>
 <p>/</p>
 <h3>生成主体网络</h3>
@@ -272,6 +271,12 @@
 <h2>资料来源</h2>
 <ul>
 <li><a href="https://github.com/Tencent-Hunyuan/Hunyuan3D-2" rel="nofollow">official_repository</a></li>
+</ul>
+<h2>补充资料（2026-09-16）</h2>
+<ul>
+<li><a href="https://github.com/Tencent-Hunyuan/Hunyuan3D-2" rel="nofollow">资料 1</a></li>
+<li><a href="https://huggingface.co/tencent/Hunyuan3D-2mini/raw/main/hunyuan3d-dit-v2-mini/config.yaml" rel="nofollow">资料 2</a></li>
+<li><a href="https://huggingface.co/tencent/Hunyuan3D-2mv/raw/main/hunyuan3d-dit-v2-mv/config.yaml" rel="nofollow">资料 3</a></li>
 </ul>
     </article>
     <article class="summary-article summary-topic-entry" id="milestone-hunyuan3d-2-turbo">
@@ -294,7 +299,7 @@
 <h3>训练数据</h3>
 <p>/</p>
 <h3>VAE 结构</h3>
-<p>/</p>
+<p>已核验 2 Turbo 与 2mv Turbo 的发布配置均为 3072×64 ShapeVAE，16 层解码器、宽度 1024；本条不外推至 2mini Turbo。 <a href="https://huggingface.co/tencent/Hunyuan3D-2/raw/main/hunyuan3d-dit-v2-0-turbo/config.yaml" rel="nofollow">2 Turbo 配置</a> · <a href="https://huggingface.co/tencent/Hunyuan3D-2mv/raw/main/hunyuan3d-dit-v2-mv-turbo/config.yaml" rel="nofollow">2mv Turbo 配置</a></p>
 <h3>Text Encoder</h3>
 <p>/</p>
 <h3>生成主体网络</h3>
@@ -314,6 +319,12 @@
 <h2>资料来源</h2>
 <ul>
 <li><a href="https://github.com/Tencent-Hunyuan/Hunyuan3D-2" rel="nofollow">official_repository</a></li>
+</ul>
+<h2>补充资料（2026-09-16）</h2>
+<ul>
+<li><a href="https://github.com/Tencent-Hunyuan/Hunyuan3D-2" rel="nofollow">资料 1</a></li>
+<li><a href="https://huggingface.co/tencent/Hunyuan3D-2/raw/main/hunyuan3d-dit-v2-0-turbo/config.yaml" rel="nofollow">资料 2</a></li>
+<li><a href="https://huggingface.co/tencent/Hunyuan3D-2mv/raw/main/hunyuan3d-dit-v2-mv-turbo/config.yaml" rel="nofollow">资料 3</a></li>
 </ul>
     </article>
     <article class="summary-article summary-topic-entry" id="milestone-hunyuan3d-2-1">
@@ -463,17 +474,15 @@
 <li><strong>Hunyuan3D-Omni</strong>：以统一框架接收点、体素、三维包围盒与人体姿态等多种控制条件。</li>
 </ul>
 <h3>训练数据</h3>
-<p>/</p>
+<p>姿态控制按 PoseMaster 构造跨帧图像—骨骼—网格对；其他控制采用 Hunyuan3D 2.1 数据，派生点云、体素和包围盒条件。 <a href="https://arxiv.org/html/2509.21245" rel="nofollow">来源</a></p>
 <h3>VAE 结构</h3>
-<p>/</p>
+<p>报告明确继承 Hunyuan3D 2.1：ShapeVAE 以表面点的坐标和法向形成连续向量集合，解码 SDF 后提取网格。 <a href="https://arxiv.org/html/2509.21245" rel="nofollow">来源</a></p>
 <h3>Text Encoder</h3>
 <p>/</p>
 <h3>生成主体网络</h3>
 <p>基于 Hunyuan3D 2.1 扩展统一条件注入，使三维结构信号与形状扩散协同建模。</p>
 <h3>训练 Trick</h3>
-<ul>
-<li>/</li>
-</ul>
+<p>随机抽取控制类型，并提高较少且难学的姿态数据采样率；batch size 1，AdamW、固定学习率 1e-5，联合训练扩散模型与控制编码器。 <a href="https://arxiv.org/html/2509.21245" rel="nofollow">来源</a></p>
 <h3>新提出的创新点</h3>
 <ul>
 <li>统一多种三维条件，允许从粗布局到细结构表达生成约束。</li>
@@ -485,6 +494,11 @@
 <h2>资料来源</h2>
 <ul>
 <li><a href="https://arxiv.org/abs/2509.21245" rel="nofollow">arxiv</a></li>
+</ul>
+<h2>补充资料（2026-09-16）</h2>
+<ul>
+<li><a href="https://arxiv.org/html/2509.21245" rel="nofollow">资料 1</a></li>
+<li><a href="https://arxiv.org/abs/2509.21245" rel="nofollow">资料 2</a></li>
 </ul>
     </article>
     <article class="summary-article summary-topic-entry" id="milestone-hunyuan3d-3-1">
@@ -563,12 +577,15 @@
 <li>统一三维任务数据及训练，允许语言驱动编辑。</li>
 </ul>
 <h3>局限性</h3>
-<ul>
-<li>/</li>
-</ul>
+<p>当前主要处理几何编辑，端到端纹理编辑仍缺数据；自动描述存在歧义，编辑掩码内部未编辑区域的一致性也难保证。 <a href="https://arxiv.org/html/2608.02711" rel="nofollow">来源</a></p>
 <h2>资料来源</h2>
 <ul>
 <li><a href="https://arxiv.org/abs/2608.02711" rel="nofollow">arxiv</a></li>
+</ul>
+<h2>补充资料（2026-09-16）</h2>
+<ul>
+<li><a href="https://arxiv.org/html/2608.02711" rel="nofollow">资料 1</a></li>
+<li><a href="https://arxiv.org/abs/2608.02711" rel="nofollow">资料 2</a></li>
 </ul>
     </article>
       </div>

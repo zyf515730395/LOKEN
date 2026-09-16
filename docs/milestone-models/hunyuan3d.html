@@ -74,7 +74,6 @@
       </div>
     </header>
 <nav class="context-strip" aria-label="模型系列">
-    <a class="context-strip-link" href="claude.html">Claude</a>
     <a class="context-strip-link" href="deepseek.html">DeepSeek</a>
     <a class="context-strip-link" href="flux.html">FLUX</a>
     <a class="context-strip-link" href="gpt.html">GPT</a>
@@ -98,7 +97,7 @@
       </div>
       <div class="milestone-hero-meta">
         <ul class="status-legend" aria-label="发布状态图例"><li><span class="release-status status-released">已发布</span><span>已发布</span></li><li><span class="release-status status-early-access">Early Access</span><span>Early Access</span></li><li><span class="release-status status-announced">已宣布</span><span>已宣布</span></li></ul>
-        <p>Updated 2026-09-11</p>
+        <p>Updated 2026-09-16</p>
       </div>
       </header>
       <div class="milestone-overview">
@@ -316,7 +315,7 @@
           <td><p>三维资产提供几何表面、法线和渲染材质监督；PBR 训练分别监督反照率与金属度、粗糙度。</p></td>
           <td><p>扩大高质量复杂三维资产的数据、模型与计算规模；材质阶段使用多视图几何与 PBR 监督。</p></td>
           <td><p>/</p></td>
-          <td><p>/</p></td>
+          <td><p>姿态控制按 PoseMaster 构造跨帧图像—骨骼—网格对；其他控制采用 Hunyuan3D 2.1 数据，派生点云、体素和包围盒条件。 <a href="https://arxiv.org/html/2509.21245" rel="nofollow">来源</a></p></td>
           <td><p>Nano3D v2 统一三维语料包含约 8700 万样本：2500 万理解、5000 万文字到三维、1200 万编辑对。</p></td>
         </tr>
         <tr><th scope="row">VAE 结构</th>
@@ -325,7 +324,7 @@
           <td><p>ShapeVAE 以带法向的表面点压缩为向量集合，解码 SDF 后提取网格。</p></td>
           <td><p>/</p></td>
           <td><p>/</p></td>
-          <td><p>/</p></td>
+          <td><p>报告明确继承 Hunyuan3D 2.1：ShapeVAE 以表面点的坐标和法向形成连续向量集合，解码 SDF 后提取网格。 <a href="https://arxiv.org/html/2509.21245" rel="nofollow">来源</a></p></td>
           <td><p>形状生成分支沿用 Hunyuan3D 2.1 的三维潜表示路线。</p></td>
         </tr>
         <tr><th scope="row">Text Encoder</th>
@@ -367,9 +366,7 @@
           <td><ul>
 <li>/</li>
 </ul></td>
-          <td><ul>
-<li>/</li>
-</ul></td>
+          <td><p>随机抽取控制类型，并提高较少且难学的姿态数据采样率；batch size 1，AdamW、固定学习率 1e-5，联合训练扩散模型与控制编码器。 <a href="https://arxiv.org/html/2509.21245" rel="nofollow">来源</a></p></td>
           <td><ul>
 <li>先冻结视觉语言模型对齐连接器，再进行联合指令微调。</li>
 <li>结构和外观分别编码，统一训练三维理解、生成与编辑。</li>
@@ -421,9 +418,7 @@
           <td><ul>
 <li>/</li>
 </ul></td>
-          <td><ul>
-<li>/</li>
-</ul></td>
+          <td><p>当前主要处理几何编辑，端到端纹理编辑仍缺数据；自动描述存在歧义，编辑掩码内部未编辑区域的一致性也难保证。 <a href="https://arxiv.org/html/2608.02711" rel="nofollow">来源</a></p></td>
         </tr>
       </tbody>
     </table>

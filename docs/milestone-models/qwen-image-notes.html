@@ -72,7 +72,6 @@
         <h1 id="notes-page-title">Qwen-Image · 文章精读</h1>
       </header>
 <nav class="context-strip" aria-label="模型系列">
-    <a class="context-strip-link" href="claude.html">Claude</a>
     <a class="context-strip-link" href="deepseek.html">DeepSeek</a>
     <a class="context-strip-link" href="flux.html">FLUX</a>
     <a class="context-strip-link" href="gpt.html">GPT</a>
@@ -136,13 +135,17 @@
 <li>通过文字专门数据与课程学习加强中英文精确绘制。</li>
 </ul>
 <h3>局限性</h3>
-<ul>
-<li>/</li>
-</ul>
+<p>构图控制仍非完全可靠：报告中基础 Qwen-Image 的 GenEval 位置关系得分 0.76、属性绑定 0.77，低于单物体 0.99；这是该基准下的薄弱项，不能等同于所有使用场景的失败率。<a href="https://arxiv.org/html/2508.02324v1" rel="nofollow">技术报告 Table 4</a></p>
 <h2>资料来源</h2>
 <ul>
 <li><a href="https://arxiv.org/abs/2508.02324" rel="nofollow">arxiv</a></li>
 <li><a href="https://github.com/QwenLM/Qwen-Image" rel="nofollow">official_repository</a></li>
+</ul>
+<h2>补充资料（2026-09-16）</h2>
+<ul>
+<li><a href="https://arxiv.org/html/2508.02324v1" rel="nofollow">资料 1</a></li>
+<li><a href="https://arxiv.org/abs/2508.02324" rel="nofollow">资料 2</a></li>
+<li><a href="https://github.com/QwenLM/Qwen-Image" rel="nofollow">资料 3</a></li>
 </ul>
     </article>
     <article class="summary-article summary-topic-entry" id="milestone-qwen-image-edit">
@@ -163,27 +166,31 @@
 <h3>训练数据</h3>
 <p>/</p>
 <h3>VAE 结构</h3>
-<p>/</p>
+<p>官方该版本配置采用 AutoencoderKLQwenImage，16 维潜变量（z_dim=16），基础通道 96，通道倍率 [1,2,4,4]，配置 num_res_blocks=2。<a href="https://huggingface.co/Qwen/Qwen-Image-Edit/blob/main/vae/config.json" rel="nofollow">官方 VAE 配置</a></p>
 <h3>Text Encoder</h3>
 <p>输入图像分别进入 Qwen2.5-VL 和 VAE，提供语义与外观条件。</p>
 <h3>生成主体网络</h3>
 <p>基于 Qwen-Image 的 MMDiT 图像编辑模型。</p>
 <h3>训练 Trick</h3>
-<ul>
-<li>/</li>
-</ul>
+<p>初代技术报告的编辑训练联合 T2I、TI2I 与 I2I 重建任务，利用输入图像的语义编码与 VAE 重建编码对齐文本、视觉和扩散空间；训练以原图细节保真与编辑指令遵循共同约束。<a href="https://arxiv.org/html/2508.02324v1" rel="nofollow">技术报告 §4.3</a></p>
 <h3>新提出的创新点</h3>
 <ul>
 <li>语义条件与外观条件并行注入，使语义级和外观级编辑共享模型。</li>
 </ul>
 <h3>局限性</h3>
-<ul>
-<li>/</li>
-</ul>
+<p>全局生成式编辑不能保证未编辑区域逐像素不变；Qwen 团队后续分层论文明确指出 Qwen-Image-Edit 的这种一致性限制。<a href="https://arxiv.org/html/2512.15603v1" rel="nofollow">Qwen-Image-Layered §2.1</a></p>
 <h2>资料来源</h2>
 <ul>
 <li><a href="https://github.com/QwenLM/Qwen-Image" rel="nofollow">official_repository</a></li>
 <li><a href="https://qwenlm.github.io/blog/qwen-image-edit/" rel="nofollow">official_blog</a></li>
+</ul>
+<h2>补充资料（2026-09-16）</h2>
+<ul>
+<li><a href="https://huggingface.co/Qwen/Qwen-Image-Edit/blob/main/vae/config.json" rel="nofollow">资料 1</a></li>
+<li><a href="https://arxiv.org/html/2508.02324v1" rel="nofollow">资料 2</a></li>
+<li><a href="https://arxiv.org/html/2512.15603v1" rel="nofollow">资料 3</a></li>
+<li><a href="https://github.com/QwenLM/Qwen-Image" rel="nofollow">资料 4</a></li>
+<li><a href="https://qwenlm.github.io/blog/qwen-image-edit/" rel="nofollow">资料 5</a></li>
 </ul>
     </article>
     <article class="summary-article summary-topic-entry" id="milestone-qwen-image-edit-2509">
@@ -204,11 +211,11 @@
 <h3>训练数据</h3>
 <p>/</p>
 <h3>VAE 结构</h3>
-<p>/</p>
+<p>官方该版本配置采用 AutoencoderKLQwenImage，16 维潜变量（z_dim=16），基础通道 96，通道倍率 [1,2,4,4]，配置 num_res_blocks=2。<a href="https://huggingface.co/Qwen/Qwen-Image-Edit-2509/blob/main/vae/config.json" rel="nofollow">官方 VAE 配置</a></p>
 <h3>Text Encoder</h3>
-<p>/</p>
+<p>该版本官方配置指定 Qwen2.5-VL（Qwen2_5_VLForConditionalGeneration）作为条件编码器。<a href="https://huggingface.co/Qwen/Qwen-Image-Edit-2509/blob/main/model_index.json" rel="nofollow">官方版本配置</a></p>
 <h3>生成主体网络</h3>
-<p>/</p>
+<p>官方该版本为 QwenImageTransformer2DModel：60 层、24 个注意力头、每头 128 维，patch_size=2。<a href="https://huggingface.co/Qwen/Qwen-Image-Edit-2509/blob/main/transformer/config.json" rel="nofollow">官方 Transformer 配置</a></p>
 <h3>训练 Trick</h3>
 <ul>
 <li>/</li>
@@ -218,13 +225,20 @@
 <li>公开能力变化（实现未披露）：支持多图联合编辑和更加稳定的主体保持。</li>
 </ul>
 <h3>局限性</h3>
-<ul>
-<li>/</li>
-</ul>
+<p>Qwen 团队后续论文的对比案例显示，2509 在布局修改、缩放、重新定位指令上仍会失误，并出现像素级偏移；这是论文展示的特定编辑案例结论。<a href="https://arxiv.org/html/2512.15603v1" rel="nofollow">官方论文 §4.4.2</a></p>
 <h2>资料来源</h2>
 <ul>
 <li><a href="https://github.com/QwenLM/Qwen-Image" rel="nofollow">official_repository</a></li>
 <li><a href="https://huggingface.co/Qwen/Qwen-Image-Edit-2509" rel="nofollow">official_model_page</a></li>
+</ul>
+<h2>补充资料（2026-09-16）</h2>
+<ul>
+<li><a href="https://huggingface.co/Qwen/Qwen-Image-Edit-2509/blob/main/vae/config.json" rel="nofollow">资料 1</a></li>
+<li><a href="https://huggingface.co/Qwen/Qwen-Image-Edit-2509/blob/main/transformer/config.json" rel="nofollow">资料 2</a></li>
+<li><a href="https://huggingface.co/Qwen/Qwen-Image-Edit-2509/blob/main/model_index.json" rel="nofollow">资料 3</a></li>
+<li><a href="https://arxiv.org/html/2512.15603v1" rel="nofollow">资料 4</a></li>
+<li><a href="https://github.com/QwenLM/Qwen-Image" rel="nofollow">资料 5</a></li>
+<li><a href="https://huggingface.co/Qwen/Qwen-Image-Edit-2509" rel="nofollow">资料 6</a></li>
 </ul>
     </article>
     <article class="summary-article summary-topic-entry" id="milestone-qwen-image-layered">
@@ -262,13 +276,17 @@
 <li>可变图层数量的扩散建模允许一次生成结构化图层。</li>
 </ul>
 <h3>局限性</h3>
-<ul>
-<li>/</li>
-</ul>
+<p>技术分析：各 RGBA 层独立编码，层维度不压缩，且多层视觉序列共同参与注意力，增加输出层数会增加计算与存储负担；报告处理含数百层的 PSD 时合并空间不重叠层以降低复杂度。<a href="https://arxiv.org/html/2512.15603v1" rel="nofollow">论文 §3.1–3.2、§4.1</a></p>
 <h2>资料来源</h2>
 <ul>
 <li><a href="https://arxiv.org/abs/2512.15603" rel="nofollow">arxiv</a></li>
 <li><a href="https://github.com/QwenLM/Qwen-Image" rel="nofollow">official_repository</a></li>
+</ul>
+<h2>补充资料（2026-09-16）</h2>
+<ul>
+<li><a href="https://arxiv.org/html/2512.15603v1" rel="nofollow">资料 1</a></li>
+<li><a href="https://arxiv.org/abs/2512.15603" rel="nofollow">资料 2</a></li>
+<li><a href="https://github.com/QwenLM/Qwen-Image" rel="nofollow">资料 3</a></li>
 </ul>
     </article>
     <article class="summary-article summary-topic-entry" id="milestone-qwen-image-edit-2511">
@@ -289,15 +307,13 @@
 <h3>训练数据</h3>
 <p>/</p>
 <h3>VAE 结构</h3>
-<p>/</p>
+<p>官方该版本配置采用 AutoencoderKLQwenImage，16 维潜变量（z_dim=16），基础通道 96，通道倍率 [1,2,4,4]，配置 num_res_blocks=2。<a href="https://huggingface.co/Qwen/Qwen-Image-Edit-2511/blob/main/vae/config.json" rel="nofollow">官方 VAE 配置</a></p>
 <h3>Text Encoder</h3>
-<p>/</p>
+<p>该版本官方配置指定 Qwen2.5-VL（Qwen2_5_VLForConditionalGeneration）作为条件编码器。<a href="https://huggingface.co/Qwen/Qwen-Image-Edit-2511/blob/main/text_encoder/config.json" rel="nofollow">官方版本配置</a></p>
 <h3>生成主体网络</h3>
-<p>/</p>
+<p>官方该版本为 QwenImageTransformer2DModel：60 层、24 个注意力头、每头 128 维，patch_size=2。<a href="https://huggingface.co/Qwen/Qwen-Image-Edit-2511/blob/main/transformer/config.json" rel="nofollow">官方 Transformer 配置</a></p>
 <h3>训练 Trick</h3>
-<ul>
-<li>/</li>
-</ul>
+<p>将选定的社区 LoRA 能力直接集成到基础模型中，包含光照调整与新视角生成；官方未披露具体权重融合或再训练算法。<a href="https://huggingface.co/Qwen/Qwen-Image-Edit-2511" rel="nofollow">2511 官方模型卡</a></p>
 <h3>新提出的创新点</h3>
 <ul>
 <li>公开能力变化（实现未披露）：把常见编辑能力整合进模型，减少针对具体效果单独挂接适配器的需求。</li>
@@ -310,6 +326,14 @@
 <ul>
 <li><a href="https://github.com/QwenLM/Qwen-Image" rel="nofollow">official_repository</a></li>
 <li><a href="https://huggingface.co/Qwen/Qwen-Image-Edit-2511" rel="nofollow">official_model_page</a></li>
+</ul>
+<h2>补充资料（2026-09-16）</h2>
+<ul>
+<li><a href="https://huggingface.co/Qwen/Qwen-Image-Edit-2511/blob/main/vae/config.json" rel="nofollow">资料 1</a></li>
+<li><a href="https://huggingface.co/Qwen/Qwen-Image-Edit-2511/blob/main/transformer/config.json" rel="nofollow">资料 2</a></li>
+<li><a href="https://huggingface.co/Qwen/Qwen-Image-Edit-2511/blob/main/text_encoder/config.json" rel="nofollow">资料 3</a></li>
+<li><a href="https://huggingface.co/Qwen/Qwen-Image-Edit-2511" rel="nofollow">资料 4</a></li>
+<li><a href="https://github.com/QwenLM/Qwen-Image" rel="nofollow">资料 5</a></li>
 </ul>
     </article>
     <article class="summary-article summary-topic-entry" id="milestone-qwen-image-2512">
@@ -330,11 +354,11 @@
 <h3>训练数据</h3>
 <p>/</p>
 <h3>VAE 结构</h3>
-<p>/</p>
+<p>官方该版本配置采用 AutoencoderKLQwenImage，16 维潜变量（z_dim=16），基础通道 96，通道倍率 [1,2,4,4]，配置 num_res_blocks=2。<a href="https://huggingface.co/Qwen/Qwen-Image-2512/blob/main/vae/config.json" rel="nofollow">官方 VAE 配置</a></p>
 <h3>Text Encoder</h3>
-<p>/</p>
+<p>该版本官方配置指定 Qwen2.5-VL（Qwen2_5_VLForConditionalGeneration）作为条件编码器。<a href="https://huggingface.co/Qwen/Qwen-Image-2512/blob/main/model_index.json" rel="nofollow">官方版本配置</a></p>
 <h3>生成主体网络</h3>
-<p>/</p>
+<p>官方该版本为 QwenImageTransformer2DModel：60 层、24 个注意力头、每头 128 维，patch_size=2。<a href="https://huggingface.co/Qwen/Qwen-Image-2512/blob/main/transformer/config.json" rel="nofollow">官方 Transformer 配置</a></p>
 <h3>训练 Trick</h3>
 <ul>
 <li>/</li>
@@ -351,6 +375,14 @@
 <ul>
 <li><a href="https://github.com/QwenLM/Qwen-Image" rel="nofollow">official_repository</a></li>
 <li><a href="https://huggingface.co/Qwen/Qwen-Image-2512" rel="nofollow">official_model_page</a></li>
+</ul>
+<h2>补充资料（2026-09-16）</h2>
+<ul>
+<li><a href="https://huggingface.co/Qwen/Qwen-Image-2512/blob/main/vae/config.json" rel="nofollow">资料 1</a></li>
+<li><a href="https://huggingface.co/Qwen/Qwen-Image-2512/blob/main/transformer/config.json" rel="nofollow">资料 2</a></li>
+<li><a href="https://huggingface.co/Qwen/Qwen-Image-2512/blob/main/model_index.json" rel="nofollow">资料 3</a></li>
+<li><a href="https://github.com/QwenLM/Qwen-Image" rel="nofollow">资料 4</a></li>
+<li><a href="https://huggingface.co/Qwen/Qwen-Image-2512" rel="nofollow">资料 5</a></li>
 </ul>
     </article>
     <article class="summary-article summary-topic-entry" id="milestone-qwen-image-2">
