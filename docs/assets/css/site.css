@@ -606,11 +606,13 @@ footer { padding: 2.2rem clamp(1.25rem, 2.6vw, 2.5rem); color: var(--muted); fon
 .model-specimen { display: grid; align-content: start; gap: 1.25rem; padding: 1.25rem; background: var(--surface-muted); }
 .model-specimen-data dt { margin: 0 0 .45rem; color: var(--muted); font-family: var(--label); font-size: .61rem; font-weight: 700; letter-spacing: .13em; }
 .model-specimen-heading h2 { margin: 0; font-size: clamp(1.7rem, 3vw, 2.35rem); letter-spacing: -.045em; line-height: 1.08; }
-.model-specimen-graphic { display: grid; min-height: 10rem; place-items: center; border: 1px solid var(--line); background-image: linear-gradient(90deg, var(--line) 1px, transparent 1px), linear-gradient(var(--line) 1px, transparent 1px); background-size: 1.5rem 1.5rem; }
-.model-specimen-graphic span { grid-area: 1 / 1; display: block; border: 1px solid var(--accent); transform: rotate(45deg); }
-.model-specimen-graphic span:nth-child(1) { width: 7rem; height: 7rem; background: var(--surface); }
-.model-specimen-graphic span:nth-child(2) { width: 4.5rem; height: 4.5rem; background: var(--accent-soft); }
-.model-specimen-graphic span:nth-child(3) { width: 1.75rem; height: 1.75rem; background: var(--accent); }
+.model-release-tabs { display: flex; flex-wrap: wrap; gap: .4rem; }
+.model-release-tabs[hidden] { display: none; }
+.model-release-tabs button { border: 1px solid var(--line); border-radius: .3rem; background: var(--surface); padding: .45rem .65rem; color: var(--muted); font-size: .78rem; line-height: 1.4; overflow-wrap: anywhere; }
+.model-release-tabs button:hover { border-color: var(--accent); color: var(--text); }
+.model-release-tabs button[aria-selected="true"] { border-color: var(--accent); background: var(--accent-soft); color: var(--text); font-weight: 700; }
+.model-release-tabs button:focus-visible, .model-specimen [role="tabpanel"]:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.model-specimen-data dd { overflow-wrap: anywhere; }
 .model-specimen-data { display: grid; gap: .7rem; margin: 0; }
 .model-specimen-data > div { display: grid; grid-template-columns: 6.5rem minmax(0, 1fr); gap: .65rem; border-top: 1px solid var(--line); padding-top: .65rem; }
 .model-specimen-data dt { margin: 0; }
