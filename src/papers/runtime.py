@@ -26,8 +26,9 @@ PRIVATE = paths.ROOT / 'build/paper-summaries'
 ZONE = ZoneInfo('Asia/Shanghai')
 BACKFILL_BATCH_SIZE = 100
 GIT_PUSH_TIMEOUT_SECONDS = 5 * 60
+GIT_SYNC_TIMEOUT_SECONDS = 120
 GIT_PUSH_RETRY_SECONDS = 60
-GIT_SSH_COMMAND = 'ssh -o ServerAliveInterval=15 -o ServerAliveCountMax=4'
+GIT_SSH_COMMAND = 'ssh -o BatchMode=yes -o ConnectTimeout=20 -o ServerAliveInterval=15 -o ServerAliveCountMax=4'
 PENDING_PUSH = PRIVATE / 'pending-runtime-push.json'
 
 
@@ -35,13 +36,35 @@ class RetryableGitPush(RuntimeError):
     """A transient push failure that must not discard completed publication work."""
 
 
-def command(*args, capture=False, check=True, timeout=None):
-    return subprocess.run(args, cwd=paths.ROOT, check=check, text=True,
-                          stdout=subprocess.PIPE if capture else None, timeout=timeout)
+def command(*args, capture=False, check=True, timeout=None, env=None):
+    if timeout is None:
+        return subprocess.run(args, cwd=paths.ROOT, check=check, text=True,
+                              stdout=subprocess.PIPE if capture else None, env=env)
+    process = subprocess.Popen(args, cwd=paths.ROOT, text=True, env=env,
+                               stdout=subprocess.PIPE if capture else None,
+                               start_new_session=True)
+    try:
+        stdout, _ = process.communicate(timeout=timeout)
+    except (subprocess.TimeoutExpired, KeyboardInterrupt):
+        try:
+            os.killpg(process.pid, signal.SIGKILL)
+        except ProcessLookupError:
+            pass
+        process.communicate()
+        raise
+    result = subprocess.CompletedProcess(args, process.returncode, stdout)
+    if check:
+        result.check_returncode()
+    return result
 
 
 def git(*args, capture=False):
-    result = command('git', *args, capture=capture)
+    network = args[0] in ('pull', 'fetch', 'push', 'ls-remote')
+    environment = os.environ.copy()
+    environment.setdefault('GIT_SSH_COMMAND', GIT_SSH_COMMAND)
+    environment['GIT_TERMINAL_PROMPT'] = '0'
+    result = command('git', *args, capture=capture, env=environment,
+                     timeout=GIT_SYNC_TIMEOUT_SECONDS if network else None)
     return result.stdout.strip() if capture else ''
 
 
@@ -331,8 +354,9 @@ def main(argv=None):
     except KeyboardInterrupt:
         print('Stopped; completed caches and batch checkpoint retained', flush=True)
         return 130
-    except subprocess.TimeoutExpired:
-        print('Weekend window ended; cached results and checkpoint retained', flush=True)
+    except subprocess.TimeoutExpired as error:
+        print(f'Command timed out after {error.timeout}s: {error.cmd}; '
+              'completed results and checkpoints retained for retry', flush=True)
         return 130
     except (RuntimeError, subprocess.CalledProcessError) as error:
         print(str(error), file=sys.stderr, flush=True)
