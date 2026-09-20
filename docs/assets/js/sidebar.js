@@ -328,6 +328,39 @@ const summaryMobileQuery = window.matchMedia?.("(max-width: 900px)");
 summaryMobileQuery?.addEventListener?.("change", moveSummaryPanel);
 summaryMobileQuery?.addListener?.(moveSummaryPanel);
 
+document.querySelectorAll("[data-release-selector]").forEach((selector) => {
+  const tablist = selector.querySelector('[role="tablist"]');
+  const tabs = Array.from(tablist.querySelectorAll('[role="tab"]'));
+  const panels = Array.from(selector.querySelectorAll('[role="tabpanel"]'));
+
+  function selectRelease(tab, focus = false) {
+    tabs.forEach((candidate) => {
+      const selected = candidate === tab;
+      candidate.setAttribute("aria-selected", String(selected));
+      candidate.tabIndex = selected ? 0 : -1;
+    });
+    panels.forEach((panel) => {
+      panel.hidden = panel.id !== tab.getAttribute("aria-controls");
+    });
+    if (focus) tab.focus();
+  }
+
+  tabs.forEach((tab, index) => {
+    tab.addEventListener("click", () => selectRelease(tab));
+    tab.addEventListener("keydown", (event) => {
+      let next;
+      if (event.key === "ArrowRight") next = (index + 1) % tabs.length;
+      else if (event.key === "ArrowLeft") next = (index + tabs.length - 1) % tabs.length;
+      else if (event.key === "Home") next = 0;
+      else if (event.key === "End") next = tabs.length - 1;
+      else return;
+      event.preventDefault();
+      selectRelease(tabs[next], true);
+    });
+  });
+  tablist.hidden = false;
+});
+
 document.querySelectorAll("[data-drag-scroll]").forEach((viewport) => {
   let pointerId = null;
   let startX = 0;

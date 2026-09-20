@@ -274,25 +274,50 @@ def render_timeline(family: dict[str, Any]) -> str:
 def render_model_specimen(
     family: dict[str, Any], notes: dict[str, Any]
 ) -> str:
-    """Render the latest documented release as a compact, data-backed specimen."""
-    release = family["releases"][-1]
-    note = notes.get(release["slug"])
-    note_availability = "精读已就绪" if note and note.get("ready") else "精读待补充"
-    return f"""<section class="model-specimen" aria-labelledby="model-specimen-heading">
+    """Render selectable official releases, initially showing the latest node."""
+    tabs = []
+    panels = []
+    for index, release in enumerate(family["releases"]):
+        selected = index == len(family["releases"]) - 1
+        node_id = f'model-release-{index}'
+        tabs.append(
+            f'<button type="button" role="tab" id="{node_id}-tab" '
+            f'aria-controls="{node_id}" aria-selected="{str(selected).lower()}" '
+            f'tabindex="{0 if selected else -1}">{html.escape(release["name"])}</button>'
+        )
+        note = notes.get(release["slug"])
+        reading = (
+            f'<a href="{html.escape(family["slug"], quote=True)}-notes.html'
+            f'#milestone-{html.escape(release["slug"], quote=True)}">查看精读</a>'
+            if note and note.get("ready") else "精读待补充"
+        )
+        sources = " · ".join(
+            f'<a href="{html.escape(source["url"], quote=True)}" '
+            f'target="_blank" rel="noopener">官方资料 {number}</a>'
+            for number, source in enumerate(release["sources"], start=1)
+        )
+        variants = " / ".join(html.escape(variant) for variant in release["variants"]) or "/"
+        hidden = "" if selected else " hidden"
+        panels.append(f"""  <div role="tabpanel" id="{node_id}" aria-labelledby="{node_id}-tab" tabindex="0"{hidden}>
+    <dl class="model-specimen-data">
+      <div><dt>模型</dt><dd>{html.escape(release["name"])}</dd></div>
+      <div><dt>发布日期</dt><dd><time datetime="{html.escape(release["release_date"], quote=True)}">{html.escape(release["release_date"])}</time></dd></div>
+      <div><dt>机构</dt><dd>{html.escape(family["organization"])}</dd></div>
+      <div><dt>状态</dt><dd>{_status_badge(release["status"])}</dd></div>
+      <div><dt>变体</dt><dd>{variants}</dd></div>
+      <div><dt>官方来源</dt><dd>{sources}</dd></div>
+      <div><dt>精读</dt><dd>{reading}</dd></div>
+    </dl>
+  </div>""")
+    return f"""<section class="model-specimen" aria-labelledby="model-specimen-heading" data-release-selector>
   <div class="model-specimen-heading">
-    <p>SELECTED SPECIMEN</p>
-    <h2 id="model-specimen-heading">最新发布节点</h2>
+    <p>RELEASE NODES</p>
+    <h2 id="model-specimen-heading">发布节点</h2>
   </div>
-  <div class="model-specimen-graphic" aria-hidden="true">
-    <span></span><span></span><span></span>
+  <div class="model-release-tabs" role="tablist" aria-label="选择发布节点" hidden>
+    {''.join(tabs)}
   </div>
-  <dl class="model-specimen-data">
-    <div><dt>MODEL</dt><dd>{html.escape(release["name"])}</dd></div>
-    <div><dt>RELEASED</dt><dd><time datetime="{html.escape(release["release_date"], quote=True)}">{html.escape(release["release_date"])}</time></dd></div>
-    <div><dt>ORGANIZATION</dt><dd>{html.escape(family["organization"])}</dd></div>
-    <div><dt>STATUS</dt><dd>{_status_badge(release["status"])}</dd></div>
-    <div><dt>READING</dt><dd>{note_availability}</dd></div>
-  </dl>
+{''.join(panels)}
 </section>"""
 
 
