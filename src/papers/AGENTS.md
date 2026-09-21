@@ -61,3 +61,8 @@
 - Run `python -m papers.conference_dates --apply` for verified updates, `--resume` to continue an applied web pass, and `--refresh` for weekend rechecks. arXiv requests observe spacing and HTTP 429 backoff; other official metadata lookups may continue. A dry run must never mark unapplied results as applied. Body summaries do not write publication dates.
 
 - Historical conference summary runs may use `summarize --skip-failed` to exclude existing failed receipts. Per-paper acquisition or inference exceptions are recorded by exception type and do not terminate the queue; interrupts, memory exhaustion, and failures writing checkpoints remain fatal. Preserve skipped records and their source evidence.
+
+## Public publication-year exclusions
+
+- `config/site.yaml` → `publication.excluded_years` excludes publication years from paper lists, counts, search and conference summary publication, including older conference exceptions. Currently 2022 and 2023 are excluded. Preserve candidate records, source catalogs, local originals and reading notes; this is a public visibility rule.
+- Surveys period tabs and navigation labels show only `Surveys`, with no count, including empty periods.

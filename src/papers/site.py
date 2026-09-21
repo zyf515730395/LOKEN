@@ -697,6 +697,15 @@ def generate_site(
     library = load_library()
     ledger = json.loads(Path(candidate_path).read_text(encoding='utf-8')) if candidate_path and Path(candidate_path).exists() else {}
     extra_rows = library_rows(library, data, ledger)
+    excluded_years = set(site_config.get('publication', {}).get('excluded_years', []))
+    data = {
+        topic: {
+            paper_id: entry for paper_id, entry in entries.items()
+            if parse_entry(paper_id, entry)['date'].year not in excluded_years
+        }
+        for topic, entries in data.items()
+    }
+    extra_rows = [row for row in extra_rows if row['date'].year not in excluded_years]
     if library['papers']:
         summary_catalog['conference'] = publish_library_notes(library, Path(output_root or Path(output_path).parent), {row['id'] for row in extra_rows})
     all_categories, _ = build_archive(data, labels, annotations, candidate_statuses, extra_rows)
