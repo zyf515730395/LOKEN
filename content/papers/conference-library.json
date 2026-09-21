@@ -27552,7 +27552,21 @@
       },
       "source_edition": "ICCV 2025",
       "source_version": "3f4063bb8600a07aaab61a2d8af0f0f5684f41a078b6b741fa5ea732c1f2fbdb",
-      "summary": null,
+      "summary": {
+        "contributions": [
+          "提出了 UniCombine 框架，这是一种基于 DiT 的多条件可控生成框架，能够处理包括文本提示、空间地图和主体图像在内的任意条件组合。",
+          "构建了 SubjectSpatial200K 数据集，该数据集包含主体驱动和空间对齐条件，解决了多条件可控生成模型训练和测试缺乏公开数据集的问题。",
+          "引入了新颖的条件 MMDiT 注意力机制并整合了可训练的去噪 LoRA 模块，从而构建了免训练和基于训练两种版本的模型。",
+          "通过整合多个预训练的条件 LoRA 模块权重，实现了优秀的免训练性能，并展示了在特定多条件数据集上训练后性能的进一步提升。",
+          "在主体插入、主体空间和多空间条件生成任务上进行了广泛实验，证明了 UniCombine 在保持所有输入条件一致性方面的优越性和通用性。"
+        ],
+        "one_sentence": "UniCombine 提出了一种基于扩散 Transformer 的统一多条件可控生成框架，通过引入条件 MMDiT 注意力机制和可训练的去噪 LoRA 模块，实现了文本、空间地图和主体图像等任意条件组合的高效生成，并构建了 SubjectSpatial200K 数据集以填补该领域公开数据的空白。",
+        "problem": "现有基于扩散模型的可控生成框架主要局限于单一条件控制或仅支持空间类条件（如 Canny 或深度图）的多条件组合，难以同时处理主体身份保持、空间结构对齐、背景连贯性和风格统一性等复杂约束，且缺乏适用于多条件生成任务的公开数据集。"
+      },
+      "summary_source": {
+        "sha256": "bae80edb0de8e2516b0aa2116a354e380ba7ffabb3dcc35d0ae41367d1c3f35d",
+        "url": "https://openaccess.thecvf.com/content/ICCV2025/html/Wang_UniCombine_Unified_Multi-Conditional_Combination_with_Diffusion_Transformer_ICCV_2025_paper.html"
+      },
       "title": "UniCombine: Unified Multi-Conditional Combination with Diffusion Transformer",
       "topics": [
         "Image Gen&Edit"
@@ -36627,6 +36641,21 @@
       "url": "https://openaccess.thecvf.com/content/CVPR2026/html/Chen_Reliev3R_Relieving_Feed-forward_3D_Reconstruction_from_Multi-View_Geometric_Annotations_CVPR_2026_paper.html"
     },
     "conf-2cbf21ab8139c55665921451": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Multi-View-to-3D",
+          "Feed-Forward"
+        ],
+        "topics": [
+          "3D Gen&Recon"
+        ]
+      },
+      "annotation_source": {
+        "sha256": "f1d9b116d629ddb99df11ab51f1e9f37512bc317e701b0ae1b3e7dad55d2bae4",
+        "url": "https://ojs.aaai.org/index.php/AAAI/article/view/37972"
+      },
       "authors": [
         "Shaoqian Wang",
         "Jiadai Sun",
@@ -36646,6 +36675,7 @@
         "basis": "publisher_publication",
         "url": "https://ojs.aaai.org/index.php/AAAI/article/view/37972"
       },
+      "doi": "10.1609/aaai.v40i12.37972",
       "id": "conf-2cbf21ab8139c55665921451",
       "order_date": "2026-01-20",
       "published": "2026-03-17",
@@ -36661,7 +36691,20 @@
       },
       "source_edition": "AAAI 2026",
       "source_version": "0692ead9a35404cbd2454d424eac158b26714c61c033bd4ad6c173c428fb1f55",
-      "summary": null,
+      "summary": {
+        "contributions": [
+          "提出了跨尺度特征联合构建（CFC）模块，通过联合利用跨尺度图像特征来构建代价体，从而提高了代价体的可靠性。",
+          "提出了跨尺度概率引导增强（CPE）模块，通过分析低分辨率尺度的深度概率分布来引导并增强后续更细尺度上的代价体。",
+          "提出了单目特征细化（MFR）模块，利用单目先验知识优化深度概率分布并采用掩码上采样，将高质量估计传播到后续尺度以改进深度估计精度。",
+          "在DTU、Tanks and Temples和ETH3D等多个基准测试上进行了大量实验，证明了EC-MVSNet取得了最先进的性能，验证了跨尺度相关性整合策略的有效性。"
+        ],
+        "one_sentence": "针对现有级联多视图立体方法中跨尺度交互有限的问题，本文提出了EC-MVSNet框架，通过引入跨尺度特征联合构建、概率引导增强及单目特征细化模块，实现了跨尺度相关性信息的深度整合，从而在多个基准测试中取得了最先进的性能。",
+        "problem": "现有的级联多视图立体方法虽然通过多尺度框架提高了效率和精度，但各尺度的深度估计过程通常是独立执行的，跨尺度交互有限，未能充分利用相邻尺度间特征和概率分布中蕴含的丰富跨尺度相关性信息，从而限制了级联框架的潜力。"
+      },
+      "summary_source": {
+        "sha256": "f1d9b116d629ddb99df11ab51f1e9f37512bc317e701b0ae1b3e7dad55d2bae4",
+        "url": "https://ojs.aaai.org/index.php/AAAI/article/view/37972"
+      },
       "title": "EC-MVSNet: Enhanced Cascaded Multi-View Stereo with Cross-Scale Relevance Integration",
       "topics": [
         "3D Gen&Recon"
@@ -80315,6 +80358,22 @@
       "url": "https://openaccess.thecvf.com/content/CVPR2025/html/Wang_FreeTimeGS_Free_Gaussian_Primitives_at_Anytime_Anywhere_for_Dynamic_Scene_CVPR_2025_paper.html"
     },
     "conf-5d187afaf76b1784900a1fb6": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Transformer",
+          "Continuous Latents",
+          "World-Model Policy Learning"
+        ],
+        "topics": [
+          "World Model"
+        ]
+      },
+      "annotation_source": {
+        "sha256": "e8e5dc6a3a79b4a803924e12422c44c38f62087e0bfc3c5d46ce979f35243a70",
+        "url": "https://openaccess.thecvf.com/content/CVPR2026/html/Tian_SimScale_Learning_to_Drive_via_Real-World_Simulation_at_Scale_CVPR_2026_paper.html"
+      },
       "arxiv_id": "2511.23369",
       "authors": [
         "Haochen Tian",
@@ -80357,7 +80416,21 @@
       },
       "source_edition": "CVPR 2026",
       "source_version": "85b3365215cc76dbe4d05a30faac4421b44fd24ed7441ebc2596582d0acac2bb",
-      "summary": null,
+      "summary": {
+        "contributions": [
+          "提出 SimScale 系统，构建了一个可扩展的仿真数据生成框架，利用 3D 高斯泼溅技术从有限的真实世界场景扩展专家分布，以引导端到端自动驾驶系统。",
+          "开发了基于 3D 高斯泼溅的仿真数据引擎，能够控制自车和其他智能体的时间状态，并从自车视角渲染多视角视频，支持对自车轨迹进行多样化扰动以最大化状态空间覆盖。",
+          "设计了两种形式的伪专家生成对应演示：基于恢复的专家生成类似人类但谨慎的行为，基于特权规划器的专家生成最大化最优性的探索性策略，并在反应式环境中执行以增强可扩展性和合理性。",
+          "采用简单有效的仿真-真实联合训练策略，在保持人类驾驶分布的同时缓解视觉域退化，并系统性地分析了不同规模端到端规划器从仿真数据中获益的情况及其可预测的扩展特性。",
+          "在 NavHard 和 NavTest 两个真实世界闭环基准上进行了严格实验，揭示了可扩展仿真解锁真实数据潜力、联合训练提升鲁棒性与泛化能力、探索性专家及交互环境提高仿真数据有效性等关键发现。"
+        ],
+        "one_sentence": "SimScale 提出了一种基于 3D 高斯泼溅的可扩展仿真数据生成框架与仿真-真实联合训练策略，旨在通过大规模生成分布外状态及其对应的伪专家演示，解决端到端自动驾驶中真实数据稀缺及分布偏移问题。",
+        "problem": "真实世界驾驶数据主要由常见场景主导，安全关键等罕见场景严重不足，导致基于此类数据训练的规划器局限于人类驾驶分布，难以泛化到罕见或未见过的情境，且在部署时面临分布偏移和因果混淆问题，仅扩展真实数据对于实现可部署的自动驾驶效率低下。"
+      },
+      "summary_source": {
+        "sha256": "e8e5dc6a3a79b4a803924e12422c44c38f62087e0bfc3c5d46ce979f35243a70",
+        "url": "https://openaccess.thecvf.com/content/CVPR2026/html/Tian_SimScale_Learning_to_Drive_via_Real-World_Simulation_at_Scale_CVPR_2026_paper.html"
+      },
       "title": "SimScale: Learning to Drive via Real-World Simulation at Scale",
       "topics": [
         "World Model"
@@ -84732,6 +84805,20 @@
       "url": "https://openaccess.thecvf.com/content/CVPR2025/html/Tang_SpecTRe-GS_Modeling_Highly_Specular_Surfaces_with_Reflected_Nearby_Objects_by_CVPR_2025_paper.html"
     },
     "conf-6233727236132ffedb68032f": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Text-to-3D"
+        ],
+        "topics": [
+          "3D Gen&Recon"
+        ]
+      },
+      "annotation_source": {
+        "sha256": "b31291410a9599a342d415da13cd896641d120605707d8b9c772f4f60e29c0f0",
+        "url": "https://openaccess.thecvf.com/content/CVPR2026/html/Wang_DrivePTS_A_Progressive_Learning_Framework_with_Textual_and_Structural_Enhancement_CVPR_2026_paper.html"
+      },
       "arxiv_id": "2602.22549",
       "authors": [
         "Zhechao Wang",
@@ -84767,7 +84854,19 @@
       },
       "source_edition": "CVPR 2026",
       "source_version": "56715416101494222d40bc7166c23fe90034806cf121f227192689f7d341de09",
-      "summary": null,
+      "summary": {
+        "contributions": [
+          "提出一种渐进式学习策略，将道路布局学习与物体放置渲染分解为不同阶段，并引入互信息约束以显式解耦地图与边界框之间的几何条件依赖。",
+          "开发基于视觉语言模型的方法，从时间、天气、道路类型、周围环境、物体及空间关系六个维度生成多视角层级化描述，提供细粒度文本引导以增强场景生成保真度。",
+          "引入频率引导结构损失，通过增强模型对道路边缘和物体轮廓等高频结构元素的敏感性，改善生成图像中前景物体的结构保真度并减少模糊现象。"
+        ],
+        "one_sentence": "针对现有驾驶场景生成方法中几何条件相互依赖、文本引导粗糙及前景细节缺失的问题，本文提出了一种结合渐进式学习策略、视觉语言模型细粒度文本引导及频率引导结构损失的增强框架 DrivePTS。",
+        "problem": "现有基于扩散模型的驾驶场景生成方法存在三大局限：一是几何条件（如3D边界框与地图）联合学习时易过拟合共现模式，导致地图修改时无法正确生成对应场景；二是依赖简短且视角不变的文本描述，缺乏细粒度及视角特定的环境细节，导致背景建模较弱；三是去噪损失计算时同等对待所有区域，忽视前景细节，导致生成物体和道路出现结构扭曲和模糊。"
+      },
+      "summary_source": {
+        "sha256": "b31291410a9599a342d415da13cd896641d120605707d8b9c772f4f60e29c0f0",
+        "url": "https://openaccess.thecvf.com/content/CVPR2026/html/Wang_DrivePTS_A_Progressive_Learning_Framework_with_Textual_and_Structural_Enhancement_CVPR_2026_paper.html"
+      },
       "title": "DrivePTS: A Progressive Learning Framework with Textual and Structural Enhancement for Driving Scene Generation",
       "topics": [
         "3D Gen&Recon"
@@ -105215,6 +105314,21 @@
       "url": "https://ojs.aaai.org/index.php/AAAI/article/view/28239"
     },
     "conf-7a9a58218bccd0495d0937bc": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Transformer",
+          "Continuous Latents"
+        ],
+        "topics": [
+          "World Model"
+        ]
+      },
+      "annotation_source": {
+        "sha256": "95510d0486bb4fd70b47b19c52de57b8c2cffbcebf1e183c7b5b87e88ecb4c20",
+        "url": "https://iclr.cc/virtual/2026/poster/10007391"
+      },
       "arxiv_id": "2510.20068",
       "authors": [
         "Ram Dyuthi Sristi",
@@ -105250,7 +105364,21 @@
       },
       "source_edition": "ICLR 2026",
       "source_version": "eb50a6dce380317148dc2a96e5f90f26e9d09a84ca1bc07b4d9cc6720a614680",
-      "summary": null,
+      "summary": {
+        "contributions": [
+          "提出耦合Transformer自编码器（CTAE）框架，利用基于Transformer的编码器和解码器作为灵活先验，捕捉传统方法中缺失的长程、非线性及非平稳多脑区动态。",
+          "设计正交共享与私有子空间结构，通过重构损失保留区域特定信息，并利用轻量级对齐损失匹配共享表示，实现共享与私有信号的解耦。",
+          "构建可扩展架构，引入混合权重机制，使共享子空间能够扩展到两个以上脑区，且不会导致参数呈指数级增长。",
+          "验证潜变量空间的行为无关性，支持在无需重新训练的情况下，通过简单的线性读出器进行多种下游解码任务，如位置、速度或认知状态解码。",
+          "在M1-PMd（犹他阵列）和SC-ALM（Neuropixel探针）神经记录数据上进行实证验证，证明CTAE在共享方差捕获方面优于现有工作，并揭示了与解剖学一致的相互作用。"
+        ],
+        "one_sentence": "该论文提出了一种名为耦合Transformer自编码器（CTAE）的端到端框架，旨在通过正交共享与私有子空间解耦多脑区神经潜变量动态，以捕捉非平稳且长程的非线性神经活动模式。",
+        "problem": "现有单脑区潜变量模型直接应用于多脑区数据时，常因区际延迟扭曲潜空间、相关结构差异导致共享因子吸收私有方差以及活跃区域主导混合权重而失效；同时，现有的多区联合潜变量模型往往将时间点视为独立同分布样本，从而丢弃了神经动力学的时间平滑性和非平稳非线性动态特征，且难以在脑区数量增加时避免参数爆炸。"
+      },
+      "summary_source": {
+        "sha256": "95510d0486bb4fd70b47b19c52de57b8c2cffbcebf1e183c7b5b87e88ecb4c20",
+        "url": "https://iclr.cc/virtual/2026/poster/10007391"
+      },
       "title": "Coupled Transformer Autoencoder for Disentangling Multi-Region Neural Latent Dynamics",
       "topics": [
         "World Model"
@@ -138381,6 +138509,21 @@
       "url": "https://doi.org/10.1109/iros58592.2024.10801331"
     },
     "conf-a1a43d44839757c8f47a7b66": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Diffusion",
+          "Structural Conditioning"
+        ],
+        "topics": [
+          "Image Gen&Edit"
+        ]
+      },
+      "annotation_source": {
+        "sha256": "6f408e12fe12efa94d84f21840a385b3ff2f775adea4b2bafa3cd395492fa2af",
+        "url": "https://ojs.aaai.org/index.php/AAAI/article/view/37579"
+      },
       "authors": [
         "Xiaopan Li",
         "Yi Jiang",
@@ -138399,6 +138542,7 @@
         "basis": "publisher_publication",
         "url": "https://ojs.aaai.org/index.php/AAAI/article/view/37579"
       },
+      "doi": "10.1609/aaai.v40i8.37579",
       "id": "conf-a1a43d44839757c8f47a7b66",
       "order_date": "2026-01-20",
       "published": "2026-03-17",
@@ -138413,7 +138557,19 @@
       },
       "source_edition": "AAAI 2026",
       "source_version": "c46b1b30a1853731755dd97c935f8ff8e68b2d5284f3b5cdef5993a11588dfc7",
-      "summary": null,
+      "summary": {
+        "contributions": [
+          "提出了一种模糊级别标注器，用于创建离散的区域模糊标签，并指导多尺度分类器预测软性的、基于补丁的模糊级别概率。",
+          "设计了一个模糊自适应专家混合器，根据局部模糊严重程度动态路由特征，从而提升模型处理不同模糊条件的能力。",
+          "通过ControlNet和交叉注意力机制将模糊感知特征集成到稳定扩散模型中，实现了空间自适应且高质量的图像恢复。"
+        ],
+        "one_sentence": "该论文提出了一种名为MBSD的多层级模糊感知稳定扩散框架，通过显式建模局部模糊严重程度并动态路由专家模块，实现了区域自适应的离焦去模糊。",
+        "problem": "现有离焦去模糊方法通常假设模糊核为高斯或圆盘形状，难以应对真实场景中复杂且空间变化的模糊；基于学习的方法往往对图像进行统一处理，缺乏对局部模糊严重程度的显式建模，导致在严重退化或低纹理区域恢复效果不佳；现有的基于扩散模型的方法通常全局处理退化，未考虑空间变化，容易在较清晰区域产生过度平滑或在严重模糊区域产生幻觉结构。"
+      },
+      "summary_source": {
+        "sha256": "6f408e12fe12efa94d84f21840a385b3ff2f775adea4b2bafa3cd395492fa2af",
+        "url": "https://ojs.aaai.org/index.php/AAAI/article/view/37579"
+      },
       "title": "Multi-Level Blur-Aware Stable Diffusion for Region-Adaptive Defocus Deblurring",
       "topics": [
         "Image Gen&Edit"
@@ -144743,7 +144899,19 @@
       },
       "source_edition": "ICLR 2026",
       "source_version": "abc0287067cef0bb1dc31d02eead5025ce648277a34f7cb80cb9f87c7acb4ddf",
-      "summary": null,
+      "summary": {
+        "contributions": [
+          "提出了首个针对LLM的基于JEPA的训练目标，该目标在嵌入空间中操作并利用不同视图，既遵循视觉JEPA范式又保留了LLM的生成能力。",
+          "通过实证验证表明，在多种微调设置下，该方法相比标准LLM微调方案取得了性能提升，并在预训练场景中展示了令人鼓舞的结果。",
+          "在多种模型家族（如llama, gemma, apple/openelm, allenai/olmo）、数据集（如NL-RX, GSM8K, Spider, RottenTomatoes）和规模上进行了广泛的实证验证。"
+        ],
+        "one_sentence": "该研究提出了LLM-JEPA框架，通过结合重建损失与联合嵌入预测架构（JEPA）目标，利用文本与代码等多视图数据提升大语言模型的表示质量。",
+        "problem": "当前大语言模型主要依赖基于输入空间的重建或生成目标进行评估和训练，难以直接利用在视觉领域已被证明能提升感知和推理能力的JEPA目标，且缺乏将JEPA适配到LLM以改善其表示质量的方法。"
+      },
+      "summary_source": {
+        "sha256": "a257ef291e3097a5b8e3ba774568647bf06a26f4d218b0f58b27f5b69e2ae66d",
+        "url": "https://iclr.cc/virtual/2026/poster/10010475"
+      },
       "title": "LLM-JEPA: Large Language Models Meet Joint Embedding Predictive Architectures",
       "topics": [
         "World Model"
@@ -187051,6 +187219,21 @@
       "url": "https://openaccess.thecvf.com/content/CVPR2026/html/Dong_DreamSR_Towards_Ultra-High-Resolution_Image_Super-Resolution_via_a_Receptive-Field_Enhanced_Diffusion_CVPR_2026_paper.html"
     },
     "conf-d817a84047c46db5ff6cff38": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Diffusion",
+          "Pixel Space"
+        ],
+        "topics": [
+          "Image Gen&Edit"
+        ]
+      },
+      "annotation_source": {
+        "sha256": "9e1bebf1c4cd0245568a36e17fba79ea9f9ce29ca6cf549c728fcdd50ac40dc4",
+        "url": "https://papers.nips.cc/paper_files/paper/2025/hash/395371f778ebd4854b88521100af30ad-Abstract-Conference.html"
+      },
       "arxiv_id": "2502.17157",
       "authors": [
         "Canyu Zhao",
@@ -187074,6 +187257,7 @@
         "basis": "arxiv_first_submission",
         "url": "https://arxiv.org/abs/2502.17157"
       },
+      "doi": "10.52202/085713-1339",
       "id": "conf-d817a84047c46db5ff6cff38",
       "order_date": "2025-12-02",
       "published": "2025-02-24",
@@ -187088,7 +187272,21 @@
       },
       "source_edition": "NeurIPS 2025",
       "source_version": "54b0bc938d96f050f53272927c67a5664d55f77c2223a4a44b39618de5ba1a20",
-      "summary": null,
+      "summary": {
+        "contributions": [
+          "提出了 DICEPTION，这是首个完全共享参数的统一多任务感知模型，在显著减少数据需求（例如仅使用 SAM 0.06% 的数据）的情况下，实现了与专用模型相当的性能，并能在一个模型中解决六个视觉感知任务。",
+          "提供了关于将扩散模型重新用于感知任务的全面实验分析，阐明了架构、输入注入策略和采样时间步选择等关键设计，发现保留预训练生成先验对于实现快速适应和稳健的多任务性能至关重要，且 DiT 架构对此尤为有利。",
+          "展示了统一多任务范式在少样本设置下的优势，DICEPTION 能够仅使用 50 张训练图像并微调不到 1% 的参数即可快速适应新任务。",
+          "证明了像素级对齐训练能显著增强模型保留细节的能力并减少生成伪影，这对于低层图像处理任务具有重要意义。",
+          "指出统一预测空间使得交互式分割能够达到抠图级别的精度。"
+        ],
+        "one_sentence": "DICEPTION 是一个基于扩散模型先验的通用视觉感知模型，通过完全共享参数和极少量数据训练，实现了在多个视觉任务上与专用模型相当的性能。",
+        "problem": "现有视觉基础模型通常针对单一特定任务进行训练，由于不同视觉任务间的表征差异巨大，导致模型难以统一处理多种任务，且微调新任务时面临巨大的计算和数据开销，而现有的通用视觉模型往往需要从头训练并依赖大规模多任务数据集，效率较低。"
+      },
+      "summary_source": {
+        "sha256": "9e1bebf1c4cd0245568a36e17fba79ea9f9ce29ca6cf549c728fcdd50ac40dc4",
+        "url": "https://papers.nips.cc/paper_files/paper/2025/hash/395371f778ebd4854b88521100af30ad-Abstract-Conference.html"
+      },
       "title": "DICEPTION: A Generalist Diffusion Model for Visual Perceptual Tasks",
       "topics": [
         "Image Gen&Edit"
