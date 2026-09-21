@@ -347,8 +347,7 @@ def render_sidebar(
                     anchor = survey_anchor(category, year)
                     output.append(
                         f'{indent}    <li><a href="#{anchor}">'
-                        f'<span>Surveys</span><span class="nav-count">'
-                        f'{len(year_data["surveys"])}</span></a></li>'
+                        '<span>Surveys</span></a></li>'
                     )
                 for month, day_ranges in year_data["months"].items():
                     anchor = month_anchor(category, year, month)
@@ -513,12 +512,12 @@ def render_content(
                     f'        <button id="{surveys_anchor}-tab" type="button" role="tab" '
                     f'aria-controls="{surveys_anchor}" aria-selected="{str(survey_selected).lower()}" '
                     f'tabindex="{0 if survey_selected else -1}" data-period-target="{surveys_anchor}">'
-                    f'Surveys <span>{len(surveys)}</span></button>'
+                    'Surveys</button>'
                 )
             else:
                 output.append(
                     '        <button type="button" role="tab" disabled aria-disabled="true" '
-                    'aria-selected="false">Surveys <span>0</span></button>'
+                    'aria-selected="false">Surveys</button>'
                 )
             for month in (*range(1, 13), *((0,) if 0 in months else ())):
                 day_ranges = months.get(month)
