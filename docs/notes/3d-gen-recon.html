@@ -13,6 +13,673 @@
       <h1>3D Gen&amp;Recon · 论文要点</h1>
     </header>
     <div class="summary-topic-list">
+    <article class="summary-article summary-topic-entry" id="summary-2607.14513" data-arxiv-id="2607.14513" data-status="ready">
+<h1>[2607.14513] Compression of 3D Gaussian Splatting Data Using GPU-friendly Graphics Texture Coding</h1>
+<p><a href="https://arxiv.org/abs/2607.14513" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种利用标准图形纹理编码方法压缩3D高斯泼溅数据的技术，通过利用数据重排自由度优化固定码率编码，从而支持GPU高效并行渲染与随机访问。</p>
+<h2>解决的问题</h2>
+<p>现有3D高斯泼溅压缩方法未充分利用GPU并行架构特性，且缺乏对压缩数据的随机访问支持，导致在渲染复杂场景时无法仅解压可见部分，造成带宽浪费和渲染效率低下。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出将标准图形纹理编码方法应用于3D高斯泼溅数据压缩，以继承纹理压缩在GPU并行执行、随机访问及硬件加速方面的优势。</li>
+<li>利用3D高斯泼溅渲染前需按相机距离排序的特性，通过重排和分组原始数据，在保持随机访问能力的同时显著提升了固定码率压缩的效率。</li>
+<li>证明按颜色对原始数据进行部分排序能够显著降低压缩失真，从而在恒定码率约束下获得更好的重建质量。</li>
+<li>采用多压缩数据流策略，针对具有不同颜色分量数量的原始数据应用不同形式的固定码率编码，实现了比特率的更优分配。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2607.14927" data-arxiv-id="2607.14927" data-status="ready">
+<h1>[2607.14927] TanGO: Training-Free 3D Editing via Tangent-Space Guidance and Optimization</h1>
+<p><a href="https://arxiv.org/abs/2607.14927" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>TanGO 提出了一种无需训练的 3D 编辑框架，通过在切空间中进行自适应的逐 token 引导和优化，解决了现有方法在高阶表示中因忽略语义边界而导致的编辑伪影和身份丢失问题。</p>
+<h2>解决的问题</h2>
+<p>现有 3D 编辑方法主要依赖体素等低层表示，未能有效利用 VecSet 等高层结构化表示的自然语义边界，导致在编辑时出现网格撕裂、表面塌陷等语义伪影，且难以保持原始模型的身份特征，同时缺乏针对结构多样性的基准数据集。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了 TanGO，一个无需训练的局部 3D 编辑框架，通过在切空间中分配自适应的逐 token 引导来实现掩码无关的编辑。</li>
+<li>将编辑过程建模为瞬时单步最优控制问题，推导出了平衡编辑进度和控制能量的简单闭式更新公式。</li>
+<li>定义了基于 von Mises-Fisher 分布的归一化源速度与目标速度之间的逐 token 方向差异，以确定每个 token 的引导强度。</li>
+<li>通过调制增益和平均增益归一化实现了自适应的逐 token 引导，从而在 token 级别显式分配控制以解决全局锚点损失的不精确性。</li>
+<li>引入了 TanGOEdit 数据集，包含刚性和非刚性编辑任务，以解决现有基准测试中结构多样性不足的问题。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2606.26985" data-arxiv-id="2606.26985" data-status="ready">
+<h1>[2606.26985] Vis4GS: A Visual Analytic Tool for 3D Gaussian Splatting Reconstruction</h1>
+<p><a href="https://arxiv.org/abs/2606.26985" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种名为Vis4GS的视觉分析工具，旨在通过多视图联动机制将3D高斯泼溅重建中的渲染伪迹与高斯基元属性、视图覆盖率及演化谱系相连接，以解决现有工具难以解释优化过程及定位伪迹成因的问题。</p>
+<h2>解决的问题</h2>
+<p>尽管3D高斯泼溅支持快速训练和实时渲染，但其优化过程难以解释，现有平台仅能提供场景检查、编辑和基本统计，缺乏对高斯属性如何产生可见伪迹或在训练期间演化的支持，导致用户难以区分视图覆盖不足、运动恢复结构初始化差或致密化行为等成因，只能依赖试错法进行诊断。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种视觉分析方法，将渲染伪迹与高斯属性、视图覆盖率及谱系联系起来，以实现基元级别的诊断。</li>
+<li>设计了Vis4GS多视图视觉分析工具，包含交互式高斯分析视图、属性时间线视图、高斯致密化树视图以及日志和控制面板四个联动组件。</li>
+<li>实现了从伪迹到高斯的归因功能，允许用户追踪渲染场景中可见伪迹的责任高斯。</li>
+<li>提供了多视图定量诊断功能，通过分数、时间线图和联动视图检查高斯属性和视图覆盖率，引导用户定位可疑区域、迭代和高斯。</li>
+<li>引入了历史感知的谱系分析，展示高斯在初始化、致密化、克隆、分裂和剪枝过程中的演化。</li>
+<li>进行了用户研究，表明Vis4GS在可用性和伪迹理解方面提供了更强的支持。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2607.15536" data-arxiv-id="2607.15536" data-status="ready">
+<h1>[2607.15536] E3DGS: Unified Geometric-Photometric Equivariance for 3D Gaussian Splatting via Color-as-Geometry Embedding</h1>
+<p><a href="https://arxiv.org/abs/2607.15536" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>该论文提出了一种名为E3DGS的新范式，通过将颜色视为几何（Color-as-Geometry）将3D高斯泼溅中的球谐系数映射为矩阵子空间，实现了几何与光度属性在单一共轭变换下的统一等变处理，从而解决了现有方法因丢弃视角依赖信息而导致的表示瓶颈。</p>
+<h2>解决的问题</h2>
+<p>现有基于3D高斯泼溅的深度学习方法为了规避旋转对称性的复杂性，通常剥离视角依赖的球谐系数，将场景简化为无光泽的点云，导致模型无法区分几何相同但材质不同的物体；同时，由于几何属性与球谐系数在旋转下遵循不同的变换规则（张量变换与Wigner-DD矩阵），将它们整合到统一的等变流水线中需要计算代价高昂的Clebsch-Gordan张量积，使得在数百万高斯基元上实现严格的SE(3)等变性变得在计算上不可行。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了Color-as-Geometry范式，证明视角依赖的光度信息本身是一个等变几何对象，通过显式互易算子将球谐系数与gl(3)共轭载体识别，使外观和几何遵循单一的M映射到RMR转置变换规则。</li>
+<li>构建了一个完整的矩阵载体族，证明每个球谐阶数都可以精确表示为End(Vk)上的矩阵共轭，并指出3x3矩阵是覆盖至二阶视角依赖外观的最小载体，高阶则通过同族中的更大载体处理。</li>
+<li>实例化了一个矩阵原生的刚体SE(3)等变编码器，采用Ad-等变操作（如ReLN-Attention和ReLN-LayerNorm），其成对交互简化为SO(3)不变标量收缩，每对成本为O(1)，避免了计算代价随表示阶数陡峭增长的Clebsch-Gordan张量积。</li>
+<li>在3DGS基准上进行了验证，将该编码器实例化为等变高斯MAE和动作条件高斯世界模型，在物体级识别和动作条件操作任务中展示了跨相机帧变化的旋转鲁棒性和标签效率。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2607.16352" data-arxiv-id="2607.16352" data-status="ready">
+<h1>[2607.16352] Clarify Before Executing: A Self-Evolving Agent for Resolving Intent Asymmetry in 3D Tool Orchestration</h1>
+<p><a href="https://arxiv.org/abs/2607.16352" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种名为Clare的自进化多智能体框架，旨在通过主动澄清机制解决3D工具编排中用户意图与系统执行要求之间的不对称问题，并构建了用于评估该能力的3D-Clarify基准数据集。</p>
+<h2>解决的问题</h2>
+<p>当前3D基础模型和智能体系统存在根本性的意图不对称问题，即用户通常提供模糊、信息缺失或包含错误的指令，而系统要求精确可执行的参数；现有系统假设单轮完整指令，面对未指定需求时会出现盲目执行导致资源浪费、未检测参数矛盾导致运行时错误以及缺乏主动识别信息缺口机制等三种失败模式，且通用智能体框架缺乏针对3D特定不确定性（如缺失文件路径、模态不匹配）的检测机制。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了Clare，首个通过主动澄清和工具编排系统性地解决3D任务执行中用户需求未指定问题的多智能体框架，涵盖文本生成3D、单视图重建、多视图重建、点云编辑和后处理五个领域。</li>
+<li>引入了3D-Clarify基准数据集，包含620个任务及三种受控的未指定类型（歧义、信息缺失、错误细节），为评估意图不对称提供了标准化测试平台。</li>
+<li>开发了一种自进化训练范式，通过模拟用户交互和多轮奖励优化来优化澄清策略，使智能体无需人工标注即可学习有效的多轮决策。</li>
+<li>实现了显著的性能提升，在单步任务上执行成功率达到60.40%，在复杂多步任务上达到43.34%，且交互开销可忽略不计。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2603.20714" data-arxiv-id="2603.20714" data-status="ready">
+<h1>[2603.20714] The Role of Initialization in 3D Gaussian Splatting</h1>
+<p><a href="https://arxiv.org/abs/2603.20714" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>该论文通过系统评估六种初始化方法与五种致密化策略，揭示了密集初始化在提升3D高斯泼溅几何精度及泛化能力方面的关键作用，并指出当前研究孤立评估初始化与致密化的局限性。</p>
+<h2>解决的问题</h2>
+<p>现有3D高斯泼溅研究通常孤立地评估致密化策略和初始化方法，且多基于稀疏运动恢复结构或随机初始化，导致密集初始化对几何一致性的潜在优势未被充分探索，且缺乏对初始化与致密化交互作用的全面评估。</p>
+<h2>创新点</h2>
+<ul>
+<li>通过结合六种初始化方法（包括运动恢复结构、激光扫描、EDGS、单目深度预测等）和五种致密化策略，对3D高斯泼溅进行了全面的实验评估。</li>
+<li>发现密集初始化在约束良好的场景中虽未显著提升新视角合成质量，但能显著改善对训练图像差异较大视角的泛化能力。</li>
+<li>证明使用密集初始化能大幅提升训练后场景的几何精度，并缓解最佳新视角合成致密化策略往往导致最差几何结果的问题。</li>
+<li>指出结合先进致密化策略的低成本实用初始化方法（如单目深度预测）可显著改善新视角合成泛化性和几何精度，效果常可与激光扫描初始化相媲美。</li>
+<li>建议未来方法应充分利用密集初始化，将其作为核心组件直接设计，例如在致密化过程中利用初始点的预测置信度或重投影误差。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2607.16624" data-arxiv-id="2607.16624" data-status="ready">
+<h1>[2607.16624] SPARE-GS: Structural Parsimony and Resource Efficiency for 3D Gaussian Splatting</h1>
+<p><a href="https://arxiv.org/abs/2607.16624" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>该论文提出了一种名为 SPARE-GS 的即插即用框架，通过将 3D 高斯泼溅的结构演化建模为全局预算约束优化问题，利用区域边际需求估计和容量感知目标配额来协调致密化与剪枝，从而在显著降低训练时间和高斯数量的同时保持渲染保真度并提升下游压缩效率。</p>
+<h2>解决的问题</h2>
+<p>3D 高斯泼溅（3DGS）虽然在新视角合成中表现优异，但其显式表示引入了巨大的资源开销，高保真重建通常需要海量高斯基元，导致模型尺寸大、内存消耗高、训练时间长，且传统固定迭代训练在收敛后仍继续优化，现有方法多依赖局部启发式规则或缺乏全局空间预算协调，导致结构冗余和表示不紧凑。</p>
+<h2>创新点</h2>
+<ul>
+<li>将 3D 高斯泼溅的结构演化形式化为全局预算约束优化问题，并推导了最优性条件，要求结构资源的边际效用在有限基元预算下在各空间区域间保持平衡。</li>
+<li>提出了 SPARE-GS 框架，通过估计区域边际需求、构建容量感知目标配额，并利用区域预算偏差来引导致密化、剪枝和自适应终止，以实现更均衡的结构分配。</li>
+<li>在多种 3D 高斯泼溅训练管线和下游任务中验证了 SPARE-GS，展示了在保持渲染保真度的同时，显著减少了训练时间和高斯数量，并提高了后续后处理（如压缩和剪枝）的效率。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2607.16805" data-arxiv-id="2607.16805" data-status="ready">
+<h1>[2607.16805] Scene-SAM3D: Multi-View Scene Asset Generation Without Fine-Tuning</h1>
+<p><a href="https://arxiv.org/abs/2607.16805" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>Scene-SAM3D 提出了一种无需微调的多视图场景资产生成框架，通过占据覆盖视图选择、步数高效的冲突感知多视图融合以及刚体高斯布局精化，解决了多视图重建中的几何冲突与位姿不一致问题，显著提升了场景级空间一致性。</p>
+<h2>解决的问题</h2>
+<p>现有方法在处理多视图场景资产生成时面临多重挑战：随机视图条件化无法显式协调不同视图间的差异；多视图速度融合（如 MultiDiffusion）虽能提升质量，但隐含假设各视图更新在共享规范空间中兼容，导致直接平均可能产生重复或分层结构；此外，不同视图对同一实例的旋转、缩放和平移预测存在显著差异，导致在世界坐标系中物体尺寸、朝向和位置不兼容，且最利于网格质量的视图往往不是最利于下游布局估计的视图，造成形状重建与场景布局之间的不匹配。</p>
+<h2>创新点</h2>
+<ul>
+<li>将校准多视图场景资产生成形式化为实例中心流估计与全局一致放置之间的耦合问题，提出了选择、融合和对齐三个阶段，使其能与预训练的单视图生成器无缝协作。</li>
+<li>提出了 Scene-SAM3D 这一免训练方法，结合了基于占据的锚点-辅助视图选择机制，通过测量共享世界坐标系中新观察到的物体占据来减少三维互补冗余。</li>
+<li>引入了步数高效的冲突感知多视图融合策略，将多视图融合集中在早期采样步骤，并通过锚点引导的符号共识抑制不兼容的速度更新，以缓解规范空间冲突。</li>
+<li>设计了刚体高斯布局精化模块，在固定重建物体资产的前提下，利用校准多视图渲染反馈优化其相似变换，从而在不修改生成网格的情况下提升场景级空间一致性。</li>
+<li>在 Replica 和 ScanNet++ 数据集上进行了评估，证明该方法在物体级指标上取得一致提升，并在场景尺度重建上表现出更强性能，同时相比穷举多视图速度融合减少了流模型推理步骤。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2607.16838" data-arxiv-id="2607.16838" data-status="ready">
+<h1>[2607.16838] TopoGS: Planar Reconstruction via Topology-aware 3D Gaussian Splatting</h1>
+<p><a href="https://arxiv.org/abs/2607.16838" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种名为TopoGS的新型3D高斯泼溅框架，通过显式集成拓扑关系作为几何约束，从多视角图像中重建具有明确连接性的结构化平面模型。</p>
+<h2>解决的问题</h2>
+<p>传统重建管线通常将场景几何恢复为无序点集或孤立表面片段，导致关键的拓扑连接性（如平面的相交、邻接或共享边界）在重建过程中丢失，从而产生碎片化模型和边界错位，无法满足动画制作、机器人、物理模拟等下游应用对精度的要求；现有的基于3D高斯泼溅的方法虽然利用单目先验恢复了平面基元，但仍将平面视为孤立实体，缺乏拓扑连接性，且直接提升2D邻接关系到3D时易受透视遮挡和深度不连续的影响而产生错误。</p>
+<h2>创新点</h2>
+<ul>
+<li>引入了一种新颖的基于3D高斯泼溅的框架，该框架整合了几何和拓扑约束，以恢复一致的平面几何和拓扑结构。</li>
+<li>提出了一种利用优化后的可靠3D邻接关系来提取连通结构化平面模型的方法。</li>
+<li>在ScanNet++数据集上，该方法在高保真平面重建任务中实现了最先进的性能。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2607.17093" data-arxiv-id="2607.17093" data-status="ready">
+<h1>[2607.17093] Autoregressive B-Rep Shape Generation with Parametric Surfaces</h1>
+<p><a href="https://arxiv.org/abs/2607.17093" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>ParaCAD 提出了一种基于 GPT 的自回归生成框架，通过混合表面分词器直接预测带有显式 UV 参数化的 B-Rep 曲面，从而在保持解析曲面精确性的同时简化了拓扑结构的生成任务。</p>
+<h2>解决的问题</h2>
+<p>现有基于潜在网格或点云表示的直接 B-Rep 生成方法存在压缩误差，导致曲面类型语义模糊且解析曲面无法被忠实保留，进而引发下游几何计算（如曲面求交）中的误差放大和拓扑错误，使得生成的模型难以编辑且不利于制造与仿真。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种以表面为中心的分词器，在将 B-Rep 面表示为离散令牌的同时保留原生曲面类型和参数，显式编码常见解析基元并通过兼容的离散化支持自由曲面。</li>
+<li>设计了一种有效的点云条件自回归生成器，预测具有有界 UV 域的参数化曲面，通过从学习空间中移除显式拓扑实体来简化生成任务，使模型专注于预测几何上有意义的曲面。</li>
+<li>开发了一个精确的几何求解器，利用曲面求交和二元整数规划从参数化曲面稳健地组装 B-Rep，通过切割曲面片并组装有用部分以最大化几何覆盖并确保拓扑有效性。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2607.09260" data-arxiv-id="2607.09260" data-status="ready">
+<h1>[2607.09260] AnythingReality: Robust Online Gaussian Splatting SLAM for Open-Vocabulary VR Scene Exploration</h1>
+<p><a href="https://arxiv.org/abs/2607.09260" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>该论文提出了一种名为 AnythingReality 的集成系统，通过结合基于 ORB-SLAM 的位姿估计、在线高斯加 SDF 重建、实时 VR 渲染以及语音驱动的视觉语言模型交互，实现了在开放词汇场景下对在线重建的 3D 高斯泼溅场景进行鲁棒的实时探索与语义理解。</p>
+<h2>解决的问题</h2>
+<p>现有的在线重建流水线通常依赖精确的深度测量进行跟踪，对缺失深度和噪声敏感，且多依赖昂贵的 TOF 传感器或外部里程计；此外，大多数重建过程缺乏直接的用户交互支持，用户只能被动观察，难以在重建过程中对场景进行语义查询、检查或理解，且缺乏将视觉语言模型能力应用于实时 3D 场景交互的有效手段。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种集成系统，将基于 ORB-SLAM3 的轻量级位姿估计与在线高斯加 SDF 映射模块相结合，降低了对干净深度数据的依赖，实现了鲁棒的在线重建。</li>
+<li>设计了一种改进的高斯生成策略，通过颜色误差驱动插入并结合射线投射深度和 TSDF 积分置信度进行门控，以处理室内噪声深度数据，并采用异步线程解耦高斯优化与数据采集。</li>
+<li>构建了一个基于 WebXR 和 WebRTC 的实时立体 VR 渲染管线，支持在重建过程中通过头显实时流式传输增量更新的高斯场景，并应用异步时间扭曲技术降低旋转延迟。</li>
+<li>引入了基于视觉语言模型的语音驱动语义交互模块，允许用户在探索过程中通过自然语言提问当前视图内容，并创建开放词汇的兴趣点，实现了人机协同的场景理解。</li>
+<li>在多个室内场景和公开数据集上评估了系统性能，通过帧率、PSNR、SSIM 和 LPIPS 等指标验证了该系统在沉浸式场景理解、远程检查和人在回路重建方面的潜力。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2607.10623" data-arxiv-id="2607.10623" data-status="ready">
+<h1>[2607.10623] LATO.2: Factorized 3D Mesh Generation with Vertex and Topology Flow</h1>
+<p><a href="https://arxiv.org/abs/2607.10623" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>LATO.2 提出了一种将顶点生成与拓扑连接解耦的因子化流匹配框架，通过分别建模顶点位置与基于顶点的连接关系，解决了传统统一隐空间方法中几何与离散结构纠缠导致的表面破碎问题，并支持高分辨率分块生成与拓扑自适应编辑。</p>
+<h2>解决的问题</h2>
+<p>现有拓扑感知的 3D 网格生成方法面临两大挑战：一是基于神经场或自回归序列的方法难以生成具有艺术家风格紧凑拓扑结构的网格，且序列方法存在训练成本高、推理慢及面数受限的问题；二是早期基于流匹配的联合隐空间方法将顶点坐标与离散组合连接性编码在同一共享隐空间中，导致流模型需同时捕捉统计特性截然不同的空间位置信号与离散结构信号，这种纠缠使得流学习复杂化并引发表面破碎现象。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了 LATO.2 因子化流匹配框架，将显式网格生成分解为基于共享体素脚手架的结构化隐空间上的顶点流与连接流两个独立阶段。</li>
+<li>引入了逐顶点漂移向量以补偿顶点解码中最高分辨率下的量化误差，并设计了可解码为成对边概率的逐顶点拓扑隐变量表示。</li>
+<li>实现了顶点诱导的分块高分辨率生成，通过划分体素脚手架并在每个部分以完整隐容量合成，生成了比单体隐空间允许更高分辨率的网格。</li>
+<li>支持拓扑自适应编辑，允许通过操纵第一阶段生成的顶点来诱导相应的连接性变化，而无需重新优化。</li>
+<li>实验表明 LATO.2 在几何保真度和连接性质量上超越了最先进的拓扑感知网格生成器。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.22809" data-arxiv-id="2609.22809" data-status="ready">
+<h1>[2609.22809] Kinematic Interface for the Wild: Modular Bimanual Loco-Manipulation Capture from 360$^{\circ}$ Cameras Alone</h1>
+<p><a href="https://arxiv.org/abs/2609.22809" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>KIWI 提出了一种仅使用 360 度相机进行模块化双手位姿与操作捕捉的系统，通过利用双镜头分别构建共享场景地图和记录操作细节，实现了无需额外计算单元的高精度双手轨迹估计与场景重建。</p>
+<h2>解决的问题</h2>
+<p>现有机器人学习数据采集系统通常依赖昂贵的追踪器、专用传感器或复杂的硬件组合，且纯相机方案常因视野遮挡或双手缺乏共同视野而导致定位失败率高，同时场景重建往往需要独立的扫描过程，缺乏一种低成本、模块化且能同时提供双手位姿、夹爪状态及场景模型的纯相机捕捉方案。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出双镜头状态估计方法，利用后置镜头从演示数据中构建共享地图以注册双手及可选头部相机，并通过离线融合前置镜头与 IMU 数据解决前置视野丢失问题。</li>
+<li>实现了仅从相机视频、IMU 和音频中完整提取双手 6-DoF 工具位姿、离地高度、夹爪开度、同步视图及头部标记位姿，并无需独立扫描即可恢复场景的 3D 高斯泼溅模型。</li>
+<li>设计了开源的模块化硬件与软件核心，允许用户复用校准后的相机模块和重建管线，通过更换适配器即可支持多种夹爪及机器人末端执行器。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.22849" data-arxiv-id="2609.22849" data-status="ready">
+<h1>[2609.22849] LINGO: Latent Initialization and Gradient Optimization for Sparse-view X-ray Novel View Synthesis and CT Reconstruction with 3D Gaussian Splatting</h1>
+<p><a href="https://arxiv.org/abs/2609.22849" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出LINGO方法，通过潜空间掩码初始化和动态梯度优化策略，解决稀疏视角X光新视角合成与CT重建中3D高斯泼溅面临的背景噪声抑制、空间位置敏感度低及低密度结构细节恢复困难等挑战。</p>
+<h2>解决的问题</h2>
+<p>现有基于3D高斯泼溅的稀疏视角CT重建方法（如R2-Gaussian）存在三大问题：一是X光图像缺乏丰富纹理导致基于FDK反投影的初始化难以有效抑制背景噪声，引入严重干扰和离群点；二是X光成像模型导致对空间位置敏感度有限，沿射线方向的位置扰动对投影影响微小，且不同视角投影可能产生冲突梯度导致梯度抵消，难以抑制噪声或锐化结构边界；三是低密度结构产生的弱损失信号导致梯度不足、收敛缓慢且细节恢复效果差。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出一种潜空间掩码初始化策略，利用X光掩码构建体素级滤波器，生成更干净且结构一致性更高的初始高斯点云。</li>
+<li>引入一种动态梯度优化方案，结合损失缩放策略和体素缩放机制，以增强低密度区域的梯度响应并降低计算开销。</li>
+<li>提供IPSD指标以定量评估初始化质量。</li>
+<li>通过对比实验和消融研究，证明了LINGO在稀疏视角条件下的新视角合成和CT重建任务中的优势。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.22941" data-arxiv-id="2609.22941" data-status="ready">
+<h1>[2609.22941] D3GS: Depth, DINO, and RGB Diffusion Co-Guided 3D Gaussian Splatting for Sparse-View Reconstruction</h1>
+<p><a href="https://arxiv.org/abs/2609.22941" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种名为D3GS的稀疏视角3D高斯泼溅框架，通过整合度量深度、DINO特征和RGB扩散先验，有效解决了稀疏输入下几何与外观歧义导致的重建质量问题。</p>
+<h2>解决的问题</h2>
+<p>现有3D高斯泼溅方法在稀疏视角下因缺乏足够的几何和光度监督，导致跨视图对应关系不可靠、重建错位、细节丢失以及浮点（floaters）问题，且单目深度存在尺度模糊和噪声，仅依赖RGB和深度约束不足以实现稳定重建。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种新颖的高斯泼溅框架，通过整合度量深度、DINO特征和RGB扩散先验，解决了稀疏输入固有的关键几何和外观歧义问题。</li>
+<li>设计了一个跨分辨率深度细化模块，利用低到高分辨率策略生成高分辨率度量深度图，为鲁棒的3D高斯优化提供稳定的几何约束。</li>
+<li>开创性地引入了DINO引导的视图一致特征学习，通过为高斯属性增加DINO特征描述符，直接增强了3D高斯表示的多视图一致性和结构准确性，有效缓解浮点问题。</li>
+<li>提出了一种基于新视角扩散的迭代高斯细化模块，用于在弱约束区域恢复精细细节并增强视觉保真度，从而进一步优化高斯场景表示。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.23005" data-arxiv-id="2609.23005" data-status="ready">
+<h1>[2609.23005] Compressing 3D Gaussian Splatting via Cross-Representation Priors</h1>
+<p><a href="https://arxiv.org/abs/2609.23005" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种名为CRP-GS的3D高斯泼溅压缩框架，通过引入跨表示先验（包括成对对应先验和全局共享先验）来减少锚点间的冗余，从而在保持渲染保真度的同时显著降低存储需求。</p>
+<h2>解决的问题</h2>
+<p>现有3D高斯泼溅压缩方法主要关注原始高斯基元的冗余或局部空间结构，忽略了锚点之间存在的跨表示相关性，导致无法有效利用特征对应关系来降低熵编码的冗余，压缩效率仍有优化空间。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种基于对应关系的层次结构（COHS），利用锚点间的特征对应关系构建上下文参考，使部分解码后的锚点能作为先验辅助其他锚点的解码，从而提升率失真性能。</li>
+<li>提出了一种共享特征聚合方法（SFA），通过从上下文哈希网格中提取全局共享先验，抑制单个锚点特征中的冗余信息，增强结构紧凑性和编码效率。</li>
+<li>构建了CRP-GS框架，显式地建模跨表示先验，结合成对对应先验和全局共享先验，有效减少了锚点间的冗余。</li>
+<li>在多个3D高斯泼溅压缩基准测试中进行了全面评估，证明CRP-GS相比基线方法HAC平均实现了超过30%的存储节省，同时保持了具有竞争力的视觉质量。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.23049" data-arxiv-id="2609.23049" data-status="ready">
+<h1>[2609.23049] VDGS: Visibility-Driven Large-Scale 3D Gaussian Splatting for Aerial Scene Reconstruction</h1>
+<p><a href="https://arxiv.org/abs/2609.23049" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>该论文提出了一种名为VDGS的可见性驱动大规模3D高斯泼溅框架，通过引入可见性统计进行场景分块并采用梯度补偿策略，解决了现有方法在视点分布不均时导致的监督不平衡和低可见区域重建质量差的问题。</p>
+<h2>解决的问题</h2>
+<p>现有大规模3D高斯泼溅方法主要依赖几何驱动的分块或基于锚点的混合表示，忽略了相机观测分布的影响，导致不同观测水平区域受到不平衡的监督，使得低可见性区域因梯度弱而难以致密化，最终造成重建质量显著下降。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种可见性驱动的数据划分策略，显式建模相机分布与场景结构之间的关系，实现了更合理的数据划分和更均衡的训练过程。</li>
+<li>设计了一种针对低可见性锚点的梯度补偿和致密化机制，有效缓解了弱约束区域的欠拟合问题，显著提升了复杂场景下的重建鲁棒性。</li>
+<li>在多个具有挑战性的真实世界大规模数据集上进行了广泛实验，证明了在视点覆盖不均的情况下，该方法显著优于现有方法。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.23103" data-arxiv-id="2609.23103" data-status="ready">
+<h1>[2609.23103] DiagGen: Agentic Generation of Deformable Assets with Sim-based Diagnostics for Robotic Simulation</h1>
+<p><a href="https://arxiv.org/abs/2609.23103" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>DiagGen 提出了一种基于代理的生成框架，通过将物理模拟器集成到生成循环中，利用模拟诊断信号来识别并修复由真实世界图像生成的可变形资产中的物理不合理问题。</p>
+<h2>解决的问题</h2>
+<p>现有基于视觉语言模型的可变形资产生成框架存在两个主要局限：一是通常依赖临时验证方法，未利用单个资产在模拟器中的材料响应作为诊断信号来识别导致物理不合理行为的问题；二是材料参数通常通过基于梯度的优化拟合，未根据部件语义条件化参数推断，且需要昂贵的校准交互捕获和逐对象优化。</p>
+<h2>创新点</h2>
+<ul>
+<li>引入了一种带有模拟诊断在环的代理式可变形资产生成工作流，给定野外图像，阶段代理生成几何和材料参数，建立面向模拟器的可变形资产。</li>
+<li>设计了一个诊断代理，在最后一阶段指挥基于物理的模拟器渲染视觉，应用抓取以探测感兴趣区域，并根据从模拟器获得的信息判断被抓取区域的物理合理性。</li>
+<li>实现了诊断代理向早期生成阶段发送修复线索的机制，在40个资产的评估中，这些线索指导了对分割、材料推断和网格处理的针对性修改，从而在修订后的资产中产生中等程度的改进。</li>
+<li>展示了 DiagGen 资产的多种机器人效用，证明与未打磨的视觉基础模型生成的资产不同，DiagGen 生成的可变形资产可直接用于高保真机器人模拟器中的操作。</li>
+<li>证明了经过诊断修复后的资产相比未修复的对应物，能够获得更具物理真实性的操作轨迹，并展示了 DiagGen 资产可以被放置在由真实世界转换而来的合成场景中。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.23169" data-arxiv-id="2609.23169" data-status="ready">
+<h1>[2609.23169] UltraTex: Unleashing 2K Multi-View Diffusion for 3D Texturing</h1>
+<p><a href="https://arxiv.org/abs/2609.23169" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>UltraTex 通过引入背景令牌丢弃、块稀疏注意力及前景感知 VAE 解码等高效计算设计，成功将多视角扩散模型扩展至 2048 分辨率，实现了高保真 3D 纹理的生成。</p>
+<h2>解决的问题</h2>
+<p>现有基于多视角扩散模型的 3D 纹理生成框架受限于低分辨率（如 512 或 768），无法保留高频细节；主要障碍在于高分辨率下多视角生成的计算复杂度极高，导致 GPU 内存消耗和延迟过大，使得训练和推理在架构上不可行。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了 UltraTex 框架，成功将多视角扩散模型扩展至 2048 分辨率，解锁了高保真、高细节 3D 纹理的生成能力。</li>
+<li>引入了前景感知的计算设计以消除高分辨率 DiT 的瓶颈，包括用于压缩序列长度的背景令牌丢弃和用于优化令牌交互的块稀疏注意力。</li>
+<li>设计了前景感知 VAE 解码机制，通过替换噪声背景并微调解码器，在保持推理效率的同时避免了视觉伪影，确保最终高分辨率视图的鲁棒重建。</li>
+<li>构建了 G-buffer TexVerse 数据集，这是一个覆盖超过 268,000 个 3D 资产的大规模、超高分辨率多视角渲染数据集，为未来 3D 纹理研究提供了结构化且经过严格筛选的训练数据。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.23182" data-arxiv-id="2609.23182" data-status="ready">
+<h1>[2609.23182] GrapeSplat: Geometry-Grounded Reconstruction via Amalgamated Pose-Free Encoding for Feed-Forward 3D Gaussian Splatting</h1>
+<p><a href="https://arxiv.org/abs/2609.23182" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>GrapeSplat 提出了一种基于统一体素网格的前馈式 3D 高斯重建框架，通过 Atlas 编码器、PEACH-Vox 模块和稀疏解码器，实现了从无位姿、无标定图像中单次前向传播生成全局结构一致且可控数量的可渲染 3D 高斯场景。</p>
+<h2>解决的问题</h2>
+<p>现有前馈式 3D 高斯重建方法大多依赖真值相机位姿和内参，或采用逐像素预测高斯基元，导致基元数量受限于图像分辨率和视图数量，存在冗余观测、跨视图一致性依赖隐式特征以及难以控制全局结构一致性和基元总数的问题。</p>
+<h2>创新点</h2>
+<ul>
+<li>引入了一种基于统一体素网格的非像素对齐前馈流水线，能够从无位姿和无标定图像中通过单次前向传播重建可渲染的 3D 高斯场景，无需后处理或逐场景优化。</li>
+<li>设计了 Atlas 编码器，将适配的几何骨干网络转换为 3D 点级令牌，利用预测的相机参数将像素特征显式锚定在 3D 空间中。</li>
+<li>提出了 PEACH-Vox 模块，通过场景自适应的压缩体素化将无界 3D 场景映射到有界稀疏网格，并利用闭式逆函数和高斯协方差传输实现高斯基元到世界空间的精确恢复。</li>
+<li>通过稀疏解码器整合网格信息，从场景级网格解码出全局一致且与体素对齐的高斯基元，实现了对基元数量的显式控制。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.23286" data-arxiv-id="2609.23286" data-status="ready">
+<h1>[2609.23286] RegVGGT: Sustainable Visual Geometry Grounding for Streaming via Regulated Memory</h1>
+<p><a href="https://arxiv.org/abs/2609.23286" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种名为RegVGGT的免训练令牌调节方法，通过利用FFRM令牌在时间流上的显著性一致性，仅保留每帧至多1%的令牌作为上下文记忆，从而在大幅降低内存占用的同时实现了长视频流中密集3D几何重建的可持续性与高精度。</p>
+<h2>解决的问题</h2>
+<p>现有的前馈重建模型（FFRM）在离线推理模式下需要重新处理所有历史帧，导致无法处理长视频流；虽然基于时间因果注意力的在线推理和记忆库策略缓解了计算开销，但随着处理帧数的增加，这些方法会遗忘关键的历史上下文，导致重建精度下降。</p>
+<h2>创新点</h2>
+<ul>
+<li>报告了FFRM在图像流输入推理中的一种启发式行为，即FFRM令牌的初始显著性可靠地决定了其在整个流中的长期重要性。</li>
+<li>提出了RegVGGT方法，该方法激进地仅保留每个输入帧至多1%的令牌，以最小的历史流上下文完整性妥协换取高效的内存管理。</li>
+<li>引入了一种兼容FlashAttention的显著性估计机制，通过Log-Sum-Exp统计量即时恢复精确的注意力分数，而无需实例化完整的注意力图，从而提高了时间因果注意力的效率。</li>
+<li>在长时程基准测试上展示了RegVGGT在多种FFRM预测任务中达到了最先进的性能，并大幅超越了基于FFRM的流重建基线方法。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.23380" data-arxiv-id="2609.23380" data-status="ready">
+<h1>[2609.23380] LiteTex-GS: Fast and Lightweight Texturing for Gaussian Splatting</h1>
+<p><a href="https://arxiv.org/abs/2609.23380" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>LiteTex-GS 提出了一种通过全局到局部容量分配机制解耦几何与外观的高斯泼溅纹理化框架，旨在平衡高保真细节表达与计算效率。</p>
+<h2>解决的问题</h2>
+<p>标准高斯泼溅在建模复杂场景时存在严重的表示低效问题，为了捕捉高频纹理需要大量基元，导致内存和存储瓶颈；现有解耦方法依赖复杂的 UV 参数化或坐标变换，计算开销大且易破坏重建效率，难以在表达细节与计算敏捷性之间取得平衡。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种用于轻量级纹理化高斯泼溅的全局到局部容量分配框架，通过统一机制平衡细节表达与计算效率。</li>
+<li>设计了一个基于 DashGaussian 的频率感知调度器，联合控制渲染分辨率、纹理分辨率上限和基元致密化率，并依据每个高斯的重建误差决定新纹理容量的局部消耗位置。</li>
+<li>提出了一种自适应纹理增长和几何管理策略，仅针对高误差基元选择性增加纹理分辨率，并移除持续低效用的几何体，从而生成紧凑且保留重要局部结构的表示。</li>
+<li>引入了一种分辨率感知的纹理优化规则，通过适应纹理分辨率的演变来调整有效更新幅度，以缓解渐进式纹理增长导致的优化不平衡，提高收敛速度和质量效率权衡。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.23386" data-arxiv-id="2609.23386" data-status="ready">
+<h1>[2609.23386] ProxyBuild: Text-Guided Structured 3D Building Generation with Mesh-Anchored Procedural Proxies</h1>
+<p><a href="https://arxiv.org/abs/2609.23386" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>ProxyBuild 提出了一种结合图神经网络拓扑代理推理、文本条件语义理解与程序化内容生成的混合方法，通过引入 MAPP 中间表示和面-边二部图编码器，实现了由文本和基础几何共同驱动的结构化 3D 建筑生成。</p>
+<h2>解决的问题</h2>
+<p>现有自动 3D 建筑生成方法存在显著局限：程序化内容生成（PCG）依赖专家先验且难以灵活响应自然语言指令；大语言模型（LLM）缺乏精确的 3D 空间感知和连续数值推理能力，难以解决复杂几何约束下的 PCG 问题；基于扩散模型和 3D 表示的生成范式虽能提升形态多样性，但生成的隐式神经场或单体网格缺乏结构化层级信息，无法满足下游交互编辑和资产复用的需求；而现有的混合生成框架（如 BuildingBlock）仅基于边界框进行松散堆叠，忽略了细粒度的建筑边界约束，容易导致组件实例化阶段出现悬浮组件和网格穿插等几何伪影。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了 ProxyBuild，一种新颖的混合方法，整合了基于图神经网络的拓扑代理推理、文本条件语义理解和程序化内容生成，实现了由文本和基础几何共同驱动的结构化建筑生成。</li>
+<li>引入了 MAPP 作为新的建筑中间表示，并设计了面-边二部图编码器，通过显式建模网格细分图上面和边之间的特征交互，克服了边界框的表示局限性，实现了准确的基元角色预测。</li>
+<li>将建筑生成任务解耦为代理预测和代理到资产实例化两个阶段，利用 LLM 解析文本中的全局风格和程序化属性，并结合基元几何特征进行资产检索，通过硬约束空间放置逻辑将抽象代理精确实例化为结构化建筑模型。</li>
+<li>构建了一个包含文本描述、建筑外壳、MAPP 语义标签和完整建筑实例的建筑数据集，以支持该流水线的训练和评估。</li>
+<li>通过扩展测试数据源至 BuildAnyPoint 生成的建筑网格和 3DBAG 的真实世界城市 LoD2 片段，验证了 ProxyBuild 在几何先验学习和泛化方面的能力，实验表明其在生成多样性、结构合理性和可编辑性方面具有优越性能。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.23404" data-arxiv-id="2609.23404" data-status="ready">
+<h1>[2609.23404] ScaleBlind: Point Cloud Completion under Unknown Scale</h1>
+<p><a href="https://arxiv.org/abs/2609.23404" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>ScaleBlind 提出了一种无需真实尺度信息的点云补全框架，通过利用预训练视觉语言模型补全多视角渲染图并构建概率体积先验，结合先验引导的由粗到细补全网络，解决了现有方法在未知尺度下因尺度线索泄露导致的性能下降问题。</p>
+<h2>解决的问题</h2>
+<p>现有基于学习的点云补全方法通常依赖将形状规范化到单位球体的预处理流程，这隐含地将部分输入与真实全局尺度绑定，引入了测试时不可用的特权线索；当移除这种真实尺度依赖的预处理时，现有模型性能会急剧下降，表现为全局尺度失真和过度补全伪影，且现有的生成式方法在补全时缺乏对观测几何一致性的约束，导致结构不合理和尺度偏差。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了真实尺度无关的点云补全问题，并揭示了现有流水线中真实尺度绑定的规范化处理向部分输入引入了不真实的尺度先验泄露。</li>
+<li>提出利用预训练视觉语言模型补全部分扫描的多视角渲染图，并通过体素投票将多视角证据提升为尺度一致的概率三维先验，以恢复缺失的全局范围。</li>
+<li>将恢复的先验整合到先验引导的由粗到细补全网络中，采用联合归一化和置信度感知融合策略，在真实尺度无关的预处理下生成与观测几何保持一致的忠实补全结果。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.23425" data-arxiv-id="2609.23425" data-status="ready">
+<h1>[2609.23425] Semi-automated reconstruction of indoor geometry from 360-degree video for CFD-based airflow analysis in classrooms</h1>
+<p><a href="https://arxiv.org/abs/2609.23425" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种端到端的半自动化流程，利用神经辐射场和语义分割技术将单段360度视频转化为可编辑的仿真就绪几何资产，以支持教室等室内空间的CFD气流分析。</p>
+<h2>解决的问题</h2>
+<p>现有室内CFD分析面临三大障碍：获取准确房间几何需昂贵设备或耗时的人工建模；标准流程仅生成整体表面表示，缺乏对家具、人员等语义对象的独立分解；评估不同布局需重新采集或建模，导致参数化研究成本高且难以复现。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出一种端到端半自动化流程，将单段消费级360度视频转化为可独立编辑的仿真就绪表面资产，整合了NeRF重建、文本提示语义分割、多视图共识、八叉树实例提取、图论修复及OpenFOAM案例自动生成。</li>
+<li>开发基于浏览器的半自动场景编辑器，支持从单次采集快速构建参数化假设配置，允许调整家具布局、人员位置及物体朝向而无需重新扫描。</li>
+<li>在两个大学教室和一个阶梯式礼堂中进行多环境CFD演示，通过固定通风边界条件下的受控遮挡序列重模拟四种内部配置，报告了基于监测点的被动标量半清除时间。</li>
+<li>在阶梯式礼堂案例中验证了工作流在更大几何规模和计算规模下的适用性，展示了其在机械通风室内空间中的应用无关性。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.23436" data-arxiv-id="2609.23436" data-status="ready">
+<h1>[2609.23436] GAPS: Generative Active Pseudo-view Selection for Sparse-View 3D Gaussian Splatting</h1>
+<p><a href="https://arxiv.org/abs/2609.23436" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>该论文提出了GAPS框架，通过生成式主动伪视图选择、四重约束的扩散模型生成以及密度自适应正则化，解决了稀疏视角下3D高斯泼溅重建中未观测区域内容缺失及训练不稳定的问题。</p>
+<h2>解决的问题</h2>
+<p>3D高斯泼溅（3DGS）在稀疏视角输入下重建严重欠约束，导致深度错误、漂浮结构及外观不一致等伪影，且现有方法无法有效合成未观测区域内容或防止低质量生成破坏训练稳定性。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了生成式主动伪视图选择（GAPS）机制，通过评分函数联合平衡重建信息量与生成可靠性，并采用退火策略从保守插值逐步过渡到探索性外推。</li>
+<li>构建了一种交替优化框架，利用ControlNet、IP-Adapter、LoRA微调及img2img去噪四种互补机制约束扩散模型，确保生成的伪视图在几何结构和风格上保持一致性。</li>
+<li>提出了密度自适应DropGaussian正则化方法，根据场景复杂度动态调整dropout强度，以增强训练鲁棒性。</li>
+<li>设计了双准则伪视图准入机制与不确定性加权损失，通过门控和降权策略过滤不可靠的伪视图，防止低质量生成 destabilize 训练过程。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.23491" data-arxiv-id="2609.23491" data-status="ready">
+<h1>[2609.23491] Elevator-VIGS: Separating Elevator Motion from Robot Motion in Visual-Inertial Gaussian Splatting SLAM</h1>
+<p><a href="https://arxiv.org/abs/2609.23491" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>该论文提出Elevator-VIGS，通过在视觉惯性高斯泼溅SLAM中引入运输状态并采用零样本电梯检测，解决了电梯内相机与IMU观测坐标系不一致导致的帧冲突问题，实现了电梯运动与机器人运动的有效分离。</p>
+<h2>解决的问题</h2>
+<p>在室内无GNSS且电梯屏蔽无线信号的场景下，现有仅依赖相机和IMU的SLAM系统无法建模电梯运动。由于相机观测电梯坐标系下的相对运动，而IMU测量世界坐标系下的绝对加速度，这种坐标系差异导致紧耦合估计器出现帧冲突，造成轨迹估计发散或丢失电梯升降高度。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出Elevator-VIGS框架，在VIGS-SLAM的密集视觉惯性束调整中引入运输状态，用于承载电梯沿重力方向的运动，并通过视觉语言模型和深度网络实现零样本电梯行程检测。</li>
+<li>设计了基于IMU积分的运输状态更新机制，利用行程起止静止状态进行约束，并在优化过程中固定运输状态以防止垂直运动错误地分配至机器人位姿。</li>
+<li>提出了延迟折叠机制，在机器人离开电梯后将累积的升降高度写入位姿并恢复至世界坐标系，同时修改回环检测逻辑以拒绝不同楼层的关键帧配对。</li>
+<li>构建了包含激光测量楼层高度参考的真实世界电梯数据集和具有真值模拟的电梯序列数据集，用于全面评估系统性能。</li>
+<li>通过大量实验证明，Elevator-VIGS在真实和模拟电梯序列上的跟踪与渲染性能优于所有基线方法，并在四个无电梯公开基准上保持了VIGS-SLAM的最先进性能。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.23509" data-arxiv-id="2609.23509" data-status="ready">
+<h1>[2609.23509] GARO: Geometry-Aware Redundancy Optimization for Real-Time and High-Fidelity Dynamic Gaussian Splatting</h1>
+<p><a href="https://arxiv.org/abs/2609.23509" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>GARO 提出了一种结合优化活动与几何复杂度的统一冗余度量框架，通过自适应剪枝策略在动态高斯泼溅中实现超过两倍的渲染加速并保持高质量重建。</p>
+<h2>解决的问题</h2>
+<p>现有动态 3D 高斯泼溅方法主要关注静态场景或仅依赖启发式指标进行剪枝，缺乏对动态场景中低优化活动且低几何复杂度冗余高斯的有效识别，导致高内存占用、推理速度慢及渲染效率低下。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种统一冗余度量框架，结合基于梯度幅值的优化活动评估和基于曲率的几何复杂度评估，以全面识别动态 3D 高斯中的冗余。</li>
+<li>设计了一种自适应剪枝策略，根据训练过程中每个高斯的实时梯度和曲率动态响应其分布变化，从而高效减少冗余高斯数量并降低内存消耗。</li>
+<li>实现了超过两倍的渲染速度提升，同时在保持甚至优于现有方法的重建质量方面取得了显著效果。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.23606" data-arxiv-id="2609.23606" data-status="ready">
+<h1>[2609.23606] Beyond UV Mapping: Mesh Texture Compression via Surface-Aligned Texture Fields</h1>
+<p><a href="https://arxiv.org/abs/2609.23606" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种名为TexF的表面对齐纹理场，通过利用网格表面几何结构在3D空间中组织纹理属性，从而克服了传统UV映射在压缩效率上的局限性，实现了更高效的网格纹理压缩。</p>
+<h2>解决的问题</h2>
+<p>现有基于UV参数化的网格纹理压缩方法存在显著缺陷：UV图集构建会将邻近的表面区域分割为不连续的图表，削弱了2D编解码器可利用的空间相关性；同时引入了填充、打包和UV映射的额外开销，导致编码效率降低，特别是在处理复杂几何形状的网格时，这些限制阻碍了纹理的高效压缩与存储。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出TexF表面对齐纹理场，仅在网格表面相交的体素中存储纹理属性，利用表面局部稀疏性支持高分辨率纹理，同时避免密集体积存储，且样本数量与2D纹理图相当。</li>
+<li>开发了一种高效的可微渲染器，支持直接在网格表面位置查询纹理属性，并引入逆渲染细化技术，利用多视角图像空间监督来减少纹理传输和离散化带来的误差。</li>
+<li>针对比特流压缩，利用TexF的原生3D空间相关性，直接采用Unicorn和G-PCC等成熟的3D属性编解码器进行编码，并通过从解码后的网格重建体素位置，避免了单独传输体素位置和UV映射开销。</li>
+<li>针对GPU驻留压缩，开发了一种神经编解码器，通过量化多分辨率哈希特征捕获3D空间相关性，并使用紧凑解码器在表面位置按需重建属性，支持渲染期间的随机访问解码。</li>
+<li>在标准MPEG和AOM基准测试中进行了系统性实验，证明TexF结合Unicorn在平均率失真性能上显著优于评估的UV基线方法，且与G-PCC结合也取得了具有竞争力的结果，验证了该方法在不同编码后端下的有效性。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.23733" data-arxiv-id="2609.23733" data-status="ready">
+<h1>[2609.23733] VGGT-Prime: Compute-Adaptive Mixture-of-Heads for Efficient Visual Geometry Transformers</h1>
+<p><a href="https://arxiv.org/abs/2609.23733" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出VGGT-Prime，一种通过计算自适应混合头机制解决视觉几何Transformer中全局注意力架构冗余问题的高效前馈3D重建模型。</p>
+<h2>解决的问题</h2>
+<p>现有视觉几何Transformer（如VGGT）依赖全局注意力机制来捕捉跨视图对应关系，但其计算成本随输入视图数量呈二次方增长，限制了模型的可扩展性和效率；现有加速方法主要关注令牌冗余，未直接解决全局注意力架构内部的低效问题。</p>
+<h2>创新点</h2>
+<ul>
+<li>深入分析了视觉几何Transformer中全局注意力机制的头部显著性和注意力模式，揭示了头部层面的架构冗余，发现低显著性头部表现出均值池化行为而高显著性头部更具选择性。</li>
+<li>提出了VGGT-Prime模型，这是一种计算自适应混合头架构，利用轻量级路由器自适应估计每个头部的计算需求，并将其路由至均值池化、线性复杂度代理注意力或精确softmax注意力三种计算模式之一。</li>
+<li>在七个3D重建基准数据集上进行了广泛实验，证明VGGT-Prime在1000帧长序列上相比VGGT实现了8倍加速，同时保持了具有竞争力的重建质量。</li>
+<li>验证了VGGT-Prime在不同视觉几何Transformer骨干网络上的泛化能力，并证明其与令牌合并等现有加速方法具有互补性，可进一步加速推理。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.23796" data-arxiv-id="2609.23796" data-status="ready">
+<h1>[2609.23796] Mira-Scene: Pixel-Aligned Layouts for Generative 3D Scene</h1>
+<p><a href="https://arxiv.org/abs/2609.23796" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>Mira-Scene 提出了一种基于像素对齐布局的生成式 3D 场景重建框架，通过引入规范坐标图与点云图结合的密集有界对应关系，解决了单图重建中物体布局回归稀疏且无界导致的精度不足问题。</p>
+<h2>解决的问题</h2>
+<p>从单张图像重建组合式 3D 场景时，现有方法要么将场景视为整体导致物体细节分辨率不足，要么直接回归稀疏且无界的物体位姿参数，在遮挡、透视歧义及数据稀缺情况下难以准确恢复物体布局，且缺乏物体级编辑所需的解耦表示。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出结合规范坐标图与点云图的像素对齐对应式布局表示，用鲁棒的几何对齐替代稀疏的物体位姿回归，实现了密集且有界的布局预测。</li>
+<li>设计了一种几何-布局联合生成模型，利用多模态扩散变换器同时预测规范物体几何与像素对齐的规范坐标图，并通过共享自注意力机制促进形状与布局的一致性。</li>
+<li>引入共享位置编码策略，将几何与布局令牌嵌入共同的位置空间，增强了生成过程中的跨模态交互效果。</li>
+<li>在室内、室外及野外场景上验证了方法的有效性，在 Blend Swap 基准上显著提升了 3D-IoU 和 2D-IoU 指标，且使用了比强基线更少的公开训练数据。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.23817" data-arxiv-id="2609.23817" data-status="ready">
+<h1>[2609.23817] VISTA: Video-Injected Stylized Text-to-Animation</h1>
+<p><a href="https://arxiv.org/abs/2609.23817" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>VISTA 提出了一种结合视频风格参考与文本提示生成风格化 3D 人体动作的方法，通过双通道自编码器、晚期融合扩散骨干及跨批次非配对训练协议，解决了现有方法中视频帧间因果结构丢失及缺乏多模态配对数据的问题。</p>
+<h2>解决的问题</h2>
+<p>现有基于扩散模型的自然语言生成 3D 人体动作方法在扩展到多模态输入（文本加视频风格参考）时面临两大挑战：一是标准编码器如 CLIP 独立处理视频帧，丢弃了区分不同动作风格的帧间因果结构；二是缺乏提供文本、视频与风格化动作三元组配对的数据集，现有内容数据集和风格数据集无法同时满足需求，且先前方法在处理 RGB 视频或动态动作阶段时存在模态冲突导致风格保持困难的问题。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出 VISTA 框架，旨在通过视频注入的风格化文本到动画生成，同时解决视频帧间结构丢失和数据缺失的挑战。</li>
+<li>设计了一个双通道自编码器，构建共享潜在流形以桥接视频域和动作域。</li>
+<li>开发了一个晚期融合扩散骨干网络，包含专用风格块和双 AdaLN 调制机制，以维持严格的内容与风格分离。</li>
+<li>引入了一种跨批次非配对训练协议，并结合潜在循环一致性以应对缺乏配对三元组数据的问题。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.23910" data-arxiv-id="2609.23910" data-status="ready">
+<h1>[2609.23910] ReVeal: A Reconstruction-Aware Real-to-Sim Framework for VLA Policy Evaluation</h1>
+<p><a href="https://arxiv.org/abs/2609.23910" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>ReVeal 提出了一种结合重建质量评估与闭环策略评估的 Real-to-Sim 框架，旨在解决视觉语言动作策略在仿真环境中评估时因重建误差导致的真实与仿真性能不一致问题。</p>
+<h2>解决的问题</h2>
+<p>当前视觉语言动作策略的评估严重依赖真实世界试验，成本高且效率低；虽然基于高斯泼溅的 Real-to-Sim 方法提供了仿真替代方案，但在低纹理和反射平面区域的重建精度不足，导致仿真环境保真度低，进而使得基于仿真的策略评估结果无法准确反映真实世界的性能。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了 ReVeal 框架，整合了工作空间重建、重建质量评估和闭环 VLA 策略评估，通过 NVMF 和 APGF 指标在重建层面评估观测与平面几何保真度，并通过匹配闭环评估在策略层面衡量真实与仿真性能的一致性。</li>
+<li>开发了 PGSR-D 深度引导重建管线，引入单目深度作为额外的几何先验，以改善在缺乏多视角视觉线索区域（如低纹理表面）的几何重建质量。</li>
+<li>在 8 个多样化评估场景和 8 个人形机器人操作任务中，使用 2DGS、PGSR 和 PGSR-D 三种重建管线以及 GR00T、SmolVLA 和 π0.5 三种 VLA 策略进行了全面评估，验证了重建保真度与真实-仿真策略性能一致性之间的正相关关系。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.23915" data-arxiv-id="2609.23915" data-status="ready">
+<h1>[2609.23915] Learning-Based 3D Reconstruction of Power Networks from Aerial Point Clouds</h1>
+<p><a href="https://arxiv.org/abs/2609.23915" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>该论文提出了一种基于学习的框架，通过结合鲁棒的电杆提取与基于紧凑二维电杆-导线证据图的跨段分类，解决了从航空点云重建电力网络时因遮挡、植被杂乱及导线返回间歇性导致的拓扑连接难题。</p>
+<h2>解决的问题</h2>
+<p>将航空激光雷达点云转换为拓扑正确的网络图具有挑战性，主要困难包括遮挡、植被杂乱、异质点密度以及间歇性的导线返回；现有的操作流水线通常依赖人工或启发式连接规则，在密集布局中容易错误连接电杆，或在导线观测稀疏时失效。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种从航空激光雷达中提取电杆和导线跨段的端到端流水线，并在标签不可用时包含基于KPConv的语义分割阶段。</li>
+<li>设计了一个轻量级的基于ResNet的跨段分类器，利用紧凑的二维电杆-导线投影验证候选电杆对，从而在杂乱环境和稀疏导线观测下改进拓扑推断。</li>
+<li>开发了一个跨段级元数据提取模块，用于估计导线端点高度、地面高程、与下垂相关的特征、导线排列以及导线宽度。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.23961" data-arxiv-id="2609.23961" data-status="ready">
+<h1>[2609.23961] Colon3R: Cross-Domain 3D Reconstruction from Monocular Colonoscopic Video</h1>
+<p><a href="https://arxiv.org/abs/2609.23961" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出Colon3R，一种跨域半监督框架，通过结合有标签的仿真数据与无标签的真实结肠镜视频，利用分层准刚性可靠性机制实现单目结肠镜视频的鲁棒三维重建。</p>
+<h2>解决的问题</h2>
+<p>单目结肠镜视频三维重建面临狭窄可变形腔体内的几何漂移、弱纹理导致的特征匹配困难，以及有标签仿真数据与无标签真实临床数据之间存在的显著域差距和不对称监督问题。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出Colon3R跨域半监督框架，将来自有标签仿真和模拟数据的耦合几何先验迁移至无标签真实结肠镜视频，以应对临床域偏移下的几何重建挑战。</li>
+<li>提出分层准刚性可靠性机制，在序列、有向视图对和像素层级识别可靠的跨视图约束，从而在组织变形等情况下提高目标域监督的鲁棒性，无需显式估计形变。</li>
+<li>引入源保持适应策略，结合可靠的目标域监督、持续源域监督和受约束更新，在适应真实视频的同时保留从有标签源数据学习到的耦合几何结构。</li>
+<li>通过大量实验证明该方法在不同结肠镜设置下优于现有最先进方法，特别是在真实体内结肠镜数据上产生了更完整且几何一致性更高的重建结果。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.24140" data-arxiv-id="2609.24140" data-status="ready">
+<h1>[2609.24140] BayesianGS-SLAM: Uncertainty-Aware Neural Rendering SLAM via Probabilistic Formulation</h1>
+<p><a href="https://arxiv.org/abs/2609.24140" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>该论文提出了一种名为BayesianGS-SLAM的不确定性感知神经渲染SLAM框架，通过结合传感器噪声与地图表示不确定性的可处理预测不确定性公式，统一优化了建图、跟踪及关键帧选择过程。</p>
+<h2>解决的问题</h2>
+<p>现有基于神经渲染的SLAM方法在不确定性量化方面存在显著局限，主要面临两大挑战：一是神经模型的非线性导致分布推断困难，现有的不确定性量化方法计算成本高昂且难以与SLAM紧密耦合；二是不确定性估计未能有效整合到SLAM的下游优化中，缺乏统一框架来利用不确定性进行残差加权、帧选择及鲁棒在线运行。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种针对RGB-D神经渲染的可处理预测不确定性公式，该公式同时结合了颜色与深度的传感器噪声不确定性和地图表示不确定性。</li>
+<li>构建了统一的不确定性感知神经渲染SLAM框架，在映射阶段估计预测RGB-D不确定性，并一致地将其复用于映射、跟踪和关键帧选择。</li>
+<li>将预测不确定性整合到不确定性感知映射目标中，通过线性化渲染传播不透明度引起的地图表示不确定性，从而增强映射过程。</li>
+<li>利用不确定性实现不确定性归一化的鲁棒跟踪，确保不确定性估计对下游SLAM优化有用，维持鲁棒的在线运行。</li>
+<li>基于信息增益动机，使用负后验预测似然作为预测惊讶分数进行关键帧选择，从而减少冗余的映射更新。</li>
+<li>在保持具有竞争力的跟踪和渲染性能的同时，通过上述机制有效减少了冗余的映射更新。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.24158" data-arxiv-id="2609.24158" data-status="ready">
+<h1>[2609.24158] Relightable 3D Avatar Reconstruction with Semantic-Adaptive Motion-Illumination Responses</h1>
+<p><a href="https://arxiv.org/abs/2609.24158" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>该论文提出了SAMIRA框架，通过语义自适应的运动-光照响应建模，解决了单目视频中3D头像重建时面部不同语义区域在形变和光照响应上存在差异的问题，从而提升了表情保真度和重光照真实感。</p>
+<h2>解决的问题</h2>
+<p>现有基于3D高斯泼溅的头像重建方法通常采用全局共享的运动和光照响应模型，无法准确捕捉面部不同语义区域（如额头、嘴部、脸颊）在表情驱动下的局部形变差异以及对光照的非均匀响应，导致细粒度表情细节恢复不佳且重光照效果失真。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了SAMIRA框架，这是一个用于语义自适应运动-光照响应建模的高斯头像重建系统。</li>
+<li>设计了语义自适应运动响应模块，通过UV对齐的位移特征和语义特定调制器，在FLAME网格绑定基础上补充了细粒度的高斯几何残差，以恢复皱纹、眼睑闭合等细节。</li>
+<li>引入了语义自适应光照响应模块，为面部语义区域学习紧凑的漫反射和镜面反射响应因子，并将其集成到延迟PBR高斯渲染中，实现不同区域对新型光照的自适应响应。</li>
+<li>提出了一种两阶段参数化策略，以稳定内在属性分解和响应因子的学习过程。</li>
+<li>在多个数据集上进行了自我重演、交叉重演和重光照任务的实验，证明了该方法在表情保真度和重光照真实感上优于现有方法。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.24253" data-arxiv-id="2609.24253" data-status="ready">
+<h1>[2609.24253] OpenFlyScan: A Quality-Guided Aerial Reconstruction System for Consumer Drones</h1>
+<p><a href="https://arxiv.org/abs/2609.24253" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 OpenFlyScan，一个面向消费级无人机的质量引导空中重建系统，通过集成 GS 质量模型、重采集规划器和定制移动应用，在无需额外机载硬件的情况下实现自动化倾斜摄影、现场反馈及针对性重采集，从而降低大规模场景重建的成本并提升重建质量。</p>
+<h2>解决的问题</h2>
+<p>构建覆盖建筑立面和地面的街区级大规模 3D 场景成本高昂，消费级无人机缺乏相应的规划与执行能力，且预设飞行路径无法确保复杂表面的充分观测，导致遮挡、大入射角等问题，传统几何反馈方法无法区分观测不足与特征匹配失败，且无法揭示外观和光照变化导致的渲染缺陷，往往需在全重建后才发现质量问题，增加时间和人力成本。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出一种面向消费级无人机的轻量级采集与反馈系统，支持自动化倾斜摄影、现场反馈和针对性重采集，无需额外机载硬件。</li>
+<li>开发一种用于 3DGS 重建的跨模态区域质量预测模型，融合图像特征、前馈几何和相对相机几何，在目标场景 3DGS 训练前识别低质量区域。</li>
+<li>建立质量引导的重采集与重建工作流，将质量预测转化为可执行的飞行条带，并通过仿真和实地实验证明联合重建能改善重建不佳区域的质量。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.24487" data-arxiv-id="2609.24487" data-status="ready">
+<h1>[2609.24487] AgentSTAR: Agentic Shape Tracking and Reconstruction from Monocular Videos</h1>
+<p><a href="https://arxiv.org/abs/2609.24487" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>该论文提出了一种名为AgentSTAR的代理式形状跟踪与重建方法，通过结合视觉语言模型与数值优化，从单目视频中联合推断刚体及铰接物体的几何结构、运动学状态及位姿。</p>
+<h2>解决的问题</h2>
+<p>现有基于自底向上方法的铰接物体重建主要依赖密集对应和点轨迹估计，在遮挡和视觉重叠有限时面临挑战，且生成的表示缺乏结构信息，导致后续结构推断脆弱，难以满足机器人等需要显式物体模型的应用需求。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种基于合成分析（analysis-by-synthesis）的自顶向下方法，直接推断能生成视频的具有结构的3D物体及其状态序列，将密集点运动估计转化为紧凑的位姿估计问题。</li>
+<li>设计了一种代理式渲染与比较循环（agentic render-and-compare loop），利用视觉语言模型（VLM）进行无梯度优化以缩小搜索范围并拒绝虚假局部极小值，结合数值优化工具实现形状、关节和位姿的联合估计。</li>
+<li>首次将VLM代理应用于从随意拍摄的单目视频中对刚体和铰接物体进行联合形状与运动重建，克服了传统SfM方法脆弱且VLM单独使用时状态估计精度不足的问题。</li>
+<li>在ARCTIC、iTACO和HOT3D数据集上验证了方法的有效性，展示了其在铰接物体重建和刚体物体跟踪上优于现有3D点跟踪基线及铰接物体重建方法。</li>
+<li>实现了在先前方法无法处理场景下的运动重建与恢复，例如跟踪透明物体（如玻璃）以及严重遮挡或仅部分可见的物体，因为该方法建模了物体运动的原因而非仅视觉证据。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.24531" data-arxiv-id="2609.24531" data-status="ready">
+<h1>[2609.24531] Dynamic Thermal Gaussians: Multimodal 4D Gaussian Splatting</h1>
+<p><a href="https://arxiv.org/abs/2609.24531" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>该论文提出了首个针对复杂场景的动态RGB-热重建框架Dynamic Thermal Gaussians，并构建了包含快速热变化的基准数据集DynamicRGBT-Scenes，通过多模态嵌入和动态变形机制实现了高保真的4D时空热场重建。</p>
+<h2>解决的问题</h2>
+<p>现有3D热场重建方法无法有效捕捉复杂的动态热传递过程，且缺乏覆盖复杂场景中几何与温度快速变化的联合RGB-热重建开源数据集，导致难以在物体运动和温度快速变化的环境中同时重建动态RGB外观、热观测和场景几何。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了DynamicRGBT-Scenes基准数据集，这是首个在动态环境中捕捉快速热变化并包含双视角同步RGB-热图像对的数据集。</li>
+<li>提出了Dynamic Thermal Gaussians框架，这是首个针对复杂场景的动态RGB-热重建框架，能够在任意时间步渲染高保真的RGB和热视图。</li>
+<li>设计了多模态嵌入和渐进式变形架构，以建模每种模态独特的时间演化过程。</li>
+<li>在统一的动态高斯表示中集成了可学习的多模态路由机制，用于自动区分共享高斯和模态特定高斯以增强细节表示。</li>
+<li>通过大量实验证明该方法在热和RGB两种模态上均达到了最先进的性能，为时空热成像奠定了坚实基础。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.24825" data-arxiv-id="2609.24825" data-status="ready">
+<h1>[2609.24825] ZVeC: A Zero-Shot Framework for Instance-Level Vehicle Extraction and Generative Point Cloud Completion</h1>
+<p><a href="https://arxiv.org/abs/2609.24825" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>ZVeC 提出了一种零样本实例级框架，通过将场景级点云补全重构为基于 GenPC 模块的独立实例几何推理，解决了 LiDAR 点云因遮挡导致的几何缺失问题。</p>
+<h2>解决的问题</h2>
+<p>LiDAR 点云常因视角有限、回波弱和严重遮挡导致几何不完整，传统方法依赖几何假设或需大量配对数据监督，难以应对真实场景中的域偏移，且地下停车场等复杂环境获取完整监督成本极高。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了 ZVeC 零样本框架，将场景级点云补全重构为组合式实例级重建，利用 GenPC 模块通过逐对象补全减少杂乱 LiDAR 场景中的重建歧义。</li>
+<li>构建了一个真实世界地下停车场 LiDAR 基准数据集，用于在真实遮挡和不完整观测条件下评估零样本点云补全性能。</li>
+<li>实验证明该方法在定量指标和视觉质量上均优于代表性场景级基线，特别是在恢复细粒度车辆结构方面表现一致。</li>
+<li>展示了在极端输入稀疏性下的鲁棒重建能力，仅使用原始输入点的 1% 即可保持几何一致的补全结果。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.24839" data-arxiv-id="2609.24839" data-status="ready">
+<h1>[2609.24839] When Wider Views Fail: Stress-Testing Feed-Forward 3D Reconstruction</h1>
+<p><a href="https://arxiv.org/abs/2609.24839" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>该研究通过评估VGGT、Pi3X和VGGT-Ω在30度至360度不同跨度轨道拍摄下的表现，揭示了前馈式三维重建在应对大幅视角变化时面临的几何一致性挑战，并指出宽跨度轨道拍摄是检验全局场景连贯性的关键压力测试。</p>
+<h2>解决的问题</h2>
+<p>现有前馈式三维重建方法在处理城市场景时，面临轨道拍摄中表面覆盖率与视图间一致性的权衡问题；随着视角跨度增加，观测间距变大导致可见性、外观和遮挡变化，进而降低跨视图重叠度并复杂化对应关系，可能产生扭曲的几何结构或同一建筑物的空间分离副本，现有评估往往仅关注表面覆盖率而忽视了重建几何是否形成连贯场景。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出将宽跨度轨道拍摄作为评估前馈式三维重建全局连贯性的重要压力测试场景</li>
+<li>在两个场景上使用跨越30度至360度的十张图像轨迹，对VGGT、Pi3X和VGGT-Ω进行了系统性评估</li>
+<li>发现VGGT和Pi3X随着视角跨度增加性能显著下降，而VGGT-Ω在保持表面完整性和全局场景连贯性方面表现出更强的鲁棒性</li>
+<li>采用单一相似变换将包含重复组件的完整预测对齐到伪参考，并使用基于距离和覆盖率的指标进行量化评估</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.24850" data-arxiv-id="2609.24850" data-status="ready">
+<h1>[2609.24850] Revisiting Multi-View Stereo: A Sequence-to-Sequence Formulation</h1>
+<p><a href="https://arxiv.org/abs/2609.24850" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>该论文提出了一种基于已知相机参数的多视图立体重建方法，通过结合全局Transformer架构与相机诱导先验（如射线图和全局代价体），实现了序列到序列的几何估计，从而在精度上超越了传统MVS和现有前馈模型。</p>
+<h2>解决的问题</h2>
+<p>现有基于学习的多视图立体（MVS）方法通常采用序列到一的范式，仅预测参考视图的深度图，导致效率降低且缺乏全局对齐建模，限制了几何估计的准确性；而现有的序列到序列前馈模型虽然能联合估计相机参数和深度，但由于联合估计的固有难度，即使提供真实相机参数，其重建结果往往精度较低或存在畸变。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种在已知相机参数条件下工作的多视图立体重建框架，采用序列到序列的范式，利用全局Transformer架构同时处理所有输入视图，克服了传统序列到一方法的局限性。</li>
+<li>引入相机诱导先验以确保几何精度，具体通过将相机内参和外参转换为射线图，并将其标记化后与图像标记合并，使Transformer架构具备相机感知能力。</li>
+<li>提出了全局代价体（Global Cost Volume）概念，不同于传统需逐视图构建的代价体，该设计在所有视图的统一表示中捕获场景的全局3D结构，为底层3D场景几何提供有价值的正则化。</li>
+<li>实验结果表明，该方法在已知相机参数的多视图重建任务中，相比传统MVS方法和最近的序列到序列前馈模型均取得了更优的重建结果，确立了新的最先进水平。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.24981" data-arxiv-id="2609.24981" data-status="ready">
+<h1>[2609.24981] GAE: Learning a Geometry-Native Latent Space for 3D-Consistent World Generation</h1>
+<p><a href="https://arxiv.org/abs/2609.24981" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>该论文提出了一种几何原生自编码器（GAE），通过重新参数化几何基础模型的特征层级，构建了一个统一且紧凑的潜在空间，从而实现了感知与生成在3D一致性世界模型中的共享基础。</p>
+<h2>解决的问题</h2>
+<p>现有视频生成器产生的视图在恢复几何时存在漂移，且相机轨迹偏离预期，导致缺乏连贯的场景一致性；同时，几何基础模型通常依赖多层特征层级进行解码，这种结构对于生成任务而言存在不匹配问题，因为单一特征层级无法同时保留语义、空间及跨视图结构，且原始参数化存在高度冗余和各向异性，不适合生成传输。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了几何原生自编码器（GAE），在冻结的几何基础模型编码器与几何头之间引入学习瓶颈，将多层特征压缩为单一潜在表示，并在解码时保持原始几何头冻结以保留几何信息。</li>
+<li>设计了统一的潜在表示机制，通过从同一瓶颈解码RGB外观和几何信息，强制外观与几何在共享潜在空间中共存，实现了紧凑的统一表示。</li>
+<li>提出了针对生成传输的潜在空间组织策略，结合基于C-RADIO特征的逐token对齐和基于DINOv2特征的成对相似度匹配，以改善传输平滑性并恢复关系几何结构。</li>
+<li>训练了一个基于标准DiT风格条件流的统一生成器，支持文本到图像生成、相机控制视频生成以及参考条件的新视角合成，并验证了该潜在空间在多种生成模式下的有效性。</li>
+<li>通过对比实验证明，GAE潜在空间相较于像素、语义及原始几何潜在空间，在RealEstate10K和DL3DV数据集上显著降低了FVD，并大幅提升了生成视图的3D一致性和相机轨迹精度。</li>
+</ul>
+</article>
     <article class="summary-article summary-topic-entry" id="summary-2607.17803" data-arxiv-id="2607.17803" data-status="ready">
 <h1>[2607.17803] FF-ProCams: Feed-Forward Gaussian Splatting for Projector-Camera System</h1>
 <p><a href="https://arxiv.org/abs/2607.17803" rel="nofollow">arXiv 原文</a></p>
@@ -5359,6 +6026,6 @@
 </article>
     </div>
   </main>
-  <script type="application/json" id="summary-catalog">{"papers":{"2601.04348":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2601.04348"},"2601.12122":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2601.12122"},"2602.06343":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2602.06343"},"2602.15355":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2602.15355"},"2603.05607":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2603.05607"},"2603.21611":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2603.21611"},"2603.21933":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2603.21933"},"2603.22782":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2603.22782"},"2603.25129":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2603.25129"},"2603.27084":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2603.27084"},"2603.27151":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2603.27151"},"2604.10259":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2604.10259"},"2604.16910":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2604.16910"},"2605.00177":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2605.00177"},"2605.10760":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2605.10760"},"2605.13794":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2605.13794"},"2605.21472":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2605.21472"},"2605.22069":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2605.22069"},"2605.27351":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2605.27351"},"2606.03254":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2606.03254"},"2606.09074":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2606.09074"},"2606.29395":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2606.29395"},"2606.30380":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2606.30380"},"2607.03819":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2607.03819"},"2607.08891":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2607.08891"},"2607.13468":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2607.13468"},"2607.13682":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2607.13682"},"2607.14990":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2607.14990"},"2607.16577":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2607.16577"},"2607.17145":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2607.17145"},"2607.17803":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2607.17803"},"2607.17965":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2607.17965"},"2607.18067":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2607.18067"},"2607.18466":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2607.18466"},"2607.18801":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2607.18801"},"2607.19120":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2607.19120"},"2607.19777":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2607.19777"},"2607.20417":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2607.20417"},"2607.20660":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2607.20660"},"2607.20789":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2607.20789"},"2607.20813":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2607.20813"},"2607.21448":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2607.21448"},"2607.21675":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2607.21675"},"2607.22446":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2607.22446"},"2607.22673":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2607.22673"},"2607.22738":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2607.22738"},"2607.22780":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2607.22780"},"2607.22890":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2607.22890"},"2607.24298":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2607.24298"},"2607.24403":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2607.24403"},"2607.24721":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2607.24721"},"2607.25569":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2607.25569"},"2607.26525":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2607.26525"},"2607.26578":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2607.26578"},"2607.26646":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2607.26646"},"2607.26889":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2607.26889"},"2607.27825":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2607.27825"},"2607.28164":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2607.28164"},"2607.28581":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2607.28581"},"2607.29284":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2607.29284"},"2607.29633":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2607.29633"},"2608.00094":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.00094"},"2608.00214":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.00214"},"2608.00891":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.00891"},"2608.00931":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.00931"},"2608.01178":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.01178"},"2608.01186":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.01186"},"2608.01335":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.01335"},"2608.01492":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.01492"},"2608.01588":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.01588"},"2608.01605":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.01605"},"2608.01659":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.01659"},"2608.01761":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.01761"},"2608.01958":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.01958"},"2608.01969":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.01969"},"2608.02016":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.02016"},"2608.02145":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.02145"},"2608.02191":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.02191"},"2608.02711":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.02711"},"2608.03062":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.03062"},"2608.03179":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.03179"},"2608.03279":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.03279"},"2608.04475":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.04475"},"2608.04560":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.04560"},"2608.04581":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.04581"},"2608.05218":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.05218"},"2608.05248":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.05248"},"2608.05704":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.05704"},"2608.05714":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.05714"},"2608.05879":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.05879"},"2608.06161":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.06161"},"2608.07144":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.07144"},"2608.07760":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.07760"},"2608.07937":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.07937"},"2608.08053":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.08053"},"2608.08585":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.08585"},"2608.08659":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.08659"},"2608.08949":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.08949"},"2608.09110":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.09110"},"2608.09186":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.09186"},"2608.10286":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.10286"},"2608.10345":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.10345"},"2608.10744":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.10744"},"2608.10756":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.10756"},"2608.10938":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.10938"},"2608.11100":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.11100"},"2608.11150":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.11150"},"2608.11876":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.11876"},"2608.12175":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.12175"},"2608.12825":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.12825"},"2608.12997":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.12997"},"2608.13095":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.13095"},"2608.13502":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.13502"},"2608.13541":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.13541"},"2608.14136":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.14136"},"2608.14713":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.14713"},"2608.14783":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.14783"},"2608.14902":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.14902"},"2608.15024":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.15024"},"2608.15420":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.15420"},"2608.15651":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.15651"},"2608.15749":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.15749"},"2608.15785":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.15785"},"2608.16042":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.16042"},"2608.16103":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.16103"},"2608.16234":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.16234"},"2608.16324":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.16324"},"2608.16863":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.16863"},"2608.17298":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.17298"},"2608.17420":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.17420"},"2608.17535":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.17535"},"2608.17682":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.17682"},"2608.17832":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.17832"},"2608.17988":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.17988"},"2608.18285":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.18285"},"2608.18840":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.18840"},"2608.19036":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.19036"},"2608.19556":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.19556"},"2608.19900":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.19900"},"2608.20000":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.20000"},"2608.20277":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.20277"},"2608.20308":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.20308"},"2608.20534":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.20534"},"2608.20602":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.20602"},"2608.20687":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.20687"},"2608.20699":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.20699"},"2608.20740":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.20740"},"2608.20759":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.20759"},"2608.22344":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.22344"},"2608.22465":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.22465"},"2608.22740":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.22740"},"2608.22773":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.22773"},"2608.22821":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.22821"},"2608.22888":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.22888"},"2608.22906":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.22906"},"2608.23014":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.23014"},"2608.23140":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.23140"},"2608.23206":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.23206"},"2608.23410":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.23410"},"2608.23549":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.23549"},"2608.24169":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.24169"},"2608.24212":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.24212"},"2608.24714":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.24714"},"2608.24760":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.24760"},"2608.25401":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.25401"},"2608.25461":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.25461"},"2608.25483":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.25483"},"2608.26656":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.26656"},"2608.26868":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.26868"},"2608.26948":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.26948"},"2608.26951":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.26951"},"2608.27073":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.27073"},"2608.27407":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.27407"},"2608.27735":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.27735"},"2608.28240":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.28240"},"2608.28272":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.28272"},"2608.28386":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.28386"},"2608.28570":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.28570"},"2608.28895":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.28895"},"2608.29346":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.29346"},"2608.29538":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.29538"},"2608.29680":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.29680"},"2608.29733":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.29733"},"2608.29793":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.29793"},"2608.29905":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.29905"},"2608.29928":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.29928"},"2608.30054":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.30054"},"2608.30184":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.30184"},"2608.30218":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.30218"},"2608.30307":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.30307"},"2608.30423":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.30423"},"2608.30617":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.30617"},"2608.30821":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.30821"},"2608.31023":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.31023"},"2608.31113":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.31113"},"2609.00625":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.00625"},"2609.00812":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.00812"},"2609.00923":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.00923"},"2609.00994":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.00994"},"2609.00995":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.00995"},"2609.01276":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.01276"},"2609.01516":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.01516"},"2609.01823":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.01823"},"2609.02184":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.02184"},"2609.02352":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.02352"},"2609.02543":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.02543"},"2609.02747":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.02747"},"2609.02847":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.02847"},"2609.03117":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03117"},"2609.03304":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03304"},"2609.03334":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03334"},"2609.03341":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03341"},"2609.03349":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03349"},"2609.03447":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03447"},"2609.03534":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03534"},"2609.03613":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03613"},"2609.03639":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03639"},"2609.03657":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03657"},"2609.03824":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03824"},"2609.03897":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03897"},"2609.03919":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03919"},"2609.03931":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03931"},"2609.03956":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03956"},"2609.04174":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.04174"},"2609.04196":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.04196"},"2609.04201":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.04201"},"2609.04942":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.04942"},"2609.04984":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.04984"},"2609.05127":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.05127"},"2609.05210":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.05210"},"2609.05255":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.05255"},"2609.05382":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.05382"},"2609.05415":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.05415"},"2609.05416":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.05416"},"2609.06436":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.06436"},"2609.06723":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.06723"},"2609.06726":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.06726"},"2609.06810":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.06810"},"2609.06955":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.06955"},"2609.07085":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.07085"},"2609.07137":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.07137"},"2609.07174":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.07174"},"2609.07231":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.07231"},"2609.07274":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.07274"},"2609.07346":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.07346"},"2609.07434":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.07434"},"2609.07557":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.07557"},"2609.07724":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.07724"},"2609.07734":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.07734"},"2609.08101":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.08101"},"2609.08148":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.08148"},"2609.08332":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.08332"},"2609.08449":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.08449"},"2609.08493":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.08493"},"2609.08730":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.08730"},"2609.08841":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.08841"},"2609.08848":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.08848"},"2609.09012":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.09012"},"2609.09145":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.09145"},"2609.09394":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.09394"},"2609.09418":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.09418"},"2609.09491":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.09491"},"2609.09507":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.09507"},"2609.09513":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.09513"},"2609.09606":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.09606"},"2609.09890":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.09890"},"2609.10095":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.10095"},"2609.10307":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.10307"},"2609.10322":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.10322"},"2609.10363":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.10363"},"2609.10376":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.10376"},"2609.10456":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.10456"},"2609.10531":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.10531"},"2609.10643":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.10643"},"2609.11129":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.11129"},"2609.11223":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.11223"},"2609.11434":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.11434"},"2609.11439":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.11439"},"2609.11472":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.11472"},"2609.11499":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.11499"},"2609.11506":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.11506"},"2609.11722":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.11722"},"2609.11886":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.11886"},"2609.11894":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.11894"},"2609.12343":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.12343"},"2609.12395":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.12395"},"2609.12557":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.12557"},"2609.12614":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.12614"},"2609.12682":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.12682"},"2609.12850":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.12850"},"2609.13146":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.13146"},"2609.13397":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.13397"},"2609.13504":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.13504"},"2609.13733":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.13733"},"2609.13903":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.13903"},"2609.13991":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.13991"},"2609.14521":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.14521"},"2609.14634":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.14634"},"2609.14695":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.14695"},"2609.14899":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.14899"},"2609.14965":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.14965"},"2609.15018":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.15018"},"2609.15032":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.15032"},"2609.15392":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.15392"},"2609.15550":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.15550"},"2609.15639":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.15639"},"2609.15659":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.15659"},"2609.15735":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.15735"},"2609.15833":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.15833"},"2609.16310":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.16310"},"2609.16603":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.16603"},"2609.16672":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.16672"},"2609.16772":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.16772"},"2609.16926":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.16926"},"2609.17039":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.17039"},"2609.17230":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.17230"},"2609.17387":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.17387"},"2609.17450":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.17450"},"2609.17689":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.17689"},"2609.17810":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.17810"},"2609.18406":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.18406"},"2609.18465":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.18465"},"2609.18473":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.18473"},"2609.18510":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.18510"},"2609.18620":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.18620"},"2609.18634":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.18634"},"2609.18737":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.18737"},"2609.18898":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.18898"},"2609.19119":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.19119"},"2609.19421":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.19421"},"2609.19463":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.19463"},"2609.19628":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.19628"},"2609.19782":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.19782"},"2609.19815":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.19815"},"2609.19824":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.19824"},"2609.19872":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.19872"},"2609.19907":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.19907"},"2609.20012":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.20012"},"2609.20348":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.20348"},"2609.20586":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.20586"},"2609.20589":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.20589"},"2609.20623":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.20623"},"2609.20673":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.20673"},"2609.20818":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.20818"},"2609.21347":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.21347"},"2609.21437":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.21437"},"2609.21502":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.21502"},"2609.21516":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.21516"},"2609.21938":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.21938"}},"topic":"3D Gen&Recon","version":1}</script>
+  <script type="application/json" id="summary-catalog">{"papers":{"2601.04348":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2601.04348"},"2601.12122":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2601.12122"},"2602.06343":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2602.06343"},"2602.15355":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2602.15355"},"2603.05607":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2603.05607"},"2603.20714":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2603.20714"},"2603.21611":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2603.21611"},"2603.21933":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2603.21933"},"2603.22782":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2603.22782"},"2603.25129":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2603.25129"},"2603.27084":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2603.27084"},"2603.27151":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2603.27151"},"2604.10259":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2604.10259"},"2604.16910":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2604.16910"},"2605.00177":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2605.00177"},"2605.10760":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2605.10760"},"2605.13794":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2605.13794"},"2605.21472":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2605.21472"},"2605.22069":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2605.22069"},"2605.27351":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2605.27351"},"2606.03254":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2606.03254"},"2606.09074":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2606.09074"},"2606.26985":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2606.26985"},"2606.29395":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2606.29395"},"2606.30380":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2606.30380"},"2607.03819":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2607.03819"},"2607.08891":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2607.08891"},"2607.09260":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2607.09260"},"2607.10623":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2607.10623"},"2607.13468":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2607.13468"},"2607.13682":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2607.13682"},"2607.14513":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2607.14513"},"2607.14927":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2607.14927"},"2607.14990":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2607.14990"},"2607.15536":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2607.15536"},"2607.16352":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2607.16352"},"2607.16577":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2607.16577"},"2607.16624":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2607.16624"},"2607.16805":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2607.16805"},"2607.16838":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2607.16838"},"2607.17093":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2607.17093"},"2607.17145":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2607.17145"},"2607.17803":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2607.17803"},"2607.17965":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2607.17965"},"2607.18067":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2607.18067"},"2607.18466":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2607.18466"},"2607.18801":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2607.18801"},"2607.19120":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2607.19120"},"2607.19777":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2607.19777"},"2607.20417":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2607.20417"},"2607.20660":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2607.20660"},"2607.20789":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2607.20789"},"2607.20813":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2607.20813"},"2607.21448":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2607.21448"},"2607.21675":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2607.21675"},"2607.22446":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2607.22446"},"2607.22673":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2607.22673"},"2607.22738":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2607.22738"},"2607.22780":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2607.22780"},"2607.22890":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2607.22890"},"2607.24298":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2607.24298"},"2607.24403":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2607.24403"},"2607.24721":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2607.24721"},"2607.25569":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2607.25569"},"2607.26525":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2607.26525"},"2607.26578":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2607.26578"},"2607.26646":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2607.26646"},"2607.26889":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2607.26889"},"2607.27825":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2607.27825"},"2607.28164":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2607.28164"},"2607.28581":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2607.28581"},"2607.29284":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2607.29284"},"2607.29633":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2607.29633"},"2608.00094":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.00094"},"2608.00214":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.00214"},"2608.00891":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.00891"},"2608.00931":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.00931"},"2608.01178":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.01178"},"2608.01186":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.01186"},"2608.01335":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.01335"},"2608.01492":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.01492"},"2608.01588":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.01588"},"2608.01605":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.01605"},"2608.01659":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.01659"},"2608.01761":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.01761"},"2608.01958":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.01958"},"2608.01969":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.01969"},"2608.02016":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.02016"},"2608.02145":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.02145"},"2608.02191":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.02191"},"2608.02711":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.02711"},"2608.03062":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.03062"},"2608.03179":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.03179"},"2608.03279":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.03279"},"2608.04475":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.04475"},"2608.04560":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.04560"},"2608.04581":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.04581"},"2608.05218":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.05218"},"2608.05248":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.05248"},"2608.05704":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.05704"},"2608.05714":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.05714"},"2608.05879":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.05879"},"2608.06161":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.06161"},"2608.07144":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.07144"},"2608.07760":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.07760"},"2608.07937":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.07937"},"2608.08053":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.08053"},"2608.08585":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.08585"},"2608.08659":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.08659"},"2608.08949":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.08949"},"2608.09110":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.09110"},"2608.09186":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.09186"},"2608.10286":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.10286"},"2608.10345":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.10345"},"2608.10744":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.10744"},"2608.10756":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.10756"},"2608.10938":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.10938"},"2608.11100":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.11100"},"2608.11150":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.11150"},"2608.11876":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.11876"},"2608.12175":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.12175"},"2608.12825":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.12825"},"2608.12997":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.12997"},"2608.13095":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.13095"},"2608.13502":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.13502"},"2608.13541":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.13541"},"2608.14136":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.14136"},"2608.14713":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.14713"},"2608.14783":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.14783"},"2608.14902":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.14902"},"2608.15024":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.15024"},"2608.15420":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.15420"},"2608.15651":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.15651"},"2608.15749":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.15749"},"2608.15785":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.15785"},"2608.16042":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.16042"},"2608.16103":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.16103"},"2608.16234":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.16234"},"2608.16324":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.16324"},"2608.16863":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.16863"},"2608.17298":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.17298"},"2608.17420":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.17420"},"2608.17535":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.17535"},"2608.17682":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.17682"},"2608.17832":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.17832"},"2608.17988":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.17988"},"2608.18285":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.18285"},"2608.18840":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.18840"},"2608.19036":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.19036"},"2608.19556":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.19556"},"2608.19900":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.19900"},"2608.20000":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.20000"},"2608.20277":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.20277"},"2608.20308":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.20308"},"2608.20534":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.20534"},"2608.20602":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.20602"},"2608.20687":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.20687"},"2608.20699":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.20699"},"2608.20740":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.20740"},"2608.20759":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.20759"},"2608.22344":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.22344"},"2608.22465":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.22465"},"2608.22740":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.22740"},"2608.22773":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.22773"},"2608.22821":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.22821"},"2608.22888":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.22888"},"2608.22906":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.22906"},"2608.23014":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.23014"},"2608.23140":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.23140"},"2608.23206":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.23206"},"2608.23410":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.23410"},"2608.23549":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.23549"},"2608.24169":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.24169"},"2608.24212":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.24212"},"2608.24714":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.24714"},"2608.24760":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.24760"},"2608.25401":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.25401"},"2608.25461":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.25461"},"2608.25483":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.25483"},"2608.26656":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.26656"},"2608.26868":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.26868"},"2608.26948":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.26948"},"2608.26951":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.26951"},"2608.27073":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.27073"},"2608.27407":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.27407"},"2608.27735":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.27735"},"2608.28240":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.28240"},"2608.28272":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.28272"},"2608.28386":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.28386"},"2608.28570":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.28570"},"2608.28895":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.28895"},"2608.29346":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.29346"},"2608.29538":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.29538"},"2608.29680":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.29680"},"2608.29733":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.29733"},"2608.29793":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.29793"},"2608.29905":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.29905"},"2608.29928":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.29928"},"2608.30054":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.30054"},"2608.30184":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.30184"},"2608.30218":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.30218"},"2608.30307":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.30307"},"2608.30423":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.30423"},"2608.30617":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.30617"},"2608.30821":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.30821"},"2608.31023":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.31023"},"2608.31113":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2608.31113"},"2609.00625":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.00625"},"2609.00812":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.00812"},"2609.00923":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.00923"},"2609.00994":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.00994"},"2609.00995":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.00995"},"2609.01276":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.01276"},"2609.01516":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.01516"},"2609.01823":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.01823"},"2609.02184":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.02184"},"2609.02352":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.02352"},"2609.02543":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.02543"},"2609.02747":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.02747"},"2609.02847":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.02847"},"2609.03117":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03117"},"2609.03304":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03304"},"2609.03334":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03334"},"2609.03341":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03341"},"2609.03349":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03349"},"2609.03447":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03447"},"2609.03534":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03534"},"2609.03613":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03613"},"2609.03639":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03639"},"2609.03657":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03657"},"2609.03824":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03824"},"2609.03897":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03897"},"2609.03919":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03919"},"2609.03931":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03931"},"2609.03956":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.03956"},"2609.04174":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.04174"},"2609.04196":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.04196"},"2609.04201":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.04201"},"2609.04942":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.04942"},"2609.04984":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.04984"},"2609.05127":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.05127"},"2609.05210":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.05210"},"2609.05255":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.05255"},"2609.05382":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.05382"},"2609.05415":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.05415"},"2609.05416":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.05416"},"2609.06436":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.06436"},"2609.06723":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.06723"},"2609.06726":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.06726"},"2609.06810":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.06810"},"2609.06955":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.06955"},"2609.07085":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.07085"},"2609.07137":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.07137"},"2609.07174":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.07174"},"2609.07231":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.07231"},"2609.07274":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.07274"},"2609.07346":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.07346"},"2609.07434":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.07434"},"2609.07557":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.07557"},"2609.07724":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.07724"},"2609.07734":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.07734"},"2609.08101":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.08101"},"2609.08148":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.08148"},"2609.08332":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.08332"},"2609.08449":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.08449"},"2609.08493":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.08493"},"2609.08730":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.08730"},"2609.08841":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.08841"},"2609.08848":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.08848"},"2609.09012":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.09012"},"2609.09145":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.09145"},"2609.09394":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.09394"},"2609.09418":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.09418"},"2609.09491":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.09491"},"2609.09507":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.09507"},"2609.09513":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.09513"},"2609.09606":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.09606"},"2609.09890":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.09890"},"2609.10095":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.10095"},"2609.10307":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.10307"},"2609.10322":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.10322"},"2609.10363":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.10363"},"2609.10376":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.10376"},"2609.10456":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.10456"},"2609.10531":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.10531"},"2609.10643":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.10643"},"2609.11129":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.11129"},"2609.11223":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.11223"},"2609.11434":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.11434"},"2609.11439":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.11439"},"2609.11472":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.11472"},"2609.11499":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.11499"},"2609.11506":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.11506"},"2609.11722":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.11722"},"2609.11886":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.11886"},"2609.11894":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.11894"},"2609.12343":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.12343"},"2609.12395":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.12395"},"2609.12557":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.12557"},"2609.12614":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.12614"},"2609.12682":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.12682"},"2609.12850":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.12850"},"2609.13146":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.13146"},"2609.13397":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.13397"},"2609.13504":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.13504"},"2609.13733":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.13733"},"2609.13903":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.13903"},"2609.13991":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.13991"},"2609.14521":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.14521"},"2609.14634":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.14634"},"2609.14695":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.14695"},"2609.14899":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.14899"},"2609.14965":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.14965"},"2609.15018":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.15018"},"2609.15032":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.15032"},"2609.15392":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.15392"},"2609.15550":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.15550"},"2609.15639":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.15639"},"2609.15659":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.15659"},"2609.15735":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.15735"},"2609.15833":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.15833"},"2609.16310":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.16310"},"2609.16603":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.16603"},"2609.16672":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.16672"},"2609.16772":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.16772"},"2609.16926":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.16926"},"2609.17039":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.17039"},"2609.17230":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.17230"},"2609.17387":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.17387"},"2609.17450":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.17450"},"2609.17689":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.17689"},"2609.17810":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.17810"},"2609.18406":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.18406"},"2609.18465":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.18465"},"2609.18473":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.18473"},"2609.18510":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.18510"},"2609.18620":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.18620"},"2609.18634":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.18634"},"2609.18737":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.18737"},"2609.18898":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.18898"},"2609.19119":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.19119"},"2609.19421":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.19421"},"2609.19463":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.19463"},"2609.19628":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.19628"},"2609.19782":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.19782"},"2609.19815":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.19815"},"2609.19824":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.19824"},"2609.19872":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.19872"},"2609.19907":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.19907"},"2609.20012":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.20012"},"2609.20348":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.20348"},"2609.20586":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.20586"},"2609.20589":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.20589"},"2609.20623":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.20623"},"2609.20673":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.20673"},"2609.20818":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.20818"},"2609.21347":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.21347"},"2609.21437":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.21437"},"2609.21502":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.21502"},"2609.21516":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.21516"},"2609.21938":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.21938"},"2609.22809":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.22809"},"2609.22849":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.22849"},"2609.22941":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.22941"},"2609.23005":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.23005"},"2609.23049":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.23049"},"2609.23103":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.23103"},"2609.23169":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.23169"},"2609.23182":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.23182"},"2609.23286":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.23286"},"2609.23380":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.23380"},"2609.23386":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.23386"},"2609.23404":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.23404"},"2609.23425":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.23425"},"2609.23436":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.23436"},"2609.23491":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.23491"},"2609.23509":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.23509"},"2609.23606":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.23606"},"2609.23733":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.23733"},"2609.23796":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.23796"},"2609.23817":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.23817"},"2609.23910":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.23910"},"2609.23915":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.23915"},"2609.23961":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.23961"},"2609.24140":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.24140"},"2609.24158":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.24158"},"2609.24253":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.24253"},"2609.24487":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.24487"},"2609.24531":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.24531"},"2609.24825":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.24825"},"2609.24839":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.24839"},"2609.24850":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.24850"},"2609.24981":{"status":"ready","url":"notes/3d-gen-recon.html#summary-2609.24981"}},"topic":"3D Gen&Recon","version":1}</script>
 </body>
 </html>
