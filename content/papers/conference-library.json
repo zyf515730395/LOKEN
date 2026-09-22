@@ -65729,6 +65729,21 @@
       "url": "https://papers.nips.cc/paper_files/paper/2024/hash/860c1c657deafe09f64c013c2888bd7b-Abstract-Conference.html"
     },
     "conf-4c9ba40b31e42835e5958c35": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Discrete Tokens",
+          "Autoregressive"
+        ],
+        "topics": [
+          "Image Gen&Edit"
+        ]
+      },
+      "annotation_source": {
+        "sha256": "f12b068eb88495b4612b28ef017aac3699a8b0764485ad84b9d704a2def44314",
+        "url": "https://openaccess.thecvf.com/content/ICCV2025/html/Esteves_Spectral_Image_Tokenizer_ICCV_2025_paper.html"
+      },
       "arxiv_id": "2412.09607",
       "authors": [
         "Carlos Esteves",
@@ -65760,7 +65775,22 @@
       },
       "source_edition": "ICCV 2025",
       "source_version": "896cffaeb52fb8dad4317e7b40ef9877c15e09af9220df18bee99202acd5367e",
-      "summary": null,
+      "summary": {
+        "contributions": [
+          "提出了频谱图像分词器（SIT），该模型在离散小波变换（DWT）系数上操作，利用自然图像功率谱随频率降低的特性，在较高小波尺度上对较大图像块进行更重的压缩，从而在保持视觉质量的同时实现高效编码。",
+          "引入了尺度因果注意力机制，使每个尺度仅依赖于自身及较低尺度，允许模型在单一分辨率下训练，但能用于对任意数量尺度（直至训练最大尺度）的多分辨率图像进行分词，并支持对部分令牌序列进行解码以重建粗略图像。",
+          "训练了基于SIT的自回归生成Transformer（AR-SIT），该模型以由部分令牌序列给出的图像粗略重建作为条件进行下一令牌预测，实现了从粗到细的图像建模，区别于传统基于前一行部分重建的条件方式。",
+          "实现了快速粗略生成应用，AR-SIT可以仅生成前几个令牌并重建图像的粗略版本，使用户能够快速浏览多个粗略生成结果并选择需要精细化的内容。",
+          "支持基于文本的低分辨率图像超分辨率重建，通过以SIT输出的少量令牌开始解码过程，并生成其余序列直至达到目标分辨率，实现文本引导的图像增强。",
+          "实现了文本引导的图像编辑功能，通过将给定图像编码至粗略尺度，并基于新的文本描述生成更精细的细节，从而在保留粗略结构的同时修改图像内容。"
+        ],
+        "one_sentence": "该论文提出了一种基于离散小波变换系数的频谱图像分词器（SIT），通过利用自然图像功率谱随频率衰减的特性及尺度因果注意力机制，实现了从粗到细的自回归图像生成、多分辨率处理及文本引导的图像编辑与超分辨率重建。",
+        "problem": "自然图像具有高维度、冗余和噪声，直接为每个像素分配令牌不切实际，且图像不像语言那样具有天然的序列性，导致传统的自回归模型难以直接应用，而现有的替代方案（如扩散模型）通常仍依赖于VQGAN等分词器的潜在空间，缺乏直接在频谱域进行自回归建模的有效方法。"
+      },
+      "summary_source": {
+        "sha256": "f12b068eb88495b4612b28ef017aac3699a8b0764485ad84b9d704a2def44314",
+        "url": "https://openaccess.thecvf.com/content/ICCV2025/html/Esteves_Spectral_Image_Tokenizer_ICCV_2025_paper.html"
+      },
       "title": "Spectral Image Tokenizer",
       "topics": [
         "Image Gen&Edit"
@@ -119416,7 +119446,21 @@
       },
       "source_edition": "ICCV 2025",
       "source_version": "86db8cefc6ce3a8b1b418196d7e29464e6668bccde4a8e1a81f7e4b4513f1809",
-      "summary": null,
+      "summary": {
+        "contributions": [
+          "设计了一种新的基础模型缓存策略，利用缓存过程中独特的梯度来减少未来缓存中的误差。",
+          "提出了一种确定何时应用梯度缓存优化的方法，旨在减少与梯度缓存优化相关的误差。",
+          "通过计算最近两个缓存内容之间的梯度并将其整合到后续缓存内容中，使重用特征更接近被跳过的特征，从而最小化缓存误差。",
+          "利用模型统计信息计算每步的反梯度块比例，并结合采样过程中的步骤位置，制定了一种梯度缓存优化决策策略，以防止引入主要误差并将剩余的小误差限制在后期采样阶段。",
+          "该方法在牺牲质量或引入额外计算成本的情况下，提高了图像生成速度的上限，同时优化了生成质量。"
+        ],
+        "one_sentence": "该论文提出了一种名为梯度优化缓存（GOC）的方法，通过利用最近两步缓存内容的梯度来补偿误差，从而在保持生成质量的同时加速扩散Transformer（DiT）的推理过程。",
+        "problem": "扩散Transformer（DiT）在采样过程中耗时较长，阻碍了其在现实世界中的快速部署；现有的基于缓存的加速方法虽然利用了时间连贯性，但缺乏对缓存计算的严格误差分析，导致递归应用缓存特征时产生误差传播和累积，且直接状态重用存在系统性的位置偏差。"
+      },
+      "summary_source": {
+        "sha256": "403c99393b0ec128c39285dfc268bfc001d0ce33d8991de91204e827eede9425",
+        "url": "https://openaccess.thecvf.com/content/ICCV2025/html/Qiu_Accelerating_Diffusion_Transformer_via_Gradient-Optimized_Cache_ICCV_2025_paper.html"
+      },
       "title": "Accelerating Diffusion Transformer via Gradient-Optimized Cache",
       "topics": [
         "Image Gen&Edit"
@@ -125834,6 +125878,20 @@
       "url": "https://eccv.ecva.net/virtual/2024/poster/529"
     },
     "conf-92e7d325ed7a35801fd55088": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Diffusion"
+        ],
+        "topics": [
+          "Image Gen&Edit"
+        ]
+      },
+      "annotation_source": {
+        "sha256": "c31d569e417a947b9e507d3af73cc7994b87c3b2c7370874318c089c81ee4cb3",
+        "url": "https://openaccess.thecvf.com/content/ICCV2025/html/Chu_OmniCache_A_Trajectory-Oriented_Global_Perspective_on_Training-Free_Cache_Reuse_for_ICCV_2025_paper.html"
+      },
       "arxiv_id": "2508.16212",
       "authors": [
         "Huanpeng Chu",
@@ -125866,7 +125924,19 @@
       },
       "source_edition": "ICCV 2025",
       "source_version": "3f4bc6c9ecbacc2307f55b32b58422005d2d087306e3af17aaba1a22acf18e1f",
-      "summary": null,
+      "summary": {
+        "contributions": [
+          "分析了缓存复用对扩散Transformer采样过程的影响，并首次提出基于模型采样轨迹特性的系统化缓存复用优化策略。",
+          "发现当前步骤缓存引入的噪声与上一步骤具有高度相关性，利用该特性估计并过滤缓存噪声，结合高通和低通滤波技术以减轻对无关信号的干扰。",
+          "在Opensora和Latte等模型上实现了2至2.5倍的加速且无性能损失，并在低冗余的蒸馏模型上实现了1.45倍的加速，避免了现有方法导致的模型崩溃。"
+        ],
+        "one_sentence": "本文提出了一种名为OmniCache的免训练缓存复用方法，通过基于扩散Transformer采样轨迹的全局视角优化缓存节点选择并校正缓存引入的噪声，从而在保持生成质量的同时显著提升推理速度。",
+        "problem": "现有扩散Transformer模型的缓存复用策略主要依赖输出相似度指标，倾向于在采样后期复用缓存，但这会导致不可恢复的轨迹偏差和信噪比持续下降，且难以在低冗余的蒸馏模型上有效工作。"
+      },
+      "summary_source": {
+        "sha256": "c31d569e417a947b9e507d3af73cc7994b87c3b2c7370874318c089c81ee4cb3",
+        "url": "https://openaccess.thecvf.com/content/ICCV2025/html/Chu_OmniCache_A_Trajectory-Oriented_Global_Perspective_on_Training-Free_Cache_Reuse_for_ICCV_2025_paper.html"
+      },
       "title": "OmniCache: A Trajectory-Oriented Global Perspective on Training-Free Cache Reuse for Diffusion Transformer Models",
       "topics": [
         "Image Gen&Edit"
@@ -148032,6 +148102,22 @@
       "url": "https://openaccess.thecvf.com/content/CVPR2026/html/Liu_GenSplat_Bridging_the_Generalization_Gap_in_3DGS_Language_Comprehension_CVPR_2026_paper.html"
     },
     "conf-ab63e40ef0350ea2e7f0d5e2": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Diffusion",
+          "Reference Conditioning",
+          "Continuous Latents"
+        ],
+        "topics": [
+          "Image Gen&Edit"
+        ]
+      },
+      "annotation_source": {
+        "sha256": "67c63551cb96b30e8626dc38c55557e7f5c700e253c6d220fda966ff612786fc",
+        "url": "https://openaccess.thecvf.com/content/ICCV2025/html/Huang_MaTe_Images_Are_All_You_Need_for_Material_Transfer_via_ICCV_2025_paper.html"
+      },
       "arxiv_id": "2605.15660",
       "authors": [
         "Nisha Huang",
@@ -148068,7 +148154,19 @@
       },
       "source_edition": "ICCV 2025",
       "source_version": "c29934d0c7becb7812c67f779c9825f25ec67dfff604c68fe995d600436f5d00",
-      "summary": null,
+      "summary": {
+        "contributions": [
+          "提出了MaTe架构，通过多模态注意力机制在统一潜空间中处理图像条件，实现了图像条件间的语义交互和零样本控制，显著降低了架构复杂度和推理时间。",
+          "简化了推理流程，消除了对微调或手动设置文本信息的需求，仅利用现有预训练扩散模型从输入图像中推断所有必要信息。",
+          "构建了多样化且广泛的真实世界材料迁移评估数据集，并在定性分析和定量分析中证明该方法优于最先进基线，产生了细节一致的高质量结果。"
+        ],
+        "one_sentence": "本文提出了一种名为MaTe的材料迁移架构，通过统一序列处理和跨偏置调制机制在共享潜空间中融合多模态图像条件，从而摆脱对复杂控制模块和文本提示的依赖，实现高效且高质量的材料迁移。",
+        "problem": "现有基于扩散模型的材料迁移方法存在显著局限：基于微调的方法训练成本高且易过拟合，依赖文本提示导致对材料属性的细粒度控制受限；而基于IP-Adapter和ControlNet的方法虽然引入了图像编码器和深度信息，但缺乏跨模态交互机制，导致材料、几何结构和光照信息在潜空间中发生层级解耦，引发材料-几何错位和光照-反射不一致等伪影，且推理时间较长。"
+      },
+      "summary_source": {
+        "sha256": "67c63551cb96b30e8626dc38c55557e7f5c700e253c6d220fda966ff612786fc",
+        "url": "https://openaccess.thecvf.com/content/ICCV2025/html/Huang_MaTe_Images_Are_All_You_Need_for_Material_Transfer_via_ICCV_2025_paper.html"
+      },
       "title": "MaTe: Images Are All You Need for Material Transfer via Diffusion Transformer",
       "topics": [
         "Image Gen&Edit"
