@@ -13,6 +13,389 @@
       <h1>Image Gen&amp;Edit · 论文要点</h1>
     </header>
     <div class="summary-topic-list">
+    <article class="summary-article summary-topic-entry" id="summary-2607.10165" data-arxiv-id="2607.10165" data-status="ready">
+<h1>[2607.10165] EmoStyle: Affective Conditioning of Style-Specialist Experts for Emotional Image Generation</h1>
+<p><a href="https://arxiv.org/abs/2607.10165" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>该论文提出了一种名为EmoStyle的情感感知艺术生成框架，通过结合大语言模型推理、风格专家适配器和视觉语言模型测试时优化，解决了在缺乏结构化情感标注情况下生成符合特定艺术风格且情感表达准确的图像问题。</p>
+<h2>解决的问题</h2>
+<p>现有情感感知艺术生成模型面临的主要挑战是，在测试阶段缺乏训练数据中存在的丰富结构化情感标注（如效价-唤醒度、主导情绪和治疗效果标签），模型仅能接收输入提示词和目标风格桶，必须推断缺失的线索以确定如何在特定艺术风格下表达目标情感，同时需兼顾内容保留、风格遵循和情感表达。</p>
+<h2>创新点</h2>
+<ul>
+<li>引入基于大语言模型的情感规划器，从输入提示词和目标风格桶中推断缺失的情感和布局线索，构建包含情感线索和宽高比决策的结构化生成计划。</li>
+<li>提出基于Z-Image的框架，将风格选择与情感调制分离，通过为每个风格桶训练特定的LoRA适配器来建模艺术风格，并通过AdaLN风格的移位-缩放调制将情感线索注入去噪块。</li>
+<li>设计了一种视觉语言模型引导的测试时优化策略，根据提示词对齐、风格一致性、情感一致性和视觉质量评估生成候选项，识别残留失败并选择或重新生成最终输出。</li>
+<li>在2026年AffectiveArt挑战赛的Track 1中，该框架的提交获得了第一名。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2606.24844" data-arxiv-id="2606.24844" data-status="ready">
+<h1>[2606.24844] Bridging the Manifold Gap: Riemannian Residual Line Search for One-Step Image Editing</h1>
+<p><a href="https://arxiv.org/abs/2606.24844" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>该论文提出了一种名为黎曼残差线搜索（RRLS）的方法，通过结合一阶泰勒展开和二阶曲率校正来近似潜空间中的最小能量传输问题，从而解决单步图像编辑中因分布差异过大导致的编辑能力退化问题。</p>
+<h2>解决的问题</h2>
+<p>现有基于能量传输过程的单步图像编辑方法（如ChordEdit）依赖一阶差分函数建模传输动态，当两个能量分布之间不存在一对一单射映射且分布差异较大时，会导致严重的信息丢失和编辑能力显著退化，难以在满足目标提示的同时保持源图像无关区域的结构完整性。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种联合一阶和二阶差分近似框架，通过一阶泰勒展开与二阶曲率校正的协同组合来近似传输向量场，以克服传统单一线性近似的局限性。</li>
+<li>将文本驱动的图像编辑形式化为潜空间内的最小能量传输问题，并基于Benamou-Brenier动态最优传输公式来描述传输动态。</li>
+<li>构建了一个离散候选解集，利用二阶变化扩展语义编辑边界，同时保留一阶更新的结构鲁棒性，以应对复杂扩散流形上解析不可解的偏微分方程。</li>
+<li>将最终图像的选择建模为一个正则化优化问题，通过引入拉格朗日乘子平衡目标对齐势能与源漂移惩罚，从而无需梯度更新或模型微调即可锁定全局最优解。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2607.10535" data-arxiv-id="2607.10535" data-status="ready">
+<h1>[2607.10535] Improving Sample Diversity in Autoregressive Text-to-Image Generation via Cluster Truncation</h1>
+<p><a href="https://arxiv.org/abs/2607.10535" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种名为 p-less cluster 的基于簇截断的解码策略，旨在通过利用视觉令牌空间的高熵与冗余特性，在不显著牺牲图像质量或提示对齐的前提下，显著提升自回归文本到图像生成模型中针对同一提示词的样本多样性。</p>
+<h2>解决的问题</h2>
+<p>自回归文本到图像生成模型存在样本多样性坍缩问题，即对同一提示词重复采样时生成的图像在构图、风格或内容上缺乏变化，且现有研究尚未探讨源自文本生成的截断式采样策略如何影响此类模型的样本多样性。</p>
+<h2>创新点</h2>
+<ul>
+<li>首次对基于令牌的自回归文本到图像模型进行了针对同一提示词的样本多样性研究，涵盖了四种模型和三种不同的向量量化码本范式。</li>
+<li>提出了 p-less cluster 方法，这是一种簇感知的解码策略，通过对视觉令牌簇进行截断来实现两阶段采样。</li>
+<li>在四个自回归图像生成模型上进行了广泛实验，证明该方法相比标准采样基线一致地改善了多样性与质量之间的帕累托前沿。</li>
+<li>通过定量和定性分析验证了研究结果的鲁棒性，并识别出簇级采样能带来最大多样性增益的具体场景。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2607.10538" data-arxiv-id="2607.10538" data-status="ready">
+<h1>[2607.10538] Navigating the Open-Source Model Ecosystem: An Empirical Study of Creator Practices in Artistic Image Generation</h1>
+<p><a href="https://arxiv.org/abs/2607.10538" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文通过构建包含六百万张图像元数据的大规模数据集，对开源生成式AI生态系统中创作者的模型选择、组合及LoRA微调实践进行了首个大规模实证研究。</p>
+<h2>解决的问题</h2>
+<p>尽管开源生成式AI模型生态蓬勃发展，但现有研究多聚焦于单一模型下的提示词行为或模型开发者视角，缺乏对创作者在包含数十万模型的复杂开源生态中如何实际选择、使用及组合模型以进行艺术创作的系统性实证理解。</p>
+<h2>创新点</h2>
+<ul>
+<li>构建了首个包含六百万张AI生成图像及其完整生成元数据（如提示词、参数、具体模型）的大规模公开数据集，涵盖2.24万个基础模型和15.4万个LoRA模型。</li>
+<li>揭示了开源生态中模型使用的长尾分布特征，发现80%的图像仅由2.5%的热门基础模型生成，且大多数创作者倾向于依赖有限的熟悉模型而非探索多样性。</li>
+<li>分析了模型的生命周期动态，指出基础模型流行度上升较快（中位11周达峰）而LoRA模型采用较慢但持久（中位23周达峰），并发现创作者存在显著的版本更新惰性，仅40%图像在发布20周后采用最新版本。</li>
+<li>证实了LoRA技术在2025年的爆发式增长（75%图像使用）及其与作品受欢迎程度的正相关性，表明LoRA在提升艺术创作效果方面具有显著价值。</li>
+<li>识别出LoRA使用模式的演进趋势，即基础功能任务逐渐由更强大的基础模型承担，而LoRA更多用于风格化和概念性的细微调整，反映了创作流程的专业化与复杂化。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2607.10800" data-arxiv-id="2607.10800" data-status="ready">
+<h1>[2607.10800] h-Flow: Flexible Flow-based Image Editing via Doob&#x27;s h-Transform</h1>
+<p><a href="https://arxiv.org/abs/2607.10800" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种名为 hh-Flow 的免训练流式图像编辑方法，通过基于 Doob 的 hh-Transform 将编辑重构为条件生成问题，并利用速度正交分解策略在理论上解耦源一致性与目标对齐，实现了灵活且鲁棒的图像编辑。</p>
+<h2>解决的问题</h2>
+<p>现有基于流模型的图像编辑方法主要面临两大挑战：一是早期基于反转的两阶段范式依赖启发式策略和特定架构分析，缺乏可扩展性和通用性；二是近期无反转范式虽然增强了结构一致性，但对随机种子和流步数等超参数设置敏感，导致在实际场景中鲁棒性和泛化能力受限，且缺乏统一的理论支撑。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了 hh-Flow，一个免训练且具备理论基础的流式图像编辑框架，利用 Doob 的 hh-Transform 将图像编辑重构为多终端事件下的条件生成问题。</li>
+<li>构建了与整流流（RF）动力学具有相同边缘分布的等效随机微分方程（SDE），从而在理论上将 hh-Transform 从基于 SDE 的扩散模型严谨地扩展到基于常微分方程（ODE）的 RF 框架。</li>
+<li>设计了专用的 hh-函数以显式编码源一致性和目标对齐两个核心目标，其中源一致性通过终端约束诱导精确的闭式重构引导，目标对齐通过速度场中的偏差捕捉语义转变。</li>
+<li>提出了速度正交分解策略，将编辑速度投影到互补子空间，在速度层面完全解耦重构与编辑方向，从而在源保持和目标修改之间实现可控的权衡。</li>
+<li>证明了该方法在修改反向过程的同时对前向构建保持不可知性，能够以即插即用的方式与不同的前向过程无缝结合，进一步增强了编辑的灵活性和性能。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2607.16291" data-arxiv-id="2607.16291" data-status="ready">
+<h1>[2607.16291] Beyond Target Scores: Measuring Off-Target Drift in Diffusion-Based Medical Image Editing</h1>
+<p><a href="https://arxiv.org/abs/2607.16291" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>该论文指出基于扩散模型的医学图像编辑面临非目标漂移问题，提出应通过单调目标进展、非目标语义稳定性、轨迹级评估及读者对齐四项核心标准来衡量编辑的可识别性，而非仅依赖感知真实感或单一目标分类器分数。</p>
+<h2>解决的问题</h2>
+<p>现有基于扩散模型的医学图像编辑方法主要依赖感知真实感指标或单一目标分类器分数进行评估，这在临床场景中是不充分的，因为病理发现通过共病和共享成像线索在统计上相互纠缠，导致模型可能通过利用训练分布中的相关性（即奖励黑客行为）来增加目标疾病分数，从而无意中放大相关但临床不同的发现，产生违反预期反事实解释的图像，使得无法区分独立操纵与分布跟随行为。</p>
+<h2>创新点</h2>
+<ul>
+<li>论证了医学图像编辑的核心挑战在于可识别性而非真实感，指出仅优化目标改进允许模型利用相关性而非操纵预期的病理因素。</li>
+<li>提出了方向性医学图像编辑应满足的四个核心标准：单调目标进展、非目标语义稳定性、轨迹级评估以及读者对齐。</li>
+<li>指出仅基于目标分类器改进的评估协议混淆了真正的进展与相关的语义漂移，无法区分独立操纵与分布跟随行为。</li>
+<li>强调在观察性临床数据中，许多发现系统性共存，学习到的表示通常隐式编码这些依赖关系，导致看似编辑性能的提升可能反映的是更好的捷径利用而非改进的语义控制。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2607.11655" data-arxiv-id="2607.11655" data-status="ready">
+<h1>[2607.11655] Feature-Space Guided Diffusion for Realistic Ultrasound Image Synthesis</h1>
+<p><a href="https://arxiv.org/abs/2607.11655" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>该论文提出了一种名为特征空间候选引导（FSCG）的免训练策略，利用超声基础模型OpenUS的特征空间来指导条件扩散模型的反向扩散过程，从而提升合成超声图像的真实感并解决现有评估指标与生成模型在特征空间上的对齐问题。</p>
+<h2>解决的问题</h2>
+<p>现有超声图像合成方法主要依赖掩码或语义图等结构输入，缺乏对B模式真实外观的显式约束；同时，常用的图像质量评估指标对归一化和对齐敏感，而基于自然图像特征空间的分布度量无法反映超声特有的外观特征，导致生成样本在特征空间中与真实图像存在偏差，且缺乏针对超声数据学习到的表示空间进行有效评估和引导的手段。</p>
+<h2>创新点</h2>
+<ul>
+<li>指出了超声图像真实感评估指标的缺失以及真实超声图像与生成样本之间的表示差距，证明仅靠掩码条件无法保证生成图像与真实超声域的对齐。</li>
+<li>提出了FSCG，一种免训练的引导机制，利用从真实训练图像中提取的OpenUS特征库来引导反向扩散过程，无需重新训练或修改生成器。</li>
+<li>在多个解剖结构不同的超声数据集上验证了FSCG的有效性，展示了其在特征空间对齐和图像级分布度量方面优于标准采样及其他特征空间引导基线方法。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2607.11885" data-arxiv-id="2607.11885" data-status="ready">
+<h1>[2607.11885] Latent-Identity Tuning in Text-to-Image Personalization Models</h1>
+<p><a href="https://arxiv.org/abs/2607.11885" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>该论文提出了一种在文本到图像个性化模型中对潜在身份表示进行微调的方法，通过识别和利用身份潜在空间中的语义编辑方向，实现了对人脸特征的细粒度、一致且可控的修改。</p>
+<h2>解决的问题</h2>
+<p>现有文本到图像个性化方法虽然能忠实复现身份，但缺乏对身份表示本身的修改控制能力，导致用户无法在保持跨样本一致性的前提下，对特定面部特征（如胡须、雀斑或鼻型）进行精细化的定制或创造性重构。</p>
+<h2>创新点</h2>
+<ul>
+<li>分析了个性化编码器中的身份潜在空间，揭示了其中包含可被显式识别的有意义编辑方向，这些方向支持对身份进行细粒度且语义连贯的调整。</li>
+<li>探究了操纵单个身份令牌或联合操纵所有令牌对编码身份的影响，并引入了一种方法来识别与特定局部面部属性最相关的令牌。</li>
+<li>对选定的令牌应用了多种有监督和无监督技术，以发现潜在空间中的语义方向，从而实现从局部特征修改到身份间平滑插值的定向连续编辑。</li>
+<li>展示了该框架在不同身份微调场景和不同个性化模型中的有效性，证明其能够实现通过文本引导方法难以达成的细粒度编辑，如控制眼睛大小、添加特定胡须或转移眉毛。</li>
+<li>通过生成跨多样化图像的一致身份表示，允许用户一次性调整身份，从而在所有后续生成中保持与其偏好外观对齐的结果。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2607.11886" data-arxiv-id="2607.11886" data-status="ready">
+<h1>[2607.11886] Read It Back: Pretrained MLLMs Are Zero-Shot Reward Models for Text-to-Image Generation</h1>
+<p><a href="https://arxiv.org/abs/2607.11886" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种名为 SpectraReward 的免训练奖励函数，通过复用预训练多模态大语言模型（MLLM）的图文对齐知识，利用图像条件下的提示词令牌似然性作为奖励信号，从而为文本到图像生成任务提供高效且无需偏好标签的强化学习优化方案。</p>
+<h2>解决的问题</h2>
+<p>现有用于图像生成强化学习的奖励模型设计面临效率与可靠性难以兼顾的挑战：基于大规模人类偏好标注的方法依赖昂贵且难以收集的数据，而直接复用预训练 MLLM 进行零样本评分的方法则对校准敏感且存在评分噪声，基于问题分解的流水线虽然提高了可靠性但引入了巨大的工程复杂度，导致缺乏一种高效、无需偏好标签且即插即用的开源图像生成器奖励模型。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了 SpectraReward，一种免训练且即插即用的奖励函数，通过计算图像条件下的提示词令牌似然性，复用预训练 MLLM 的图文对齐知识，无需偏好标签、奖励模型微调、标量判断或问题分解即可为文本到图像生成提供奖励信号。</li>
+<li>引入了 Self-SpectraReward，作为 SpectraReward 在统一多模态模型（UMM）中的特例，利用策略模型自身的理解分支作为生成分支的奖励模型，构建了无需外部模型或外部知识的闭环自我改进框架。</li>
+<li>论证了统一多模态模型中理解分支与生成分支共享分词器、视觉编码器和预训练分布所带来的内在分布对齐优势，提出这种内在对齐使得策略自身的理解分支成为其生成任务特别合适的奖励来源。</li>
+<li>开展了一项广泛的图像生成强化学习研究，涵盖两个生成器骨干、三种强化学习算法、来自四个 MLLM 家族且参数量从 4B 到 235B 不等的九个奖励 MLLM 骨干，并在五个下游基准上评估了真实泛化改进。</li>
+<li>实验结果表明 SpectraReward 和 Self-SpectraReward 在多个基准上显著提升了基线性能，并揭示了奖励模型规模带来的收益并非单调递增，且分布对齐良好的自奖励模型可以匹配甚至超越规模大得多的外部模型。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2607.16294" data-arxiv-id="2607.16294" data-status="ready">
+<h1>[2607.16294] A${}^2$BM: Alignment-Aware Bridge Matching for Image-to-Image Translation</h1>
+<p><a href="https://arxiv.org/abs/2607.16294" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>该论文提出了一种名为A2BM的对齐感知桥接匹配框架，旨在解决弱对齐图像翻译中因源域与目标域图像未完美匹配而导致的内容保真度下降问题。</p>
+<h2>解决的问题</h2>
+<p>现有图像翻译方法主要关注完全配对或完全无配对两种极端情况，而现实应用中普遍存在弱对齐数据（如遥感影像中的几何偏移、内容变化或采集噪声），这些未完美匹配的配对会导致监督信号受损，使得基于流匹配或桥接匹配的方法难以在翻译过程中保留细粒度的源域内容信息。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了A2BM框架，这是一种用于弱对齐图像翻译的对齐感知桥接匹配方法，通过显式建模图像对的对齐程度并将其作为训练时的条件信号，使模型能够区分相关特征与未对齐特征。</li>
+<li>设计了两种对齐分数机制：一种是利用先验知识的轻量级元数据基础分数，另一种是在缺乏领域知识时基于预训练视觉编码器嵌入的特征空间相似度分数。</li>
+<li>在推理阶段将对齐分数用作翻译保真度的控制变量，通过提示模型使用最高对齐分数来获得高保真度的翻译结果。</li>
+<li>在受控环境中通过向完全配对数据集引入合成错位来验证方法的有效性，并在遥感领域的真实世界任务（如洪涝前后图像翻译、历史图像翻译及跨传感器超分辨率）中展示了优于强基线方法的翻译保真度。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2604.19632" data-arxiv-id="2604.19632" data-status="ready">
+<h1>[2604.19632] CreatiParser: Generative Image Parsing of Raster Graphic Designs into Editable Layers</h1>
+<p><a href="https://arxiv.org/abs/2604.19632" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种名为 CreatiParser 的混合生成式框架，通过将栅格化平面设计图像解析为文本、背景和贴纸图层，解决了 AI 生成图像不可编辑及现有方法误差累积的问题。</p>
+<h2>解决的问题</h2>
+<p>AI 生成的栅格化平面设计图像缺乏可编辑图层，导致后期定制困难；现有的基于多模态大语言模型的级联解析方法存在误差累积和视觉伪影问题，而基于生成模型的方法多局限于自然图像的前景背景二分类，无法有效处理平面设计中语义异构的文本、背景和贴纸元素。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种用于栅格到图层平面设计图像解析的混合生成式框架，将图像分解为文本、背景和贴纸图层，克服了多阶段流水线现有方法的局限性。</li>
+<li>引入了基于视觉语言模型的文本解析模块以预测文本层，并设计了多分支扩散架构用于生成背景和贴纸层，实现了忠实重建和灵活编辑。</li>
+<li>提出了 ParserReward 评估目标，并将其与组相对策略优化结合，以对齐 Qwen3-VL 的文本渲染协议预测与人类设计偏好，提升了文本层解析性能。</li>
+<li>在多个平面设计基准上进行了广泛实验，该方法在图层重建准确性、文本可编辑性和感知质量方面达到了最先进性能，并展示了良好的泛化能力。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2607.12539" data-arxiv-id="2607.12539" data-status="ready">
+<h1>[2607.12539] DiTailed: Ensuring Visual Object Consistency in Text-Image-to-Image Flow Matching Models</h1>
+<p><a href="https://arxiv.org/abs/2607.12539" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>该论文针对文本图像到图像流匹配模型在生成过程中难以保持视觉对象一致性的问题，提出了名为ABO-Edit的基准数据集、揭示了整流流编辑模型在条件嵌入空间中的潜在预测机制，并设计了无参数辅助损失FlowMirror以提升生成质量。</p>
+<h2>解决的问题</h2>
+<p>尽管大规模生成模型在图像合成领域取得了显著进展，但现有最先进模型在处理背景移除或基本几何变换等简单提示时，往往无法保持视觉对象的一致性，即难以在生成过程中保留对象的几何结构、纹理、颜色及细粒度细节，这种缺乏像素级视觉保真度的缺陷限制了其在产品可视化、3D数字内容创建等下游应用中的适用性。</p>
+<h2>创新点</h2>
+<ul>
+<li>引入了名为ABO-Edit的视觉对象一致性基准数据集，该数据集基于Amazon Berkeley Objects构建，包含超过12k个经人工审核的高质量源图像-提示词-目标图像三元组，目标图像由3D模型渲染生成以确保证据真值，并支持多视角旋转评估。</li>
+<li>提供了关于整流流编辑模型内部行为的新颖分析洞察，发现特定模型家族即使在高噪声水平下，其输入图像的条件嵌入空间中已编码了对最终输出的潜在预测，且该潜在预测在早期去噪步骤中与目标的相似度高于速度估计。</li>
+<li>提出了一种名为FlowMirror的无参数辅助损失函数，利用上述关于条件嵌入空间内在预测行为的洞察，通过监督该嵌入空间来增强生成过程中的对象一致性，并在多个指标和架构上展示了相比基线方法的生成质量提升。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2607.13300" data-arxiv-id="2607.13300" data-status="ready">
+<h1>[2607.13300] Improving Medical Image Generative Models with Fréchet Distance Loss</h1>
+<p><a href="https://arxiv.org/abs/2607.13300" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>该研究提出了一种基于Fréchet距离损失的微调策略，通过利用多种预训练编码器定义的嵌入空间来优化分割引导的医学扩散模型，从而生成更逼真的合成医学图像以提升下游分割任务的性能。</p>
+<h2>解决的问题</h2>
+<p>现有的医学图像生成模型难以捕捉具有大小、形状等形态特征巨大变化的结构，导致生成的合成图像不真实，进而降低下游任务（如肿瘤分割）在真实临床样本上的性能；同时，传统的FID指标与医学图像生成质量相关性不强，且以往将FID作为损失函数因需要大样本量而在小样本医学数据集中难以实施，其在医学图像生成中的效用尚未被探索。</p>
+<h2>创新点</h2>
+<ul>
+<li>将基于队列的Fréchet距离损失（FD-loss）适配用于微调分割引导的医学扩散模型</li>
+<li>评估了包括InceptionV3、RadInceptionV3、BiomedCLIP和MedDINOv3在内的多种自然、放射及生物医学特征空间用于优化</li>
+<li>在肝脏CT和脑部MRI数据集上证明，经过FD正则化的合成数据增强策略优于传统策略</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2607.16307" data-arxiv-id="2607.16307" data-status="ready">
+<h1>[2607.16307] CoBind: Stage-Aware Compositional Binding for Training-Free Text-to-Image Generation</h1>
+<p><a href="https://arxiv.org/abs/2607.16307" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>CoBind 提出了一种阶段感知的组合绑定框架，通过将提示词建模为组合图并在扩散去噪的不同阶段动态应用相应的语义约束，从而在无需训练的情况下显著提升了文生图模型对复杂组合指令的执行能力。</p>
+<h2>解决的问题</h2>
+<p>现有文生图模型在处理包含多实体、属性及关系的复杂提示词时，常出现实体缺失、属性错绑或空间关系反转等系统性组合错误；现有方法通常在整个去噪过程中应用统一的组合约束，忽视了不同语义错误在扩散采样不同阶段（如早期布局、中期属性、晚期细节）具有不同的有效干预时机，导致早期错误难以在后期修正或过度约束破坏生成质量。</p>
+<h2>创新点</h2>
+<ul>
+<li>从扩散采样的时间视角分析组合文生图错误，识别出实体关系、属性绑定和视觉细节分别主要依赖于早期布局形成、中期实体区域建立和晚期细节生成的不同有效干预阶段。</li>
+<li>提出 CoBind 框架，将提示词建模为包含实体、属性和关系的组合图，并采用阶段感知的语义绑定机制，在对应的去噪阶段分别约束空间关系、实体完整性和属性归属。</li>
+<li>设计了一种通用的免训练推理时框架，能够直接集成到不同的预训练文生图扩散模型中，无需额外的图像标注或参数更新即可提升组合生成能力。</li>
+<li>在 T2I-CompBench++、GenEval 等多个基准及多种预训练模型上进行了系统评估，结果显示 CoBind 在保持竞争性视觉质量的同时，一致性地改善了属性绑定、物体关系和复杂组合的表现。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2606.29814" data-arxiv-id="2606.29814" data-status="ready">
+<h1>[2606.29814] Nemotron-Labs-Diffusion-Image: Advancing Masked Discrete Diffusion for High-Resolution Image Synthesis</h1>
+<p><a href="https://arxiv.org/abs/2606.29814" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>该论文提出了名为ours的8B参数掩码离散扩散模型，通过引入令牌编辑机制和分组交叉熵目标，解决了离散图像生成中缺乏自我修正能力以及大码本训练困难的问题，从而实现了高分辨率文本到图像合成。</p>
+<h2>解决的问题</h2>
+<p>现有离散图像生成模型主要面临两个核心挑战：一是缺乏自我修正能力，因为标准掩码离散扩散模型在令牌一旦解除掩码后便无法再被修正，导致采样过程中的误差累积；二是大码本训练困难，随着码本规模增大，令牌频率降低导致监督信号稀疏，且标准交叉熵损失无法捕捉语义相似性，造成优化困难。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了ours，一个8B参数的先进掩码离散扩散基础模型，在多个文本到图像基准测试中取得了强劲的性能表现。</li>
+<li>引入了一种令牌编辑机制，通过修改训练过程加入令牌损坏，使模型能够在推理过程中迭代地修正和细化已解除掩码的令牌，从而提升图像保真度。</li>
+<li>提出了一种名为分组交叉熵的新型训练目标，通过聚类提供辅助监督信号，缓解了大词汇量离散图像生成器中的码本稀疏性问题，提高了训练效率和优化稳定性。</li>
+<li>实现了自定义融合算子以优化分组交叉熵的计算，显著降低了与朴素PyTorch自动微分实现相比的延迟和显存开销。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2602.19946" data-arxiv-id="2602.19946" data-status="ready">
+<h1>[2602.19946] When Pretty Isn&#x27;t Useful: Investigating Why Modern Text-to-Image Models Fail as Reliable Training Data Generators</h1>
+<p><a href="https://arxiv.org/abs/2602.19946" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>该研究通过大规模基准测试发现，尽管现代文本到图像模型在视觉保真度上有所提升，但其生成的合成数据在作为下游视觉模型训练数据时，由于分布漂移和多样性丧失，实际效果反而不如早期模型。</p>
+<h2>解决的问题</h2>
+<p>现有研究主要关注合成数据的视觉质量，但缺乏对最新一代文本到图像模型生成的数据在训练下游模型时的实际效用评估，且未深入探究视觉质量提升与训练数据可靠性之间的潜在矛盾及背后的分布学原因。</p>
+<h2>创新点</h2>
+<ul>
+<li>构建了一个涵盖2022年至2025年十三个开源文本到图像模型的大规模时间跨度基准测试，在ImageNet-1K上证实了随着模型更新，尽管视觉保真度提高，但合成数据到真实数据的分类准确率反而下降。</li>
+<li>通过深度结构分类器、局部纹理分类器以及高低通滤波输入，深入探究了纹理和频率失配问题，发现新模型虽然保留了全局结构和低频信息，但纹理质量和高频细节出现系统性退化。</li>
+<li>通过测量特征空间中的密度与覆盖率，并对比真实到合成与合成到真实的迁移性能，量化了分布漂移和多样性损失，证明新模型在分布真实性方面存在退化。</li>
+<li>揭示了详细文本提示虽能提升下游性能，但会导致合成流形变得紧凑（高密度低覆盖），从而加剧分布漂移并降低类内多样性，分离了样本真实感与分布真实感两个独立维度。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2603.16551" data-arxiv-id="2603.16551" data-status="ready">
+<h1>[2603.16551] CompDiff: Hierarchical Compositional Diffusion for Fair and Zero-Shot Intersectional Medical Image Generation</h1>
+<p><a href="https://arxiv.org/abs/2603.16551" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>CompDiff 通过引入层级条件网络在表示层面显式建模人口统计属性的组合交互，解决了生成模型在训练数据缺失特定人口统计交叉组合时无法生成高质量样本的不平衡生成器问题，实现了零样本泛化。</p>
+<h2>解决的问题</h2>
+<p>现有扩散模型在训练数据存在人口统计不平衡时，虽然平均保真度较高，但针对罕见子群体或完全缺失的交叉组合（如特定年龄、种族、性别与病理的交集）无法生成高质量图像，且现有的数据重加权或优化层面的公平性方法无法为训练集中不存在的组合提供学习信号。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了 CompDiff 框架，通过层级条件网络在表示层面显式建模人口统计属性交互，解决了训练数据中完全缺失特定人口统计交叉组合时的零样本生成问题。</li>
+<li>设计了层级条件网络，将人口统计身份视为可组合结构，利用单属性嵌入和成对交互嵌入组合生成专用人口统计令牌，与临床文本嵌入拼接以增强条件控制。</li>
+<li>在组合位置上区别于采样时组合独立条件分数的方法，CompDiff 在训练时的单一条件器内部组合人口统计表示，可作为文本编码器的即插即用替代方案。</li>
+<li>在因子假设上显式建模人口统计属性间的成对交互，承认人口统计特征与解剖结构之间存在非加性交互（如年龄与骨密度、性别与心胸比），而非假设属性边缘分布独立。</li>
+<li>在组合目标上专注于医疗图像中的人口统计交叉组合，针对 MIMIC-CXR 等数据集中训练样本为零的最罕见单元格，将挑战从罕见样本提升至完全缺失样本的生成。</li>
+<li>在胸部 X 光和眼底图像数据集上的实验表明，CompDiff 在图像质量、人口统计公平性和下游任务效用方面均优于标准基线模型和 FairDiffusion。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.24088" data-arxiv-id="2609.24088" data-status="ready">
+<h1>[2609.24088] Bridging Reconstruction and Generation: A Latent Distribution Perspective on Evaluation and Improvement</h1>
+<p><a href="https://arxiv.org/abs/2609.24088" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>该论文指出重建与生成过程中潜在分布的不匹配是导致重建质量与生成性能脱节的关键原因，并提出了生成感知重建（GAR）方法以构建潜在轨迹，从而实现对生成性能的可靠评估及通过解码器适配提升生成质量。</p>
+<h2>解决的问题</h2>
+<p>现有研究通常假设视觉分词器的重建质量与下游生成性能正相关，但近期实证研究表明重建FID与生成FID之间可能存在弱相关甚至负相关，揭示了重建质量与生成性能之间的显著差异，且缺乏对解码器在从编码器潜在分布向生成时潜在分布转变过程中行为变化的观测手段。</p>
+<h2>创新点</h2>
+<ul>
+<li>识别了重建与生成之间的潜在分布不匹配问题，指出解码器在重建时评估于编码器潜在分布，而在生成时操作于生成器产生的潜在分布，从分布角度解释了重建质量未必能追踪生成性能的原因。</li>
+<li>提出了生成感知重建（GAR）方法，通过扰动编码器潜在变量并经生成模型去噪，构建了从标准重建到生成的连续潜在轨迹，使重建与生成之间的过渡变得可观测和可诊断。</li>
+<li>引入了基于轨迹的诊断指标GAR-FID，该指标通过探测解码器沿轨迹的行为，在多种分词器、生成器架构和模型规模下与生成FID表现出强相关性，提供了比重建FID更可靠的生成性能评估代理。</li>
+<li>提出了解码器适配策略，利用GAR轨迹中间噪声级别的潜在变量作为生成感知的配对监督信号，在冻结编码器和生成模型的情况下仅微调解码器，从而在保持图像级监督的同时使解码器适应更接近生成时的潜在分布。</li>
+<li>实验证明该解码器适配方法在不同模型规模下均能带来生成质量的一致提升，确立了潜在分布不匹配作为评估和改进潜在生成模型的有效视角。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.24116" data-arxiv-id="2609.24116" data-status="ready">
+<h1>[2609.24116] Patch-to-Global: Random Patch Diffusion for Globally Consistent Megapixel Artifact Inpainting in Whole Slide Images</h1>
+<p><a href="https://arxiv.org/abs/2609.24116" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>该论文提出了一种名为 RestorePath 的新框架，通过结合大核注意力机制与随机补丁扩散策略，实现了全切片图像中兆像素级组织伪影的全局一致修复，从而显著提升了下游计算病理分析的可靠性。</p>
+<h2>解决的问题</h2>
+<p>全切片图像（WSI）中普遍存在气泡、折叠等兆像素级组织伪影，导致病理诊断模型出现高置信度错误预测或静默失败；现有的检测并丢弃策略在稀疏病变场景下会丢失关键诊断证据，而现有的基于扩散模型的修复方法仅局限于局部补丁级重建，缺乏与周围健康组织严格对齐的全局一致性，且难以处理完全被遮挡区域的结构性一致性。</p>
+<h2>创新点</h2>
+<ul>
+<li>重新定义了兆像素级伪影修复任务，将其视为一种全局一致的修复问题，以确保在下游计算病理分析中的鲁棒性能。</li>
+<li>提出了 RestorePath 框架，利用针对大规模 WSI 复杂组织学模式优化的修复潜在扩散模型（LDM）进行高保真修复。</li>
+<li>在基于病理基础模型（PFM）条件的 LDM 中集成了大核注意力（LKA），以有效处理高分辨率图像中的长程相关性。</li>
+<li>实现了随机补丁扩散策略，利用距离加权插值（DWI）从邻近健康区域插值条件信号，确保即使补丁完全被遮挡也能保持结构一致性。</li>
+<li>引入了自适应引导尺度（AGS），根据局部内容和图像复杂度动态调整引导尺度，优化修复过程以实现与周围组织无缝对齐。</li>
+<li>在 TCGA BRCA、BACH 和 Camelyon16 数据集上验证了框架的有效性，证明其在保留组织学上下文、降低错误率及缓解静默失败方面优于现有方法及检测并丢弃策略。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.25267" data-arxiv-id="2609.25267" data-status="ready">
+<h1>[2609.25267] ImIR: Image-Instruction Tuning for All-in-One Image Restoration</h1>
+<p><a href="https://arxiv.org/abs/2609.25267" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>ImIR 提出了一种基于图像指令调用的全功能图像恢复方法，通过轻量级令牌映射器从退化图像的视觉语言嵌入中预测连续指令向量，从而在单一预训练图像编辑模型上实现无需文本提示的多任务恢复。</p>
+<h2>解决的问题</h2>
+<p>现有全功能图像恢复模型主要依赖离散文本提示或从零开始训练，存在提示工程复杂、任务词汇封闭、无法针对具体图像进行连续调节以及存储和部署困难等问题，且文本作为全局离散信号难以提供针对特定退化图像的精细控制。</p>
+<h2>创新点</h2>
+<ul>
+<li>将全功能图像恢复重构为由图像衍生指令引导的编辑任务，用连续指令向量替代离散文本提示，消除了对逐任务提示工程的依赖。</li>
+<li>引入轻量级令牌映射器，将退化图像的视觉语言嵌入转换为恢复指令，使得指令无需书面提示或参考图像即可生成。</li>
+<li>利用连续嵌入空间的插值和外推特性，通过缩放指令沿退化到清晰方向移动输出，为低光增强等目标不唯一的任务生成一系列有效恢复结果。</li>
+<li>提出任务无关变体，在无需退化标签的情况下匹配任务感知模型的性能，并证明该能力源于图像衍生指令而非编辑器或适配器本身。</li>
+<li>在单一 GPU 上使用少量数据约三小时训练一个模型处理六种恢复任务，达到具有竞争力的全参考质量并在所有任务上优于文本条件方法。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.25444" data-arxiv-id="2609.25444" data-status="ready">
+<h1>[2609.25444] Mean Velocity Matching: Rethinking Generative Dynamics in Diffusion Models</h1>
+<p><a href="https://arxiv.org/abs/2609.25444" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出了一种名为平均速度匹配（MVM）的连续时间生成框架，通过单一学习场直接参数化反向随机微分方程的漂移项，从而在无需中间速度到分数转换的情况下实现高效的生成过程。</p>
+<h2>解决的问题</h2>
+<p>现有扩散模型和流匹配模型在生成过程中往往需要分别学习分数场或进行中间的速度到分数重构，且直接回归在时间步接近零时会出现数值不稳定问题，缺乏一种既能保持单场预测简洁性又能直接定义随机反向动力学的统一框架。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了平均速度匹配（MVM）框架，利用单一学习场直接参数化反向随机微分方程的漂移项，避免了生成过程中对独立分数场或中间速度到分数重构的依赖。</li>
+<li>推导了一种高斯扰动过程，证明其边际反向漂移恰好等于条件期望，使得随机反向动力学可以通过对成对前向样本进行普通的二次回归来学习。</li>
+<li>引入了一种基于时间步平方根的缩放参数化方法，消除了直接回归目标在数据端点附近出现的数值发散问题，同时保持了对应的反向动力学特性。</li>
+<li>基于Transformer架构实例化了MVM模型，并在32乘32及256乘256分辨率的ImageNet数据集上进行了类条件生成评估。</li>
+<li>在匹配数值预算的条件下，对比分析了MVM的随机反向随机微分方程及其确定性概率流常微分方程的性能表现。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.25881" data-arxiv-id="2609.25881" data-status="ready">
+<h1>[2609.25881] Delving into Asymmetric Information Dynamics for High-Fidelity Virtual Try-On</h1>
+<p><a href="https://arxiv.org/abs/2609.25881" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>该论文提出了一种名为RealFit的高保真虚拟试穿框架，通过引入单向信息流和解耦时间步调制机制，解决了基于扩散Transformer的对称注意力架构在保持服装身份一致性方面的信息瓶颈问题。</p>
+<h2>解决的问题</h2>
+<p>现有基于扩散Transformer的虚拟试穿模型通常采用对称的联合注意力机制，将噪声潜变量和条件令牌同等对待，导致确定性的服装条件受到随机噪声的干扰，造成条件特征漂移和高频细节丢失，同时时间步调制削弱了条件信号向噪声潜变量的注入，使得生成结果在颜色、纹理和细节上无法准确保留参考服装的特征。</p>
+<h2>创新点</h2>
+<ul>
+<li>将虚拟试穿任务形式化为非对称信息任务，区分随机噪声潜变量与确定性条件信号，并提出了基于条件注意力熵和注入信息通量的诊断框架以量化特征无偏性和注入有效性。</li>
+<li>提出了RealFit框架，通过单向信息流机制阻断条件对噪声的注意力路径，使条件分支仅关注自身，从而最小化条件注意力熵，保持服装表示的无偏性并保留高频细节。</li>
+<li>设计了解耦时间步调制机制，使条件分支使用固定的最优调制状态而非动态调度，以最大化注入信息通量，确保确定性服装特征在整个去噪过程中提供强引导。</li>
+<li>利用条件分支对去噪时间步和噪声潜变量独立的特性，实现了条件键值缓存，使服装特征只需计算一次即可复用，从而将推理时间减少约75%并降低GPU内存使用。</li>
+<li>通过定量基准测试和定性评估证明，RealFit在保持服装身份一致性方面达到了最先进的性能，验证了所提方法在解决对称架构结构性瓶颈方面的有效性。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.26375" data-arxiv-id="2609.26375" data-status="ready">
+<h1>[2609.26375] KwaiMind Technical Report</h1>
+<p><a href="https://arxiv.org/abs/2609.26375" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>KwaiMind 提出了一种面向电商领域的指令式图像编辑系统，通过智能体数据引擎、基于奖励驱动对齐的领域适配模型以及专为商业场景设计的 Ecom-Bench 基准，解决了通用编辑器在商品保真度、文本渲染及商业吸引力方面的不足。</p>
+<h2>解决的问题</h2>
+<p>通用图像编辑器无法满足商业图像生产的需求，主要存在三大障碍：一是电商领域高质量训练数据稀缺且分布不均；二是标准训练目标未针对商品身份保持、文本正确性及商业吸引力等关键属性进行优化；三是现有基准主要衡量通用编辑能力，缺乏针对真实电商工作流要求的评估协议。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种基于智能体的数据引擎，通过过滤、生成、分层描述及协调智能体构建闭环系统，以规模化生产高质量的电商编辑数据。</li>
+<li>将开源编辑器适配至电商领域，采用混合离线与在线偏好优化、前向过程强化学习及针对商业吸引力、文本渲染和身份一致性的三个专用奖励模型进行对齐。</li>
+<li>通过在线策略蒸馏将多个专用策略整合为单一模型，使编辑器在继承所有能力的同时避免跨任务干扰。</li>
+<li>引入了 Ecom-Bench 基准，涵盖 11 项代表性任务，采用行为锚定的领域定制指标及几何均值协议，并包含用于评估商业吸引力的学习点击率分数。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.26620" data-arxiv-id="2609.26620" data-status="ready">
+<h1>[2609.26620] GeoComposer: Geometry-Grounded Photographic Composition Instruction</h1>
+<p><a href="https://arxiv.org/abs/2609.26620" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>GeoComposer 提出了一种基于几何的摄影构图框架，通过结合文本指导与视觉示例，并利用几何感知表示学习和混合奖励强化学习策略，解决了现有方法在遵循构图指令、保持视觉美感及确保三维几何一致性方面的不足。</p>
+<h2>解决的问题</h2>
+<p>现有摄影构图辅助方法主要局限于图像裁剪或仅关注语义一致性，往往忽视三维场景几何一致性，导致在生成视角变化和空间连贯的构图时效果不佳，且难以同时满足指令遵循、构图质量和几何一致性的要求。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了一种基于几何的摄影构图框架，能够同时提供文本指导和视觉示例，综合解决摄影构图中指令遵循、构图质量和几何一致性的挑战。</li>
+<li>引入了一种几何感知表示学习机制，通过全局结构监督和局部对应监督，将视觉几何基础模型的三维几何先验融入构图编辑模型，增强其对空间关系和视角变化的理解。</li>
+<li>设计了一种由混合奖励引导的强化学习策略，在优化构图编辑模型时显式强制几何一致性，同时兼顾指令保真度和美学质量。</li>
+</ul>
+</article>
+    <article class="summary-article summary-topic-entry" id="summary-2609.26774" data-arxiv-id="2609.26774" data-status="ready">
+<h1>[2609.26774] StableVQ: Practical Guidelines for Stable Vector-Quantized Tokenizer Training</h1>
+<p><a href="https://arxiv.org/abs/2609.26774" rel="nofollow">arXiv 原文</a></p>
+<h2>一句话结论</h2>
+<p>本文提出 StableVQ，通过解耦编码器、解码器与码本的训练职责，解决向量量化训练中的码本坍缩与稳定性问题，实现无需启发式设计的稳定训练。</p>
+<h2>解决的问题</h2>
+<p>现有向量量化（VQ）训练中存在码本坍缩、训练不稳定、对初始化敏感以及编码器与码本职责纠缠导致模块无法独立有效工作的问题，限制了下游生成质量。</p>
+<h2>创新点</h2>
+<ul>
+<li>提出了对 VQ 分词器训练的关注点分离分析，指出模块间纠缠掩盖了各模块的潜在功能缺陷，将训练不稳定性重新定义为模块化职责失败而非量化范式的根本局限。</li>
+<li>提出了 StableVQ 框架，包含三个无参数的轻量级干预组件，使各模块能独立履行其职责，从而在不同码本大小和初始化设置下实现原则性且稳定的训练。</li>
+<li>消除了对启发式初始化和共享投影架构设计的依赖，使 VQ 分词器能够充分发挥其表达潜力，仅通过单个线性投影即可在多种设置下达到最先进的质量水平。</li>
+<li>建立了原则性的模块化稳定性理论基础，为将 VQ 训练可靠地扩展到更具挑战性的场景提供了坚实支撑。</li>
+</ul>
+</article>
     <article class="summary-article summary-topic-entry" id="summary-2607.14521" data-arxiv-id="2607.14521" data-status="ready">
 <h1>[2607.14521] Uni-AdaVD: Universal Concept Erasure for Visual Generation via Orthogonal Value Decomposition</h1>
 <p><a href="https://arxiv.org/abs/2607.14521" rel="nofollow">arXiv 原文</a></p>
@@ -3699,6 +4082,6 @@
 </article>
     </div>
   </main>
-  <script type="application/json" id="summary-catalog">{"papers":{"2601.03499":{"status":"ready","url":"notes/image-gen-edit.html#summary-2601.03499"},"2601.12401":{"status":"ready","url":"notes/image-gen-edit.html#summary-2601.12401"},"2602.03811":{"status":"ready","url":"notes/image-gen-edit.html#summary-2602.03811"},"2602.06886":{"status":"ready","url":"notes/image-gen-edit.html#summary-2602.06886"},"2602.11658":{"status":"ready","url":"notes/image-gen-edit.html#summary-2602.11658"},"2602.20839":{"status":"ready","url":"notes/image-gen-edit.html#summary-2602.20839"},"2602.23783":{"status":"ready","url":"notes/image-gen-edit.html#summary-2602.23783"},"2603.08652":{"status":"ready","url":"notes/image-gen-edit.html#summary-2603.08652"},"2603.11593":{"status":"ready","url":"notes/image-gen-edit.html#summary-2603.11593"},"2603.23924":{"status":"ready","url":"notes/image-gen-edit.html#summary-2603.23924"},"2603.27790":{"status":"ready","url":"notes/image-gen-edit.html#summary-2603.27790"},"2603.27959":{"status":"ready","url":"notes/image-gen-edit.html#summary-2603.27959"},"2604.00933":{"status":"ready","url":"notes/image-gen-edit.html#summary-2604.00933"},"2604.06757":{"status":"ready","url":"notes/image-gen-edit.html#summary-2604.06757"},"2604.07230":{"status":"ready","url":"notes/image-gen-edit.html#summary-2604.07230"},"2604.09168":{"status":"ready","url":"notes/image-gen-edit.html#summary-2604.09168"},"2605.06421":{"status":"ready","url":"notes/image-gen-edit.html#summary-2605.06421"},"2605.18267":{"status":"ready","url":"notes/image-gen-edit.html#summary-2605.18267"},"2605.20807":{"status":"ready","url":"notes/image-gen-edit.html#summary-2605.20807"},"2605.29471":{"status":"ready","url":"notes/image-gen-edit.html#summary-2605.29471"},"2606.13303":{"status":"ready","url":"notes/image-gen-edit.html#summary-2606.13303"},"2606.22568":{"status":"ready","url":"notes/image-gen-edit.html#summary-2606.22568"},"2606.24817":{"status":"ready","url":"notes/image-gen-edit.html#summary-2606.24817"},"2607.05382":{"status":"ready","url":"notes/image-gen-edit.html#summary-2607.05382"},"2607.09133":{"status":"ready","url":"notes/image-gen-edit.html#summary-2607.09133"},"2607.14521":{"status":"ready","url":"notes/image-gen-edit.html#summary-2607.14521"},"2607.14580":{"status":"ready","url":"notes/image-gen-edit.html#summary-2607.14580"},"2607.14807":{"status":"ready","url":"notes/image-gen-edit.html#summary-2607.14807"},"2607.14945":{"status":"ready","url":"notes/image-gen-edit.html#summary-2607.14945"},"2607.14962":{"status":"ready","url":"notes/image-gen-edit.html#summary-2607.14962"},"2607.15619":{"status":"ready","url":"notes/image-gen-edit.html#summary-2607.15619"},"2607.16409":{"status":"ready","url":"notes/image-gen-edit.html#summary-2607.16409"},"2607.16824":{"status":"ready","url":"notes/image-gen-edit.html#summary-2607.16824"},"2607.16828":{"status":"ready","url":"notes/image-gen-edit.html#summary-2607.16828"},"2607.17634":{"status":"ready","url":"notes/image-gen-edit.html#summary-2607.17634"},"2607.17768":{"status":"ready","url":"notes/image-gen-edit.html#summary-2607.17768"},"2607.18724":{"status":"ready","url":"notes/image-gen-edit.html#summary-2607.18724"},"2607.19341":{"status":"ready","url":"notes/image-gen-edit.html#summary-2607.19341"},"2607.20197":{"status":"ready","url":"notes/image-gen-edit.html#summary-2607.20197"},"2607.20883":{"status":"ready","url":"notes/image-gen-edit.html#summary-2607.20883"},"2607.22963":{"status":"ready","url":"notes/image-gen-edit.html#summary-2607.22963"},"2607.23673":{"status":"ready","url":"notes/image-gen-edit.html#summary-2607.23673"},"2607.24157":{"status":"ready","url":"notes/image-gen-edit.html#summary-2607.24157"},"2607.24215":{"status":"ready","url":"notes/image-gen-edit.html#summary-2607.24215"},"2607.24353":{"status":"ready","url":"notes/image-gen-edit.html#summary-2607.24353"},"2607.25078":{"status":"ready","url":"notes/image-gen-edit.html#summary-2607.25078"},"2607.25622":{"status":"ready","url":"notes/image-gen-edit.html#summary-2607.25622"},"2607.25642":{"status":"ready","url":"notes/image-gen-edit.html#summary-2607.25642"},"2607.26647":{"status":"ready","url":"notes/image-gen-edit.html#summary-2607.26647"},"2607.26735":{"status":"ready","url":"notes/image-gen-edit.html#summary-2607.26735"},"2607.29025":{"status":"ready","url":"notes/image-gen-edit.html#summary-2607.29025"},"2607.29367":{"status":"ready","url":"notes/image-gen-edit.html#summary-2607.29367"},"2607.29679":{"status":"ready","url":"notes/image-gen-edit.html#summary-2607.29679"},"2608.00562":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.00562"},"2608.00584":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.00584"},"2608.00588":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.00588"},"2608.02841":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.02841"},"2608.03059":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.03059"},"2608.03284":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.03284"},"2608.03357":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.03357"},"2608.04030":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.04030"},"2608.04436":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.04436"},"2608.04750":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.04750"},"2608.06075":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.06075"},"2608.06929":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.06929"},"2608.07003":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.07003"},"2608.07713":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.07713"},"2608.08720":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.08720"},"2608.09097":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.09097"},"2608.09226":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.09226"},"2608.09244":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.09244"},"2608.09322":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.09322"},"2608.09529":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.09529"},"2608.11002":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.11002"},"2608.11205":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.11205"},"2608.11732":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.11732"},"2608.11884":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.11884"},"2608.12806":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.12806"},"2608.13455":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.13455"},"2608.13478":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.13478"},"2608.14038":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.14038"},"2608.14172":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.14172"},"2608.14226":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.14226"},"2608.14543":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.14543"},"2608.14730":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.14730"},"2608.15341":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.15341"},"2608.15452":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.15452"},"2608.15583":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.15583"},"2608.15694":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.15694"},"2608.15705":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.15705"},"2608.16100":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.16100"},"2608.16104":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.16104"},"2608.16284":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.16284"},"2608.16721":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.16721"},"2608.16765":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.16765"},"2608.16812":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.16812"},"2608.16887":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.16887"},"2608.17067":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.17067"},"2608.17286":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.17286"},"2608.17747":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.17747"},"2608.17995":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.17995"},"2608.18040":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.18040"},"2608.18063":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.18063"},"2608.18076":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.18076"},"2608.19000":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.19000"},"2608.19637":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.19637"},"2608.20161":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.20161"},"2608.20334":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.20334"},"2608.20336":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.20336"},"2608.21229":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.21229"},"2608.21713":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.21713"},"2608.21748":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.21748"},"2608.21776":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.21776"},"2608.22521":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.22521"},"2608.22780":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.22780"},"2608.23024":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.23024"},"2608.23999":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.23999"},"2608.24119":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.24119"},"2608.24563":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.24563"},"2608.25380":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.25380"},"2608.25386":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.25386"},"2608.25648":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.25648"},"2608.26956":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.26956"},"2608.28082":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.28082"},"2608.29160":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.29160"},"2608.29233":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.29233"},"2608.29335":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.29335"},"2608.29804":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.29804"},"2608.29809":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.29809"},"2608.29925":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.29925"},"2608.29997":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.29997"},"2608.30081":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.30081"},"2608.30087":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.30087"},"2608.31053":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.31053"},"2609.00476":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.00476"},"2609.00525":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.00525"},"2609.00708":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.00708"},"2609.00798":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.00798"},"2609.00862":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.00862"},"2609.00885":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.00885"},"2609.00955":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.00955"},"2609.00956":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.00956"},"2609.00968":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.00968"},"2609.00984":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.00984"},"2609.01123":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.01123"},"2609.01148":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.01148"},"2609.01370":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.01370"},"2609.01409":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.01409"},"2609.01433":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.01433"},"2609.01479":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.01479"},"2609.01582":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.01582"},"2609.01607":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.01607"},"2609.01746":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.01746"},"2609.01997":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.01997"},"2609.02004":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.02004"},"2609.02075":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.02075"},"2609.02160":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.02160"},"2609.02348":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.02348"},"2609.02349":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.02349"},"2609.02504":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.02504"},"2609.02616":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.02616"},"2609.02683":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.02683"},"2609.02748":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.02748"},"2609.02813":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.02813"},"2609.03415":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.03415"},"2609.03443":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.03443"},"2609.03585":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.03585"},"2609.03688":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.03688"},"2609.03740":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.03740"},"2609.03796":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.03796"},"2609.03813":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.03813"},"2609.04090":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.04090"},"2609.04151":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.04151"},"2609.04837":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.04837"},"2609.04939":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.04939"},"2609.04976":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.04976"},"2609.05028":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.05028"},"2609.05171":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.05171"},"2609.05234":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.05234"},"2609.06490":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.06490"},"2609.06491":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.06491"},"2609.06602":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.06602"},"2609.06651":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.06651"},"2609.06947":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.06947"},"2609.07012":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.07012"},"2609.07815":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.07815"},"2609.07853":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.07853"},"2609.08253":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.08253"},"2609.08282":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.08282"},"2609.08722":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.08722"},"2609.09486":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.09486"},"2609.09905":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.09905"},"2609.09909":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.09909"},"2609.10723":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.10723"},"2609.10811":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.10811"},"2609.11317":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.11317"},"2609.11519":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.11519"},"2609.11673":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.11673"},"2609.11804":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.11804"},"2609.11842":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.11842"},"2609.11929":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.11929"},"2609.12431":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.12431"},"2609.12691":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.12691"},"2609.12731":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.12731"},"2609.12830":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.12830"},"2609.12860":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.12860"},"2609.12953":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.12953"},"2609.13425":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.13425"},"2609.13917":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.13917"},"2609.14377":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.14377"},"2609.14439":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.14439"},"2609.15072":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.15072"},"2609.15120":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.15120"},"2609.15643":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.15643"},"2609.15647":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.15647"},"2609.16572":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.16572"},"2609.16591":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.16591"},"2609.16594":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.16594"},"2609.17169":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.17169"},"2609.17227":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.17227"},"2609.17287":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.17287"},"2609.17298":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.17298"},"2609.17691":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.17691"},"2609.17814":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.17814"},"2609.17987":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.17987"},"2609.18329":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.18329"},"2609.18466":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.18466"},"2609.18488":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.18488"},"2609.19702":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.19702"},"2609.20633":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.20633"},"2609.20816":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.20816"},"2609.21407":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.21407"},"2609.21849":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.21849"},"2609.22041":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.22041"},"2609.22867":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.22867"},"2609.22916":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.22916"},"2609.24215":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.24215"},"2609.24287":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.24287"},"2609.24330":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.24330"},"2609.24691":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.24691"},"2609.24879":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.24879"},"2609.24919":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.24919"}},"topic":"Image Gen&Edit","version":1}</script>
+  <script type="application/json" id="summary-catalog">{"papers":{"2601.03499":{"status":"ready","url":"notes/image-gen-edit.html#summary-2601.03499"},"2601.12401":{"status":"ready","url":"notes/image-gen-edit.html#summary-2601.12401"},"2602.03811":{"status":"ready","url":"notes/image-gen-edit.html#summary-2602.03811"},"2602.06886":{"status":"ready","url":"notes/image-gen-edit.html#summary-2602.06886"},"2602.11658":{"status":"ready","url":"notes/image-gen-edit.html#summary-2602.11658"},"2602.19946":{"status":"ready","url":"notes/image-gen-edit.html#summary-2602.19946"},"2602.20839":{"status":"ready","url":"notes/image-gen-edit.html#summary-2602.20839"},"2602.23783":{"status":"ready","url":"notes/image-gen-edit.html#summary-2602.23783"},"2603.08652":{"status":"ready","url":"notes/image-gen-edit.html#summary-2603.08652"},"2603.11593":{"status":"ready","url":"notes/image-gen-edit.html#summary-2603.11593"},"2603.16551":{"status":"ready","url":"notes/image-gen-edit.html#summary-2603.16551"},"2603.23924":{"status":"ready","url":"notes/image-gen-edit.html#summary-2603.23924"},"2603.27790":{"status":"ready","url":"notes/image-gen-edit.html#summary-2603.27790"},"2603.27959":{"status":"ready","url":"notes/image-gen-edit.html#summary-2603.27959"},"2604.00933":{"status":"ready","url":"notes/image-gen-edit.html#summary-2604.00933"},"2604.06757":{"status":"ready","url":"notes/image-gen-edit.html#summary-2604.06757"},"2604.07230":{"status":"ready","url":"notes/image-gen-edit.html#summary-2604.07230"},"2604.09168":{"status":"ready","url":"notes/image-gen-edit.html#summary-2604.09168"},"2604.19632":{"status":"ready","url":"notes/image-gen-edit.html#summary-2604.19632"},"2605.06421":{"status":"ready","url":"notes/image-gen-edit.html#summary-2605.06421"},"2605.18267":{"status":"ready","url":"notes/image-gen-edit.html#summary-2605.18267"},"2605.20807":{"status":"ready","url":"notes/image-gen-edit.html#summary-2605.20807"},"2605.29471":{"status":"ready","url":"notes/image-gen-edit.html#summary-2605.29471"},"2606.13303":{"status":"ready","url":"notes/image-gen-edit.html#summary-2606.13303"},"2606.22568":{"status":"ready","url":"notes/image-gen-edit.html#summary-2606.22568"},"2606.24817":{"status":"ready","url":"notes/image-gen-edit.html#summary-2606.24817"},"2606.24844":{"status":"ready","url":"notes/image-gen-edit.html#summary-2606.24844"},"2606.29814":{"status":"ready","url":"notes/image-gen-edit.html#summary-2606.29814"},"2607.05382":{"status":"ready","url":"notes/image-gen-edit.html#summary-2607.05382"},"2607.09133":{"status":"ready","url":"notes/image-gen-edit.html#summary-2607.09133"},"2607.10165":{"status":"ready","url":"notes/image-gen-edit.html#summary-2607.10165"},"2607.10535":{"status":"ready","url":"notes/image-gen-edit.html#summary-2607.10535"},"2607.10538":{"status":"ready","url":"notes/image-gen-edit.html#summary-2607.10538"},"2607.10800":{"status":"ready","url":"notes/image-gen-edit.html#summary-2607.10800"},"2607.11655":{"status":"ready","url":"notes/image-gen-edit.html#summary-2607.11655"},"2607.11885":{"status":"ready","url":"notes/image-gen-edit.html#summary-2607.11885"},"2607.11886":{"status":"ready","url":"notes/image-gen-edit.html#summary-2607.11886"},"2607.12539":{"status":"ready","url":"notes/image-gen-edit.html#summary-2607.12539"},"2607.13300":{"status":"ready","url":"notes/image-gen-edit.html#summary-2607.13300"},"2607.14521":{"status":"ready","url":"notes/image-gen-edit.html#summary-2607.14521"},"2607.14580":{"status":"ready","url":"notes/image-gen-edit.html#summary-2607.14580"},"2607.14807":{"status":"ready","url":"notes/image-gen-edit.html#summary-2607.14807"},"2607.14945":{"status":"ready","url":"notes/image-gen-edit.html#summary-2607.14945"},"2607.14962":{"status":"ready","url":"notes/image-gen-edit.html#summary-2607.14962"},"2607.15619":{"status":"ready","url":"notes/image-gen-edit.html#summary-2607.15619"},"2607.16291":{"status":"ready","url":"notes/image-gen-edit.html#summary-2607.16291"},"2607.16294":{"status":"ready","url":"notes/image-gen-edit.html#summary-2607.16294"},"2607.16307":{"status":"ready","url":"notes/image-gen-edit.html#summary-2607.16307"},"2607.16409":{"status":"ready","url":"notes/image-gen-edit.html#summary-2607.16409"},"2607.16824":{"status":"ready","url":"notes/image-gen-edit.html#summary-2607.16824"},"2607.16828":{"status":"ready","url":"notes/image-gen-edit.html#summary-2607.16828"},"2607.17634":{"status":"ready","url":"notes/image-gen-edit.html#summary-2607.17634"},"2607.17768":{"status":"ready","url":"notes/image-gen-edit.html#summary-2607.17768"},"2607.18724":{"status":"ready","url":"notes/image-gen-edit.html#summary-2607.18724"},"2607.19341":{"status":"ready","url":"notes/image-gen-edit.html#summary-2607.19341"},"2607.20197":{"status":"ready","url":"notes/image-gen-edit.html#summary-2607.20197"},"2607.20883":{"status":"ready","url":"notes/image-gen-edit.html#summary-2607.20883"},"2607.22963":{"status":"ready","url":"notes/image-gen-edit.html#summary-2607.22963"},"2607.23673":{"status":"ready","url":"notes/image-gen-edit.html#summary-2607.23673"},"2607.24157":{"status":"ready","url":"notes/image-gen-edit.html#summary-2607.24157"},"2607.24215":{"status":"ready","url":"notes/image-gen-edit.html#summary-2607.24215"},"2607.24353":{"status":"ready","url":"notes/image-gen-edit.html#summary-2607.24353"},"2607.25078":{"status":"ready","url":"notes/image-gen-edit.html#summary-2607.25078"},"2607.25622":{"status":"ready","url":"notes/image-gen-edit.html#summary-2607.25622"},"2607.25642":{"status":"ready","url":"notes/image-gen-edit.html#summary-2607.25642"},"2607.26647":{"status":"ready","url":"notes/image-gen-edit.html#summary-2607.26647"},"2607.26735":{"status":"ready","url":"notes/image-gen-edit.html#summary-2607.26735"},"2607.29025":{"status":"ready","url":"notes/image-gen-edit.html#summary-2607.29025"},"2607.29367":{"status":"ready","url":"notes/image-gen-edit.html#summary-2607.29367"},"2607.29679":{"status":"ready","url":"notes/image-gen-edit.html#summary-2607.29679"},"2608.00562":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.00562"},"2608.00584":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.00584"},"2608.00588":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.00588"},"2608.02841":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.02841"},"2608.03059":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.03059"},"2608.03284":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.03284"},"2608.03357":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.03357"},"2608.04030":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.04030"},"2608.04436":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.04436"},"2608.04750":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.04750"},"2608.06075":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.06075"},"2608.06929":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.06929"},"2608.07003":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.07003"},"2608.07713":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.07713"},"2608.08720":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.08720"},"2608.09097":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.09097"},"2608.09226":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.09226"},"2608.09244":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.09244"},"2608.09322":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.09322"},"2608.09529":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.09529"},"2608.11002":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.11002"},"2608.11205":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.11205"},"2608.11732":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.11732"},"2608.11884":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.11884"},"2608.12806":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.12806"},"2608.13455":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.13455"},"2608.13478":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.13478"},"2608.14038":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.14038"},"2608.14172":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.14172"},"2608.14226":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.14226"},"2608.14543":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.14543"},"2608.14730":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.14730"},"2608.15341":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.15341"},"2608.15452":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.15452"},"2608.15583":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.15583"},"2608.15694":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.15694"},"2608.15705":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.15705"},"2608.16100":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.16100"},"2608.16104":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.16104"},"2608.16284":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.16284"},"2608.16721":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.16721"},"2608.16765":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.16765"},"2608.16812":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.16812"},"2608.16887":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.16887"},"2608.17067":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.17067"},"2608.17286":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.17286"},"2608.17747":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.17747"},"2608.17995":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.17995"},"2608.18040":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.18040"},"2608.18063":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.18063"},"2608.18076":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.18076"},"2608.19000":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.19000"},"2608.19637":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.19637"},"2608.20161":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.20161"},"2608.20334":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.20334"},"2608.20336":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.20336"},"2608.21229":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.21229"},"2608.21713":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.21713"},"2608.21748":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.21748"},"2608.21776":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.21776"},"2608.22521":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.22521"},"2608.22780":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.22780"},"2608.23024":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.23024"},"2608.23999":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.23999"},"2608.24119":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.24119"},"2608.24563":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.24563"},"2608.25380":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.25380"},"2608.25386":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.25386"},"2608.25648":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.25648"},"2608.26956":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.26956"},"2608.28082":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.28082"},"2608.29160":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.29160"},"2608.29233":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.29233"},"2608.29335":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.29335"},"2608.29804":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.29804"},"2608.29809":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.29809"},"2608.29925":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.29925"},"2608.29997":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.29997"},"2608.30081":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.30081"},"2608.30087":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.30087"},"2608.31053":{"status":"ready","url":"notes/image-gen-edit.html#summary-2608.31053"},"2609.00476":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.00476"},"2609.00525":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.00525"},"2609.00708":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.00708"},"2609.00798":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.00798"},"2609.00862":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.00862"},"2609.00885":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.00885"},"2609.00955":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.00955"},"2609.00956":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.00956"},"2609.00968":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.00968"},"2609.00984":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.00984"},"2609.01123":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.01123"},"2609.01148":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.01148"},"2609.01370":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.01370"},"2609.01409":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.01409"},"2609.01433":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.01433"},"2609.01479":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.01479"},"2609.01582":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.01582"},"2609.01607":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.01607"},"2609.01746":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.01746"},"2609.01997":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.01997"},"2609.02004":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.02004"},"2609.02075":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.02075"},"2609.02160":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.02160"},"2609.02348":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.02348"},"2609.02349":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.02349"},"2609.02504":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.02504"},"2609.02616":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.02616"},"2609.02683":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.02683"},"2609.02748":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.02748"},"2609.02813":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.02813"},"2609.03415":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.03415"},"2609.03443":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.03443"},"2609.03585":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.03585"},"2609.03688":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.03688"},"2609.03740":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.03740"},"2609.03796":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.03796"},"2609.03813":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.03813"},"2609.04090":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.04090"},"2609.04151":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.04151"},"2609.04837":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.04837"},"2609.04939":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.04939"},"2609.04976":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.04976"},"2609.05028":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.05028"},"2609.05171":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.05171"},"2609.05234":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.05234"},"2609.06490":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.06490"},"2609.06491":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.06491"},"2609.06602":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.06602"},"2609.06651":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.06651"},"2609.06947":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.06947"},"2609.07012":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.07012"},"2609.07815":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.07815"},"2609.07853":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.07853"},"2609.08253":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.08253"},"2609.08282":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.08282"},"2609.08722":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.08722"},"2609.09486":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.09486"},"2609.09905":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.09905"},"2609.09909":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.09909"},"2609.10723":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.10723"},"2609.10811":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.10811"},"2609.11317":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.11317"},"2609.11519":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.11519"},"2609.11673":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.11673"},"2609.11804":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.11804"},"2609.11842":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.11842"},"2609.11929":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.11929"},"2609.12431":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.12431"},"2609.12691":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.12691"},"2609.12731":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.12731"},"2609.12830":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.12830"},"2609.12860":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.12860"},"2609.12953":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.12953"},"2609.13425":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.13425"},"2609.13917":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.13917"},"2609.14377":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.14377"},"2609.14439":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.14439"},"2609.15072":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.15072"},"2609.15120":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.15120"},"2609.15643":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.15643"},"2609.15647":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.15647"},"2609.16572":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.16572"},"2609.16591":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.16591"},"2609.16594":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.16594"},"2609.17169":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.17169"},"2609.17227":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.17227"},"2609.17287":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.17287"},"2609.17298":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.17298"},"2609.17691":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.17691"},"2609.17814":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.17814"},"2609.17987":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.17987"},"2609.18329":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.18329"},"2609.18466":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.18466"},"2609.18488":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.18488"},"2609.19702":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.19702"},"2609.20633":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.20633"},"2609.20816":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.20816"},"2609.21407":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.21407"},"2609.21849":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.21849"},"2609.22041":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.22041"},"2609.22867":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.22867"},"2609.22916":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.22916"},"2609.24088":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.24088"},"2609.24116":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.24116"},"2609.24215":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.24215"},"2609.24287":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.24287"},"2609.24330":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.24330"},"2609.24691":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.24691"},"2609.24879":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.24879"},"2609.24919":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.24919"},"2609.25267":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.25267"},"2609.25444":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.25444"},"2609.25881":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.25881"},"2609.26375":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.26375"},"2609.26620":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.26620"},"2609.26774":{"status":"ready","url":"notes/image-gen-edit.html#summary-2609.26774"}},"topic":"Image Gen&Edit","version":1}</script>
 </body>
 </html>
