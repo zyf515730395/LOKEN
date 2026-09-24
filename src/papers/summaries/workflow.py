@@ -28,6 +28,8 @@ DEFAULT_MILESTONES = PROJECT_ROOT / "config" / "milestone_models.yaml"
 DEFAULT_SITE_CONFIG = PROJECT_ROOT / "config" / "site.yaml"
 DEFAULT_ANNOTATIONS = PROJECT_ROOT / "content" / "papers" / "paper-annotations.json"
 REPORT_VERSION = 1
+# Completed states embed the full per-paper report, including full-archive runs.
+MAX_STATE_BYTES = 64 * 1024 * 1024
 
 
 @dataclass(frozen=True, slots=True)
@@ -115,14 +117,15 @@ def _write_report(result: RunResult, *, model: str, workers: int | None) -> Path
 def _read_state() -> dict | None:
     path = private_path("state.json")
     try:
-        raw = path.read_bytes()
+        with path.open("rb") as stream:
+            raw = stream.read(MAX_STATE_BYTES + 1)
     except FileNotFoundError:
         return None
     except OSError:
         raise PaperSummaryError(
             "state_unavailable", "private run state cannot be read safely"
         ) from None
-    if len(raw) > 64 * 1024:
+    if len(raw) > MAX_STATE_BYTES:
         raise PaperSummaryError("invalid_state", "private run state is invalid")
     try:
         state = json.loads(raw.decode("utf-8", errors="strict"))
