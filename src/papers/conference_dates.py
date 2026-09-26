@@ -318,7 +318,7 @@ def cached_reference(record):
     return result
 
 
-def resolve_fuzzy(*, apply=False, refresh=False, limit=0, arxiv_only=False, web_only=False):
+def resolve_fuzzy(*, apply=False, refresh=False, limit=0, arxiv_only=False, web_only=False, resume=False):
     from papers.conference_fuzzy import verified_match, rank_candidates, search_query, CandidateIndex
     records = sorted((p for p in load_library()['papers'].values() if not p.get('arxiv_id')),
                      key=lambda p:(p.get('order_date',p['published']),p['title']),reverse=True)
@@ -398,7 +398,10 @@ def resolve_fuzzy(*, apply=False, refresh=False, limit=0, arxiv_only=False, web_
                     age=(datetime.now(timezone.utc)-datetime.fromisoformat(cached.get('checked_at',''))).total_seconds()
                 except (ValueError,TypeError): age=31*86400
                 ttl=3600 if cached.get('metadata',{}).get('lookup_errors') else 30*86400
-                if cached.get('title') == record['title'] and 0 <= age < ttl: return record,cached['metadata']
+                if (cached.get('title') == record['title']
+                        and isinstance(cached.get('metadata'),dict)
+                        and (resume or 0 <= age < ttl)):
+                    return record,cached['metadata']
                 return record,discover(record,fetch)
             except (ValueError,OSError) as error: return record,{'lookup_errors':[type(error).__name__]}
         for offset in range(0,len(remaining),16):
@@ -458,7 +461,7 @@ def main(argv=None):
     if args.web_only and (not args.fuzzy or args.arxiv_only):
         parser.error('--web-only requires --fuzzy and cannot be combined with --arxiv-only')
     if args.fuzzy:
-        print(json.dumps(resolve_fuzzy(apply=args.apply,limit=args.limit,refresh=args.refresh,arxiv_only=args.arxiv_only,web_only=args.web_only)))
+        print(json.dumps(resolve_fuzzy(apply=args.apply,limit=args.limit,refresh=args.refresh,arxiv_only=args.arxiv_only,web_only=args.web_only,resume=args.resume)))
     else:
         print(json.dumps(resolve(apply=args.apply,limit=args.limit,refresh=args.refresh,arxiv_only=args.arxiv_only,resume=args.resume)))
 
