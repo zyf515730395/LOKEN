@@ -111,7 +111,9 @@ def parse_papers(text: str, url: str) -> list[dict]:
         year = re.search(r'/virtual/(\d{4})/', url)
         if year:
             for link in soup.select('a[href]'):
-                if re.search(rf'/virtual/{year[1]}/(?:poster|oral|spotlight)/\d+', link['href']):
+                target = urlparse(urljoin(url, link['href']))
+                if target.hostname == host and re.fullmatch(
+                        rf'/virtual/{year[1]}/(?:poster|oral|spotlight)/\d+/?', target.path):
                     add(link.get_text(' ', strip=True), link['href'])
     elif host == 'papers.nips.cc':
         for link in soup.select('a[href]'):
