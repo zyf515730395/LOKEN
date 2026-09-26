@@ -52052,7 +52052,20 @@
       },
       "source_edition": "CVPR 2025",
       "source_version": "6538afa858712aa0de49fe914fe1d9fb3e469fb974171741d1f7711fb0fcb0f8",
-      "summary": null,
+      "summary": {
+        "contributions": [
+          "提出了一种无需额外输入阴影掩码的统一阴影去除框架SoftShadow，能够端到端地预测软阴影掩码作为中间结果，以捕获详细且空间变化的阴影位置信息。",
+          "引入了一种受物理阴影形成模型启发的半影形成约束（penumbra formation constraint），通过正则化预测掩码在半影区域的梯度，进一步细化软掩码的预测精度。",
+          "利用低秩适应（LoRA）技术将预训练SAM模型与阴影去除网络进行联合优化，使SAM能够作为软阴影掩码预测器，提供强大的语义先验知识。",
+          "在SRD和LRSS数据集上的实验结果表明，SoftShadow在阴影去除性能上超越了现有最先进方法，并达到了与使用真值掩码输入的方法相当的结果。"
+        ],
+        "one_sentence": "本文提出了一种名为SoftShadow的统一阴影去除框架，通过引入软阴影掩码并利用预训练SAM模型进行联合优化，有效解决了软阴影区域中半影导致的边界伪影问题。",
+        "problem": "现有阴影去除方法主要依赖硬阴影掩码（二值掩码），无法准确表示半影区域（penumbra area）中光照的渐变过渡，导致在软阴影图像去除时产生严重的边界伪影，且获取高质量硬掩码成本高、依赖外部检测器性能。"
+      },
+      "summary_source": {
+        "sha256": "9509faf25fea46527bc0d422c0fc5ddc3f052cf67b321d982b9637cfae61e44b",
+        "url": "https://openaccess.thecvf.com/content/CVPR2025/html/Wang_SoftShadow_Leveraging_Soft_Masks_for_Penumbra-Aware_Shadow_Removal_CVPR_2025_paper.html"
+      },
       "title": "SoftShadow: Leveraging Soft Masks for Penumbra-Aware Shadow Removal",
       "topics": [
         "Image Gen&Edit"
@@ -98586,6 +98599,21 @@
       "url": "https://openaccess.thecvf.com/content/ICCV2025/html/Lu_Pinco_Position-induced_Consistent_Adapter_for_Diffusion_Transformer_in_Foreground-conditioned_Inpainting_ICCV_2025_paper.html"
     },
     "conf-6e2cc36dbc8b1130e506f084": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Diffusion",
+          "Text Conditioning"
+        ],
+        "topics": [
+          "Image Gen&Edit"
+        ]
+      },
+      "annotation_source": {
+        "sha256": "c7fd176ccf775d4ed324e45464d81fef2c97cbbbe7c48e05ea64239aa5b2c269",
+        "url": "https://openaccess.thecvf.com/content/ICCV2025/html/Zhu_Stable_Score_Distillation_ICCV_2025_paper.html"
+      },
       "arxiv_id": "2507.09168",
       "authors": [
         "Haiming Zhu",
@@ -98622,7 +98650,21 @@
       },
       "source_edition": "ICCV 2025",
       "source_version": "e6190130d99528dc15e3ed3d06d6a77c609a813753c380d82230143547521ac6",
-      "summary": null,
+      "summary": {
+        "contributions": [
+          "提出了一种名为稳定分数蒸馏（SSD）的新型编辑框架，利用单一锚定分类器实现3D场景编辑中的目标化且稳定的编辑。",
+          "引入了一种提示增强策略，有效提升了提示对齐效果，特别是在2D图像编辑的风格编辑任务中。",
+          "在NeRF编辑和图像编辑任务中验证了该方法的有效性，以精简且高效的框架实现了最先进的结果。",
+          "设计了跨轨迹策略，通过使编辑方向与源内容结构对齐，确保编辑尊重原始结构，支持指定区域内细微且稳定的变换。",
+          "引入了与无编辑方向对齐的空文本分支，整合重构项以显式强制源内容保持，增强了不同任务间编辑的一致性和可靠性。"
+        ],
+        "one_sentence": "本文提出了稳定分数蒸馏（SSD）方法，通过引入跨提示分类器、跨轨迹策略及空文本分支，解决了现有基于蒸馏的文本引导3D编辑方法中存在的编辑质量低、源内容丢失及优化不稳定等问题。",
+        "problem": "现有基于分数蒸馏的文本引导3D编辑方法（如DDS和CSD）存在固有局限性，包括编辑质量低、源内容丢失以及优化过程不稳定。具体表现为DDS缺乏显式的源内容保持机制导致非编辑区域出现伪影或意外变化，而CSD缺乏显式的源保持限制导致编辑区域出现结构变形和令人烦恼的伪影。"
+      },
+      "summary_source": {
+        "sha256": "c7fd176ccf775d4ed324e45464d81fef2c97cbbbe7c48e05ea64239aa5b2c269",
+        "url": "https://openaccess.thecvf.com/content/ICCV2025/html/Zhu_Stable_Score_Distillation_ICCV_2025_paper.html"
+      },
       "title": "Stable Score Distillation",
       "topics": [
         "Image Gen&Edit"
@@ -178171,6 +178213,21 @@
       "url": "https://eccv.ecva.net/virtual/2026/poster/3336"
     },
     "conf-c7f3ae717994daf77be273dc": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Text Conditioning",
+          "Continuous Latents"
+        ],
+        "topics": [
+          "Image Gen&Edit"
+        ]
+      },
+      "annotation_source": {
+        "sha256": "48d090fbbbe68ff83b49cdddbf4be438e84788cea1c1190e0a28ca30ba5aaf24",
+        "url": "https://ojs.aaai.org/index.php/AAAI/article/view/28585"
+      },
       "authors": [
         "Zhiwei Zhao",
         "Bin Liu",
@@ -178189,6 +178246,7 @@
         "basis": "publisher_publication",
         "url": "https://ojs.aaai.org/index.php/AAAI/article/view/28585"
       },
+      "doi": "10.1609/aaai.v38i7.28585",
       "id": "conf-c7f3ae717994daf77be273dc",
       "order_date": "2024-02-20",
       "published": "2024-03-25",
@@ -178204,7 +178262,20 @@
       },
       "source_edition": "AAAI 2024",
       "source_version": "26240083ac9667a63a4101c82c7ee3f15e87f47a49508c9bc9c62fee1843100a",
-      "summary": null,
+      "summary": {
+        "contributions": [
+          "提出了面向文本到图像行人重识别的多模态不确定性建模方法，利用高斯分布表征图像和文本的全局特征，并通过结合批次级和身份级特征方差来估计多粒度不确定性，以此作为特征增强手段丰富图文语义关系。",
+          "开发了一种双向跨模态圆形损失函数，用于更有效地对齐从概率分布中采样的图像和文本特征，该损失函数以自步方式优化跨模态对的相似度，能够自适应地加强欠优化图文对的对齐并保留模态内结构。",
+          "设计了一种在跨模态交互后恢复被掩码全局文本标记跨模态语义的任务，利用跨模态对比重建作为监督信号，以补充掩码语言模型并促进全面的图文语义对齐与交互。",
+          "将多模态不确定性建模与语义对齐目标整合到一个统一的端到端联合学习框架中，并在三个文本到图像行人重识别数据集上进行了广泛实验，证明了该方法相对于最先进技术的优越性。"
+        ],
+        "one_sentence": "本文提出了一种统一多模态不确定性建模与语义对齐的新方法，旨在解决文本到图像行人重识别中因视角、光照及文本描述粒度差异导致的固有不确定性问题，从而提升跨模态检索的准确性。",
+        "problem": "现有文本到图像行人重识别方法通常将视觉和文本数据参数化为确定性嵌入，未能显式建模和考虑行人图像（如视角、光照变化）及文本描述（如同义词、标注粒度）中固有的不确定性，这限制了模型对复杂图文关系的语义理解与对齐能力。"
+      },
+      "summary_source": {
+        "sha256": "48d090fbbbe68ff83b49cdddbf4be438e84788cea1c1190e0a28ca30ba5aaf24",
+        "url": "https://ojs.aaai.org/index.php/AAAI/article/view/28585"
+      },
       "title": "Unifying Multi-Modal Uncertainty Modeling and Semantic Alignment for Text-to-Image Person Re-identification",
       "topics": [
         "Image Gen&Edit"
