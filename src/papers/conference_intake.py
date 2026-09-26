@@ -386,7 +386,8 @@ def conference_remaining(records, visible: set[str]) -> dict[str, int]:
 
 
 def summarize(*, limit: int | None = 20, timeout: float = 900, model: str | None = None,
-              runtime_owned: bool = False, skip_failed: bool = False) -> dict:
+              runtime_owned: bool = False, skip_failed: bool = False,
+              excluded_ids: set[str] | None = None) -> dict:
     from papers.conference_sources import acquire_conference_paper
     from papers.runtime import model_service
     from papers.summaries.summarizer import summarize_paper
@@ -395,7 +396,7 @@ def summarize(*, limit: int | None = 20, timeout: float = 900, model: str | None
     counts = Counter()
     state_path = PRIVATE / 'summary-state.json'
     PRIVATE.mkdir(parents=True, exist_ok=True)
-    attempted = set()
+    attempted = set(excluded_ids or ())
     completed = 0
     while limit is None or completed < limit:
         with (nullcontext(True) if runtime_owned else summary_slot()) as available:
@@ -494,14 +495,20 @@ def main(argv=None) -> int:
                                help='Attempt every currently eligible paper once, including deferred retries')
     summaries.add_argument('--timeout', type=float, default=settings['summary_timeout_seconds'])
     summaries.add_argument('--skip-failed', action='store_true', help='Skip prior failed papers and continue unattempted work')
+    summaries.add_argument('--exclude-id', action='append', default=[],
+                           help='Skip an ID already attempted in this maintenance period; repeat for each ID')
     args = parser.parse_args(argv)
+    if args.command == 'summarize' and any(
+            re.fullmatch(r'conf-[a-f0-9]{8,64}', key) is None for key in args.exclude_id):
+        parser.error('exclude-id must be a conference ID')
     if args.command == 'summarize' and ((args.limit is not None and args.limit < 1) or args.timeout <= 0):
         parser.error('limit and timeout must be positive')
     if args.command == 'review' and args.limit < 0:
         parser.error('review limit must be nonnegative')
     if args.command == 'screen': result = screen(apply=args.apply)
     elif args.command == 'review': result = review_titles(limit=args.limit)
-    else: result = summarize(limit=args.limit, timeout=args.timeout, skip_failed=args.skip_failed)
+    else: result = summarize(limit=args.limit, timeout=args.timeout, skip_failed=args.skip_failed,
+                            excluded_ids=set(args.exclude_id))
     print(json.dumps({k:v for k,v in result.items() if k != 'added_ids'}, ensure_ascii=False))
     return 3 if result.get('counts', {}).get('failed') or result.get('counts', {}).get('yielded_to_runtime') or (args.command == 'review' and result.get('remaining')) else 0
 
