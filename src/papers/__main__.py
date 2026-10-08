@@ -37,11 +37,15 @@ def main(argv=None):
     parser.add_argument('--base-url', default=os.environ.get('TOGOS_WSL_LLM_BASE_URL', 'http://127.0.0.1:8000/v1'))
     parser.add_argument('--timeout', type=float, default=DEFAULT_MODEL_TIMEOUT_SECONDS)
     parser.add_argument('--workers', type=int, default=DEFAULT_MODEL_WORKERS)
-    parser.add_argument('--limit', type=int, default=100)
+    scope = parser.add_mutually_exclusive_group()
+    scope.add_argument('--limit', type=int, default=100)
+    scope.add_argument('--all', action='store_true', help='attempt every queued paper once')
     parser.add_argument('--dry-run', action='store_true')
     args = parser.parse_args(argv)
     if args.limit < 1 or not 1 <= args.workers <= MAX_MODEL_WORKERS or args.timeout <= 0:
         parser.error(f'limit/timeout must be positive; workers must be 1-{MAX_MODEL_WORKERS}')
+    if args.all:
+        args.limit = None
     if args.command == 'collect':
         from papers.collector import collect
         print(json.dumps(collect(paths.CONFIG)))

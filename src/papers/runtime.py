@@ -30,6 +30,7 @@ GIT_SYNC_TIMEOUT_SECONDS = 120
 GIT_PUSH_RETRY_SECONDS = 60
 GIT_SSH_COMMAND = 'ssh -o BatchMode=yes -o ConnectTimeout=20 -o ServerAliveInterval=15 -o ServerAliveCountMax=4'
 PENDING_PUSH = PRIVATE / 'pending-runtime-push.json'
+DAILY_STATE = PRIVATE / 'daily-all-state.json'
 
 
 class RetryableGitPush(RuntimeError):
@@ -249,6 +250,63 @@ def in_weekend_window(now=None):
             or (now.weekday() == 6 and (now.hour, now.minute) < (23, 30)))
 
 
+def execute_daily(args, model, common, expected_head):
+    """Publish arXiv before conferences; retain stage progress across interruption."""
+    from papers.candidate_ledger import atomic_write_json
+    from papers.conference_intake import PRIVATE as CONFERENCE_PRIVATE, summarize
+    if (PRIVATE / 'recheck/local-only.json').exists():
+        raise RuntimeError('daily stage handoff requires remote publication; local review is active')
+    state = json.loads(DAILY_STATE.read_text()) if DAILY_STATE.exists() else {}
+    if state and state.get('phase') not in {'arxiv', 'arxiv_publish', 'conference', 'conference_publish', 'complete'}:
+        raise RuntimeError('invalid daily stage checkpoint; preserve it for inspection')
+    if not state or state.get('phase') == 'complete':
+        state = {'started_at': datetime.now(ZONE).isoformat(), 'phase': 'arxiv',
+                 'limit': args.limit, 'arxiv_exit': 0}
+        atomic_write_json(DAILY_STATE, state)
+    if state['limit'] != args.limit:
+        raise RuntimeError('resume daily with its original limit; preserve the active checkpoint')
+    if state['phase'] == 'arxiv':
+        scope = ['--all'] if args.limit is None else ['--limit', str(args.limit)]
+        result = command(sys.executable, '-m', 'papers', 'daily', *common, *scope, check=False)
+        if result.returncode not in (0, 3):
+            raise RuntimeError(f'daily arxiv failed: exit={result.returncode}; preserve checkpoint')
+        state.update(phase='arxiv_publish', arxiv_exit=result.returncode)
+        atomic_write_json(DAILY_STATE, state)
+    if state['phase'] == 'arxiv_publish':
+        publish('daily arxiv', expected_head=expected_head)
+        expected_head = git('rev-parse', 'HEAD', capture=True)
+        baseline_path = CONFERENCE_PRIVATE / 'summary-state.json'
+        baseline = json.loads(baseline_path.read_text()) if baseline_path.exists() else {}
+        state.update(phase='conference', arxiv_sha=expected_head,
+                     conference_baseline={k: v.get('attempts', 0) for k, v in baseline.items()})
+        atomic_write_json(DAILY_STATE, state)
+        print(f'arXiv stage published: {expected_head}; starting conference queue', flush=True)
+    if state['phase'] == 'conference':
+        baseline = state['conference_baseline']
+        receipts_path = CONFERENCE_PRIVATE / 'summary-state.json'
+        receipts = json.loads(receipts_path.read_text()) if receipts_path.exists() else {}
+        excluded = {k for k, v in receipts.items() if v.get('attempts', 0) > baseline.get(k, 0)}
+        remaining_limit = None if args.limit is None else max(0, args.limit - len(excluded))
+        report = summarize(limit=remaining_limit, timeout=args.timeout, model=model,
+                           runtime_owned=True, excluded_ids=excluded)
+        receipts = json.loads(receipts_path.read_text()) if receipts_path.exists() else {}
+        attempted = {k: v for k, v in receipts.items() if v.get('attempts', 0) > baseline.get(k, 0)}
+        # Include failures from an interrupted portion, not just the latest process.
+        failed = sum(v.get('status') == 'failed' for v in attempted.values())
+        state.update(phase='conference_publish', conference_report=report,
+                     conference_attempts=list(attempted), conference_failed=failed)
+        atomic_write_json(DAILY_STATE, state)
+    publish('daily conferences', expected_head=expected_head)
+    state.update(phase='complete', conference_sha=git('rev-parse', 'HEAD', capture=True),
+                 completed_at=datetime.now(ZONE).isoformat())
+    atomic_write_json(DAILY_STATE, state)
+    archive_path = PRIVATE / 'daily-runs' / (state['started_at'].replace(':','-') + '.json')
+    atomic_write_json(archive_path, state)
+    partial = (state['arxiv_exit'] or state.get('conference_failed')
+               or state.get('conference_report', {}).get('counts', {}).get('failed'))
+    return 3 if partial else 0
+
+
 def execute(mode, args):
     recovered_push = clean_pull()
     expected_head = git('rev-parse', 'origin/main', capture=True)
@@ -258,7 +316,7 @@ def execute(mode, args):
     with model_service(args.service) as model:
         common = ['--model', model, '--workers', str(args.workers), '--timeout', str(args.timeout)]
         if mode == 'daily':
-            result = command(sys.executable, '-m', 'papers', 'daily', *common, '--limit', str(args.limit), check=False)
+            return execute_daily(args, model, common, expected_head)
         else:
             from datetime import timedelta
             now = datetime.now(ZONE)
@@ -279,16 +337,6 @@ def execute(mode, args):
                 command(sys.executable, '-m', 'papers', 'publish-offline')
         if result.returncode not in (0, 3):
             raise RuntimeError(f'{mode} failed: exit={result.returncode}; preserve checkpoint and worktree')
-        if mode == 'daily':
-            from papers.conference_library import LIBRARY
-            if LIBRARY.exists():
-                from papers.conference_intake import summarize, rules
-                # The daily owner already holds runtime.lock; finish a small queue slice.
-                conference_result = summarize(limit=rules()['conference_intake']['summary_batch_size'],
-                                              timeout=args.timeout, model=model, runtime_owned=True)
-                if conference_result.get('counts', {}).get('failed'):
-                    result.returncode = 3
-                command(sys.executable, '-m', 'papers', 'build')
         publish(mode, expected_head=expected_head)
         return result.returncode
 
@@ -299,11 +347,11 @@ def main(argv=None):
     parser.add_argument('--service', default='vllm-paper.service')
     parser.add_argument('--workers', type=int, default=DEFAULT_MODEL_WORKERS)
     parser.add_argument('--timeout', type=float, default=DEFAULT_MODEL_TIMEOUT_SECONDS)
-    parser.add_argument('--limit', type=int, default=100)
+    parser.add_argument('--limit', type=int, default=None, help='optional bounded daily attempt limit; default all')
     parser.add_argument('--dry-run', action='store_true')
     args = parser.parse_args(argv)
     effective_mode = 'backfill' if args.mode == 'weekend' else args.mode
-    if (not 1 <= args.workers <= MAX_MODEL_WORKERS or args.limit < 1 or args.timeout <= 0
+    if (not 1 <= args.workers <= MAX_MODEL_WORKERS or (args.limit is not None and args.limit < 1) or args.timeout <= 0
             or args.service != 'vllm-paper.service'):
         parser.error(f'workers 1-{MAX_MODEL_WORKERS}, positive limit/timeout and configured model service required')
     if args.dry_run:
