@@ -31,7 +31,7 @@ def periods(now):
     monthly = now.replace(day=1, hour=9, minute=0, second=0, microsecond=0)
     if now < monthly:
         monthly = (monthly - timedelta(days=1)).replace(day=1)
-    weekly = (now - timedelta(days=(now.weekday() - 5) % 7)).replace(
+    weekly = (now - timedelta(days=now.weekday())).replace(
         hour=10, minute=0, second=0, microsecond=0)
     if now < weekly:
         weekly -= timedelta(days=7)
@@ -44,6 +44,10 @@ def due_jobs(state, now):
     due = []
     for job, period in periods(now).items():
         receipt = state.get('jobs', {}).get(job, {})
+        # A saved Saturday run belongs to the transition week; do not schedule
+        # an older Monday period before the first new Monday becomes due.
+        if job == 'conferences' and receipt.get('period', '') > period:
+            continue
         if receipt.get('period', '') >= period and receipt.get('status') in ('completed', 'partial'):
             continue
         retry_at = receipt.get('retry_at')
@@ -58,10 +62,14 @@ def record(state, job, period, status, summary, now):
         raise ValueError('valid job, status and evidence summary are required')
     fmt = '%Y-%m' if job == 'models' else '%Y-%m-%d'
     parsed = datetime.strptime(period, fmt)
-    if parsed.strftime(fmt) != period or period > periods(now)[job]:
+    # Let the already saved Saturday receipt finish during the Monday transition.
+    legacy_conference = (job == 'conferences' and parsed.weekday() == 5
+                         and state.get('jobs', {}).get(job, {}).get('period') == period
+                         and period <= now.astimezone(ZONE).strftime('%Y-%m-%d'))
+    if parsed.strftime(fmt) != period or (period > periods(now)[job] and not legacy_conference):
         raise ValueError('receipt must name an already due period from status')
-    if job == 'conferences' and parsed.weekday() != 5:
-        raise ValueError('conference period must be a Saturday')
+    if job == 'conferences' and parsed.weekday() != 0 and not legacy_conference:
+        raise ValueError('conference period must be a Monday')
     result = deepcopy(state)
     result['version'] = 1
     jobs = result.setdefault('jobs', {})
