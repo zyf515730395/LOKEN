@@ -5,9 +5,8 @@ name: Run LOKEN Daily
 on:
   workflow_dispatch:
   schedule:
-    # Daily collection plus bounded catch-up; completed UTC days are skipped.
-    - cron: "0 1 * * *"
-    - cron: "17 5,9 * * *"
+    # Beijing 12:00, 16:00, 20:00; completed UTC days are skipped.
+    - cron: "0 4,8,12 * * *"
 
 permissions:
   contents: write
