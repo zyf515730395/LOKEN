@@ -25,7 +25,7 @@ def periods(now):
     if now.tzinfo is None:
         raise ValueError('scheduler time requires a timezone')
     now = now.astimezone(ZONE)
-    daily = now.replace(hour=21, minute=30, second=0, microsecond=0)
+    daily = now.replace(hour=9, minute=0, second=0, microsecond=0)
     if now < daily:
         daily -= timedelta(days=1)
     monthly = now.replace(day=1, hour=9, minute=0, second=0, microsecond=0)
