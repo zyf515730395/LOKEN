@@ -8,7 +8,7 @@ import os
 from pathlib import Path
 import tempfile
 
-from shared.site_shell import render_site_page
+from shared.site_shell import render_section_intro, render_site_page
 
 from .data import NEW_YORK, SHANGHAI, aware_datetime, load_public_content
 
@@ -36,21 +36,26 @@ def _style() -> str:
     return """<style>
 .stocks-page .stocks-intro{margin:0 0 2rem;max-width:72ch;color:var(--muted)}
 .stocks-page .stocks-calendar{border-bottom:1px solid var(--line);padding:clamp(2rem,3.5vw,3.25rem) clamp(1.25rem,2.6vw,2.5rem)}
-.stocks-page .stocks-heading{font-size:clamp(2rem,3.5vw,3rem);font-weight:600;letter-spacing:-.045em;margin:.5rem 0 1rem;line-height:1.2}
-.stocks-page .stocks-meta{font-family:var(--label);font-size:.72rem;color:var(--muted);letter-spacing:.08em}
 .stocks-page .stocks-sources{font-size:.72rem;line-height:1.65;padding-left:1rem;color:var(--muted);overflow-wrap:anywhere}
 .stocks-page .stocks-monitors{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:2rem;border-top:1px solid var(--line);padding-top:1.5rem;margin-top:2rem}
-.stocks-page .stocks-monitor{min-width:0}.stocks-page .stocks-monitor h3{font-weight:500}
+.stocks-page .stocks-monitor{min-width:0}
 .stocks-page .stocks-observations{font-size:.8rem}.stocks-page .stocks-note{font-size:.8rem;color:var(--muted);line-height:1.7}
 .stocks-page .stocks-observations h4{font-size:.78rem;font-weight:600;margin:1rem 0 .5rem}
 .stocks-page .stocks-observations dl{margin:0}.stocks-page .stocks-observation-row{display:grid;grid-template-columns:5.5em minmax(0,1fr);gap:.5rem;padding:.18rem 0;align-items:baseline}
 .stocks-page .stocks-observation-row dt{color:var(--muted)}.stocks-page .stocks-observation-row dd{margin:0;min-width:0}
 .stocks-page .stocks-observation-row dd>.stocks-sources{margin:.3rem 0 .5rem;padding-left:1rem;font-size:.66rem}
 .stocks-page .stocks-time-secondary{font-size:.72rem;margin:.4rem 0;color:var(--muted)}
-.stocks-page .stocks-timeline .timeline-release{min-width:270px;max-width:320px}.stocks-page .stocks-timeline h3{font-size:1.15rem}
-.stocks-page .stocks-timeline footer{margin-top:1rem}.stocks-page .stocks-unknown{color:var(--muted)}
-.stocks-page .stocks-empty{margin-top:2rem;padding:2rem 0;border-top:1px solid var(--line);line-height:1.9}
+.stocks-page .stocks-timeline .timeline-release{min-width:270px;max-width:320px}
+.stocks-page .stocks-timeline footer{margin-top:auto}.stocks-page .stocks-timeline footer .stocks-sources{margin:0}
+.stocks-page .stocks-timeline .stocks-observations:last-of-type{padding-bottom:1rem}
+.stocks-page .stocks-unknown{color:var(--muted)}
+.stocks-page .stocks-empty{color:var(--muted);line-height:1.9}
+.stocks-page .stocks-yields{margin-top:2rem}
 </style>"""
+
+
+def _section_header() -> str:
+    return '<div class="section-sticky-header"><header class="section-header">' + render_section_intro("stocks") + '</header></div>'
 
 
 def _observations(event: dict, config: dict) -> str:
@@ -95,9 +100,9 @@ def render_calendar(config: dict, document: dict, *, output_file: Path, output_r
             monitors.append(f'<article class="stocks-monitor"><h3>{escaped(event["title"])}</h3><p class="stocks-note">连续观察 · 不设固定发布日期</p>'
                             f'{_observations(event, config)}{render_sources(event["sources"])}<p class="stocks-note">{escaped(event.get("note", ""))}</p></article>')
     updated = aware_datetime(document["updated_at"], "events.updated_at").astimezone(SHANGHAI).strftime("%Y.%m.%d %H:%M")
-    body = f'<section class="stocks-calendar conference-section"><header class="topic-header"><p>Key Events</p><h1 class="stocks-heading">关键节点</h1><span>更新于 {updated} · 北京时间</span></header>'
+    body = _section_header() + f'<section class="stocks-calendar conference-section"><header class="topic-header"><p>Key Events</p><h2>关键节点</h2><span>更新于 {updated} · 北京时间</span></header>'
     body += '<p class="stocks-intro">CPI、PCE、就业与 FOMC 的官方日程。日期随夏令时自动换算；未知数值留待核验。</p>'
-    body += timeline + '<section aria-labelledby="stocks-yields"><h2 id="stocks-yields">美债收益率</h2><div class="stocks-monitors">' + "".join(monitors) + '</div></section></section>'
+    body += timeline + '<section class="stocks-yields" aria-labelledby="stocks-yields"><header class="topic-header"><p>Treasury Yields</p><h2 id="stocks-yields">美债收益率</h2></header><div class="stocks-monitors">' + "".join(monitors) + '</div></section></section>'
     script = """<script>document.addEventListener('DOMContentLoaded',()=>{const el=document.querySelector('[data-stocks-current]');const rail=document.querySelector('.stocks-timeline');if(el&&rail)rail.scrollLeft=el.offsetLeft-rail.offsetLeft-24;});</script>"""
     return render_site_page(output_file=output_file, output_root=output_root, active_section="stocks", active_subtopic="events",
                             page_title="关键节点 · LOKEN", meta_description="已核验的美国宏观事件与美债收益率观察。",
@@ -128,7 +133,7 @@ def outlook_period(document: dict, config: dict) -> dict:
 def render_quant(*, output_file: Path, output_root: Path) -> str:
     return render_site_page(output_file=output_file, output_root=output_root, active_section="stocks", active_subtopic="quant",
                             page_title="量化投资 · LOKEN", meta_description="量化投资研究档案。",
-                            main_content='<section class="empty-section"><p class="stocks-meta">Quantitative Investing</p><h1 class="stocks-heading">量化投资</h1><p class="stocks-empty">研究整理中。首份经过验证的策略研究将在这里归档。</p></section>',
+                            main_content=_section_header() + '<section class="stocks-calendar"><header class="topic-header"><p>Quantitative Investing</p><h2>量化投资</h2></header><p class="stocks-empty">研究整理中。首份经过验证的策略研究将在这里归档。</p></section>',
                             body_class="stocks-page", head_content=_style())
 
 
