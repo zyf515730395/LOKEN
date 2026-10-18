@@ -5,8 +5,8 @@ name: Run LOKEN Daily
 on:
   workflow_dispatch:
   schedule:
-    # Beijing 12:00, 16:00, 20:00; completed UTC days are skipped.
-    - cron: "0 4,8,12 * * *"
+    # Beijing 08:00, 12:00, 16:00; refresh at each slot for the 18:00 local pass.
+    - cron: "0 0,4,8 * * *"
 
 permissions:
   contents: write
@@ -42,7 +42,7 @@ jobs:
         continue-on-error: true
         # Leave the job enough time to commit the latest atomic shard checkpoint.
         timeout-minutes: 50
-        run: python -m papers.collector --skip-if-current --report build/reports/collection.json
+        run: python -m papers.collector --report build/reports/collection.json
 
       # The ledger contains completed topic cursors, successful shard progress,
       # and any active rate-limit cooldown. Commit it even when collection exits 75.
