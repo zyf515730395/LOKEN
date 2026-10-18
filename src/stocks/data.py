@@ -18,7 +18,7 @@ SHANGHAI = ZoneInfo("Asia/Shanghai")
 NEW_YORK = ZoneInfo("America/New_York")
 IDENTIFIER = re.compile(r"[a-z0-9][a-z0-9_-]*\Z")
 YIELDS = {"treasury_2y", "treasury_10y"}
-INDICATORS = {"cpi", "core_cpi", "pce", "core_pce", "nonfarm", "unemployment", "hourly_earnings", "fomc", *YIELDS}
+INDICATORS = {"cpi", "core_cpi", "pce", "core_pce", "nonfarm", "unemployment", "fomc", *YIELDS}
 
 
 def require(condition: bool, message: str) -> None:
@@ -98,7 +98,7 @@ def load_config(path: Path) -> dict:
             "stocks config: explicit Shanghai/New York timezones required")
     require(config.get("update") == {"weekday": "sunday", "hour": 8}, "stocks config: weekly Sunday 08:00 contract required")
     indicators = config.get("indicators")
-    require(isinstance(indicators, dict) and set(indicators) == INDICATORS, "stocks config: expected all ten indicators")
+    require(isinstance(indicators, dict) and set(indicators) == INDICATORS, "stocks config: expected the supported indicator set")
     for key, item in indicators.items():
         text(item.get("label"), key + ".label")
         require(isinstance(item.get("official_domains"), list) and bool(item["official_domains"]), key + ": official domains required")
@@ -175,7 +175,7 @@ def validate_outlook(document: dict, config: dict, path: Path) -> None:
             require(isinstance(scenario, dict), f"{path}.{key}.{label}: scenario object required")
             text(scenario.get("condition"), f"{path}.{key}.{label}.condition")
             text(scenario.get("implication"), f"{path}.{key}.{label}.implication")
-    require(seen == INDICATORS, f"{path}: outlook must cover all ten indicators")
+    require(seen == INDICATORS, f"{path}: outlook must cover every supported indicator")
 
 
 def load_public_content(config_path: Path, content_root: Path) -> tuple[dict, dict, list[dict]]:

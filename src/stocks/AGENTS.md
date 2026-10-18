@@ -6,6 +6,7 @@
 - 事件时间必须为带偏移的 America/New_York 时间，并用 zoneinfo 转换 Asia/Shanghai；2Y/10Y 收益率为连续观察项，禁止制造固定发布日期。
 - 日期和已知数值必须携带具体来源与带时区核验时间。官方事件须使用该指标的官方机构域名；未知值为 null，不猜测市场一致预期。
 - 预期推演逐指标写明确的条件假设和上行/基准/下行情境；不承诺市场反应。
+- 普通子页复用公共 section-header、topic-header 标题层级与内容边距；期刊复用 shared.periodicals。时间线来源区域贴齐卡片底端，不随指标数量改变位置。
 - 周期为北京时间周日08:00最近到期一期；只有验证、构建、普通 push 且远端核验成功后才能记 completed。锁/维护占用由自动化预检，未完成记 deferred，保留已完成阶段。
 - 每期回执要求 `events.updated_at` 本期刷新，维护时仍未发生或日期未知的事件及全部收益率 monitor 的官方来源本期重新核验；收益率已知实际观测的证据来源也须本期重新核查。已发生的历史事件无需重复核验，真实观测日期允许早于本期（如休市），核验时间不能代替观测日期。
 
@@ -16,7 +17,7 @@
 1. `python -m stocks status` 返回最近到期周日、due 与已有回执。`due: false` 静默结束；不逐周重放。
 2. 自动化先核验 Git 状态、当前维护进程以及实际持有的维护/模型锁，其他任务占用即 `python -m stocks record --phase deferred --reason "..."`，保留旧公开内容。锁文件存在不等于被持有，不删除锁文件。
 3. 从 `config/stocks.yaml` 的官方日历刷新未来事件（至少覆盖下一周）与连续收益率。使用新近观测的真实日期，不把 H.15 发布日当成市场观测日。逐项记录具体来源和本次核验时间；可靠来源没有一致预期就填 null。
-4. 写入当前周日文件 `content/stocks/outlooks/YYYY-MM-DD.json`，覆盖下一周一至周日。六类章节可用 `indicators` 合并核心 CPI/PCE 与就业三项，但十项指标都须覆盖。每节来源本期重新核查，情境只写条件假设。
+4. 写入当前周日文件 `content/stocks/outlooks/YYYY-MM-DD.json`，覆盖下一周一至周日。六类章节可用 `indicators` 合并核心 CPI/PCE 与就业两项，配置中的九项指标都须覆盖。就业范围仅包含非农就业与失业率。每节来源本期重新核查，情境只写条件假设。
 5. `python -m stocks validate`；`python -m stocks record --phase validated`；`python -m stocks build`。集成站点构建与验收后 `python -m stocks record --phase built` 固定当前输入/三个页面指纹。
 6. 仅提交本次相关源文件和生成文件，执行 `git diff --cached --check`、普通 push；确认远端后 `python -m stocks record --phase completed`。该命令重新校验公开证据、当前 built 指纹、股票工作树干净和 `origin/main == HEAD`，成功后才写 completed。
 7. 基础设施或来源获取失败执行有界重试，仍失败记 deferred 并保留旧有效内容/历史推演/已完成阶段。`record` 不执行抓取、Git 写操作或推理，也不会启动论文协调器。
