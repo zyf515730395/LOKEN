@@ -1,0 +1,54 @@
+/* Periodicals share the site's original palette and navigation shell. */
+body.periodical-page { height: 100dvh; overflow: hidden; }
+.periodical-page .page-content { height: 100dvh; min-height: 0; padding: var(--utility-height) 0 0; overflow: hidden; }
+.periodical-reader { height: 100%; display: grid; grid-template-columns: minmax(0, 1fr) 15rem; grid-template-rows: auto minmax(0, 1fr); position: relative; }
+.periodical-heading { grid-column: 1; grid-row: 1; padding: 2.25rem 3rem 1.5rem; border-bottom: 1px solid var(--line); background: var(--canvas); }
+.periodical-kicker { font: .68rem var(--mono); letter-spacing: .1em; color: var(--muted); margin: 0 0 .65rem; }
+.periodical-heading h1 { font-size: clamp(1.65rem, 3vw, 2.5rem); letter-spacing: -.045em; margin: 0 0 .6rem; line-height: 1.1; }
+.periodical-heading h2 { font-size: .93rem; line-height: 1.5; margin: 0 0 .35rem; font-weight: 500; }
+.periodical-heading p:not(.periodical-kicker) { margin: .2rem 0 0; color: var(--muted); font-size: .78rem; line-height: 1.6; }
+.periodical-tools { grid-column: 2; grid-row: 1 / -1; padding: 2.3rem 1.35rem 1.5rem; border-left: 1px solid var(--line); display: flex; flex-direction: column; min-height: 0; background: var(--surface); }
+.periodical-tools label { font-size: .73rem; font-weight: 600; margin-bottom: .6rem; }
+.periodical-tools select { width: 100%; min-height: 2.6rem; border: 1px solid var(--line); padding: .6rem .5rem; font: .75rem var(--sans); color: var(--text); background: var(--canvas); border-radius: 0; }
+.periodical-archive-count { font: .67rem var(--mono); color: var(--muted); margin: .65rem 0 1rem; }
+.periodical-toc { margin-top: auto; display: grid; gap: .2rem; overflow: auto; max-height: 60%; padding-top: 1rem; border-top: 1px solid var(--line); }
+.periodical-toc a { padding: .6rem .4rem; font-size: .76rem; color: var(--muted); text-decoration: none; border-left: 2px solid transparent; }
+.periodical-toc a:hover, .periodical-toc a[aria-current] { color: var(--accent); border-left-color: var(--accent); background: var(--accent-soft); }
+.periodical-article { grid-column: 1; grid-row: 2; overflow-y: auto; overscroll-behavior: contain; min-height: 0; padding: 2rem 3rem 5rem; scroll-behavior: smooth; scroll-padding-top: 1.5rem; outline-offset: -3px; }
+.periodical-section { max-width: 58rem; margin: 0 auto 3.5rem; }
+.periodical-section > h2 { border-bottom: 1px solid var(--line); padding-bottom: .9rem; font: 600 1.05rem var(--sans); letter-spacing: -.02em; }
+.digest-paper { border-bottom: 1px solid var(--row-line); padding: 1.25rem 0 1.7rem; }
+.digest-paper h3 { font: 600 1.05rem/1.65 var(--sans); margin: 0 0 .5rem; }
+.digest-paper h3 a { color: var(--text); text-decoration: none; }
+.digest-paper h3 a:hover { color: var(--accent); }
+.digest-paper-meta { color: var(--muted); font: .68rem/1.7 var(--mono); margin: 0 0 1rem; }
+.digest-summary { font: .9rem/1.9 var(--sans); overflow-wrap: anywhere; }
+.digest-summary pre { white-space: pre-wrap; }
+.digest-summary h4 { font-size: .78rem; margin: 1.1rem 0 .4rem; color: var(--muted); }
+.digest-summary p { margin: .45rem 0; }
+.digest-summary li { margin-bottom: .45rem; }
+.digest-summary a { color: var(--accent); }
+.digest-summary-missing, .periodical-empty { color: var(--muted); font-size: .85rem; line-height: 1.8; }
+.periodical-status { position: absolute; left: 1rem; bottom: .5rem; margin: 0; font-size: .73rem; color: var(--muted); background: var(--canvas); }
+@media (max-width: 1050px) {
+  .periodical-reader { grid-template-columns: minmax(0, 1fr) 12rem; }
+  .periodical-heading { padding: 1.6rem 1.5rem 1rem; }
+  .periodical-article { padding: 1.2rem 1.5rem 4rem; }
+  .periodical-tools { padding: 1.6rem .85rem 1rem; }
+}
+@media (max-width: 700px) {
+  .periodical-reader { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto auto minmax(0, 1fr); }
+  .periodical-heading { grid-column: 1; grid-row: 1; padding: 1.2rem 1rem .7rem; }
+  .periodical-heading h1 { font-size: 1.7rem; }
+  .periodical-heading .periodical-note { max-height: 2.7em; overflow: auto; }
+  .periodical-tools { grid-column: 1; grid-row: 2; padding: .6rem 1rem; border-left: 0; border-bottom: 1px solid var(--line); display: grid; grid-template-columns: auto minmax(0, 1fr); gap: .45rem .6rem; align-items: center; }
+  .periodical-tools label { margin: 0; }
+  .periodical-tools select { min-height: 2.2rem; padding: .3rem; }
+  .periodical-archive-count { display: none; }
+  .periodical-toc { grid-column: 1 / -1; display: flex; max-height: none; padding: 0; border: 0; margin: 0; overflow-x: auto; }
+  .periodical-toc a { white-space: nowrap; padding: .35rem .5rem; border-left: 0; border-bottom: 2px solid transparent; }
+  .periodical-toc a:hover, .periodical-toc a[aria-current] { border-left: 0; border-bottom-color: var(--accent); }
+  .periodical-article { grid-column: 1; grid-row: 3; padding: 1rem 1rem 4rem; }
+}
+@media (prefers-reduced-motion: reduce) { .periodical-article { scroll-behavior: auto; } }
+@media (max-width: 600px) { .periodical-page .page-content { padding-top: 7.25rem; } }

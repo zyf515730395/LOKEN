@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="论文日报">
+  <title>论文日报 · LOKEN</title>
+  <script>
+    (() => {
+      document.documentElement.classList.add("js");
+      let theme = null;
+      let contextOpen = null;
+      try {
+        theme = window.localStorage.getItem("arxiv-theme");
+        contextOpen = window.localStorage.getItem("togos-secondary-sidebar-collapsed");
+      } catch (error) { /* Storage can be unavailable. */ }
+      if (theme !== "light" && theme !== "dark") {
+        theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      }
+      document.documentElement.dataset.theme = theme;
+      if (contextOpen !== "true") document.documentElement.dataset.contextOpen = "true";
+    })();
+  </script>
+<link rel="stylesheet" href="../assets/css/periodicals.css?v=1">
+  <link rel="stylesheet" href="../assets/css/site.css?v=15">
+  <script src="../assets/js/site-shell.js?v=15" defer></script>
+  <script src="../assets/js/search-core.js?v=15" defer></script>
+  <script src="../assets/js/search.js?v=15" defer></script>
+  <script src="../assets/js/sidebar.js?v=15" defer></script>
+</head>
+<body data-site-root="../" data-active-section="learning" data-active-subtopic="daily" class="periodical-page">
+  <header class="site-utility" aria-label="页面工具">
+    <button class="sidebar-toggle" type="button" aria-controls="navigation-shell" aria-expanded="false">
+      <span aria-hidden="true" data-sidebar-toggle-icon>☰</span><span data-sidebar-toggle-label>导航</span>
+    </button>
+    <div class="site-search" data-search-root>
+      <label class="site-search-field" for="search-input">
+        <span aria-hidden="true">⌕</span>
+        <input id="search-input" type="search" placeholder="搜索文章标题"
+               aria-label="搜索文章标题" role="combobox"
+               autocomplete="off" aria-autocomplete="list" aria-controls="search-results" aria-expanded="false">
+        <kbd aria-hidden="true">Ctrl K</kbd>
+      </label>
+      <div class="search-popover" data-search-popover hidden>
+        <p class="search-status" data-search-status aria-live="polite">输入标题关键词开始搜索</p>
+        <div id="search-results" class="search-results" data-search-results role="listbox"></div>
+      </div>
+    </div>
+    <button class="theme-toggle" type="button" aria-label="切换颜色主题" aria-pressed="false">
+      <span data-theme-icon aria-hidden="true"></span>
+    </button>
+  </header>
+  <div class="sidebar-scrim" data-sidebar-close></div>
+<div class="navigation-shell" id="navigation-shell">
+  <button class="navigation-close" type="button" data-navigation-close
+          aria-label="关闭导航" hidden>×</button>
+  <aside class="primary-sidebar" aria-label="知识主题">
+    <a class="primary-brand" href="../index.html" aria-label="LOKEN 首页"><img class="brand-logo" src="../assets/images/loken-logo.png" width="1990" height="329" alt=""></a>
+    <button class="primary-menu" type="button" data-context-toggle aria-controls="context-drawer" aria-expanded="true" aria-label="收起二级导航"><span>MENU</span><span aria-hidden="true">☰</span></button>
+    <nav class="primary-navigation" aria-label="知识主题">
+      <a class="primary-nav-item is-active" href="../index.html" aria-current="page"><span class="primary-nav-copy"><span class="primary-nav-label">学习一个</span><span class="primary-nav-meta">01 / PAPERS</span></span></a>
+      <a class="primary-nav-item" href="../milestone-models/flux.html"><span class="primary-nav-copy"><span class="primary-nav-label">身经百战</span><span class="primary-nav-meta">02 / MODELS</span></span></a>
+      <a class="primary-nav-item" href="../writings/index.html"><span class="primary-nav-copy"><span class="primary-nav-label">谈笑风生</span><span class="primary-nav-meta">03 / ARTICLES</span></span></a>
+      <a class="primary-nav-item" href="../journeys/index.html"><span class="primary-nav-copy"><span class="primary-nav-label">跑得还快</span><span class="primary-nav-meta">04 / TRAVELS</span></span></a>
+      <a class="primary-nav-item" href="../stocks/index.html"><span class="primary-nav-copy"><span class="primary-nav-label">闷声发大财</span><span class="primary-nav-meta">05 / STOCKS</span></span></a>
+    </nav>
+    <div class="primary-sidebar-status"><span>LAST SYNC</span><strong>AUTOMATED / WEEKDAYS</strong></div>
+  </aside>
+  <aside class="context-drawer" id="context-drawer" aria-label="学习一个二级导航">
+    <header class="secondary-nav-header"><div><span>PAPERS</span><h2>学习一个</h2></div>
+      <button type="button" data-context-close aria-label="收起二级导航">‹</button></header>
+    <div class="secondary-nav-scroll"><details class="secondary-nav-group" open><summary>论文报刊</summary><div class="secondary-nav-links"><a class="secondary-nav-link is-active" href="../reports/daily.html" aria-current="page">论文日报</a><a class="secondary-nav-link" href="../reports/weekly.html">论文周报</a></div></details><details class="secondary-nav-group" open><summary>研究主题</summary><div class="secondary-nav-links"><a class="secondary-nav-link" href="../index.html?tag=image-gen-edit#image-gen-edit">Image Gen&amp;Edit</a>
+<a class="secondary-nav-link" href="../index.html?tag=video-gen-edit#video-gen-edit">Video Gen&amp;Edit</a>
+<a class="secondary-nav-link" href="../index.html?tag=3d-gen-recon#3d-gen-recon">3D Gen&amp;Recon</a>
+<a class="secondary-nav-link" href="../index.html?tag=world-model#world-model">World Model</a>
+<a class="secondary-nav-link" href="../index.html?tag=relighting#relighting">Relighting</a>
+<a class="secondary-nav-link" href="../index.html?tag=depth-estimation#depth-estimation">Depth Estimation</a></div></details><details class="secondary-nav-group" open><summary>会议</summary><div class="secondary-nav-links"><a class="secondary-nav-link" href="../index.html?tag=conferences#conferences">Conference</a></div></details></div>
+  </aside>
+</div>
+  <main class="page-content" id="top">
+<section class="periodical-reader" data-periodical-reader data-kind="daily">
+  <header class="periodical-heading">
+    <p class="periodical-kicker">DAILY / LOKEN</p>
+    <h1>论文日报</h1>
+    <h2 data-periodical-title>2026-10-18 · 日报</h2>
+    <p data-periodical-subtitle>0 篇公开论文 · 0 篇已有摘要</p>
+    <p class="periodical-note" data-periodical-note>按北京时间首次采集日期归档（仅已公开论文）；无首次采集记录的历史论文按发表日期归档，逐篇标明。仅月份或年份已知的记录不分配到某一天。周报覆盖周一至周日；复用已发布摘要，不生成推测性总结。</p>
+  </header>
+  <aside class="periodical-tools" aria-label="期刊工具">
+    <label for="periodical-date">选择日期</label>
+    <select id="periodical-date" data-periodical-select ><option value="2026-10-18">2026-10-18 · 日报</option><option value="2026-10-17">2026-10-17 · 日报</option><option value="2026-10-16">2026-10-16 · 日报</option><option value="2026-10-15">2026-10-15 · 日报</option><option value="2026-10-14">2026-10-14 · 日报</option><option value="2026-10-13">2026-10-13 · 日报</option><option value="2026-10-12">2026-10-12 · 日报</option><option value="2026-10-11">2026-10-11 · 日报</option><option value="2026-10-10">2026-10-10 · 日报</option><option value="2026-10-09">2026-10-09 · 日报</option><option value="2026-10-08">2026-10-08 · 日报</option><option value="2026-10-07">2026-10-07 · 日报</option><option value="2026-10-06">2026-10-06 · 日报</option><option value="2026-10-05">2026-10-05 · 日报</option><option value="2026-10-04">2026-10-04 · 日报</option><option value="2026-10-03">2026-10-03 · 日报</option><option value="2026-10-02">2026-10-02 · 日报</option><option value="2026-10-01">2026-10-01 · 日报</option><option value="2026-09-30">2026-09-30 · 日报</option><option value="2026-09-29">2026-09-29 · 日报</option><option value="2026-09-28">2026-09-28 · 日报</option><option value="2026-09-27">2026-09-27 · 日报</option><option value="2026-09-26">2026-09-26 · 日报</option><option value="2026-09-25">2026-09-25 · 日报</option><option value="2026-09-24">2026-09-24 · 日报</option><option value="2026-09-23">2026-09-23 · 日报</option><option value="2026-09-22">2026-09-22 · 日报</option><option value="2026-09-21">2026-09-21 · 日报</option><option value="2026-09-20">2026-09-20 · 日报</option><option value="2026-09-19">2026-09-19 · 日报</option></select>
+    <p class="periodical-archive-count">30 期归档</p>
+    <nav class="periodical-toc" aria-label="本期目录" data-periodical-toc></nav>
+  </aside>
+  <article class="periodical-article" data-periodical-article tabindex="0" aria-label="论文日报正文" data-period-id="2026-10-18"><p class="periodical-empty">暂无已发布内容。请稍后查看。</p></article>
+  <p class="periodical-status" role="status" aria-live="polite" data-periodical-status></p>
+</section>
+<script type="application/json" id="periodical-catalog">[{"id":"2026-10-18","date":"2026-10-18","title":"2026-10-18 · 日报","subtitle":"0 篇公开论文 · 0 篇已有摘要","sections":[],"metadata":{"note":"按北京时间首次采集日期归档（仅已公开论文）；无首次采集记录的历史论文按发表日期归档，逐篇标明。仅月份或年份已知的记录不分配到某一天。周报覆盖周一至周日；复用已发布摘要，不生成推测性总结。"}},{"id":"2026-10-17","date":"2026-10-17","title":"2026-10-17 · 日报","subtitle":"0 篇公开论文 · 0 篇已有摘要","sections":[],"metadata":{"note":"按北京时间首次采集日期归档（仅已公开论文）；无首次采集记录的历史论文按发表日期归档，逐篇标明。仅月份或年份已知的记录不分配到某一天。周报覆盖周一至周日；复用已发布摘要，不生成推测性总结。","data_url":"periods/daily-2026-10-17.json"}},{"id":"2026-10-16","date":"2026-10-16","title":"2026-10-16 · 日报","subtitle":"52 篇公开论文 · 48 篇已有摘要","sections":[],"metadata":{"note":"按北京时间首次采集日期归档（仅已公开论文）；无首次采集记录的历史论文按发表日期归档，逐篇标明。仅月份或年份已知的记录不分配到某一天。周报覆盖周一至周日；复用已发布摘要，不生成推测性总结。","data_url":"periods/daily-2026-10-16.json"}},{"id":"2026-10-15","date":"2026-10-15","title":"2026-10-15 · 日报","subtitle":"52 篇公开论文 · 50 篇已有摘要","sections":[],"metadata":{"note":"按北京时间首次采集日期归档（仅已公开论文）；无首次采集记录的历史论文按发表日期归档，逐篇标明。仅月份或年份已知的记录不分配到某一天。周报覆盖周一至周日；复用已发布摘要，不生成推测性总结。","data_url":"periods/daily-2026-10-15.json"}},{"id":"2026-10-14","date":"2026-10-14","title":"2026-10-14 · 日报","subtitle":"105 篇公开论文 · 98 篇已有摘要","sections":[],"metadata":{"note":"按北京时间首次采集日期归档（仅已公开论文）；无首次采集记录的历史论文按发表日期归档，逐篇标明。仅月份或年份已知的记录不分配到某一天。周报覆盖周一至周日；复用已发布摘要，不生成推测性总结。","data_url":"periods/daily-2026-10-14.json"}},{"id":"2026-10-13","date":"2026-10-13","title":"2026-10-13 · 日报","subtitle":"28 篇公开论文 · 25 篇已有摘要","sections":[],"metadata":{"note":"按北京时间首次采集日期归档（仅已公开论文）；无首次采集记录的历史论文按发表日期归档，逐篇标明。仅月份或年份已知的记录不分配到某一天。周报覆盖周一至周日；复用已发布摘要，不生成推测性总结。","data_url":"periods/daily-2026-10-13.json"}},{"id":"2026-10-12","date":"2026-10-12","title":"2026-10-12 · 日报","subtitle":"0 篇公开论文 · 0 篇已有摘要","sections":[],"metadata":{"note":"按北京时间首次采集日期归档（仅已公开论文）；无首次采集记录的历史论文按发表日期归档，逐篇标明。仅月份或年份已知的记录不分配到某一天。周报覆盖周一至周日；复用已发布摘要，不生成推测性总结。","data_url":"periods/daily-2026-10-12.json"}},{"id":"2026-10-11","date":"2026-10-11","title":"2026-10-11 · 日报","subtitle":"0 篇公开论文 · 0 篇已有摘要","sections":[],"metadata":{"note":"按北京时间首次采集日期归档（仅已公开论文）；无首次采集记录的历史论文按发表日期归档，逐篇标明。仅月份或年份已知的记录不分配到某一天。周报覆盖周一至周日；复用已发布摘要，不生成推测性总结。","data_url":"periods/daily-2026-10-11.json"}},{"id":"2026-10-10","date":"2026-10-10","title":"2026-10-10 · 日报","subtitle":"0 篇公开论文 · 0 篇已有摘要","sections":[],"metadata":{"note":"按北京时间首次采集日期归档（仅已公开论文）；无首次采集记录的历史论文按发表日期归档，逐篇标明。仅月份或年份已知的记录不分配到某一天。周报覆盖周一至周日；复用已发布摘要，不生成推测性总结。","data_url":"periods/daily-2026-10-10.json"}},{"id":"2026-10-09","date":"2026-10-09","title":"2026-10-09 · 日报","subtitle":"81 篇公开论文 · 77 篇已有摘要","sections":[],"metadata":{"note":"按北京时间首次采集日期归档（仅已公开论文）；无首次采集记录的历史论文按发表日期归档，逐篇标明。仅月份或年份已知的记录不分配到某一天。周报覆盖周一至周日；复用已发布摘要，不生成推测性总结。","data_url":"periods/daily-2026-10-09.json"}},{"id":"2026-10-08","date":"2026-10-08","title":"2026-10-08 · 日报","subtitle":"63 篇公开论文 · 61 篇已有摘要","sections":[],"metadata":{"note":"按北京时间首次采集日期归档（仅已公开论文）；无首次采集记录的历史论文按发表日期归档，逐篇标明。仅月份或年份已知的记录不分配到某一天。周报覆盖周一至周日；复用已发布摘要，不生成推测性总结。","data_url":"periods/daily-2026-10-08.json"}},{"id":"2026-10-07","date":"2026-10-07","title":"2026-10-07 · 日报","subtitle":"52 篇公开论文 · 52 篇已有摘要","sections":[],"metadata":{"note":"按北京时间首次采集日期归档（仅已公开论文）；无首次采集记录的历史论文按发表日期归档，逐篇标明。仅月份或年份已知的记录不分配到某一天。周报覆盖周一至周日；复用已发布摘要，不生成推测性总结。","data_url":"periods/daily-2026-10-07.json"}},{"id":"2026-10-06","date":"2026-10-06","title":"2026-10-06 · 日报","subtitle":"74 篇公开论文 · 72 篇已有摘要","sections":[],"metadata":{"note":"按北京时间首次采集日期归档（仅已公开论文）；无首次采集记录的历史论文按发表日期归档，逐篇标明。仅月份或年份已知的记录不分配到某一天。周报覆盖周一至周日；复用已发布摘要，不生成推测性总结。","data_url":"periods/daily-2026-10-06.json"}},{"id":"2026-10-05","date":"2026-10-05","title":"2026-10-05 · 日报","subtitle":"37 篇公开论文 · 34 篇已有摘要","sections":[],"metadata":{"note":"按北京时间首次采集日期归档（仅已公开论文）；无首次采集记录的历史论文按发表日期归档，逐篇标明。仅月份或年份已知的记录不分配到某一天。周报覆盖周一至周日；复用已发布摘要，不生成推测性总结。","data_url":"periods/daily-2026-10-05.json"}},{"id":"2026-10-04","date":"2026-10-04","title":"2026-10-04 · 日报","subtitle":"5 篇公开论文 · 1 篇已有摘要","sections":[],"metadata":{"note":"按北京时间首次采集日期归档（仅已公开论文）；无首次采集记录的历史论文按发表日期归档，逐篇标明。仅月份或年份已知的记录不分配到某一天。周报覆盖周一至周日；复用已发布摘要，不生成推测性总结。","data_url":"periods/daily-2026-10-04.json"}},{"id":"2026-10-03","date":"2026-10-03","title":"2026-10-03 · 日报","subtitle":"3 篇公开论文 · 3 篇已有摘要","sections":[],"metadata":{"note":"按北京时间首次采集日期归档（仅已公开论文）；无首次采集记录的历史论文按发表日期归档，逐篇标明。仅月份或年份已知的记录不分配到某一天。周报覆盖周一至周日；复用已发布摘要，不生成推测性总结。","data_url":"periods/daily-2026-10-03.json"}},{"id":"2026-10-02","date":"2026-10-02","title":"2026-10-02 · 日报","subtitle":"93 篇公开论文 · 89 篇已有摘要","sections":[],"metadata":{"note":"按北京时间首次采集日期归档（仅已公开论文）；无首次采集记录的历史论文按发表日期归档，逐篇标明。仅月份或年份已知的记录不分配到某一天。周报覆盖周一至周日；复用已发布摘要，不生成推测性总结。","data_url":"periods/daily-2026-10-02.json"}},{"id":"2026-10-01","date":"2026-10-01","title":"2026-10-01 · 日报","subtitle":"80 篇公开论文 · 72 篇已有摘要","sections":[],"metadata":{"note":"按北京时间首次采集日期归档（仅已公开论文）；无首次采集记录的历史论文按发表日期归档，逐篇标明。仅月份或年份已知的记录不分配到某一天。周报覆盖周一至周日；复用已发布摘要，不生成推测性总结。","data_url":"periods/daily-2026-10-01.json"}},{"id":"2026-09-30","date":"2026-09-30","title":"2026-09-30 · 日报","subtitle":"100 篇公开论文 · 95 篇已有摘要","sections":[],"metadata":{"note":"按北京时间首次采集日期归档（仅已公开论文）；无首次采集记录的历史论文按发表日期归档，逐篇标明。仅月份或年份已知的记录不分配到某一天。周报覆盖周一至周日；复用已发布摘要，不生成推测性总结。","data_url":"periods/daily-2026-09-30.json"}},{"id":"2026-09-29","date":"2026-09-29","title":"2026-09-29 · 日报","subtitle":"150 篇公开论文 · 144 篇已有摘要","sections":[],"metadata":{"note":"按北京时间首次采集日期归档（仅已公开论文）；无首次采集记录的历史论文按发表日期归档，逐篇标明。仅月份或年份已知的记录不分配到某一天。周报覆盖周一至周日；复用已发布摘要，不生成推测性总结。","data_url":"periods/daily-2026-09-29.json"}},{"id":"2026-09-28","date":"2026-09-28","title":"2026-09-28 · 日报","subtitle":"26 篇公开论文 · 23 篇已有摘要","sections":[],"metadata":{"note":"按北京时间首次采集日期归档（仅已公开论文）；无首次采集记录的历史论文按发表日期归档，逐篇标明。仅月份或年份已知的记录不分配到某一天。周报覆盖周一至周日；复用已发布摘要，不生成推测性总结。","data_url":"periods/daily-2026-09-28.json"}},{"id":"2026-09-27","date":"2026-09-27","title":"2026-09-27 · 日报","subtitle":"0 篇公开论文 · 0 篇已有摘要","sections":[],"metadata":{"note":"按北京时间首次采集日期归档（仅已公开论文）；无首次采集记录的历史论文按发表日期归档，逐篇标明。仅月份或年份已知的记录不分配到某一天。周报覆盖周一至周日；复用已发布摘要，不生成推测性总结。","data_url":"periods/daily-2026-09-27.json"}},{"id":"2026-09-26","date":"2026-09-26","title":"2026-09-26 · 日报","subtitle":"0 篇公开论文 · 0 篇已有摘要","sections":[],"metadata":{"note":"按北京时间首次采集日期归档（仅已公开论文）；无首次采集记录的历史论文按发表日期归档，逐篇标明。仅月份或年份已知的记录不分配到某一天。周报覆盖周一至周日；复用已发布摘要，不生成推测性总结。","data_url":"periods/daily-2026-09-26.json"}},{"id":"2026-09-25","date":"2026-09-25","title":"2026-09-25 · 日报","subtitle":"41 篇公开论文 · 35 篇已有摘要","sections":[],"metadata":{"note":"按北京时间首次采集日期归档（仅已公开论文）；无首次采集记录的历史论文按发表日期归档，逐篇标明。仅月份或年份已知的记录不分配到某一天。周报覆盖周一至周日；复用已发布摘要，不生成推测性总结。","data_url":"periods/daily-2026-09-25.json"}},{"id":"2026-09-24","date":"2026-09-24","title":"2026-09-24 · 日报","subtitle":"24 篇公开论文 · 21 篇已有摘要","sections":[],"metadata":{"note":"按北京时间首次采集日期归档（仅已公开论文）；无首次采集记录的历史论文按发表日期归档，逐篇标明。仅月份或年份已知的记录不分配到某一天。周报覆盖周一至周日；复用已发布摘要，不生成推测性总结。","data_url":"periods/daily-2026-09-24.json"}},{"id":"2026-09-23","date":"2026-09-23","title":"2026-09-23 · 日报","subtitle":"33 篇公开论文 · 32 篇已有摘要","sections":[],"metadata":{"note":"按北京时间首次采集日期归档（仅已公开论文）；无首次采集记录的历史论文按发表日期归档，逐篇标明。仅月份或年份已知的记录不分配到某一天。周报覆盖周一至周日；复用已发布摘要，不生成推测性总结。","data_url":"periods/daily-2026-09-23.json"}},{"id":"2026-09-22","date":"2026-09-22","title":"2026-09-22 · 日报","subtitle":"77 篇公开论文 · 76 篇已有摘要","sections":[],"metadata":{"note":"按北京时间首次采集日期归档（仅已公开论文）；无首次采集记录的历史论文按发表日期归档，逐篇标明。仅月份或年份已知的记录不分配到某一天。周报覆盖周一至周日；复用已发布摘要，不生成推测性总结。","data_url":"periods/daily-2026-09-22.json"}},{"id":"2026-09-21","date":"2026-09-21","title":"2026-09-21 · 日报","subtitle":"21 篇公开论文 · 21 篇已有摘要","sections":[],"metadata":{"note":"按北京时间首次采集日期归档（仅已公开论文）；无首次采集记录的历史论文按发表日期归档，逐篇标明。仅月份或年份已知的记录不分配到某一天。周报覆盖周一至周日；复用已发布摘要，不生成推测性总结。","data_url":"periods/daily-2026-09-21.json"}},{"id":"2026-09-20","date":"2026-09-20","title":"2026-09-20 · 日报","subtitle":"0 篇公开论文 · 0 篇已有摘要","sections":[],"metadata":{"note":"按北京时间首次采集日期归档（仅已公开论文）；无首次采集记录的历史论文按发表日期归档，逐篇标明。仅月份或年份已知的记录不分配到某一天。周报覆盖周一至周日；复用已发布摘要，不生成推测性总结。","data_url":"periods/daily-2026-09-20.json"}},{"id":"2026-09-19","date":"2026-09-19","title":"2026-09-19 · 日报","subtitle":"1 篇公开论文 · 0 篇已有摘要","sections":[],"metadata":{"note":"按北京时间首次采集日期归档（仅已公开论文）；无首次采集记录的历史论文按发表日期归档，逐篇标明。仅月份或年份已知的记录不分配到某一天。周报覆盖周一至周日；复用已发布摘要，不生成推测性总结。","data_url":"periods/daily-2026-09-19.json"}}]</script>
+<script src="../assets/js/periodicals.js?v=1" defer></script>
+  </main>
+
+</body>
+</html>
