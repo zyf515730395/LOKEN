@@ -6,6 +6,7 @@ from contextlib import contextmanager
 from datetime import datetime
 import json
 import os
+import re
 from pathlib import Path
 import signal
 import shutil
@@ -21,7 +22,7 @@ from papers.model_runtime import DEFAULT_MODEL, DEFAULT_MODEL_TIMEOUT_SECONDS, D
 PUBLIC = ('content/papers/archive.json', 'content/papers/arxiv-candidates.json',
           'content/papers/conference-library.json',
           'content/papers/paper-annotations.json', 'docs/notes/', 'docs/index.html',
-          'docs/search-index.json', 'docs/togos-papers.json')
+          'docs/search-index.json', 'docs/togos-papers.json', 'docs/reports/')
 PRIVATE = paths.ROOT / 'build/paper-summaries'
 ZONE = ZoneInfo('Asia/Shanghai')
 BACKFILL_BATCH_SIZE = 100
@@ -138,6 +139,9 @@ def clean_pull():
 
 
 def allowed_path(path):
+    if path.startswith('docs/reports/'):
+        return path in {'docs/reports/daily.html', 'docs/reports/weekly.html'} or bool(
+            re.fullmatch(r'docs/reports/periods/(daily|weekly)-\d{4}-\d{2}-\d{2}\.json', path))
     return any((path.startswith(item) and path.endswith('.html') and '/' not in path[len(item):])
                if item.endswith('/') else path == item for item in PUBLIC)
 

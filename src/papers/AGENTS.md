@@ -1,6 +1,7 @@
 # Paper pipeline rules
 
 ## Sources, publication and taxonomy
+- digests.py 从同一公开可见集合和已发布摘要生成论文日报/周报；每日构建同步更新 docs/reports/daily.html、weekly.html 与 periods/ 下受管日期 JSON。runtime 只允许这些精确路径进入每日提交，不能扩大到任意报告或 Stocks 输出。
 - Public truth lives in content/papers/: archive.json (arXiv archive), arxiv-candidates.json (cursors/review decisions), paper-annotations.json (arXiv topics/tags/type/affiliations), conference-papers.json (official accepted lists), and conference-library.json (conference overlay/annotations). Private sources, model inputs/responses, caches and checkpoints remain under ignored build/.
 - config/site.yaml alone defines topics, descriptions, aliases, tag dimensions and publication filters. New labels must not be hard-coded. site.py owns generated paper pages; rebuild docs/index.html, docs/search-index.json and affected notes/exports rather than hand-editing them.
 - New candidates since collection.review_required_since require explicit acceptance before public lists/search/counts. Preserve previous review decisions and historical visibility; unknown/uncertain inference never authorizes deletion.

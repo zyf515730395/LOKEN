@@ -24,7 +24,7 @@ from shared.search_index import SearchDocument, serialize_search_index
 from shared.site_shell import (
     SITE_NAME,
     render_context_strip,
-    render_journey_placeholder_page,
+    publish_journey_pages,
     render_section_intro,
     render_site_page,
 )
@@ -757,6 +757,11 @@ def generate_site(
     )
     atomic_write_text(page_output, document)
 
+    from papers.digests import publish_paper_digests
+    publish_paper_digests(config_path, output_root=site_root, generated_on=today,
+                         archive_path=json_path, candidate_path=candidate_path,
+                         annotation_path=annotation_path)
+
     from milestones.publisher import build_milestone_search_documents
 
     if not refresh_related:
@@ -769,14 +774,7 @@ def generate_site(
         atomic_write_text(index_path, serialize_search_index(documents, generated_on=today))
         return
 
-    journey_destination = site_root / "journeys" / "index.html"
-    atomic_write_text(
-        journey_destination,
-        render_journey_placeholder_page(
-            output_file=journey_destination,
-            output_root=site_root,
-        ),
-    )
+    publish_journey_pages(site_root)
 
     from writings.publisher import (
         abort_writings_publication,
