@@ -321,7 +321,11 @@ def _execute_daily_pass(args, model, common, expected_head):
         baseline = state['conference_baseline']
         receipts_path = CONFERENCE_PRIVATE / 'summary-state.json'
         receipts = json.loads(receipts_path.read_text()) if receipts_path.exists() else {}
-        excluded = {k for k, v in receipts.items() if v.get('attempts', 0) > baseline.get(k, 0)}
+        from papers.conference_retry import current_attempt
+        from papers.conference_library import load_library
+        records = load_library()['papers']
+        excluded = {k for k, v in receipts.items() if v.get('attempts', 0) > baseline.get(k, 0)
+                    and current_attempt(records.get(k, {}), v)}
         remaining_limit = None if args.limit is None else max(0, args.limit - len(excluded))
         from datetime import timedelta
         now = datetime.now(ZONE)
@@ -357,7 +361,8 @@ def _execute_daily_pass(args, model, common, expected_head):
     archive_path = PRIVATE / 'daily-runs' / (state['started_at'].replace(':','-') + '.json')
     atomic_write_json(archive_path, state)
     partial = (state['arxiv_exit'] or state.get('conference_failed')
-               or state.get('conference_report', {}).get('counts', {}).get('failed'))
+               or state.get('conference_report', {}).get('counts', {}).get('failed')
+               or state.get('conference_report', {}).get('remaining'))
     return 3 if partial else 0
 
 

@@ -342,8 +342,14 @@ def classify_conference_paper(paper, record: dict, *, model: str, timeout: float
     allowlists = load_topic_tag_allowlists(paths.CONFIG, labels)
     allowed = annotation_labels_for_topics(labels, allowlists, record['topics'])
     run_classifier = classifier or classify_paper
+    evidence = {}
+    if not 40 <= len(paper.document.abstract.strip()) <= 16000:
+        from papers.conference_evidence import select_evidence
+        body = select_evidence(paper.document)
+        evidence = {'evidence_text': body['text'][:16000], 'evidence_basis': body['basis']}
     annotation = run_classifier(paper, allowed, model=model,
-                                base_url='http://127.0.0.1:8000/v1', timeout=timeout)
+                                base_url='http://127.0.0.1:8000/v1', timeout=timeout,
+                                constrained=True, **evidence)
     annotation = filter_annotation_for_topics(annotation, labels, allowlists, record['topics'])
     value = annotation_value(annotation)
     value['topics'] = list(record['topics'])
@@ -353,6 +359,7 @@ def classify_conference_paper(paper, record: dict, *, model: str, timeout: float
 def conference_work_records(records, visible: set[str], state: dict, *, attempted: set[str],
                             skip_failed: bool) -> list[dict]:
     """Order incomplete conference work so repeated failures cannot starve new papers."""
+    from papers.conference_retry import retry_allowed
     pending = [
         record for record in records
         if record['id'] in visible and record['id'] not in attempted
@@ -360,6 +367,7 @@ def conference_work_records(records, visible: set[str], state: dict, *, attempte
              or not record.get('annotation')
              or _source_refresh_pending(record, 'annotation'))
         and not (skip_failed and state.get(record['id'], {}).get('status') == 'failed')
+        and retry_allowed(record, state.get(record['id'], {}))
     ]
     pending.sort(key=lambda record: (
         state.get(record['id'], {}).get('attempts', 0),
@@ -367,6 +375,17 @@ def conference_work_records(records, visible: set[str], state: dict, *, attempte
         record['id'],
     ))
     return pending
+
+
+def _evidence_source(paper, cache_root, evidence):
+    """Public provenance excludes all private paths and raw model inputs."""
+    from papers.conference_evidence import evidence_receipt
+    filename = 'abstract-verified.json' if not paper.document.sections else 'verified.json'
+    info = json.loads((cache_root / filename).read_text())
+    if info['source_sha256'] != paper.source_sha256:
+        raise ValueError('Source receipt checksum changed')
+    return {'url': info['url'], 'sha256': paper.source_sha256,
+            'evidence': {**evidence_receipt(evidence), 'extraction': info.get('extraction', {'method': 'html_text'})}}
 
 
 def conference_remaining(records, visible: set[str]) -> dict[str, int]:
@@ -388,7 +407,9 @@ def conference_remaining(records, visible: set[str]) -> dict[str, int]:
 def summarize(*, limit: int | None = 20, timeout: float = 900, model: str | None = None,
               runtime_owned: bool = False, skip_failed: bool = False,
               excluded_ids: set[str] | None = None, deadline: float | None = None) -> dict:
-    from papers.conference_sources import acquire_conference_paper
+    from papers.conference_sources import acquire_conference_paper, acquire_conference_abstract, SourceInfrastructureError
+    from papers.conference_evidence import select_evidence
+    from papers.conference_retry import failed_receipt, RECOVERY_VERSION, source_signature
     from papers.runtime import model_service
     from papers.summaries.summarizer import summarize_paper
     from papers.summaries.models import PaperSummaryError
@@ -421,43 +442,76 @@ def summarize(*, limit: int | None = 20, timeout: float = 900, model: str | None
                 ledger = json.loads(paths.LEDGER.read_text(encoding='utf-8'))
                 visible = {r['id'] for r in library_rows(library, archive, ledger)}
                 state = json.loads(state_path.read_text(encoding='utf-8')) if state_path.exists() else {}
+                snapshot = PRIVATE / ('summary-state.pre-' + RECOVERY_VERSION + '.json')
+                if state and not snapshot.exists():
+                    atomic_write_json(snapshot, state)
                 records = conference_work_records(library['papers'].values(), visible, state,
                                                   attempted=attempted, skip_failed=skip_failed)
                 if not records: break
                 record = records[0]
                 key = record['id']; attempted.add(key)
-                receipt = {'attempts': state.get(key, {}).get('attempts', 0) + 1, 'attempted_at': utc_now()}
+                previous = state.get(key, {})
+                receipt = {'attempts': previous.get('attempts', 0) + 1, 'attempted_at': utc_now()}
+                failure_details = {}
                 try:
                     source_cache = conference_source_cache_root(record, PRIVATE / 'sources' / key)
-                    paper, metadata = acquire_conference_paper(record, source_cache)
                     failures = {}
                     refresh_summary = _source_refresh_pending(record, 'summary')
                     refresh_annotation = _source_refresh_pending(record, 'annotation')
+                    needs_summary = not record.get('summary') or refresh_summary
+                    refresh_source = previous.get('status') == 'failed' and previous.get('retry_policy') == RECOVERY_VERSION
+                    try:
+                        paper, metadata = acquire_conference_paper(record, source_cache,
+                            refresh=refresh_source)
+                    except PaperSummaryError as error:
+                        if needs_summary:
+                            failures['summary'] = error.code
+                            failure_details = error.details
+                        if record.get('annotation') and not refresh_annotation:
+                            raise
+                        try:
+                            paper, metadata = acquire_conference_abstract(record, source_cache, refresh=refresh_source)
+                        except PaperSummaryError:
+                            raise error
+                    body = select_evidence(paper.document) if paper.document.sections else None
+                    if body:
+                        atomic_write_json(source_cache / ('selected-evidence.' + RECOVERY_VERSION + '.' + body['sha256'] + '.json'), body)
+                        atomic_write_json(source_cache / 'selected-evidence.json', body)
                     with model_service('vllm-paper.service') as service_model:
                         selected_model = model or service_model
-                        if not record.get('summary') or refresh_summary:
+                        if needs_summary and body:
                             try:
                                 summary = summarize_paper(paper, model=selected_model,
-                                                          base_url='http://127.0.0.1:8000/v1', timeout=timeout)
+                                                          base_url='http://127.0.0.1:8000/v1', timeout=timeout,
+                                                          evidence_text=body['text'], evidence_basis=body['basis'])
                                 record['summary'] = asdict(summary)
-                                record['summary_source'] = {'url': record['url'], 'sha256': paper.source_sha256}
+                                record['summary_source'] = _evidence_source(paper, source_cache, body)
                                 _complete_source_refresh(record, 'summary')
                             except MemoryError:
                                 raise
                             except Exception as error:
                                 failures['summary'] = getattr(error, 'code', type(error).__name__)
+                                failure_details.update(getattr(error, 'details', {}))
                         if not record.get('annotation') or refresh_annotation:
                             try:
                                 record['annotation'] = classify_conference_paper(
                                     paper, record, model=selected_model, timeout=timeout)
-                                record['annotation_source'] = {
-                                    'url': record['url'], 'sha256': paper.source_sha256,
-                                }
+                                abstract = paper.document.abstract
+                                if 40 <= len(abstract.strip()) <= 16000:
+                                    material = {'basis': 'official_abstract', 'text': abstract,
+                                                'sha256': hashlib.sha256(abstract.encode()).hexdigest(),
+                                                'sections': ['Abstract'], 'truncated': False}
+                                else:
+                                    material = {**body, 'text': body['text'][:16000],
+                                        'sha256': hashlib.sha256(body['text'][:16000].encode()).hexdigest(),
+                                        'truncated': body['truncated'] or len(body['text']) > 16000}
+                                record['annotation_source'] = _evidence_source(paper, source_cache, material)
                                 _complete_source_refresh(record, 'annotation')
                             except MemoryError:
                                 raise
                             except Exception as error:
                                 failures['annotation'] = getattr(error, 'code', type(error).__name__)
+                                failure_details.update(getattr(error, 'details', {}))
                     for field in ('arxiv_id', 'doi'):
                         if metadata.get(field): record[field] = metadata[field]
                     # Publication dates and their provenance are owned by conference_dates.
@@ -472,12 +526,16 @@ def summarize(*, limit: int | None = 20, timeout: float = 900, model: str | None
                         counts['failed'] += 1
                         for stage in failures:
                             counts[stage + '_failed'] += 1
+                        receipt = failed_receipt(record, receipt, previous, failure_details)
                     else:
-                        receipt['status'] = 'ready'; counts['ready'] += 1
-                except MemoryError:
+                        receipt.update(status='ready', retry_policy=RECOVERY_VERSION,
+                                       source_signature=source_signature(record))
+                        counts['ready'] += 1
+                except (MemoryError, SourceInfrastructureError):
                     raise
                 except Exception as error:
                     receipt.update(status='failed', error=getattr(error, 'code', type(error).__name__))
+                    receipt = failed_receipt(record, receipt, previous, getattr(error, 'details', {}))
                     counts['failed'] += 1
                 state[key] = receipt
                 atomic_write_json(state_path, state)
@@ -489,13 +547,59 @@ def summarize(*, limit: int | None = 20, timeout: float = 900, model: str | None
     visible = {row['id'] for row in library_rows(final_library, archive, ledger)}
     report = {'counts': dict(counts),
               **conference_remaining(final_library['papers'].values(), visible)}
+    report['retry_queues'] = retry_status(final_library, visible)
     atomic_write_json(PRIVATE / 'summary-report.json', report)
     return report
+
+
+def retry_status(library=None, visible=None) -> dict:
+    from papers.conference_retry import retry_allowed, queue_for
+    # This read-only diagnostic needs source identities, not a revalidation of
+    # every successful annotation and its taxonomy for every status request.
+    if library is None:
+        library = json.loads(LIBRARY.read_text(encoding='utf-8'))
+        if library.get('version') != 1 or not isinstance(library.get('papers'), dict):
+            raise ValueError('Invalid conference library for retry status')
+    state_path = PRIVATE / 'summary-state.json'
+    state = json.loads(state_path.read_text()) if state_path.exists() else {}
+    queues, due, held = Counter(), Counter(), Counter()
+    for key, receipt in state.items():
+        record = library['papers'].get(key)
+        if not record or receipt.get('status') != 'failed' or visible is not None and key not in visible:
+            continue
+        queue = receipt.get('retry_queue') or queue_for(receipt.get('error', 'unknown'))
+        queues[queue] += 1
+        (due if retry_allowed(record, receipt) else held)[queue] += 1
+    return {'failed_by_queue': dict(queues), 'eligible_now': dict(due), 'held': dict(held)}
+
+
+def release_retry(key: str, reason: str) -> dict:
+    """Operator-reviewed release; keep the quarantined receipt as audit evidence."""
+    if sys.platform != 'linux':
+        raise ValueError('retry releases must use the shared WSL/Linux runtime')
+    if not re.fullmatch(r'conf-[a-f0-9]{8,64}', key) or not reason.strip():
+        raise ValueError('a valid conference ID and a review reason are required')
+    with run_lock():
+        path = PRIVATE / 'summary-state.json'
+        state = json.loads(path.read_text())
+        receipt = state[key]
+        if receipt.get('status') != 'failed':
+            raise ValueError('only a failed receipt can be released')
+        stamp = utc_now()
+        audit = PRIVATE / 'retry-releases' / (key + '-' + stamp.replace(':', '-') + '.json')
+        atomic_write_json(audit, {'id': key, 'reason': reason.strip(), 'reviewed_at': stamp, 'previous': receipt})
+        receipt.update(next_retry_at=stamp, reviewed_release={'reason': reason.strip(), 'reviewed_at': stamp})
+        atomic_write_json(path, state)
+        return {'id': key, 'released': True, 'reviewed_at': stamp}
 
 
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     sub = parser.add_subparsers(dest='command', required=True)
+    sub.add_parser('retry-status', help='inspect failure queues and retry eligibility without inference')
+    release = sub.add_parser('retry-release', help='release one reviewed failure with a durable audit receipt')
+    release.add_argument('--id', required=True)
+    release.add_argument('--reason', required=True)
     screening = sub.add_parser('screen'); screening.add_argument('--apply', action='store_true')
     reviewing = sub.add_parser('review'); reviewing.add_argument('--limit', type=int, default=0)
     settings = rules()['conference_intake']
@@ -516,7 +620,9 @@ def main(argv=None) -> int:
         parser.error('limit and timeout must be positive')
     if args.command == 'review' and args.limit < 0:
         parser.error('review limit must be nonnegative')
-    if args.command == 'screen': result = screen(apply=args.apply)
+    if args.command == 'retry-status': result = retry_status()
+    elif args.command == 'retry-release': result = release_retry(args.id, args.reason)
+    elif args.command == 'screen': result = screen(apply=args.apply)
     elif args.command == 'review': result = review_titles(limit=args.limit)
     else: result = summarize(limit=args.limit, timeout=args.timeout, skip_failed=args.skip_failed,
                             excluded_ids=set(args.exclude_id))
