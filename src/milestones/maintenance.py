@@ -1,4 +1,4 @@
-"""Record and report monthly per-family milestone-model verification receipts."""
+"""Record and report half-month per-family milestone-model verification receipts."""
 
 from __future__ import annotations
 
@@ -293,7 +293,7 @@ def record_check(
 def _parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="python -m milestones.maintenance",
-        description="Report and record monthly model-family verification receipts.",
+        description="Report and record half-month model-family verification receipts.",
     )
     parser.add_argument("--catalog", type=Path, default=DEFAULT_CATALOG)
     parser.add_argument("--receipts-dir", type=Path, default=DEFAULT_RECEIPTS_DIR)
