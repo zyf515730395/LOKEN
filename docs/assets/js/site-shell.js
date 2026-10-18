@@ -13,7 +13,7 @@
   }
 
   function readStoredContextOpen(storage) {
-    return readStoredValue(storage, COLLAPSE_STORAGE_KEY) === "false";
+    return readStoredValue(storage, COLLAPSE_STORAGE_KEY) !== "true";
   }
 
   function writeStoredContextOpen(storage, open) {
@@ -90,6 +90,7 @@
       contextDrawer?.setAttribute("aria-hidden", String(!open));
       contextDrawer?.toggleAttribute("inert", !open);
       contextToggle?.setAttribute("aria-expanded", String(open));
+      contextToggle?.setAttribute("aria-label", open ? "收起二级导航" : "展开二级导航");
     }
 
     function setContextOpen(open, persist = false, returnFocus = false) {
@@ -125,14 +126,7 @@
       const activeLink = matchingLink || samePageLinks[0]
         || contextLinks.find((link) => link.classList.contains("is-active")) || contextLinks[0];
       setActiveContextLink(activeLink);
-      window.requestAnimationFrame(() => {
-        const strip = activeLink.closest(".context-strip");
-        if (!strip) return;
-        const linkRect = activeLink.getBoundingClientRect();
-        const stripRect = strip.getBoundingClientRect();
-        if (linkRect.left < stripRect.left) strip.scrollLeft -= stripRect.left - linkRect.left;
-        else if (linkRect.right > stripRect.right) strip.scrollLeft += linkRect.right - stripRect.right;
-      });
+      // The links retain their original filter attributes after moving into the sidebar.
     }
 
     setDrawer(false);
@@ -171,7 +165,6 @@
     contextDrawer?.addEventListener("click", (event) => {
       if (!event.target.closest?.("a")) return;
       if (drawerMedia.matches) setDrawer(false, true);
-      else setContextOpen(false, true, true);
     });
     navigationShell?.addEventListener("click", (event) => {
       if (event.target.closest?.("a")) setDrawer(false);
@@ -206,6 +199,19 @@
       }
     });
     document.addEventListener("keydown", (event) => {
+      if (event.key === "Tab" && drawerMedia.matches && body.classList.contains("sidebar-open")) {
+        const controls = [...navigationShell.querySelectorAll("a[href], button, summary, [tabindex]")]
+          .filter((control) => !control.hidden && control.tabIndex >= 0 && control.getClientRects().length);
+        const first = controls[0];
+        const last = controls[controls.length - 1];
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last?.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first?.focus();
+        }
+      }
       if (event.key !== "Escape" || event.defaultPrevented) return;
       if (drawerMedia.matches && body.classList.contains("sidebar-open")) {
         setDrawer(false, true);
@@ -213,6 +219,25 @@
         setContextOpen(false, true, true);
       }
     });
+
+    // Native details supplies keyboard semantics; remember each section's group state.
+    document.querySelectorAll(".secondary-nav-group").forEach((group) => {
+      const label = group.querySelector("summary")?.textContent || "";
+      const key = `loken-nav-group:${body.dataset.activeSection}:${label}`;
+      const stored = readStoredValue(window.localStorage, key);
+      if (stored !== null) group.open = stored !== "false";
+      group.addEventListener("toggle", () => {
+        try { window.localStorage?.setItem(key, String(group.open)); } catch (error) { /* unavailable */ }
+      });
+    });
+
+    const stickyHeader = document.querySelector(".section-sticky-header");
+    if (stickyHeader && window.ResizeObserver) {
+      const observer = new window.ResizeObserver(() => {
+        root.style.setProperty("--section-sticky-height", `${stickyHeader.getBoundingClientRect().height}px`);
+      });
+      observer.observe(stickyHeader);
+    }
 
     return { setContextOpen, setDrawer };
   }
