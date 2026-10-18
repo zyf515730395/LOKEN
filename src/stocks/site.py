@@ -36,12 +36,16 @@ def _style() -> str:
     return """<style>
 .stocks-page .stocks-intro{margin:0 0 2rem;max-width:72ch;color:var(--muted)}
 .stocks-page .stocks-calendar{border-bottom:1px solid var(--line);padding:clamp(2rem,3.5vw,3.25rem) clamp(1.25rem,2.6vw,2.5rem)}
-.stocks-page .stocks-heading{font-size:clamp(2rem,5vw,4rem);font-weight:500;margin:.5rem 0 1rem}
+.stocks-page .stocks-heading{font-size:clamp(2rem,3.5vw,3rem);font-weight:600;letter-spacing:-.045em;margin:.5rem 0 1rem;line-height:1.2}
 .stocks-page .stocks-meta{font-family:var(--label);font-size:.72rem;color:var(--muted);letter-spacing:.08em}
 .stocks-page .stocks-sources{font-size:.72rem;line-height:1.65;padding-left:1rem;color:var(--muted);overflow-wrap:anywhere}
 .stocks-page .stocks-monitors{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:2rem;border-top:1px solid var(--line);padding-top:1.5rem;margin-top:2rem}
 .stocks-page .stocks-monitor{min-width:0}.stocks-page .stocks-monitor h3{font-weight:500}
 .stocks-page .stocks-observations{font-size:.8rem}.stocks-page .stocks-note{font-size:.8rem;color:var(--muted);line-height:1.7}
+.stocks-page .stocks-observations h4{font-size:.78rem;font-weight:600;margin:1rem 0 .5rem}
+.stocks-page .stocks-observations dl{margin:0}.stocks-page .stocks-observation-row{display:grid;grid-template-columns:5.5em minmax(0,1fr);gap:.5rem;padding:.18rem 0;align-items:baseline}
+.stocks-page .stocks-observation-row dt{color:var(--muted)}.stocks-page .stocks-observation-row dd{margin:0;min-width:0}
+.stocks-page .stocks-observation-row dd>.stocks-sources{margin:.3rem 0 .5rem;padding-left:1rem;font-size:.66rem}
 .stocks-page .stocks-time-secondary{font-size:.72rem;margin:.4rem 0;color:var(--muted)}
 .stocks-page .stocks-timeline .timeline-release{min-width:270px;max-width:320px}.stocks-page .stocks-timeline h3{font-size:1.15rem}
 .stocks-page .stocks-timeline footer{margin-top:1rem}.stocks-page .stocks-unknown{color:var(--muted)}
@@ -53,7 +57,7 @@ def _observations(event: dict, config: dict) -> str:
     rows = []
     for observation in event.get("observations", []):
         label = config["indicators"][observation["indicator"]]["label"]
-        values = "".join(f'<dt>{name}</dt><dd>{render_evidence(observation.get(key))}</dd>'
+        values = "".join(f'<div class="stocks-observation-row"><dt>{name}</dt><dd>{render_evidence(observation.get(key))}</dd></div>'
                          for key, name in (("actual", "公布值"), ("consensus", "一致预期"), ("previous", "前值")))
         rows.append(f'<div class="stocks-observations"><h4>{escaped(label)}</h4><dl>{values}</dl></div>')
     return "".join(rows)
@@ -110,10 +114,11 @@ def outlook_period(document: dict, config: dict) -> dict:
         content += '<p>已核验预期：' + render_evidence(section.get("expectation"), "暂无可核验一致预期") + '</p>'
         if section.get("note"):
             content += f'<p>{escaped(section["note"])}</p>'
+        content += f'<div class="outlook-table-wrap" tabindex="0" role="region" aria-label="{escaped(label)}情境对照表"><table class="outlook-scenarios"><caption class="visually-hidden">{escaped(label)}：条件假设与可能影响</caption><thead><tr><th scope="col">情境</th><th scope="col">条件</th><th scope="col">对美股的可能影响</th></tr></thead><tbody>'
         for scenario, title in names.items():
             item = section["scenarios"][scenario]
-            content += f'<h3>{title} · 条件假设</h3><p><strong>若</strong> {escaped(item["condition"])}</p><p>{escaped(item["implication"])}</p>'
-        content += render_sources(section["sources"])
+            content += f'<tr><th scope="row">{title}</th><td>若 {escaped(item["condition"])}</td><td>{escaped(item["implication"])}</td></tr>'
+        content += '</tbody></table></div>' + render_sources(section["sources"])
         sections.append({"id": key, "label": label, "html": content})
     return {"id": document["period"], "date": document["period"], "title": document["title"],
             "subtitle": f'{document["week_start"]} — {document["week_end"]} · 周一至周日',
