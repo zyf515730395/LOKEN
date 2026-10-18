@@ -7,6 +7,58 @@
   const article = reader.querySelector('[data-periodical-article]');
   const toc = reader.querySelector('[data-periodical-toc]');
   const status = reader.querySelector('[data-periodical-status]');
+  const calendar = reader.querySelector('[data-calendar-grid]');
+  const dateInput = reader.querySelector('[data-period-date]');
+  const datePanel = reader.querySelector('.periodical-date-panel');
+  const calendarToggle = reader.querySelector('[data-calendar-toggle]');
+  // Calendar arithmetic uses UTC date-only values so browser timezones cannot
+  // move a publication into the previous day or change Monday-Sunday ranges.
+  const dateValue = value => new Date(`${value}T00:00:00Z`);
+  const dateKey = value => value.toISOString().slice(0, 10);
+  const shiftDate = (value, days) => { const result = dateValue(value); result.setUTCDate(result.getUTCDate() + days); return dateKey(result); };
+  const range = period => [period.date, reader.dataset.kind === 'weekly' ? shiftDate(period.date, 6) : period.date];
+  const periodForDate = value => catalog.find(period => { const [start, end] = range(period); return value >= start && value <= end; });
+  const chronological = [...catalog].sort((a, b) => a.date.localeCompare(b.date));
+  let calendarMonth = (catalog[0]?.date || new Date().toISOString().slice(0, 10)).slice(0, 7);
+  const setCalendarOpen = open => {
+    datePanel.classList.toggle('calendar-open', open);
+    calendarToggle.setAttribute('aria-expanded', String(open));
+    calendarToggle.textContent = open ? '收起月历' : '展开月历';
+  };
+  const drawCalendar = (selected, resetMonth = false) => {
+    const [start, end] = selected ? range(selected) : ['', ''];
+    if (selected && resetMonth) calendarMonth = end.slice(0, 7);
+    const first = dateValue(`${calendarMonth}-01`);
+    const year = first.getUTCFullYear(), month = first.getUTCMonth();
+    reader.querySelector('[data-calendar-month]').textContent = `${year} 年 ${month + 1} 月`;
+    const monthStart = `${calendarMonth}-01`;
+    const earliest = chronological[0]?.date || monthStart;
+    const latest = chronological.length ? range(chronological.at(-1))[1] : monthStart;
+    reader.querySelector('[data-month-prev]').disabled = calendarMonth <= earliest.slice(0, 7);
+    reader.querySelector('[data-month-next]').disabled = calendarMonth >= latest.slice(0, 7);
+    const fragment = document.createDocumentFragment();
+    for (let i = 0; i < (first.getUTCDay() + 6) % 7; i++) {
+      const gap = document.createElement('span'); gap.className = 'periodical-calendar-gap'; gap.setAttribute('aria-hidden', 'true'); fragment.append(gap);
+    }
+    const days = new Date(Date.UTC(year, month + 1, 0)).getUTCDate();
+    for (let day = 1; day <= days; day++) {
+      const key = `${calendarMonth}-${String(day).padStart(2, '0')}`;
+      const period = periodForDate(key);
+      const button = document.createElement('button');
+      button.type = 'button'; button.textContent = day; button.dataset.calendarDay = key;
+      button.disabled = !period; button.setAttribute('aria-label', `${key}${period ? ' · 查看期刊' : ' · 暂无期刊'}`);
+      button.setAttribute('aria-pressed', String(key === end));
+      button.classList.toggle('is-in-range', !!selected && key >= start && key <= end);
+      fragment.append(button);
+    }
+    calendar.replaceChildren(fragment);
+    const index = selected ? chronological.findIndex(period => period.id === selected.id) : -1;
+    reader.querySelector('[data-period-prev]').disabled = index <= 0;
+    reader.querySelector('[data-period-next]').disabled = index < 0 || index >= chronological.length - 1;
+    dateInput.min = earliest; dateInput.max = latest; dateInput.value = end;
+    reader.querySelector('[data-period-day]').textContent = end ? end.slice(-2) : '—';
+    reader.querySelector('[data-period-stamp]').textContent = end ? `${end.slice(0, 4)} / ${end.slice(5, 7)}\n${reader.dataset.kind === 'weekly' ? '周一至周日' : '发布日'}` : '暂无期刊';
+  };
   let request = 0;
   let observer;
   const watchSections = () => {
@@ -67,8 +119,10 @@
       reader.querySelector('[data-periodical-subtitle]').textContent = period.subtitle || '';
       reader.querySelector('[data-periodical-note]').textContent = (period.metadata || {}).note || '';
       article.dataset.periodId = period.id;
-      article.scrollTop = 0;
+      article.scrollTo({top: 0, behavior: 'instant'});
       select.value = period.id;
+      drawCalendar(period, true);
+      setCalendarOpen(false);
       if (updateURL) {
         const url = new URL(location.href);
         url.searchParams.set('period', period.id);
@@ -79,6 +133,7 @@
     } catch (_) {
       if (revision !== request) return;
       select.value = article.dataset.periodId;
+      drawCalendar(catalog.find(item => item.id === article.dataset.periodId));
       status.textContent = '本期加载失败，请重新选择日期重试。';
     }
   };
@@ -88,11 +143,45 @@
     const target = document.getElementById(link.hash.slice(1));
     if (!target || !article.contains(target)) return;
     event.preventDefault();
-    article.scrollTo({top: target.offsetTop - article.offsetTop, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'});
+    const distance = target.getBoundingClientRect().top - article.getBoundingClientRect().top;
+    const immediate = matchMedia('(prefers-reduced-motion: reduce)').matches || Math.abs(distance) > article.clientHeight * 2;
+    article.scrollTo({top: article.scrollTop + distance, behavior: immediate ? 'instant' : 'smooth'});
     target.setAttribute('tabindex', '-1');
     target.focus({preventScroll: true});
   });
   select.addEventListener('change', () => choose(select.value, true));
+  calendar.addEventListener('click', event => {
+    const button = event.target.closest('[data-calendar-day]');
+    const period = button && !button.disabled && periodForDate(button.dataset.calendarDay);
+    if (period) choose(period.id, true);
+  });
+  dateInput.addEventListener('change', () => {
+    const period = periodForDate(dateInput.value);
+    if (period) choose(period.id, true);
+    else {
+      status.textContent = '该日期暂无期刊，请选择月历中带标记的日期。';
+      const current = catalog.find(item => item.id === article.dataset.periodId);
+      dateInput.value = current ? range(current)[1] : '';
+    }
+  });
+  for (const [name, step] of [['prev', -1], ['next', 1]]) {
+    reader.querySelector(`[data-month-${name}]`).addEventListener('click', () => {
+      const date = dateValue(`${calendarMonth}-01`); date.setUTCMonth(date.getUTCMonth() + step);
+      calendarMonth = dateKey(date).slice(0, 7);
+      drawCalendar(catalog.find(item => item.id === article.dataset.periodId));
+    });
+    reader.querySelector(`[data-period-${name}]`).addEventListener('click', () => {
+      const index = chronological.findIndex(item => item.id === article.dataset.periodId);
+      const period = chronological[index + step];
+      if (period) choose(period.id, true);
+    });
+  }
+  calendarToggle.addEventListener('click', () => setCalendarOpen(calendarToggle.getAttribute('aria-expanded') !== 'true'));
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && datePanel.classList.contains('calendar-open')) { setCalendarOpen(false); calendarToggle.focus(); }
+  });
+  document.addEventListener('click', event => { if (!datePanel.contains(event.target)) setCalendarOpen(false); });
+  drawCalendar(catalog.find(item => item.id === article.dataset.periodId), true);
   watchSections();
   const requested = new URL(location.href).searchParams.get('period');
   if (requested && requested !== article.dataset.periodId) choose(requested, false);
