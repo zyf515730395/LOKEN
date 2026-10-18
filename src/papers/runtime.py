@@ -31,6 +31,7 @@ GIT_PUSH_RETRY_SECONDS = 60
 GIT_SSH_COMMAND = 'ssh -o BatchMode=yes -o ConnectTimeout=20 -o ServerAliveInterval=15 -o ServerAliveCountMax=4'
 PENDING_PUSH = PRIVATE / 'pending-runtime-push.json'
 DAILY_STATE = PRIVATE / 'daily-all-state.json'
+CONFERENCE_STATE = PRIVATE / 'conference-backlog-state.json'
 
 
 class RetryableGitPush(RuntimeError):
@@ -251,6 +252,18 @@ def in_weekend_window(now=None):
 
 
 def execute_daily(args, model, common, expected_head):
+    """Recover publication, then catch up the newest arXiv period before backlog."""
+    from papers.scheduler import periods
+    while True:
+        result = _execute_daily_pass(args, model, common, expected_head)
+        state = json.loads(DAILY_STATE.read_text())
+        saved_period = state.get('arxiv_period', state['started_at'][:10])
+        if saved_period >= periods(datetime.now(ZONE))['daily']:
+            return result
+        expected_head = git('rev-parse', 'HEAD', capture=True)
+
+
+def _execute_daily_pass(args, model, common, expected_head):
     """Publish arXiv before conferences; retain stage progress across interruption."""
     from papers.candidate_ledger import atomic_write_json
     from papers.conference_intake import PRIVATE as CONFERENCE_PRIVATE, summarize
@@ -259,9 +272,18 @@ def execute_daily(args, model, common, expected_head):
     state = json.loads(DAILY_STATE.read_text()) if DAILY_STATE.exists() else {}
     if state and state.get('phase') not in {'arxiv', 'arxiv_publish', 'conference', 'conference_publish', 'complete'}:
         raise RuntimeError('invalid daily stage checkpoint; preserve it for inspection')
+    from papers.scheduler import periods
+    period = periods(datetime.now(ZONE))['daily']
+    if (state.get('phase') == 'conference'
+            and state.get('arxiv_period', state['started_at'][:10]) < period):
+        # Old conference work must not suppress a newer daily arXiv pass.
+        atomic_write_json(CONFERENCE_STATE, state)
+        history = PRIVATE / 'daily-runs' / (state['started_at'].replace(':', '-') + '-deferred.json')
+        atomic_write_json(history, {**state, 'status': 'deferred'})
+        state = {}
     if not state or state.get('phase') == 'complete':
         state = {'started_at': datetime.now(ZONE).isoformat(), 'phase': 'arxiv',
-                 'limit': args.limit, 'arxiv_exit': 0}
+                 'limit': args.limit, 'arxiv_exit': 0, 'arxiv_period': period}
         atomic_write_json(DAILY_STATE, state)
     if state['limit'] != args.limit:
         raise RuntimeError('resume daily with its original limit; preserve the active checkpoint')
@@ -277,18 +299,41 @@ def execute_daily(args, model, common, expected_head):
         expected_head = git('rev-parse', 'HEAD', capture=True)
         baseline_path = CONFERENCE_PRIVATE / 'summary-state.json'
         baseline = json.loads(baseline_path.read_text()) if baseline_path.exists() else {}
+        backlog = json.loads(CONFERENCE_STATE.read_text()) if CONFERENCE_STATE.exists() else {}
         state.update(phase='conference', arxiv_sha=expected_head,
-                     conference_baseline={k: v.get('attempts', 0) for k, v in baseline.items()})
+                     conference_baseline=backlog.get('conference_baseline',
+                         {k: v.get('attempts', 0) for k, v in baseline.items()}))
         atomic_write_json(DAILY_STATE, state)
         print(f'arXiv stage published: {expected_head}; starting conference queue', flush=True)
     if state['phase'] == 'conference':
+        if state.get('arxiv_period', state['started_at'][:10]) < periods(datetime.now(ZONE))['daily']:
+            # The arXiv stage or its recovered publication crossed a daily boundary.
+            # Hand back to execute_daily before admitting any old conference work.
+            return 4
+        if datetime.now(ZONE).weekday() >= 5:
+            atomic_write_json(CONFERENCE_STATE, state)
+            state.update(phase='complete', conference_deferred='weekend',
+                         completed_at=datetime.now(ZONE).isoformat())
+            atomic_write_json(DAILY_STATE, state)
+            archive = PRIVATE / 'daily-runs' / (state['started_at'].replace(':', '-') + '.json')
+            atomic_write_json(archive, state)
+            return 3 if state['arxiv_exit'] else 0
         baseline = state['conference_baseline']
         receipts_path = CONFERENCE_PRIVATE / 'summary-state.json'
         receipts = json.loads(receipts_path.read_text()) if receipts_path.exists() else {}
         excluded = {k for k, v in receipts.items() if v.get('attempts', 0) > baseline.get(k, 0)}
         remaining_limit = None if args.limit is None else max(0, args.limit - len(excluded))
+        from datetime import timedelta
+        now = datetime.now(ZONE)
+        saved_period = state.get('arxiv_period', state['started_at'][:10])
+        next_daily = datetime.fromisoformat(saved_period).replace(
+            hour=18, tzinfo=ZONE) + timedelta(days=1)
+        seconds = min(120 * 60, (next_daily - now).total_seconds())
+        if seconds <= 0:
+            return 4
         report = summarize(limit=remaining_limit, timeout=args.timeout, model=model,
-                           runtime_owned=True, excluded_ids=excluded)
+                           runtime_owned=True, excluded_ids=excluded,
+                           deadline=time.monotonic() + seconds)
         receipts = json.loads(receipts_path.read_text()) if receipts_path.exists() else {}
         attempted = {k: v for k, v in receipts.items() if v.get('attempts', 0) > baseline.get(k, 0)}
         # Include failures from an interrupted portion, not just the latest process.
@@ -297,9 +342,18 @@ def execute_daily(args, model, common, expected_head):
                      conference_attempts=list(attempted), conference_failed=failed)
         atomic_write_json(DAILY_STATE, state)
     publish('daily conferences', expected_head=expected_head)
+    counts = state.get('conference_report', {}).get('counts', {})
+    if counts.get('yielded_to_calendar') or counts.get('yielded_to_deadline'):
+        state.update(phase='conference',
+                     conference_deferred='weekend' if counts.get('yielded_to_calendar') else 'time_slice',
+                     conference_sha=git('rev-parse', 'HEAD', capture=True))
+        atomic_write_json(DAILY_STATE, state)
+        atomic_write_json(CONFERENCE_STATE, state)
+        return 4
     state.update(phase='complete', conference_sha=git('rev-parse', 'HEAD', capture=True),
                  completed_at=datetime.now(ZONE).isoformat())
     atomic_write_json(DAILY_STATE, state)
+    CONFERENCE_STATE.unlink(missing_ok=True)
     archive_path = PRIVATE / 'daily-runs' / (state['started_at'].replace(':','-') + '.json')
     atomic_write_json(archive_path, state)
     partial = (state['arxiv_exit'] or state.get('conference_failed')

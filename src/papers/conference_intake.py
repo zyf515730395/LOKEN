@@ -387,7 +387,7 @@ def conference_remaining(records, visible: set[str]) -> dict[str, int]:
 
 def summarize(*, limit: int | None = 20, timeout: float = 900, model: str | None = None,
               runtime_owned: bool = False, skip_failed: bool = False,
-              excluded_ids: set[str] | None = None) -> dict:
+              excluded_ids: set[str] | None = None, deadline: float | None = None) -> dict:
     from papers.conference_sources import acquire_conference_paper
     from papers.runtime import model_service
     from papers.summaries.summarizer import summarize_paper
@@ -399,6 +399,17 @@ def summarize(*, limit: int | None = 20, timeout: float = 900, model: str | None
     attempted = set(excluded_ids or ())
     completed = 0
     while limit is None or completed < limit:
+        if deadline is not None:
+            import time
+            if time.monotonic() >= deadline:
+                counts['yielded_to_deadline'] += 1
+                break
+        if runtime_owned:
+            from datetime import datetime
+            from zoneinfo import ZoneInfo
+            if datetime.now(ZoneInfo('Asia/Shanghai')).weekday() >= 5:
+                counts['yielded_to_calendar'] += 1
+                break
         with (nullcontext(True) if runtime_owned else summary_slot()) as available:
             if not available:
                 counts['yielded_to_runtime'] += 1
