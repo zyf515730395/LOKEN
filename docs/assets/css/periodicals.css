@@ -1,20 +1,44 @@
 /* Periodicals share the site's original palette and navigation shell. */
 body.periodical-page { height: 100dvh; overflow: hidden; }
 .periodical-page .page-content { height: 100dvh; min-height: 0; padding: var(--utility-height) 0 0; overflow: hidden; }
-.periodical-reader { height: 100%; display: grid; grid-template-columns: minmax(0, 1fr) 15rem; grid-template-rows: auto minmax(0, 1fr); position: relative; }
-.periodical-heading { grid-column: 1; grid-row: 1; padding: 2.25rem 3rem 1.5rem; border-bottom: 1px solid var(--line); background: var(--canvas); }
-.periodical-kicker { font: .68rem var(--mono); letter-spacing: .1em; color: var(--muted); margin: 0 0 .65rem; }
-.periodical-heading h1 { font-size: clamp(1.65rem, 3vw, 2.5rem); letter-spacing: -.045em; margin: 0 0 .6rem; line-height: 1.1; }
+.periodical-reader { height: 100%; display: grid; grid-template-columns: minmax(0, 1fr) 16.75rem; grid-template-rows: auto minmax(0, 1fr); column-gap: 2rem; padding: 0 2.25rem; position: relative; }
+.periodical-heading { grid-column: 1; grid-row: 1; padding: 2rem 0 1.5rem; border-bottom: 1px solid var(--line); }
+.periodical-kicker { font: .68rem var(--mono); letter-spacing: .1em; color: var(--accent); margin: 0 0 .85rem; }
+.periodical-heading h1 { font-size: clamp(2rem, 3.5vw, 3.5rem); font-weight:600; letter-spacing: -.055em; margin: 0 0 1rem; line-height: 1.15; }
 .periodical-heading h2 { font-size: .93rem; line-height: 1.5; margin: 0 0 .35rem; font-weight: 500; }
 .periodical-heading p:not(.periodical-kicker) { margin: .2rem 0 0; color: var(--muted); font-size: .78rem; line-height: 1.6; }
-.periodical-tools { grid-column: 2; grid-row: 1 / -1; padding: 2.3rem 1.35rem 1.5rem; border-left: 1px solid var(--line); display: flex; flex-direction: column; min-height: 0; background: var(--surface); }
-.periodical-tools label { font-size: .73rem; font-weight: 600; margin-bottom: .6rem; }
-.periodical-tools select { width: 100%; min-height: 2.6rem; border: 1px solid var(--line); padding: .6rem .5rem; font: .75rem var(--sans); color: var(--text); background: var(--canvas); border-radius: 0; }
-.periodical-archive-count { font: .67rem var(--mono); color: var(--muted); margin: .65rem 0 1rem; }
-.periodical-toc { margin-top: auto; display: grid; gap: .2rem; overflow: auto; max-height: 60%; padding-top: 1rem; border-top: 1px solid var(--line); }
+.periodical-tools { grid-column: 2; grid-row: 1 / -1; padding: 2rem 0 1.5rem 1.5rem; border-left: 1px solid var(--line); display: flex; flex-direction: column; min-height: 0; }
+.periodical-date-panel { flex: 0 0 auto; position:relative; border-bottom:1px solid var(--line); padding-bottom:1.1rem; }
+.periodical-tool-label { color:var(--muted);font:.65rem var(--sans);letter-spacing:.04em;margin:0 0 1rem; }
+.periodical-date-caption { display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem; }
+.periodical-date-caption strong { font:2.75rem/1 var(--sans);letter-spacing:-.06em; }
+.periodical-date-caption span { font:.63rem/1.8 var(--mono);color:var(--accent);text-align:right;white-space:pre-line; }
+.periodical-month-nav { display:flex;align-items:center;justify-content:space-between;margin-bottom:.5rem;font-size:.8rem; }
+.periodical-tools button { background:transparent;color:var(--text);border:1px solid var(--line);border-radius:3px; }
+.periodical-tools button:disabled { opacity:.35;cursor:default; }
+.periodical-tools button:focus-visible,.periodical-tools input:focus-visible { outline:2px solid var(--accent);outline-offset:2px; }
+.periodical-month-nav button { width:1.8rem;height:1.8rem;border:0;font-size:1.15rem; }
+.periodical-weekdays,.periodical-calendar-grid { display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:3px;text-align:center; }
+.periodical-weekdays { font:.6rem var(--sans);color:var(--muted);padding:.4rem 0; }
+.periodical-calendar-grid button,.periodical-calendar-gap { aspect-ratio:1;min-height:1.7rem; }
+.periodical-calendar-grid button { border:0;padding:0;position:relative;font:.68rem var(--mono); }
+.periodical-calendar-grid button:not(:disabled)::after { content:'';position:absolute;width:3px;height:3px;border-radius:50%;background:var(--accent);bottom:3px;left:calc(50% - 1.5px); }
+.periodical-calendar-grid button.is-in-range { background:var(--accent-soft);color:var(--accent); }
+.periodical-calendar-grid button[aria-pressed=true] { background:var(--accent);color:var(--canvas); }
+.periodical-calendar-grid button[aria-pressed=true]::after { background:currentColor; }
+.periodical-calendar-hint { color:var(--muted);font-size:.6rem;margin:.6rem 0 .9rem; }
+.periodical-switch { display:flex;align-items:center;justify-content:space-between;gap:.5rem; }
+.periodical-switch button { padding:.3rem .5rem;font-size:.65rem; }
+.periodical-date-jump { display:flex;align-items:center;gap:.5rem;font-size:.65rem;color:var(--muted);margin-top:.75rem; }
+.periodical-date-jump input { flex:1;min-width:0;width:100%;border:1px solid var(--line);border-radius:3px;padding:.35rem;background:var(--canvas);color:var(--text);font:.65rem var(--mono); }
+.periodical-archive { margin-top:.6rem;font-size:.65rem;color:var(--muted); }
+.periodical-archive select { width:100%;min-height:2rem;margin-top:.5rem;border:1px solid var(--line);background:var(--canvas);color:var(--text);font:.7rem var(--sans); }
+.calendar-toggle { display:none; }
+.periodical-toc-heading { margin:1.4rem 0 .65rem; }
+.periodical-toc { display: grid; gap: .2rem; overflow: auto; min-height:0; align-content:start; }
 .periodical-toc a { padding: .6rem .4rem; font-size: .76rem; color: var(--muted); text-decoration: none; border-left: 2px solid transparent; }
 .periodical-toc a:hover, .periodical-toc a[aria-current] { color: var(--accent); border-left-color: var(--accent); background: var(--accent-soft); }
-.periodical-article { grid-column: 1; grid-row: 2; overflow-y: auto; overscroll-behavior: contain; min-height: 0; padding: 2rem 3rem 5rem; scroll-behavior: smooth; scroll-padding-top: 1.5rem; outline-offset: -3px; }
+.periodical-article { grid-column: 1; grid-row: 2; overflow-y: auto; overscroll-behavior: contain; min-height: 0; padding: 1.5rem 1rem 4rem 0; scroll-behavior: smooth; scroll-padding-top: 1.5rem; outline-offset: -3px; }
 .periodical-section { max-width: 58rem; margin: 0 auto 3.5rem; }
 .periodical-section > h2 { border-bottom: 1px solid var(--line); padding-bottom: .9rem; font: 600 1.05rem var(--sans); letter-spacing: -.02em; }
 .digest-paper { border-bottom: 1px solid var(--row-line); padding: 1.25rem 0 1.7rem; }
@@ -30,25 +54,60 @@ body.periodical-page { height: 100dvh; overflow: hidden; }
 .digest-summary a { color: var(--accent); }
 .digest-summary-missing, .periodical-empty { color: var(--muted); font-size: .85rem; line-height: 1.8; }
 .periodical-status { position: absolute; left: 1rem; bottom: .5rem; margin: 0; font-size: .73rem; color: var(--muted); background: var(--canvas); }
-@media (max-width: 1050px) {
-  .periodical-reader { grid-template-columns: minmax(0, 1fr) 12rem; }
-  .periodical-heading { padding: 1.6rem 1.5rem 1rem; }
-  .periodical-article { padding: 1.2rem 1.5rem 4rem; }
-  .periodical-tools { padding: 1.6rem .85rem 1rem; }
+.periodical-article .periodical-note,.periodical-article .stocks-sources { color:var(--muted);font-size:.73rem;line-height:1.8; }
+.periodical-article p { font-size:.88rem;line-height:1.9; }
+.periodical-article .stocks-sources { padding-left:1rem;overflow-wrap:anywhere; }
+.outlook-table-wrap { max-width:100%;overflow-x:auto;margin:1.25rem 0;outline-offset:3px; }
+.outlook-scenarios { width:100%;border-collapse:collapse;table-layout:fixed;font-size:.85rem;line-height:1.85; }
+.outlook-scenarios th,.outlook-scenarios td { border-bottom:1px solid var(--line);padding:1rem .85rem;vertical-align:top;text-align:left;overflow-wrap:anywhere; }
+.outlook-scenarios thead th { font-size:.7rem;color:var(--muted);font-weight:500;background:var(--surface-muted);border-top:1px solid var(--line); }
+.outlook-scenarios th:first-child { width:6.5rem; }
+.outlook-scenarios tbody th { font-size:.78rem;font-weight:500;color:var(--accent); }
+@media (min-width:701px) and (max-height:750px) {
+  .periodical-tools { padding-top:1rem;padding-bottom:.75rem; }
+  .periodical-date-caption { margin-bottom:.5rem; }
+  .periodical-date-caption strong { font-size:2rem; }
+  .periodical-tool-label { margin-bottom:.6rem; }
+  .periodical-calendar-grid button,.periodical-calendar-gap { aspect-ratio:auto;min-height:1.35rem;height:1.35rem; }
+  .periodical-calendar-hint { margin:.35rem 0 .5rem; }
+  .periodical-date-panel { padding-bottom:.6rem; }
+  .periodical-toc-heading { margin-top:.75rem; }
+  .periodical-toc a { padding:.4rem; }
 }
-@media (max-width: 700px) {
-  .periodical-reader { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto auto minmax(0, 1fr); }
-  .periodical-heading { grid-column: 1; grid-row: 1; padding: 1.2rem 1rem .7rem; }
-  .periodical-heading h1 { font-size: 1.7rem; }
+@media (max-width: 1050px) {
+  .periodical-reader { grid-template-columns: minmax(0, 1fr) 13.5rem;column-gap:1.25rem;padding-inline:1.5rem; }
+  .periodical-heading { padding: 1.6rem 0 1rem; }
+  .periodical-tools { padding: 1.6rem 0 1rem 1rem; }
+  .outlook-scenarios th,.outlook-scenarios td { padding:.75rem .6rem; }
+}
+@media (max-width: 700px), (max-height: 540px) {
+  .periodical-reader { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto auto minmax(0, 1fr);padding:0 1rem; }
+  .periodical-heading { grid-column: 1; grid-row: 1; padding: 1.2rem 0 .7rem; }
+  .periodical-heading h1 { font-size: 1.9rem;margin-bottom:.5rem; }
   .periodical-heading .periodical-note { max-height: 2.7em; overflow: auto; }
-  .periodical-tools { grid-column: 1; grid-row: 2; padding: .6rem 1rem; border-left: 0; border-bottom: 1px solid var(--line); display: grid; grid-template-columns: auto minmax(0, 1fr); gap: .45rem .6rem; align-items: center; }
-  .periodical-tools label { margin: 0; }
-  .periodical-tools select { min-height: 2.2rem; padding: .3rem; }
-  .periodical-archive-count { display: none; }
+  .periodical-tools { grid-column: 1; grid-row: 2; padding: .7rem 0; border-left: 0; border-bottom: 1px solid var(--line); display: grid;gap:.5rem; }
+  .periodical-date-panel { display:grid;grid-template-columns:auto minmax(0,1fr);gap:.5rem .75rem;border:0;padding:0; }
+  .periodical-date-panel>.periodical-tool-label,.periodical-date-caption,.periodical-switch,.periodical-toc-heading { display:none; }
+  .calendar-toggle { display:block;padding:.35rem .5rem;font-size:.7rem; }
+  .periodical-date-jump { margin:0; }
+  .periodical-archive { display:none; }
+  .periodical-calendar { display:none;position:absolute;right:0;top:calc(100% + .5rem);width:min(20rem,calc(100vw - 2rem));max-height:calc(100dvh - 24rem);overflow-y:auto;overscroll-behavior:contain;padding:1rem;z-index:20;background:var(--surface);border:1px solid var(--line);box-shadow:var(--shadow); }
+  .periodical-date-panel.calendar-open .periodical-calendar { display:block; }
   .periodical-toc { grid-column: 1 / -1; display: flex; max-height: none; padding: 0; border: 0; margin: 0; overflow-x: auto; }
   .periodical-toc a { white-space: nowrap; padding: .35rem .5rem; border-left: 0; border-bottom: 2px solid transparent; }
   .periodical-toc a:hover, .periodical-toc a[aria-current] { border-left: 0; border-bottom-color: var(--accent); }
-  .periodical-article { grid-column: 1; grid-row: 3; padding: 1rem 1rem 4rem; }
+  .periodical-article { grid-column: 1; grid-row: 3; padding: 1rem 0 4rem; }
+  .outlook-scenarios { min-width:33rem; }
+}
+@media (max-height:540px) {
+  .periodical-heading { padding:.5rem 0; }
+  .periodical-kicker { display:none; }
+  .periodical-heading h1 { font-size:1.5rem;margin-bottom:.2rem; }
+  .periodical-heading h2 { font-size:.75rem;margin-bottom:0; }
+  .periodical-heading p:not(.periodical-kicker) { font-size:.65rem;line-height:1.4; }
+  .periodical-heading .periodical-note { max-height:1.4em; }
+  .periodical-tools { padding:.4rem 0;gap:.25rem; }
+  .periodical-calendar { position:fixed;left:50%;top:50%;right:auto;transform:translate(-50%,-50%);max-height:calc(100dvh - 2rem); }
 }
 @media (prefers-reduced-motion: reduce) { .periodical-article { scroll-behavior: auto; } }
 @media (max-width: 600px) { .periodical-page .page-content { padding-top: 7.25rem; } }

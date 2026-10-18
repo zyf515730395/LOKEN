@@ -61,19 +61,31 @@ def render_periodical_page(
     <p class="periodical-note" data-periodical-note>{html.escape(str(note))}</p>
   </header>
   <aside class="periodical-tools" aria-label="期刊工具">
-    <label for="periodical-date">选择{'周次' if kind == 'weekly' else '日期'}</label>
-    <select id="periodical-date" data-periodical-select {'disabled' if not periods else ''}>{options}</select>
-    <p class="periodical-archive-count">{len(periods)} 期归档</p>
+    <section class="periodical-date-panel" aria-label="选择期刊日期">
+      <p class="periodical-tool-label">{'本周回顾' if kind == 'weekly' else '本期归档'} / 选择日期</p>
+      <div class="periodical-date-caption"><strong data-period-day>—</strong><span data-period-stamp></span></div>
+      <button type="button" class="calendar-toggle" data-calendar-toggle aria-expanded="false" aria-controls="periodical-calendar">展开月历</button>
+      <div class="periodical-calendar" id="periodical-calendar">
+        <div class="periodical-month-nav"><button type="button" data-month-prev aria-label="上个月">‹</button><strong data-calendar-month aria-live="polite"></strong><button type="button" data-month-next aria-label="下个月">›</button></div>
+        <div class="periodical-weekdays" aria-hidden="true"><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span><span>日</span></div>
+        <div class="periodical-calendar-grid" data-calendar-grid aria-label="选择有期刊的日期"></div>
+        <p class="periodical-calendar-hint">{'点击日期查看所在周，高亮为周一至周日。' if kind == 'weekly' else '点击带标记日期切换已发布期刊。'}</p>
+      </div>
+      <div class="periodical-switch"><button type="button" data-period-prev>← 上一期</button><button type="button" data-period-next>下一期 →</button></div>
+      <label class="periodical-date-jump">跳转<input type="date" data-period-date aria-label="跳转到期刊日期" {'disabled' if not periods else ''}></label>
+      <details class="periodical-archive"><summary>{len(periods)} 期归档</summary><label for="periodical-date" class="visually-hidden">选择期刊</label><select id="periodical-date" data-periodical-select {'disabled' if not periods else ''}>{options}</select></details>
+    </section>
+    <p class="periodical-tool-label periodical-toc-heading">本期目录</p>
     <nav class="periodical-toc" aria-label="本期目录" data-periodical-toc>{toc}</nav>
   </aside>
   <article class="periodical-article" data-periodical-article tabindex="0" aria-label="{html.escape(title, quote=True)}正文" data-period-id="{html.escape(selected_id, quote=True)}">{body}</article>
   <p class="periodical-status" role="status" aria-live="polite" data-periodical-status></p>
 </section>
 <script type="application/json" id="periodical-catalog">{payload}</script>
-<script src="{root}assets/js/periodicals.js?v=1" defer></script>'''
+<script src="{root}assets/js/periodicals.js?v=2" defer></script>'''
     return render_site_page(
         output_file=output_file, output_root=output_root, active_section=active_section,
         page_title=f'{title} · LOKEN', meta_description=title, main_content=main,
         active_subtopic=active_subtopic, body_class='periodical-page',
-        head_content=f'<link rel="stylesheet" href="{root}assets/css/periodicals.css?v=1">\n',
+        head_content=f'<link rel="stylesheet" href="{root}assets/css/periodicals.css?v=2">\n',
     )
