@@ -14,8 +14,8 @@ MAX_CHUNK_CHARS = 18_000
 MAX_CHUNKS = 32
 
 
-def build_chunks(document: PaperDocument) -> tuple[str, ...]:
-    introduction = extract_introduction(document)
+def build_chunks(document: PaperDocument, *, evidence_text: str | None = None) -> tuple[str, ...]:
+    introduction = extract_introduction(document) if evidence_text is None else evidence_text
     chunks = [
         introduction[index : index + MAX_CHUNK_CHARS]
         for index in range(0, len(introduction), MAX_CHUNK_CHARS)
@@ -27,7 +27,7 @@ def build_chunks(document: PaperDocument) -> tuple[str, ...]:
     return tuple(chunks)
 
 
-def map_messages(title: str, chunk: str) -> tuple[dict[str, str], ...]:
+def map_messages(title: str, chunk: str, *, evidence_basis: str = 'introduction') -> tuple[dict[str, str], ...]:
     return (
         {
             "role": "system",
@@ -37,7 +37,7 @@ def map_messages(title: str, chunk: str) -> tuple[dict[str, str], ...]:
                 "缺少证据时明确说明片段未提供，不得补充外部事实。"
             ),
         },
-        {"role": "user", "content": f"论文标题：{title}\n\n论文引言片段：\n{chunk}"},
+        {"role": "user", "content": f"论文标题：{title}\n\n材料类型：{evidence_basis}；仅依据以下实际原文，缺失部分明确保留限定。\n论文原文片段：\n{chunk}"},
     )
 
 
@@ -56,7 +56,7 @@ def reduce_messages(
         {
             "role": "system",
             "content": (
-                "合并同一篇论文的分片结论。去重、消除片段局限提示，只保留有证据的共同结论。"
+                "合并同一篇论文的分片结论。去重，只保留有证据的结论；保留原文未提供证据的限定，不得将未知改写成已知。"
                 "输出严格 JSON，字段只能是 one_sentence、problem、contributions，创新点 3 到 6 条。"
             ),
         },
