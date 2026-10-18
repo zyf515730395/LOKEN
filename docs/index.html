@@ -18,16 +18,16 @@
         theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
       }
       document.documentElement.dataset.theme = theme;
-      if (contextOpen === "false") document.documentElement.dataset.contextOpen = "true";
+      if (contextOpen !== "true") document.documentElement.dataset.contextOpen = "true";
     })();
   </script>
-  <link rel="stylesheet" href="assets/css/site.css?v=14">
-  <script src="assets/js/site-shell.js?v=14" defer></script>
-  <script src="assets/js/search-core.js?v=14" defer></script>
-  <script src="assets/js/search.js?v=14" defer></script>
-  <script src="assets/js/sidebar.js?v=14" defer></script>
+  <link rel="stylesheet" href="assets/css/site.css?v=15">
+  <script src="assets/js/site-shell.js?v=15" defer></script>
+  <script src="assets/js/search-core.js?v=15" defer></script>
+  <script src="assets/js/search.js?v=15" defer></script>
+  <script src="assets/js/sidebar.js?v=15" defer></script>
 </head>
-<body data-site-root="" data-active-section="learning" class="learning-page">
+<body data-site-root="" data-active-section="learning" data-active-subtopic="" class="learning-page">
   <header class="site-utility" aria-label="页面工具">
     <button class="sidebar-toggle" type="button" aria-controls="navigation-shell" aria-expanded="false">
       <span aria-hidden="true" data-sidebar-toggle-icon>☰</span><span data-sidebar-toggle-label>导航</span>
@@ -55,14 +55,27 @@
           aria-label="关闭导航" hidden>×</button>
   <aside class="primary-sidebar" aria-label="知识主题">
     <a class="primary-brand" href="index.html" aria-label="LOKEN 首页"><img class="brand-logo" src="assets/images/loken-logo.png" width="1990" height="329" alt=""></a>
-    <div class="primary-menu" aria-hidden="true"><span>MENU</span><span>☰</span></div>
+    <button class="primary-menu" type="button" data-context-toggle aria-controls="context-drawer" aria-expanded="true" aria-label="收起二级导航"><span>MENU</span><span aria-hidden="true">☰</span></button>
     <nav class="primary-navigation" aria-label="知识主题">
       <a class="primary-nav-item is-active" href="index.html" aria-current="page"><span class="primary-nav-copy"><span class="primary-nav-label">学习一个</span><span class="primary-nav-meta">01 / PAPERS</span></span></a>
       <a class="primary-nav-item" href="milestone-models/flux.html"><span class="primary-nav-copy"><span class="primary-nav-label">身经百战</span><span class="primary-nav-meta">02 / MODELS</span></span></a>
       <a class="primary-nav-item" href="writings/index.html"><span class="primary-nav-copy"><span class="primary-nav-label">谈笑风生</span><span class="primary-nav-meta">03 / ARTICLES</span></span></a>
       <a class="primary-nav-item" href="journeys/index.html"><span class="primary-nav-copy"><span class="primary-nav-label">跑得还快</span><span class="primary-nav-meta">04 / TRAVELS</span></span></a>
+      <a class="primary-nav-item" href="stocks/index.html"><span class="primary-nav-copy"><span class="primary-nav-label">闷声发大财</span><span class="primary-nav-meta">05 / STOCKS</span></span></a>
     </nav>
-    <div class="primary-sidebar-status"><span>LAST SYNC</span><strong>2026.10.17 / DAILY</strong></div>
+    <div class="primary-sidebar-status"><span>LAST SYNC</span><strong>2026.10.18 / DAILY</strong></div>
+  </aside>
+  <aside class="context-drawer" id="context-drawer" aria-label="学习一个二级导航">
+    <header class="secondary-nav-header"><div><span>PAPERS</span><h2>学习一个</h2></div>
+      <button type="button" data-context-close aria-label="收起二级导航">‹</button></header>
+    <div class="secondary-nav-scroll"><details class="secondary-nav-group" open><summary>论文报刊</summary><div class="secondary-nav-links"><a class="secondary-nav-link" href="reports/daily.html">论文日报</a><a class="secondary-nav-link" href="reports/weekly.html">论文周报</a></div></details><details class="secondary-nav-group" open><summary>研究主题</summary><div class="secondary-nav-links"><div class="paper-context-navigation"><nav class="context-strip" aria-label="本页快捷目录" data-topic-navigation>
+    <a class="context-strip-link is-active" href="?tag=image-gen-edit#image-gen-edit" aria-current="location" data-topic-filter="image-gen-edit">Image Gen&amp;Edit</a>
+    <a class="context-strip-link" href="?tag=video-gen-edit#video-gen-edit" data-topic-filter="video-gen-edit">Video Gen&amp;Edit</a>
+    <a class="context-strip-link" href="?tag=3d-gen-recon#3d-gen-recon" data-topic-filter="3d-gen-recon">3D Gen&amp;Recon</a>
+    <a class="context-strip-link" href="?tag=world-model#world-model" data-topic-filter="world-model">World Model</a>
+    <a class="context-strip-link" href="?tag=relighting#relighting" data-topic-filter="relighting">Relighting</a>
+    <a class="context-strip-link" href="?tag=depth-estimation#depth-estimation" data-topic-filter="depth-estimation">Depth Estimation</a>
+  </nav></div></div></details><details class="secondary-nav-group" open><summary>会议</summary><div class="secondary-nav-links"><a class="context-strip-link conference-navigation-link" href="?tag=conferences#conferences" data-topic-filter="conferences">Conference</a></div></details></div>
   </aside>
 </div>
   <main class="page-content" id="top">
@@ -77,14 +90,7 @@
         <div><strong>11,989</strong><span>ARCHIVED</span></div>
       </div>
     </header>
-<div class="paper-context-navigation"><nav class="context-strip" aria-label="本页快捷目录" data-topic-navigation>
-    <a class="context-strip-link is-active" href="?tag=image-gen-edit#image-gen-edit" aria-current="location" data-topic-filter="image-gen-edit">Image Gen&amp;Edit</a>
-    <a class="context-strip-link" href="?tag=video-gen-edit#video-gen-edit" data-topic-filter="video-gen-edit">Video Gen&amp;Edit</a>
-    <a class="context-strip-link" href="?tag=3d-gen-recon#3d-gen-recon" data-topic-filter="3d-gen-recon">3D Gen&amp;Recon</a>
-    <a class="context-strip-link" href="?tag=world-model#world-model" data-topic-filter="world-model">World Model</a>
-    <a class="context-strip-link" href="?tag=relighting#relighting" data-topic-filter="relighting">Relighting</a>
-    <a class="context-strip-link" href="?tag=depth-estimation#depth-estimation" data-topic-filter="depth-estimation">Depth Estimation</a>
-  </nav><a class="context-strip-link conference-navigation-link" href="?tag=conferences#conferences" data-topic-filter="conferences">Conference</a></div>
+
     </div>
 <div class="learning-workspace">
   <div class="learning-archive">
