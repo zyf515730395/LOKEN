@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import hashlib
 
 from papers.model_runtime import DEFAULT_MODEL_MAX_TOKENS
 from shared.loopback_chat import LoopbackChatError, LoopbackChatTransport
@@ -85,9 +86,16 @@ def summarize_paper(
     timeout: float,
     refresh: bool = False,
     cache: PaperSummaryCache | None = None,
+    evidence_text: str | None = None,
+    evidence_basis: str = 'introduction',
 ) -> PaperSummary:
     summary_cache = cache or PaperSummaryCache()
-    key = cache_key(paper.source_sha256, model)
+    source_key = paper.source_sha256
+    if evidence_text is not None:
+        if not evidence_text.strip() or len(evidence_text) > 18_000:
+            raise PaperSummaryError('body_evidence_unavailable', 'explicit summary evidence is empty or oversized')
+        source_key += ':conference-evidence-v1:' + evidence_basis + ':' + hashlib.sha256(evidence_text.encode()).hexdigest()
+    key = cache_key(source_key, model)
     if not refresh:
         cached = summary_cache.load(key)
         if cached is not None:
@@ -99,11 +107,11 @@ def summarize_paper(
     level = tuple(
         _complete(
             transport,
-            map_messages(paper.document.title, chunk),
+            map_messages(paper.document.title, chunk, evidence_basis=evidence_basis),
             model=model,
             timeout=timeout,
         )
-        for chunk in build_chunks(paper.document)
+        for chunk in build_chunks(paper.document, evidence_text=evidence_text)
     )
     while len(level) > 1:
         reduced: list[PaperSummary] = []

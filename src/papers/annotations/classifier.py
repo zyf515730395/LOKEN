@@ -156,21 +156,47 @@ def classify_paper(
     timeout: float,
     refresh: bool = False,
     cache: PaperAnnotationCache | None = None,
+    evidence_text: str | None = None,
+    evidence_basis: str = 'abstract',
+    constrained: bool = False,
 ) -> PaperAnnotation:
     annotation_cache = cache or PaperAnnotationCache()
-    key = annotation_cache_key(paper.source_sha256, model, labels)
+    source_key = paper.source_sha256
+    if constrained:
+        source_key += ':conference-annotation-schema-v1'
+    if evidence_text is not None:
+        source_key += ':conference-evidence-v1:' + evidence_basis + ':' + hashlib.sha256(evidence_text.encode()).hexdigest()
+    key = annotation_cache_key(source_key, model, labels)
     if not refresh and (cached := annotation_cache.load(key, labels)) is not None:
         return cached
-    abstract = " ".join(paper.document.abstract.split())
+    abstract = " ".join((paper.document.abstract if evidence_text is None else evidence_text).split())
     if not 40 <= len(abstract) <= 16_000:
         raise PaperAnnotationError("annotation_evidence_invalid", "paper abstract is unavailable or outside limits")
     try:
         transport = LoopbackChatTransport(base_url)
-        messages = annotation_messages(paper.document.title, abstract, labels)
+        messages = annotation_messages(paper.document.title, abstract, labels, evidence_basis=evidence_basis)
+        schema = None
+        if constrained:
+            def choices(group):
+                names = [label.name for label in labels if (label.group == 'topic') == group]
+                return {'type': 'array', 'maxItems': len(names) if group else min(5, len(names)),
+                        'items': {'type': 'string', 'enum': names} if names else {'type': 'string'}}
+            schema = {'type': 'object', 'additionalProperties': False,
+                'required': ['topics', 'tags', 'paper_type', 'institutions'],
+                'properties': {'topics': choices(True), 'tags': choices(False),
+                    'paper_type': {'type': 'string', 'enum': ['paper', 'survey']},
+                    'institutions': {'type': 'array', 'maxItems': 0, 'items': {'type': 'string'}}}}
         for attempt in range(2):
             raw = transport.complete(messages, model=model, timeout=timeout,
-                                     max_tokens=DEFAULT_MODEL_MAX_TOKENS, enable_thinking=False)
-            annotation = parse_annotation(raw, labels)
+                                     max_tokens=DEFAULT_MODEL_MAX_TOKENS, enable_thinking=False,
+                                     **({'json_schema': schema} if schema else {}))
+            try:
+                annotation = parse_annotation(raw, labels)
+            except PaperAnnotationError:
+                if not constrained or attempt == 1:
+                    raise
+                messages += ({'role': 'user', 'content': '上一轮未通过标注契约，请仅输出指定JSON字段和白名单标签；证据不足保留空tags。'},)
+                continue
             if annotation.paper_type == 'survey' or annotation.tags:
                 break
             messages += ({'role':'user','content':'请再核对一次核心技术证据；没有可靠标签仍返回空tags，不要猜测。'},)

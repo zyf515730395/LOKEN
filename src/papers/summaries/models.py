@@ -10,9 +10,10 @@ from typing import Literal
 class PaperSummaryError(ValueError):
     """Stable error that never retains source or model response bodies."""
 
-    def __init__(self, code: str, message: str) -> None:
+    def __init__(self, code: str, message: str, *, details: dict | None = None) -> None:
         self.code = str(code)
         self.message = " ".join(str(message).split()) or "paper summary failed"
+        self.details = dict(details or {})
         super().__init__(f"{self.code}: {self.message}")
 
 
