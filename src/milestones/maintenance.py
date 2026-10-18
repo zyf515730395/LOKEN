@@ -186,11 +186,14 @@ def _family_status(
         result["reason"] = "last_attempt_failed"
         return result
     successful_on = dt.date.fromisoformat(receipt["last_success"]["observed_at"])
-    if (successful_on.year, successful_on.month) == (current.year, current.month):
+    from papers.scheduler import model_period_start
+    boundary = model_period_start(current)
+    if (successful_on >= boundary.astimezone(dt.timezone.utc).date()
+            and _parse_checked_at(receipt["last_success"]["checked_at"]) >= boundary):
         result["due"] = False
-        result["reason"] = "checked_this_month"
+        result["reason"] = "checked_this_period"
     else:
-        result["reason"] = "success_from_previous_month"
+        result["reason"] = "success_from_previous_period"
     return result
 
 
