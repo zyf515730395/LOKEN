@@ -16,6 +16,8 @@ def plain(value: str) -> str:
 
 
 def validate_analysis(item: dict, ids: list[str], summaries: dict[str, str]) -> None:
+    if not isinstance(item, dict) or item.get('generator_version') != 'problem-contribution-v2':
+        raise ValueError('Independent local-model paper sentences have not been generated')
     if not isinstance(item, dict) or not isinstance(item.get('paper_ids'), list) or not all(isinstance(key, str) for key in item['paper_ids']):
         raise ValueError('Analysis must contain a paper ID list')
     if set(item.get('paper_ids', [])) != set(ids) or len(item.get('paper_ids', [])) != len(ids):
@@ -32,6 +34,8 @@ def validate_analysis(item: dict, ids: list[str], summaries: dict[str, str]) -> 
             raise ValueError('Expected a concise contribution sentence')
         if contribution.get('evidence_hash') != evidence_hash(summaries[key]):
             raise ValueError('Analysis evidence changed')
+        if contribution.get('generator_version') != 'problem-contribution-v2' or not all(contribution.get(k) for k in ('problem','contribution','model','generated_at')):
+            raise ValueError('Per-paper local generation provenance required')
     trends = item.get('trends')
     if not isinstance(trends, list) or (contributions and not trends):
         raise ValueError('Evidence-backed topic analysis required')
@@ -66,14 +70,16 @@ def render_topic(members: list[dict], summaries: dict[str, str], analysis: dict 
             title = f'<a href="{html.escape(url, quote=True)}" target="_blank" rel="noopener noreferrer">{title}</a>'
         sentence = contributions.get(key, {}).get('text')
         if sentence is None:
-            from papers.digest_writer import contribution
-            try:
-                sentence = contribution(summaries[key])
-            except (KeyError, ValueError):
-                sentence = '贡献提炼待更新。' if key in summaries else '摘要尚未发布，暂不推断贡献。'
+            sentence = '问题与贡献待本地模型生成。' if key in summaries else '摘要证据暂缺，不推断问题与贡献。'
+            if key in summaries:
+                from papers.digest_writer import contribution
+                try:
+                    sentence = '原摘要结论（逐篇问题与贡献待更新）：' + contribution(summaries[key])
+                except ValueError:
+                    pass
         basis = '首次采集' if row['date_basis'] == 'first_collected' else '发表日期'
         rows.append(f'<tr><td>{title}<small>{html.escape(str(row.get("display_id", key)))}</small></td><td>{html.escape(sentence)}</td><td>{row["digest_date"].isoformat()}<small>{basis}</small></td></tr>')
-    result = '<div class="digest-table-wrap" role="region" aria-label="论文贡献表" tabindex="0"><table class="digest-table"><thead><tr><th scope="col">论文</th><th scope="col">一句话贡献</th><th scope="col">归档日期</th></tr></thead><tbody>' + ''.join(rows) + '</tbody></table></div><h3>技术趋势与分析</h3>'
+    result = '<div class="digest-table-wrap" role="region" aria-label="论文问题与贡献表" tabindex="0"><table class="digest-table"><thead><tr><th scope="col">论文</th><th scope="col">一句话：问题与贡献</th><th scope="col">归档日期</th></tr></thead><tbody>' + ''.join(rows) + '</tbody></table></div><h3>技术趋势与分析</h3>'
     if not valid:
         return result + '<p class="periodical-note">本期分析待生成或证据已更新；不以论文标题推断技术趋势。</p>'
     result += '<p class="periodical-note">以下为本期公开样本的综合分析，不代表全领域统计；论文事实与趋势判断分开呈现。</p>'

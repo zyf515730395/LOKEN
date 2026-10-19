@@ -27,7 +27,7 @@ from shared.rendering import atomic_write_text
 from papers.digest_analysis import load_analysis, render_topic
 
 DATE_NOTE = ('按北京时间首次采集日期归档（仅已公开论文）；无首次采集记录的历史论文按发表日期归档，逐篇标明。'
-             '仅月份或年份已知的记录不分配到某一天。周报覆盖周一至周日；贡献与趋势仅基于本期公开论文的已发布摘要。')
+             '仅月份或年份已知的记录不分配到某一天。周报覆盖周一至周日；逐篇问题与贡献依据公开摘要生成，再综合分析主题趋势。未更新的历史条目保留原摘要结论并明确标记。')
 
 
 def _first_collected(value: object) -> date | None:
@@ -129,6 +129,21 @@ def _paper_html(row: dict, summaries: dict[str, str]) -> str:
             f'{basis} {row["digest_date"].isoformat()} · 发表 {html.escape(str(public_date))}</p>{content}</article>')
 
 
+def load_digest_evidence(output_root: Path, analysis_root: Path) -> dict[str, str]:
+    from papers.digest_analysis import evidence_hash
+    summaries = load_published_summaries(output_root)
+    path = analysis_root / 'official-abstracts.json'
+    if path.exists():
+        payload = json.loads(path.read_text(encoding='utf-8'))
+        for key, value in payload['papers'].items():
+            text = value['text']
+            if (not re.fullmatch(r'\d{4}\.\d{4,5}', key) or value['url'] != f'https://arxiv.org/abs/{key}'
+                    or value['sha256'] != evidence_hash(text) or not 40 <= len(text) <= 16000):
+                raise ValueError(f'Invalid official digest evidence: {key}')
+            summaries.setdefault(key, text)
+    return summaries
+
+
 def build_digest_periods(rows: list[dict], topics: list[tuple[str, str]], summaries: dict[str, str], *, kind: str, today: date, limit: int, analysis_root: Path | None = None) -> list[dict]:
     """Build calendar days or Monday–Sunday weeks with exact, deduplicated counts."""
     if kind not in {'daily','weekly'} or limit < 1:
@@ -152,7 +167,8 @@ def build_digest_periods(rows: list[dict], topics: list[tuple[str, str]], summar
         periods.append({'id': start.isoformat(), 'date': start.isoformat(),
                         'title': f'{label} · {"日报" if kind == "daily" else "周报"}',
                         'subtitle': f'{len(selected)} 篇公开论文 · {summary_count} 篇已有摘要' + (' · 本周更新中' if kind == 'weekly' and today < end else ''),
-                        'sections': sections, 'metadata': {'note': DATE_NOTE}})
+                        'sections': sections, 'metadata': {'note': DATE_NOTE,
+                            'empty_message': '本日没有符合公开条件的新论文。' if kind == 'daily' else '本周没有符合公开条件的新论文。'}})
     return periods
 
 
@@ -174,7 +190,7 @@ def publish_paper_digests(config_path: str | Path = CONFIG, *, output_root: str 
     today = generated_on or datetime.now(ZoneInfo('Asia/Shanghai')).date()
     rows, topics = load_public_papers(config_file, today=today, archive_path=archive_path,
                                      candidate_path=candidate_path, annotation_path=annotation_path)
-    summaries = load_published_summaries(root)
+    summaries = load_digest_evidence(root, config_file.parent.parent / 'content/papers/digests')
     reports = root / 'reports'
     results: list[Path] = []
     retained: set[Path] = set()
