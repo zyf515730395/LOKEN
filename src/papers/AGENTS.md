@@ -2,6 +2,8 @@
 
 ## Sources, publication and taxonomy
 - digests.py 从同一公开可见集合和已发布摘要生成论文日报/周报；每日构建同步更新 docs/reports/daily.html、weekly.html 与 periods/ 下受管日期 JSON。runtime 只允许这些精确路径进入每日提交，不能扩大到任意报告或 Stocks 输出。
+- 每主题显示一张完整论文表和一句话贡献，趋势分析使用 content/papers/digests 的结构化真源并核验覆盖集合、摘要哈希及逐条引用。生成分析与渲染分离；过期或缺失分析明确标记待更新，不复用为当前结论。
+- daily arXiv 发布阶段先构建摘要，再在现有 runtime/model 锁内使用实际服务模型执行 digest_writer（最近8天及对应自然周，按证据哈希跳过已完成主题），最后重建发布；不额外启动协调器。分析失败保留旧真源、页面显示待更新，arXiv结果仍可发布但本期记partial并附 build/reports/digests/latest.json。自动提交仅允许 digests/ 下 daily/weekly-YYYY-MM-DD.json，不包含测试或私有回执。
 - Public truth lives in content/papers/: archive.json (arXiv archive), arxiv-candidates.json (cursors/review decisions), paper-annotations.json (arXiv topics/tags/type/affiliations), conference-papers.json (official accepted lists), and conference-library.json (conference overlay/annotations). Private sources, model inputs/responses, caches and checkpoints remain under ignored build/.
 - config/site.yaml alone defines topics, descriptions, aliases, tag dimensions and publication filters. New labels must not be hard-coded. site.py owns generated paper pages; rebuild docs/index.html, docs/search-index.json and affected notes/exports rather than hand-editing them.
 - New candidates since collection.review_required_since require explicit acceptance before public lists/search/counts. Preserve previous review decisions and historical visibility; unknown/uncertain inference never authorizes deletion.
