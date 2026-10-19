@@ -24,9 +24,10 @@ from papers.paths import CONFIG
 from papers.site import build_archive, filter_recent_archive, load_candidate_statuses, parse_entry, _iter_category_rows
 from shared.periodicals import render_periodical_page
 from shared.rendering import atomic_write_text
+from papers.digest_analysis import load_analysis, render_topic
 
 DATE_NOTE = ('按北京时间首次采集日期归档（仅已公开论文）；无首次采集记录的历史论文按发表日期归档，逐篇标明。'
-             '仅月份或年份已知的记录不分配到某一天。周报覆盖周一至周日；复用已发布摘要，不生成推测性总结。')
+             '仅月份或年份已知的记录不分配到某一天。周报覆盖周一至周日；贡献与趋势仅基于本期公开论文的已发布摘要。')
 
 
 def _first_collected(value: object) -> date | None:
@@ -128,7 +129,7 @@ def _paper_html(row: dict, summaries: dict[str, str]) -> str:
             f'{basis} {row["digest_date"].isoformat()} · 发表 {html.escape(str(public_date))}</p>{content}</article>')
 
 
-def build_digest_periods(rows: list[dict], topics: list[tuple[str, str]], summaries: dict[str, str], *, kind: str, today: date, limit: int) -> list[dict]:
+def build_digest_periods(rows: list[dict], topics: list[tuple[str, str]], summaries: dict[str, str], *, kind: str, today: date, limit: int, analysis_root: Path | None = None) -> list[dict]:
     """Build calendar days or Monday–Sunday weeks with exact, deduplicated counts."""
     if kind not in {'daily','weekly'} or limit < 1:
         raise ValueError('Expected daily/weekly and a positive period limit')
@@ -140,11 +141,12 @@ def build_digest_periods(rows: list[dict], topics: list[tuple[str, str]], summar
         end = start + timedelta(days=step - 1)
         selected = {row['id']: row for row in rows if start <= row['digest_date'] <= min(end, today)}
         sections = []
+        analyses = load_analysis(analysis_root, kind, start.isoformat()) if analysis_root else {}
         for topic, slug in topics:
             members = sorted((row for row in selected.values() if topic in row['topics']), key=lambda row: (row['digest_date'], row['id']), reverse=True)
             if members:
                 sections.append({'id': slug, 'label': f'{topic} · {len(members)}',
-                                 'html': ''.join(_paper_html(row, summaries) for row in members)})
+                                 'html': render_topic(members, summaries, analyses.get(slug))})
         label = start.isoformat() if kind == 'daily' else f'{start.isoformat()} — {end.isoformat()}'
         summary_count = sum(key in summaries for key in selected)
         periods.append({'id': start.isoformat(), 'date': start.isoformat(),
@@ -178,7 +180,8 @@ def publish_paper_digests(config_path: str | Path = CONFIG, *, output_root: str 
     retained: set[Path] = set()
     documents = {}
     for kind, limit in [('daily', daily_limit), ('weekly', weekly_limit)]:
-        periods = build_digest_periods(rows, topics, summaries, kind=kind, today=today, limit=limit)
+        periods = build_digest_periods(rows, topics, summaries, kind=kind, today=today, limit=limit,
+                                      analysis_root=config_file.parent.parent / 'content/papers/digests')
         catalog = []
         for index, period in enumerate(periods):
             data_path = reports / 'periods' / f'{kind}-{period["id"]}.json'

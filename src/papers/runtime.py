@@ -22,7 +22,7 @@ from papers.model_runtime import DEFAULT_MODEL, DEFAULT_MODEL_TIMEOUT_SECONDS, D
 PUBLIC = ('content/papers/archive.json', 'content/papers/arxiv-candidates.json',
           'content/papers/conference-library.json',
           'content/papers/paper-annotations.json', 'docs/notes/', 'docs/index.html',
-          'docs/search-index.json', 'docs/togos-papers.json', 'docs/reports/')
+          'docs/search-index.json', 'docs/togos-papers.json', 'docs/reports/', 'content/papers/digests/')
 PRIVATE = paths.ROOT / 'build/paper-summaries'
 ZONE = ZoneInfo('Asia/Shanghai')
 BACKFILL_BATCH_SIZE = 100
@@ -139,6 +139,8 @@ def clean_pull():
 
 
 def allowed_path(path):
+    if path.startswith('content/papers/digests/'):
+        return bool(re.fullmatch(r'content/papers/digests/(daily|weekly)-\d{4}-\d{2}-\d{2}\.json', path))
     if path.startswith('docs/reports/'):
         return path in {'docs/reports/daily.html', 'docs/reports/weekly.html'} or bool(
             re.fullmatch(r'docs/reports/periods/(daily|weekly)-\d{4}-\d{2}-\d{2}\.json', path))
@@ -146,7 +148,8 @@ def allowed_path(path):
                if item.endswith('/') else path == item for item in PUBLIC)
 
 
-def publish(mode, *, expected_head):
+def publish(mode, *, expected_head, model=None):
+    digest_failed = False
     if (PRIVATE / 'recheck/local-only.json').exists():
         command(sys.executable, '-m', 'papers', 'build')
         print('Local review: built results; Git publication remains disabled', flush=True)
@@ -160,6 +163,12 @@ def publish(mode, *, expected_head):
     if any(not allowed_path(name) for name in names + staged + untracked):
         raise RuntimeError('unexpected public changes; preserve worktree for review')
     command(sys.executable, '-m', 'papers', 'build')
+    if mode == 'daily arxiv':
+        from papers.digest_writer import generate_recent
+        report = generate_recent(model=model)
+        digest_failed = bool(report['failures'])
+        print('Digest analysis: ' + json.dumps(report, ensure_ascii=False), flush=True)
+        command(sys.executable, '-m', 'papers', 'build')
     git('diff', '--check')
     for path in (paths.DOCS / 'assets/js').glob('*.js'):
         node = shutil.which('node') or shutil.which('node.exe')
@@ -179,7 +188,7 @@ def publish(mode, *, expected_head):
     git('diff', '--cached', '--check')
     if not git('diff', '--cached', '--name-only', capture=True):
         print('No public changes', flush=True)
-        return
+        return digest_failed
     if git('branch', '--show-current', capture=True) != 'main' or git('rev-parse', 'HEAD', capture=True) != expected_head:
         raise RuntimeError('Publication base changed during build; preserve the staged results for review')
     git('commit', '-m', f'Publish {mode} paper results for {datetime.now(ZONE):%Y-%m-%d}')
@@ -189,6 +198,7 @@ def publish(mode, *, expected_head):
         raise RuntimeError('Concurrent commit detected; local results retained without pushing')
     atomic_write_json(PENDING_PUSH, {'commit': commit, 'base': expected_head})
     _push_main()
+    return digest_failed
 
 
 @contextmanager
@@ -299,7 +309,9 @@ def _execute_daily_pass(args, model, common, expected_head):
         state.update(phase='arxiv_publish', arxiv_exit=result.returncode)
         atomic_write_json(DAILY_STATE, state)
     if state['phase'] == 'arxiv_publish':
-        publish('daily arxiv', expected_head=expected_head)
+        digest_failed = publish('daily arxiv', expected_head=expected_head, model=model)
+        if digest_failed:
+            state.update(arxiv_exit=3, digest_failed=True, digest_report='build/reports/digests/latest.json')
         expected_head = git('rev-parse', 'HEAD', capture=True)
         baseline_path = CONFERENCE_PRIVATE / 'summary-state.json'
         baseline = json.loads(baseline_path.read_text()) if baseline_path.exists() else {}
