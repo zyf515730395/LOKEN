@@ -45,7 +45,7 @@ def render_periodical_page(
         f'<section class="periodical-section" id="periodical-{html.escape(section["id"], quote=True)}">'
         f'<h2>{html.escape(str(section["label"]))}</h2>{section["html"]}</section>'
         for section in sections
-    ) or '<p class="periodical-empty">暂无已发布内容。请稍后查看。</p>'
+    ) or '<p class="periodical-empty">' + html.escape(selected.get('metadata', {}).get('empty_message', '暂无已发布内容。请稍后查看。')) + '</p>'
     toc = ''.join(
         f'<a href="#periodical-{html.escape(section["id"], quote=True)}">{html.escape(str(section["label"]))}</a>'
         for section in sections
@@ -82,10 +82,10 @@ def render_periodical_page(
   <p class="periodical-status" role="status" aria-live="polite" data-periodical-status></p>
 </section>
 <script type="application/json" id="periodical-catalog">{payload}</script>
-<script src="{root}assets/js/periodicals.js?v=2" defer></script>'''
+<script src="{root}assets/js/periodicals.js?v=3" defer></script>'''
     return render_site_page(
         output_file=output_file, output_root=output_root, active_section=active_section,
         page_title=f'{title} · LOKEN', meta_description=title, main_content=main,
         active_subtopic=active_subtopic, body_class='periodical-page',
-        head_content=f'<link rel="stylesheet" href="{root}assets/css/periodicals.css?v=2">\n',
+        head_content=f'<link rel="stylesheet" href="{root}assets/css/periodicals.css?v=3">\n',
     )

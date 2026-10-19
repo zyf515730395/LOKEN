@@ -286,8 +286,8 @@ def render_secondary_navigation(
     elif active_section == "stocks":
         groups.append(_nav_group("投资信息", "".join(
             _nav_link(label, route, site_root, active=active_subtopic == key)
-            for key, label, route in (("events", "关键节点", "stocks/index.html"),
-                                      ("outlook", "预期推演", "stocks/outlook.html"),
+            for key, label, route in (("outlook", "预期推演", "stocks/outlook.html"),
+                                      ("events", "关键节点", "stocks/index.html"),
                                       ("quant", "量化投资", "stocks/quant.html"))
         )))
     return f'''  <aside class="context-drawer" id="context-drawer" aria-label="{html.escape(section.label)}二级导航">
