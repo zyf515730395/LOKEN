@@ -148,7 +148,13 @@ def validate_events(document: dict, config: dict) -> None:
                 evidence(observation.get(field), identifier + "." + key + "." + field)
 
 
-def validate_outlook(document: dict, config: dict, path: Path) -> None:
+def outlook_events(document: dict, events: dict) -> list[dict]:
+    start, end = date.fromisoformat(document['week_start']), date.fromisoformat(document['week_end'])
+    return [event for event in events['events'] if event['kind'] in ('release','meeting')
+            and event.get('scheduled_at') and start <= aware_datetime(event['scheduled_at'],'event').astimezone(SHANGHAI).date() <= end]
+
+
+def validate_outlook(document: dict, config: dict, path: Path, events: dict | None = None) -> None:
     require(document.get("schema_version") == 1, f"{path}: schema_version must be 1")
     aware_datetime(document.get("updated_at"), str(path) + ".updated_at")
     period = date.fromisoformat(document.get("period", ""))
@@ -157,7 +163,7 @@ def validate_outlook(document: dict, config: dict, path: Path) -> None:
     require(document.get("week_end") == (period + timedelta(days=7)).isoformat(), f"{path}: week_end must be following Sunday")
     text(document.get("title"), str(path) + ".title")
     sections = document.get("sections")
-    require(isinstance(sections, list) and bool(sections), f"{path}: sections required")
+    require(isinstance(sections, list), f"{path}: sections list required (empty when no releases)")
     seen = set()
     for section in sections:
         require(isinstance(section, dict), f"{path}: section object required")
@@ -175,7 +181,9 @@ def validate_outlook(document: dict, config: dict, path: Path) -> None:
             require(isinstance(scenario, dict), f"{path}.{key}.{label}: scenario object required")
             text(scenario.get("condition"), f"{path}.{key}.{label}.condition")
             text(scenario.get("implication"), f"{path}.{key}.{label}.implication")
-    require(seen == INDICATORS, f"{path}: outlook must cover every supported indicator")
+    if events is not None:
+        scheduled = {key for event in outlook_events(document, events) for key in event['indicators']}
+        require(scheduled <= seen, f'{path}: missing outlook sections for scheduled indicators: {sorted(scheduled-seen)}')
 
 
 def load_public_content(config_path: Path, content_root: Path) -> tuple[dict, dict, list[dict]]:
@@ -190,7 +198,7 @@ def load_public_content(config_path: Path, content_root: Path) -> tuple[dict, di
     outlooks = []
     for path in sorted((content_root / "outlooks").glob("*.json")):
         outlook = read_json(path)
-        validate_outlook(outlook, config, path)
+        validate_outlook(outlook, config, path, events)
         outlooks.append(outlook)
     return config, events, outlooks
 

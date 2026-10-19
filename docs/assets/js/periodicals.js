@@ -110,7 +110,7 @@
       if (!sections.length) {
         const empty = document.createElement('p');
         empty.className = 'periodical-empty';
-        empty.textContent = '暂无已发布内容。请稍后查看。';
+        empty.textContent = (period.metadata || {}).empty_message || '暂无已发布内容。请稍后查看。';
         content.append(empty);
       }
       article.replaceChildren(content);

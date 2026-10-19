@@ -10,7 +10,7 @@ import tempfile
 
 from shared.site_shell import render_section_intro, render_site_page
 
-from .data import NEW_YORK, SHANGHAI, aware_datetime, load_public_content
+from .data import NEW_YORK, SHANGHAI, aware_datetime, load_public_content, outlook_events
 
 
 def escaped(value: object) -> str:
@@ -109,13 +109,24 @@ def render_calendar(config: dict, document: dict, *, output_file: Path, output_r
                             main_content=body, body_class="stocks-page", head_content=_style(), trailing_dialogs=script)
 
 
-def outlook_period(document: dict, config: dict) -> dict:
+def outlook_period(document: dict, config: dict, events: dict) -> dict:
     sections = []
+    scheduled = outlook_events(document, events)
+    included = {key for event in scheduled for key in event['indicators']}
+    covered = {key for section in document['sections'] for key in section.get('indicators',[section['indicator']])}
+    if not included <= covered:
+        raise ValueError('Scheduled indicators lack outlook sections; cannot display an empty week')
     names = {"upside": "上行情境", "base": "基准情境", "downside": "下行情境"}
     for section in document["sections"]:
         key = section["indicator"]
-        label = section.get("title") or " / ".join(config["indicators"][item]["label"] for item in section.get("indicators", [key]))
+        covered = [item for item in section.get('indicators',[key]) if item in included]
+        if not covered:
+            continue
+        key = key if key in covered else covered[0]
+        label = " / ".join(config['indicators'][item]['label'] for item in covered)
         content = '<p class="periodical-note">条件假设 · 以下为情境推演，市场反应取决于数据、预期差及当时环境。</p>'
+        dates = sorted({aware_datetime(event['scheduled_at'],'event').astimezone(SHANGHAI).strftime('%m.%d %H:%M') for event in scheduled if set(covered) & set(event['indicators'])})
+        content += '<p class="outlook-release-date">发布时间 · ' + ' / '.join(dates) + ' 北京时间</p>'
         content += '<p>已核验预期：' + render_evidence(section.get("expectation"), "暂无可核验一致预期") + '</p>'
         if section.get("note"):
             content += f'<p>{escaped(section["note"])}</p>'
@@ -127,7 +138,8 @@ def outlook_period(document: dict, config: dict) -> dict:
         sections.append({"id": key, "label": label, "html": content})
     return {"id": document["period"], "date": document["period"], "title": document["title"],
             "subtitle": f'{document["week_start"]} — {document["week_end"]} · 周一至周日',
-            "metadata": {"note": "每周日 08:00 更新 · 事实附来源，未知项留空，推演为条件假设。"}, "sections": sections}
+            "metadata": {"note": "每周日更新 · 仅列本期周一至周日有已确认发布事件的指标。",
+                         "empty_message": "本周暂无已核验的指标发布事件，不列无发布节点的情境推演。"}, "sections": sections}
 
 
 def render_quant(*, output_file: Path, output_root: Path) -> str:
@@ -159,7 +171,7 @@ def publish_stocks(*, config_path: str | Path = "config/stocks.yaml", content_ro
     # Complete validation and rendering before touching any published page.
     pages = [render_calendar(config, events, output_file=paths[0], output_root=root),
              render_periodical_page(output_file=paths[1], output_root=root, active_section="stocks", active_subtopic="outlook",
-                                    title="预期推演", kind="outlook", periods=[outlook_period(item, config) for item in reversed(outlooks)]),
+                                    title="预期推演", kind="outlook", periods=[outlook_period(item, config, events) for item in reversed(outlooks)]),
              render_quant(output_file=paths[2], output_root=root)]
     for path, page in zip(paths, pages):
         _atomic_write(path, page)
