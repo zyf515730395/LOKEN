@@ -82,7 +82,7 @@
     try {
       let sections = period.sections || [];
       if (period.metadata && period.metadata.data_url && !period.loaded) {
-        const response = await fetch(period.metadata.data_url, {credentials: 'same-origin'});
+        const response = await fetch(period.metadata.data_url, {credentials: 'same-origin', cache: 'no-cache'});
         if (!response.ok) throw new Error('period unavailable');
         const data = await response.json();
         if (data.id !== period.id || !Array.isArray(data.sections)) throw new Error('period mismatch');
