@@ -93,6 +93,8 @@ def record(*, phase: str, config_path: Path, content_root: Path, output_root: Pa
         require(any(aware_datetime(source["verified_at"], "outlook.source") >= boundary for source in section["sources"]),
                 f"{section['indicator']}: official/factual sources have not been checked this period")
     entry = {"at": local.isoformat(), "content_fingerprint": fingerprint}
+    actuals = content_root / 'actuals.json'
+    entry['actuals_fingerprint'] = hashlib.sha256(actuals.read_bytes() if actuals.exists() else b'').hexdigest()
     if phase in {"built", "published", "completed"}:
         entry["outputs"] = output_fingerprint(output_root)
     if phase in {"published", "completed"}:
@@ -101,7 +103,8 @@ def record(*, phase: str, config_path: Path, content_root: Path, output_root: Pa
                 and output_root.resolve() == (repository / "docs").resolve(),
                 "Publication receipts require the repository's canonical stocks source and docs paths")
         built = receipt["phases"].get("built", {})
-        require(built.get("content_fingerprint") == fingerprint and built.get("outputs") == entry["outputs"],
+        require(built.get("content_fingerprint") == fingerprint and built.get("outputs") == entry["outputs"]
+                and built.get('actuals_fingerprint') == entry['actuals_fingerprint'],
                 "Record built for the current validated content/output before publication completion")
         # Dirty stock source or site outputs are not evidence of the pushed commit.
         dirty = _git(repository, "status", "--porcelain", "--", "src/stocks", "config/stocks.yaml", "content/stocks", "docs/stocks")

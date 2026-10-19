@@ -183,6 +183,10 @@ def load_public_content(config_path: Path, content_root: Path) -> tuple[dict, di
     events_path = content_root / "events.json"
     events = read_json(events_path) if events_path.exists() else {"schema_version": 1, "updated_at": datetime.now(SHANGHAI).isoformat(), "events": []}
     validate_events(events, config)
+    actuals_path = content_root / 'actuals.json'
+    if actuals_path.exists():
+        from .actuals import merge_actuals
+        events = merge_actuals(events, read_json(actuals_path), config)
     outlooks = []
     for path in sorted((content_root / "outlooks").glob("*.json")):
         outlook = read_json(path)
