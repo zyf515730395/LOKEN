@@ -1,5 +1,7 @@
 # 美股公开内容约定
 
+- `actuals.json` 保存已到发布时间事件的官方公布值覆盖及 revisions 历史；按 event_id 与 period 精确匹配，仅允许 actual/previous，不改 consensus 或历史 outlook。校验来源机构和核验时间，缺数不写零。通过 `python -m stocks.actuals status/apply --input <本地证据JSON>` 检查/应用，验证和构建后独立提交发布。周更期次不因实际值覆盖而重新生成推演。
+
 - `events.json` 是事件与连续收益率观察的公开真源；`outlooks/YYYY-MM-DD.json` 是北京时间周日一期的下一周推演，日期区间为接下来周一至周日。
 - JSON 使用 `schema_version: 1`，所有 `updated_at`、`verified_at` 和事件 `scheduled_at` 必须含时区；事件另固定 `timezone: America/New_York`。
 - `sources` 为 `{title, url, verified_at}` 列表；官方发布时间和日期只能引用指标对应的 BLS、BEA、Federal Reserve、Treasury 官方域名。
