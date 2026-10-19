@@ -1,6 +1,6 @@
 # 美股发布模块
 
-- 美股任务每天08:00/22:00唤醒，周更仍仅周日08:00到期；先 status，未完成则补最近一期，完成则检查 stocks.actuals status。两阶段均遵守主工作区占用让行。
+- 美股由唯一automation-3协调器串行调度，不保留独立美股自动化。周更仅周日08:00到期，实际值每天08:00/22:00到期；先核对scheduler与stocks阶段回执，补最近一期，均遵守主工作区占用让行。
 - 实际值独立写 actuals.json，官方发布后才允许 apply；回执存 build/reports/stocks/actuals，包含核验事件、未发布/失败原因、输入和输出校验和、提交及远端验证。失败下个检查点有界重试；不把未取得实际值记作完成，不改写历史推演。
 
 - 本目录保存美股数据校验、页面生成和每周回执 CLI；不调用论文推理、采集器或论文协调器。
@@ -20,7 +20,7 @@
 1. `python -m stocks status` 返回最近到期周日、due 与已有回执。`due: false` 静默结束；不逐周重放。
 2. 自动化先核验 Git 状态、当前维护进程以及实际持有的维护/模型锁，其他任务占用即 `python -m stocks record --phase deferred --reason "..."`，保留旧公开内容。锁文件存在不等于被持有，不删除锁文件。
 3. 从 `config/stocks.yaml` 的官方日历刷新未来事件（至少覆盖下一周）与连续收益率。使用新近观测的真实日期，不把 H.15 发布日当成市场观测日。逐项记录具体来源和本次核验时间；可靠来源没有一致预期就填 null。
-4. 写入当前周日文件 `content/stocks/outlooks/YYYY-MM-DD.json`，覆盖下一周一至周日。六类章节可用 `indicators` 合并核心 CPI/PCE 与就业两项，配置中的九项指标都须覆盖。就业范围仅包含非农就业与失业率。每节来源本期重新核查，情境只写条件假设。
+4. 写入当前周日文件 `content/stocks/outlooks/YYYY-MM-DD.json`，仅覆盖下一周北京时间周一至周日有已确认release/meeting事件的指标；无发布事件则sections可为空。不包含monitor、未知日期和窗口外指标。可合并同期核心CPI/PCE或就业项，但不能夹带无事件指标。每节来源本期重新核查，情境只写条件假设；旧内容保留，渲染时按各期周界过滤。
 5. `python -m stocks validate`；`python -m stocks record --phase validated`；`python -m stocks build`。集成站点构建与验收后 `python -m stocks record --phase built` 固定当前输入/三个页面指纹。
 6. 仅提交本次相关源文件和生成文件，执行 `git diff --cached --check`、普通 push；确认远端后 `python -m stocks record --phase completed`。该命令重新校验公开证据、当前 built 指纹、股票工作树干净和 `origin/main == HEAD`，成功后才写 completed。
 7. 基础设施或来源获取失败执行有界重试，仍失败记 deferred 并保留旧有效内容/历史推演/已完成阶段。`record` 不执行抓取、Git 写操作或推理，也不会启动论文协调器。
