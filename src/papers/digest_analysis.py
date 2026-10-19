@@ -78,8 +78,8 @@ def render_topic(members: list[dict], summaries: dict[str, str], analysis: dict 
                 except ValueError:
                     pass
         basis = '首次采集' if row['date_basis'] == 'first_collected' else '发表日期'
-        rows.append(f'<tr><td>{title}<small>{html.escape(str(row.get("display_id", key)))}</small></td><td>{html.escape(sentence)}</td><td>{row["digest_date"].isoformat()}<small>{basis}</small></td></tr>')
-    result = '<div class="digest-table-wrap" role="region" aria-label="论文问题与贡献表" tabindex="0"><table class="digest-table"><thead><tr><th scope="col">论文</th><th scope="col">一句话：问题与贡献</th><th scope="col">归档日期</th></tr></thead><tbody>' + ''.join(rows) + '</tbody></table></div><h3>技术趋势与分析</h3>'
+        rows.append(f'<tr><td>{title}<small>{html.escape(str(row.get("display_id", key)))}</small><small class="digest-paper-date">{row["digest_date"].isoformat()} · {basis}</small></td><td>{html.escape(sentence)}</td></tr>')
+    result = '<div class="digest-table-wrap" role="region" aria-label="论文问题与贡献表" tabindex="0"><table class="digest-table"><thead><tr><th scope="col">论文</th><th scope="col">一句话：问题与贡献</th></tr></thead><tbody>' + ''.join(rows) + '</tbody></table></div><h3>技术趋势与分析</h3>'
     if not valid:
         return result + '<p class="periodical-note">本期分析待生成或证据已更新；不以论文标题推断技术趋势。</p>'
     result += '<p class="periodical-note">以下为本期公开样本的综合分析，不代表全领域统计；论文事实与趋势判断分开呈现。</p>'

@@ -87,5 +87,5 @@ def render_periodical_page(
         output_file=output_file, output_root=output_root, active_section=active_section,
         page_title=f'{title} · LOKEN', meta_description=title, main_content=main,
         active_subtopic=active_subtopic, body_class='periodical-page',
-        head_content=f'<link rel="stylesheet" href="{root}assets/css/periodicals.css?v=3">\n',
+        head_content=f'<link rel="stylesheet" href="{root}assets/css/periodicals.css?v=4">\n',
     )
