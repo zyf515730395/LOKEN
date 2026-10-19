@@ -140,6 +140,8 @@ def clean_pull():
 
 def allowed_path(path):
     if path.startswith('content/papers/digests/'):
+        if path == 'content/papers/digests/official-abstracts.json':
+            return True
         return bool(re.fullmatch(r'content/papers/digests/(daily|weekly)-\d{4}-\d{2}-\d{2}\.json', path))
     if path.startswith('docs/reports/'):
         return path in {'docs/reports/daily.html', 'docs/reports/weekly.html'} or bool(
