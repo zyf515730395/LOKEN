@@ -82,7 +82,7 @@ def render_periodical_page(
   <p class="periodical-status" role="status" aria-live="polite" data-periodical-status></p>
 </section>
 <script type="application/json" id="periodical-catalog">{payload}</script>
-<script src="{root}assets/js/periodicals.js?v=3" defer></script>'''
+<script src="{root}assets/js/periodicals.js?v=4" defer></script>'''
     return render_site_page(
         output_file=output_file, output_root=output_root, active_section=active_section,
         page_title=f'{title} · LOKEN', meta_description=title, main_content=main,
