@@ -28,6 +28,8 @@ from papers.digest_analysis import load_analysis, render_topic
 
 DATE_NOTE = ('按北京时间首次采集日期归档（仅已公开论文）；无首次采集记录的历史论文按发表日期归档，逐篇标明。'
              '仅月份或年份已知的记录不分配到某一天。周报覆盖周一至周日；逐篇问题与贡献依据公开摘要生成，再综合分析主题趋势。未更新的历史条目保留原摘要结论并明确标记。')
+WEEKLY_NOTE = ('周一至周日的技术趋势回顾，基于本期全部公开论文综合分析，保留支撑引用，不逐篇罗列。'
+               '按北京时间首次采集日期归档；缺少采集记录的历史论文使用已核验发表日期。结论仅适用于本期样本。')
 
 
 def _first_collected(value: object) -> date | None:
@@ -161,13 +163,13 @@ def build_digest_periods(rows: list[dict], topics: list[tuple[str, str]], summar
             members = sorted((row for row in selected.values() if topic in row['topics']), key=lambda row: (row['digest_date'], row['id']), reverse=True)
             if members:
                 sections.append({'id': slug, 'label': f'{topic} · {len(members)}',
-                                 'html': render_topic(members, summaries, analyses.get(slug))})
+                                 'html': render_topic(members, summaries, analyses.get(slug), include_papers=kind == 'daily')})
         label = start.isoformat() if kind == 'daily' else f'{start.isoformat()} — {end.isoformat()}'
         summary_count = sum(key in summaries for key in selected)
         periods.append({'id': start.isoformat(), 'date': start.isoformat(),
                         'title': f'{label} · {"日报" if kind == "daily" else "周报"}',
                         'subtitle': f'{len(selected)} 篇公开论文 · {summary_count} 篇已有摘要' + (' · 本周更新中' if kind == 'weekly' and today < end else ''),
-                        'sections': sections, 'metadata': {'note': DATE_NOTE,
+                        'sections': sections, 'metadata': {'note': DATE_NOTE if kind == 'daily' else WEEKLY_NOTE,
                             'empty_message': '本日没有符合公开条件的新论文。' if kind == 'daily' else '本周没有符合公开条件的新论文。'}})
     return periods
 
