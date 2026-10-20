@@ -46,7 +46,7 @@ def _first_collected(value: object) -> date | None:
 
 def load_public_papers(config_path: str | Path = CONFIG, *, today: date | None = None,
                        archive_path: str | Path | None = None, candidate_path: str | Path | None = None,
-                       annotation_path: str | Path | None = None) -> tuple[list[dict], list[tuple[str, str]]]:
+                       annotation_path: str | Path | None = None, include_historical: bool = False) -> tuple[list[dict], list[tuple[str, str]]]:
     """Apply the same curation, taxonomy, overlay and visibility gates as site.py."""
     path = Path(config_path).resolve()
     config = yaml.safe_load(path.read_text(encoding='utf-8'))
@@ -75,9 +75,11 @@ def load_public_papers(config_path: str | Path = CONFIG, *, today: date | None =
     categories, _ = build_archive(public_archive, labels, annotations, statuses, extra)
     all_rows = [row for category in categories for row in _iter_category_rows(category)]
     retain_library_matches(all_rows, library, ledger)
-    visible, _ = filter_recent_archive(categories, (today or date.today()).year)
+    visible = categories if include_historical else filter_recent_archive(categories, (today or date.today()).year)[0]
     unique = {row['id']: row for category in visible for row in _iter_category_rows(category)}
     output = []
+    recent_ids = {row['id'] for category in filter_recent_archive(categories,(today or date.today()).year)[0] for row in _iter_category_rows(category)}
+    historical_ids = {}
     for key, row in unique.items():
         first = _first_collected(ledger.get('papers', {}).get(key, {}).get('collected_at'))
         # Conference records can carry durable first-seen metadata in future.
@@ -85,7 +87,13 @@ def load_public_papers(config_path: str | Path = CONFIG, *, today: date | None =
             first = _first_collected(library['papers'].get(key, {}).get('first_seen_at'))
         if first is None and row.get('date_precision', 3) < 3:
             continue
-        output.append({**row, 'digest_date': first or row['date'],
+        digest_date = first or row['date']
+        if include_historical:
+            if digest_date.year not in historical_ids:
+                historical_ids[digest_date.year] = {r['id'] for c in filter_recent_archive(categories,digest_date.year)[0] for r in _iter_category_rows(c)}
+            if key not in historical_ids[digest_date.year]:
+                continue
+        output.append({**row, 'digest_date': digest_date, 'recent_visible': key in recent_ids,
                        'date_basis': 'first_collected' if first else 'publication'})
     return output, [(label.name, label.slug) for label in labels]
 
@@ -174,11 +182,25 @@ def build_digest_periods(rows: list[dict], topics: list[tuple[str, str]], summar
     return periods
 
 
+def retained_weekly_limit(analysis_root: Path, today: date, minimum: int) -> int:
+    """Retain every backfilled week across routine rebuilds and year changes."""
+    anchor = today - timedelta(days=today.weekday())
+    limit = minimum
+    for path in analysis_root.glob('weekly-*.json'):
+        try:
+            start = date.fromisoformat(path.stem.removeprefix('weekly-'))
+        except ValueError:
+            continue
+        if start.weekday() == 0 and start <= anchor:
+            limit = max(limit, (anchor - start).days // 7 + 1)
+    return limit
+
+
 def publish_paper_digests(config_path: str | Path = CONFIG, *, output_root: str | Path | None = None,
                          generated_on: date | None = None, daily_limit: int = 30, weekly_limit: int = 12,
                          archive_path: str | Path | None = None, candidate_path: str | Path | None = None,
-                         annotation_path: str | Path | None = None) -> list[Path]:
-    """Publish 30 days/12 weeks with lazy JSON, rebuilding every retained period.
+                         annotation_path: str | Path | None = None, kinds: tuple[str, ...] = ('daily', 'weekly')) -> list[Path]:
+    """Publish daily and weekly lazy JSON, retaining backfilled weekly history.
 
     No dated HTML copies are created. Only managed digest JSON outside the bounded
     windows is removed, so excluded/rejected records cannot survive in old assets.
@@ -191,14 +213,19 @@ def publish_paper_digests(config_path: str | Path = CONFIG, *, output_root: str 
         root = config_file.parent.parent / root
     today = generated_on or datetime.now(ZoneInfo('Asia/Shanghai')).date()
     rows, topics = load_public_papers(config_file, today=today, archive_path=archive_path,
-                                     candidate_path=candidate_path, annotation_path=annotation_path)
+                                     candidate_path=candidate_path, annotation_path=annotation_path, include_historical=True)
     summaries = load_digest_evidence(root, config_file.parent.parent / 'content/papers/digests')
     reports = root / 'reports'
     results: list[Path] = []
     retained: set[Path] = set()
     documents = {}
+    if not kinds or set(kinds) - {'daily', 'weekly'}:
+        raise ValueError('Expected daily and/or weekly kinds')
+    weekly_limit = retained_weekly_limit(config_file.parent.parent / 'content/papers/digests', today, weekly_limit)
     for kind, limit in [('daily', daily_limit), ('weekly', weekly_limit)]:
-        periods = build_digest_periods(rows, topics, summaries, kind=kind, today=today, limit=limit,
+        if kind not in kinds:
+            continue
+        periods = build_digest_periods([row for row in rows if row.get('recent_visible',True)] if kind == 'daily' else rows, topics, summaries, kind=kind, today=today, limit=limit,
                                       analysis_root=config_file.parent.parent / 'content/papers/digests')
         catalog = []
         for index, period in enumerate(periods):
@@ -216,7 +243,7 @@ def publish_paper_digests(config_path: str | Path = CONFIG, *, output_root: str 
         atomic_write_text(destination, document)
         results.append(destination)
     for path in (reports / 'periods').glob('*.json'):
-        if re.fullmatch(r'(daily|weekly)-\d{4}-\d{2}-\d{2}\.json', path.name) and path not in retained:
+        if re.fullmatch(r'(daily|weekly)-\d{4}-\d{2}-\d{2}\.json', path.name) and path.name.split('-')[0] in kinds and path not in retained:
             path.unlink()
     return results
 
@@ -227,7 +254,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument('--output-root', type=Path)
     args = parser.parse_args(argv)
     paths = publish_paper_digests(args.config, output_root=args.output_root)
-    print(json.dumps({'published_files': len(paths), 'daily_periods': 30, 'weekly_periods': 12}, ensure_ascii=False))
+    print(json.dumps({'published_files': len(paths), 'daily_periods': 30, 'weekly_periods': sum(path.name.startswith('weekly-') for path in paths)}, ensure_ascii=False))
     return 0
 
 

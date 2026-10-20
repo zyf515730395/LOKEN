@@ -17,6 +17,8 @@
 - Publish pipeline changes with their affected public data and generated pages/search; never stage tests, caches, README or unrelated content.
 
 ## Runtime and scheduling
+
+- weekly_backfill 是显式授权的低优先级历史队列；每周获取runtime.lock并在周界释放，daily-request占用或新18:00边界时让行。公开写入仅限该周分析、核验官方摘要和周报生成产物，不提交其他任务改动；提交前复核HEAD和各受管文件初始状态，推送失败保存自己的pending SHA后停止，恢复先核实远端。每期必须通过全量validate_analysis，空周也保存明确分析。模型逐篇请求沿用digest_writer；大主题用全部逐篇问题/贡献综合，不依赖标题或截取部分论文。
 - Root AGENTS.md owns business due times and Git boundaries; scheduler.py owns period/receipt semantics, and the saved sole automation owns its actual wake checkpoints. Follow ignored ops/RUNBOOK.md for machine paths/services; do not copy a second wake interval into rules or prompts.
 - GitHub Actions only collects candidates at each configured slot, including intraday refresh. Keep completed shards/cursors and HTTP429 cooldown in the ledger; exhausted429 pauses the whole collection, preserves incomplete-topic cursors and returns a nonzero status. Do not use daily completion to skip later scheduled slots.
 - Use the sole WSL entry bash ops/summary_runtime.sh daily. Publish/verify arXiv first. Conference backlog runs only Monday-Friday in 120-minute wall-clock slices, capped at the next18:00 arXiv boundary; finish the current paper, publish a validated checkpoint and release locks.
