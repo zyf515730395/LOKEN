@@ -15,7 +15,7 @@ def plain(value: str) -> str:
     return re.sub(r'\s+', ' ', html.unescape(re.sub('<[^>]+>', ' ', value))).strip()
 
 
-def validate_analysis(item: dict, ids: list[str], summaries: dict[str, str]) -> None:
+def validate_analysis(item: dict, ids: list[str], summaries: dict[str, str], *, titles: dict | None = None) -> None:
     if not isinstance(item, dict) or item.get('generator_version') != 'problem-contribution-v2':
         raise ValueError('Independent local-model paper sentences have not been generated')
     if not isinstance(item, dict) or not isinstance(item.get('paper_ids'), list) or not all(isinstance(key, str) for key in item['paper_ids']):
@@ -23,9 +23,18 @@ def validate_analysis(item: dict, ids: list[str], summaries: dict[str, str]) -> 
     if set(item.get('paper_ids', [])) != set(ids) or len(item.get('paper_ids', [])) != len(ids):
         raise ValueError('Analysis must cover exactly the visible topic papers')
     contributions = item.get('contributions', {})
+    skipped = item.get('skipped_papers', {})
+    if not isinstance(skipped, dict) or not set(skipped) <= set(ids) or len(skipped) > 5:
+        raise ValueError('Invalid explicit paper skips')
+    for key, skip in skipped.items():
+        if (not isinstance(skip, dict) or not all(isinstance(skip.get(k),str) and skip[k].strip() for k in ('title','stage','reason'))
+                or 'evidence_hash' not in skip or skip['stage'] not in ('evidence','sentence')
+                or skip.get('evidence_hash') != (evidence_hash(summaries[key]) if key in summaries else None)
+                or (titles is not None and skip['title'] != titles.get(key))):
+            raise ValueError('Skipped paper identity or evidence changed')
     if not isinstance(contributions, dict):
         raise ValueError('Contributions must be an object')
-    if set(contributions) != {key for key in ids if key in summaries}:
+    if set(contributions) != {key for key in ids if key in summaries and key not in skipped}:
         raise ValueError('Contributions must cover every available summary')
     for key, contribution in contributions.items():
         if not isinstance(contribution, dict):
@@ -54,7 +63,7 @@ def render_topic(members: list[dict], summaries: dict[str, str], analysis: dict 
     valid = False
     if analysis:
         try:
-            validate_analysis(analysis, ids, summaries)
+            validate_analysis(analysis, ids, summaries, titles={row['id']:row['title'] for row in members})
             valid = True
         except (ValueError, TypeError, KeyError):
             pass
@@ -84,6 +93,9 @@ def render_topic(members: list[dict], summaries: dict[str, str], analysis: dict 
     result = ('<div class="digest-table-wrap" role="region" aria-label="论文问题与贡献表" tabindex="0"><table class="digest-table"><thead><tr><th scope="col">论文</th><th scope="col">一句话：问题与贡献</th></tr></thead><tbody>' + ''.join(rows) + '</tbody></table></div><h3>技术趋势与分析</h3>') if include_papers else ''
     if not valid:
         return result + '<p class="periodical-note">本期分析待生成或证据已更新；不以论文标题推断技术趋势。</p>'
+    skipped = analysis.get('skipped_papers', {})
+    if skipped:
+        result += f'<p class="periodical-note">本主题共 {len(ids)} 篇，分析覆盖 {len(contributions)} 篇；{len(skipped)} 篇因证据或生成失败暂未纳入。以下结论仅基于已覆盖样本，缺口保留待补。</p>'
     result += '<p class="periodical-note">以下为本期公开样本的综合分析，不代表全领域统计；论文事实与趋势判断分开呈现。</p>'
     for trend in analysis['trends']:
         refs = '、'.join(f'<a href="{html.escape(urls[key], quote=True)}" target="_blank" rel="noopener noreferrer">{html.escape(key)}</a>' if key in urls else html.escape(key) for key in trend['paper_ids'])
