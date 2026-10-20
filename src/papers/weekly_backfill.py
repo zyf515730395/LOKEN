@@ -41,19 +41,26 @@ def weeks_for_year(year: int, today: date) -> list[date]:
     return [last - timedelta(days=7 * i) for i in range((last-first).days // 7 + 1)]
 
 
-def analysis_complete(analyses, members, topics, summaries):
+def analysis_processed(analyses, members, topics, summaries):
     expected = {slug: sorted(row['id'] for row in members if topic in row['topics'])
                 for topic, slug in topics if any(topic in row['topics'] for row in members)}
     if set(analyses) != set(expected):
         return False
-    if any(row['id'] not in summaries for row in members):
-        return False
     try:
         for slug, ids in expected.items():
-            validate_analysis(analyses[slug], ids, summaries)
+            item=analyses[slug]
+            if any(key not in summaries and key not in item.get('skipped_papers',{}) for key in ids):
+                return False
+            validate_analysis(item, ids, summaries,titles={r['id']:r['title'] for r in members})
+        if len({key for item in analyses.values() for key in item.get('skipped_papers',{})}) > 5:
+            return False
     except (ValueError, TypeError, KeyError):
         return False
     return True
+
+
+def analysis_complete(analyses, members, topics, summaries):
+    return analysis_processed(analyses,members,topics,summaries) and not any(item.get('skipped_papers') for item in analyses.values())
 
 
 def fingerprint(relative):
@@ -117,7 +124,7 @@ def recover_commit(state, state_path):
             # Blob hashes avoid newline transformations and bind HEAD to the intent.
             if git('rev-parse',f'{head}:{relative}',capture=True) != intent['blobs'][relative]:
                 raise RuntimeError('Interrupted commit content differs from intent')
-    state['pending'] = {'week':intent['week'],'commit':head,'papers':intent['papers'],'topics':intent['topics'],'complete':intent.get('complete',True),'resume_status':intent.get('resume_status')}
+    state['pending'] = {'week':intent['week'],'commit':head,'papers':intent['papers'],'topics':intent['topics'],'complete':intent.get('complete',True),'resume_status':intent.get('resume_status'),'advance':intent.get('advance',False),'skipped_papers':intent.get('skipped_papers',{})}
     state.pop('commit_intent')
     write_json(state_path,state)
 
@@ -138,21 +145,30 @@ def recover_push(state, state_path):
         git('fetch', 'origin', 'main')
         if command('git', 'merge-base', '--is-ancestor', commit, 'origin/main', check=False).returncode:
             raise RuntimeError('Backfill remote inclusion unconfirmed')
-    category = 'completed' if pending.get('complete',True) else 'checkpoints'
+    category = 'completed' if pending.get('complete',True) else ('partial' if pending.get('advance') else 'checkpoints')
+    for old_category in ('completed','partial','checkpoints'):
+        if old_category != category:
+            previous=state.get(old_category,{}).pop(pending['week'],None)
+            if previous: state.setdefault('publication_history',[]).append({'category':old_category,**previous})
     state.setdefault(category, {})[pending['week']] = {**pending, 'verified_at': now()}
     state.pop('pending')
     state['owned'] = {}
-    if pending.get('complete',True):
+    if pending.get('complete',True) or pending.get('advance'):
         state['remaining_weeks'] = [w for w in state.get('remaining_weeks',[]) if w != pending['week']]
-        state['verified_weeks'] = sorted(set(state.get('verified_weeks',[])) | {pending['week']},reverse=True)
-        state['status'] = 'checkpoint_published' if state['remaining_weeks'] else 'completed'
+        state['verified_weeks']=[w for w in state.get('verified_weeks',[]) if w != pending['week']]
+        state['partial_weeks']=[w for w in state.get('partial_weeks',[]) if w != pending['week']]
+        if not pending.get('complete',True): state['partial_weeks'].append(pending['week'])
+        if pending.get('complete',True):
+            state['verified_weeks'] = sorted(set(state.get('verified_weeks',[])) | {pending['week']},reverse=True)
+        state['processed_weeks'] = sorted(set(state.get('processed_weeks',[])) | set(state.get('verified_weeks',[])) | {pending['week']},reverse=True)
+        state['status'] = ('partial_published' if pending.get('advance') and not pending.get('complete',True) else 'checkpoint_published') if state['remaining_weeks'] else ('completed_with_gaps' if state.get('partial_weeks') else 'completed')
     else:
         state['status'] = pending.get('resume_status') or 'deferred_generation'
     state.pop('error',None)
     write_json(state_path, state)
 
 
-def publish_week(start, base, state, state_path, *, complete=True):
+def publish_week(start, base, state, state_path, *, complete=True, advance=False, skipped=None):
     from papers.runtime import git
     if git('rev-parse', 'HEAD', capture=True) != base:
         raise RuntimeError('HEAD changed during generation; preserve all changes')
@@ -171,13 +187,13 @@ def publish_week(start, base, state, state_path, *, complete=True):
         state['commit_intent'] = {'base':base,'week':str(start),'files':candidates,
                                   'hashes':{p:fingerprint(p) for p in candidates},
                                   'blobs':{p:git('rev-parse',f':{p}',capture=True) for p in candidates},
-                                  'papers':state['papers'],'topics':state['topics'],'complete':complete,'resume_status':state.get('resume_status')}
+                                  'papers':state['papers'],'topics':state['topics'],'complete':complete,'resume_status':state.get('resume_status'),'advance':advance,'skipped_papers':skipped or {}}
         write_json(state_path,state)
         recover_commit(state,state_path)
         recover_push(state,state_path)
         return
     commit = git('rev-parse', 'HEAD', capture=True)
-    state['pending'] = {'week': str(start), 'commit': commit, 'papers': state['papers'], 'topics': state['topics'],'complete':complete,'resume_status':state.get('resume_status')}
+    state['pending'] = {'week': str(start), 'commit': commit, 'papers': state['papers'], 'topics': state['topics'],'complete':complete,'resume_status':state.get('resume_status'),'advance':advance,'skipped_papers':skipped or {}}
     write_json(state_path, state)
     recover_push(state, state_path)
 
@@ -219,26 +235,30 @@ def run(year, max_weeks=1, max_minutes=60):
                 summaries = load_digest_evidence(ROOT/'docs', ANALYSES)
                 pending = []
                 valid = []
+                partial = []
                 for start in weeks:
                     members = [r for r in rows if start <= r['digest_date'] <= start+timedelta(days=6)]
-                    complete = (ANALYSES/f'weekly-{start}.json').exists() and analysis_complete(load_analysis(ANALYSES,'weekly',str(start)),members,topics,summaries)
+                    saved=load_analysis(ANALYSES,'weekly',str(start))
+                    exists=(ANALYSES/f'weekly-{start}.json').exists()
+                    processed=exists and analysis_processed(saved,members,topics,summaries)
+                    complete=processed and analysis_complete(saved,members,topics,summaries)
                     # A valid committed source still needs a published calendar asset.
                     asset = ROOT/f'docs/reports/periods/weekly-{start}.json'
-                    published = git('ls-files', '--', str((ANALYSES/f'weekly-{start}.json').relative_to(ROOT)), capture=True) if complete else ''
-                    expected_asset = build_digest_periods(members,topics,summaries,kind='weekly',today=start+timedelta(days=6),limit=1,analysis_root=ANALYSES)[0] if complete else None
+                    published = git('ls-files', '--', str((ANALYSES/f'weekly-{start}.json').relative_to(ROOT)), capture=True) if processed else ''
+                    expected_asset = build_digest_periods(members,topics,summaries,kind='weekly',today=start+timedelta(days=6),limit=1,analysis_root=ANALYSES)[0] if processed else None
                     asset_current = asset.exists() and json.loads(asset.read_text(encoding='utf-8')) == expected_asset
-                    if complete and asset_current and published and not any(allowed(p,start) for p in changed_files()):
-                        valid.append(str(start))
+                    if processed and asset_current and published and not any(allowed(p,start) for p in changed_files()):
+                        (valid if complete else partial).append(str(start))
                     else:
-                        pending.append((start, members, complete))
-                state.update(total_weeks=len(weeks), verified_weeks=valid, remaining_weeks=[str(p[0]) for p in pending], updated_at=now())
+                        pending.append((start, members, processed))
+                state.update(total_weeks=len(weeks), verified_weeks=valid, partial_weeks=partial, processed_weeks=sorted(valid+partial,reverse=True), remaining_weeks=[str(p[0]) for p in pending], updated_at=now())
                 write_json(state_path, state)
                 if not pending:
-                    state['status'] = 'completed'
+                    state['status'] = 'completed_with_gaps' if partial else 'completed'
                     break
                 # Finish our unpublished transaction before admitting a newer week.
                 active = state.get('active_week') if state.get('owned') else None
-                start, members, complete = next((item for item in pending if str(item[0]) == active), pending[0])
+                start, members, processed = next((item for item in pending if str(item[0]) == active), pending[0])
                 assert_owned_changes(start, state)
                 state.update(active_week=str(start), status='generating', papers=len(members), topics=sum(any(t in r['topics'] for r in members) for t,_ in topics))
                 write_json(state_path, state)
@@ -256,17 +276,18 @@ def run(year, max_weeks=1, max_minutes=60):
                     state['status']='deferred_slice'
                     break
                 incomplete = False
-                if not complete:
+                if not processed:
                     with model_service('vllm-paper.service') as model:
                         result = generate_periods([('weekly',start,start+timedelta(days=6))],today=today,model=model,
-                                                  sentence_evidence_only=True, context=(rows,topics,summaries),on_write=record_write,should_continue=admission)
+                                                  sentence_evidence_only=True, context=(rows,topics,summaries),on_write=record_write,should_continue=admission,skip_failed_papers=True)
                     state['generation'] = result
                     write_json(state_path, state)
-                    if result['failures']:
+                    blocking=[f for f in result['failures'] if f.get('paper') not in result.get('skipped_papers',{})]
+                    if blocking or result.get('interrupted'):
                         incomplete = True
                         state['resume_status'] = 'deferred_generation' if result.get('interrupted') else 'failed_generation'
                 analyses = load_analysis(ANALYSES,'weekly',str(start))
-                if not incomplete and not analysis_complete(analyses,members,topics,summaries):
+                if not incomplete and not analysis_processed(analyses,members,topics,summaries):
                     raise RuntimeError('Full-week evidence coverage validation failed')
                 assert_owned_changes(start, state)
                 before = {p: fingerprint(p) for p in managed_files(start)}
@@ -278,8 +299,10 @@ def run(year, max_weeks=1, max_minutes=60):
                         record_write(path)
                 state['status'] = 'publishing'
                 write_json(state_path, state)
-                publish_week(start,base,state,state_path,complete=not incomplete)
-                category = 'checkpoints' if incomplete else 'completed'
+                skips={key:value for item in analyses.values() for key,value in item.get('skipped_papers',{}).items()}
+                advance=not incomplete and bool(skips)
+                publish_week(start,base,state,state_path,complete=not incomplete and not skips,advance=advance,skipped=skips)
+                category = 'checkpoints' if incomplete else ('partial' if advance else 'completed')
                 print(f'Published {category} checkpoint {start}: {state[category][str(start)]["commit"]}',flush=True)
                 if incomplete:
                     break
