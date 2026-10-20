@@ -66,9 +66,17 @@ def git(*args, capture=False):
     environment = os.environ.copy()
     environment.setdefault('GIT_SSH_COMMAND', GIT_SSH_COMMAND)
     environment['GIT_TERMINAL_PROMPT'] = '0'
-    result = command('git', *args, capture=capture, env=environment,
-                     timeout=GIT_SYNC_TIMEOUT_SECONDS if network else None)
-    return result.stdout.strip() if capture else ''
+    for attempt in range(3 if network else 1):
+        try:
+            result = command('git', *args, capture=capture, env=environment,
+                             timeout=GIT_SYNC_TIMEOUT_SECONDS if network else None)
+            return result.stdout.strip() if capture else ''
+        except (subprocess.TimeoutExpired, subprocess.CalledProcessError):
+            if not network or attempt == 2:
+                raise
+            delay = 15 * (attempt + 1)
+            print(f'Git {args[0]} failed; retrying in {delay}s (attempt {attempt + 2}/3)', flush=True)
+            time.sleep(delay)
 
 
 def _origin_is_ancestor():
