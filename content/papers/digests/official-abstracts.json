@@ -1276,6 +1276,53 @@
       "basis": "official_abstract",
       "source_sha256": "8cc2a20d19db79e3bdb5c48f2a3c8220c6e52f36f168ee887ab38e8e0cc25435",
       "source_version": "537ce619b787fdac45457efde79ec85f5edcf76536176420976763380805c747"
+    },
+    "conf-d8efd36d692ac760fe0b52e8": {
+      "title": "Source-Agnostic Image Translation Based on Latent Aware Adaptive Masking",
+      "url": "https://arxiv.org/abs/2608.14046",
+      "text": "In this work, we propose a source-agnostic framework that dynamically refines a binary mask throughout the reverse diffusion process by computing the discrepancies of a pretrained diffusion model's prediction for each latent time step. Rather than relying on a fixed threshold, our method introduces a time-dependent statistical thresholding scheme derived from the empirical mean and standard deviation of prediction discrepancies across the latent noisy images from the target distribution. This allows the mask to adapt to the model's varying predictive confidence at different noise levels, effectively isolating domain-specific regions while preserving global structural coherence. Experimental results on the AFHQ and Celeba-HQ datasets demonstrate that our approach outperforms state-of-the-art unsupervised Image-to-Image methods in both realism (FID, KID) and faithfulness (SSIM, LPIPS). By requiring only a pretrained model of the target domain, our approach enables precise, automated localization and seamless translation across diverse source distributions without any specialized training. The project source code is available at: https://github.com/dtoma95/PM-Edit",
+      "sha256": "c83949e1d93359c896f920221ffb6821874f637e4c34e75744228e72dd7fa418",
+      "verified_at": "2026-10-21T05:15:19.866402+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "bb70acfbb4c7b2daa063c9ee428f83af920f1abad9b1fcba42b107bee6a5340c",
+      "source_version": "274109fbba6e6623b1f50a3ebf506a7965828d664bc686fabb2f0419a9a16495"
+    },
+    "conf-2bddf205e8b2af9e54d29643": {
+      "title": "Aligning Human Sense: Calibrated Distributional Reward Learning for Video Generation",
+      "url": "https://arxiv.org/abs/2608.21425",
+      "text": "Video generation is central to AI-powered content creation. Aligning generated videos with human preferences is a key criterion for evaluating generation quality. Despite significant progress in visual quality, three key challenges remain. First, the reliability of reward signals is constrained by the quality of human preference data, which is often affected by subjective noise and bias. Second, standard scalar reward models collapse multi-aspect human preferences into a single value, leading to the loss of dynamic trade-offs across multiple preference dimensions. Third, in policy optimization, the widely adopted KL divergence imposes primarily local constraints and may fail to capture the global structure of human preferences. To address these challenges, we propose a unified preference-aware learning framework for video generation. First, we introduce elite-guided filtering to calibrate preference data and construct reliable supervision for reward model training. We then model video quality as a multidimensional reward distribution to capture the uncertainty inherent in human preferences, and use the Wasserstein distance to align the learned reward distribution with the empirical human preference distribution. Finally, we introduce Wasserstein-based distributional alignment into GRPO, guiding policy optimization to better match the global structure of human preferences over videos. Experiments on reward modeling and video generation demonstrate that our approach improves the reliability of reward signals and the perceptual consistency of generated videos. Our code is available at https://github.com/alignhs26/ahs.",
+      "sha256": "a63519e65b93662b6ad1d819d6af97976d4ce4054eabd24949cf04b2658c28b1",
+      "verified_at": "2026-10-21T05:15:25.692811+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "506dea973b716168cd5a87d6b6937ace34ac42f19245e5a4a412614ef402ae7e",
+      "source_version": "e0034e446e2194dfc557e852535768637dd4c0e63178d9f1eed36ad3016efaea"
+    },
+    "conf-1c8922e3e4dafe9cc4094372": {
+      "title": "Map-Det3D: Metric Feed-Forward 3D Reconstruction Prior for Multi-view 3D Object Detection from Streaming Inputs",
+      "url": "https://arxiv.org/abs/2608.12179",
+      "text": "Metric 3D object detection is a core capability for embodied agents, yet most reliable systems lean on depth sensors, trading away cost, power, and integration simplicity. This motivates monocular 3D detection, which avoids additional constraints, yet it faces a major obstacle: from a single image, depth, and especially absolute scale, are underconstrained. As a result, the prevailing pattern of detecting in 2D and then predicting 3D attributes is often brittle, since modest range errors can dominate 3D localization, and the learned scale prior can fail when cameras, motion, or environments undergo domain shifts. To address this, we propose Map-Det3D, an online multi-view 3D object detection model that brings detection directly into a 3D space reconstructed from RGB. We map a short temporal window into multiple views and repurpose a feed-forward metric 3D reconstruction model as our geometric backbone while tuning its object-aware capabilities. Building on this representation, Map-Det3D directly predicts boxes in metric 3D space, without the widely used 2D-to-3D lifting. Experiments across different benchmarks show that this design supports strong online performance and robust transfer without adaptation, suggesting that training reconstruction priors for detection is a practical route to stable metric 3D detection from monocular video. Code and models are available at https://royyang0714.github.io/Map-Det3D.",
+      "sha256": "b2d17062035adefada792e3737e94481e323375f3a2f7cd5c2ff0f6b3ffe88c2",
+      "verified_at": "2026-10-21T05:15:31.483138+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "b8c88ba1e815daa85052ce36d91beec8250a3e6072336e706b9fe77662291521",
+      "source_version": "f0d5f3f951397b8baa9767b2cf012ed24b07110980759ac778bc805c78681b3a"
+    },
+    "2605.19748": {
+      "title": "Memory-Augmented Reinforcement Learning Agent for CAD Generation",
+      "url": "https://arxiv.org/abs/2605.19748",
+      "text": "Automatic generation of computer-aided design (CAD) models is a core technology for enabling intelligence in advanced manufacturing. Existing generation methods based on large language models (LLMs) often fall short when handling complex CAD models characterized by long operation sequences, diverse operation types, and strong geometric constraints, primarily because reasoning chains break and effective error-correction mechanisms are lacking. To address this problem, this paper proposes a memory-augmented reinforcement learning framework for CAD generation agents. The framework encapsulates the underlying geometric kernel into a structured toolchain callable by the agent and builds a closed-loop mechanism of design intent understanding, global planning, execution, and multi-dimensional verification. It also designs a dual-track memory module consisting of a case library and a skill library, and proposes a dynamic utility retrieval algorithm. By introducing reinforcement learning into retrieval and policy optimization, the agent can effectively avoid retrieval traps in which examples are semantically similar but geometrically infeasible, enabling online self-correction and continual evolution without additional large-scale annotated data. Experiments show that the proposed method significantly improves both the success rate and geometric consistency on complex CAD model generation tasks.",
+      "sha256": "59b397c2fa988ecd799556454026c718681faec7668b5a638638325fb63c3592",
+      "verified_at": "2026-10-21T05:15:36.544040+08:00"
+    },
+    "conf-e0dd91b985682ce14e698ff8": {
+      "title": "A second-order theory of texture for depth from focus",
+      "url": "https://arxiv.org/abs/2608.10411",
+      "text": "We present a theory of textured appearance of optically rough surfaces based on wave optics, emphasizing the role of texture for passive depth from focus. Our theory shows that even surfaces that traditional computer vision would consider textureless can produce textured appearance, due to subjective speckle from surface microgeometry. We analyze the properties of this second-order texture, and show that we can enhance its contrast under natural ambient lighting by simply using a narrowband spectral filter. Doing so results in dramatic improvements in passive depth reconstruction of seemingly textureless scenes, as we demonstrate through extensive theory, simulations, and real-world experiments.",
+      "sha256": "726bfc065aa826b7a2305289a52229f49fa4bdb29b5da71192138f3ccdb50d36",
+      "verified_at": "2026-10-21T05:15:39.875655+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "a9301759dd821bbadd9e5e6f60cd12d111ec353d6aef897ae3febdd4f86b074a",
+      "source_version": "bbb125a7997c8651152f51024ada0992da6f38f1d9091ed897b5047d361cd3e4"
     }
   }
 }
