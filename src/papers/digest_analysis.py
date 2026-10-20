@@ -49,7 +49,7 @@ def validate_analysis(item: dict, ids: list[str], summaries: dict[str, str]) -> 
             raise ValueError('Trend references must have published evidence in this topic and period')
 
 
-def render_topic(members: list[dict], summaries: dict[str, str], analysis: dict | None) -> str:
+def render_topic(members: list[dict], summaries: dict[str, str], analysis: dict | None, *, include_papers: bool = True) -> str:
     ids = [row['id'] for row in members]
     valid = False
     if analysis:
@@ -68,6 +68,8 @@ def render_topic(members: list[dict], summaries: dict[str, str], analysis: dict 
         if url.startswith(('https://', 'http://')):
             urls[key] = url
             title = f'<a href="{html.escape(url, quote=True)}" target="_blank" rel="noopener noreferrer">{title}</a>'
+        if not include_papers:
+            continue
         sentence = contributions.get(key, {}).get('text')
         if sentence is None:
             sentence = '问题与贡献待本地模型生成。' if key in summaries else '摘要证据暂缺，不推断问题与贡献。'
@@ -79,7 +81,7 @@ def render_topic(members: list[dict], summaries: dict[str, str], analysis: dict 
                     pass
         basis = '首次采集' if row['date_basis'] == 'first_collected' else '发表日期'
         rows.append(f'<tr><td>{title}<small>{html.escape(str(row.get("display_id", key)))}</small><small class="digest-paper-date">{row["digest_date"].isoformat()} · {basis}</small></td><td>{html.escape(sentence)}</td></tr>')
-    result = '<div class="digest-table-wrap" role="region" aria-label="论文问题与贡献表" tabindex="0"><table class="digest-table"><thead><tr><th scope="col">论文</th><th scope="col">一句话：问题与贡献</th></tr></thead><tbody>' + ''.join(rows) + '</tbody></table></div><h3>技术趋势与分析</h3>'
+    result = ('<div class="digest-table-wrap" role="region" aria-label="论文问题与贡献表" tabindex="0"><table class="digest-table"><thead><tr><th scope="col">论文</th><th scope="col">一句话：问题与贡献</th></tr></thead><tbody>' + ''.join(rows) + '</tbody></table></div><h3>技术趋势与分析</h3>') if include_papers else ''
     if not valid:
         return result + '<p class="periodical-note">本期分析待生成或证据已更新；不以论文标题推断技术趋势。</p>'
     result += '<p class="periodical-note">以下为本期公开样本的综合分析，不代表全领域统计；论文事实与趋势判断分开呈现。</p>'
