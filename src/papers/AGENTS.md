@@ -3,6 +3,7 @@
 ## Sources, publication and taxonomy
 
 - 期刊缺失证据按身份路由：arXiv ID使用arXiv采集器，conf-ID使用会议库记录与现有官方会议摘要采集器及其版本化缓存；官方摘要真源须绑定标题、来源URL、正文哈希、原始来源哈希和会议source_version。不能把会议ID传给arXiv接口。回填多线程共享的daily-request锁探测必须在进程内串行，避免探测线程互相误判成daily等待者。
+- 主题趋势的paper_ids输出schema必须使用本主题本期真实ID枚举，禁止集合外引用；格式与语义校验失败最多3次本地模型重试，每次请求前重查让行。所有原始响应按内容哈希分别保留，不能通过删引用、改ID或放宽校验让错误分析通过。
 - 期刊逐篇问题/贡献与主题趋势均通过本地模型生成；逐篇一次调用、最多4并发，共享持久化推理预算，缓存按证据哈希与提示词版本隔离。最近一周人工触发重生成也必须持有唯一runtime锁，退出时只关闭自己启动的模型服务。
 - scheduler统一管理daily、stocks_weekly、stocks_actuals、models、conferences，保留旧论文回执兼容；stocks_weekly为周日08:00期次，stocks_actuals为每日08:00/22:00最近检查期次。无新证据也须核对待发布阶段后才结束。
 - digests.py 从同一公开可见集合和已发布摘要生成论文日报/周报；每日构建同步更新 docs/reports/daily.html、weekly.html 与 periods/ 下受管日期 JSON。runtime 只允许这些精确路径进入每日提交，不能扩大到任意报告或 Stocks 输出。

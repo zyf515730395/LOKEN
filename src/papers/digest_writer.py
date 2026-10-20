@@ -104,6 +104,29 @@ def recover_official_abstract(key,row,source):
             'source_version':record.get('source_version')}
 
 
+def trend_schema(ids):
+    schema=json.loads(json.dumps(TREND_SCHEMA))
+    schema['properties']['trends']['items']['properties']['paper_ids']['items']['enum']=list(ids)
+    return schema
+
+
+def synthesize_topic(prompt,ids,contributions,summaries,client,model,reports,identity,should_continue=None):
+    for attempt in range(3):
+        if should_continue and not should_continue():
+            raise ValueError('Backfill yielded before another topic request')
+        repair='' if attempt==0 else '\n上次输出未通过校验。请重写，paper_ids必须从当前给定ID枚举中原样选取，不能发明、改写或引用本期本主题以外的ID；其余分析仍须依据全部输入。'
+        raw=client.complete([{'role':'user','content':prompt+repair}],model=model,timeout=900,max_tokens=6500,enable_thinking=False,json_schema=trend_schema(ids))
+        atomic_write_text(reports/f'{identity}-{evidence_hash(raw)[:16]}.json',raw)
+        try:
+            item={'paper_ids':ids,'contributions':contributions,'trends':scope_trends(json.loads(raw)['trends']),
+                  'generator_version':VERSION,'model':model,'generated_at':now()}
+            validate_analysis(item,ids,summaries)
+            return item
+        except (ValueError,KeyError,TypeError):
+            if attempt==2:
+                raise
+
+
 def generate_periods(periods,*,today=None,model=None,workers=4,sentence_evidence_only=False,context=None,on_write=None,should_continue=None):
     from papers import paths
     from papers.digests import load_public_papers,load_digest_evidence
@@ -177,10 +200,7 @@ def generate_periods(periods,*,today=None,model=None,workers=4,sentence_evidence
                         '不声称全领域统计、不使用领域共识或社区共识等措辞、不编造实验结果。单篇时明确单篇观察。输出trends数组1至5项；claim为趋势判断，'
                         'reasoning为跨论文技术比较，limitations为适用边界与待验证问题，paper_ids引用给定ID。\n'
                         +json.dumps({'topic':topic,'period':str(start),'kind':kind,'papers':evidence},ensure_ascii=False))
-                raw=client.complete([{'role':'user','content':prompt}],model=model,timeout=900,max_tokens=6500,enable_thinking=False,json_schema=TREND_SCHEMA)
-                atomic_write_text(reports/f'{kind}-{start}-{slug}.json',raw)
-                item={'paper_ids':ids,'contributions':contributions,'trends':scope_trends(json.loads(raw)['trends']),'generator_version':VERSION,'model':model,'generated_at':now()}
-                validate_analysis(item,ids,summaries); output[slug]=item
+                output[slug]=synthesize_topic(prompt,ids,contributions,summaries,client,model,reports,f'{kind}-{start}-{slug}',should_continue)
                 print(f'Trend ready: {kind} {start} {slug} ({len(ids)} papers)',flush=True)
             except (ValueError,OSError,KeyError,TypeError) as error:
                 failures.append({'kind':kind,'period':str(start),'topic':slug,'error':str(error)})
