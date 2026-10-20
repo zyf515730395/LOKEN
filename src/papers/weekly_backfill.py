@@ -7,6 +7,7 @@ import hashlib
 import json
 from pathlib import Path
 import sys
+import threading
 import time
 
 from papers import paths
@@ -17,6 +18,16 @@ from papers.digests import load_digest_evidence, load_public_papers, publish_pap
 ROOT = paths.ROOT
 ANALYSES = ROOT / 'content/papers/digests'
 REPORTS = ROOT / 'build/reports/digests'
+
+
+def model_admission(boundary, deadline):
+    """Serialize probes: flock probes from our own workers must not race."""
+    from papers.runtime import daily_waiting
+    probe_lock = threading.Lock()
+    def admitted():
+        with probe_lock:
+            return not daily_waiting() and datetime.fromisoformat(now()) < boundary and time.monotonic() < deadline
+    return admitted
 
 
 def weeks_for_year(year: int, today: date) -> list[date]:
@@ -239,8 +250,7 @@ def run(year, max_weeks=1, max_minutes=60):
                     state['updated_at'] = now()
                     write_json(state_path, state)
 
-                def admission():
-                    return not daily_waiting() and datetime.fromisoformat(now()) < boundary and time.monotonic() < deadline
+                admission = model_admission(boundary,deadline)
 
                 if not admission():
                     state['status']='deferred_slice'
