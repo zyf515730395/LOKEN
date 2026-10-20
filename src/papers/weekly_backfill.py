@@ -5,6 +5,7 @@ import argparse
 from datetime import date, datetime, timedelta
 import hashlib
 import json
+import subprocess
 from pathlib import Path
 import sys
 import threading
@@ -320,9 +321,43 @@ def run(year, max_weeks=1, max_minutes=60):
         raise
 
 
+def watch(year, max_minutes, *, worker=None, sleep=None):
+    """Supervise fresh workers; never duplicate their owner/runtime locks."""
+    from papers.runtime import lock
+    worker = worker or subprocess.run
+    sleep = sleep or time.sleep
+    target = REPORTS / f'backfill-{year}.json'
+    receipt = REPORTS / f'backfill-{year}-supervisor.json'
+    failures = 0
+    with lock('weekly-backfill-supervisor.lock', blocking=False) as acquired:
+        if not acquired:
+            print('Another weekly supervisor owns the queue; deferred.', flush=True)
+            return 4
+        while True:
+            write_json(receipt, {'status': 'running', 'year': year, 'updated_at': now(), 'consecutive_failures': failures})
+            try:
+                result = worker([sys.executable, '-u', '-m', 'papers.weekly_backfill', 'run',
+                                 '--year', str(year), '--max-weeks', '0', '--max-minutes', str(max_minutes)], cwd=ROOT)
+                state = json.loads(target.read_text(encoding='utf-8')) if target.exists() else {}
+                # A busy foreign worker must never let its stale receipt complete us.
+                if result.returncode == 0 and state.get('status') in ('completed', 'completed_with_gaps') and not state.get('remaining_weeks'):
+                    write_json(receipt, {'status': state['status'], 'year': year, 'updated_at': now()})
+                    return 0
+                failures = failures + 1 if result.returncode not in (0, 4) else 0
+                error = state.get('error') if result.returncode not in (0, 4) else None
+            except (OSError, ValueError) as error_value:
+                failures += 1
+                error = f'{type(error_value).__name__}: {error_value}'
+            delay = min(900, 60 * 2 ** min(failures, 4))
+            write_json(receipt, {'status': 'waiting', 'year': year, 'updated_at': now(),
+                                'consecutive_failures': failures, 'retry_seconds': delay, 'error': error})
+            print(f'Weekly supervisor retains checkpoints; retry in {delay}s. {error or "Yielding between workers."}', flush=True)
+            sleep(delay)
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('command',choices=('status','run'))
+    parser.add_argument('command',choices=('status','run','watch'))
     parser.add_argument('--year',type=int,default=2026)
     parser.add_argument('--max-weeks',type=int,default=1,help='0 processes until the slice boundary')
     parser.add_argument('--max-minutes',type=int,default=60,help='stop admitting model requests at the slice boundary')
@@ -332,6 +367,8 @@ def main(argv=None):
     if sys.platform != 'linux' or ROOT.resolve() != Path('/mnt/g/share/projects/arxiv-papers-daily').resolve():
         parser.error('Use the canonical shared WSL workspace')
     target = REPORTS / f'backfill-{args.year}.json'
+    if args.command == 'watch':
+        return watch(args.year, args.max_minutes)
     if args.command == 'status':
         value = json.loads(target.read_text(encoding='utf-8')) if target.exists() else {'status':'not_started','year':args.year,'total_weeks':len(weeks_for_year(args.year,datetime.fromisoformat(now()).date()))}
     else:
