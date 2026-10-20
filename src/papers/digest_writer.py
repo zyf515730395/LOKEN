@@ -79,6 +79,31 @@ def summarize_paper(key,title,evidence,client,model,cache_root,should_continue=N
     write_json(target,result)
     return result
 
+def recover_official_abstract(key,row,source):
+    """Route by verified identity, reusing the canonical acquisition caches."""
+    if re.fullmatch(r'\d{4}\.\d{4,5}',key):
+        text=source.acquire_abstract(key,row['title'])
+        return {'title':row['title'],'url':f'https://arxiv.org/abs/{key}','text':text,
+                'sha256':evidence_hash(text),'verified_at':now()}
+    from papers import paths
+    from papers.conference_intake import conference_source_cache_root
+    from papers.conference_sources import acquire_conference_abstract
+    from papers.proceedings import normalize_title
+    library=json.loads((paths.ROOT/'content/papers/conference-library.json').read_text(encoding='utf-8'))
+    record=library['papers'].get(key)
+    if not record or normalize_title(record['title'])!=normalize_title(row['title']):
+        raise ValueError(f'Conference digest identity mismatch: {key}')
+    cache=conference_source_cache_root(record,paths.ROOT/'build/conferences/intake/sources'/key)
+    paper,_=acquire_conference_abstract(record,cache)
+    receipt=json.loads((cache/'abstract-verified.json').read_text(encoding='utf-8'))
+    if receipt['source_sha256']!=paper.source_sha256:
+        raise ValueError('Conference official abstract receipt changed')
+    text=paper.document.abstract
+    return {'title':record['title'],'url':receipt['url'],'text':text,'sha256':evidence_hash(text),
+            'verified_at':now(),'basis':'official_abstract','source_sha256':paper.source_sha256,
+            'source_version':record.get('source_version')}
+
+
 def generate_periods(periods,*,today=None,model=None,workers=4,sentence_evidence_only=False,context=None,on_write=None,should_continue=None):
     from papers import paths
     from papers.digests import load_public_papers,load_digest_evidence
@@ -110,9 +135,9 @@ def generate_periods(periods,*,today=None,model=None,workers=4,sentence_evidence
         if should_continue and not should_continue():
             interrupted=True; break
         try:
-            text=source.acquire_abstract(key,row['title'])
-            official['papers'][key]={'title':row['title'],'url':f'https://arxiv.org/abs/{key}','text':text,'sha256':evidence_hash(text),'verified_at':now()}
-            save_public(official_path,official); summaries[key]=text
+            entry=recover_official_abstract(key,row,source)
+            official['papers'][key]=entry
+            save_public(official_path,official); summaries[key]=entry['text']
             print(f'Official abstract recovered: {key}',flush=True); time.sleep(5)
         except (ValueError,OSError) as error:
             failures.append({'paper':key,'stage':'evidence','error':str(error)})

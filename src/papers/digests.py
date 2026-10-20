@@ -139,17 +139,47 @@ def _paper_html(row: dict, summaries: dict[str, str]) -> str:
             f'{basis} {row["digest_date"].isoformat()} · 发表 {html.escape(str(public_date))}</p>{content}</article>')
 
 
-def load_digest_evidence(output_root: Path, analysis_root: Path) -> dict[str, str]:
+class StaleOfficialEvidence(ValueError):
+    """Expected source-version turnover; retained audit evidence is not reused."""
+
+
+def official_evidence_text(key: str, value: dict, library: dict) -> str:
     from papers.digest_analysis import evidence_hash
+    text = value['text']
+    if value['sha256'] != evidence_hash(text) or not 40 <= len(text) <= 16000:
+        raise ValueError(f'Invalid official digest evidence: {key}')
+    if re.fullmatch(r'\d{4}\.\d{4,5}', key):
+        if value['url'] != f'https://arxiv.org/abs/{key}':
+            raise ValueError(f'Invalid official arXiv digest URL: {key}')
+    elif re.fullmatch(r'conf-[a-f0-9]{24}', key):
+        from papers.conference_sources import _safe_url
+        from papers.proceedings import normalize_title
+        record = library.get(key)
+        if not record or value.get('source_version') != record.get('source_version'):
+            raise StaleOfficialEvidence(f'Conference official evidence requires refresh: {key}')
+        if (normalize_title(value.get('title','')) != normalize_title(record['title'])
+                or value.get('basis') != 'official_abstract'
+                or not re.fullmatch(r'[a-f0-9]{64}',value.get('source_sha256',''))):
+            raise ValueError(f'Invalid conference digest evidence identity: {key}')
+        _safe_url(value['url'])
+    else:
+        raise ValueError(f'Invalid official digest paper ID: {key}')
+    return text
+
+
+def load_digest_evidence(output_root: Path, analysis_root: Path) -> dict[str, str]:
     summaries = load_published_summaries(output_root)
     path = analysis_root / 'official-abstracts.json'
     if path.exists():
         payload = json.loads(path.read_text(encoding='utf-8'))
+        library = None
         for key, value in payload['papers'].items():
-            text = value['text']
-            if (not re.fullmatch(r'\d{4}\.\d{4,5}', key) or value['url'] != f'https://arxiv.org/abs/{key}'
-                    or value['sha256'] != evidence_hash(text) or not 40 <= len(text) <= 16000):
-                raise ValueError(f'Invalid official digest evidence: {key}')
+            if key.startswith('conf-') and library is None:
+                library = json.loads((analysis_root.parent/'conference-library.json').read_text(encoding='utf-8'))['papers']
+            try:
+                text = official_evidence_text(key,value,library or {})
+            except StaleOfficialEvidence:
+                continue
             summaries.setdefault(key, text)
     return summaries
 
