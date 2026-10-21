@@ -112,11 +112,20 @@ def trend_schema(ids):
 
 
 def synthesize_topic(prompt,ids,contributions,summaries,client,model,reports,identity,should_continue=None):
+    from shared.loopback_chat import LoopbackChatError
+    output_budget = 6500
     for attempt in range(3):
         if should_continue and not should_continue():
             raise ValueError('Backfill yielded before another topic request')
         repair='' if attempt==0 else '\n上次输出未通过校验。请重写，paper_ids必须从当前给定ID枚举中原样选取，不能发明、改写或引用本期本主题以外的ID；其余分析仍须依据全部输入。'
-        raw=client.complete([{'role':'user','content':prompt+repair}],model=model,timeout=900,max_tokens=6500,enable_thinking=False,json_schema=trend_schema(ids))
+        try:
+            raw=client.complete([{'role':'user','content':prompt+repair}],model=model,timeout=900,max_tokens=output_budget,enable_thinking=False,json_schema=trend_schema(ids))
+        except LoopbackChatError as error:
+            if error.code != 'model_output_truncated' or attempt == 2:
+                raise
+            output_budget = min(20000, output_budget * 2)
+            print(f'Topic {identity} output truncated; retry with {output_budget} output tokens', flush=True)
+            continue
         atomic_write_text(reports/f'{identity}-{evidence_hash(raw)[:16]}.json',raw)
         try:
             item={'paper_ids':ids,'contributions':contributions,'trends':scope_trends(json.loads(raw)['trends']),
