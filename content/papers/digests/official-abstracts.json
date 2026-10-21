@@ -2788,6 +2788,537 @@
       "basis": "official_abstract",
       "source_sha256": "4886536291679d4904c5ec307a01c7f7b4a7cab6cc19a369e65b904b812b4e92",
       "source_version": "a62eb06dff60e83fb9b9163e6400fd09083e5426e732f68e50d553a7002a6c08"
+    },
+    "2603.06351": {
+      "title": "DC-DiT: Adaptive Compute and Elastic Inference for Visual Generation via Dynamic Chunking",
+      "url": "https://arxiv.org/abs/2603.06351",
+      "text": "Diffusion Transformers rely on static patchify tokenization, assigning the same token budget to smooth backgrounds, detailed object regions, noisy early timesteps, and late-stage refinements. We introduce the Dynamic Chunking Diffusion Transformer (DC-DiT), which replaces fixed patchification with a learned encoder-router-decoder scaffold that adaptively compresses the 2D input into a shorter token sequence through a chunking mechanism learned end-to-end with diffusion training. DC-DiT allocates fewer tokens to predictable regions and noisy timesteps, and more tokens to detailed regions and later refinement stages, yielding meaningful spatial segmentations and timestep-adaptive compression schedules without supervision. Furthermore, the router provides an importance ordering over retained tokens, enabling elastic inference: a single checkpoint can be evaluated at flexible compute budgets with a smooth quality-compute tradeoff. Additionally, DC-DiT can be upcycled from pretrained DiT checkpoints and is also compatible with orthogonal dynamic computation approaches. On class-conditional ImageNet generation, DC-DiT reduces inference FLOPs by up to 36.8% and improves FID by up to 37.8% over DiT baselines, yielding a stronger quality--compute Pareto frontier across model scales, resolutions, and guidance settings. More broadly, these results suggest that adaptive tokenization is a general mechanism for making visual generation both more efficient and more flexible at inference time.",
+      "sha256": "808693a52a494a669336e7a1ab53ec950f4fc92f2aad35c7fcf2cb8ca7503faa",
+      "verified_at": "2026-10-21T13:01:57.827499+08:00"
+    },
+    "conf-e5eed8771df2cd6a6d806948": {
+      "title": "ProtoVAR: Efficient Dataset Distillation via Prototype-Guided Visual Autoregressive Modeling",
+      "url": "https://icml.cc/virtual/2026/poster/66235",
+      "text": "Recent advances in generative distillation have shown strong potential in constructing high quality surrogate datasets within a fraction of the time required by optimization-based approaches. However, most existing generative solutions rely on diffusion models, which suffer from two limitations. (i) Indirect matching objectives. Their sequential denoising process makes it difficult to directly match representative prototypes. (ii) Target-agnostic generation. The generation process is often decoupled from the target task, causing the synthesized samples to drift from the desired distribution. Building on this insight, We propose ProtoVAR, a prototype-guided visual autoregressive framework. Instead of relying on latent space, ProtoVAR uses the coarse-to-fine next-scale prediction of Visual AutoRegressive (VAR) modeling to maintain semantic consistency during generation. By injecting multi-scale class prototypes, ProtoVAR enforces clear representativeness constraints while preserving diversity. A pool-based selector further distills the prototype-guided outputs into a compact, task-aligned surrogate dataset. Extensive experiments show that ProtoVAR achieves state-of-the-art performance with comparable or lower computational cost than diffusion-based distillation. Show more",
+      "sha256": "0d31bad9bb589d7f94c18428005fbf1ce65113c525f016fddd6f951c9a952e02",
+      "verified_at": "2026-10-21T13:02:03.164439+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "d048f8711b7c55a3cfd4575e3a14467c59325e9f39b0712b34a36ea23eb7cdfc",
+      "source_version": "a68be86f1054125bfdee3c775f9606b0cc350bbc9b71047e5dca251910aee08a"
+    },
+    "conf-e0fb180aec8753d5c03d96d7": {
+      "title": "B-Spar: Bayesian Sparse-Reward Modeling for RL-based Image Editing",
+      "url": "https://icml.cc/virtual/2026/poster/63022",
+      "text": "Autonomous image-editing agents powered by multimodal large language models (MLLMs) improve transparency and controllability by translating high-level instructions into tool-mediated edit sequences, but training such agents with reinforcement learning often relies on dense proxy rewards (e.g., incremental image-quality score gains) to compensate for sparse human feedback. When these proxies overvalue small local changes, the resulting optimization signal can be dominated by numerically measurable yet perceptually negligible edits, biasing policy gradients toward proxy artifacts rather than meaningful progress. We propose B-Spar, a reward-centric Reinforcement Learning framework for perceptually aligned image retouching under sparse feedback that combines prior-guided trajectory sampling to reduce inefficient exploration, Bayesian reward modeling to densify sparse binary feedback into a stable training signal, and anchor-regularized policy optimization to steer updates toward high-reward regions while preventing early mode collapse. Experiments on public benchmarks demonstrate that B-Spar improves perceptual quality and metric alignment with stable training and competitive inference efficiency over strong prompt-based and training-based baselines. Notably, it outperforms AIGC-based baselines by over 95\\% in perceptual quality, achieving an improvement of approximately 33.5\\% over the state-of-the-art. Show more",
+      "sha256": "7d929a99a82acfebebfeba62369f5fdffe7e4a0edc92da68a797333ec5a8abb9",
+      "verified_at": "2026-10-21T13:02:08.445163+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "cfc276fb7c46c75d9573731db82a05976b55e0d9a319362dcb58b1b7d9b9e1bf",
+      "source_version": "6b2811d5d9d20189e52e64cc74f8b1db813494e609f2da1f8e6c410f20f876ae"
+    },
+    "conf-d48a59895da7a7154eaf78c1": {
+      "title": "Preference-Enhanced Reinforcement Learning for Pluralistic Image Inpainting",
+      "url": "https://icml.cc/virtual/2026/poster/63619",
+      "text": "Existing image inpainting frameworks rely on strictly supervised training paradigms, often suffering from an over-reliance on ground-truth reconstruction, which leads to conservative outputs with misaligned creativity and limited diversity. To this end, we propose the first framework to explore Group Relative Policy Optimization (GRPO) and Direct Preference Optimization (DPO) for text-guided image inpainting, formulating an efficient online reinforcement learning pipeline that enables flexible, human-aligned aesthetic control via a preference scoring model. Crucially, by decoupling the rigid one-to-one correspondence between text prompts and masked images, our method enables the model to explore diverse, controllable, and high-quality solutions beyond a single target. Furthermore, to balance semantic consistency with physical naturalness at mask boundaries, we introduce a scale-aware dynamic reward mechanism that adaptively emphasizes boundary gradient coherence for small occlusions while prioritizing visual aesthetics in large-scale generation. Extensive experiments demonstrate that our approach consistently produces higher-quality results across different backbone architectures such as Stable Diffusion and FLUX, significantly enhancing the generative capacity of base models. Show more",
+      "sha256": "6a5a76e2c7d7819156e57c8c5d2b351e621604565d658e8fbd91458fdb3a17da",
+      "verified_at": "2026-10-21T13:02:13.727212+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "b497ecdc6d92d3a9ee67eda35bf4dd24a9b5561fcc872c49a659dc8dd01e2b98",
+      "source_version": "8cee25b712dc209c6210db0119bca6bd98965f8cf1595820a0ad40a3b80574c3"
+    },
+    "conf-b60aca4381a600e214dbe9ff": {
+      "title": "Responsible Text-to-Image Diffusion: Interpretable and Linearly Controllable Semantics for Fair and Safe Generation",
+      "url": "https://icml.cc/virtual/2026/poster/63546",
+      "text": "Text-to-image (T2I) diffusion models (DMs) have achieved remarkable generative quality but still exhibit risk of producing biased and inappropriate images. A promising line of prior work aims to mitigate this issue by learning interpretable, linearly controllable concepts from semantic spaces, such as the U-Net bottleneck; however, these methods rely entirely on U-Net architectures and cannot be generalized to modern ViT-based DMs, including FLUX and PixArt. In this work, we present an architecture-agnostic framework for discovering interpretable and linearly controllable semantic attributes across any T2I DM backbone. Theoretically, we show that multi-modal attention heads in ViT-based DMs exhibit a linear semantic structure: injected concept vectors combine linearly at the attention level and induce near-linear effects at the model output, satisfying homogeneity and additivity. These theoretical results are aligned with and supported by empirical experiments. Building on this insight, we introduce a method that learns external concept vectors, which are added to the multi-modal attention heads for ViT-based DMs or to the bottleneck layer for U-Net-based DMs, while keeping pretrained models frozen. Experiments across SDXL, SD3.5, PixArt, and FLUX demonstrate that these concept vectors provide interpretability, linearity, and significantly improved fairness while preserving visual fidelity. The code and demo are available at https://github.com/Moslem-Sh21/responsible-t2i-diffusion. Show more",
+      "sha256": "495d0ac0bd662a2d4858730999810c99ca7edd118b6a03a46ede8d13c6e74822",
+      "verified_at": "2026-10-21T13:02:19.004060+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "4d7ecc1913f9c287710e49aaa5f87c75d433635fc4f196253b866436a3358cd9",
+      "source_version": "d7fc3e48b101fb8198606041794d7af753903bc418ef2edffabd9a0ac0f4e3d3"
+    },
+    "conf-aef0779c1555cae5d0a17ce0": {
+      "title": "Unpaired Visual Editing with Self-Consistent Flow Matching",
+      "url": "https://icml.cc/virtual/2026/poster/66004",
+      "text": "Modern generative models possess a deep understanding of visual content, yet training them for image editing typically requires massive datasets of paired examples. This limits scalability, especially for video editing where collecting paired data is prohibitively expensive. We propose a general framework for unpaired training of flow matching editing models. It leverages the base model's knowledge without any external signal. Our approach pairs instruction-following cues extracted from the frozen model with cycle-consistency for structure preservation. To make this tractable, we propose to route gradients from downstream losses over clean predictions to noisy training states. We demonstrate state-of-the-art results on challenging data-scarce image and video editing scenarios. Extensive evaluations and user studies show that our method effectively generalizes to unseen domains and outperforms supervised baselines trained on millions of samples. Analysis reveals that our gradient routing bridges the train-inference gap, and extracting semantic cues from a base model provides a robust training signal that obviates the need for external reward models. Show more",
+      "sha256": "ec178885e79dc9804f1ec5f6183625ee40e405275a17780b917f74fd51510db3",
+      "verified_at": "2026-10-21T13:02:24.283553+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "52f0e77f839ef9a33e3bec59f0c2f87920e7d2044ecf76c61d66e5ec00154d6d",
+      "source_version": "614357e9a08d980574f773bdb17f7860291d54c886d882b06ad2e83beeeec602"
+    },
+    "conf-a21412da25707f05f5d37060": {
+      "title": "A Flat Vocabulary or a Rich Hierarchy? Re-introducing Intrinsic Structure Transforms the Autoregressive Image Generation",
+      "url": "https://icml.cc/virtual/2026/poster/62205",
+      "text": "Autoregressive (AR) models have shown great promise in image generation, yet they face a fundamental inefficiency stemming from their core component: a vast, unstructured vocabulary of visual tokens. By treating tokens as a flat set, standard models overlook the manifold structure where geometric proximity reflects semantic similarity. This oversight unnecessarily complicates the prediction task, hindering training efficiency and limiting generation quality. To resolve this, we propose Manifold-Aligned Semantic Clustering (MASC), a principled framework that constructs a hierarchical semantic tree directly from the codebook's intrinsic geometry. Utilizing a geometry-aware distance metric and density-driven agglomerative construction, MASC faithfully models the token embedding manifold. By transforming the flat, high-dimensional prediction into a structured hierarchical task, MASC introduces a powerful inductive bias that simplifies learning. Designed as a plug-and-play module, MASC accelerates training by up to 71\\% and significantly boosts generation quality, improving LlamaGen-XL's FID from 2.87 to 2.49. Crucially, MASC further serves as a convergence enabler for complex architectures. These results establish that structuring the prediction space is as vital as architectural innovation, elevating existing AR frameworks to state-of-the-art performance. Show more",
+      "sha256": "2592a2c222ca0f2b368a1b979b10243d8e2741d38337409dd1e3367f0c6ed767",
+      "verified_at": "2026-10-21T13:02:29.564008+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "d360c227c66a72d707caf542a2992aa18e01fdf036c827ae3e98f24d1566e634",
+      "source_version": "20b70e0e2fcad0924187fc96b99c7c19e8edaf80455e7614fd390669962acbdc"
+    },
+    "conf-88242f4b72f7792d21bea8eb": {
+      "title": "Prism-MoE: Efficient Dense-to-MoE Conversion for Visual Autoregressive Generation",
+      "url": "https://icml.cc/virtual/2026/poster/65615",
+      "text": "Scaling up visual autoregressive models improves generation quality but incurs substantial inference costs. Mixture-of-Experts (MoE) architectures mitigate this issue through sparse activation and have proven effective in large language models. However, training MoE models from scratch remains prohibitively expensive, and dense-to-MoE conversion for visual autoregressive models is still underexplored. To enable low-cost and high-quality dense-to-MoE conversion , we propose Prism-MoE , an efficient framework for transforming pretrained dense visual autoregressive models into sparse MoE models. Prism-MoE consists of two key components.  First, we introduce trajectory-consistent Initialization, which formulates expert initialization as a principled decomposition problem and preserves the generation trajectory of pretrained models. Second, we propose a confidence-adaptive sparse fine-tuning framework that aligns expert specialization with the information density of visual tokens via confidence-aware routing supervision. Experiments show that Prism-MoE achieves dense-to-MoE conversion with less than 10\\% of the standard training budget, while maintaining generation quality comparable to dense baselines with only 37.5\\% active parameters. Show more",
+      "sha256": "0e9ac35341739ebfd2e8d3f17a120e471440a09afde6a0826180937ab961e6d7",
+      "verified_at": "2026-10-21T13:02:34.840060+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "f799c949305ea85a36941c66a84945917d19feef303c46f1ec90b17b78aed8a6",
+      "source_version": "e5ba2084ddd97aeabf3167f6d0184d1643834dd7413db3f02b72f8d0ea91a358"
+    },
+    "conf-7b5999d38573e1ccc32640eb": {
+      "title": "Entropy-Aware Dynamic KV Cache Sparsification for Autoregressive Image Generation and Editing",
+      "url": "https://icml.cc/virtual/2026/poster/62177",
+      "text": "Autoregressive (AR) image generation has recently gained momentum as a scalable alternative to diffusion models, benefiting from unified next-token prediction paradigm and strong instruction following ability. However, AR visual generation must decode excessively long sequences of visual tokens, making inference heavily bottlenecked by the memory footprint and latency of the self-attention KV cache. While KV cache compression is well studied in Large Language Model, its counterparts in AR image generation remain underexplored. The reason is fundamental: visual tokens are highly redundant, and their spatial information density is highly non-uniform. In this work, we introduce SparseAR, a training-free, entropy-aware sparse attention method that is specifically designed for AR image generation and editing. Our key insight is that information-rich regions exhibit higher entropy and require broader attention, while redundant regions show lower entropy and allow aggressive sparsification. Based on this insight, we dynamically identify information-rich regions during decoding and adaptively adjust attention sparsity to reduce KV-cache overhead. SparseAR is plug-and-play and can be readily applied to mainstream AR models. Extensive experiments on four representative AR  models across multiple benchmarks demonstrate that SparseAR significantly improves inference efficiency while maintaining, and often even improving, generation and editing quality. Show more",
+      "sha256": "4ede1933ca5959e54bf9bac09c24bcda2d06eebaacc291c0c6b1124f42a7d6e0",
+      "verified_at": "2026-10-21T13:02:40.131204+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "5dd8d3974067779c77b1f0307b9787d2df4ecf04918a27078e9d86f13d7de0e5",
+      "source_version": "ea475ae661d70cf65654dfb043e3eaa6667e78f6cd7ec0291fade2abc557fefd"
+    },
+    "conf-647eb0bce7acd10b58db4d22": {
+      "title": "AnyCanvas: Potential Field Guidance for Training-Free Spatial Control in Text-to-Image Diffusion",
+      "url": "https://icml.cc/virtual/2026/poster/63676",
+      "text": "Diffusion-based text-to-image (T2I) models have demonstrated remarkable advancements in generating high-quality images. However, while real-world applications like product packaging and logo design necessitate synthesis within irregular geometries, existing methods struggle to handle such constraints. Therefore, generating complete pictures that conform to arbitrary-shaped canvas constraints while maintaining semantic integrity remains a significant challenge. To address this, we introduce AnyCanvas, a training-free framework that leverages a Mask-to-Potential Field paradigm to convert binary masks into a differentiable potential field, which guides content to naturally converge within target regions. Extensive experiments demonstrate that AnyCanvas achieves 4.23\\% higher spatial adherence to user-specified constraints while maintaining 99.45\\% of the semantic fidelity measured by CLIP score, leading to a superior harmonic mean of spatial and semantic metrics. AnyCanvas also exhibits robust generalizability across different model backbones and versatile spatial control objectives. Show more",
+      "sha256": "247f4d8292f97ba2c69858a06a084f9849dcfa891d468eb3ea99d4f7b5ecf4c7",
+      "verified_at": "2026-10-21T13:02:45.426069+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "3d7931a4f76e5e4404567b9fe072ef02b1eeb7c5939599d392161faa89d0f8c8",
+      "source_version": "0ac4a2747d61cbaf017157738a171a6bba57cec01e356f682625a48b2fda1a20"
+    },
+    "conf-62abd995de24ba08acd7b8b3": {
+      "title": "Sparse Relaxed-Lasso Steering: Automatic Sparse Autoencoder Feature Selection for Precise Image Editing",
+      "url": "https://icml.cc/virtual/2026/poster/63749",
+      "text": "Precise, training-free image editing with text-to-image diffusion models requires balancing alignment (faithful realization of the target attribute), consistency (preserving non-target content), and quality (maintaining sharp, artifact-free textures). Sparse autoencoder (SAE) steering offers interpretable, smooth ``slider-like'' control by manipulating SAE feature activations derived from the text encoder; however, existing approaches rely on heuristic feature selection and manual steering-strength tuning, leading to suboptimal trade-offs among the three objectives. We propose Sparse Relaxed-Lasso Steering (SRLS), which casts steering-vector discovery as a convex sparse recovery problem. Exploiting the affine structure of the SAE decoder, SRLS automatically identifies sparse, generalizable support sets via a Lasso objective and then debiases the coefficients using support-restricted ridge refitting. We further replace manual strength tuning with a fixed-budget Bayesian optimization procedure. Across diverse attributes and subjects, SRLS improves the alignment--consistency--quality trade-off over competing methods. Show more",
+      "sha256": "b181bcc13240de384b98e05dfff8cab9d82001298c3f24c51194c8a349b09dcd",
+      "verified_at": "2026-10-21T13:02:50.696987+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "e41df68ec6dbab3dc4ed16ec3e7a885dc024e0c4b5d587446e550bc52c8d94d0",
+      "source_version": "36b1e92d165ba7556258ce868332d8852193910ffa2b0475a97b1f880148e050"
+    },
+    "conf-4b7cf43b6dee2cce2a686acf": {
+      "title": "Boost the Identity-Preserving Embedding for Consistent Visual Generation",
+      "url": "https://icml.cc/virtual/2026/poster/61511",
+      "text": "Text-to-image models have advanced high-fidelity content generation, but their inability to maintain subject consistency hampers realistic applications.  Existing training-based methods rely on heavy computation and large datasets; while training-free approaches demand excessive memory or complex auxiliary modules.  In this paper, we first reveal a key property overlooked in prior works that the identity-relevant signals, termed Identity-Preserving Embeddings ( IPemb ), are implicitly encoded in textual embeddings of frame prompts. To address the consistent T2I generation with the IPemb embedding, we propose Boost Identity-Preserving Embedding ( BIPE ), a training-free yet plug-and-play framework that explicitly extracts and enhances the IPemb .  Its core innovations are two complementary techniques:  First, Adaptive Singular-Value Rescaling ( adaSVR ) applies singular-value decomposition to the joint embedding matrix of all frame prompts, amplifying identity-centric components  while suppressing frame-specific noise.  Second, Union Key ( UniK ) further reinforces consistency by aligning the T2I backbone’s image-text attention across the entire generation sequence. Experiments on the ConsiStory+ benchmark demonstrate BIPE outperforms existing methods in both qualitative and quantitative metrics. To address the gap in evaluating a broader range of scenarios with diversified prompt templates, we introduce a DiverStory benchmark to further confirm our scalability. Show more",
+      "sha256": "8df8262c116510495c6b095e1076596809e3c1d52b27cee60b03607a6208c85c",
+      "verified_at": "2026-10-21T13:02:55.982424+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "f42e4e4a231403c93a280a1903fc8f931e6fd30007239bf0c252235025adcf60",
+      "source_version": "7af6321b917b2618b362ec309a067e8856899c8db7eb6570ea33994ae60bb5ed"
+    },
+    "conf-491e67513cba2296363ed789": {
+      "title": "CacheEdit: Efficient Multi-round Image Editing via Adaptive Token-wise Reuse.",
+      "url": "https://icml.cc/virtual/2026/poster/66154",
+      "text": "Instruction-based image editing (IIE) is a vital tool for iterative content creation, enabling multi-round interactions that refine visual details while preserving cross-round consistency. However, this workflow is constrained by the compute-bound nature of Diffusion Transformers (DiTs): because DiTs process tokens uniformly, they waste substantial computation on regions untouched by the instruction. We investigate the Round--Step--Layer hierarchy of DiT-based editing and identify a phenomenon we term Delayed Latent Emergence (DLE). Although pronounced latent changes emerge only in the late denoising stages, deep-layer activations within transformer blocks at the very first sampling step already diverge markedly in edited regions. Building on this insight, we propose CacheEdit, a training-free framework centered on an Adaptive Activation Cache (Acache) that exploits early-step sensitivity to detect invariant tokens and reuse their cached activations across subsequent sampling steps, thereby bypassing redundant computation. Experiments on FLUX.1 Kontext and Qwen-Image-Edit show that CacheEdit achieves up to $2.5\\times$ end-to-end acceleration. Moreover, by isolating and reusing static features, CacheEdit mitigates stochastic drift and improves instruction-following and structural consistency over full-recomputation baselines. Show more",
+      "sha256": "8213d0184da2eee557b9de6494722da4ef8169e9c8830781bdc9a7d583bf6038",
+      "verified_at": "2026-10-21T13:03:01.274650+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "d71fb10a8499fb2947d6b334138743ab3930ac0c0f15ffb69e258d3eb1da8aae",
+      "source_version": "e06884773f0a0ec99a6d469c02606813f08b1d3ababdd842db46183971e26693"
+    },
+    "conf-3360335bae40ca18ce54138b": {
+      "title": "Preference-Calibrated Optimization with Score-Level Distribution Alignment for Text-to-Image Diffusion Model Unlearning",
+      "url": "https://icml.cc/virtual/2026/poster/66454",
+      "text": "While text-to-image diffusion models achieve remarkable generation quality, they inadvertently memorize sensitive content, necessitating machine unlearning to prevent undesired outputs. However, existing unlearning methods rely on suboptimal surrogate objectives rather than directly optimizing the unlearning goal, leading to fundamental objective mismatch. Moreover, these methods preserve model utility via surface-level constraints on model parameters or outputs, yet fail to capture the intrinsic generative dynamics of diffusion models, consequently triggering catastrophic forgetting. To address these challenges, we propose Preference-calibrated Optimization with Score-level Distribution Alignment (POSDA), a unified unlearning framework that harmonizes effective erasure with fine-grained structural preservation. Specifically, we reframe unlearning as a preference optimization problem by constructing a reward that explicitly quantifies the unlearning objective. Additionally, we introduce score-level distribution alignment to ensure the invariance of the underlying manifold topology of the unlearned model, thereby preventing distributional drift. Extensive experiments across object, style, and NSFW unlearning tasks demonstrate that POSDA achieves state-of-the-art erasure efficacy while maintaining superior model utility compared to existing methods. Show more",
+      "sha256": "d5e8b2339dfab1204f7f80d5b2572517301adab161b386a023f7b6e3b8dc80c6",
+      "verified_at": "2026-10-21T13:03:06.578510+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "d4c2f72a4168083ae93b2e5d3f9fca699e1c2af29e4c4fb009ea2b619dcaed32",
+      "source_version": "59ac43cba23e5a8098a8b60a6a7095586266bcf8a8a208cd9fc4a073c8a898bc"
+    },
+    "conf-2c1f8a335f502ac54975fd63": {
+      "title": "Towards Seed-Robust Safety Alignment in Text-to-Image Models",
+      "url": "https://icml.cc/virtual/2026/poster/64210",
+      "text": "Text-to-image diffusion models have achieved remarkable success in generating high-quality images, yet existing safety mechanisms exhibit critical cross-seed instability where defense performance varies significantly under different random seed conditions. This instability stems from the fact that a single malicious prompt generates diverse harmful variants across different noise initializations, forming complex distributional clusters that current methods cannot adequately address. We investigate extending Noise Contrastive Alignment (NCA) to diffusion models due to its native capability of handling multiple negative samples through probabilistic weighting, but our theoretical analysis reveals two fundamental flaws in direct extension: gradient reversal caused by positive regularization terms that paradoxically penalize safe content generation, and uniform suppression of harmful samples that ignores severity variations. To tackle these issues, we propose Noise Contrastive Diffusion (NCD), which incorporates targeted algorithmic modifications including elimination of problematic regularization and introduction of pairwise regularization mechanisms that establish individualized preference relationships between safe and harmful variants. Extensive experiments further demonstrate that NCD achieves superior cross-seed stability, reducing attack success rates (ASRs) from 11.1% to 6.2% compared to SOTA methods at the seed level while maintaining exceptional generation quality, exhibiting robust resistance against sophisticated jailbreak prompts and strong generalizability across different T2I architectures. WARNING: This paper may contain examples of harmful texts and images. Show more",
+      "sha256": "88033f307161795edf37cfef690d6bf6e6b4d3fc90738f204cd5f3016613d2e2",
+      "verified_at": "2026-10-21T13:03:11.862684+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "5a352f12a96460214878fd8684abb1a28f4688c38ad136e9d8d80fd330440497",
+      "source_version": "3294da852f1a7193424d7a57ab31a7111ef1f099f5752e2551f693f3af96be11"
+    },
+    "conf-28f25f87c0d70565e7970632": {
+      "title": "Benchmarking and Improving Fine-Grained Text-to-Image Alignment via Paired Reinforcement Learning",
+      "url": "https://icml.cc/virtual/2026/poster/61758",
+      "text": "While recent autoregressive models have achieved text-to-image generation performance comparable to diffusion models, they significantly struggle with fine-grained semantic alignment. To rigorously evaluate this limitation, we introduce DeltaBench, a benchmark featuring paired prompts with subtle fine-grained differences, which reveals that existing models fail to achieve precise control over visual tokens. To bridge this gap, we propose FocusDiff, a comprehensive framework that enhances alignment by learning from subtle differences in similar text-image pairs. Specifically, we construct FocusDiff-Data, a large-scale dataset of paired samples derived from image editing tasks to capture localized semantic shifts. Furthermore, we introduce Pair-GRPO, an improved reinforcement learning algorithm that extends GRPO to paired samples. Extensive experiments demonstrate that our approach outperforms most prior prominent methods on both DeltaBench and existing benchmarks. Show more",
+      "sha256": "4f78fdc23235250b424d910f4e3070f69e5fe4b1b08319570f60b1f1fa6d153a",
+      "verified_at": "2026-10-21T13:03:17.177466+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "794699a284924e73a1362f704e998f0f5be4521d44ada4c16cba464c8d6a948e",
+      "source_version": "3288ba19ce2cabd852233e6fd74b834adcf779c6113f1b2521c9a5b188ba4827"
+    },
+    "conf-2806942e3d2bd04f3d115cdf": {
+      "title": "Inference Time Concept Removal Guidance for Text-to-Image Diffusion Models",
+      "url": "https://icml.cc/virtual/2026/poster/65659",
+      "text": "Text-to-image diffusion models remain vulnerable to adversarial prompts that elicit disallowed content, motivating reliable inference-time controls. A popular approach is negative guidance, which subtracts a negative-prompt direction with a fixed weight. However, it often forces a safety–fidelity trade-off, causing artifacts or prompt drift when over-applied and failing under attacks when under-applied. Recent dynamic variants reweight guidance using posterior-odds signals, which can be brittle for open-vocabulary compositional prompts, while lightweight similarity-based methods do not leverage the evolving image evidence along the denoising trajectory. We introduce Concept Removal Guidance (CRG), a training-free, plug-and-play method that estimates unwanted-concept presence at each diffusion step using only the noise predictions from the model, and then adaptively gates and calibrates negative guidance via a closed-form constrained update that enforces a target presence threshold while minimally perturbing the conditional trajectory. Across multiple red-teaming benchmarks, CRG significantly reduces attack success rates while improving benign fidelity, and additional suppression targets such as artist style and violence  without fine-tuning or external classifiers. Show more",
+      "sha256": "ea3c8582cdd61b3a5fd86aeca3ff39fa243b973c854ef4283fcaca05e20e7064",
+      "verified_at": "2026-10-21T13:03:22.471020+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "60bedd23809502a23dc47a153815bfe50587ec1e90b5d4b59c8688d7af4f3ed2",
+      "source_version": "3523c21f1e58958087c92f5923caec7ccb7eeb02292648f1c826bb8dff1221aa"
+    },
+    "conf-0bcfa514793896142220328f": {
+      "title": "StructMAR: Structure-Aware Masked Autoregression for Explicit Layout Alignment in Text-to-Image Generation",
+      "url": "https://icml.cc/virtual/2026/poster/65257",
+      "text": "Although text-to-image generation has achieved significant progress, strict instance-level layout alignment remains a challenge for many applications. Masked Autoregressive (MAR) models on continuous latents are both efficient and high-fidelity, yet the standard practice of flattening 2D latents into 1D sequences weakens spatial topology, limiting precise controllability. To address this, we propose StructMAR, a structure-aware masked autoregressive framework that transforms layout alignment from a soft correlation into an explicit structural alignment. By integrating 2D Rotary Positional Embeddings with a Layout-Guided Attention Bias, StructMAR explicitly biases latent tokens toward their corresponding layout instances during attention computation. We further use Group Relative Policy Optimization (GRPO) as a final-stage policy refinement to reduce the mismatch between the MAR training objective and detector-based layout evaluation metrics. Evaluated on the COCO-Position and COCO-MIG benchmarks, StructMAR achieves state-of-the-art performance, reaching 57.2 AP and 79.4 mIoU on the former, and 61.7 ISR and 56.9 mIoU on the latter. These results, coupled with a 4.05$\\times$ inference speedup, underscore the efficacy of explicit structural inductive biases in controllable autoregressive generation. Show more",
+      "sha256": "56ab9dc152a32d8c1e9fae2c6274b3eb1ce5b1ee0b72a59f829f331f65f40194",
+      "verified_at": "2026-10-21T13:03:27.763710+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "301fb1c4f0e3af44584fbc1c8cfe1f2826a538d1fd294bf184cf67eaa3b9357f",
+      "source_version": "2c82bc7c7271f252a466f7461f2992985282158cb43c7f12467fadf341cb534e"
+    },
+    "2605.01135": {
+      "title": "ScribbleEdit: Synthetic Data for Image Editing with Scribbles and Text",
+      "url": "https://arxiv.org/abs/2605.01135",
+      "text": "Recent progress in generative models has significantly advanced image editing capabilities, yet precise and intuitive user control remains difficult. Specifically, users often struggle to communicate both exact spatial layouts and specific semantic details simultaneously. While natural language instructions effectively convey high-level semantics like texture and color, they lack spatial specificity. Conversely, freehand scribbles provide rough spatial boundaries but cannot express detailed visual attributes. Consequently, achieving precise control requires combining both modalities. However, existing models struggle to jointly interpret abstract scribbles alongside text due to a lack of specialized training data. In this work, we introduce ScribbleEdit, a large-scale synthetic dataset designed to bridge this gap by combining natural language instructions with freehand scribble inputs for more accurate, controllable edits. We construct this dataset through a synthetic pipeline that automatically generates source-target image pairs via inpainting, which are then paired with human-drawn scribbles and VLM-generated text instructions. Using ScribbleEdit, we evaluate and finetune both diffusion-based and autoregressive unified multimodal image editing models. Our experiments reveal that while off-the-shelf models struggle with abstract scribble inputs, finetuning on our synthetic dataset significantly improves their ability to generate spatially aligned and semantically consistent edits.",
+      "sha256": "30972eef8ca7939f4f594f447cfd0e392b82dc7500aaa0664b071caba478defd",
+      "verified_at": "2026-10-21T13:03:33.214969+08:00"
+    },
+    "conf-fe4dffdabc01ef041f9f3770": {
+      "title": "AlignVid: Taming Visual Dominance via Training-Free Attention Modulation in Text-guided Image-to-Video Generation",
+      "url": "https://icml.cc/virtual/2026/poster/62940",
+      "text": "Text-guided image-to-video generation has made substantial progress, yet it still struggles to execute text-specified edits that require substantial changes to a reference image (e.g., object addition, deletion, or modification). Empirically, our analysis reveals that this stems from visual dominance , where the reference image causes severe attention dispersion, inhibiting the model's ability to incorporate new semantic information. To address this, we propose AlignVid , a training-free intervention that re-calibrates the model's internal attention distribution. Drawing on an energy-based perspective of attention, AlignVid employs Attention Scaling Modulation ( ASM ) to reduce attention entropy and concentrate focus on semantic tokens, alongside Guidance Scheduling ( GS ) to maintain generation stability. To rigorously assess this capability, we present OmitI2V , a comprehensive benchmark for evaluating prompt adherence across object addition, deletion, and modification. Extensive experiments demonstrate that AlignVid effectively enhances semantic fidelity with negligible computational overhead. Show more",
+      "sha256": "17c0545871e3e02a2629464a5b23259b058ede1f0faa709445bc2ef1cda2138d",
+      "verified_at": "2026-10-21T13:03:38.505886+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "fc4da5a431a187075b399b0e6f74147830ff2d872c4d2a3ca5ced7c40b0014c7",
+      "source_version": "1d79580954b42468caea9d0f8ce11c3567fe0a1ebd9099e497d9a2d49dec45b3"
+    },
+    "conf-eec354eb43c5b2f3f53d953b": {
+      "title": "SMD: Multi-view Safety-Critical Driving Video Generation in the Real-world Domain",
+      "url": "https://icml.cc/virtual/2026/poster/61036",
+      "text": "Safety-critical scenarios are essential for evaluating autonomous driving (AD) systems, yet they are rare in practice. Existing generators produce trajectories, simulations, or single-view videos—but they don’t meet what modern AD systems actually consume: realistic multi-view video. We present SMD, the first framework for generating multi-view safety-critical driving videos in the real-world domain. SMD couples a safety-critical trajectory engine with a diffusion-based multi-view video generator through three design choices. First, we pick the right adversary: a GRPO-fine-tuned vision-language model (VLM) that understands multi-camera context and selects vehicles most likely to induce hazards. Second, we generate the right motion: a two-stage trajectory process that (i) produces collisions, then (ii) transforms them into natural evasion trajectories—preserving risk while staying within what current video generators can faithfully render. Third, we synthesize the right data: a diffusion model that turns these trajectories into multi-view videos suitable for end-to-end planners. Videos generated by SMD substantially increase collision rates when stress testing multiple end-to-end planners, and reduce collision rates when incorporated into training, improving planner robustness and safety. Our code and video examples are available at: \\href{https://icml-2.github.io/SMD/}{https://icml-2.github.io/SMD/}. Show more",
+      "sha256": "21426fdafd1703fb000a970fc16748b1ae736ef0390f5b2792daa3c9a21c828f",
+      "verified_at": "2026-10-21T13:03:43.801837+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "07faab7c33d918dc9d11d81ad4ccd55a937165d8c339709f7061157d7b8c7284",
+      "source_version": "b2f07deef91c9c5a54ea85128d6fa8c1dc33ba329d39caca48947ffad6b29080"
+    },
+    "conf-ec4b90c34e7f390931b3c451": {
+      "title": "EchoAttention: Exploiting Token-Pair Redundancy and Frame-Block Similarity for Efficient Video Generation",
+      "url": "https://icml.cc/virtual/2026/poster/60893",
+      "text": "Diffusion Transformers (DiTs) are increasingly adopted for long-video generation, yet inference is dominated by the quadratic cost of 3D full attention. Sparse attention mitigates this bottleneck by exploiting *token-pair redundancy* and pruning query-key interactions.  Nevertheless, its effectiveness on video generation is often constrained by non-sparse attention heads, making it hard to strike a good balance between inference speed and generation quality. To address this, we identify another pervasive but overlooked redundancy specific to video DiTs: *frame-block similarity*, where frame-blocks in attention weights exhibit highly similar distributions and can be well approximated by lightweight linear calibration. Motivated by this observation, we propose **EchoAttention**, which jointly leverages *token-pair redundancy* (*Sparse* operator) and *frame-block similarity* (*Echo* operator), together with a fine-grained routing policy learned via three-stage distillation. This design enables efficient handling of both sparse and non-sparse heads, overcoming the inherent ceiling of purely sparse attention and yielding a better speed-quality trade-off. Across public video DiTs, EchoAttention consistently improves the speed-quality frontier over SOTA sparse-attention baselines, reducing end-to-end latency up to 2.42$\\times$ with minimal quality loss. Show more",
+      "sha256": "71b362a95f6237207f76fefbfea9b6360977030dc67bc00ff3f3b57d175e2d85",
+      "verified_at": "2026-10-21T13:03:49.089821+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "fd55d1262fb98e97e39d19ba62f75579eee6b02df5990f7383272e7bc53a9e9c",
+      "source_version": "db89b2901a9294886d65ebc0162d8fa52884ad77a6aab675e3a901b70ebfb40e"
+    },
+    "conf-b3c7f16ba39c0b7275e89083": {
+      "title": "In-Context Generation with Regional Constraints for Instructional Video Editing",
+      "url": "https://icml.cc/virtual/2026/poster/63380",
+      "text": "The In-context generation paradigm has demonstrated strong power in instructional image editing for better synthesis quality. Nevertheless, shaping such in-context learning for instructional video editing is not trivial. Without specifying editing regions, the results can suffer from the issue of inaccurate editing regions and the token interference between different areas. To address these, we present ReCo, a new instructional video editing paradigm that novelly delves into Re gional Co nstraint modeling between editing and non-editing areas. Technically, ReCo width-wise concatenates source and target video for joint denoising. In model training, ReCo formulates regional constraints with two regularization terms, i.e., latent and attention regularization, on one-step backward denoised latents and attention maps, respectively. The former increases the latent discrepancy of the editing region between source and target videos while reducing that of non-editing areas, emphasizing editing area modification and alleviating unexpected content generation. The latter suppresses the attention of tokens in the editing region to the tokens in counterpart of the source video, thereby mitigating their interference during novel object generation in target video. Furthermore, we propose a large-scale, high-quality video editing dataset, i.e., ReCo-Data, comprising 500K instruction-video pairs. Extensive experiments conducted on four major instruction-based video editing tasks verify the superiority of ReCo. Code is available at https://github.com/HiDream-ai/ReCo. Show more",
+      "sha256": "6ac25f2c1ebabcd8276ce3a952f4ac8998b704618f5c16600cfcb46902e9ab15",
+      "verified_at": "2026-10-21T13:03:54.386603+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "4875344aee20d42b2819de2f3fd430550b03b674ca32735167f8226ac3fe394f",
+      "source_version": "3b55b51807aa36be05e998b8a229876bf6a99cd26a04270722ebab6dbbec3be3"
+    },
+    "conf-a923a95a87d1292cff1f6488": {
+      "title": "Video-SVD: Efficient Video Diffusion via Orthogonal Basis Composition",
+      "url": "https://icml.cc/virtual/2026/poster/62091",
+      "text": "Video Diffusion Transformers (VDiTs) represent the state of the art in video generation but remain constrained by the quadratic complexity of dense self-attention. To address this attention bottleneck, we analyze the pre-softmax matrix ($QK^\\top$) and reveal two key properties: (1) video attention exhibits an effective low-dimensional structure with rapid singular-value decay, and (2) real motion induces hybrid spatio-temporal patterns rather than rigid ``spatial vs. temporal'' layouts. Guided by these observations, we propose Video-SVD, a training-free and plug-and-play acceleration method that does not modify the original network parameters. Video-SVD learns checkpoint-adaptive orthogonal bases offline and, at inference time, replaces expensive dense attention computation with lightweight online subspace projection and basis composition. To preserve high fidelity, Video-SVD further employs layer-shared dual-stream residual modules to recover fine-grained content details and positional information. Across HunyuanVideo and Wan2.1 backbones, Video-SVD achieves significant end-to-end speedups while maintaining high visual quality, reaching 1.92$\\times$ on HunyuanVideo, 1.75$\\times$ on Wan2.1-1.3B, and 1.79$\\times$ on Wan2.1-14B. Show more",
+      "sha256": "429214218b77d36035d80431a4bb8f6baa3f7f1b0aeab1d1d29c2c946d1a50d4",
+      "verified_at": "2026-10-21T13:03:59.682130+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "cfb0d9018fbf9619ccf6c2d34e88c0a7528ddac29f9432ab4674e16f0f3352dc",
+      "source_version": "272a6dd023acd11015a2453d74c391e381d3a354338711959bad6e16a72e1546"
+    },
+    "conf-a6796691e0711d668f07789c": {
+      "title": "DiasR: Dual-Modal Identity-Anchored Sparse Routing for Efficient Multi-Subject Video Generation",
+      "url": "https://icml.cc/virtual/2026/poster/60999",
+      "text": "Personalized multi-subject video generation is a promising direction within the field of controllable video generation; however, existing methods face challenges in maintaining cross-frame identity consistency and incur high computational overhead. To address these issues, we propose DiasR, an efficient framework that integrates Dual-Modal Identity-Anchored Alignment and a novel Sparse Routing Strategy. The Dual-Modal Identity-Anchored Alignment employs learnable identity queries to align visual and textual modalities with ground-truth subject masks, thereby mitigating cross-frame identity drift. The Sparse Routing Strategy dynamically routes video tokens to relevant subjects and groups them through bucket aggregation, reducing computational overhead and alleviating identity entanglement induced by redundant tokens. We also construct MuSA-2M, a large-scale dataset comprising 2 million annotated samples equipped with subject-level masks, which fills the gap in existing multi-subject video datasets. Experiments conducted on the OpenS2V-Eval benchmark demonstrate that our method achieves superior performance in identity consistency, text fidelity, and video naturalness. Notably, it maintains a nearly constant inference time as the number of reference subjects increases, outperforming existing baselines in both efficiency and generation quality for scenarios involving multi-subject interactions. Project Page: https://tale17.github.io/diasr. Show more",
+      "sha256": "6323161e5bbe4305fc35dda1b16c3535445e37d95a7394084b19e9c43325b9ee",
+      "verified_at": "2026-10-21T13:04:04.976290+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "3d9d25312593644099e5c4da06d65510fb7b3c46941bb0e2468b9794ede365db",
+      "source_version": "10f9f386dfacbac51eba4b6ed63bc328af8de24a6616f24c146e4258db1c6598"
+    },
+    "conf-9255674e51e8febc197653a8": {
+      "title": "Temporal-aware Flow Matching for Video Generation with Temporally Coherent Motion",
+      "url": "https://icml.cc/virtual/2026/poster/62352",
+      "text": "Despite rapid advances in text-to-video generation, state-of-the-art generative models still suffer from producing temporally incoherent and unrealistic motion for videos. The key weakness of existing works is that they commonly treat videos as frame sequences and directly adopt Flow Matching (FM) objectives, which are originally designed for images. This practice fails to explicitly model motion priors or temporal dependencies, resulting in suboptimal dynamics that may appear incoherent and unrealistic. To solve this problem, we propose Temporal-aware Flow Matching (TFM), a novel training paradigm that embeds inter-frame constraints into the flow objective, leading to temporally coherent motion modeling in video generation. More specifically, the proposed TFM enforces temporal correlations across frames while retaining the desirable properties of FM, and further introduces a residual-type loss that aligns naturally with this new flow. We theoretically prove that models trained with TFM are able to exhibit remarkably enhanced temporal perception ability. Notably, TFM imposes no additional cost during inference and is applicable to any model using FM. Extensive experiments demonstrate that our TFM can significantly improve motion realism across diverse motion types. Generated videos are presented at https://pzrain.github.io/tfm. Show more",
+      "sha256": "19e2b4fb7387c3505c426e642e8b165b7936a5162dd3db9225a64ecd28807df1",
+      "verified_at": "2026-10-21T13:04:10.259271+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "d9e96c50e73694b53bd63d9ae677451ac30b82ea778410fc849d4ded3f50ef97",
+      "source_version": "b6956b01b3f04653a7a0872dfac4632383b1ff16ad344e955d2f1947c822e127"
+    },
+    "conf-8b128167a23318c85de57719": {
+      "title": "WEVSR: Video Diffusion Generators for Real-World Video Super‑Resolution with Wavelet-Enhanced VAE Encoder",
+      "url": "https://icml.cc/virtual/2026/poster/63509",
+      "text": "Recent advances in video diffusion models have demonstrated remarkable generative capability, yet adapting these large pretrained  text-to-video (T2V) models to video super‑resolution (VSR) typically encounters challenges, such as artifacts introduced by complex degradations in real-world scenarios and compromised fidelity due to the strong generative capacity of the powerful T2V models. We present WEVSR, a novel approach that adapts a pretrained flow-matching video diffusion transformer to VSR. First, we design a task-oriented adaptation strategy that leverages timestep sampling and noise augmentation to enhance detail restoration while preserving structural stability. Second, we propose a lightweight multi-level discrete wavelet transform (DWT) front-end for the VAE encoder, injecting explicit frequency priors into the latent space without modifying the pretrained decoder. Extensive experiments across multiple VSR benchmarks demonstrate that WEVSR achieves state-of-the-art performance against existing approaches. Code and models will be released here. Show more",
+      "sha256": "97d4c806e7d63f611a00b9c001f1cfa037d86590a74d35438e4173510284bea6",
+      "verified_at": "2026-10-21T13:04:15.545446+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "6f73bce693f1d4dc4608099c4a78fd2529bb4358d5618fe49af6e48bf5bc9dae",
+      "source_version": "418483d43fb27fa1430d2092afb753a99542080b391376d58da3b8f94a710029"
+    },
+    "conf-66a0e0c89542d7c0d7337c07": {
+      "title": "Trajectory-Stabilized Inference for Diffusion-Based Video Inpainting",
+      "url": "https://icml.cc/virtual/2026/poster/62112",
+      "text": "Video inpainting aims to restore missing regions while preserving spatial and temporal coherence. Diffusion-based methods achieve strong per-frame reconstruction, but their sampling implicitly generates temporally coupled latent trajectories whose long-horizon stability is not explicitly modeled, leading to a trade-off between temporal consistency and structural detail. We revisit video inpainting from the perspective of temporal trajectory stability, viewing temporal inconsistency as instability along time-indexed denoising trajectories rather than an output-level error. Based on this view, we propose an inference-time trajectory stabilization framework that monitors motion-aligned deviation and triggers risk-aware correction only when instability accumulates. It combines sparsely sampled trajectory anchors as stability references with neighborhood-consistent propagation to regulate trajectory evolution while preserving local generative freedom. Implemented as a lightweight control layer in the sampling loop, it selectively contracts unstable trajectories toward motion-consistent manifolds instead of enforcing uniform temporal constraints. Experiments show consistent improvements in temporal coherence and structural fidelity. Show more",
+      "sha256": "c85d1e9836c6ec6a6e6aec5747228c44ab488c97eb2dd8f3afb150f26795714d",
+      "verified_at": "2026-10-21T13:04:20.827021+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "8e664a72ec64fc3e30c6ab23be512bbe8cbd6acacfbd211f487b677a26cabbab",
+      "source_version": "afbe190cd4b73fac3a02f2d7f5624419c247fecfd8be49dd82c9d897e9efd305"
+    },
+    "conf-64f09cecf71de0c1fc708e59": {
+      "title": "VideoMAETok: Boosting Video Diffusion Models via Masked Autoencoders as Tokenizers",
+      "url": "https://icml.cc/virtual/2026/poster/61035",
+      "text": "Latent diffusion models have become the dominant paradigm for video generation, making the video tokenizer a critical role. While most existing tokenizers are trained primarily for reconstruction, diffusion models are optimized to denoise heavily corrupted latents, which creates a mismatch between tokenizer training objectives and downstream generative learning. As a result, reconstruction metrics (e.g., rFVD) can be a poor proxy for generation quality (gFVD), and overly prioritizing reconstruction may even hinder diffusion training. We propose VideoMAETok, a simple family of ViT-based video tokenizers trained explicitly as corruption-inversion models for latent video diffusion. VideoMAETok builds on masked autoencoders: we (i) apply high-ratio token masking and encode only visible spatiotemporal tokens for efficiency, and (ii) corrupt latent tokens with interpolative Gaussian noise to better match the denoising nature of diffusion generators. Training under such corruption encourages latents that remain informative and well-conditioned for downstream denoising. Extensive experiments show that VideoMAETok consistently improves generation quality when paired with off-the-shelf diffusion models (SiT and LightningDiT), achieving state-of-the-art gFVD on Kinetics-600 and UCF-101 while remaining compute-efficient. Code is available at https://github.com/yztongzhan/VideoMAETok. Show more",
+      "sha256": "0cd9ba11dc0c37b1889fe326e26eb93f9659bd43af0f65b86371cbeca1742ec5",
+      "verified_at": "2026-10-21T13:04:26.109285+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "44126ed8615bf06c9f7ccb58cb79506951ebfcb8607922f315db66cc6632ac52",
+      "source_version": "5def2ba186a8249e260dd000f6775d89f4504eb52d73a9de6df9fcfc61240df9"
+    },
+    "conf-5d9a674cf8f49ecfdddd0a5c": {
+      "title": "DynaMem: Consistent Long Video Generation via Hierarchical Memory and Motion Priors",
+      "url": "https://icml.cc/virtual/2026/poster/63857",
+      "text": "Recent text-to-video diffusion models can synthesize visually compelling clips from natural language prompts. However, practical applications increasingly demand long-form videos with evolving narratives and persistent identity. A common solution is autoregressive generation, where the video is produced clip by clip over long horizons, yet coherence often degrades as errors compound. In this work, we study long-video generation under an autoregressive setting, where videos are synthesized clip by clip over long horizons. Despite strong short-clip quality, existing approaches often suffer from semantic drift, motion decay, and appearance instability as the sequence grows. We present DynaMem, a unified framework that improves long-horizon coherence via three components: Semantic-Adaptive Hierarchical Memory for long-range semantic preservation, Motion-Prioritized Optimization for motion-coherent learning, and Reference-Anchored Perceptual Alignment for stabilizing appearance. Extensive experiments show that DynaMem produces more consistent semantics, stronger temporal dynamics, and more stable appearance on long videos compared to competitive baselines. Show more",
+      "sha256": "15c1982550cd1695197ec1bdded5cc64126348e75cb7468a217d72f3dfd2f759",
+      "verified_at": "2026-10-21T13:04:31.385540+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "1d7a7dc744720f41f2739bbb8d3917d1b74029f16a5fc1df0939aa49b006310b",
+      "source_version": "7e8973956c01b2a0f1ec9e011c32763826d089dfce9ade2e5d66eed30e146cd7"
+    },
+    "conf-fe75ed49621e953bf6ce34be": {
+      "title": "Rh-3DGS: Robust Open-Vocabulary Scene Understanding via Riemannian Huber Distillation and Manifold-Aware Sampling",
+      "url": "https://icml.cc/virtual/2026/poster/62937",
+      "text": "Open-vocabulary 3D scene understanding answers free-form text queries over reconstructed scenes. However, lifting dense 2D foundation-model embeddings into 3D Gaussian Splatting (3DGS) is still challenging. Existing 3DGS-based methods often average normalized embeddings in Euclidean space. This ignores their hyperspherical geometry and can cause feature collapse. They also distill supervision from all views equally, which amplifies occlusion noise and mixed-depth artifacts. We propose Rh-3DGS , a robust semantic 3DGS framework that uses reliability-aware distillation and manifold-consistent aggregation. Visibility-Calibrated Distillation (VCD) computes per-pixel reliability weights from rasterization statistics and down-weights ambiguous pixels. Visibility-Weighted Fréchet Mean (VFM) aggregates embeddings on the unit hypersphere with a Riemannian Huber objective for robust distillation. Lightweight Consistency Contrast (LIC) regularizes the 3D semantic field with neighborhood-based multi-positive contrast to improve local consistency and sharper boundaries. Experiments on three benchmarks show that Rh-3DGS is best on open-vocabulary segmentation, boundary quality, and view-consistent rendering. Show more",
+      "sha256": "9fc7de6b28f132090c0128c92fd849121582c41e5b65e59878fe3c8a72814468",
+      "verified_at": "2026-10-21T13:04:36.666160+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "e47e2acc262f9934145511949df1141c59d3a2a2a772e294b4a6620f7d389c51",
+      "source_version": "fcc7d86b0e5bf8870e0fb76ff5e3363d78e59c93f18e22b4451c019250ed8859"
+    },
+    "conf-d43ec883d05477049976bf57": {
+      "title": "PCGS: Deblurring 3D Gaussian Splatting with Patch Comparison",
+      "url": "https://icml.cc/virtual/2026/poster/66334",
+      "text": "Recent neural methods, such as 3D Gaussian Splatting, have achieved state-of-the-art rendering quality and speed. However, these methods frequently encounter challenges in regions with overlapping Gaussians, leading to blurring and artifacts in the rendered images. We observed that widely used view-space positional gradients are insufficient for handling such circumstances. To address this, we introduce PCGS, a Patch Comparison Gaussian Splatting method to control the densification of corresponding Gaussians adaptively. Specifically, PCGS divides the rendered image into patches and identifies those with significant errors by comparing the loss between the rendered and ground truth images. Additional densification operations are then applied to the Gaussians in these error-prone regions. Furthermore, to prevent over-densification and redundant Gaussians, we design a Gaussian control strategy to regulate the densification process. Specifically, we set a Gaussian number budget that dynamically changes according to the progress of densification, and sample the Gaussians required for each densification step based on their importance scores. Our method results in significantly fewer artifacts and less blur while maintaining a Gaussian count approximately equal to that of 3DGS. Extensive experiments on multiple standard benchmarks demonstrate the superiority of our approach. Show more",
+      "sha256": "a8d88afab17c3649588376fc42195bcbddf284440a27752177f50864b4ace7d7",
+      "verified_at": "2026-10-21T13:04:41.965832+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "b835e7bddf4fffc6a745fa0e9f63e6dce2d9655022792235ae9878fab558b013",
+      "source_version": "be37118aaa95419214d0ebff44cdea09fc3fb3c45b02b065777b641b1b8f4de2"
+    },
+    "conf-ccaa1df8726e1c74253dec60": {
+      "title": "Creat3r: Confidence Reaggregation for Exploration-aware Active 3D Reconstruction",
+      "url": "https://icml.cc/virtual/2026/poster/62117",
+      "text": "We present Creat3r, an iterative next-best-view (NBV) selection framework for efficient, high-quality 3D reconstruction. Starting from a small seed set of image-pose pairs, Creat3r repeatedly selects the most informative next camera pose. After each pose is chosen, the corresponding image is acquired and added to the multi-view set to update a 3DGS reconstruction. To guide selection, Creat3r constructs an intermediate point cloud and estimates reconstruction reliability via a novel 3D confidence field, which is projected to candidate poses through Gaussian projection to produce 2D confidence and exploration maps. These maps balance exploitation of reliable regions and exploration of uncertain or unseen areas under computational constraints. Experiments with standard 3DGS show that Creat3r consistently outperforms baselines in novel view synthesis and surface reconstruction, achieving higher SSIM and F1 scores with fewer views. Show more",
+      "sha256": "af3c49d0b849a3ec39689c863e046ca7862f1a6c125d20a1fce790d04c45b3c2",
+      "verified_at": "2026-10-21T13:04:47.261921+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "5f5e023bb00417bf7db37faf0435b76b3c5811ec3cf6a202100e50c6b87a3327",
+      "source_version": "69ee7bc56bfb3d457887cd7bcd7c0fbf4d23e78e1dbf027b3f1ba35ef7401840"
+    },
+    "conf-c3244e85f73ca43a26a002a0": {
+      "title": "MAC-NeRF: Motion-Aware Curriculum Learning for Dynamic LiDAR NeRFs",
+      "url": "https://icml.cc/virtual/2026/poster/62332",
+      "text": "While LiDAR NeRFs excel in static environments, synthesizing dynamic scenes remains challenging as moving objects break multi-view consistency, causing conflicting supervision and ghosting artifacts across frames. Existing methods typically suffer from optimization difficulty from the start, struggling to disentangle valid geometry from motion noise when initial motion priors are unreliable. To address this, we propose MAC-NeRF, a novel LiDAR NeRF framework enhanced by motion-aware curriculum learning for high-fidelity dynamic scene synthesis. First, we propose Rectified Temporal Consistency to resolve motion-induced supervision conflicts. By filtering out erroneous supervision via forward-backward geometric verification, it creates a curriculum that prioritizes trustworthy temporal correspondences before handling challenging motions. Second, we propose Confidence-Modulated Frequency Regularization (CMFR) to eliminate geometric ambiguity. It adaptively modulates the frequency regularization bandwidth, progressively transitioning from strict low-frequency constraints for artifact suppression to full-spectrum modeling for fine-grained detail preservation. Extensive experiments on KITTI-360 and nuScenes demonstrate that MAC-NeRF significantly outperforms state-of-the-art methods in rendering quality. Show more",
+      "sha256": "7f36faca7f4173a2ba88c55a79d1f00a645e6b4115a1ac7030294b6d2f686b48",
+      "verified_at": "2026-10-21T13:04:52.564366+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "fc485c40557e433c6d8678399e69d59cc3f1a64ef3a852110e8a900c66556bcb",
+      "source_version": "353bc2cd769ccc57d2721b80fefb8383acfa0b9d64502275671eed20db35aa01"
+    },
+    "conf-9ee2410c033f0828b84e538f": {
+      "title": "Taylor-Gaussians-Flow: Towards Non-uniform Motion for Novel View Synthesis from Monocular Video",
+      "url": "https://icml.cc/virtual/2026/poster/60713",
+      "text": "Long-term non-uniform motion poses a significant challenge for Novel View Synthesis (\\textbf{NVS}), as it requires modeling higher-order motion, such as acceleration. Existing methods primarily rely on deformation fields or scene flow, which are limited to first-order approximations.  Due to neglecting higher-order motion representations and supervision, these approaches suffer from long-term non-uniform motion scenarios. Inspired by Taylor’s theorem, we propose Taylor-Gaussians-Flow (\\textbf{TGsF}) to represent and supervise non-uniform motion through first-order and second-order motion components.   TGsF comprises two key modules: Taylor-Gaussians (\\textbf{TGs}) and Taylor-Gaussians-Flow (\\textbf{TGs-Flow}). TGs represent motion using Gaussian means with a quadratic temporal term and time-dependent opacity. Unlike previous methods, TGs-Flow decouples scene-flow supervision into separate depth and 2D optical-flow constraints. This approach effectively mitigates error propagation from either depth or motion estimation while circumventing the scarcity of labeled scene flow data. Guided by the above analysis, we develop the Feed-Forward Taylor-Gaussians-Flow framework, which sets a new state-of-the-art on four dynamic benchmarks. Show more",
+      "sha256": "567721b7ae708aa32d053dadda84c254094e207cfdfe02b7f056f933266588b0",
+      "verified_at": "2026-10-21T13:04:57.851893+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "0b6ac7c698e43eadb6d60ad7cd01bfc11b2c0609234d2c36e97a6fee8509382f",
+      "source_version": "d04c13521156a4f2bc980d4a4575880e7160164fe80f6fab95f34d3c03d7ba1b"
+    },
+    "conf-73aaa7e46ae6b90eefa17b35": {
+      "title": "Bridging Tokens and Geometry: Token-wise 3D Supervision for CAD Generation",
+      "url": "https://icml.cc/virtual/2026/poster/65302",
+      "text": "Computer-Aided Design (CAD) generation is typically formulated as a sequence modeling task over parametric tokens. Recent studies introduce visual information through additional visual inputs or rendering of the final generated programs. However, these methods provide no intermediate visual feedback, hindering the association of individual tokens with their geometric effects. In this work, we propose an Argument-induced 3D Point Loss (A3PL) that maps argument tokens to corresponding 3D points, enabling dense token-wise geometric supervision. To reduce learning complexity and invalid sequences, we further introduce a Grammar-constrained Operator (GCO) that leverages the structured nature of CAD programs to regulate sequence generation. We evaluate our approach on five CAD generation tasks with diverse input modalities, including text, Scalable Vector Graphics (SVG) sketches, point clouds, and CAD sequences. Our approach improves generation accuracy and program validity across different input modalities. Code is available at https://github.com/JumpJumpTigger-GYJ/A3PL. Show more",
+      "sha256": "ef362d9b436349678c1fff337d2cf14f43361c9d72ba715c1df626c1b07fd24e",
+      "verified_at": "2026-10-21T13:05:03.120906+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "c1f70e2c9ffdc22924fa81ffd5e09818d839e72c34a807fbd737ad78e47933dc",
+      "source_version": "30e0bafe0a2fbb57d3a8f5e8adeedd25fe9dc8caed2fb8247a5a184c8af53808"
+    },
+    "conf-539f36894221f7473b001cd7": {
+      "title": "Op-CAD: Benchmarking and Investigating Operation-oriented CAD Generation",
+      "url": "https://icml.cc/virtual/2026/poster/66571",
+      "text": "Recent research has made growing efforts to leverage large language models (LLMs) for computer-aided design (CAD), a domain that demands advanced geometric and spatial reasoning across long operation sequence. However, existing studies remain limited in addressing complex modeling tasks that necessitate step-by-step reasoning, primarily due to the scarcity of high-quality CAD datasets and the absence of fine-grained evaluation frameworks. In response to these challenges, we introduce Op-CAD, the first large-scale, multi-modal dataset for operation-oriented CAD generation, encompassing four operation types and five modalities. Furthermore, we introduce a novel CAD parsing module together with a geometry-guided hierarchical annotation pipeline, which decomposes modeling sequences into discrete operations and substantially improves the annotation accuracy of Vision-Language Models (VLMs). Based on our dataset, we redefine the CAD modeling task by decoupling geometric and spatial perspectives and introduce a novel metric, Chamfer/Fillet Intersection over Union (CF-IoU), to fill the void in assessing chamfer and fillet operations. By comprehensively evaluating eight LLMs on Op-CAD, we establish a benchmark for current models on operation-oriented tasks. Finally, we investigate performance enhancement strategies through fine-tuning on Op-CAD and propose Chain-of-Operation (COOP), a novel prompting strategy that emulates human-engineer reasoning. Show more",
+      "sha256": "62e94a6ee2d6eb52b2adb01f66148e6caebb6109537750c465b2a868ce343f9e",
+      "verified_at": "2026-10-21T13:05:08.415973+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "1fbaca6883bec1b23cc02762c4074f66197850b4e8953b62cd9f6278a34f1d8c",
+      "source_version": "e76feca7f0b154314112a9524e2d18dec01f20dd3c29b1de0f12c7b622120061"
+    },
+    "conf-4df58429776e25a4b1147173": {
+      "title": "WhisperSplat: Lossless Steganography in 3D Gaussian Splatting",
+      "url": "https://icml.cc/virtual/2026/poster/64147",
+      "text": "We present WhisperSplat, the first lossless steganography method for 3D Gaussian Splatting (3DGS) models that hides a full‐resolution 2D image in a single view without any degradation of the model's rendering quality elsewhere. Prior work embeds data by retraining or modifying model weights, altering novel‐view synthesis fidelity and limiting capacity. Instead, we learn a small, view‐specific noise key applied to each Gaussian's spherical‐harmonic (SH) features while keeping all other views remain indistinguishable from the original renders. We further propose a Gradual Pixel Perturbation (GPP) strategy with a cosine-decay schedule, bootstrapping fast divergence from the clean render before transitioning to a combined reconstruction and SSIM loss. Unlike prior works that are highly dependent on accurate and large pretrained decoders, our method is able to recover the hidden image through rendering with noise key, and an optional lightweight refiner to enhance recovery image quality. Across nine standard 3DGS data scenes, WhisperSplat demonstrates superior hidden image recovery quality without sacrifice in clean 3DGS model performance, when compared to prior work such as GS-Hider and KeySS. Show more",
+      "sha256": "327670f1ccc58fae124368bb13357cb01fbfd9d0340d2a13e15a4de1b4766d1e",
+      "verified_at": "2026-10-21T13:05:13.700248+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "5473915669604ab84347526fe8649e8f618f8ca8dc239b0c12d5b498ba52377b",
+      "source_version": "98c766f326346cfcd70e1d94d1ad5c73a7a19da9a35c4cbc43d2cce48474e813"
+    },
+    "conf-39a7cbbec1a387cac20a8191": {
+      "title": "CoverPruneGS: Coverage-Preserving Structured Pruning for Hierarchical 3D Gaussian Splatting from Sparse-View Monocular Videos",
+      "url": "https://icml.cc/virtual/2026/poster/65348",
+      "text": "Reconstructing complete yet compact 3D Gaussian Splatting (3DGS) representations from sparse-view monocular videos remains a significant challenge. While hierarchical training with Video Frame Interpolation (VFI) improves coverage, its correlated pseudo-views and repeated merging accumulate structured, non-i.i.d. redundancy, violating the implicit independence assumptions of standard pruning methods and rendering global thresholding ineffectual. We propose CoverPruneGS, a coverage-preserving structured pruning framework specifically designed for hierarchical 3DGS. Our approach implements a coarse-to-fine pruning pipeline using voxel-based local diversity selection and ground-truth-guided lazy refinement via randomized dropout rendering. To ensure reliable refinement, we introduce a footprint-aware CUDA attribution mechanism. By aggregating ground-truth-aligned error degradation across Gaussian-influenced pixels, we generate faithful importance scores that enable precise, quantile-based \"rescue\" of essential primitives. Experimental results across multiple datasets demonstrate that CoverPruneGS substantially reduces Gaussian counts by 56.8\\% and significantly accelerates inference speeds, all while enhancing or maintaining the quality of novel view synthesis. Show more",
+      "sha256": "378463f8750372a1757c04d1acd47e91ff55fe215172ec658a370636cfb05fe5",
+      "verified_at": "2026-10-21T13:05:19.001900+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "ad12b6cdb4c392864cc714e7d14619839d6eb0e5ff6a0c3b1bb44e83a3ed84bf",
+      "source_version": "c4dca53b016ac569c175ff5283f999c47aa214bf09700865f25459c67510d9b6"
+    },
+    "conf-378c0e449a116e2546dd8ca3": {
+      "title": "Mix3R: Mixing Feed-forward Reconstruction and Generative 3D Priors for Joint Multi-view Aligned 3D Reconstruction and Pose Estimation",
+      "url": "https://arxiv.org/abs/2605.03359",
+      "text": "Recent trends in sparse-view 3D reconstruction have taken two different paths: feed-forward reconstruction that predicts pixel-aligned point maps without a complete geometry, and generative 3D reconstruction that generates complete geometry but often with poor input-alignment. We present Mix3R, a novel generative 3D reconstruction method which mixes feed-forward reconstruction and 3D generation into a single framework in an aligned manner. Mix3R generates a 3D shape in two stages: a sparse voxel generation stage and a textured geometry generation stage. Unlike pure generative methods, our first-stage generation jointly produces a coarse 3D structure (sparse voxels), per-view point maps and camera parameters aligned to that 3D structure. This is made possible by introducing a Mixture-of-Transformers architecture that inserts global self-attentions to a feed-forward reconstruction model and a 3D generative model, both pretrained on large-scale data. This design effectively retains the pretrained priors but enables better 2D-3D alignment. Based on the initial aligned generations of sparse 3D voxels and point maps, we compute an overlap-based attention bias that is directly added to another pretrained textured geometry generation model, enabling it to correctly place input textures onto generated shapes in a training-free manner. Our design brings mutual benefits to both feed-forward reconstruction and 3D generation: The feed-forward branch learns to ground its predictions to a generative 3D prior, and conversely, the 3D generation branch is conditioned on geometrically informative features from the feed-forward branch. As a result, our method produces 3D shapes with better input alignment compared with pure 3D generative methods, together with camera pose estimations more accurate than previous feed-forward reconstruction methods. Our project page is at https://jsnln.github.io/mix3r/",
+      "sha256": "361d4c9336a6e2fa7227a58dd0ea39a2d8b1c54417930c035df1d2c262ec9e91",
+      "verified_at": "2026-10-21T13:05:25.390877+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "392df919ff389a387003403ea8ce64c7b57f941e2762f9155f3ccf5cd7552c57",
+      "source_version": "1e75b7aee9ce72c8d6d04ef5e6cfc9ebd6409c55c82d5db5b5d6ead7e52cfe26"
+    },
+    "conf-174386d81fb588651176ff91": {
+      "title": "Improving Explicit Dynamic Gaussian Splatting Optimization via Update Mixture",
+      "url": "https://icml.cc/virtual/2026/poster/63861",
+      "text": "3D Gaussian Splatting (3DGS) enables real-time, high-fidelity view synthesis via explicit scene representations and has recently been extended to dynamic scene modeling. Despite their excellent rendering quality and interpretability, we find that explicit Dynamic GS often exhibits generalization degradation in scenes with large motion. Motivated by generalization behavior in deep neural optimization and the characteristics of Gaussian primitive optimization, we propose an update mixture strategy. This work focuses on two representative open-source explicit Dynamic GS pipelines and our approach consists of three components: (i) a space–time dependent Strictly Sparse Update with additional regularization to stabilize adaptive updates; (ii) a constant-corrected adaptive algorithm that alleviates over-scaling of primitive gradients and yields a stable mixture of adaptive and non-adaptive steps; and (iii) attributes mixing via Stochastic Attribute Averaging to mitigate frame-preference under motion disturbances. Experiments show consistent improvements and reduced generalization issues, highlighting the role of non-adaptive updates and the impact of frame-preference in explicit Dynamic GS optimization. Show more",
+      "sha256": "1c08fa086f8382105405e47889a88505e1a3db07390bd75392eaebfa4fd3b5a1",
+      "verified_at": "2026-10-21T13:05:30.683134+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "aa9aef85cb9fb7336feebd2704372b2fdd2ceb8f5953456352f0b55c9d713ea1",
+      "source_version": "3c3ddf2c2b4abf6b7578ab8c769c39927d2b71ff82d796955b01e858a4a8a113"
+    },
+    "conf-11fa28dbc66ae9722466a9e8": {
+      "title": "Expo-GS: Exposure-Aware Signed Distance Function in Gaussian Splatting for High Dynamic Range",
+      "url": "https://icml.cc/virtual/2026/poster/66548",
+      "text": "High dynamic range novel view synthesis (HDR-NVS) remains challenged by geometric artifacts and radiometric distortions under multi-exposure conditions, primarily due to existing methods ignoring exposure and over-relying on color cues. Inspired by the integrated processing of color and structure of the human visual system (HVS), we propose Expo-GS, a novel framework that decomposes HDR-NVS into three interpretable components, namely,  Irradiance Field Training, Geometry Field Training, and Interactive Joint Training. Central to Expo-GS is the exposure-aware signed distance function (Expo-SDF), which dynamically reweights geometric supervision via localized exposure reliability estimation, suppressing noisy gradients from unstable regions while enhancing structure learning in well-exposed areas. Building on this, we design an interactive optimization strategy that synchronizes Gaussian primitive growth and pruning with evolving Expo-SDF cues, enabling exposure-aware density control and eliminating hallucinated structures near exposure transitions. Experiments show that Expo-GS significantly outperforms prior methods on both synthetic and real-world datasets. It achieves a peak PSNR of 39.06 dB under HDR settings and up to 41.38 dB in the LDR-OE configuration, excelling in preserving high-frequency textures and maintaining structural consistency. Show more",
+      "sha256": "c55698070ec7711bbf2150226dc8a93604fdaf77adb008f0a8bacece1daf2596",
+      "verified_at": "2026-10-21T13:05:35.964753+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "a8359e1539f8eb219437288290e1f6b42a34e4da345488bc25ea9967378dca98",
+      "source_version": "56ba676a0df01f6c311151775760758a611443ece309aa077c7ad024e80b4ddb"
+    },
+    "conf-06ffbdf05ec8445582abaa26": {
+      "title": "Scalable Training of 3D Gaussian Splatting via Out-of-Core Optimization",
+      "url": "https://icml.cc/virtual/2026/poster/64763",
+      "text": "Training 3D Gaussian Splatting (3DGS) at billion-primitive scale is fundamentally memory-bound: each Gaussian carries a large attribute vector, and the aggregate parameter table quickly exceeds GPU capacity, limiting prior systems to tens of millions of Gaussians on consumer hardware. We observe that 3DGS training is inherently sparse and trajectory-conditioned: each iteration activates only the Gaussians visible from the current camera batch, so GPU memory can serve as a working-set cache rather than a persistent parameter store. Building on this insight, we introduce \\textbf{TideGS}, an out-of-core training framework that manages parameters across an SSD--CPU--GPU hierarchy via three synergistic techniques: block-virtualized geometry for SSD-aligned spatial locality, a hierarchical asynchronous pipeline to overlap I/O with computation, and trajectory-adaptive differential streaming that transfers only incremental working-set deltas between iterations. Experiments show that TideGS enables training with \\textbf{over one billion Gaussians} on a single consumer GPU while achieving state-of-the-art reconstruction quality on large-scale scenes, exceeding prior out-of-core baselines (e.g., $\\sim$100M Gaussians) and standard in-memory training (e.g., $\\sim$11M Gaussians). Show more",
+      "sha256": "7c0444f7c8ec14782566fb7a94a4e319840d4a9cb8ed1aa02a9ecf06a68a75d9",
+      "verified_at": "2026-10-21T13:05:41.273276+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "49546604f85862eb720145ba9896c59650b3acf137cab989160e314e79854653",
+      "source_version": "01d07edc1f676eeb3599467d842f37e329809cf8565ac0f1a80bb54675688f38"
+    },
+    "conf-01ab18bc857a7a1a9d7c7a61": {
+      "title": "FastSESR: Fast Scene-level Explicit Surface Reconstruction",
+      "url": "https://icml.cc/virtual/2026/poster/64625",
+      "text": "Explicit surface reconstruction aims to recover high-fidelity meshes directly from point clouds. While existing methods achieve strong performance on scene-level data, they often rely on test-time optimization, resulting in a prohibitive runtime of several minutes. To address this bottleneck, we propose FastSESR, a two-stage framework for efficient scene-level explicit surface reconstruction. In the first stage, a lightweight triangular candidate network (TCN) captures local connections via an edge-factorized parameterization, enabling effective extraction of surface triangles from uniformly sampled points. In the second stage, an offset optimization network amortizes offset refinement into a small, fixed number of learnable update steps guided by TCN, producing geometries that are more suitable for triangulation. Experiments on multiple scene-level datasets show that FastSESR accelerates surface reconstruction by at least $20 \\times$ over prior methods while maintaining competitive reconstruction quality. Moreover, evaluations on shape-level benchmarks indicate good generalization performance. Our code is available at https://github.com/Vaiduryasses/FastSESR. Show more",
+      "sha256": "fcad76f0c6f67b9a7fb831d7f61012c4cb2713dadf2c5182a20ca9241dcdb1b0",
+      "verified_at": "2026-10-21T13:05:46.571794+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "b147de970559f7f5cc79078c23ca3cec22af9b4897c7fb65443e100593b81afd",
+      "source_version": "373b61343d21343a7f364cee2f92c7cf68ce91189451e37f6217e98bb3ff47dd"
+    },
+    "2601.03200": {
+      "title": "A High-Fidelity Digital Twin for Robotic Manipulation Based on 3D Gaussian Splatting",
+      "url": "https://arxiv.org/abs/2601.03200",
+      "text": "Developing high-fidelity, interactive digital twins is crucial for enabling closed-loop motion planning and reliable real-world robot execution, which are essential to advancing sim-to-real transfer. However, existing approaches often suffer from slow reconstruction, limited visual fidelity, and difficulties in converting photorealistic models into planning-ready collision geometry. We present a practical framework that constructs high-quality digital twins within minutes from sparse RGB inputs. Our system employs 3D Gaussian Splatting (3DGS) for fast, photorealistic reconstruction as a unified scene representation. We enhance 3DGS with visibility-aware semantic fusion for accurate 3D labelling and introduce an efficient, filter-based geometry conversion method to produce collision-ready models seamlessly integrated with a Unity-ROS2-MoveIt physics engine. In experiments with a Franka Emika Panda robot performing pick-and-place tasks, we demonstrate that this enhanced geometric accuracy effectively supports robust manipulation in real-world trials. These results demonstrate that 3DGS-based digital twins, enriched with semantic and geometric consistency, offer a fast, reliable, and scalable path from perception to manipulation in unstructured environments.",
+      "sha256": "9dcf764b485f85458dc01d36c3f9d7cbe11f04ac2c19a2ffc039c7c6afc706ca",
+      "verified_at": "2026-10-21T13:05:51.639161+08:00"
+    },
+    "conf-20266e2bf5683762d4cc429c": {
+      "title": "GEM: Generating LiDAR World Model via Deformable Mamba",
+      "url": "https://arxiv.org/abs/2605.07326",
+      "text": "World models, which simulate environmental dynamics and generate sensor observations, are gaining increasing attention in autonomous driving. However, progress in LiDAR-based world models has lagged behind those built on camera videos or occupancy data, primarily due to two core challenges: the inherent disorder of LiDAR point clouds and the difficulty of distinguishing dynamic objects from static structures. To address these issues, we propose GEM: a Generative LiDAR world model that leverages deformable mamba architecture, significantly improving fidelity and imaginative capability. Specifically, leveraging the structural similarity between sequential laser scanning and Mamba's processing mechanism, we first tokenize LiDAR sweeps into compact representations via a custom LiDAR scene tokenizer. After unsupervised disentanglement of tokenized features via a dynamic-static separator, a tri-path deformable Mamba is introduced to perform selective scanning and adaptive gating fusion over the disentangled features, leading to enhanced spatial-temporal understanding of the world evolution. Optionally, a planner and a BEV layout controller can be integrated to explore the model's capability for autonomous rollout and its potential to generate ``what-if\" scenarios. Extensive experiments show that GEM achieves state-of-the-art performances across diverse benchmarks and evaluation settings, demonstrating its superiority and effectiveness. Project page: https://github.com/wuyang98/GEM.",
+      "sha256": "91e83f7bd3c5a9b461331fc468bcca4b550e3276a45a9f8833c2bbf97fbcf101",
+      "verified_at": "2026-10-21T13:05:57.416006+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "15460a5bc76331cea9e0bd15378dc3e8a432e46cefd89325e792e70a5c45e6c9",
+      "source_version": "fbdd09ceca729a039ca9b0876fd1ac84c90e089a21e3ac8fa6b2a3355c9bac00"
+    },
+    "conf-5934cf39ea8d08049f3a2f16": {
+      "title": "Driver-WM: A Driver-Centric Traffic-Conditioned Latent World Model for In-Cabin Dynamics Rollout",
+      "url": "https://arxiv.org/abs/2605.05092",
+      "text": "Safe L2/L3 driving automation requires anticipating human-in-the-loop reactions during shared-control transitions. While most driving world models forecast the external environment, in-cabin intelligence remains strictly recognition-oriented and lacks multi-step rollout capabilities for driver dynamics. We introduce Driver-WM, a driver-centric latent world model that rolls out in-cabin dynamics causally conditioned on out-cabin traffic context. This formulation unifies physical kinematics forecasting with auxiliary behavioral and emotional semantic recognition. Operating in a compact latent space constructed from frozen vision-language features, Driver-WM adopts a dual-stream architecture to separately encode external traffic and internal driver states. These streams are directionally coupled via a gated causal injection mechanism, which uses a learned vector gate to modulate external contextual perturbations while strictly enforcing temporal causality. Experiments on AIDE show robust long-horizon forecasting on reactive high-motion clips, improved driver/traffic semantic alignment, and controlled interventions that expose the external-to-internal mechanism.",
+      "sha256": "6dc90ab050d6222bde99b3895778f8a1eba2b529129f282c37ed114455d3478f",
+      "verified_at": "2026-10-21T13:06:02.919807+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "84ec8244427768928edf2dc5c82ea4eeb3889570536110426a23a158dfc73faa",
+      "source_version": "dd410f515a4a335761aa18fa5616ed88675691bf1f601a0fc1e29cc1c9a5f1fa"
+    },
+    "conf-f77546eb37d67b62b6dad0b6": {
+      "title": "Scaling Real-World Robot Policy Evaluation via Discrete Diffusion World Model",
+      "url": "https://icml.cc/virtual/2026/poster/65898",
+      "text": "Evaluating generalist robot manipulation policies is costly and difficult to scale in the real world. While emerging world models (e.g., WorldEval, Ctrl-World) offer a promising alternative, the reliability of such evaluation remains a critical bottleneck.  Specifically, their visual predictions can undermine policy assessment by \"self-correcting\" failures into false positives or yielding artifacts under out-of-distribution controls. Even with failure-enriched data, current architectures struggle to capture action-causal dynamics, as they typically treat actions as passive conditions rather than causal drivers. To address this, we propose dWorldEval, an action-centric discrete-diffusion world model that maps visual observations, language instructions, and action chunks into a shared unified token space and denoises them with a single self-attention backbone where actions function as first-class tokens.  To realize reliable policy-world interaction, dWorldEval introduces a sparse keyframe memory that anchors global scene state while preserving fine-grained multi-view interaction cues, and leverages Progress-as-text to jointly generate future observations and success indicators. Extensive experiments on LIBERO, RoboTwin, and real-robot tasks demonstrate that dWorldEval significantly outperforms video diffusion baselines in action controllability, stabilizes long-horizon multi-view rollouts, enabling accurate policy ranking via automatic success estimation. Show more",
+      "sha256": "c9d54c1b2b11eb9b190b4f9308fc7cf18e02191f8802f92e6b275de38ed728e9",
+      "verified_at": "2026-10-21T13:06:08.208581+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "994efd86176ed8b618383cebc14be056528b46253be17b08c4b6ccc9dbad928c",
+      "source_version": "b1ff4d0d450883ab25e12bc82a43102012f8934cbf1bb920dace733aae433a1a"
+    },
+    "conf-e4301c297cf3abd9cdea6b42": {
+      "title": "iWorld-Bench: A Benchmark for Interactive World Models with a Unified Action Generation Framework",
+      "url": "https://arxiv.org/abs/2605.03941",
+      "text": "Achieving Artificial General Intelligence (AGI) requires agents that learn and interact adaptively, with interactive world models providing scalable environments for perception, reasoning, and action. Yet current research still lacks large-scale datasets and unified benchmarks to evaluate their physical interaction capabilities. To address this, we propose iWorld-Bench, a comprehensive benchmark for training and testing world models on interaction-related abilities such as distance perception and memory. We construct a diverse dataset with 330k video clips and select 2.1k high-quality samples covering varied perspectives, weather, and scenes. As existing world models differ in interaction modalities, we introduce an Action Generation Framework to unify evaluation and design six task types, generating 4.9k test samples. These tasks jointly assess model performance across visual generation, trajectory following, and memory. Evaluating 14 representative world models, we identify key limitations and provide insights for future research. The iWorld-Bench model leaderboard is publicly available at iWorld-Bench.com.",
+      "sha256": "63c4b28478184c1964679ccfa5360b6ae7ef5b52bb4be28a25346d50448b585d",
+      "verified_at": "2026-10-21T13:06:13.715345+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "9fdb52ee33c26dbbc5f271de7987fbbb9bf4fbddf3880a8c68c6ad0f11de5f1c",
+      "source_version": "56c45c034e00a385bf071c6cf735017ac4bb5b7ad27a5457741452e285eee7b6"
+    },
+    "conf-b91ec9237f1860348b68faef": {
+      "title": "Multi-view Consistent Latent Action Learning for World Modeling and Control",
+      "url": "https://icml.cc/virtual/2026/poster/62268",
+      "text": "The scalability of world models is currently bottlenecked by the scarcity of action annotations. While self-supervised latent action learning offers a potential solution, existing single-view paradigms—relying on information bottlenecks or Vector Quantization (VQ)—often conflate superficial 2D pixel displacements with the underlying physical-spatial dynamics of an action. Consequently, these methods remain highly susceptible to view-dependent noise, such as camera shake. We introduce MuCoLA ( Mu lti-view Co nsistent L atent A ction learning), a framework that learns robust, view-invariant action representations by enforcing semantic consistency across synchronized video streams. MuCoLA utilizes a Student-Teacher network with DINO-style self-distillation to align action distributions across viewpoints, effectively filtering high-frequency visual noise while preserving motion semantics. Theoretical analysis reveals that our multi-view objective functions as a spectral filter, isolating agent dynamics from environmental nuisances. Empirically, MuCoLA significantly outperforms baselines in action regression, video reconstruction, and downstream visual control tasks. Furthermore, we demonstrate that MuCoLA exhibits favorable scaling properties with respect to model capacity and data volume, paving the way for large-scale action-free world modeling. Show more",
+      "sha256": "45458c410de400a901fc176cf89afcc2fa63982697f7624217da41415b58114c",
+      "verified_at": "2026-10-21T13:06:19.024941+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "54b60878dd6fce282bb309552c87d26e8fe5d90b6c13bd0ca3582f80fdce5dd1",
+      "source_version": "c95c80f2af9aa0b17f7b60533a94949b0b13e16e37426e85e098c6e97ad49c2d"
+    },
+    "conf-6714c9ab099914004c601c58": {
+      "title": "Dyn-VPP: Video Prediction Policy Optimization for Improved Visual Dynamics",
+      "url": "https://icml.cc/virtual/2026/poster/66506",
+      "text": "Video action models are a promising foundation for Vision–Language–Action (VLA) because they can learn rich visual dynamics directly from video. However, likelihood-oriented training of diffusion predictors emphasizes globally plausible futures and does not guarantee precision-critical visual dynamics needed for manipulation, so small prediction errors can be amplified by downstream policies. We propose Dyn-VPP, a post-training framework that casts multi-step denoising as policy optimization and aligns predicted future latents with expert visual dynamics via verifiable terminal reward, without modifying any architecture. This enables explicit optimization of dynamics signals that are not captured by likelihood-only training. As a result, Dyn-VPP yields more accurate visual dynamics and improves downstream task execution. Experiments across diverse simulated and real-world manipulation settings show improved dynamics consistency and consistently higher task success. Show more",
+      "sha256": "7d19eab2b72681539ca7e8e173026a379fe10d31cb8775c4696864961ef11573",
+      "verified_at": "2026-10-21T13:06:24.328494+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "71888b37ddeced72106dc46c16f59fa88b81e953dd8e896b21b32914e4ab9845",
+      "source_version": "a664479300ed9f49e955453093955b5c47ec1fdd9199ea129d60ebc41f0fe866"
+    },
+    "conf-20d39b883ac4017f97893c8a": {
+      "title": "Learning Disentangled Multi-Agent World Model for Decentralized Control",
+      "url": "https://icml.cc/virtual/2026/poster/61713",
+      "text": "World models enable learning policies via latent imagination, offering benefits such as history compression and sample efficiency. The primary challenge in applying world models to multi-agent tasks is that modeling multi-agent dynamics in latent space requires integrating information from different agents, often creating spurious correlations between their latent states. Existing methods either reconstruct the observation for each agent or employ communication to maintain correlation during execution, failing to learn disentangled latent states that are crucial for effective decentralized control. To address this, we present the Disentangled Multi-Agent World Model (DMAWM). It facilitates learning decentralized policies in the latent space through a novel architecture comprising independent agent modules and a shared environment module. During real-environment execution, agent modules independently process local information to form a factorized latent representation. The environment module is then trained to mirror the factorized structure generated by the agent modules, effectively disentangling individual latent states from the interaction dynamics. Consequently, imaginary rollouts generated by the environment module more faithfully simulate decentralized execution dynamics, facilitating the transfer of policies from imagination to decentralized execution. Empirically, DMAWM outperforms existing model-based and model-free approaches in convergence speed and final performance, with additional visualization demonstrating its efficacy in capturing agent interactions. Show more",
+      "sha256": "40a4b90cb20388a58375164d2124bfd7a298330e5b5f97ea7091f93d5fde04ed",
+      "verified_at": "2026-10-21T13:06:29.618120+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "b77ae2c7a1653b123307b5db5cf947ebf08b3764f567f3362958a37ad3a07176",
+      "source_version": "31d2db6d6a0385fedfd3f8e65d8d03bc43280e94492c109171f59312a1fc630f"
+    },
+    "conf-2dd2fc165515ef16627fd7c8": {
+      "title": "PVDepth: Panoramic Video Depth Estimation via Geometry-Aware Spatiotemporal Adaptation",
+      "url": "https://icml.cc/virtual/2026/poster/64995",
+      "text": "Panoramic video depth estimation is pivotal for applications such as Virtual Reality and World Models. However, advancements in this field are impeded by two primary obstacles: the scarcity of large-scale training data and the unique spatiotemporal challenges of Equirectangular Projection (ERP), which hinder the direct transfer of perspective models. In this paper, we first present PanoCARLA , a large-scale synthetic RGB-D panoramic video dataset, featuring natural motion trajectories and drone-like roaming perspectives.  Building on this foundation, we propose PVDepth , an end-to-end framework adapted from perspective video depth models.  To tackle ERP-specific geometric distortions and consequent non-linear temporal dynamics, we introduce two core mechanisms: (1) A Progressive Sphere-aware Noise Initialization strategy that anneals the noise distribution from planar to spherical, guiding the model to adapt to non-uniform information density; and (2) A Cube-rectified Temporal Modeling module that incorporates an auxiliary cubemap temporal branch to rectify non-linear temporal dynamics in the ERP domain. Extensive experiments demonstrate that PVDepth achieves superior performance, generating geometrically accurate and temporally consistent depth sequences. Code and data will be released at https://github.com/ChuanxinSong/PVDepth. Show more",
+      "sha256": "b98e49354edc3ae2766b89d5584377b95b635e22e87660165f0a2b301a54142c",
+      "verified_at": "2026-10-21T13:06:34.905333+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "daa5cd859b2df5be9ff3d6b26ac363de9173b6dcd4461f0ab4828d74ac4c7e97",
+      "source_version": "612f5128a9156dceeeb1f76dad9b561be7cfc8b74df757fda82d16d893ce3d5b"
+    },
+    "conf-2a62483d8c8bdadc459c7824": {
+      "title": "PolarDepth: Monocular Transparent Object Depth from Polar-Physics Priors",
+      "url": "https://icml.cc/virtual/2026/poster/61742",
+      "text": "Depth estimation for transparent objects remains a fundamental challenge, as RGB-based cues often fail in regions affected by refraction and light transmission. Polarization provides physically grounded information related to surface orientation and material properties, offering reliable geometric cues even in the absence of texture. In this work, we introduce PolarDepth, a monocular framework that incorporates both RGB and polarization inputs, including the degree and angle of linear polarization (DoLP and AoLP), to estimate dense depth and localize transparent regions. PolarDepth injects polarization-derived physical priors by estimating the refractive index, zenith angle, and azimuth angle from polarization measurements and embedding them into an implicit geometric representation that constrains depth inference in ambiguous transparent regions. To support model development and evaluation, we introduce PTOD, a dataset with synchronized RGB, polarization, and depth data and manually annotated transparent region masks. Experimental results demonstrate that PolarDepth achieves state-of-the-art performance in transparent object depth estimation. The findings highlight the effectiveness of embedding polarization-derived physical priors into learned representations for robust perception in complex visual environments. Show more",
+      "sha256": "1d1cf112fe4a1d5108a820127a21ee81ffc0baaf403184117279af02f712cca1",
+      "verified_at": "2026-10-21T13:06:40.184618+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "b19eab6d4ac043c279364d77955e3697380eea106a17e34ac107f56f18969ccf",
+      "source_version": "861f348478200b4b89bc6df7b914de84b4be8933f7ef19652bb88bf5008835b3"
     }
   }
 }
