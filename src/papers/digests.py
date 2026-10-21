@@ -158,7 +158,7 @@ def official_evidence_text(key: str, value: dict, library: dict) -> str:
         if not record or value.get('source_version') != record.get('source_version'):
             raise StaleOfficialEvidence(f'Conference official evidence requires refresh: {key}')
         if (normalize_title(value.get('title','')) != normalize_title(record['title'])
-                or value.get('basis') != 'official_abstract'
+                or value.get('basis') not in {'official_abstract', 'official_description'}
                 or not re.fullmatch(r'[a-f0-9]{64}',value.get('source_sha256',''))):
             raise ValueError(f'Invalid conference digest evidence identity: {key}')
         _safe_url(value['url'])

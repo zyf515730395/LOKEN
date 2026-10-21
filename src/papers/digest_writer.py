@@ -95,13 +95,13 @@ def recover_official_abstract(key,row,source):
     if not record or normalize_title(record['title'])!=normalize_title(row['title']):
         raise PaperSummaryError('paper_identity_mismatch',f'Conference digest identity mismatch: {key}')
     cache=conference_source_cache_root(record,paths.ROOT/'build/conferences/intake/sources'/key)
-    paper,_=acquire_conference_abstract(record,cache)
+    paper,_=acquire_conference_abstract(record,cache,allow_description=True)
     receipt=json.loads((cache/'abstract-verified.json').read_text(encoding='utf-8'))
     if receipt['source_sha256']!=paper.source_sha256:
         raise ValueError('Conference official abstract receipt changed')
     text=paper.document.abstract
     return {'title':record['title'],'url':receipt['url'],'text':text,'sha256':evidence_hash(text),
-            'verified_at':now(),'basis':'official_abstract','source_sha256':paper.source_sha256,
+            'verified_at':now(),'basis':receipt['basis'],'source_sha256':paper.source_sha256,
             'source_version':record.get('source_version')}
 
 
@@ -175,7 +175,7 @@ def generate_periods(periods,*,today=None,model=None,workers=4,sentence_evidence
             entry=recover_official_abstract(key,row,source)
             official['papers'][key]=entry
             save_public(official_path,official); summaries[key]=entry['text']
-            print(f'Official abstract recovered: {key}',flush=True); time.sleep(5)
+            print(f'Official evidence recovered: {key}',flush=True); time.sleep(5)
         except (ValueError,OSError) as error:
             failures.append({'paper':key,'stage':'evidence','error':str(error),'skippable':skippable_paper_error(error,'evidence')})
     client=LoopbackChatTransport('http://127.0.0.1:8000/v1',max_message_chars=150000,max_request_bytes=600000)

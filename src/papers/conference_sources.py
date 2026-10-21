@@ -28,6 +28,8 @@ HOSTS = frozenset({
     'ecva.net', 'www.ecva.net', 'ojs.aaai.org', 'aaai.org',
     'openreview.net', 'arxiv.org', 'dl.acm.org', 'ieeexplore.ieee.org',
     'doi.org', 'api.crossref.org', 'proceedings.iclr.cc',
+    's2026.conference-schedule.org', 's2025.conference-schedule.org',
+    'sa2025.conference-schedule.org',
 })
 # Explicit publisher transitions; a redirect to another otherwise supported
 # publisher is still rejected unless this pair is declared here.
@@ -86,6 +88,10 @@ def _page_details(raw: bytes, url: str, title: str) -> dict:
             for tag in soup.select('meta[content]')}
     identities = [meta.get('citation_title', ''), meta.get('dc.title', '')]
     identities.extend(tag.get_text(' ', strip=True) for tag in soup.select('h1, h2, #papertitle'))
+    schedule = urlsplit(url).hostname in {'s2026.conference-schedule.org', 's2025.conference-schedule.org', 'sa2025.conference-schedule.org'}
+    if schedule:
+        current = soup.select_one('.left-col > .presentation-title')
+        identities = [current.get_text(' ', strip=True)] if current else []
     expected = normalize_title(title)
     if not expected or not any(normalize_title(value) == expected for value in identities):
         raise PaperSummaryError('paper_identity_mismatch', 'official page title does not match the accepted paper')
@@ -97,8 +103,13 @@ def _page_details(raw: bytes, url: str, title: str) -> dict:
     if re.fullmatch(r'10\.\d{4,9}/\S+', doi):
         metadata['doi'] = doi
     abstract = meta.get('citation_abstract', '')
+    description = ''
+    if schedule:
+        node = soup.select_one('.left-col > .abstract-sect .abstract')
+        if node:
+            description = node.get_text(' ', strip=True)
     if not abstract:
-        node = soup.select_one('#abstract, .abstract, .abstract-content, .paper-abstract')
+        node = None if schedule else soup.select_one('#abstract, .abstract, .abstract-content, .paper-abstract')
         if node:
             abstract = node.get_text(' ', strip=True)
     links = [meta.get('citation_pdf_url', '')]
@@ -131,7 +142,7 @@ def _page_details(raw: bytes, url: str, title: str) -> dict:
             permitted.append(absolute)
             if verified_cdn:
                 verified_cdn_urls.append(absolute)
-    return {'metadata': metadata, 'links': permitted, 'abstract': abstract,
+    return {'metadata': metadata, 'links': permitted, 'abstract': abstract, 'description': description,
             'verified_cdn_urls': verified_cdn_urls}
 
 
@@ -549,7 +560,7 @@ def acquire_conference_paper(record: dict, cache_root: Path, *, refresh: bool = 
     raise failure
 
 
-def acquire_conference_abstract(record: dict, cache_root: Path, *, refresh: bool = False) -> tuple[AcquiredPaper, dict]:
+def acquire_conference_abstract(record: dict, cache_root: Path, *, refresh: bool = False, allow_description: bool = False) -> tuple[AcquiredPaper, dict]:
     """Independent official abstract evidence; never sufficient for body summaries."""
     directory = Path(cache_root).resolve()
     directory.mkdir(parents=True, exist_ok=True)
@@ -560,11 +571,21 @@ def acquire_conference_abstract(record: dict, cache_root: Path, *, refresh: bool
     error = PaperSummaryError('abstract_unavailable', 'verified official abstract is unavailable')
     for url in list(dict.fromkeys(urls))[:10]:
         try:
-            raw, content_type, final = _download(url, directory, refresh=refresh)
+            # The publication-date collector already fetched these official
+            # pages. Recheck exact identity before reusing its bounded raw bytes.
+            existing = HOST_COOLDOWNS.parent.parent / 'dates/responses' / (hashlib.sha256(url.encode()).hexdigest() + '.raw')
+            schedule_host = urlsplit(url).hostname in {'s2026.conference-schedule.org', 's2025.conference-schedule.org', 'sa2025.conference-schedule.org'}
+            if not refresh and schedule_host and existing.exists() and existing.stat().st_size <= MAX_BYTES:
+                _safe_url(url)
+                raw, content_type, final = existing.read_bytes(), 'text/html', url
+                _page_details(raw, final, record['title'])
+            else:
+                raw, content_type, final = _download(url, directory, refresh=refresh)
             if content_type not in {'text/html', 'application/xhtml+xml'}:
                 continue
             details = _page_details(raw, final, record['title'])
-            abstract = re.sub(r'^abstract\s*[:.\-—]?\s*', '', details['abstract'].strip(), flags=re.I)
+            basis = 'official_abstract' if details['abstract'] else 'official_description'
+            abstract = re.sub(r'^abstract\s*[:.\-—]?\s*', '', (details['abstract'] or (details.get('description', '') if allow_description else '')).strip(), flags=re.I)
             if not 40 <= len(abstract) <= 16000:
                 continue
             path = directory / 'abstract-source.html'
@@ -572,7 +593,7 @@ def acquire_conference_abstract(record: dict, cache_root: Path, *, refresh: bool
             sha = hashlib.sha256(raw).hexdigest()
             _preserve(directory / 'abstract-verified.json', json.dumps({
                 'id': record['id'], 'title': record['title'], 'url': final,
-                'source_sha256': sha, 'basis': 'official_abstract'}, ensure_ascii=False).encode())
+                'source_sha256': sha, 'basis': basis}, ensure_ascii=False).encode())
             return AcquiredPaper(record['id'], 'html', path, sha,
                 PaperDocument(record['title'], abstract, ())), details['metadata']
         except PaperSummaryError as caught:
