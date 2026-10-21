@@ -5266,6 +5266,90 @@
       "basis": "official_abstract",
       "source_sha256": "ff23241c52a34a5c76de63cdc26721c82b668a0a9b2f824fcc4eb30da49155c8",
       "source_version": "835d7d3b49ae508383761c629a365f662a1ca5f05479c8f4cbdac6106283eec1"
+    },
+    "conf-3d15d4fb343412c146c58a68": {
+      "title": "FasterVAR: Plug-and-Play Acceleration for Visual Autoregressive Models",
+      "url": "https://arxiv.org/abs/2512.16483",
+      "text": "Visual Autoregressive (VAR) modeling departs from the next-token prediction paradigm of traditional Autoregressive (AR) models through next-scale prediction, enabling high-quality image generation. However, the VAR paradigm suffers from sharply increased computational complexity and running time at large-scale steps. Although existing acceleration methods reduce runtime for large-scale steps, but rely on manual step selection and overlook the varying importance of different stages in the generation process. To address this challenge, we present FasterVAR, a systematic study and plug-and-play acceleration framework for VAR models. Our analysis shows that early steps are critical for preserving semantic and structural consistency and should remain intact,while later steps mainly refine details and can be pruned or approximated for acceleration. Building on these insights, FasterVAR introduces a plug-and-play acceleration strategy that exploits semantic irrelevance and low-rank properties in late-stage computations, without requiring additional training. Our proposed FasterVAR achieves up to 3.4x speedup with almost no performance loss. consistently outperforming existing acceleration baselines.These results highlight stage-aware design as a powerful principle for efficient visual autoregressive image generation.",
+      "sha256": "4e39e64cfecb2c57de7c0489e49e1cab6036eeace39236a75e1227b2912a33fe",
+      "verified_at": "2026-10-21T22:05:02.092885+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "f94127decc706ac184d7fbcfdb3fc2d0f1efbbedf4c2edaf3b187e2046fb8504",
+      "source_version": "e83ae62909748adf0889099ef4701efe7cfa1ea4b5627182049747b305fc40c7"
+    },
+    "conf-f18841fd8cc92380c5d05b70": {
+      "title": "EchoMotion: Unified Human Video and Motion Generation via Dual-Modality Diffusion Transformer",
+      "url": "https://arxiv.org/abs/2512.18814",
+      "text": "Video generation models have advanced significantly, yet they still struggle to synthesize complex human movements due to the high degrees of freedom in human articulation. This limitation stems from the intrinsic constraints of pixel-only training objectives, which inherently bias models toward appearance fidelity at the expense of learning underlying kinematic principles. To address this, we introduce EchoMotion, a framework designed to model the joint distribution of appearance and human motion, thereby improving the quality of complex human action video generation. EchoMotion extends the DiT (Diffusion Transformer) framework with a dual-branch architecture that jointly processes tokens concatenated from different modalities. Furthermore, we propose MVS-RoPE (Motion-Video Syncronized RoPE), which offers unified 3D positional encoding for both video and motion tokens. By providing a synchronized coordinate system for the dual-modal latent sequence, MVS-RoPE establishes an inductive bias that fosters temporal alignment between the two modalities. We also propose a Motion-Video Two-Stage Training Strategy. This strategy enables the model to perform both the joint generation of complex human action videos and their corresponding motion sequences, as well as versatile cross-modal conditional generation tasks. To facilitate the training of a model with these capabilities, we construct HuMoVe, a large-scale dataset of approximately 80,000 high-quality, human-centric video-motion pairs. Our findings reveal that explicitly representing human motion is complementary to appearance, significantly boosting the coherence and plausibility of human-centric video generation.",
+      "sha256": "73f62117c362adcbe948d8c0067b48b104c4d5a9b7782d5b1d99875275082f58",
+      "verified_at": "2026-10-21T22:05:07.646400+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "44972f605b3954ab133999008dfc751e186c460ca86f3bed4b0855ff48fb900b",
+      "source_version": "60f9097894db4b55c0d4c77609daab176448e52d501f561d7e48996482be5c8d"
+    },
+    "conf-138aeed2a06794a3ad5ae0b3": {
+      "title": "InfoTok: Adaptive Discrete Video Tokenizer via Information-Theoretic Compression",
+      "url": "https://arxiv.org/abs/2512.16975",
+      "text": "Accurate and efficient discrete video tokenization is essential for long video sequences processing. Yet, the inherent complexity and variable information density of videos present a significant bottleneck for current tokenizers, which rigidly compress all content at a fixed rate, leading to redundancy or information loss. Drawing inspiration from Shannon's information theory, this paper introduces InfoTok, a principled framework for adaptive video tokenization. We rigorously prove that existing data-agnostic training methods are suboptimal in representation length, and present a novel evidence lower bound (ELBO)-based algorithm that approaches theoretical optimality. Leveraging this framework, we develop a transformer-based adaptive compressor that enables adaptive tokenization. Empirical results demonstrate state-of-the-art compression performance, saving 20% tokens without influence on performance, and achieving 2.3x compression rates while still outperforming prior heuristic adaptive approaches. By allocating tokens according to informational richness, InfoTok enables a more compressed yet accurate tokenization for video representation, offering valuable insights for future research.",
+      "sha256": "6fbc1114f4d2c4ea5d9c6379d2140b7fbce656b3e45003b9b75dbb5522c82756",
+      "verified_at": "2026-10-21T22:05:15.662072+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "d5cf2eaaea0c099f3a6f558b8d2ef2147cb408f3c8f0cd11500fb81c150a1f18",
+      "source_version": "35f4d29ebbcc0d6660f84b9559d37ea994d6e6957385dc7713b723d456e22eeb"
+    },
+    "2512.16093": {
+      "title": "TurboDiffusion: Accelerating Video Diffusion Models by 100-200 Times",
+      "url": "https://arxiv.org/abs/2512.16093",
+      "text": "We introduce TurboDiffusion, a video generation acceleration framework that can speed up end-to-end diffusion generation by 100-200x while maintaining video quality. TurboDiffusion mainly relies on several components for acceleration: (1) Attention acceleration: TurboDiffusion uses low-bit SageAttention and trainable Sparse-Linear Attention (SLA) to speed up attention computation. (2) Step distillation: TurboDiffusion adopts rCM for efficient step distillation. (3) W8A8 quantization: TurboDiffusion quantizes model parameters and activations to 8 bits to accelerate linear layers and compress the model. In addition, TurboDiffusion incorporates several other engineering optimizations. We conduct experiments on the Wan2.2-I2V-14B-720P, Wan2.1-T2V-1.3B-480P, Wan2.1-T2V-14B-720P, and Wan2.1-T2V-14B-480P models. Experimental results show that TurboDiffusion achieves 100-200x speedup for video generation even on a single RTX 5090 GPU, while maintaining comparable video quality. The GitHub repository, which includes model checkpoints and easy-to-use code, is available at this https URL .",
+      "sha256": "5e5b4a8b8a101467936bb9a463333785d3231b40092105c3151f481434eca47e",
+      "verified_at": "2026-10-21T22:05:21.003435+08:00"
+    },
+    "2512.17784": {
+      "title": "Long-Range depth estimation using learning based Hybrid Distortion Model for CCTV cameras",
+      "url": "https://arxiv.org/abs/2512.17784",
+      "text": "Accurate camera models are essential for photogrammetry applications such as 3D mapping and object localization, particularly for long distances. Various stereo-camera based 3D localization methods are available but are limited to few hundreds of meters' range. This is majorly due to the limitation of the distortion models assumed for the non-linearities present in the camera lens. This paper presents a framework for modeling a suitable distortion model that can be used for localizing the objects at longer distances. It is well known that neural networks can be a better alternative to model a highly complex non-linear lens distortion function; on contrary, it is observed that a direct application of neural networks to distortion models fails to converge to estimate the camera parameters. To resolve this, a hybrid approach is presented in this paper where the conventional distortion models are initially extended to incorporate higher-order terms and then enhanced using neural network based residual correction model. This hybrid approach has substantially improved long-range localization performance and is capable of estimating the 3D position of objects at distances up to 5 kilometres. The estimated 3D coordinates are transformed to GIS coordinates and are plotted on a GIS map for visualization. Experimental validation demonstrates the robustness and effectiveness of proposed framework, offering a practical solution to calibrate CCTV cameras for long-range photogrammetry applications.",
+      "sha256": "8e7fa5b801d4d332cd8161825a999033a73e47c88d1b6910da84bd658aeef716",
+      "verified_at": "2026-10-21T22:05:26.087887+08:00"
+    },
+    "conf-4398f58ddc0d6f67fd4d0f54": {
+      "title": "4D Primitive-Mache: Glueing Primitives for Persistent 4D Scene Reconstruction",
+      "url": "https://arxiv.org/abs/2512.16564",
+      "text": "We present a dynamic reconstruction system that receives a casual monocular RGB video as input, and outputs a complete and persistent reconstruction of the scene. In other words, we reconstruct not only the the currently visible parts of the scene, but also all previously viewed parts, which enables replaying the complete reconstruction across all timesteps. Our method decomposes the scene into a set of rigid 3D primitives, which are assumed to be moving throughout the scene. Using estimated dense 2D correspondences, we jointly infer the rigid motion of these primitives through an optimisation pipeline, yielding a 4D reconstruction of the scene, i.e. providing 3D geometry dynamically moving through time. To achieve this, we also introduce a mechanism to extrapolate motion for objects that become invisible, employing motion-grouping techniques to maintain continuity. The resulting system enables 4D spatio-temporal awareness, offering capabilities such as replayable 3D reconstructions of articulated objects through time, multi-object scanning, and object permanence. On object scanning and multi-object datasets, our system significantly outperforms existing methods both quantitatively and qualitatively.",
+      "sha256": "f15a6dae858446b3bf1c3e1aafef828862fccfddec79c55285e9fae791739dd9",
+      "verified_at": "2026-10-21T22:05:31.717442+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "37fd796c12953a2018742473950d0289300e38ffafa3faa895641c547fa9da51",
+      "source_version": "0a20f6bad125bdc14abbf9d7d87707c63e9eb2a9f06027b1cc8192d19517278e"
+    },
+    "conf-ce01770e13ae8c379dfb5db9": {
+      "title": "Charge: A Comprehensive Novel View Synthesis Benchmark and Dataset to Bind Them All",
+      "url": "https://arxiv.org/abs/2512.13639",
+      "text": "This paper presents a new dataset for Novel View Synthesis, generated from a high-quality, animated film with stunning realism and intricate detail. Our dataset captures a variety of dynamic scenes, complete with detailed textures, lighting, and motion, making it ideal for training and evaluating cutting-edge 4D scene reconstruction and novel view generation models. In addition to high-fidelity RGB images, we provide multiple complementary modalities, including depth, surface normals, object segmentation and optical flow, enabling a deeper understanding of scene geometry and motion. The dataset is organised into three distinct benchmarking scenarios: a dense multi-view camera setup, a sparse camera arrangement, and monocular video sequences, enabling a wide range of experimentation and comparison across varying levels of data sparsity. With its combination of visual richness, high-quality annotations, and diverse experimental setups, this dataset offers a unique resource for pushing the boundaries of view synthesis and 3D vision.",
+      "sha256": "5c4478f72e93e71fe0d89ee1f54da31f875338fb7bd2d358650fe8d5a0ed15e5",
+      "verified_at": "2026-10-21T22:05:36.358686+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "df47096329298ae1356bff59a5f710f9dc92ecf968e671fbf35bfbce1bff92b2",
+      "source_version": "3ced354a3ccc1286fde8ee1d05642085ee9b62875e416e718bf8681f536074c3"
+    },
+    "conf-0e0f6e7042a69a2b9929000f": {
+      "title": "Nexels: Neurally-Textured Surfels for Real-Time Novel View Synthesis with Sparse Primitives",
+      "url": "https://eccv.ecva.net/virtual/2026/poster/3898",
+      "text": "Though Gaussian splatting has achieved impressive resultsin novel view synthesis, it requires millions of primitives to representhighly textured scenes — even when the underlying geometry is simple.We propose a representation that decouples geometry and appearanceto achieve a compact and computationally efficient representation. Ourmethod uses surfels for geometry and combines a global neural field withper-primitive colors for appearance. While existing approaches that tex-ture primitives incur significant overhead in either memory or renderingspeed, our method strikes a better balance by leveraging the neural fieldto implicitly compress texture information. We bound the computationsrequired in the rendering pass by querying the neural field for a fixednumber of primitives per pixel, enabling real-time rendering speeds. Ourrepresentation matches the perceptual quality of 3D Gaussian splattingwhile using 9.7× fewer primitives and 5.5× less memory on outdoorscenes, and 31× fewer primitives and 3.7× less memory on indoor scenes. Show more",
+      "sha256": "f3d06f9cb0b7e51b33dbb91644f300c99814d74dd570dab438256bec9fa0563c",
+      "verified_at": "2026-10-21T22:05:44.063379+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "e6a8f7f53be786a9b94833e9b3f501dc400110814cf523e71bd1154ed4229c6c",
+      "source_version": "d835c3388d540604ca5c32e769fd6d0c63896d2bda6790c2062649bb54ab431a"
+    },
+    "conf-a4a6e24922d425510590755b": {
+      "title": "WorldPlay: Towards Long-Term Geometric Consistency for Real-Time Interactive World Modeling",
+      "url": "https://arxiv.org/abs/2512.14614",
+      "text": "This paper presents WorldPlay, a streaming video diffusion model that enables real-time, interactive world modeling with long-term geometric consistency, resolving the trade-off between speed and memory that limits current methods. WorldPlay draws power from three key ingredients. 1) We use a Dual Action Representation to enable robust action control in response to the user's keyboard and mouse inputs. 2) To enforce long-term consistency, our Reconstituted Context Memory dynamically rebuilds context from past frames and uses temporal reframing to keep geometrically important but long-past frames accessible, effectively alleviating memory attenuation. 3) We also propose Context Forcing, a novel distillation method designed for memory-aware model. Aligning memory context between the teacher and student preserves the student's capacity to use long-range information, enabling real-time speeds while preventing error drift. Taken together, WorldPlay generates long-horizon streaming 720p video at 24 FPS with superior consistency, comparing favorably with existing techniques and showing strong generalization across diverse scenes. Project page and online demo can be found: https://3d-models.hunyuan.tencent.com/world/ and https://3d.hunyuan.tencent.com/sceneTo3D.",
+      "sha256": "0bfc7a790eea7795861a0a492c6aeba88b3a9847d65195761daf65ae13712032",
+      "verified_at": "2026-10-21T22:05:49.562858+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "05e9bb3824ddcdda2b82ceba2d0f9f62c9bc0b0456e67f945240809d74b6604f",
+      "source_version": "ae15471af3e586262bf40000473ec94377337555ed9d294c1c82b125923c10c6"
     }
   }
 }
