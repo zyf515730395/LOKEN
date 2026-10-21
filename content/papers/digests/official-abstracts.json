@@ -3643,6 +3643,80 @@
       "basis": "official_abstract",
       "source_sha256": "7cc0d3a446d1838a452a6e299279e900e4f421e34e6ce45aed5658fbb33533dc",
       "source_version": "26ad3e79902ecb971840d56b409a063096c53c7e274bb61a3ffecde99c229193"
+    },
+    "2604.15611": {
+      "title": "CLIMB: Controllable Longitudinal Brain Image Generation using Mamba-based Latent Diffusion Model and Gaussian-aligned Autoencoder",
+      "url": "https://arxiv.org/abs/2604.15611",
+      "text": "Latent diffusion models have emerged as powerful generative models in medical imaging, enabling the synthesis of high quality brain magnetic resonance imaging scans. In particular, predicting the evolution of a patients brain can aid in early intervention, prognosis, and treatment planning. In this study, we introduce CLIMB, Controllable Longitudinal brain Image generation via state space based latent diffusion model, an advanced framework for modeling temporal changes in brain structure. CLIMB is designed to model the structural evolution of the brain structure over time, utilizing a baseline MRI scan and its acquisition age as foundational inputs. Additionally, multiple conditional variables, including projected age, gender, disease status, genetic information, and brain structure volumes, are incorporated to enhance the temporal modeling of anatomical changes. Unlike existing LDM methods that rely on self attention modules, which effectively capture contextual information from input images but are computationally expensive, our approach leverages state space, a state space model architecture that substantially reduces computational overhead while preserving high-quality image synthesis. Furthermore, we introduce a Gaussian-aligned autoencoder that extracts latent representations conforming to prior distributions without the sampling noise inherent in conventional variational autoencoders. We train and evaluate our proposed model on the Alzheimers Disease Neuroimaging Initiative dataset, consisting of 6,306 MRI scans from 1,390 participants. By comparing generated images with real MRI scans, CLIMB achieves a structural similarity index of 0.9433, demonstrating notable improvements over existing methods.",
+      "sha256": "738cea3554e9c02bf5d5c1320612a60f07086fcbf716f4e9d44d40c4bcf993fb",
+      "verified_at": "2026-10-21T13:37:40.468488+08:00"
+    },
+    "conf-eae0d43238bee73e28027d56": {
+      "title": "CoSyncDiT: Cognitive Synchronous Diffusion Transformer for Movie Dubbing",
+      "url": "https://arxiv.org/abs/2604.12292",
+      "text": "Movie dubbing aims to synthesize speech that preserves the vocal identity of a reference audio while synchronizing with the lip movements in a target video. Existing methods fail to achieve precise lip-sync and lack naturalness due to explicit alignment at the duration level. While implicit alignment solutions have emerged, they remain susceptible to interference from the reference audio, triggering timbre and pronunciation degradation in in-the-wild scenarios. In this paper, we propose a novel flow matching-based movie dubbing framework driven by the Cognitive Synchronous Diffusion Transformer (CoSync-DiT), inspired by the cognitive process of professional actors. This architecture progressively guides the noise-to-speech generative trajectory by executing acoustic style adapting, fine-grained visual calibrating, and time-aware context aligning. Furthermore, we design the Joint Semantic and Alignment Regularization (JSAR) mechanism to simultaneously constrain frame-level temporal consistency on the contextual outputs and semantic consistency on the flow hidden states, ensuring robust alignment. Extensive experiments on both standard benchmarks and challenging in-the-wild dubbing benchmarks demonstrate that our method achieves the state-of-the-art performance across multiple metrics.",
+      "sha256": "b98f9da23f13c01bf5f53fab25b3fc531217458b365ae705b59c1ca8c46ad527",
+      "verified_at": "2026-10-21T13:37:46.257687+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "11a035f0c428f0486b144ee5bba6e3bf42e28ea7105dbbcb30327226b32dea78",
+      "source_version": "f7fe719175e9c7cbcd41047ab1764e424b2ab3fe1c833a734b8739f5eb756b1b"
+    },
+    "conf-8a062fb54c9b61f417925151": {
+      "title": "VideoFlexTok: Flexible-Length Coarse-to-Fine Video Tokenization",
+      "url": "https://arxiv.org/abs/2604.12887",
+      "text": "Visual tokenizers map high-dimensional raw pixels into a compressed representation for downstream modeling. Beyond compression, tokenizers dictate what information is preserved and how it is organized. A de facto standard approach to video tokenization is to represent a video as a spatiotemporal 3D grid of tokens, each capturing the corresponding local information in the original signal. This requires the downstream model that consumes the tokens, e.g., a text-to-video model, to learn to predict all low-level details \"pixel-by-pixel\" irrespective of the video's inherent complexity, leading to high learning complexity. We present VideoFlexTok, which represents videos with a variable-length sequence of tokens structured in a coarse-to-fine manner -- where the first tokens (emergently) capture abstract information, such as semantics and motion, and later tokens add fine-grained details. The generative flow decoder enables realistic video reconstructions from any token count. This representation structure allows adapting the token count according to downstream needs and encoding videos longer than the baselines with the same budget. We evaluate VideoFlexTok on class- and text-to-video generative tasks and show that it leads to more efficient training compared to 3D grid tokens, e.g., achieving comparable generation quality (gFVD and ViCLIP Score) with a 5x smaller model (1.1B vs 5.2B). Finally, we demonstrate how VideoFlexTok can enable long video generation without prohibitive computational cost by training a text-to-video model on 10-second 81-frame videos with only 672 tokens, 8x fewer than a comparable 3D grid tokenizer.",
+      "sha256": "0b914fe0a726abbf52b4a68a484793ab37e8439a6e07421e8b3dc15dbd8e2107",
+      "verified_at": "2026-10-21T13:37:51.891210+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "89d0ec4423df1ff54b15da27d80b427dc9ad2fc4d2cd4cb3ed0c80cc927ac44e",
+      "source_version": "5952b74a898f9eb313acea4fcae2932322421b82422d1e597e6771c9b7ded44f"
+    },
+    "conf-d2f8a58efb9d50e3118808ff": {
+      "title": "C-GenReg: Training-Free 3D Point Cloud Registration by Multi-View-Consistent Geometry-to-Image Generation with Probabilistic Modalities Fusion",
+      "url": "https://arxiv.org/abs/2604.16680",
+      "text": "We introduce C-GenReg, a training-free framework for 3D point cloud registration that leverages the complementary strengths of world-scale generative priors and registration-oriented Vision Foundation Models (VFMs). Current learning-based 3D point cloud registration methods struggle to generalize across sensing modalities, sampling differences, and environments. Hence, C-GenReg augments the geometric point cloud registration branch by transferring the matching problem into an auxiliary image domain, where VFMs excel, using a World Foundation Model to synthesize multi-view-consistent RGB representations from the input geometry. This generative transfer, preserves spatial coherence across source and target views without any fine-tuning. From these generated views, a VFM pretrained for finding dense correspondences extracts matches. The resulting pixel correspondences are lifted back to 3D via the original depth maps. To further enhance robustness, we introduce a \"Match-then-Fuse\" probabilistic cold-fusion scheme that combines two independent correspondence posteriors, that of the generated-RGB branch with that of the raw geometric branch. This principled fusion preserves each modality inductive bias and provides calibrated confidence without any additional learning. C-GenReg is zero-shot and plug-and-play: all modules are pretrained and operate without fine-tuning. Extensive experiments on indoor (3DMatch, ScanNet) and outdoor (Waymo) benchmarks demonstrate strong zero-shot performance and superior cross-domain generalization. For the first time, we demonstrate a generative registration framework that operates successfully on real outdoor LiDAR data, where no imagery data is available.",
+      "sha256": "14d7221e49f8c286ccbc6337d0ecb0132e87c939f690a6070d0e2936c624c9d3",
+      "verified_at": "2026-10-21T13:37:57.483755+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "e587e3329bbd30f8f397d568576d5d07b597e3e22b4b2588a228d73d6728e0d8",
+      "source_version": "993b3ac4d8e4359f62f899872e864ac068e8ff4442860b877b577789680daab0"
+    },
+    "conf-dfb87b0b2a13b6074219ea6d": {
+      "title": "Geometric Context Transformer for Streaming 3D Reconstruction",
+      "url": "https://eccv.ecva.net/virtual/2026/poster/3493",
+      "text": "Streaming 3D reconstruction aims to recover 3D information, such as camera poses and point clouds, from a video stream, which necessitates geometric accuracy, temporal consistency, and computational efficiency. Motivated by the principles of Simultaneous Localization and Mapping (SLAM), we introduce GCT, geometric context transformer, a feed-forward 3D foundation model for reconstructing scenes from streaming data. A defining aspect of GCT lies in its carefully designed attention mechanism, which integrates an anchor context, a pose-reference window, and a trajectory memory to address coordinate grounding, dense geometric cues, and long-range drift reduction, respectively. This design keeps the streaming state compact while retaining rich geometric context, enabling stable efficient inference at around 20 FPS on 518×378 resolution inputs over long sequences exceeding 10,000 frames. Extensive evaluations across a variety of benchmarks demonstrate that our approach achieves superior performance compared to both existing streaming and iterative optimization-based approaches. Show more",
+      "sha256": "41a9e6c2d6fe1111f3ce51e3d09dff8edd284da612c9bbfaf489783af28f2d47",
+      "verified_at": "2026-10-21T13:38:03.044252+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "89820fc8b16eef24e60d515a240df664bf9d1d416f3fad7beaf75f3db6a36dde",
+      "source_version": "50e5dff8c00c3b9d346f5bc4b85a26f992e6d94296de75539afbccad92d078ee"
+    },
+    "conf-8ac92aa044192967715e7e11": {
+      "title": "DF3DV-1K: A Large-Scale Dataset and Benchmark for Distractor-Free Novel View Synthesis",
+      "url": "https://arxiv.org/abs/2604.13416",
+      "text": "Advances in radiance fields have enabled photorealistic novel view synthesis. In several domains, large-scale real-world datasets have been developed to support comprehensive benchmarking and to facilitate progress beyond scene-specific reconstruction. However, for distractor-free radiance fields, a large-scale dataset with clean and cluttered images per scene remains lacking, limiting the development. To address this gap, we introduce DF3DV-1K, a large-scale real-world dataset comprising 1,048 scenes, each providing clean and cluttered image sets for benchmarking. In total, the dataset contains 89,924 images captured using consumer cameras to mimic casual capture, spanning 128 distractor types and 161 scene themes across indoor and outdoor environments. A curated subset of 41 scenes, DF3DV-41, is systematically designed to evaluate the robustness of distractor-free radiance field methods under challenging scenarios. Using DF3DV-1K, we benchmark nine recent distractor-free radiance field methods and 3D Gaussian Splatting, identifying the most robust methods and the most challenging scenarios. Beyond benchmarking, we demonstrate an application of DF3DV-1K by fine-tuning a diffusion-based 2D enhancer to improve radiance field methods, achieving average improvements of 0.96 dB PSNR and 0.057 LPIPS on the held-out set (e.g., DF3DV-41) and the On-the-go dataset. We hope DF3DV-1K facilitates the development of distractor-free vision and promotes progress beyond scene-specific approaches. The dataset and leaderboard are available at https://johnnylu305.github.io/df3dv1k_web/.",
+      "sha256": "32d859ed1a189d9214e99b88beba1c34ee327126f669ebfeebefac7ff86684a4",
+      "verified_at": "2026-10-21T13:38:08.632401+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "2d45348e4afe6bb238f86be4f4dd1876fbfe4bc5bbc8b489ed22fec5258ec923",
+      "source_version": "9063be6e9d198d80248d4ced548069978a7e9a7bb0fde65f79a988c6e3042158"
+    },
+    "2604.13340": {
+      "title": "MSGS: Multispectral 3D Gaussian Splatting",
+      "url": "https://arxiv.org/abs/2604.13340",
+      "text": "We present a multispectral extension to 3D Gaussian Splatting (3DGS) for wavelength-aware view synthesis. Each Gaussian is augmented with spectral radiance, represented via per-band spherical harmonics, and optimized under a dual-loss supervision scheme combining RGB and multispectral signals. To improve rendering fidelity, we perform spectral-to-RGB conversion at the pixel level, allowing richer spectral cues to be retained during optimization. Our method is evaluated on both public and self-captured real-world datasets, demonstrating consistent improvements over the RGB-only 3DGS baseline in terms of image quality and spectral consistency. Notably, it excels in challenging scenes involving translucent materials and anisotropic reflections. The proposed approach maintains the compactness and real-time efficiency of 3DGS while laying the foundation for future integration with physically based shading models.",
+      "sha256": "6eb4f1d30aa23ca3d6d729b768d0993d07818c3f1e6b8a71fcfab4d266415007",
+      "verified_at": "2026-10-21T13:38:14.118337+08:00"
+    },
+    "conf-8583b95c0e2bda520f72a875": {
+      "title": "Pair2Scene: Learning Local Object Relations for Procedural Scene Generation",
+      "url": "https://arxiv.org/abs/2604.11808",
+      "text": "Generating high-fidelity 3D indoor scenes remains a significant challenge due to data scarcity and the complexity of modeling intricate spatial relations. Current methods often struggle to scale beyond training distribution to dense scenes or rely on LLMs/VLMs that lack the ability for precise spatial reasoning. Building on top of the observation that object placement relies mainly on local dependencies instead of information-redundant global distributions, in this paper, we propose Pair2Scene, a novel procedural generation framework that integrates learned local rules with scene hierarchies and physics-based algorithms. These rules mainly capture two types of inter-object relations, namely support relations that follow physical hierarchies, and functional relations that reflect semantic links. We model these rules through a network, which estimates spatial position distributions of dependent objects conditioned on position and geometry of the anchor ones. Accordingly, we curate a dataset 3D-Pairs from existing scene data to train the model. During inference, our framework can generate scenes by recursively applying our model within a hierarchical structure, leveraging collision-aware rejection sampling to align local rules into coherent global layouts. Extensive experiments demonstrate that our framework outperforms existing methods in generating complex environments that go beyond training data while maintaining physical and semantic plausibility.",
+      "sha256": "45b6d0b315d867a66bf26468ca366407e8a05f348289d4870bc706082f8ae4e7",
+      "verified_at": "2026-10-21T13:38:19.486053+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "ca37aff012a644bf152b7a4431e3ebdf038ec71473e9691b67ecab884c38944e",
+      "source_version": "336564ed23638ec761a2306cdb6629f429580c03d56961f5ae1d3fad67a22447"
     }
   }
 }
