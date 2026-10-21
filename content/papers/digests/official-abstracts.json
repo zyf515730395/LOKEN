@@ -1782,6 +1782,416 @@
       "text": "While monocular depth estimation has achieved significant progress, achieving generalized metric depth estimation for both narrow field-of-view (FoV) perspectives and $360^\\circ$ panoramas remains an unsolved challenge. Existing methods are often tailored to specific camera types and struggle to produce accurate metric depth that generalizes across diverse settings. This limitation stems from two key challenges: the inherent geometric discrepancy between perspective and panoramic cameras, and the scarcity of panoramic training data with metric annotations. In this work, we introduce DepthMaster, a unified metric depth estimation framework. Rather than employing specialized networks to learn spherical distortions, we reformulate the problem by decomposing panoramic images into overlapping perspective patches. Crucially, distinct from prior projection-based methods that rely on ad-hoc architectural modifications to handle boundaries, we introduce a novel Correspondence Consistency Loss (CCL) and inject virtual projection cameras as geometric priors, allowing us to seamlessly stitch the patches while avoiding specialized operators and keeping the backbone largely compatible with standard Transformer designs. This strategy also resolves the geometric differences by unifying all inputs into a canonical perspective representation, and effectively circumvents data scarcity by directly unlocking powerful metric priors from vast perspective datasets. Trained on a mixed dataset that contains only one panorama dataset, DepthMaster achieves state-of-the-art zero-shot performance on 13 diverse datasets, outperforming not only universal methods but also leading specialist models in both perspective and panoramic domains.",
       "sha256": "b430a2e300fda79c0676d7f0d0f6824c3fb91db603ca812995208f20c643f790",
       "verified_at": "2026-10-21T09:49:00.706206+08:00"
+    },
+    "conf-3b21f637e6d3dab57b453b0a": {
+      "title": "Physically-Grounded Data Generation Via Video Diffusion Models",
+      "url": "https://ras.papercept.net/conferences/conferences/ICRA26/program/ICRA26_ContentListWeb_4.html#5412",
+      "text": "Existing datasets for training generalist manipulation policies often lack diversity in object variety and initial states, limiting the range of physically grounded interactions present in them. Consequently, these policies struggle with unseen object shapes, sizes, or unfamiliar object poses. Manually collecting real-world trajectories with diverse physical interactions is tedious, time-consuming, and expensive, underscoring the need to generate these autonomously. Simulators offer a scalable pathway to autonomously generate trajectories by enabling extensive variation not only in tasks (e.g., objects, object properties, and initial conditions), but also in the robot behaviors required to solve these tasks. We develop a data generation pipeline that autonomously produces physically grounded trajectories in simulation using video diffusion models. Our approach first simulates random initial conditions across various tasks using a diverse asset library. A video diffusion model generates videos of a robot performing these tasks in physically diverse scenarios, which are then fed to a learned goal-conditioned planner to extract actions that closely follow the generated videos. Unlike prior trajectory generation methods, our pipeline generalizes to new objects across multiple tasks without relying on human demonstrations. Using our approach, we generate a simulation dataset PHYSVIVID containing 5k+ demonstrations involving 400+ objects. We demonstrate the effectiveness of PHYSVIVID by fine-tuning robot policies on it, and demonstrating generalization of policies to unseen objects with varying shapes, textures, and sizes, as well as to unseen object categories.",
+      "sha256": "912a0bb212bc646a6c80cf2efacb5424476967d62b0071f5df2515b47eb41cf6",
+      "verified_at": "2026-10-21T11:59:10.566208+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "df1b42d933c1c7ea77726dc5a1c56be7531ca266007cd271b50eb338bdf4538a",
+      "source_version": "dd7f1af355b7e89a5afe8966b8e524d55b3b432125e8eb6ecda3d3163319521f"
+    },
+    "conf-f0b196dcddfa6fc4e48bce55": {
+      "title": "MGS-Track: Monocular 6DoF Pose Tracking Via Masked 3D Prior and Online Gaussian Splatting",
+      "url": "https://ras.papercept.net/conferences/conferences/ICRA26/program/ICRA26_ContentListWeb_3.html#5219",
+      "text": "Tracking the 6DoF pose of previously unseen objects from monocular RGB videos is crucial for robotic manipulation, yet remains challenging due to depth ambiguity and limited object-centric visual context. Existing trackers often rely on accurate depth sensors, which constrains deployment in low-cost settings, while substituting monocular pseudo-depth frequently introduces geometric errors that reduce tracking robustness. In this end, We propose textbf{MGS-Track}, an object-centric online tracking and reconstruction framework that combines learning-based geometric priors with differentiable 3D Gaussian Splatting (3DGS). Specifically, we first introduce a mask-augmented DUSt3R network (DUSt3R-M) to establish pairwise correspondences and predict point maps, which serve as geometric priors for initializing and guiding an online 3DGS representation. We then jointly optimize Gaussian parameters and 6DoF object poses in a coarse-to-fine manner, enabling robust tracking and high-fidelity reconstruction. To control model growth and maintain efficiency over time, we further introduce adaptive Gaussian management with capacity-aware selection and mask-consistent pruning. Experiments on YCBInEOAT and HO3D show that MGS-Track consistently outperforms competitive monocular baselines on both pose tracking and object reconstruction in challenging object-centric scenarios.",
+      "sha256": "d4029de98f5527e3e7bed724a6a91fb756b5e5ab74edb9f068510f3d251f19b0",
+      "verified_at": "2026-10-21T11:59:17.485512+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "fb2bad60403efaac0198db45ae92d3fd381a85ba415b96f066c6b5812134c9c6",
+      "source_version": "5cc044fba59ba9c431aba6c8a518a8360b752e617f5df49e3e6d8adf24be7377"
+    },
+    "conf-ebe9add33c1ddd41ec497adf": {
+      "title": "Single-View 3D-Aware Representations for Reinforcement Learning by Cross-View Neural Radiance Fields",
+      "url": "https://ras.papercept.net/conferences/conferences/ICRA26/program/ICRA26_ContentListWeb_4.html#5627",
+      "text": "Reinforcement learning (RL) has enabled robots to develop complex skills, but its success in image-based tasks often depends on effective representation learning. Prior works have primarily focused on 2D representations, often overlooking the inherent 3D geometric structure of the world, or have attempted to learn 3D representations that require extensive resources such as synchronized multi-view images even during deployment. To address these issues, we propose a novel RL framework that extracts 3D-aware representations from single-view RGB input, without requiring camera pose or synchronized multi-view images during the downstream RL. Our method employs an autoencoder architecture, using a masked Vision Transformer (ViT) as the encoder and a latent-conditioned Neural Radiance Fields (NeRF) as the decoder, trained with cross-view completion to implicitly capture fine-grained, 3D geometry-aware representations. Additionally, we utilize a time contrastive loss that further regularizes the learned representation for consistency across different viewpoints, which enables viewpoint-robust robot manipulations. Our method significantly enhances the RL agent’s performance both in simulation and real-world experiments, demonstrating superior effectiveness compared to prior 3D-aware representation-based methods, even when using only single-view RGB images during deployment.",
+      "sha256": "8e6084dbeb5426335db9f4cdbbbd2945966914d18ae5c55cc827d8eba0d70d87",
+      "verified_at": "2026-10-21T11:59:24.464777+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "df1b42d933c1c7ea77726dc5a1c56be7531ca266007cd271b50eb338bdf4538a",
+      "source_version": "1431d98e4425a9c32b5e1ef589360820f440c7921d948f693995b5c0fd4bf153"
+    },
+    "conf-dcbbb7846bcd7e3668ecd7f7": {
+      "title": "Active Scene Reconstruction with Topological Reasoning and Semantic-Augmented Reinforcement Learning",
+      "url": "https://ras.papercept.net/conferences/conferences/ICRA26/program/ICRA26_ContentListWeb_5.html#1619",
+      "text": "Active scene reconstruction aims to autonomously recover the fine-grained appearance and structural details of a complex unknown scenes. Existing approaches based on 2D topological or voxel-based abstractions often scale poorly to large environments and rely heavily on handcrafted features and heuristic rules, limiting scalability and robustness. To address these challenges, using a RGB-D camera on a mobile robot, we present a graph-based planning framework by integrating skeleton-derived topology, Bird’s-Eye-View (BEV)-augmented graph inference, and offline Reinforcement Learning (RL) for policy optimization. The 3D skeleton graph captures full spatial connectivity, overcoming the limitations of 2D representations. BEV-augmented graph inference enriches node embeddings with semantic context, avoiding handcrafted feature design. The offline RL approach replaces heuristic planning with data-driven decision-making, while an additional Maximum Mean Discrepancy (MMD) term mitigates distributional shift before and after feature injection, improving stability. Extensive simulation results validate the efficacy of the proposed method. Real-world experiments demonstrate the zero-shot transferability of the learned policy, highlighting its potential for scalable, fine-grained scene reconstruction.",
+      "sha256": "cfce4ba812f128952083768b7b9e5293ac81a83552dadf49508e9349854cc189",
+      "verified_at": "2026-10-21T11:59:31.464309+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "620577fd8b71df0d1b015f4ceeaaa905c7c40f613688d8a95da082bec5966ae5",
+      "source_version": "46f7c9e818130ddebb3a515ae6e8b2b5bb3c355966641695386529b3c6446cef"
+    },
+    "conf-daf39c9b434b3be5a773e4e6": {
+      "title": "Audio-2-Shape: 3D Generation from What You Hear",
+      "url": "https://ras.papercept.net/conferences/conferences/ICRA26/program/ICRA26_ContentListWeb_3.html#2607",
+      "text": "Audio serves as an important bridge connecting humans to their surroundings, providing a unique modality for perceiving the world. For embodied AI systems, such as robots and autonomous vehicles, enabling them to understand the world through sound is a promising and significant research direction. In this paper, we explore the underexplored domain of audio-driven 3D shape generation and propose a novel architecture for audio-conditioned 3D shape synthesis. Specifically, our framework comprises three key modules: cross-modal alignment, a latent diffusion model for generation, and a 3D Gaussian Splatting (3DGS) based optimization module. We first align audio and 3D shape representations within a unified embedding space using a contrastive learning strategy, which conditions a latent diffusion model to generate an initial coarse 3D structure. Subsequently, we introduce a refinement stage utilizing 3D Gaussian Splatting to produce high-fidelity 3D shapes. Extensive qualitative and quantitative experiments validate the effectiveness of our proposed method, demonstrating its capability to generate semantically coherent 3D shapes from audio input.",
+      "sha256": "5075f68898051ef1f1018b72213b9e104d3d9cfbc529bc87b98cc7bec3431ba7",
+      "verified_at": "2026-10-21T11:59:38.443085+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "fb2bad60403efaac0198db45ae92d3fd381a85ba415b96f066c6b5812134c9c6",
+      "source_version": "c898ff176878343a862c2be9cfd34c4065a4e8c6f0d98708ca520fa4a0807d6a"
+    },
+    "conf-bfca1e8af74654359a5bc51c": {
+      "title": "Semantic-Augmented 3D Gaussian Splatting for Visual Localization in Complex Indoor Environments",
+      "url": "https://ras.papercept.net/conferences/conferences/ICRA26/program/ICRA26_ContentListWeb_4.html#6104",
+      "text": "This paper presents a new visual localization framework for complex indoor environments under dynamic scene change conditions. Conventional visual localization methods often struggle to maintain accuracy and robustness in such environments, where frequent scene changes, occlusions, diverse object categories, and intricate scene structures significantly affect feature consistency and matching reliability. These challenges highlight the need for a more adaptive and semantically aware localization approach. By proposing an algorithm that integrates semantic information with a Gaussian map as input, the method enhances the algorithm’s environmental awareness. This allows robust objects to be identified and extracted, thereby improving feature extraction performance and consequently enhancing pose estimation precision. Furthermore, a new coarse-to-fine matching strategy has been developed that takes an overview of the Gaussian map, from which suitable viewpoints are generated to produce the best matching images. Rendered images produced from the Gaussian map are employed in subsequent stages to improve comparison effectiveness, thereby enabling the determination of the most accurate camera pose. Finally, the capability of the proposed methodology is confirmed through experiments on different types of datasets.",
+      "sha256": "df2da6e02feaa080a55f9b7e7f47f0d3bbc17cff2f6096eaa385425d91cf0c80",
+      "verified_at": "2026-10-21T11:59:45.475301+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "df1b42d933c1c7ea77726dc5a1c56be7531ca266007cd271b50eb338bdf4538a",
+      "source_version": "1c52128948e080ba048de9ffa964b07a8308fb3f551de8c1b8059ed50d89f663"
+    },
+    "conf-bc7f78d1bef756332a129dff": {
+      "title": "MV3D: Multi-View 3D Reconstruction of Objects Using Forward-Looking Sonar",
+      "url": "https://ras.papercept.net/conferences/conferences/ICRA26/program/ICRA26_ContentListWeb_5.html#130",
+      "text": "This work proposes a method for learning features from a batch of 2D sonar images to predict a multi-view point-cloud for achieving a dense 3D-reconstruction. In comparison to vision-based sensors, acoustics are considered a reliable sensing modality in underwater environments. The output of sonars is a 2D image which is unable to represent the scanned scene in all three dimensions. Estimation of this missing information, known as the elevation angle, is the key to performing 3d-reconstruction from acoustic images. One of the approaches is to predict a depth-map from the 2D sonar image, and transforming it into a point-cloud. In this paper, this idea is further improved into learning features from a batch of 2D acoustic images and predicting multiple depthmaps of the scanned object which covers it from different viewpoints. For training the deep learning model, and due to the lack of datasets from real environments, data was generated synthetically. For reducing the simulation-to-real gap, a Cycle-GAN was trained on real images for transferring the realistic style into the synthetically generated images. The conducted experiments in simulation showed that the proposed method is able to perform dense 3D reconstruction. The approach was then further tested in a real environment using an underwater vehicle, which accurately 3d-reconstructed the scanned objects achieving an average chamfer distance error of 0.06 meters when compared to a laser-scanned ground-truth.",
+      "sha256": "a29857426d0f51ad0883e804195b4570a525b56bd52e8e9efb28d9a780cf902e",
+      "verified_at": "2026-10-21T11:59:52.427231+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "620577fd8b71df0d1b015f4ceeaaa905c7c40f613688d8a95da082bec5966ae5",
+      "source_version": "f9c3f5fa39d11fcc48de10649e9d22577d7eb7545bf28b28266da7a4cb8ac3a6"
+    },
+    "conf-bb4062e7c2af957e989845bd": {
+      "title": "DisFlow: Scene Flow from Distance Field for Object Pose, Velocity Tracking, and Surface Reconstruction",
+      "url": "https://ras.papercept.net/conferences/conferences/ICRA26/program/ICRA26_ContentListWeb_4.html#4483",
+      "text": "We present DisFlow, a novel framework for online scene flow estimation from distance field that enables 6DoF dynamic object pose estimation, motion tracking, and surface reconstruction. The scene is represented by Gaussian Process Implicit Surfaces (GPIS), with surface normals serving as derivative constraints, enabling accurate signed distance computations near the surface and gradient queries with uncertainty. With this representation as a foundation, we compute a scene flow from the distance field that describes how surface points are transported over time in consecutive frames. Through our flow, we can estimate an object's pose and motion by incrementally registering a new observed point cloud via an elegant closed-form optimisation. Unlike prior methods that operate in the camera or world frame, our approach performs probabilistic fusion directly in the object frame, where the object remains geometrically consistent over time. The tight coupling of the DisFlow method in space and time yields dense geometry, surface normals, object pose trajectories, velocities, and uncertainty, all at real-time rates. We evaluate DisFlow on dynamic object sequences and demonstrate that it achieves accurate pose and motion tracking while simultaneously reconstructing high-quality object surfaces.",
+      "sha256": "4de2f691dba58875d3648e2808d3a21201be28cb1e93b7e3944385be88e346e8",
+      "verified_at": "2026-10-21T11:59:59.446388+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "df1b42d933c1c7ea77726dc5a1c56be7531ca266007cd271b50eb338bdf4538a",
+      "source_version": "4609801b635a68065b0bfb755d55946883f8f54a3fbf88b4a413005aa1e6f056"
+    },
+    "conf-a8cc414fcdca5a899a0d5ab1": {
+      "title": "High-Quality Sparse-View Gaussian Splatting without Ground-Truth Camera Poses",
+      "url": "https://ras.papercept.net/conferences/conferences/ICRA26/program/ICRA26_ContentListWeb_4.html#6346",
+      "text": "The existing methods for novel view synthesis depend on dense input images and accurate camera poses, which significantly limits their practical application. We propose a novel framework that enables high-quality sparse-view reconstruction via 3D Gaussian Splatting (3DGS) without knowing camera poses. Our approach leverages MASt3R, a ViT-based multi-view stereo prior, to generate point clouds and coarse camera poses from uncalibrated sparse images. We use the point clouds to initial 3DGS. Additionally, we propose several regularization techniques, including point-rendered LPIPS regularization, geometric regularization (local depth regularization and normal regularization), and semantic regularization to improve the quality of reconstructed scenes and enhance the generalization capability of the model in unseen viewpoint. Due to the inaccuracies in the camera poses output by MASt3R, we optimized the camera poses during both the training and testing phase. Experimental results on the Tanks and Temples and MVImgNet datasets demonstrate that our method outperforms state-of-the-art techniques in novel view synthesis and camera pose estimation under sparse-view settings.\tOur approach achieves higher fidelity and more photorealistic visual effects.",
+      "sha256": "99932dc97f5e57cf09965db8e89ce5f96f8c2ed2a276b9e09d651bab248882bf",
+      "verified_at": "2026-10-21T12:00:06.494676+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "df1b42d933c1c7ea77726dc5a1c56be7531ca266007cd271b50eb338bdf4538a",
+      "source_version": "dc4b1ea242ad34286ab4c41507d75641c5196aebadcf32adfbbcce01d1b8338b"
+    },
+    "conf-a3e8a481f4a0d9e01ee3a856": {
+      "title": "Efficient Trajectory-Conditioned Text-To-4D Gaussian Splatting",
+      "url": "https://ras.papercept.net/conferences/conferences/ICRA26/program/ICRA26_ContentListWeb_3.html#4864",
+      "text": "Recent text-to-4D generation methods have achieved remarkable progress thanks to advances in text-to-video models. Existing approaches typically reconstruct 4D scenes from generated videos or distill them from pre-trained text-to-video models. However, these methods often restrict the scene to a local region or lack spatial controllability. TC4D pioneered trajectory-controllable 4D asset generation by decomposing motion into global transformation and local deformation. While it achieves high visual quality, TC4D suffers from extremely low generation efficiency due to its NeRF-based framework. To overcome this limitation, we propose Efficient TC4DGS, which replaces NeRF with 4D Gaussian Splatting (4DGS) to significantly improve efficiency. Nevertheless, the discrete representation of 4DGS makes optimization challenging, leading to noticeable degradation in visual and motion quality. Thus, we propose a HexPlane-based 4D representation combined with a key-node control scheme. By computing the deformation only for the control nodes and getting overall deformation through interpolation, we greatly improve generation efficiency while maintaining quality. Compared with TC4D, the previous SOTA, we have improved the generation efficiency by 13times (reducing the generation time from 26 hours to 2 hours), while also achieving superior performance in terms of the dynamic quality of the generated objects.",
+      "sha256": "8f454fdc737e5ee40d495c374ee4d19a56820d5be647693f1c276e650776ef17",
+      "verified_at": "2026-10-21T12:00:13.452101+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "fb2bad60403efaac0198db45ae92d3fd381a85ba415b96f066c6b5812134c9c6",
+      "source_version": "5096b1d9f6bf66c3b8873e909e120cc1d6566beadae032c177f76fa43cd551cc"
+    },
+    "conf-a15e3c80856c8736e640878b": {
+      "title": "TI-3DGS: 3D Thermal Reconstruction Via Thermal Imaging-Guided 3D Gaussian Splatting",
+      "url": "https://ras.papercept.net/conferences/conferences/ICRA26/program/ICRA26_ContentListWeb_5.html#927",
+      "text": "Thermal imaging, with its all-weather capabilities and strong penetration, enables 3D reconstruction in low- light and adverse conditions. In this paper, we investigate RGB-independent pure 3D thermal reconstruction, aiming to overcome the challenges of 3D reconstruction in extreme environments where RGB images are unavailable. However, directly applying visible-light 3D reconstruction methods to thermal images often leads to severe artifacts due to two key challenges: (i) thermal images lack rich textures, hindering detail reconstruction, and (ii) heat conduction causes intensity diffusion, resulting in blurred edges. To address these issues, we propose TI-3DGS, a novel 3D Gaussian Splatting framework guided by thermal imaging. We introduce a Thermal Imaging Field (TIF) to model radiance in thermal domains and a Thermal Attenuation-aware Density Control (TADC) strategy to densify sparse point clouds from low-texture thermal inputs. Additionally, we incorporate an edge-enhancement constraint to mitigate blur from heat diffusion. Extensive experiments on the TI-NSD dataset, covering indoor and outdoor scenarios, show that our TI-3DGS achieves state-of-the-art performance, effectively overcoming texture sparsity and edge degradation in thermal reconstruction.",
+      "sha256": "d507bd2f3605fb60e9ab0c3a42d22c9cc71fd82737d69d4f6c45362f85dc60c2",
+      "verified_at": "2026-10-21T12:00:20.418504+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "620577fd8b71df0d1b015f4ceeaaa905c7c40f613688d8a95da082bec5966ae5",
+      "source_version": "e4b1586957e5c7b3565fc4a5c213bd80d1dddad9909b41a93a7528b34e8b42ee"
+    },
+    "conf-99e2fa9a4541e2619e5c853e": {
+      "title": "3DGS-Holo-Inspector: A Mixed Reality UAV Controller with 3D Gaussian Splatting Localization for Infrastructure Inspection",
+      "url": "https://ras.papercept.net/conferences/conferences/ICRA26/program/ICRA26_ContentListWeb_3.html#4424",
+      "text": "Unmanned aerial vehicles (UAVs) are increasingly used for infrastructure inspection, but conventional joystick and first-person-view (FPV) controllers remain unintuitive, error-prone, and cognitively demanding, particularly in cluttered or safety-critical environments. We present 3DGS-Holo- Inspector, a Mixed Reality (MR) UAV controller that combines holographic goal-setting with autonomous UAV navigation. Using natural hand gestures, operators can define and preview navigation goals directly in MR before flight, ensuring precise and safe data capture at inspection viewpoints. The system complements existing inspection pipelines by leveraging pre-built 3D maps (e.g., photogrammetry or LiDAR reconstructions) to enable refinement of regions of interest (ROIs) where coverage is incomplete or the detail is insufficient. Robust headset–UAV alignment is achieved through a LiDAR–RGB 3D Gaussian Splatting (3DGS) localization backbone, which provides dense, markerless, and persistent spatial registration in both indoor and outdoor settings. Once goals are placed, the UAV autonomously navigates to the specified pose, with real-time telemetry and live video overlaid in MR to enhance situational awareness. Experimental validation using a ModalAI Starling UAV and Microsoft HoloLens 2 demonstrated accurate UAV-goal alignment, achieving a positional Root Mean Square Error (RMSE) of 0.090 m (median = 0.084 m) indoors and 0.119 m (median = 0.118 m) outdoors, with orientation (yaw) RMSEs of 1.491 ◦ (median = 1.400 ◦ ) and 2.233 ◦ (median = 2.268 ◦ ), respectively. These results confirm that 3DGS-Holo-Inspector provides reliable MR-based UAV control, augmenting inspection workflows by enabling safe, intuitive, and high-precision UAV operations in real-world environments.",
+      "sha256": "02508127a4865ef3a586b45d426c89ea4687546be77a32a960cee70fcc6806b1",
+      "verified_at": "2026-10-21T12:00:27.397665+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "fb2bad60403efaac0198db45ae92d3fd381a85ba415b96f066c6b5812134c9c6",
+      "source_version": "5ce75ff833c754bc0cf3643174560b2e694ab37f4c2fd2d82d6971b198617ae7"
+    },
+    "conf-8bd401e0ca6ffda5897da46b": {
+      "title": "SupGS-SLAM: Gaussian Splatting SLAM with Efficient Keyframe Strategy and Supplementary Mapping",
+      "url": "https://ras.papercept.net/conferences/conferences/ICRA26/program/ICRA26_ContentListWeb_4.html#5109",
+      "text": "Gaussian Splatting SLAM methods have exhibited impressive high-fidelity rendering performance. Existing methods maintain high rendering quality around the current camera viewpoint, but the rendering quality degrades in previously observed regions as the camera moves away, particularly in real-world scenarios. We identify two core factors for high-quality rendering: keyframes should efficiently cover the entire scene while minimizing redundancy, and the mapping strategy should effectively select critical keyframes for full scene optimization. To address these issues, we propose SupGS-SLAM to improve rendering quality across the entire scene. For effective keyframe management, we propose an efficient keyframe strategy, which reduces redundant keyframe selection and prioritizes the optimization of critical keyframes by assigning high weights. For enhanced mapping, we propose a supplementary mapping strategy comprising three components: supplementary densification, supplementary global mapping, and supplementary depth mapping. In supplementary densification, we add supplementary Gaussian primitives to previous regions with insufficient representation. In supplementary global mapping, we select keyframes globally to optimize the full scene. In supplementary depth mapping, we use estimated depth to optimize regions without ground-truth depth. Extensive experiments demonstrate that SupGS-SLAM achieves excellent performance on both synthetic and real-world datasets. The project page is available at https://github.com/rucliushuai/SupGS-SLAM.",
+      "sha256": "89c89e1b2c42045079b73b22a91f7d4f0b7d43a4e5c3811a19c5c536b17d178b",
+      "verified_at": "2026-10-21T12:00:34.455199+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "df1b42d933c1c7ea77726dc5a1c56be7531ca266007cd271b50eb338bdf4538a",
+      "source_version": "4a18529d1c5df0edb8b427ca4ebe0ac4874bbaca5b7928593195154f441ef07d"
+    },
+    "conf-875dffa1a7f3a785b01cc50e": {
+      "title": "Freeze-Frame with StaticNeRF: Uncertainty-Guided NeRF Map Reconstruction in Dynamic Scenes",
+      "url": "https://ras.papercept.net/conferences/conferences/ICRA26/program/ICRA26_ContentListWeb_3.html#5920",
+      "text": "Recent advances in neural representations have shown great promise for enabling high-fidelity dense mapping in robotics. Given the inherently dynamic nature of real-world environments, many studies have attempted to learn static scene representations from dynamic observations. However, existing methods often fail to remove subtly moving objects and struggle to accurately recover occluded static backgrounds, which leads to critical limitations in practice. Furthermore, when static neural maps are used for localization, dynamic content in query images must be handled effectively. To overcome these challenges, we propose a static neural mapping framework that is robust to diverse dynamic environments and capable of processing dynamic content during localization. We evaluated our approach through extensive experiments on both public and in-house datasets. Our method improves both dynamic object removal and localization robustness under dynamic conditions, and constitutes a significant step toward resilient robot navigation in real-world environments.",
+      "sha256": "11cbc6ccb5242c1f6217ced94a0beb27ea4d085d724b2c80a4da9a3d541c8361",
+      "verified_at": "2026-10-21T12:00:41.431417+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "fb2bad60403efaac0198db45ae92d3fd381a85ba415b96f066c6b5812134c9c6",
+      "source_version": "90b4effa557f37fb6ecb27064769442c991a301dc2a0245e05666a000a9bab67"
+    },
+    "conf-854a78617af25f5c055efa58": {
+      "title": "One Prompt, Many Rooms: A Force-Directed Approach to 3D Scene Generation for Robotics Simulation",
+      "url": "https://ras.papercept.net/conferences/conferences/ICRA26/program/ICRA26_ContentListWeb_4.html#2738",
+      "text": "Training generalizable robotic agents requires large datasets of diverse, physically consistent 3D scenes, yet their generation remains a critical bottleneck. Current text-to-scene methods are inefficient for this task; generating diverse layouts requires repeated, expensive sampling that fails to maintain the semantic consistency required for robust policy learning. In this paper, we address this with our “one-plan-to-many-layouts” method. A Large Language Model (LLM) generates a single declarative plan, which a force-directed physics simulation then realizes into multiple layouts that share semantics but differ in geometry. We validate our method by transfer to photorealistic 3D reconstructions of real environments (Replica) within simulation, where a navigation agent trained on our scenes attains a Success Rate of 0.84. These results establish our pipeline as a scalable method for producing the controlled, diverse data required for embodied AI training.",
+      "sha256": "3be0f36190c9ea4113ff54f14032239a83e8807229c20cb605e77adbbc897bb9",
+      "verified_at": "2026-10-21T12:00:48.455968+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "df1b42d933c1c7ea77726dc5a1c56be7531ca266007cd271b50eb338bdf4538a",
+      "source_version": "c1fbe68c9676a31d2e7a04e91c8e7a54fcb9ec89ba525b99d406b79896a1a25b"
+    },
+    "conf-8300df59d2ecfc7963d17b1c": {
+      "title": "View Synthesis and 6DoF Pose Estimation in mmWave Radar Neural Radiance Fields",
+      "url": "https://ras.papercept.net/conferences/conferences/ICRA26/program/ICRA26_ContentListWeb_5.html#3537",
+      "text": "Estimating a device’s 6DoF pose (i.e., location and orientation) within the environment is a fundamental problem in robotics, and beyond. Millimeter-wave (mmWave) radars have emerged as an attractive alternative to optical sensors (e.g., RGB cameras) in these tasks due to their ability to operate in poor lighting and adverse conditions such as smoke and fog. This paper presents mmNeRF, a view synthesis and 6DoF pose estimation system based on neural radiance fields (NeRF) designed specifically for mmWave radars. mmNeRF requires only radar range-angle heatmaps collected in a given environment to construct its implicit neural representation, ensuring multi-view consistency and producing high-quality view synthesis. It then builds a 6DoF pose estimation framework that queries the neural model with particle filters to perform scan & matching operations to yield an accurate 6DoF pose. We evaluate mmNeRF using over 50K radar frames collected in six different indoor environments on a handheld rig equipped with a radar. Our results show that mmNeRF achieves median translation and rotation errors of 0.34m and 17.15◦ for single-spectrum 6DoF pose estimation and Absolute Trajectory Error (ATE) of 0.66m and 0.81 radians for continuous 6DoF pose tracking, considerably outperforming state-of-the-art solutions.",
+      "sha256": "bf5f2cd5cad065a24f384a4aa8f77c26f9c40c19c475da10ea54a98022c48aa3",
+      "verified_at": "2026-10-21T12:00:55.432042+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "620577fd8b71df0d1b015f4ceeaaa905c7c40f613688d8a95da082bec5966ae5",
+      "source_version": "4e1a921155d7d1821c648cf2a4d1b17aa567628f2a6b5b199c89209f5ba94f30"
+    },
+    "conf-7bd4f749e7d79d80ce53fac0": {
+      "title": "GFreeDet2: Exploiting Gaussian Splatting and Foundation Models for RGB-Based Model-Free 2D and 6D Detection of Unseen Objects",
+      "url": "https://ras.papercept.net/conferences/conferences/ICRA26/program/ICRA26_ContentListWeb_4.html#963",
+      "text": "We introduce GFreeDet2, which leverages Gaussian Splatting and foundation models to address RGB-based model-free 2D detection and 6D detection of unseen objects. GFreeDet2 reconstructs 3D Gaussian object models from multi-view RGB references, enabling efficient model-free detection without relying on CAD models. To accelerate reconstruction and consistently handle both pinhole and fisheye cameras, we propose projection-aware perspective cropping (PAPC) with visual hull initialization. PAPC further improves coarse 6D detection by accurately extracting pinhole crops from fisheye query images. The Gaussian objects enable rendering in place of CAD models within foundation model-driven pipelines, allowing existing state-of-the-art RGB-based methods for unseen 2D and 6D detection to be extended to the model-free setting with minimal modifications. Extensive experiments on all three BOP-H3 datasets demonstrate that GFreeDet2 achieves state-of-the-art performance and establishes a strong baseline for RGB-based, model-free 2D and 6D unseen object detection. The code is publicly available at https://github.com/wangg12/GFreeDet2.git.",
+      "sha256": "8064dea855673581ac746bcef85ae586b07d42412c77ffc44a2dd661d88f7a14",
+      "verified_at": "2026-10-21T12:01:02.477131+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "df1b42d933c1c7ea77726dc5a1c56be7531ca266007cd271b50eb338bdf4538a",
+      "source_version": "6e5706226c265f8144c48945ed7923ff9afcf0ee558e5d4d38cbaacca8c9e891"
+    },
+    "conf-6c1e83183d78befdce32d257": {
+      "title": "Frequency-Guided 3D Gaussian Splatting for Challenging Low-Light View Synthesis",
+      "url": "https://ras.papercept.net/conferences/conferences/ICRA26/program/ICRA26_ContentListWeb_3.html#2830",
+      "text": "Robust 3D scene understanding is crucial for autonomous robots, but degrades sharply in low-light environments where sensor noise and illumination inconsistencies corrupt visual inputs. Even 3D Gaussian Splatting (3DGS), while efficient for real-time reconstruction, produces unstable and artifact-prone results under such conditions, limiting its reliability for navigation and mapping. To address these challenges, we propose a 3DGS-based framework for reconstructing clear scenes under low-light conditions. Firstly, We employ a frequency-aware modulator that operates on spectral components to decouple and suppress sensor noise from structural signals, providing a clean input for reconstruction. To refine the 3D model and ensure its compactness for onboard deployment, we introduce an adaptive denoising mask guided by dynamically updated statistics of rendering contribution and stability, which filters transient artifacts caused by sensor noise. Finally, a multi-view frequency consistency constraint is enforced to ensure the global coherence of the reconstructed model's appearance, which is critical for consistent mapping. Experiments on challenging low-light datasets demonstrate that our method achieves state-of-the-art reconstruction quality while significantly reducing model storage by approximately 46.4% and maintaining real-time rendering speeds.",
+      "sha256": "58644c166049e4414814c5fc34ff5298d3dcbdce462898728d71083afeb8d03b",
+      "verified_at": "2026-10-21T12:01:09.407587+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "fb2bad60403efaac0198db45ae92d3fd381a85ba415b96f066c6b5812134c9c6",
+      "source_version": "f831510cb79012553a127e7d97b2cf41c8eb76c0eb7a695c2ba43fbb316ec43f"
+    },
+    "conf-6918dac8989daa09135185a4": {
+      "title": "SAGA-SLAM: Scale-Adaptive 3D Gaussian Splatting for Visual SLAM",
+      "url": "https://ras.papercept.net/conferences/conferences/ICRA26/program/ICRA26_ContentListWeb_3.html#125",
+      "text": "3D Gaussian Splatting (3DGS) has recently emerged as a powerful technique for representing 3D scenes. Its superior high-fidelity rendering quality and speed have driven its rapid adoption in many applications. Among them, Visual Simultaneous Localization and Mapping (VSLAM) is the most prominent application, as it requires real-time simultaneous mapping and position tracking of navigating objects. However, from our comprehensive study, we observed a fundamental hur- dle in directly applying the current 3DGS technique to VSLAM, which we define as the scale adaptation problem. The scale adaptation problem refers to the inability of existing 3DGS- based SLAM methods to address varying scales, specifically the extent of camera pose difference from the perspective of tracking, and environmental size in terms of mapping and the addition of new 3D Gaussians. To overcome this limitation, we propose SAGA-SLAM, the first scale-adaptive RGB-D Dense SLAM framework based on 3DGS. We optimize the tracking and mapping stages robustly over various scales by utilizing the Polyak step size and momentum. Additionally, we present gaussian fission method to address the scale problem during the addition of 3D Gaussians. Experiments show that our method achieves state-of-the-art results robustly on both large and small scales, such as KITTI, Replica, and TUM-RGBD. By adapting without the need for hyperparameter tuning, our method demonstrates both superior performance and practical applicability.",
+      "sha256": "11cc607deb0b0925ff1d4f756ed7f75bbc30dc85ef0c8473be40a639f4b69691",
+      "verified_at": "2026-10-21T12:01:16.399458+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "fb2bad60403efaac0198db45ae92d3fd381a85ba415b96f066c6b5812134c9c6",
+      "source_version": "eb02398fc6c3162d16bca9a7019a15013739e7a5659ea47825eab29cbc7b8933"
+    },
+    "conf-5edcdaaf46ea96aed0ca924c": {
+      "title": "Multi-View Stereo with Geometric Encoding for Large-Scale Dense Scene Reconstruction (I)",
+      "url": "https://ras.papercept.net/conferences/conferences/ICRA26/program/ICRA26_ContentListWeb_5.html#5885",
+      "text": "Multi-view stereo (MVS) implicitly encodes photometric and geometric cues into the cost volume for multi-view correspondence matching, transferring insufficient geometric cues essential to depth estimation and reconstruction. This paper proposes GE-MVS, a novel multi-view stereo network with geometric encoding for more accurate and complete depth estimation and point cloud reconstruction. First, the cross-view adaptive cost volume aggregation module is proposed to strengthen the encoding of multi-view geometric cues during cost volume construction. Then, the depth consistency optimization is performed in 3D point space during learning by invoking ground-truth depth cues from adjacent views. Finally, the surface normal geometries are explicitly encoded to refine the sampled depth hypotheses to be consistent in the local neighbor regions. Extensive experiments on the standard MVS benchmarks including DTU, Tanks and Temples, and BlendedMVS demonstrate the state-of-the-art depth estimation and point cloud reconstruction performance of GE-MVS. The GE-MVS is further deployed in real-world experiments for UAV-based large-scale reconstruction, where our method outperforms the prevalent industrial reconstruction solutions in terms of reconstruction efficiency and effectiveness.",
+      "sha256": "1d668b0a26860a44754e0c700cb6607a429975201f6a68e7db1003f7d9c56cbe",
+      "verified_at": "2026-10-21T12:01:23.427661+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "620577fd8b71df0d1b015f4ceeaaa905c7c40f613688d8a95da082bec5966ae5",
+      "source_version": "e1a611142b10e4ce17de2d8b992a64a817a52927c4eb155873bc603c4323ad8d"
+    },
+    "conf-515df648c29a54f250d50176": {
+      "title": "ROI-GSurFisher: Next Best View Selection for Active Gaussian Splatting Via Fisher Information of ROI-Selected Gaussian Surfels",
+      "url": "https://ras.papercept.net/conferences/conferences/ICRA26/program/ICRA26_ContentListWeb_4.html#4328",
+      "text": "Next Best View (NBV) selection is critical for achieving high-quality 3D reconstruction in unknown environments. This paper presents an active NBV selection approach tailored for Gaussian Splatting (GS), a widely adopted 3D reconstruction technique that has recently gained significant attention and been extended to Simultaneous Localization and Mapping (SLAM) systems. Existing state-of-the-art NBV methods for GS focus on minimizing uncertainties of GS parameters but often fail to prioritize views that improve geometric reconstruction quality. To address this limitation, we propose an active view selection method for GS-based reconstruction, with its core being ROI-GSurFisher. This method calculates Fisher Information on Gaussian surfels selected via a Region of Interest (ROI) mechanism. Both the use of surfels for computation and the ROI constraint enhance ROI-GSurFisher's ability to evaluate geometric information gain. We further introduce a close-front view scoring module that prioritizes viewpoints conducive to high-quality reconstruction. The final NBV is selected by maximizing the combined geometric information gain and close-front score. Experimental results on 3D reconstruction of various objects and scenes demonstrate consistent qualitative and quantitative improvements. Beyond standalone 3D reconstruction, the proposed NBV method can be integrated into SLAM systems to select fewer but more valuable keyframes. Code is available at https://github.com/WW11111/ROI-GSurFisher.",
+      "sha256": "5b300f5cc3c336b9e661893ae92705c087f4a10897ddcf1d167914cf4a76f8d4",
+      "verified_at": "2026-10-21T12:01:30.438892+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "df1b42d933c1c7ea77726dc5a1c56be7531ca266007cd271b50eb338bdf4538a",
+      "source_version": "72ce20f1584819a98af8478e32d11d15e35c069ffd349488e3baf382af99a3e4"
+    },
+    "conf-514e0b7bc06e4e63bb38f8c0": {
+      "title": "PIPS: Planar Instance 3D Reconstruction Leveraging Planar Structural Priors",
+      "url": "https://ras.papercept.net/conferences/conferences/ICRA26/program/ICRA26_ContentListWeb_3.html#2660",
+      "text": "Planar structures, ubiquitous in man-made indoor environments, enable compact and accurate scene abstraction for various downstream tasks. Recent methods distill planar features into learning-based MVS geometries to obtain coherent 3D plane estimation from multi-view inputs. However, the lack of explicit planar instance definitions hinders semantic–geometry alignment, leading to distorted geometry and mismatched semantics. To address this, we propose PIPS, a planar-instance 3D reconstruction method that leverages planar structural priors for both single-view planar segmentation (SGPS module) and multi-view instance association (MVPI module). The planar instance point clouds are regularized by planar distances and then converted into complete planar meshes via an instance-level planar meshing strategy. Extensive experiments on hundreds of indoor scenes demonstrate the superior performance of our method, which is less dependent on annotations and requires no feature optimization. The effectiveness of each component is further verified through comprehensive ablation studies. The project page of PIPS is available at https://pips325.github.io.",
+      "sha256": "b092525f648d5b77f79b1fbbcff102be690438a0f96793866489b72f5a2b3763",
+      "verified_at": "2026-10-21T12:01:37.447649+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "fb2bad60403efaac0198db45ae92d3fd381a85ba415b96f066c6b5812134c9c6",
+      "source_version": "296befcd2d08a8c7bf272b3e289ee88ddb0ac05c5d3ba736518f86823ad8357f"
+    },
+    "conf-50e684886376dca675fc4427": {
+      "title": "Human-In-The-Loop Gaussian Splatting for Robotic Teleoperation",
+      "url": "https://ras.papercept.net/conferences/conferences/ICRA26/program/ICRA26_ContentListWeb_4.html#6373",
+      "text": "Safe, precise teleoperation demands a third-person 3D view that reveals collision clearances\tand task-critical geometry in full detail. Yet most systems still rely on live camera streams that offer tunnel-vision perspectives and weak depth cues, hiding hazards and denying operators the spatial context for precise manipulation. 3D Gaussian Splatting (GS) enables real-time photorealistic streaming, but acquiring\tthe required multi-view imagery safely and efficiently remains a critical bottleneck in cluttered teleoperation environments. We propose Human-in-the-Loop Gaussian Splatting (HIL-GS) that delivers safe, robust,\tand efficient\t3D scene reconstruction for challenging teleoperation environments. HIL-GS combines three modules in a tightly-coupled loop: (1) motion-aware GS reconstruction that fuses RGB-D and proprioceptive sensors for drift-free and robust mapping under aggressive motions; (2) VR-based informative display that renders the GS map with contextual overlays/feedback in real time to ensure situational awareness and reconstruction completeness; and (3) finger- based control interface to guide the robot toward informative viewpoints\tthrough safe,\tnon-redundant motions. Through simulation, real-world experiments, and a user study, we demonstrate that HIL-GS outperforms traditional approaches in reconstruction quality, usability, and efficiency.",
+      "sha256": "dad65064801b7b875a5212b4c978dc7921a3acfb94de66a6019f80a6c8c2e757",
+      "verified_at": "2026-10-21T12:01:44.482582+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "df1b42d933c1c7ea77726dc5a1c56be7531ca266007cd271b50eb338bdf4538a",
+      "source_version": "0a8786a1cf13210e265175e4d28e81066b12bfc083baf0befa1ad1ab27648dae"
+    },
+    "conf-45243b6d4dbc87ad5a239681": {
+      "title": "UM3D: Towards a Unified Multimodal 3D Shape Generation Model",
+      "url": "https://ras.papercept.net/conferences/conferences/ICRA26/program/ICRA26_ContentListWeb_3.html#2590",
+      "text": "Vision-Language Pre-training models (VLMs) have emerged as a highly promising solution to the generative problem, achieving remarkable success in the field of 2D image generation. However, extending these 2D paradigms to 3D domains is still unexplored due to the scarcity of text-3D pairs and shape ambiguity. To address this challenge, we introduce UM3D, a two-stage pre-training architecture towards unified multimodal 3D shape generation. Our approach first optimizes a Finite Scalar Quantization based Autoencoder (FSQ-AE) to learn a compact yet powerful implicit representation with improved codebook utilization. We then encode sketch features into CLIP's multimodal embedding space to incorporate additional geometric information. This unified space conditions our well-designed Instance-Normalized Glow model (Glow-IN) to model the distribution of 3D shape representations while mitigating distribution shift issues. During inference, UM3D can accept individual text, image, sketch, or combined inputs to generate corresponding 3D shapes. Quantitative and qualitative evaluations confirm our method's effectiveness in synthesizing high-fidelity, input-consistent 3D geometries.",
+      "sha256": "5831760a37ef09edca99d8f261269bf14cccc402a42405a26ee8b21081254eee",
+      "verified_at": "2026-10-21T12:01:51.523689+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "fb2bad60403efaac0198db45ae92d3fd381a85ba415b96f066c6b5812134c9c6",
+      "source_version": "1dce58b023ed199a368346201572d812f5397ddea144a78804e5d865b5975ffd"
+    },
+    "conf-37acfa779f77a421daff332a": {
+      "title": "Semantically Consistent Language Gaussian Splatting for 3D Point-Level Open-Vocabulary Querying",
+      "url": "https://ras.papercept.net/conferences/conferences/ICRA26/program/ICRA26_ContentListWeb_3.html#1309",
+      "text": "Open-vocabulary 3D scene understanding is crucial for robotics applications, such as natural language-driven manipulation, human-robot interaction, and autonomous navigation. Existing methods for querying 3D Gaussian Splatting often struggle with inconsistent 2D mask supervision and lack a robust 3D point-level retrieval mechanism. In this work, (i) we present a novel point-level querying framework that performs tracking on segmentation masks to establish a semantically consistent ground-truth for distilling the language Gaussians; (ii) we introduce a GT-anchored querying approach that first retrieves the distilled ground-truth and subsequently uses the ground-truth to query the individual Gaussians. Extensive experiments on three benchmark datasets demonstrate that the proposed method outperforms state-of-the-art performance. Our method achieves an mIoU improvement of +4.14, +20.42, and +1.7 on the LERF, 3D-OVS, and Replica datasets. These results validate our framework as a promising step toward open-vocabulary understanding in real-world robotic systems.",
+      "sha256": "bbbf2d8ac67bb34954dad081475121ae183f0797791e2444630d6d75b57bd2b3",
+      "verified_at": "2026-10-21T12:01:58.618340+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "fb2bad60403efaac0198db45ae92d3fd381a85ba415b96f066c6b5812134c9c6",
+      "source_version": "70f5ff2506537060608c3d80b0f57d164b2170659c8ead50d663f3a4e5f01cb8"
+    },
+    "conf-244500b9385de0d9844f702c": {
+      "title": "State-Space Time Surfaces for Event-Based Zero-Shot Robotic Grasping and Scene Reconstruction",
+      "url": "https://ras.papercept.net/conferences/conferences/ICRA26/program/ICRA26_ContentListWeb_5.html#6508",
+      "text": "Event cameras report per-pixel brightness changes asynchronously with microsecond latency, but their output is incompatible with vision foundation models trained on conventional images. We propose State-Space Time Surfaces (S3TS), a training-free representation that recasts exponential-decay time surfaces as a diagonal state-space model with multi-scale temporal channels and Mamba-inspired selective decay. The resulting pseudo-RGB image is fed directly to a frozen OWLv2 detector for zero-shot, text-prompted object detection from events alone. We demonstrate two applications on a 6-DOF manipulator: event-only grasping with near-nadir refinement, and dense 3D scene reconstruction via multi-view TSDF fusion with neuromorphic surface descriptors. S3TS detects over twice as many objects as single-channel event representations and produces faithful 3D workspace meshes",
+      "sha256": "515313e3788b90333795303c04819711ac1a161d0ba60a630d98fb25fcf9570e",
+      "verified_at": "2026-10-21T12:02:05.567616+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "620577fd8b71df0d1b015f4ceeaaa905c7c40f613688d8a95da082bec5966ae5",
+      "source_version": "45f4a38751b8752341379c352419f4ea715788e2a388b9b319cce4cc89b830be"
+    },
+    "conf-16d98a00dd92e52acf7704c6": {
+      "title": "AMG-SLAM: Adaptive Monocular Gaussian SLAM for Efficient Surface Reconstruction",
+      "url": "https://ras.papercept.net/conferences/conferences/ICRA26/program/ICRA26_ContentListWeb_3.html#4824",
+      "text": "Dense SLAM with a monocular camera remains a highly challenging task. In this paper, we present AMG-SLAM, a novel dense monocular SLAM system that tightly couples sparse tracking with dense Gaussian mapping to achieve fully online and high-quality surface reconstruction. In the frontend, learning-based modules enable efficient pose tracking and Gaussian proposal with sparse depth initialization. Specifically, we propose a fidelity-aware Gaussian proposal strategy that adaptively adds new Gaussians based on reconstruction completeness, effectively avoiding redundancy. In the backend, we propose a focus-and-balance online refinement strategy, which adaptively selects under-optimized Gaussians for focused refinement while ensuring globally balanced optimization by maximizing scene view coverage. We evaluated our method on synthetic and real-world datasets, including Replica, ScanNet, and EuRoC. Thanks to efficient system coupling and adaptive Gaussian proposal and refinement, our system achieves trajectory accuracy, rendering precision, and geometric accuracy comparable to or exceeding current state-of-the-art methods, while also demonstrating high efficiency.",
+      "sha256": "74d80e0c0d873f58531d0e2ff23b72773f1dc452638377378ff4f7a866d0530c",
+      "verified_at": "2026-10-21T12:02:12.584305+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "fb2bad60403efaac0198db45ae92d3fd381a85ba415b96f066c6b5812134c9c6",
+      "source_version": "6fc3639a4a3965868efcc22f6cc80fc10b15ca50365f5b16e2edd06e2ac10024"
+    },
+    "conf-12a90521da35e155c3e60151": {
+      "title": "DepthMesh: A Dual-End Complementary Online Depth Estimation and Mesh Reconstruction",
+      "url": "https://ras.papercept.net/conferences/conferences/ICRA26/program/ICRA26_ContentListWeb_3.html#1515",
+      "text": "We present a novel dual-end complementary method for online depth estimation and mesh reconstruction, termed DepthMesh. Unlike most existing state-of-the-art methods that produce either only depth online or surface mesh offline, our method tightly couples online multiview depth estimation and Truncated Signed Distance Function (TSDF) reconstruction to achieve fast online mesh reconstruction. For each keyframe from 6DoF tracking, we first obtain the prior depth and normal maps via ultra-fast raycasting from TSDF, which is incrementally fused from historical keyframe depths. Then, these priors, combined with segmentation results, are used to generate local planar hypotheses that optimize both depth accuracy and computational efficiency. Finally, the optimized depth estimates further enhance the accuracy of mesh reconstruction. Through this dual-end complementary mechanism, our system achieves high accuracy and efficiency. Experiments with qualitative and quantitative evaluations on the ScanNetV2 and self-collected datasets demonstrate the effectiveness of our method. Our method can generate depth and mesh online with accuracy (< 3 cm) on mobile devices, which is useful for robotic autonomous navigation and mixed reality applications such as real-time occlusion and collision handling.",
+      "sha256": "3121ffc7324cd287dc6e897b8c79554c101f5bd5e5acb8dda5c6b73d358d854d",
+      "verified_at": "2026-10-21T12:02:19.610184+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "fb2bad60403efaac0198db45ae92d3fd381a85ba415b96f066c6b5812134c9c6",
+      "source_version": "d6e480a4c907677c66fb6656217af33cafeb89d8d726a7a35f5834348e47caa0"
+    },
+    "conf-0fca546255999dd7ba8fbb49": {
+      "title": "ED-SLAM: Event-Depth Gaussian Splatting SLAM",
+      "url": "https://ras.papercept.net/conferences/conferences/ICRA26/program/ICRA26_ContentListWeb_4.html#5048",
+      "text": "Event-based Gaussian splatting (GS) reconstruction approach has recently attracted considerable attention. Existing methods usually assume the camera poses are known as a prior, or struggle to process long event streams due to the robustness of the method while poses are not known. In this work, we present ED-SLAM, an Event-Depth Gaussian Splatting-based simultaneous localization and mapping(SLAM) pipeline, which is robust to long event streams and does not require ground-truth camera poses. The pipeline achieves high-accuracy pose estimation and high-fidelity 3D reconstruction thanks to the impressive 3D representation capability of Gaussian splatting. In particular, we propose a novel patch-based event-depth tracking algorithm and seamlessly integrate it into the Gaussian splatting mapping pipeline. Extensive experiments on both synthetic and real-world datasets demonstrate that our method significantly improves tracking accuracy and robustness, and also delivers improved reconstruction performance.",
+      "sha256": "28537343662caed0765bbf87cfcd5df34d6f124c9c8af830a9363ab0c90a52b8",
+      "verified_at": "2026-10-21T12:02:26.680012+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "df1b42d933c1c7ea77726dc5a1c56be7531ca266007cd271b50eb338bdf4538a",
+      "source_version": "6b010d66a53ac240e4f1fdefb0246759cd32e860f00f0803a383248fbb7e6f7c"
+    },
+    "conf-09d0c6e0a72984dfa43eeef0": {
+      "title": "Aqua-Splat: Physically-Informed Sonar-Camera Gaussian Splatting for Underwater 3D Reconstruction",
+      "url": "https://ras.papercept.net/conferences/conferences/ICRA26/program/ICRA26_ContentListWeb_4.html#5630",
+      "text": "Differentiable Gaussian Splatting (GS) has emerged as a powerful paradigm for scene representation, enabling efficient rendering and real-time editing. However, existing GS-based methods, which rely mainly on clear visual images, perform poorly in underwater environments due to camera distortions such as light absorption and backscattering. In contrast, acoustic sensors like Forward Looking Sonar (FLS) offer superior penetration and robustness in such conditions. To leverage the complementary merits of visual and FLS images, we propose a novel Gaussian splatting framework customized for underwater scenarios, termed Aqua-Splat, for robust and accurate underwater perception. It ensures physically consistent reconstruction by incorporating the sonar wave propagation modeling in the image formation process. Moreover, we propose a volume rendering technique for sonar image synthesis, achieving similar speed to visual rendering. Additionally, we introduce a sonar-guided den- sification strategy to optimize the scene representation. Through extensive experiments on both simulated and laboratory datasets, we demonstrate that Aqua-Splat significantly improves image synthesis and 3D scene reconstruction in challenging underwater environments, outperforming existing methods in terms of both geometric accuracy and photometric fidelity. The code of Aqua-Splat will be open-sourced later for the community.",
+      "sha256": "25ff64d0f09eb6bcc7f25456863e3e4f5c3aae3f5663f03730e2f505742142aa",
+      "verified_at": "2026-10-21T12:02:33.661804+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "df1b42d933c1c7ea77726dc5a1c56be7531ca266007cd271b50eb338bdf4538a",
+      "source_version": "87ef4fa6c494c76e6406fbc9dd03acb9904653f6990295915de39621ddbc80c4"
+    },
+    "conf-067ea7853213eae84704b862": {
+      "title": "LSADS-Gaussian: Gaussian Splatting for Large-Scale Autonomous Driving Scene Reconstruction",
+      "url": "https://ras.papercept.net/conferences/conferences/ICRA26/program/ICRA26_ContentListWeb_3.html#1212",
+      "text": "The rapid advancement of 3D scene understanding techniques presents a significant opportunity for enhancing autonomous driving simulation systems. As these systems are increasingly required to operate in complex, large-scale, and unbounded real-world environments, efficient and high-fidelity 3D reconstruction of common outdoor scenes has become a critical prerequisite for realistic and extensible autonomous driving simulation. 3D Gaussian Splatting has achieved state-of-the-art performance in novel view synthesis, coupled with real-time rendering efficiency. However, large-scale reconstruction for autonomous driving scenarios faces several challenges as scenes grow in complexity: (1) limited views with insufficient pose diversity, (2) inadequate representation of geometric structural details, and (3) complex lighting conditions involving saturation and shadow variations. To cope with these challenges, we propose LSADS-Gaussian, a novel model for large-scale autonomous driving scene reconstruction. The model consists of a Multimodal Gaussian Network (MGN) module composed of two Gaussian sub-networks, designed to perform Gaussian aggregation and optimization from multi-sensor data, a Geometric Representation Guidance (GRG) module refines and enhances geometric consistency, and a Lighting Enhancement (LE) module introduces learnable illumination coefficients to maintain illumination consistency. Extensive experiments show that LSADS-Gaussian outperforms the state-of-the-art methods.",
+      "sha256": "f0adce030fcb57ca3b5452cb1c67f54415d22f2ebe8e5c2f1a2d061dc500362a",
+      "verified_at": "2026-10-21T12:02:40.666504+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "fb2bad60403efaac0198db45ae92d3fd381a85ba415b96f066c6b5812134c9c6",
+      "source_version": "6fcacef7f6bacda72fe7b3e1a0518a29978b82da445088fb6042dba970b57d6c"
+    },
+    "conf-023097cf88a31df6a21f74e8": {
+      "title": "GS-UVCE: Gaussian Splatting-Driven Unsupervised Visual Consistency Enhancement for Underwater 3D Scene Reconstruction",
+      "url": "https://ras.papercept.net/conferences/conferences/ICRA26/program/ICRA26_ContentListWeb_3.html#1386",
+      "text": "Underwater 3D scene reconstruction is critical for the operation of underwater robotics, yet remains highly challenging due to the semi-transparent water medium, which introduces optical distortions, light scattering, and severe visibility degradation. Therefore, effective underwater image enhancement is a prerequisite for reliable reconstruction. However, existing approaches typically enhance individual views with pre-trained models before reconstruction, leading to poor generalization and inconsistent multi-view results. To address these limitations, we propose GS-UVCE, an end-to-end framework for Gaussian Splatting-driven Unsupervised Visual Consistency Enhancement. GS-UVCE incorporates a Medium-MLP to model water-medium effects and a Light-MLP to adaptively correct illumination, ensuring illumination consistency. Furthermore, depth regularization is introduced to preserve geometric consistency under varying scene conditions. Extensive experiments on multiple underwater datasets show that GS-UVCE consistently outperforms SOTA methods, achieving superior reconstruction fidelity and visual consistency enhancement.",
+      "sha256": "e994216e3e431bcf38facb88de55bef06131f047cc6c6e1c0f0c3bf686213f24",
+      "verified_at": "2026-10-21T12:02:47.703030+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "fb2bad60403efaac0198db45ae92d3fd381a85ba415b96f066c6b5812134c9c6",
+      "source_version": "7695e5bb26b34baf6dc8fbe40b8cca6522eaa0eee1a323c8cfc6f28a02f3647a"
+    },
+    "conf-009a85bb6a02613d00c418bb": {
+      "title": "Multi-View Control for Robust 3D Gaussian Splatting",
+      "url": "https://ras.papercept.net/conferences/conferences/ICRA26/program/ICRA26_ContentListWeb_4.html#1481",
+      "text": "3D Gaussian Splatting (3DGS) has recently demonstrated impressive capabilities in real-time novel view synthesis. However, the performance of 3DGS tends to degrade significantly when the quality of the initial point cloud is poor. Although subsequent research has successfully addressed the initialization issue by using suboptimal point clouds to train the 3D Gaussian model, certain challenges still remain in practical applications. Specifically, the lack of an effective pruning strategy to thoroughly eliminate suboptimal points (defined as erroneous points in this paper). The excessive accumulation of these erroneous points leads to overfitting in specific viewpoints, thereby affecting the visual appearance and geometric accuracy in novel view synthesis. To address these challenges, we propose a novel 3DGS optimization method named MVC-GS, which introduces two key innovative contributions. First, based on multi-view geometric constraints, we use image rendering errors as a guiding criterion for optimization. By performing point calibration in the target region, we effectively mitigate the impact of erroneous Gaussian points. Subsequently, we introduce a multi-view Gaussian attribute optimization method that further enhances the precision of 3D Gaussian attributes representation, while avoiding overfitting to the training views. We conducted comprehensive visualization analysis across multiple scenes in various datasets. Extensive experiments on public datasets show that the proposed method achieves state-of-the-art performance across diverse scenes.",
+      "sha256": "af46575c2d3f17e256a133b2830162e62c385daaddb8fab61dcdb40ae9251671",
+      "verified_at": "2026-10-21T12:02:54.778640+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "df1b42d933c1c7ea77726dc5a1c56be7531ca266007cd271b50eb338bdf4538a",
+      "source_version": "0ea616cbb2e90f488eb13bebe9ca8e159657f6b9d3873d15b58d114873a90cc0"
+    },
+    "conf-b7d5adc8510efd52a3d378bc": {
+      "title": "CG-THWM: Curriculum-Guided Temporal Haptic World Modeling for Peg-In-Hole Tasks",
+      "url": "https://ras.papercept.net/conferences/conferences/ICRA26/program/ICRA26_ContentListWeb_5.html#4833",
+      "text": "Fine-tolerance peg-in-hole manipulation demands high precision under contact-rich, nonsmooth dynamics, where irregular geometries, inclinations, and tight-clearance interference often cause model-free reinforcement learning (RL) to fail. We propose the Curriculum-Guided Temporal Haptic World Model (CG-THWM), which couples a world model with temporal haptic information and trains it via a staged curriculum. The world model supports efficient long-horizon planning with value estimation, while temporal haptic signals expose critical contact events; the curriculum stabilizes training and improves generalization. To enable rigorous evaluation, we construct a dataset for complex insertions that covers irregular, inclined, and interference-rich settings. In simulation, CG-THWM attains a 100% success rate on standard baselines and a 70% mean success rate in scenarios where conventional RL fails. These results highlight CG-THWM's potential for industrial and service applications.",
+      "sha256": "06d30486aca41193e0ed4d9feb6dd556b2921d267b114326af5cf23c9c49d427",
+      "verified_at": "2026-10-21T12:03:01.761496+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "620577fd8b71df0d1b015f4ceeaaa905c7c40f613688d8a95da082bec5966ae5",
+      "source_version": "7618eca75183f16903453f8c75eee069b7029229ab76816b73f815a7a913a6d6"
+    },
+    "conf-97a8af7b286e6114bfa5914e": {
+      "title": "OccLLaMA: A Unified Occupancy-Language-Action World Model for Enhancing Motion Planning Via Multi-Task Learning",
+      "url": "https://ras.papercept.net/conferences/conferences/ICRA26/program/ICRA26_ContentListWeb_5.html#5066",
+      "text": "Scene understanding via multi-modal large language models and scene forecasting with world models have advanced the development of autonomous driving. The former maps visual inputs to driving-specific outputs, neglecting spatial reasoning and world dynamics. The latter captures world dynamics, lacking comprehensive scene understanding. In contrast, human divers seamlessly integrate understanding, forecasting, and decision-making through multi-modal representations. To this end, we propose OccLLaMA, a unified occupancy-language-action world model to enhance motion planning via multi-task learning. It uses semantic occupancy as a unified 3D visual representation, effectively integrating spatial scene understanding and forecasting. Specifically, we first introduce a tailored scene tokenizer that auto-encodes semantic occupancy into latent tokens for invertible compression. Furthermore, we enhance LLaMA to enable joint learning across both understanding and generation tasks within a unified auto-regressive framework, incorporating multi-task pretraining and motion-planning–oriented fine-tuning. Extensive experiments demonstrate that OccLLaMA not only achieves competitive performance on scene understanding and occupancy forecasting, but also enhances motion planning by integrating multi-task inference, showcasing its effectiveness and potential as a foundation model for autonomous driving. Project page: href{https://vilonge.github.io/OccLLaMA_Page/}{OccLLaMA}",
+      "sha256": "534cc91248e401d0a0df31a3cbad62543f3a6b35a77cd96b2c1c4e37587350ab",
+      "verified_at": "2026-10-21T12:03:08.799937+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "620577fd8b71df0d1b015f4ceeaaa905c7c40f613688d8a95da082bec5966ae5",
+      "source_version": "8a8089ef9e68a518b1d984f8fa03fc6bbbd7c4760ae877f2045a6789ef4c04da"
+    },
+    "conf-c5db85225b68d7acde1e6e84": {
+      "title": "JetsonCompletion: Real-Time Depth Completion on Resource-Constrained Edge Devices",
+      "url": "https://ras.papercept.net/conferences/conferences/ICRA26/program/ICRA26_ContentListWeb_5.html#4961",
+      "text": "Depth completion from sparse LiDAR points and images is a key perception task for autonomous robots, enabling dense 3D understanding in challenging environments. However, most recent researches achieve accuracy gains by greatly enlarging network size, making them unsuitable for realtime deployment on power- and compute-constrained platforms. This paper proposes an ultra-lightweight depth completion framework optimized for embedded systems. Our approach integrates a re-parameterized encoder–decoder with fewer than 5M parameters and a two-stage hybrid distillation strategy. The first stage progressively densifies sparse depth supervision, while the second preserves edge fidelity through a combination of metric and structural losses. A full TensorRT FP16 pipeline further ensures efficient deployment. Extensive experiments on KITTI Depth Completion, NYU-v2 . demonstrate that our method achieves competitive accuracy while maintaining high efficiency. On a Jetson Xavier NX, the system runs at over 30 FPS with sub-33 ms latency within a 20 W power envelope, showing strong potential for real-world micro-robotic platforms. We will open-source the code to benefit the community. Our open source website: https://github.com/2463450186Q/JetsonCompletion.git",
+      "sha256": "7913720a088379a4650e7e829a125f4b97a1c0da348556fc753ac6ba236f1f23",
+      "verified_at": "2026-10-21T12:03:15.816568+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "620577fd8b71df0d1b015f4ceeaaa905c7c40f613688d8a95da082bec5966ae5",
+      "source_version": "143dcfd41eb10e787ff06053c19752b9600ecfd1a3be1a664b5c16c75834c420"
+    },
+    "conf-c3ae19bfedd084df3845fdfc": {
+      "title": "Fast Monocular Depth Estimation for Underwater Robotics Leveraging Attenuation Differences As Supplementary Information",
+      "url": "https://ras.papercept.net/conferences/conferences/ICRA26/program/ICRA26_ContentListWeb_5.html#2063",
+      "text": "Underwater and in-air environments exhibit distinct imaging characteristics, which should be carefully considered and effectively exploited for accurate depth estimation. In this work, we analyze the effectiveness of wavelength-dependent attenuation for underwater depth estimation and show that it is helpful but insufficient to perform depth estimation independently. Therefore, we propose a fast underwater monocular depth estimation network that incorporates underwater light absorption difference (ULAD) as supplementary information. Compared with methods that rely solely on RGB input, the proposed approach provides more accurate depth predictions. In our network, RGB and ULAD features are extracted by MobileNetV4 and fused using FusionMamba, followed by decoding and refinement with a micro Vision Transformer. The network is trained on the USOD10K dataset and evaluated on both its test set and the FLSea dataset. Experimental results demonstrate that our method achieves more accurate depth estimation and higher efficiency compared with other lightweight networks. Furthermore, Compared with existing state-of-the-art fast underwater depth estimation methods, our network further reduces the number of parameters by 10% and improves inference speed by 43%.",
+      "sha256": "de86dd636a52e7d4b7315049dc8e813acb896037e9967e61a0ad4633b90e65a1",
+      "verified_at": "2026-10-21T12:03:22.831905+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "620577fd8b71df0d1b015f4ceeaaa905c7c40f613688d8a95da082bec5966ae5",
+      "source_version": "1a4fb9c80fdaefbdd181614a2960bbeabfc3f2bb40f42c607ee3146ed3a69952"
+    },
+    "conf-726476f78248c1960d923e65": {
+      "title": "Depth Completion by Rescaling Monocular Depth Estimates Via Compressed Sensing",
+      "url": "https://ras.papercept.net/conferences/conferences/ICRA26/program/ICRA26_ContentListWeb_4.html#1176",
+      "text": "Depth completion is the challenge of recovering a dense depth map from an RGB image and corresponding sparse depth measurements. Many modern depth completion strategies often rely on deep neural networks, using a monocular depth estimation (MDE) backbone to generate an initial dense depth map from the RGB image. This estimate is then further refined with the help of auxiliary network components that utilise the sparse depth measurements to improve accuracy and restore fine-grained depth details. However, such approaches introduce additional model parameters and require domain-specific fine-tuning, making them impractical for resource-constrained robotics applications. In this paper, we propose an alternative refinement strategy based on compressed sensing. Using the Discrete Cosine Transform (DCT) as our basis, we construct a ratio matrix that rescales the estimated depth map to align with measured ground truth data. Our experiments demonstrate that this method can significantly reduce the RMSE and MAE of the initial MDE estimate by more than a factor of 15. Furthermore, the proposed approach can outperform state-of-the-art depth completion models at sampling ratios above 50 percent, while also substantially reducing the overall GPU VRAM requirements. This pipeline is modular and compatible with any existing MDE model with no additional training, making it particularly suitable for deployment on GPU-constrained robotic platforms in previously unseen environments.",
+      "sha256": "df3ab100ed5a258b140365a7395b3f5a6b733013a7ed2c03f3bc3f445026817d",
+      "verified_at": "2026-10-21T12:03:29.878615+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "df1b42d933c1c7ea77726dc5a1c56be7531ca266007cd271b50eb338bdf4538a",
+      "source_version": "7d07c6c0671339b9267a9e33f2c5eebad394723e09b977c6691f3c6a46bc1d1e"
+    },
+    "conf-50ec8969e1da21bb61ca29fe": {
+      "title": "Consistency-Driven Confidence Estimation for Stereo Matching",
+      "url": "https://ras.papercept.net/conferences/conferences/ICRA26/program/ICRA26_ContentListWeb_4.html#4975",
+      "text": "Confidence estimation for stereo matching is crucial for enhancing the reliability and accuracy of depth perception in real-world applications. Despite effectively capturing aleatoric uncertainty through probabilistic modeling and statistical aggregation, current regression-based confidence estimation methods neglect uncertainty arising from unstable training dynamics, resulting in over-confident predictions near occlusion boundaries, textureless regions, and reflective surfaces where errors are most severe. We propose a novel epoch-wise consistency accumulation algorithm that explicitly incorporates training dynamics into confidence estimation. Specifically, we design a full-image cross-epoch alignment mechanism to dynamically quantify pixel-wise training consistency between consecutive epochs, thereby significantly enhancing the estimation of confidence. We further propose a consistency-ranked evidential discrepancy loss, which aligns evidential uncertainty estimates with consistency-derived ordinal supervision, aiming to improve the correlation between confidence scores and actual prediction errors. Our approach is incorporated into MonSter, an advanced stereo baseline, achieving SOTA performance in confidence estimation across KITTI 2012, KITTI 2015 and Middlebury benchmarks.",
+      "sha256": "959165aa0a5b9084797cde939b928d0a7a775c6b8ebbc587d29ca74e5005a2f6",
+      "verified_at": "2026-10-21T12:03:38.027819+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "df1b42d933c1c7ea77726dc5a1c56be7531ca266007cd271b50eb338bdf4538a",
+      "source_version": "5f9cfba9be9d0e085bb6ed1f95cda2c3d1338432c8aca7fcaaf1ff6d4ad17053"
+    },
+    "conf-2bfbb184f799c922a71d3f9a": {
+      "title": "TiCoSS: Tightening the Coupling between Semantic Segmentation and Stereo Matching within a Joint Learning Framework (I)",
+      "url": "https://ras.papercept.net/conferences/conferences/ICRA26/program/ICRA26_ContentListWeb_5.html#5919",
+      "text": "Semantic segmentation and stereo matching, respectively analogous to the ventral and dorsal streams in our human brain, are two key components of autonomous driving perception systems. Addressing these two tasks with separate networks is no longer the mainstream direction in developing computer vision algorithms, particularly with the recent advances in large vision models and embodied artificial intelligence. The trend is shifting towards combining them within a joint learning framework, especially emphasizing feature sharing between the two tasks. The major contributions of this study lie in comprehensively tightening the coupling between semantic segmentation and stereo matching. Specifically, this study makes three key contributions: (1) a tightly coupled, gated feature fusion strategy, (2) a hierarchical deep supervision strategy, and (3) a coupling tightening loss function. The combined use of these technical contributions results in TiCoSS, a state-of-the-art joint learning framework that simultaneously tackles semantic segmentation and stereo matching. Through extensive experiments on the KITTI, vKITTI2, and Cityscapes datasets, along with both qualitative and quantitative analyses, we validate the effectiveness of our developed strategies and loss function. Our approach demonstrates superior performance compared to prior arts, with a notable increase in mean intersection over union by over 9%.",
+      "sha256": "1146b9f5d81a55de92ef11209c3a43c815905251a4f4eeaf951606743276cb4b",
+      "verified_at": "2026-10-21T12:03:45.110770+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "620577fd8b71df0d1b015f4ceeaaa905c7c40f613688d8a95da082bec5966ae5",
+      "source_version": "2e4c1d128778dbe22f5988351df18efb5ca0add97cc1b343af4d8b3c4082f751"
+    },
+    "conf-1d1e08cb1c056ee6214d6d37": {
+      "title": "Self-Supervised Underwater Monocular Depth Estimation Informed by Multi-Physics Processes",
+      "url": "https://ras.papercept.net/conferences/conferences/ICRA26/program/ICRA26_ContentListWeb_3.html#6157",
+      "text": "Depth information is crucial for underwater robotic detection and navigation tasks. However, the underwater imaging environment is complex and variable. The images captured by robots are typically sequences or videos with uniform scene content, and the ground-truth of depth is difficult to obtain. This challenge hinders the generalization of existing self-supervised monocular depth estimation (SMDE) schemes for practical underwater detection applications. To address this issue, we propose an SMDE method for underwater images informed by the physical process of optical degradation. Specifically, we developed a further degradation process for underwater images, which can constrain the image restoration process to solve the attenuation coefficient and depth map, and then combine it with the ego-motion based framework to form a self-supervised learning closed loop. Guided by inherent optical properties, this closed-loop can learn depth cues from the underwater image formation model and the geometric relationships involved in view transformation. Experimental results demonstrate that the proposed method outperforms existing techniques and generalizes well across different underwater scenes. Experiments demonstrate that the proposed method is reduced by about 9:1% in RMSE index and improved by about 3:5% in threshold accuracy compared with the SOTA method and can adapt to various underwater robot detection scenarios.",
+      "sha256": "8fa72025f9bd171f679f3ccb8dcb7650af8977a6e6703c45b30a7a4753bd12fe",
+      "verified_at": "2026-10-21T12:03:52.152021+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "fb2bad60403efaac0198db45ae92d3fd381a85ba415b96f066c6b5812134c9c6",
+      "source_version": "7e1f740023570ffde8b6c2724e1af196ce4ce4f9d9cba639cd13d62659c72f14"
     }
   }
 }
