@@ -5122,6 +5122,46 @@
       "basis": "official_abstract",
       "source_sha256": "6a56094968d6b47f11cb61837abf1d4f0e3e89c4770f049e77441f76af9a12f8",
       "source_version": "d6e53ecd5a6cde2a992c9e5056a707555b55e181f4f618dbc2f5a76422333efe"
+    },
+    "conf-e551fb21c10dd693a571d985": {
+      "title": "VAR RL Done Right: Tackling Asynchronous Policy Conflicts in Visual Autoregressive Generation",
+      "url": "https://arxiv.org/abs/2601.02256",
+      "text": "Visual generation is dominated by three paradigms: AutoRegressive (AR), diffusion, and Visual AutoRegressive (VAR) models. Unlike AR and diffusion, VARs operate on heterogeneous input structures across their generation steps, which creates severe asynchronous policy conflicts. This issue becomes particularly acute in reinforcement learning (RL) scenarios, leading to unstable training and suboptimal alignment. To resolve this, we propose a novel framework to enhance Group Relative Policy Optimization (GRPO) by explicitly managing these conflicts. Our method integrates three synergistic components: 1) a stabilizing intermediate reward to guide early-stage generation; 2) a dynamic time-step reweighting scheme for precise credit assignment; and 3) a novel mask propagation algorithm, derived from principles of Reward Feedback Learning (ReFL), designed to isolate optimization effects both spatially and temporally. Our approach demonstrates significant improvements in sample quality and objective alignment over the vanilla GRPO baseline, enabling robust and effective optimization for VAR models.",
+      "sha256": "047a43971d834dd32dc17c0d2911d8946cfe696014c20df8480ea9cd5629cfc0",
+      "verified_at": "2026-10-21T19:04:41.854703+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "89eb59a66bbcc80b724ecf923ca44b4f30cec996c6c214a4139239182fa1424e",
+      "source_version": "8aec9c2b39f1da0231dbcb9b4bd73ba0f8a053926cf66ddaa869b5f8b8b3bd61"
+    },
+    "conf-a4533a79d1a62ba12eafcc36": {
+      "title": "VerseCrafter: Dynamic Realistic Video World Model with 4D Geometric Control",
+      "url": "https://arxiv.org/abs/2601.05138",
+      "text": "Video world models aim to simulate dynamic, real-world environments, yet existing methods struggle to provide unified and precise control over camera and multi-object motion, as videos inherently capture dynamics in the projected 2D image plane. To bridge this gap, we introduce VerseCrafter, a geometry-driven video world model that generates dynamic, realistic videos from a unified 4D geometric world state. Our approach is centered on a novel 4D Geometric Control representation, which encodes the world state as a static background point cloud and per-object 3D Gaussian trajectories. This representation captures each object's motion path and probabilistic 3D occupancy over time, providing a flexible, category-agnostic alternative to rigid bounding boxes and parametric models. We render 4D Geometric Control into 4D control maps for a pretrained video diffusion model, enabling high-fidelity, view-consistent video generation that faithfully follows the specified dynamics. To enable training at scale, we develop an automatic data engine and construct VerseControl4D, a real-world dataset of 35K training samples with automatically derived prompts and rendered 4D control maps. Extensive experiments show that VerseCrafter achieves superior visual quality and more accurate control over camera and multi-object motion than prior methods.",
+      "sha256": "9bfe9f5cd1f365a69a2eaa4811a0dc593df973cc8f65c97eafef0b41cbaa7e3c",
+      "verified_at": "2026-10-21T19:04:47.586454+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "97394766621137bb7b8fc1ee953e67835131334cbd7069d97e0895a1a5cbe6a7",
+      "source_version": "f23f16e1b46d356bc6546dbc1719360042fa844965cf9cad9a5e46f484e04a92"
+    },
+    "conf-ffc64995b4a49dc8c3666a4b": {
+      "title": "MOSAIC-GS: Monocular Scene Reconstruction via Advanced Initialization for Complex Dynamic Environments",
+      "url": "https://arxiv.org/abs/2601.05368",
+      "text": "We present MOSAIC-GS, a novel, fully explicit, and computationally efficient approach for high-fidelity dynamic scene reconstruction from monocular videos using Gaussian Splatting. Monocular reconstruction is inherently ill-posed due to the lack of sufficient multiview constraints, making accurate recovery of object geometry and temporal coherence particularly challenging. To address this, we leverage multiple geometric cues, such as depth, optical flow, dynamic object segmentation, and point tracking. Combined with rigidity-based motion constraints, these cues allow us to estimate preliminary 3D scene dynamics during an initialization stage. Recovering scene dynamics prior to the photometric optimization reduces reliance on motion inference from visual appearance alone, which is often ambiguous in monocular settings. To enable compact representations, fast training, and real-time rendering while supporting non-rigid deformations, the scene is decomposed into static and dynamic components. Each Gaussian in the dynamic part of the scene is assigned a trajectory represented as time-dependent Poly-Fourier curve for parameter-efficient motion encoding. We demonstrate that MOSAIC-GS achieves substantially faster optimization and rendering compared to existing methods, while maintaining reconstruction quality on par with state-of-the-art approaches across standard monocular dynamic scene benchmarks.",
+      "sha256": "4198557af5d4a0a8a179f83fc785fac962dfad3389e36c491cc231238325752d",
+      "verified_at": "2026-10-21T19:04:53.500383+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "9ef294cad6d698899cdfd6ffdef77e1f920cc32677ad7ac4560f65d86806c825",
+      "source_version": "c099a47b3f6c141a62db0cd1338fe3614ef030241bae9db2d32b66864fa0afee"
+    },
+    "conf-41172d9df8d19bb402fab057": {
+      "title": "From Rays to Projections: Better Inputs for Feed-Forward View Synthesis",
+      "url": "https://arxiv.org/abs/2601.05116",
+      "text": "Feed-forward view synthesis models predict a novel view in a single pass with minimal 3D inductive bias. Existing works encode cameras as Pl\\\"ucker ray maps, which tie predictions to the arbitrary world coordinate gauge and make them sensitive to small camera transformations, thereby undermining geometric consistency. In this paper, we ask what inputs best condition a model for robust and consistent view synthesis. We propose projective conditioning, which replaces raw camera parameters with a target-view projective cue that provides a stable 2D input. This reframes the task from a brittle geometric regression problem in ray space to a well-conditioned target-view image-to-image translation problem. Additionally, we introduce a masked autoencoding pretraining strategy tailored to this cue, enabling the use of large-scale uncalibrated data for pretraining. Our method shows improved fidelity and stronger cross-view consistency compared to ray-conditioned baselines on our view-consistency benchmark. It also achieves state-of-the-art quality on standard novel view synthesis benchmarks.",
+      "sha256": "7838dc7bad4c46bdffc4b273e64fb7dc0eb6a2e3680ed103bb2f7ba721c6c4dd",
+      "verified_at": "2026-10-21T19:04:59.354502+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "4bd70306487ff41ddeb38d59881317f69b6b8f00b37c6768d455dcec801ad738",
+      "source_version": "105bf8b314de868de246cc3a856474c60e95225b3f8775604b104f863829bc91"
     }
   }
 }
