@@ -4219,6 +4219,66 @@
       "basis": "official_abstract",
       "source_sha256": "09e93cdb51095fcd303ed78a3cc61d76c1281268df0c50cb2210a8c36f724662",
       "source_version": "912b74b5c28badeb830eca39ab724bcc02a5988f9a9198bb58dcbbf14d899c3d"
+    },
+    "conf-f411cc3d0f3828d75de8ad52": {
+      "title": "SODA: Sensitivity-Oriented Dynamic Acceleration for Diffusion Transformer",
+      "url": "https://arxiv.org/abs/2603.07057",
+      "text": "Diffusion Transformers have become a dominant paradigm in visual generation, yet their low inference efficiency remains a key bottleneck hindering further advancement. Among common training-free techniques, caching offers high acceleration efficiency but often compromises fidelity, whereas pruning shows the opposite trade-off. Integrating caching with pruning achieves a balance between acceleration and generation quality. However, existing methods typically employ fixed and heuristic schemes to configure caching and pruning strategies. While they roughly follow the overall sensitivity trend of generation models to acceleration, they fail to capture fine-grained and complex variations, inevitably skipping highly sensitive computations and leading to quality degradation. Furthermore, such manually designed strategies exhibit poor generalization. To address these issues, we propose SODA, a Sensitivity-Oriented Dynamic Acceleration method that adaptively performs caching and pruning based on fine-grained sensitivity. SODA builds an offline sensitivity error modeling framework across timesteps, layers, and modules to capture the sensitivity to different acceleration operations. The cache intervals are optimized via dynamic programming with sensitivity error as the cost function, minimizing the impact of caching on model sensitivity. During pruning and cache reuse, SODA adaptively determines the pruning timing and rate to preserve computations of highly sensitive tokens, significantly enhancing generation fidelity. Extensive experiments on DiT-XL/2, PixArt-$\\alpha$, and OpenSora demonstrate that SODA achieves state-of-the-art generation fidelity under controllable acceleration ratios. Our code is released publicly at: https://github.com/leaves162/SODA.",
+      "sha256": "66f5a7ec99bb06d68349306d592c2cec26c21e0a77944c9f9662611279fb2d66",
+      "verified_at": "2026-10-21T14:48:22.637799+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "4251cf59ace23a6bc1e6f1d1a9770293d9bb9d99fa91ffb24d420c5dd707c788",
+      "source_version": "e8622cf1c97418c71805675be2726dbf79369b4e32c9d8441d4079fd1c8218fe"
+    },
+    "conf-b57e6fb361227e58ed42f6cb": {
+      "title": "Spectral and Trajectory Regularization for Diffusion Transformer Super-Resolution",
+      "url": "https://arxiv.org/abs/2603.06275",
+      "text": "Diffusion transformer (DiT) architectures show great potential for real-world image super-resolution (Real-ISR). However, their computationally expensive iterative sampling necessitates one-step distillation. Existing one-step distillation methods struggle with Real-ISR on DiT. They suffer from fundamental trajectory mismatch and generate severe grid-like periodic artifacts. To tackle these challenges, we propose StrSR, a novel one-step adversarial distillation framework featuring spectral and trajectory regularization. Specifically, we propose an asymmetric discriminative distillation architecture to bridge the trajectory gap. Additionally, we design a frequency distribution matching strategy to effectively suppress DiT-specific periodic artifacts caused by high-frequency spectral leakage. Extensive experiments demonstrate that StrSR achieves state-of-the-art performance in Real-ISR, across both quantitative metrics and visual perception. The code and models will be released at https://github.com/jkwang28/StrSR .",
+      "sha256": "8f40d51200946374b4bffd1edf419ff31069d4989cba283866058d7831f29781",
+      "verified_at": "2026-10-21T14:48:28.260377+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "ad3d941c4de3a00ad8a5adecd3e2ec6887ade26f461bc9e099d6f7e03d84b792",
+      "source_version": "82afea65e73cf077183587ede708eafafe5872b3adf08252734600399e37433b"
+    },
+    "conf-079a48245e34856578a32b99": {
+      "title": "SIGMark: Scalable In-Generation Watermark with Blind Extraction for Video Diffusion",
+      "url": "https://arxiv.org/abs/2603.02882",
+      "text": "Artificial Intelligence Generated Content (AIGC), particularly video generation with diffusion models, has been advanced rapidly. Invisible watermarking is a key technology for protecting AI-generated videos and tracing harmful content, and thus plays a crucial role in AI safety. Beyond post-processing watermarks which inevitably degrade video quality, recent studies have proposed distortion-free in-generation watermarking for video diffusion models. However, existing in-generation approaches are non-blind: they require maintaining all the message-key pairs and performing template-based matching during extraction, which incurs prohibitive computational costs at scale. Moreover, when applied to modern video diffusion models with causal 3D Variational Autoencoders (VAEs), their robustness against temporal disturbance becomes extremely weak. To overcome these challenges, we propose SIGMark, a Scalable In-Generation watermarking framework with blind extraction for video diffusion. To achieve blind-extraction, we propose to generate watermarked initial noise using a Global set of Frame-wise PseudoRandom Coding keys (GF-PRC), reducing the cost of storing large-scale information while preserving noise distribution and diversity for distortion-free watermarking. To enhance robustness, we further design a Segment Group-Ordering module (SGO) tailored to causal 3D VAEs, ensuring robust watermark inversion during extraction under temporal disturbance. Comprehensive experiments on modern diffusion models show that SIGMark achieves very high bit-accuracy during extraction under both temporal and spatial disturbances with minimal overhead, demonstrating its scalability and robustness. Our project is available at https://jeremyzhao1998.github.io/SIGMark-release/.",
+      "sha256": "66e88f43491669d63f4d230b6c1f75d3c8926c5aa64d3f53a23a45ff9c3b0d10",
+      "verified_at": "2026-10-21T14:48:33.907632+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "c99a710d036c9d7a1beea1f7f315dd1d37d09a311e5e9980285bb7421972d166",
+      "source_version": "68ce821602ed398b7aef31fabb376f626364cdc3d4705e090750f4c8101904ba"
+    },
+    "conf-fb0028f49f814d745a8ae7a6": {
+      "title": "ZipMap: Linear-Time Stateful 3D Reconstruction via Test-Time Training",
+      "url": "https://arxiv.org/abs/2603.04385",
+      "text": "Feed-forward transformer models have driven rapid progress in 3D vision, but state-of-the-art methods such as VGGT and $\\pi^3$ have a computational cost that scales quadratically with the number of input images, making them inefficient when applied to large image collections. Sequential-reconstruction approaches reduce this cost but sacrifice reconstruction quality. We introduce ZipMap, a stateful feed-forward model that achieves linear-time, bidirectional 3D reconstruction while matching or surpassing the accuracy of quadratic-time methods. ZipMap employs test-time training layers to zip an entire image collection into a compact hidden scene state in a single forward pass, enabling reconstruction of over 700 frames in under 10 seconds on a single H100 GPU, more than $20\\times$ faster than state-of-the-art methods such as VGGT. Moreover, we demonstrate the benefits of having a stateful representation in real-time scene-state querying and its extension to sequential streaming reconstruction.",
+      "sha256": "ca101469d4f92fe2ceaaa573223b7070a66342feb2907764638cbbba8953d325",
+      "verified_at": "2026-10-21T14:48:39.515958+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "a9dc4402b9fb1a302e391486d5815625d045e4e1d5f161fcd9218a03e44d0118",
+      "source_version": "f6ff93eb883a28e7dfbc75350f12c0c5d35ff7acd4697786d1f488d28a533dee"
+    },
+    "conf-cb2de641baaae8ca2759f30e": {
+      "title": "NOVA3R: Non-pixel-aligned Visual Transformer for Amodal 3D Reconstruction",
+      "url": "https://arxiv.org/abs/2603.04179",
+      "text": "We present NOVA3R, an effective approach for non-pixel-aligned 3D reconstruction from a set of unposed images in a feed-forward manner. Unlike pixel-aligned methods that tie geometry to per-ray predictions, our formulation learns a global, view-agnostic scene representation that decouples reconstruction from pixel alignment. This addresses two key limitations in pixel-aligned 3D: (1) it recovers both visible and invisible points with a complete scene representation, and (2) it produces physically plausible geometry with fewer duplicated structures in overlapping regions. To achieve this, we introduce a scene-token mechanism that aggregates information across unposed images and a diffusion-based 3D decoder that reconstructs complete, non-pixel-aligned point clouds. Extensive experiments on both scene-level and object-level datasets demonstrate that NOVA3R outperforms state-of-the-art methods in terms of reconstruction accuracy and completeness.",
+      "sha256": "e3ed319937f8003a3dacb64524b9f572604bfaee4d17cbb683d93e716fdc9b54",
+      "verified_at": "2026-10-21T14:48:45.074610+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "d38389aec62a05e681c5a2aea23e329b7cbd6ea55a6bafabd3b53ec3c1f720a6",
+      "source_version": "a616426a02c6ba7bac452ca4dc80836318177f93c1ac2f9660b175c983474d72"
+    },
+    "conf-df22ea3e1eb8a9f22746de90": {
+      "title": "Chain of World: World Model Thinking in Latent Motion",
+      "url": "https://arxiv.org/abs/2603.03195",
+      "text": "Vision-Language-Action (VLA) models are a promising path toward embodied intelligence, yet they often overlook the predictive and temporal-causal structure underlying visual dynamics. World-model VLAs address this by predicting future frames, but waste capacity reconstructing redundant backgrounds. Latent-action VLAs encode frame-to-frame transitions compactly, but lack temporally continuous dynamic modeling and world knowledge. To overcome these limitations, we introduce CoWVLA (Chain-of-World VLA), a new \"Chain of World\" paradigm that unifies world-model temporal reasoning with a disentangled latent motion representation. First, a pretrained video VAE serves as a latent motion extractor, explicitly factorizing video segments into structure and motion latents. Then, during pre-training, the VLA learns from an instruction and an initial frame to infer a continuous latent motion chain and predict the segment's terminal frame. Finally, during co-fine-tuning, this latent dynamic is aligned with discrete action prediction by jointly modeling sparse keyframes and action sequences in a unified autoregressive decoder. This design preserves the world-model benefits of temporal reasoning and world knowledge while retaining the compactness and interpretability of latent actions, enabling efficient visuomotor learning. Extensive experiments on robotic simulation benchmarks show that CoWVLA outperforms existing world-model and latent-action approaches and achieves moderate computational efficiency, highlighting its potential as a more effective VLA pretraining paradigm. The project website can be found at https://fx-hit.github.io/cowvla-io.",
+      "sha256": "4ff7e604fde9a17cbd75b71161759d9da3762225b7efdd1cae3d707efab96c29",
+      "verified_at": "2026-10-21T14:48:50.626247+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "30c1dccf5a9025032597e115d80ffb8206b41b2f4ac94292744b861b5ccedc72",
+      "source_version": "99ed44304d0a5c21c819b3eb9b4ba43cb40defa744f88813cc8009849e74c212"
     }
   }
 }
