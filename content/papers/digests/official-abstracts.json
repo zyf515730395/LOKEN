@@ -1634,6 +1634,77 @@
       "basis": "official_abstract",
       "source_sha256": "6aafa828efd1c0518adfda7ae8db106971062bfb1d979705adc34d9cb3b9030d",
       "source_version": "3784aebf2dacb02da5f1b10d3f05ffe83fe4fa2e1c890ea638f088f0ddafb5b7"
+    },
+    "2606.24369": {
+      "title": "Accelerating Disaggregated RL for Visual Generative LLMs with Diffusion-Based Parallelism and Trainer-Assisted Generation",
+      "url": "https://arxiv.org/abs/2606.24369",
+      "text": "Reinforcement learning (RL) has become a dominant post-training paradigm, driving the emergence of high-performance RL systems such as veRL for autoregressive large language models (LLMs). In parallel, diffusion-oriented RL algorithms, e.g., DanceGRPO and FlowGRPO, have rapidly expanded the scope of RL from language reasoning to diffusion-based visual and flow-based generation. However, efficient RL systems for diffusion generative LLMs remain underexplored. Existing implementations, e.g., veRL-Omni, still rely on colocated execution, which simplifies synchronization but couples rollout and training resources, limits heterogeneous deployment, and constrains independent scaling. To this end, we introduce DigenRL, a disaggregated RL framework for diffusion-based generative LLMs that supports flexible resource allocation, accommodates heterogeneous GPUs, and facilitates efficient task scheduling. To maximally reduce the execution bubbles in the disaggregated architecture, we propose: 1) a generation-axis pipeline (GAP) and time-step parallelism (TSP) in the diffusion architecture to enable finer-grained pipelining between rollout and training; 2) an elastic trainer-assisted generation (TAG) approach to enable the trainer GPU resources to dynamically assist in executing rollout generations; and 3) a tightly one-step constrained asynchronous strategy to further utilize the tail bubble in the pipeline. Extensive experiments are conducted on three hardware testbeds with 16-32 GPUs using HunyuanVideo-13B, Wan2.1-14B, FLUX.1-12B, and QwenImage-20B generative models. Experimental results show that DigenRL achieves 1.56-2.10x throughput improvements over state-of-the-art diffusion RL systems, veRL-Omni and GenRL.",
+      "sha256": "ad85c91344c549fbef76f4bcf104659a9ad86d190b13b2d8106695e631514206",
+      "verified_at": "2026-10-21T09:29:31.907845+08:00"
+    },
+    "conf-df857f7045219f6d177589fc": {
+      "title": "Beyond Pixel Mimicry: Disentangled Self-Similarity Rewards for Diverse Subject-Driven Generation",
+      "url": "https://eccv.ecva.net/virtual/2026/poster/5173",
+      "text": "Subject-driven image generation faces an “Identity-DiversityParadox”, where strong identity preservation often leads to rigid and low-diversity outputs. We propose a post-training framework called DivRLthat jointly optimizes identity consistency and structural diversity si-multaneously by leveraging disentangled visual features from a robustsimilarity model. Specifically, we introduce a Negative Self-SimilarityMeasure (nSSM) to quantify structural diversity, and Visual Seman-tic Matching (VSM) to evaluate identity consistency. We propose an“Explore-and-Suppress” strategy that treats VSM as a gated constraint:the model freely explores structurally diverse configurations, and onlysamples that violate the identity threshold are penalized via a quadratichinge loss. This converts identity preservation from a competing objectiveinto a feasibility constraint, allowing nSSM and VSM to improve jointly.Experiments demonstrate that our method effectively pushes the modelto generate both consistent and diverse images and improves structuraldiversity while maintaining comparable identity consistency through agated optimization formulation. Show more",
+      "sha256": "3caa052f57eddb6b723b2e9df3ebb997d588720d6f15dfc9117f948e31b5a887",
+      "verified_at": "2026-10-21T09:29:37.897529+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "2d3ae017719f2b8fef6e30e7930cf1c6f7ff4fea95ee1daf6e3345266a06e3c0",
+      "source_version": "09c5c3d031a641b282b7a85a808a0f78e69da1c3eaffa3bb5c4fd1a4a806c0e5"
+    },
+    "2602.09415": {
+      "title": "Stability and Concentration in Nonlinear Inverse Problems with Block-Structured Parameters: Lipschitz Geometry, Identifiability, and an Application to Gaussian Splatting",
+      "url": "https://arxiv.org/abs/2602.09415",
+      "text": "We develop an operator-theoretic framework for stability and statistical concentration in nonlinear inverse problems with block-structured parameters. Under a unified set of assumptions combining blockwise Lipschitz geometry, local identifiability, and sub-Gaussian noise, we establish deterministic stability inequalities, global Lipschitz bounds for least-squares misfit functionals, and nonasymptotic concentration estimates. These results yield high-probability parameter error bounds that are intrinsic to the forward operator and independent of any specific reconstruction algorithm. As a concrete instantiation, we verify that the Gaussian Splatting rendering operator satisfies the proposed assumptions and derive explicit constants governing its Lipschitz continuity and resolution-dependent observability. This leads to a fundamental stability--resolution tradeoff, showing that estimation error is inherently constrained by the ratio between image resolution and model complexity. Overall, the analysis characterizes operator-level limits for a broad class of high-dimensional nonlinear inverse problems arising in modern imaging and differentiable rendering.",
+      "sha256": "57a25c218e0e0f19cd3d212f67e57fa1f5fa4a7d626db4d844d60a82c8f1e5ca",
+      "verified_at": "2026-10-21T09:29:42.975162+08:00"
+    },
+    "2606.28826": {
+      "title": "RefGlass-GS: A UAV-Enabled Fusion Framework for Photorealistic, Semantic and Interactive Digitization of Reflective Glass Facades via Gaussian Splatting",
+      "url": "https://arxiv.org/abs/2606.28826",
+      "text": "Existing digitization of buildings with reflective glass facades suffers from geometric reconstruction distortion, unrealistic view-dependent texture rendering, and difficulties in object-based semantic enhancement. Therefore, we propose RefGlass-GS, a fusion framework that enables end-to-end UAV-based photorealistic, semantic, and interactive digitization of reflective glass facades. The contributions include: (1) proposing an individual glass panel segmentation method based on maximum a posteriori estimation with structural regularities, robust to severe reflection and background interference; (2) formulating a UAV viewpoint planning optimization function that maximizes the coverage of view-dependent appearance for sufficient data capture; (3) developing an optimized Gaussian Splatting framework with a Reflection MLP, a novel deferred shading function, and two enhanced regularization terms for effective modeling of high-frequency near-field reflections; (4) introducing a standardized data organization paradigm for structuring GS-based representations into object-based models, facilitating interactive facility management on digital twin platforms. Experiments on real-world reflective glass facade scenes validate the effectiveness and superiority of the proposed method. Specifically, the glass panel segmentation achieves an improvement of 0.1927 in mIoU over SOTA methods, and only our method enables instance-level panel extraction. The UAV view planning improves novel view synthesis for reflective facades by 13.15 dB in PSNR compared to commercially used nap-of-the-object planning methods. The RefGlass-GS modeling outperforms SOTA Gaussian Splatting approaches for reflective scenes with an average improvement of 5.08 dB in PSNR.",
+      "sha256": "01db280c4d0db806f752ce4ea6e8d539d9b51c99a1c708c91f2b543e47a0abcd",
+      "verified_at": "2026-10-21T09:29:48.085932+08:00"
+    },
+    "conf-64cebb4b805178df7e584072": {
+      "title": "Perceptual 3D Simulation With Physical World Modeling",
+      "url": "https://arxiv.org/abs/2606.27575",
+      "text": "Predicting how a scene will evolve after a desired 3D transformation from images is a central goal in vision, graphics, and robotics. Yet unlike ideal simulators with full access to 3D geometry and dynamics, real world systems must rely on perceptual inputs and local actions that are inherently partial and incomplete. In this work, we present P3Sim, a physical world modeling system that simulates future scene states under both partial observations and incomplete 3D transformation signals. P3Sim is composed of three interacting components: a learned physical world model, a geometric conditioning module, and a persistent scene memory. The world model interprets perception as probabilistic inference over multimodal scene variables, providing predictions of the distributions of any scene variable conditioned on any combination of others. The geometric conditioning module provides a partial 3D transform signal for conditioning the world model at inference time. The persistent scene memory integrates predictions over time, enabling online updates and consistency under uncertainty. By combining learned inference with explicit geometric structure, P3Sim balances data-driven flexibility with built-in inductive bias. This design yields a flexible perceptual simulator that generalizes across diverse 3D transformation tasks, such as novel view synthesis, object manipulation, and dynamic scene prediction, advancing toward general purpose 3D scene understanding and transformation.",
+      "sha256": "e2a388285621bfc30fce124d37f1e4dcf4e4975861b5619f159fc670da8f2bf3",
+      "verified_at": "2026-10-21T09:29:54.227977+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "f806bd8997a88fc257d42372669140d542d2ca6522482dad965bceff57ecef34",
+      "source_version": "fe2b799f1feda6bdd989d55806585301b8474795dd5b4eb08a97e72aa0d647a7"
+    },
+    "conf-2d9044da2d0e4181824fe8f7": {
+      "title": "Learning Transferable Dynamics Priors from Action to World Modeling",
+      "url": "https://arxiv.org/abs/2606.29501",
+      "text": "We study action-conditioned world modeling as a scalable way to learn transferable dynamics priors for robot learning. By pretraining a model to predict how actions drive visual scene evolution, the resulting world model captures reusable interaction dynamics beyond appearance-level video generation. Concretely, we pretrain a multi-view interactive base diffusion world model, A2World, on large-scale robot manipulation data with real action annotations. We validate the learned dynamics priors from two complementary perspectives. First, we adapt A2World into a task- or scene-specialized real-world simulator, A2World-sim, whose long-horizon rollouts support simulator-based policy evaluation and scalable what-if analysis by replacing real-robot rollouts with world model rollouts. Second, starting from the same pretrained weights, we adapt A2World into a video-action joint prediction model, A2World-policy, that predicts actions under visual and instruction conditioning. Experiments across simulation benchmarks and real-robot settings demonstrate that action-conditioned world model pretraining yields transferable dynamics priors that benefit both simulator-centric and policy-centric robot learning.",
+      "sha256": "649349ca82ffb0129d78b07ff1d3624d597edbf2cba116df97793f4e1b1996f7",
+      "verified_at": "2026-10-21T09:29:57.351563+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "d34104699f76eb78208de13d066b8eab110b108f3b2fa957dfe38b32dd81e764",
+      "source_version": "e1ab837c576dd6ca82b34cce28799dd8059e8d2019025be8d5a4b71351a5ca6a"
+    },
+    "conf-9836f7df777ac02fb4314bc8": {
+      "title": "MemoBench: Benchmarking World Modeling in Dynamically Changing Environments",
+      "url": "https://arxiv.org/abs/2606.27537",
+      "text": "Video generation models aspire to simulate dynamic environments, and several benchmarks now evaluate memory consistency across frames. However, most assess consistency only while the target remains in view, and the few that force objects out of view evaluate static scenes where nothing changes during occlusion. To bridge this gap, we introduce MemoBench, a diagnostic benchmark built around the disappear-and-reappear paradigm in dynamically changing environments: a target object undergoes a physical process, disappears from view, and must be correctly recovered in its updated state upon reappearance. We curate 360 ground-truth clips spanning synthetic and real-world scenes, and design an evaluation suite combining automated metrics with VQA-based assessment across four diagnostic pillars. Evaluation of eight state-of-the-art models reveals key insights and open challenges regarding memory consistency under the disappear-and-reappear paradigm.",
+      "sha256": "b71549dcd32b927cebfc1a971d9f68e7c616c6614dfee0ffba4b51065b661dc4",
+      "verified_at": "2026-10-21T09:30:03.144340+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "525b8bb865eca73d68408420f92505077a36357b075dce8324fa1e4be5170b96",
+      "source_version": "84b11417c52c704578463f8b33b159af5fea440aa58681f917e19f2a2c1de6a0"
+    },
+    "conf-0f6252eb39ec4c273fa61c00": {
+      "title": "LithoDreamer: A Physics-Informed World Model for Multi-Stage Computational Lithography",
+      "url": "https://arxiv.org/abs/2606.26713",
+      "text": "As semiconductor technology nodes scale, computational lithography is essential for ensuring yield and performance. However, lithography is a continuous physical process involving mask optimization, optical imaging, resist exposure, and development, which existing models fail to capture. To overcome this limitation, we present LithoDreamer, the first physics-informed World Model (WM) framework for computational lithography, which formulates the ``Layout-Mask-Resist Image-After Development Image (ADI)'' pipeline as a decision-driven multi-step evolution system. LithoDreamer captures feature changes between adjacent states to model stage-specific physics-informed latent spaces, in which it controls process intervention exploration and drives subsequent state transitions. To achieve interpretable intervention optimization without continuous supervision, we propose a contrastive variational optimization paradigm that contrasts the latent differences between intervention paths with variational evolution constraints, guiding the model to generate evolutions consistent with real lithography physics. Experiments show LithoDreamer achieves state-of-the-art performance in forward evolution and inverse planning. Our lithography dataset is publicly available at GitHub (https://github.com/7jiangyq/lithodreamer.git).",
+      "sha256": "d0685e9badda51f8e299162ff78c3d52d948f1cdf182aaff2840dd0418ee393c",
+      "verified_at": "2026-10-21T09:30:08.970147+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "5cb2bc28882d5e7871e529441f180d05b41966ebaf38bc18233a994b297d8408",
+      "source_version": "574bd990f9f7431b07bfc73d69f9c61738daa060be32f6fe9c12701b3a5d2a8f"
     }
   }
 }
