@@ -5802,6 +5802,80 @@
       "basis": "official_abstract",
       "source_sha256": "bfc6bae89b49fd94748656553d5071d2b934cccb9ec0488b991ebd775846789b",
       "source_version": "488fdc83afea385e64f50c50483450a574d0a5a63dfeccdef87c7a7213fdcba8"
+    },
+    "conf-ca214f992a8c09a70279e497": {
+      "title": "Zero-Reference Joint Low-Light Enhancement and Deblurring via Visual Autoregressive Modeling with VLM-Derived Modulation",
+      "url": "https://ojs.aaai.org/index.php/AAAI/article/view/37363",
+      "text": "Real-world dark images commonly exhibit not only low visibility and contrast but also complex noise and blur, posing significant restoration challenges. Existing methods often rely on paired data or fail to model dynamic illumination and blur characteristics, leading to poor generalization. To tackle this, we propose a generative framework based on visual autoregressive (VAR) modeling, guided by perceptual priors from the vision-language model (VLM). Specifically, to supply informative conditioning cues for VAR models, we deploy an adaptive curve estimation scheme to modulate the diverse illumination based on VLM-derived visibility scores.\nIn addition, we integrate dynamic and spatial-frequency-aware Rotary Positional Encodings (SF-RoPE) into VAR to enhance its ability to model structures degraded by blur. Furthermore, we propose a recursive phase-domain modulation strategy that mitigates blur-induced artifacts in the phase domain via bounded iterative refinement guided by VLM-assessed blur scores. Our framework is fully unsupervised and achieves state-of-the-art performance on benchmark datasets.",
+      "sha256": "fa8a09eeffbf0e502bc576b81496cb9adca4a19f38376223ee050766ddc4adb5",
+      "verified_at": "2026-10-22T00:10:16.270451+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "38a1d41f5c6e8640a5faaef22202e493e8aea3608e754f742bbca182fae2d450",
+      "source_version": "bea0a85fe4352701eea4788518e49dbba27a0552759137895f4828f0d743bfcc"
+    },
+    "conf-2c595453f1d045271aba6d8b": {
+      "title": "BokehFlow: Depth-Free Controllable Bokeh Rendering via Flow Matching",
+      "url": "https://ojs.aaai.org/index.php/AAAI/article/view/37431",
+      "text": "Bokeh rendering simulates the shallow depth-of-field effect in photography, enhancing visual aesthetics and guiding viewer attention to regions of interest. Although recent approaches perform well, rendering controllable bokeh without additional depth inputs remains a significant challenge. Existing classical and neural controllable methods rely on accurate depth maps, while generative approaches often struggle with limited controllability and efficiency. In this paper, we propose BokehFlow, a depth-free framework for controllable bokeh rendering based on flow matching. BokehFlow directly synthesizes photorealistic bokeh effects from all-in-focus images, eliminating the need for depth inputs. It employs a cross-attention mechanism to enable semantic control over both focus regions and blur intensity via text prompts. To support training and evaluation, we collect and synthesize four datasets. Extensive experiments demonstrate that BokehFlow achieves visually compelling bokeh effects and offers precise control, outperforming existing depth-dependent and generative methods in both rendering quality and efficiency.",
+      "sha256": "37bc99361e41ba8bd08aeedddbe1e93aaa8e1d43539e2e5531b46014037a37d2",
+      "verified_at": "2026-10-22T00:10:34.767600+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "599d4c5ddb431c80f7e7233abce99531246586aed2b1d83f219eee9bd2b2f6a2",
+      "source_version": "37e765703d41467a60ccabdd6372156488a6751e89303bd1b8385ad9a4b09bcc"
+    },
+    "2511.17615": {
+      "title": "Plug-and-Play Multi-Concept Adaptive Blending for High-Fidelity Text-to-Image Synthesis",
+      "url": "https://arxiv.org/abs/2511.17615",
+      "text": "Integrating multiple personalized concepts into a single image has recently become a significant area of focus within Text-to-Image (T2I) generation. However, existing methods often underperform on complex multi-object scenes due to unintended alterations in both personalized and non-personalized regions. This not only fails to preserve the intended prompt structure but also disrupts interactions among regions, leading to semantic inconsistencies. To address this limitation, we introduce plug-and-play multi-concept adaptive blending for high-fidelity text-to-image synthesis (PnP-MIX), an innovative, tuning-free approach designed to seamlessly embed multiple personalized concepts into a single generated image. Our method leverages guided appearance attention to faithfully reflect the intended appearance of each personalized concept. To further enhance compositional fidelity, we present a mask-guided noise mixing strategy that preserves the integrity of non-personalized regions such as the background or unrelated objects while enabling the precise integration of personalized objects. Finally, to mitigate concept leakage, i.e., the inadvertent leakage of personalized concept features into other regions, we propose background dilution++, a novel strategy that effectively reduces such leakage and promotes accurate localization of features within personalized regions. Extensive experimental results demonstrate that PnP-MIX consistently surpasses existing methodologies in both single- and multi-concept personalization scenarios, underscoring its robustness and superior performance without additional model tuning.",
+      "sha256": "485c51ba37507929d276a3fe3675b53fea1eb2da31a7d0536e820324652f226d",
+      "verified_at": "2026-10-22T00:10:40.027373+08:00"
+    },
+    "conf-3ecb6871208ad79e8c19e265": {
+      "title": "VVS: Accelerating Speculative Decoding for Visual Autoregressive Generation via Partial Verification Skipping",
+      "url": "https://openaccess.thecvf.com/content/CVPR2026/html/Dong_VVS_Accelerating_Speculative_Decoding_for_Visual_Autoregressive_Generation_via_Partial_CVPR_2026_paper.html",
+      "text": "Visual autoregressive (AR) generation models have demonstrated strong potential for image generation, yet their next-token-prediction paradigm introduces considerable inference latency. Although speculative decoding (SD) has been proven effective for accelerating visual AR models, its \"draft one step, then verify one step\" paradigm prevents a direct reduction in the number of forward passes, limiting its acceleration potential. Motivated by the interchangeability of visual tokens, we explore verification skipping in the SD process for the first time to explicitly cut the number of target model forward passes, thereby reducing inference latency. By analyzing the characteristics of the drafting stage, we observe that verification redundancy and stale feature reusability are key factors to maintain generation quality while improving speed for verification-free steps. Inspired by these two observations, we propose a novel SD framework VVS to accelerate \\underline \\text v  isual AR model via partial \\underline \\text v  erification \\underline \\text s  kipping, which integrates three complementary modules: (1) a verification-free token selector with dynamically truncation, (2) token level feature caching and reuse, and (3) fine-grained skipped step scheduling. Consequently, VVS reduces the number of target model forward passes by  2.8x  relative to vanilla AR decoding while maintaining competitive generation quality, offering a superior speed-quality trade-off over conventional SD frameworks and revealing strong potential to reshape the SD paradigm. Our code is available at https://github.com/HyattDD/VVS.",
+      "sha256": "ce8565151cf7466d6b2d07b0d11955da79ef78af03be37130e8df1cdc2b9078a",
+      "verified_at": "2026-10-22T00:10:48.622380+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "eb7ed55634f364f55bf7b94291c8aac30d8b1ebb37f8dcf77569ca0fe57823a4",
+      "source_version": "1776e278deeae99578921521fe43199a107e0fda7f8fda4c01dcd2a00e1993b1"
+    },
+    "conf-e832d95b7aee5f3560cc9225": {
+      "title": "Do Flat Minima Improve Sparse Novel View Synthesis?",
+      "url": "https://eccv.ecva.net/virtual/2026/poster/3745",
+      "text": "Despite the success of recent novel view synthesis methods,they tend to struggle in sparse-view settings. This poor generalizationto unseen viewpoints is an inherent challenge when training with lim-ited data. To address this, we investigate the relationship between losssharpness and generalization in novel view synthesis—an underexploreddirection. Interestingly, while pursuing flatter minima is widely knownto improve generalization in deep learning, reducing loss sharpness is notalways beneficial in novel view synthesis. We demonstrate that this dif-ference arises because high-detail regions inherently require a sharp losslandscape for accurate reconstruction, whereas low-detail regions benefitfrom a flat loss landscape for improving generalization. Based on this in-sight, we introduce structure-aware sharpness, defined within structure-adaptive neighborhoods, and propose to adaptively adjust the sharpnessregularization weight according to the local image structure. This strat-egy encourages flatter minima for generalization while preserving the losssharpness necessary to reconstruct fine details. Across various datasetsand configurations, our strategy consistently improves a wide range ofbaselines. Code is available at https://bbangsik13.github.io/FASR. Show more",
+      "sha256": "60d03da3ac155d0370f73da2f1459f0d02c0580f045a23ea64f82368fa259d12",
+      "verified_at": "2026-10-22T00:10:57.429789+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "2a47b80dcdfdb6983eef58b6a23bb6f72670126b242d7561182d9045704576cb",
+      "source_version": "47c39b8bbcc4436d8372ad38e57bb4600f139af969e06fa8d2675e2674d54bb1"
+    },
+    "conf-8be27ece261e731332c157df": {
+      "title": "MuM: Multi-View Masked Image Modeling for 3D Vision",
+      "url": "https://openaccess.thecvf.com/content/CVPR2026/html/Nordstrom_MuM_Multi-View_Masked_Image_Modeling_for_3D_Vision_CVPR_2026_paper.html",
+      "text": "Self-supervised learning on images seeks to extract meaningful visual representations from unlabeled data. When scaled to large datasets, this paradigm has achieved state-of-the-art performance and the resulting trained models such as DINOv3 have seen widespread adoption. However, most prior efforts are optimized for semantic understanding rather than geometric reasoning. One important exception is Cross-View Completion, CroCo, which is a form of masked autoencoding (MAE) tailored for 3D understanding. In this work, we continue on the path proposed by CroCo and focus on learning features tailored for 3D vision. In a nutshell, we extend MAE to arbitrarily many views of the same scene. By uniformly masking all views and employing a lightweight decoder with inter-frame attention, our approach is inherently simpler and more scalable than CroCo. We evaluate the resulting model, MuM, extensively on downstream tasks including feedforward reconstruction, dense image matching and relative pose estimation, finding that it outperforms the state-of-the-art visual encoders DINOv3 and CroCo v2.",
+      "sha256": "e337b304fcb855717fe05dbfbeb991a1b7523f64bb1ff3f1445241f98cc00d18",
+      "verified_at": "2026-10-22T00:11:11.304636+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "3937443a4cf044157d12d890e40ef8fb59cfcf423bc56af767f0e36e45099e5b",
+      "source_version": "f405e272449a7ad142c24f09347d5c2c5a43d4cae7554824608dc24556ab1a95"
+    },
+    "conf-41ecf12f982e4eafab259c1d": {
+      "title": "IGaussian: Real-Time Camera Pose Estimation Via Feed-Forward 3D Gaussian Splatting Inversion",
+      "url": "https://ras.papercept.net/conferences/conferences/IROS25/program/IROS25_ContentListWeb_2.html#4263",
+      "text": "Recent trends in SLAM and visual navigation have embraced 3D Gaussians as the preferred scene representation, highlighting the importance of estimating camera poses from a single image using a pre-built Gaussian model. However, existing approaches typically rely on an iterative render-compare-refine loop, where candidate views are first rendered using NeRF or Gaussian Splatting, then compared against the target image, and finally, discrepancies are used to update the pose. This multi-round process incurs significant computational overhead, hindering real-time performance in robotics. In this paper, we propose iGaussian, a two-stage feed-forward framework that achieves real-time camera pose estimation through direct 3D Gaussian inversion. Our method first regresses a coarse 6DoF pose using a Gaussian Scene Prior-based Pose Regression Network with spatial uniform sampling and guided attention mechanisms, then refines it through feature matching and multi-model fusion. The key contribution lies in our cross-correlation module that aligns image embeddings with 3D Gaussian attributes without differentiable rendering, coupled with a Weighted Multiview Predictor that fuses features from Multiple strategically sampled viewpoints. Experimental results on the NeRF Synthetic, Mip-NeRF 360, and T&T+DB datasets demonstrate a significant performance improvement over previous methods, reducing median rotation errors to 0.2° while achieving 2.87 FPS tracking on mobile robots, which is an impressive 10× speedup compared to optimization-based approaches. Project page: https://github.com/pythongod-exe/iGaussian",
+      "sha256": "6092bcbc64ac19b97ebce14ac0c316db6cdc2a7d370f108636e012359c351637",
+      "verified_at": "2026-10-22T00:11:22.797940+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "75efe43e30f23e44758a89c1f7436e916e98d697aef3baa11aa5f7ff76ad5c81",
+      "source_version": "0177a6d218b5cb7c7a5efac56cfe98c1a1beddd8ce1c7820c6b5c952d668a39a"
+    },
+    "2511.12972": {
+      "title": "SplatSearch: Instance Image Goal Navigation for Mobile Robots using 3D Gaussian Splatting and Diffusion Models",
+      "url": "https://arxiv.org/abs/2511.12972",
+      "text": "The Instance Image Goal Navigation (IIN) problem requires mobile robots deployed in unknown environments to search for specific objects or people of interest using only a single reference goal image of the target. This problem can be especially challenging when: 1) the reference image is captured from an arbitrary viewpoint, and 2) the robot must operate with sparse-view scene reconstructions. In this paper, we address the IIN problem, by introducing SplatSearch, a novel architecture that leverages sparse-view 3D Gaussian Splatting (3DGS) reconstructions. SplatSearch renders multiple viewpoints around candidate objects using a sparse online 3DGS map and uses a multi-view diffusion model to complete missing regions of the rendered images, enabling robust feature matching against the goal image. A novel frontier exploration policy is introduced which uses visual context from the synthesized viewpoints with semantic context from the goal image to evaluate frontier locations, allowing the robot to prioritize frontiers that are semantically and visually relevant to the goal image. Extensive experiments in photorealistic home and real-world environments validate the higher performance of SplatSearch against current state-of-the-art methods in terms of Success Rate and Success Path Length. An ablation study confirms the design choices of SplatSearch.",
+      "sha256": "e0281b62db3b33f5d3457ebd426535c934a2fb4a887ffa404e9c8dcd85db61f9",
+      "verified_at": "2026-10-22T00:11:27.870662+08:00"
     }
   }
 }
