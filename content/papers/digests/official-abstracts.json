@@ -4917,6 +4917,103 @@
       "basis": "official_abstract",
       "source_sha256": "ebfbeeb8db3bc4b993ed74b9f2385f288f63343d69332aa22dd5625a5353cf39",
       "source_version": "99fc7f6ca92d86a7c9ae11e335583aa6806082519c1e02d733826b84a9cc801a"
+    },
+    "conf-ac6b13ca5f4c7215ff51b3e7": {
+      "title": "Adaptive Visual Autoregressive Acceleration via Dual-Linkage Entropy Analysis",
+      "url": "https://arxiv.org/abs/2602.01345",
+      "text": "Visual AutoRegressive modeling (VAR) suffers from substantial computational cost due to the massive token count involved. Failing to account for the continuous evolution of modeling dynamics, existing VAR token reduction methods face three key limitations: heuristic stage partition, non-adaptive schedules, and limited acceleration scope, thereby leaving significant acceleration potential untapped. Since entropy variation intrinsically reflects the transition of predictive uncertainty, it offers a principled measure to capture modeling dynamics evolution. Therefore, we propose NOVA, a training-free token reduction acceleration framework for VAR models via entropy analysis. NOVA adaptively determines the acceleration activation scale during inference by online identifying the inflection point of scale entropy growth. Through scale-linkage and layer-linkage ratio adjustment, NOVA dynamically computes distinct token reduction ratios for each scale and layer, pruning low-entropy tokens while reusing the cache derived from the residuals at the prior scale to accelerate inference and maintain generation quality. Extensive experiments and analyses validate NOVA as a simple yet effective training-free acceleration framework.",
+      "sha256": "413a9981a397ed1739491a6e33d044b8862be0a7b0343756670bc8bb5cc1ac56",
+      "verified_at": "2026-10-21T18:36:48.412550+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "1b57f8802e30a2c1ace23bc65ee67edc67fbc018b49722e4387ead629fa9b94e",
+      "source_version": "21547c610f8ad741aa964f711200c86a8e53a1528da4bf8af6895575b17d64e2"
+    },
+    "conf-06bb4e6c75870925e66bfa9e": {
+      "title": "Q-DiT4SR: Exploration of Detail-Preserving Diffusion Transformer Quantization for Real-World Image Super-Resolution",
+      "url": "https://arxiv.org/abs/2602.01273",
+      "text": "Recently, Diffusion Transformers (DiTs) have emerged in Real-World Image Super-Resolution (Real-ISR) to generate high-quality textures, yet their heavy inference burden hinders real-world deployment. While Post-Training Quantization (PTQ) is a promising solution for acceleration, existing methods in super-resolution mostly focus on U-Net architectures, whereas generic DiT quantization is typically designed for text-to-image tasks. Directly applying these methods to DiT-based super-resolution models leads to severe degradation of local textures. Therefore, we propose Q-DiT4SR, the first PTQ framework specifically tailored for DiT-based Real-ISR. We propose H-SVD, a hierarchical SVD that integrates a global low-rank branch with a local block-wise rank-1 branch under a matched parameter budget. We further propose Variance-aware Spatio-Temporal Mixed Precision: VaSMP allocates cross-layer weight bit-widths in a data-free manner based on rate-distortion theory, while VaTMP schedules intra-layer activation precision across diffusion timesteps via dynamic programming (DP) with minimal calibration. Experiments on multiple real-world datasets demonstrate that our Q-DiT4SR achieves SOTA performance under both W4A6 and W4A4 settings. Notably, the W4A4 quantization configuration reduces model size by 5.8$\\times$ and computational operations by 6.14$\\times$. Our code and models will be available at https://github.com/xunzhang1128/Q-DiT4SR.",
+      "sha256": "6e6ac0198a3af04a49824cf750d72e9439fa27481cb6adc90823896738c996c2",
+      "verified_at": "2026-10-21T18:36:53.952228+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "f1a6f6c873806770f781f3524b1d0b8867deca49c3ff0de7904454d1acfe3420",
+      "source_version": "a866622ebada3c39233390792e9f2900445a2fe707a7b8f9bcd42e88ed2a9f4d"
+    },
+    "conf-c0f0d62ed7f8561eefe4b50f": {
+      "title": "WMVLM: Evaluating Diffusion Model Image Watermarking via Vision-Language Models",
+      "url": "https://arxiv.org/abs/2601.21610",
+      "text": "Digital watermarking is essential for securing generated images from diffusion models. Accurate watermark evaluation is critical for algorithm development, yet existing methods have significant limitations: they lack a unified framework for both residual and semantic watermarks, provide results without interpretability, neglect comprehensive security considerations, and often use inappropriate metrics for semantic watermarks. To address these gaps, we propose WMVLM, the first unified and interpretable evaluation framework for diffusion model image watermarking via vision-language models (VLMs). We redefine quality and security metrics for each watermark type: residual watermarks are evaluated by artifact strength and erasure resistance, while semantic watermarks are assessed through latent distribution shifts. Moreover, we introduce a three-stage training strategy to progressively enable the model to achieve classification, scoring, and interpretable text generation. Experiments show WMVLM outperforms state-of-the-art VLMs with strong generalization across datasets, diffusion models, and watermarking methods.",
+      "sha256": "6af97d58061677c10bc5dc2e26b57460d45911070f60082a86e14af36293f83c",
+      "verified_at": "2026-10-21T18:36:59.561258+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "45bb5c465c4d046c5be6e6cc6ee80def70ec6edfd1acec68cd51418453a26d9b",
+      "source_version": "22443464d458b445df2506e4a26157e202f6d035314903e520ad6880f1fe3197"
+    },
+    "2601.15766": {
+      "title": "LL-GaussianMap: Zero-shot Low-Light Image Enhancement via 2D Gaussian Splatting Guided Gain Maps",
+      "url": "https://arxiv.org/abs/2601.15766",
+      "text": "Significant progress has been made in low-light image enhancement with respect to visual quality. However, most existing methods primarily operate in the pixel domain or rely on implicit feature representations. As a result, the intrinsic geometric structural priors of images are often neglected. 2D Gaussian Splatting (2DGS) has emerged as a prominent explicit scene representation technique characterized by superior structural fitting capabilities and high rendering efficiency. Despite these advantages, the utilization of 2DGS in low-level vision tasks remains unexplored. To bridge this gap, LL-GaussianMap is proposed as the first unsupervised framework incorporating 2DGS into low-light image enhancement. Distinct from conventional methodologies, the enhancement task is formulated as a gain map generation process guided by 2DGS primitives. The proposed method comprises two primary stages. First, high-fidelity structural reconstruction is executed utilizing 2DGS. Then, data-driven enhancement dictionary coefficients are rendered via the rasterization mechanism of Gaussian splatting through an innovative unified enhancement module. This design effectively incorporates the structural perception capabilities of 2DGS into gain map generation, thereby preserving edges and suppressing artifacts during enhancement. Additionally, the reliance on paired data is circumvented through unsupervised learning. Experimental results demonstrate that LL-GaussianMap achieves superior enhancement performance with an extremely low storage footprint, highlighting the effectiveness of explicit Gaussian representations for image enhancement.",
+      "sha256": "4e1c7899ecdfac3a560f7f11be193df06c1646e8fa0af9d9b44d04aa0ccdd0e8",
+      "verified_at": "2026-10-21T18:37:04.005026+08:00"
+    },
+    "conf-b425f8aa13435ebf70af67bb": {
+      "title": "Adaptive Domain Shift in Diffusion Models for Cross-Modality Image Translation",
+      "url": "https://arxiv.org/abs/2601.18623",
+      "text": "Cross-modal image translation remains brittle and inefficient. Standard diffusion approaches often rely on a single, global linear transfer between domains. We find that this shortcut forces the sampler to traverse off-manifold, high-cost regions, inflating the correction burden and inviting semantic drift. We refer to this shared failure mode as fixed-schedule domain transfer. In this paper, we embed domain-shift dynamics directly into the generative process. Our model predicts a spatially varying mixing field at every reverse step and injects an explicit, target-consistent restoration term into the drift. This in-step guidance keeps large updates on-manifold and shifts the model's role from global alignment to local residual correction. We provide a continuous-time formulation with an exact solution form and derive a practical first-order sampler that preserves marginal consistency. Empirically, across translation tasks in medical imaging, remote sensing, and electroluminescence semantic mapping, our framework improves structural fidelity and semantic consistency while converging in fewer denoising steps.",
+      "sha256": "499fce6697f5d76e1e4bf77fdc6ede9f9ba245068ae941d8f8fbffd3b75e991a",
+      "verified_at": "2026-10-21T18:37:09.595475+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "e0c4725f00c0b148ebae3a96656dac11af13aa764e8c346e12efc81c778fde22",
+      "source_version": "556595623b5764e11813276e1cd529e80a4333d89cabdab4e7c323717f8f2d60"
+    },
+    "conf-a5fe926dad8158057639f74b": {
+      "title": "EAG-PT: Emission-Aware Gaussians and Path Tracing for Diffuse Indoor Scene Reconstruction and Editing",
+      "url": "https://arxiv.org/abs/2601.23065",
+      "text": "Recent radiance-field-based reconstruction methods, such as NeRF and 3DGS, achieve high visual fidelity for indoor scenes, but often break down under scene editing due to baked illumination and the lack of explicit light transport. In contrast, inverse path tracing methods based on mesh representations enforce correct light transport but require highly accurate geometry, making them difficult to apply robustly to real indoor scenes. We present Emission-Aware Gaussians and Path Tracing (EAG-PT), a method for physically based reconstruction and rendering of indoor scenes using a unified 2D Gaussian representation, targeting editable diffuse global illumination. Our approach consists of three key ideas: (1) representing indoor scenes with 2D Gaussians as a transport-friendly geometric proxy that avoids explicit mesh reconstruction; (2) explicitly separating emissive and non-emissive components during reconstruction to support editing; and (3) decoupling reconstruction from final rendering by using efficient single-bounce optimization and high-quality multi-bounce path tracing, respectively. Experiments on synthetic and real indoor scenes show that EAG-PT produces more natural and physically consistent edited renderings than radiance-field reconstructions, while preserving finer geometric detail and avoiding mesh-induced artifacts compared with mesh-based inverse path tracing. These results highlight the potential of our approach for applications such as interior design, XR content creation, and embodied AI.",
+      "sha256": "4d256c1bce6fbc777799a5672c291d8ecaa5c43439d614b16ecf461b35e61ab8",
+      "verified_at": "2026-10-21T18:37:15.213782+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "dd1c48c9a96795008739233588f4eece63788f243915ed9be1e7dd575de77db6",
+      "source_version": "0c86bf80b4546a61ccc5d3ce550f3268408d1d5140b59daff69e17d156ba944d"
+    },
+    "conf-c921134b20c6d2ff15e962c2": {
+      "title": "Mesh Splatting for End-to-end Multiview Surface Reconstruction",
+      "url": "https://arxiv.org/abs/2601.21400",
+      "text": "Surfaces are typically represented as meshes, which can be extracted from volumetric fields via meshing or optimized directly as surface parameterizations. Volumetric representations occupy 3D space and have a large effective receptive field along rays, enabling stable and efficient optimization via volumetric rendering; however, subsequent meshing often produces overly dense meshes and introduces accumulated errors. In contrast, pure surface methods avoid meshing but capture only boundary geometry with a single-layer receptive field, making it difficult to learn intricate geometric details and increasing reliance on priors (e.g., shading or normals). We bridge this gap by differentiably turning a surface representation into a volumetric one, enabling end-to-end surface reconstruction via volumetric rendering to model complex geometries. Specifically, we soften a mesh into multiple semi-transparent layers that remain differentiable with respect to the base mesh, endowing it with a controllable 3D receptive field. Combined with a splatting-based renderer and a topology-control strategy, our method can be optimized in about 20 minutes to achieve accurate surface reconstruction while substantially improving mesh quality.",
+      "sha256": "a283a8164a9dcef2c380ae7277df3a7f466b878d625a60a482e1a1fa2ae98e9b",
+      "verified_at": "2026-10-21T18:37:20.758175+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "82f2255e233e7726b6086edff1d075b5f3e0b1577621391b0cbfc8c37484c0de",
+      "source_version": "703ce28bb9c965afdeb19e2478254e467c44a47998c29d309ad0103d64faea98"
+    },
+    "conf-8332cce691dc36560528b1f0": {
+      "title": "Quartet of Diffusions: Structure-Aware Point Cloud Generation through Part and Symmetry Guidance",
+      "url": "https://arxiv.org/abs/2601.20425",
+      "text": "We introduce the Quartet of Diffusions, a structure-aware point cloud generation framework that explicitly models part composition and symmetry. Unlike prior methods that treat shape generation as a holistic process or only support part composition, our approach leverages four coordinated diffusion models to learn distributions of global shape latents, symmetries, semantic parts, and their spatial assembly. This structured pipeline ensures guaranteed symmetry, coherent part placement, and diverse, high-quality outputs. By disentangling the generative process into interpretable components, our method supports fine-grained control over shape attributes, enabling targeted manipulation of individual parts while preserving global consistency. A central global latent further reinforces structural coherence across assembled parts. Our experiments show that the Quartet achieves state-of-the-art performance. To our best knowledge, this is the first 3D point cloud generation framework that fully integrates and enforces both symmetry and part priors throughout the generative process.",
+      "sha256": "86519b9927cc0103cbdc353c18d5ca4d0bb3708934973d2c3be35d95dad36f88",
+      "verified_at": "2026-10-21T18:37:26.514679+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "60eaea5674c938fa8a18999bf3f9261fcf3ed33fd45269e9d2996633c251be22",
+      "source_version": "a0be0986a073fd118ae72ab9161366b46f499cdb32b401b74fd868e58c60605b"
+    },
+    "conf-255bf20a1631bfd33c7334f6": {
+      "title": "FreeOrbit4D: Training-Free Arbitrary Camera Redirection for Monocular Videos via Foreground-Complete 4D Reconstruction",
+      "url": "https://arxiv.org/abs/2601.18993",
+      "text": "Camera redirection aims to replay a dynamic scene from a single monocular video under a user-specified camera trajectory. However, large-angle redirection is inherently ill-posed: a monocular video captures only a narrow spatio-temporal view of a dynamic 3D scene, providing severely limited observations of the underlying 4D world. The key challenge is therefore to recover a complete and coherent representation from this limited input, with consistent geometry and motion. While recent diffusion-based methods achieve impressive visual generation quality, they often break down under large-angle viewpoint changes far from the original trajectory, where missing visual grounding leads to severe geometric ambiguity and temporal inconsistency. We present FreeOrbit4D, an effective training-free framework that tackles this ambiguity by recovering a foreground-complete 4D proxy as structural grounding for video generation. We obtain this proxy by decoupling foreground and background reconstructions: we unproject the monocular video into a static background and partial foreground point clouds in a unified global space, then use an object-centric multi-view diffusion model to synthesize multi-view images and reconstruct complete foreground point clouds in canonical object space. By aligning the canonical foreground point cloud to the global scene space via dense pixel-synchronized 3D-3D correspondences and projecting the foreground-complete 4D proxy onto target camera viewpoints, we provide geometric scaffolds that guide a conditional video diffusion model. Extensive experiments show that FreeOrbit4D produces more faithful and temporally coherent redirected videos under challenging large-angle trajectories, and our proxy further enables applications such as edit propagation and 4D data generation. Project page: https://freeorbit4d.vision.ischool.illinois.edu/",
+      "sha256": "1cb76c703ebeb0256e7a4b2569dcd379bf21c4487b4e94723260a8a7babee476",
+      "verified_at": "2026-10-21T18:37:32.094588+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "1afa06da515ac68fbb537ae421a8e88cf63efcf6ca62350a46cefef2c2b74540",
+      "source_version": "b4a40961cc6b6386f8fa7c05f01d7f05f44f7487ef344207c2933189a59c0e49"
+    },
+    "conf-3c6f8f898181bd71603a4529": {
+      "title": "Mixture-of-World Models: Scaling Multi-Task Reinforcement Learning with Modular Latent Dynamics",
+      "url": "https://arxiv.org/abs/2602.01270",
+      "text": "A fundamental challenge in multi-task reinforcement learning (MTRL) is achieving sample efficiency in visual domains where tasks exhibit substantial heterogeneity in both observations and dynamics. Model-based reinforcement learning offers a promising path to improved sample efficiency through world models, but standard monolithic architectures struggle to capture diverse task dynamics, resulting in poor reconstruction and prediction accuracy. We introduce Mixture-of-World Models (MoW), a scalable architecture that combines modular variational autoencoders for task-adaptive visual compression, a hybrid Transformer-based dynamics model with task-conditioned experts and a shared backbone, and a gradient-based task clustering strategy for efficient parameter allocation. On the Atari 100k benchmark, a single MoW agent trained once on 26 Atari games achieves a mean human-normalized score of 110.4%, competitive with the score of 114.2% achieved by STORM, an ensemble of 26 task-specific models, while using 50% fewer parameters. On Meta-World, MoW achieves a 74.5% average success rate within 300 thousand environment steps, establishing a new state of the art. These results demonstrate that MoW provides a scalable and parameter-efficient foundation for generalist world models.",
+      "sha256": "d3c1e5fb8d9c5c1f828cdbfaf6ab9d0415dc34e7712072bb2fd2b2b271b5f850",
+      "verified_at": "2026-10-21T18:37:36.944998+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "b2882d9b691ceffc3e323753b18ff636611906c115fb124fc27c48e6db8419d9",
+      "source_version": "054b692da943d9225b9af45f615a3aafc72f2466dc2f9a34b8f2faf3705d33a9"
     }
   }
 }
