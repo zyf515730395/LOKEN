@@ -6981,6 +6981,126 @@
       "basis": "official_abstract",
       "source_sha256": "bc75e3fbcb811c58b3eb962b86163952814a852b760ea2a663a76bd8c6deea95",
       "source_version": "b89f6fa18e4c95ecc3204f0819aaa66e5ef8d5a29ce834fae796a0c04cd26256"
+    },
+    "conf-c2e01c26d1a03b3366f12783": {
+      "title": "Rethinking Visual Autoregressive Sampling with Information-Grounding Guidance",
+      "url": "https://icml.cc/virtual/2026/poster/66353",
+      "text": "Autoregressive (AR) models based on next-scale prediction are rapidly emerging as a powerful tool for image generation, but they face a critical weakness: information inconsistencies between patches across timesteps introduced by progressive resolution scaling. These inconsistencies scatter guidance signals, causing them to drift away from conditioning information and leaving behind ambiguous, unfaithful features. We tackle this challenge with Information-Grounding Guidance (IGG), a novel mechanism that anchors guidance to semantically important regions through attention. By adaptively reinforcing informative patches during sampling, IGG ensures that guidance and content remain tightly aligned. Across both class-conditioned and text-to-image generation tasks, IGG delivers sharper, more coherent, and semantically grounded images, setting a new benchmark for AR-based methods. Show more",
+      "sha256": "59f2a9ee4775cfb2d8aa8707278dc11be094453702abdc4dea5d8e629525b812",
+      "verified_at": "2026-10-22T01:46:35.422880+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "2914e4a3bd1d06740a86ad8e73a26b81491f70a2691594677188d3997863cc1f",
+      "source_version": "16456278a3b8f4d47b0bffa098de166cb65116adab2ede66af0ad9d40ee8d39e"
+    },
+    "conf-b5e0a4d4e4b14ee7c0754902": {
+      "title": "DiffInk: Glyph- and Style-Aware Latent Diffusion Transformer for Text to Online Handwriting Generation",
+      "url": "https://iclr.cc/virtual/2026/poster/10008981",
+      "text": "Deep generative models have advanced text-to-online handwriting generation (TOHG), which aims to synthesize realistic pen trajectories conditioned on textual input and style references. However, most existing methods still primarily focus on character- or word-level generation, resulting in inefficiency and a lack of holistic structural modeling when applied to full text lines. To address these issues, we propose DiffInk, the first latent diffusion Transformer framework for full-line handwriting generation. We first introduce InkVAE, a novel sequential variational autoencoder enhanced with two complementary latent-space regularization losses: (1) an OCR-based loss enforcing glyph-level accuracy, and (2) a style-classification loss preserving writing style. This dual regularization yields a semantically structured latent space where character content and writer styles are effectively disentangled. We then introduce InkDiT, a novel latent diffusion Transformer that integrates target text and reference styles to generate coherent pen trajectories. Experimental results demonstrate that DiffInk outperforms existing state-of-the-art (SOTA) methods in both glyph accuracy and style fidelity, while significantly improving generation efficiency. Show more",
+      "sha256": "3aa4930652b5b5d6c2755cf823d32db089f8dfdf3e1a501ff6ad4e11c0796212",
+      "verified_at": "2026-10-22T01:46:43.950725+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "c667a2a47fd41480c7ea13027e0ce0879cba52c0f9392378c8a9b75665ee09df",
+      "source_version": "8f2792a1691cad7fe6cbecde89734395a2cfcc6baee675dc4187bc7b2dc57220"
+    },
+    "conf-5061f4ec9a532cfe6a449c76": {
+      "title": "Follow-Your-Preference: Towards Preference-Aligned Image Inpainting",
+      "url": "https://iclr.cc/virtual/2026/poster/10007508",
+      "text": "This paper investigates image inpainting with preference alignment. Instead of introducing a novel method, we go back to basics and revisit fundamental problems in achieving such alignment. We leverage the prominent direct preference optimization approach for alignment training and employ public reward models to construct preference training datasets. Experiments are conducted across nine reward models, two benchmarks, and two baseline models with varying structures and generative algorithms. Our key findings are as follows: (1) Most reward models deliver valid reward scores for constructing preference data, even if some of them are not reliable evaluators. (2) Preference data demonstrates robust trends in both candidate scaling and sample scaling across models and benchmarks. (3) Observable biases in reward models, particularly in brightness, composition, and color scheme, render them susceptible to cause reward hacking. (4) A simple ensemble of these models yields robust and generalizable results by mitigating such biases. Built upon these observations, our alignment models significantly outperform prior models across standard metrics, GPT-4 assessments, and human evaluations, without any changes to model structures or the use of new datasets. We hope our work can set a simple yet solid baseline, pushing this promising frontier. Our code is available at: https://github.com/shenytzzz/Follow-Your-Preference. Show more",
+      "sha256": "4433154f339cfc46d8eefe1afadd12716642a0ec16906eca11549bc687daf0d5",
+      "verified_at": "2026-10-22T01:46:52.475141+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "ae871913b0526729251125a71a7672e4bbd7f88d9eabfae42c6bda7f707298e6",
+      "source_version": "46bd43949cb0c336d4bac6cfc6b7ee56a049120d591f9e3a1e854ed4110eec7e"
+    },
+    "conf-c832f3df1a2c9241d1d4a37b": {
+      "title": "RAPID$^3$: Tri-Level Reinforced Acceleration Policies for Diffusion Transformer",
+      "url": "https://iclr.cc/virtual/2026/poster/10007060",
+      "text": "Diffusion Transformers (DiTs) excel at visual generation yet remain hampered by slow sampling.  Existing training-free accelerators—step reduction, feature caching, and sparse attention—enhance inference speed but typically rely on a uniform heuristic or manually designed adaptive strategy for all images, leaving quality on the table. Alternatively, dynamic neural networks offer per-image adaptive acceleration, but their high fine-tuning costs limit broader applicability. To address these limitations, we introduce RAPID^3: Tri-Level Reinforced Acceleration Policies for Diffusion Transformer framework that delivers image-wise acceleration with zero updates to the base generator.  Specifically, three lightweight policy heads—Step-Skip, Cache-Reuse, and Sparse-Attention—observe the current denoising state and independently decide their corresponding speed-up at each timestep. All policy parameters are trained online via Group Relative Policy Optimization (GRPO) while the generator remains frozen.  Meanwhile, an adversarially learned discriminator augments the reward signal, discouraging reward hacking by boosting returns only when generated samples stay close to the original model’s distribution. Across state-of-the-art DiT backbones including Stable Diffusion 3 and FLUX, RAPID^3 achieves nearly 3$\\times$ faster sampling with competitive generation quality. Show more",
+      "sha256": "87ee56b2efe954f4a705e071ea52c62a1cc7b512ec159925369229f45c8992b4",
+      "verified_at": "2026-10-22T01:46:59.567807+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "d81c9ac43e4ad67f24dc5b8b59cd49a44f414de70cc1ae04e7bc37bf48bb0b05",
+      "source_version": "11dac48d850909579bf086d6754aa262e4feca1c225055bf7a31d736add487fa"
+    },
+    "conf-6e4968a97df68ec595057e4c": {
+      "title": "LucidFlux: Caption-Free Universal Image Restoration via a Large-Scale Diffusion Transformer",
+      "url": "https://iclr.cc/virtual/2026/poster/10007207",
+      "text": "Universal image restoration (UIR) aims to recover images degraded by unknown mixtures while preserving semantics—conditions under which discriminative restorers and UNet-based diffusion priors often oversmooth, hallucinate, or drift. We present LucidFlux, a caption-free UIR framework that adapts a large diffusion transformer (Flux.1) to restoration with minimal parameter overhead. LucidFlux introduces a lightweight \\emph{dual-branch conditioner} that injects signals from the degraded input and a lightly restored proxy to respectively anchor geometry and suppress artifacts. A timestep- and layer-adaptive modulation schedule routes these cues across the backbone’s hierarchy, yielding coarse-to-fine, context-aware updates that protect global structure while recovering texture. To avoid the latency and instability of text prompts or VLM captions, we enforce \\emph{caption-free semantic alignment} via SigLIP features extracted from the proxy. A scalable curation pipeline further filters large-scale data for structure-rich supervision.   Across synthetic and in-the-wild benchmarks, LucidFlux consistently surpasses strong open-source and commercial baselines across seven metrics, with clear visual gains in realism, detail, and artifact suppression. Ablations confirm that, for large DiTs, when, where, and what to condition—rather than scaling parameters or relying on text prompts—is the key lever for robust, prompt-free restoration. Show more",
+      "sha256": "5cf63c2f1f6f8066ca5742f34a1f1025a4874ff76bc2fad128353af1de698a73",
+      "verified_at": "2026-10-22T01:47:08.091001+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "9ceabcf66e94ed0d5d223143dcc70711fa4fc7bb212eaa4fcddc00d564492a05",
+      "source_version": "8054f0c8d1fbb648c3e681269f23c441c6ead72d08b85c77704a7d89fa0baac4"
+    },
+    "conf-790897759a52978edbc4ddde": {
+      "title": "WorldSplat: Gaussian-Centric Feed-Forward 4D Scene Generation for Autonomous Driving",
+      "url": "https://iclr.cc/virtual/2026/poster/10010119",
+      "text": "Recent advances in driving-scene generation and reconstruction have demonstrated significant potential for enhancing autonomous driving systems by producing scalable and controllable training data. Existing generation methods primarily focus on synthesizing diverse and high-fidelity driving videos; however, due to limited 3D consistency and sparse viewpoint coverage, they struggle to support convenient and high-quality novel-view synthesis (NVS). Conversely, recent 3D/4D reconstruction approaches have significantly improved NVS for real-world driving scenes, yet inherently lack generative capabilities. To overcome this dilemma between scene generation and reconstruction, we propose \\textbf{WorldSplat}, a novel feed-forward framework for 4D driving-scene generation. Our approach effectively generates consistent multi-track videos through two key steps: ((i)) We introduce a 4D-aware latent diffusion model integrating multi-modal information to produce pixel-aligned 4D Gaussians in a feed-forward manner. ((ii)) Subsequently, we refine the novel view videos rendered from these Gaussians using a enhanced video diffusion model. Extensive experiments conducted on benchmark datasets demonstrate that \\textbf{WorldSplat} effectively generates high-fidelity, temporally and spatially consistent multi-track novel view driving videos. Show more",
+      "sha256": "31eea142093b7b42eb7a9e4e8514927ca8ec9e010688441b956f95000713dd8c",
+      "verified_at": "2026-10-22T01:47:16.603199+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "c58269d8ec6e3101a1f16bb4c94429e6688ae45d9698109a0403fedc4b20fe3b",
+      "source_version": "16ace16932912fc239a0341cd4cb7f389affcda73c2357091e7a74b981eca2b1"
+    },
+    "conf-3aefd222f72812e93d33a106": {
+      "title": "Orientation-anchored Hyper-Gaussian for 4D Reconstruction from Casual Videos",
+      "url": "https://papers.nips.cc/paper_files/paper/2025/hash/d4b6ccf3acd6ccbc1093e093df345ba2-Abstract-Conference.html",
+      "text": "We present Orientation-anchored Gaussian Splatting (OriGS), a novel framework for high-quality 4D reconstruction from casually captured monocular videos. While recent advances extend 3D Gaussian Splatting to dynamic scenes via various motion anchors, such as graph nodes or spline control points, they often rely on low-rank assumptions and fall short in modeling complex, region-specific deformations inherent to unconstrained dynamics. OriGS addresses this by introducing a hyperdimensional representation grounded in scene orientation. We first estimate a Global Orientation Field that propagates principal forward directions across space and time, serving as stable structural guidance for dynamic modeling. Built upon this, we propose Orientation-aware Hyper-Gaussian, a unified formulation that embeds time, space, geometry, and orientation into a coherent probabilistic state. This enables inferring region-specific deformation through principled conditioned slicing, adaptively capturing diverse local dynamics in alignment with global motion intent. Experiments demonstrate the superior reconstruction fidelity of OriGS over mainstream methods in challenging real-world dynamic scenes.",
+      "sha256": "f8e43c314cdd70a024f51b6f31c94f1b11f6a64b8ab77add5dd5a0edef34fcf6",
+      "verified_at": "2026-10-22T01:47:25.066866+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "442d4270f9f0f391b2f137d6b583c0203f5742ab14ab855d7039f10e467c3c4b",
+      "source_version": "4f7264584a779c73d32490c3473b836a4cc75774d1de33d0260f0fcb795d6662"
+    },
+    "conf-a87a6260c17b1c5debd90bd7": {
+      "title": "MesaTask: Towards Task-Driven Tabletop Scene Generation via 3D Spatial Reasoning",
+      "url": "https://papers.nips.cc/paper_files/paper/2025/hash/b078eaadc927d7f7ae67371c1363195b-Abstract-Conference.html",
+      "text": "The ability of robots to interpret human instructions and execute manipulation tasks necessitates the availability of task-relevant tabletop scenes for training. However, traditional methods for creating these scenes rely on time-consuming manual layout design or purely randomized layouts, which are limited in terms of plausibility or alignment with the tasks. In this paper, we formulate a novel task, namely task-oriented tabletop scene generation, which poses significant challenges due to the substantial gap between high-level task instructions and the tabletop scenes. To support research on such a challenging task, we introduce \\textbf{MesaTask-10K}, a large-scale dataset comprising approximately 10,700 synthetic tabletop scenes with \\emph{manually crafted layouts} that ensure realistic layouts and intricate inter-object relations. To bridge the gap between tasks and scenes, we propose a \\textbf{Spatial Reasoning Chain} that decomposes the generation process into object inference, spatial interrelation reasoning, and scene graph construction for the final 3D layout. We present \\textbf{MesaTask}, an LLM-based framework that utilizes this reasoning chain and is further enhanced with DPO algorithms to generate physically plausible tabletop scenes that align well with given task descriptions. Exhaustive experiments demonstrate the superior performance of MesaTask compared to baselines in generating task-conforming tabletop scenes with realistic layouts.",
+      "sha256": "d7810594c7d22ee21025ab8977475aa20822999e88c0f2f5aa7ff8fccefa8dee",
+      "verified_at": "2026-10-22T01:47:32.122869+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "4d5dd39f6bdf5e815939da76ca89eea1db32ff0edf901c4b4a9fe8fe29efb832",
+      "source_version": "1166662dd8a849ab5e69c292af345c12eb619a8990643a9e838ec6617317ad6b"
+    },
+    "conf-424db72467b46204718a5e84": {
+      "title": "Dynamic Novel View Synthesis in High Dynamic Range",
+      "url": "https://iclr.cc/virtual/2026/poster/10011877",
+      "text": "High Dynamic Range Novel View Synthesis (HDR NVS) seeks to learn an HDR 3D model from Low Dynamic Range (LDR) training images captured under conventional imaging conditions. Current methods primarily focus on static scenes, implicitly assuming all scene elements remain stationary and non-living. However, real-world scenarios frequently feature dynamic elements, such as moving objects, varying lighting conditions, and other temporal events, thereby presenting a significantly more challenging scenario.  To address this gap, we propose a more realistic problem named HDR Dynamic Novel View Synthesis (HDR DNVS), where the additional dimension ``Dynamic'' emphasizes the necessity of jointly modeling temporal radiance variations alongside sophisticated 3D translation between LDR and HDR. To tackle this complex, intertwined challenge, we introduce HDR-4DGS, a Gaussian Splatting-based architecture featured with an innovative dynamic tone-mapping module that explicitly connects HDR and LDR domains, maintaining temporal radiance coherence by dynamically adapting tone-mapping functions according to the evolving radiance distributions across the temporal dimension. As a result, HDR-4DGS achieves both temporal radiance consistency and spatially accurate color translation, enabling photorealistic HDR renderings from arbitrary viewpoints and time instances. Extensive experiments demonstrate that HDR-4DGS surpasses existing state-of-the-art methods in both quantitative performance and visual fidelity. Source code is available at \\url{https://github.com/prinasi/HDR-4DGS}. Show more",
+      "sha256": "4cb0846f24e029671d70de03a090043e91922eb434103d4fcffaaa0cf22ae71f",
+      "verified_at": "2026-10-22T01:47:40.621423+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "0e5619d37d128f1825ff510557a128bc9bd47593cbed094b92f7bccdbc2c5af0",
+      "source_version": "5f8ead160d8971a67b8f38f220ec21cfec99ec084ba02348f2548bc1173777a9"
+    },
+    "conf-9e6217d300b5ed558774988c": {
+      "title": "Efficient Construction of Implicit Surface Models from a Single Image for Motion Generation",
+      "url": "https://ras.papercept.net/conferences/conferences/ICRA26/program/ICRA26_ContentListWeb_4.html#4992",
+      "text": "Implicit representations have been widely applied in robotics for obstacle avoidance and path planning. In this paper, we explore the problem of constructing an implicit distance representation from a single image. Past methods for implicit surface reconstruction, such as NeuS and its variants generally require a large set of multi-view images as input, and require long training times. In this work, we propose Fast Image-to-Neural Surface (FINS), a lightweight framework that can reconstruct high-fidelity surfaces and SDF fields based on a single or a small set of images. FINS integrates a multi-resolution hash grid encoder with lightweight geometry and color heads, making the training via an approximate second-order optimizer highly efficient and capable of converging within a few seconds. Additionally, we achieve the construction of a neural surface requiring only a single RGB image, by leveraging pre-trained foundation models to estimate the geometry inherent in the image. Our experiments demonstrate that under the same conditions, our method outperforms state-of-the-art baselines in both convergence speed and accuracy on surface reconstruction and SDF field estimation. Moreover, we demonstrate the applicability of FINS for robot surface following tasks and show its scalability to a variety of benchmark datasets.",
+      "sha256": "ebfa1d378996b58239d3cb228d024e829e12068e19aacf6c440e1d43cf8d3ac1",
+      "verified_at": "2026-10-22T01:47:51.251449+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "df1b42d933c1c7ea77726dc5a1c56be7531ca266007cd271b50eb338bdf4538a",
+      "source_version": "36ea697ece6f016f95595c17651136be20b9791cae138189af4aae39a24ad818"
+    },
+    "conf-fb1765c12f2905fe69308496": {
+      "title": "SEHDR: Single-Exposure HDR Novel View Synthesis via 3D Gaussian Bracketing",
+      "url": "https://openaccess.thecvf.com/content/ICCV2025/html/Li_SEHDR_Single-Exposure_HDR_Novel_View_Synthesis_via_3D_Gaussian_Bracketing_ICCV_2025_paper.html",
+      "text": "This paper presents SeHDR, a novel high dynamic range 3D Gaussian Splatting (HDR-3DGS) approach for generating HDR novel views given multi-view LDR images. Unlike existing methods that typically require the multi-view LDR input images to be captured from different exposures, which are tedious to capture and more likely to suffer from errors (e.g., object motion blurs and calibration/alignment inaccuracies), our approach learns the HDR scene representation from multi-view LDR images of a single exposure. Our key insight to this ill-posed problem is that by first estimating **Bracketed 3D Gaussians** (i.e., with different exposures) from single-exposure multi-view LDR images, we may then be able to merge these bracketed 3D Gaussians into an HDR scene representation. Specifically, SeHDR first learns base 3D Gaussians from single-exposure LDR inputs, where the spherical harmonics parameterize colors in a linear color space. We then estimate multiple 3D Gaussians with identical geometry but varying linear colors conditioned on exposure manipulations. Finally, we propose the Differentiable Neural Exposure Fusion (NeEF) to integrate the base and estimated 3D Gaussians into HDR Gaussians for novel view rendering. Extensive experiments demonstrate that SeHDR outperforms existing methods as well as carefully designed baselines.",
+      "sha256": "d8cad18692cbe9172139f48439bf2698abd143cf5c4b2e29a637db956369a69c",
+      "verified_at": "2026-10-22T01:47:58.656986+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "9bbb72a2901162dbc69142cbb128559f5808b202a69ff0dedbf920036028c2f5",
+      "source_version": "0386cc68571e20aaedb92d33761b98889c8af8568fd83f2024ae185d8696d007"
+    },
+    "conf-3a2188024015369a361d1a3b": {
+      "title": "GeoSVR: Taming Sparse Voxels for Geometrically Accurate Surface Reconstruction",
+      "url": "https://papers.nips.cc/paper_files/paper/2025/hash/9ca825deb6ce588c96f880728d3b8aea-Abstract-Conference.html",
+      "text": "Reconstructing accurate surfaces with radiance fields has achieved remarkable progress in recent years. However, prevailing approaches, primarily based on Gaussian Splatting, are increasingly constrained by representational bottlenecks. In this paper, we introduce GeoSVR, an explicit voxel-based framework that explores and extends the under-investigated potential of sparse voxels for achieving accurate, detailed, and complete surface reconstruction. As strengths, sparse voxels support preserving the coverage completeness and geometric clarity, while corresponding challenges also arise from absent scene constraints and locality in surface refinement. To ensure correct scene convergence, we first propose a Voxel-Uncertainty Depth Constraint that maximizes the effect of monocular depth cues while presenting a voxel-oriented uncertainty to avoid quality degradation, enabling effective and robust scene constraints yet preserving highly accurate geometries. Subsequently, Sparse Voxel Surface Regularization is designed to enhance geometric consistency for tiny voxels and facilitate the voxel-based formation of sharp and accurate surfaces. Extensive experiments demonstrate our superior performance compared to existing methods across diverse challenging scenarios, excelling in geometric accuracy, detail preservation, and reconstruction completeness while maintaining high efficiency. Code is available at https://github.com/Fictionarry/GeoSVR.",
+      "sha256": "35e531ce177b947b7324db28bbb593f453270e6d986cd2e4bc4f2baff1cc17f4",
+      "verified_at": "2026-10-22T01:48:07.443046+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "e8c77de18fa421f6ba5e923f58d21ec3f286dbd331eb0a5f718a4d55c29f2386",
+      "source_version": "40c0b521a5f15aa23b99fa66240d7d50093a357ab3f64f5b9086deb29d59e109"
     }
   }
 }
