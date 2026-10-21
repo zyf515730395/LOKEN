@@ -2704,6 +2704,90 @@
       "basis": "official_abstract",
       "source_sha256": "21bce2e5a7dd63087630f362395a1c5db6b39dd0637599cf0ddb10181de67aeb",
       "source_version": "271eeb441fbce52798e6fe8536a1bfd1e19582a8cd16ff7ead69ca954a2e4ed4"
+    },
+    "conf-d6bafc65a58821b5041e5e8a": {
+      "title": "Self-Prompting Diffusion Transformer for Open-Vocabulary Scene Text Edit via In-Context Learning",
+      "url": "https://icml.cc/virtual/2026/poster/60814",
+      "text": "Scene text editing aims to modify text in a target region of an image while preserving its background style and texture. Existing methods rely solely on image background information while neglecting the visual details of target regions, which discards stylistic features in the original text and essentially degrades the task to text rendering. Moreover, the conditions imposed by pre-trained glyph encoder limit the scope of editable text. To address these issues, this paper proposes a self-prompting scene text editing method, which constructs style and glyph prompts directly from the original image without additional style or glyph encoders. We employ a two-stage training strategy, where the diffusion transformer is first trained on large-scale self-supervised datasets and subsequently refined with a small set of paired images. By leveraging the in-context learning capability of FLUX-Fill, it achieves open-vocabulary and style-consistent text editing. Experimental results on various languages demonstrate that our method achieves the state-of-the-art performance in both text accuracy and style consistency. Show more",
+      "sha256": "649ed210d59868f2ec533bfb1720cab8633d2ffc01270cebfa7cf9d17c18eb00",
+      "verified_at": "2026-10-21T12:47:40.766572+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "c6e68326239f6b5da44f9ebf18765ee3646d2e96cff0dcb6231f9ea22baff531",
+      "source_version": "bcd4169ae5b62da860eeb35a724de73e12d240358b0866847ff7c007815ec596"
+    },
+    "conf-f13c84306065c0ff3ae91621": {
+      "title": "HL-OutPaint: Coarse-to-Fine Video Outpainting for High-Resolution Long-Range Videos",
+      "url": "https://arxiv.org/abs/2605.17543",
+      "text": "Video outpainting generates plausible visual content beyond the original spatial extent of a video, playing a key role in adapting videos to diverse display formats. To support such use cases, it must enable large spatial extrapolation over long sequences. However, most existing methods address only one of these challenges or lack explicit mechanisms for ensuring global spatio-temporal consistency, leading to notable limitations. In this paper, we propose HL-OutPaint, a high-resolution video outpainting framework for long sequences. Our approach follows a coarse-to-fine strategy with a two-stage pipeline. We first construct Global Coarse Guidance (GCG), a low-resolution representation that captures global structure and dominant motion across the video. Unlike naive downsampling, GCG is built via a novel global-local frame swapping mechanism that couples sparse global keyframes with local temporal windows and exchanges information during sampling. This enables GCG to encode both long-term structural consistency and short-term temporal dynamics in a unified representation. Guided by this representation, HL-OutPaint then performs high-resolution outpainting to generate spatially detailed and temporally consistent content. By separating global structure modeling from fine-grained synthesis, our framework achieves stable, coherent generation for large spatial expansion and long video sequences. Extensive experiments show that HL-OutPaint outperforms existing methods in challenging scenarios involving wide spatial extrapolation and long video sequences.",
+      "sha256": "84be72ca31581f5b348a26d4d61f4e788f31ebff51393bb9f7e8e12023fa94a8",
+      "verified_at": "2026-10-21T12:47:46.729595+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "a8086cc751552f855cae12e6929c593c821ee185adce84ef173a1874462d1526",
+      "source_version": "0377735846506a709df2aa9a258e7d61e51766a77eeecf7ecf04f98db33dbf0d"
+    },
+    "2605.17002": {
+      "title": "A Single Atlas is All You Need: Decoder-Side Gaussian Splatting for Immersive Video",
+      "url": "https://arxiv.org/abs/2605.17002",
+      "text": "Immersive video delivery is bottlenecked by pixel-rate constraints, making the transmission of high-resolution depth maps or explicit 3D volumetric data expensive. Decoder-Side Depth Estimation (DSDE) shifts depth computation to the client, but struggles with complex geometries, inter-view flickering, and non-Lambertian reflections. Conversely, 3D Gaussian Splatting (3DGS) offers state-of-the-art view synthesis, but transmitting splats (or their projected 2D maps) incurs prohibitive bandwidth costs and is poorly aligned with standard video codecs. We propose Decoder-Side Gaussian Splatting (DSGS), a framework that natively replaces the depth-estimation stage of DSDE with feed-forward 3DGS inference, optimizing volumetric scenes entirely on the decoder side from compressed textures and metadata. A central, counterintuitive finding is that lossy compression acts as an implicit low-pass filter stabilizing feed-forward splat prediction: compressed bitstreams exceed lossless quality while shrinking tenfold. Under extreme view sparsity (one 2D atlas comprising 4 input views), DSGS achieves a +5.79 dB BD-PSNR and +0.054 BD-SSIM gain over the DSDE anchor while reducing maximum inter-view Delta IV-PSNR from 17.2 dB to 6.4 dB, minimizing the domain shift between transmitted and virtual viewports.",
+      "sha256": "c3855f5a95ae8f9120c578a8ac1fd919ef000da5d9f2fedadc2d986eb7ade685",
+      "verified_at": "2026-10-21T12:47:51.805048+08:00"
+    },
+    "conf-4cd43440083dd82acca765e5": {
+      "title": "HAD: Hallucination-Aware Diffusion Priors for 3D Reconstruction",
+      "url": "https://arxiv.org/abs/2605.16873",
+      "text": "Diffusion priors have recently demonstrated strong capability in enhancing the quality of sparse-view 3D reconstruction by augmenting training views at novel viewpoints, but they inevitably introduce hallucinated content -- artifacts inconsistent with the input views -- into the final 3D model. To address this challenge, we propose Hallucination-Aware Diffusion prior (HAD), which estimates pixel-wise hallucination score maps for augmented images by leveraging multi-view reasoning capabilities from a feedforward novel view synthesis (NVS) network pre-trained on large-scale 3D data. These hallucination scores enable selective masking of unreliable pixels during the progressive 3D reconstruction procedure, preventing the introduction of non-existent artifacts into the 3D model. To further enhance performance, we create multiple versions of augmented images at each novel view by conditioning the diffusion prior on different input views, which are then fused into a final image that leverages the broader context across all input views. We show that our method substantially reduces hallucination artifacts in diffusion-assisted 3D reconstruction, thereby achieving state-of-the-art performance across multiple benchmarks on novel view synthesis. Our project are publicly available at \\href{https://xiliu8006.github.io/HAD-Project-website/}{project website}.",
+      "sha256": "89d70cd73fe5c1f57c33eca83653ebaa66b2765b2b2efb85bdaf0dd272e95111",
+      "verified_at": "2026-10-21T12:47:57.328118+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "ee5e838d988fdc120f9961cba1b6f5e3f6e2f98bbe1e828d762a3f70d511fcb7",
+      "source_version": "560fb3b7bcdf4e8c59a74c35b4db6c61aab0fe859450758b693553dc5dd92919"
+    },
+    "conf-36b225b0d4595a4424adb898": {
+      "title": "MoCam: Unified Novel View Synthesis via Structured Denoising Dynamics",
+      "url": "https://arxiv.org/abs/2605.12119",
+      "text": "Generative novel view synthesis faces a fundamental dilemma: geometric priors provide spatial alignment but become sparse and inaccurate under view changes, while appearance priors offer visual fidelity but lack geometric correspondence. Existing methods either propagate geometric errors throughout generation or suffer from signal conflicts when fusing both statically. We introduce MoCam, which employs structured denoising dynamics to orchestrate a coordinated progression from geometry to appearance within the diffusion process. MoCam first leverages geometric priors in early stages to anchor coarse structures and tolerate their incompleteness, then switches to appearance priors in later stages to actively correct geometric errors and refine details. This design naturally unifies static and dynamic view synthesis by temporally decoupling geometric alignment and appearance refinement within the diffusion process. Experiments demonstrate that MoCam significantly outperforms prior methods, particularly when point clouds contain severe holes or distortions, achieving robust geometry-appearance disentanglement.",
+      "sha256": "507a4447d80133782bbf4fdb967d95e848272a0af35fccbf52f3a612053444d2",
+      "verified_at": "2026-10-21T12:48:02.858362+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "642fc348c9de02851275fb1533972aa03aaae3a3100255a1ca8ca10473a5cc12",
+      "source_version": "1559d2ae5571fed2330f7ee47aa999cc6090236012c4e01290d27c1612723143"
+    },
+    "conf-913b20bbfa3788b13b5cf9e0": {
+      "title": "3DReflecNet: A Large-Scale Dataset for 3D Reconstruction of Reflective, Transparent, and Low-Texture Objects",
+      "url": "https://arxiv.org/abs/2605.10204",
+      "text": "Accurate 3D reconstruction of objects with reflective, transparent, or low-texture surfaces still remains notoriously challenging. Such materials often violate key assumptions in multi-view reconstruction pipelines, such as photometric consistency and the availability on distinct geometric texture cues. Existing datasets primarily focus on diffuse, textured objects, and therefore provide limited insight into performance under real-world material complexities. We introduce 3DReflecNet, a large-scale hybrid dataset exceeding 22 TB that is specifically designed to benchmark and advance 3D vision methods for these challenging materials. 3DReflecNet combines two types of data: over 120,000 synthetic instances generated via physically-based rendering of more than 12,000 shapes, and over 1,000 real-world objects captured using consumer devices. Together, these data consist of more than 7 million multi-view frames. The dataset spans diverse materials, complex lighting conditions, and a wide range of geometric forms, including shapes generated from both real and LLM-synthesized 2D images using diffusion-based pipelines. To support robust evaluation, we design benchmarks for five core tasks: image matching, structure-from-motion, novel view synthesis, reflection removal, and relighting. Extensive experiments demonstrate that state-of-the-art methods struggle to maintain accuracy across these settings, highlighting the need for more resilient 3D vision models.",
+      "sha256": "844d5661ceca3612dda530457d9ebc0448d77561cde72fe101aa68af10af49ac",
+      "verified_at": "2026-10-21T12:48:08.411168+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "ceffd2a1127ef39122b9813824c25f149f78ac1f6e6d9bc8257442ceeb5c0e01",
+      "source_version": "4a90b1fb44ecf04d14604d03c53508f2c6dd9f9a8b28bd8dba8b337074047680"
+    },
+    "2603.24577": {
+      "title": "EndoVGGT: GNN-Enhanced Depth Estimation for Surgical 3D Reconstruction",
+      "url": "https://arxiv.org/abs/2603.24577",
+      "text": "Accurate 3D reconstruction of deformable soft tissues is essential for surgical robotic perception. However, low-texture surfaces, specular highlights, and instrument occlusions often fragment geometric continuity, posing a challenge for existing fixed-topology approaches. To address this, we propose EndoVGGT, a geometry-centric framework equipped with a Deformation-aware Graph Attention (DeGAT) module. Rather than using static spatial neighborhoods, DeGAT dynamically constructs feature-space semantic graphs to capture long-range correlations among coherent tissue regions. This enables robust propagation of structural cues across occlusions, enforcing global consistency and improving non-rigid deformation recovery. Extensive experiments on SCARED show that our method significantly improves fidelity, increasing PSNR by 24.6% and SSIM by 9.1% over prior state-of-the-art. Crucially, EndoVGGT exhibits strong zero-shot cross-dataset generalization to the unseen SCARED and EndoNeRF domains, confirming that DeGAT learns domain-agnostic geometric priors. These results highlight the efficacy of dynamic feature-space modeling for consistent surgical 3D reconstruction.",
+      "sha256": "2267798d185357f42684e924eac84fcb023e1447a63bcd25f42e2e069ade215b",
+      "verified_at": "2026-10-21T12:48:13.467151+08:00"
+    },
+    "conf-d6ad64b599fcffbf8ddaf36f": {
+      "title": "Structure Abstraction and Generalization in a Hippocampal-Entorhinal Inspired World Model",
+      "url": "https://arxiv.org/abs/2605.15733",
+      "text": "Humans abstract experiences into structured representations to facilitate pattern inference and knowledge transfer. While the hippocampal-entorhinal (HPC-MEC) circuit is known to represent both spatial and conceptual spaces, the mechanisms for concurrently extracting abstract structures from continuous, high-dimensional dynamics remain poorly understood. We propose a brain-inspired hierarchical model that simultaneously infers latent transitions and constructs a predictive visual world model. Our architecture employs an inverse model for structural extraction alongside an HPC-MEC coupling model that dissociates relational structures (MEC) from integrated episodic scenes (HPC). Using primitive transformation dynamics as a benchmark, we demonstrate the model's capacity for structural abstraction. By leveraging velocity-driven path integration, the framework enables robust prediction and structural reuse across diverse contexts, thereby achieving structural generalization. This work provides a novel computational framework for understanding how brain-inspired, self-supervised learning of world models facilitates the acquisition of reusable abstract knowledge.",
+      "sha256": "31261d1d4f0145cb28a27e80431886626fbd86aa9375e4800ca6aa8fd50ae5b7",
+      "verified_at": "2026-10-21T12:48:19.311612+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "b5232b18c0a215805a6266c09cf6d8a1c39757e21e3dfbf929589756ad5caa6d",
+      "source_version": "35d171f32a33c455e65618363d7f34453628533051a620c29c5f3c0deb134311"
+    },
+    "conf-c5df474c1117b6ec9049d343": {
+      "title": "The Midas Touch for Metric Depth",
+      "url": "https://arxiv.org/abs/2605.11578",
+      "text": "Recent advances have markedly improved the cross-scene generalization of relative depth estimation, yet its practical applicability remains limited by the absence of metric scale, local inconsistencies, and low computational efficiency. To address these issues, we present \\emph{\\textbf{M}idas \\textbf{T}ouch for \\textbf{D}epth} (MTD), a mathematically interpretable approach that converts relative depth into metric depth using only extremely sparse 3D data. To eliminate local scale inconsistencies, it applies a segment-wise recovery strategy via sparse graph optimization, followed by a pixel-wise refinement strategy using a discontinuity-aware geodesic cost. MTD exhibits strong generalization and achieves substantial accuracy improvements over previous depth completion and depth estimation methods. Moreover, its lightweight, plug-and-play design facilitates deployment and integration on diverse downstream 3D tasks. Project page is available at https://mias.group/MTD.",
+      "sha256": "87a4ea1dba98b602923fe701e866662d50fda617f7209c5688790a4b48506ad3",
+      "verified_at": "2026-10-21T12:48:25.069590+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "4886536291679d4904c5ec307a01c7f7b4a7cab6cc19a369e65b904b812b4e92",
+      "source_version": "a62eb06dff60e83fb9b9163e6400fd09083e5426e732f68e50d553a7002a6c08"
     }
   }
 }
