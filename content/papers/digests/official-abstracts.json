@@ -2242,6 +2242,54 @@
       "basis": "official_abstract",
       "source_sha256": "c6b7fdeae8c04801520d81b84883a47ee157a322259ea80d6819ad66d4a8b09e",
       "source_version": "e149ccd8d34ea21ed01bc6bb39d20442c45ec8824a478cc272d74c827f25c9b4"
+    },
+    "2606.00658": {
+      "title": "Collaborative Few-Step Distillation and Low-Bit Quantization for Wan2.2 Dual-Expert Video Diffusion Models",
+      "url": "https://arxiv.org/abs/2606.00658",
+      "text": "Large video diffusion models achieve strong visual quality but remain expensive to deploy because each sample requires many denoising steps and a large resident parameter footprint. This paper studies a deployment-oriented compression pipeline for Wan2.2-T2V-A14B by combining few-step distribution-matching distillation with low-bit quantization. The pipeline follows the model's dual-expert denoising route, calibrates the high-noise and low-noise branches separately, protects sensitive entrance layers, and uses HiF4-style low-bit representation to improve dynamic-range coverage. Quantization is calibrated on the distilled few-step student rather than on the original long-step trajectory, reducing activation-distribution mismatch during inference. The proposed co-design keeps the quantized model close to the same-step full-precision model and surpasses the original full-precision baseline at 8 and 20 steps on average. The 20-step setting gives the best quality-efficiency trade-off in the tested configurations.",
+      "sha256": "b25a3665ee8dee3f8b47228986e4799130ecccc5f29ca896db5a95ef6d69e08f",
+      "verified_at": "2026-10-21T12:22:13.533980+08:00"
+    },
+    "2604.24764": {
+      "title": "World-R1: Reinforcing 3D Constraints for Text-to-Video Generation",
+      "url": "https://arxiv.org/abs/2604.24764",
+      "text": "Recent video foundation models demonstrate impressive visual synthesis but frequently suffer from geometric inconsistencies. While existing methods attempt to inject 3D priors via architectural modifications, they often incur high computational costs and limit scalability. We propose World-R1, a framework that aligns video generation with 3D constraints through reinforcement learning. To facilitate this alignment, we introduce a specialized pure text dataset tailored for world simulation. Utilizing Flow-GRPO, we optimize the model using feedback from pre-trained 3D foundation models and vision-language models to enforce structural coherence without altering the underlying architecture. We further employ a periodic decoupled training strategy to balance rigid geometric consistency with dynamic scene fluidity. Extensive evaluations reveal that our approach significantly enhances 3D consistency while preserving the original visual quality of the foundation model, effectively bridging the gap between video generation and scalable world simulation.",
+      "sha256": "2d283ff389f1fc4bb4af7bcc6bda35f722ea1c24c85583d9da00dfe9cfc3cb5b",
+      "verified_at": "2026-10-21T12:22:18.592469+08:00"
+    },
+    "conf-5dd607f4246144015e5d75e9": {
+      "title": "SuperVoxelGPT: Adaptive and Ordered 3D Tokenization for Autoregressive Shape Generation",
+      "url": "https://arxiv.org/abs/2605.29655",
+      "text": "Autoregressive multimodal large language models (MLLMs) enable 3D generation but struggle to scale to high-resolution shapes due to inadequate 3D tokenizations. Compact set-based representations discard deterministic spatial ordering, leading to ambiguous sequence prediction, while uniform or octree-based voxel grids preserve ordering at the cost of severe redundancy and excessively long sequences. This structural trade-off limits stable and efficient autoregressive 3D generation. We present SuperVoxelGPT, a representation-first framework that resolves this tension through adaptive and deterministically ordered supervoxel tokenization. Given a prompt, we first predict a coarse geometric saliency distribution and construct a shape-adaptive supervoxel partition using saliency-guided centroidal Voronoi tessellation, allocating fine-grained cells to complex regions and larger cells to smooth regions. Conditioned on this prompt and ordered supervoxel layout, we introduce a SuperVoxelVAE and fine-tune a pretrained MLLM to autoregressively generate supervoxel tokens. Experiments using Trellis-500K data show that SuperVoxelGPT reduces token sequence length to 12.8% of uniform voxel tokenization while achieving state-of-the-art generation quality and an average 10x speedup over prior methods.",
+      "sha256": "fcbcc97ca8bbf443570083f66570e9ed636e10a27cfca90d4b51c2a6db2fed93",
+      "verified_at": "2026-10-21T12:22:24.500354+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "61789ff1bcb9fdef76814af13d02586e7668556de7885b8ba82910bbb6750a74",
+      "source_version": "b9b3432605fd724880dacd87c41c30552ed58a545bbf2c321f117af4637ed410"
+    },
+    "2605.20150": {
+      "title": "TideGS: Scalable Training of Over One Billion 3D Gaussian Splatting Primitives via Out-of-Core Optimization",
+      "url": "https://arxiv.org/abs/2605.20150",
+      "text": "Training 3D Gaussian Splatting (3DGS) at billion-primitive scale is fundamentally memory-bound: each Gaussian primitive carries a large attribute vector, and the aggregate parameter table quickly exceeds GPU capacity, limiting prior systems to tens of millions of Gaussians on commodity single-GPU hardware. We observe that 3DGS training is inherently sparse and trajectory-conditioned: each iteration activates only the Gaussians visible from the current camera batch, so GPU memory can serve as a working-set cache rather than a persistent parameter store. Building on this insight, we introduce TideGS, an out-of-core training framework that manages parameters across an SSD-CPU-GPU hierarchy via three synergistic techniques: block-virtualized geometry for SSD-aligned spatial locality, a hierarchical asynchronous pipeline to overlap I/O with computation, and trajectory-adaptive differential streaming that transfers only incremental working-set deltas between iterations. Experiments show that TideGS enables training with over one billion Gaussians on a single 24 GB GPU while achieving the best reconstruction quality among evaluated single-GPU baselines on large-scale scenes, scaling beyond prior out-of-core baselines (e.g., approximately 100M Gaussians) and standard in-memory training (e.g., approximately 11M Gaussians).",
+      "sha256": "77b722cf61e39b3e5df10948a555c5048536b4015c839b4c5f90a7c8fe66f200",
+      "verified_at": "2026-10-21T12:22:29.555283+08:00"
+    },
+    "2605.25418": {
+      "title": "Generating 3D models from sketches of human faces using a combined approach of Convolutional Neural Networks, Procedural Modeling, and Contour Mapping",
+      "url": "https://arxiv.org/abs/2605.25418",
+      "text": "Generating 3D models from face sketches is an active topic of research in Computer Graphics due to its potential to tremendously facilitate the modeling of faces for both professional 3D arists and novices. Motivated by the observation that facial expressions are responsible for significantly altering and shaping the contours in our faces, we combine both expression detection and 3D model generation in our approach. The result is a novel approach to generating 3D models from sketches which relies on three components: Convolutional Neural Networks, a parametric 3D face model (Valley Girl), and Active Snake Contours. For the first time in the literature, CNNs are trained (using our own generated dataset) to detect the expression in the given sketch through detecting the active FACS Action Units. The expression is then duplicated on Valley Girl to obtain a 3D model with a similar expression. Active Snake Contours are then used to find the transforms needed to close the gaps between that model and the given sketch.",
+      "sha256": "fb0d3e3dd5bb1ef8506c24fffebc7ead79d81aece45bf0754d717f156e32afe4",
+      "verified_at": "2026-10-21T12:22:34.919802+08:00"
+    },
+    "conf-65177ac4b781c02c1812598f": {
+      "title": "Physical Object Understanding with a Physically Controllable World Model",
+      "url": "https://arxiv.org/abs/2606.00439",
+      "text": "A central challenge in visual intelligence is learning the physical structure of scenes from raw videos: how regions form objects and the laws that govern their interactions. Solving these tasks requires world models capable of inferring distributional states of the world from partial observations - capabilities that current architectures do not provide. We introduce a new class of probabilistic world models that support estimation of the probability of any visual variable, such as appearance and dynamics, conditioned on any other variables. Here, we identify that these models can be trained efficiently with autoregressive sequence modeling, yielding world models from which rich object understanding emerges. First, we demonstrate that our model captures the physical laws governing how objects move by generating multiple plausible future states of the world through sequential inference. Then, by analyzing motion correlations across these futures, we extract objects and articulated object subparts. Having discovered these objects, we show that our world model can manipulate them in 3D. Finally, we demonstrate how physical relationships between objects can be computed from the world model, enabling applications such as Visual Jenga.",
+      "sha256": "e87794eecd79c10017ab8a01c321acffa5d94232413a07f2106d27277cf56902",
+      "verified_at": "2026-10-21T12:22:40.302972+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "0d9c883785344d417f91e00c692dc440f9ca34b8d65f940dd2c476f18bdc5f4d",
+      "source_version": "f17fc5479b972c8ab7a21ce4d4fea9d0d9ef326044e3a9fe3c9d87f09083b1c5"
     }
   }
 }
