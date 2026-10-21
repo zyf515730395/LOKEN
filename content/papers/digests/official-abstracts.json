@@ -3771,6 +3771,70 @@
       "basis": "official_abstract",
       "source_sha256": "1f7bf6019d49def1cac0e335dca241d0ca61dc31cd156543d11b866acaecd235",
       "source_version": "8c1230a463ff7b347bfbe5df12d959298b17548dd3e13bf42ac3b77683e77334"
+    },
+    "2604.02289": {
+      "title": "Omni123: Exploring 3D Native Foundation Models with Limited 3D Data by Unifying Text to 2D and 3D Generation",
+      "url": "https://arxiv.org/abs/2604.02289",
+      "text": "Recent multimodal large language models have achieved strong performance in unified text and image understanding and generation, yet extending such native capability to 3D remains challenging due to limited data. Compared to abundant 2D imagery, high-quality 3D assets are scarce, making 3D synthesis under-constrained. Existing methods often rely on indirect pipelines that edit in 2D and lift results into 3D via optimization, sacrificing geometric consistency. We present Omni123, a 3D-native foundation model that unifies text-to-2D and text-to-3D generation within a single autoregressive framework. Our key insight is that cross-modal consistency between images and 3D can serve as an implicit structural constraint. By representing text, images, and 3D as discrete tokens in a shared sequence space, the model leverages abundant 2D data as a geometric prior to improve 3D representations. We introduce an interleaved X-to-X training paradigm that coordinates diverse cross-modal tasks over heterogeneous paired datasets without requiring fully aligned text-image-3D triplets. By traversing semantic-visual-geometric cycles (e.g., text to image to 3D to image) within autoregressive sequences, the model jointly enforces semantic alignment, appearance fidelity, and multi-view geometric consistency. Experiments show that Omni123 significantly improves text-guided 3D generation and editing, demonstrating a scalable path toward multimodal 3D world models.",
+      "sha256": "e13acc62afd380e47cd86f20d7f524a31dbb2a9dac958530e3864fd41799f65e",
+      "verified_at": "2026-10-21T13:57:00.419465+08:00"
+    },
+    "2604.01864": {
+      "title": "MAR-MAER: Metric-Aware and Ambiguity-Adaptive Autoregressive Image Generation",
+      "url": "https://arxiv.org/abs/2604.01864",
+      "text": "Autoregressive (AR) models have demonstrated significant success in the realm of text-to-image generation. However, they usually face two major challenges. Firstly, the generated images may not always meet the quality standards expected by humans. Furthermore, these models face difficulty when dealing with ambiguous prompts that could be interpreted in several valid ways. To address these issues, we introduce MAR-MAER, an innovative hierarchical autoregressive framework. It combines two main components. It is a metric-aware embedding regularization method. The other one is a probabilistic latent model used for handling ambiguous semantics. Our method utilizes a lightweight projection head, which is trained with an adaptive kernel regression loss function. This aligns the model's internal representations with human-preferred quality metrics, such as CLIPScore and HPSv2. As a result, the embedding space that is learned more accurately reflects human judgment. We are also introducing a conditional variational module. This approach incorporates an aspect of controlled randomness within the hierarchical token generation process. This capability allows the model to produce a diverse array of coherent images based on ambiguous or open-ended prompts. We conducted extensive experiments using COCO and a newly developed Ambiguous-Prompt Benchmark. The results show that MAR-MAER achieves excellent performance in both metric consistency and semantic flexibility. It exceeds the baseline Hi-MAR model's performance, showing an improvement of +1.6 in CLIPScore and +5.3 in HPSv2. For unclear inputs, it produces a notably wider range of outputs. These findings have been confirmed through both human evaluation and automated metrics.",
+      "sha256": "d7f1f5cbec77b44f38a945453cf9200ea8f87755fb2646588445910b7cb47bf6",
+      "verified_at": "2026-10-21T13:57:05.526249+08:00"
+    },
+    "conf-ef40e73c7cf8e92ff08f8de9": {
+      "title": "Drift-AR: Single-Step Visual Autoregressive Generation via Anti-Symmetric Drifting",
+      "url": "https://arxiv.org/abs/2603.28049",
+      "text": "Autoregressive (AR)-Diffusion hybrid paradigms combine AR's structured semantic modeling with diffusion's high-fidelity synthesis, yet suffer from a dual speed bottleneck: the sequential AR stage and the iterative multi-step denoising of the diffusion vision decode stage. Existing methods address each in isolation without a unified principle design. We observe that the per-position \\emph{prediction entropy} of continuous-space AR models naturally encodes spatially varying generation uncertainty, which simultaneously governing draft prediction quality in the AR stage and reflecting the corrective effort required by vision decoding stage, which is not fully explored before. Since entropy is inherently tied to both bottlenecks, it serves as a natural unifying signal for joint acceleration. In this work, we propose \\textbf{Drift-AR}, which leverages entropy signal to accelerate both stages: 1) for AR acceleration, we introduce Entropy-Informed Speculative Decoding that align draft-target entropy distributions via a causal-normalized entropy loss, resolving the entropy mismatch that causes excessive draft rejection; 2) for visual decoder acceleration, we reinterpret entropy as the \\emph{physical variance} of the initial state for an anti-symmetric drifting field -- high-entropy positions activate stronger drift toward the data manifold while low-entropy positions yield vanishing drift -- enabling single-step (1-NFE) decoding without iterative denoising or distillation. Moreover, both stages share the same entropy signal, which is computed once with no extra cost. Experiments on MAR, TransDiff, and NextStep-1 demonstrate 3.8-5.5$\\times$ speedup with genuine 1-NFE decoding, matching or surpassing original quality. Code will be available at https://github.com/aSleepyTree/Drift-AR.",
+      "sha256": "d169ec55515f4ba2b5dcdd32589a3b2987da5f0bd2ff9ab68882afbed9f70078",
+      "verified_at": "2026-10-21T13:57:11.351413+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "5e84fccdd34aea36825965b9b6551dc171d384be3d507fbafbdc7f77864812ed",
+      "source_version": "39184dbad9b7d9177f08439520bb53bde715698ac4b4dd70975fa462fb11888b"
+    },
+    "conf-e4dfda03fd3cee70e03c69f8": {
+      "title": "EgoSim: Egocentric World Simulator for Embodiment Interaction Generation",
+      "url": "https://eccv.ecva.net/virtual/2026/poster/3429",
+      "text": "We introduce EgoSim, a closed-loop egocentric world sim-ulator that generates spatially consistent interaction videos and per-sistently updates the underlying 3D scene state for continuous simu-lation. Existing egocentric simulators either lack explicit 3D ground-ing, causing structural drift under viewpoint changes, or treat the sceneas static, failing to update world states across multi-stage interactions.EgoSim addresses both limitations by modeling 3D scenes as updatableworld states. We generate embodiment interactions via a Geometry-action-aware Observation Simulation model, with spatial consistencyfrom an Interaction-aware State Updating module. To overcome the crit-ical data bottleneck posed by the difficulty in acquiring densely alignedscene–interaction training pairs, we design a scalable pipeline that ex-tracts static point clouds, camera trajectories, and embodiment actionsfrom in-the-wild large-scale monocular egocentric videos. Extensive ex-periments demonstrate that EgoSim significantly outperforms existingmethods in terms of visual quality, spatial consistency, and generalizationto complex scenes and in-the-wild dexterous interactions, while support-ing cross-embodiment transfer to robotic manipulation. Project page isat: egosimulator.github.io. Show more",
+      "sha256": "c1fbbd1ebde5b41a50f27fe5c15ce405bec78fb7747ac7076bb3070136626a62",
+      "verified_at": "2026-10-21T13:57:17.356336+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "8c20a30fefa6f6a56c82c58b4ab3023a249458738002ad7aa02ad4827935abbb",
+      "source_version": "7381a087ace6e1af4705d6daf1ea5839c2275dd9b6687b934a0ad00986c9a143"
+    },
+    "conf-a49563e6d339a13402b16e0c": {
+      "title": "ReFlow: Self-correction Motion Learning for Dynamic Scene Reconstruction",
+      "url": "https://arxiv.org/abs/2604.01561",
+      "text": "We present ReFlow, a unified framework for monocular dynamic scene reconstruction that learns 3D motion in a novel self-correction manner from raw video. Existing methods often suffer from incomplete scene initialization for dynamic regions, leading to unstable reconstruction and motion estimation, which often resorts to external dense motion guidance such as pre-computed optical flow to further stabilize and constrain the reconstruction of dynamic components. However, this introduces additional complexity and potential error propagation. To address these issues, ReFlow integrates a Complete Canonical Space Construction module for enhanced initialization of both static and dynamic regions, and a Separation-Based Dynamic Scene Modeling module that decouples static and dynamic components for targeted motion supervision. The core of ReFlow is a novel self-correction flow matching mechanism, consisting of Full Flow Matching to align 3D scene flow with time-varying 2D observations, and Camera Flow Matching to enforce multi-view consistency for static objects. Together, these modules enable robust and accurate dynamic scene reconstruction. Extensive experiments across diverse scenarios demonstrate that ReFlow achieves superior reconstruction quality and robustness, establishing a novel self-correction paradigm for monocular 4D reconstruction.",
+      "sha256": "44e501352379a5bd40c4abf05b533f0fd60d3b7fef4bb334646def610f32d600",
+      "verified_at": "2026-10-21T13:57:23.347624+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "108b88730c0e7bcc638839655b8f7329954dd23a3f5b9abe6bef4e83ff68c1bf",
+      "source_version": "dae35aff4362ffe783b03c1b16fee4c280fd21065c4b0770dd769ca2537fe95e"
+    },
+    "conf-2cbdf805a1a950eefdaaa711": {
+      "title": "Reliev3R: Relieving Feed-forward 3D Reconstruction from Multi-View Geometric Annotations",
+      "url": "https://openaccess.thecvf.com/content/CVPR2026/html/Chen_Reliev3R_Relieving_Feed-forward_3D_Reconstruction_from_Multi-View_Geometric_Annotations_CVPR_2026_paper.html",
+      "text": "With recent advances, Feed-forward Reconstruction Models (FFRMs) have demonstrated great potential in reconstruction quality and adaptiveness to multiple downstream tasks. However, the excessive reliance on multi-view geometric annotations, e.g. 3D point maps and camera poses, makes the fully-supervised training scheme of FFRMs difficult to scale up.In this paper, we propose Reliev3R, a weakly-supervised paradigm for training FFRMs from scratch without cost-prohibitive multi-view geometric annotations. Relieving the reliance on geometric sensory data and compute-exhaustive structure-from-motion preprocessing, our method draws 3D knowledge directly from monocular relative depths and image sparse correspondences given by zero-shot predictions of pretrained models.At the core of Reliev3R, we design an ambiguity-aware relative depth loss and a trigonometry-based reprojection loss to facilitate supervision for multi-view geometric consistency.Training from scratch with the less data, Reliev3R catches up with its fully-supervised sibling models, taking a step towards low-cost 3D reconstruction supervisions and scalable FFRMs.",
+      "sha256": "071b8c81b5bdfe21e325da99b9c17fcb54836d103dc5bcf36bb897ea1b998d67",
+      "verified_at": "2026-10-21T13:57:29.045676+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "0e25aeb82c169fcf012ae26f462d70f45d82a2a3e92b20c110af58eb1a4983db",
+      "source_version": "3065cb283b926b2ac4537ac1e69f709ee3730a04c0f09e88859f977f226bc8b2"
+    },
+    "conf-4caf32154a611963d5347ce4": {
+      "title": "CLaD: Planning with Grounded Foresight via Cross-Modal Latent Dynamics",
+      "url": "https://arxiv.org/abs/2603.29409",
+      "text": "Robotic manipulation involves kinematic and semantic transitions that are inherently coupled via underlying actions. However, existing approaches plan within either semantic or latent space without explicitly aligning these cross-modal transitions. To address this, we propose CLaD, a framework that models how proprioceptive and semantic states jointly evolve under actions through asymmetric cross-attention that allows kinematic transitions to query semantic ones. CLaD predicts grounded latent foresights via self-supervised objectives with EMA target encoders and auxiliary reconstruction losses, preventing representation collapse while anchoring predictions to observable states. Predicted foresights are modulated with observations to condition a diffusion policy for action generation. On LIBERO-LONG benchmark, CLaD achieves 94.7\\% success rate, competitive with large VLAs with significantly fewer parameters.",
+      "sha256": "5454c9dec9bc7b90597783183cbef5d4c4ed435f12e1b8fa819805a9a2cb13b1",
+      "verified_at": "2026-10-21T13:57:34.582645+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "8750a261469254de6487231a88be9226f7bc010116aa0d27381ce2ced77d1e57",
+      "source_version": "c8c987027c2d25336a47f1b57a2f100e6115ae009ab08250c2b9dce8369518b4"
     }
   }
 }
