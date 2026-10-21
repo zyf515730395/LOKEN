@@ -5162,6 +5162,56 @@
       "basis": "official_abstract",
       "source_sha256": "4bd70306487ff41ddeb38d59881317f69b6b8f00b37c6768d455dcec801ad738",
       "source_version": "105bf8b314de868de246cc3a856474c60e95225b3f8775604b104f863829bc91"
+    },
+    "conf-9e276151ccede19bc1831f91": {
+      "title": "Guiding a Diffusion Transformer with the Internal Dynamics of Itself",
+      "url": "https://arxiv.org/abs/2512.24176",
+      "text": "The diffusion model presents a powerful ability to capture the entire (conditional) data distribution. However, due to the lack of sufficient training and data to learn to cover low-probability areas, the model will be penalized for failing to generate high-quality images corresponding to these areas. To achieve better generation quality, guidance strategies such as classifier free guidance (CFG) can guide the samples to the high-probability areas during the sampling stage. However, the standard CFG often leads to over-simplified or distorted samples. On the other hand, the alternative line of guiding diffusion model with its bad version is limited by carefully designed degradation strategies, extra training and additional sampling steps. In this paper, we proposed a simple yet effective strategy Internal Guidance (IG), which introduces an auxiliary supervision on the intermediate layer during training process and extrapolates the intermediate and deep layer's outputs to obtain generative results during sampling process. This simple strategy yields significant improvements in both training efficiency and generation quality on various baselines. On ImageNet 256x256, SiT-XL/2+IG achieves FID=5.31 and FID=1.75 at 80 and 800 epochs. More impressively, LightningDiT-XL/1+IG achieves FID=1.34 which achieves a large margin between all of these methods. Combined with CFG, LightningDiT-XL/1+IG achieves the current state-of-the-art FID of 1.19.",
+      "sha256": "8e4a1e18e706a0213ebbd921d54d09944d7944460e9cd308e1b70aa78cf78504",
+      "verified_at": "2026-10-21T19:13:37.232448+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "ba0e61d0804ff5bc2fd86a9da43a67765f9d8e6e96be34ad6c5401228140ac4e",
+      "source_version": "96f0f02ba965aa87efcca210b2bf9bd593d6421caa29e83822b25b2062b3ec5f"
+    },
+    "conf-ca82a8b495032a9d2b91e9fd": {
+      "title": "Plug-and-Play Fidelity Optimization for Diffusion Transformer Acceleration via Cumulative Error Minimization",
+      "url": "https://arxiv.org/abs/2512.23258",
+      "text": "Although Diffusion Transformer (DiT) has emerged as a predominant architecture for image and video generation, its iterative denoising process results in slow inference, which hinders broader applicability and development. Caching-based methods achieve training-free acceleration, while suffering from considerable computational error. Existing methods typically incorporate error correction strategies such as pruning or prediction to mitigate it. However, their fixed caching strategy fails to adapt to the complex error variations during denoising, which limits the full potential of error correction. To tackle this challenge, we propose a novel fidelity-optimization plugin for existing error correction methods via cumulative error minimization, named CEM. CEM predefines the error to characterize the sensitivity of model to acceleration jointly influenced by timesteps and cache intervals. Guided by this prior, we formulate a dynamic programming algorithm with cumulative error approximation for strategy optimization, which achieves the caching error minimization, resulting in a substantial improvement in generation fidelity. CEM is model-agnostic and exhibits strong generalization, which is adaptable to arbitrary acceleration budgets. It can be seamlessly integrated into existing error correction frameworks and quantized models without introducing any additional computational overhead. Extensive experiments conducted on nine generation models and quantized methods across three tasks demonstrate that CEM significantly improves generation fidelity of existing acceleration models, and outperforms the original generation performance on FLUX.1-dev, PixArt-$\\alpha$, StableDiffusion1.5 and Hunyuan. Our code is released publicly at https://github.com/leaves162/CEM.",
+      "sha256": "dff7bde7ff57134f14562d94bac4599678c959792950ac35adbbb5875a34b7f1",
+      "verified_at": "2026-10-21T19:13:43.090643+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "6e57e48ff008b300f8e9f79e3e6d66908dbd89a4034554afff45a7ed2f250d17",
+      "source_version": "188e8c8476ec63ad20784f74569c377193be46ec34601324b9ae4a84f2c02f22"
+    },
+    "conf-d30692e5084bdb81b20568cd": {
+      "title": "Dream2Flow: Bridging Video Generation and Open-World Manipulation with 3D Object Flow",
+      "url": "https://arxiv.org/abs/2512.24766",
+      "text": "Generative video modeling has emerged as a compelling tool to zero-shot reason about plausible physical interactions for open-world manipulation. Yet, it remains a challenge to translate such human-led motions into the low-level actions demanded by robotic systems. We observe that given an initial image and task instruction, these models excel at synthesizing sensible object motions. Thus, we introduce Dream2Flow, a framework that bridges video generation and robotic control through 3D object flow as an intermediate representation. Our method reconstructs 3D object motions from generated videos and formulates manipulation as object trajectory tracking. By separating the state changes from the actuators that realize those changes, Dream2Flow overcomes the embodiment gap and enables zero-shot guidance from pre-trained video models to manipulate objects of diverse categories-including rigid, articulated, deformable, and granular. Through trajectory optimization or reinforcement learning, Dream2Flow converts reconstructed 3D object flow into executable low-level commands without task-specific demonstrations. Simulation and real-world experiments highlight 3D object flow as a general and scalable interface for adapting video generation models to open-world robotic manipulation. Videos and visualizations are available at https://dream2flow.github.io/.",
+      "sha256": "3a32563dc6a0e6d99264e2d08f6d62cf11c68bd450f784472c0311a15540d2b7",
+      "verified_at": "2026-10-21T19:13:48.652765+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "f9e648753243c2efdcf67e7f74b5fa6019c02f66b65d10c1a443eba6c3854999",
+      "source_version": "c3e2f73a532fc41db7625716a18b90c516705877513fd395961cbdb5bfc2d336"
+    },
+    "conf-34bc215dd3ea33b1e7897296": {
+      "title": "VISO: Robust Underwater Visual-Inertial-Sonar SLAM with Photometric Rendering for Dense 3D Reconstruction",
+      "url": "https://arxiv.org/abs/2601.01144",
+      "text": "Visual challenges in underwater environments significantly hinder the accuracy of vision-based localisation and the high-fidelity dense reconstruction. In this paper, we propose VISO, a robust underwater SLAM system that fuses a stereo camera, an inertial measurement unit (IMU), and a 3D sonar to achieve accurate 6-DoF localisation and enable efficient dense 3D reconstruction with high photometric fidelity. We introduce a coarse-to-fine online calibration approach for extrinsic parameters estimation between the 3D sonar and the camera. Additionally, a photometric rendering strategy is proposed for the 3D sonar point cloud to enrich the sonar map with visual information. Extensive experiments in a laboratory tank and an open lake demonstrate that VISO surpasses current state-of-the-art underwater and visual-based SLAM algorithms in terms of localisation robustness and accuracy, while also exhibiting real-time dense 3D reconstruction performance comparable to the offline dense mapping method.",
+      "sha256": "273a7ba260f35e9dd8b25d99a805c3ae8376c6e2bf9a184aa417c43b4893cde3",
+      "verified_at": "2026-10-21T19:13:54.496586+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "20501195c1d1bef511e890dc5c6cd0ca1be0dd2e37db4c1d7e3e725dc8925c97",
+      "source_version": "37731be2fc291e1335b211d40e9135cf238eb6c1a48b770bdca0283a06a67ac2"
+    },
+    "conf-c5703af7aa13021ea0ca2147": {
+      "title": "Diffusion Knows Transparency: Repurposing Video Diffusion for Transparent Object Depth and Normal Estimation",
+      "url": "https://arxiv.org/abs/2512.23705",
+      "text": "Transparent objects remain notoriously hard for perception systems: refraction, reflection and transmission break the assumptions behind stereo, ToF and purely discriminative monocular depth, causing holes and temporally unstable estimates. Our key observation is that modern video diffusion models already synthesize convincing transparent phenomena, suggesting they have internalized the optical rules. We build TransPhy3D, a synthetic video corpus of transparent/reflective scenes: 11k sequences rendered with Blender/Cycles. Scenes are assembled from a curated bank of category-rich static assets and shape-rich procedural assets paired with glass/plastic/metal materials. We render RGB + depth + normals with physically based ray tracing and OptiX denoising. Starting from a large video diffusion model, we learn a video-to-video translator for depth (and normals) via lightweight LoRA adapters. During training we concatenate RGB and (noisy) depth latents in the DiT backbone and co-train on TransPhy3D and existing frame-wise synthetic datasets, yielding temporally consistent predictions for arbitrary-length input videos. The resulting model, DKT, achieves zero-shot SOTA on real and synthetic video benchmarks involving transparency: ClearPose, DREDS (CatKnown/CatNovel), and TransPhy3D-Test. It improves accuracy and temporal consistency over strong image/video baselines, and a normal variant sets the best video normal estimation results on ClearPose. A compact 1.3B version runs at ~0.17 s/frame. Integrated into a grasping stack, DKT's depth boosts success rates across translucent, reflective and diffuse surfaces, outperforming prior estimators. Together, these results support a broader claim: \"Diffusion knows transparency.\" Generative video priors can be repurposed, efficiently and label-free, into robust, temporally coherent perception for challenging real-world manipulation.",
+      "sha256": "a18090bad5cac3150e5987cd79d899f00975a930241ef26852671bbc4c0fca0b",
+      "verified_at": "2026-10-21T19:13:59.240890+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "279bbf687de8deb51b9712c7185cfd784116fbae7b0079ef5e62ee89adae9fcc",
+      "source_version": "610d2a0f504e934ab156072b738c1a9cd3d8e9eb4ccc64b4ec9c91760d853f32"
     }
   }
 }
