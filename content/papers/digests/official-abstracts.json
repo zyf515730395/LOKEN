@@ -5062,6 +5062,66 @@
       "basis": "official_abstract",
       "source_sha256": "f9c6ccd2c36f570d9d10ff54824208b623387eb056305eecd5908e4fd38542b0",
       "source_version": "74f18a6398637528c41c8a302f2bba76140514d041d806465b45331fd59f46b2"
+    },
+    "conf-59d05a1fe9645e606341a3a7": {
+      "title": "Sim2real Image Translation Enables Viewpoint-Robust Policies from Fixed-Camera Datasets",
+      "url": "https://arxiv.org/abs/2601.09605",
+      "text": "Vision-based policies for robot manipulation have achieved significant recent success, but are still brittle to distribution shifts such as camera viewpoint variations. Robot demonstration data is scarce and often lacks appropriate variation in camera viewpoints. Simulation offers a way to collect robot demonstrations at scale with comprehensive coverage of different viewpoints, but presents a visual sim2real challenge. To bridge this gap, we propose MANGO -- an unpaired image translation method with a novel segmentation-conditioned InfoNCE loss, a highly-regularized discriminator design, and a modified PatchNCE loss. We find that these elements are crucial for maintaining viewpoint consistency during sim2real translation. When training MANGO, we only require a small amount of fixed-camera data from the real world, but show that our method can generate diverse unseen viewpoints by translating simulated observations. In this setting, MANGO outperforms all other image translation methods we tested. In certain real-world tabletop manipulation tasks, MANGO augmentation increases shifted-view success rates by over 40 percentage points compared to policies trained without augmentation.",
+      "sha256": "2e7c3b5eed42ff348e08d554744310f777bc42c0781f3155ab79963d147c70c5",
+      "verified_at": "2026-10-21T18:55:34.951948+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "5c260963ac9b157922f93094951383a19168f4f440813de8c17f7c6a1c56fbf7",
+      "source_version": "472fb2da7961085df0877d1b949476bb07e065ebc4ed4d6dc600574b9cc77a91"
+    },
+    "conf-f92762720edfc7fcea6dc13e": {
+      "title": "Learning Stochastic Bridges for Video Object Removal via Video-to-Video Translation",
+      "url": "https://arxiv.org/abs/2601.12066",
+      "text": "Existing video object removal methods predominantly rely on diffusion models following a noise-to-data paradigm, where generation starts from uninformative Gaussian noise. This approach discards the rich structural and contextual priors present in the original input video. Consequently, such methods often lack sufficient guidance, leading to incomplete object erasure or the synthesis of implausible content that conflicts with the scene's physical logic. In this paper, we reformulate video object removal as a video-to-video translation task via a stochastic bridge model. Unlike noise-initialized methods, our framework establishes a direct stochastic path from the source video (with objects) to the target video (objects removed). This bridge formulation effectively leverages the input video as a strong structural prior, guiding the model to perform precise removal while ensuring that the filled regions are logically consistent with the surrounding environment. To address the trade-off where strong bridge priors hinder the removal of large objects, we propose a novel adaptive mask modulation strategy. This mechanism dynamically modulates input embeddings based on mask characteristics, balancing background fidelity with generative flexibility. Extensive experiments demonstrate that our approach significantly outperforms existing methods in both visual quality and temporal consistency. The project page is https://bridgeremoval.github.io/.",
+      "sha256": "75df553e40fa440bd8afcfe9773dcdb26011c13860897a8cdc304955010d11d2",
+      "verified_at": "2026-10-21T18:55:40.927723+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "d59ae8c96589365420196ac7b99efd43db9078625a6f39e0e116b633fff744f1",
+      "source_version": "733562c6cf97bd1e159718ece3d5dfeab221a7140f7c480e0e93adb61c46aef4"
+    },
+    "conf-c73dca73a18c4591f619cef0": {
+      "title": "Class-Partitioned VQ-VAE and Latent Flow Matching for Point Cloud Scene Generation",
+      "url": "https://arxiv.org/abs/2601.12391",
+      "text": "Most 3D scene generation methods are limited to only generating object bounding box parameters while newer diffusion methods also generate class labels and latent features. Using object size or latent feature, they then retrieve objects from a predefined database. For complex scenes of varied, multi-categorical objects, diffusion-based latents cannot be effectively decoded by current autoencoders into the correct point cloud objects which agree with target classes. We introduce a Class-Partitioned Vector Quantized Variational Autoencoder (CPVQ-VAE) that is trained to effectively decode object latent features, by employing a pioneering $\\textit{class-partitioned codebook}$ where codevectors are labeled by class. To address the problem of $\\textit{codebook collapse}$, we propose a $\\textit{class-aware}$ running average update which reinitializes dead codevectors within each partition. During inference, object features and class labels, both generated by a Latent-space Flow Matching Model (LFMM) designed specifically for scene generation, are consumed by the CPVQ-VAE. The CPVQ-VAE's class-aware inverse look-up then maps generated latents to codebook entries that are decoded to class-specific point cloud shapes. Thereby, we achieve pure point cloud generation without relying on an external objects database for retrieval. Extensive experiments reveal that our method reliably recovers plausible point cloud scenes, with up to 70.4% and 72.3% reduction in Chamfer and Point2Mesh errors on complex living room scenes.",
+      "sha256": "7c161e988bb18e300f008e5f3287963cc3c504868a6b2cf0cb25ac8852a12182",
+      "verified_at": "2026-10-21T18:55:46.712536+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "e6fd5107520028a46d5d9d32c539ec9bdbc647a67b9c1fd023ac239117d850fb",
+      "source_version": "cd7b731bf21ea69228f459bc0b09f47bcb41dc2e5c70fb2b34043c5a3751e8a6"
+    },
+    "conf-68677940b745c963f7b64b97": {
+      "title": "UniMo: Unified Motion Generation and Understanding with Chain of Thought",
+      "url": "https://arxiv.org/abs/2601.12126",
+      "text": "Existing 3D human motion generation and understanding methods often exhibit limited interpretability, restricting effective mutual enhancement between these inherently related tasks. While current unified frameworks based on large language models (LLMs) leverage linguistic priors, they frequently encounter challenges in semantic alignment and task coherence. Moreover, the next-token prediction paradigm in LLMs is ill-suited for motion sequences, causing cumulative prediction errors. To address these limitations, we propose UniMo, a novel framework that integrates motion-language information and interpretable chain of thought (CoT) reasoning into the LLM via supervised fine-tuning (SFT). We further introduce reinforcement learning with Group Relative Policy Optimization (GRPO) as a post-training strategy that optimizes over groups of tokens to enforce structural correctness and semantic alignment, mitigating cumulative errors in motion token prediction. Extensive experiments demonstrate that UniMo significantly outperforms existing unified and task-specific models, achieving state-of-the-art performance in both motion generation and understanding.",
+      "sha256": "d13fe7f9e071f34125be0c54ada07cb03ffbb82bb0517014a470bfdfd225e895",
+      "verified_at": "2026-10-21T18:55:52.414972+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "0e27ced4e19f93b1b501a08ab81dcedc3305f52244f9eae6622de5e46cf5eb4c",
+      "source_version": "e15c21b157dd2d8fd44191f4e5da6a359cbdfe6850c7c2801ee233825858b3ec"
+    },
+    "conf-a600a1f1d4a9c17696694db7": {
+      "title": "Vision-as-Inverse-Graphics Agent via Interleaved Multimodal Reasoning",
+      "url": "https://arxiv.org/abs/2601.11109",
+      "text": "Vision-as-inverse-graphics, the concept of reconstructing images into editable programs, remains challenging for Vision-Language Models (VLMs), which inherently lack fine-grained spatial grounding in one-shot settings. To address this, we introduce VIGA (Vision-as-Inverse-Graphics Agent), an interleaved multimodal reasoning framework where symbolic logic and visual perception actively cross-verify each other. VIGA operates through a tightly coupled code-render-inspect loop: synthesizing symbolic programs, projecting them into visual states, and inspecting discrepancies to guide iterative edits. Equipped with high-level semantic skills and an evolving multimodal memory, VIGA sustains evidence-based modifications over long horizons. This training-free, task-agnostic framework seamlessly supports 2D document generation, 3D reconstruction, multi-step 3D editing, and 4D physical interaction. Finally, we introduce BlenderBench, a challenging visual-to-code benchmark. Empirically, VIGA substantially improves accuracy compared with one-shot baselines in BlenderGym (35.32%), SlideBench (117.17%) and our proposed BlenderBench (124.70%).",
+      "sha256": "ca4e9707f49f056520337dbefa0a9f13998900ae537b6c7db461345d2544f2fb",
+      "verified_at": "2026-10-21T18:55:58.165479+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "56c6219ff97eefb4fd5acad7bb606d9733c51d11b1a07e848cea26db88346171",
+      "source_version": "8b882c35debf78dcc58b1200bbc1d6f2675d68a25c5e66f892a6c66846da806f"
+    },
+    "conf-d85abd4a8c4d2c17e061ca81": {
+      "title": "R3DPA: Leveraging 3D Representation Alignment and RGB Pretrained Priors for LiDAR Scene Generation",
+      "url": "https://arxiv.org/abs/2601.07692",
+      "text": "LiDAR scene synthesis is an emerging solution to scarcity in 3D data for robotic tasks such as autonomous driving. Recent approaches employ diffusion or flow matching models to generate realistic scenes, but 3D data remains limited compared to RGB datasets with millions of samples. We introduce R3DPA, the first LiDAR scene generation method to unlock image-pretrained priors for LiDAR point clouds, and leverage self-supervised 3D representations for state-of-the-art results. Specifically, we (i) align intermediate features of our generative model with self-supervised 3D features, which substantially improves generation quality; (ii) transfer knowledge from large-scale image-pretrained generative models to LiDAR generation, mitigating limited LiDAR datasets; and (iii) enable point cloud control at inference for object inpainting and scene mixing with solely an unconditional model. On the KITTI-360 benchmark R3DPA achieves state of the art performance. Code and pretrained models are available at https://github.com/valeoai/R3DPA.",
+      "sha256": "d0bdb8a0d56aff17b90ce75a34dc99237fa907d3662af36aa6c972bb524afaf2",
+      "verified_at": "2026-10-21T18:56:03.324063+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "6a56094968d6b47f11cb61837abf1d4f0e3e89c4770f049e77441f76af9a12f8",
+      "source_version": "d6e53ecd5a6cde2a992c9e5056a707555b55e181f4f618dbc2f5a76422333efe"
     }
   }
 }
