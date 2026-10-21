@@ -4169,6 +4169,56 @@
       "basis": "official_abstract",
       "source_sha256": "a4652f8ad2193291fdac009929c6c503c384f14ad58089fe90b5032193c7f434",
       "source_version": "1955e7d4c3e10f96c570b7caff1042a137cecf60787c88f4d8a1ab798738afb7"
+    },
+    "conf-84de112ca0d8d8a960df4ab0": {
+      "title": "OmniForcing: Unleashing Real-time Joint Audio-Visual Generation",
+      "url": "https://arxiv.org/abs/2603.11647",
+      "text": "Recent joint audio-visual diffusion models achieve remarkable generation quality but suffer from high latency due to their bidirectional attention dependencies, hindering real-time applications. We propose OmniForcing, the first framework to distill an offline, dual-stream bidirectional diffusion model into a high-fidelity streaming autoregressive generator. However, naively applying causal distillation to such dual-stream architectures triggers severe training instability, due to the extreme temporal asymmetry between modalities and the resulting token sparsity. We address the inherent information density gap by introducing an Asymmetric Block-Causal Alignment with a zero-truncation Global Prefix that prevents multi-modal synchronization drift. The gradient explosion caused by extreme audio token sparsity during the causal shift is further resolved through an Audio Sink Token mechanism equipped with an Identity RoPE constraint. Finally, a Joint Self-Forcing Distillation paradigm enables the model to dynamically self-correct cumulative cross-modal errors from exposure bias during long rollouts. Empowered by a modality-independent rolling KV-cache inference scheme, OmniForcing achieves state-of-the-art streaming generation at $\\sim$25 FPS on a single GPU, maintaining multi-modal synchronization and visual quality on par with the bidirectional teacher.\\textbf{Project Page:} \\href{https://omniforcing.com}{https://omniforcing.com}",
+      "sha256": "8b27b8cac5ca0964f5497ca4f74e7c95799e2fb918895761dced844bf623d61a",
+      "verified_at": "2026-10-21T14:38:17.061296+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "672211896868cb21f989b760cb6d01d719e859c7ec3607adf5143dfd4e592bf5",
+      "source_version": "a539ad717a1ccc463f2d58269f448ebef7c502bde0073c0ce711095698ac9b12"
+    },
+    "conf-80b744f20ed36c9f85a4cb39": {
+      "title": "NLiPsCalib: An Efficient Calibration Framework for High-Fidelity 3D Reconstruction of Curved Visuotactile Sensors",
+      "url": "https://arxiv.org/abs/2603.09319",
+      "text": "Recent advances in visuotactile sensors increasingly employ biomimetic curved surfaces to enhance sensorimotor capabilities. Although such curved visuotactile sensors enable more conformal object contact, their perceptual quality is often degraded by non-uniform illumination, which reduces reconstruction accuracy and typically necessitates calibration. Existing calibration methods commonly rely on customized indenters and specialized devices to collect large-scale photometric data, but these processes are expensive and labor-intensive. To overcome these calibration challenges, we present NLiPsCalib, a physics-consistent and efficient calibration framework for curved visuotactile sensors. NLiPsCalib integrates controllable near-field light sources and leverages Near-Light Photometric Stereo (NLiPs) to estimate contact geometry, simplifying calibration to just a few simple contacts with everyday objects. We further introduce NLiPsTac, a controllable-light-source tactile sensor developed to validate our framework. Experimental results demonstrate that our approach enables high-fidelity 3D reconstruction across diverse curved form factors with a simple calibration procedure. We emphasize that our approach lowers the barrier to developing customized visuotactile sensors of diverse geometries, thereby making visuotactile sensing more accessible to the broader community.",
+      "sha256": "5d8ff49e8760abec3cc1fc474451fe6594b2ab88f00f153b05a216b598cc88a1",
+      "verified_at": "2026-10-21T14:38:22.604829+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "83918ca81133bc4543cf23ded9ba6c66094449bf834c9d8e038904bf1f7b492f",
+      "source_version": "f31091e3c763dd5d0095beec0e767ec8e3ee093d55cd5f1132e69d2ff7193d49"
+    },
+    "conf-b156564c18a4e003c40475a5": {
+      "title": "Egocentric World Model for Photorealistic Hand Object Interaction Synthesis",
+      "url": "https://arxiv.org/abs/2603.13615",
+      "text": "To serve as a scalable data source for embodied AI, world models should act as true simulators that infer interaction dynamics strictly from user actions, rather than mere conditional video generators relying on privileged future object states. In this context, egocentric Human-Object Interaction (HOI) world models are critical for predicting physically grounded first-person rollouts. However, building such models is profoundly challenging due to rapid head motions, severe occlusions, and high-DoF hand articulations that abruptly alter contact topologies. Consequently, existing approaches often circumvent these physics challenges by resorting to conditional video generation with access to known future object trajectories. We introduce EgoHOI, an egocentric HOI world model that breaks away from this shortcut to simulate photorealistic, contact-consistent interactions from action signals alone. To ensure physical accuracy without future-state inputs, EgoHOI distills geometric and kinematic priors from 3D estimates into physics-informed embeddings. These embeddings regularize the egocentric rollouts toward physically valid dynamics. Experiments on the HOT3D dataset demonstrate consistent gains over strong baselines, and ablations validate the effectiveness of our physics-informed design.",
+      "sha256": "767b497312a9035cc4d3b8390382dc88c5d2ab70956196cf82650cae7f5ffbb5",
+      "verified_at": "2026-10-21T14:38:28.168588+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "8680b61d60a5ea15b24688f3bb16a1b0788f61c7f88a2d5d28dc9295eb318333",
+      "source_version": "b678f897c1319445752b3e239fc64e53c1c719605afd4d347c5fb93fe6e6ab88"
+    },
+    "conf-6523a33f1d982aeb9b3a7836": {
+      "title": "RAE-NWM: Navigation World Model in Dense Visual Representation Space",
+      "url": "https://arxiv.org/abs/2603.09241",
+      "text": "Visual navigation requires agents to reach goals in complex environments through perception and planning. World models address this task by simulating action-conditioned state transitions to predict future observations. Current navigation world models typically learn state evolution under actions within the compressed latent space of a Variational Autoencoder, where spatial compression often discards fine-grained structural information and hinders precise control. To better understand the propagation characteristics of different representations, we conduct a linear dynamics probe and observe that dense DINOv2 features exhibit stronger linear predictability for action-conditioned transitions. Motivated by this observation, we propose the Representation Autoencoder-based Navigation World Model (RAE-NWM), which models navigation dynamics in a dense visual representation space. We employ a Conditional Diffusion Transformer with Decoupled Diffusion Transformer head (CDiT-DH) to model continuous transitions, and introduce a separate time-driven gating module for dynamics conditioning to regulate action injection strength during generation. Extensive evaluations show that modeling sequential rollouts in this space improves structural stability and action accuracy, benefiting downstream planning and navigation.",
+      "sha256": "42c58261e205f5e1c9653e87d09a74fb7a734939792ad9e5c76b1f6cf1d8967d",
+      "verified_at": "2026-10-21T14:38:33.716872+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "867a1bf9503d775e071b602797359e048af8aff8d7fb7f6db768adbd00c4c2e8",
+      "source_version": "a6c51aeba7e41ee11bdc5b39c433772ebfbef812f9114c0962155786ff7900cc"
+    },
+    "conf-f06d90ce72722c6ca6cc43c1": {
+      "title": "VSDiffusion: Taming Ill-Posed Shadow Generation via Visibility-Constrained Diffusion",
+      "url": "https://arxiv.org/abs/2603.08020",
+      "text": "Generating realistic cast shadows for inserted foreground objects is a crucial yet challenging problem in image composition, where maintaining geometric consistency of shadow and object in complex scenes remains difficult due to the ill-posed nature of shadow formation. To address this issue, we propose VSDiffusion, a visibility-constrained two-stage framework designed to narrow the solution space by incorporating visibility priors. In Stage I, we predict a coarse shadow mask to localize plausible shadow generated regions. And in Stage II, conditional diffusion is performed guided by lighting and depth cues estimated from the composite to generate accurate shadows. In VSDiffusion, we inject visibility priors through two complementary pathways. First, a visibility control branch with shadow-gated cross attention that provides multi-scale structural guidance. Then, a learned soft prior map that reweights training loss in error-prone regions to enhance geometric correction. Additionally, we also introduce high-frequency guided enhancement module to sharpen boundaries and improve texture interaction with the background. Experiments on widely used public DESOBAv2 dataset demonstrated that our proposed VSDiffusion can generate accurate shadow, and establishes new SOTA results across most evaluation metrics.",
+      "sha256": "b94f7a89688dafadc2e12760af52d9a116d4a137df9ae127131efd65e1f393ff",
+      "verified_at": "2026-10-21T14:38:39.583623+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "09e93cdb51095fcd303ed78a3cc61d76c1281268df0c50cb2210a8c36f724662",
+      "source_version": "912b74b5c28badeb830eca39ab724bcc02a5988f9a9198bb58dcbbf14d899c3d"
     }
   }
 }
