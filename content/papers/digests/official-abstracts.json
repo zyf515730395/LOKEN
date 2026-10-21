@@ -6854,6 +6854,133 @@
       "basis": "official_abstract",
       "source_sha256": "9d662984d4c62e0a48ddce395430d9495c3bc58157d412c9700edeacbfcfbe41",
       "source_version": "eb267ecbbe286fdfee12941d88820fdeff84cfef8f04b625672727dd2acf9770"
+    },
+    "conf-369487304c475fbb0bb2b0c1": {
+      "title": "Rare Text Semantics Were Always There in Your Diffusion Transformer",
+      "url": "https://papers.nips.cc/paper_files/paper/2025/hash/ffe44976d273c8e5bb4b9ae2ebe746e2-Abstract-Conference.html",
+      "text": "Starting from flow- and diffusion-based transformers, Multi-modal Diffusion Transformers (MM-DiTs) have reshaped text-to-vision generation, gaining acclaim for exceptional visual fidelity. As these models advance, users continually push the boundary with imaginative or rare prompts, which advanced models still falter in generating, since their concepts are often too scarce to leave a strong imprint during pre-training. In this paper, we propose a simple yet effective intervention that surfaces rare semantics inside MM-DiTs without additional training steps, data, denoising-time optimization, or reliance on external modules (e.g., large language models). In particular, the joint-attention mechanism intrinsic to MM-DiT sequentially updates text embeddings alongside image embeddings throughout transformer blocks. We find that by mathematically expanding representational basins around text token embeddings via variance scale-up before the joint-attention blocks, rare semantics clearly emerge in MM-DiT’s outputs. Furthermore, our results generalize effectively across text-to-vision tasks, including text-to-image, text-to-video, and text-driven image editing. Our work invites generative models to reveal the semantics that users intend, once hidden yet ready to surface.",
+      "sha256": "2a48a4fefe25ecfa0608de06ddf86a39a586cc0469321c489c445e54e0a35cb0",
+      "verified_at": "2026-10-22T01:35:16.469326+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "53bcf7a0f1f32edbaa160f7ef2c3ab0aafc90e56408f0b6857c2e0a842ed3c2f",
+      "source_version": "150e9ed2454e6703334117a9a5a69d8e46707aa852ea94c04c5f5e2447558021"
+    },
+    "conf-04a09d1b01c9797722e5de54": {
+      "title": "FideDiff: Efficient Diffusion Model for High-Fidelity Image Motion Deblurring",
+      "url": "https://iclr.cc/virtual/2026/poster/10011057",
+      "text": "Recent advancements in image motion deblurring, driven by CNNs and transformers, have made significant progress. Large-scale pre-trained diffusion models, which are rich in real-world modeling, have shown great promise for high-quality image restoration tasks such as deblurring, demonstrating stronger generative capabilities than CNN and transformer-based methods. However, challenges such as unbearable inference time and compromised fidelity still limit the full potential of the diffusion models. To address this, we introduce FideDiff, a novel single-step diffusion model designed for high-fidelity deblurring. We reformulate motion deblurring as a diffusion-like process where each timestep represents a progressively blurred image, and we train a consistency model that aligns all timesteps to the same clean image. By reconstructing training data with matched blur trajectories, the model learns temporal consistency, enabling accurate one-step deblurring. We further enhance model performance by integrating Kernel ControlNet for blur kernel estimation and introducing adaptive timestep prediction. Our model achieves superior performance on full-reference metrics, surpassing previous diffusion-based methods and matching the performance of other state-of-the-art models. FideDiff offers a new direction for applying pre-trained diffusion models to high-fidelity image restoration tasks, establishing a robust baseline for further advancing diffusion models in real-world industrial applications. Our dataset and code will be available at https://github.com/xyLiu339/FideDiff. Show more",
+      "sha256": "0964f203accc62a43629a95e1e9d55d76c14347b0227ac97aedf31acd0b10e7f",
+      "verified_at": "2026-10-22T01:35:26.069613+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "fbc0a83653c10968c9617f8bff2427fd923e6d8e0e29abfd68e1cd0817ee0ab4",
+      "source_version": "e20e5e86821253e68058f9ee03d8da900014d42acc72441c38d03d11f45c7042"
+    },
+    "conf-7d426bd36cdbd2dcea7b2e60": {
+      "title": "SoftCFG: Uncertainty-guided Stable Guidance for Visual Autoregressive Model",
+      "url": "https://iclr.cc/virtual/2026/poster/10010531",
+      "text": "Autoregressive (AR) models have emerged as powerful tools for image generation by modeling images as sequences of discrete tokens. While Classifier-Free Guidance (CFG) has been adopted to improve conditional generation, its application in AR models faces two key issues: guidance diminishing, where the conditional–unconditional gap quickly vanishes as decoding progresses, and over-guidance, where strong conditions distort visual coherence. To address these challenges, we propose SoftCFG, an uncertainty-guided inference method that distributes adaptive perturbations across all tokens in the sequence. The key idea behind SoftCFG is to let each generated token contribute certainty-weighted guidance, ensuring that the signal persists across steps while resolving conflicts between text guidance and visual context. To further stabilize long-sequence generation, we introduce Step Normalization, which bounds cumulative perturbations of SoftCFG. Our method is training-free, model-agnostic, and seamlessly integrates with existing AR pipelines. Experiments show that SoftCFG significantly improves image quality over standard CFG and achieves state-of-the-art FID on ImageNet 256 × 256 among autoregressive models. Show more",
+      "sha256": "cccf1671b9b7dd9aa9fcc274e5bc181ea507503690b7691a1c8074946456947e",
+      "verified_at": "2026-10-22T01:35:33.366586+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "29fb571c9d3a7ce6cd79fdd0efba82ab1091cc84aac09104a8591961eb315353",
+      "source_version": "953ae17432e01e59945b7fd98a0fb993d310e446194ba07a325e80c97dd6bf5c"
+    },
+    "conf-66a15abe059c59d8049294f9": {
+      "title": "ImageDoctor: Diagnosing Text-to-Image Generation via Grounded Image Reasoning",
+      "url": "https://iclr.cc/virtual/2026/poster/10011974",
+      "text": "The rapid advancement of text-to-image (T2I) models has increased the need for reliable human preference modeling, a demand further amplified by recent progress in reinforcement learning for preference alignment. However, existing approaches typically quantify the quality of a generated image using a single scalar, limiting their ability to provide comprehensive and interpretable feedback on image quality. To address this, we introduce ImageDoctor, a unified multi-aspect T2I model evaluation framework that assesses image quality across four complementary dimensions: plausibility, semantic alignment, aesthetics, and overall quality. ImageDoctor also provides pixel-level flaw indicators in the form of heatmaps, which highlight misaligned or implausible regions, and can be used as a dense reward for T2I model preference alignment. Inspired by the diagnostic process, we improve the detail sensitivity and reasoning capability of ImageDoctor by introducing a ``look-think-predict\" paradigm, where the model first localizes potential flaws, then generates reasoning, and finally concludes the evaluation with quantitative scores. Built on top of a vision-language model and trained through a combination of supervised fine-tuning and reinforcement learning, ImageDoctor demonstrates strong alignment with human preference across multiple datasets, establishing its effectiveness as an evaluation metric. Furthermore, when used as a reward model for preference tuning, ImageDoctor significantly improves generation quality—achieving an improvement of 10% over scalar-based reward models. Show more",
+      "sha256": "18efbbb63406bfe877f0aabee1b172dffbd43a4a77d474c5c77aaa54d2834d82",
+      "verified_at": "2026-10-22T01:35:42.190414+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "a6351e1c5b663e1ad67aced949f2a641a18e52e5e76024c7549b0f8a88768561",
+      "source_version": "9a8e4caf44e3964b6d20e1bffeb7e841e0071779253a2ac65d3708b9e40208b9"
+    },
+    "conf-8caac672da4dfafd5ae50782": {
+      "title": "LaTo: Landmark-tokenized Diffusion Transformer for Fine-grained Human Face Editing",
+      "url": "https://iclr.cc/virtual/2026/poster/10011283",
+      "text": "Recent multimodal models for instruction-based face editing enable semantic manipulation but still struggle with precise attribute control and identity preservation. Structural facial representations such as landmarks are effective for intermediate supervision, yet most existing methods treat them as rigid geometric constraints, which can degrade identity when conditional landmarks deviate significantly from the source (e.g., large expression or pose changes, inaccurate landmark estimates). To address these limitations, we propose LaTo, a landmark-tokenized diffusion transformer for fine-grained, identity-preserving face editing. Our key innovations include: (1) a landmark tokenizer that directly quantizes raw landmark coordinates into discrete facial tokens, obviating the need for dense pixel-wise correspondence; (2) a location-mapped positional encoding and a landmark-aware classifier-free guidance that jointly facilitate flexible yet decoupled interactions among instruction, geometry, and appearance, enabling strong identity preservation; and (3) a landmark predictor that leverages vision–language models to infer target landmarks from instructions and source images, whose structured chain-of-thought improves estimation accuracy and interactive control. To mitigate data scarcity, we curate HFL-150K, to our knowledge the largest benchmark for this task, containing over 150K real face pairs with fine-grained instructions. Extensive experiments show that LaTo outperforms state-of-the-art methods by 7.8% in identity preservation and 4.6% in semantic consistency. Code is available at https://github.com/alibaba/landmark-tokenized-dit. Show more",
+      "sha256": "8140a1d928f9c570d97233a82780fc9c49a27702e777c70aefd33a6db2420d4f",
+      "verified_at": "2026-10-22T01:35:50.992436+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "453acf4ebbff9806fc529ee9a370bd8f5d17a488ae789dc09d3a75d8392aa20f",
+      "source_version": "9fdeb93184b029a9c3af4f643289c9e6c9f9c135252f898adb33a53bc108c710"
+    },
+    "conf-d4b3622c760a3ac4f0de9756": {
+      "title": "ThermalGen: Style-Disentangled Flow-Based Generative Models for RGB-to-Thermal Image Translation",
+      "url": "https://papers.nips.cc/paper_files/paper/2025/hash/2f9e10c28c4052570ef9e39cc4dd69b9-Abstract-Conference.html",
+      "text": "Paired RGB-thermal data is crucial for visual-thermal sensor fusion and cross-modality tasks, including important applications such as multi-modal image alignment and retrieval. However, the scarcity of synchronized and calibrated RGB-thermal image pairs presents a major obstacle to progress in these areas. To overcome this challenge, RGB-to-Thermal (RGB-T) image translation has emerged as a promising solution, enabling the synthesis of thermal images from abundant RGB datasets for training purposes. In this study, we propose ThermalGen, an adaptive flow-based generative model for RGB-T image translation, incorporating an RGB image conditioning architecture and a style-disentangled mechanism. To support large-scale training, we curated eight public satellite-aerial, aerial, and ground RGB-T paired datasets, and introduced three new large-scale satellite-aerial RGB-T datasets--DJI-day, Bosonplus-day, and Bosonplus-night--captured across diverse times, sensor types, and geographic regions. Extensive evaluations across multiple RGB-T benchmarks demonstrate that ThermalGen achieves comparable or superior translation performance compared to existing GAN-based and diffusion-based methods. To our knowledge, ThermalGen is the first RGB-T image translation model capable of synthesizing thermal images that reflect significant variations in viewpoints, sensor characteristics, and environmental conditions. Project page: http://xjh19971.github.io/ThermalGen",
+      "sha256": "61ead590971ac66f3a21a5ad4316c71ff4762b18449cff083425165eaf6943e9",
+      "verified_at": "2026-10-22T01:35:59.776712+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "8e2f916e9ee9500a67689153bf917bd33970deaf2fff04a03ed25f80132ab2e3",
+      "source_version": "cfdcd409b3d8e35bd881e3094f0bb3784b559fb606d49055205b154cb4d575cb"
+    },
+    "conf-a3f6920a5da3efc750694920": {
+      "title": "Streaming Drag-Oriented Interactive Video Manipulation: Drag Anything, Anytime!",
+      "url": "https://iclr.cc/virtual/2026/poster/10009188",
+      "text": "Achieving streaming, fine-grained control over the outputs of autoregressive video diffusion models remains challenging, making it difficult to ensure that they consistently align with user expectations. To bridge this gap, we propose \\textbf{stReaming drag-oriEnted interactiVe vidEo manipuLation (REVEL)}, a new task that enables users to modify generated videos \\emph{anytime} on \\emph{anything} via fine-grained, interactive drag. Beyond DragVideo and SG-I2V, REVEL unifies drag-style video manipulation as editing and animating video frames with both supporting user-specified translation, deformation, and rotation effects, making drag operations versatile. In resolving REVEL, we observe: \\emph{i}) drag-induced perturbations accumulate in latent space, causing severe latent distribution drift that halts the drag process; \\emph{ii}) streaming drag is easily disturbed by context frames, thereby yielding visually unnatural outcomes. We thus propose a training-free approach, \\textbf{DragStream}, comprising: \\emph{i}) an adaptive distribution self-rectification strategy that leverages neighboring frames' statistics to effectively constrain the drift of latent embeddings; \\emph{ii}) a spatial-frequency selective optimization mechanism, allowing the model to fully exploit contextual information while mitigating its interference via selectively propagating visual cues along generation. Our method can be seamlessly integrated into existing autoregressive video diffusion models, and extensive experiments firmly demonstrate the effectiveness of our DragStream. Show more",
+      "sha256": "2b27adba1c0a4b820ef1fbf6910b424a798316dc335ad1ae8eeff634a73b0b39",
+      "verified_at": "2026-10-22T01:36:07.184817+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "33c856d26365a55022422dc29ac76cc208e0dbcc9d9f1a52833b90e59993f6dc",
+      "source_version": "1f579525c2e0dad7d33f3f24a829199f8bd717e6c63947958075fb5fb94ded5f"
+    },
+    "conf-5787f00f90e982d1b32dedc4": {
+      "title": "Non-Rigid Structure-From-Motion Via Differential Geometry with Recoverable Conformal Scale",
+      "url": "https://ras.papercept.net/conferences/conferences/ICRA26/program/ICRA26_ContentListWeb_3.html#5830",
+      "text": "Non-rigid structure-from-motion (NRSfM), a promising technique for addressing the mapping challenges in monocular visual deformable simultaneous localization and mapping (SLAM), has attracted growing attention. We introduce a novel method, called Con-NRSfM, for NRSfM under conformal deformations, encompassing isometric deformations as a subset. Our approach performs point-wise reconstruction using 2D selected image warps optimized through a graph-based framework. Unlike existing methods that rely on strict assumptions—such as locally planar surfaces or locally linear deformations—and fail to recover the conformal scale, our method eliminates these constraints and accurately computes the local conformal scale. Additionally, our framework decouples constraints on depth and conformal scale, which are inseparable in other approaches, enabling more precise depth estimation. To address the sensitivity of the formulated problem, we employ a parallel separable iterative optimization strategy. Furthermore, a self-supervised learning framework, utilizing an encoder-decoder network, is incorporated to generate dense 3D point clouds with texture. Simulation and experimental results using both synthetic and real datasets demonstrate that our method surpasses existing approaches in terms of reconstruction accuracy and robustness.",
+      "sha256": "541513c96b1db2f0f2f6decb9b37728c4bcd5e25b1c5d9de70d34e5f1f46c926",
+      "verified_at": "2026-10-22T01:36:17.637701+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "fb2bad60403efaac0198db45ae92d3fd381a85ba415b96f066c6b5812134c9c6",
+      "source_version": "a5284afef479d0b4d2552e1c1a44fe0fcdd739c81a481d18d571f7717ec530e6"
+    },
+    "conf-23ef16eeddff124d6158aa6f": {
+      "title": "EC3R-SLAM: Efficient and Consistent Monocular Dense SLAM with Feed-Forward 3D Reconstruction",
+      "url": "https://ras.papercept.net/conferences/conferences/ICRA26/program/ICRA26_ContentListWeb_3.html#1731",
+      "text": "The application of monocular dense Simultaneous Localization and Mapping (SLAM) is often hindered by high latency, large GPU memory consumption, and reliance on camera calibration. To relax this constraint, we propose EC3R-SLAM, a novel calibration-free monocular dense SLAM framework that jointly achieves high localization and mapping accuracy, low latency, and low GPU memory consumption. This enables the framework to achieve efficiency through the coupling of a tracking module, which maintains a sparse map of feature points, and a mapping module based on a feed-forward 3D reconstruction model that simultaneously estimates camera intrinsics. In addition, both local and global loop closures are incorporated to ensure mid-term and long-term data association, enforcing multi-view consistency and thereby enhancing the overall accuracy and robustness of the system. Experiments across multiple benchmarks show that EC3R-SLAM achieves competitive performance compared to state-of-the-art methods, while being faster and more memory-efficient. Moreover, it runs effectively even on resource-constrained platforms such as laptops and Jetson Orin NX, highlighting its potential for real-world robotics applications.",
+      "sha256": "6e5c7cfe02341cb72393e8136a3b4b498910b0e81c2aa8e16106645e76975d96",
+      "verified_at": "2026-10-22T01:36:29.394637+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "fb2bad60403efaac0198db45ae92d3fd381a85ba415b96f066c6b5812134c9c6",
+      "source_version": "405b9298a7f7c9e00243272353b3945d9f5e3fde6f44e3d4824ac7ac4101c975"
+    },
+    "2510.00592": {
+      "title": "Multi-level Dynamic Style Transfer for NeRFs",
+      "url": "https://arxiv.org/abs/2510.00592",
+      "text": "As the application of neural radiance fields (NeRFs) in various 3D vision tasks continues to expand, numerous NeRF-based style transfer techniques have been developed. However, existing methods typically integrate style statistics into the original NeRF pipeline, often leading to suboptimal results in both content preservation and artistic stylization. In this paper, we present multi-level dynamic style transfer for NeRFs (MDS-NeRF), a novel approach that reengineers the NeRF pipeline specifically for stylization and incorporates an innovative dynamic style injection module. Particularly, we propose a multi-level feature adaptor that helps generate a multi-level feature grid representation from the content radiance field, effectively capturing the multi-scale spatial structure of the scene. In addition, we present a dynamic style injection module that learns to extract relevant style features and adaptively integrates them into the content patterns. The stylized multi-level features are then transformed into the final stylized view through our proposed multi-level cascade decoder. Furthermore, we extend our 3D style transfer method to support omni-view style transfer using 3D style references. Extensive experiments demonstrate that MDS-NeRF achieves outstanding performance for 3D style transfer, preserving multi-scale spatial structures while effectively transferring stylistic characteristics.",
+      "sha256": "919bb3d07fd98b948dde7c559ec1bd0520ea46e66cec5d06b6b1e44da390d7fd",
+      "verified_at": "2026-10-22T01:36:33.102793+08:00"
+    },
+    "conf-dfb27990d58ce79c88bedcf1": {
+      "title": "TTT3R: 3D Reconstruction as Test-Time Training",
+      "url": "https://iclr.cc/virtual/2026/poster/10008709",
+      "text": "Modern Recurrent Neural Networks have become a competitive architecture for 3D reconstruction due to their linear-time complexity. However, their performance degrades significantly when applied beyond the training context length, revealing limited length generalization. In this work, we revisit the 3D reconstruction foundation models from a Test-Time Training perspective, framing their designs as an online learning problem. Building on this perspective, we leverage the alignment confidence between the memory state and incoming observations to derive a closed-form learning rate for memory updates, to balance between retaining historical information and adapting to new observations. This training-free intervention, termed TTT3R, substantially improves length generalization, achieving a 2 $\\times$ improvement in global pose estimation over baselines, while operating at 20 FPS with just 6 GB of GPU memory to process thousands of images. Code is available in https://rover-xingyu.github.io/TTT3R. Show more",
+      "sha256": "6966e9c77eaa0648c2685819ec5505c47292ec33721a72632ef5f7c901a3d843",
+      "verified_at": "2026-10-22T01:36:41.590597+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "ae5ce33aaa5205e7e853560f6e9ef56aeca9ede3bf748f7af7e9c655ab5a1623",
+      "source_version": "537d9f0302d1544eba05c65369564ef8fa3d36e7e5c456e8a8ec74321262825f"
+    },
+    "conf-cbc34869c688a67ab4a21393": {
+      "title": "DA$^{2}$: Depth Anything in Any Direction",
+      "url": "https://iclr.cc/virtual/2026/poster/10011682",
+      "text": "Panorama has a full FoV (360$^\\circ\\times$180$^\\circ$), offering a more complete visual description than perspective images. Thanks to this characteristic, panoramic depth estimation is gaining increasing traction in 3D vision. However, due to the scarcity of panoramic data, previous methods are often restricted to in-domain settings, leading to poor zero-shot generalization. Furthermore, due to the spherical distortions inherent in panoramas, many approaches rely on perspective splitting (\\textit{e.g.}, cubemaps), which leads to suboptimal efficiency. To address these challenges, we propose $\\textbf{DA}$$^{\\textbf{2}}$: $\\textbf{D}$epth $\\textbf{A}$nything in $\\textbf{A}$ny $\\textbf{D}$irection, an accurate, zero-shot generalizable, and fully end-to-end panoramic depth estimator. Specifically, for scaling up panoramic data, we introduce a data curation engine for generating high-quality panoramic depth data from perspective, and create $\\sim$543K panoramic RGB-depth pairs, bringing the total to $\\sim$607K. To further mitigate the spherical distortions, we present SphereViT, which explicitly leverages spherical coordinates to enforce the spherical geometric consistency in panoramic image features, yielding improved performance. A comprehensive benchmark on multiple datasets clearly demonstrates DA$^{2}$'s SoTA performance, with an average 38\\% improvement on AbsRel over the strongest zero-shot baseline. Surprisingly, DA$^{2}$ even outperforms prior in-domain methods, highlighting its superior zero-shot generalization. Moreover, as an end-to-end solution, DA$^{2}$ exhibits much higher efficiency over fusion-based approaches. Both the code and the curated panoramic data have be released. Project page: https://depth-any-in-any-dir.github.io/. Show more",
+      "sha256": "1f9894226bbf595fde8d2baeaf6dfd09bff8bd2542399bdfd6b34d75cddb2581",
+      "verified_at": "2026-10-22T01:37:03.435076+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "86ace138e8366ff238a516ed31fd8731d06743695ed12e76a4a05eba34700233",
+      "source_version": "e44293594c2a8da308ef1abc33190e83c6f782ddd862442313f77e5c1fc0de0c"
+    },
+    "conf-7e5a3eed52bfdb8ba64b751b": {
+      "title": "DepthLM: Metric Depth from Vision Language Models",
+      "url": "https://iclr.cc/virtual/2026/poster/10009767",
+      "text": "Vision language models (VLMs) can flexibly address various vision tasks through text interactions. Although successful in semantic understanding, state-of-the-art VLMs including GPT-5 still struggle in understanding 3D from 2D inputs. On the other hand, expert pure vision models achieve super-human accuracy in metric depth estimation, a key 3D understanding task. However, they require task-specific architectures and losses. Such difference motivates us to ask: Can VLMs reach expert-level accuracy without architecture or loss change? We take per-pixel metric depth estimation as the representative task and show that the answer is yes! Surprisingly, comprehensive analysis shows that text-based supervised-finetuning with sparse labels is sufficient for VLMs to unlock strong 3D understanding, no dense prediction head or complex regression/regularization loss is needed. The bottleneck lies in pixel reference and cross-dataset camera ambiguity, which we address through visual prompting and intrinsic-conditioned augmentation. With much smaller models, our method DepthLM surpasses the accuracy of most advanced VLMs by over 2x, making VLMs for the first time comparable with pure vision models. The simplicity of DepthLM also enables a single VLM to cover various 3D tasks beyond metric depth. Code and model are available at https://github.com/facebookresearch/DepthLM_Official. Show more",
+      "sha256": "6b9ff464494068943198b04bd698d2c2954d10f2d09329968b07fcee8daff303",
+      "verified_at": "2026-10-22T01:37:10.528704+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "bc75e3fbcb811c58b3eb962b86163952814a852b760ea2a663a76bd8c6deea95",
+      "source_version": "b89f6fa18e4c95ecc3204f0819aaa66e5ef8d5a29ce834fae796a0c04cd26256"
     }
   }
 }
