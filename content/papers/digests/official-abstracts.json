@@ -3919,6 +3919,256 @@
       "text": "Urban flooding poses an escalating threat to transportation network continuity, yet no operational system currently provides real-time, street-level flood depth information at the centimeter resolution required for dynamic routing, electric vehicle (EV) safety, and autonomous vehicle (AV) operations. This study presents FloodLlama, a fine-tuned open-source vision-language model (VLM) for continuous flood depth estimation from single street-level images, supported by a multimodal sensing pipeline using TikTok data. A synthetic dataset of approximately 190000 images was generated, covering seven vehicle types, four weather conditions, and 41 depth levels (0-40 cm at 1 cm resolution). Progressive curriculum training enabled coarse-to-fine learning, while LLaMA 3.2-11B Vision was fine-tuned using QLoRA. Evaluation across 34797 trials reveals a depth-dependent prompt effect: simple prompts perform better for shallow flooding, whereas chain-of-thought (CoT) reasoning improves performance at greater depths. FloodLlama achieves a mean absolute error (MAE) below 0.97 cm and Acc@5cm above 93.7% for deep flooding, exceeding 96.8% for shallow depths. A five-phase mechanistic interpretability framework identifies layer L23 as the critical depth-encoding transition and enables selective fine-tuning that reduces trainable parameters by 76-80% while maintaining accuracy. The Tier 3 configuration achieves 98.62% accuracy on real-world data and shows strong robustness under visual occlusion. A TikTok-based data pipeline, validated on 676 annotated flood frames from Detroit, demonstrates the feasibility of real-time, crowd-sourced flood sensing. The proposed framework provides a scalable, infrastructure-free solution with direct implications for EV safety, AV deployment, and resilient transportation management.",
       "sha256": "7a5312982464887e31d58b0c32436a42557b548c55bb2c3ca73ba6b923265615",
       "verified_at": "2026-10-21T14:15:44.088011+08:00"
+    },
+    "conf-0b2e3fd667bec77bfd966f52": {
+      "title": "MERIT: Multi-domain Efficient RAW Image Translation",
+      "url": "https://arxiv.org/abs/2603.20836",
+      "text": "RAW images captured by different camera sensors exhibit substantial domain shifts due to varying spectral responses, noise characteristics, and tone behaviors, complicating their direct use in downstream computer vision tasks. Prior methods address this problem by training domain-specific RAW-to-RAW translators for each source-target pair, but such approaches do not scale to real-world scenarios involving multiple types of commercial cameras. In this work, we introduce MERIT, the first unified framework for multi-domain RAW image translation, which leverages a single model to perform translations across arbitrary camera domains. To address domain-specific noise discrepancies, we propose a sensor-aware noise modeling loss that explicitly aligns the signal-dependent noise statistics of the generated images with those of the target domain. We further enhance the generator with a conditional multi-scale large kernel attention module for improved context and sensor-aware feature modeling. To facilitate standardized evaluation, we introduce MDRAW, the first dataset tailored for multi-domain RAW image translation, comprising both paired and unpaired RAW captures from five diverse camera sensors across a wide range of scenes. Extensive experiments demonstrate that MERIT outperforms prior models in both quality (5.56 dB improvement) and scalability (80% reduction in training iterations).",
+      "sha256": "238b209794b5d636225a01ac4884a90415a5a202475796cd542d9f09a45e757b",
+      "verified_at": "2026-10-21T14:25:18.642717+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "5382fe7dff702a4e4e06cbbd58de322e6f924b36501d5782b89d2d61d49b90ae",
+      "source_version": "c49a7e1ae22b909c78584107bb30acc1cb2a8ad4adde15ec6fe579c6bc41261c"
+    },
+    "conf-cc6189a9eef837a03aa3f312": {
+      "title": "Inpaint-Anywhere: Zero-Shot Multi-Identity Inpainting with Efficient Diffusion Transformer",
+      "url": "https://ojs.aaai.org/index.php/AAAI/article/view/37706",
+      "text": "Subject-driven generation, which aims to synthesize visual content for a given identity V* with specific attributes, has garnered increasing attention in recent years. While existing methods demonstrate impressive identity consistency for both single and multiple identities, they often lack user-specified spatial control. Recent approaches, such as OminiControl-2 and EasyControl, enable inpainting conditioned on a single identity but fall short in multi-identity scenarios. In this paper, we introduce BoundID, a dataset synthesis pipeline for generating multi-identity images with bounding box annotations, and introduce Inpaint-Anywhere, a diffusion transformer framework for multi-identity inpainting. Given multiple identity references and corresponding masks, our method simultaneously generates all desired identities at precise locations while achieving both high identity and prompt fidelity. Extensive experiments show that Inpaint-Anywhere achieves state-of-the-art performance in multi-identity inpainting.",
+      "sha256": "7f8301f3c88f7056638aceab836f7107a2017e74f401a78b1c21a7af1943ac22",
+      "verified_at": "2026-10-21T14:25:23.952798+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "94b2c1e2bc1e394ab0218e3c1139d5103790528df68d7885e8bdfaaeb228f679",
+      "source_version": "a9679329e8f4b88dcf512bc79d9ed7d634148ee75ea82b40f33fbf85be1333cd"
+    },
+    "conf-787d77a596d4e012016ccccb": {
+      "title": "RPGen: Robust and Differentially Private Synthetic Image Generation",
+      "url": "https://ojs.aaai.org/index.php/AAAI/article/view/38016",
+      "text": "Differentially private (DP) image synthesis enables the generation of realistic images while bounding privacy leakage, facilitating secure data sharing across organizations. However, the Gaussian noise injected during DP training, such as via DP-SGD, often severely degrades synthesis quality by disrupting model convergence. To address this, we introduce RPGen, a novel framework that enhances diffusion models' parameter robustness to mitigate DP noise effects without compromising privacy guarantees. At its core, RPGen employs adversarial model perturbation (AMP) during public pre-training to build resilience against perturbations, but we identify and tackle the critical issue of robustness transferability across domains.\nRPGen achieves this through a three-step process: (1) A pre-trained classifier infers labels for private images, aggregated into a class distribution noised with Gaussian mechanism for DP, and public samples are selected to match this privatized distribution for domain alignment; (2) The diffusion model is pre-trained on this curated subset with adversarial model perturbation to foster robustness; (3) The model undergoes fine-tuning on private data using DP-SGD. This synergy of robustness augmentation and transferability optimization yields high-fidelity synthesis.\nExtensive evaluations on ImageNet for pre-training, with CelebA and CIFAR-10 for synthesis, show RPGen outperforming state-of-the-art baselines across epsilon in 1, 5, 10. On average, it achieves 20.18% lower FID and 5.45% higher classification accuracy. Ablations confirm the efficacy of domain curation and modest perturbations, establishing RPGen as a new benchmark for privacy-utility trade-offs in image generation.",
+      "sha256": "6eac38da0b44c56ad854d3f9741137742cf80b073180c65e2e1bb266b86ae471",
+      "verified_at": "2026-10-21T14:25:29.240307+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "47f6dddbe903ca33dd211edf771642b6fed6c5eb585fa50ffbeac5e4142be6c9",
+      "source_version": "f076effe158393a5148849af5f3e25772d1a53f9553c1ac58147d029e7dc17d8"
+    },
+    "conf-47a269def6e5b510053a6845": {
+      "title": "SCAN: Self-Calibrated AutoregressioN for High-Quality Visual Generation",
+      "url": "https://ojs.aaai.org/index.php/AAAI/article/view/37400",
+      "text": "Human artists can continuously refine their coarse sketches during artistic creation. This is quite different from existing autoregressive generation, where a token is determined once sampled. Aiming to flexibly refine the generated contents, this paper presents a Self-Calibrated AutoregressioN (SCAN) model capable of self-evaluating and refining generation quality without regenerating the entire image. We unify image token generation and quality evaluation into a single autoregressive model, formulating both tasks as categorical prediction problems.  During inference, the model first generates a coarse initial image, then iteratively refines the lowest-quality patches until satisfactory image quality is achieved.  Experimental results demonstrate that SCAN effectively handles diverse real-world generation errors and achieves a promising balance between image quality and speed. For example, SCAN-XL achieves an FID of 2.10 and an IS of 326.1, surpassing the LlamaGen-XL by 1.29 (+38%) in FID and 99.0 (+43.6%) in IS, with a 5.6× speedup (19.76s to 3.56s). Compared to recent works, SCAN improves FID and speed by +18.3% and +23% over VAR-d20, and by +7% and +46% over RandAR-XL.",
+      "sha256": "b40c5b4ebb5ecef41e92d3c9672165142e9a634d78b5aa577917b49b543aa55a",
+      "verified_at": "2026-10-21T14:25:34.533461+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "b3923658a62fe45f119b2ae5469df8160b5170697bde8573ffafe25f9a821003",
+      "source_version": "cb7e331db4f54a7cb9bf0c4f10dad0a5220b3c13e7afa6bc90a700b846ba8490"
+    },
+    "conf-4436ef42c311812e12cc6829": {
+      "title": "MoSs: Mixture of Scales for Efficient High-Resolution Autoregressive Image Generation",
+      "url": "https://ojs.aaai.org/index.php/AAAI/article/view/37611",
+      "text": "Since next-scale prediction was introduced as a new paradigm for autoregressive image generation, it has attracted extensive research interest. By progressively increasing resolution in a draft-to-refinement process, next-scale prediction demonstrates great potential in both generation quality and efficiency. However, at high resolutions, this paradigm faces a fundamental challenge: token sequences grow quadratically and accumulate across multiple scales, resulting in a key performance bottleneck. Our systematic study uncovers two critical observations: (1) most image regions have stabilized during early drafting stages, making later refinement across the full-scale image token-inefficient; (2) different scales inherently trade off efficiency and fidelity, suggesting that adaptive token dispatch on different scales can focus resources where they yield the greatest quality gains. Motivated by these insights, we propose a training-free Mixture of Scales (MoSs) method for efficient high-resolution autoregressive image generation. MoSs breaks the strict causal dependency across scales in the final refinement steps by parallelizing scales of different resolutions, each responsible for a subset of spatial regions. A lightweight frequency-based token dispatcher analyzes the drafted image and assigns regions to the appropriate scale. The outputs are then composited over the draft to produce the final high-resolution image. The scale-mixture method exhibits remarkable efficiency with little impact on generation quality on various models.  For instance, our implementation achieves 2.05-4.96x speedup on the transformer backbone, up to 85.62% KV cache reduction, incurring only 0.1-2.4% loss on GenEval quality, based on the state-of-the-art Infinity model.",
+      "sha256": "c360a64703e5e478f9a36f2a6dd717ec55c68307199aa16e8ec281f7870ebf7e",
+      "verified_at": "2026-10-21T14:25:39.817000+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "fc04200437de0de6f7dd974cb0fa81da8adda08f634d485d2cf21f202502c0ea",
+      "source_version": "f5367779799cf3548bcbf91f42a9849e130bd06f58709f4bd586247fa3aa87e4"
+    },
+    "conf-29033a172dea622e8a0a9044": {
+      "title": "Object Fusion via Diffusion Time-step for Customized Image Editing with Single Example",
+      "url": "https://ojs.aaai.org/index.php/AAAI/article/view/37869",
+      "text": "We tackle the task of customized image editing using a text-conditioned Diffusion Model (DM). The goal is to fuse the subject in a reference image (e.g., sunglasses) with a source one (e.g., a boy), while retaining the fidelity of them both (e.g., the boy wearing the sunglasses). An intuitive approach, called LoRA fusion, first separately trains a DM LoRA for each image to encode its details. Then the two LoRAs are linearly combined by a weight to generate a fused image. Unfortunately, even through careful grid search or learning the weight, this approach still trades off the fidelity of one image against the other. We point out that the evil lies in the overlooked role of diffusion time-step in the generation process, i.e., a smaller time-step controls the generation of a more fine-grained attribute. For example, a large LoRA weight for the source may help preserve its fine-grained details (e.g., face attributes) at a small time-step, but could overpower the reference subject LoRA and lose the fidelity of its overall shape at a larger time-step. To address this deficiency, we propose TimeFusion, which learns a time-step-specific LoRA fusion weight that resolves the trade-off, i.e., generating the source and reference subject in high fidelity given their respective prompt. Then we can customize image editing using this weight and a target prompt.",
+      "sha256": "78c677cdf48158512c85a30ab9c6f686ab9db0c933a45d723d6ef152e05c4b6e",
+      "verified_at": "2026-10-21T14:25:45.111754+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "dd4cb9e6f497eebff0790a5221ac659b7a269b0d4bba25560624d30ec6a984e2",
+      "source_version": "7b8dbaddfe3fd2d861992624592e857822f537c3d33591857cb9baf2f7526ae9"
+    },
+    "conf-0c0dc8ba34d873a084ce692c": {
+      "title": "LookFlow: Training-Free and Efficient High-Resolution Image Synthesis via Dynamic Lookahead Guidance Flow",
+      "url": "https://ojs.aaai.org/index.php/AAAI/article/view/38388",
+      "text": "Rectification flow Transformers (RFTs) have shown promising performance in diffusion-based image synthesis but are typically confined to lower-resolution scenarios, limiting their ability to generate high-resolution images. \nExisting resolution extrapolation approaches often suffer from excessive computational overhead, resulting in prolonged inference times. \nWe propose LookFlow, a training-free high-resolution synthesis framework that accelerates inference while preserving visual quality.\nBuilding on pretrained text-to-image RFTs, LookFlow employs a dynamic lookahead guidance flow  mechanism to refine high-resolution velocity predictions by leveraging multi-timestep lookahead information extracted from a low-resolution flow. \nAdditionally, reusing temporally similar features across consecutive timesteps drastically reduces computation and significantly decreases inference time overhead.\nExtensive experiments on COCO demonstrate that LookFlow robustly scales resolutions from 4× to 25×, achieving up to a maximum speedup of 2.01× while maintaining competitive visual fidelity.",
+      "sha256": "4840d2f731bd08545ae113e13fadc0e2ff3e35bfdc2f6d4927336fcc27b145d2",
+      "verified_at": "2026-10-21T14:25:50.406674+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "16e95425ed8e2d6942acba82228531a9816e1ad58e6770da123c566d7d41e666",
+      "source_version": "a009fcc173838bfddf700fffd9ab1c3bb4557cfc9797da41e6c8b47314e139c9"
+    },
+    "conf-f9538488b10ca736f5191ec6": {
+      "title": "S²Flow: Towards Fast and Authentic Training-Free High-Resolution Video Generation",
+      "url": "https://ojs.aaai.org/index.php/AAAI/article/view/37932",
+      "text": "Rectified flow models have shown strong potential in high-fidelity video generation, yet extending them to high-resolution remains challenging due to the high cost of full attention and error accumulation in the ODE-solving process. In this paper, we propose S^2Flow, a training-free framework that enables efficient and authentic high-resolution video generation by jointly exploring Flow-guided Sparse attention and Second-order ODE solution. Specifically, S^2Flow exploits and transfers the semantic and structural information from the low-resolution flow trajectory to guide the high-resolution flow in two aspects. First, S^2Flow dynamically captures the sparse patterns of the spatio-temporal attention maps from low-resolution videos to construct localized 3D windows, enabling efficient window attention in high-resolution inference. This can significantly reduce redundant computation while preserving contextual dependencies. Second, S^2Flow adopts a second-order ODE solver based on Taylor expansion, where the high-order derivative is approximated via central difference from the low-resolution flow, facilitating accurate high-resolution denoising. Extensive experiments on VBench dataset demonstrate that S^2Flow outperforms prior methods in both visual quality and inference speed, enabling 4x acceleration on 2560x1536 video generation.",
+      "sha256": "a63b954244be681feca57ae3570fe0899f41e2492ad7661a32ce59eaa8a74fbd",
+      "verified_at": "2026-10-21T14:25:55.717611+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "61ce6a80d7b774b18bae2c800ae469536c7b6518397c58a1588449bd2f0c4aeb",
+      "source_version": "9fa35e28fda6a529a27f782d116f4a17b029fe7e2774cf331e818ea77c2ad3e7"
+    },
+    "conf-aba6f78b14660ec8ee449cdc": {
+      "title": "Collaboratively “Copy & Paste” 2D-3D Features for Complex Video-to-Video Motion Editing",
+      "url": "https://ojs.aaai.org/index.php/AAAI/article/view/38357",
+      "text": "Video-to-video human motion editing aims to transfer motion from a driving video to a reference video while preserving the background dynamics and the protagonist's original appearance. We identify critical limitations in existing methods that fail to capture the full complexity of human motions, particularly regarding: 1) location changes, 2) orientation variations, and 3) complicated non-upright poses. To address these challenges, we propose a framework that collaboratively \"copies and pastes\" 2D and 3D features across spatio-temporal dimensions into a shared representation space for motion guidance. Our approach achieves this through: 1) a mutual distillation mechanism that enhances the robustness and capability of individual encoders, and 2) a selective fusion module that adaptively weights and combines complementary information from spatio-temporal representations. To evaluate motion editing algorithms under challenging scenarios, we introduce a comprehensive benchmark dataset comprising real-world video clips from artistic gymnastics and figure skating competitions. These sports disciplines naturally encompass the three aforementioned aspects of motion complexity. Extensive experiments demonstrate that our approach significantly outperforms existing methods, particularly in handling intricate human motions.",
+      "sha256": "f7edbfd41a5f34f437a3911591cba359c534a5c821b71d97e5be61cae526f554",
+      "verified_at": "2026-10-21T14:26:01.002795+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "e0f3c661e1a4b90fb2fd70e94aa1a5b8892f93d6392e979db9d0553c325a21ca",
+      "source_version": "469259f88b32516d49fc027f751a0a84ac186fad1b09dc1551ce5e938138301d"
+    },
+    "conf-3ffd5c4ada60b414f61535d3": {
+      "title": "DLVINet: Advancing Dual-Lens Video Inpainting Beyond Parallax Constraints",
+      "url": "https://ojs.aaai.org/index.php/AAAI/article/view/38065",
+      "text": "Dual-lens video inpainting aims to simultaneously restore missing or corrupted contents in videos captured by each lens of binocular systems. Although preliminary explorations have been conducted, existing methods still face two key challenges: limited exploitation of long-range reference information and inadequate modeling of inter-lens consistency in non-standard binocular systems. In this paper, we propose a novel dual-lens video inpainting framework named DLVINet, which addresses these challenges with two core components. Firstly, we develop a sparse spatial-temporal transformer (SSTT) that effectively utilizes the information from distant frames to complete the video contents of each lens individually. By employing sparse spatial-temporal attention with a channel selection mechanism, SSTT not only restores missing regions, but also avoids introducing redundant or irrelevant information. Furthermore, SSTT introduces a multi-scale feed-forward network to enrich the multi-scale representation of completed features. Secondly, we design a cross-lens texture transformer (CLTT) to model inter-lens consistency. By interacting with corresponding features between lenses under the guidance of cross-attention, CLTT captures global inter-lens correspondences. Such a design enables effective cross-view information modeling without being constrained by horizontal parallax, which is particularly critical for non-standard binocular systems. Extensive experiments demonstrate the effectiveness of our DLVINet.",
+      "sha256": "138d72d5435078a9628cd158ae52e4c025f2f0a764823ff57b5d6fdeacaf8291",
+      "verified_at": "2026-10-21T14:26:06.295585+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "1b06b3989645de639eb22d98b21061e9e19521488354763a5feef366414d930d",
+      "source_version": "30687d18c5b80a0a33fa4f9803e278f6fe280fbcc76a93881464e187feaa4c6b"
+    },
+    "conf-656389cffd46b6bc7d5cc5ba": {
+      "title": "Training-Free Instance-Aware 3D Scene Reconstruction and Diffusion-Based View Synthesis from Sparse Images",
+      "url": "https://arxiv.org/abs/2603.21166",
+      "text": "We introduce a novel, training-free system for reconstructing, understanding, and rendering 3D indoor scenes from a sparse set of unposed RGB images. Unlike traditional radiance field approaches that require dense views and per-scene optimization, our pipeline achieves high-fidelity results without any training or pose preprocessing. The system integrates three key innovations: (1) A robust point cloud reconstruction module that filters unreliable geometry using a warping-based anomaly removal strategy; (2) A warping-guided 2D-to-3D instance lifting mechanism that propagates 2D segmentation masks into a consistent, instance-aware 3D representation; and (3) A novel rendering approach that projects the point cloud into new views and refines the renderings with a 3D-aware diffusion model. Our method leverages the generative power of diffusion to compensate for missing geometry and enhances realism, especially under sparse input conditions. We further demonstrate that object-level scene editing such as instance removal can be naturally supported in our pipeline by modifying only the point cloud, enabling the synthesis of consistent, edited views without retraining. Our results establish a new direction for efficient, editable 3D content generation without relying on scene-specific optimization. Project page: https://jiatongxia.github.io/TID3R/",
+      "sha256": "3c66b579e13aab0cb99d8e1bc7f7a21b61661f3ed0ee15983a5cb6a06225b942",
+      "verified_at": "2026-10-21T14:26:11.874190+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "9d97422f8ab419fe062141e9f39ae710604363605c35a7ff95e672731632ed20",
+      "source_version": "f1d710e95d4c6c0784afbf3da1191b23ad113d85c04f85cfd2ad9ebfef203948"
+    },
+    "conf-d894388ad31d91771e0f948e": {
+      "title": "SegVGGT: Joint 3D Reconstruction and Instance Segmentation from Multi-View Images",
+      "url": "https://arxiv.org/abs/2603.19926",
+      "text": "3D instance segmentation methods typically rely on high-quality point clouds or posed RGB-D scans, requiring complex multi-stage processing pipelines, and are highly sensitive to reconstruction noise. While recent feed-forward transformers have revolutionized multi-view 3D reconstruction, they remain decoupled from high-level semantic understanding. In this work, we present SegVGGT, a unified end-to-end framework that simultaneously performs feed-forward 3D reconstruction and instance segmentation directly from multi-view RGB images. By introducing object queries that interact with multi-level geometric features, our method deeply integrates instance identification into the visual geometry grounded transformer. To address the severe attention dispersion problem caused by the massive number of global image tokens, we propose the Frame-level Attention Distribution Alignment (FADA) strategy. FADA explicitly guides object queries to attend to instance-relevant frames during training, providing structured supervision without extra inference overhead. Extensive experiments demonstrate that SegVGGT achieves the state-of-the-art performance on ScanNetv2 and ScanNet200, outperforming both recent joint models and RGB-D-based approaches, while exhibiting strong generalization capabilities on ScanNet++.",
+      "sha256": "184b8c392db3ec747a5d9bf1013ba587c6f3eef2f7a5093b467f936dfc37802a",
+      "verified_at": "2026-10-21T14:26:17.490840+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "de64c1b9f77af0bac22719ad139a45431457fb6c9505b58fc1262f189446cdff",
+      "source_version": "bda7fcc9496b8980aa9dea000b212413cf3d5a85b7e28f02667f639f91b40c81"
+    },
+    "conf-0fffc628efcef48ba3e05f3d": {
+      "title": "LagerNVS: Latent Geometry for Fully Neural Real-time Novel View Synthesis",
+      "url": "https://arxiv.org/abs/2603.20176",
+      "text": "Recent work has shown that neural networks can perform 3D tasks such as Novel View Synthesis (NVS) without explicit 3D reconstruction. Even so, we argue that strong 3D inductive biases are still helpful in the design of such networks. We show this point by introducing LagerNVS, an encoder-decoder neural network for NVS that builds on `3D-aware' latent features. The encoder is initialized from a 3D reconstruction network pre-trained using explicit 3D supervision. This is paired with a lightweight decoder, and trained end-to-end with photometric losses. LagerNVS achieves state-of-the-art deterministic feed-forward Novel View Synthesis (including 31.4 PSNR on Re10k), with and without known cameras, renders in real time, generalizes to in-the-wild data, and can be paired with a diffusion decoder for generative extrapolation.",
+      "sha256": "8c2719c2c1e436dc6df28ea1136b0df84e42e543542dee82c3ce54b41c1077e3",
+      "verified_at": "2026-10-21T14:26:23.485404+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "0a7c2400622f29846f07072290d9853115c74a5f859b01096a466284ea992301",
+      "source_version": "e00abc2b0a8123e3a67afaabff9aa2431be765d537eec05cfe6a98bc758e1cf9"
+    },
+    "conf-9b7c93ceb38f731fbfa4d57b": {
+      "title": "SEAR: Simple and Efficient Adaptation of Visual Geometric Transformers for RGB+Thermal 3D Reconstruction",
+      "url": "https://eccv.ecva.net/virtual/2026/poster/5733",
+      "text": "Foundational feed-forward visual geometry models enableaccurate and efficient camera pose estimation and scene reconstruction bylearning strong scene priors from massive RGB datasets. However, theireffectiveness drops when applied to mixed sensing modalities, such asRGB-thermal (RGB-T) images. We observe that while a visual geometrygrounded transformer pretrained on RGB data generalizes well to thermal-only reconstruction, it struggles to align RGB and thermal modalitieswhen processed jointly. To address this, we propose SEAR, a simple yet ef-ficient fine-tuning strategy that adapts a pretrained geometry transformerto multimodal RGB-T inputs. Despite being trained on a relatively smallRGB-T dataset, our approach significantly outperforms state-of-the-artmethods for 3D reconstruction and camera pose estimation, achievingsignificant improvements over all metrics and delivering higher detailand consistency between modalities with negligible overhead in inferencetime compared to the original pretrained model. Notably, SEAR enablesreliable multimodal pose estimation and reconstruction even under chal-lenging conditions, such as low lighting and dense smoke. We validateour architecture through extensive ablation studies and demonstratehow the model aligns both modalities. Additionally, we introduce a newdataset featuring RGB and thermal sequences captured at different times,viewpoints, and illumination conditions, providing a robust benchmarkfor future work in multimodal 3D scene reconstruction. Code and modelsare publicly available at https://doi.org/10.5281/ZENODO.21077295. Show more",
+      "sha256": "8254e5127b26609712c64fbcb842d1836e0c05e1c52c6cb1075ec2f80f69af60",
+      "verified_at": "2026-10-21T14:26:29.461402+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "622378ad982e2c6bdea70be9daf2317afb33e97e6f1d3ea8c71a3a670ac3f83f",
+      "source_version": "9296ba7f8d31eaa0c9e23ce8378b9c9adc53b710b999b55d8e0df7c94846f15a"
+    },
+    "conf-de0fd05ab5e6ec84b66efe64": {
+      "title": "STAC: Plug-and-Play Spatio-Temporal Aware Cache Compression for Streaming 3D Reconstruction",
+      "url": "https://arxiv.org/abs/2603.20284",
+      "text": "Online 3D reconstruction from streaming inputs requires both long-term temporal consistency and efficient memory usage. Although causal variants of VGGT address this challenge through a key-value (KV) cache mechanism, the cache grows linearly with the stream length, creating a major memory bottleneck. Under limited memory budgets, early cache eviction significantly degrades reconstruction quality and temporal consistency. In this work, we observe that attention in causal transformers for 3D reconstruction exhibits intrinsic spatio-temporal sparsity. Based on this insight, we propose STAC, a Spatio-Temporally Aware Cache Compression framework for streaming 3D reconstruction with large causal transformers. STAC consists of three key components: (1) a Working Temporal Token Caching mechanism that preserves long-term informative tokens using decayed cumulative attention scores; (2) a Long-term Spatial Token Caching scheme that compresses spatially redundant tokens into voxel-aligned representations for memory-efficient storage; and (3) a Chunk-based Multi-frame Optimization strategy that jointly processes consecutive frames to improve temporal coherence and GPU efficiency. Extensive experiments show that STAC achieves state-of-the-art reconstruction quality while reducing memory consumption by nearly 10x and accelerating inference by 4x, substantially improving the scalability of real-time 3D reconstruction in streaming settings.",
+      "sha256": "99b8d427c01bd2f48acb55020988226b3189af0d19f523eb26d2d5b00f7e4116",
+      "verified_at": "2026-10-21T14:26:35.194454+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "4125b5293d92226d2d580093059c7cb7fbd7ba4938a4abd52aa56974075e2c42",
+      "source_version": "1f1dded833795f8c59b002615683f4179937edb002b0721aaa154c1eca874829"
+    },
+    "conf-a84539501f3adbe596ef2c0a": {
+      "title": "Universal Skeleton Understanding via Differentiable Rendering and MLLMs",
+      "url": "https://arxiv.org/abs/2603.18003",
+      "text": "Multimodal large language models (MLLMs) exhibit strong visual-language reasoning, yet cannot process structured, non-visual data such as human skeletons. Existing methods either compress skeleton dynamics into lossy feature vectors for text alignment, or quantize motion into discrete tokens that generalize poorly across heterogeneous skeleton formats. We present SkeletonLLM, which achieves universal skeleton understanding by translating arbitrary skeleton sequences into the MLLM's native visual modality. At its core is DrAction, a differentiable, format-agnostic renderer that converts skeletal kinematics into compact image sequences. Because the pipeline is end-to-end differentiable, MLLM gradients can directly guide the rendering to produce task-informative visual tokens. To further enhance reasoning capabilities, we introduce a cooperative training strategy: Causal Reasoning Distillation transfers structured, step-by-step reasoning from a teacher model, while Discriminative Finetuning sharpens decision boundaries between confusable actions. SkeletonLLM demonstrates strong generalization \\revise{in open-vocabulary action recognition, while its learned reasoning capabilities naturally extend to motion captioning and question answering across heterogeneous skeleton formats} -- suggesting a viable path for applying MLLMs to non-native modalities. Code: https://github.com/wangzy01/SkeletonLLM.",
+      "sha256": "ab893ea241299402ee0d6bf65171a408152bbc7a3b73e10bcac6f4cca454bd3a",
+      "verified_at": "2026-10-21T14:26:41.167368+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "13ea3f23e25be3d8a3b9eed0019da8a9ce8a23f9e43fee3c6c986affbfdfd59f",
+      "source_version": "c9822604ed1cb1fad63cc8f33cb3b1a87369a4ee35a7e5c62f8b941f8734e3f2"
+    },
+    "conf-a7567fa7da26fe8f1bd0c9b8": {
+      "title": "MessyKitchens: Contact-rich object-level 3D scene reconstruction",
+      "url": "https://arxiv.org/abs/2603.16868",
+      "text": "Monocular 3D scene reconstruction has recently seen significant progress. Powered by the modern neural architectures and large-scale data, recent methods achieve high performance in depth estimation from a single image. Meanwhile, reconstructing and decomposing common scenes into individual 3D objects remains a hard challenge due to the large variety of objects, frequent occlusions and complex object relations. Notably, beyond shape and pose estimation of individual objects, applications in robotics and animation require physically-plausible scene reconstruction where objects obey physical principles of non-penetration and realistic contacts. In this work we advance object-level scene reconstruction along two directions. First, we introduceMessyKitchens, a new dataset with real-world scenes featuring cluttered environments and providing high-fidelity object-level ground truth in terms of 3D object shapes, poses and accurate object contacts. Second, we build on the recent SAM 3D approach for single-object reconstruction and extend it with Multi-Object Decoder (MOD) for joint object-level scene reconstruction. To validate our contributions, we demonstrate MessyKitchens to significantly improve previous datasets in registration accuracy and inter-object penetration. We also compare our multi-object reconstruction approach on three datasets and demonstrate consistent and significant improvements of MOD over the state of the art. Our new benchmark, code and pre-trained models will become publicly available on our project website: https://messykitchens.github.io/.",
+      "sha256": "7eea4e1e58aac4b5e2dec4db1ecaf9e0069da67b92c335a2b017aedbed39690e",
+      "verified_at": "2026-10-21T14:26:46.998497+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "e66eec81aef1968a12f3dc0725a05bd3afcfc63144ce8361bd8f0cd329955e54",
+      "source_version": "f5ec1c5246287bbd034877d72d417cd64f31d8dd2b0ed04fd001189c6a4e460b"
+    },
+    "conf-a51707c9d59deab5ca5bbc63": {
+      "title": "HI-SLAM2: Geometry-Aware Gaussian SLAM for Fast Monocular Scene Reconstruction (Abstract Reprint)",
+      "url": "https://ojs.aaai.org/index.php/AAAI/article/view/41423",
+      "text": "We present HI-SLAM2, a geometry-aware Gaussian SLAM system that achieves fast and accurate monocular scene reconstruction using only RGB input. Existing Neural SLAM or 3DGS-based SLAM methods often trade off between rendering quality and geometry accuracy, our research demonstrates that both can be achieved simultaneously with RGB input alone. The key idea of our approach is to enhance the ability for geometry estimation by combining easy-to-obtain monocular priors with learning-based dense SLAM, and then using 3D Gaussian splatting as our core map representation to efficiently model the scene. Upon loop closure, our method ensures on-the-fly global consistency through efficient pose graph bundle adjustment and instant map updates by explicitly deforming the 3D Gaussian units based on anchored keyframe updates. Furthermore, we introduce a grid-based scale alignment strategy to maintain improved scale consistency in prior depths for finer depth details. Through extensive experiments on Replica, ScanNet, and ScanNet++, we demonstrate significant improvements over existing Neural SLAM methods and even surpass RGB-D-based methods in both reconstruction and rendering quality.",
+      "sha256": "314441322084f6a2649b878f764bfda5be3bd0aa36ccc0ee71bd13be2faba056",
+      "verified_at": "2026-10-21T14:26:52.283948+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "a94600ee763b19ae2573d86195d91c882397e8b2bfbd8b890835896b3f7c534f",
+      "source_version": "bcb828596ee34fa00d0b9dc72fa2ca443e36e6926dcc845e6de157539b194a64"
+    },
+    "conf-8645abc13ccf756b22045ef0": {
+      "title": "Slender3D: Curve-Guided Multi-View Reconstruction of Slender Structures",
+      "url": "https://ojs.aaai.org/index.php/AAAI/article/view/37979",
+      "text": "Although geometric reconstruction of general objects from images has made remarkable progress in recent years, slender structures remain largely underexplored, despite their critical importance in engineering, biomedical, and agricultural applications. To bridge this gap, we propose a dedicated 2DGS-based geometric reconstruction framework tailored for slender structures, achieving accurate and faithful geometry recovery. Our method first addresses the challenge that most slender objects are texture-less, which hinders reliable feature matching and pose estimation in traditional SfM pipelines. By leveraging the curve-like nature of slender structures, we perform a curve-guided SfM process that provides robust camera poses and accurate 3D curve initialization for Gaussian primitives. To ensure SfM reliability, we introduce a high-precision mask extraction strategy that integrates geometric priors with a segmentation network, effectively handling self-occlusion and thin geometry. Furthermore, to enhance fine geometric recovery, we incorporate a differentiable Poisson reconstruction module to extract an initial mesh during training, which is then refined via image-space iterative optimization using differentiable mesh rasterization. In contrast to conventional approaches that rely on differentiable Gaussian rasterization followed by TSDF-based mesh extraction, our method avoids the additional geometric errors and artifacts introduced during the intermediate TSDF conversion, thereby improving the overall reconstruction quality. Comprehensive experiments on both synthetic and real-world datasets validate that our method achieves superior reconstruction quality compared to state-of-the-art approaches.",
+      "sha256": "d758433af61de4ec37c50ecfddcb5edc2ccf0e5c0c708e4e65e66e046b295e15",
+      "verified_at": "2026-10-21T14:26:57.559499+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "5b78dc23b0950f6f2ab3101ba6896132da3cd499830f1db3cd2cdd6a32809192",
+      "source_version": "c2aa2105a2bffe63e24ba8ac32d30841ab2a54d8ab5e93be097d8615eed35b2d"
+    },
+    "conf-782e51337ff1d27277df9337": {
+      "title": "Evolving Semantic Propagation for Aerial Semantic 3D Gaussian Splatting",
+      "url": "https://ojs.aaai.org/index.php/AAAI/article/view/42418",
+      "text": "Semantic understanding of large-scale aerial scenes represents a critical challenge in 3D computer vision, hindered by the prohibitive cost of dense annotation. This paper introduces EvoPropGS, a novel approach for the semantic segmentation of 3D Gaussian Splatting models that requires only minimal supervision. Our core insight is to leverage the inherent structural repetitions within aerial environments to propagate semantic information from a sparse set of annotations across the entire 3D scene. Our approach constructs a prompt library by pairing SAM-generated mask candidates with DINOv2 feature embeddings from annotated views. For unannotated regions, we generate pseudo-labels by matching region proposals with these featured prompts via cosine similarity. We then formulate optimal prompt selection as a discrete optimization problem solved via evolutionary search, guided by our novel fitness function that evaluates both 3D consistency and 2D semantic coherence. Extensive experiments demonstrate that EvoPropGS achieves accurate segmentation with only 2 percent annotated pixels.",
+      "sha256": "c9a714d2972d06be710c7bed62180fe18d27bf326113e2b4622f9cc8bbfbcabc",
+      "verified_at": "2026-10-21T14:27:02.841980+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "4795d9c70e7117b02d09da928f556905c01ca3ec214b370955488bf759fa3ed6",
+      "source_version": "b8c7f2afb8c963215012e428718b3be7d210fadb5d795a256a283c7ca7a9f558"
+    },
+    "conf-52382ba2487881f6bf73f6ff": {
+      "title": "Hybrid Vector-Occupancy Field for Robust Implicit 3D Surface Reconstruction",
+      "url": "https://ojs.aaai.org/index.php/AAAI/article/view/38062",
+      "text": "We introduce the Hybrid Vector-Occupancy Field (HVOF), a new implicit 3D representation for reconstructing both open and closed surfaces from sparse point clouds. Existing approaches, such as occupancy field and signed distance fields, face severe limitations. They struggle with open surfaces, while unsigned distance field and neural vector field exhibit directional instability in complex topologies and ridge regions. HVOF addresses these challenges by incorporating a smoothly decaying occupancy field around the surface, while capturing precise local geometry using truncated displacement vectors, naturally mitigating direction-field ambiguities near ridge regions. This unified design forms a robust hybrid representation that leverages both occupancy and vector fields. To fulfill it, we design a Hybrid Field variational autoencoder including a hierarchical cross-attention encoder and dual-branch decoder that jointly learn occupancy and vector fields through continuous weighting. Extensive experiments demonstrate that HVOF consistently outperforms state-of-the-art methods across ShapeNet, ABC, and MGN datasets, accurately reconstructing both open and closed surfaces while preserving fine geometric details in complex regions.",
+      "sha256": "71e67031cbf24d5253ec2d1574417257eef58e06f67f8238242e781e34260637",
+      "verified_at": "2026-10-21T14:27:08.117150+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "78f3611a2517baa1ce1807e29e48011be4fff1047d603eeaea910f88f65be5a1",
+      "source_version": "383922f7b1a1ac1ac20320c06489ce58c7ee523a2828e986b30fbe555338e21b"
+    },
+    "conf-037137a0acbcfab330ea0178": {
+      "title": "DenoiseGS: Delta-Based 3D Gaussian Splatting with B-spline Trajectory Optimization for Dynamic Driving Scene Reconstruction",
+      "url": "https://ojs.aaai.org/index.php/AAAI/article/view/37640",
+      "text": "3D street scene reconstruction is a challenging yet crucial task for autonomous driving. Many reconstruction methods often overlook two key limitations for high-quality driving scene reconstruction, sensitivity to camera parameter noise from high-speed vehicles and heavy reliance on precise dynamic object annotations of datasets. To resolve these issues, we propose DenoiseGS, a simple yet effective approach based on explicit 3D Gaussian splatting. Specifically, we propose a novel learnable Delta attribute per Gaussian primitive that operates on the image plane during rasterization to mitigate the impact of noisy camera parameters through modulating the inputs of the alpha-blending process. To enhance the representation of this Delta attribute, we propose a DeltaEstimator that encodes viewing direction and contextual cues to facilitate view dependence. We also extend additional CUDA operations to enable efficient gradient update for the delta attribute. Furthermore, to overcome the limitation of inaccurate annotations for dynamic objects, we propose a learnable B-spline trajectory optimization with a few control points to model the trajectory of a moving object. Comprehensive experiments conducted on nuScenes and Waymo Open Dataset demonstrate that our DenoiseGS outperforms some state-of-the-art methods across all metrics of both reconstruction quality and novel view synthesis.",
+      "sha256": "b49c39c58f52fdd2526207ba625c8a75cf9e2eaeb4c1156f73eca193781dd84f",
+      "verified_at": "2026-10-21T14:27:13.389534+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "63ac0f5ffcd83796b8fc19a0fc8647c533f1065aa5950e62438712498f7e10c3",
+      "source_version": "24b08b426609f39e24e4c767a37b144415eb0c933dac321a76ddd7e7eb9838dc"
+    },
+    "conf-dc460f6bc7f674219b755a1b": {
+      "title": "Towards Practical World Model-based Reinforcement Learning for Vision-Language-Action Models",
+      "url": "https://arxiv.org/abs/2603.20607",
+      "text": "Vision-Language-Action (VLA) models show strong generalization for robotic control, but finetuning them with reinforcement learning (RL) is constrained by the high cost and safety risks of real-world interaction. Training VLA models in interactive world models avoids these issues but introduces several challenges, including pixel-level world modeling, multi-view consistency, and compounding errors under sparse rewards. Building on recent advances across large multimodal models and model-based RL, we propose VLA-MBPO, a practical framework to tackle these problems in VLA finetuning. Our approach has three key design choices: (i) adapting unified multimodal models (UMMs) for data-efficient world modeling; (ii) an interleaved view decoding mechanism to enforce multi-view consistency; and (iii) chunk-level branched rollout to mitigate error compounding. Theoretical analysis and experiments across simulation and real-world tasks demonstrate that VLA-MBPO significantly improves policy performance and sample efficiency, underscoring its robustness and scalability for real-world robotic deployment.",
+      "sha256": "fd66d5a13f28db423062f7e9e58c8f072943ccdcab2558820d91a76367c2f66e",
+      "verified_at": "2026-10-21T14:27:18.947753+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "70ca14fc68bebbe42414c0fdc0e60f6ac2762feb208c3c4a438fbdf71e7f33ce",
+      "source_version": "29e2dcd44017aba2be7072b57216c9edfbd0513f3370a18b770623e95d750e6c"
+    },
+    "conf-a7c2aa46971234d74aaea9da": {
+      "title": "Grounding World Simulation Models in a Real-World Metropolis",
+      "url": "https://arxiv.org/abs/2603.15583",
+      "text": "What if a world simulation model could render not an imagined environment but a city that actually exists? Prior generative world models synthesize visually plausible yet artificial environments by imagining all content. We present Seoul World Model (SWM), a city-scale world model grounded in the real city of Seoul. SWM anchors autoregressive video generation through retrieval-augmented conditioning on nearby street-view images. However, this design introduces several challenges, including temporal misalignment between retrieved references and the dynamic target scene, limited trajectory diversity and data sparsity from vehicle-mounted captures at sparse intervals. We address these challenges through cross-temporal pairing, a large-scale synthetic dataset enabling diverse camera trajectories, and a view interpolation pipeline that synthesizes coherent training videos from sparse street-view images. We further introduce a Virtual Lookahead Sink to stabilize long-horizon generation by continuously re-grounding each chunk to a retrieved image at a future location. We evaluate SWM against recent video world models across three cities: Seoul, Busan, and Ann Arbor. SWM outperforms existing methods in generating spatially faithful, temporally consistent, long-horizon videos grounded in actual urban environments over trajectories reaching hundreds of meters, while supporting diverse camera movements and text-prompted scenario variations.",
+      "sha256": "b666679ac6b1baef1f617e291aa42fc2abd6521d63c880e4a6fb33f1513896a7",
+      "verified_at": "2026-10-21T14:27:24.667251+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "73150619d295303e67d84a9a87b1467286d0b916bc79533892a1b0ef69027d26",
+      "source_version": "5a18cdf2a6ab6442a72477fd674023bdcc6c09ef05ee7792469d049cf58bc415"
+    },
+    "conf-2978d8f6be84236338b74b1d": {
+      "title": "Geometry-Aware Stereo Matching via Monocular Disparity Distribution Prior and Gradient Enhancement",
+      "url": "https://ojs.aaai.org/index.php/AAAI/article/view/38253",
+      "text": "Stereo matching recovers 3D scene information based on the correlation between corresponding pixels. Despite impressive progress, existing methods lack sufficient correlation priors in ill-posed regions such as occlusions, detailed and reflective regions. In this paper, we propose Geometry Aware Stereo Matching Network (GEAStereo) to enhance geometric structure perception and address this issue. We adaptively incorporate the Monocular Disparity Distribution Prior into the stereo cost volume, building Mono-Stereo Fusion Volume (MSFV), which effectively captures global geometric structures and rectifies the correlation information in ill-posed regions. Furthermore, we introduce rich detail information from gradient features and construct a Detail-Aware Volume (DAV) by aggregating the group-wise cost volume under the guidance of gradient spatial attention, thus enhancing the correlation modeling in detailed structures. Jointly, MSFV and DAV provide rich correlation priors for disparity iterative optimization. Experimental results show that our method achieves competitive results on the ETH3D and KITTI2015 benchmarks. Compared with the state-of-the-art methods, our method demonstrates stronger performance in zero-shot generalization.",
+      "sha256": "b102299bad597f1811521cb46885f05d306990ead0e4ee3753f1fe360d982b9a",
+      "verified_at": "2026-10-21T14:27:29.971349+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "a4652f8ad2193291fdac009929c6c503c384f14ad58089fe90b5032193c7f434",
+      "source_version": "1955e7d4c3e10f96c570b7caff1042a137cecf60787c88f4d8a1ab798738afb7"
     }
   }
 }
