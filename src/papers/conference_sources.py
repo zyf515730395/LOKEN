@@ -12,7 +12,7 @@ import json
 from pathlib import Path
 import re
 import time
-from urllib.parse import quote, unquote, urljoin, urlsplit
+from urllib.parse import quote, unquote, urljoin, urlsplit, urldefrag
 
 import requests
 
@@ -30,6 +30,7 @@ HOSTS = frozenset({
     'doi.org', 'api.crossref.org', 'proceedings.iclr.cc',
     's2026.conference-schedule.org', 's2025.conference-schedule.org',
     'sa2025.conference-schedule.org',
+    'ras.papercept.net',
 })
 # Explicit publisher transitions; a redirect to another otherwise supported
 # publisher is still rejected unless this pair is declared here.
@@ -84,6 +85,22 @@ def _published(value: str) -> str:
 def _page_details(raw: bytes, url: str, title: str) -> dict:
     from bs4 import BeautifulSoup
     soup = BeautifulSoup(raw, 'html.parser')
+    if urlsplit(url).hostname == 'ras.papercept.net':
+        identity = urlsplit(url).fragment
+        matches = [link for link in soup.select('.pTtl a[onclick]')
+                   if re.fullmatch(r"\s*viewAbstract\(['\"]?" + re.escape(identity) + r"['\"]?\);?\s*(?:return false;?)?\s*", str(link.get('onclick', '')))] if identity.isdigit() else []
+        if len(matches) != 1 or normalize_title(matches[0].get_text(' ', strip=True)) != normalize_title(title):
+            raise PaperSummaryError('paper_identity_mismatch', 'Papercept paper number and title must match exactly')
+        blocks = soup.select('#Ab' + identity)
+        if len(blocks) != 1:
+            raise PaperSummaryError('abstract_unavailable', 'Papercept abstract block is missing or ambiguous')
+        labels = [node for node in blocks[0].find_all('strong') if node.get_text(' ', strip=True).strip().casefold() == 'abstract:']
+        if len(labels) != 1:
+            raise PaperSummaryError('abstract_unavailable', 'Papercept Abstract label is missing or ambiguous')
+        from bs4 import Tag
+        abstract = ' '.join(node.get_text(' ', strip=True) if isinstance(node, Tag) else str(node).strip()
+                            for node in labels[0].next_siblings).strip()
+        return {'metadata': {}, 'links': [], 'abstract': abstract, 'description': '', 'verified_cdn_urls': []}
     meta = {str(tag.get('name', tag.get('property', ''))).casefold(): str(tag.get('content', ''))
             for tag in soup.select('meta[content]')}
     identities = [meta.get('citation_title', ''), meta.get('dc.title', '')]
@@ -575,7 +592,16 @@ def acquire_conference_abstract(record: dict, cache_root: Path, *, refresh: bool
             # pages. Recheck exact identity before reusing its bounded raw bytes.
             existing = HOST_COOLDOWNS.parent.parent / 'dates/responses' / (hashlib.sha256(url.encode()).hexdigest() + '.raw')
             schedule_host = urlsplit(url).hostname in {'s2026.conference-schedule.org', 's2025.conference-schedule.org', 'sa2025.conference-schedule.org'}
-            if not refresh and schedule_host and existing.exists() and existing.stat().st_size <= MAX_BYTES:
+            papercept = urlsplit(url).hostname == 'ras.papercept.net'
+            if papercept:
+                original = urldefrag(url)[0]
+                existing = HOST_COOLDOWNS.parent.parent / (hashlib.sha256(original.encode()).hexdigest() + '.html')
+                if not refresh and existing.exists() and existing.stat().st_size <= MAX_BYTES:
+                    info = json.loads(existing.with_suffix('.json').read_text(encoding='utf-8')) if existing.with_suffix('.json').exists() else {}
+                    raw = existing.read_bytes()
+                    if info.get('url') != original or info.get('sha256') != hashlib.sha256(raw).hexdigest():
+                        raise PaperSummaryError('source_metadata_invalid', 'Papercept program cache provenance mismatch')
+            if not refresh and (schedule_host or papercept) and existing.exists() and existing.stat().st_size <= MAX_BYTES:
                 _safe_url(url)
                 raw, content_type, final = existing.read_bytes(), 'text/html', url
                 _page_details(raw, final, record['title'])
