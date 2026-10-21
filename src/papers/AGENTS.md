@@ -2,6 +2,8 @@
 
 ## Sources, publication and taxonomy
 
+- Papercept官方程序页按URL数字fragment定位单篇；必须匹配同一viewAbstract编号的pTtl标题及Ab编号摘要块，不以整页标题或其他论文摘要替代。复用官方程序采集缓存时验证原URL回执哈希、精确论文身份，保留fragment与完整原文哈希；摘要仅提取Abstract标记之后正文，缺字段拒绝。
+
 - SIGGRAPH官方日程仅支持config/conferences.yaml已确认的精确域名；单篇页以当前presentation-title核对身份，Description只作为official_description保存，不冒充official_abstract，不放宽跨域跳转。周报证据保留原文哈希、来源版本及basis；来源适配修复后复用成功逐篇缓存。
 
 - 周报持续监督入口watch不直接生成或持有runtime锁；串行启动run子进程并等待退出，成功年份结束后退出，暂时失败或让行按60至900秒退避恢复。监督状态独立保存；子进程终止或监督退出不删除原事务、缓存和锁文件。Git网络命令可有限重试，真实冲突仍由原严格校验阻止发布。
