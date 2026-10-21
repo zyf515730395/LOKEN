@@ -5212,6 +5212,60 @@
       "basis": "official_abstract",
       "source_sha256": "279bbf687de8deb51b9712c7185cfd784116fbae7b0079ef5e62ee89adae9fcc",
       "source_version": "610d2a0f504e934ab156072b738c1a9cd3d8e9eb4ccc64b4ec9c91760d853f32"
+    },
+    "conf-0730ba8690d26de9da6f3fff": {
+      "title": "Yume1.5: A Text-Controlled Interactive World Generation Model",
+      "url": "https://arxiv.org/abs/2512.22096",
+      "text": "Recent approaches have demonstrated the promise of using diffusion models to generate interactive and explorable worlds. However, most of these methods face critical challenges such as excessively large parameter sizes, reliance on lengthy inference steps, and rapidly growing historical context, which severely limit real-time performance and lack text-controlled generation capabilities. To address these challenges, we propose \\method, a novel framework designed to generate realistic, interactive, and continuous worlds from a single image or text prompt. \\method achieves this through a carefully designed framework that supports keyboard-based exploration of the generated worlds. The framework comprises three core components: (1) a long-video generation framework integrating unified context compression with linear attention; (2) a real-time streaming acceleration strategy powered by bidirectional attention distillation and an enhanced text embedding scheme; (3) a text-controlled method for generating world events. We have provided the codebase in the supplementary material.",
+      "sha256": "0e52378b65d90f84277c86b72bb84f248c88cc47fb5646b71cc6a5239354470e",
+      "verified_at": "2026-10-21T21:03:23.636031+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "7dba9ec3d3a3fc109b621f496462aa5aac97e52d123385a995fe7affb6cb6d57",
+      "source_version": "c2a13191f3557df9d57c9c9a4d1b9798e84a63e0e0a01bfc1c7d684d0b388516"
+    },
+    "conf-53883e2001eb5fd702deb0e1": {
+      "title": "RAPTOR: Real-Time High-Resolution UAV Video Prediction with Efficient Video Attention",
+      "url": "https://arxiv.org/abs/2512.21710",
+      "text": "Video prediction is plagued by a fundamental trilemma: achieving high-resolution and perceptual quality typically comes at the cost of real-time speed, hindering its use in latency-critical applications. This challenge is most acute for autonomous UAVs in dense urban environments, where foreseeing events from high-resolution imagery is non-negotiable for safety. Existing methods, reliant on iterative generation (diffusion, autoregressive models) or quadratic-complexity attention, fail to meet these stringent demands on edge hardware. To break this long-standing trade-off, we introduce RAPTOR, a video prediction architecture that achieves real-time, high-resolution performance. RAPTOR's single-pass design avoids the error accumulation and latency of iterative approaches. Its core innovation is Efficient Video Attention (EVA), a novel translator module that factorizes spatiotemporal modeling. Instead of processing flattened spacetime tokens with $O((ST)^2)$ or $O(ST)$ complexity, EVA alternates operations along the spatial (S) and temporal (T) axes. This factorization reduces the time complexity to $O(S + T)$ and memory complexity to $O(max(S, T))$, enabling global context modeling at $512^2$ resolution and beyond, operating directly on dense feature maps with a patch-free design. Complementing this architecture is a 3-stage training curriculum that progressively refines predictions from coarse structure to sharp, temporally coherent details. Experiments show RAPTOR is the first predictor to exceed 30 FPS on a Jetson AGX Orin for $512^2$ video, setting a new state-of-the-art on UAVid, KTH, and a custom high-resolution dataset in PSNR, SSIM, and LPIPS. Critically, RAPTOR boosts the mission success rate in a real-world UAV navigation task by 18%, paving the way for safer and more anticipatory embodied agents.",
+      "sha256": "2a8b0427548b90a94264fcc1ecf41683730e094d49b733d3fe20c6455fbb0006",
+      "verified_at": "2026-10-21T21:03:29.360644+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "22037b8c9c7aebb7d6ca93a483dc5d0b6e45ca5d5add7b6cfa6a2b955648e736",
+      "source_version": "2dff31c9673b9b3a288e9c93dd94945cf8fc052dd65d85c3f5a78252e973e6e1"
+    },
+    "2512.21776": {
+      "title": "Inference-based GAN Video Generation",
+      "url": "https://arxiv.org/abs/2512.21776",
+      "text": "Video generation has seen remarkable progress thanks to advancements in generative deep learning. However, generating long sequences remains a significant challenge. Generated videos should not only display coherent and continuous movement but also meaningful movement in successions of scenes. Models such as GANs, VAEs, and Diffusion Networks have been used for generating short video sequences, typically up to 16 frames. In this paper, we first propose a new type of video generator by enabling adversarial-based unconditional video generators with a variational encoder, akin to a VAE-GAN hybrid structure. The proposed model, as in other video deep learning-based processing frameworks, incorporates two processing branches, one for content and another for movement. However, existing models struggle with the temporal scaling of the generated videos. Classical approaches often result in degraded video quality when attempting to increase the generated video length, especially for significantly long sequences. To overcome this limitation, our research study extends the initially proposed VAE-GAN video generation model by employing a novel, memory-efficient approach to generate long videos composed of hundreds or thousands of frames ensuring their temporal continuity, consistency and dynamics. Our approach leverages a Markov chain framework with a recall mechanism, where each state represents a short-length VAE-GAN video generator. This setup enables the sequential connection of generated video sub-sequences, maintaining temporal dependencies and resulting in meaningful long video sequences.",
+      "sha256": "ef769194850fd5fa38345b0aa815dc36e1de622079bb21a92f855d72f39bdc07",
+      "verified_at": "2026-10-21T21:03:34.443622+08:00"
+    },
+    "conf-7661d97e5d494e34608fc3be": {
+      "title": "Split4D: Decomposed 4D Scene Reconstruction Without Video Segmentation",
+      "url": "https://arxiv.org/abs/2512.22745",
+      "text": "This paper addresses the problem of decomposed 4D scene reconstruction from multi-view videos. Recent methods achieve this by lifting video segmentation results to a 4D representation through differentiable rendering techniques. Therefore, they heavily rely on the quality of video segmentation maps, which are often unstable, leading to unreliable reconstruction results. To overcome this challenge, our key idea is to represent the decomposed 4D scene with the Freetime FeatureGS and design a streaming feature learning strategy to accurately recover it from per-image segmentation maps, eliminating the need for video segmentation. Freetime FeatureGS models the dynamic scene as a set of Gaussian primitives with learnable features and linear motion ability, allowing them to move to neighboring regions over time. We apply a contrastive loss to Freetime FeatureGS, forcing primitive features to be close or far apart based on whether their projections belong to the same instance in the 2D segmentation map. As our Gaussian primitives can move across time, it naturally extends the feature learning to the temporal dimension, achieving 4D segmentation. Furthermore, we sample observations for training in a temporally ordered manner, enabling the streaming propagation of features over time and effectively avoiding local minima during the optimization process. Experimental results on several datasets show that the reconstruction quality of our method outperforms recent methods by a large margin.",
+      "sha256": "5a46762e483007c431bd101fb4857d0adc04f775355567faca4cdad0ff53aa36",
+      "verified_at": "2026-10-21T21:03:40.212736+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "08ecffd792e6a47a068027a2ed8019fc0160c47ca1102ab44f6a802a806b86fc",
+      "source_version": "9e22fb2b1a1e8218221b277d5c834179fc35fb7b356d662c4bc2074c3b1bbe55"
+    },
+    "2512.22294": {
+      "title": "A Three-Level Alignment Framework for Large-Scale 3D Retrieval and Controlled 4D Generation",
+      "url": "https://arxiv.org/abs/2512.22294",
+      "text": "We introduce Uni4D, a unified framework for large scale open vocabulary 3D retrieval and controlled 4D generation based on structured three level alignment across text, 3D models, and image modalities. Built upon the Align3D 130 dataset, Uni4D employs a 3D text multi head attention and search model to optimize text to 3D retrieval through improved semantic alignment. The framework further strengthens cross modal alignment through three components: precise text to 3D retrieval, multi view 3D to image alignment, and image to text alignment for generating temporally consistent 4D assets. Experimental results demonstrate that Uni4D achieves high quality 3D retrieval and controllable 4D generation, advancing dynamic multimodal understanding and practical applications.",
+      "sha256": "6a7912df54e0dd40617a821489298d2551ac1332df6f97a45eea96c9144924e1",
+      "verified_at": "2026-10-21T21:03:45.281235+08:00"
+    },
+    "conf-cf1902eb3fd66ed932a130db": {
+      "title": "UMAMI: Unifying Masked Autoregressive Models and Deterministic Rendering for View Synthesis",
+      "url": "https://arxiv.org/abs/2512.20107",
+      "text": "Novel view synthesis (NVS) seeks to render photorealistic, 3D-consistent images of a scene from unseen camera poses given only a sparse set of posed views. Existing deterministic networks render observed regions quickly but blur unobserved areas, whereas stochastic diffusion-based methods hallucinate plausible content yet incur heavy training- and inference-time costs. In this paper, we propose a hybrid framework that unifies the strengths of both paradigms. A bidirectional transformer encodes multi-view image tokens and Plucker-ray embeddings, producing a shared latent representation. Two lightweight heads then act on this representation: (i) a feed-forward regression head that renders pixels where geometry is well constrained, and (ii) a masked autoregressive diffusion head that completes occluded or unseen regions. The entire model is trained end-to-end with joint photometric and diffusion losses, without handcrafted 3D inductive biases, enabling scalability across diverse scenes. Experiments demonstrate that our method attains state-of-the-art image quality while reducing rendering time by an order of magnitude compared with fully generative baselines.",
+      "sha256": "751de72d4e5f731c16d34ecadb4f88e9781c011aa1860cd320f4f61368a8e5b1",
+      "verified_at": "2026-10-21T21:03:51.064750+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "ff23241c52a34a5c76de63cdc26721c82b668a0a9b2f824fcc4eb30da49155c8",
+      "source_version": "835d7d3b49ae508383761c629a365f662a1ca5f05479c8f4cbdac6106283eec1"
     }
   }
 }
