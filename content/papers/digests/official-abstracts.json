@@ -1705,6 +1705,56 @@
       "basis": "official_abstract",
       "source_sha256": "5cb2bc28882d5e7871e529441f180d05b41966ebaf38bc18233a994b297d8408",
       "source_version": "574bd990f9f7431b07bfc73d69f9c61738daa060be32f6fe9c12701b3a5d2a8f"
+    },
+    "conf-f54cba193ada7cfa20410e07": {
+      "title": "UniDDT: Unifying Multimodal Understanding and Generation with Decoupled Diffusion Transformer",
+      "url": "https://arxiv.org/abs/2606.16255",
+      "text": "Unified Multimodal Models (UMMs) have emerged as a critical direction for general-purpose multimodal intelligence, integrating understanding and generation into a single framework. However, existing UMMs face prominent challenges: (1) the inherent learning conflicts between visual understanding and generation tasks, leading to suboptimal modeling in both tasks; (2) different understanding and generation visual spaces impeding scalability; (3) over-reliance on task-specific data that neglects the duality of text-image understanding and generation. To address these challenges, we propose UniDDT, which leverages a Noisy ViT encoder along with an LLM to unify semantic encoding for visual generation and understanding tasks, while employing a separate diffusion decoder to decouple diffusion decoding from text decoding. With this Noisy ViT encoder, UniDDT is able to leverage the latent space as a unified visual representation, enabling seamless compatibility between understanding and generation tasks. Thus, the scalability within the generation tasks and the semantic expressiveness within understanding tasks can be balanced. Also, we construct dual data structures from the same image-text pairs, fostering interdependence between the generation and understanding data to exploit their inherent duality. Extensive experiments demonstrate that UniDDT achieves effective unification of multimodal understanding and generation with enhanced semantic consistency and scalability. For visual generation tasks, our UniDDT achieves 0.87 GenEval score and 86.9 DPG overall score. For multimodal understanding tasks, our UniDDT achieves 1699.5 score on MME benchmark and 76.5 overall score on SEEDbench.",
+      "sha256": "dc97f8df070081aa29d609fa09408439c0c7d7f680da2233e62e45a727489143",
+      "verified_at": "2026-10-21T09:39:31.760559+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "80337a12d7c5e988c851e3a2e75525e3c25a53b148724858ad4bb9ff209390a5",
+      "source_version": "a1a07c574e0c0c6d2e0bc51761aa141cc3bad1108c8982aa57af84234b941967"
+    },
+    "conf-14f26be0e26250b24c902cf4": {
+      "title": "Shift-and-Sum Quantization for Visual Autoregressive Models",
+      "url": "https://arxiv.org/abs/2606.16131",
+      "text": "Post-training quantization (PTQ) enables efficient deployment of deep networks using a small set of data. Its application to visual autoregressive models (VAR), however, remains relatively unexplored. We identify two key challenges for applying PTQ to VAR: (i) large reconstruction errors in attention-value products, especially at coarse scales where high attention scores occur more frequently; and (ii) a discrepancy between the sampling frequencies of codebook entries and their predicted probabilities due to limited calibration data. To address these challenges, we propose a PTQ framework tailored for VAR. First, we introduce a shift-and-sum quantization method that reduces reconstruction errors by aggregating quantized results from symmetrically shifted duplicates of value tokens. Second, we present a resampling strategy for calibration data that aligns sampling frequencies of codebook entries with their predicted probabilities. Experiments on class-conditional image generation, inpainting, outpainting, and class-conditional editing show consistent improvements across VAR architectures, establishing a new state of the art in PTQ for VAR.",
+      "sha256": "48c06a6db1d8741a6f0b2b9d9eb4d8e97263faeef1cc1e123a458e143574b9f2",
+      "verified_at": "2026-10-21T09:39:37.584311+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "39ad4c53ebf084d8d6643a13b01edc2cee5ae4b39b0fa4f137a44d3b89bad066",
+      "source_version": "5d10eef76e37e492d9c1fabae1760eaf422482afd539276ca4aaeb5ef9f93f35"
+    },
+    "conf-55231fb6806fe7514b405c2f": {
+      "title": "FrozenDrive: Zero-Shot Text-Guided Driving Scene Generation and Data Augmentation with Parameter-Free Frozen Diffusion Model",
+      "url": "https://arxiv.org/abs/2606.20110",
+      "text": "Synthetic data for autonomous driving is surging, powered by diffusion models that promise scalable scene generation. Yet key obstacles remain, as enforcing multi-view and temporal consistency often relies on backbone fine-tuning or added layers, which erodes pre-trained knowledge and weakens text alignment. Models also stay close to the training distribution, struggling under adverse weather and unseen configurations, and fidelity favors frequent over rare classes. We address these gaps with FrozenDrive, a controllable generative framework that preserves a pretrained diffusion models knowledge while achieving strong consistency. FrozenDrive conditions on rich driving-stack signals and text prompts, and introduces knowledge-preserving spatio-temporal attention to impose cross-view alignment and temporal coherence in a single pass within a parameter-free frozen diffusion backbone. An additional object-focused constraint improves per-object fidelity for rare categories. Without any weather- or scene-specific fine-tuning, our model synthesizes globally coherent multi-view driving scenes from text, particularly under adverse and rare conditions, and surpasses prior baselines. On nuScenes, FrozenDrive augmented data significantly improves AD models performance, especially at night and in rain, demonstrating stronger robustness when trained with our scenario-targeted data.",
+      "sha256": "5751b82f73e65363d352008bd6c2bb48193b5a28100784831d4e184e58297802",
+      "verified_at": "2026-10-21T09:39:43.464938+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "06c1affb91971c6b7c7708070094da4a9d8b2f7150d48ad7901704387f4dc782",
+      "source_version": "e8b02fde8a2e5e9897757985d7f4251004f1290c9d3d4a5835576e5a8f0c2f1d"
+    },
+    "conf-ded2b84b00198dae8331cc07": {
+      "title": "Geometry-Preserving in 3D Gaussian Splatting for LiDAR-Camera Extrinsic Calibration",
+      "url": "https://arxiv.org/abs/2606.20103",
+      "text": "Accurate LiDAR-camera calibration is essential for robust multi-modal perception. Targetless approaches avoid manual setup but remain limited by the scarcity of discriminative cross-modal features. Recent methods address this by reconstructing the scene within a differentiable model, enabling extrinsic optimization through dense photometric supervision. Among these, 3D Gaussian Splatting (3DGS) has been widely adopted as a geometric proxy that bridges LiDAR and camera within a single differentiable framework. However, since 3DGS was originally designed for novel view synthesis, existing methods tend to prioritize rendering quality, causing the proxy geometry to drift from the true LiDAR structure. We propose a framework that preserves the metric geometry of the Gaussian proxy by aggregating multi-view LiDAR observations for dense depth supervision and blocking photometric gradients from updating the Gaussian spatial parameters. We validate our method on public driving datasets, where it consistently outperforms existing targetless methods in calibration accuracy.",
+      "sha256": "ac8bacf8eae367b5c85e227b316fdadcbbf4d9721e65f9da431a413278bebe9c",
+      "verified_at": "2026-10-21T09:39:49.322097+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "7cd317eb43cfc97162f187ea461a454911184757dc423a0bcf9549aa98cf0c77",
+      "source_version": "dac63627a632ff6058abdc6c3845f3a9c55cb92ded303da4b2ba6c850c4180a2"
+    },
+    "conf-8cf5afc496dc6e2146d3f84f": {
+      "title": "Future Dynamic 3D Reconstruction: A 3D World Model with Disentangled Ego-Motion",
+      "url": "https://icml.cc/virtual/2026/poster/60566",
+      "text": "Forecasting the evolution of dynamic environments is crucial for autonomous agents. While generative world models have recently achieved high photorealism in 2D video synthesis by mixing ego-motion and environmental dynamics within the image plane, they exhibit physical inconsistencies, such as morphing or vanishing objects, especially over long time horizons. In this paper, we propose FR3D, a world model that predicts a persistent 3D latent representation for future dynamic 3D reconstruction. Unlike prior works that treat the world as a sequence of image-based features, FR3D explicitly decouples the 3D evolution of the scene from the agent's trajectory, treating the inferred ego-motion as a latent proxy for action. This disentanglement resolves the ambiguities between self-motion and world-motion, ensuring geometric consistency into the future. Furthermore, we introduce a teacher-student distillation strategy that leverages the spatial \"common sense\" of off-the-shelf foundation models, leading to robust zero-shot generalization. Extensive experiments demonstrate FR3D's strong performance for future dynamic 3D reconstruction from monocular observations across multiple datasets, even 2 seconds into the future. Project page: https://fr3d-wm.github.io. Show more",
+      "sha256": "69c634c8dd15fa7591a61ffa33147000d47080c90d242b03fb589d68e0fcdd6d",
+      "verified_at": "2026-10-21T09:39:52.193264+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "4cc99d48ca1814e97bf2cd1b0495ea3b36034df6a56556867d556bf2aa03ece2",
+      "source_version": "2510e9dae6b5b7b1d5cfea6df4cce54aa2ccf997a3a77ef27ad19b5170c9149f"
     }
   }
 }
