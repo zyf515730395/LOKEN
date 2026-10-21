@@ -3835,6 +3835,90 @@
       "basis": "official_abstract",
       "source_sha256": "8750a261469254de6487231a88be9226f7bc010116aa0d27381ce2ced77d1e57",
       "source_version": "c8c987027c2d25336a47f1b57a2f100e6115ae009ab08250c2b9dce8369518b4"
+    },
+    "conf-f868bb9e5c595bfb8c43f4c8": {
+      "title": "VideoWeaver: Multimodal Multi-View Video-to-Video Transfer for Embodied Agents",
+      "url": "https://arxiv.org/abs/2603.25420",
+      "text": "Recent progress in video-to-video (V2V) translation has enabled realistic resimulation of embodied AI demonstrations, a capability that allows pretrained robot policies to be transferable to new environments without additional data collection. However, prior works can only operate on a single view at a time, while embodied AI tasks are commonly captured from multiple synchronized cameras to support policy learning. Naively applying single-view models independently to each camera leads to inconsistent appearance across views, and standard transformer architectures do not scale to multi-view settings due to the quadratic cost of cross-view attention. We present VideoWeaver, the first multimodal multi-view V2V translation framework. VideoWeaver is initially trained as a single-view flow-based V2V model. To achieve an extension to the multi-view regime, we propose to ground all views in a shared 4D latent space derived from a feed-forward spatial foundation model, namely, Pi3. This encourages view-consistent appearance even under wide baselines and dynamic camera motion. To scale beyond a fixed number of cameras, we train views at distinct diffusion timesteps, enabling the model to learn both joint and conditional view distributions. This in turn allows autoregressive synthesis of new viewpoints conditioned on existing ones. Experiments show superior or similar performance to the state-of-the-art on the single-view translation benchmarks and, for the first time, physically and stylistically consistent multi-view translations, including challenging egocentric and heterogeneous-camera setups central to world randomization for robot learning.",
+      "sha256": "f7fb522fbad048bc9852243bc159cd60eba4bb84cb8a5ff1ea5e286465c6aca3",
+      "verified_at": "2026-10-21T14:14:59.333048+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "466a510340d41d670720ff97fbae07c7e377d590a695260f9a7dde4a66c47814",
+      "source_version": "d76651f41ebdf4d2974936ceeb9af6487414fa54bb3a593fe9fc42c461d20946"
+    },
+    "conf-30b84a35c23cfd9f4c4c7166": {
+      "title": "From None to All: Self-Supervised 3D Reconstruction via Novel View Synthesis",
+      "url": "https://arxiv.org/abs/2603.27455",
+      "text": "In this paper, we introduce NAS3R, a self-supervised feed-forward framework that jointly learns explicit 3D geometry and camera parameters with no ground-truth annotations and no pretrained priors. During training, NAS3R reconstructs 3D Gaussians from uncalibrated and unposed context views and renders target views using its self-predicted camera parameters, enabling self-supervised training from 2D photometric supervision. To ensure stable convergence, NAS3R integrates reconstruction and camera prediction within a shared transformer backbone regulated by masked attention, and adopts a depth-based Gaussian formulation that facilitates well-conditioned optimization. The framework is compatible with state-of-the-art supervised 3D reconstruction architectures and can incorporate pretrained priors or intrinsic information when available. Extensive experiments show that NAS3R achieves superior results to other self-supervised methods, establishing a scalable and geometry-aware paradigm for 3D reconstruction from unconstrained data. Code and models are publicly available at https://ranrhuang.github.io/nas3r/.",
+      "sha256": "33fb85c038cdeb7184bf8548fca0bc1d3b16736599577c2d744faf9392a0490b",
+      "verified_at": "2026-10-21T14:15:05.163468+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "47fe4cd26443beee8e0ada3197ed337c1f2e9f443c5891661199f607505da6bc",
+      "source_version": "d92e6884df85574a0f1625ff657f60ff25ad65012aaee1fdd602d09e27811974"
+    },
+    "conf-f0791f3f848756c1ff33612e": {
+      "title": "Complet4R: Geometric Complete 4D Reconstruction",
+      "url": "https://arxiv.org/abs/2603.27300",
+      "text": "We introduce Complet4R, a novel end-to-end framework for Geometric Complete 4D Reconstruction, which aims to recover temporally coherent and geometrically complete reconstruction for dynamic scenes. Our method formalizes the task of Geometric Complete 4D Reconstruction as a unified framework of reconstruction and completion, by directly accumulating full contexts onto each frame. Unlike previous approaches that rely on pairwise reconstruction or local motion estimation, Complet4R utilizes a decoder-only transformer to operate all context globally directly from sequential video input, reconstructing a complete geometry for every single timestamp, including occluded regions visible in other frames. Our method demonstrates the state-of-the-art performance on our proposed benchmark for Geometric Complete 4D Reconstruction and the 3D Point Tracking task. Code will be released to support future research.",
+      "sha256": "33454ffde395e277d9ecda0d06239d21248c0337fb4815b6ce555f8ee1e792b4",
+      "verified_at": "2026-10-21T14:15:11.149929+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "9bc01147c65b72cd00a5a18754d4433dcf35244b930a58ee398c33d89cf6067d",
+      "source_version": "523cdf36b8cb25c8c7fe06dae604e14238095acf268327f85159fa0e477a3d4f"
+    },
+    "conf-691323ee1b3f51eaa9023a02": {
+      "title": "GaussianGPT: Towards Autoregressive 3D Gaussian Scene Generation",
+      "url": "https://arxiv.org/abs/2603.26661",
+      "text": "Most recent advances in 3D generative modeling rely on diffusion or flow-matching formulations. We instead explore a fully autoregressive alternative and introduce GaussianGPT, a transformer-based model that directly generates 3D Gaussians via next-token prediction, thus facilitating full 3D scene generation. We first compress Gaussian primitives into a discrete latent grid using a sparse 3D convolutional autoencoder with vector quantization. The resulting tokens are serialized and modeled using a causal transformer with 3D rotary positional embedding, enabling sequential generation of spatial structure and appearance. Unlike diffusion-based methods that refine scenes holistically, our formulation constructs scenes step-by-step, naturally supporting completion, outpainting, controllable sampling via temperature, and flexible generation horizons. This formulation leverages the compositional inductive biases and scalability of autoregressive modeling while operating on explicit representations compatible with modern neural rendering pipelines, positioning autoregressive transformers as a complementary paradigm for controllable and context-aware 3D generation.",
+      "sha256": "fef56be5f55b610743614b9ffbd66b8e6336a027e38077802d0f794a71d6f527",
+      "verified_at": "2026-10-21T14:15:16.856871+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "a04a3fbdbfbc0ea59dfe9da5cd3d0972c070fdee05ec24ae5236cd3cd86bca8a",
+      "source_version": "cbd691d0e07065b0ffe9cad121e1124b38f04abe4e65880b6b601650ba9801f8"
+    },
+    "2603.24994": {
+      "title": "Relaxed Rigidity with Ray-based Grouping for Dynamic Gaussian Splatting",
+      "url": "https://arxiv.org/abs/2603.24994",
+      "text": "The reconstruction of dynamic 3D scenes using 3D Gaussian Splatting has shown significant promise. A key challenge, however, remains in modeling realistic motion, as most methods fail to align the motion of Gaussians with real-world physical dynamics. This misalignment is particularly problematic for monocular video datasets, where failing to maintain coherent motion undermines local geometric structure, ultimately leading to degraded reconstruction quality. Consequently, many state-of-the-art approaches rely heavily on external priors, such as optical flow or 2D tracks, to enforce temporal coherence. In this work, we propose a novel method to explicitly preserve the local geometric structure of Gaussians across time in 4D scenes. Our core idea is to introduce a view-space ray grouping strategy that clusters Gaussians intersected by the same ray, considering only those whose $\\alpha$-blending weights exceed a threshold. We then apply constraints to these groups to maintain a consistent spatial distribution, effectively preserving their local geometry. This approach enforces a more physically plausible motion model by ensuring that local geometry remains stable over time, eliminating the reliance on external guidance. We demonstrate the efficacy of our method by integrating it into two distinct baseline models. Extensive experiments on challenging monocular datasets show that our approach significantly outperforms existing methods, achieving superior temporal consistency and reconstruction quality.",
+      "sha256": "db7eb92fc89ee162c77ce8e68c5a18457be0ba5e606b14a1b134baa98611d612",
+      "verified_at": "2026-10-21T14:15:21.950159+08:00"
+    },
+    "conf-032cac42653696c005e8d862": {
+      "title": "ArtHOI: Taming Foundation Models for Monocular 4D Reconstruction of Hand-Articulated-Object Interactions",
+      "url": "https://arxiv.org/abs/2603.25791",
+      "text": "Existing hand-object interactions (HOI) methods are largely limited to rigid objects, while 4D reconstruction methods of articulated objects generally require pre-scanning the object or even multi-view videos. It remains an unexplored but significant challenge to reconstruct 4D human-articulated-object interactions from a single monocular RGB video. Fortunately, recent advancements in foundation models present a new opportunity to address this highly ill-posed problem. To this end, we introduce ArtHOI, an optimization-based framework that integrates and refines priors from multiple foundation models. Our key contribution is a suite of novel methodologies designed to resolve the inherent inaccuracies and physical unreality of these priors. In particular, we introduce an Adaptive Sampling Refinement (ASR) method to optimize object's metric scale and pose for grounding its normalized mesh in world space. Furthermore, we propose a Multimodal Large Language Model (MLLM) guided hand-object alignment method, utilizing contact reasoning information as constraints of hand-object mesh composition optimization. To facilitate a comprehensive evaluation, we also contribute two new datasets, ArtHOI-RGBD and ArtHOI-Wild. Extensive experiments validate the robustness and effectiveness of our ArtHOI across diverse objects and interactions. Project: https://arthoi-reconstruction.github.io.",
+      "sha256": "aff44bbe0ea579c534e8f672c589213b78b437debe170e8e0e467b9f6fe4eb2d",
+      "verified_at": "2026-10-21T14:15:27.655199+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "0181d8870394f47039b003617745182c47fcf238470be90ff322a8ffdf5e75d4",
+      "source_version": "36efa18a22acd3df4a21848e6fa565399104b985b12e3a3b0ed136d1dfb6b818"
+    },
+    "conf-76fa5f905bafdc227d146b25": {
+      "title": "WildWorld: A Large-Scale Dataset for Action-Conditioned World Modeling with Explicit State Annotations",
+      "url": "https://eccv.ecva.net/virtual/2026/poster/5427",
+      "text": "Dynamical systems theory and reinforcement learning viewworld evolution as the dynamics of latent states driven by actions, withvisual observations providing partial information about those states. Re-cent video world models attempt to learn these action-conditioned dy-namics from data. However, existing datasets rarely meet these require-ments: they typically lack diverse and semantically meaningful actionspaces, and actions are directly tied to visual observations rather thanmediated by underlying states. As a result, actions are often entangledwith pixel-level changes, making it difficult for models to learn structuredworld dynamics and maintain consistent evolution over long horizons. Inthis paper, we propose WildWorld, a large-scale action-conditioned worldmodeling dataset with explicit state annotations, automatically collectedfrom a photorealistic AAA action role-playing game (Monster Hunter:Wilds). WildWorld contains over 108 million frames and features morethan 450 actions, including movement, attacks, and skill casting, togetherwith synchronized per-frame annotations of character skeletons, worldstates, camera poses, and depth maps. We further derive WildBench toevaluate models through Action Following and State Alignment. Exten-sive experiments reveal persistent challenges in modeling semanticallyrich actions and maintaining long-horizon state consistency, highlightingthe need for state-aware video generation. Show more",
+      "sha256": "d7db51f77285d01b5db8cb7e98d1259293399f23d503a61e4d9a6586df3f2ec5",
+      "verified_at": "2026-10-21T14:15:33.218213+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "051e4a35a8a86ce07e2044d7586d2695f695bd0ffe2488a5c4981343d3894454",
+      "source_version": "7d8f928c8592cd4c9bf3a1e55893cd1c92ea7ef7fcffa749a4ed22b5f89decb5"
+    },
+    "conf-65adaa2ef996e0d2ff643a84": {
+      "title": "Zero-shot Depth from Defocus",
+      "url": "https://arxiv.org/abs/2603.26658",
+      "text": "Depth from Defocus (DfD) is the task of estimating a dense metric depth map from a focus stack. Unlike previous works overfitting to a certain dataset, this paper focuses on the challenging and practical setting of zero-shot generalization. We first propose a new real-world DfD benchmark ZEDD, which contains 8.3x more scenes and significantly higher quality images and ground-truth depth maps compared to previous benchmarks. We also design a novel network architecture named FOSSA. FOSSA is a Transformer-based architecture with novel designs tailored to the DfD task. The key contribution is a stack attention layer with a focus distance embedding, allowing efficient information exchange across the focus stack. Finally, we develop a new training data pipeline allowing us to utilize existing large-scale RGBD datasets to generate synthetic focus stacks. Experiment results on ZEDD and other benchmarks show a significant improvement over the baselines, reducing errors by up to 55.7%. The ZEDD benchmark is released at https://zedd.cs.princeton.edu. The code and checkpoints are released at https://github.com/princeton-vl/FOSSA.",
+      "sha256": "c555784173962f842381642c5dd0985f629e2f47a1d6065dd02a77b8d627a826",
+      "verified_at": "2026-10-21T14:15:39.007282+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "43593b3ad491ff81a0d0a74c7b9d94bdb0f5501b73f336025c7dcbc79e9619ae",
+      "source_version": "14bf909bf37bb99722c308ccf42631a884d4fb1b185177f28538d325a60f88c2"
+    },
+    "2603.17108": {
+      "title": "LLM-Powered Flood Depth Estimation from Social Media Imagery: A Vision-Language Model Framework with Mechanistic Interpretability for Transportation Resilience",
+      "url": "https://arxiv.org/abs/2603.17108",
+      "text": "Urban flooding poses an escalating threat to transportation network continuity, yet no operational system currently provides real-time, street-level flood depth information at the centimeter resolution required for dynamic routing, electric vehicle (EV) safety, and autonomous vehicle (AV) operations. This study presents FloodLlama, a fine-tuned open-source vision-language model (VLM) for continuous flood depth estimation from single street-level images, supported by a multimodal sensing pipeline using TikTok data. A synthetic dataset of approximately 190000 images was generated, covering seven vehicle types, four weather conditions, and 41 depth levels (0-40 cm at 1 cm resolution). Progressive curriculum training enabled coarse-to-fine learning, while LLaMA 3.2-11B Vision was fine-tuned using QLoRA. Evaluation across 34797 trials reveals a depth-dependent prompt effect: simple prompts perform better for shallow flooding, whereas chain-of-thought (CoT) reasoning improves performance at greater depths. FloodLlama achieves a mean absolute error (MAE) below 0.97 cm and Acc@5cm above 93.7% for deep flooding, exceeding 96.8% for shallow depths. A five-phase mechanistic interpretability framework identifies layer L23 as the critical depth-encoding transition and enables selective fine-tuning that reduces trainable parameters by 76-80% while maintaining accuracy. The Tier 3 configuration achieves 98.62% accuracy on real-world data and shows strong robustness under visual occlusion. A TikTok-based data pipeline, validated on 676 annotated flood frames from Detroit, demonstrates the feasibility of real-time, crowd-sourced flood sensing. The proposed framework provides a scalable, infrastructure-free solution with direct implications for EV safety, AV deployment, and resilient transportation management.",
+      "sha256": "7a5312982464887e31d58b0c32436a42557b548c55bb2c3ca73ba6b923265615",
+      "verified_at": "2026-10-21T14:15:44.088011+08:00"
     }
   }
 }
