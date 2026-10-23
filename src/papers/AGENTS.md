@@ -2,6 +2,8 @@
 
 ## Sources, publication and taxonomy
 
+- weekly_backfill读取私有backfill-control.json的resume_after（必须带时区）。暂停期间run/watch不得启动模型；在途任务在下一次admission停止领取，保留缓存/事务。恢复时间不影响daily、会议、模型或Stocks调度回执。
+
 - 历史主题推理最多3次内容尝试；失败3次可保存skipped_trend（attempts、reason、failures、evidence_hash），全量逐篇contributions仍严格校验。只有证据绑定正确、trends为空的显式跳过记录可作为partial主题；日报默认生成不启用此降级。发布事务同时保留skipped_topics，远端核验前不推进。传输/环境/让行及文件故障继续传播，不计内容跳过。
 
 - 主题趋势输出必须收敛：每条claim最多180字符、reasoning最多1200字符、limitations最多600字符；每条最多8个支撑引用且不超过当前论文数。所有论文及逐篇问题/贡献仍完整输入，引用ID枚举保持全量；限制输出篇幅和参考数量，不删减样本、不截断模型结果来通过验证。
