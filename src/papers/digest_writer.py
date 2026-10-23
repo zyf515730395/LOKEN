@@ -9,7 +9,7 @@ import re
 import sys
 import time
 from zoneinfo import ZoneInfo
-from papers.digest_analysis import evidence_hash, load_analysis, plain, validate_analysis
+from papers.digest_analysis import evidence_hash, load_analysis, plain, validate_analysis, trend_evidence_hash
 from shared.rendering import atomic_write_text
 
 VERSION = 'problem-contribution-v2'
@@ -115,9 +115,19 @@ def trend_schema(ids):
     return schema
 
 
-def synthesize_topic(prompt,ids,contributions,summaries,client,model,reports,identity,should_continue=None):
+def synthesize_topic(prompt,ids,contributions,summaries,client,model,reports,identity,should_continue=None,allow_skip=False):
     from shared.loopback_chat import LoopbackChatError
     output_budget = 6500
+    failures = []
+    def skip_or_raise(error):
+        if not allow_skip:
+            raise error
+        item={'paper_ids':ids,'contributions':contributions,'trends':[],
+              'generator_version':VERSION,'model':model,'generated_at':now(),
+              'skipped_trend':{'attempts':3,'reason':str(error),'failures':failures,
+                               'evidence_hash':trend_evidence_hash(ids,contributions)}}
+        validate_analysis(item,ids,summaries)
+        return item
     for attempt in range(3):
         if should_continue and not should_continue():
             raise ValueError('Backfill yielded before another topic request')
@@ -126,10 +136,14 @@ def synthesize_topic(prompt,ids,contributions,summaries,client,model,reports,ide
         try:
             raw=client.complete([{'role':'user','content':prompt+repair}],model=model,timeout=900,max_tokens=output_budget,enable_thinking=False,json_schema=trend_schema(ids))
         except LoopbackChatError as error:
-            if error.code != 'model_output_truncated' or attempt == 2:
+            if error.code not in {'model_output_truncated','model_response_invalid_json','model_response_invalid','model_response_empty','model_output_invalid'}:
                 raise
-            output_budget = min(20000, output_budget * 2)
-            print(f'Topic {identity} output truncated; retry with {output_budget} output tokens', flush=True)
+            failures.append(str(error))
+            if attempt == 2:
+                return skip_or_raise(error)
+            if error.code == 'model_output_truncated':
+                output_budget = min(20000, output_budget * 2)
+            print(f'Topic {identity} content attempt failed; retry with {output_budget} output tokens', flush=True)
             continue
         atomic_write_text(reports/f'{identity}-{evidence_hash(raw)[:16]}.json',raw)
         try:
@@ -137,9 +151,10 @@ def synthesize_topic(prompt,ids,contributions,summaries,client,model,reports,ide
                   'generator_version':VERSION,'model':model,'generated_at':now()}
             validate_analysis(item,ids,summaries)
             return item
-        except (ValueError,KeyError,TypeError):
+        except (ValueError,KeyError,TypeError) as error:
+            failures.append(f'{type(error).__name__}: {error}')
             if attempt==2:
-                raise
+                return skip_or_raise(error)
 
 
 def skippable_paper_error(error,stage):
@@ -236,9 +251,11 @@ def generate_periods(periods,*,today=None,model=None,workers=4,sentence_evidence
                         '不声称全领域统计、不使用领域共识或社区共识等措辞、不编造实验结果。单篇时明确单篇观察。输出trends数组1至5项；claim为趋势判断，'
                         'reasoning为跨论文技术比较，limitations为适用边界与待验证问题，paper_ids引用给定ID。\n'
                         +json.dumps({'topic':topic,'period':str(start),'kind':kind,'excluded_count':len(topic_skips),'coverage_note':'仅分析给定可用样本；跳过项不参与推断','papers':evidence},ensure_ascii=False))
-                item=synthesize_topic(prompt,ready_ids,contributions,summaries,client,model,reports,f'{kind}-{start}-{slug}',should_continue) if ready_ids else {'contributions':{},'trends':[],'generator_version':VERSION,'model':model,'generated_at':now()}
+                item=synthesize_topic(prompt,ready_ids,contributions,summaries,client,model,reports,f'{kind}-{start}-{slug}',should_continue,allow_skip=skip_failed_papers) if ready_ids else {'contributions':{},'trends':[],'generator_version':VERSION,'model':model,'generated_at':now()}
                 item['paper_ids']=ids
                 if topic_skips: item['skipped_papers']=topic_skips
+                if item.get('skipped_trend'):
+                    item['skipped_trend']['evidence_hash']=trend_evidence_hash(ids,contributions)
                 validate_analysis(item,ids,summaries,titles={r['id']:r['title'] for r in members})
                 output[slug]=item
                 print(f'Trend ready: {kind} {start} {slug} ({len(ids)} papers)',flush=True)
@@ -247,7 +264,8 @@ def generate_periods(periods,*,today=None,model=None,workers=4,sentence_evidence
                 if old: output[slug]=old
             save_public(root/f'{kind}-{start}.json',{'schema_version':1,'kind':kind,'period':str(start),'topics':{**previous,**output}})
         save_public(root/f'{kind}-{start}.json',{'schema_version':1,'kind':kind,'period':str(start),'topics':output}); written+=1
-    result={'written_periods':written,'selected':len(selected),'sentences_ready':len(results),'failures':failures,'stage':'complete','skipped_papers':skipped,'interrupted':interrupted or bool(should_continue and not should_continue())}
+    skipped_topics={slug:item['skipped_trend'] for slug,item in output.items() if item.get('skipped_trend')} if periods else {}
+    result={'written_periods':written,'selected':len(selected),'sentences_ready':len(results),'failures':failures,'stage':'complete','skipped_papers':skipped,'skipped_topics':skipped_topics,'interrupted':interrupted or bool(should_continue and not should_continue())}
     write_json(reports/'latest.json',result)
     return result
 
