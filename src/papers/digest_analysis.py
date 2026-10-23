@@ -11,6 +11,10 @@ def evidence_hash(value: str) -> str:
     return hashlib.sha256(value.encode('utf-8')).hexdigest()
 
 
+def trend_evidence_hash(ids: list[str], contributions: dict) -> str:
+    return evidence_hash(json.dumps({'paper_ids':sorted(ids),'contributions':contributions},sort_keys=True,ensure_ascii=False))
+
+
 def plain(value: str) -> str:
     return re.sub(r'\s+', ' ', html.unescape(re.sub('<[^>]+>', ' ', value))).strip()
 
@@ -46,7 +50,15 @@ def validate_analysis(item: dict, ids: list[str], summaries: dict[str, str], *, 
         if contribution.get('generator_version') != 'problem-contribution-v2' or not all(contribution.get(k) for k in ('problem','contribution','model','generated_at')):
             raise ValueError('Per-paper local generation provenance required')
     trends = item.get('trends')
-    if not isinstance(trends, list) or (contributions and not trends):
+    trend_skip = item.get('skipped_trend')
+    if trend_skip is not None:
+        if (not isinstance(trend_skip,dict) or type(trend_skip.get('attempts')) is not int or trend_skip['attempts'] != 3
+                or not isinstance(trend_skip.get('reason'),str) or not trend_skip['reason'].strip()
+                or not isinstance(trend_skip.get('failures'),list) or len(trend_skip['failures']) != 3
+                or not all(isinstance(error,str) and error.strip() for error in trend_skip['failures'])
+                or trend_skip.get('evidence_hash') != trend_evidence_hash(ids,contributions) or trends != []):
+            raise ValueError('Invalid or stale explicit topic skip')
+    if not isinstance(trends, list) or (contributions and not trends and trend_skip is None):
         raise ValueError('Evidence-backed topic analysis required')
     for trend in trends:
         if not isinstance(trend, dict):
@@ -96,6 +108,8 @@ def render_topic(members: list[dict], summaries: dict[str, str], analysis: dict 
     skipped = analysis.get('skipped_papers', {})
     if skipped:
         result += f'<p class="periodical-note">本主题共 {len(ids)} 篇，分析覆盖 {len(contributions)} 篇；{len(skipped)} 篇因证据或生成失败暂未纳入。以下结论仅基于已覆盖样本，缺口保留待补。</p>'
+    if analysis.get('skipped_trend'):
+        return result + '<p class="periodical-note">本主题技术趋势生成连续失败3次，已跳过；已成功的逐篇结果保留，本期不提供该主题趋势结论。</p>'
     result += '<p class="periodical-note">以下为本期公开样本的综合分析，不代表全领域统计；论文事实与趋势判断分开呈现。</p>'
     for trend in analysis['trends']:
         refs = '、'.join(f'<a href="{html.escape(urls[key], quote=True)}" target="_blank" rel="noopener noreferrer">{html.escape(key)}</a>' if key in urls else html.escape(key) for key in trend['paper_ids'])

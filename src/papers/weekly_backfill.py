@@ -61,7 +61,7 @@ def analysis_processed(analyses, members, topics, summaries):
 
 
 def analysis_complete(analyses, members, topics, summaries):
-    return analysis_processed(analyses,members,topics,summaries) and not any(item.get('skipped_papers') for item in analyses.values())
+    return analysis_processed(analyses,members,topics,summaries) and not any(item.get('skipped_papers') or item.get('skipped_trend') for item in analyses.values())
 
 
 def fingerprint(relative):
@@ -125,7 +125,7 @@ def recover_commit(state, state_path):
             # Blob hashes avoid newline transformations and bind HEAD to the intent.
             if git('rev-parse',f'{head}:{relative}',capture=True) != intent['blobs'][relative]:
                 raise RuntimeError('Interrupted commit content differs from intent')
-    state['pending'] = {'week':intent['week'],'commit':head,'papers':intent['papers'],'topics':intent['topics'],'complete':intent.get('complete',True),'resume_status':intent.get('resume_status'),'advance':intent.get('advance',False),'skipped_papers':intent.get('skipped_papers',{})}
+    state['pending'] = {'week':intent['week'],'commit':head,'papers':intent['papers'],'topics':intent['topics'],'complete':intent.get('complete',True),'resume_status':intent.get('resume_status'),'advance':intent.get('advance',False),'skipped_papers':intent.get('skipped_papers',{}),'skipped_topics':intent.get('skipped_topics',{})}
     state.pop('commit_intent')
     write_json(state_path,state)
 
@@ -169,7 +169,7 @@ def recover_push(state, state_path):
     write_json(state_path, state)
 
 
-def publish_week(start, base, state, state_path, *, complete=True, advance=False, skipped=None):
+def publish_week(start, base, state, state_path, *, complete=True, advance=False, skipped=None, skipped_topics=None):
     from papers.runtime import git
     if git('rev-parse', 'HEAD', capture=True) != base:
         raise RuntimeError('HEAD changed during generation; preserve all changes')
@@ -188,13 +188,13 @@ def publish_week(start, base, state, state_path, *, complete=True, advance=False
         state['commit_intent'] = {'base':base,'week':str(start),'files':candidates,
                                   'hashes':{p:fingerprint(p) for p in candidates},
                                   'blobs':{p:git('rev-parse',f':{p}',capture=True) for p in candidates},
-                                  'papers':state['papers'],'topics':state['topics'],'complete':complete,'resume_status':state.get('resume_status'),'advance':advance,'skipped_papers':skipped or {}}
+                                  'papers':state['papers'],'topics':state['topics'],'complete':complete,'resume_status':state.get('resume_status'),'advance':advance,'skipped_papers':skipped or {},'skipped_topics':skipped_topics or {}}
         write_json(state_path,state)
         recover_commit(state,state_path)
         recover_push(state,state_path)
         return
     commit = git('rev-parse', 'HEAD', capture=True)
-    state['pending'] = {'week': str(start), 'commit': commit, 'papers': state['papers'], 'topics': state['topics'],'complete':complete,'resume_status':state.get('resume_status'),'advance':advance,'skipped_papers':skipped or {}}
+    state['pending'] = {'week': str(start), 'commit': commit, 'papers': state['papers'], 'topics': state['topics'],'complete':complete,'resume_status':state.get('resume_status'),'advance':advance,'skipped_papers':skipped or {},'skipped_topics':skipped_topics or {}}
     write_json(state_path, state)
     recover_push(state, state_path)
 
@@ -301,8 +301,9 @@ def run(year, max_weeks=1, max_minutes=60):
                 state['status'] = 'publishing'
                 write_json(state_path, state)
                 skips={key:value for item in analyses.values() for key,value in item.get('skipped_papers',{}).items()}
-                advance=not incomplete and bool(skips)
-                publish_week(start,base,state,state_path,complete=not incomplete and not skips,advance=advance,skipped=skips)
+                topic_skips={slug:item['skipped_trend'] for slug,item in analyses.items() if item.get('skipped_trend')}
+                advance=not incomplete and bool(skips or topic_skips)
+                publish_week(start,base,state,state_path,complete=not incomplete and not (skips or topic_skips),advance=advance,skipped=skips,skipped_topics=topic_skips)
                 category = 'checkpoints' if incomplete else ('partial' if advance else 'completed')
                 print(f'Published {category} checkpoint {start}: {state[category][str(start)]["commit"]}',flush=True)
                 if incomplete:

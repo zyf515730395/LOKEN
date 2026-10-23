@@ -2,6 +2,8 @@
 
 ## Sources, publication and taxonomy
 
+- 历史主题推理最多3次内容尝试；失败3次可保存skipped_trend（attempts、reason、failures、evidence_hash），全量逐篇contributions仍严格校验。只有证据绑定正确、trends为空的显式跳过记录可作为partial主题；日报默认生成不启用此降级。发布事务同时保留skipped_topics，远端核验前不推进。传输/环境/让行及文件故障继续传播，不计内容跳过。
+
 - 主题趋势输出必须收敛：每条claim最多180字符、reasoning最多1200字符、limitations最多600字符；每条最多8个支撑引用且不超过当前论文数。所有论文及逐篇问题/贡献仍完整输入，引用ID枚举保持全量；限制输出篇幅和参考数量，不删减样本、不截断模型结果来通过验证。
 
 - 主题趋势输出触及token上限时，在原3次尝试内将输出预算从6500依次提升至13000、20000；每次仍重查daily让行和共享推理预算，保留完整输入、引用schema及内容校验，不接受截断JSON，不将主题失败当少量论文跳过。其他传输故障保持原传播与断点恢复。
