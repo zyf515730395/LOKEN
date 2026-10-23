@@ -21,13 +21,24 @@ ANALYSES = ROOT / 'content/papers/digests'
 REPORTS = ROOT / 'build/reports/digests'
 
 
+def resume_after():
+    control = REPORTS / 'backfill-control.json'
+    if not control.exists():
+        return None
+    value = json.loads(control.read_text(encoding='utf-8'))
+    target = datetime.fromisoformat(value['resume_after'])
+    if target.tzinfo is None:
+        raise ValueError('Backfill resume_after requires a timezone')
+    return target if datetime.fromisoformat(now()) < target else None
+
+
 def model_admission(boundary, deadline):
     """Serialize probes: flock probes from our own workers must not race."""
     from papers.runtime import daily_waiting
     probe_lock = threading.Lock()
     def admitted():
         with probe_lock:
-            return not daily_waiting() and datetime.fromisoformat(now()) < boundary and time.monotonic() < deadline
+            return resume_after() is None and not daily_waiting() and datetime.fromisoformat(now()) < boundary and time.monotonic() < deadline
     return admitted
 
 
@@ -205,6 +216,11 @@ def run(year, max_weeks=1, max_minutes=60):
     state = json.loads(state_path.read_text(encoding='utf-8')) if state_path.exists() else {'version': 1, 'year': year, 'completed': {}, 'owned': {}}
     if state.get('version') != 1 or state.get('year') != year:
         raise ValueError('Invalid backfill checkpoint; preserve it')
+    held = resume_after()
+    if held:
+        state.update(status='paused',resume_after=held.isoformat(),updated_at=now())
+        write_json(state_path,state)
+        return state
     began = datetime.fromisoformat(now())
     boundary = began.replace(hour=18, minute=0, second=0, microsecond=0)
     if boundary <= began:
@@ -335,6 +351,10 @@ def watch(year, max_minutes, *, worker=None, sleep=None):
             print('Another weekly supervisor owns the queue; deferred.', flush=True)
             return 4
         while True:
+            held = resume_after()
+            if held:
+                write_json(receipt, {'status':'paused','year':year,'resume_after':held.isoformat(),'updated_at':now()})
+                return 0
             write_json(receipt, {'status': 'running', 'year': year, 'updated_at': now(), 'consecutive_failures': failures})
             try:
                 result = worker([sys.executable, '-u', '-m', 'papers.weekly_backfill', 'run',
