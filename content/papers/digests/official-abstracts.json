@@ -8525,6 +8525,137 @@
       "text": "Multi-view stereo methods have achieved great success for depth estimation based on the coarse-to-fine depth learning frameworks, however, the existing methods perform poorly in recovering the depth of object boundaries and detail regions. To address these issues, we propose a detail-aware multi-view stereo network (DA-MVSNet) with a coarse-to-fine framework. The geometric depth clues hidden in the coarse stage are utilized to maintain the geometric structural relationships between object surfaces and enhance the expressive capability of image features. In addition, an image synthesis loss is employed to constrain the gradient flow for detailed regions and further strengthen the supervision of object boundaries and texture-rich areas. Finally, we propose an adaptive depth interval adjustment strategy to improve the accuracy of object reconstruction. Extensive experiments on the DTU and Tanks & Temples datasets demonstrate that our method achieves competitive results. The code is available at this https URL .",
       "sha256": "51466ac03b541c958bff2eb33166ac4b609daa73cb6bc61d9e46146446821d3e",
       "verified_at": "2026-10-25T01:30:10.759305+08:00"
+    },
+    "conf-fc1ac2e20e284cc7947c0734": {
+      "title": "DiT4SR: Taming Diffusion Transformer for Real-World Image Super-Resolution",
+      "url": "https://arxiv.org/abs/2503.23580",
+      "text": "Large-scale pre-trained diffusion models are becoming increasingly popular in solving the Real-World Image Super-Resolution (Real-ISR) problem because of their rich generative priors. The recent development of diffusion transformer (DiT) has witnessed overwhelming performance over the traditional UNet-based architecture in image generation, which also raises the question: Can we adopt the advanced DiT-based diffusion model for Real-ISR? To this end, we propose our DiT4SR, one of the pioneering works to tame the large-scale DiT model for Real-ISR. Instead of directly injecting embeddings extracted from low-resolution (LR) images like ControlNet, we integrate the LR embeddings into the original attention mechanism of DiT, allowing for the bidirectional flow of information between the LR latent and the generated latent. The sufficient interaction of these two streams allows the LR stream to evolve with the diffusion process, producing progressively refined guidance that better aligns with the generated latent at each diffusion step. Additionally, the LR guidance is injected into the generated latent via a cross-stream convolution layer, compensating for DiT's limited ability to capture local information. These simple but effective designs endow the DiT model with superior performance in Real-ISR, which is demonstrated by extensive experiments. Project Page: https://adam-duan.github.io/projects/dit4sr/.",
+      "sha256": "cbacb6cb3c2d8aa63f69821529ab874f0d0433a40c1becc5c71a40f6922ff100",
+      "verified_at": "2026-10-25T01:39:42.304989+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "2656d746526980885bb48f682bb07228b466e4755c10a2236199c35c501816ae",
+      "source_version": "8273cf3506d5cf420f3eb5cea0628042d220d819c9f1d5cdfa556fc42864d151"
+    },
+    "conf-290e008190331dc54d73845b": {
+      "title": "FastVAR: Linear Visual Autoregressive Modeling via Cached Token Pruning",
+      "url": "https://arxiv.org/abs/2503.23367",
+      "text": "Visual Autoregressive (VAR) modeling has gained popularity for its shift towards next-scale prediction. However, existing VAR paradigms process the entire token map at each scale step, leading to the complexity and runtime scaling dramatically with image resolution. To address this challenge, we propose FastVAR, a post-training acceleration method for efficient resolution scaling with VARs. Our key finding is that the majority of latency arises from the large-scale step where most tokens have already converged. Leveraging this observation, we develop the cached token pruning strategy that only forwards pivotal tokens for scale-specific modeling while using cached tokens from previous scale steps to restore the pruned slots. This significantly reduces the number of forwarded tokens and improves the efficiency at larger resolutions. Experiments show the proposed FastVAR can further speedup FlashAttention-accelerated VAR by 2.7$\\times$ with negligible performance drop of <1%. We further extend FastVAR to zero-shot generation of higher resolution images. In particular, FastVAR can generate one 2K image with 15GB memory footprints in 1.5s on a single NVIDIA 3090 GPU. Code is available at https://github.com/csguoh/FastVAR.",
+      "sha256": "7c45195124d500f42c3257e5cb51bcb4386e09b3b684fdf35bc7514fa433b8ee",
+      "verified_at": "2026-10-25T01:39:47.993853+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "2b68c353e7e3ee7546183b56e87c79a162d6e04ecb9b17f84e4c3e620fd19511",
+      "source_version": "6f81612feea8699aff346d7934ba9ba507621105ca4136964f9150c942d9082a"
+    },
+    "conf-05d77e6fbd0fe5c5b258129d": {
+      "title": "ControlFusion: A Controllable Image Fusion Network with Language-Vision Degradation Prompts",
+      "url": "https://papers.nips.cc/paper_files/paper/2025/hash/ab96f6d04380de817ed3a1bad9b92f2e-Abstract-Conference.html",
+      "text": "Current image fusion methods struggle with real-world composite degradations and lack the flexibility to accommodate user-specific needs. To address this, we propose ControlFusion, a controllable fusion network guided by language-vision prompts that adaptively mitigates composite degradations. On the one hand, we construct a degraded imaging model based on physical mechanisms, such as the Retinex theory and atmospheric scattering principle, to simulate composite degradations and provide a data foundation for addressing realistic degradations. On the other hand, we devise a prompt-modulated restoration and fusion network that dynamically enhances features according to degradation prompts, enabling adaptability to varying degradation levels. To support user-specific preferences in visual quality, a text encoder is incorporated to embed user-defined degradation types and levels as degradation prompts. Moreover, a spatial-frequency collaborative visual adapter is designed to autonomously perceive degradations from source images, thereby reducing complete reliance on user instructions. Extensive experiments demonstrate that ControlFusion outperforms SOTA fusion methods in fusion quality and degradation handling, particularly under real-world and compound degradations.",
+      "sha256": "2b0dfbe3f15311bcc6e8ad92d2e588033a0edd53018a30943efd8e726f9f867b",
+      "verified_at": "2026-10-25T01:39:54.387484+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "df97155f8b3a26e79a2f6a5c6d433e123b674d313578c4814b0a8cd917c8fa41",
+      "source_version": "bd10ad4b4ec5fba2c36168b0a52de5bfceea2794095d587702c48e652d0c7781"
+    },
+    "conf-bf3afed1c5a754cf9982df01": {
+      "title": "Traversing Distortion-Perception Tradeoff using a Single Score-Based Generative Model",
+      "url": "https://arxiv.org/abs/2503.20297",
+      "text": "The distortion-perception (DP) tradeoff reveals a fundamental conflict between distortion metrics (e.g., MSE and PSNR) and perceptual quality. Recent research has increasingly concentrated on evaluating denoising algorithms within the DP framework. However, existing algorithms either prioritize perceptual quality by sacrificing acceptable distortion, or focus on minimizing MSE for faithful restoration. When the goal shifts or noisy measurements vary, adapting to different points on the DP plane needs retraining or even re-designing the model. Inspired by recent advances in solving inverse problems using score-based generative models, we explore the potential of flexibly and optimally traversing DP tradeoffs using a single pre-trained score-based model. Specifically, we introduce a variance-scaled reverse diffusion process and theoretically characterize the marginal distribution. We then prove that the proposed sample process is an optimal solution to the DP tradeoff for conditional Gaussian distribution. Experimental results on two-dimensional and image datasets illustrate that a single score network can effectively and flexibly traverse the DP tradeoff for general denoising problems.",
+      "sha256": "0164c6e401474b3362b2f13e59b27aa3f4095f045e2666c99de828cffbdfb189",
+      "verified_at": "2026-10-25T01:40:00.074113+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "1152ad242680a97df35b3b79f0e08c98291e07052abb106ebb18202b8d391cfc",
+      "source_version": "f0898fd40e7e3d5e620cdb2a842711c85be9c233042cf8bcb76166faf5d23891"
+    },
+    "conf-8fdccad375a6ac3744ae4db7": {
+      "title": "ITA-MDT: Image-Timestep-Adaptive Masked Diffusion Transformer Framework for Image-Based Virtual Try-On",
+      "url": "https://arxiv.org/abs/2503.20418",
+      "text": "This paper introduces ITA-MDT, the Image-Timestep-Adaptive Masked Diffusion Transformer Framework for Image-Based Virtual Try-On (IVTON), designed to overcome the limitations of previous approaches by leveraging the Masked Diffusion Transformer (MDT) for improved handling of both global garment context and fine-grained details. The IVTON task involves seamlessly superimposing a garment from one image onto a person in another, creating a realistic depiction of the person wearing the specified garment. Unlike conventional diffusion-based virtual try-on models that depend on large pre-trained U-Net architectures, ITA-MDT leverages a lightweight, scalable transformer-based denoising diffusion model with a mask latent modeling scheme, achieving competitive results while reducing computational overhead. A key component of ITA-MDT is the Image-Timestep Adaptive Feature Aggregator (ITAFA), a dynamic feature aggregator that combines all of the features from the image encoder into a unified feature of the same size, guided by diffusion timestep and garment image complexity. This enables adaptive weighting of features, allowing the model to emphasize either global information or fine-grained details based on the requirements of the denoising stage. Additionally, the Salient Region Extractor (SRE) module is presented to identify complex region of the garment to provide high-resolution local information to the denoising model as an additional condition alongside the global information of the full garment image. This targeted conditioning strategy enhances detail preservation of fine details in highly salient garment regions, optimizing computational resources by avoiding unnecessarily processing entire garment image. Comparative evaluations confirms that ITA-MDT improves efficiency while maintaining strong performance, reaching state-of-the-art results in several metrics.",
+      "sha256": "12437c2e5a1d179526e2c13de156740d011fe2fdd224a53b1f12f4f61a41d32f",
+      "verified_at": "2026-10-25T01:40:05.929377+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "c7ebc2e20ed1c5ea71f9c72ed3f53cf2d318b98711ece15fec2390cb1e54782a",
+      "source_version": "09dd7d36cb0e7ae3f0808e0f41d8e89d061246ec19cc57e7c606a657afce1cfd"
+    },
+    "conf-1ac0c453550df41d16bf36cc": {
+      "title": "Uncertainty-guided Perturbation for Image Super-Resolution Diffusion Model",
+      "url": "https://arxiv.org/abs/2503.18512",
+      "text": "Diffusion-based image super-resolution methods have demonstrated significant advantages over GAN-based approaches, particularly in terms of perceptual quality. Building upon a lengthy Markov chain, diffusion-based methods possess remarkable modeling capacity, enabling them to achieve outstanding performance in real-world scenarios. Unlike previous methods that focus on modifying the noise schedule or sampling process to enhance performance, our approach emphasizes the improved utilization of LR information. We find that different regions of the LR image can be viewed as corresponding to different timesteps in a diffusion process, where flat areas are closer to the target HR distribution but edge and texture regions are farther away. In these flat areas, applying a slight noise is more advantageous for the reconstruction. We associate this characteristic with uncertainty and propose to apply uncertainty estimate to guide region-specific noise level control, a technique we refer to as Uncertainty-guided Noise Weighting. Pixels with lower uncertainty (i.e., flat regions) receive reduced noise to preserve more LR information, therefore improving performance. Furthermore, we modify the network architecture of previous methods to develop our Uncertainty-guided Perturbation Super-Resolution (UPSR) model. Extensive experimental results demonstrate that, despite reduced model size and training overhead, the proposed UWSR method outperforms current state-of-the-art methods across various datasets, both quantitatively and qualitatively.",
+      "sha256": "a3a43754a94d8098ff0d77037390ef3e7f3c4b7cee07b5c498693baf37086e71",
+      "verified_at": "2026-10-25T01:40:11.546654+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "6d077969667f95fd173066ba1a0e2078207f31c54bd9029d3902ee81ec29e998",
+      "source_version": "3466ec73c37d10f6f35a9895a303a7e73c1be8c407c62fd5e6a49627537cf00d"
+    },
+    "conf-0a3c9218a9f484a3f6094be2": {
+      "title": "Teller: Real-Time Streaming Audio-Driven Portrait Animation with Autoregressive Motion Generation",
+      "url": "https://arxiv.org/abs/2503.18429",
+      "text": "In this work, we introduce the first autoregressive framework for real-time, audio-driven portrait animation, a.k.a, talking head. Beyond the challenge of lengthy animation times, a critical challenge in realistic talking head generation lies in preserving the natural movement of diverse body parts. To this end, we propose Teller, the first streaming audio-driven protrait animation framework with autoregressive motion generation. Specifically, Teller first decomposes facial and body detail animation into two components: Facial Motion Latent Generation (FMLG) based on an autoregressive transfromer, and movement authenticity refinement using a Efficient Temporal Module (ETM).Concretely, FMLG employs a Residual VQ model to map the facial motion latent from the implicit keypoint-based model into discrete motion tokens, which are then temporally sliced with audio embeddings. This enables the AR tranformer to learn real-time, stream-based mappings from audio to motion. Furthermore, Teller incorporate ETM to capture finer motion details. This module ensures the physical consistency of body parts and accessories, such as neck muscles and earrings, improving the realism of these movements. Teller is designed to be efficient, surpassing the inference speed of diffusion-based models (Hallo 20.93s vs. Teller 0.92s for one second video generation), and achieves a real-time streaming performance of up to 25 FPS. Extensive experiments demonstrate that our method outperforms recent audio-driven portrait animation models, especially in small movements, as validated by human evaluations with a significant margin in quality and realism.",
+      "sha256": "0f0fe4bee4f8faad3bc8c88f5b0bbd4269558e18699f12114f98add4868f490c",
+      "verified_at": "2026-10-25T01:40:17.200538+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "1f7ddcee60c8aceb09d4f6dc24916be805c3816d2a9af8f4a03e10a65ec615d8",
+      "source_version": "76db7d42bf5c5f511bfff969b7a5aa6404e20b51886b01d6d09eefebfe12b0a6"
+    },
+    "2503.19753": {
+      "title": "A Survey on Event-driven 3D Reconstruction: Development under Different Categories",
+      "url": "https://arxiv.org/abs/2503.19753",
+      "text": "Event cameras have gained increasing attention for 3D reconstruction due to their high temporal resolution, low latency, and high dynamic range. They capture per-pixel brightness changes asynchronously, allowing accurate reconstruction under fast motion and challenging lighting conditions. In this survey, we provide a comprehensive review of event-driven 3D reconstruction methods, including stereo, monocular, and multimodal systems. We further categorize recent developments based on geometric, learning-based, and hybrid approaches. Emerging trends, such as neural radiance fields and 3D Gaussian splatting with event data, are also covered. The related works are structured chronologically to illustrate the innovations and progression within the field. To support future research, we also highlight key research gaps and future research directions in dataset, experiment, evaluation, event representation, etc.",
+      "sha256": "4b11b2d7bbfa334ed4b865ce92e265c251a6653c80bc471c3024b371dbe6ff63",
+      "verified_at": "2026-10-25T01:40:22.314215+08:00"
+    },
+    "conf-229213ca8c18cd0bcaf2c401": {
+      "title": "CityGS-X: A Scalable Architecture for Efficient and Geometrically Accurate Large-Scale Scene Reconstruction",
+      "url": "https://arxiv.org/abs/2503.23044",
+      "text": "Despite its significant achievements in large-scale scene reconstruction, 3D Gaussian Splatting still faces substantial challenges, including slow processing, high computational costs, and limited geometric accuracy. These core issues arise from its inherently unstructured design and the absence of efficient parallelization. To overcome these challenges simultaneously, we introduce CityGS-X, a scalable architecture built on a novel parallelized hybrid hierarchical 3D representation (PH^2-3D). As an early attempt, CityGS-X abandons the cumbersome merge-and-partition process and instead adopts a newly-designed batch-level multi-task rendering process. This architecture enables efficient multi-GPU rendering through dynamic Level-of-Detail voxel allocations, significantly improving scalability and performance. Through extensive experiments, CityGS-X consistently outperforms existing methods in terms of faster training times, larger rendering capacities, and more accurate geometric details in large-scale scenes. Notably, CityGS-X can train and render a scene with 5,000+ images in just 5 hours using only 4 * 4090 GPUs, a task that would make other alternative methods encounter Out-Of-Memory (OOM) issues and fail completely. This implies that CityGS-X is far beyond the capacity of other existing methods.",
+      "sha256": "bca5adadf6552ceeb955a614b7759fcca8f606fe85da5d0b48ec239c3c06623f",
+      "verified_at": "2026-10-25T01:40:28.235317+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "0520c38df87323f70162955b6c95e8e76a385e5c4281a0fa1861061708d020a4",
+      "source_version": "692019e15b286d326f99f9b3a03a4fcb982c95535239bc55bbfea26be56120a5"
+    },
+    "2503.22324": {
+      "title": "AH-GS: Augmented 3D Gaussian Splatting for High-Frequency Detail Representation",
+      "url": "https://arxiv.org/abs/2503.22324",
+      "text": "The 3D Gaussian Splatting (3D-GS) is a novel method for scene representation and view synthesis. Although Scaffold-GS achieves higher quality real-time rendering compared to the original 3D-GS, its fine-grained rendering of the scene is extremely dependent on adequate viewing angles. The spectral bias of neural network learning results in Scaffold-GS's poor ability to perceive and learn high-frequency information in the scene. In this work, we propose enhancing the manifold complexity of input features and using network-based feature map loss to improve the image reconstruction quality of 3D-GS models. We introduce AH-GS, which enables 3D Gaussians in structurally complex regions to obtain higher-frequency encodings, allowing the model to more effectively learn the high-frequency information of the scene. Additionally, we incorporate high-frequency reinforce loss to further enhance the model's ability to capture detailed frequency information. Our result demonstrates that our model significantly improves rendering fidelity, and in specific scenarios (e.g., MipNeRf360-garden), our method exceeds the rendering quality of Scaffold-GS in just 15K iterations.",
+      "sha256": "e89da20525c2b0a327be8d90ffd807abbc466ff0ed7db55ce2c168346080ab14",
+      "verified_at": "2026-10-25T01:40:33.346656+08:00"
+    },
+    "conf-dfc271614cbc5c1d9478d8e2": {
+      "title": "Locally Orderless Images for Optimization in Differentiable Rendering",
+      "url": "https://arxiv.org/abs/2503.21931",
+      "text": "Problems in differentiable rendering often involve optimizing scene parameters that cause motion in image space. The gradients for such parameters tend to be sparse, leading to poor convergence. While existing methods address this sparsity through proxy gradients such as topological derivatives or lagrangian derivatives, they make simplifying assumptions about rendering. Multi-resolution image pyramids offer an alternative approach but prove unreliable in practice. We introduce a method that uses locally orderless images, where each pixel maps to a histogram of intensities that preserves local variations in appearance. Using an inverse rendering objective that minimizes histogram distance, our method extends support for sparsely defined image gradients and recovers optimal parameters. We validate our method on various inverse problems using both synthetic and real data.",
+      "sha256": "e381aa52486e94ca79eb6e5432386bc24a9774b49871d3cdb2558d467065ab9c",
+      "verified_at": "2026-10-25T01:40:38.910423+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "4ac33f6a79c122597329b704199dd40dd02d8f4fb9f2965911f53a3b3681f092",
+      "source_version": "c70e2f5e68d5f2d2c6cb50f76dab5be1a240c53391be973f41e1aacdecd4a9f5"
+    },
+    "conf-a85550a1174ba7b0fabc5c6b": {
+      "title": "EVPGS: Enhanced View Prior Guidance for Splatting-based Extrapolated View Synthesis",
+      "url": "https://arxiv.org/abs/2503.21816",
+      "text": "Gaussian Splatting (GS)-based methods rely on sufficient training view coverage and perform synthesis on interpolated views. In this work, we tackle the more challenging and underexplored Extrapolated View Synthesis (EVS) task. Here we enable GS-based models trained with limited view coverage to generalize well to extrapolated views. To achieve our goal, we propose a view augmentation framework to guide training through a coarse-to-fine process. At the coarse stage, we reduce rendering artifacts due to insufficient view coverage by introducing a regularization strategy at both appearance and geometry levels. At the fine stage, we generate reliable view priors to provide further training guidance. To this end, we incorporate an occlusion awareness into the view prior generation process, and refine the view priors with the aid of coarse stage output. We call our framework Enhanced View Prior Guidance for Splatting (EVPGS). To comprehensively evaluate EVPGS on the EVS task, we collect a real-world dataset called Merchandise3D dedicated to the EVS scenario. Experiments on three datasets including both real and synthetic demonstrate EVPGS achieves state-of-the-art performance, while improving synthesis quality at extrapolated views for GS-based methods both qualitatively and quantitatively. We will make our code, dataset, and models public.",
+      "sha256": "ca4956030fee9497a85d6256be9468021dbdbdc0cea56dbfe26962df5a0f3495",
+      "verified_at": "2026-10-25T01:40:44.471325+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "49f5be81fef2ac6e384ef830ac98edcdc7bbea1e42710540dd587cde18b882df",
+      "source_version": "5ca8ccc5f62aac5fa9d73403914a1fd97da2a7fb9f99813c1269e7ccaaae6220"
+    },
+    "2503.19330": {
+      "title": "MATT-GS: Masked Attention-based 3DGS for Robot Perception and Object Detection",
+      "url": "https://arxiv.org/abs/2503.19330",
+      "text": "This paper presents a novel masked attention-based 3D Gaussian Splatting (3DGS) approach to enhance robotic perception and object detection in industrial and smart factory environments. U2-Net is employed for background removal to isolate target objects from raw images, thereby minimizing clutter and ensuring that the model processes only relevant data. Additionally, a Sobel filter-based attention mechanism is integrated into the 3DGS framework to enhance fine details - capturing critical features such as screws, wires, and intricate textures essential for high-precision tasks. We validate our approach using quantitative metrics, including L1 loss, SSIM, PSNR, comparing the performance of the background-removed and attention-incorporated 3DGS model against the ground truth images and the original 3DGS training baseline. The results demonstrate significant improves in visual fidelity and detail preservation, highlighting the effectiveness of our method in enhancing robotic vision for object recognition and manipulation in complex industrial settings.",
+      "sha256": "41502435db09caf13235a8290a9aae7e4cb61e84bbe65270127249bc8939eb69",
+      "verified_at": "2026-10-25T01:40:49.599348+08:00"
+    },
+    "conf-9cc7b9bae9f9a3d4cd4daf11": {
+      "title": "Stochastic Poisson Surface Reconstruction with One Solve using Geometric Gaussian Processes",
+      "url": "https://arxiv.org/abs/2503.19136",
+      "text": "Poisson Surface Reconstruction is a widely-used algorithm for reconstructing a surface from an oriented point cloud. To facilitate applications where only partial surface information is available, or scanning is performed sequentially, a recent line of work proposes to incorporate uncertainty into the reconstructed surface via Gaussian process models. The resulting algorithms first perform Gaussian process interpolation, then solve a set of volumetric partial differential equations globally in space, resulting in a computationally expensive two-stage procedure. In this work, we apply recently-developed techniques from geometric Gaussian processes to combine interpolation and surface reconstruction into a single stage, requiring only one linear solve per sample. The resulting reconstructed surface samples can be queried locally in space, without the use of problem-dependent volumetric meshes or grids. These capabilities enable one to (a) perform probabilistic collision detection locally around the region of interest, (b) perform ray casting without evaluating points not on the ray's trajectory, and (c) perform next-view planning on a per-ray basis. They also do not requiring one to approximate kernel matrix inverses with diagonal matrices as part of intermediate computations, unlike prior methods. Results show that our approach provides a cleaner, more-principled, and more-flexible stochastic surface reconstruction pipeline.",
+      "sha256": "b38411d43937ccb18a5202aef1ecb95503fd7f1c3d1ab5b92ee990a820c02acb",
+      "verified_at": "2026-10-25T01:40:55.451116+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "2db361d3f64b76271ca169afbf3b180747300b53a7ba791a5f10799870b8ed16",
+      "source_version": "1373f44affd7e905c02d649d23e545a8c170e800c47c8ff4fd3ce28bfeaac674"
     }
   }
 }
