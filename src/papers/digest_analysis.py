@@ -28,7 +28,7 @@ def validate_analysis(item: dict, ids: list[str], summaries: dict[str, str], *, 
         raise ValueError('Analysis must cover exactly the visible topic papers')
     contributions = item.get('contributions', {})
     skipped = item.get('skipped_papers', {})
-    if not isinstance(skipped, dict) or not set(skipped) <= set(ids) or len(skipped) > 5:
+    if not isinstance(skipped, dict) or not set(skipped) <= set(ids):
         raise ValueError('Invalid explicit paper skips')
     for key, skip in skipped.items():
         if (not isinstance(skip, dict) or not all(isinstance(skip.get(k),str) and skip[k].strip() for k in ('title','stage','reason'))

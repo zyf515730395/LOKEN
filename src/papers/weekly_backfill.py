@@ -67,8 +67,6 @@ def analysis_processed(analyses, members, topics, summaries):
             if any(key not in summaries and key not in item.get('skipped_papers',{}) for key in ids):
                 return False
             validate_analysis(item, ids, summaries,titles={r['id']:r['title'] for r in members})
-        if len({key for item in analyses.values() for key in item.get('skipped_papers',{})}) > 5:
-            return False
     except (ValueError, TypeError, KeyError):
         return False
     return True

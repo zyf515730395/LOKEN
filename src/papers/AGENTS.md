@@ -37,7 +37,7 @@
 
 ## Runtime and scheduling
 
-- 用户2026-10-20授权周报回填跳过少量失败论文：每周最多5篇，保留完整paper_ids与skipped_papers（标题、阶段、原因、当前证据哈希），仅基于成功论文生成趋势并显示覆盖缺口。全部主题处理并核实发布后记partial且推进更早周次，不冒充全量completed；跳过项不在主队列反复重试，证据变化使旧跳过失效。时间片让行、模型/锁/发布故障仍保留断点，不冒充少量论文失败。
+- 用户2026-10-25取消历史周报每周跳过论文篇数上限：可跳过明确的逐篇材料/输出失败，保留完整paper_ids与skipped_papers（标题、阶段、原因、当前证据哈希），仅基于成功论文生成趋势并显示覆盖缺口；全部论文均跳过的主题不生成趋势。全部主题处理并核实发布后记partial且推进更早周次，不冒充全量completed；跳过项不在主队列反复重试，证据变化使旧跳过失效。时间片让行、模型/锁/发布故障仍保留断点，不冒充逐篇失败。
 
 - weekly_backfill 是显式授权的低优先级历史队列；每周获取runtime.lock并在周界释放，daily-request占用或新18:00边界时让行。公开写入仅限该周分析、核验官方摘要和周报生成产物，不提交其他任务改动；提交前复核HEAD和各受管文件初始状态，推送失败保存自己的pending SHA后停止，恢复先核实远端。每期必须通过全量validate_analysis，空周也保存明确分析。模型逐篇请求沿用digest_writer；大主题用全部逐篇问题/贡献综合，不依赖标题或截取部分论文。
 - Root AGENTS.md owns business due times and Git boundaries; scheduler.py owns period/receipt semantics, and the saved sole automation owns its actual wake checkpoints. Follow ignored ops/RUNBOOK.md for machine paths/services; do not copy a second wake interval into rules or prompts.
