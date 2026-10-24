@@ -8357,6 +8357,120 @@
       "basis": "official_abstract",
       "source_sha256": "99db6f2ce311133be4cf01c6b0d34686b14bbee63a2be7a1c5b2125bd4331f2a",
       "source_version": "79eb0964d1e0ace0dfeea1b96bb99120395649c254e920d419d1e5182a917a4f"
+    },
+    "conf-8a4b02bb4cb1e2fc69cbf4be": {
+      "title": "Head-Aware KV Cache Compression for Efficient Visual Autoregressive Modeling",
+      "url": "https://arxiv.org/abs/2504.09261",
+      "text": "Visual Autoregressive (VAR) models adopt a next-scale prediction paradigm, offering high-quality content generation with substantially fewer decoding steps. However, existing VAR models suffer from significant attention complexity and severe memory overhead due to the accumulation of key-value (KV) caches across scales. In this paper, we tackle this challenge by introducing KV cache compression into the next-scale generation paradigm. We begin with a crucial observation: attention heads in VAR models can be divided into two functionally distinct categories: Contextual Heads focus on maintaining semantic consistency, while Structural Heads are responsible for preserving spatial coherence. This structural divergence causes existing one-size-fits-all compression methods to perform poorly on VAR models. To address this, we propose HACK, a training-free Head-Aware KV cache Compression frameworK. HACK utilizes an offline classification scheme to separate head types, enabling it to apply pattern-specific compression strategies with asymmetric cache budgets for each category. By doing so, HACK effectively constrains the average KV cache length within a fixed budget $B$, reducing the theoretical attention complexity from $\\mathcal{O}(n^4)$ to $\\mathcal{O}(Bn^2)$. Extensive experiments on multiple VAR models across text-to-image and class-conditional tasks validate the effectiveness and generalizability of HACK. It achieves up to 70% KV cache compression without degrading output quality, resulting in memory savings and faster inference. For example, HACK provides a $1.75\\times$ memory reduction and a $1.57\\times$ speedup on Infinity-8B.",
+      "sha256": "da471a9a0b94f343189d76220d924c93e36b12cc7dce01e844f1f22a0a3ce533",
+      "verified_at": "2026-10-25T01:18:47.713088+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "563cace038a4cc0707b51861b3b41a05581c047912f9a63422890f9c2e8de421",
+      "source_version": "07e3f1a8ccdd5157a1ab4eb8e9495e03794182501f8cdcaebefc07715bf16c46"
+    },
+    "conf-764befc8476458883ea2674e": {
+      "title": "DDT: Decoupled Diffusion Transformer",
+      "url": "https://arxiv.org/abs/2504.05741",
+      "text": "Diffusion transformers have demonstrated remarkable generation quality, albeit requiring longer training iterations and numerous inference steps. In each denoising step, diffusion transformers encode the noisy inputs to extract the lower-frequency semantic component and then decode the higher frequency with identical modules. This scheme creates an inherent optimization dilemma: encoding low-frequency semantics necessitates reducing high-frequency components, creating tension between semantic encoding and high-frequency decoding. To resolve this challenge, we propose a new \\textbf{\\color{ddt}D}ecoupled \\textbf{\\color{ddt}D}iffusion \\textbf{\\color{ddt}T}ransformer~(\\textbf{\\color{ddt}DDT}), with a decoupled design of a dedicated condition encoder for semantic extraction alongside a specialized velocity decoder. Our experiments reveal that a more substantial encoder yields performance improvements as model size increases. For ImageNet $256\\times256$, Our DDT-XL/2 achieves a new state-of-the-art performance of {1.31 FID}~(nearly $4\\times$ faster training convergence compared to previous diffusion transformers). For ImageNet $512\\times512$, Our DDT-XL/2 achieves a new state-of-the-art FID of 1.28. Additionally, as a beneficial by-product, our decoupled architecture enhances inference speed by enabling the sharing self-condition between adjacent denoising steps. To minimize performance degradation, we propose a novel statistical dynamic programming approach to identify optimal sharing strategies.",
+      "sha256": "efc59cf47faf508dcaffbc5b9a4f6a6d406e375e08ed3dc64e8fb33d8241d503",
+      "verified_at": "2026-10-25T01:18:53.516107+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "0eeff6fed145a07cad98ff90c8090371e6dc4bb506d0716a99d06894d9cfb863",
+      "source_version": "f4dfca106be29510bf16abaac6aa2e01164434ec3ebfbfbe35bcee519f8717ca"
+    },
+    "conf-e9ec4207356fd20f0e335268": {
+      "title": "PanoDiT: Panoramic Videos Generation with Diffusion Transformer",
+      "url": "https://ojs.aaai.org/index.php/AAAI/article/view/33089",
+      "text": "As immersive experiences become increasingly popular, panoramic video has garnered significant attention in both research and applications. The high cost associated with capturing panoramic video underscores the need for efficient prompt-based generation methods. Although recent text-to-video (T2V) diffusion techniques have shown potential in standard video generation, they face challenges when applied to panoramic videos due to substantial differences in content and motion patterns. In this paper, we propose PanoDiT, a framework that utilizes the Diffusion Transformer (DiT) architecture to generate panoramic videos from text descriptions. Unlike traditional methods that rely on UNet-based denoising, our method leverages a transformer architecture for denoising, incorporating both temporal and global attention mechanisms. This ensures coherent frame generation and smooth motion transitions, offering distinct advantages in long-horizon generation tasks. To further enhance motion and consistency in the generated videos, we introduce DTM-LoRA and two panoramic-specific losses. Compared to previous methods, our PanoDiT achieves state-of-the-art performance across various evaluation metrics and user study, with code is available in the supplementary material.",
+      "sha256": "38bad1bb17330104390511f9d97fcfe943982de744c3c98c64cc59d7d1a5fc27",
+      "verified_at": "2026-10-25T01:18:58.846703+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "85b28d0e6414e30b0a43720534903512ff1c7a453643726e29a85d7b2505fa53",
+      "source_version": "1e6059a772ab54b5f3c8e89089e96f872e43c4cf6335fc8f8527dd50baee9e62"
+    },
+    "2504.09328": {
+      "title": "Text To 3D Object Generation For Scalable Room Assembly",
+      "url": "https://arxiv.org/abs/2504.09328",
+      "text": "Modern machine learning models for scene understanding, such as depth estimation and object tracking, rely on large, high-quality datasets that mimic real-world deployment scenarios. To address data scarcity, we propose an end-to-end system for synthetic data generation for scalable, high-quality, and customizable 3D indoor scenes. By integrating and adapting text-to-image and multi-view diffusion models with Neural Radiance Field-based meshing, this system generates highfidelity 3D object assets from text prompts and incorporates them into pre-defined floor plans using a rendering tool. By introducing novel loss functions and training strategies into existing methods, the system supports on-demand scene generation, aiming to alleviate the scarcity of current available data, generally manually crafted by artists. This system advances the role of synthetic data in addressing machine learning training limitations, enabling more robust and generalizable models for real-world applications.",
+      "sha256": "21c92e5610d7c421e9300a1a62376c2733c336237c1096a1a64f22889a458530",
+      "verified_at": "2026-10-25T01:19:04.505657+08:00"
+    },
+    "conf-e321f74d25e56944fad5ee0b": {
+      "title": "EvHDR-NeRF: Building High Dynamic Range Radiance Fields with Single Exposure Images and Events",
+      "url": "https://ojs.aaai.org/index.php/AAAI/article/view/32238",
+      "text": "We present EvHDR-NeRF to recover a High Dynamic Range (HDR) radiance field from event streams and a set of Low Dynamic Range (LDR) views with single exposures. Using the EvHDR-NeRF, we can generate both novel HDR views and novel LDR views under different exposures. The key to our method is to model the new relationship between events streams and LDR images, which considers both the Camera Response Function (CRF) and exposure time.  Based on this relationship, we categorize events into inter-frame events and intra-exposure. The former is utilized for building HDR radiance field and the latter is used to deblur potentially blurred images. Compared to existing methods, this method can effectively reconstruct the HDR radiance field even when the input images are degraded. Experimental results demonstrate that our method achieves state-of-the-art HDR reconstruction, providing a more adaptable and accurate solution for complex imaging applications.",
+      "sha256": "496471e8967dec3e207db631ad0608d981158df6398a253bd9f9e2131fbb6cc4",
+      "verified_at": "2026-10-25T01:19:09.808433+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "33a082aec99196c8167675fff4c27a3e30ff8a8a5d21dda3975fc235937b6c3f",
+      "source_version": "514bab12160ded97151285dbe335f0c4eddb9587ae9b2d7b6f8be8f2776eb5dc"
+    },
+    "conf-dbf706059337b1202ca899a5": {
+      "title": "RRT-MVS: Recurrent Regularization Transformer for Multi-View Stereo",
+      "url": "https://ojs.aaai.org/index.php/AAAI/article/view/32418",
+      "text": "Learning-based multi-view stereo methods aim to predict depth maps for reconstructing dense point clouds. These methods rely on regularization to reduce redundancy in the cost volume. However, existing methods have limitations: CNN-based regularization is restricted to local receptive fields, while Transformer-based regularization struggles with handling depth discontinuities. These limitations often result in inaccurate depth maps with significant noise, particularly noticeable in the boundary and background regions. In this paper, we propose a Recurrent Regularization Transformer for Multi-View Stereo (RRT-MVS), which addresses these limitations by regularizing the cost volume separately for depth and spatial dimensions. Specifically, we introduce Recurrent Self-Attention (R-SA) to aggregate global matching costs within and across the cost maps and filter out noisy feature correlations. Additionally, we present Depth Residual Attention (DRA) to aggregate depth correlations within the cost volume and a Positional Adapter (PA) to enhance 3D positional awareness in each 2D cost map, further augmenting the effectiveness of R-SA. Experimental results demonstrate that RRT-MVS achieves state-of-the-art performance on the DTU and Tanks-and-Temples datasets. Notably, RRT-MVS ranks first on both the Tanks-and-Temples intermediate and advanced benchmarks among all published methods.",
+      "sha256": "42aa9e8c82898209a6b9e7971b5a16eae1effb9bcbd00686a68b34b6e113a372",
+      "verified_at": "2026-10-25T01:19:15.121358+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "54eabd30a8a99696bfe6be621e38e71bce2fe7b22d0fbeff76971a42af2e213e",
+      "source_version": "6bfe4900e23f0edf7e2ccf049b53a877e98771bffc4247515072da28dde7e80d"
+    },
+    "conf-b190d9c03731cc377cf2d6ca": {
+      "title": "STGC-NeRF: Spatial-Temporal Geometric Consistency for LiDAR Neural Radiance Fields in Dynamic Scenes",
+      "url": "https://ojs.aaai.org/index.php/AAAI/article/view/33045",
+      "text": "While Neural Radiance Fields (NeRFs) have advanced the frontiers of novel view synthesis (NVS) using LiDAR data, they still struggle in dynamic scenes. Due to the low frequency and sparsity characteristics of LiDAR point clouds, it is challenging to spontaneously learn a dynamic and consistent scene representation from posed scans. In this paper, we propose STGC-NeRF, a novel LiDAR NeRF method that combines spatial-temporal geometry consistency to enhance the reconstruction of dynamic scenes. First, we propose a temporal geometry consistency regularization to enhance the regression of time-varying scene geometries from low-frequency LiDAR sequences. By estimating the pointwise correspondences between synthetic (or real) and real frames at different times, we convert them into various forms of temporal supervision. This alleviates the inconsistency caused by moving objects in dynamic scenes. Second, to improve the reconstruction of sparse LiDAR data, we propose spatial geometric consistency constraints. By computing multiple neighborhood feature descriptors incorporating geometric and contextual information, we capture structural geometry information from sparse LiDAR data. This helps encourage consistent direction, smoothness, and detail of the local surface. Extensive experiments on the KITTI-360 and nuScenes datasets demonstrate that STGC-NeRF outperforms state-of-the-art methods in both geometry and intensity accuracy for dynamic LiDAR scene reconstruction.",
+      "sha256": "51c85e170fd7d845505c0de3d563978895877fae0ecd10e819f4a16d2bb651eb",
+      "verified_at": "2026-10-25T01:19:20.469518+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "047aedd57bccbe44580d20aeed0dd5f7ff50abe4e757f904462e796ae07c1421",
+      "source_version": "004bcf9b0e9ef6b47af650c28f2cb1b86a010b8390a9eb1d1a87aecfdb7991f0"
+    },
+    "conf-83f583efc56a309cc3826067": {
+      "title": "EvHDR-GS: Event-guided HDR Video Reconstruction with 3D Gaussian Splatting",
+      "url": "https://ojs.aaai.org/index.php/AAAI/article/view/32237",
+      "text": "High Dynamic Range (HDR) video reconstruction seeks to accurately restore the extensive dynamic range present in real-world scenes and is widely employed in downstream applications. Existing methods typically operate on one or a small number of consecutive frames, which often leads to inconsistent brightness across the video due to their limited perspective on the video sequence. Moreover, supervised learning-based approaches are susceptible to data bias, resulting in reduced effectiveness when confronted with test inputs exhibiting a domain gap relative to the training data. To address these limitations, we present an event-guided HDR video reconstruction method through building 3D Gaussian Splatting (3DGS), to ensure consistent brightness imposed by 3D consistency. We introduce HDR 3D Gaussians capable of simultaneously representing HDR and low-dynamic-range (LDR) colors. Furthermore, we incorporate a learnable HDR-to-LDR transformation optimized by input event streams and LDR frames to eliminate the data bias. Experimental results on both synthetic and real-world datasets demonstrate that the proposed method achieves state-of-the-art performance.",
+      "sha256": "741ba8014b9b65dd28b0c8dde12c6815efd80ed2d62eb2a778ae7c3fd625eb94",
+      "verified_at": "2026-10-25T01:19:25.786001+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "a03dc9cbfa6177cba5a95683061f2d02435b6b5a98500b9195e7b83d4d1d9fc9",
+      "source_version": "ce777278ebd447407a00d2db743d5ea983081fc047a7ca3e6b2e89293873aa9e"
+    },
+    "conf-30f0fecb4e25a27d016043d9": {
+      "title": "Physical-aware Neural Radiance Fields for Efficient Exposure Correction",
+      "url": "https://ojs.aaai.org/index.php/AAAI/article/view/32963",
+      "text": "Neural Radiance Fields (NeRF) has achieved remarkable success in synthesizing impressive novel views. However, existing methods usually fail to handle scenes with adverse lighting conditions caused by external time variations and different camera settings, leading to poor visual quality. To address this challenge, we propose a physical-aware NeRF for efficient exposure correction, named PHY-NeRF. Specifically, we design Adaptive Lighting Particles inspired by the theory of light scattering and absorption, which can adjust the illumination intensity during volume rendering. Subsequently, we can handle scenes with different lighting conditions by jointly optimizing camera parameters and these lighting particles. Moreover, to promote natural brightness transitions, we devise a global illumination consistency module to control the lighting intensity across views at the feature level while completing more details. Benefiting from the above designs, our PHY-NeRF can tackle arbitrary low-light or overexposed scenes in an unsupervised manner. Extensive experiments show that our PHY-NeRF achieves state-of-the-art results in addressing adverse lighting problems while ensuring high rendering efficiency.",
+      "sha256": "01c76b97c9fb1a45315db623976d81d25115dad64cb214eb25044a9daa724b1e",
+      "verified_at": "2026-10-25T01:19:31.103812+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "7a3092b2183c8368cd543673265d85a097c1c500b3d6eb5c1a23c6134b23356f",
+      "source_version": "6c1ca677bb7c24b933cb91a1ca910be7d141cb1224f8ac4a67845a7376d43892"
+    },
+    "2504.05751": {
+      "title": "InvNeRF-Seg: Fine-Tuning a Pre-Trained NeRF for 3D Object Segmentation",
+      "url": "https://arxiv.org/abs/2504.05751",
+      "text": "Neural Radiance Fields (NeRF) have been widely adopted for reconstructing high quality 3D point clouds from 2D RGB images. However, the segmentation of these reconstructed 3D scenes is more essential for downstream tasks such as object counting, size estimation, and scene understanding. While segmentation on raw 3D point clouds using deep learning requires labor intensive and time-consuming manual annotation, directly training NeRF on binary masks also fails due to the absence of color and shading cues essential for geometry learning. We propose Invariant NeRF for Segmentation (InvNeRFSeg), a two step, zero change fine tuning strategy for 3D segmentation. We first train a standard NeRF on RGB images and then fine tune it using 2D segmentation masks without altering either the model architecture or loss function. This approach produces higher quality, cleaner segmented point clouds directly from the refined radiance field with minimal computational overhead or complexity. Field density analysis reveals consistent semantic refinement: densities of object regions increase while background densities are suppressed, ensuring clean and interpretable segmentations. We demonstrate InvNeRFSegs superior performance over both SA3D and FruitNeRF on both synthetic fruit and real world soybean datasets. This approach effectively extends 2D segmentation to high quality 3D segmentation.",
+      "sha256": "e1a97231938d38e4c969bff23c499344d4405d40ecdd3ba20aa8bf2b5990fa5e",
+      "verified_at": "2026-10-25T01:19:35.757829+08:00"
+    },
+    "conf-beb7b6ec83572204ba53af98": {
+      "title": "DFDNet: Disentangling and Filtering Dynamics for Enhanced Video Prediction",
+      "url": "https://ojs.aaai.org/index.php/AAAI/article/view/32314",
+      "text": "Videos inherently contain complex temporal dynamics across various spatial directions, often entangled in ways that obscure effective dynamic extraction. Previous studies typically process video spatiotemporal features without disentangling, which hampers their ability to extract dynamic information. Additionally, the extraction of dynamics is disrupted by transient high-dynamic information in video sequences, e.g., noise or flicker, which has received limited attention in the literature. To tackle those problems, this paper proposes the Disentangling and Filtering Dynamics Network (DFDNet). Firstly, to disentangle the interwoven dynamics, DFDNet decomposes the spatially encoded video sequences into lower dimensional sequences. Secondly, a learnable threshold filter is proposed to eliminate the transient high-dynamic information. Thirdly, the model incorporates an MLP to extract the temporal dependencies from the disentangled and filtered sequences. DFDNet demonstrates competitive performance across four chosen datasets, including both low and high-resolution videos. Specifically, on the low-resolution Moving MNIST dataset, DFDNet achieves a 19% improvement on MSE over the previous state-of-the-art model. On the high-resolution SJTU4K dataset, it outperforms the previous state-of-the-art model by 10% on the LPIPS metric under similar inference time.",
+      "sha256": "20b65d295747c34281a8af5e7a2c30c3bcba9db653679ce20d4a3f0efeb1e527",
+      "verified_at": "2026-10-25T01:19:41.070112+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "0d610019a08daaeaf536d8da214dbd62379100900c3c503622fb16f1c8315bb8",
+      "source_version": "4a24d69084542ca12854150ce157e4881c7227e8774e82618607650830094bc4"
+    },
+    "conf-87ec10ea3d430bb83518ccf9": {
+      "title": "DualNet: Robust Self-Supervised Stereo Matching with Pseudo-Label Supervision",
+      "url": "https://ojs.aaai.org/index.php/AAAI/article/view/32882",
+      "text": "Self-supervised stereo matching has drawn attention due to its ability to estimate disparity without needing ground-truth data.\nHowever, existing self-supervised stereo matching methods heavily rely on the photo-metric consistency assumption, which is vulnerable to natural disturbances, resulting in ambiguous supervision and inferior performance compared to the supervised ones.\nTo relax the limitation of the photo-metric consistency assumption and even bypass this assumption, we propose a novel self-supervised framework named DualNet, which consists of two key steps: robust self-supervised teacher learning and pseudo-label supervised student training.\nSpecifically, the teacher model is first trained in a self-supervised manner with a focus on feature-metric consistency and data augmentation consistency.\nThen, the output of the teacher model is geometrically constrained to obtain high-quality pseudo labels. \nBenefiting from these high-quality pseudo labels, the student model can outperform its teacher model by a large margin.\nWith the two well-designed steps, the proposed framework DualNet ranks 1st among all self-supervised methods on multiple benchmarks, surprisingly even outperforming several supervised counterparts.",
+      "sha256": "2ccf711d733b9cf2d969c7069aa88a4cb6550ac7bf05888767426675d4d39519",
+      "verified_at": "2026-10-25T01:19:46.411828+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "6aeb157cd0a3a7a8074f6566658fe849a846faa97a0882bf9d4b82fd707b66e5",
+      "source_version": "40c8aae74ae41eb690c3c3b1316360634c45603cf45138b9f2cca9d3606ae07b"
     }
   }
 }
