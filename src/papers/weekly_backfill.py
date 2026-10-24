@@ -15,6 +15,7 @@ from papers import paths
 from papers.digest_analysis import load_analysis, validate_analysis
 from papers.digest_writer import generate_periods, now, write_json
 from papers.digests import load_digest_evidence, load_public_papers, publish_paper_digests, build_digest_periods
+from papers.routine_priority import check as routine_admission
 
 ROOT = paths.ROOT
 ANALYSES = ROOT / 'content/papers/digests'
@@ -38,7 +39,9 @@ def model_admission(boundary, deadline):
     probe_lock = threading.Lock()
     def admitted():
         with probe_lock:
-            return resume_after() is None and not daily_waiting() and datetime.fromisoformat(now()) < boundary and time.monotonic() < deadline
+            return (routine_admission()['admitted'] and resume_after() is None
+                    and not daily_waiting() and datetime.fromisoformat(now()) < boundary
+                    and time.monotonic() < deadline)
     return admitted
 
 
@@ -221,6 +224,11 @@ def run(year, max_weeks=1, max_minutes=60):
         state.update(status='paused',resume_after=held.isoformat(),updated_at=now())
         write_json(state_path,state)
         return state
+    admission = routine_admission()
+    if not admission['admitted']:
+        state.update(status='deferred_routine', routine_admission=admission, updated_at=now())
+        write_json(state_path, state)
+        return state
     began = datetime.fromisoformat(now())
     boundary = began.replace(hour=18, minute=0, second=0, microsecond=0)
     if boundary <= began:
@@ -229,6 +237,10 @@ def run(year, max_weeks=1, max_minutes=60):
     finished = 0
     try:
         while max_weeks == 0 or finished < max_weeks:
+            admission = routine_admission()
+            if not admission['admitted']:
+                state.update(status='deferred_routine', routine_admission=admission)
+                break
             with lock('runtime.lock', blocking=False) as acquired:
                 if not acquired or daily_waiting() or datetime.fromisoformat(now()) >= boundary:
                     state['status'] = 'deferred_daily_or_runtime'
@@ -355,6 +367,12 @@ def watch(year, max_minutes, *, worker=None, sleep=None):
             if held:
                 write_json(receipt, {'status':'paused','year':year,'resume_after':held.isoformat(),'updated_at':now()})
                 return 0
+            admission = routine_admission()
+            if not admission['admitted']:
+                write_json(receipt, {'status':'waiting_routine','year':year,'updated_at':now(),
+                                     'routine_admission':admission,'retry_seconds':60})
+                sleep(60)
+                continue
             write_json(receipt, {'status': 'running', 'year': year, 'updated_at': now(), 'consecutive_failures': failures})
             try:
                 result = worker([sys.executable, '-u', '-m', 'papers.weekly_backfill', 'run',
