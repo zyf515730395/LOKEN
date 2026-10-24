@@ -223,7 +223,7 @@ def generate_periods(periods,*,today=None,model=None,workers=4,sentence_evidence
             print(f'Sentences {len(results)}/{len(selected)}; failures {len(failures)}',flush=True)
     skipped={}
     paper_failures={f['paper']:f for f in failures if f.get('stage') in ('evidence','sentence')}
-    if skip_failed_papers and 0<len(paper_failures)<=5 and all(f.get('skippable') for f in paper_failures.values()) and not interrupted and (not should_continue or should_continue()):
+    if skip_failed_papers and paper_failures and all(f.get('skippable') for f in paper_failures.values()) and not interrupted and (not should_continue or should_continue()):
         skipped={key:{'title':selected[key]['title'],'stage':f['stage'],'reason':f['error'],
                       'evidence_hash':evidence_hash(summaries[key]) if key in summaries else None}
                  for key,f in paper_failures.items()}
