@@ -482,6 +482,75 @@
       "generator_version": "problem-contribution-v2",
       "model": "PaperReader-Qwen3.8",
       "generated_at": "2026-10-25T21:52:19.810306+08:00"
+    },
+    "world-model": {
+      "paper_ids": [
+        "conf-094fb59dead1d3c278b53fa2"
+      ],
+      "contributions": {
+        "conf-094fb59dead1d3c278b53fa2": {
+          "text": "针对缺乏材料真值数据导致难以估计物体物理属性从而无法在新型交互下合成逼真的3D物体动力学响应，提出PhysDreamer通过蒸馏视频生成模型中的物体动力学先验使静态3D物体在外部力或代理操作下产生物理合理的动态响应。",
+          "problem": "缺乏材料真值数据导致难以估计物体物理属性从而无法在新型交互下合成逼真的3D物体动力学响应",
+          "contribution": "提出PhysDreamer通过蒸馏视频生成模型中的物体动力学先验使静态3D物体在外部力或代理操作下产生物理合理的动态响应",
+          "evidence_hash": "af9872679a4871f1ba33a8905f97598c4ff7e92ccb25477dbf763d7082a03800",
+          "generator_version": "problem-contribution-v2",
+          "model": "PaperReader-Qwen3.8",
+          "generated_at": "2026-10-25T21:48:58.117889+08:00"
+        }
+      },
+      "trends": [
+        {
+          "claim": "利用视频生成模型蒸馏物理先验以解决3D物体动力学响应合成中缺乏真值数据的问题，成为当前技术路线之一。",
+          "reasoning": "样本中PhysDreamer指出传统方法因缺乏材料真值数据难以估计物理属性，导致无法在新型交互下合成逼真动力学。该工作通过蒸馏视频生成模型中隐含的物体动力学先验，使静态3D物体在外部力或代理操作下产生物理合理的动态响应。这反映了从显式物理模拟向隐式数据驱动先验提取的技术转向，旨在绕过对精确材料参数测量的依赖。",
+          "limitations": "仅基于单篇论文观察，无法评估该蒸馏方法在复杂多体交互或极端物理条件下的泛化能力。视频生成模型中的先验是否包含足够的物理一致性约束尚待验证，且该方法对计算资源的需求及实时性表现未在此样本中体现。",
+          "paper_ids": [
+            "conf-094fb59dead1d3c278b53fa2"
+          ]
+        }
+      ],
+      "generator_version": "problem-contribution-v2",
+      "model": "PaperReader-Qwen3.8",
+      "generated_at": "2026-10-25T22:10:04.752706+08:00"
+    },
+    "relighting": {
+      "paper_ids": [
+        "2404.09412",
+        "conf-df8f2e9e3d40ec7636de5bff"
+      ],
+      "contributions": {
+        "2404.09412": {
+          "text": "针对高斯泼溅中纹理与光照纠缠且前向着色导致混合伪影，提出结合延迟着色与SDF法线蒸馏的解耦表示以实现独立编辑。",
+          "problem": "高斯泼溅中纹理与光照纠缠且前向着色导致混合伪影",
+          "contribution": "提出结合延迟着色与SDF法线蒸馏的解耦表示以实现独立编辑",
+          "evidence_hash": "894b6183a0207a69616ea588a4acf417e43a7225965d086c0b40744aeb69764b",
+          "generator_version": "problem-contribution-v2",
+          "model": "PaperReader-Qwen3.8",
+          "generated_at": "2026-10-25T21:48:57.201874+08:00"
+        },
+        "conf-df8f2e9e3d40ec7636de5bff": {
+          "text": "针对未知光照下逆渲染因漫反射与反照率歧义及硬阴影烘焙导致分解不准确，利用条件扩散模型学习反照率与镜面反射先验并结合由粗到细优化方案。",
+          "problem": "未知光照下逆渲染因漫反射与反照率歧义及硬阴影烘焙导致分解不准确",
+          "contribution": "利用条件扩散模型学习反照率与镜面反射先验并结合由粗到细优化方案",
+          "evidence_hash": "edf3bc0d1a1696ecbc747ba8a6cebf42cf817625e3d7f818f6b142593a4d42e5",
+          "generator_version": "problem-contribution-v2",
+          "model": "PaperReader-Qwen3.8",
+          "generated_at": "2026-10-25T21:48:58.778762+08:00"
+        }
+      },
+      "trends": [
+        {
+          "claim": "3D场景重光照正从单一表示转向解耦几何与材质，以解决纹理-光照纠缠及逆渲染歧义问题。",
+          "reasoning": "样本中两篇论文均针对重光照中的核心歧义问题：2404.09412指出高斯泼溅中纹理与光照纠缠导致伪影，提出通过SDF法线蒸馏和延迟着色实现表示解耦；conf-df8f2e9e3d40ec7636de5bff则针对逆渲染中漫反射与反照率的歧义，利用条件扩散模型学习材质先验。两者虽技术路线不同（前者侧重几何表示优化，后者侧重生成式先验），但共同指向通过解耦几何、材质与光照状态来提升重光照的可编辑性与准确性。",
+          "limitations": "样本仅含2篇论文，无法代表整个重光照领域的统计趋势。2404.09412的解耦效果在复杂动态场景下的鲁棒性待验证；conf-df8f2e9e3d40ec7636de5bff依赖扩散模型先验，其计算开销及在极端光照条件下的泛化能力需进一步评估。",
+          "paper_ids": [
+            "2404.09412",
+            "conf-df8f2e9e3d40ec7636de5bff"
+          ]
+        }
+      ],
+      "generator_version": "problem-contribution-v2",
+      "model": "PaperReader-Qwen3.8",
+      "generated_at": "2026-10-25T22:10:12.226334+08:00"
     }
   }
 }
