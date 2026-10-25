@@ -9806,6 +9806,183 @@
       "basis": "official_abstract",
       "source_sha256": "2b55090755bbf1664d6e052be5b7c4f3d12b0e61e6c713e9f98c17ab2faa626f",
       "source_version": "e6b92a6a5b94f46d123c0a155c42cba93b9e3bcccaa02becf06ac267f6c3949e"
+    },
+    "conf-128a01df0988ada10a767b08": {
+      "title": "AlignGuard: Scalable Safety Alignment for Text-to-Image Generation",
+      "url": "https://arxiv.org/abs/2412.10493",
+      "text": "Text-to-image (T2I) models are widespread, but their limited safety guardrails expose end users to harmful content and potentially allow for model misuse. Current safety measures are typically limited to text-based filtering or concept removal strategies, able to remove just a few concepts from the model's generative capabilities. In this work, we introduce AlignGuard, a method for safety alignment of T2I models. We enable the application of Direct Preference Optimization (DPO) for safety purposes in T2I models by synthetically generating a dataset of harmful and safe image-text pairs, which we call CoProV2. Using a custom DPO strategy and this dataset, we train safety experts, in the form of low-rank adaptation (LoRA) matrices, able to guide the generation process away from specific safety-related concepts. Then, we merge the experts into a single LoRA using a novel merging strategy for optimal scaling performance. This expert-based approach enables scalability, allowing us to remove 7x more harmful concepts from T2I models compared to baselines. AlignGuard consistently outperforms the state-of-the-art on many benchmarks and establishes new practices for safety alignment in T2I networks. Code and data will be shared at https://safetydpo.github.io/.",
+      "sha256": "fc3569efbcc1520239204c4c420954d7b57bb47601f2c6d8b7d6bbae85b37f36",
+      "verified_at": "2026-10-25T10:49:13.717876+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "a6623ca46651738b14abd578203cee189440ec49856b742e2223140f17872a05",
+      "source_version": "ca4ea63356f9fefb0b44eba82c3e623ac70d658800d730035c1d79a23d38d9b9"
+    },
+    "conf-bf9e0d37d516a1612b12fbe8": {
+      "title": "RAD: Region-Aware Diffusion Models for Image Inpainting",
+      "url": "https://arxiv.org/abs/2412.09191",
+      "text": "Diffusion models have achieved remarkable success in image generation, with applications broadening across various domains. Inpainting is one such application that can benefit significantly from diffusion models. Existing methods either hijack the reverse process of a pretrained diffusion model or cast the problem into a larger framework, \\ie, conditioned generation. However, these approaches often require nested loops in the generation process or additional components for conditioning. In this paper, we present region-aware diffusion models (RAD) for inpainting with a simple yet effective reformulation of the vanilla diffusion models. RAD utilizes a different noise schedule for each pixel, which allows local regions to be generated asynchronously while considering the global image context. A plain reverse process requires no additional components, enabling RAD to achieve inference time up to 100 times faster than the state-of-the-art approaches. Moreover, we employ low-rank adaptation (LoRA) to fine-tune RAD based on other pretrained diffusion models, reducing computational burdens in training as well. Experiments demonstrated that RAD provides state-of-the-art results both qualitatively and quantitatively, on the FFHQ, LSUN Bedroom, and ImageNet datasets.",
+      "sha256": "41ae2eb75741b3bcb695fd38913df61d667fc6e4075a8b87576d5dbbbb9195a8",
+      "verified_at": "2026-10-25T10:49:19.400258+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "ceadeb939a111d12076aedfb6c1fa28e707ce1e7f49649bffc70388e8134e6c2",
+      "source_version": "08fecee88b777774b922775adc22c1c3814f94453d85c6c8e0fbd54b51621dc3"
+    },
+    "conf-34ca8a50219eb35a8bad53a4": {
+      "title": "Generate Any Scene: Scene Graph Driven Data Synthesis for Visual Generation Training",
+      "url": "https://arxiv.org/abs/2412.08221",
+      "text": "Recent advances in text-to-vision generation excel in visual fidelity but struggle with compositional generalization and semantic alignment. Existing datasets are noisy and weakly compositional, limiting models' understanding of complex scenes, while scalable solutions for dense, high-quality annotations remain a challenge. We introduce Generate Any Scene, a data engine that systematically enumerates scene graphs representing the combinatorial array of possible visual scenes. Generate Any Scene dynamically constructs scene graphs of varying complexity from a structured taxonomy of objects, attributes, and relations. Given a sampled scene graph, Generate Any Scene translates it into a caption for text-to-image or text-to-video generation; it also translates it into a set of visual question answers that allow automatic evaluation and reward modeling of semantic alignment. Using Generate Any Scene, we first design a self-improving framework where models iteratively enhance their performance using generated data. Stable Diffusion v1.5 achieves an average 4% improvement over baselines and surpassing fine-tuning on CC3M. Second, we also design a distillation algorithm to transfer specific strengths from proprietary models to their open-source counterparts. Using fewer than 800 synthetic captions, we fine-tune Stable Diffusion v1.5 and achieve a 10% increase in TIFA score on compositional and hard concept generation. Third, we create a reward model to align model generation with semantic accuracy at a low cost. Using GRPO algorithm, we fine-tune SimpleAR-0.5B-SFT and surpass CLIP-based methods by +5% on DPG-Bench. Finally, we apply these ideas to the downstream task of content moderation where we train models to identify challenging cases by learning from synthetic data.",
+      "sha256": "9bd1760663a5df9c6579aba9e2f78e98b4e94058901bde5aa29084fd917598e7",
+      "verified_at": "2026-10-25T10:49:25.757100+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "0b99e027182c100be6e82afb4f06d9848dcb495372af6388285b009d73f31d73",
+      "source_version": "e25138deac543fd6c0ebe6e7492bf841b6cbbfb3879d070adb2d2ccb25888151"
+    },
+    "conf-fea0fabe5ec72de5e669c5a7": {
+      "title": "FireFlow: Fast Inversion of Rectified Flow for Image Semantic Editing",
+      "url": "https://arxiv.org/abs/2412.07517",
+      "text": "Though Rectified Flows (ReFlows) with distillation offers a promising way for fast sampling, its fast inversion transforms images back to structured noise for recovery and following editing remains unsolved. This paper introduces FireFlow, a simple yet effective zero-shot approach that inherits the startling capacity of ReFlow-based models (such as FLUX) in generation while extending its capabilities to accurate inversion and editing in $8$ steps. We first demonstrate that a carefully designed numerical solver is pivotal for ReFlow inversion, enabling accurate inversion and reconstruction with the precision of a second-order solver while maintaining the practical efficiency of a first-order Euler method. This solver achieves a $3\\times$ runtime speedup compared to state-of-the-art ReFlow inversion and editing techniques, while delivering smaller reconstruction errors and superior editing results in a training-free mode. The code is available at $\\href{https://github.com/HolmesShuan/FireFlow}{this URL}$.",
+      "sha256": "a745e5f5c738481f70183af6a80b2ebe2b9a1d8d9ad188412685506172ddc42e",
+      "verified_at": "2026-10-25T10:49:31.402193+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "b55770de05df40e9b5b295c154b8bd20498af5d382be3b1af9b4ffb56a53a720",
+      "source_version": "d37784e484e979731dc87fffe5f1cbf40f01fd648ce44de63dc20b5f5ac2512c"
+    },
+    "conf-ea2ae43a1fe7d3cc7de8781b": {
+      "title": "FiVA: Fine-grained Visual Attribute Dataset for Text-to-Image Diffusion Models",
+      "url": "https://arxiv.org/abs/2412.07674",
+      "text": "Recent advances in text-to-image generation have enabled the creation of high-quality images with diverse applications. However, accurately describing desired visual attributes can be challenging, especially for non-experts in art and photography. An intuitive solution involves adopting favorable attributes from the source images. Current methods attempt to distill identity and style from source images. However, \"style\" is a broad concept that includes texture, color, and artistic elements, but does not cover other important attributes such as lighting and dynamics. Additionally, a simplified \"style\" adaptation prevents combining multiple attributes from different sources into one generated image. In this work, we formulate a more effective approach to decompose the aesthetics of a picture into specific visual attributes, allowing users to apply characteristics such as lighting, texture, and dynamics from different images. To achieve this goal, we constructed the first fine-grained visual attributes dataset (FiVA) to the best of our knowledge. This FiVA dataset features a well-organized taxonomy for visual attributes and includes around 1 M high-quality generated images with visual attribute annotations. Leveraging this dataset, we propose a fine-grained visual attribute adaptation framework (FiVA-Adapter), which decouples and adapts visual attributes from one or more source images into a generated one. This approach enhances user-friendly customization, allowing users to selectively apply desired attributes to create images that meet their unique preferences and specific content requirements.",
+      "sha256": "fcc8af5521261202a5f4913b1e2b2f499b7bc45841c39bcf9a224fcda60f1727",
+      "verified_at": "2026-10-25T10:49:35.739980+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "3dc4ec1fb7af81427dc3c9b7a0a9533f3a6ee8817938ef4991ed92ff49e0d6c5",
+      "source_version": "d76cde25251a7e3f36328e39aba730aedc635f82ce74be0f87bc15a2f7e6a3bd"
+    },
+    "conf-651cd2361e4a74d582e88848": {
+      "title": "Preference Adaptive and Sequential Text-to-Image Generation",
+      "url": "https://arxiv.org/abs/2412.10419",
+      "text": "We address the problem of interactive text-to-image (T2I) generation, designing a reinforcement learning (RL) agent which iteratively improves a set of generated images for a user through a sequence of prompt expansions. Using human raters, we create a novel dataset of sequential preferences, which we leverage, together with large-scale open-source (non-sequential) datasets. We construct user-preference and user-choice models using an EM strategy and identify varying user preference types. We then leverage a large multimodal language model (LMM) and a value-based RL approach to suggest an adaptive and diverse slate of prompt expansions to the user. Our Preference Adaptive and Sequential Text-to-image Agent (PASTA) extends T2I models with adaptive multi-turn capabilities, fostering collaborative co-creation and addressing uncertainty or underspecification in a user's intent. We evaluate PASTA using human raters, showing significant improvement compared to baseline methods. We also open-source our sequential rater dataset and simulated user-rater interactions to support future research in user-centric multi-turn T2I systems.",
+      "sha256": "9ff8c77dc10312dedcd5eef3c5703c92bc1470bd2c8d98c75e5527c7d0c32a80",
+      "verified_at": "2026-10-25T10:49:41.361196+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "da1b3ebbb25f3de62ac8931a28e67426044f3aa541351ae404e9925f326580b5",
+      "source_version": "17c5751774e371228b0c209a69163ede2d4897210b474013b3faee3400546472"
+    },
+    "conf-650295297748b8743cd04d19": {
+      "title": "StoryWeaver: A Unified World Model for Knowledge-Enhanced Story Character Customization",
+      "url": "https://arxiv.org/abs/2412.07375",
+      "text": "Story visualization has gained increasing attention in artificial intelligence. However, existing methods still struggle with maintaining a balance between character identity preservation and text-semantics alignment, largely due to a lack of detailed semantic modeling of the story scene. To tackle this challenge, we propose a novel knowledge graph, namely Character Graph (\\textbf{CG}), which comprehensively represents various story-related knowledge, including the characters, the attributes related to characters, and the relationship between characters. We then introduce StoryWeaver, an image generator that achieve Customization via Character Graph (\\textbf{C-CG}), capable of consistent story visualization with rich text semantics. To further improve the multi-character generation performance, we incorporate knowledge-enhanced spatial guidance (\\textbf{KE-SG}) into StoryWeaver to precisely inject character semantics into generation. To validate the effectiveness of our proposed method, extensive experiments are conducted using a new benchmark called TBC-Bench. The experiments confirm that our StoryWeaver excels not only in creating vivid visual story plots but also in accurately conveying character identities across various scenarios with considerable storage efficiency, \\emph{e.g.}, achieving an average increase of +9.03\\% DINO-I and +13.44\\% CLIP-T. Furthermore, ablation experiments are conducted to verify the superiority of the proposed module. Codes and datasets are released at https://github.com/Aria-Zhangjl/StoryWeaver.",
+      "sha256": "7ae679fceacc7234b49ee104add7217b8e11535105564491981e356b18fe411c",
+      "verified_at": "2026-10-25T10:49:47.243837+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "95bf1c570e17328f997d6ef666cdc6a4092fe0063167ad3025b4763c105c30ef",
+      "source_version": "23f097120a5e5c1ab71709992fe3dec1e8cca82c1c57f3e00e01ee1e743934f1"
+    },
+    "conf-ab346c04d5bfd15cad2a5d6c": {
+      "title": "Boosting Alignment for Post-Unlearning Text-to-Image Generative Models",
+      "url": "https://arxiv.org/abs/2412.07808",
+      "text": "Large-scale generative models have shown impressive image-generation capabilities, propelled by massive data. However, this often inadvertently leads to the generation of harmful or inappropriate content and raises copyright concerns. Driven by these concerns, machine unlearning has become crucial to effectively purge undesirable knowledge from models. While existing literature has studied various unlearning techniques, these often suffer from either poor unlearning quality or degradation in text-image alignment after unlearning, due to the competitive nature of these objectives. To address these challenges, we propose a framework that seeks an optimal model update at each unlearning iteration, ensuring monotonic improvement on both objectives. We further derive the characterization of such an update. In addition, we design procedures to strategically diversify the unlearning and remaining datasets to boost performance improvement. Our evaluation demonstrates that our method effectively removes target classes from recent diffusion-based generative models and concepts from stable diffusion models while maintaining close alignment with the models' original trained states, thus outperforming state-of-the-art baselines. Our code will be made available at https://github.com/reds-lab/Restricted_gradient_diversity_unlearning.git.",
+      "sha256": "c0dedaa040d91f11c8e47e43a11f88014e3477ffcde60561dbec2f2f6ec0fd2d",
+      "verified_at": "2026-10-25T10:49:53.115832+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "af0f035ca7af24ad171a1f676a610ba840aec32b786da20405258df3976ac76c",
+      "source_version": "1cc160c3cdb3cfab1460024a01f03405f6893a24ef2218d480e38925fad4fe75"
+    },
+    "conf-7d5177b2e7dd07a21a8bbcaf": {
+      "title": "Proactive Agents for Multi-Turn Text-to-Image Generation Under Uncertainty",
+      "url": "https://arxiv.org/abs/2412.06771",
+      "text": "User prompts for generative AI models are often underspecified, leading to a misalignment between the user intent and models' understanding. As a result, users commonly have to painstakingly refine their prompts. We study this alignment problem in text-to-image (T2I) generation and propose a prototype for proactive T2I agents equipped with an interface to (1) actively ask clarification questions when uncertain, and (2) present their uncertainty about user intent as an understandable and editable belief graph. We build simple prototypes for such agents and propose a new scalable and automated evaluation approach using two agents, one with a ground truth intent (an image) while the other tries to ask as few questions as possible to align with the ground truth. We experiment over three image-text datasets: ImageInWords (Garg et al., 2024), COCO (Lin et al., 2014) and DesignBench, a benchmark we curated with strong artistic and design elements. Experiments over the three datasets demonstrate the proposed T2I agents' ability to ask informative questions and elicit crucial information to achieve successful alignment with at least 2 times higher VQAScore (Lin et al., 2024) than the standard T2I generation. Moreover, we conducted human studies and observed that at least 90% of human subjects found these agents and their belief graphs helpful for their T2I workflow, highlighting the effectiveness of our approach. Code and DesignBench can be found at https://github.com/google-deepmind/proactive_t2i_agents.",
+      "sha256": "045ce24c86866883018771f2ff9343312cb415385e586d218bf321f057237a1a",
+      "verified_at": "2026-10-25T10:49:59.021855+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "72061554101f187874767883f27a4bc551db7b426410f4b6d746bbbde0a1ad56",
+      "source_version": "d62f7e76c64c241b7d2a1aabf752977309a4ddc608f76ce3d9347f7220da9f28"
+    },
+    "conf-54a27585ee9c0e04eb133b53": {
+      "title": "DynamicScaler: Seamless and Scalable Video Generation for Panoramic Scenes",
+      "url": "https://arxiv.org/abs/2412.11100",
+      "text": "The increasing demand for immersive AR/VR applications and spatial intelligence has heightened the need to generate high-quality scene-level and 360${\\deg}$ panoramic video. However, most video diffusion models are constrained by limited resolution and aspect ratio, which restricts their applicability to scene-level dynamic content synthesis. In this work, we propose $\\textbf{DynamicScaler}$, addressing these challenges by enabling spatially scalable and panoramic dynamic scene synthesis that preserves coherence across panoramic scenes of arbitrary size. Specifically, we introduce a Offset Shifting Denoiser, facilitating efficient, synchronous, and coherent denoising panoramic dynamic scenes via a diffusion model with fixed resolution through a seamless rotating Window, which ensures seamless boundary transitions and consistency across the entire panoramic space, accommodating varying resolutions and aspect ratios. Additionally, we employ a Global Motion Guidance mechanism to ensure both local detail fidelity and global motion continuity. Extensive experiments demonstrate our method achieves superior content and motion quality in panoramic scene-level video generation, offering a training-free, efficient, and scalable solution for immersive dynamic scene creation with constant VRAM consumption regardless of the output video resolution. Project page is available at $\\href{https://dynamic-scaler.pages.dev/new}{https://dynamic-scaler.pages.dev/new}$.",
+      "sha256": "e3692917e37129c4d302f6a38ba8e4e73f9d2625d61ddedb5609e23796b1a758",
+      "verified_at": "2026-10-25T10:50:04.655958+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "04eaf47ff064173a9c7d04a26a237bd832f36c22a202d9738de2666c9e790396",
+      "source_version": "c938ac8f2a7b7bf68c0ed5d414ee950cfed7066325db77d87e23dfe4b3f0596a"
+    },
+    "conf-a7dead84930abd6d433867d9": {
+      "title": "LinGen: Towards High-Resolution Minute-Length Text-to-Video Generation with Linear Computational Complexity",
+      "url": "https://arxiv.org/abs/2412.09856",
+      "text": "Text-to-video generation enhances content creation but is highly computationally intensive: The computational cost of Diffusion Transformers (DiTs) scales quadratically in the number of pixels. This makes minute-length video generation extremely expensive, limiting most existing models to generating videos of only 10-20 seconds length. We propose a Linear-complexity text-to-video Generation (LinGen) framework whose cost scales linearly in the number of pixels. For the first time, LinGen enables high-resolution minute-length video generation on a single GPU without compromising quality. It replaces the computationally-dominant and quadratic-complexity block, self-attention, with a linear-complexity block called MATE, which consists of an MA-branch and a TE-branch. The MA-branch targets short-to-long-range correlations, combining a bidirectional Mamba2 block with our token rearrangement method, Rotary Major Scan, and our review tokens developed for long video generation. The TE-branch is a novel TEmporal Swin Attention block that focuses on temporal correlations between adjacent tokens and medium-range tokens. The MATE block addresses the adjacency preservation issue of Mamba and improves the consistency of generated videos significantly. Experimental results show that LinGen outperforms DiT (with a 75.6% win rate) in video quality with up to 15$\\times$ (11.5$\\times$) FLOPs (latency) reduction. Furthermore, both automatic metrics and human evaluation demonstrate our LinGen-4B yields comparable video quality to state-of-the-art models (with a 50.5%, 52.1%, 49.1% win rate with respect to Gen-3, LumaLabs, and Kling, respectively). This paves the way to hour-length movie generation and real-time interactive video generation. We provide 68s video generation results and more examples in our project website: https://lineargen.github.io/.",
+      "sha256": "c01d8456f45a68aa0e946a162ba3a70a340f5fda0790e7600fd751c6494e29bd",
+      "verified_at": "2026-10-25T10:50:09.018857+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "04f0c46406a0d262e70053344ba4a0dc2204fed4412e687a93afa611859d4928",
+      "source_version": "0ef0d6de5199565b002b9a31d4c61ea811dc6bf683754dec42656e38414ba6c1"
+    },
+    "conf-aab18a9461ff1d09e854b865": {
+      "title": "Elevating Flow-Guided Video Inpainting with Reference Generation",
+      "url": "https://arxiv.org/abs/2412.08975",
+      "text": "Video inpainting (VI) is a challenging task that requires effective propagation of observable content across frames while simultaneously generating new content not present in the original video. In this study, we propose a robust and practical VI framework that leverages a large generative model for reference generation in combination with an advanced pixel propagation algorithm. Powered by a strong generative model, our method not only significantly enhances frame-level quality for object removal but also synthesizes new content in the missing areas based on user-provided text prompts. For pixel propagation, we introduce a one-shot pixel pulling method that effectively avoids error accumulation from repeated sampling while maintaining sub-pixel precision. To evaluate various VI methods in realistic scenarios, we also propose a high-quality VI benchmark, HQVI, comprising carefully generated videos using alpha matte composition. On public benchmarks and the HQVI dataset, our method demonstrates significantly higher visual quality and metric scores compared to existing solutions. Furthermore, it can process high-resolution videos exceeding 2K resolution with ease, underscoring its superiority for real-world applications.",
+      "sha256": "e57b4abe2351a6e6ddd913de4476ee815efb8f1adea53f9e1872055ebbbfcde7",
+      "verified_at": "2026-10-25T10:50:15.462193+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "eed20e4464bd73e4d061d800fb344deab7c516a960068f70bd8bdceefb09e88a",
+      "source_version": "2bcc52afadcec5d18b39f5c9ebbfb8711262d2ae673b37c094b8a0c4342afbc3"
+    },
+    "conf-d223b31abc0e6d33078feed4": {
+      "title": "Mobile Video Diffusion",
+      "url": "https://arxiv.org/abs/2412.07583",
+      "text": "Video diffusion models have achieved impressive realism and controllability but are limited by high computational demands, restricting their use on mobile devices. This paper introduces the first mobile-optimized video diffusion model. Starting from a spatio-temporal UNet from Stable Video Diffusion (SVD), we reduce memory and computational cost by reducing the frame resolution, incorporating multi-scale temporal representations, and introducing two novel pruning schema to reduce the number of channels and temporal blocks. Furthermore, we employ adversarial finetuning to reduce the denoising to a single step. Our model, coined as MobileVD, is 523x more efficient (1817.2 vs. 4.34 TFLOPs) with a slight quality drop (FVD 149 vs. 171), generating latents for a 14x512x256 px clip in 1.7 seconds on a Xiaomi-14 Pro. Our results are available at https://qualcomm-ai-research.github.io/mobile-video-diffusion/",
+      "sha256": "ecdb3a2258f4f9f0f8289c1955e52d7e24797bbfe13db3a90301df4b8802df90",
+      "verified_at": "2026-10-25T10:50:21.051733+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "d0e5960944cbd17a3967d2efdc288b910678bf4d58494a79be96a833319d6228",
+      "source_version": "9952b32c1afedd9ab4bfa1d4f21bc9193c08b005a18f266c0aca691b323d48c8"
+    },
+    "conf-3a8abd0fec630119f67b12c9": {
+      "title": "STIV: Scalable Text and Image Conditioned Video Generation",
+      "url": "https://arxiv.org/abs/2412.07730",
+      "text": "The field of video generation has made remarkable advancements, yet there remains a pressing need for a clear, systematic recipe that can guide the development of robust and scalable models. In this work, we present a comprehensive study that systematically explores the interplay of model architectures, training recipes, and data curation strategies, culminating in a simple and scalable text-image-conditioned video generation method, named STIV. Our framework integrates image condition into a Diffusion Transformer (DiT) through frame replacement, while incorporating text conditioning via a joint image-text conditional classifier-free guidance. This design enables STIV to perform both text-to-video (T2V) and text-image-to-video (TI2V) tasks simultaneously. Additionally, STIV can be easily extended to various applications, such as video prediction, frame interpolation, multi-view generation, and long video generation, etc. With comprehensive ablation studies on T2I, T2V, and TI2V, STIV demonstrate strong performance, despite its simple design. An 8.7B model with 512 resolution achieves 83.1 on VBench T2V, surpassing both leading open and closed-source models like CogVideoX-5B, Pika, Kling, and Gen-3. The same-sized model also achieves a state-of-the-art result of 90.1 on VBench I2V task at 512 resolution. By providing a transparent and extensible recipe for building cutting-edge video generation models, we aim to empower future research and accelerate progress toward more versatile and reliable video generation solutions.",
+      "sha256": "2a9c67a8efcdd8c8d336e1e5db147c0bf68fbae4d03238b0d7a5e20e57a5efe3",
+      "verified_at": "2026-10-25T10:50:26.927172+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "6049900946c5e33d63981c4d07df9e3636584c7a76d4e5a3e1eeed4c0935319f",
+      "source_version": "e750330d5516e71754f77935d72c8fc98bedbc43c8a5a10d3ecafc22b3dd94b4"
+    },
+    "conf-5626bc81876c16e21c5e0865": {
+      "title": "Benchmarking and Learning Multi-Dimensional Quality Evaluator for Text-to-3D Generation",
+      "url": "https://arxiv.org/abs/2412.11170",
+      "text": "Text-to-3D generation has achieved remarkable progress in recent years, yet evaluating these methods remains challenging for two reasons: i) Existing benchmarks lack fine-grained evaluation on different prompt categories and evaluation dimensions. ii) Previous evaluation metrics only focus on a single aspect (e.g., text-3D alignment) and fail to perform multi-dimensional quality assessment. To address these problems, we first propose a comprehensive benchmark named MATE-3D. The benchmark contains eight well-designed prompt categories that cover single and multiple object generation, resulting in 1,280 generated textured meshes. We have conducted a large-scale subjective experiment from four different evaluation dimensions and collected 107,520 annotations, followed by detailed analyses of the results. Based on MATE-3D, we propose a novel quality evaluator named HyperScore. Utilizing hypernetwork to generate specified mapping functions for each evaluation dimension, our metric can effectively perform multi-dimensional quality assessment. HyperScore presents superior performance over existing metrics on MATE-3D, making it a promising metric for assessing and improving text-to-3D generation. The project is available at https://mate-3d.github.io/.",
+      "sha256": "48ba590ba8e5d80a6ef6d3448b37617afee3a66f018d86dbe82c2e46480e9503",
+      "verified_at": "2026-10-25T10:50:33.282455+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "e070590168078934064f2e47b05635ae0f518793c1e8dbb2f7468fb2bc8941b8",
+      "source_version": "118ea94d06fee76b949deec46d2bb817bdaab1539aa14c961aaec7f90cee4c06"
+    },
+    "2412.09176": {
+      "title": "LIVE-GS: LLM Powers Interactive VR by Enhancing Gaussian Splatting",
+      "url": "https://arxiv.org/abs/2412.09176",
+      "text": "As 3D Gaussian Splatting (3DGS) emerges as a leading approach for novel view synthesis and scene reconstruction, its potential in digital asset creation has gained significant attention. An increasing number of asset libraries based on GS are being established. However, generating physics-based dynamic assets remains a time-consuming and expertise-intensive task, especially for non-experts. In this paper, we propose LIVE-GS, a highly realistic Virtual Reality (VR) system powered by Large Language Models (LLMs), which enables rapid creation of dynamic Gaussian assets and real-time VR interactions. To inform our system design, we conducted interviews to examine challenges faced by current GS-based VR systems and the specific demands of users. Based on these insights, we employed GPT-4o to analyze key physical properties of objects that significantly impact user interactions, ensuring physics-based interactions in VR align with real-world phenomena. A key innovation of LIVE-GS is its ability to predict reasonable parameters in just 10 seconds from static Gaussian assets while maintaining high-quality VR interactions. To validate our approach, we invited participants experienced in physical simulation to manually adjust physical parameters, providing a baseline for comparison in both asset quality and authoring efficiency. We also conducted a comprehensive user study to evaluate system usability and user satisfaction. Experimental results demonstrate that LIVE-GS, leveraging LLMs' scene understanding capabilities, can achieve efficient physical scene creation and natural interactions without requiring manual design or annotation.",
+      "sha256": "a9ce10100b08106992fb9e7df8d12626f43505f81a1b4ff0943f94e4c1cf2c80",
+      "verified_at": "2026-10-25T10:50:37.662213+08:00"
+    },
+    "conf-54da48c2209ca24eb10bba0d": {
+      "title": "CoMA: Compositional Human Motion Generation with Multi-modal Agents",
+      "url": "https://arxiv.org/abs/2412.07320",
+      "text": "3D human motion generation has seen substantial advancement in recent years. While state-of-the-art approaches have improved performance significantly, they still struggle with complex and detailed motions unseen in training data, largely due to the scarcity of motion datasets and the prohibitive cost of generating new training examples. To address these challenges, we introduce CoMA, an agent-based solution for complex human motion generation, editing, and comprehension. CoMA leverages multiple collaborative agents powered by large language and vision models, alongside a mask transformer-based motion generator featuring body part-specific encoders and codebooks for fine-grained control. Our framework enables generation of both short and long motion sequences with detailed instructions, text-guided motion editing, and self-correction for improved quality. Evaluations on the HumanML3D dataset demonstrate competitive performance against state-of-the-art methods. Additionally, we create a set of context-rich, compositional, and long text prompts, where user studies show our method significantly outperforms existing approaches.",
+      "sha256": "062255970527cc3dea4fd2c92318b6f1443e66367820c9907ba6ed4f377b4e0a",
+      "verified_at": "2026-10-25T10:50:43.242337+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "515e2cd43d4a04ec96b3c7487ea05859c310596432ab89a7a6f6a51edde7987c",
+      "source_version": "463999e56614f3c2356f31dbe271f621f83f6d6e02635ce00c546f9a73357598"
+    },
+    "conf-2564bdd7cbd4eab249a10b62": {
+      "title": "FLIP: Flow-Centric Generative Planning as General-Purpose Manipulation World Model",
+      "url": "https://arxiv.org/abs/2412.08261",
+      "text": "We aim to develop a model-based planning framework for world models that can be scaled with increasing model and data budgets for general-purpose manipulation tasks with only language and vision inputs. To this end, we present FLow-centric generative Planning (FLIP), a model-based planning algorithm on visual space that features three key modules: 1. a multi-modal flow generation model as the general-purpose action proposal module; 2. a flow-conditioned video generation model as the dynamics module; and 3. a vision-language representation learning model as the value module. Given an initial image and language instruction as the goal, FLIP can progressively search for long-horizon flow and video plans that maximize the discounted return to accomplish the task. FLIP is able to synthesize long-horizon plans across objects, robots, and tasks with image flows as the general action representation, and the dense flow information also provides rich guidance for long-horizon video generation. In addition, the synthesized flow and video plans can guide the training of low-level control policies for robot execution. Experiments on diverse benchmarks demonstrate that FLIP can improve both the success rates and quality of long-horizon video plan synthesis and has the interactive world model property, opening up wider applications for future works.Video demos are on our website: https://nus-lins-lab.github.io/flipweb/.",
+      "sha256": "85fcafe1d7969bee28194fb8034dae10d1fa47d288b8570423e75741eb3ed3cd",
+      "verified_at": "2026-10-25T10:50:48.898307+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "7cbe22d0ff138845986f8feabddd8216a4115dd8253af3104e46244fdcb5edff",
+      "source_version": "c89134e55fccfd10a8f3238db5606246ff9b003d7cd3bbb21f96a0d4b386ca12"
     }
   }
 }
