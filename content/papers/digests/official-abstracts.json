@@ -11206,6 +11206,184 @@
       "basis": "official_abstract",
       "source_sha256": "1493a0ccaec2eb6c16f3f2392999107f995279d35bd26a98a7a06da8179b8232",
       "source_version": "5ca8e1297ee07edfd54adcebfbb0098cca93fe766a7971f6e43ce1de2234e904"
+    },
+    "conf-c76d31fb15c73011425f7528": {
+      "title": "Toward Guidance-Free AR Visual Generation via Condition Contrastive Alignment",
+      "url": "https://arxiv.org/abs/2410.09347",
+      "text": "Classifier-Free Guidance (CFG) is a critical technique for enhancing the sample quality of visual generative models. However, in autoregressive (AR) multi-modal generation, CFG introduces design inconsistencies between language and visual content, contradicting the design philosophy of unifying different modalities for visual AR. Motivated by language model alignment methods, we propose \\textit{Condition Contrastive Alignment} (CCA) to facilitate guidance-free AR visual generation with high performance and analyze its theoretical connection with guided sampling methods. Unlike guidance methods that alter the sampling process to achieve the ideal sampling distribution, CCA directly fine-tunes pretrained models to fit the same distribution target. Experimental results show that CCA can significantly enhance the guidance-free performance of all tested models with just one epoch of fine-tuning ($\\sim$ 1\\% of pretraining epochs) on the pretraining dataset, on par with guided sampling methods. This largely removes the need for guided sampling in AR visual generation and cuts the sampling cost by half. Moreover, by adjusting training parameters, CCA can achieve trade-offs between sample diversity and fidelity similar to CFG. This experimentally confirms the strong theoretical connection between language-targeted alignment and visual-targeted guidance methods, unifying two previously independent research fields. Code and model weights: https://github.com/thu-ml/CCA.",
+      "sha256": "84f9b8a2d63a5664a959467d75d053f32697a5f8aa0e64d8bb8552557f88c397",
+      "verified_at": "2026-10-25T13:39:48.539656+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "3914ea388da488ef9b5e66752ddbd65b6e256fe893ebe9c8ded13f7fa9e8441b",
+      "source_version": "ba411bf699ddafd2035c758aefbff1de34b22bb442fa87e2195e3f62b83a199a"
+    },
+    "conf-55ab55aa48c535f7ba3ed9b1": {
+      "title": "CtrLoRA: An Extensible and Efficient Framework for Controllable Image Generation",
+      "url": "https://arxiv.org/abs/2410.09400",
+      "text": "Recently, large-scale diffusion models have made impressive progress in text-to-image (T2I) generation. To further equip these T2I models with fine-grained spatial control, approaches like ControlNet introduce an extra network that learns to follow a condition image. However, for every single condition type, ControlNet requires independent training on millions of data pairs with hundreds of GPU hours, which is quite expensive and makes it challenging for ordinary users to explore and develop new types of conditions. To address this problem, we propose the CtrLoRA framework, which trains a Base ControlNet to learn the common knowledge of image-to-image generation from multiple base conditions, along with condition-specific LoRAs to capture distinct characteristics of each condition. Utilizing our pretrained Base ControlNet, users can easily adapt it to new conditions, requiring as few as 1,000 data pairs and less than one hour of single-GPU training to obtain satisfactory results in most scenarios. Moreover, our CtrLoRA reduces the learnable parameters by 90% compared to ControlNet, significantly lowering the threshold to distribute and deploy the model weights. Extensive experiments on various types of conditions demonstrate the efficiency and effectiveness of our method. Codes and model weights will be released at https://github.com/xyfJASON/ctrlora.",
+      "sha256": "824d9168b4130ca2d2137a718626bba31ce0c3a0cad14991d65ea9bcc51c9e63",
+      "verified_at": "2026-10-25T13:39:55.227516+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "14a065ffb7b2eace82e36cc79b21a210d4aa9a7371d11600e91606e19e0b2dc7",
+      "source_version": "017bb057558da2502d6700480c07180879b63fe914c11ccdad550cc9e675bfe7"
+    },
+    "conf-a436e81e731bfd64c3390428": {
+      "title": "Meissonic: Revitalizing Masked Generative Transformers for Efficient High-Resolution Text-to-Image Synthesis",
+      "url": "https://arxiv.org/abs/2410.08261",
+      "text": "We present Meissonic, which elevates non-autoregressive masked image modeling (MIM) text-to-image to a level comparable with state-of-the-art diffusion models like SDXL. By incorporating a comprehensive suite of architectural innovations, advanced positional encoding strategies, and optimized sampling conditions, Meissonic substantially improves MIM's performance and efficiency. Additionally, we leverage high-quality training data, integrate micro-conditions informed by human preference scores, and employ feature compression layers to further enhance image fidelity and resolution. Our model not only matches but often exceeds the performance of existing models like SDXL in generating high-quality, high-resolution images. Extensive experiments validate Meissonic's capabilities, demonstrating its potential as a new standard in text-to-image synthesis. We release a model checkpoint capable of producing $1024 \\times 1024$ resolution images.",
+      "sha256": "73080d580518af64c7331637d6d3ac54d9948bc4c293125953c66e37306f1fb0",
+      "verified_at": "2026-10-25T13:39:59.701409+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "af3bd9b1a84670603477c931439ef727f6090e214ec44d3032d99ba4238a3a89",
+      "source_version": "60f2a2985cf5e875ad2ba0d95bcaf5d3ee32ad4276ba694af370ee03191e98c1"
+    },
+    "conf-5d22e16d29127b607a989dfb": {
+      "title": "EvolveDirector: Approaching Advanced Text-to-Image Generation with Large Vision-Language Models",
+      "url": "https://arxiv.org/abs/2410.07133",
+      "text": "Recent advancements in generation models have showcased remarkable capabilities in generating fantastic content. However, most of them are trained on proprietary high-quality data, and some models withhold their parameters and only provide accessible application programming interfaces (APIs), limiting their benefits for downstream tasks. To explore the feasibility of training a text-to-image generation model comparable to advanced models using publicly available resources, we introduce EvolveDirector. This framework interacts with advanced models through their public APIs to obtain text-image data pairs to train a base model. Our experiments with extensive data indicate that the model trained on generated data of the advanced model can approximate its generation capability. However, it requires large-scale samples of 10 million or more. This incurs significant expenses in time, computational resources, and especially the costs associated with calling fee-based APIs. To address this problem, we leverage pre-trained large vision-language models (VLMs) to guide the evolution of the base model. VLM continuously evaluates the base model during training and dynamically updates and refines the training dataset by the discrimination, expansion, deletion, and mutation operations. Experimental results show that this paradigm significantly reduces the required data volume. Furthermore, when approaching multiple advanced models, EvolveDirector can select the best samples generated by them to learn powerful and balanced abilities. The final trained model Edgen is demonstrated to outperform these advanced models. The code and model weights are available at https://github.com/showlab/EvolveDirector.",
+      "sha256": "6d2cbe5768fe47efea093e47bae139ca44954188e43aa593f4e999193fcef070",
+      "verified_at": "2026-10-25T13:40:05.430183+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "71de816c10679e4801f51847ddacac5e8abe55c60072ce973c0cc705da882c5a",
+      "source_version": "e26c0a547b9d4f4e6448605c667812778c52729dc89f0558eb850d544b73822f"
+    },
+    "conf-be46b21e7f2d13da415c79bb": {
+      "title": "TweedieMix: Improving Multi-Concept Fusion for Diffusion-based Image/Video Generation",
+      "url": "https://arxiv.org/abs/2410.05591",
+      "text": "Despite significant advancements in customizing text-to-image and video generation models, generating images and videos that effectively integrate multiple personalized concepts remains a challenging task. To address this, we present TweedieMix, a novel method for composing customized diffusion models during the inference phase. By analyzing the properties of reverse diffusion sampling, our approach divides the sampling process into two stages. During the initial steps, we apply a multiple object-aware sampling technique to ensure the inclusion of the desired target objects. In the later steps, we blend the appearances of the custom concepts in the de-noised image space using Tweedie's formula. Our results demonstrate that TweedieMix can generate multiple personalized concepts with higher fidelity than existing methods. Moreover, our framework can be effortlessly extended to image-to-video diffusion models, enabling the generation of videos that feature multiple personalized concepts. Results and source code are in our anonymous project page.",
+      "sha256": "13078eedf36512ff4eaba6354ac3107d605ecf762fa99b16b3618c80b3ca9063",
+      "verified_at": "2026-10-25T13:40:12.689865+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "170700d7c2e80c8c105a9c2f811eb9e8d8b708af4a39b11c1c19ffd8a86959ca",
+      "source_version": "e7706d96f29ef899d0199abdde80be5e3bb29bc5f0ea4b50b20537ce5ebb4271"
+    },
+    "conf-59e2021ae05b1cca9e1f822f": {
+      "title": "DiffusionGuard: A Robust Defense Against Malicious Diffusion-based Image Editing",
+      "url": "https://arxiv.org/abs/2410.05694",
+      "text": "Recent advances in diffusion models have introduced a new era of text-guided image manipulation, enabling users to create realistic edited images with simple textual prompts. However, there is significant concern about the potential misuse of these methods, especially in creating misleading or harmful content. Although recent defense strategies, which introduce imperceptible adversarial noise to induce model failure, have shown promise, they remain ineffective against more sophisticated manipulations, such as editing with a mask. In this work, we propose DiffusionGuard, a robust and effective defense method against unauthorized edits by diffusion-based image editing models, even in challenging setups. Through a detailed analysis of these models, we introduce a novel objective that generates adversarial noise targeting the early stage of the diffusion process. This approach significantly improves the efficiency and effectiveness of adversarial noises. We also introduce a mask-augmentation technique to enhance robustness against various masks during test time. Finally, we introduce a comprehensive benchmark designed to evaluate the effectiveness and robustness of methods in protecting against privacy threats in realistic scenarios. Through extensive experiments, we show that our method achieves stronger protection and improved mask robustness with lower computational costs compared to the strongest baseline. Additionally, our method exhibits superior transferability and better resilience to noise removal techniques compared to all baseline methods. Our source code is publicly available at https://github.com/choi403/DiffusionGuard.",
+      "sha256": "b6789de75b3b66474f5269bad0a3501251fd1d0fc880bddd89fd0a41b534a3b3",
+      "verified_at": "2026-10-25T13:40:18.379236+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "412bc25e964387c1abb3e0ea4e927bec053e67a6de4dc82ae2d2f92ad2bcacc6",
+      "source_version": "8edc7d333a3570754cb4d120c39ac217775c4c6327d123548f3ad8c741a8eab6"
+    },
+    "conf-4645738cef284effba5d6d36": {
+      "title": "PostEdit: Posterior Sampling for Efficient Zero-Shot Image Editing",
+      "url": "https://arxiv.org/abs/2410.04844",
+      "text": "In the field of image editing, three core challenges persist: controllability, background preservation, and efficiency. Inversion-based methods rely on time-consuming optimization to preserve the features of the initial images, which results in low efficiency due to the requirement for extensive network inference. Conversely, inversion-free methods lack theoretical support for background similarity, as they circumvent the issue of maintaining initial features to achieve efficiency. As a consequence, none of these methods can achieve both high efficiency and background consistency. To tackle the challenges and the aforementioned disadvantages, we introduce PostEdit, a method that incorporates a posterior scheme to govern the diffusion sampling process. Specifically, a corresponding measurement term related to both the initial features and Langevin dynamics is introduced to optimize the estimated image generated by the given target prompt. Extensive experimental results indicate that the proposed PostEdit achieves state-of-the-art editing performance while accurately preserving unedited regions. Furthermore, the method is both inversion- and training-free, necessitating approximately 1.5 seconds and 18 GB of GPU memory to generate high-quality results.",
+      "sha256": "d7315e8585719e9b94e82256acaa92ae8e15b18627ee4d117b330e79b21fad92",
+      "verified_at": "2026-10-25T13:40:24.773724+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "e0f6773adf47bcefd231b03158e44b77cc083e0192b2ae1780d8d401460c83e6",
+      "source_version": "16a1ec049b458543e392b5ebcbd33386fa34b0a813e7b818e44b2df660e97493"
+    },
+    "conf-423187948c51be42fc10dd8d": {
+      "title": "HARIVO: Harnessing Text-to-Image Models for Video Generation",
+      "url": "https://arxiv.org/abs/2410.07763",
+      "text": "We present a method to create diffusion-based video models from pretrained Text-to-Image (T2I) models. Recently, AnimateDiff proposed freezing the T2I model while only training temporal layers. We advance this method by proposing a unique architecture, incorporating a mapping network and frame-wise tokens, tailored for video generation while maintaining the diversity and creativity of the original T2I model. Key innovations include novel loss functions for temporal smoothness and a mitigating gradient sampling technique, ensuring realistic and temporally consistent video generation despite limited public video data. We have successfully integrated video-specific inductive biases into the architecture and loss functions. Our method, built on the frozen StableDiffusion model, simplifies training processes and allows for seamless integration with off-the-shelf models like ControlNet and DreamBooth. project page: https://kwonminki.github.io/HARIVO",
+      "sha256": "87d77162620d7a292dc27974925578f6513735ac579a182c262263e8b0e322f6",
+      "verified_at": "2026-10-25T13:40:30.748456+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "51315293584efc3c0071e74d60ec52b4fd8974ddfb03af0985d58a6a54760e99",
+      "source_version": "3eda0e912c2afdc6fbf65eb0bee7e891835149ce733b1f28e8087a3d03745676"
+    },
+    "conf-a3e2464aa280753002bdd7fc": {
+      "title": "ViBiDSampler: Enhancing Video Interpolation Using Bidirectional Diffusion Sampler",
+      "url": "https://arxiv.org/abs/2410.05651",
+      "text": "Recent progress in large-scale text-to-video (T2V) and image-to-video (I2V) diffusion models has greatly enhanced video generation, especially in terms of keyframe interpolation. However, current image-to-video diffusion models, while powerful in generating videos from a single conditioning frame, need adaptation for two-frame (start & end) conditioned generation, which is essential for effective bounded interpolation. Unfortunately, existing approaches that fuse temporally forward and backward paths in parallel often suffer from off-manifold issues, leading to artifacts or requiring multiple iterative re-noising steps. In this work, we introduce a novel, bidirectional sampling strategy to address these off-manifold issues without requiring extensive re-noising or fine-tuning. Our method employs sequential sampling along both forward and backward paths, conditioned on the start and end frames, respectively, ensuring more coherent and on-manifold generation of intermediate frames. Additionally, we incorporate advanced guidance techniques, CFG++ and DDS, to further enhance the interpolation process. By integrating these, our method achieves state-of-the-art performance, efficiently generating high-quality, smooth videos between keyframes. On a single 3090 GPU, our method can interpolate 25 frames at 1024 x 576 resolution in just 195 seconds, establishing it as a leading solution for keyframe interpolation.",
+      "sha256": "21fbe3c953ba8093c83dcb0500cb50df0218766efbb8b72f21bb51fafadaf60b",
+      "verified_at": "2026-10-25T13:40:34.762475+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "02b644e6df14e480d17801b114cfbc781292d1283c9ec67ca507dd685d077d31",
+      "source_version": "eab5308ac0743ba08880bf27e4803d21314ccb7bacb0074e1135f19524f51bd3"
+    },
+    "conf-6ad75c25916a3344498153e2": {
+      "title": "Pyramidal Flow Matching for Efficient Video Generative Modeling",
+      "url": "https://arxiv.org/abs/2410.05954",
+      "text": "Video generation requires modeling a vast spatiotemporal space, which demands significant computational resources and data usage. To reduce the complexity, the prevailing approaches employ a cascaded architecture to avoid direct training with full resolution latent. Despite reducing computational demands, the separate optimization of each sub-stage hinders knowledge sharing and sacrifices flexibility. This work introduces a unified pyramidal flow matching algorithm. It reinterprets the original denoising trajectory as a series of pyramid stages, where only the final stage operates at the full resolution, thereby enabling more efficient video generative modeling. Through our sophisticated design, the flows of different pyramid stages can be interlinked to maintain continuity. Moreover, we craft autoregressive video generation with a temporal pyramid to compress the full-resolution history. The entire framework can be optimized in an end-to-end manner and with a single unified Diffusion Transformer (DiT). Extensive experiments demonstrate that our method supports generating high-quality 5-second (up to 10-second) videos at 768p resolution and 24 FPS within 20.7k A100 GPU training hours. All code and models are open-sourced at https://pyramid-flow.github.io.",
+      "sha256": "fc51f69814967dd25ebdc0060f19aefd8f3b4b9b096d373d6e2a1357fe41869f",
+      "verified_at": "2026-10-25T13:40:40.612849+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "598b7605c991be504a21d898e624fe164f75a754868b3a8046bcf721ce80c00b",
+      "source_version": "c18cce699277d5b830c9bb35a6dc517864571218938a7a64c82b42fb8eb4e15d"
+    },
+    "conf-f5bff902880e8fd4d2e875c7": {
+      "title": "Towards World Simulator: Crafting Physical Commonsense-Based Benchmark for Video Generation",
+      "url": "https://arxiv.org/abs/2410.05363",
+      "text": "Text-to-video (T2V) models like Sora have made significant strides in visualizing complex prompts, which is increasingly viewed as a promising path towards constructing the universal world simulator. Cognitive psychologists believe that the foundation for achieving this goal is the ability to understand intuitive physics. However, the capacity of these models to accurately represent intuitive physics remains largely unexplored. To bridge this gap, we introduce PhyGenBench, a comprehensive \\textbf{Phy}sics \\textbf{Gen}eration \\textbf{Ben}chmark designed to evaluate physical commonsense correctness in T2V generation. PhyGenBench comprises 160 carefully crafted prompts across 27 distinct physical laws, spanning four fundamental domains, which could comprehensively assesses models' understanding of physical commonsense. Alongside PhyGenBench, we propose a novel evaluation framework called PhyGenEval. This framework employs a hierarchical evaluation structure utilizing appropriate advanced vision-language models and large language models to assess physical commonsense. Through PhyGenBench and PhyGenEval, we can conduct large-scale automated assessments of T2V models' understanding of physical commonsense, which align closely with human feedback. Our evaluation results and in-depth analysis demonstrate that current models struggle to generate videos that comply with physical commonsense. Moreover, simply scaling up models or employing prompt engineering techniques is insufficient to fully address the challenges presented by PhyGenBench (e.g., dynamic scenarios). We hope this study will inspire the community to prioritize the learning of physical commonsense in these models beyond entertainment applications. We will release the data and codes at https://github.com/OpenGVLab/PhyGenBench",
+      "sha256": "6a45d8dbc121c1e1c959b654229dda752178d8e8dfc830b46d5438b772573cc3",
+      "verified_at": "2026-10-25T13:40:46.443963+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "07858b1866ec0a3c0199e27d7d4a7f8f7dc8a556a9a29919df38e193a1de145c",
+      "source_version": "66a18011a6a2061bd0ed01a1757af88ca6674a6b95298c897f6cd2fefd97e822"
+    },
+    "conf-774ea713af39b27d95af7ad6": {
+      "title": "GALA: Geometry-Aware Local Adaptive Grids for Detailed 3D Generation",
+      "url": "https://arxiv.org/abs/2410.10037",
+      "text": "We propose GALA, a novel representation of 3D shapes that (i) excels at capturing and reproducing complex geometry and surface details, (ii) is computationally efficient, and (iii) lends itself to 3D generative modelling with modern, diffusion-based schemes. The key idea of GALA is to exploit both the global sparsity of surfaces within a 3D volume and their local surface properties. Sparsity is promoted by covering only the 3D object boundaries, not empty space, with an ensemble of tree root voxels. Each voxel contains an octree to further limit storage and compute to regions that contain surfaces. Adaptivity is achieved by fitting one local and geometry-aware coordinate frame in each non-empty leaf node. Adjusting the orientation of the local grid, as well as the anisotropic scales of its axes, to the local surface shape greatly increases the amount of detail that can be stored in a given amount of memory, which in turn allows for quantization without loss of quality. With our optimized C++/CUDA implementation, GALA can be fitted to an object in less than 10 seconds. Moreover, the representation can efficiently be flattened and manipulated with transformer networks. We provide a cascaded generation pipeline capable of generating 3D shapes with great geometric detail.",
+      "sha256": "6eee4177b9a5c4f46f01fe3a5e22e047a948f5072dcd0a461bb85d8eee8588a2",
+      "verified_at": "2026-10-25T13:40:54.216926+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "b56306200c3eb234992d5e9af39e72d2a097cf2a258280619460ae842fc6da41",
+      "source_version": "f5b9a20e3a43bd7299885b025a01ae9a3bf03375525d884b7e5105d6bb41376b"
+    },
+    "conf-30619995e88d75e6509e6836": {
+      "title": "FAMOUS: High-Fidelity Monocular 3D Human Digitization Using View Synthesis",
+      "url": "https://arxiv.org/abs/2410.09690",
+      "text": "The advancement in deep implicit modeling and articulated models has significantly enhanced the process of digitizing human figures in 3D from just a single image. While state-of-the-art methods have greatly improved geometric precision, the challenge of accurately inferring texture remains, particularly in obscured areas such as the back of a person in frontal-view images. This limitation in texture prediction largely stems from the scarcity of large-scale and diverse 3D datasets, whereas their 2D counterparts are abundant and easily accessible. To address this issue, our paper proposes leveraging extensive 2D fashion datasets to enhance both texture and shape prediction in 3D human digitization. We incorporate 2D priors from the fashion dataset to learn the occluded back view, refined with our proposed domain alignment strategy. We then fuse this information with the input image to obtain a fully textured mesh of the given person. Through extensive experimentation on standard 3D human benchmarks, we demonstrate the superior performance of our approach in terms of both texture and geometry. Code and dataset is available at https://github.com/humansensinglab/FAMOUS.",
+      "sha256": "55995971766ffeed45ba2a549a829adc9b301bf1a7576fc6cb1c84dfea1122ec",
+      "verified_at": "2026-10-25T13:41:00.147418+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "e2bf2a4bf424c274db442888ec4d4827850dc1cb6c09cc7d4893e2ecc6436c1a",
+      "source_version": "d62ae95ee851531bd207f26511e0eb04c5e516c6c3fa9a1ce5ab40acc86bf379"
+    },
+    "2410.06613": {
+      "title": "ES-Gaussian: Gaussian Splatting Mapping via Error Space-Based Gaussian Completion",
+      "url": "https://arxiv.org/abs/2410.06613",
+      "text": "Accurate and affordable indoor 3D reconstruction is critical for effective robot navigation and interaction. Traditional LiDAR-based mapping provides high precision but is costly, heavy, and power-intensive, with limited ability for novel view rendering. Vision-based mapping, while cost-effective and capable of capturing visual data, often struggles with high-quality 3D reconstruction due to sparse point clouds. We propose ES-Gaussian, an end-to-end system using a low-altitude camera and single-line LiDAR for high-quality 3D indoor reconstruction. Our system features Visual Error Construction (VEC) to enhance sparse point clouds by identifying and correcting areas with insufficient geometric detail from 2D error maps. Additionally, we introduce a novel 3DGS initialization method guided by single-line LiDAR, overcoming the limitations of traditional multi-view setups and enabling effective reconstruction in resource-constrained environments. Extensive experimental results on our new Dreame-SR dataset and a publicly available dataset demonstrate that ES-Gaussian outperforms existing methods, particularly in challenging scenarios. The project page is available at this https URL .",
+      "sha256": "4bc9eea38ff6e397f6af19ae719ba8e84ddf16f304d9938e9b2d99bf43aa720b",
+      "verified_at": "2026-10-25T13:41:03.599732+08:00"
+    },
+    "conf-cd69d9ada6a5b499c3dcb761": {
+      "title": "Vector Grimoire: Codebook-based Shape Generation under Raster Image Supervision",
+      "url": "https://arxiv.org/abs/2410.05991",
+      "text": "Scalable Vector Graphics (SVG) is a popular format on the web and in the design industry. However, despite the great strides made in generative modeling, SVG has remained underexplored due to the discrete and complex nature of such data. We introduce GRIMOIRE, a text-guided SVG generative model that is comprised of two modules: A Visual Shape Quantizer (VSQ) learns to map raster images onto a discrete codebook by reconstructing them as vector shapes, and an Auto-Regressive Transformer (ART) models the joint probability distribution over shape tokens, positions and textual descriptions, allowing us to generate vector graphics from natural language. Unlike existing models that require direct supervision from SVG data, GRIMOIRE learns shape image patches using only raster image supervision which opens up vector generative modeling to significantly more data. We demonstrate the effectiveness of our method by fitting GRIMOIRE for closed filled shapes on the MNIST and for outline strokes on icon and font data, surpassing previous image-supervised methods in generative quality and vector-supervised approach in flexibility.",
+      "sha256": "e7d9b8930483e4853a6780d36db3238d78ce8b2d5bec8398ba0e9eb5301d49b5",
+      "verified_at": "2026-10-25T13:41:09.232299+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "d101f537959c074a979a9d11aa30fe6da65db710f32356987c9f527032b8de79",
+      "source_version": "4cf743302ca6b4f3f2b6c46b8486155503ab657f476c6b18db6cdeed771e6b9b"
+    },
+    "conf-1609ae96422833dd7db6f90b": {
+      "title": "BEVLoc: Cross-View Localization and Matching via Birds-Eye-View Synthesis",
+      "url": "https://arxiv.org/abs/2410.06410",
+      "text": "Ground to aerial matching is a crucial and challenging task in outdoor robotics, particularly when GPS is absent or unreliable. Structures like buildings or large dense forests create interference, requiring GNSS replacements for global positioning estimates. The true difficulty lies in reconciling the perspective difference between the ground and air images for acceptable localization. Taking inspiration from the autonomous driving community, we propose a novel framework for synthesizing a birds-eye-view (BEV) scene representation to match and localize against an aerial map in off-road environments. We leverage contrastive learning with domain specific hard negative mining to train a network to learn similar representations between the synthesized BEV and the aerial map. During inference, BEVLoc guides the identification of the most probable locations within the aerial map through a coarse-to-fine matching strategy. Our results demonstrate promising initial outcomes in extremely difficult forest environments with limited semantic diversity. We analyze our model's performance for coarse and fine matching, assessing both the raw matching capability of our model and its performance as a GNSS replacement. Our work delves into off-road map localization while establishing a foundational baseline for future developments in localization. Our code is available at: https://github.com/rpl-cmu/bevloc",
+      "sha256": "cd37903566cc91c0375c785e5a266cf73e7459f1a7c9420c6f497487003cfefd",
+      "verified_at": "2026-10-25T13:41:14.854296+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "5b263c5906df5de60aad9284d061005287490aeac5513adb04c0de17e1be486f",
+      "source_version": "80267aed9d311278b83ab1457480a5ef5735d225f8bd7d606807ca2d142abf50"
+    },
+    "2410.05772": {
+      "title": "Comparative Analysis of Novel View Synthesis and Photogrammetry for 3D Forest Stand Reconstruction and extraction of individual tree parameters",
+      "url": "https://arxiv.org/abs/2410.05772",
+      "text": "Accurate and efficient 3D reconstruction of trees is crucial for forest resource assessments and management. Close-Range Photogrammetry (CRP) is commonly used for reconstructing forest scenes but faces challenges like low efficiency and poor quality. Recently, Novel View Synthesis (NVS) technologies, including Neural Radiance Fields (NeRF) and 3D Gaussian Splatting (3DGS), have shown promise for 3D plant reconstruction with limited images. However, existing research mainly focuses on small plants in orchards or individual trees, leaving uncertainty regarding their application in larger, complex forest stands. In this study, we collected sequential images of forest plots with varying complexity and performed dense reconstruction using NeRF and 3DGS. The resulting point clouds were compared with those from photogrammetry and laser scanning. Results indicate that NVS methods significantly enhance reconstruction efficiency. Photogrammetry struggles with complex stands, leading to point clouds with excessive canopy noise and incorrectly reconstructed trees, such as duplicated trunks. NeRF, while better for canopy regions, may produce errors in ground areas with limited views. The 3DGS method generates sparser point clouds, particularly in trunk areas, affecting diameter at breast height (DBH) accuracy. All three methods can extract tree height information, with NeRF yielding the highest accuracy; however, photogrammetry remains superior for DBH accuracy. These findings suggest that NVS methods have significant potential for 3D reconstruction of forest stands, offering valuable support for complex forest resource inventory and visualization tasks.",
+      "sha256": "91df30555c3c5e8e521ab7d77983c4123975d8dc1acf31f45102d1db61933a6b",
+      "verified_at": "2026-10-25T13:41:19.991416+08:00"
+    },
+    "2410.05097": {
+      "title": "DreamSat: Towards a General 3D Model for Novel View Synthesis of Space Objects",
+      "url": "https://arxiv.org/abs/2410.05097",
+      "text": "Novel view synthesis (NVS) enables to generate new images of a scene or convert a set of 2D images into a comprehensive 3D model. In the context of Space Domain Awareness, since space is becoming increasingly congested, NVS can accurately map space objects and debris, improving the safety and efficiency of space operations. Similarly, in Rendezvous and Proximity Operations missions, 3D models can provide details about a target object's shape, size, and orientation, allowing for better planning and prediction of the target's behavior. In this work, we explore the generalization abilities of these reconstruction techniques, aiming to avoid the necessity of retraining for each new scene, by presenting a novel approach to 3D spacecraft reconstruction from single-view images, DreamSat, by fine-tuning the Zero123 XL, a state-of-the-art single-view reconstruction model, on a high-quality dataset of 190 high-quality spacecraft models and integrating it into the DreamGaussian framework. We demonstrate consistent improvements in reconstruction quality across multiple metrics, including Contrastive Language-Image Pretraining (CLIP) score (+0.33%), Peak Signal-to-Noise Ratio (PSNR) (+2.53%), Structural Similarity Index (SSIM) (+2.38%), and Learned Perceptual Image Patch Similarity (LPIPS) (+0.16%) on a test set of 30 previously unseen spacecraft images. Our method addresses the lack of domain-specific 3D reconstruction tools in the space industry by leveraging state-of-the-art diffusion models and 3D Gaussian splatting techniques. This approach maintains the efficiency of the DreamGaussian framework while enhancing the accuracy and detail of spacecraft reconstructions. The code for this work can be accessed on GitHub ( this https URL ).",
+      "sha256": "45f128ea542768533b932f1a3c3e6744499015aea4dad528a5c1b0e16cbd19b6",
+      "verified_at": "2026-10-25T13:41:25.137067+08:00"
+    },
+    "2410.06711": {
+      "title": "Analysis of different disparity estimation techniques on aerial stereo image datasets",
+      "url": "https://arxiv.org/abs/2410.06711",
+      "text": "With the advent of aerial image datasets, dense stereo matching has gained tremendous progress. This work analyses dense stereo correspondence analysis on aerial images using different techniques. Traditional methods, optimization based methods and learning based methods have been implemented and compared here for aerial images. For traditional methods, we implemented the architecture of Stereo SGBM while using different cost functions to get an understanding of their performance on aerial datasets. Analysis of most of the methods in standard datasets has shown good performance, however in case of aerial dataset, not much benchmarking is available. Visual qualitative and quantitative analysis has been carried out for two stereo aerial datasets in order to compare different cost functions and techniques for the purpose of depth estimation from stereo images. Using existing pre-trained models, recent learning based architectures have also been tested on stereo pairs along with different cost functions in SGBM. The outputs and given ground truth are compared using MSE, SSIM and other error metrics.",
+      "sha256": "4bd04863c37a67e40ec41f3e123846984febfc22e231075b7a35d86ab6788e97",
+      "verified_at": "2026-10-25T13:41:30.403971+08:00"
     }
   }
 }
