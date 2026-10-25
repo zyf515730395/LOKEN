@@ -14238,6 +14238,126 @@
       "basis": "official_abstract",
       "source_sha256": "642b2a2cd6aacf13d0e1b56b2fcdea979378afce5f06c9f50c550a2008e1dd49",
       "source_version": "839b51c8a8e6721b2e9d9a0cf8345a5a352f16810e618ec6f897d1a7f0bcd706"
+    },
+    "conf-770dd783f89820de9dfc23e3": {
+      "title": "Attention Calibration for Disentangled Text-to-Image Personalization",
+      "url": "https://arxiv.org/abs/2403.18551",
+      "text": "Recent thrilling progress in large-scale text-to-image (T2I) models has unlocked unprecedented synthesis quality of AI-generated content (AIGC) including image generation, 3D and video composition. Further, personalized techniques enable appealing customized production of a novel concept given only several images as reference. However, an intriguing problem persists: Is it possible to capture multiple, novel concepts from one single reference image? In this paper, we identify that existing approaches fail to preserve visual consistency with the reference image and eliminate cross-influence from concepts. To alleviate this, we propose an attention calibration mechanism to improve the concept-level understanding of the T2I model. Specifically, we first introduce new learnable modifiers bound with classes to capture attributes of multiple concepts. Then, the classes are separated and strengthened following the activation of the cross-attention operation, ensuring comprehensive and self-contained concepts. Additionally, we suppress the attention activation of different classes to mitigate mutual influence among concepts. Together, our proposed method, dubbed DisenDiff, can learn disentangled multiple concepts from one single image and produce novel customized images with learned concepts. We demonstrate that our method outperforms the current state of the art in both qualitative and quantitative evaluations. More importantly, our proposed techniques are compatible with LoRA and inpainting pipelines, enabling more interactive experiences.",
+      "sha256": "047d9d19e9d6513cb6412a7c2f3ba0da31425fc040a97142fba5a5f32f8bbd0b",
+      "verified_at": "2026-10-25T22:44:16.084620+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "18ebf37662753160642290f4f1cf501e25d3a27f78c58c3839e7565a68bd32ae",
+      "source_version": "89450c101fdd4cac15eac10d2e2c702e107373d4c415873bb910701d997d4f7a"
+    },
+    "conf-e3bdaf28d7e0d1428ff598c1": {
+      "title": "Improving Text-to-Image Consistency via Automatic Prompt Optimization",
+      "url": "https://arxiv.org/abs/2403.17804",
+      "text": "Impressive advances in text-to-image (T2I) generative models have yielded a plethora of high performing models which are able to generate aesthetically appealing, photorealistic images. Despite the progress, these models still struggle to produce images that are consistent with the input prompt, oftentimes failing to capture object quantities, relations and attributes properly. Existing solutions to improve prompt-image consistency suffer from the following challenges: (1) they oftentimes require model fine-tuning, (2) they only focus on nearby prompt samples, and (3) they are affected by unfavorable trade-offs among image quality, representation diversity, and prompt-image consistency. In this paper, we address these challenges and introduce a T2I optimization-by-prompting framework, OPT2I, which leverages a large language model (LLM) to improve prompt-image consistency in T2I models. Our framework starts from a user prompt and iteratively generates revised prompts with the goal of maximizing a consistency score. Our extensive validation on two datasets, MSCOCO and PartiPrompts, shows that OPT2I can boost the initial consistency score by up to 24.9% in terms of DSG score while preserving the FID and increasing the recall between generated and real data. Our work paves the way toward building more reliable and robust T2I systems by harnessing the power of LLMs.",
+      "sha256": "5b675ff136265aa9d406674fde818d9f92bb1ab7e428e34a5e01774ff2663da8",
+      "verified_at": "2026-10-25T22:44:22.234809+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "e9930276b35d50a3764ff1b5ad3053245e2d5b4e71535a641d80f569dc32104c",
+      "source_version": "78ddee54dfeb15e9af5be77c035829a758e7293ca0c49f529e248f17c2c90b68"
+    },
+    "conf-c248e57459375c53e8ece37a": {
+      "title": "AID: Attention Interpolation of Text-to-Image Diffusion",
+      "url": "https://arxiv.org/abs/2403.17924",
+      "text": "Conditional diffusion models can create unseen images in various settings, aiding image interpolation. Interpolation in latent spaces is well-studied, but interpolation with specific conditions like text or poses is less understood. Simple approaches, such as linear interpolation in the space of conditions, often result in images that lack consistency, smoothness, and fidelity. To that end, we introduce a novel training-free technique named Attention Interpolation via Diffusion (AID). Our key contributions include 1) proposing an inner/outer interpolated attention layer; 2) fusing the interpolated attention with self-attention to boost fidelity; and 3) applying beta distribution to selection to increase smoothness. We also present a variant, Prompt-guided Attention Interpolation via Diffusion (PAID), that considers interpolation as a condition-dependent generative process. This method enables the creation of new images with greater consistency, smoothness, and efficiency, and offers control over the exact path of interpolation. Our approach demonstrates effectiveness for conceptual and spatial interpolation. Code and demo are available at https://github.com/QY-H00/attention-interpolation-diffusion.",
+      "sha256": "e8e7201abc7b9832215adafa7d52c578d45361e91e9ad4a49359dcf845dce6a4",
+      "verified_at": "2026-10-25T22:44:26.259954+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "22a72e55f79aa5d875193efafb77f6d4998876da131401133e3d285bcced3bcb",
+      "source_version": "b6fe1f7d93fa18ae7ed7549ee65f5463bd40940e35574eb23b86104ae504f66e"
+    },
+    "conf-ca7578eba70dfec4382517c3": {
+      "title": "FlashEval: Towards Fast and Accurate Evaluation of Text-to-image Diffusion Generative Models",
+      "url": "https://arxiv.org/abs/2403.16379",
+      "text": "In recent years, there has been significant progress in the development of text-to-image generative models. Evaluating the quality of the generative models is one essential step in the development process. Unfortunately, the evaluation process could consume a significant amount of computational resources, making the required periodic evaluation of model performance (e.g., monitoring training progress) impractical. Therefore, we seek to improve the evaluation efficiency by selecting the representative subset of the text-image dataset. We systematically investigate the design choices, including the selection criteria (textural features or image-based metrics) and the selection granularity (prompt-level or set-level). We find that the insights from prior work on subset selection for training data do not generalize to this problem, and we propose FlashEval, an iterative search algorithm tailored to evaluation data selection. We demonstrate the effectiveness of FlashEval on ranking diffusion models with various configurations, including architectures, quantization levels, and sampler schedules on COCO and DiffusionDB datasets. Our searched 50-item subset could achieve comparable evaluation quality to the randomly sampled 500-item subset for COCO annotations on unseen models, achieving a 10x evaluation speedup. We release the condensed subset of these commonly used datasets to help facilitate diffusion algorithm design and evaluation, and open-source FlashEval as a tool for condensing future datasets, accessible at https://github.com/thu-nics/FlashEval.",
+      "sha256": "e0d1788d9158208c91ee04122c060a2dbcaebcf82956dc5f120fda4748b08efb",
+      "verified_at": "2026-10-25T22:44:32.478710+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "737ada0110987cd4ad20331a4715f1ae019b08733174448c03b85bc651e8cb58",
+      "source_version": "4001e27acbf2229c6426a1d9d1e3995e669bc20514ff19a61be8c5ddffd2c36c"
+    },
+    "conf-94c839fcadfc15fff5c73399": {
+      "title": "Skews in the Phenomenon Space Hinder Generalization in Text-to-Image Generation",
+      "url": "https://arxiv.org/abs/2403.16394",
+      "text": "The literature on text-to-image generation is plagued by issues of faithfully composing entities with relations. But there lacks a formal understanding of how entity-relation compositions can be effectively learned. Moreover, the underlying phenomenon space that meaningfully reflects the problem structure is not well-defined, leading to an arms race for larger quantities of data in the hope that generalization emerges out of large-scale pretraining. We hypothesize that the underlying phenomenological coverage has not been proportionally scaled up, leading to a skew of the presented phenomenon which harms generalization. We introduce statistical metrics that quantify both the linguistic and visual skew of a dataset for relational learning, and show that generalization failures of text-to-image generation are a direct result of incomplete or unbalanced phenomenological coverage. We first perform experiments in a synthetic domain and demonstrate that systematically controlled metrics are strongly predictive of generalization performance. Then we move to natural images and show that simple distribution perturbations in light of our theories boost generalization without enlarging the absolute data size. This work informs an important direction towards quality-enhancing the data diversity or balance orthogonal to scaling up the absolute size. Our discussions point out important open questions on 1) Evaluation of generated entity-relation compositions, and 2) Better models for reasoning with abstract relations.",
+      "sha256": "971a212ff8c1bf9b3519fce0d4af121700068cdf7b375ba8d8b6e4c30804b939",
+      "verified_at": "2026-10-25T22:44:38.718424+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "12b8e13444703021130947b00e23132832d4e48b9a5fc1f4628dc827dfcfe4df",
+      "source_version": "a9e9c2dbce5d7ed6d7cc1ead29f0c125836ff6bf65d1f88c6d8d692e4e4ea145"
+    },
+    "conf-5338001a49dd0152d562f57a": {
+      "title": "R3CD: Scene Graph to Image Generation with Relation-Aware Compositional Contrastive Control Diffusion",
+      "url": "https://ojs.aaai.org/index.php/AAAI/article/view/28155",
+      "text": "Image generation tasks have achieved remarkable performance using large-scale diffusion models. However, these models are limited to capturing the abstract relations (viz., interactions excluding positional relations) among multiple entities of complex scene graphs. Two main problems exist:  1) fail to depict more concise and accurate interactions via abstract relations; 2) fail to generate complete entities. To address that, we propose a novel Relation-aware Compositional Contrastive Control Diffusion method, dubbed as R3CD, that leverages large-scale diffusion models to learn abstract interactions from scene graphs. Herein, a scene graph transformer based on node and edge encoding is first designed to perceive both local and global information from input scene graphs, whose embeddings are initialized by a T5 model. Then a joint contrastive loss based on attention maps and denoising steps is developed to control the diffusion model to understand and further generate images, whose spatial structures and interaction features are consistent with a priori relation. Extensive experiments are conducted on two datasets: Visual Genome and COCO-Stuff, and demonstrate that the proposal outperforms existing models both in quantitative and qualitative metrics to generate more realistic and diverse images according to different scene graph specifications.",
+      "sha256": "9e8236913925b729b21aad13294c9d6f77514f7c25f3595f438b85d89102019d",
+      "verified_at": "2026-10-25T22:44:44.065067+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "909b7e187797f5e201bad461a01770cac998d0e7e0681179f91344fa34b07bcd",
+      "source_version": "2723961189a62127ee1c232efce681ad763498286e5631c555bf47bfe3e8b50e"
+    },
+    "conf-1ebcb53fc611c649067fba49": {
+      "title": "SkipDiff: Adaptive Skip Diffusion Model for High-Fidelity Perceptual Image Super-resolution",
+      "url": "https://ojs.aaai.org/index.php/AAAI/article/view/28195",
+      "text": "It is well-known that image quality assessment usually meets with the problem of perception-distortion (p-d) tradeoff. The existing deep image super-resolution (SR) methods either focus on high fidelity with pixel-level objectives or high perception with generative models. The emergence of diffusion model paves a fresh way for image restoration, which has the potential to offer a brand-new solution for p-d trade-off. We experimentally observed that the perceptual quality and distortion change in an opposite direction with the increase of sampling steps. In light of this property, we propose an adaptive skip diffusion model (SkipDiff), which aims to achieve\nhigh-fidelity perceptual image SR with fewer sampling steps. Specifically, it decouples the sampling procedure into coarse skip approximation and fine skip refinement stages. A coarse-grained skip diffusion is first performed as a high-fidelity prior to obtaining a latent approximation of the full diffusion. Then, a fine-grained skip diffusion is followed to further refine the latent sample for promoting perception, where the fine time steps are adaptively learned by deep reinforcement learning. Meanwhile, this approach also enables faster sampling of diffusion model through skipping the intermediate denoising process to shorten the effective steps of the computation. Extensive experimental results show that our SkipDiff achieves superior perceptual quality with plausible reconstruction accuracy and a faster sampling speed.",
+      "sha256": "ed54940a57555ea9490c09b927b64273e7c149031dbdada19a76c2df49fb96f7",
+      "verified_at": "2026-10-25T22:44:49.403391+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "2cf5e6419e485512fd7f5399425aaffa53625a0a1901d307bfb0b8600f9f9397",
+      "source_version": "3f5f0c2badd219d7b387d2df90b40464d7b89aad87892d1af5ac9ef6b81968bc"
+    },
+    "conf-4d51b02ef5b44e88b96eda2a": {
+      "title": "3DGSR: Implicit Surface Reconstruction with 3D Gaussian Splatting",
+      "url": "https://arxiv.org/abs/2404.00409",
+      "text": "In this paper, we present an implicit surface reconstruction method with 3D Gaussian Splatting (3DGS), namely 3DGSR, that allows for accurate 3D reconstruction with intricate details while inheriting the high efficiency and rendering quality of 3DGS. The key insight is incorporating an implicit signed distance field (SDF) within 3D Gaussians to enable them to be aligned and jointly optimized. First, we introduce a differentiable SDF-to-opacity transformation function that converts SDF values into corresponding Gaussians' opacities. This function connects the SDF and 3D Gaussians, allowing for unified optimization and enforcing surface constraints on the 3D Gaussians. During learning, optimizing the 3D Gaussians provides supervisory signals for SDF learning, enabling the reconstruction of intricate details. However, this only provides sparse supervisory signals to the SDF at locations occupied by Gaussians, which is insufficient for learning a continuous SDF. Then, to address this limitation, we incorporate volumetric rendering and align the rendered geometric attributes (depth, normal) with those derived from 3D Gaussians. This consistency regularization introduces supervisory signals to locations not covered by discrete 3D Gaussians, effectively eliminating redundant surfaces outside the Gaussian sampling range. Our extensive experimental results demonstrate that our 3DGSR method enables high-quality 3D surface reconstruction while preserving the efficiency and rendering quality of 3DGS. Besides, our method competes favorably with leading surface reconstruction techniques while offering a more efficient learning process and much better rendering qualities. The code will be available at https://github.com/CVMI-Lab/3DGSR.",
+      "sha256": "a4f4516624ac3a92edc577c84c8eab655355a31e0bd9120372f7beaf714ffe43",
+      "verified_at": "2026-10-25T22:44:54.230822+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "a3c525bcb7980390171209c56c3be57d4144d6ac14a80b028b958c680724ac13",
+      "source_version": "c2bf51905b28d9cb065c003caf500186735b334d9336ff286ece8cf39ed4c9fe"
+    },
+    "conf-73c41271ec00ebf7bb2af929": {
+      "title": "Ced-NeRF: A Compact and Efficient Method for Dynamic Neural Radiance Fields",
+      "url": "https://ojs.aaai.org/index.php/AAAI/article/view/28138",
+      "text": "Rendering photorealistic dynamic scenes has been a focus of recent research, with applications in virtual and augmented reality. While the Neural Radiance Field (NeRF) has shown remarkable rendering quality for static scenes, achieving real-time rendering of dynamic scenes remains challenging due to expansive computation for the time dimension. The incorporation of explicit-based methods, specifically voxel grids, has been proposed to accelerate the training and rendering of neural radiance fields with hybrid representation. However, employing a hybrid representation for dynamic scenes results in overfitting due to fast convergence, which can result in artifacts (e.g., floaters, noisy geometric) on novel views. To address this, we propose a compact and efficient method for dynamic neural radiance fields, namely Ced-NeRF which only require a small number of additional parameters to construct a hybrid representation of dynamic NeRF. Evaluation of dynamic scene datasets shows that our Ced-NeRF achieves fast rendering speeds while maintaining high-quality rendering results. Our method outperforms the current state-of-the-art methods in terms of quality, training and rendering speed.",
+      "sha256": "53e5369b813ebe6a782a76a15e006143ea621a4566b2bb7be639de8a1b7ea632",
+      "verified_at": "2026-10-25T22:44:59.569921+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "2b808984274bc2dcd3354fc7257dd0b1467a67eca3b1b5eb5af0ec1b0e27d52c",
+      "source_version": "ec5d017ecb807578464394292720ee9b4f4d533eabfd52cb6436efa1cfd7770a"
+    },
+    "conf-4a7a071717e9f65907afbb27": {
+      "title": "Diverse and Stable 2D Diffusion Guided Text to 3D Generation with Noise Recalibration",
+      "url": "https://ojs.aaai.org/index.php/AAAI/article/view/28476",
+      "text": "In recent years, following the success of text guided image generation, text guided 3D generation has gained increasing attention among researchers. Dreamfusion is a notable approach that enhances generation quality by utilizing 2D text guided diffusion models and introducing SDS loss, a technique for distilling 2D diffusion model information to train 3D models. However, the SDS loss has two major limitations that hinder its effectiveness. Firstly, when given a text prompt, the SDS loss struggles to produce diverse content. Secondly, during training, SDS loss may cause the generated content to overfit and collapse, limiting the model's ability to learn intricate texture details. To overcome these challenges, we propose a novel approach called Noise Recalibration algorithm. By incorporating this technique, we can generate 3D content with significantly greater diversity and stunning details. Our approach offers a promising solution to the limitations of SDS loss.",
+      "sha256": "f74f52825b2ad8141bba1b8f15472eddf236402defbabd2a4c558b82e643523f",
+      "verified_at": "2026-10-25T22:45:04.897232+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "0adec97e357abb05730178da728df23292249995a4c61f3fffa9e3583515de51",
+      "source_version": "8fb2158f740bf9dee2a71798be134c6dea72ba4df8d7bb4482d04c95d4352892"
+    },
+    "conf-c4c7187c8a8bf1798c0846ef": {
+      "title": "Intrinsic Phase-Preserving Networks for Depth Super Resolution",
+      "url": "https://ojs.aaai.org/index.php/AAAI/article/view/27883",
+      "text": "Depth map super-resolution (DSR) plays an indispensable role in 3D vision. We discover an non-trivial spectral phenomenon: the components of high-resolution (HR) and low-resolution (LR) depth maps manifest the same intrinsic phase, and the spectral phase of RGB is a superset of them, which suggests that a phase-aware filter can assist in the precise use of RGB cues. Motivated by this, we propose an intrinsic phase-preserving DSR paradigm, named IPPNet, to fully exploit inter-modality collaboration in a mutually guided way. In a nutshell, a novel Phase-Preserving Filtering Module (PPFM) is developed to generate dynamic phase-aware filters according to the LR depth flow to filter out erroneous noisy components contained in RGB and then conduct depth enhancement via the modulation of the phase-preserved RGB signal.  By stacking multiple PPFM blocks, the proposed IPPNet is capable of reaching a highly competitive restoration performance.  Extensive experiments on various benchmark datasets, e.g., NYU v2, RGB-D-D, reach SOTA performance and also well demonstrate the validity of the proposed phase-preserving scheme. Code: https://github.com/neuralchen/IPPNet/.",
+      "sha256": "8aad9e731de0b2bd348b50d9bf57755136356486fa637320cc746ff4bf69f18f",
+      "verified_at": "2026-10-25T22:45:10.290717+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "0045326cc2b3485c980b2e94a95cb656065415e120a5f670be20cd799fb56937",
+      "source_version": "667b671474043008abf09dc39a8571b8e9537af0a7cea12361b2f8c9caac343d"
+    },
+    "conf-4802108109d9ef18ba2541a1": {
+      "title": "IINet: Implicit Intra-inter Information Fusion for Real-Time Stereo Matching",
+      "url": "https://ojs.aaai.org/index.php/AAAI/article/view/28107",
+      "text": "Recently, there has been a growing interest in 3D CNN-based stereo matching methods due to their remarkable accuracy. However, the high complexity of 3D convolution makes it challenging to strike a balance between accuracy and speed. Notably, explicit 3D volumes contain considerable redundancy. In this study, we delve into more compact 2D implicit network to eliminate redundancy and boost real-time performance. However, simply replacing explicit 3D networks with 2D implicit networks causes issues that can lead to performance degradation, including the loss of structural information, the quality decline of inter-image information, as well as the inaccurate regression caused by low-level features. To address these issues, we first integrate intra-image information to fuse with inter-image information, facilitating propagation guided by structural cues. Subsequently, we introduce the Fast Multi-scale Score Volume (FMSV) and Confidence Based Filtering (CBF) to efficiently acquire accurate multi-scale, noise-free inter-image information. Furthermore, combined with the Residual Context-aware Upsampler (RCU), our Intra-Inter Fusing network is meticulously designed to enhance information transmission on both feature-level and disparity-level, thereby enabling accurate and robust regression. Experimental results affirm the superiority of our network in terms of both speed and accuracy compared to all other fast methods.",
+      "sha256": "0e8dae618fd1bcef8468cd59f5467299a90fb8cb7fd27806eade9d3c0f9cd5a3",
+      "verified_at": "2026-10-25T22:45:15.624482+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "e84e4e37a6e616d683dbd4a43ea07c6ba6ea4cd3d1f6c9d37fa1763432171a21",
+      "source_version": "4fd57646803c8cce882d9cbc912bbe1628b2cfa7fe4b4ece362bcd5bbf60a96e"
     }
   }
 }
