@@ -10694,6 +10694,80 @@
       "basis": "official_abstract",
       "source_sha256": "db435f0d068529d9f911c5097e16ffb06303aacffc246b6baab1acc6d35cdbe8",
       "source_version": "3715e7ea82abc3ce53e088d35d30a62cbd983b2c10eac63cdc881642d9f0333c"
+    },
+    "conf-75c2e1b632cc31b32fe609ba": {
+      "title": "Improving image synthesis with diffusion-negative sampling",
+      "url": "https://arxiv.org/abs/2411.05473",
+      "text": "For image generation with diffusion models (DMs), a negative prompt n can be used to complement the text prompt p, helping define properties not desired in the synthesized image. While this improves prompt adherence and image quality, finding good negative prompts is challenging. We argue that this is due to a semantic gap between humans and DMs, which makes good negative prompts for DMs appear unintuitive to humans. To bridge this gap, we propose a new diffusion-negative prompting (DNP) strategy. DNP is based on a new procedure to sample images that are least compliant with p under the distribution of the DM, denoted as diffusion-negative sampling (DNS). Given p, one such image is sampled, which is then translated into natural language by the user or a captioning model, to produce the negative prompt n*. The pair (p, n*) is finally used to prompt the DM. DNS is straightforward to implement and requires no training. Experiments and human evaluations show that DNP performs well both quantitatively and qualitatively and can be easily combined with several DM variants.",
+      "sha256": "9fc566015e0333a5edf0259dab9f3b07d8fec90c0fb740a2591fc56d6e159176",
+      "verified_at": "2026-10-25T12:52:53.397534+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "296b21e0543733ef5ea303782a5a465dcf6f910ef6c3206f64c9baa0dbc9dd7a",
+      "source_version": "ae2757a6699f706e1065a98c2c1ea83d98ebeff77536ac203efee2b6b50e0ccc"
+    },
+    "conf-6c1432d285e54beed53cf272": {
+      "title": "Multi-Reward as Condition for Instruction-based Image Editing",
+      "url": "https://arxiv.org/abs/2411.04713",
+      "text": "High-quality training triplets (instruction, original image, edited image) are essential for instruction-based image editing. Predominant training datasets (e.g., InsPix2Pix) are created using text-to-image generative models (e.g., Stable Diffusion, DALL-E) which are not trained for image editing. Accordingly, these datasets suffer from inaccurate instruction following, poor detail preserving, and generation artifacts. In this paper, we propose to address the training data quality issue with multi-perspective reward data instead of refining the ground-truth image quality. 1) we first design a quantitative metric system based on best-in-class LVLM (Large Vision Language Model), i.e., GPT-4o in our case, to evaluate the generation quality from 3 perspectives, namely, instruction following, detail preserving, and generation quality. For each perspective, we collected quantitative score in $0\\sim 5$ and text descriptive feedback on the specific failure points in ground-truth edited images, resulting in a high-quality editing reward dataset, i.e., RewardEdit20K. 2) We further proposed a novel training framework to seamlessly integrate the metric output, regarded as multi-reward, into editing models to learn from the imperfect training triplets. During training, the reward scores and text descriptions are encoded as embeddings and fed into both the latent space and the U-Net of the editing models as auxiliary conditions. 3) We also build a challenging evaluation benchmark with real-world images/photos and diverse editing instructions, named Real-Edit. Experiments indicate that our multi-reward conditioned model outperforms its no-reward counterpart on two popular editing pipelines, i.e., InsPix2Pix and SmartEdit. Code is released at https://github.com/bytedance/Multi-Reward-Editing.",
+      "sha256": "cc6de1991981d0cedb0e7361bb8b037db3d35db5b3a336762e130244ae851f49",
+      "verified_at": "2026-10-25T12:52:59.624548+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "36da3a8fa1f9b6c8d7e14523f5793754dd99ef419217e53b7d91c7f0f873232a",
+      "source_version": "56e7c63535bed980932018052c5d8c0c962d71622b6122e9b4fa71ac586250e4"
+    },
+    "conf-b0bacd466750213e29609e05": {
+      "title": "Improved Video VAE for Latent Video Diffusion Model",
+      "url": "https://arxiv.org/abs/2411.06449",
+      "text": "Variational Autoencoder (VAE) aims to compress pixel data into low-dimensional latent space, playing an important role in OpenAI's Sora and other latent video diffusion generation models. While most of existing video VAEs inflate a pretrained image VAE into the 3D causal structure for temporal-spatial compression, this paper presents two astonishing findings: (1) The initialization from a well-trained image VAE with the same latent dimensions suppresses the improvement of subsequent temporal compression capabilities. (2) The adoption of causal reasoning leads to unequal information interactions and unbalanced performance between frames. To alleviate these problems, we propose a keyframe-based temporal compression (KTC) architecture and a group causal convolution (GCConv) module to further improve video VAE (IV-VAE). Specifically, the KTC architecture divides the latent space into two branches, in which one half completely inherits the compression prior of keyframes from a lower-dimension image VAE while the other half involves temporal compression through 3D group causal convolution, reducing temporal-spatial conflicts and accelerating the convergence speed of video VAE. The GCConv in above 3D half uses standard convolution within each frame group to ensure inter-frame equivalence, and employs causal logical padding between groups to maintain flexibility in processing variable frame video. Extensive experiments on five benchmarks demonstrate the SOTA video reconstruction and generation capabilities of the proposed IV-VAE (https://wpy1999.github.io/IV-VAE/).",
+      "sha256": "d58c3e8cda4d1bb3f7aed0a6c052659e34785e35dd3c1d690860efcd37b053a8",
+      "verified_at": "2026-10-25T12:53:05.735423+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "e282e6798b3989d67fbb151f5615e1a93a58500bbab9871b393d1a00f15e3ac9",
+      "source_version": "b2013c53ca61490571f953c4fc3cb6ccb0fb93387e6ea184c5dbb4d22855134c"
+    },
+    "conf-98a3c6362a2525c099af2502": {
+      "title": "TIP-I2V: A Million-Scale Real Text and Image Prompt Dataset for Image-to-Video Generation",
+      "url": "https://arxiv.org/abs/2411.04709",
+      "text": "Video generation models are revolutionizing content creation, with image-to-video models drawing increasing attention due to their enhanced controllability, visual consistency, and practical applications. However, despite their popularity, these models rely on user-provided text and image prompts, and there is currently no dedicated dataset for studying these prompts. In this paper, we introduce TIP-I2V, the first large-scale dataset of over 1.70 million unique user-provided Text and Image Prompts specifically for Image-to-Video generation. Additionally, we provide the corresponding generated videos from five state-of-the-art image-to-video models. We begin by outlining the time-consuming and costly process of curating this large-scale dataset. Next, we compare TIP-I2V to two popular prompt datasets, VidProM (text-to-video) and DiffusionDB (text-to-image), highlighting differences in both basic and semantic information. This dataset enables advancements in image-to-video research. For instance, to develop better models, researchers can use the prompts in TIP-I2V to analyze user preferences and evaluate the multi-dimensional performance of their trained models; and to enhance model safety, they may focus on addressing the misinformation issue caused by image-to-video models. The new research inspired by TIP-I2V and the differences with existing datasets emphasize the importance of a specialized image-to-video prompt dataset. The project is available at https://tip-i2v.github.io.",
+      "sha256": "a9b08e537fece32a2426bb2e40ef06fd4bf933b13608761bbd60ed6a0e6713b1",
+      "verified_at": "2026-10-25T12:53:11.467071+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "135d10083e080cdab877613cee86de722284a2607de5a8086103fd888523b3d1",
+      "source_version": "288293b0608e2c931670342aca9c249c1fd0869b4daafb8cca4916360f9ed7f0"
+    },
+    "2411.05557": {
+      "title": "A Nerf-Based Color Consistency Method for Remote Sensing Images",
+      "url": "https://arxiv.org/abs/2411.05557",
+      "text": "Due to different seasons, illumination, and atmospheric conditions, the photometric of the acquired image varies greatly, which leads to obvious stitching seams at the edges of the mosaic image. Traditional methods can be divided into two categories, one is absolute radiation correction and the other is relative radiation normalization. We propose a NeRF-based method of color consistency correction for multi-view images, which weaves image features together using implicit expressions, and then re-illuminates feature space to generate a fusion image with a new perspective. We chose Superview-1 satellite images and UAV images with large range and time difference for the experiment. Experimental results show that the synthesize image generated by our method has excellent visual effect and smooth color transition at the edges.",
+      "sha256": "4e5da0d7b18995ea0b81c7dc993d36d6b3e3c74663d63bb96fe7326da2385163",
+      "verified_at": "2026-10-25T12:53:16.589664+08:00"
+    },
+    "conf-f9245607215660626fce4b18": {
+      "title": "VAIR: Visuo-Acoustic Implicit Representations for Low-Cost, Multi-Modal Transparent Surface Reconstruction in Indoor Scenes",
+      "url": "https://arxiv.org/abs/2411.04963",
+      "text": "Mobile robots operating indoors must be prepared to navigate challenging scenes that contain transparent surfaces. This paper proposes a novel method for the fusion of acoustic and visual sensing modalities through implicit neural representations to enable dense reconstruction of transparent surfaces in indoor scenes. We propose a novel model that leverages generative latent optimization to learn an implicit representation of indoor scenes consisting of transparent surfaces. We demonstrate that we can query the implicit representation to enable volumetric rendering in image space or 3D geometry reconstruction (point clouds or mesh) with transparent surface prediction. We evaluate our method's effectiveness qualitatively and quantitatively on a new dataset collected using a custom, low-cost sensing platform featuring RGB-D cameras and ultrasonic sensors. Our method exhibits significant improvement over state-of-the-art for transparent surface reconstruction.",
+      "sha256": "4325ae7f294832ae98fd69ae676c6a45263826a39aa7f02838e9cf0dd39d8045",
+      "verified_at": "2026-10-25T12:53:20.908327+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "d0944440156fb38821989a2047fe3d5c8a77a526b6fd3722622c0396c6d8ab61",
+      "source_version": "cb7df727f4368e6a5a48887a185b910c687de384d4b822611e3a6f977f6a5d66"
+    },
+    "conf-2599f9dd78077b02c68f2b8c": {
+      "title": "FlexCAD: Unified and Versatile Controllable CAD Generation with Fine-tuned Large Language Models",
+      "url": "https://arxiv.org/abs/2411.05823",
+      "text": "Recently, there is a growing interest in creating computer-aided design (CAD) models based on user intent, known as controllable CAD generation. Existing work offers limited controllability and needs separate models for different types of control, reducing efficiency and practicality. To achieve controllable generation across all CAD construction hierarchies, such as sketch-extrusion, extrusion, sketch, face, loop and curve, we propose FlexCAD, a unified model by fine-tuning large language models (LLMs). First, to enhance comprehension by LLMs, we represent a CAD model as a structured text by abstracting each hierarchy as a sequence of text tokens. Second, to address various controllable generation tasks in a unified model, we introduce a hierarchy-aware masking strategy. Specifically, during training, we mask a hierarchy-aware field in the CAD text with a mask token. This field, composed of a sequence of tokens, can be set flexibly to represent various hierarchies. Subsequently, we ask LLMs to predict this masked field. During inference, the user intent is converted into a CAD text with a mask token replacing the part the user wants to modify, which is then fed into FlexCAD to generate new CAD models. Comprehensive experiments on public dataset demonstrate the effectiveness of FlexCAD in both generation quality and controllability. Code will be available at https://github.com/microsoft/FlexCAD.",
+      "sha256": "8d61b159ed8c3b9f7234be299e4f40ee56d0da4ff99a01158f073b1d2c3bbf32",
+      "verified_at": "2026-10-25T12:53:26.682606+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "843eec446139d8bf57f3e8a053d7b1a5edfeac1e728db8b2e19ad68deda44bcf",
+      "source_version": "47093cbb0f4c3ae3e437f112915c2c1c0d5a0f01b4ee4c20b8937631ecaf92d0"
+    },
+    "2411.05344": {
+      "title": "Enhancing Depth Image Estimation for Underwater Robots by Combining Image Processing and Machine Learning",
+      "url": "https://arxiv.org/abs/2411.05344",
+      "text": "Depth information plays a crucial role in autonomous systems for environmental perception and robot state estimation. With the rapid development of deep neural network technology, depth estimation has been extensively studied and shown potential for practical applications. However, in particularly challenging environments such as low-light and noisy underwater conditions, direct application of machine learning models may not yield the desired results. Therefore, in this paper, we present an approach to enhance underwater image quality to improve depth estimation effectiveness. First, underwater images are processed through methods such as color compensation, brightness equalization, and enhancement of contrast and sharpness of objects in the image. Next, we perform depth estimation using the Udepth model on the enhanced images. Finally, the results are evaluated and presented to verify the effectiveness and accuracy of the enhanced depth image quality approach for underwater robots.",
+      "sha256": "d58eab1bc252a3f33c2e7aabd21a4d8b8e5eda2aff064034c02d024551b39d0a",
+      "verified_at": "2026-10-25T12:53:31.789605+08:00"
     }
   }
 }
