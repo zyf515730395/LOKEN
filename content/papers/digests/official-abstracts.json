@@ -14358,6 +14358,66 @@
       "basis": "official_abstract",
       "source_sha256": "e84e4e37a6e616d683dbd4a43ea07c6ba6ea4cd3d1f6c9d37fa1763432171a21",
       "source_version": "4fd57646803c8cce882d9cbc912bbe1628b2cfa7fe4b4ece362bcd5bbf60a96e"
+    },
+    "conf-7e482850de9ef649cb4b188b": {
+      "title": "Harmonizing Visual and Textual Embeddings for Zero-Shot Text-to-Image Customization",
+      "url": "https://arxiv.org/abs/2403.14155",
+      "text": "In a surge of text-to-image (T2I) models and their customization methods that generate new images of a user-provided subject, current works focus on alleviating the costs incurred by a lengthy per-subject optimization. These zero-shot customization methods encode the image of a specified subject into a visual embedding which is then utilized alongside the textual embedding for diffusion guidance. The visual embedding incorporates intrinsic information about the subject, while the textual embedding provides a new, transient context. However, the existing methods often 1) are significantly affected by the input images, eg., generating images with the same pose, and 2) exhibit deterioration in the subject's identity. We first pin down the problem and show that redundant pose information in the visual embedding interferes with the textual embedding containing the desired pose information. To address this issue, we propose orthogonal visual embedding which effectively harmonizes with the given textual embedding. We also adopt the visual-only embedding and inject the subject's clear features utilizing a self-attention swap. Our results demonstrate the effectiveness and robustness of our method, which offers highly flexible zero-shot generation while effectively maintaining the subject's identity.",
+      "sha256": "6cdaf4a8b9ec84d793bc8d8c050992fb019873322533fc368e01676b13f12a64",
+      "verified_at": "2026-10-25T23:01:48.804020+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "2db31882218501676a7ed06fc7e4bf9dffcd2df33092e8063a31399e07874fcf",
+      "source_version": "94ba05b886b878dc5bbc76517ea9090b1e15c2207a4ab0c8cba9ac5340bd46e8"
+    },
+    "conf-e35b989e9b9698b8ba840db0": {
+      "title": "You Only Sample Once: Taming One-Step Text-to-Image Synthesis by Self-Cooperative Diffusion GANs",
+      "url": "https://arxiv.org/abs/2403.12931",
+      "text": "Recently, some works have tried to combine diffusion and Generative Adversarial Networks (GANs) to alleviate the computational cost of the iterative denoising inference in Diffusion Models (DMs). However, existing works in this line suffer from either training instability and mode collapse or subpar one-step generation learning efficiency. To address these issues, we introduce YOSO, a novel generative model designed for rapid, scalable, and high-fidelity one-step image synthesis with high training stability and mode coverage. Specifically, we smooth the adversarial divergence by the denoising generator itself, performing self-cooperative learning. We show that our method can serve as a one-step generation model training from scratch with competitive performance. Moreover, we extend our YOSO to one-step text-to-image generation based on pre-trained models by several effective training techniques (i.e., latent perceptual loss and latent discriminator for efficient training along with the latent DMs; the informative prior initialization (IPI), and the quick adaption stage for fixing the flawed noise scheduler). Experimental results show that YOSO achieves the state-of-the-art one-step generation performance even with Low-Rank Adaptation (LoRA) fine-tuning. In particular, we show that the YOSO-PixArt-$\\alpha$ can generate images in one step trained on 512 resolution, with the capability of adapting to 1024 resolution without extra explicit training, requiring only ~10 A800 days for fine-tuning. Our code is provided at https://github.com/Luo-Yihong/YOSO.",
+      "sha256": "4bc872e15730b11ce65db1d0f6b6545a394628baf55848133a47bc22c3e03b83",
+      "verified_at": "2026-10-25T23:01:54.832114+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "33ac50d6709aa0e29c2a35ac09a9e522f0e37b4c205b5ec76366d71c45e1f45a",
+      "source_version": "8882ee861c169ede4e38f88de0c33b03581065a922c24b4c67112793dbdbfc27"
+    },
+    "conf-9923c34cc1a381590f1e901a": {
+      "title": "Fast High-Resolution Image Synthesis with Latent Adversarial Diffusion Distillation",
+      "url": "https://arxiv.org/abs/2403.12015",
+      "text": "Diffusion models are the main driver of progress in image and video synthesis, but suffer from slow inference speed. Distillation methods, like the recently introduced adversarial diffusion distillation (ADD) aim to shift the model from many-shot to single-step inference, albeit at the cost of expensive and difficult optimization due to its reliance on a fixed pretrained DINOv2 discriminator. We introduce Latent Adversarial Diffusion Distillation (LADD), a novel distillation approach overcoming the limitations of ADD. In contrast to pixel-based ADD, LADD utilizes generative features from pretrained latent diffusion models. This approach simplifies training and enhances performance, enabling high-resolution multi-aspect ratio image synthesis. We apply LADD to Stable Diffusion 3 (8B) to obtain SD3-Turbo, a fast model that matches the performance of state-of-the-art text-to-image generators using only four unguided sampling steps. Moreover, we systematically investigate its scaling behavior and demonstrate LADD's effectiveness in various applications such as image editing and inpainting.",
+      "sha256": "05d5c067d0d022e852b097a9c0f031346a71cc44a8f414ce1a63420a754d6376",
+      "verified_at": "2026-10-25T23:02:01.626494+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "17061f3c9c43453eeb50b7e781108f92a7e9b30c2f54d7a3824f7f5a267d4297",
+      "source_version": "0084bc777f350696a5f37d609c935fd46f30eeb0ad2e4b7e77c98def08b9611f"
+    },
+    "conf-461948bb1e9380cab1352e4b": {
+      "title": "DreamSampler: Unifying Diffusion Sampling and Score Distillation for Image Manipulation",
+      "url": "https://arxiv.org/abs/2403.11415",
+      "text": "Reverse sampling and score-distillation have emerged as main workhorses in recent years for image manipulation using latent diffusion models (LDMs). While reverse diffusion sampling often requires adjustments of LDM architecture or feature engineering, score distillation offers a simple yet powerful model-agnostic approach, but it is often prone to mode-collapsing. To address these limitations and leverage the strengths of both approaches, here we introduce a novel framework called {\\em DreamSampler}, which seamlessly integrates these two distinct approaches through the lens of regularized latent optimization. Similar to score-distillation, DreamSampler is a model-agnostic approach applicable to any LDM architecture, but it allows both distillation and reverse sampling with additional guidance for image editing and reconstruction. Through experiments involving image editing, SVG reconstruction and etc, we demonstrate the competitive performance of DreamSampler compared to existing approaches, while providing new applications. Code: https://github.com/DreamSampler/dream-sampler",
+      "sha256": "9aac024e44eab7471746b45136189861d85d84d6a3c5bf69cf941deda89f82f2",
+      "verified_at": "2026-10-25T23:02:07.552912+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "5b51789fb80d11188206d116672eed750def176ccc87b642e8cd79722fb03c34",
+      "source_version": "db6f5f7277a9f787bd4d44b4dbe54d2c3e73e4ca2a722651b1bbe4a37b8f5bd1"
+    },
+    "conf-ea38e80ad1094dfc955e907d": {
+      "title": "Efficient Video Diffusion Models via Content-Frame Motion-Latent Decomposition",
+      "url": "https://arxiv.org/abs/2403.14148",
+      "text": "Video diffusion models have recently made great progress in generation quality, but are still limited by the high memory and computational requirements. This is because current video diffusion models often attempt to process high-dimensional videos directly. To tackle this issue, we propose content-motion latent diffusion model (CMD), a novel efficient extension of pretrained image diffusion models for video generation. Specifically, we propose an autoencoder that succinctly encodes a video as a combination of a content frame (like an image) and a low-dimensional motion latent representation. The former represents the common content, and the latter represents the underlying motion in the video, respectively. We generate the content frame by fine-tuning a pretrained image diffusion model, and we generate the motion latent representation by training a new lightweight diffusion model. A key innovation here is the design of a compact latent space that can directly utilizes a pretrained image diffusion model, which has not been done in previous latent video diffusion models. This leads to considerably better quality generation and reduced computational costs. For instance, CMD can sample a video 7.7$\\times$ faster than prior approaches by generating a video of 512$\\times$1024 resolution and length 16 in 3.1 seconds. Moreover, CMD achieves an FVD score of 212.7 on WebVid-10M, 27.3% better than the previous state-of-the-art of 292.4.",
+      "sha256": "c8793af018902388418b51efb6973cb4669aee79b1d2f3a6ac5c76a9f1b4b440",
+      "verified_at": "2026-10-25T23:02:11.961621+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "876a08ca3f33f6950939190598be00886e6369073792cd0c4290dd7224bd16ab",
+      "source_version": "d821a57a6822e340ff725aa2cb5fba32810cc0c70c278330c9b9dba685be901d"
+    },
+    "conf-443a79e5186254ca1fca2008": {
+      "title": "CAGE: Unsupervised Visual Composition and Animation for Controllable Video Generation",
+      "url": "https://arxiv.org/abs/2403.14368",
+      "text": "The field of video generation has expanded significantly in recent years, with controllable and compositional video generation garnering considerable interest. Most methods rely on leveraging annotations such as text, objects' bounding boxes, and motion cues, which require substantial human effort and thus limit their scalability. In contrast, we address the challenge of controllable and compositional video generation without any annotations by introducing a novel unsupervised approach. Our model is trained from scratch on a dataset of unannotated videos. At inference time, it can compose plausible novel scenes and animate objects by placing object parts at the desired locations in space and time. The core innovation of our method lies in the unified control format and the training process, where video generation is conditioned on a randomly selected subset of pre-trained self-supervised local features. This conditioning compels the model to learn how to inpaint the missing information in the video both spatially and temporally, thereby learning the inherent compositionality of a scene and the dynamics of moving objects. The abstraction level and the imposed invariance of the conditioning input to minor visual perturbations enable control over object motion by simply using the same features at all the desired future locations. We call our model CAGE, which stands for visual Composition and Animation for video GEneration. We conduct extensive experiments to validate the effectiveness of CAGE across various scenarios, demonstrating its capability to accurately follow the control and to generate high-quality videos that exhibit coherent scene composition and realistic animation.",
+      "sha256": "10ec52ab3bbcb5b9bea3191c5fe636d805de15a4a77a54a14f7e8e3f77853eaa",
+      "verified_at": "2026-10-25T23:02:18.057282+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "e43b0dee59894c76b0000a7c6dd54b04b063ec7716079c87375ed23260b4ac9a",
+      "source_version": "f47ce0ea21d7d5d2e5e0adb3c99f7cdc77768d62636e7442884a140471ff9c65"
     }
   }
 }
