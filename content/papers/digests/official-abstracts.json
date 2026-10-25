@@ -13891,6 +13891,113 @@
       "basis": "official_abstract",
       "source_sha256": "fb4f6d8a839e8cf3fa231c4ef87ce2cc01109cf5e818ff5a374f9b1a3a03ec59",
       "source_version": "c111dce1cb29409adea44ea9e72b6e744e5752dd23b0300c767fb23d4f5c969e"
+    },
+    "conf-fa21c442b5e53714d6f931af": {
+      "title": "Hyper-SD: Trajectory Segmented Consistency Model for Efficient Image Synthesis",
+      "url": "https://arxiv.org/abs/2404.13686",
+      "text": "Recently, a series of diffusion-aware distillation algorithms have emerged to alleviate the computational overhead associated with the multi-step inference process of Diffusion Models (DMs). Current distillation techniques often dichotomize into two distinct aspects: i) ODE Trajectory Preservation; and ii) ODE Trajectory Reformulation. However, these approaches suffer from severe performance degradation or domain shifts. To address these limitations, we propose Hyper-SD, a novel framework that synergistically amalgamates the advantages of ODE Trajectory Preservation and Reformulation, while maintaining near-lossless performance during step compression. Firstly, we introduce Trajectory Segmented Consistency Distillation to progressively perform consistent distillation within pre-defined time-step segments, which facilitates the preservation of the original ODE trajectory from a higher-order perspective. Secondly, we incorporate human feedback learning to boost the performance of the model in a low-step regime and mitigate the performance loss incurred by the distillation process. Thirdly, we integrate score distillation to further improve the low-step generation capability of the model and offer the first attempt to leverage a unified LoRA to support the inference process at all steps. Extensive experiments and user studies demonstrate that Hyper-SD achieves SOTA performance from 1 to 8 inference steps for both SDXL and SD1.5. For example, Hyper-SDXL surpasses SDXL-Lightning by +0.68 in CLIP Score and +0.51 in Aes Score in the 1-step inference.",
+      "sha256": "23f6085b121ea97db09b4bda21c799e90c3a16e8d211baf0b6d878c62b4d5dbd",
+      "verified_at": "2026-10-25T21:47:36.312056+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "5305e765788aa11d41dd6744ce49bd5206353e54d2629f153aa2922d5febdb74",
+      "source_version": "a16a2575f20bafa0ca78fd3fde5be4e4de1d7b64a472b4d47dbe938c76daac5f"
+    },
+    "conf-9a551ebd79c4edbbdd0039f8": {
+      "title": "FreeDiff: Progressive Frequency Truncation for Image Editing with Diffusion Models",
+      "url": "https://arxiv.org/abs/2404.11895",
+      "text": "Precise image editing with text-to-image models has attracted increasing interest due to their remarkable generative capabilities and user-friendly nature. However, such attempts face the pivotal challenge of misalignment between the intended precise editing target regions and the broader area impacted by the guidance in practice. Despite excellent methods leveraging attention mechanisms that have been developed to refine the editing guidance, these approaches necessitate modifications through complex network architecture and are limited to specific editing tasks. In this work, we re-examine the diffusion process and misalignment problem from a frequency perspective, revealing that, due to the power law of natural images and the decaying noise schedule, the denoising network primarily recovers low-frequency image components during the earlier timesteps and thus brings excessive low-frequency signals for editing. Leveraging this insight, we introduce a novel fine-tuning free approach that employs progressive $\\textbf{Fre}$qu$\\textbf{e}$ncy truncation to refine the guidance of $\\textbf{Diff}$usion models for universal editing tasks ($\\textbf{FreeDiff}$). Our method achieves comparable results with state-of-the-art methods across a variety of editing tasks and on a diverse set of images, highlighting its potential as a versatile tool in image editing applications.",
+      "sha256": "0e8d87660bec57edce6e71abf709cc01be824cbe2e17521dd1c0aa9d48cf68cf",
+      "verified_at": "2026-10-25T21:47:42.440314+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "13347fbf994ab0326c074e42f1c9642df121c8d2c174f9d720c5bc54d0b9e1a7",
+      "source_version": "b19bf4e1ce4fa14363b9118c5b6039a93c635b96f78b77cc82021f5058575824"
+    },
+    "conf-47b3ab7ba2609921cf2a5c9c": {
+      "title": "Customizing Text-to-Image Diffusion with Object Viewpoint Control",
+      "url": "https://arxiv.org/abs/2404.12333",
+      "text": "Model customization introduces new concepts to existing text-to-image models, enabling the generation of these new concepts/objects in novel contexts. However, such methods lack accurate camera view control with respect to the new object, and users must resort to prompt engineering (e.g., adding ``top-view'') to achieve coarse view control. In this work, we introduce a new task -- enabling explicit control of the object viewpoint in the customization of text-to-image diffusion models. This allows us to modify the custom object's properties and generate it in various background scenes via text prompts, all while incorporating the object viewpoint as an additional control. This new task presents significant challenges, as one must harmoniously merge a 3D representation from the multi-view images with the 2D pre-trained model. To bridge this gap, we propose to condition the diffusion process on the 3D object features rendered from the target viewpoint. During training, we fine-tune the 3D feature prediction modules to reconstruct the object's appearance and geometry, while reducing overfitting to the input multi-view images. Our method outperforms existing image editing and model customization baselines in preserving the custom object's identity while following the target object viewpoint and the text prompt.",
+      "sha256": "dfc2debbdebf27d8c13da1d20ad4a6625f4f450c807fc5708f90867699a5f852",
+      "verified_at": "2026-10-25T21:47:48.276850+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "7d4c9ccad13d1cd0ecf74422ccd0c650b820588d256b8878f3b19f8bc6e8d8b1",
+      "source_version": "8dc6b9393691a15907a4ccf544e74c1410533de053c81be9236fa189de081bba"
+    },
+    "conf-6a62a7fd30be7e2132a26795": {
+      "title": "MoA: Mixture-of-Attention for Subject-Context Disentanglement in Personalized Image Generation",
+      "url": "https://arxiv.org/abs/2404.11565",
+      "text": "We introduce a new architecture for personalization of text-to-image diffusion models, coined Mixture-of-Attention (MoA). Inspired by the Mixture-of-Experts mechanism utilized in large language models (LLMs), MoA distributes the generation workload between two attention pathways: a personalized branch and a non-personalized prior branch. MoA is designed to retain the original model's prior by fixing its attention layers in the prior branch, while minimally intervening in the generation process with the personalized branch that learns to embed subjects in the layout and context generated by the prior branch. A novel routing mechanism manages the distribution of pixels in each layer across these branches to optimize the blend of personalized and generic content creation. Once trained, MoA facilitates the creation of high-quality, personalized images featuring multiple subjects with compositions and interactions as diverse as those generated by the original model. Crucially, MoA enhances the distinction between the model's pre-existing capability and the newly augmented personalized intervention, thereby offering a more disentangled subject-context control that was previously unattainable. Project page: https://snap-research.github.io/mixture-of-attention",
+      "sha256": "37e4423577ef99e0c5a9bfcf89d7f162aa17b970dd3d3c612d51894069333a81",
+      "verified_at": "2026-10-25T21:47:54.178241+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "fd7ce64afdc1dd1fa593fcc19f0db3f72ee4de10a305c86f530e12d0d2c07aa9",
+      "source_version": "e8bf6aa04568d041d77acd6d86a90f24f972ebd65bcc9454adaf058926cb8dab"
+    },
+    "conf-7b8ab5033b4539d52ee7e108": {
+      "title": "HQ-Edit: A High-Quality Dataset for Instruction-based Image Editing",
+      "url": "https://arxiv.org/abs/2404.09990",
+      "text": "This study introduces HQ-Edit, a high-quality instruction-based image editing dataset with around 200,000 edits. Unlike prior approaches relying on attribute guidance or human feedback on building datasets, we devise a scalable data collection pipeline leveraging advanced foundation models, namely GPT-4V and DALL-E 3. To ensure its high quality, diverse examples are first collected online, expanded, and then used to create high-quality diptychs featuring input and output images with detailed text prompts, followed by precise alignment ensured through post-processing. In addition, we propose two evaluation metrics, Alignment and Coherence, to quantitatively assess the quality of image edit pairs using GPT-4V. HQ-Edits high-resolution images, rich in detail and accompanied by comprehensive editing prompts, substantially enhance the capabilities of existing image editing models. For example, an HQ-Edit finetuned InstructPix2Pix can attain state-of-the-art image editing performance, even surpassing those models fine-tuned with human-annotated data. The project page is https://thefllood.github.io/HQEdit_web.",
+      "sha256": "ff8abc435dfd3501901f8990b7cf8cf7920bce6e5109f33f7c2ec58f5949d634",
+      "verified_at": "2026-10-25T21:48:00.160048+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "a9e62ee9a364d6330767356c52f6fea9f5d8638e46165564dce31a60aa43997a",
+      "source_version": "49d0b2508c5291e11b680dda8db76142bcf67c2777cab969d6119bcf5260ccc8"
+    },
+    "conf-90d24ccaf31b5e1349b3a298": {
+      "title": "Learning 3D Geometry and Feature Consistent Gaussian Splatting for Object Removal",
+      "url": "https://eccv.ecva.net/virtual/2024/poster/1303",
+      "text": "This paper tackles the intricate challenge of object removal to update the radiance field using the 3D Gaussian Splatting. The main challenges of this task lie in the preservation of geometric consistency and the maintenance of texture coherence in the presence of the substantial discrete nature of Gaussian primitives. We introduce a robust framework specifically designed to overcome these obstacles. The key insight of our approach is the enhancement of information exchange among visible and invisible areas, facilitating content restoration in terms of both geometry and texture. Our methodology begins with optimizing the positioning of Gaussian primitives to improve geometric consistency across both removed and visible areas, guided by an online registration process informed by monocular depth estimation. Following this, we employ a novel feature propagation mechanism to bolster texture coherence, leveraging a cross-attention design that bridges sampling Gaussians from both uncertain and certain areas. This innovative approach significantly refines the texture coherence within the final radiance field. Extensive experiments validate that our method not only elevates the quality of novel view synthesis for scenes undergoing object removal but also showcases notable efficiency gains in training and rendering speeds. Show more",
+      "sha256": "fd43c88f3ca6dccf72d5d014ab799b49afd2c4a8c65db26a7ef5f1cd8302df30",
+      "verified_at": "2026-10-25T21:48:04.150107+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "0cb8d37019b42ac80436ed771242d290848d63de3070f89449f394b7f6e27b8b",
+      "source_version": "c63d5512fc742dec44a91c9d85e63ac1fbbe168eb820115cdf9906aa05f394da"
+    },
+    "conf-ee74dc01335dbf489d94cdbc": {
+      "title": "DragTraffic: Interactive and Controllable Traffic Scene Generation for Autonomous Driving",
+      "url": "https://arxiv.org/abs/2404.12624",
+      "text": "Evaluating and training autonomous driving systems require diverse and scalable corner cases. However, most existing scene generation methods lack controllability, accuracy, and versatility, resulting in unsatisfactory generation results. Inspired by DragGAN in image generation, we propose DragTraffic, a generalized, interactive, and controllable traffic scene generation framework based on conditional diffusion. DragTraffic enables non-experts to generate a variety of realistic driving scenarios for different types of traffic agents through an adaptive mixture expert architecture. We employ a regression model to provide a general initial solution and a refinement process based on the conditional diffusion model to ensure diversity. User-customized context is introduced through cross-attention to ensure high controllability. Experiments on a real-world driving dataset show that DragTraffic outperforms existing methods in terms of authenticity, diversity, and freedom. Demo videos and code are available at https://chantsss.github.io/Dragtraffic/.",
+      "sha256": "f3fb4c627782eaeb53063c4db162a35fc2ba44de57216e2b579ce8fa4e70c65e",
+      "verified_at": "2026-10-25T21:48:10.881089+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "31b8a740eb57569240219ac7d9a56ca22ac5b4e42be08bb173d01e4c2ec5ab50",
+      "source_version": "d42e89f1b426d716d17200dbedf9901c6b7a68b23771c7baf5acfb420b29bc89"
+    },
+    "conf-c515bc9cca78e311c3b62525": {
+      "title": "Gaussian Opacity Fields: Efficient Adaptive Surface Reconstruction in Unbounded Scenes",
+      "url": "https://arxiv.org/abs/2404.10772",
+      "text": "Recently, 3D Gaussian Splatting (3DGS) has demonstrated impressive novel view synthesis results, while allowing the rendering of high-resolution images in real-time. However, leveraging 3D Gaussians for surface reconstruction poses significant challenges due to the explicit and disconnected nature of 3D Gaussians. In this work, we present Gaussian Opacity Fields (GOF), a novel approach for efficient, high-quality, and adaptive surface reconstruction in unbounded scenes. Our GOF is derived from ray-tracing-based volume rendering of 3D Gaussians, enabling direct geometry extraction from 3D Gaussians by identifying its levelset, without resorting to Poisson reconstruction or TSDF fusion as in previous work. We approximate the surface normal of Gaussians as the normal of the ray-Gaussian intersection plane, enabling the application of regularization that significantly enhances geometry. Furthermore, we develop an efficient geometry extraction method utilizing Marching Tetrahedra, where the tetrahedral grids are induced from 3D Gaussians and thus adapt to the scene's complexity. Our evaluations reveal that GOF surpasses existing 3DGS-based methods in surface reconstruction and novel view synthesis. Further, it compares favorably to or even outperforms, neural implicit methods in both quality and speed.",
+      "sha256": "f4ee80a5f948e57ce85566d37af92188527ee6370279466ee732eeb08bb6017e",
+      "verified_at": "2026-10-25T21:48:16.996109+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "6977e6052c261f3a50e82e39b04a34688702de294acc3df88173f47a550b476a",
+      "source_version": "9c61ce23cac95164f7543299438c3cce96a59dc5a64be0a52b50fb25a8bfff21"
+    },
+    "conf-761ec197aed504551f9b0271": {
+      "title": "Autonomous Implicit Indoor Scene Reconstruction with Frontier Exploration",
+      "url": "https://arxiv.org/abs/2404.10218",
+      "text": "Implicit neural representations have demonstrated significant promise for 3D scene reconstruction. Recent works have extended their applications to autonomous implicit reconstruction through the Next Best View (NBV) based method. However, the NBV method cannot guarantee complete scene coverage and often necessitates extensive viewpoint sampling, particularly in complex scenes. In the paper, we propose to 1) incorporate frontier-based exploration tasks for global coverage with implicit surface uncertainty-based reconstruction tasks to achieve high-quality reconstruction. and 2) introduce a method to achieve implicit surface uncertainty using color uncertainty, which reduces the time needed for view selection. Further with these two tasks, we propose an adaptive strategy for switching modes in view path planning, to reduce time and maintain superior reconstruction quality. Our method exhibits the highest reconstruction quality among all planning methods and superior planning efficiency in methods involving reconstruction tasks. We deploy our method on a UAV and the results show that our method can plan multi-task views and reconstruct a scene with high quality.",
+      "sha256": "c53b076f86f49d14ad49b4cdbc7b04d7625de2261a2e56dab9cf832e01c3b8ce",
+      "verified_at": "2026-10-25T21:48:23.202483+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "a300418454bc15db098dd578777baa5a6bf8abbdf4b01bbb9063ccb10ac43df7",
+      "source_version": "b70c7fabbfcbe5e5d8a82b3806b5ed0362e27629dbb9dad709f9c34f1e39daba"
+    },
+    "2404.08449": {
+      "title": "OccGaussian: 3D Gaussian Splatting for Occluded Human Rendering",
+      "url": "https://arxiv.org/abs/2404.08449",
+      "text": "Rendering dynamic 3D human from monocular videos is crucial for various applications such as virtual reality and digital entertainment. Most methods assume the people is in an unobstructed scene, while various objects may cause the occlusion of body parts in real-life scenarios. Previous method utilizing NeRF for surface rendering to recover the occluded areas, but it requiring more than one day to train and several seconds to render, failing to meet the requirements of real-time interactive applications. To address these issues, we propose OccGaussian based on 3D Gaussian Splatting, which can be trained within 6 minutes and produces high-quality human renderings up to 160 FPS with occluded input. OccGaussian initializes 3D Gaussian distributions in the canonical space, and we perform occlusion feature query at occluded regions, the aggregated pixel-align feature is extracted to compensate for the missing information. Then we use Gaussian Feature MLP to further process the feature along with the occlusion-aware loss functions to better perceive the occluded area. Extensive experiments both in simulated and real-world occlusions, demonstrate that our method achieves comparable or even superior performance compared to the state-of-the-art method. And we improving training and inference speeds by 250x and 800x, respectively. Our code will be available for research purposes.",
+      "sha256": "056c25349076df02c5ddfa72082eb40a545d5e20c282e3ad66613ff09f7bec67",
+      "verified_at": "2026-10-25T21:48:28.508323+08:00"
+    },
+    "conf-094fb59dead1d3c278b53fa2": {
+      "title": "Physics-Based Interaction with 3D Objects via Video Generation",
+      "url": "https://eccv.ecva.net/virtual/2024/poster/2423",
+      "text": "Realistic object interactions are crucial for creating immersive virtual experiences, yet synthesizing realistic 3D object dynamics in response to novel interactions remains a significant challenge. Unlike unconditional or text-conditioned dynamics generation, action-conditioned dynamics requires perceiving the physical material properties of objects and grounding the 3D motion prediction on these properties, such as object stiffness. However, estimating physical material properties is an open problem due to the lack of material ground-truth data, as measuring these properties for real objects is highly difficult. We present PhysDreamer, a physics-based approach that endows static 3D objects with interactive dynamics by leveraging the object dynamics priors learned by video generation models. By distilling these priors, PhysDreamer enables the synthesis of realistic object responses to novel interactions, such as external forces or agent manipulations. We demonstrate our approach on diverse examples of elastic objects and evaluate the realism of the synthesized interactions through a user study. PhysDreamer takes a step towards more engaging and realistic virtual experiences by enabling static 3D objects to dynamically respond to interactive stimuli in a physically plausible manner. Show more",
+      "sha256": "af9872679a4871f1ba33a8905f97598c4ff7e92ccb25477dbf763d7082a03800",
+      "verified_at": "2026-10-25T21:48:32.931224+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "391dd86ad79f26e9c6be2e69fc483beb383d1edeabba5d07a9159d32024fb487",
+      "source_version": "d7c14e195a888304688caad6d8b9bb4deb153d66e75f7b37bf37392840fc60d8"
     }
   }
 }
