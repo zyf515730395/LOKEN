@@ -9566,6 +9566,246 @@
       "basis": "official_abstract",
       "source_sha256": "96a55d62560028cc1be8b128b3f4f881ba4d462dd732df0d7836af1fc944a608",
       "source_version": "81e3d24dc401faf27f3ae2e4acd64c8e241565624613f9af90da33b5af190dc5"
+    },
+    "conf-f1b23c7e217e6bbb6cedde56": {
+      "title": "DreamOmni: Unified Image Generation and Editing",
+      "url": "https://arxiv.org/abs/2412.17098",
+      "text": "Currently, the success of large language models (LLMs) illustrates that a unified multitasking approach can significantly enhance model usability, streamline deployment, and foster synergistic benefits across different tasks. However, in computer vision, while text-to-image (T2I) models have significantly improved generation quality through scaling up, their framework design did not initially consider how to unify with downstream tasks, such as various types of editing. To address this, we introduce DreamOmni, a unified model for image generation and editing. We begin by analyzing existing frameworks and the requirements of downstream tasks, proposing a unified framework that integrates both T2I models and various editing tasks. Furthermore, another key challenge is the efficient creation of high-quality editing data, particularly for instruction-based and drag-based editing. To this end, we develop a synthetic data pipeline using sticker-like elements to synthesize accurate, high-quality datasets efficiently, which enables editing data scaling up for unified model training. For training, DreamOmni jointly trains T2I generation and downstream tasks. T2I training enhances the model's understanding of specific concepts and improves generation quality, while editing training helps the model grasp the nuances of the editing task. This collaboration significantly boosts editing performance. Extensive experiments confirm the effectiveness of DreamOmni. The code and model will be released.",
+      "sha256": "ccc6f2c3e3169011cfb3bd73a1f05f1b6737da16ad1ad840f0a700c8cdc6fd24",
+      "verified_at": "2026-10-25T10:26:49.035866+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "02fc9b5dc95cdff3aa13d493392a93404b3d50b7e2fe8da32831c19085f74c74",
+      "source_version": "03a3faaaf1833ad8f394881591015cbbc7253718c8130327e6ef2524cfdd2d56"
+    },
+    "conf-90d835c36df9479e6a89ef3b": {
+      "title": "Distilled Decoding 1: One-step Sampling of Image Auto-regressive Models with Flow Matching",
+      "url": "https://arxiv.org/abs/2412.17153",
+      "text": "Autoregressive (AR) models have achieved state-of-the-art performance in text and image generation but suffer from slow generation due to the token-by-token process. We ask an ambitious question: can a pre-trained AR model be adapted to generate outputs in just one or two steps? If successful, this would significantly advance the development and deployment of AR models. We notice that existing works that try to speed up AR generation by generating multiple tokens at once fundamentally cannot capture the output distribution due to the conditional dependencies between tokens, limiting their effectiveness for few-step generation. To address this, we propose Distilled Decoding (DD), which uses flow matching to create a deterministic mapping from Gaussian distribution to the output distribution of the pre-trained AR model. We then train a network to distill this mapping, enabling few-step generation. DD doesn't need the training data of the original AR model, making it more practical. We evaluate DD on state-of-the-art image AR models and present promising results on ImageNet-256. For VAR, which requires 10-step generation, DD enables one-step generation (6.3$\\times$ speed-up), with an acceptable increase in FID from 4.19 to 9.96. For LlamaGen, DD reduces generation from 256 steps to 1, achieving an 217.8$\\times$ speed-up with a comparable FID increase from 4.11 to 11.35. In both cases, baseline methods completely fail with FID>100. DD also excels on text-to-image generation, reducing the generation from 256 steps to 2 for LlamaGen with minimal FID increase from 25.70 to 28.95. As the first work to demonstrate the possibility of one-step generation for image AR models, DD challenges the prevailing notion that AR models are inherently slow, and opens up new opportunities for efficient AR generation. The project website is at https://imagination-research.github.io/distilled-decoding.",
+      "sha256": "e00656d47278973d3065f1e2fd91ccb1cd5b73db18aef2a498c602de3cc228b9",
+      "verified_at": "2026-10-25T10:26:54.702333+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "c465616812b4a38f8078ff5309b62336dcbfa1d0eeae5630c799050693be46d4",
+      "source_version": "c61685bbec4dd6aa4bb0987c206f37aba194039368f4c4042bf064afc81226c5"
+    },
+    "conf-595998e9aeeab7965c30a454": {
+      "title": "Self-Corrected Flow Distillation for Consistent One-Step and Few-Step Image Generation",
+      "url": "https://ojs.aaai.org/index.php/AAAI/article/view/32269",
+      "text": "Flow matching has emerged as a promising framework for training generative models, demonstrating impressive empirical performance while offering relative ease of training compared to diffusion-based models. However, this method still requires numerous function evaluations in the sampling process. To address these limitations, we introduce a self-corrected flow distillation method that effectively integrates consistency models and adversarial training within the flow-matching framework. This work is a pioneer in achieving consistent generation quality in both few-step and one-step sampling. Our extensive experiments validate the effectiveness of our method, yielding superior results both quantitatively and qualitatively on CelebA-HQ and zero-shot benchmarks on the COCO dataset.",
+      "sha256": "b5c33ec3fb3919c46b29c0d5c77a835e79b345586ff4502932fdcaff57a9abf1",
+      "verified_at": "2026-10-25T10:27:00.372771+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "8773adfcda772bf3c58e5ea04f2201c48ee265d323f61a7572377d173c13e3e2",
+      "source_version": "d0906f868083926e8b2c693eb88281289327cd9416cd82e8768fb81a3307fdc9"
+    },
+    "conf-de06bb9759b6a86401c0d4fc": {
+      "title": "FlowAR: Scale-wise Autoregressive Image Generation Meets Flow Matching",
+      "url": "https://arxiv.org/abs/2412.15205",
+      "text": "Autoregressive (AR) modeling has achieved remarkable success in natural language processing by enabling models to generate text with coherence and contextual understanding through next token prediction. Recently, in image generation, VAR proposes scale-wise autoregressive modeling, which extends the next token prediction to the next scale prediction, preserving the 2D structure of images. However, VAR encounters two primary challenges: (1) its complex and rigid scale design limits generalization in next scale prediction, and (2) the generator's dependence on a discrete tokenizer with the same complex scale structure restricts modularity and flexibility in updating the tokenizer. To address these limitations, we introduce FlowAR, a general next scale prediction method featuring a streamlined scale design, where each subsequent scale is simply double the previous one. This eliminates the need for VAR's intricate multi-scale residual tokenizer and enables the use of any off-the-shelf Variational AutoEncoder (VAE). Our simplified design enhances generalization in next scale prediction and facilitates the integration of Flow Matching for high-quality image synthesis. We validate the effectiveness of FlowAR on the challenging ImageNet-256 benchmark, demonstrating superior generation performance compared to previous methods. Codes will be available at \\url{https://github.com/OliverRensu/FlowAR}.",
+      "sha256": "fa9aa301aa42f4e4fb506e6286b25a0308f98c8b4b0ed1515f2ff680f3d6cf8b",
+      "verified_at": "2026-10-25T10:27:06.248452+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "d698cd3144298a9094bdc6cb2e61d59817844439a1a43ab740b1a0314e30de94",
+      "source_version": "3cb0307ef8321320bd32f0178836007064637c13ceb43a7dee18bd65563ea96c"
+    },
+    "conf-3967d5d17e3e2ce4d112d094": {
+      "title": "Parallelized Autoregressive Visual Generation",
+      "url": "https://arxiv.org/abs/2412.15119",
+      "text": "Autoregressive models have emerged as a powerful approach for visual generation but suffer from slow inference speed due to their sequential token-by-token prediction process. In this paper, we propose a simple yet effective approach for parallelized autoregressive visual generation that improves generation efficiency while preserving the advantages of autoregressive modeling. Our key insight is that parallel generation depends on visual token dependencies-tokens with weak dependencies can be generated in parallel, while strongly dependent adjacent tokens are difficult to generate together, as their independent sampling may lead to inconsistencies. Based on this observation, we develop a parallel generation strategy that generates distant tokens with weak dependencies in parallel while maintaining sequential generation for strongly dependent local tokens. Our approach can be seamlessly integrated into standard autoregressive models without modifying the architecture or tokenizer. Experiments on ImageNet and UCF-101 demonstrate that our method achieves a 3.6x speedup with comparable quality and up to 9.5x speedup with minimal quality degradation across both image and video generation tasks. We hope this work will inspire future research in efficient visual generation and unified autoregressive modeling. Project page: https://yuqingwang1029.github.io/PAR-project.",
+      "sha256": "d6bc11e231cc772a60a7078c091f0302405ed892bce6cbf514294fabbedbb50d",
+      "verified_at": "2026-10-25T10:27:10.847766+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "1eb816d3992dda5301f496456259fc6ea49a20e150fde2e9c4d3b02ada00fe98",
+      "source_version": "818b1646c1bbfb19c228436dcfa45c93e0892edfe224d9a920558e1e47845fb1"
+    },
+    "conf-495056448d0338dbaddc2cc7": {
+      "title": "FashionComposer: Compositional Fashion Image Generation",
+      "url": "https://arxiv.org/abs/2412.14168",
+      "text": "We present FashionComposer for compositional fashion image generation. Unlike previous methods, FashionComposer is highly flexible. It takes multi-modal input (i.e., text prompt, parametric human model, garment image, and face image) and supports personalizing the appearance, pose, and figure of the human and assigning multiple garments in one pass. To achieve this, we first develop a universal framework capable of handling diverse input modalities. We construct scaled training data to enhance the model's robust compositional capabilities. To accommodate multiple reference images (garments and faces) seamlessly, we organize these references in a single image as an \"asset library\" and employ a reference UNet to extract appearance features. To inject the appearance features into the correct pixels in the generated result, we propose subject-binding attention. It binds the appearance features from different \"assets\" with the corresponding text features. In this way, the model could understand each asset according to their semantics, supporting arbitrary numbers and types of reference images. As a comprehensive solution, FashionComposer also supports many other applications like human album generation, diverse virtual try-on tasks, etc.",
+      "sha256": "514f766f05ff6585aca1e259841600fa072bfae2f3dbebd8f3fed67a06aeb10d",
+      "verified_at": "2026-10-25T10:27:16.706038+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "9240f0bf5057c0d20e8aee0ad026b2ef324fd6be7d3f1fa65585a23d65acc99a",
+      "source_version": "be8b2a8823320590101c516ce555134131d32729891860f735de10773d8bc0f7"
+    },
+    "conf-64813a03cb5058f14206a3cc": {
+      "title": "Unsupervised Region-Based Image Editing of Denoising Diffusion Models",
+      "url": "https://arxiv.org/abs/2412.12912",
+      "text": "Although diffusion models have achieved remarkable success in the field of image generation, their latent space remains under-explored. Current methods for identifying semantics within latent space often rely on external supervision, such as textual information and segmentation masks. In this paper, we propose a method to identify semantic attributes in the latent space of pre-trained diffusion models without any further training. By projecting the Jacobian of the targeted semantic region into a low-dimensional subspace which is orthogonal to the non-masked regions, our approach facilitates precise semantic discovery and control over local masked areas, eliminating the need for annotations. We conducted extensive experiments across multiple datasets and various architectures of diffusion models, achieving state-of-the-art performance. In particular, for some specific face attributes, the performance of our proposed method even surpasses that of supervised approaches, demonstrating its superior ability in editing local image properties.",
+      "sha256": "334f3421b839e60b135a3ab9ff3c35babfd8908438089f15a4839cc683904003",
+      "verified_at": "2026-10-25T10:27:23.055349+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "dc81a1cfef1a12c860268995fcf65cacc3eed67ac6df0ffd1fa6017f408a03fa",
+      "source_version": "5ee0ecac3daf8c8741e07abb4dd8a5692801631a70b7931d5b581a92d31a2626"
+    },
+    "conf-8fd87440f9e2f8c9182d8e54": {
+      "title": "Exploring Fixed Point in Image Editing: Theoretical Support and Convergence Optimization",
+      "url": "https://papers.nips.cc/paper_files/paper/2024/hash/23c32cb7ac397f612b7c16aaa2bf0340-Abstract-Conference.html",
+      "text": "In image editing, Denoising Diffusion Implicit Models (DDIM) inversion has become a widely adopted method and is extensively used in various image editing approaches. The core concept of DDIM inversion stems from the deterministic sampling technique of DDIM, which allows the DDIM process to be viewed as an Ordinary Differential Equation (ODE) process that is reversible. This enables the prediction of corresponding noise from a reference image, ensuring that the restored image from this noise remains consistent with the reference image. Image editing exploits this property by modifying the cross-attention between text and images to edit specific objects while preserving the remaining regions. However, in the DDIM inversion, using the $t-1$ time step to approximate the noise prediction at time step $t$ introduces errors between the restored image and the reference image. Recent approaches have modeled each step of the DDIM inversion process as finding a fixed-point problem of an implicit function. This approach significantly mitigates the error in the restored image but lacks theoretical support regarding the existence of such fixed points. Therefore, this paper focuses on the study of fixed points in DDIM inversion and provides theoretical support. Based on the obtained theoretical insights, we further optimize the loss function for the convergence of fixed points in the original DDIM inversion, improving the visual quality of the edited image. Finally, we extend the fixed-point based image editing to the application of unsupervised image dehazing, introducing a novel text-based approach for unsupervised dehazing.",
+      "sha256": "47077715dbdfefc8fce9bdbb854b013f28959986b33963de68c846cc10ec409a",
+      "verified_at": "2026-10-25T10:27:28.388105+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "f8100be832437f9b495310a54643574921cac93827763276831c512206f78b2d",
+      "source_version": "39801b105aff2a2c144aac3b428be5abd9539cb22ef4e66a58efea3980b1dc23"
+    },
+    "conf-6edbe4de3fdb525a961a58d8": {
+      "title": "ParallelEdits: Efficient Multi-Aspect Text-Driven Image Editing with Attention Grouping",
+      "url": "https://papers.nips.cc/paper_files/paper/2024/hash/2847043899e1171183ceadf86bdbb280-Abstract-Conference.html",
+      "text": "Text-driven image synthesis has made significant advancements with the development of diffusion models, transforming how visual content is generated from text prompts. Despite these advances, text-driven image editing, a key area in computer graphics, faces unique challenges. A major challenge is making simultaneous edits across multiple objects or attributes. Applying these methods sequentially for multi-attribute edits increases computational demands and efficiency losses.     In this paper, we address these challenges with significant contributions. Our main contribution is the development of ParallelEdits, a method that seamlessly manages simultaneous edits across multiple attributes. In contrast to previous approaches, ParallelEdits not only preserves the quality of single attribute edits but also significantly improves the performance of multitasking edits. This is achieved through innovative attention distribution mechanism and multi-branch design that operates across several processing heads.     Additionally, we introduce the PIE-Bench++ dataset, an expansion of the original PIE-Bench dataset, to better support evaluating image-editing tasks involving multiple objects and attributes simultaneously. This dataset is a benchmark for evaluating text-driven image editing methods in multifaceted scenarios.",
+      "sha256": "a847c67bff3af1daecf9722290a4d23430ca18c8f0c582d1bc1b6e9030495817",
+      "verified_at": "2026-10-25T10:27:33.710213+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "1f74bdbf2f7767b049efdf553c1cf57c69b2bae165e09d6908cd19fd971da756",
+      "source_version": "3065a9699f2cae621af384b13a56ce60d17b3ccaf4ab8169aaf52a0ca5b69306"
+    },
+    "conf-4e80bccbd81ea28d51e7cd15": {
+      "title": "IDProtector: An Adversarial Noise Encoder to Protect Against ID-Preserving Image Generation",
+      "url": "https://arxiv.org/abs/2412.11638",
+      "text": "Recently, zero-shot methods like InstantID have revolutionized identity-preserving generation. Unlike multi-image finetuning approaches such as DreamBooth, these zero-shot methods leverage powerful facial encoders to extract identity information from a single portrait photo, enabling efficient identity-preserving generation through a single inference pass. However, this convenience introduces new threats to the facial identity protection. This paper aims to safeguard portrait photos from unauthorized encoder-based customization. We introduce IDProtector, an adversarial noise encoder that applies imperceptible adversarial noise to portrait photos in a single forward pass. Our approach offers universal protection for portraits against multiple state-of-the-art encoder-based methods, including InstantID, IP-Adapter, and PhotoMaker, while ensuring robustness to common image transformations such as JPEG compression, resizing, and affine transformations. Experiments across diverse portrait datasets and generative models reveal that IDProtector generalizes effectively to unseen data and even closed-source proprietary models.",
+      "sha256": "d1a3061a01ecb85aa5600c409fc9800f7a2e60b90be9c4dab9d25bd7e957af1e",
+      "verified_at": "2026-10-25T10:27:39.568379+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "dbf3e4f73b4b292eeb277dea1113a349853cb8ab87826cbb1935034a0ea0c9d3",
+      "source_version": "60379430328a1365e4ce13b0b40eb8bdfaf2812a624ab6f299b37483fec89f05"
+    },
+    "conf-3505cdc8cc13e016508c0827": {
+      "title": "Prompt-A-Video: Prompt Your Video Diffusion Model via Preference-Aligned LLM",
+      "url": "https://arxiv.org/abs/2412.15156",
+      "text": "Text-to-video models have made remarkable advancements through optimization on high-quality text-video pairs, where the textual prompts play a pivotal role in determining quality of output videos. However, achieving the desired output often entails multiple revisions and iterative inference to refine user-provided prompts. Current automatic methods for refining prompts encounter challenges such as Modality-Inconsistency, Cost-Discrepancy, and Model-Unaware when applied to text-to-video diffusion models. To address these problem, we introduce an LLM-based prompt adaptation framework, termed as Prompt-A-Video, which excels in crafting Video-Centric, Labor-Free and Preference-Aligned prompts tailored to specific video diffusion model. Our approach involves a meticulously crafted two-stage optimization and alignment system. Initially, we conduct a reward-guided prompt evolution pipeline to automatically create optimal prompts pool and leverage them for supervised fine-tuning (SFT) of the LLM. Then multi-dimensional rewards are employed to generate pairwise data for the SFT model, followed by the direct preference optimization (DPO) algorithm to further facilitate preference alignment. Through extensive experimentation and comparative analyses, we validate the effectiveness of Prompt-A-Video across diverse generation models, highlighting its potential to push the boundaries of video generation.",
+      "sha256": "462df1a43b27774b4226889edbf59340236a335644e5256cb69963f459014679",
+      "verified_at": "2026-10-25T10:27:44.022391+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "c518c6dd9f7a6a66cb4d540fde6cb3cd14114591eed6bff956fe1a3674ff675e",
+      "source_version": "3a343b50cb1b63bff38c2d9af6b149e6054946a6805d5fe5632c0652a9571d30"
+    },
+    "conf-24ea4207c451c7984c5a666d": {
+      "title": "Is Your World Simulator a Good Story Presenter? A Consecutive Events-Based Benchmark for Future Long Video Generation",
+      "url": "https://arxiv.org/abs/2412.16211",
+      "text": "The current state-of-the-art video generative models can produce commercial-grade videos with highly realistic details. However, they still struggle to coherently present multiple sequential events in the stories specified by the prompts, which is foreseeable an essential capability for future long video generation scenarios. For example, top T2V generative models still fail to generate a video of the short simple story 'how to put an elephant into a refrigerator.' While existing detail-oriented benchmarks primarily focus on fine-grained metrics like aesthetic quality and spatial-temporal consistency, they fall short of evaluating models' abilities to handle event-level story presentation. To address this gap, we introduce StoryEval, a story-oriented benchmark specifically designed to assess text-to-video (T2V) models' story-completion capabilities. StoryEval features 423 prompts spanning 7 classes, each representing short stories composed of 2-4 consecutive events. We employ advanced vision-language models, such as GPT-4V and LLaVA-OV-Chat-72B, to verify the completion of each event in the generated videos, applying a unanimous voting method to enhance reliability. Our methods ensure high alignment with human evaluations, and the evaluation of 11 models reveals its challenge, with none exceeding an average story-completion rate of 50%. StoryEval provides a new benchmark for advancing T2V models and highlights the challenges and opportunities in developing next-generation solutions for coherent story-driven video generation.",
+      "sha256": "4b396bd3d87b5464119e111e057604b665466061e62fc58de9dfc36ae980b8c4",
+      "verified_at": "2026-10-25T10:27:49.659087+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "551e0202422a569c8f96c5e79b3f3c15236fb516721a83ae2d127c6f056bd247",
+      "source_version": "fd79ba3932679d2fd5fb67cf0974854e7496da6db17b0fab323c20b0fc33e53b"
+    },
+    "conf-496c09cf68e582e87299ddd4": {
+      "title": "Boosting Text-to-Video Generative Model with MLLMs Feedback",
+      "url": "https://papers.nips.cc/paper_files/paper/2024/hash/fbe2b2f74a2ece8070d8fb073717bda6-Abstract-Conference.html",
+      "text": "Recent advancements in text-to-video generative models, such as Sora, have showcased impressive capabilities. These models have attracted significant interest for their potential applications. However, they often rely on extensive datasets of variable quality, which can result in generated videos that lack aesthetic appeal and do not accurately reflect the input text prompts. A promising approach to mitigate these issues is to leverage Reinforcement Learning from Human Feedback (RLHF), which aims to align the outputs of text-to-video generative with human preferences. However, the considerable costs associated with manual annotation have led to a scarcity of comprehensive preference datasets. In response to this challenge, our study begins by investigating the efficacy of Multimodal Large Language Models (MLLMs) generated annotations in capturing video preferences, discovering a high degree of concordance with human judgments. Building upon this finding, we utilize MLLMs to perform fine-grained video preference annotations across two dimensions, resulting in the creation of VideoPrefer, which includes 135,000 preference annotations. Utilizing this dataset, we introduce VideoRM, the first general-purpose reward model tailored for video preference in the text-to-video domain. Our comprehensive experiments confirm the effectiveness of both VideoPrefer and VideoRM, representing a significant step forward in the field.",
+      "sha256": "94af8514985e21d8fe1f1f9b0602595e4e04d626d661f5b4ec7a986d785ddbab",
+      "verified_at": "2026-10-25T10:27:54.987462+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "1234e77833afe7b39fb0ed446750b495622d0f4f70477ec39fc48cef884ad474",
+      "source_version": "8d08f8a8222dddcc9a54d81f4b1981e3b9ec9a5be170075fd8006abfd74c0f56"
+    },
+    "conf-98e65a650f9fe173074cbee4": {
+      "title": "Topology-Aware 3D Gaussian Splatting: Leveraging Persistent Homology for Optimized Structural Integrity",
+      "url": "https://arxiv.org/abs/2412.16619",
+      "text": "Gaussian Splatting (GS) has emerged as a crucial technique for representing discrete volumetric radiance fields. It leverages unique parametrization to mitigate computational demands in scene optimization. This work introduces Topology-Aware 3D Gaussian Splatting (Topology-GS), which addresses two key limitations in current approaches: compromised pixel-level structural integrity due to incomplete initial geometric coverage, and inadequate feature-level integrity from insufficient topological constraints during optimization. To overcome these limitations, Topology-GS incorporates a novel interpolation strategy, Local Persistent Voronoi Interpolation (LPVI), and a topology-focused regularization term based on persistent barcodes, named PersLoss. LPVI utilizes persistent homology to guide adaptive interpolation, enhancing point coverage in low-curvature areas while preserving topological structure. PersLoss aligns the visual perceptual similarity of rendered images with ground truth by constraining distances between their topological features. Comprehensive experiments on three novel-view synthesis benchmarks demonstrate that Topology-GS outperforms existing methods in terms of PSNR, SSIM, and LPIPS metrics, while maintaining efficient memory usage. This study pioneers the integration of topology with 3D-GS, laying the groundwork for future research in this area.",
+      "sha256": "c4d0ea0b0eed26228cf596af65f3f29771f56b5d7b70e3f5240b56755d359ca5",
+      "verified_at": "2026-10-25T10:28:00.840636+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "fe8a688dfb24c93fda2cf2e3c64149ebce00ade29074840b2387a5fb043e06b6",
+      "source_version": "9b098383c73066ea0193f01e2374d1654b23a95b4c9ddec9d2edc7421f22b436"
+    },
+    "conf-76b2d05faf1f74fc55d633a8": {
+      "title": "OmniSplat: Taming Feed-Forward 3D Gaussian Splatting for Omnidirectional Images with Editable Capabilities",
+      "url": "https://arxiv.org/abs/2412.16604",
+      "text": "Feed-forward 3D Gaussian splatting (3DGS) models have gained significant popularity due to their ability to generate scenes immediately without needing per-scene optimization. Although omnidirectional images are becoming more popular since they reduce the computation required for image stitching to composite a holistic scene, existing feed-forward models are only designed for perspective images. The unique optical properties of omnidirectional images make it difficult for feature encoders to correctly understand the context of the image and make the Gaussian non-uniform in space, which hinders the image quality synthesized from novel views. We propose OmniSplat, a training-free fast feed-forward 3DGS generation framework for omnidirectional images. We adopt a Yin-Yang grid and decompose images based on it to reduce the domain gap between omnidirectional and perspective images. The Yin-Yang grid can use the existing CNN structure as it is, but its quasi-uniform characteristic allows the decomposed image to be similar to a perspective image, so it can exploit the strong prior knowledge of the learned feed-forward network. OmniSplat demonstrates higher reconstruction accuracy than existing feed-forward networks trained on perspective images. Our project page is available on: https://robot0321.github.io/omnisplat/index.html.",
+      "sha256": "3f1da519c2eac41806bad547e637fadf3f5410d5b0d57c232279a7df40dcfaef",
+      "verified_at": "2026-10-25T10:28:06.426475+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "6febb8bbc6d70b0b55a43938a7318b2614e138ca7d5ccf196ddab3dae710cd00",
+      "source_version": "b5512e0918240810b97266c39034d2540c8e05c35ebd0aefa4d9cd550a1dbaad"
+    },
+    "conf-b16d0ab0d73c6d89ab428ac2": {
+      "title": "SOUS VIDE: Cooking Visual Drone Navigation Policies in a Gaussian Splatting Vacuum",
+      "url": "https://arxiv.org/abs/2412.16346",
+      "text": "We propose a new simulator, training approach, and policy architecture, collectively called SOUS VIDE, for end-to-end visual drone navigation. Our trained policies exhibit zero-shot sim-to-real transfer with robust real-world performance using only onboard perception and computation. Our simulator, called FiGS, couples a computationally simple drone dynamics model with a high visual fidelity Gaussian Splatting scene reconstruction. FiGS can quickly simulate drone flights producing photorealistic images at up to 130 fps. We use FiGS to collect 100k-300k image/state-action pairs from an expert MPC with privileged state and dynamics information, randomized over dynamics parameters and spatial disturbances. We then distill this expert MPC into an end-to-end visuomotor policy with a lightweight neural architecture, called SV-Net. SV-Net processes color image, optical flow and IMU data streams into low-level thrust and body rate commands at 20 Hz onboard a drone. Crucially, SV-Net includes a learned module for low-level control that adapts at runtime to variations in drone dynamics. In a campaign of 105 hardware experiments, we show SOUS VIDE policies to be robust to 30% mass variations, 40 m/s wind gusts, 60% changes in ambient brightness, shifting or removing objects from the scene, and people moving aggressively through the drone's visual field. Code, data, and experiment videos can be found on our project page: https://stanfordmsl.github.io/SousVide/.",
+      "sha256": "6796b610c52191ab91dac6730bda6496185fa7562c2018db84c32d6fe60725b0",
+      "verified_at": "2026-10-25T10:28:12.297048+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "07e75578543c057e69b9a8df9a754bf733dc3a5ab747f4e1f5ff93e9fc77fad8",
+      "source_version": "7a31fc0338732d4ebbe7268f2352c311aaa7b866e20a6e6df000eaafa757f4da"
+    },
+    "conf-d960ad7df0c71c104032af02": {
+      "title": "DreaMark: Rooting Watermark in Score Distillation Sampling Generated Neural Radiance Fields",
+      "url": "https://arxiv.org/abs/2412.15278",
+      "text": "Recent advancements in text-to-3D generation can generate neural radiance fields (NeRFs) with score distillation sampling, enabling 3D asset creation without real-world data capture. With the rapid advancement in NeRF generation quality, protecting the copyright of the generated NeRF has become increasingly important. While prior works can watermark NeRFs in a post-generation way, they suffer from two vulnerabilities. First, a delay lies between NeRF generation and watermarking because the secret message is embedded into the NeRF model post-generation through fine-tuning. Second, generating a non-watermarked NeRF as an intermediate creates a potential vulnerability for theft. To address both issues, we propose Dreamark to embed a secret message by backdooring the NeRF during NeRF generation. In detail, we first pre-train a watermark decoder. Then, the Dreamark generates backdoored NeRFs in a way that the target secret message can be verified by the pre-trained watermark decoder on an arbitrary trigger viewport. We evaluate the generation quality and watermark robustness against image- and model-level attacks. Extensive experiments show that the watermarking process will not degrade the generation quality, and the watermark achieves 90+% accuracy among both image-level attacks (e.g., Gaussian noise) and model-level attacks (e.g., pruning attack).",
+      "sha256": "8b0ad1aff2afd3ca6a3d7ce2ae26b219e1986e7eb7b764e776ddc3b3ed0bf54f",
+      "verified_at": "2026-10-25T10:28:17.093289+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "967a4374e84c3ab816cb63c231a711256aa70a0a9af3f1951a5d93fa3516d843",
+      "source_version": "e633b8339ca4f9a1176ac2a9fa0685e86e2c3d039ccaa0e4b8046cd2990497f4"
+    },
+    "conf-f7a2170f1f13835c8b2274e4": {
+      "title": "Event-3DGS: Event-based 3D Reconstruction Using 3D Gaussian Splatting",
+      "url": "https://papers.nips.cc/paper_files/paper/2024/hash/e73ad1f690542144ce354637bb913c35-Abstract-Conference.html",
+      "text": "Event cameras, offering high temporal resolution and high dynamic range, have brought a new perspective to addressing 3D reconstruction challenges in fast-motion and low-light scenarios. Most methods use the Neural Radiance Field (NeRF) for event-based photorealistic 3D reconstruction. However, these NeRF methods suffer from time-consuming training and inference, as well as limited scene-editing capabilities of implicit representations. To address these problems, we propose Event-3DGS, the first event-based reconstruction using 3D Gaussian splatting (3DGS) for synthesizing novel views freely from event streams. Technically, we first propose an event-based 3DGS framework that directly processes event data and reconstructs 3D scenes by simultaneously optimizing scenario and sensor parameters. Then, we present a high-pass filter-based photovoltage estimation module, which effectively reduces noise in event data to improve the robustness of our method in real-world scenarios. Finally, we design an event-based 3D reconstruction loss to optimize the parameters of our method for better reconstruction quality. The results show that our method outperforms state-of-the-art methods in terms of reconstruction quality on both simulated and real-world datasets. We also verify that our method can perform robust 3D reconstruction even in real-world scenarios with extreme noise, fast motion, and low-light conditions. Our code is available in https://github.com/lanpokn/Event-3DGS.",
+      "sha256": "a4903554e2300c16a999f8a929eaadeefacea97bfbec4af15ab2521771da9129",
+      "verified_at": "2026-10-25T10:28:22.450535+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "21a2bde84bf9131d15396db30b03c8439e1e2dcdd4605df79baca9275070455a",
+      "source_version": "c014e55e68649061b1f489db722a14e55eacac92076effb3b40c0be0e0bebad5"
+    },
+    "conf-7ffcb7f172ffd9ef58c51511": {
+      "title": "MOVIS: Enhancing Multi-Object Novel View Synthesis for Indoor Scenes",
+      "url": "https://arxiv.org/abs/2412.11457",
+      "text": "Repurposing pre-trained diffusion models has been proven to be effective for NVS. However, these methods are mostly limited to a single object; directly applying such methods to compositional multi-object scenarios yields inferior results, especially incorrect object placement and inconsistent shape and appearance under novel views. How to enhance and systematically evaluate the cross-view consistency of such models remains under-explored. To address this issue, we propose MOVIS to enhance the structural awareness of the view-conditioned diffusion model for multi-object NVS in terms of model inputs, auxiliary tasks, and training strategy. First, we inject structure-aware features, including depth and object mask, into the denoising U-Net to enhance the model's comprehension of object instances and their spatial relationships. Second, we introduce an auxiliary task requiring the model to simultaneously predict novel view object masks, further improving the model's capability in differentiating and placing objects. Finally, we conduct an in-depth analysis of the diffusion sampling process and carefully devise a structure-guided timestep sampling scheduler during training, which balances the learning of global object placement and fine-grained detail recovery. To systematically evaluate the plausibility of synthesized images, we propose to assess cross-view consistency and novel view object placement alongside existing image-level NVS metrics. Extensive experiments on challenging synthetic and realistic datasets demonstrate that our method exhibits strong generalization capabilities and produces consistent novel view synthesis, highlighting its potential to guide future 3D-aware multi-object NVS tasks. Our project page is available at https://jason-aplp.github.io/MOVIS/.",
+      "sha256": "0f475b685c778f0ad5a0c85fe65a6978b674a56b2873871ea63d9c503ae6282d",
+      "verified_at": "2026-10-25T10:28:28.285464+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "602df845862ab959078687329cf7a098764fbe6273a0618d186f765bafa300d6",
+      "source_version": "92c5feb56f07264c7bec65b342831da037b3b01f541d84b5d7542a08a8bdd98f"
+    },
+    "conf-1a5a58e123c5291831c9d41c": {
+      "title": "Subsurface Scattering for Gaussian Splatting",
+      "url": "https://papers.nips.cc/paper_files/paper/2024/hash/dc72529d604962a86b7730806b6113fa-Abstract-Conference.html",
+      "text": "3D reconstruction and relighting of objects made from scattering materials present a significant challenge due to the complex light transport beneath the surface. 3D Gaussian Splatting introduced high-quality novel view synthesis at real-time speeds. While 3D Gaussians efficiently approximate an object's surface, they fail to capture the volumetric properties of subsurface scattering. We propose a framework for optimizing an object's shape together with the radiance transfer field given multi-view OLAT (one light at a time) data. Our method decomposes the scene into an explicit surface represented as 3D Gaussians, with a spatially varying BRDF, and an implicit volumetric representation of the scattering component. A learned incident light field accounts for shadowing. We optimize all parameters jointly via ray-traced differentiable rendering. Our approach enables material editing, relighting, and novel view synthesis at interactive rates. We show successful application on synthetic data and contribute a newly acquired multi-view multi-light dataset of objects in a light-stage setup. Compared to previous work we achieve comparable or better results at a fraction of optimization and rendering time while enabling detailed control over material attributes.",
+      "sha256": "1143d93b97c2da41bf6cea7cce43476bc97e9c53075aef4084f036a552eccc2d",
+      "verified_at": "2026-10-25T10:28:33.632072+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "29d1c8c559364a8665c60443af3effbac19c8036fb73eea9cb404887828d478f",
+      "source_version": "4bd9868fca4f099912668b131eb5e62e1e4df168464e020aa046c4d8fc0c0421"
+    },
+    "conf-ac64411aa07c0515a4374c9e": {
+      "title": "Leveraging Separated World Model for Exploration in Visually Distracted Environments",
+      "url": "https://papers.nips.cc/paper_files/paper/2024/hash/96189e90e599ccc43f00434ff3ed0312-Abstract-Conference.html",
+      "text": "Model-based unsupervised reinforcement learning (URL) has gained prominence for reducing environment interactions and learning general skills using intrinsic rewards. However, distractors in observations can severely affect intrinsic reward estimation, leading to a biased exploration process, especially in environments with visual inputs like images or videos. To address this challenge, we propose a bi-level optimization framework named Separation-assisted eXplorer (SeeX). In the inner optimization, SeeX trains a separated world model to extract exogenous and endogenous information, minimizing uncertainty to ensure task relevance. In the outer optimization, it learns a policy on imaginary trajectories generated within the endogenous state space to maximize task-relevant uncertainty. Evaluations on multiple locomotion and manipulation tasks demonstrate SeeX's effectiveness.",
+      "sha256": "784451865e88eaf643ceb83fae4eb0a8babe55159e7a1e9af8db36161eea8af2",
+      "verified_at": "2026-10-25T10:28:38.962114+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "db3bcf80300f07e4c322c499ac1b964b586eff7e87646f5b9f952656824940a7",
+      "source_version": "824b57ff82224970e5c4998ec14dc495a9616aefd3bc2b5136cdc8f5d5f91fe8"
+    },
+    "conf-e015ae4c24fbe724f16243b5": {
+      "title": "A Simple yet Universal Framework for Depth Completion",
+      "url": "https://papers.nips.cc/paper_files/paper/2024/hash/2a02b560822d564119fe3ac3be024ac6-Abstract-Conference.html",
+      "text": "Consistent depth estimation across diverse scenes and sensors is a crucial challenge in computer vision, especially when deploying machine learning models in the real world. Traditional methods depend heavily on extensive pixel-wise labeled data, which is costly and labor-intensive to acquire, and frequently have difficulty in scale issues on various depth sensors. In response, we define Universal Depth Completion (UniDC) problem. We also present a baseline architecture, a simple yet effective approach tailored to estimate scene depth across a wide range of sensors and environments using minimal labeled data. Our approach addresses two primary challenges: generalizable knowledge of unseen scene configurations and strong adaptation to arbitrary depth sensors with various specifications. To enhance versatility in the wild, we utilize a foundation model for monocular depth estimation that provides a comprehensive understanding of 3D structures in scenes. Additionally, for fast adaptation to off-the-shelf sensors, we generate a pixel-wise affinity map based on the knowledge from the foundation model. We then adjust depth information from arbitrary sensors to the monocular depth along with the constructed affinity. Furthermore, to boost up both the adaptability and generality, we embed the learned features into hyperbolic space, which builds implicit hierarchical structures of 3D data from fewer examples. Extensive experiments demonstrate the proposed method's superior generalization capabilities for UniDC problem over state-of-the-art depth completion. Source code is publicly available at https://github.com/JinhwiPark/UniDC.",
+      "sha256": "ead03f6b949cd9ea882e78ee38182b3144610b9634a4fab0174476a75877efad",
+      "verified_at": "2026-10-25T10:28:44.270835+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "a2424cbbb766764b429c8c18bfba1c74ef44a87bc2cdcf248742b54e2001eea4",
+      "source_version": "72e317b25e0e3c2f6b5d9d3aa9d67d6af68e230a3f3418e69479079a67f866e1"
+    },
+    "conf-be842e4800e6014a2950e7e0": {
+      "title": "Metric from Human: Zero-shot Monocular Metric Depth Estimation via Test-time Adaptation",
+      "url": "https://papers.nips.cc/paper_files/paper/2024/hash/bd19ca8039547b339a6a37bd4df24405-Abstract-Conference.html",
+      "text": "Monocular depth estimation (MDE) is fundamental for deriving 3D scene structures from 2D images. While state-of-the-art monocular relative depth estimation (MRDE) excels in estimating relative depths for in-the-wild images, current monocular metric depth estimation (MMDE) approaches still face challenges in handling unseen scenes. Since MMDE can be viewed as the composition of MRDE and metric scale recovery, we attribute this difficulty to scene dependency, where MMDE models rely on scenes observed during supervised training for predicting scene scales during inference. To address this issue, we propose to use humans as landmarks for distilling scene-independent metric scale priors from generative painting models. Our approach, Metric from Human (MfH), bridges from generalizable MRDE to zero-shot MMDE in a generate-and-estimate manner. Specifically, MfH generates humans on the input image with generative painting and estimates human dimensions with an off-the-shelf human mesh recovery (HMR) model. Based on MRDE predictions, it propagates the metric information from painted humans to the contexts, resulting in metric depth estimations for the original input. Through this annotation-free test-time adaptation, MfH achieves superior zero-shot performance in MMDE, demonstrating its strong generalization ability.",
+      "sha256": "61f0545732f56604be2bc75987492329ee5fa5eb0eaa9f061f8d6c2b6cdd3302",
+      "verified_at": "2026-10-25T10:28:48.406368+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "974c9c588cc08a08857f43548fc58a5c6ce4757dfd410f820a8f3ef8bc141859",
+      "source_version": "e2337563b24f65faa7f59a78acde721549cc74bd7601c981d457c090140521fb"
+    },
+    "conf-8a1468f8d61fc7587a653727": {
+      "title": "Beware of Road Markings: A New Adversarial Patch Attack to Monocular Depth Estimation",
+      "url": "https://papers.nips.cc/paper_files/paper/2024/hash/7d26958422928e08465d5dd6cf0cb4cb-Abstract-Conference.html",
+      "text": "Monocular Depth Estimation (MDE) enables the prediction of scene depths from a single RGB image, having been widely integrated into production-grade autonomous driving systems, e.g., Tesla Autopilot. Current adversarial attacks to MDE models focus on attaching an optimized adversarial patch to a designated obstacle. Although effective, this approach presents two inherent limitations: its reliance on specific obstacles and its limited malicious impact. In contrast, we propose a pioneering attack to MDE models that \\textit{decouples obstacles from patches physically and deploys optimized patches on roads}, thereby extending the attack scope to arbitrary traffic participants. This approach is inspired by our groundbreaking discovery: \\textit{various MDE models with different architectures, trained for autonomous driving, heavily rely on road regions} when predicting depths for different obstacles. Based on this discovery, we design the Adversarial Road Marking (AdvRM) attack, which camouflages patches as ordinary road markings and deploys them on roads, thereby posing a continuous threat within the environment. Experimental results from both dataset simulations and real-world scenarios demonstrate that AdvRM is effective, stealthy, and robust against various MDE models, achieving about 1.507 of Mean Relative Shift Ratio (MRSR) over 8 MDE models. The code is available at \\url{https://github.com/a-c-a-c/AdvRM.git}",
+      "sha256": "dbed3c516e3a0ef6c4080069d4bf63bf53306a084cb0e330eae9a9fe724c5a8e",
+      "verified_at": "2026-10-25T10:28:53.758849+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "2b55090755bbf1664d6e052be5b7c4f3d12b0e61e6c713e9f98c17ab2faa626f",
+      "source_version": "e6b92a6a5b94f46d123c0a155c42cba93b9e3bcccaa02becf06ac267f6c3949e"
     }
   }
 }
