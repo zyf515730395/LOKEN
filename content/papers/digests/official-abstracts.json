@@ -9983,6 +9983,266 @@
       "basis": "official_abstract",
       "source_sha256": "7cbe22d0ff138845986f8feabddd8216a4115dd8253af3104e46244fdcb5edff",
       "source_version": "c89134e55fccfd10a8f3238db5606246ff9b003d7cd3bbb21f96a0d4b386ca12"
+    },
+    "conf-7e560f3e69ddc577be1b64de": {
+      "title": "SparseDiT: Token Sparsification for Efficient Diffusion Transformer",
+      "url": "https://arxiv.org/abs/2412.06028",
+      "text": "Diffusion Transformers (DiT) are renowned for their impressive generative performance; however, they are significantly constrained by considerable computational costs due to the quadratic complexity in self-attention and the extensive sampling steps required. While advancements have been made in expediting the sampling process, the underlying architectural inefficiencies within DiT remain underexplored. We introduce SparseDiT, a novel framework that implements token sparsification across spatial and temporal dimensions to enhance computational efficiency while preserving generative quality. Spatially, SparseDiT employs a tri-segment architecture that allocates token density based on feature requirements at each layer: Poolingformer in the bottom layers for efficient global feature extraction, Sparse-Dense Token Modules (SDTM) in the middle layers to balance global context with local detail, and dense tokens in the top layers to refine high-frequency details. Temporally, SparseDiT dynamically modulates token density across denoising stages, progressively increasing token count as finer details emerge in later timesteps. This synergy between SparseDiT spatially adaptive architecture and its temporal pruning strategy enables a unified framework that balances efficiency and fidelity throughout the generation process. Our experiments demonstrate SparseDiT effectiveness, achieving a 55% reduction in FLOPs and a 175% improvement in inference speed on DiT-XL with similar FID score on 512x512 ImageNet, a 56% reduction in FLOPs across video generation datasets, and a 69% improvement in inference speed on PixArt-$\\alpha$ on text-to-image generation task with a 0.24 FID score decrease. SparseDiT provides a scalable solution for high-quality diffusion-based generation compatible with sampling optimization techniques.",
+      "sha256": "ea1b0c555880ab2dacb002c5433dfc7ff0ac20aa3151fe59d95f0f257da70728",
+      "verified_at": "2026-10-25T11:22:06.989397+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "a24568d15a4a127e4a62a2d75b9f9949ba91604915179204b0d20e8e9b59ad9e",
+      "source_version": "085cde8c33009e4e3f1b774257895d36dceadf6bb9b3a0f580faf655ba1eac41"
+    },
+    "conf-14140c138b7c5afee3eb7a98": {
+      "title": "LoRA.rar: Learning to Merge LoRAs via Hypernetworks for Subject-Style Conditioned Image Generation",
+      "url": "https://arxiv.org/abs/2412.05148",
+      "text": "Recent advancements in image generation models have enabled personalized image creation with both user-defined subjects (content) and styles. Prior works achieved personalization by merging corresponding low-rank adapters (LoRAs) through optimization-based methods, which are computationally demanding and unsuitable for real-time use on resource-constrained devices like smartphones. To address this, we introduce LoRA$.$rar, a method that not only improves image quality but also achieves a remarkable speedup of over $4000\\times$ in the merging process. We collect a dataset of style and subject LoRAs and pre-train a hypernetwork on a diverse set of content-style LoRA pairs, learning an efficient merging strategy that generalizes to new, unseen content-style pairs, enabling fast, high-quality personalization. Moreover, we identify limitations in existing evaluation metrics for content-style quality and propose a new protocol using multimodal large language models (MLLMs) for more accurate assessment. Our method significantly outperforms the current state of the art in both content and style fidelity, as validated by MLLM assessments and human evaluations.",
+      "sha256": "402ce8e707c20aa7923905a290114057fbe23ee80ea943cd4313823f2ad17096",
+      "verified_at": "2026-10-25T11:22:12.628198+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "6a7a6ac4c536d5d39dc40656878e3215b7c5a0fd62a11fd70b61eef212b678b4",
+      "source_version": "fd17d75238aa55413525dddba45d21e3548fac31ba484daad2e605ce35d0dcd3"
+    },
+    "conf-0203eaed58f135247ad7f16f": {
+      "title": "Addressing Text Embedding Leakage in Diffusion-based Image Editing",
+      "url": "https://arxiv.org/abs/2412.04715",
+      "text": "Text-based image editing, powered by generative diffusion models, lets users modify images through natural-language prompts and has dramatically simplified traditional workflows. Despite these advances, current methods still suffer from a critical problem: attribute leakage, where edits meant for specific objects unintentionally affect unrelated regions or other target objects. Our analysis reveals the root cause as the semantic entanglement inherent in End-of-Sequence (EOS) embeddings generated by autoregressive text encoders, which indiscriminately aggregate attributes across prompts. To address this issue, we introduce Attribute-Leakage-free Editing (ALE), a framework that tackles attribute leakage at its source. ALE combines Object-Restricted Embeddings (ORE) to disentangle text embeddings, Region-Guided Blending for Cross-Attention Masking (RGB-CAM) for spatially precise attention, and Background Blending (BB) to preserve non-edited content. To quantitatively evaluate attribute leakage across various editing methods, we propose the Attribute-Leakage Evaluation Benchmark (ALE-Bench), featuring comprehensive editing scenarios and new metrics. Extensive experiments show that ALE reduces attribute leakage by large margins, thereby enabling accurate, multi-object, text-driven image editing while faithfully preserving non-target content.",
+      "sha256": "347c63806e5c78b82b0b3e1eeaac5e81fada8341edc1aec8acd16aa9b5ae0201",
+      "verified_at": "2026-10-25T11:22:18.293055+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "f7e7609dc211283c4c096609d4933b844e5eb1475eb048740938fa1b365fb36d",
+      "source_version": "96cf1d6ad5b36821728b58029f8d9007399a45e980e0bb18d6f7bd7d870e1894"
+    },
+    "conf-6e270abd39ddb7b164ff757b": {
+      "title": "Pinco: Position-induced Consistent Adapter for Diffusion Transformer in Foreground-conditioned Inpainting",
+      "url": "https://arxiv.org/abs/2412.03812",
+      "text": "Foreground-conditioned inpainting aims to seamlessly fill the background region of an image by utilizing the provided foreground subject and a text description. While existing T2I-based image inpainting methods can be applied to this task, they suffer from issues of subject shape expansion, distortion, or impaired ability to align with the text description, resulting in inconsistencies between the visual elements and the text description. To address these challenges, we propose Pinco, a plug-and-play foreground-conditioned inpainting adapter that generates high-quality backgrounds with good text alignment while effectively preserving the shape of the foreground subject. Firstly, we design a Self-Consistent Adapter that integrates the foreground subject features into the layout-related self-attention layer, which helps to alleviate conflicts between the text and subject features by ensuring that the model can effectively consider the foreground subject's characteristics while processing the overall image layout. Secondly, we design a Decoupled Image Feature Extraction method that employs distinct architectures to extract semantic and spatial features separately, significantly improving subject feature extraction and ensuring high-quality preservation of the subject's shape. Thirdly, to ensure precise utilization of the extracted features and to focus attention on the subject region, we introduce a Shared Positional Embedding Anchor, greatly improving the model's understanding of subject features and boosting training efficiency. Extensive experiments demonstrate that our method achieves superior performance and efficiency in foreground-conditioned inpainting.",
+      "sha256": "e0b2f4ff32ff964283f7a87380c3e0ce16a111f4924bc9ae33e096c2eb642ac1",
+      "verified_at": "2026-10-25T11:22:24.222476+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "8439fe0b1a11388f5e00b15d3832a7e8cec7e4d9beeb124275220e9b9b22dc3f",
+      "source_version": "e684b2f434a447ddffc719f680f244984f1360da2729c3c1cafaf0adf0ae1ce1"
+    },
+    "conf-0b9f9b54d71295b2bde0b14c": {
+      "title": "Infinity: Scaling Bitwise AutoRegressive Modeling for High-Resolution Image Synthesis",
+      "url": "https://arxiv.org/abs/2412.04431",
+      "text": "We present Infinity, a Bitwise Visual AutoRegressive Modeling capable of generating high-resolution, photorealistic images following language instruction. Infinity redefines visual autoregressive model under a bitwise token prediction framework with an infinite-vocabulary tokenizer & classifier and bitwise self-correction mechanism, remarkably improving the generation capacity and details. By theoretically scaling the tokenizer vocabulary size to infinity and concurrently scaling the transformer size, our method significantly unleashes powerful scaling capabilities compared to vanilla VAR. Infinity sets a new record for autoregressive text-to-image models, outperforming top-tier diffusion models like SD3-Medium and SDXL. Notably, Infinity surpasses SD3-Medium by improving the GenEval benchmark score from 0.62 to 0.73 and the ImageReward benchmark score from 0.87 to 0.96, achieving a win rate of 66%. Without extra optimization, Infinity generates a high-quality 1024x1024 image in 0.8 seconds, making it 2.6x faster than SD3-Medium and establishing it as the fastest text-to-image model. Models and codes will be released to promote further exploration of Infinity for visual generation and unified tokenizer modeling.",
+      "sha256": "f8ce0b8d84d1d3bb9947ed87087dc4f267ff98ddedb39067b8a5f04a80a4e11a",
+      "verified_at": "2026-10-25T11:22:29.838971+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "a5bb5240eb01768df5868eda72b1d45cf69cb53be24a17b23f70287c7db578a5",
+      "source_version": "7d198c03760763ca6c5ec94b5e663900e4edb429ef42ced841cecfb688b48307"
+    },
+    "conf-df14a395f0ba4fa3d270bb6b": {
+      "title": "Beyond [cls]: Exploring the True Potential of Masked Image Modeling Representations",
+      "url": "https://arxiv.org/abs/2412.03215",
+      "text": "Masked Image Modeling (MIM) has emerged as a promising approach for Self-Supervised Learning (SSL) of visual representations. However, the out-of-the-box performance of MIMs is typically inferior to competing approaches. Most users cannot afford fine-tuning due to the need for large amounts of data, high GPU consumption, and specialized user knowledge. Therefore, the practical use of MIM representations is limited. In this paper we ask what is the reason for the poor out-of-the-box performance of MIMs. Is it due to weaker features produced by MIM models, or is it due to suboptimal usage? Through detailed analysis, we show that attention in MIMs is spread almost uniformly over many patches, leading to ineffective aggregation by the [cls] token. Based on this insight, we propose Selective Aggregation to better capture the rich semantic information retained in patch tokens, which significantly improves the out-of-the-box performance of MIM.",
+      "sha256": "0be55ab6e15c748e449327ddf7e5b42760bd1d19d91ddf13a7d79cad35f1c070",
+      "verified_at": "2026-10-25T11:22:33.990320+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "8bbf85056e642fffb6f4f128610d91a78e872b3410ff26e8375bf189db338dc5",
+      "source_version": "b2cb5081a3fbf62c1db9f4099f39ff9c2fa41d16e961d32f52488b6af574c5d4"
+    },
+    "conf-cf26f454f3a407f470c68fde": {
+      "title": "ScImage: How good are multimodal large language models at scientific text-to-image generation?",
+      "url": "https://arxiv.org/abs/2412.02368",
+      "text": "Multimodal large language models (LLMs) have demonstrated impressive capabilities in generating high-quality images from textual instructions. However, their performance in generating scientific images--a critical application for accelerating scientific progress--remains underexplored. In this work, we address this gap by introducing ScImage, a benchmark designed to evaluate the multimodal capabilities of LLMs in generating scientific images from textual descriptions. ScImage assesses three key dimensions of understanding: spatial, numeric, and attribute comprehension, as well as their combinations, focusing on the relationships between scientific objects (e.g., squares, circles). We evaluate five models, GPT-4o, Llama, AutomaTikZ, Dall-E, and StableDiffusion, using two modes of output generation: code-based outputs (Python, TikZ) and direct raster image generation. Additionally, we examine four different input languages: English, German, Farsi, and Chinese. Our evaluation, conducted with 11 scientists across three criteria (correctness, relevance, and scientific accuracy), reveals that while GPT-4o produces outputs of decent quality for simpler prompts involving individual dimensions such as spatial, numeric, or attribute understanding in isolation, all models face challenges in this task, especially for more complex prompts.",
+      "sha256": "941898de0f55159128c56b1e2189ecb7af3b27e760dda5a198c9344afca3fc29",
+      "verified_at": "2026-10-25T11:22:39.918754+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "774b18afc4367bfe772740d4d104352fd86ecde6f283d3d2e4fbc27910e86381",
+      "source_version": "53b1d653d8a38fc0a69740b1a4e484d7f58a64a5fad5aab39b18ca167ec7c4b0"
+    },
+    "conf-b3645c3d5cd64ebb1fcd4801": {
+      "title": "Generative Photography: Scene-Consistent Camera Control for Realistic Text-to-Image Synthesis",
+      "url": "https://arxiv.org/abs/2412.02168",
+      "text": "Image generation today can produce somewhat realistic images from text prompts. However, if one asks the generator to synthesize a specific camera setting such as creating different fields of view using a 24mm lens versus a 70mm lens, the generator will not be able to interpret and generate scene-consistent images. This limitation not only hinders the adoption of generative tools in professional photography but also highlights the broader challenge of aligning data-driven models with real-world physical settings. In this paper, we introduce Generative Photography, a framework that allows controlling camera intrinsic settings during content generation. The core innovation of this work are the concepts of Dimensionality Lifting and Differential Camera Intrinsics Learning, enabling smooth and consistent transitions across different camera settings. Experimental results show that our method produces significantly more scene-consistent photorealistic images than state-of-the-art models such as Stable Diffusion 3 and FLUX. Our code and additional results are available at https://generative-photography.github.io/project.",
+      "sha256": "96982c2621f717bef6b400bcfde8d27f1cb9f0f7aae7a93f64999591fbba3969",
+      "verified_at": "2026-10-25T11:22:45.540443+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "18d3663d544113572ac8be26e9d1fb25f604763f56c16bce4a10cdabca559bcf",
+      "source_version": "dfa9141c49f147db0a58a10b64c55c215c241c54d6559b21e32dcb415d31fc7b"
+    },
+    "conf-99ec612beee549c8c57abed8": {
+      "title": "Cross-Attention Head Position Patterns Can Align with Human Visual Concepts in Text-to-Image Generative Models",
+      "url": "https://arxiv.org/abs/2412.02237",
+      "text": "Recent text-to-image diffusion models leverage cross-attention layers, which have been effectively utilized to enhance a range of visual generative tasks. However, our understanding of cross-attention layers remains somewhat limited. In this study, we introduce a mechanistic interpretability approach for diffusion models by constructing Head Relevance Vectors (HRVs) that align with human-specified visual concepts. An HRV for a given visual concept has a length equal to the total number of cross-attention heads, with each element representing the importance of the corresponding head for the given visual concept. To validate HRVs as interpretable features, we develop an ordered weakening analysis that demonstrates their effectiveness. Furthermore, we propose concept strengthening and concept adjusting methods and apply them to enhance three visual generative tasks. Our results show that HRVs can reduce misinterpretations of polysemous words in image generation, successfully modify five challenging attributes in image editing, and mitigate catastrophic neglect in multi-concept generation. Overall, our work provides an advancement in understanding cross-attention layers and introduces new approaches for fine-controlling these layers at the head level.",
+      "sha256": "cd13551516fbf3967900daef4f2de4bbd11631a93498c31c750b6c242d25121d",
+      "verified_at": "2026-10-25T11:22:51.170334+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "cf7e5b847d810401a650da5f3c67afd2d6090f0c41525a21f76aac0d890aa26a",
+      "source_version": "9c768b6c7d485c8e3c38af22cc6f45683766fb6ade0080dd0675e539ac014e9b"
+    },
+    "conf-791a4d2d04ebb5c962504539": {
+      "title": "ShapeWords: Guiding Text-to-Image Synthesis with 3D Shape-Aware Prompts",
+      "url": "https://arxiv.org/abs/2412.02912",
+      "text": "We introduce ShapeWords, an approach for synthesizing images based on 3D shape guidance and text prompts. ShapeWords incorporates target 3D shape information within specialized tokens embedded together with the input text, effectively blending 3D shape awareness with textual context to guide the image synthesis process. Unlike conventional shape guidance methods that rely on depth maps restricted to fixed viewpoints and often overlook full 3D structure or textual context, ShapeWords generates diverse yet consistent images that reflect both the target shape's geometry and the textual description. Experimental results show that ShapeWords produces images that are more text-compliant, aesthetically plausible, while also maintaining 3D shape awareness.",
+      "sha256": "b0060a48239d2e3e7dc2659e18fe1363e92c3fbf33b08399d077a4d989db2d1b",
+      "verified_at": "2026-10-25T11:22:57.058144+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "8109f3df4526b1bbbefe09dc3077c26bb5badf69f3ee52d74b904ab3f09d9aeb",
+      "source_version": "5f8057f19b3f5eb6da7353b3afc3199b20413185d4df5ee8bef8485477bce905"
+    },
+    "conf-f5557f4b38c327313416a3c8": {
+      "title": "RandAR: Decoder-only Autoregressive Visual Generation in Random Orders",
+      "url": "https://arxiv.org/abs/2412.01827",
+      "text": "We introduce RandAR, a decoder-only visual autoregressive (AR) model capable of generating images in arbitrary token orders. Unlike previous decoder-only AR models that rely on a predefined generation order, RandAR removes this inductive bias, unlocking new capabilities in decoder-only generation. Our essential design enables random order by inserting a \"position instruction token\" before each image token to be predicted, representing the spatial location of the next image token. Trained on randomly permuted token sequences -- a more challenging task than fixed-order generation, RandAR achieves comparable performance to its conventional raster-order counterpart. More importantly, decoder-only transformers trained from random orders acquire new capabilities. For the efficiency bottleneck of AR models, RandAR adopts parallel decoding with KV-Cache at inference time, enjoying 2.5x acceleration without sacrificing generation quality. Additionally, RandAR supports inpainting, outpainting and resolution extrapolation in a zero-shot manner. We hope RandAR inspires new directions for decoder-only visual generation models and broadens their applications across diverse scenarios. Our project page is at https://rand-ar.github.io/.",
+      "sha256": "397d24a6b4c6ecb9067cb0df62fb7928cf319dafcfb09268dd4809161060febc",
+      "verified_at": "2026-10-25T11:23:01.495452+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "de4267dd4fefc2671cc3df726f10482f602b2550014605037b7c37a4c78c4d6b",
+      "source_version": "02e7932346ee2a674df371989f1b8ac5ebd0012a6407b561987cab68a880a47a"
+    },
+    "conf-6f90d20a61d4cd21c549c7f0": {
+      "title": "Schedule On the Fly: Diffusion Time Prediction for Faster and Better Image Generation",
+      "url": "https://arxiv.org/abs/2412.01243",
+      "text": "Diffusion and flow matching models have achieved remarkable success in text-to-image generation. However, these models typically rely on the predetermined denoising schedules for all prompts. The multi-step reverse diffusion process can be regarded as a kind of chain-of-thought for generating high-quality images step by step. Therefore, diffusion models should reason for each instance to adaptively determine the optimal noise schedule, achieving high generation quality with sampling efficiency. In this paper, we introduce the Time Prediction Diffusion Model (TPDM) for this. TPDM employs a plug-and-play Time Prediction Module (TPM) that predicts the next noise level based on current latent features at each denoising step. We train the TPM using reinforcement learning to maximize a reward that encourages high final image quality while penalizing excessive denoising steps. With such an adaptive scheduler, TPDM not only generates high-quality images that are aligned closely with human preferences but also adjusts diffusion time and the number of denoising steps on the fly, enhancing both performance and efficiency. With Stable Diffusion 3 Medium architecture, TPDM achieves an aesthetic score of 5.44 and a human preference score (HPS) of 29.59, while using around 50% fewer denoising steps to achieve better performance.",
+      "sha256": "3e2bc56ae9ee14eb4cfc9c2dc3694dc1eab91f49757b2f728c456b7f53561953",
+      "verified_at": "2026-10-25T11:23:07.096178+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "f6f3ce146671b62b96f6418937957381638759abd0b67179797b607f7a32f097",
+      "source_version": "fef321091f0666b3a30ed105f4ca95f6a745e6f06cf6b26c018729e102fba2b5"
+    },
+    "conf-10f95ad4460dbc67fcc406a6": {
+      "title": "SerialGen: Personalized Image Generation by First Standardization Then Personalization",
+      "url": "https://arxiv.org/abs/2412.01485",
+      "text": "In this work, we are interested in achieving both high text controllability and whole-body appearance consistency in the generation of personalized human characters. We propose a novel framework, named SerialGen, which is a serial generation method consisting of two stages: first, a standardization stage that standardizes reference images, and then a personalized generation stage based on the standardized reference. Furthermore, we introduce two modules aimed at enhancing the standardization process. Our experimental results validate the proposed framework's ability to produce personalized images that faithfully recover the reference image's whole-body appearance while accurately responding to a wide range of text prompts. Through thorough analysis, we highlight the critical contribution of the proposed serial generation method and standardization model, evidencing enhancements in appearance consistency between reference and output images and across serial outputs generated from diverse text prompts. The term \"Serial\" in this work carries a double meaning: it refers to the two-stage method and also underlines our ability to generate serial images with consistent appearance throughout.",
+      "sha256": "9e373a27802b8b82e02687443c5650b9948f17eb30f78472e239edef8e7e4c9f",
+      "verified_at": "2026-10-25T11:23:13.107731+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "ab69e450b068d8750ac7c4df7e00c4fc0c7a2fc3054eb24101e0fd7158aaeb07",
+      "source_version": "13ddbd32f7363b0e013c0b7e560f81946e54b623341f321688dee2ec1ea5c8af"
+    },
+    "conf-f0df4ee121c3ddbc629e29c1": {
+      "title": "Latent-Reframe: Enabling Camera Control for Video Diffusion Models without Training",
+      "url": "https://openaccess.thecvf.com/content/ICCV2025/html/Zhou_Latent-Reframe_Enabling_Camera_Control_for_Video_Diffusion_Models_without_Training_ICCV_2025_paper.html",
+      "text": "Precise camera pose control is crucial for video generation with diffusion models. Existing methods require fine-tuning with additional datasets containing paired videos and camera pose annotations, which are both data-intensive and computationally costly, and may disrupt the model's distribution learned from the training data. We introduce Latent-Reframe, which enables camera control in a pre-trained video diffusion model without fine-tuning. Unlike existing methods, Latent-Reframe operates during the sampling stage, maintaining efficiency while preserving the distribution learned during pretraining. Our approach reframes the latent code of video frames to align with the input camera trajectory through time-aware point clouds. Latent code inpainting and harmonization then refine the model's latent space, ensuring high-quality video generation. Latent-Reframe can be applied to both DiT- and UNet-based video diffusion models. Experimental results demonstrate that Latent-Reframe can achieve comparable or superior camera control precision and video quality to training-based methods, without the need for fine-tuning on additional datasets.",
+      "sha256": "2c5d66921716a46c2a42de213d6a79aed3b7ca824190bd020b01cd88a4a87483",
+      "verified_at": "2026-10-25T11:23:19.094260+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "0a33448cb5561036b2b1c13ef7957597ac765bae88dbf66f04e170b44d6ae98d",
+      "source_version": "3ac4b264740eb253e86cb67e3298a0105fc3656adde6c31ce7d789a1c08ecbf1"
+    },
+    "conf-8d399a669e4a58270877b01e": {
+      "title": "Video Prediction by Modeling Videos as Continuous Multi-Dimensional Processes",
+      "url": "https://openaccess.thecvf.com/content/CVPR2024/html/Shrivastava_Video_Prediction_by_Modeling_Videos_as_Continuous_Multi-Dimensional_Processes_CVPR_2024_paper.html",
+      "text": "Diffusion models have made significant strides in image generation mastering tasks such as unconditional image synthesis text-image translation and image-to-image conversions. However their capability falls short in the realm of video prediction mainly because they treat videos as a collection of independent images relying on external constraints such as temporal attention mechanisms to enforce temporal coherence. In our paper we introduce a novel model class that treats video as a continuous multi-dimensional process rather than a series of discrete frames. Through extensive experimentation we establish state-of-the-art performance in video prediction validated on benchmark datasets including KTH BAIR Human3.6M and UCF101.",
+      "sha256": "f333d18c074957d2c3848d91fed1b27bc3dba712e739ac21b5f345f71033e12e",
+      "verified_at": "2026-10-25T11:23:24.928570+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "48a2a20555f298a1f44782cc8e25cce3645754efd0caf5b938ad36f7a0886cc2",
+      "source_version": "5fe52365449489480edec2d95ecb776f4fdf53d8dce38f561d9252fb69048903"
+    },
+    "conf-2b5929dd01f33862d2aefb0d": {
+      "title": "UniMLVG: Unified Framework for Multi-view Long Video Generation with Comprehensive Control Capabilities for Autonomous Driving",
+      "url": "https://arxiv.org/abs/2412.04842",
+      "text": "The creation of diverse and realistic driving scenarios has become essential to enhance perception and planning capabilities of the autonomous driving system. However, generating long-duration, surround-view consistent driving videos remains a significant challenge. To address this, we present UniMLVG, a unified framework designed to generate extended street multi-perspective videos under precise control. By integrating single- and multi-view driving videos into the training data, our approach updates a DiT-based diffusion model equipped with cross-frame and cross-view modules across three stages with multi training objectives, substantially boosting the diversity and quality of generated visual content. Importantly, we propose an innovative explicit viewpoint modeling approach for multi-view video generation to effectively improve motion transition consistency. Capable of handling various input reference formats (e.g., text, images, or video), our UniMLVG generates high-quality multi-view videos according to the corresponding condition constraints such as 3D bounding boxes or frame-level text descriptions. Compared to the best models with similar capabilities, our framework achieves improvements of 48.2% in FID and 35.2% in FVD.",
+      "sha256": "bd9c6741371b9fe987178804a90f276d43c9f8f92d4b01ac437b82d2448e4cfd",
+      "verified_at": "2026-10-25T11:23:30.606121+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "1d3ee14d8effa0c505ff7737056dd94663d1b21b88e4b9e87c120b24d12cd1b5",
+      "source_version": "10e4203e89340a4a74810bea578c9d1f17168b832e8b447c92a83bb70fa2845d"
+    },
+    "conf-e659c10f49143bc277ee37a5": {
+      "title": "Divot: Diffusion Powers Video Tokenizer for Comprehension and Generation",
+      "url": "https://arxiv.org/abs/2412.04432",
+      "text": "In recent years, there has been a significant surge of interest in unifying image comprehension and generation within Large Language Models (LLMs). This growing interest has prompted us to explore extending this unification to videos. The core challenge lies in developing a versatile video tokenizer that captures both the spatial characteristics and temporal dynamics of videos to obtain representations for LLMs, and the representations can be further decoded into realistic video clips to enable video generation. In this work, we introduce Divot, a Diffusion-Powered Video Tokenizer, which leverages the diffusion process for self-supervised video representation learning. We posit that if a video diffusion model can effectively de-noise video clips by taking the features of a video tokenizer as the condition, then the tokenizer has successfully captured robust spatial and temporal information. Additionally, the video diffusion model inherently functions as a de-tokenizer, decoding videos from their representations. Building upon the Divot tokenizer, we present Divot-Vicuna through video-to-text autoregression and text-to-video generation by modeling the distributions of continuous-valued Divot features with a Gaussian Mixture Model. Experimental results demonstrate that our diffusion-based video tokenizer, when integrated with a pre-trained LLM, achieves competitive performance across various video comprehension and generation benchmarks. The instruction tuned Divot-Vicuna also excels in video storytelling, generating interleaved narratives and corresponding videos.",
+      "sha256": "2ca92e0b11b1605a566771ab2bcbf48480f4ffacb7e0a38b2bbc359ea288e39b",
+      "verified_at": "2026-10-25T11:23:35.149856+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "bec0afce767581bd454eabeaf1f13de69d652d85dbfb143709f7ac2ab852d70f",
+      "source_version": "7fbe66afbac36ee901ba2cf37522b0848ea8c2bc533f957628341d15a190a21c"
+    },
+    "conf-d646d5b308947e4db08aa90d": {
+      "title": "FLOAT: Generative Motion Latent Flow Matching for Audio-driven Talking Portrait",
+      "url": "https://arxiv.org/abs/2412.01064",
+      "text": "With the rapid advancement of diffusion-based generative models, portrait image animation has achieved remarkable results. However, it still faces challenges in temporally consistent video generation and fast sampling due to its iterative sampling nature. This paper presents FLOAT, an audio-driven talking portrait video generation method based on flow matching generative model. Instead of a pixel-based latent space, we take advantage of a learned orthogonal motion latent space, enabling efficient generation and editing of temporally consistent motion. To achieve this, we introduce a transformer-based vector field predictor with an effective frame-wise conditioning mechanism. Additionally, our method supports speech-driven emotion enhancement, enabling a natural incorporation of expressive motions. Extensive experiments demonstrate that our method outperforms state-of-the-art audio-driven talking portrait methods in terms of visual quality, motion fidelity, and efficiency.",
+      "sha256": "45c8f3862b963292af61dae95789cbf98a05fb9ae1dff380c07a9c14a8e47569",
+      "verified_at": "2026-10-25T11:23:41.121016+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "53535402dd15686ccb5ef636d4ec484205d4022297ed38741ba203bbc0ee20fc",
+      "source_version": "a3bc876192615e71e0e7d83e24db895eb61a723e09ecf43e2e7a54ab3310ffc1"
+    },
+    "conf-b278384a51999ef82469cdae": {
+      "title": "Long Video Diffusion Generation with Segmented Cross-Attention and Content-Rich Video Data Curation",
+      "url": "https://arxiv.org/abs/2412.01316",
+      "text": "We introduce Presto, a novel video diffusion model designed to generate 15-second videos with long-range coherence and rich content. Extending video generation methods to maintain scenario diversity over long durations presents significant challenges. To address this, we propose a Segmented Cross-Attention (SCA) strategy, which splits hidden states into segments along the temporal dimension, allowing each segment to cross-attend to a corresponding sub-caption. SCA requires no additional parameters, enabling seamless incorporation into current DiT-based architectures. To facilitate high-quality long video generation, we build the LongTake-HD dataset, consisting of 261k content-rich videos with scenario coherence, annotated with an overall video caption and five progressive sub-captions. Experiments show that our Presto achieves 78.5% on the VBench Semantic Score and 100% on the Dynamic Degree, outperforming existing state-of-the-art video generation methods. This demonstrates that our proposed Presto significantly enhances content richness, maintains long-range coherence, and captures intricate textual details. More details are displayed on our project page: https://presto-video.github.io/.",
+      "sha256": "e4b039b83081058438d40b4206c3b9c3b916ec9bcd9bea87d41c90bb8d261d8c",
+      "verified_at": "2026-10-25T11:23:46.742452+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "fb1478abf5193ba04ff21813ce957c4d11c41360791e71e7b12be63bf30fe2c0",
+      "source_version": "5b00fbece22010287fc44697f89d622d9485976245121a67e205feba7abc6936"
+    },
+    "conf-0fd33f48feb9f7605dacf6b7": {
+      "title": "Template-free Articulated Gaussian Splatting for Real-time Reposable Dynamic View Synthesis",
+      "url": "https://arxiv.org/abs/2412.05570",
+      "text": "While novel view synthesis for dynamic scenes has made significant progress, capturing skeleton models of objects and re-posing them remains a challenging task. To tackle this problem, in this paper, we propose a novel approach to automatically discover the associated skeleton model for dynamic objects from videos without the need for object-specific templates. Our approach utilizes 3D Gaussian Splatting and superpoints to reconstruct dynamic objects. Treating superpoints as rigid parts, we can discover the underlying skeleton model through intuitive cues and optimize it using the kinematic model. Besides, an adaptive control strategy is applied to avoid the emergence of redundant superpoints. Extensive experiments demonstrate the effectiveness and efficiency of our method in obtaining re-posable 3D objects. Not only can our approach achieve excellent visual fidelity, but it also allows for the real-time rendering of high-resolution images.",
+      "sha256": "3ef94bef688fa598bb3c7d6024d86e8e2ca29b1f456440440ebd016ccabe4e26",
+      "verified_at": "2026-10-25T11:23:52.666850+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "6b4df0cde0a0ae4945d1ab2b0ee5d479a3b6562029b1aad2cf65f888fb04ad64",
+      "source_version": "987e84316fd215a13ee6cbd48521473be7b0f7b5873408a7bb23e8d5688c8e22"
+    },
+    "conf-c6b2b39b315a183ce3b2ce4f": {
+      "title": "NVComposer: Boosting Generative Novel View Synthesis with Multiple Sparse and Unposed Images",
+      "url": "https://arxiv.org/abs/2412.03517",
+      "text": "Recent advancements in generative models have significantly improved novel view synthesis (NVS) from multi-view data. However, existing methods depend on external multi-view alignment processes, such as explicit pose estimation or pre-reconstruction, which limits their flexibility and accessibility, especially when alignment is unstable due to insufficient overlap or occlusions between views. In this paper, we propose NVComposer, a novel approach that eliminates the need for explicit external alignment. NVComposer enables the generative model to implicitly infer spatial and geometric relationships between multiple conditional views by introducing two key components: 1) an image-pose dual-stream diffusion model that simultaneously generates target novel views and condition camera poses, and 2) a geometry-aware feature alignment module that distills geometric priors from dense stereo models during training. Extensive experiments demonstrate that NVComposer achieves state-of-the-art performance in generative multi-view NVS tasks, removing the reliance on external alignment and thus improving model accessibility. Our approach shows substantial improvements in synthesis quality as the number of unposed input views increases, highlighting its potential for more flexible and accessible generative NVS systems. Our project page is available at https://lg-li.github.io/project/nvcomposer",
+      "sha256": "ed0daf5b1f3257b85531eb38a24f99a4ca6a62ad3d507bf93ca3cee5589bb80b",
+      "verified_at": "2026-10-25T11:23:58.319996+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "8347c142ce4ab80d7bc0cb614ecc0f301f0bf49a32bdc9763d3e5512173a1a21",
+      "source_version": "ce506774ebe344cac44a8db8318dab37bd3f92f79d089985c51537aad9dc9267"
+    },
+    "conf-c381e9eafb06e0342f03b418": {
+      "title": "Stochastic Gradient Estimation for Higher-Order Differentiable Rendering",
+      "url": "https://arxiv.org/abs/2412.03489",
+      "text": "We derive methods to compute higher order differentials (Hessians and Hessian-vector products) of the rendering operator. Our approach is based on importance sampling of a convolution that represents the differentials of rendering parameters and shows to be applicable to both rasterization and path tracing. We further suggest an aggregate sampling strategy to importance-sample multiple dimensions of one convolution kernel simultaneously. We demonstrate that this information improves convergence when used in higher-order optimizers such as Newton or Conjugate Gradient relative to a gradient descent baseline in several inverse rendering tasks.",
+      "sha256": "0f4a047945bc312a9c7ba99db7acf527e1ea4721f2e2e1ff3bab01e9d51be5c9",
+      "verified_at": "2026-10-25T11:24:03.262604+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "ebb326addd250292afe0f84bef95db4ddd0786e722d9849f1f08842c584f3e46",
+      "source_version": "1e95e625e46f1de448eb02ad52e96d20e3529429a136941ea85019344bf75bba"
+    },
+    "conf-ad49c5edae1e8c699fb19772": {
+      "title": "Structured 3D Latents for Scalable and Versatile 3D Generation",
+      "url": "https://arxiv.org/abs/2412.01506",
+      "text": "We introduce a novel 3D generation method for versatile and high-quality 3D asset creation. The cornerstone is a unified Structured LATent (SLAT) representation which allows decoding to different output formats, such as Radiance Fields, 3D Gaussians, and meshes. This is achieved by integrating a sparsely-populated 3D grid with dense multiview visual features extracted from a powerful vision foundation model, comprehensively capturing both structural (geometry) and textural (appearance) information while maintaining flexibility during decoding. We employ rectified flow transformers tailored for SLAT as our 3D generation models and train models with up to 2 billion parameters on a large 3D asset dataset of 500K diverse objects. Our model generates high-quality results with text or image conditions, significantly surpassing existing methods, including recent ones at similar scales. We showcase flexible output format selection and local 3D editing capabilities which were not offered by previous models. Code, model, and data will be released.",
+      "sha256": "8dfbb269fadb5ee39d954209d5aba3aa2077d2ee66a22654c20e530a4fcb3945",
+      "verified_at": "2026-10-25T11:24:12.917108+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "175024ae48bf5eaa3dcb872f5e98cbe5126dc1acfbceaed4b7fafce5d4c55d0b",
+      "source_version": "f88451f5524eab3513dd1461fbc44d5a0d4e19c97f13d244e6cc93ae23cfbdee"
+    },
+    "conf-a39249b5493cc6d13c0fbd97": {
+      "title": "Driving View Synthesis on Free-form Trajectories with Generative Prior",
+      "url": "https://arxiv.org/abs/2412.01717",
+      "text": "Driving view synthesis along free-form trajectories is essential for realistic driving simulations, enabling closed-loop evaluation of end-to-end driving policies. Existing methods excel at view interpolation along recorded paths but struggle to generalize to novel trajectories due to limited viewpoints in driving videos. To tackle this challenge, we propose DriveX, a novel free-form driving view synthesis framework, that progressively distills generative prior into the 3D Gaussian model during its optimization. Within this framework, we utilize a video diffusion model to refine the degraded novel trajectory renderings from the in-training Gaussian model, while the restored videos in turn serve as additional supervision for optimizing the 3D Gaussian. Concretely, we craft an inpainting-based video restoration task, which can disentangle the identification of degraded regions from the generative capability of the diffusion model and remove the need of simulating specific degraded pattern in the training of the diffusion model. To further enhance the consistency and fidelity of generated contents, the pseudo ground truth is progressively updated with gradually improved novel trajectory rendering, allowing both components to co-adapt and reinforce each other while minimizing the disruption on the optimization. By tightly integrating 3D scene representation with generative prior, DriveX achieves high-quality view synthesis beyond recorded trajectories in real time--unlocking new possibilities for flexible and realistic driving simulations on free-form trajectories.",
+      "sha256": "f05d7226aa199e7bcc0741e67a7f370b821abc4becbff4bab6148889fb7388df",
+      "verified_at": "2026-10-25T11:24:18.791637+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "a9c285629b5779b3f6353d4d4cdd716729152eea64ff100ec183c7af58fea2cb",
+      "source_version": "993817acbb42999fdba909cb710d2bf7a95099ef35aaaf7a9f895b352ac313ad"
+    },
+    "conf-1721e8b5794dea7dd3ed9fdd": {
+      "title": "SfM-Free 3D Gaussian Splatting via Hierarchical Training",
+      "url": "https://arxiv.org/abs/2412.01553",
+      "text": "Standard 3D Gaussian Splatting (3DGS) relies on known or pre-computed camera poses and a sparse point cloud, obtained from structure-from-motion (SfM) preprocessing, to initialize and grow 3D Gaussians. We propose a novel SfM-Free 3DGS (SFGS) method for video input, eliminating the need for known camera poses and SfM preprocessing. Our approach introduces a hierarchical training strategy that trains and merges multiple 3D Gaussian representations -- each optimized for specific scene regions -- into a single, unified 3DGS model representing the entire scene. To compensate for large camera motions, we leverage video frame interpolation models. Additionally, we incorporate multi-source supervision to reduce overfitting and enhance representation. Experimental results reveal that our approach significantly surpasses state-of-the-art SfM-free novel view synthesis methods. On the Tanks and Temples dataset, we improve PSNR by an average of 2.25dB, with a maximum gain of 3.72dB in the best scene. On the CO3D-V2 dataset, we achieve an average PSNR boost of 1.74dB, with a top gain of 3.90dB. The code is available at https://github.com/jibo27/3DGS_Hierarchical_Training.",
+      "sha256": "32c6d1459a36f60517d7e26e12c488f01aa4cdc155b1fb67c7794c4a8af990a0",
+      "verified_at": "2026-10-25T11:24:24.672136+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "6ec90aaa7c4c023654631563fe398e6fba41f4e4f797d109f92b589c38836eb8",
+      "source_version": "27d8fe530cdc0bbd833c39441d8714a315598da74f1057cc94c2e1a2b5e04374"
+    },
+    "conf-5c0b94e1afae7e7265cc87ac": {
+      "title": "Policy-shaped prediction: avoiding distractions in model-based reinforcement learning",
+      "url": "https://arxiv.org/abs/2412.05766",
+      "text": "Model-based reinforcement learning (MBRL) is a promising route to sample-efficient policy optimization. However, a known vulnerability of reconstruction-based MBRL consists of scenarios in which detailed aspects of the world are highly predictable, but irrelevant to learning a good policy. Such scenarios can lead the model to exhaust its capacity on meaningless content, at the cost of neglecting important environment dynamics. While existing approaches attempt to solve this problem, we highlight its continuing impact on leading MBRL methods -- including DreamerV3 and DreamerPro -- with a novel environment where background distractions are intricate, predictable, and useless for planning future actions. To address this challenge we develop a method for focusing the capacity of the world model through synergy of a pretrained segmentation model, a task-aware reconstruction loss, and adversarial learning. Our method outperforms a variety of other approaches designed to reduce the impact of distractors, and is an advance towards robust model-based reinforcement learning.",
+      "sha256": "2341c5b4edecd68d883919ff4d3acfbecfad14a13bc95e90e2f869e55ed9afbf",
+      "verified_at": "2026-10-25T11:24:30.497237+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "f1a2360d573890ace88624c0a0879578953760419dae5bc6c4fb521c9fb2aa19",
+      "source_version": "467510f11996112ef56d27229a536bc2aebe8905cbbd7e83adbce0620f070a98"
     }
   }
 }
