@@ -10768,6 +10768,190 @@
       "text": "Depth information plays a crucial role in autonomous systems for environmental perception and robot state estimation. With the rapid development of deep neural network technology, depth estimation has been extensively studied and shown potential for practical applications. However, in particularly challenging environments such as low-light and noisy underwater conditions, direct application of machine learning models may not yield the desired results. Therefore, in this paper, we present an approach to enhance underwater image quality to improve depth estimation effectiveness. First, underwater images are processed through methods such as color compensation, brightness equalization, and enhancement of contrast and sharpness of objects in the image. Next, we perform depth estimation using the Udepth model on the enhanced images. Finally, the results are evaluated and presented to verify the effectiveness and accuracy of the enhanced depth image quality approach for underwater robots.",
       "sha256": "d58eab1bc252a3f33c2e7aabd21a4d8b8e5eda2aff064034c02d024551b39d0a",
       "verified_at": "2026-10-25T12:53:31.789605+08:00"
+    },
+    "conf-81087e0a3fb5467052759999": {
+      "title": "Conditional Controllable Image Fusion",
+      "url": "https://arxiv.org/abs/2411.01573",
+      "text": "Image fusion aims to integrate complementary information from multiple input images acquired through various sources to synthesize a new fused image. Existing methods usually employ distinct constraint designs tailored to specific scenes, forming fixed fusion paradigms. However, this data-driven fusion approach is challenging to deploy in varying scenarios, especially in rapidly changing environments. To address this issue, we propose a conditional controllable fusion (CCF) framework for general image fusion tasks without specific training. Due to the dynamic differences of different samples, our CCF employs specific fusion constraints for each individual in practice. Given the powerful generative capabilities of the denoising diffusion model, we first inject the specific constraints into the pre-trained DDPM as adaptive fusion conditions. The appropriate conditions are dynamically selected to ensure the fusion process remains responsive to the specific requirements in each reverse diffusion stage. Thus, CCF enables conditionally calibrating the fused images step by step. Extensive experiments validate our effectiveness in general fusion tasks across diverse scenarios against the competing methods without additional training.",
+      "sha256": "8f81ccc581b2ec155aeb843942ffceaa90af6420c5d3e315086c2cb28bbb0b23",
+      "verified_at": "2026-10-25T13:02:44.263251+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "e66a22f89027b9b0f47e2904abf043fc09c60db3aba248c52a6319d709a0b5f4",
+      "source_version": "0fab8536dccde9e615d2f849b457ec76bd52c212b6fcd6a25da0a727c2db5266"
+    },
+    "conf-05719475f4149636e50fc217": {
+      "title": "4Diff: 3D-Aware Diffusion Model for Third-to-First Viewpoint Translation",
+      "url": "https://eccv.ecva.net/virtual/2024/poster/1665",
+      "text": "We present 4Diff, a 3D-aware diffusion model addressing the exo-to-ego viewpoint translation problem. This task involves generating first-person (egocentric) view images from third-person (exocentric) images. Leveraging the diffusion model's ability to generate photorealistic images,  we propose a transformer-based diffusion model that incorporates geometry priors via the proposed mechanisms: (i) egocentric prior rendering and (ii) 3D-aware rotary cross-attention. The former integrates egocentric layout cues through point cloud rasterization, while the latter incorporates exocentric semantic features by guiding attention between diffusion model feature maps and exocentric semantic features, considering their geometric relationships. Our experiments on the challenging and diverse Ego-Exo4D multiview dataset demonstrate superior performance compared to state-of-the-art approaches. Notably, our approach exhibits robust generalization to novel environments not encountered during training. The code and pretrained models will be made public. Show more",
+      "sha256": "4b964681f54eab47dbb1cfc7806d9d3ea9d180d514fb3cdeb29bfcdad9fc9ea0",
+      "verified_at": "2026-10-25T13:02:49.641355+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "018cd0c595495560990e249d3aff7c2c1d3264b141b91f4f958ccd2353d99d51",
+      "source_version": "a6f1003df10d9a1ab94ec093e7054089dc10796b50e21d78b09270a4532fe149"
+    },
+    "conf-1271f3afd24c6a0e6be24110": {
+      "title": "Hollowed Net for On-Device Personalization of Text-to-Image Diffusion Models",
+      "url": "https://arxiv.org/abs/2411.01179",
+      "text": "Recent advancements in text-to-image diffusion models have enabled the personalization of these models to generate custom images from textual prompts. This paper presents an efficient LoRA-based personalization approach for on-device subject-driven generation, where pre-trained diffusion models are fine-tuned with user-specific data on resource-constrained devices. Our method, termed Hollowed Net, enhances memory efficiency during fine-tuning by modifying the architecture of a diffusion U-Net to temporarily remove a fraction of its deep layers, creating a hollowed structure. This approach directly addresses on-device memory constraints and substantially reduces GPU memory requirements for training, in contrast to previous methods that primarily focus on minimizing training steps and reducing the number of parameters to update. Additionally, the personalized Hollowed Net can be transferred back into the original U-Net, enabling inference without additional memory overhead. Quantitative and qualitative analyses demonstrate that our approach not only reduces training memory to levels as low as those required for inference but also maintains or improves personalization performance compared to existing methods.",
+      "sha256": "849cf190be2c4877df251acdf759aae66d4e64aedf096bd9536b026b73aeca7b",
+      "verified_at": "2026-10-25T13:02:55.340499+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "55330d1126bba1fb61e62767b45142dc1f0b62c03160049a20d6bd9010054224",
+      "source_version": "fbcce61434bf375eaeb0ac1d72647e86b813509f053cab8c1f5656556e5f6060"
+    },
+    "conf-86d20f7a6a3416c2795b0adc": {
+      "title": "Randomized Autoregressive Visual Generation",
+      "url": "https://arxiv.org/abs/2411.00776",
+      "text": "This paper presents Randomized AutoRegressive modeling (RAR) for visual generation, which sets a new state-of-the-art performance on the image generation task while maintaining full compatibility with language modeling frameworks. The proposed RAR is simple: during a standard autoregressive training process with a next-token prediction objective, the input sequence-typically ordered in raster form-is randomly permuted into different factorization orders with a probability r, where r starts at 1 and linearly decays to 0 over the course of training. This annealing training strategy enables the model to learn to maximize the expected likelihood over all factorization orders and thus effectively improve the model's capability of modeling bidirectional contexts. Importantly, RAR preserves the integrity of the autoregressive modeling framework, ensuring full compatibility with language modeling while significantly improving performance in image generation. On the ImageNet-256 benchmark, RAR achieves an FID score of 1.48, not only surpassing prior state-of-the-art autoregressive image generators but also outperforming leading diffusion-based and masked transformer-based methods. Code and models will be made available at https://github.com/bytedance/1d-tokenizer",
+      "sha256": "099e794d51bb132ce4a5d127382fd15955c3ff29dcacb3d9e16f8e43c1827987",
+      "verified_at": "2026-10-25T13:03:01.115703+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "3120f88239534a057a22663423caf11887489ccc8972f82a6933c89f3395f78a",
+      "source_version": "388590472036ca431ceae6d770e8988ae72fcf4281b9f024631a1c5946212fc7"
+    },
+    "conf-c77c96da2241e2612e9b1e97": {
+      "title": "Exploring DCN-like architecture for fast image generation with arbitrary resolution",
+      "url": "https://papers.nips.cc/paper_files/paper/2024/hash/a07e5160196058120105ad7cb3505d3c-Abstract-Conference.html",
+      "text": "Arbitrary-resolution image generation still remains a challenging task in AIGC, as it requires handling varying resolutions and aspect ratios while maintaining high visual quality. Existing transformer-based diffusion methods suffer from quadratic computation cost and limited resolution extrapolation capabilities, making them less effective for this task. In this paper, we propose FlowDCN, a purely convolution-based generative model with linear time and memory complexity, that can efficiently generate high-quality images at arbitrary resolutions. Equipped with a new design of learnable group-wise deformable convolution block, our FlowDCN yields higher flexibility and capability to handle different resolutions with a single model.FlowDCN achieves the state-of-the-art 4.30 sFID on $256\\times256$ ImageNet Benchmark and comparable resolution extrapolation results, surpassing transformer-based counterparts in terms of convergence speed (only $\\frac{1}{5}$ images), visual quality, parameters ($8\\%$ reduction) and FLOPs ($20\\%$ reduction). We believe FlowDCN offers a promising solution to scalable and flexible image synthesis.",
+      "sha256": "667303f20f67f2ab7200897061bcc622235c63aa502c27de64585c5465f95349",
+      "verified_at": "2026-10-25T13:03:05.414530+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "b06254d5678707cb994e53f607ae1649f20cd42ac8930a7a4a0fd622fe6893cc",
+      "source_version": "54a72ba7c4fc7e58cad32762749ca3305ae75964d3a6e6f9218a2e090ae6d19e"
+    },
+    "conf-e1cd79e6e24f4f5c2755b136": {
+      "title": "Fast and Memory-Efficient Video Diffusion Using Streamlined Inference",
+      "url": "https://arxiv.org/abs/2411.01171",
+      "text": "The rapid progress in artificial intelligence-generated content (AIGC), especially with diffusion models, has significantly advanced development of high-quality video generation. However, current video diffusion models exhibit demanding computational requirements and high peak memory usage, especially for generating longer and higher-resolution videos. These limitations greatly hinder the practical application of video diffusion models on standard hardware platforms. To tackle this issue, we present a novel, training-free framework named Streamlined Inference, which leverages the temporal and spatial properties of video diffusion models. Our approach integrates three core components: Feature Slicer, Operator Grouping, and Step Rehash. Specifically, Feature Slicer effectively partitions input features into sub-features and Operator Grouping processes each sub-feature with a group of consecutive operators, resulting in significant memory reduction without sacrificing the quality or speed. Step Rehash further exploits the similarity between adjacent steps in diffusion, and accelerates inference through skipping unnecessary steps. Extensive experiments demonstrate that our approach significantly reduces peak memory and computational overhead, making it feasible to generate high-quality videos on a single consumer GPU (e.g., reducing peak memory of AnimateDiff from 42GB to 11GB, featuring faster inference on 2080Ti).",
+      "sha256": "43fbf44ff8f4b657ca4492246e135985f793318f74a7ef60625338d3beb87747",
+      "verified_at": "2026-10-25T13:03:11.135502+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "d32dcb1d6a93eaccd9f3788efdc85eb1e8bf42c7a4519b61c55dd1bb44bea46b",
+      "source_version": "a7107cbcccbbaf4c838a1fdef6994d08819f868900c0b7c33c7a1f00a9cf144b"
+    },
+    "conf-febb079094175d32d7bd2083": {
+      "title": "GameGen-X: Interactive Open-world Game Video Generation",
+      "url": "https://arxiv.org/abs/2411.00769",
+      "text": "We introduce GameGen-X, the first diffusion transformer model specifically designed for both generating and interactively controlling open-world game videos. This model facilitates high-quality, open-domain generation by simulating an extensive array of game engine features, such as innovative characters, dynamic environments, complex actions, and diverse events. Additionally, it provides interactive controllability, predicting and altering future content based on the current clip, thus allowing for gameplay simulation. To realize this vision, we first collected and built an Open-World Video Game Dataset from scratch. It is the first and largest dataset for open-world game video generation and control, which comprises over a million diverse gameplay video clips sampling from over 150 games with informative captions from GPT-4o. GameGen-X undergoes a two-stage training process, consisting of foundation model pre-training and instruction tuning. Firstly, the model was pre-trained via text-to-video generation and video continuation, endowing it with the capability for long-sequence, high-quality open-domain game video generation. Further, to achieve interactive controllability, we designed InstructNet to incorporate game-related multi-modal control signal experts. This allows the model to adjust latent representations based on user inputs, unifying character interaction and scene content control for the first time in video generation. During instruction tuning, only the InstructNet is updated while the pre-trained foundation model is frozen, enabling the integration of interactive controllability without loss of diversity and quality of generated video content.",
+      "sha256": "8f2d0d8055f559bc18169c50bc4b4ad5c50ff7c06dfecef2388d18a91dae7c8e",
+      "verified_at": "2026-10-25T13:03:16.867495+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "2742395f0eace7fb6bd8b7389cc63a768cdd345a976f07e5f64fd328b6a9811f",
+      "source_version": "cf58271c99289b87f0f909b9129b48f54ded4795a98528c373a4def5bbccb075"
+    },
+    "conf-2063f0aeca0d9c14e7ed72c1": {
+      "title": "Fashion-VDM: Video Diffusion Model for Virtual Try-On",
+      "url": "https://arxiv.org/abs/2411.00225",
+      "text": "We present Fashion-VDM, a video diffusion model (VDM) for generating virtual try-on videos. Given an input garment image and person video, our method aims to generate a high-quality try-on video of the person wearing the given garment, while preserving the person's identity and motion. Image-based virtual try-on has shown impressive results; however, existing video virtual try-on (VVT) methods are still lacking garment details and temporal consistency. To address these issues, we propose a diffusion-based architecture for video virtual try-on, split classifier-free guidance for increased control over the conditioning inputs, and a progressive temporal training strategy for single-pass 64-frame, 512px video generation. We also demonstrate the effectiveness of joint image-video training for video try-on, especially when video data is limited. Our qualitative and quantitative experiments show that our approach sets the new state-of-the-art for video virtual try-on. For additional results, visit our project page: https://johannakarras.github.io/Fashion-VDM.",
+      "sha256": "d9ea75b53107ce412c9f7284e31ccc63f9d0328f95bea0a57aee2aea768fc402",
+      "verified_at": "2026-10-25T13:03:22.571153+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "8317d229d9ab5abd31b92bb012960d8845b522d702cee93c49508c1d6fea50ca",
+      "source_version": "33195f6908b86b490e0aab61f40d3fb499f09af6d42e1e1cdedd205ffc30e750"
+    },
+    "conf-caf4b0f7405c1b3d4639e7a5": {
+      "title": "Motion Graph Unleashed: A Novel Approach to Video Prediction",
+      "url": "https://arxiv.org/abs/2410.22288",
+      "text": "We introduce motion graph, a novel approach to the video prediction problem, which predicts future video frames from limited past data. The motion graph transforms patches of video frames into interconnected graph nodes, to comprehensively describe the spatial-temporal relationships among them. This representation overcomes the limitations of existing motion representations such as image differences, optical flow, and motion matrix that either fall short in capturing complex motion patterns or suffer from excessive memory consumption. We further present a video prediction pipeline empowered by motion graph, exhibiting substantial performance improvements and cost reductions. Experiments on various datasets, including UCF Sports, KITTI and Cityscapes, highlight the strong representative ability of motion graph. Especially on UCF Sports, our method matches and outperforms the SOTA methods with a significant reduction in model size by 78% and a substantial decrease in GPU memory utilization by 47%.",
+      "sha256": "a891108e83cbb0972bd8337e53037cddc6784d6c1a2d76b71927599fe4eef92c",
+      "verified_at": "2026-10-25T13:03:28.218040+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "73ec477ce38c7eaa1fcc5d44d69f103b35bd2066a6a8d7492517633e018a0d08",
+      "source_version": "f7c14b099cfecb26252e365563bf3939b8654940478169877b20ed77a6bbbcc2"
+    },
+    "conf-9c6ca7dd468928396f73cebe": {
+      "title": "Resolving Scale Ambiguity in Multi-view 3D Reconstruction using Dual-Pixel Sensors",
+      "url": "https://eccv.ecva.net/virtual/2024/poster/1345",
+      "text": "Multi-view 3D reconstruction, namely structure-from-motion and multi-view stereo, is an essential component in 3D computer vision. In general, multi-view 3D reconstruction suffers from unknown scale ambiguity unless a reference object of known size is recorded together with the scene, or the camera poses are pre-calibrated. In this paper, we show that multi-view images recorded by a dual-pixel (DP) sensor allow us to automatically resolve the scale ambiguity without requiring a reference object or pre-calibration. Specifically, the observed defocus blurs in DP images provide sufficient information for determining the scale when paired together with the depth maps (up to scale) recovered from the multi-view 3D reconstruction. Based on this observation, we develop a simple yet effective linear solution method to determine the absolute scale in multi-view 3D reconstruction. Experiments demonstrate the effectiveness of the proposed method with diverse scenes recorded with different cameras/lenses. Our code and data will be released upon acceptance. Show more",
+      "sha256": "518587e202e6ac5fce956b99e23eb5b3f25061038b7b3170f6ea3dd4c18d4ee3",
+      "verified_at": "2026-10-25T13:03:33.545404+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "ed9664022f36fb07c58b2552ec7db3e121d35d75928cdae23a1b4f127231bfdb",
+      "source_version": "99c12d522450c53694824a6df52a89faa2f3f4602a486321403e6f9e96c35bd8"
+    },
+    "conf-72f0570e27a0f44452bb8e5e": {
+      "title": "Diverse Text-to-3D Synthesis with Augmented Text Embedding",
+      "url": "https://eccv.ecva.net/virtual/2024/poster/1675",
+      "text": "Text-to-3D synthesis has recently emerged as a new approach to sampling 3D models by adopting pretrained text-to-image models as guiding visual priors. An intriguing but underexplored problem with existing text-to-3D methods is that 3D models obtained from the sampling-by-optimization procedure tend to have mode collapses, and hence poor diversity in their results. In this paper, we provide an analysis and identify potential causes of such a limited diversity, which motivates us to devise a new method that considers the joint generation of different 3D models from the same text prompt. We propose to use augmented text prompts via textual inversion of reference images to diversify the joint generation. We show that our method leads to improved diversity in text-to-3D synthesis qualitatively and quantitatively. Show more",
+      "sha256": "4f70425a04d9387bbf0482db5a987780e478f23b0a8919b4f92970e9e3818721",
+      "verified_at": "2026-10-25T13:03:37.238968+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "e976c942e0d9922f2a18d1b7035cec1dfca9a5035d60c9a1665b5d0f07cdc03e",
+      "source_version": "4cfa7703775cde2d7e6939b4c5a818ea9415e12fdcf447427a9a185e8b3a25b3"
+    },
+    "conf-bf282cd03871e18c1857b053": {
+      "title": "Self-Ensembling Gaussian Splatting for Few-Shot Novel View Synthesis",
+      "url": "https://arxiv.org/abs/2411.00144",
+      "text": "3D Gaussian Splatting (3DGS) has demonstrated remarkable effectiveness in novel view synthesis (NVS). However, 3DGS tends to overfit when trained with sparse views, limiting its generalization to novel viewpoints. In this paper, we address this overfitting issue by introducing Self-Ensembling Gaussian Splatting (SE-GS). We achieve self-ensembling by incorporating an uncertainty-aware perturbation strategy during training. A $\\mathbf{\\Delta}$-model and a $\\mathbf{\\Sigma}$-model are jointly trained on the available images. The $\\mathbf{\\Delta}$-model is dynamically perturbed based on rendering uncertainty across training steps, generating diverse perturbed models with negligible computational overhead. Discrepancies between the $\\mathbf{\\Sigma}$-model and these perturbed models are minimized throughout training, forming a robust ensemble of 3DGS models. This ensemble, represented by the $\\mathbf{\\Sigma}$-model, is then used to generate novel-view images during inference. Experimental results on the LLFF, Mip-NeRF360, DTU, and MVImgNet datasets demonstrate that our approach enhances NVS quality under few-shot training conditions, outperforming existing state-of-the-art methods. The code is released at: https://sailor-z.github.io/projects/SEGS.html.",
+      "sha256": "d2e998f33bf1c89f10a7d8334669b1e7f582813b440e52ee69c3cb33470dc951",
+      "verified_at": "2026-10-25T13:03:43.001868+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "74c34e1c355c68a2ff651eff51d50768e3032c41a43c370233bb9e52352f5f58",
+      "source_version": "9daa663ab5771378c05502de4053973c2228a0bfb460865368621d616be113e8"
+    },
+    "conf-78d8fe157b9ce9d529cafa04": {
+      "title": "Distractor-Free Novel View Synthesis via Exploiting Memorization Effect in Optimization",
+      "url": "https://eccv.ecva.net/virtual/2024/poster/906",
+      "text": "Neural Radiance Fields (NeRF) and 3D Gaussian Splatting (3DGS) have greatly advanced novel view synthesis, which is capable of photo-realistic rendering. However, these methods require the foundational assumption of the static scene (e.g., consistent lighting condition and persistent object positions), which is often violated in real-world scenarios. In this study, we introduce MemE, an unsupervised plug-and-play module, to achieve high-quality novel view synthesis in noisy input scenarios. MemE leverages the inherent property in parameter optimization, known as the memorization effect to achieve distractor filtering and can be easily combined with NeRF or 3DGS. Furthermore, MemE is applicable in environments both with and without distractors, significantly enhancing the adaptability of NeRF and 3DGS across diverse input scenarios. Extensive experiments show that our methods (i.e., MemE-NeRF and MemE-3DGS) achieve state-of-the-art performance on both real and synthetic noisy scenes. Show more",
+      "sha256": "059334a10126a2d1dab67be6aeb9fc2989f1641a068cd86cf125fd596e47e2e8",
+      "verified_at": "2026-10-25T13:03:48.342268+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "2c8729ab973c4534b5ec827f30e5cdc7e91ce88a1d40dca55716a62fd47cfd66",
+      "source_version": "6ed4c035bcdfe338836cc1a687dbd6c78d096826329f80fdd9a9e7876beea12f"
+    },
+    "conf-bb954561320db46d63e3694a": {
+      "title": "SS3DM: Benchmarking Street-View Surface Reconstruction with a Synthetic 3D Mesh Dataset",
+      "url": "https://arxiv.org/abs/2410.21739",
+      "text": "Reconstructing accurate 3D surfaces for street-view scenarios is crucial for applications such as digital entertainment and autonomous driving simulation. However, existing street-view datasets, including KITTI, Waymo, and nuScenes, only offer noisy LiDAR points as ground-truth data for geometric evaluation of reconstructed surfaces. These geometric ground-truths often lack the necessary precision to evaluate surface positions and do not provide data for assessing surface normals. To overcome these challenges, we introduce the SS3DM dataset, comprising precise \\textbf{S}ynthetic \\textbf{S}treet-view \\textbf{3D} \\textbf{M}esh models exported from the CARLA simulator. These mesh models facilitate accurate position evaluation and include normal vectors for evaluating surface normal. To simulate the input data in realistic driving scenarios for 3D reconstruction, we virtually drive a vehicle equipped with six RGB cameras and five LiDAR sensors in diverse outdoor scenes. Leveraging this dataset, we establish a benchmark for state-of-the-art surface reconstruction methods, providing a comprehensive evaluation of the associated challenges. For more information, visit our homepage at https://ss3dm.top.",
+      "sha256": "570e04a5d3b18045d49d8e7ed770813935c73cd87ec1ec70461db4b0c446aa9e",
+      "verified_at": "2026-10-25T13:03:54.148911+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "58c57b2c8df4011f46640a509a1e414f887c9d8731c7e6d944401e093d559ef9",
+      "source_version": "b884903ad0bc3074ad85101bedb8bbae0d4327e57df1f3a0948cac16302c767b"
+    },
+    "conf-6b906152a5b9caa03d483635": {
+      "title": "High-Resolution and Few-shot View Synthesis from Asymmetric Dual-lens Inputs",
+      "url": "https://eccv.ecva.net/virtual/2024/poster/2395",
+      "text": "Novel view synthesis has achieved remarkable quality and efficiency by the paradigm of 3D Gaussian Splatting (3D-GS), but still faces two challenges: 1) significant performance degradation when trained with only few-shot samples due to a lack of geometry constraint, and 2) incapability of rendering at a higher resolution that is beyond the input resolution of training samples. In this paper, we propose Dual-Lens 3D-GS (DL-GS) to achieve high-resolution (HR) and few-shot view synthesis, by leveraging the characteristics of the asymmetric dual-lens system commonly equipped on mobile devices. This kind of system captures the same scene with different focal lengths (\\textit{i.e.}, wide-angle and telephoto) under an asymmetric stereo configuration, which naturally provides geometric hints for few-shot training and HR guidance for resolution improvement. Nevertheless, there remain two major technical problems to achieving this goal. First, how to effectively exploit the geometry information from the asymmetric stereo configuration? To this end, we propose a consistency-aware training strategy, which integrates a dual-lens-consistent loss to regularize the 3D-GS optimization. Second, how to make the best use of the dual-lens training samples to effectively improve the resolution of newly synthesized views? To this end, we design a multi-reference-guided refinement module to select proper telephoto and wide-angle guided images from training samples based on the camera pose distances, and then exploit their information for high-frequency detail enhancement. Extensive experiments on simulated and real-captured datasets validate the distinct superiority of our DL-GS over various competitors on the task of HR and few-shot view synthesis. Show more",
+      "sha256": "8aab1c57ccf10e7bbfdd26dd0cb81677cf8b5f05fa3c7ab147c73ef627eea75f",
+      "verified_at": "2026-10-25T13:03:59.474041+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "97abc93bfca882e62c30beff788a325059eeb7804fcd0801e86cbd3ad63b1cbf",
+      "source_version": "6290b9bf5ce76cc608ca076a585fc634174ac8dba5b466329fa794bfef63e40b"
+    },
+    "2410.20789": {
+      "title": "LoDAvatar: Hierarchical Embedding and Adaptive Levels of Detail with Gaussian Splatting for Enhanced Human Avatars",
+      "url": "https://arxiv.org/abs/2410.20789",
+      "text": "With the advancement of virtual reality, the demand for 3D human avatars is increasing. The emergence of Gaussian Splatting technology has enabled the rendering of Gaussian avatars with superior visual quality and reduced computational costs. Despite numerous methods researchers propose for implementing drivable Gaussian avatars, limited attention has been given to balancing visual quality and computational costs. In this paper, we introduce LoDAvatar, a method that introduces levels of detail into Gaussian avatars through hierarchical embedding and selective detail enhancement methods. The key steps of LoDAvatar encompass data preparation, Gaussian embedding, Gaussian optimization, and selective detail enhancement. We conducted experiments involving Gaussian avatars at various levels of detail, employing both objective assessments and subjective evaluations. The outcomes indicate that incorporating levels of detail into Gaussian avatars can decrease computational costs during rendering while upholding commendable visual quality, thereby enhancing runtime frame rates. We advocate adopting LoDAvatar to render multiple dynamic Gaussian avatars or extensive Gaussian scenes to balance visual quality and computational costs.",
+      "sha256": "f03b61197b09c8cf4fcef9ce5eaf2f679a6ec91b689a422066d68c9de9e7a8fe",
+      "verified_at": "2026-10-25T13:04:04.627876+08:00"
+    },
+    "conf-537de9fbe5935446c6cb4de2": {
+      "title": "FACTS: A Factored State-Space Framework for World Modelling",
+      "url": "https://arxiv.org/abs/2410.20922",
+      "text": "World modelling is essential for understanding and predicting the dynamics of complex systems by learning both spatial and temporal dependencies. However, current frameworks, such as Transformers and selective state-space models like Mambas, exhibit limitations in efficiently encoding spatial and temporal structures, particularly in scenarios requiring long-term high-dimensional sequence modelling. To address these issues, we propose a novel recurrent framework, the \\textbf{FACT}ored \\textbf{S}tate-space (\\textbf{FACTS}) model, for spatial-temporal world modelling. The FACTS framework constructs a graph-structured memory with a routing mechanism that learns permutable memory representations, ensuring invariance to input permutations while adapting through selective state-space propagation. Furthermore, FACTS supports parallel computation of high-dimensional sequences. We empirically evaluate FACTS across diverse tasks, including multivariate time series forecasting, object-centric world modelling, and spatial-temporal graph prediction, demonstrating that it consistently outperforms or matches specialised state-of-the-art models, despite its general-purpose world modelling design.",
+      "sha256": "36db3e72c424809bcd5eee6b0086d5fd226e25b9a73f90ad48cbe1390143e6ec",
+      "verified_at": "2026-10-25T13:04:08.916914+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "58dba3707220719715da0a754ecf618785eea94349505272dcaf205cce6ca0c2",
+      "source_version": "3fdda24368a9ea69527c7d3667fe3fd543728c6b5801873e3d161bfa57e6ce1a"
+    },
+    "conf-4006241ef72fa0df770d1674": {
+      "title": "Physics-informed Knowledge Transfer for Underwater Monocular Depth Estimation",
+      "url": "https://eccv.ecva.net/virtual/2024/poster/952",
+      "text": "Compared to the in-air case, underwater depth estimation has its own challenges. For instance, acquiring high-quality training datasets with groundtruth poses difficulties due to sensor limitations in aquatic environments. Additionally, the physics characteristics of underwater imaging diverge significantly from the in-air case, the methods developed for in-air depth estimation underperform when applied underwater, due to the domain gap. To address these challenges, our paper introduces a novel transfer-learning-based method - Physics-informed Underwater Depth Estimation (\\textbf{PUDE}). The key idea is to transfer the knowledge of a pre-trained in-air depth estimation model to underwater settings utilizing a small underwater image set without groundtruth measurement, guided by a physical model for underwater image formation. We propose novel bound losses based on the physical model to rectify the depth estimations to align with actual underwater physical properties. Finally, in the evaluations across multiple datasets, we compare our Physics-informed Underwater Depth Estimation (\\textbf{PUDE}) model with other existing in-air and underwater methods. The results reveal that the \\textbf{PUDE} model excels in both quantitative and qualitative comparisons. Show more",
+      "sha256": "e8bac62bcee02dc6b8ec428018fe83d9e1c7ba567265e94929550b8882ec7767",
+      "verified_at": "2026-10-25T13:04:14.229738+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "ed29694b4dcda8100eec9523eb4ae7bc020d0a29fd551620d010d17fd6ab6293",
+      "source_version": "a024ae061e34a5b378ea339fb2f528a63d91255dbb99e4259fd618d1c53ec2a1"
+    },
+    "2411.00600": {
+      "title": "On Deep Learning for Geometric and Semantic Scene Understanding Using On-Vehicle 3D LiDAR",
+      "url": "https://arxiv.org/abs/2411.00600",
+      "text": "3D LiDAR point cloud data is crucial for scene perception in computer vision, robotics, and autonomous driving. Geometric and semantic scene understanding, involving 3D point clouds, is essential for advancing autonomous driving technologies. However, significant challenges remain, particularly in improving the overall accuracy (e.g., segmentation accuracy, depth estimation accuracy, etc.) and efficiency of these systems. To address the challenge in terms of accuracy related to LiDAR-based tasks, we present DurLAR, the first high-fidelity 128-channel 3D LiDAR dataset featuring panoramic ambient (near infrared) and reflectivity imagery. To improve efficiency in 3D segmentation while ensuring the accuracy, we propose a novel pipeline that employs a smaller architecture, requiring fewer ground-truth annotations while achieving superior segmentation accuracy compared to contemporary approaches. To improve the segmentation accuracy, we introduce Range-Aware Pointwise Distance Distribution (RAPiD) features and the associated RAPiD-Seg architecture. All contributions have been accepted by peer-reviewed conferences, underscoring the advancements in both accuracy and efficiency in 3D LiDAR applications for autonomous driving. Full abstract: this https URL .",
+      "sha256": "e98041cb5ecac99819dcc243f2f2969152be2f781775874695925d8ba591b99a",
+      "verified_at": "2026-10-25T13:04:19.461240+08:00"
     }
   }
 }
