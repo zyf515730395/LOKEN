@@ -10610,6 +10610,90 @@
       "basis": "official_abstract",
       "source_sha256": "d75d65aab93604b5e365ef92c9058e308408d302ed461cc67bfcd02c91fb8433",
       "source_version": "d801b8833e959c0e4a4fd82348cbcad0ec4510e83a2ac7f1b016012c0a79bdac"
+    },
+    "conf-73f934757de016dbac9135a1": {
+      "title": "TIPO: Text to Image with Text Pre-sampling for Prompt Optimization",
+      "url": "https://arxiv.org/abs/2411.08127",
+      "text": "TIPO (Text-to-Image Prompt Optimization) introduces an efficient approach for automatic prompt refinement in text-to-image (T2I) generation. Starting from simple user prompts, TIPO leverages a lightweight pre-trained model to expand these prompts into richer and more detailed versions. Conceptually, TIPO samples refined prompts from a targeted sub-distribution within the broader semantic space, preserving the original intent while significantly improving visual quality, coherence, and detail. Unlike resource-intensive methods based on large language models (LLMs) or reinforcement learning (RL), TIPO offers strong computational efficiency and scalability, opening new possibilities for effective automated prompt engineering in T2I tasks. Extensive experiments across multiple domains demonstrate that TIPO achieves stronger text alignment, reduced visual artifacts, and consistently higher human preference rates, while maintaining competitive aesthetic quality. These results highlight the effectiveness of distribution-aligned prompt engineering and point toward broader opportunities for scalable, automated refinement in text-to-image generation.",
+      "sha256": "e79f04817cdbe790302098ecaf62335001f28c0d7ecf081799ecb8688d34338f",
+      "verified_at": "2026-10-25T12:43:04.656269+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "4c39e630dc1e7a9a4007bc1a96ad04f4d674700a72eb8f5d0057752eab990c48",
+      "source_version": "f02a4206087085e62586b07bc3e7f1a262266096d6246a0619057177f89733c9"
+    },
+    "conf-56c7610cc79568f788c669ed": {
+      "title": "Token Merging for Training-Free Semantic Binding in Text-to-Image Synthesis",
+      "url": "https://arxiv.org/abs/2411.07132",
+      "text": "Although text-to-image (T2I) models exhibit remarkable generation capabilities, they frequently fail to accurately bind semantically related objects or attributes in the input prompts; a challenge termed semantic binding. Previous approaches either involve intensive fine-tuning of the entire T2I model or require users or large language models to specify generation layouts, adding complexity. In this paper, we define semantic binding as the task of associating a given object with its attribute, termed attribute binding, or linking it to other related sub-objects, referred to as object binding. We introduce a novel method called Token Merging (ToMe), which enhances semantic binding by aggregating relevant tokens into a single composite token. This ensures that the object, its attributes and sub-objects all share the same cross-attention map. Additionally, to address potential confusion among main objects with complex textual prompts, we propose end token substitution as a complementary strategy. To further refine our approach in the initial stages of T2I generation, where layouts are determined, we incorporate two auxiliary losses, an entropy loss and a semantic binding loss, to iteratively update the composite token to improve the generation integrity. We conducted extensive experiments to validate the effectiveness of ToMe, comparing it against various existing methods on the T2I-CompBench and our proposed GPT-4o object binding benchmark. Our method is particularly effective in complex scenarios that involve multiple objects and attributes, which previous methods often fail to address. The code will be publicly available at \\url{https://github.com/hutaihang/ToMe}.",
+      "sha256": "5b98560a50e0f99d4849c50b2d2c90fbf203390db4114ed640e2efad3fa4f09a",
+      "verified_at": "2026-10-25T12:43:10.427600+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "d067749209ca2230e0e67ac934529c4de611141e6e5d039433d408a10ca7a112",
+      "source_version": "6154693e0107ac79be7e19c5ec2cfc1854a0a590c005d0141acbeacc2b9271d7"
+    },
+    "conf-80901d39f2a58d929e21f942": {
+      "title": "SPARS3R: Semantic Prior Alignment and Regularization for Sparse 3D Reconstruction",
+      "url": "https://arxiv.org/abs/2411.12592",
+      "text": "Recent efforts in Gaussian-Splat-based Novel View Synthesis can achieve photorealistic rendering; however, such capability is limited in sparse-view scenarios due to sparse initialization and over-fitting floaters. Recent progress in depth estimation and alignment can provide dense point cloud with few views; however, the resulting pose accuracy is suboptimal. In this work, we present SPARS3R, which combines the advantages of accurate pose estimation from Structure-from-Motion and dense point cloud from depth estimation. To this end, SPARS3R first performs a Global Fusion Alignment process that maps a prior dense point cloud to a sparse point cloud from Structure-from-Motion based on triangulated correspondences. RANSAC is applied during this process to distinguish inliers and outliers. SPARS3R then performs a second, Semantic Outlier Alignment step, which extracts semantically coherent regions around the outliers and performs local alignment in these regions. Along with several improvements in the evaluation process, we demonstrate that SPARS3R can achieve photorealistic rendering with sparse images and significantly outperforms existing approaches.",
+      "sha256": "57128b33c64557af651b222e80dd85f959d8c8c7385fb1371832b7c36a0448fe",
+      "verified_at": "2026-10-25T12:43:16.157164+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "764cc9f11c4fa6e7fad1def85d9e04a1703b423f49f8f026b358b01e3acbb7c0",
+      "source_version": "131b73d5bc70036890abb4ec850355e02755b6d8b0bbf1ff6385eae81bece4d7"
+    },
+    "conf-c943617fba7f0f78fc2d5e99": {
+      "title": "Self-Supervised Monocular 4D Scene Reconstruction for Egocentric Videos",
+      "url": "https://arxiv.org/abs/2411.09145",
+      "text": "Egocentric videos provide valuable insights into human interactions with the physical world, which has sparked growing interest in the computer vision and robotics communities. A critical challenge in fully understanding the geometry and dynamics of egocentric videos is dense scene reconstruction. However, the lack of high-quality labeled datasets in this field has hindered the effectiveness of current supervised learning methods. In this work, we aim to address this issue by exploring an self-supervised dynamic scene reconstruction approach. We introduce EgoMono4D, a novel model that unifies the estimation of multiple variables necessary for Egocentric Monocular 4D reconstruction, including camera intrinsic, camera poses, and video depth, all within a fast feed-forward framework. Starting from pretrained single-frame depth and intrinsic estimation model, we extend it with camera poses estimation and align multi-frame results on large-scale unlabeled egocentric videos. We evaluate EgoMono4D in both in-domain and zero-shot generalization settings, achieving superior performance in dense pointclouds sequence reconstruction compared to all baselines. EgoMono4D represents the first attempt to apply self-supervised learning for pointclouds sequence reconstruction to the label-scarce egocentric field, enabling fast, dense, and generalizable reconstruction. The interactable visualization, code and trained models are released https://egomono4d.github.io/",
+      "sha256": "fb1f37fc0bac096f7e37140f2e9b44d5b6b2e52edd551d0598fd34a0e12eae89",
+      "verified_at": "2026-10-25T12:43:21.901710+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "d6d50268dc9ff8d8388ba5180410b24cc205df879cce4aef2d686eb7d84d99cf",
+      "source_version": "2ffe5d6ad186590b0622422a634e3af339c82144f7a0ab4bb871e036aa3ec676"
+    },
+    "2411.08453": {
+      "title": "Biomass phenotyping of oilseed rape through UAV multi-view oblique imaging with 3DGS and SAM model",
+      "url": "https://arxiv.org/abs/2411.08453",
+      "text": "Biomass estimation of oilseed rape is crucial for optimizing crop productivity and breeding strategies. While UAV-based imaging has advanced high-throughput phenotyping, current methods often rely on orthophoto images, which struggle with overlapping leaves and incomplete structural information in complex field environments. This study integrates 3D Gaussian Splatting (3DGS) with the Segment Anything Model (SAM) for precise 3D reconstruction and biomass estimation of oilseed rape. UAV multi-view oblique images from 36 angles were used to perform 3D reconstruction, with the SAM module enhancing point cloud segmentation. The segmented point clouds were then converted into point cloud volumes, which were fitted to ground-measured biomass using linear regression. The results showed that 3DGS (7k and 30k iterations) provided high accuracy, with peak signal-to-noise ratios (PSNR) of 27.43 and 29.53 and training times of 7 and 49 minutes, respectively. This performance exceeded that of structure from motion (SfM) and mipmap Neural Radiance Fields (Mip-NeRF), demonstrating superior efficiency. The SAM module achieved high segmentation accuracy, with a mean intersection over union (mIoU) of 0.961 and an F1-score of 0.980. Additionally, a comparison of biomass extraction models found the point cloud volume model to be the most accurate, with an determination coefficient (R2) of 0.976, root mean square error (RMSE) of 2.92 g/plant, and mean absolute percentage error (MAPE) of 6.81%, outperforming both the plot crop volume and individual crop volume models. This study highlights the potential of combining 3DGS with multi-view UAV imaging for improved biomass phenotyping.",
+      "sha256": "bb96c713dd06e4a3b002d7b475e97bbac971a048b6b51b6aab697b582d5b232b",
+      "verified_at": "2026-10-25T12:43:27.189479+08:00"
+    },
+    "conf-63c781ba8785ec2101b4a993": {
+      "title": "GaussianAnything: Interactive Point Cloud Flow Matching for 3D Generation",
+      "url": "https://iclr.cc/virtual/2025/poster/29781",
+      "text": "Recent advancements in diffusion models and large-scale datasets have revolutionized image and video generation, with increasing focus on 3D content generation. While existing methods show promise, they face challenges in input formats, latent space structures, and output representations. This paper introduces a novel 3D generation framework that addresses these issues, enabling scalable and high-quality 3D generation with an interactive Point Cloud-structured Latent space. Our approach utilizes a VAE with multi-view posed RGB-D-N renderings as input, features a unique latent space design that preserves 3D shape information, and incorporates a cascaded latent flow-based model for improved shape-texture disentanglement. The proposed method, GaussianAnything, supports multi-modal conditional 3D generation, allowing for point cloud, caption, and single-view image inputs. Experimental results demonstrate superior performance on various datasets, advancing the state-of-the-art in 3D content generation. Show more",
+      "sha256": "84aa8552e54f18148cfec1e57d2411c870fff18afd4343a868dfbc20a2baa226",
+      "verified_at": "2026-10-25T12:43:31.181457+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "3bfbfd39512216e91bc76b594b0aed7650b7773cbef5a32674da180cc9641870",
+      "source_version": "17d14137acedbb0214e5ca72e2f909ba7f11df0c97768ddced84a7aba3a659e3"
+    },
+    "2411.08158": {
+      "title": "TomoGRAF: A Robust and Generalizable Reconstruction Network for Single-View Computed Tomography",
+      "url": "https://arxiv.org/abs/2411.08158",
+      "text": "Computed tomography (CT) provides high spatial resolution visualization of 3D structures for scientific and clinical applications. Traditional analytical/iterative CT reconstruction algorithms require hundreds of angular data samplings, a condition that may not be met in practice due to physical and mechanical limitations. Sparse view CT reconstruction has been proposed using constrained optimization and machine learning methods with varying success, less so for ultra-sparse view CT reconstruction with one to two views. Neural radiance field (NeRF) is a powerful tool for reconstructing and rendering 3D natural scenes from sparse views, but its direct application to 3D medical image reconstruction has been minimally successful due to the differences between optical and X-ray photon transportation. Here, we develop a novel TomoGRAF framework incorporating the unique X-ray transportation physics to reconstruct high-quality 3D volumes using ultra-sparse projections without prior. TomoGRAF captures the CT imaging geometry, simulates the X-ray casting and tracing process, and penalizes the difference between simulated and ground truth CT sub-volume during training. We evaluated the performance of TomoGRAF on an unseen dataset of distinct imaging characteristics from the training data and demonstrated a vast leap in performance compared with state-of-the-art deep learning and NeRF methods. TomoGRAF provides the first generalizable solution for image-guided radiotherapy and interventional radiology applications, where only one or a few X-ray views are available, but 3D volumetric information is desired.",
+      "sha256": "4497d1e93dafadcb3c4c7a44c41ea660edd1cfd181476c791be869227a676410",
+      "verified_at": "2026-10-25T12:43:36.348993+08:00"
+    },
+    "conf-108dc7d390c927c7f1d59ac2": {
+      "title": "Scaling Mesh Generation via Compressive Tokenization",
+      "url": "https://arxiv.org/abs/2411.07025",
+      "text": "We propose a compressive yet effective mesh representation, Blocked and Patchified Tokenization (BPT), facilitating the generation of meshes exceeding 8k faces. BPT compresses mesh sequences by employing block-wise indexing and patch aggregation, reducing their length by approximately 75\\% compared to the original sequences. This compression milestone unlocks the potential to utilize mesh data with significantly more faces, thereby enhancing detail richness and improving generation robustness. Empowered with the BPT, we have built a foundation mesh generative model training on scaled mesh data to support flexible control for point clouds and images. Our model demonstrates the capability to generate meshes with intricate details and accurate topology, achieving SoTA performance on mesh generation and reaching the level for direct product usage.",
+      "sha256": "82f484a2738706a0be5581e6725205804fce8876d80907e77196988efa9b219c",
+      "verified_at": "2026-10-25T12:43:42.050345+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "a1afbdc40fcf46e3618ac8c14a6fbd733c3cf640063a65c6536d6e1c20421ab0",
+      "source_version": "6273a9a61ca51a2d43bf3b46d69459639f7efaff198a5adb8671a0f6ebc944d9"
+    },
+    "conf-1ab2510ccbf246617fcc641d": {
+      "title": "The Surprising Ineffectiveness of Pre-Trained Visual Representations for Model-Based Reinforcement Learning",
+      "url": "https://arxiv.org/abs/2411.10175",
+      "text": "Visual Reinforcement Learning (RL) methods often require extensive amounts of data. As opposed to model-free RL, model-based RL (MBRL) offers a potential solution with efficient data utilization through planning. Additionally, RL lacks generalization capabilities for real-world tasks. Prior work has shown that incorporating pre-trained visual representations (PVRs) enhances sample efficiency and generalization. While PVRs have been extensively studied in the context of model-free RL, their potential in MBRL remains largely unexplored. In this paper, we benchmark a set of PVRs on challenging control tasks in a model-based RL setting. We investigate the data efficiency, generalization capabilities, and the impact of different properties of PVRs on the performance of model-based agents. Our results, perhaps surprisingly, reveal that for MBRL current PVRs are not more sample efficient than learning representations from scratch, and that they do not generalize better to out-of-distribution (OOD) settings. To explain this, we analyze the quality of the trained dynamics model. Furthermore, we show that data diversity and network architecture are the most important contributors to OOD generalization performance.",
+      "sha256": "590e1b3a9e518a2d371d0e981e4bc98360bdc5d5d295807f2551ca174617a9fc",
+      "verified_at": "2026-10-25T12:43:47.924781+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "db435f0d068529d9f911c5097e16ffb06303aacffc246b6baab1acc6d35cdbe8",
+      "source_version": "3715e7ea82abc3ce53e088d35d30a62cbd983b2c10eac63cdc881642d9f0333c"
     }
   }
 }
