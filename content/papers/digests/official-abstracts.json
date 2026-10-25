@@ -14558,6 +14558,193 @@
       "basis": "official_abstract",
       "source_sha256": "3ced8530eb9fc02ffa8367f899ff89da78667fc75348a9e71153d26365927e02",
       "source_version": "3733189c00e19409388fc7b527a233affd24f2417b4d8e25984492936251d75b"
+    },
+    "conf-3cd5e632d5cf8a419ba2fcd1": {
+      "title": "Unveiling and Mitigating Memorization in Text-to-image Diffusion Models through Cross Attention",
+      "url": "https://arxiv.org/abs/2403.11052",
+      "text": "Recent advancements in text-to-image diffusion models have demonstrated their remarkable capability to generate high-quality images from textual prompts. However, increasing research indicates that these models memorize and replicate images from their training data, raising tremendous concerns about potential copyright infringement and privacy risks. In our study, we provide a novel perspective to understand this memorization phenomenon by examining its relationship with cross-attention mechanisms. We reveal that during memorization, the cross-attention tends to focus disproportionately on the embeddings of specific tokens. The diffusion model is overfitted to these token embeddings, memorizing corresponding training images. To elucidate this phenomenon, we further identify and discuss various intrinsic findings of cross-attention that contribute to memorization. Building on these insights, we introduce an innovative approach to detect and mitigate memorization in diffusion models. The advantage of our proposed method is that it will not compromise the speed of either the training or the inference processes in these models while preserving the quality of generated images. Our code is available at https://github.com/renjie3/MemAttn .",
+      "sha256": "b55d4ea108be32ae61df471bd6354d398880981fc492a8813462935b34b02d3f",
+      "verified_at": "2026-10-25T23:22:07.979544+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "8447ff1aaf05c58c6fcb081201af151288e63b9640e543cdb90e740cf2b174b1",
+      "source_version": "29fb56e24d56ffc5e5a3f0550ef560cf2f4acbc43a6e68ea4469bc4f8e87c669"
+    },
+    "conf-0b21206f9a27c0198eb753b1": {
+      "title": "SCP-Diff: Spatial-Categorical Joint Prior for Diffusion Based Semantic Image Synthesis",
+      "url": "https://arxiv.org/abs/2403.09638",
+      "text": "Semantic image synthesis (SIS) shows good promises for sensor simulation. However, current best practices in this field, based on GANs, have not yet reached the desired level of quality. As latent diffusion models make significant strides in image generation, we are prompted to evaluate ControlNet, a notable method for its dense control capabilities. Our investigation uncovered two primary issues with its results: the presence of weird sub-structures within large semantic areas and the misalignment of content with the semantic mask. Through empirical study, we pinpointed the cause of these problems as a mismatch between the noised training data distribution and the standard normal prior applied at the inference stage. To address this challenge, we developed specific noise priors for SIS, encompassing spatial, categorical, and a novel spatial-categorical joint prior for inference. This approach, which we have named SCP-Diff, has set new state-of-the-art results in SIS on Cityscapes, ADE20K and COCO-Stuff, yielding a FID as low as 10.53 on Cityscapes. The code and models can be accessed via the project page.",
+      "sha256": "101ab760a883013ee86e2a0127ca03ff89d16c6f057fa954fcc4a8515aeb3234",
+      "verified_at": "2026-10-25T23:22:13.943205+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "39e52d4ffe363edf90e1c6786d0451c860b0d707c0d5906bd6eafd744858a7aa",
+      "source_version": "602a31b7f8abf899c211b75158c081de26447249cb7f684e7da0d46ed16b3c5e"
+    },
+    "conf-00311cb63fb788f7b66b1054": {
+      "title": "Stable-Makeup: When Real-World Makeup Transfer Meets Diffusion Model",
+      "url": "https://arxiv.org/abs/2403.07764",
+      "text": "Current makeup transfer methods are limited to simple makeup styles, making them difficult to apply in real-world scenarios. In this paper, we introduce Stable-Makeup, a novel diffusion-based makeup transfer method capable of robustly transferring a wide range of real-world makeup, onto user-provided faces. Stable-Makeup is based on a pre-trained diffusion model and utilizes a Detail-Preserving (D-P) makeup encoder to encode makeup details. It also employs content and structural control modules to preserve the content and structural information of the source image. With the aid of our newly added makeup cross-attention layers in U-Net, we can accurately transfer the detailed makeup to the corresponding position in the source image. After content-structure decoupling training, Stable-Makeup can maintain content and the facial structure of the source image. Moreover, our method has demonstrated strong robustness and generalizability, making it applicable to varioustasks such as cross-domain makeup transfer, makeup-guided text-to-image generation and so on. Extensive experiments have demonstrated that our approach delivers state-of-the-art (SOTA) results among existing makeup transfer methods and exhibits a highly promising with broad potential applications in various related fields. Code released: https://github.com/Xiaojiu-z/Stable-Makeup",
+      "sha256": "79b454a5df4984c0602290738bb1bb8ecf84c4cb765fb11afef085639ddf08da",
+      "verified_at": "2026-10-25T23:22:19.915753+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "2ef37cafeb3a2204b33acb513da6ce3e58c3d4aa5aaa0d613b34995592c80705",
+      "source_version": "d4d65d9138ee22b644a2e047cce1e8f2280f16bba41228da20ecac017cd730e8"
+    },
+    "conf-5aa318733532702defb21621": {
+      "title": "Enhancing Semantic Fidelity in Text-to-Image Synthesis: Attention Regulation in Diffusion Models",
+      "url": "https://arxiv.org/abs/2403.06381",
+      "text": "Recent advancements in diffusion models have notably improved the perceptual quality of generated images in text-to-image synthesis tasks. However, diffusion models often struggle to produce images that accurately reflect the intended semantics of the associated text prompts. We examine cross-attention layers in diffusion models and observe a propensity for these layers to disproportionately focus on certain tokens during the generation process, thereby undermining semantic fidelity. To address the issue of dominant attention, we introduce attention regulation, a computation-efficient on-the-fly optimization approach at inference time to align attention maps with the input text prompt. Notably, our method requires no additional training or fine-tuning and serves as a plug-in module on a model. Hence, the generation capacity of the original model is fully preserved. We compare our approach with alternative approaches across various datasets, evaluation metrics, and diffusion models. Experiment results show that our method consistently outperforms other baselines, yielding images that more faithfully reflect the desired concepts with reduced computation overhead. Code is available at https://github.com/YaNgZhAnG-V5/attention_regulation.",
+      "sha256": "463a168e784f76b86f03f91a0e4c4f15d58b53edb5f57a7ffc4a8d23fc0f12ff",
+      "verified_at": "2026-10-25T23:22:25.807743+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "e4685d311802772faaba31f2f3a7582c3aac68b0b0ac697a0ff4a500cdb07693",
+      "source_version": "12ccac628913d1ea9c31d9e74eda065efac29e08b197dc3820b42c7afadbdc11"
+    },
+    "conf-33a5181e35d67dc4423cfd71": {
+      "title": "SELMA: Learning and Merging Skill-Specific Text-to-Image Experts with Auto-Generated Data",
+      "url": "https://arxiv.org/abs/2403.06952",
+      "text": "Recent text-to-image (T2I) generation models have demonstrated impressive capabilities in creating images from text descriptions. However, these T2I generation models often fall short of generating images that precisely match the details of the text inputs, such as incorrect spatial relationship or missing objects. In this paper, we introduce SELMA: Skill-Specific Expert Learning and Merging with Auto-Generated Data, a novel paradigm to improve the faithfulness of T2I models by fine-tuning models on automatically generated, multi-skill image-text datasets, with skill-specific expert learning and merging. First, SELMA leverages an LLM's in-context learning capability to generate multiple datasets of text prompts that can teach different skills, and then generates the images with a T2I model based on the prompts. Next, SELMA adapts the T2I model to the new skills by learning multiple single-skill LoRA (low-rank adaptation) experts followed by expert merging. Our independent expert fine-tuning specializes multiple models for different skills, and expert merging helps build a joint multi-skill T2I model that can generate faithful images given diverse text prompts, while mitigating the knowledge conflict from different datasets. We empirically demonstrate that SELMA significantly improves the semantic alignment and text faithfulness of state-of-the-art T2I diffusion models on multiple benchmarks (+2.1% on TIFA and +6.9% on DSG), human preference metrics (PickScore, ImageReward, and HPS), as well as human evaluation. Moreover, fine-tuning with image-text pairs auto-collected via SELMA shows comparable performance to fine-tuning with ground truth data. Lastly, we show that fine-tuning with images from a weaker T2I model can help improve the generation quality of a stronger T2I model, suggesting promising weak-to-strong generalization in T2I models.",
+      "sha256": "0a245f3a2452d57d4bbc3212a9aab062ac033f22e05c8bc31a88ea08d5c481b2",
+      "verified_at": "2026-10-25T23:22:29.832788+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "9c151250320070515d55cf5a06c8b1ac3aaf94accd289f9a61998b54013206c4",
+      "source_version": "a0bc08c03fd84cf307c9769841e37dc336c3f11548427f628388861aa12a794a"
+    },
+    "conf-45212ae9d92cf69bf701c93d": {
+      "title": "Video Editing via Factorized Diffusion Distillation",
+      "url": "https://arxiv.org/abs/2403.09334",
+      "text": "We introduce Emu Video Edit (EVE), a model that establishes a new state-of-the art in video editing without relying on any supervised video editing data. To develop EVE we separately train an image editing adapter and a video generation adapter, and attach both to the same text-to-image model. Then, to align the adapters towards video editing we introduce a new unsupervised distillation procedure, Factorized Diffusion Distillation. This procedure distills knowledge from one or more teachers simultaneously, without any supervised data. We utilize this procedure to teach EVE to edit videos by jointly distilling knowledge to (i) precisely edit each individual frame from the image editing adapter, and (ii) ensure temporal consistency among the edited frames using the video generation adapter. Finally, to demonstrate the potential of our approach in unlocking other capabilities, we align additional combinations of adapters",
+      "sha256": "c7a71b56ab7d70bbfc83a2fb84f386e5d9a285aba0192196515d4fb76c07356a",
+      "verified_at": "2026-10-25T23:22:35.948761+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "a351ed8540676cbe5742ce4208454f9f9eedd72400c77a67d9ee513dea62202c",
+      "source_version": "4930e4bfa67018e1e898886f4d2a010431e2b3ad8771336bf8f197d8598bd527"
+    },
+    "2403.11134": {
+      "title": "Recent Advances in 3D Gaussian Splatting",
+      "url": "https://arxiv.org/abs/2403.11134",
+      "text": "The emergence of 3D Gaussian Splatting (3DGS) has greatly accelerated the rendering speed of novel view synthesis. Unlike neural implicit representations like Neural Radiance Fields (NeRF) that represent a 3D scene with position and viewpoint-conditioned neural networks, 3D Gaussian Splatting utilizes a set of Gaussian ellipsoids to model the scene so that efficient rendering can be accomplished by rasterizing Gaussian ellipsoids into images. Apart from the fast rendering speed, the explicit representation of 3D Gaussian Splatting facilitates editing tasks like dynamic reconstruction, geometry editing, and physical simulation. Considering the rapid change and growing number of works in this field, we present a literature review of recent 3D Gaussian Splatting methods, which can be roughly classified into 3D reconstruction, 3D editing, and other downstream applications by functionality. Traditional point-based rendering methods and the rendering formulation of 3D Gaussian Splatting are also illustrated for a better understanding of this technique. This survey aims to help beginners get into this field quickly and provide experienced researchers with a comprehensive overview, which can stimulate the future development of the 3D Gaussian Splatting representation.",
+      "sha256": "af277fe86d1ddc305f159af6e6b8869ee34d274a19ed3f40def1f81a22aa07c7",
+      "verified_at": "2026-10-25T23:22:41.109435+08:00"
+    },
+    "conf-2c975a5ee8fc3289b41e85d8": {
+      "title": "Analytic-Splatting: Anti-Aliased 3D Gaussian Splatting via Analytic Integration",
+      "url": "https://arxiv.org/abs/2403.11056",
+      "text": "The 3D Gaussian Splatting (3DGS) gained its popularity recently by combining the advantages of both primitive-based and volumetric 3D representations, resulting in improved quality and efficiency for 3D scene rendering. However, 3DGS is not alias-free, and its rendering at varying resolutions could produce severe blurring or jaggies. This is because 3DGS treats each pixel as an isolated, single point rather than as an area, causing insensitivity to changes in the footprints of pixels. Consequently, this discrete sampling scheme inevitably results in aliasing, owing to the restricted sampling bandwidth. In this paper, we derive an analytical solution to address this issue. More specifically, we use a conditioned logistic function as the analytic approximation of the cumulative distribution function (CDF) in a one-dimensional Gaussian signal and calculate the Gaussian integral by subtracting the CDFs. We then introduce this approximation in the two-dimensional pixel shading, and present Analytic-Splatting, which analytically approximates the Gaussian integral within the 2D-pixel window area to better capture the intensity response of each pixel. Moreover, we use the approximated response of the pixel window integral area to participate in the transmittance calculation of volume rendering, making Analytic-Splatting sensitive to the changes in pixel footprint at different resolutions. Experiments on various datasets validate that our approach has better anti-aliasing capability that gives more details and better fidelity.",
+      "sha256": "dc70b839aefe540ef5e7841c4c363f165ee25416cbb861ea77115ce5ada57d2b",
+      "verified_at": "2026-10-25T23:22:47.049254+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "275b4bcef160ba2bb18cc86a6b544b50d7c6ef39a996a80e77a50d470e5a20fc",
+      "source_version": "c622668a9ca59bd28a6116eb53c25d0e7ee692478db697344abfd0e0dce8698b"
+    },
+    "conf-246b0f698b5cc6d14a02709b": {
+      "title": "CGS-SLAM: Compact 3D Gaussian Splatting for Dense Visual SLAM",
+      "url": "https://ras.papercept.net/conferences/conferences/IROS25/program/IROS25_ContentListWeb_1.html#2444",
+      "text": "Recent work has shown that 3D Gaussian-based SLAM enables high-quality reconstruction, accurate pose estimation, and real-time rendering of scenes. However, these approaches are built on a tremendous number of redundant 3D Gaussian ellipsoids, leading to high memory and storage costs and slow training speed. To address this limitation, we propose a compact 3D Gaussian Splatting SLAM system that reduces the number and the parameter size of Gaussian ellipsoids. A sliding window-based masking strategy is first proposed to reduce the redundant ellipsoids. Then, a novel geometry codebook-based quantization method is proposed to further compress 3D Gaussian geometric attributes. Robust and accurate pose estimation is achieved by a local-to-global bundle adjustment method with reprojection loss. Extensive experiments demonstrate that our method achieves faster training, rendering speed, and low memory usage while maintaining the state-of-the-art (SOTA) quality of the scene representation.",
+      "sha256": "d14a3056c3d45de4af1776158808eed15cc39430ffc1d11b6cc2eb28b035311d",
+      "verified_at": "2026-10-25T23:22:54.718765+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "eb8286854f1c79b64d99c9c35dbd23b449e7844e17a015f7c32c926ccab9dec1",
+      "source_version": "bcec4a525569703ed33c69ecb96d921129bfd83f401860f68078a071e00c5b49"
+    },
+    "conf-91ba96e645362e14a727d49b": {
+      "title": "MicroDiffusion: Implicit Representation-Guided Diffusion for 3D Reconstruction from Limited 2D Microscopy Projections",
+      "url": "https://arxiv.org/abs/2403.10815",
+      "text": "Volumetric optical microscopy using non-diffracting beams enables rapid imaging of 3D volumes by projecting them axially to 2D images but lacks crucial depth information. Addressing this, we introduce MicroDiffusion, a pioneering tool facilitating high-quality, depth-resolved 3D volume reconstruction from limited 2D projections. While existing Implicit Neural Representation (INR) models often yield incomplete outputs and Denoising Diffusion Probabilistic Models (DDPM) excel at capturing details, our method integrates INR's structural coherence with DDPM's fine-detail enhancement capabilities. We pretrain an INR model to transform 2D axially-projected images into a preliminary 3D volume. This pretrained INR acts as a global prior guiding DDPM's generative process through a linear interpolation between INR outputs and noise inputs. This strategy enriches the diffusion process with structured 3D information, enhancing detail and reducing noise in localized 2D images. By conditioning the diffusion model on the closest 2D projection, MicroDiffusion substantially enhances fidelity in resulting 3D reconstructions, surpassing INR and standard DDPM outputs with unparalleled image quality and structural fidelity. Our code and dataset are available at https://github.com/UCSC-VLAA/MicroDiffusion.",
+      "sha256": "ed78f932f82688855155fd9bed7aa4ee2f72283cdc2372f0c38389e63e50a994",
+      "verified_at": "2026-10-25T23:23:00.511733+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "df80194bfe08aa1496d4033c8f597d85c1b54bd49494ae449d481ded2105dccb",
+      "source_version": "ce84254357b1b4397a6e592a5e5ec69eacebb8352fdc95ab1659aff8d223949a"
+    },
+    "conf-12b606f92443b2b77bcc4585": {
+      "title": "DarkGS: Learning Neural Illumination and 3D Gaussians Relighting for Robotic Exploration in the Dark",
+      "url": "https://arxiv.org/abs/2403.10814",
+      "text": "Humans have the remarkable ability to construct consistent mental models of an environment, even under limited or varying levels of illumination. We wish to endow robots with this same capability. In this paper, we tackle the challenge of constructing a photorealistic scene representation under poorly illuminated conditions and with a moving light source. We approach the task of modeling illumination as a learning problem, and utilize the developed illumination model to aid in scene reconstruction. We introduce an innovative framework that uses a data-driven approach, Neural Light Simulators (NeLiS), to model and calibrate the camera-light system. Furthermore, we present DarkGS, a method that applies NeLiS to create a relightable 3D Gaussian scene model capable of real-time, photorealistic rendering from novel viewpoints. We show the applicability and robustness of our proposed simulator and system in a variety of real-world environments.",
+      "sha256": "f3046a0f915482015b85a5ea51615867d6becc58a24ade328c27662e3baead02",
+      "verified_at": "2026-10-25T23:23:04.740091+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "b407f654090709d86b51e5e52118e351d148303a96d6071fb5147c324d2f65d7",
+      "source_version": "18a6a2d618765a15961aff96164f2742eaf0485fd78532fa9dc6954fc7d5d7a7"
+    },
+    "conf-1ebe8b1773f571e0736e2528": {
+      "title": "ViiNeuS: Volumetric Initialization for Implicit Neural Surface Reconstruction of Urban Scenes with Limited Image Overlap",
+      "url": "https://arxiv.org/abs/2403.10344",
+      "text": "Neural implicit surface representation methods have recently shown impressive 3D reconstruction results. However, existing solutions struggle to reconstruct driving scenes due to their large size, highly complex nature and their limited visual observation overlap. Hence, to achieve accurate reconstructions, additional supervision data such as LiDAR, strong geometric priors, and long training times are required. To tackle such limitations, we present ViiNeuS, a new hybrid implicit surface learning method that efficiently initializes the signed distance field to reconstruct large driving scenes from 2D street view images. ViiNeuS's hybrid architecture models two separate implicit fields: one representing the volumetric density of the scene, and another one representing the signed distance to the surface. To accurately reconstruct urban outdoor driving scenarios, we introduce a novel volume-rendering strategy that relies on self-supervised probabilistic density estimation to sample points near the surface and transition progressively from volumetric to surface representation. Our solution permits a proper and fast initialization of the signed distance field without relying on any geometric prior on the scene, compared to concurrent methods. By conducting extensive experiments on four outdoor driving datasets, we show that ViiNeuS can learn an accurate and detailed 3D surface representation of various urban scene while being two times faster to train compared to previous state-of-the-art solutions.",
+      "sha256": "e74a2fb9f965c0cdb765eecb64c64bd0e0f511f876f778617c8668ed9a868693",
+      "verified_at": "2026-10-25T23:23:11.000435+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "d93b863ca74b09c46e88bf64fdaeb049b2dd2dfed897cdf7ecef26779b79b0d1",
+      "source_version": "fbae01d9910ec98facfe6e113793dea6375df68fd90558a5b4f695ad0a83c874"
+    },
+    "conf-19ab15bd7a9d4b39f2685433": {
+      "title": "SemanticHuman-HD: High Resolution Semantic disentangled 3D Human Generation",
+      "url": "https://arxiv.org/abs/2403.10166",
+      "text": "With the development of neural radiance fields and generative models, numerous methods have been proposed for learning 3D human generation from 2D images. These methods allow control over the pose of the generated 3D human and enable rendering from different viewpoints. However, none of these methods explore semantic disentanglement in human image synthesis, i.e., they can not disentangle the generation of different semantic parts, such as the body, tops, and bottoms. Furthermore, existing methods are limited to synthesize images at $512^2$ resolution due to the high computational cost of neural radiance fields. To address these limitations, we introduce SemanticHuman-HD, the first method to achieve semantic disentangled human image synthesis. Notably, SemanticHuman-HD is also the first method to achieve 3D-aware image synthesis at $1024^2$ resolution, benefiting from our proposed 3D-aware super-resolution module. By leveraging the depth maps and semantic masks as guidance for the 3D-aware super-resolution, we significantly reduce the number of sampling points during volume rendering, thereby reducing the computational cost. Our comparative experiments demonstrate the superiority of our method. The effectiveness of each proposed component is also verified through ablation studies. Moreover, our method opens up exciting possibilities for various applications, including 3D garment generation, semantic-aware image synthesis, controllable image synthesis, and out-of-domain image synthesis.",
+      "sha256": "ee72bfa0967b094d6d72e168f48781db216424e0da96d365af52bf7dfb8dac67",
+      "verified_at": "2026-10-25T23:23:17.194134+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "e371ec8788cdaf1a421d1085c1f3e082d23e79afdc71410a849faa60f43cde7c",
+      "source_version": "3068353076e36f7fc08e90769671b1675744f67f51a0bc7668b6dd161cbf0057"
+    },
+    "conf-59b905e8c7a12a5f96975a9b": {
+      "title": "Make-Your-3D: Fast and Consistent Subject-Driven 3D Content Generation",
+      "url": "https://arxiv.org/abs/2403.09625",
+      "text": "Recent years have witnessed the strong power of 3D generation models, which offer a new level of creative flexibility by allowing users to guide the 3D content generation process through a single image or natural language. However, it remains challenging for existing 3D generation methods to create subject-driven 3D content across diverse prompts. In this paper, we introduce a novel 3D customization method, dubbed Make-Your-3D that can personalize high-fidelity and consistent 3D content from only a single image of a subject with text description within 5 minutes. Our key insight is to harmonize the distributions of a multi-view diffusion model and an identity-specific 2D generative model, aligning them with the distribution of the desired 3D subject. Specifically, we design a co-evolution framework to reduce the variance of distributions, where each model undergoes a process of learning from the other through identity-aware optimization and subject-prior optimization, respectively. Extensive experiments demonstrate that our method can produce high-quality, consistent, and subject-specific 3D content with text-driven modifications that are unseen in subject image.",
+      "sha256": "1f687ed5bdc7e47bb97265234db4eef5a6f4bd7d665e65f93c205aa20107e646",
+      "verified_at": "2026-10-25T23:23:23.273919+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "6b8b453d33c7fee82a2f6bdbd3aa528a625fc76b992d6979d89998377532f6c4",
+      "source_version": "413c7c5ed02be21dfe08b1c4fbd91c07fbb9c85a42501685204a9f4990586857"
+    },
+    "conf-3649f114128bdb7ad77647cd": {
+      "title": "Touch-GS: Visual-Tactile Supervised 3D Gaussian Splatting",
+      "url": "https://arxiv.org/abs/2403.09875",
+      "text": "In this work, we propose a novel method to supervise 3D Gaussian Splatting (3DGS) scenes using optical tactile sensors. Optical tactile sensors have become widespread in their use in robotics for manipulation and object representation; however, raw optical tactile sensor data is unsuitable to directly supervise a 3DGS scene. Our representation leverages a Gaussian Process Implicit Surface to implicitly represent the object, combining many touches into a unified representation with uncertainty. We merge this model with a monocular depth estimation network, which is aligned in a two stage process, coarsely aligning with a depth camera and then finely adjusting to match our touch data. For every training image, our method produces a corresponding fused depth and uncertainty map. Utilizing this additional information, we propose a new loss function, variance weighted depth supervised loss, for training the 3DGS scene model. We leverage the DenseTact optical tactile sensor and RealSense RGB-D camera to show that combining touch and vision in this manner leads to quantitatively and qualitatively better results than vision or touch alone in a few-view scene syntheses on opaque as well as on reflective and transparent objects. Please see our project page at http://armlabstanford.github.io/touch-gs",
+      "sha256": "2910d7bd49347ec5b9480e07f4a544cd541510a0573de976209367d7a12ab5b5",
+      "verified_at": "2026-10-25T23:23:29.518699+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "328a4463b85774c6bfb60ec2a6cf37755119e1fc811f20ac623c62b1af4bd120",
+      "source_version": "10b9478d58de178a3d81f7749745fbf61929581efa88e1c795435d2495d99f58"
+    },
+    "conf-ae28dd0ec617f21f93f35ff8": {
+      "title": "Refractive COLMAP: Refractive Structure-from-Motion Revisited",
+      "url": "https://arxiv.org/abs/2403.08640",
+      "text": "In this paper, we present a complete refractive Structure-from-Motion (RSfM) framework for underwater 3D reconstruction using refractive camera setups (for both, flat- and dome-port underwater housings). Despite notable achievements in refractive multi-view geometry over the past decade, a robust, complete and publicly available solution for such tasks is not available at present, and often practical applications have to resort to approximating refraction effects by the intrinsic (distortion) parameters of a pinhole camera model. To fill this gap, we have integrated refraction considerations throughout the entire SfM process within the state-of-the-art, open-source SfM framework COLMAP. Numerical simulations and reconstruction results on synthetically generated but photo-realistic images with ground truth validate that enabling refraction does not compromise accuracy or robustness as compared to in-air reconstructions. Finally, we demonstrate the capability of our approach for large-scale refractive scenarios using a dataset consisting of nearly 6000 images. The implementation is released as open-source at: https://cau-git.rz.uni-kiel.de/inf-ag-koeser/colmap_underwater.",
+      "sha256": "5436955bae3626cd0522f601eab782574902519ebed855231e1192c725dfabb1",
+      "verified_at": "2026-10-25T23:23:35.424461+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "74fecd654f2c7c0b91a092744c4380c063f785d6796d5c537301a3171a0dde64",
+      "source_version": "9f64a66581fdd36c694ade2f6cc6b00308770d98c65b40502c3c380a40fbf35f"
+    },
+    "conf-a4b124fa831760d72bd2b872": {
+      "title": "SemGauss-SLAM: Dense Semantic Gaussian Splatting SLAM",
+      "url": "https://arxiv.org/abs/2403.07494",
+      "text": "We propose SemGauss-SLAM, a dense semantic SLAM system utilizing 3D Gaussian representation, that enables accurate 3D semantic mapping, robust camera tracking, and high-quality rendering simultaneously. In this system, we incorporate semantic feature embedding into 3D Gaussian representation, which effectively encodes semantic information within the spatial layout of the environment for precise semantic scene representation. Furthermore, we propose feature-level loss for updating 3D Gaussian representation, enabling higher-level guidance for 3D Gaussian optimization. In addition, to reduce cumulative drift in tracking and improve semantic reconstruction accuracy, we introduce semantic-informed bundle adjustment. By leveraging multi-frame semantic associations, this strategy enables joint optimization of 3D Gaussian representation and camera poses, resulting in low-drift tracking and accurate semantic mapping. Our SemGauss-SLAM demonstrates superior performance over existing radiance field-based SLAM methods in terms of mapping and tracking accuracy on Replica and ScanNet datasets, while also showing excellent capabilities in high-precision semantic segmentation and dense semantic mapping.",
+      "sha256": "b787aad3ac98a4f2608dd27a0a689a48709957dd14d164a2a86b4e6475766bdf",
+      "verified_at": "2026-10-25T23:23:41.497242+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "b12d0f95d05e6be80f6d3dfb92fc34155f55585223c32adae893b538d58f7268",
+      "source_version": "c99b132ffb21b7d551ed29ec56296bee79697863eaab3385465b03cb46f8e73e"
+    },
+    "conf-df723e5173277de901370e7c": {
+      "title": "MAMBA: an Effective World Model Approach for Meta-Reinforcement Learning",
+      "url": "https://arxiv.org/abs/2403.09859",
+      "text": "Meta-reinforcement learning (meta-RL) is a promising framework for tackling challenging domains requiring efficient exploration. Existing meta-RL algorithms are characterized by low sample efficiency, and mostly focus on low-dimensional task distributions. In parallel, model-based RL methods have been successful in solving partially observable MDPs, of which meta-RL is a special case. In this work, we leverage this success and propose a new model-based approach to meta-RL, based on elements from existing state-of-the-art model-based and meta-RL methods. We demonstrate the effectiveness of our approach on common meta-RL benchmark domains, attaining greater return with better sample efficiency (up to $15\\times$) while requiring very little hyperparameter tuning. In addition, we validate our approach on a slate of more challenging, higher-dimensional domains, taking a step towards real-world generalizing agents.",
+      "sha256": "4ed75b088575569ea2e343512517948a15a15c30fbab8d82613a66f4d030f201",
+      "verified_at": "2026-10-25T23:23:44.981302+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "0d7b6b51e527fd6406501278a9365f378248d049d627b190e05bd9d82130bfd8",
+      "source_version": "bcabe5d2a528fe3f2a109ffc5b38ab241671eb11ccf532a47a8356762dfc22de"
+    },
+    "conf-88a62a034406f4b4cf6e0316": {
+      "title": "Neural Markov Random Field for Stereo Matching",
+      "url": "https://arxiv.org/abs/2403.11193",
+      "text": "Stereo matching is a core task for many computer vision and robotics applications. Despite their dominance in traditional stereo methods, the hand-crafted Markov Random Field (MRF) models lack sufficient modeling accuracy compared to end-to-end deep models. While deep learning representations have greatly improved the unary terms of the MRF models, the overall accuracy is still severely limited by the hand-crafted pairwise terms and message passing. To address these issues, we propose a neural MRF model, where both potential functions and message passing are designed using data-driven neural networks. Our fully data-driven model is built on the foundation of variational inference theory, to prevent convergence issues and retain stereo MRF's graph inductive bias. To make the inference tractable and scale well to high-resolution images, we also propose a Disparity Proposal Network (DPN) to adaptively prune the search space of disparity. The proposed approach ranks $1^{st}$ on both KITTI 2012 and 2015 leaderboards among all published methods while running faster than 100 ms. This approach significantly outperforms prior global methods, e.g., lowering D1 metric by more than 50% on KITTI 2015. In addition, our method exhibits strong cross-domain generalization and can recover sharp edges. The codes at https://github.com/aeolusguan/NMRF",
+      "sha256": "2b9b261fd7709d80c9c9526e8068d36d56c066b44048e014f921fc78f6e1de39",
+      "verified_at": "2026-10-25T23:23:51.181227+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "a9429da0dbd535fcbacacc7c5885f6ecfd78b2677f78a6d768eac94890b0a0d7",
+      "source_version": "44b479cf163ad21deb7e94d9f08b3d1d5b692a22319fa660e97eb56d2b0288e6"
     }
   }
 }
