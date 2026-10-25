@@ -13540,6 +13540,166 @@
       "basis": "official_abstract",
       "source_sha256": "545bd56336d2398bf80c74d67d341ddd3a9b319bd6242d8b03316a61095a3c1b",
       "source_version": "76780eb6c2bdb63cfbac9704d6cf7804e88262bee6494dad51e87c64a1907afc"
+    },
+    "conf-d17fa73680f00504abf4bc46": {
+      "title": "Enhancing Consistency-Based Image Generation via Adversarialy-Trained Classification and Energy-Based Discrimination",
+      "url": "https://arxiv.org/abs/2405.16260",
+      "text": "The recently introduced Consistency models pose an efficient alternative to diffusion algorithms, enabling rapid and good quality image synthesis. These methods overcome the slowness of diffusion models by directly mapping noise to data, while maintaining a (relatively) simpler training. Consistency models enable a fast one- or few-step generation, but they typically fall somewhat short in sample quality when compared to their diffusion origins. In this work we propose a novel and highly effective technique for post-processing Consistency-based generated images, enhancing their perceptual quality. Our approach utilizes a joint classifier-discriminator model, in which both portions are trained adversarially. While the classifier aims to grade an image based on its assignment to a designated class, the discriminator portion of the very same network leverages the softmax values to assess the proximity of the input image to the targeted data manifold, thereby serving as an Energy-based Model. By employing example-specific projected gradient iterations under the guidance of this joint machine, we refine synthesized images and achieve an improved FID scores on the ImageNet 64x64 dataset for both Consistency-Training and Consistency-Distillation techniques.",
+      "sha256": "65f6a2c25bd2c608295a85afd406a3b0f36b45076a94012b0dbc361308c5967f",
+      "verified_at": "2026-10-25T20:45:34.298146+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "740a0b310ec2f56ea3610b9c1ddf84d008943525daccd2aab9e1e0590432a915",
+      "source_version": "107cd41f3590b7cf0fcebdf49936e40e41846460023cfa48402805a574b9bf30"
+    },
+    "conf-736cb5577d41fa5a3b89ff88": {
+      "title": "Global Well-posedness and Convergence Analysis of Score-based Generative Models via Sharp Lipschitz Estimates",
+      "url": "https://arxiv.org/abs/2405.16104",
+      "text": "We establish global well-posedness and convergence of the score-based generative models (SGM) under minimal general assumptions of initial data for score estimation. For the smooth case, we start from a Lipschitz bound of the score function with optimal time length. The optimality is validated by an example whose Lipschitz constant of scores is bounded at initial but blows up in finite time. This necessitates the separation of time scales in conventional bounds for non-log-concave distributions. In contrast, our follow up analysis only relies on a local Lipschitz condition and is valid globally in time. This leads to the convergence of numerical scheme without time separation. For the non-smooth case, we show that the optimal Lipschitz bound is O(1/t) in the point-wise sense for distributions supported on a compact, smooth and low-dimensional manifold with boundary.",
+      "sha256": "06ff879749f78bda4b4347d8d7eced1b98a6b5b2f8facb5d4d878e584262a050",
+      "verified_at": "2026-10-25T20:45:40.246728+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "4332b06f7dd0f4f85aac30c3477e0664ad8d8b4b9a3faa8d749a073eea104a68",
+      "source_version": "c486c04f89226cc1bb2e7a94371ef6e8774418cc9e5539a2615cc81521c7795c"
+    },
+    "conf-3e23dc78da3426afe1283489": {
+      "title": "R.A.C.E.: Robust Adversarial Concept Erasure for Secure Text-to-Image Diffusion Model",
+      "url": "https://arxiv.org/abs/2405.16341",
+      "text": "In the evolving landscape of text-to-image (T2I) diffusion models, the remarkable capability to generate high-quality images from textual descriptions faces challenges with the potential misuse of reproducing sensitive content. To address this critical issue, we introduce \\textbf{R}obust \\textbf{A}dversarial \\textbf{C}oncept \\textbf{E}rase (RACE), a novel approach designed to mitigate these risks by enhancing the robustness of concept erasure method for T2I models. RACE utilizes a sophisticated adversarial training framework to identify and mitigate adversarial text embeddings, significantly reducing the Attack Success Rate (ASR). Impressively, RACE achieves a 30 percentage point reduction in ASR for the ``nudity'' concept against the leading white-box attack method. Our extensive evaluations demonstrate RACE's effectiveness in defending against both white-box and black-box attacks, marking a significant advancement in protecting T2I diffusion models from generating inappropriate or misleading imagery. This work underlines the essential need for proactive defense measures in adapting to the rapidly advancing field of adversarial challenges. Our code is publicly available: \\url{https://github.com/chkimmmmm/R.A.C.E.}",
+      "sha256": "e72faaae284ddbc692284bcab2dbe63f76b972522570ec5e773957327170bd08",
+      "verified_at": "2026-10-25T20:45:46.156401+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "cbecf239085125101f47539143c61400d2daa71ebd936537259812b21e6bb625",
+      "source_version": "8f139f0f56f1f7a4d503baf99a1e75e62bdee7a307049d3486e5bf7f28d0ce54"
+    },
+    "conf-3ec0012c9d794c376d3801bf": {
+      "title": "Towards Understanding the Working Mechanism of Text-to-Image Diffusion Model",
+      "url": "https://arxiv.org/abs/2405.15330",
+      "text": "Recently, the strong latent Diffusion Probabilistic Model (DPM) has been applied to high-quality Text-to-Image (T2I) generation (e.g., Stable Diffusion), by injecting the encoded target text prompt into the gradually denoised diffusion image generator. Despite the success of DPM in practice, the mechanism behind it remains to be explored. To fill this blank, we begin by examining the intermediate statuses during the gradual denoising generation process in DPM. The empirical observations indicate, the shape of image is reconstructed after the first few denoising steps, and then the image is filled with details (e.g., texture). The phenomenon is because the low-frequency signal (shape relevant) of the noisy image is not corrupted until the final stage in the forward process (initial stage of generation) of adding noise in DPM. Inspired by the observations, we proceed to explore the influence of each token in the text prompt during the two stages. After a series of experiments of T2I generations conditioned on a set of text prompts. We conclude that in the earlier generation stage, the image is mostly decided by the special token [\\texttt{EOS}] in the text prompt, and the information in the text prompt is already conveyed in this stage. After that, the diffusion model completes the details of generated images by information from themselves. Finally, we propose to apply this observation to accelerate the process of T2I generation by properly removing text guidance, which finally accelerates the sampling up to 25\\%+.",
+      "sha256": "61bfbc71d06047ed039cc5bf414761a17b290e194b4c00e37198b34661c9937f",
+      "verified_at": "2026-10-25T20:45:51.921636+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "592fd5e2f69d7bf730d30491cb953bd8a3f102d90ecd11aefc71cf36c831b969",
+      "source_version": "7b1c44366c84df2ae8f6ad0837bfc435312ee1c15b7123c70f83961cc33b1039"
+    },
+    "conf-bd6c556ec1624c40265ab12d": {
+      "title": "Membership Inference on Text-to-Image Diffusion Models via Conditional Likelihood Discrepancy",
+      "url": "https://arxiv.org/abs/2405.14800",
+      "text": "Text-to-image diffusion models have achieved tremendous success in the field of controllable image generation, while also coming along with issues of privacy leakage and data copyrights. Membership inference arises in these contexts as a potential auditing method for detecting unauthorized data usage. While some efforts have been made on diffusion models, they are not applicable to text-to-image diffusion models due to the high computation overhead and enhanced generalization capabilities. In this paper, we first identify a conditional overfitting phenomenon in text-to-image diffusion models, indicating that these models tend to overfit the conditional distribution of images given the corresponding text rather than the marginal distribution of images only. Based on this observation, we derive an analytical indicator, namely Conditional Likelihood Discrepancy (CLiD), to perform membership inference, which reduces the stochasticity in estimating memorization of individual samples. Experimental results demonstrate that our method significantly outperforms previous methods across various data distributions and dataset scales. Additionally, our method shows superior resistance to overfitting mitigation strategies, such as early stopping and data augmentation.",
+      "sha256": "6c34268ccffc5949d6b7265988e5f18ac4f827103792106a379f2b217546321c",
+      "verified_at": "2026-10-25T20:45:57.680650+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "929191605cc779d48f49e79fedf9338a3a0a02523feeebca6d8c5a6378f921c7",
+      "source_version": "1d5d2f57511945b2aba57354401eefafd2d925ab889b9e56b9942799f2afcdb2"
+    },
+    "conf-451c0443b17326220ff39d1f": {
+      "title": "LightningDrag: Lightning Fast and Accurate Drag-based Image Editing Emerging from Videos",
+      "url": "https://arxiv.org/abs/2405.13722",
+      "text": "Accuracy and speed are critical in image editing tasks. Pan et al. introduced a drag-based image editing framework that achieves pixel-level control using Generative Adversarial Networks (GANs). A flurry of subsequent studies enhanced this framework's generality by leveraging large-scale diffusion models. However, these methods often suffer from inordinately long processing times (exceeding 1 minute per edit) and low success rates. Addressing these issues head on, we present LightningDrag, a rapid approach enabling high quality drag-based image editing in ~1 second. Unlike most previous methods, we redefine drag-based editing as a conditional generation task, eliminating the need for time-consuming latent optimization or gradient-based guidance during inference. In addition, the design of our pipeline allows us to train our model on large-scale paired video frames, which contain rich motion information such as object translations, changing poses and orientations, zooming in and out, etc. By learning from videos, our approach can significantly outperform previous methods in terms of accuracy and consistency. Despite being trained solely on videos, our model generalizes well to perform local shape deformations not presented in the training data (e.g., lengthening of hair, twisting rainbows, etc.). Extensive qualitative and quantitative evaluations on benchmark datasets corroborate the superiority of our approach. The code and model will be released at https://github.com/magic-research/LightningDrag.",
+      "sha256": "659bafc063adcc0256fee7f150e90264dffed011a06db906e8482ee4feaf54fd",
+      "verified_at": "2026-10-25T20:46:01.499930+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "280eadeed193f936855af346553d8a1e35e63e2c76ff7167122e5d3f426b4c41",
+      "source_version": "d6e281325d5cce1851808cdc11f004f869eb17e8e2f287dd829aa306cd0b7d43"
+    },
+    "conf-f9335a41071d084d560386d7": {
+      "title": "Looking Backward: Streaming Video-to-Video Translation with Feature Banks",
+      "url": "https://arxiv.org/abs/2405.15757",
+      "text": "This paper introduces StreamV2V, a diffusion model that achieves real-time streaming video-to-video (V2V) translation with user prompts. Unlike prior V2V methods using batches to process limited frames, we opt to process frames in a streaming fashion, to support unlimited frames. At the heart of StreamV2V lies a backward-looking principle that relates the present to the past. This is realized by maintaining a feature bank, which archives information from past frames. For incoming frames, StreamV2V extends self-attention to include banked keys and values and directly fuses similar past features into the output. The feature bank is continually updated by merging stored and new features, making it compact but informative. StreamV2V stands out for its adaptability and efficiency, seamlessly integrating with image diffusion models without fine-tuning. It can run 20 FPS on one A100 GPU, being 15x, 46x, 108x, and 158x faster than FlowVid, CoDeF, Rerender, and TokenFlow, respectively. Quantitative metrics and user studies confirm StreamV2V's exceptional ability to maintain temporal consistency.",
+      "sha256": "b70bc7a0c9cc89c48e8d2f9f2693d8ecc443f2cc437691512e657bea4f8cc62f",
+      "verified_at": "2026-10-25T20:46:07.585743+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "06f03abb5afc1fe70ac7bdea242fae4b965d24446be4915251f1e206ab4638c2",
+      "source_version": "046d3e7f9b030ceb63ad5f26fac6e81042435966b71b779db0c0eec5b2db9eb5"
+    },
+    "conf-e8f529e6b1540160212efe1a": {
+      "title": "Video Diffusion Models are Training-free Motion Interpreter and Controller",
+      "url": "https://arxiv.org/abs/2405.14864",
+      "text": "Video generation primarily aims to model authentic and customized motion across frames, making understanding and controlling the motion a crucial topic. Most diffusion-based studies on video motion focus on motion customization with training-based paradigms, which, however, demands substantial training resources and necessitates retraining for diverse models. Crucially, these approaches do not explore how video diffusion models encode cross-frame motion information in their features, lacking interpretability and transparency in their effectiveness. To answer this question, this paper introduces a novel perspective to understand, localize, and manipulate motion-aware features in video diffusion models. Through analysis using Principal Component Analysis (PCA), our work discloses that robust motion-aware feature already exists in video diffusion models. We present a new MOtion FeaTure (MOFT) by eliminating content correlation information and filtering motion channels. MOFT provides a distinct set of benefits, including the ability to encode comprehensive motion information with clear interpretability, extraction without the need for training, and generalizability across diverse architectures. Leveraging MOFT, we propose a novel training-free video motion control framework. Our method demonstrates competitive performance in generating natural and faithful motion, providing architecture-agnostic insights and applicability in a variety of downstream tasks.",
+      "sha256": "663803f34f2603ff911deb5177c64a6cbdd5ddfbe9337a39d806d5143740d86d",
+      "verified_at": "2026-10-25T20:46:13.417728+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "b9c106bc087ec42571f98b1a29ad23f6d0c5beefd60a7c6e40fbd34eb853e026",
+      "source_version": "81e8c70c4ba474f5124b670adfbc65ca635a41b6f4973d16a85b311ca842c447"
+    },
+    "conf-5800e17dc7223851b0b29859": {
+      "title": "Generative Camera Dolly: Extreme Monocular Dynamic Novel View Synthesis",
+      "url": "https://arxiv.org/abs/2405.14868",
+      "text": "Accurate reconstruction of complex dynamic scenes from just a single viewpoint continues to be a challenging task in computer vision. Current dynamic novel view synthesis methods typically require videos from many different camera viewpoints, necessitating careful recording setups, and significantly restricting their utility in the wild as well as in terms of embodied AI applications. In this paper, we propose $\\textbf{GCD}$, a controllable monocular dynamic view synthesis pipeline that leverages large-scale diffusion priors to, given a video of any scene, generate a synchronous video from any other chosen perspective, conditioned on a set of relative camera pose parameters. Our model does not require depth as input, and does not explicitly model 3D scene geometry, instead performing end-to-end video-to-video translation in order to achieve its goal efficiently. Despite being trained on synthetic multi-view video data only, zero-shot real-world generalization experiments show promising results in multiple domains, including robotics, object permanence, and driving environments. We believe our framework can potentially unlock powerful applications in rich dynamic scene understanding, perception for robotics, and interactive 3D video viewing experiences for virtual reality.",
+      "sha256": "0b00a6ef52b4827df13b8394d2773fdc18fe31745b397d3f4651160911d258cd",
+      "verified_at": "2026-10-25T20:46:19.532361+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "791bb5033217117189bd1891d6e34f6553a87a2083562a80c042e3c2ce20f51b",
+      "source_version": "b4931dc72eb5df121c1e4c4916c305b7bc71b5b166b49fd9017a988240edf7ab"
+    },
+    "conf-bd0d21c9d12e533e174f4150": {
+      "title": "MCGMapper: Light-Weight Incremental Structure from Motion and Visual Localization with Planar Markers and Camera Groups",
+      "url": "https://arxiv.org/abs/2405.16599",
+      "text": "Structure from Motion (SfM) and visual localization in indoor texture-less scenes and industrial scenarios present prevalent yet challenging research topics. Existing SfM methods designed for natural scenes typically yield low accuracy or map-building failures due to insufficient robust feature extraction in such settings. Visual markers, with their artificially designed features, can effectively address these issues. Nonetheless, existing marker-assisted SfM methods encounter problems like slow running speed and difficulties in convergence; and also, they are governed by the strong assumption of unique marker size. In this paper, we propose a novel SfM framework that utilizes planar markers and multiple cameras with known extrinsics to capture the surrounding environment and reconstruct the marker map. In our algorithm, the initial poses of markers and cameras are calculated with Perspective-n-Points (PnP) in the front-end, while bundle adjustment methods customized for markers and camera groups are designed in the back-end to optimize the 6-DOF pose directly. Our algorithm facilitates the reconstruction of large scenes with different marker sizes, and its accuracy and speed of map building are shown to surpass existing methods. Our approach is suitable for a wide range of scenarios, including laboratories, basements, warehouses, and other industrial settings. Furthermore, we incorporate representative scenarios into simulations and also supply our datasets with pose labels to address the scarcity of quantitative ground-truth datasets in this research field. The datasets and source code are available on GitHub.",
+      "sha256": "c47ee62175e7983ec761f05a8da79e9df82038c15ee14d2c72608795263d7ad7",
+      "verified_at": "2026-10-25T20:46:25.391428+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "7471f243545dbc3a948e9786484854b8fe095ed21376dc46ce7a54b510eb4e66",
+      "source_version": "18829d67e6716842be7eec078d580bd64d90ae0003eba45e44ea61a7c1bcf69c"
+    },
+    "conf-0f69435a419963aa72a05d48": {
+      "title": "ID-to-3D: Expressive ID-guided 3D Heads via Score Distillation Sampling",
+      "url": "https://arxiv.org/abs/2405.16570",
+      "text": "We propose ID-to-3D, a method to generate identity- and text-guided 3D human heads with disentangled expressions, starting from even a single casually captured in-the-wild image of a subject. The foundation of our approach is anchored in compositionality, alongside the use of task-specific 2D diffusion models as priors for optimization. First, we extend a foundational model with a lightweight expression-aware and ID-aware architecture, and create 2D priors for geometry and texture generation, via fine-tuning only 0.2% of its available training parameters. Then, we jointly leverage a neural parametric representation for the expressions of each subject and a multi-stage generation of highly detailed geometry and albedo texture. This combination of strong face identity embeddings and our neural representation enables accurate reconstruction of not only facial features but also accessories and hair and can be meshed to provide render-ready assets for gaming and telepresence. Our results achieve an unprecedented level of identity-consistent and high-quality texture and geometry generation, generalizing to a ``world'' of unseen 3D identities, without relying on large 3D captured datasets of human assets.",
+      "sha256": "2e75b8cf373c44f43f511249cd06d8d405c8d47b149c17e2fb68ecba912a1907",
+      "verified_at": "2026-10-25T20:46:29.682582+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "d432c12f8edeb30f94505cf13d0a7462142046f4cfcb554cf15249ee923462d2",
+      "source_version": "1f226c7f8a0ed964a822387c879c8797ae734c3360471a55f340bf00986bd741"
+    },
+    "conf-a93b7d68fee7594bd8df118e": {
+      "title": "NVS-Solver: Video Diffusion Model as Zero-Shot Novel View Synthesizer",
+      "url": "https://arxiv.org/abs/2405.15364",
+      "text": "By harnessing the potent generative capabilities of pre-trained large video diffusion models, we propose NVS-Solver, a new novel view synthesis (NVS) paradigm that operates \\textit{without} the need for training. NVS-Solver adaptively modulates the diffusion sampling process with the given views to enable the creation of remarkable visual experiences from single or multiple views of static scenes or monocular videos of dynamic scenes. Specifically, built upon our theoretical modeling, we iteratively modulate the score function with the given scene priors represented with warped input views to control the video diffusion process. Moreover, by theoretically exploring the boundary of the estimation error, we achieve the modulation in an adaptive fashion according to the view pose and the number of diffusion steps. Extensive evaluations on both static and dynamic scenes substantiate the significant superiority of our NVS-Solver over state-of-the-art methods both quantitatively and qualitatively. \\textit{ Source code in } \\href{https://github.com/ZHU-Zhiyu/NVS_Solver}{https://github.com/ZHU-Zhiyu/NVS$\\_$Solver}.",
+      "sha256": "1eb828d70fe9fd8a0187949a77bdec78ed15f1b3a05f5e55f6f96311b552f395",
+      "verified_at": "2026-10-25T20:46:35.522196+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "dd272c39b71a4d27b6e86889d1ae54cd9f4f29b1165c3de34a6b404d2991590a",
+      "source_version": "3abda71e701ad6d91655a148875ea462469ca7877d9a349adff51bbb1f6d6926"
+    },
+    "conf-439ca266f9c36ed5d1e47909": {
+      "title": "LAM3D: Large Image-Point Clouds Alignment Model for 3D Reconstruction from Single Image",
+      "url": "https://papers.nips.cc/paper_files/paper/2024/hash/084727e8abf90a8365b940036329cb6f-Abstract-Conference.html",
+      "text": "Large Reconstruction Models have made significant strides in the realm of automated 3D content generation from single or multiple input images. Despite their success, these models often produce 3D meshes with geometric inaccuracies, stemming from the inherent challenges of deducing 3D shapes solely from image data. In this work, we introduce a novel framework, the Large Image and Point Cloud Alignment Model (LAM3D), which utilizes 3D point cloud data to enhance the fidelity of generated 3D meshes. Our methodology begins with the development of a point-cloud-based network that effectively generates precise and meaningful latent tri-planes, laying the groundwork for accurate 3D mesh reconstruction. Building upon this, our Image-Point-Cloud Feature Alignment technique processes a single input image, aligning to the latent tri-planes to imbue image features with robust 3D information. This process not only enriches the image features but also facilitates the production of high-fidelity 3D meshes without the need for multi-view input, significantly reducing geometric distortions. Our approach achieves state-of-the-art high-fidelity 3D mesh reconstruction from a single image in just 6 seconds, and experiments on various datasets demonstrate its effectiveness.",
+      "sha256": "6d3a262abb7d8cd8cd9b84ded8617d11339015e6769062e76b217911fed1c2d9",
+      "verified_at": "2026-10-25T20:46:41.765426+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "eb9838c55cda5fa17c5740c6762bcc8fcec9c6e011b9a96f1f7bffbb095f83ab",
+      "source_version": "65e1bf4e6fd641906c0dd993d0632c913be3a03b3c1576c0ae938304f6f0ec27"
+    },
+    "conf-9b69ead82c4d856ab0d88120": {
+      "title": "NeurCross: A Neural Approach to Computing Cross Fields for Quad Mesh Generation",
+      "url": "https://arxiv.org/abs/2405.13745",
+      "text": "Quadrilateral mesh generation plays a crucial role in numerical simulations within Computer-Aided Design and Engineering (CAD/E). Producing high-quality quadrangulation typically requires satisfying four key criteria. First, the quadrilateral mesh should closely align with principal curvature directions. Second, singular points should be strategically placed and effectively minimized. Third, the mesh should accurately conform to sharp feature edges. Lastly, quadrangulation results should exhibit robustness against noise and minor geometric variations. Existing methods generally involve first computing a regular cross field to represent quad element orientations across the surface, followed by extracting a quadrilateral mesh aligned closely with this cross field. A primary challenge with this approach is balancing the smoothness of the cross field with its alignment to pre-computed principal curvature directions, which are sensitive to small surface perturbations and often ill-defined in spherical or planar regions. To tackle this challenge, we propose NeurCross, a novel framework that simultaneously optimizes a cross field and a neural signed distance function (SDF), whose zero-level set serves as a proxy of the input shape. Our joint optimization is guided by three factors: faithful approximation of the optimized SDF surface to the input surface, alignment between the cross field and the principal curvature field derived from the SDF surface, and smoothness of the cross field. Acting as an intermediary, the neural SDF contributes in two essential ways. First, it provides an alternative, optimizable base surface exhibiting more regular principal curvature directions for guiding the cross field. Second, we leverage the Hessian matrix of the neural SDF to implicitly enforce cross field alignment with principal curvature directions...",
+      "sha256": "94fb548b0d5f9cd863127f816fab9631610674c2bccf9036dc3a085d59924f0f",
+      "verified_at": "2026-10-25T20:46:47.919760+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "9f87aa3926a9b8e4ff7e5d56a874336e2df053aedca95030ad814de0ecee3109",
+      "source_version": "90fd1ba75df3b87ae4fddfc66aa9bedc0ab12cba5de3603161ff2df7df963b92"
+    },
+    "conf-abc74e68b5ed0e49c21f2503": {
+      "title": "Distill-then-prune: An Efficient Compression Framework for Real-time Stereo Matching Network on Edge Devices",
+      "url": "https://arxiv.org/abs/2405.11809",
+      "text": "In recent years, numerous real-time stereo matching methods have been introduced, but they often lack accuracy. These methods attempt to improve accuracy by introducing new modules or integrating traditional methods. However, the improvements are only modest. In this paper, we propose a novel strategy by incorporating knowledge distillation and model pruning to overcome the inherent trade-off between speed and accuracy. As a result, we obtained a model that maintains real-time performance while delivering high accuracy on edge devices. Our proposed method involves three key steps. Firstly, we review state-of-the-art methods and design our lightweight model by removing redundant modules from those efficient models through a comparison of their contributions. Next, we leverage the efficient model as the teacher to distill knowledge into the lightweight model. Finally, we systematically prune the lightweight model to obtain the final model. Through extensive experiments conducted on two widely-used benchmarks, Sceneflow and KITTI, we perform ablation studies to analyze the effectiveness of each module and present our state-of-the-art results.",
+      "sha256": "9f0b45251c35deb5eaa237042145ab8c7fab01119b65d61bb33579db96def018",
+      "verified_at": "2026-10-25T20:46:53.983390+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "acac26adb26f76eb848193237e0de6f1368c030ab8e94ac7105a960a4019a03f",
+      "source_version": "c5e09309918235028fb556091796f7a3d6814b77be3fb41da46e6402742f6f41"
+    },
+    "conf-9146420b7a21be014f492585": {
+      "title": "Depth Prompting for Sensor-Agnostic Depth Estimation",
+      "url": "https://arxiv.org/abs/2405.11867",
+      "text": "Dense depth maps have been used as a key element of visual perception tasks. There have been tremendous efforts to enhance the depth quality, ranging from optimization-based to learning-based methods. Despite the remarkable progress for a long time, their applicability in the real world is limited due to systematic measurement biases such as density, sensing pattern, and scan range. It is well-known that the biases make it difficult for these methods to achieve their generalization. We observe that learning a joint representation for input modalities (e.g., images and depth), which most recent methods adopt, is sensitive to the biases. In this work, we disentangle those modalities to mitigate the biases with prompt engineering. For this, we design a novel depth prompt module to allow the desirable feature representation according to new depth distributions from either sensor types or scene configurations. Our depth prompt can be embedded into foundation models for monocular depth estimation. Through this embedding process, our method helps the pretrained model to be free from restraint of depth scan range and to provide absolute scale depth maps. We demonstrate the effectiveness of our method through extensive evaluations. Source code is publicly available at https://github.com/JinhwiPark/DepthPrompting .",
+      "sha256": "1b0551c8420f5a89b704aed399b4f9a86b08e6721d2ada8efa715d3a4cdf693b",
+      "verified_at": "2026-10-25T20:46:58.493100+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "7d8e6691fa68f5eacb640f0b1f7500ba84fbdc73ef62db45af473bd056833099",
+      "source_version": "db24345a47c7a7a9c476be7d961055e812724de126e8cfd8fb1c26f13f2ed551"
     }
   }
 }
