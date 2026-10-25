@@ -13313,6 +13313,233 @@
       "basis": "official_abstract",
       "source_sha256": "712616e3ee3f49f5a8a18cb310e74a37e8a0dd3fb199ce705c010814df07ee1d",
       "source_version": "6a65be090f55365eab4cad7e0b18c0006e84a813370328092fd13da86bd65bd6"
+    },
+    "conf-ed240ea68d9175af01d92246": {
+      "title": "FlowIE: Efficient Image Enhancement via Rectified Flow",
+      "url": "https://arxiv.org/abs/2406.00508",
+      "text": "Image enhancement holds extensive applications in real-world scenarios due to complex environments and limitations of imaging devices. Conventional methods are often constrained by their tailored models, resulting in diminished robustness when confronted with challenging degradation conditions. In response, we propose FlowIE, a simple yet highly effective flow-based image enhancement framework that estimates straight-line paths from an elementary distribution to high-quality images. Unlike previous diffusion-based methods that suffer from long-time inference, FlowIE constructs a linear many-to-one transport mapping via conditioned rectified flow. The rectification straightens the trajectories of probability transfer, accelerating inference by an order of magnitude. This design enables our FlowIE to fully exploit rich knowledge in the pre-trained diffusion model, rendering it well-suited for various real-world applications. Moreover, we devise a faster inference algorithm, inspired by Lagrange's Mean Value Theorem, harnessing midpoint tangent direction to optimize path estimation, ultimately yielding visually superior results. Thanks to these designs, our FlowIE adeptly manages a diverse range of enhancement tasks within a concise sequence of fewer than 5 steps. Our contributions are rigorously validated through comprehensive experiments on synthetic and real-world datasets, unveiling the compelling efficacy and efficiency of our proposed FlowIE. Code is available at https://github.com/EternalEvan/FlowIE.",
+      "sha256": "b86e0a53fbfee27a56eb6aeae22c3bd3e8d2d92eed33cb663ee89ac9b10efc8e",
+      "verified_at": "2026-10-25T20:26:49.124067+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "adee52d1628fbdbb1c0f21701d02b6cdd1a0e2aab52c25ffa08a56079cc7e98c",
+      "source_version": "b0cab7ad41a00aca7d2416883abd4e00b337e6c26609c194a2a3f6fc4783fa88"
+    },
+    "conf-5da8d052402389e1e18fe12e": {
+      "title": "Information Theoretic Text-to-Image Alignment",
+      "url": "https://arxiv.org/abs/2405.20759",
+      "text": "Diffusion models for Text-to-Image (T2I) conditional generation have recently achieved tremendous success. Yet, aligning these models with user's intentions still involves a laborious trial-and-error process, and this challenging alignment problem has attracted considerable attention from the research community. In this work, instead of relying on fine-grained linguistic analyses of prompts, human annotation, or auxiliary vision-language models, we use Mutual Information (MI) to guide model alignment. In brief, our method uses self-supervised fine-tuning and relies on a point-wise (MI) estimation between prompts and images to create a synthetic fine-tuning set for improving model alignment. Our analysis indicates that our method is superior to the state-of-the-art, yet it only requires the pre-trained denoising network of the T2I model itself to estimate MI, and a simple fine-tuning strategy that improves alignment while maintaining image quality. Code available at https://github.com/Chao0511/mitune.",
+      "sha256": "e30f859cfeee89a4b95aaf2ee09613ae1989513357dbfbdf06d2c3065639bd96",
+      "verified_at": "2026-10-25T20:26:55.336955+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "d1228154493d094c77d4c02933bdfe6fc827cc5483232812e864fe21a31029b8",
+      "source_version": "dddf82436cef3bd13d03befa58381cc53c7a262ef86a38c9ce3c45c45f15c616"
+    },
+    "conf-c357a98cf333b30b3485a480": {
+      "title": "RefDrop: Controllable Consistency in Image or Video Generation via Reference Feature Guidance",
+      "url": "https://arxiv.org/abs/2405.17661",
+      "text": "There is a rapidly growing interest in controlling consistency across multiple generated images using diffusion models. Among various methods, recent works have found that simply manipulating attention modules by concatenating features from multiple reference images provides an efficient approach to enhancing consistency without fine-tuning. Despite its popularity and success, few studies have elucidated the underlying mechanisms that contribute to its effectiveness. In this work, we reveal that the popular approach is a linear interpolation of image self-attention and cross-attention between synthesized content and reference features, with a constant rank-1 coefficient. Motivated by this observation, we find that a rank-1 coefficient is not necessary and simplifies the controllable generation mechanism. The resulting algorithm, which we coin as RefDrop, allows users to control the influence of reference context in a direct and precise manner. Besides further enhancing consistency in single-subject image generation, our method also enables more interesting applications, such as the consistent generation of multiple subjects, suppressing specific features to encourage more diverse content, and high-quality personalized video generation by boosting temporal consistency. Even compared with state-of-the-art image-prompt-based generators, such as IP-Adapter, RefDrop is competitive in terms of controllability and quality while avoiding the need to train a separate image encoder for feature injection from reference images, making it a versatile plug-and-play solution for any image or video diffusion model.",
+      "sha256": "10920750f97b1467745d34e4948610c1a3dccbc99819dfb7c0403f4542a3f180",
+      "verified_at": "2026-10-25T20:27:01.193792+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "6cbd64741f6cbcb0f622a274876f617558e0e4e3520e69b1666e83ab82f0a433",
+      "source_version": "03986f3147051cd180d9898c1154bf50d4428dde97e4477f2e521e8d5d9dca7c"
+    },
+    "conf-19c7e4b6fa17571a271a177b": {
+      "title": "Frieren: Efficient Video-to-Audio Generation Network with Rectified Flow Matching",
+      "url": "https://arxiv.org/abs/2406.00320",
+      "text": "Video-to-audio (V2A) generation aims to synthesize content-matching audio from silent video, and it remains challenging to build V2A models with high generation quality, efficiency, and visual-audio temporal synchrony. We propose Frieren, a V2A model based on rectified flow matching. Frieren regresses the conditional transport vector field from noise to spectrogram latent with straight paths and conducts sampling by solving ODE, outperforming autoregressive and score-based models in terms of audio quality. By employing a non-autoregressive vector field estimator based on a feed-forward transformer and channel-level cross-modal feature fusion with strong temporal alignment, our model generates audio that is highly synchronized with the input video. Furthermore, through reflow and one-step distillation with guided vector field, our model can generate decent audio in a few, or even only one sampling step. Experiments indicate that Frieren achieves state-of-the-art performance in both generation quality and temporal alignment on VGGSound, with alignment accuracy reaching 97.22%, and 6.2% improvement in inception score over the strong diffusion-based baseline. Audio samples are available at http://frieren-v2a.github.io.",
+      "sha256": "6e4908d3ccd79ed73e68ffc6bf5c0a1e0f1d5a71771fd3384cd128067e0d091d",
+      "verified_at": "2026-10-25T20:27:07.350831+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "8e22a83f8b6e3bc1f5a05ae0a37cddcb7d8e20c9f64094037f2c3577fe89407d",
+      "source_version": "b366ced135df1c45497fc66f2fcb00ca739623787a3537c130a984b6c4147ac7"
+    },
+    "conf-be4fcd217f94f4ba6b2be71f": {
+      "title": "SNED: Superposition Network Architecture Search for Efficient Video Diffusion Model",
+      "url": "https://arxiv.org/abs/2406.00195",
+      "text": "While AI-generated content has garnered significant attention, achieving photo-realistic video synthesis remains a formidable challenge. Despite the promising advances in diffusion models for video generation quality, the complex model architecture and substantial computational demands for both training and inference create a significant gap between these models and real-world applications. This paper presents SNED, a superposition network architecture search method for efficient video diffusion model. Our method employs a supernet training paradigm that targets various model cost and resolution options using a weight-sharing method. Moreover, we propose the supernet training sampling warm-up for fast training optimization. To showcase the flexibility of our method, we conduct experiments involving both pixel-space and latent-space video diffusion models. The results demonstrate that our framework consistently produces comparable results across different model options with high efficiency. According to the experiment for the pixel-space video diffusion model, we can achieve consistent video generation results simultaneously across 64 x 64 to 256 x 256 resolutions with a large range of model sizes from 640M to 1.6B number of parameters for pixel-space video diffusion models.",
+      "sha256": "279ff5830b58f94aff3ee2822e31f4f6bfcf4f56fde9af8bffd1fe5e9fbe6817",
+      "verified_at": "2026-10-25T20:27:13.377459+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "a9c6348378042b58172b7e7d84962e6d058642113af28e9c7d7e1b54a28671d9",
+      "source_version": "bb509f29e2a86daab918979206270db8658ebc5f4eeeed5ab69b4f6c4613dd51"
+    },
+    "conf-a3b217f0066c66cf2e0066f7": {
+      "title": "T2V-Turbo: Breaking the Quality Bottleneck of Video Consistency Model with Mixed Reward Feedback",
+      "url": "https://arxiv.org/abs/2405.18750",
+      "text": "Diffusion-based text-to-video (T2V) models have achieved significant success but continue to be hampered by the slow sampling speed of their iterative sampling processes. To address the challenge, consistency models have been proposed to facilitate fast inference, albeit at the cost of sample quality. In this work, we aim to break the quality bottleneck of a video consistency model (VCM) to achieve $\\textbf{both fast and high-quality video generation}$. We introduce T2V-Turbo, which integrates feedback from a mixture of differentiable reward models into the consistency distillation (CD) process of a pre-trained T2V model. Notably, we directly optimize rewards associated with single-step generations that arise naturally from computing the CD loss, effectively bypassing the memory constraints imposed by backpropagating gradients through an iterative sampling process. Remarkably, the 4-step generations from our T2V-Turbo achieve the highest total score on VBench, even surpassing Gen-2 and Pika. We further conduct human evaluations to corroborate the results, validating that the 4-step generations from our T2V-Turbo are preferred over the 50-step DDIM samples from their teacher models, representing more than a tenfold acceleration while improving video generation quality.",
+      "sha256": "85bbce28c8c5758701f50d0281b50a554d96819894ed3269dc00a1a62c401c04",
+      "verified_at": "2026-10-25T20:27:17.991355+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "36d5716047468729a16508bdd749c76269e45fdbd45dbc23c081685359da3b35",
+      "source_version": "9173fe0a550321f66f44b9366b557c7c8b4a6495f6ee215a1a20e977a8f06a0b"
+    },
+    "conf-dd34d4c5d97e3d66dc668fe9": {
+      "title": "MMDisCo: Multi-Modal Discriminator-Guided Cooperative Diffusion for Joint Audio and Video Generation",
+      "url": "https://arxiv.org/abs/2405.17842",
+      "text": "This study aims to construct an audio-video generative model with minimal computational cost by leveraging pre-trained single-modal generative models for audio and video. To achieve this, we propose a novel method that guides single-modal models to cooperatively generate well-aligned samples across modalities. Specifically, given two pre-trained base diffusion models, we train a lightweight joint guidance module to adjust scores separately estimated by the base models to match the score of joint distribution over audio and video. We show that this guidance can be computed using the gradient of the optimal discriminator, which distinguishes real audio-video pairs from fake ones independently generated by the base models. Based on this analysis, we construct a joint guidance module by training this discriminator. Additionally, we adopt a loss function to stabilize the discriminator's gradient and make it work as a noise estimator, as in standard diffusion models. Empirical evaluations on several benchmark datasets demonstrate that our method improves both single-modal fidelity and multimodal alignment with relatively few parameters. The code is available at: https://github.com/SonyResearch/MMDisCo.",
+      "sha256": "5e7839173b9ff517774ec0cd1bb7206b96fb79cc08ede7014cc0ba79bd884aa2",
+      "verified_at": "2026-10-25T20:27:23.890482+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "6fb05b388fe3b23e2f64015bd9abe8785fe0a994ee2a9191f803f67cb046d55c",
+      "source_version": "1b6351eebea24a37e1229bfc1addec48d9748d92c513b2165a6817ca28505397"
+    },
+    "conf-81b7feeecb27532b532240c6": {
+      "title": "Topo4D: Topology-Preserving Gaussian Splatting for High-Fidelity 4D Head Capture",
+      "url": "https://arxiv.org/abs/2406.00440",
+      "text": "4D head capture aims to generate dynamic topological meshes and corresponding texture maps from videos, which is widely utilized in movies and games for its ability to simulate facial muscle movements and recover dynamic textures in pore-squeezing. The industry often adopts the method involving multi-view stereo and non-rigid alignment. However, this approach is prone to errors and heavily reliant on time-consuming manual processing by artists. To simplify this process, we propose Topo4D, a novel framework for automatic geometry and texture generation, which optimizes densely aligned 4D heads and 8K texture maps directly from calibrated multi-view time-series images. Specifically, we first represent the time-series faces as a set of dynamic 3D Gaussians with fixed topology in which the Gaussian centers are bound to the mesh vertices. Afterward, we perform alternative geometry and texture optimization frame-by-frame for high-quality geometry and texture learning while maintaining temporal topology stability. Finally, we can extract dynamic facial meshes in regular wiring arrangement and high-fidelity textures with pore-level details from the learned Gaussians. Extensive experiments show that our method achieves superior results than the current SOTA face reconstruction methods both in the quality of meshes and textures. Project page: https://xuanchenli.github.io/Topo4D/.",
+      "sha256": "fb865fac1363f07223a28908541a6fc416d46febb9e19a87550585d916810981",
+      "verified_at": "2026-10-25T20:27:31.101319+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "0152f3c5506f931d828cbf0f1c7b255a3f9018f2c1142b633f58b20e4f98e189",
+      "source_version": "a06206c397312501cad1d3c965bc1de71f7b6dcd3cf76bda39d79ab3ce3c5fb6"
+    },
+    "conf-34253782b8a9793964a27a28": {
+      "title": "MoDGS: Dynamic Gaussian Splatting from Casually-captured Monocular Videos with Depth Priors",
+      "url": "https://arxiv.org/abs/2406.00434",
+      "text": "In this paper, we propose MoDGS, a new pipeline to render novel views of dy namic scenes from a casually captured monocular video. Previous monocular dynamic NeRF or Gaussian Splatting methods strongly rely on the rapid move ment of input cameras to construct multiview consistency but struggle to recon struct dynamic scenes on casually captured input videos whose cameras are either static or move slowly. To address this challenging task, MoDGS adopts recent single-view depth estimation methods to guide the learning of the dynamic scene. Then, a novel 3D-aware initialization method is proposed to learn a reasonable deformation field and a new robust depth loss is proposed to guide the learning of dynamic scene geometry. Comprehensive experiments demonstrate that MoDGS is able to render high-quality novel view images of dynamic scenes from just a casually captured monocular video, which outperforms state-of-the-art meth ods by a significant margin. The code is publicly available now.",
+      "sha256": "79e413e6a1b444dec8b83e61ef723190f5fad8b2c0cb66098735cb32eb47bcbc",
+      "verified_at": "2026-10-25T20:27:37.204432+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "3b223af53ace15c23af659e199992b128c6cd94e9d1a2d2a7b26d3f65aa1221e",
+      "source_version": "55382dcd944c8868b15a5130188effcbb87296a0ee3caa5446040f97b1287887"
+    },
+    "conf-6096c622bd56d544ebde3b53": {
+      "title": "ContextGS : Compact 3D Gaussian Splatting with Anchor Level Context Model",
+      "url": "https://arxiv.org/abs/2405.20721",
+      "text": "Recently, 3D Gaussian Splatting (3DGS) has become a promising framework for novel view synthesis, offering fast rendering speeds and high fidelity. However, the large number of Gaussians and their associated attributes require effective compression techniques. Existing methods primarily compress neural Gaussians individually and independently, i.e., coding all the neural Gaussians at the same time, with little design for their interactions and spatial dependence. Inspired by the effectiveness of the context model in image compression, we propose the first autoregressive model at the anchor level for 3DGS compression in this work. We divide anchors into different levels and the anchors that are not coded yet can be predicted based on the already coded ones in all the coarser levels, leading to more accurate modeling and higher coding efficiency. To further improve the efficiency of entropy coding, e.g., to code the coarsest level with no already coded anchors, we propose to introduce a low-dimensional quantized feature as the hyperprior for each anchor, which can be effectively compressed. Our work pioneers the context model in the anchor level for 3DGS representation, yielding an impressive size reduction of over 100 times compared to vanilla 3DGS and 15 times compared to the most recent state-of-the-art work Scaffold-GS, while achieving comparable or even higher rendering quality.",
+      "sha256": "7f498ad6788a8055051989fcc5ecd41c0febacf30b318d0e026693c07082aa13",
+      "verified_at": "2026-10-25T20:27:42.936954+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "d85fd10fd0e5b06a260dbadc0a6ae92df51f40e3e7ac7bb87491e09c383de2df",
+      "source_version": "a34ea1910b282ca4e044d56d20e60b82ab643aa804b9feefad1761baa73c9874"
+    },
+    "2405.20078": {
+      "title": "NeRF View Synthesis: Subjective Quality Assessment and Objective Metrics Evaluation",
+      "url": "https://arxiv.org/abs/2405.20078",
+      "text": "Neural radiance fields (NeRF) are a groundbreaking computer vision technology that enables the generation of high-quality, immersive visual content from multiple viewpoints. This capability has significant advantages for applications such as virtual/augmented reality, 3D modelling, and content creation for the film and entertainment industry. However, the evaluation of NeRF methods poses several challenges, including a lack of comprehensive datasets, reliable assessment methodologies, and objective quality metrics. This paper addresses the problem of NeRF view synthesis (NVS) quality assessment thoroughly, by conducting a rigorous subjective quality assessment test that considers several scene classes and recently proposed NVS methods. Additionally, the performance of a wide range of state-of-the-art conventional and learning-based full-reference 2D image and video quality assessment metrics is evaluated against the subjective scores of the subjective study. This study found that errors in camera pose estimation can result in spatial misalignments between synthesized and reference images, which need to be corrected before applying an objective quality metric. The experimental results are analyzed in depth, providing a comparative evaluation of several NVS methods and objective quality metrics, across different classes of visual scenes, including real and synthetic content for front-face and 360-degree camera trajectories.",
+      "sha256": "3e45e4e859b4ab7cf49c135e81ca1cedc207fd3c8f7219524236a8e346601e88",
+      "verified_at": "2026-10-25T20:27:45.993029+08:00"
+    },
+    "conf-6df28ccb7d6b95c3a121d915": {
+      "title": "GaussianRoom: Improving 3D Gaussian Splatting with SDF Guidance and Monocular Cues for Indoor Scene Reconstruction",
+      "url": "https://arxiv.org/abs/2405.19671",
+      "text": "Embodied intelligence requires precise reconstruction and rendering to simulate large-scale real-world data. Although 3D Gaussian Splatting (3DGS) has recently demonstrated high-quality results with real-time performance, it still faces challenges in indoor scenes with large, textureless regions, resulting in incomplete and noisy reconstructions due to poor point cloud initialization and underconstrained optimization. Inspired by the continuity of signed distance field (SDF), which naturally has advantages in modeling surfaces, we propose a unified optimization framework that integrates neural signed distance fields (SDFs) with 3DGS for accurate geometry reconstruction and real-time rendering. This framework incorporates a neural SDF field to guide the densification and pruning of Gaussians, enabling Gaussians to model scenes accurately even with poor initialized point clouds. Simultaneously, the geometry represented by Gaussians improves the efficiency of the SDF field by piloting its point sampling. Additionally, we introduce two regularization terms based on normal and edge priors to resolve geometric ambiguities in textureless areas and enhance detail accuracy. Extensive experiments in ScanNet and ScanNet++ show that our method achieves state-of-the-art performance in both surface reconstruction and novel view synthesis.",
+      "sha256": "0bf48120913fc7b1ec74d37074eb7415757883bbca28fc0e463a01c050c92a74",
+      "verified_at": "2026-10-25T20:27:51.691986+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "17795fb3042774badca4857c483faef164791285425f5c77e81822c4c3e305f6",
+      "source_version": "fcc7241ca29cdc4e9342e97ff4094e247f6e7b35d1bd6b618254e3335401a6e3"
+    },
+    "conf-e32bf12441f4e0730de56f00": {
+      "title": "EvaGaussians: Event Stream Assisted Gaussian Splatting from Blurry Images",
+      "url": "https://arxiv.org/abs/2405.20224",
+      "text": "3D Gaussian Splatting (3D-GS) has demonstrated exceptional capabilities in 3D scene reconstruction and novel view synthesis. However, its training heavily depends on high-quality, sharp images and accurate camera poses. Fulfilling these requirements can be challenging in non-ideal real-world scenarios, where motion-blurred images are commonly encountered in high-speed moving cameras or low-light environments that require long exposure times. To address these challenges, we introduce Event Stream Assisted Gaussian Splatting (EvaGaussians), a novel approach that integrates event streams captured by an event camera to assist in reconstructing high-quality 3D-GS from blurry images. Capitalizing on the high temporal resolution and dynamic range offered by the event camera, we leverage the event streams to explicitly model the formation process of motion-blurred images and guide the deblurring reconstruction of 3D-GS. By jointly optimizing the 3D-GS parameters and recovering camera motion trajectories during the exposure time, our method can robustly facilitate the acquisition of high-fidelity novel views with intricate texture details. We comprehensively evaluated our method and compared it with previous state-of-the-art deblurring rendering methods. Both qualitative and quantitative comparisons demonstrate that our method surpasses existing techniques in restoring fine details from blurry images and producing high-fidelity novel views.",
+      "sha256": "e941a3fe71607eb1d45893fc1e922383acc1232a29838f64ef8cbeb7d70a7657",
+      "verified_at": "2026-10-25T20:27:57.584734+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "f8b78f089e25e5981bf8329716df3edca02dcacd21ce6e9d37117ebd3ae6ab6d",
+      "source_version": "48af9536dd236a73db48f9c6d8840643b0ee0f4e404cdee7162001618f6de711"
+    },
+    "conf-f0492bb8e544b3cbf08d387e": {
+      "title": "EG4D: Explicit Generation of 4D Object without Score Distillation",
+      "url": "https://arxiv.org/abs/2405.18132",
+      "text": "In recent years, the increasing demand for dynamic 3D assets in design and gaming applications has given rise to powerful generative pipelines capable of synthesizing high-quality 4D objects. Previous methods generally rely on score distillation sampling (SDS) algorithm to infer the unseen views and motion of 4D objects, thus leading to unsatisfactory results with defects like over-saturation and Janus problem. Therefore, inspired by recent progress of video diffusion models, we propose to optimize a 4D representation by explicitly generating multi-view videos from one input image. However, it is far from trivial to handle practical challenges faced by such a pipeline, including dramatic temporal inconsistency, inter-frame geometry and texture diversity, and semantic defects brought by video generation results. To address these issues, we propose DG4D, a novel multi-stage framework that generates high-quality and consistent 4D assets without score distillation. Specifically, collaborative techniques and solutions are developed, including an attention injection strategy to synthesize temporal-consistent multi-view videos, a robust and efficient dynamic reconstruction method based on Gaussian Splatting, and a refinement stage with diffusion prior for semantic restoration. The qualitative results and user preference study demonstrate that our framework outperforms the baselines in generation quality by a considerable margin. Code will be released at \\url{https://github.com/jasongzy/EG4D}.",
+      "sha256": "3ba5c149d833516f8fff84ed55a873f840454f8efe27338eb5313ae57d8da502",
+      "verified_at": "2026-10-25T20:28:03.545806+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "4f22096d5e2032a26ce771d6bf82726557400135d6f8696859127b9bd7ec0007",
+      "source_version": "8e2513270dc5b6ad23cbff4c0b3008c1bc67cc1c37fd4424fe34fad5501d1ca9"
+    },
+    "conf-e29e83166e4b8c654bd1ca26": {
+      "title": "FreeSplat: Generalizable 3D Gaussian Splatting Towards Free View Synthesis of Indoor Scenes",
+      "url": "https://arxiv.org/abs/2405.17958",
+      "text": "Empowering 3D Gaussian Splatting with generalization ability is appealing. However, existing generalizable 3D Gaussian Splatting methods are largely confined to narrow-range interpolation between stereo images due to their heavy backbones, thus lacking the ability to accurately localize 3D Gaussian and support free-view synthesis across wide view range. In this paper, we present a novel framework FreeSplat that is capable of reconstructing geometrically consistent 3D scenes from long sequence input towards free-view synthesis.Specifically, we firstly introduce Low-cost Cross-View Aggregation achieved by constructing adaptive cost volumes among nearby views and aggregating features using a multi-scale structure. Subsequently, we present the Pixel-wise Triplet Fusion to eliminate redundancy of 3D Gaussians in overlapping view regions and to aggregate features observed across multiple views. Additionally, we propose a simple but effective free-view training strategy that ensures robust view synthesis across broader view range regardless of the number of views. Our empirical results demonstrate state-of-the-art novel view synthesis peformances in both novel view rendered color maps quality and depth maps accuracy across different numbers of input views. We also show that FreeSplat performs inference more efficiently and can effectively reduce redundant Gaussians, offering the possibility of feed-forward large scene reconstruction without depth priors.",
+      "sha256": "b4439a5fd35c0f804fc60a455fe67185910419bd8fe23d5f4970189e408f8872",
+      "verified_at": "2026-10-25T20:28:09.350211+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "e3da116c8c3435cdae1712123b04f8be5342ab6de4a69a2a2c4f5bba5e205444",
+      "source_version": "0160e5fe57a1086fa9d1c3c705b95839cb9d9efdc73741f638ea22e09e728d63"
+    },
+    "conf-65e9b293f26ea1486734d567": {
+      "title": "3D StreetUnveiler with Semantic-aware 2DGS - a simple baseline",
+      "url": "https://arxiv.org/abs/2405.18416",
+      "text": "Unveiling an empty street from crowded observations captured by in-car cameras is crucial for autonomous driving. However, removing all temporarily static objects, such as stopped vehicles and standing pedestrians, presents a significant challenge. Unlike object-centric 3D inpainting, which relies on thorough observation in a small scene, street scene cases involve long trajectories that differ from previous 3D inpainting tasks. The camera-centric moving environment of captured videos further complicates the task due to the limited degree and time duration of object observation. To address these obstacles, we introduce StreetUnveiler to reconstruct an empty street. StreetUnveiler learns a 3D representation of the empty street from crowded observations. Our representation is based on the hard-label semantic 2D Gaussian Splatting (2DGS) for its scalability and ability to identify Gaussians to be removed. We inpaint rendered image after removing unwanted Gaussians to provide pseudo-labels and subsequently re-optimize the 2DGS. Given its temporal continuous movement, we divide the empty street scene into observed, partial-observed, and unobserved regions, which we propose to locate through a rendered alpha map. This decomposition helps us to minimize the regions that need to be inpainted. To enhance the temporal consistency of the inpainting, we introduce a novel time-reversal framework to inpaint frames in reverse order and use later frames as references for earlier frames to fully utilize the long-trajectory observations. Our experiments conducted on the street scene dataset successfully reconstructed a 3D representation of the empty street. The mesh representation of the empty street can be extracted for further applications. The project page and more visualizations can be found at: https://streetunveiler.github.io",
+      "sha256": "60e3275491083c53a249bb19581857010c8435dd4b13f542b26f93632013b8fe",
+      "verified_at": "2026-10-25T20:28:15.361774+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "c87099e54530ecc9e4ab80063568e387fbec53268a71ced0ff54139d0bfabd29",
+      "source_version": "6450cf21ae81eb2228eb741a582cd50248cb497abd015eba57e8c1f71ef1b58d"
+    },
+    "conf-4cc059f6540f38e1fa82ce6f": {
+      "title": "3DitScene: Editing Any Scene via Language-guided Disentangled Gaussian Splatting",
+      "url": "https://arxiv.org/abs/2405.18424",
+      "text": "Scene image editing is crucial for entertainment, photography, and advertising design. Existing methods solely focus on either 2D individual object or 3D global scene editing. This results in a lack of a unified approach to effectively control and manipulate scenes at the 3D level with different levels of granularity. In this work, we propose 3DitScene, a novel and unified scene editing framework leveraging language-guided disentangled Gaussian Splatting that enables seamless editing from 2D to 3D, allowing precise control over scene composition and individual objects. We first incorporate 3D Gaussians that are refined through generative priors and optimization techniques. Language features from CLIP then introduce semantics into 3D geometry for object disentanglement. With the disentangled Gaussians, 3DitScene allows for manipulation at both the global and individual levels, revolutionizing creative expression and empowering control over scenes and objects. Experimental results demonstrate the effectiveness and versatility of 3DitScene in scene image editing. Code and online demo can be found at our project homepage: https://zqh0253.github.io/3DitScene/.",
+      "sha256": "6770548d98b0105c55322c24106847c8dbdb09b18ef885d3a8c39189d1c72e16",
+      "verified_at": "2026-10-25T20:28:19.172526+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "44a1c76096a123f869a665d49e33a027aedc57c46d411d583ed3b344dcfba311",
+      "source_version": "aead937aa419d9542e0d3ded53fccbe79ee1126b3ef916f32041a48cdeb1f7e4"
+    },
+    "conf-fec98a5a1d66c6ea4a07ba8d": {
+      "title": "$\\text{Di}^2\\text{Pose}$: Discrete Diffusion Model for Occluded 3D Human Pose Estimation",
+      "url": "https://arxiv.org/abs/2405.17016",
+      "text": "Continuous diffusion models have demonstrated their effectiveness in addressing the inherent uncertainty and indeterminacy in monocular 3D human pose estimation (HPE). Despite their strengths, the need for large search spaces and the corresponding demand for substantial training data make these models prone to generating biomechanically unrealistic poses. This challenge is particularly noticeable in occlusion scenarios, where the complexity of inferring 3D structures from 2D images intensifies. In response to these limitations, we introduce the Discrete Diffusion Pose ($\\text{Di}^2\\text{Pose}$), a novel framework designed for occluded 3D HPE that capitalizes on the benefits of a discrete diffusion model. Specifically, $\\text{Di}^2\\text{Pose}$ employs a two-stage process: it first converts 3D poses into a discrete representation through a \\emph{pose quantization step}, which is subsequently modeled in latent space through a \\emph{discrete diffusion process}. This methodological innovation restrictively confines the search space towards physically viable configurations and enhances the model's capability to comprehend how occlusions affect human pose within the latent space. Extensive evaluations conducted on various benchmarks (e.g., Human3.6M, 3DPW, and 3DPW-Occ) have demonstrated its effectiveness.",
+      "sha256": "c621498c58225121e925ed092e0f818e007d257f790de52e3b61ad1dcc8ca51b",
+      "verified_at": "2026-10-25T20:28:24.877835+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "35e2cd18767beed1b314d48be0e6b1050c8b1be9cdf93ba6b76de0665e80a999",
+      "source_version": "5b4811dc327bd58ef140444c170b3303aac5c91b3f8a9e06979c0b39120fcc69"
+    },
+    "conf-d5ad148bcb72b5c501a06cf4": {
+      "title": "PivotMesh: Generic 3D Mesh Generation via Pivot Vertices Guidance",
+      "url": "https://arxiv.org/abs/2405.16890",
+      "text": "Generating compact and sharply detailed 3D meshes poses a significant challenge for current 3D generative models. Different from extracting dense meshes from neural representation, some recent works try to model the native mesh distribution (i.e., a set of triangles), which generates more compact results as humans crafted. However, due to the complexity and variety of mesh topology, these methods are typically limited to small datasets with specific categories and are hard to extend. In this paper, we introduce a generic and scalable mesh generation framework PivotMesh, which makes an initial attempt to extend the native mesh generation to large-scale datasets. We employ a transformer-based auto-encoder to encode meshes into discrete tokens and decode them from face level to vertex level hierarchically. Subsequently, to model the complex typology, we first learn to generate pivot vertices as coarse mesh representation and then generate the complete mesh tokens with the same auto-regressive Transformer. This reduces the difficulty compared with directly modeling the mesh distribution and further improves the model controllability. PivotMesh demonstrates its versatility by effectively learning from both small datasets like Shapenet, and large-scale datasets like Objaverse and Objaverse-xl. Extensive experiments indicate that PivotMesh can generate compact and sharp 3D meshes across various categories, highlighting its great potential for native mesh modeling.",
+      "sha256": "23f981636877a42f897a6f6089e8bf43a8ee2afba941e6a7c9b3991f4699c66d",
+      "verified_at": "2026-10-25T20:28:30.788285+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "bc4c361b5cff180b1aab0512cd336c8b3dbc13b3124f4bc72101f78893b3ba7a",
+      "source_version": "1ce17b1f32a40b1f1084fe1c92041a2ba42658412e315800fb777a86fd5bf383"
+    },
+    "conf-54b464f0c2b0b2fcb6503f41": {
+      "title": "Motion-Agent: A Conversational Framework for Human Motion Generation with LLMs",
+      "url": "https://arxiv.org/abs/2405.17013",
+      "text": "While previous approaches to 3D human motion generation have achieved notable success, they often rely on extensive training and are limited to specific tasks. To address these challenges, we introduce Motion-Agent, an efficient conversational framework designed for general human motion generation, editing, and understanding. Motion-Agent employs an open-source pre-trained language model to develop a generative agent, MotionLLM, that bridges the gap between motion and text. This is accomplished by encoding and quantizing motions into discrete tokens that align with the language model's vocabulary. With only 1--3\\% of the model's parameters fine-tuned using adapters, MotionLLM delivers performance on par with diffusion models and other transformer-based methods trained from scratch. By integrating MotionLLM with GPT-4 without additional training, Motion-Agent is able to generate highly complex motion sequences through multi-turn conversations, a capability that previous models have struggled to achieve. Motion-Agent supports a wide range of motion-language tasks, offering versatile capabilities for generating and customizing human motion through interactive conversational exchanges. Project page: https://knoxzhao.github.io/Motion-Agent",
+      "sha256": "fc60291c56669717a5ef27c5d35d386ef71bd095c68a7180cc772130b3081187",
+      "verified_at": "2026-10-25T20:28:36.722615+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "bed6952c3107565ed16660576be0b6cc2e07493592476a12988a44d78313d779",
+      "source_version": "0742d260b6f87f33bad659001e087ed2433b0f1dc31b1e1840322669ab9bb33f"
+    },
+    "conf-204d59a8f49a1d496d1a7d95": {
+      "title": "Vidu4D: Single Generated Video to High-Fidelity 4D Reconstruction with Dynamic Gaussian Surfels",
+      "url": "https://arxiv.org/abs/2405.16822",
+      "text": "Video generative models are receiving particular attention given their ability to generate realistic and imaginative frames. Besides, these models are also observed to exhibit strong 3D consistency, significantly enhancing their potential to act as world simulators. In this work, we present Vidu4D, a novel reconstruction model that excels in accurately reconstructing 4D (i.e., sequential 3D) representations from single generated videos, addressing challenges associated with non-rigidity and frame distortion. This capability is pivotal for creating high-fidelity virtual contents that maintain both spatial and temporal coherence. At the core of Vidu4D is our proposed Dynamic Gaussian Surfels (DGS) technique. DGS optimizes time-varying warping functions to transform Gaussian surfels (surface elements) from a static state to a dynamically warped state. This transformation enables a precise depiction of motion and deformation over time. To preserve the structural integrity of surface-aligned Gaussian surfels, we design the warped-state geometric regularization based on continuous warping fields for estimating normals. Additionally, we learn refinements on rotation and scaling parameters of Gaussian surfels, which greatly alleviates texture flickering during the warping process and enhances the capture of fine-grained appearance details. Vidu4D also contains a novel initialization state that provides a proper start for the warping fields in DGS. Equipping Vidu4D with an existing video generative model, the overall framework demonstrates high-fidelity text-to-4D generation in both appearance and geometry.",
+      "sha256": "eaf4c6d0a84273f969d753754f296b7743e4fede5943b1f3e7034adc0e3a7cca",
+      "verified_at": "2026-10-25T20:28:42.966788+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "a41b608fe9311d5097eb7de625cfb2681af522f45b575bf7e56f30b96fe1cd3c",
+      "source_version": "97201857f3178eb81d5aa372e85fb140d578bf378eabfdda42fccd50405ee3af"
+    },
+    "conf-1705f1b405387cd0b8be8da9": {
+      "title": "3D Reconstruction with Fast Dipole Sums",
+      "url": "https://arxiv.org/abs/2405.16788",
+      "text": "We introduce a method for high-quality 3D reconstruction from multi-view images. Our method uses a new point-based representation, the regularized dipole sum, which generalizes the winding number to allow for interpolation of per-point attributes in point clouds with noisy or outlier points. Using regularized dipole sums, we represent implicit geometry and radiance fields as per-point attributes of a dense point cloud, which we initialize from structure from motion. We additionally derive Barnes-Hut fast summation schemes for accelerated forward and adjoint dipole sum queries. These queries facilitate the use of ray tracing to efficiently and differentiably render images with our point-based representations, and thus update their point attributes to optimize scene geometry and appearance. We evaluate our method in inverse rendering applications against state-of-the-art alternatives, based on ray tracing of neural representations or rasterization of Gaussian point-based representations. Our method significantly improves 3D reconstruction quality and robustness at equal runtimes, while also supporting more general rendering methods such as shadow rays for direct illumination.",
+      "sha256": "741b6004a38f62d9f1e3f9b7a703e62fc7ac097c113c4fd0338a7f3a4fa5d670",
+      "verified_at": "2026-10-25T20:28:46.920899+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "99889d97bfbb76696dc272b2fce29fdb8622119af91fbb4d1575ef3bd7688f8e",
+      "source_version": "d0b7a56e173512231b37cb4018ea8e1b226884fe5c0b28ef0e489f7454ce3522"
+    },
+    "conf-20c806670ca314617948b976": {
+      "title": "All-day Depth Completion",
+      "url": "https://arxiv.org/abs/2405.17315",
+      "text": "We propose a method for depth estimation under different illumination conditions, i.e., day and night time. As photometry is uninformative in regions under low-illumination, we tackle the problem through a multi-sensor fusion approach, where we take as input an additional synchronized sparse point cloud (i.e., from a LiDAR) projected onto the image plane as a sparse depth map, along with a camera image. The crux of our method lies in the use of the abundantly available synthetic data to first approximate the 3D scene structure by learning a mapping from sparse to (coarse) dense depth maps along with their predictive uncertainty - we term this, SpaDe. In poorly illuminated regions where photometric intensities do not afford the inference of local shape, the coarse approximation of scene depth serves as a prior; the uncertainty map is then used with the image to guide refinement through an uncertainty-driven residual learning (URL) scheme. The resulting depth completion network leverages complementary strengths from both modalities - depth is sparse but insensitive to illumination and in metric scale, and image is dense but sensitive with scale ambiguity. SpaDe can be used in a plug-and-play fashion, which allows for 25% improvement when augmented onto existing methods to preprocess sparse depth. We demonstrate URL on the nuScenes dataset where we improve over all baselines by an average 11.65% in all-day scenarios, 11.23% when tested specifically for daytime, and 13.12% for nighttime scenes.",
+      "sha256": "15125bee92edae402a0efe5143205894ba92dcf8398e56242c094d659e9b202d",
+      "verified_at": "2026-10-25T20:28:52.946202+08:00",
+      "basis": "official_abstract",
+      "source_sha256": "545bd56336d2398bf80c74d67d341ddd3a9b319bd6242d8b03316a61095a3c1b",
+      "source_version": "76780eb6c2bdb63cfbac9704d6cf7804e88262bee6494dad51e87c64a1907afc"
     }
   }
 }
