@@ -36,9 +36,8 @@ def periods(now):
     stocks = (now - timedelta(days=(now.weekday() + 1) % 7)).replace(hour=8, minute=0, second=0, microsecond=0)
     if now < stocks:
         stocks -= timedelta(days=7)
-    actuals = now.replace(hour=22 if now.hour >= 22 else 8, minute=0, second=0, microsecond=0)
-    if now < actuals:
-        actuals = (actuals - timedelta(days=1)).replace(hour=22)
+    # Midnight belongs to the new calendar day (the preceding day's 24:00).
+    actuals = now.replace(hour=8 if now.hour >= 8 else 0, minute=0, second=0, microsecond=0)
     return {'daily': daily.strftime('%Y-%m-%d'),
             'stocks_weekly': stocks.strftime('%Y-%m-%d'),
             'stocks_actuals': actuals.strftime('%Y-%m-%dT%H:%M'),
@@ -97,8 +96,10 @@ def record(state, job, period, status, summary, now):
         raise ValueError('model period must be day 1 or 15')
     if job == 'stocks_weekly' and parsed.weekday() != 6:
         raise ValueError('stocks weekly period must be a Sunday')
-    if job == 'stocks_actuals' and (parsed.hour not in (8, 22) or parsed.minute != 0):
-        raise ValueError('stocks actuals period must be 08:00 or 22:00')
+    legacy_actuals = (job == 'stocks_actuals' and parsed.hour == 22
+                      and state.get('jobs', {}).get(job, {}).get('period') == period)
+    if job == 'stocks_actuals' and (parsed.minute != 0 or (parsed.hour not in (0, 8) and not legacy_actuals)):
+        raise ValueError('stocks actuals period must be 00:00 or 08:00')
     result = deepcopy(state)
     result['version'] = 1
     jobs = result.setdefault('jobs', {})

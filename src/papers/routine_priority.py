@@ -10,7 +10,7 @@ import re
 from papers import paths
 from papers.scheduler import JOBS, ZONE, periods
 
-CHECKPOINT_HOURS = (8, 10, 12, 16, 18, 21, 22)
+CHECKPOINT_HOURS = (0, 8, 10, 12, 16, 18)
 PUBLICATION_RESERVE_SECONDS = 600
 
 
