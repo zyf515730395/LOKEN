@@ -2,6 +2,8 @@
 
 ## Sources, publication and taxonomy
 
+- Runtime Git push must preserve a caller-provided `GIT_SSH_COMMAND`, matching the other Git operations; otherwise use the existing secure defaults. Temporary DNS recovery must use a freshly verified address with the original host-key alias and strict host-key checking, never a permanent IP or disabled verification. Publication timeouts, process-group cleanup, pending receipts and exact remote confirmation remain mandatory.
+
 - `routine_priority.check` 是历史回填只读准入真源，watch/worker/逐请求复用；任何例行最近一期回执未 completed/partial、暂停、待发布事务、云端采集无独立核验或下一检查点不足10分钟均让行。partial仍须原业务完整尝试与公开缺口，不由准入器伪造完成。云端核验回执在忽略的 `build/reports/collection-receipt.json`：schema_version=1、period（北京时间08/12/16的YYYY-MM-DDTHH:MM）、status=completed/partial、full_attempt=true、published=true、带时区verified_at、官方仓库actions run_url、evidence_path与evidence_sha256。证据必须在build/reports内，来自真实云端回执审计；URL或游标时间不能代替核验。不创建新采集器/定时器，不凭成功退出码补造回执。
 
 - weekly_backfill读取私有backfill-control.json的resume_after（必须带时区）。暂停期间run/watch不得启动模型；在途任务在下一次admission停止领取，保留缓存/事务。恢复时间不影响daily、会议、模型或Stocks调度回执。
