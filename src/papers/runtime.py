@@ -86,7 +86,7 @@ def _origin_is_ancestor():
 
 def _push_main_once(commit, *, timeout=GIT_PUSH_TIMEOUT_SECONDS):
     environment = os.environ.copy()
-    environment['GIT_SSH_COMMAND'] = GIT_SSH_COMMAND
+    environment.setdefault('GIT_SSH_COMMAND', GIT_SSH_COMMAND)
     process = subprocess.Popen(
         ('git', 'push', 'origin', f'{commit}:refs/heads/main'), cwd=paths.ROOT, env=environment,
         start_new_session=True,
