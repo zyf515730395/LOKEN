@@ -1262,7 +1262,45 @@
       },
       "source_edition": "ECCV 2026",
       "source_version": "57b017c676506339b6f6202030c673f763657be4d0ac7417026711e1e2bfcfdd",
-      "summary": null,
+      "summary": {
+        "contributions": [
+          "识别并解决了基于大语言模型进行代码式布局生成中的两个根本性挑战，即数据集的局限性以及自回归生成过程中的信息不平衡问题。",
+          "提出了一种统一的数据工程流水线，重新处理并重新标注了5个异构数据集，创建了用于微调大语言模型以生成代码式场景表示的大规模数据集。",
+          "引入了SceneSpinner框架，这是一种针对代码式室内场景生成微调的大语言模型，具备基于语言的规划阶段，能够先分解用户请求为高层自然语言计划再生成代码。",
+          "提出了一种基于条件互信息的训练配方，通过量化和调节模型对用户指令与布局历史的依赖程度，有效解决了信息不平衡问题，确保模型能够稳健地遵循用户指令。"
+        ],
+        "one_sentence": "该论文提出SceneSpinner框架，通过构建统一的大规模数据集和引入基于条件互信息的训练策略，解决了大语言模型在生成代码式室内场景布局时存在的数据异构性和指令遵循能力弱的问题。",
+        "problem": "现有基于大语言模型的室内场景生成面临两大核心挑战：一是缺乏包含开放词汇描述、精确7自由度位姿及多视角场景描述的统一高质量数据集；二是自回归生成过程中存在信息不平衡，模型倾向于关注冗长的布局历史代码而忽略简短的用户指令，导致生成的布局无法准确遵循用户意图。"
+      },
+      "summary_source": {
+        "evidence": {
+          "basis": "body_excerpt",
+          "extraction": {
+            "method": "pdf_text"
+          },
+          "sections": [
+            "Page 1",
+            "Page 2",
+            "Page 3",
+            "Page 4",
+            "Page 5",
+            "Page 6",
+            "Page 7",
+            "Page 8",
+            "Page 9",
+            "Page 10",
+            "Page 11",
+            "Page 12",
+            "Page 13",
+            "Page 14",
+            "Page 15"
+          ],
+          "sha256": "a429998f7dfedeab4dcef1b913cf2666ec1622e7e6c01ff7aa0ea91e644ec716",
+          "truncated": true
+        },
+        "sha256": "79f5d1c64cc451c2542ea658a63afe4784c35a12cbd9c21991b14362f6d1512d",
+        "url": "https://media.eventhosts.cc/Conferences/ECCV2026/pdfs/1860.pdf"
+      },
       "title": "Taming LLMs for Codematic Indoor Scene Generation",
       "topic_review": {
         "decisions": {
@@ -1646,6 +1684,32 @@
       "url": "https://openaccess.thecvf.com/content/CVPR2024/html/Moon_From-Ground-To-Objects_Coarse-to-Fine_Self-supervised_Monocular_Depth_Estimation_of_Dynamic_Objects_with_CVPR_2024_paper.html"
     },
     "conf-02181c0c558f6f9ac6cf6fa9": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Diffusion",
+          "Reference Conditioning"
+        ],
+        "topics": [
+          "Image Gen&Edit"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "official_abstract",
+          "extraction": {
+            "method": "pdf_text"
+          },
+          "sections": [
+            "Abstract"
+          ],
+          "sha256": "a8abc6b6f63efca4d9c962f966d9433c778280378aa69bafd924c48e93293300",
+          "truncated": false
+        },
+        "sha256": "524ab395ba3fed513ad61dbe4c6bee20b0f0fa85da051f1860da88436f2de6d1",
+        "url": "https://media.eventhosts.cc/Conferences/ECCV2026/pdfs/8980.pdf"
+      },
       "authors": [
         "Baolin Liu",
         "Zongyuan Yang",
@@ -1678,7 +1742,45 @@
       },
       "source_edition": "ECCV 2026",
       "source_version": "d101f2635a5cd128816ae35d1be788e44caa0cb758cafc9a9763460762d5e386",
-      "summary": null,
+      "summary": {
+        "contributions": [
+          "提出了 StereoEdit，一个用于立体一致、文本引导图像编辑的零样本扩散框架，无需重新训练即可利用预训练文本到图像模型的强大编辑能力。",
+          "设计了结合几何门控注意力参考（GGAR）和几何感知潜在对齐（GALA）的几何感知推理机制，分别在注意力层面进行几何过滤和在潜在层面进行细化，以确保局部和全局的立体一致性。",
+          "GGAR 模块通过利用预测视差图对关键特征进行跨视图扭曲，应用软高斯掩码进行极线对齐，并引入基于前后视差一致性的可靠性感知门控，确保跨视图注意力仅聚焦于几何有效的对应区域。",
+          "GALA 模块在潜在层面操作，通过估计双向扭曲误差并在加权下自适应地细化一致性较差的视图，逐步改善去噪过程中的全局几何一致性。",
+          "在多种立体数据集和合成基准上进行了全面实验，证明该方法在立体一致性、纹理对齐以及定性定量评估上均显著优于现有方法。"
+        ],
+        "one_sentence": "StereoEdit 提出了一种基于扩散模型的零样本立体一致图像编辑框架，通过引入几何感知机制解决现有方法在立体视图编辑中缺乏语义灵活性和几何一致性的问题。",
+        "problem": "现有立体图像编辑方法通常局限于特定任务且缺乏语义灵活性，而直接应用 2D 扩散模型会导致严重的纹理不匹配和几何失真，视频编辑框架则忽略了立体视图特有的极线几何约束，导致跨视图一致性差，且基于显式 3D 表示的方法在小基线立体对上表现不稳定。"
+      },
+      "summary_source": {
+        "evidence": {
+          "basis": "body_excerpt",
+          "extraction": {
+            "method": "pdf_text"
+          },
+          "sections": [
+            "Page 1",
+            "Page 2",
+            "Page 3",
+            "Page 4",
+            "Page 5",
+            "Page 6",
+            "Page 7",
+            "Page 8",
+            "Page 9",
+            "Page 10",
+            "Page 11",
+            "Page 12",
+            "Page 13",
+            "Page 14"
+          ],
+          "sha256": "799919c792541e8eb572420f87081841147be913f7a5df0c463866195e1a2869",
+          "truncated": true
+        },
+        "sha256": "524ab395ba3fed513ad61dbe4c6bee20b0f0fa85da051f1860da88436f2de6d1",
+        "url": "https://media.eventhosts.cc/Conferences/ECCV2026/pdfs/8980.pdf"
+      },
       "title": "StereoEdit: A Diffusion-Based Framework for Stereo-Consistent Image Editing",
       "topic_review": {
         "decisions": {
@@ -1965,6 +2067,33 @@
       "url": "https://proceedings.mlr.press/v267/qu25h.html"
     },
     "conf-027da53857bc374af3136e4a": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Gaussian Splatting",
+          "Multi-View-to-3D",
+          "Optimization-Based"
+        ],
+        "topics": [
+          "3D Gen&Recon"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "official_abstract",
+          "extraction": {
+            "method": "pdf_text"
+          },
+          "sections": [
+            "Abstract"
+          ],
+          "sha256": "9ff9c3375e5bae50373d8e84dcf24793a97193a4d6cb77a46ece6a0b5bc990d8",
+          "truncated": false
+        },
+        "sha256": "e777cf1dd29846f2aea9bbefe425445b7a72e16f700c1ea46c6054d13907da37",
+        "url": "https://media.eventhosts.cc/Conferences/ECCV2026/pdfs/12014.pdf"
+      },
       "authors": [
         "Junao Shen",
         "Tian Feng",
@@ -2000,7 +2129,45 @@
       },
       "source_edition": "ECCV 2026",
       "source_version": "13cf23b69c3337475df69211f849413355486c627acf20cc96541804f5fcf698",
-      "summary": null,
+      "summary": {
+        "contributions": [
+          "首次识别并定义了代表性3DGS新视角合成方法中存在的稀疏性差异问题，指出其使用扩展视图信息违反了少样本设定的原则。",
+          "提出了一种名为ReInGS的新型高效3DGS少样本新视角合成方法，通过针对场景几何的由粗到细重初始化3D高斯来解决稀疏性差异，并在无稀疏性差异的情况下优于代表性方法。",
+          "设计了基于扩展的混合点采样策略，在粗粒度初始化阶段通过均匀和随机混合采样生成覆盖场景空间的稠密点，以优化高斯的全局几何结构。",
+          "提出了视图主导的细节感知点采样策略，在细粒度重初始化阶段结合视图内和跨视图采样子策略，利用预优化高斯生成关注局部几何细节的点，以改善重建质量。",
+          "在两个基准数据集上进行了实验验证，证明该方法在2视图、3视图和4视图等极具挑战性的少样本设置下均达到了最先进的性能。"
+        ],
+        "one_sentence": "该论文提出了ReInGS方法，通过两阶段由粗到细的3D高斯重初始化策略，解决了少样本新视角合成中因使用扩展视图点云导致的稀疏性差异问题，从而在仅使用稀疏训练视图的情况下实现了高效且高质量的场景重建。",
+        "problem": "现有基于3D高斯泼溅的少样本新视角合成方法通常利用扩展视图生成的稠密融合立体点进行高斯初始化，这种做法虽然提升了性能，但引入了数据泄露并违背了少样本任务的本质，被定义为稀疏性差异问题；若仅使用稀疏训练视图或随机点初始化，则会导致高斯位置优化困难、局部细节缺失及重建质量显著下降。"
+      },
+      "summary_source": {
+        "evidence": {
+          "basis": "body_excerpt",
+          "extraction": {
+            "method": "pdf_text"
+          },
+          "sections": [
+            "Page 2",
+            "Page 3",
+            "Page 4",
+            "Page 5",
+            "Page 6",
+            "Page 7",
+            "Page 8",
+            "Page 9",
+            "Page 10",
+            "Page 11",
+            "Page 12",
+            "Page 13",
+            "Page 14",
+            "Page 15"
+          ],
+          "sha256": "3a9e8f5ad50a80c0c5d9897950d628c4acd12956315cc7857ae0684d481acf87",
+          "truncated": true
+        },
+        "sha256": "e777cf1dd29846f2aea9bbefe425445b7a72e16f700c1ea46c6054d13907da37",
+        "url": "https://media.eventhosts.cc/Conferences/ECCV2026/pdfs/12014.pdf"
+      },
       "title": "ReInGS: Re-Initializing 3D Gaussians against Sparsity Discrepancy in Few-Shot Novel View Synthesis",
       "topic_review": {
         "decisions": {
@@ -3461,7 +3628,44 @@
       },
       "source_edition": "ECCV 2026",
       "source_version": "8c572ccd41929593841933bdc8710948d16be7c96299fe4e0e7faa2126b0587e",
-      "summary": null,
+      "summary": {
+        "contributions": [
+          "重新设计了针对一步扩散超分辨率任务的对抗分数蒸馏（ASD）稳定化公式，通过采用完整的WGAN判别器损失及稳定化惩罚项，显著提升了训练鲁棒性和感知真实感。",
+          "利用CLIP的视觉语义先验，在CLIP语义空间中对齐重建图像与真实世界高质量图像，以强制语义一致性并增强感知自然度。",
+          "在合成和真实世界基准上进行了大量实验，证明ASDSR在恢复性能和推理效率方面均优于现有方法。"
+        ],
+        "one_sentence": "该论文提出了一种名为ASDSR的一步扩散模型，通过重新设计对抗分数蒸馏机制并引入CLIP语义引导，旨在解决真实世界图像超分辨率任务中现有方法存在的训练不稳定、细节恢复不足及语义一致性差的问题。",
+        "problem": "现有的一步扩散超分辨率方法（如OSEDiff和TSD-SR）主要依赖变分分数蒸馏（VSD）范式，其判别器仅通过扩散损失更新，导致梯度弱且不稳定，难以提供有效指导以恢复精细图像细节；此外，这些方法在早期训练阶段容易产生视觉伪影，且缺乏对重建图像与真实图像之间语义一致性的有效约束，导致感知自然度不足。"
+      },
+      "summary_source": {
+        "evidence": {
+          "basis": "body_excerpt",
+          "extraction": {
+            "method": "pdf_text"
+          },
+          "sections": [
+            "Page 1",
+            "Page 2",
+            "Page 3",
+            "Page 4",
+            "Page 5",
+            "Page 6",
+            "Page 7",
+            "Page 8",
+            "Page 9",
+            "Page 10",
+            "Page 11",
+            "Page 12",
+            "Page 13",
+            "Page 14",
+            "Page 15"
+          ],
+          "sha256": "ac4efc829fcae9409e4f31d8a84da353ac5c1f2148ad06adb8d0c0f1904ffd59",
+          "truncated": true
+        },
+        "sha256": "397422cac1a25ca2a6fc0fa6cb64fa4231596b255bf6178fc926f925abe1f96c",
+        "url": "https://media.eventhosts.cc/Conferences/ECCV2026/pdfs/4144.pdf"
+      },
       "title": "Adversarial Score Distillation for Stable One-Step Diffusion in Real-World Image Super-Resolution",
       "topic_review": {
         "decisions": {
@@ -3984,6 +4188,34 @@
       "url": "https://openaccess.thecvf.com/content/CVPR2024/html/Liu_Video-P2P_Video_Editing_with_Cross-attention_Control_CVPR_2024_paper.html"
     },
     "conf-04ec5aa4372312206ea839f5": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Diffusion",
+          "Reference Conditioning",
+          "Structural Conditioning",
+          "Pixel Space"
+        ],
+        "topics": [
+          "Image Gen&Edit"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "bcef5e93bd18aa1c2b6399fb27baaa565c66617c518ca3aa95ee774193de2573",
+          "truncated": false
+        },
+        "sha256": "dc4562088e6ba9d981fe65fe03f276024e71a5f32d5b4335e6168ff4193d9ea2",
+        "url": "https://arxiv.org/html/2607.20924"
+      },
       "arxiv_id": "2607.20924",
       "authors": [
         "Ziyi Wang",
@@ -4020,7 +4252,31 @@
       },
       "source_edition": "ECCV 2026",
       "source_version": "7b25ba65689a543dc37b6b0a91fc185ffae45e7c6c07014ec6911d761bfdcca0",
-      "summary": null,
+      "summary": {
+        "contributions": [
+          "提出了 MagicMakeup 框架，这是一个基于 DiT 的区域可控高保真妆容迁移系统，在多种风格和真实世界数据上实现了最先进的性能，并展现出强大的鲁棒性和泛化能力。",
+          "引入了 Token 对齐区域门控（TARG）和跨模态感知引导（CMPG）机制，前者通过映射像素掩码到 Token 并应用区域特定 Logit 门控来强制区域特定的注意力约束，后者通过增强文本与图像特征的跨模态对齐来解耦迁移与保持概念，从而减少溢出并提高身份一致性。",
+          "开发了一个自动化的数据构建流水线，通过对 1024×1024 真实妆容图像进行区域特定的妆容去除来生成配对数据，相比合成妆容更好地保留了面部结构，提供了更贴近真实世界分布且对齐良好的监督信号。",
+          "建立了一个统一的高分辨率基准，涵盖合成和真实场景，覆盖多样化的人口统计特征和细粒度面部区域，并提供了针对身份保持、妆容保真度和区域控制准确度的标准化评估。"
+        ],
+        "one_sentence": "MagicMakeup 提出了一种基于扩散 Transformer 的区域可控高保真妆容迁移框架，通过引入 Token 对齐区域门控、跨模态感知引导以及自动化数据构建流水线，解决了现有方法在空间可控性、概念解耦和数据质量方面的挑战。",
+        "problem": "现有妆容迁移方法在同时实现区域可控性、妆容保真度和身份保持方面面临三大挑战：一是空间可控性有限，像素掩码在注意力空间中对齐不佳导致妆容溢出；二是概念模糊，模型难以区分需迁移的妆容属性与需保留的身份特征，导致妆容细节丢失或参考人脸结构泄露；三是数据质量与可用性受限，真实配对数据稀缺且未配对或合成数据存在分布偏移，同时现有基准缺乏区域标注且分辨率低。"
+      },
+      "summary_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "bcef5e93bd18aa1c2b6399fb27baaa565c66617c518ca3aa95ee774193de2573",
+          "truncated": false
+        },
+        "sha256": "dc4562088e6ba9d981fe65fe03f276024e71a5f32d5b4335e6168ff4193d9ea2",
+        "url": "https://arxiv.org/html/2607.20924"
+      },
       "title": "MagicMakeup: A Region-Controllable Diffusion Transformer for High-Fidelity Makeup-Transfer",
       "topic_review": {
         "decisions": {
@@ -4392,6 +4648,33 @@
       "url": "https://ras.papercept.net/conferences/conferences/ICRA26/program/ICRA26_ContentListWeb_4.html#101"
     },
     "conf-0544ece0ac69a7d1219b5b2a": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Gaussian Splatting",
+          "Single-Image-to-3D",
+          "Optimization-Based"
+        ],
+        "topics": [
+          "3D Gen&Recon"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "official_abstract",
+          "extraction": {
+            "method": "pdf_text"
+          },
+          "sections": [
+            "Abstract"
+          ],
+          "sha256": "f1fcf84d84480ff4f13476f4a440af325174bdd4fcc150f86b8560ac5c0b3631",
+          "truncated": false
+        },
+        "sha256": "0706d895533a5e1d465ff1f235641a147f4fe8021b355928967f2be76b22d3d9",
+        "url": "https://media.eventhosts.cc/Conferences/ECCV2026/pdfs/7978.pdf"
+      },
       "authors": [
         "Yunqing Wang",
         "Baoyao Yang",
@@ -4427,7 +4710,47 @@
       },
       "source_edition": "ECCV 2026",
       "source_version": "666322606c53b7293b6d185bd412d2e71b88eeee390230c281a17dd4adb21d61",
-      "summary": null,
+      "summary": {
+        "contributions": [
+          "提出了 KineticGS，一种将动力学原理嵌入 4D 场景建模的动量驱动高斯泼溅方法，实现从单目视频到时间连续且物理连贯的 4D 场景重建。",
+          "设计了层级化范式，通过三重动量干预实现连贯重建：自适应分配运动感知粒子、确保能量连续传播以及无需显式分割即可同步对象级动态。",
+          "引入了动量引导的粒子采样机制，根据区域运动能量自适应分配粒子，使动态活跃区域拥有更密集和更具表现力的表示。",
+          "提出了可学习的能量流激活机制，由动量连续性场调制，捕捉动能随时间的传播，从而促进平滑且合理的运动轨迹。",
+          "实现了整体动力学同步机制，强制同一运动实体（对象）内相关粒子的一致运动演化，保持结构完整性并抑制漂移和碎片化。",
+          "在单目动态场景数据集上的实验表明，KineticGS 在动态物体区域相比次优方法实现了平均 0.91 dB 的 PSNR 提升，同时保持了具有竞争力的存储效率。"
+        ],
+        "one_sentence": "KineticGS 提出了一种基于动量驱动的高斯泼溅方法，通过层级化动量策略解决单目动态场景重建中的运动碎片化和时间不连贯问题。",
+        "problem": "现有单目动态场景重建方法（如 4DGS 变体）主要依赖外观监督或噪声较大的 2D 线索，缺乏物理先验，导致在遮挡、运动模糊或非刚性变形下出现轨迹碎片化、运动估计不稳定及时间连贯性差的问题。"
+      },
+      "summary_source": {
+        "evidence": {
+          "basis": "body_excerpt",
+          "extraction": {
+            "method": "pdf_text"
+          },
+          "sections": [
+            "Page 1",
+            "Page 2",
+            "Page 3",
+            "Page 4",
+            "Page 5",
+            "Page 6",
+            "Page 7",
+            "Page 8",
+            "Page 9",
+            "Page 10",
+            "Page 11",
+            "Page 12",
+            "Page 13",
+            "Page 14",
+            "Page 15"
+          ],
+          "sha256": "32e848c0b19cadff65bf9bb55139637f0e5ba33ccbff2d1fe2da6d5b24b98d14",
+          "truncated": true
+        },
+        "sha256": "0706d895533a5e1d465ff1f235641a147f4fe8021b355928967f2be76b22d3d9",
+        "url": "https://media.eventhosts.cc/Conferences/ECCV2026/pdfs/7978.pdf"
+      },
       "title": "KineticGS: Momentum-driven Coherent 4D Gaussian Splatting for Monocular Dynamic Scene Reconstruction",
       "topic_review": {
         "decisions": {
@@ -7385,6 +7708,33 @@
       "url": "https://papers.nips.cc/paper_files/paper/2024/hash/8754ad68d557e633e5ce9dd02781e9cc-Abstract-Conference.html"
     },
     "conf-08a1464461b124b80a207dc9": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Single-Image-to-3D",
+          "Multi-View-to-3D",
+          "Generative-Prior Optimization"
+        ],
+        "topics": [
+          "3D Gen&Recon"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "official_abstract",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Abstract"
+          ],
+          "sha256": "9077c42db52c400e1b2e43695d5bc8044f5abb261d666608a0ab8533fc83599d",
+          "truncated": false
+        },
+        "sha256": "8cc2a20d19db79e3bdb5c48f2a3c8220c6e52f36f168ee887ab38e8e0cc25435",
+        "url": "https://eccv.ecva.net/virtual/2026/poster/3167"
+      },
       "conferences": [
         {
           "edition": "ECCV 2026",
@@ -12967,6 +13317,33 @@
       "url": "https://openaccess.thecvf.com/content/ICCV2025/html/Hong_SuperMat_Physically_Consistent_PBR_Material_Estimation_at_Interactive_Rates_ICCV_2025_paper.html"
     },
     "conf-0e0f6e7042a69a2b9929000f": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Gaussian Splatting",
+          "NeRF",
+          "Feed-Forward"
+        ],
+        "topics": [
+          "3D Gen&Recon"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "official_abstract",
+          "extraction": {
+            "method": "pdf_text"
+          },
+          "sections": [
+            "Abstract"
+          ],
+          "sha256": "f3d06f9cb0b7e51b33dbb91644f300c99814d74dd570dab438256bec9fa0563c",
+          "truncated": false
+        },
+        "sha256": "bde309b65e8ffdbb1913730d7e1df174473d1eae3751682ecc9df3c19b89250a",
+        "url": "https://media.eventhosts.cc/Conferences/ECCV2026/pdfs/3601.pdf"
+      },
       "arxiv_id": "2512.13796",
       "authors": [
         "Victor Rong",
@@ -13020,7 +13397,47 @@
       },
       "source_edition": "ECCV 2026",
       "source_version": "d835c3388d540604ca5c32e769fd6d0c63896d2bda6790c2062649bb54ab431a",
-      "summary": null,
+      "summary": {
+        "contributions": [
+          "引入了一种由神经纹理化基元组成的新表示Nexels，通过解耦几何与外观克服了高斯泼溅中两者的耦合问题。",
+          "提出了一种可微分四边形指示器（基于广义高斯核），通过引入gamma参数控制基元的矩形程度，从而更好地重建表面和锐利边界。",
+          "学习了一个世界空间神经场，仅对最相关的基元提供视角依赖的纹理，在高效捕捉细节的同时保持低计算成本。",
+          "发布了一个新数据集，旨在突出点云表示方法在准确重建高频纹理区域时的局限性。",
+          "在户外场景中实现了比3DGS少9.7倍基元、在室内场景中少31倍基元的情况下达到感知上的同等效果。",
+          "在实现实时渲染速率的同时，取得了比现有纹理化方法更好的光度质量。"
+        ],
+        "one_sentence": "该论文提出了一种名为Nexels的新表示方法，通过解耦几何与外观并利用神经纹理化surfels，在保持实时渲染性能的同时显著减少了表示高频细节所需的基元数量。",
+        "problem": "基于点云的表示方法（如3D高斯泼溅）将几何与外观耦合，导致表示高频外观细节时需要大量基元，从而造成巨大的内存占用；现有的纹理化高斯方法要么因纹理分辨率限制导致内存随分辨率平方增长，要么因神经场查询开销大而导致渲染和训练速度过慢，无法兼顾实时性与高保真度。"
+      },
+      "summary_source": {
+        "evidence": {
+          "basis": "body_excerpt",
+          "extraction": {
+            "method": "pdf_text"
+          },
+          "sections": [
+            "Page 1",
+            "Page 2",
+            "Page 3",
+            "Page 4",
+            "Page 5",
+            "Page 6",
+            "Page 7",
+            "Page 8",
+            "Page 9",
+            "Page 10",
+            "Page 11",
+            "Page 12",
+            "Page 13",
+            "Page 14",
+            "Page 15"
+          ],
+          "sha256": "4246f196197c6875a9eef0a0f3739622b455754e8a11f598d99392ff5d327aee",
+          "truncated": true
+        },
+        "sha256": "bde309b65e8ffdbb1913730d7e1df174473d1eae3751682ecc9df3c19b89250a",
+        "url": "https://media.eventhosts.cc/Conferences/ECCV2026/pdfs/3601.pdf"
+      },
       "title": "Nexels: Neurally-Textured Surfels for Real-Time Novel View Synthesis with Sparse Primitives",
       "topic_review": {
         "decisions": {
@@ -15413,6 +15830,34 @@
       "url": "https://papers.nips.cc/paper_files/paper/2024/hash/98b2b307aa4aa323df2ba3a83460f25e-Abstract-Conference.html"
     },
     "conf-104977de18b59cb14b7ccdf6": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Multi-View-to-3D",
+          "Point Cloud",
+          "Mesh",
+          "Feed-Forward"
+        ],
+        "topics": [
+          "3D Gen&Recon"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "8d53c4de04f7e1908c41a2ce8a09016695b65ee73f92daa9fd58366cade99c14",
+          "truncated": false
+        },
+        "sha256": "21111ddea1704692b721c8c7b0ca0cd9e08e54a4f521debd074dbc52de185eae",
+        "url": "https://arxiv.org/html/2604.22482"
+      },
       "arxiv_id": "2604.22482",
       "authors": [
         "Jing Ou",
@@ -15450,7 +15895,30 @@
       },
       "source_edition": "ECCV 2026",
       "source_version": "481c1063aeb3077345e31f74cdda07300c37c6058a5c0a3a5d23169d180e66cc",
-      "summary": null,
+      "summary": {
+        "contributions": [
+          "提出了Holo360D，一个包含109,495张全景图的大规模真实世界全景3D数据集，具有连续相机轨迹和准确对齐的高完整性深度图。",
+          "提出了一种数据后处理流水线，包括数据去噪、网格孔洞填充和区域特定重网格化，以生成高质量深度图并消除初始输出网格中的伪影。",
+          "通过在全景3D数据集Holo360D上微调领先的前馈3D重建模型，建立了一个新的基准，实验结果表明该数据集提供了优于先前全景3D数据集的训练信号。"
+        ],
+        "one_sentence": "本文提出了Holo360D，一个包含109,495张全景图、具有连续相机轨迹和高完整性深度图的大规模真实世界全景3D数据集，旨在解决现有全景3D数据集在规模、深度图质量和轨迹连续性方面的局限性，并建立了新的基准以推动全景前馈3D重建模型的发展。",
+        "problem": "现有前馈3D重建模型主要基于透视图像开发，在全景图像上性能显著下降，主要源于等距圆柱投影引入的球面畸变、非均匀采样及极点附近的严重拉伸，导致从透视图像学习的几何先验失效；同时，现有的全景3D数据集在规模、深度图质量（如遮挡和玻璃区域不完整、对齐精度低）以及视点连续性（如固定离散位置导致基线稀疏）方面存在显著局限。"
+      },
+      "summary_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "8d53c4de04f7e1908c41a2ce8a09016695b65ee73f92daa9fd58366cade99c14",
+          "truncated": false
+        },
+        "sha256": "21111ddea1704692b721c8c7b0ca0cd9e08e54a4f521debd074dbc52de185eae",
+        "url": "https://arxiv.org/html/2604.22482"
+      },
       "title": "Holo360D: A Large-Scale Real-World Dataset with Continuous Trajectories for Advancing Panoramic 3D Reconstruction and Beyond",
       "topic_review": {
         "decisions": {
@@ -16137,6 +16605,32 @@
       "url": "https://icml.cc/virtual/2026/poster/66063"
     },
     "conf-11619cabb614424ce04268cb": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Gaussian Splatting",
+          "Feed-Forward"
+        ],
+        "topics": [
+          "3D Gen&Recon"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "2ac46a701184eb94c124d50164ee33fc06569ee1bc2f3161e119bb800c11992f",
+          "truncated": false
+        },
+        "sha256": "3a7d398b015f858f1a59986b6985fca595bcc67afe9b464ddb2969b445bee862",
+        "url": "https://arxiv.org/html/2603.16099"
+      },
       "arxiv_id": "2603.16099",
       "authors": [
         "Sensen Gao",
@@ -17098,6 +17592,35 @@
       "url": "https://eccv.ecva.net/virtual/2024/poster/698"
     },
     "conf-121ba548ca246a5491bdc0a3": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Text-to-3D",
+          "Single-Image-to-3D",
+          "Mesh",
+          "Feed-Forward",
+          "Optimization-Based"
+        ],
+        "topics": [
+          "3D Gen&Recon"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "d8047ef65ddf496b867e46e074348f8610be5bc9c95f4ec7f43ace84da9e0b8b",
+          "truncated": false
+        },
+        "sha256": "ee2546a1bfa963f74427df243171492e8477f60ad7e5a5a2ce2480a15a684d89",
+        "url": "https://arxiv.org/html/2512.01204"
+      },
       "arxiv_id": "2512.01204",
       "authors": [
         "Ziqian Wang",
@@ -17135,7 +17658,32 @@
       },
       "source_edition": "ECCV 2026",
       "source_version": "f282550e15d3b8f576347249438376916fbbb475397143f3499f5246624150cf",
-      "summary": null,
+      "summary": {
+        "contributions": [
+          "提出了 TabletopGen，一个自动化且无需训练的 3D 桌面场景生成框架，能够从文本或单张图像生成兼具视觉真实感、实例级交互性和物理合理性的仿真场景，为机器人操作任务中的策略学习提供高效的数据合成途径。",
+          "提出了一种专为桌面场景设计的新型位姿和尺度对齐方法，通过解耦的可微旋转优化器（DRO）和俯视图空间对齐（TSA）两个阶段，从 2D 参考中恢复视觉一致且物理合理的桌面布局。",
+          "实现了从生成实例提取到物理属性装配的三阶段渐进式场景构建流程，包括从合成或真实图像中提取并补全高质量 2D 实例、在统一规范坐标系下重建 3D 资产，以及在仿真器中组装实例并附加物理属性以生成符合现实逻辑的交互式场景。",
+          "支持通过添加、移除、替换和重新排列物体进行快速场景衍生，能够在相同文本描述下生成多样化场景，从而实现低成本的场景扩展和更广泛的仿真环境覆盖，以支持大规模数据合成。",
+          "进行了全面的系统级验证，实验表明 TabletopGen 在场景质量和物理有效性方面显著优于现有方法，并通过零样本的实到仿再到实策略迁移实验，证实了生成场景和合成轨迹在真实世界机器人操作策略学习中的可靠性。"
+        ],
+        "one_sentence": "本文提出了 TabletopGen，一个无需训练的自动化 3D 桌面场景生成框架，旨在通过从文本或单张图像生成高保真、实例级且物理合理的仿真场景，解决机器人操作数据获取成本高且难以规模化的问题。",
+        "problem": "现有 3D 场景生成方法难以直接生成可用于仿真的桌面环境：基于检索的方法受限于固定资产库导致多样性不足和几何不匹配；基于大语言模型的方法主要关注房间级布局，无法处理桌面场景的高密度小物体功能排列和强语义约束；单图像重建方法受限于单视角观察不完整且缺乏物理先验，常产生拓扑融合或破损的实例网格以及物体穿插、悬浮等物理不合理布局，导致无法可靠导入仿真器进行运动规划和大规模可执行操作数据的自动生成。"
+      },
+      "summary_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "d8047ef65ddf496b867e46e074348f8610be5bc9c95f4ec7f43ace84da9e0b8b",
+          "truncated": false
+        },
+        "sha256": "ee2546a1bfa963f74427df243171492e8477f60ad7e5a5a2ce2480a15a684d89",
+        "url": "https://arxiv.org/html/2512.01204"
+      },
       "title": "TabletopGen: Tabletop Scene Generation and Interactive Simulation for Robotic Manipulation",
       "topic_review": {
         "decisions": {
@@ -18088,6 +18636,33 @@
       "url": "https://papers.nips.cc/paper_files/paper/2025/hash/19f7f755908372efb25826d61959cdf9-Abstract-Conference.html"
     },
     "conf-133365dfcfb00cf4cdeb689b": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Flow Matching",
+          "Continuous Latents",
+          "Pixel Space"
+        ],
+        "topics": [
+          "Image Gen&Edit"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "9bbc9d9c49db80c12d8717dfc1c78d0f6cbafc09a8fb51dc38054367fb4cde97",
+          "truncated": false
+        },
+        "sha256": "56655128a761162f83eda1fbd2bc5173fb332191f27bb7761d6a3b2d99a67d9e",
+        "url": "https://arxiv.org/html/2608.10544"
+      },
       "arxiv_id": "2608.10544",
       "authors": [
         "Sangwoo Jo",
@@ -25900,6 +26475,32 @@
       "url": "https://proceedings.mlr.press/v267/huang25ah.html"
     },
     "conf-1c8922e3e4dafe9cc4094372": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Multi-View-to-3D",
+          "Feed-Forward"
+        ],
+        "topics": [
+          "3D Gen&Recon"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "79ccb116cde38f6d5c7923e3c77daee4b1c2c63d8e5ddad338ac8cd555b5ac17",
+          "truncated": false
+        },
+        "sha256": "303f04a0b0ffd31421ac30ef281f319da4fc2cbe560c34ba84d71c1368dceeb9",
+        "url": "https://arxiv.org/html/2608.12179"
+      },
       "arxiv_id": "2608.12179",
       "authors": [
         "Yung-Hsu Yang",
@@ -25938,7 +26539,32 @@
       },
       "source_edition": "ECCV 2026",
       "source_version": "f0d5f3f951397b8baa9767b2cf012ed24b07110980759ac778bc805c78681b3a",
-      "summary": null,
+      "summary": {
+        "contributions": [
+          "提出 Map-Det3D 框架，将前馈式度量重建模型作为检测 Transformer 的几何编码器，实现从 RGB 图像直接进行 3D 推理的在线多视角室内 3D 目标检测。",
+          "设计了一种尺度无关的直接 3D 边界框头，通过在无尺度坐标系中回归边界框并利用前馈重建的尺度因子恢复度量输出，避免了 2D 到 3D 提升路径中的误差放大问题。",
+          "扩展了 MapAnything 模型以支持相机条件建模和解耦的度量尺度预测，并将其重新利用为生成 3D token 的编码器，配合检测 Transformer 风格的检测头使用。",
+          "采用滑动时间窗口和多视角 Transformer 进行因果证据聚合，利用相机内参和位姿提供显式几何线索以稳定深度和尺度，满足在线处理约束。",
+          "在 CA-1M 数据集上实现了新的最先进性能，并在 ScanNetV2 基准上展示了零样本泛化能力，同时通过组件分析证明性能提升源于几何与尺度设计选择。"
+        ],
+        "one_sentence": "本文提出 Map-Det3D，一种利用前馈式度量重建先验作为几何编码器的在线多视角 3D 目标检测框架，旨在解决仅基于图像进行 3D 检测时存在的尺度模糊与跨域泛化难题。",
+        "problem": "现有单目 3D 目标检测方法通常依赖 2D 到 3D 的提升策略，容易受深度误差主导且对相机内参、自运动或场景统计变化敏感，导致跨设备和环境迁移时性能脆弱；而直接基于 3D 表示的检测又面临几何噪声、不完整以及缺乏外观线索的问题，且传统离线重建流程无法满足实时性需求。"
+      },
+      "summary_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "79ccb116cde38f6d5c7923e3c77daee4b1c2c63d8e5ddad338ac8cd555b5ac17",
+          "truncated": false
+        },
+        "sha256": "303f04a0b0ffd31421ac30ef281f319da4fc2cbe560c34ba84d71c1368dceeb9",
+        "url": "https://arxiv.org/html/2608.12179"
+      },
       "title": "Map-Det3D: Metric Feed-Forward 3D Reconstruction Prior for Multi-view 3D Object Detection from Streaming Inputs",
       "topic_review": {
         "decisions": {
@@ -26125,6 +26751,33 @@
       "url": "https://s2024.conference-program.org/presentation/?id=papers_726&sess=sess132"
     },
     "conf-1cc070a32686b8f06cbdff95": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Gaussian Splatting",
+          "Multi-View-to-3D",
+          "Feed-Forward"
+        ],
+        "topics": [
+          "3D Gen&Recon"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "f2ffff7072b0c58658b3e33f7c68f4016fd861c27f9891ce1671d37adcfdea22",
+          "truncated": false
+        },
+        "sha256": "5640f03a4ee936534b3d87918fbb03e36556bcf79d77830ebdffbe132e93655b",
+        "url": "https://arxiv.org/html/2607.04661"
+      },
       "arxiv_id": "2607.04661",
       "authors": [
         "Guoqing Wang",
@@ -26158,7 +26811,31 @@
       },
       "source_edition": "ECCV 2026",
       "source_version": "54f779cce994d4b1711c511ffbf831292c5c20f27f462c85a17db7cadbd25760",
-      "summary": null,
+      "summary": {
+        "contributions": [
+          "识别出均匀体积处理是现有双分支流水线中的关键瓶颈，并利用定量区域分析论证了像素法在平坦确定性区域表现良好而在几何歧义区域严重退化的现象，从而提出了目标结构补全的新范式。",
+          "提出了FocusGS框架，该框架首先构建基于像素的高斯作为基础表示，随后通过提升2D歧义区域到稀疏3D不确定性子空间来推导3D几何歧义流形，将其作为不完整几何的精确空间先验。",
+          "设计了一个轻量级的目标结构补全模块，该模块严格在3D不确定性子空间内随机初始化一组连续查询，仅在该流形上实例化和优化目标高斯查询，从而将结构补全与确定性区域解耦。",
+          "在多个基准测试上验证了FocusGS的有效性，实验表明与Omni-Scene相比，FocusGS在nuScenes数据集上实现了最先进的重建质量，同时将总高斯数量减少了约74%，渲染时间减少了约34%。"
+        ],
+        "one_sentence": "针对自动驾驶中稀疏视角重建因相机重叠率低导致的几何一致性问题，本文提出FocusGS框架，通过识别几何歧义流形并仅在该稀疏子空间内进行目标结构补全，在保持重建质量的同时显著降低了计算开销。",
+        "problem": "现有基于3D高斯泼溅的前馈框架假设输入视图间存在大量重叠以维持几何一致性，但在自动驾驶自车视角下相机重叠率低于15%，导致重建质量下降；而现有的Omni-Gaussian等双分支架构虽通过体素化解决遮挡问题，但其均匀体积处理策略在几何连续且无遮挡的大面积区域（如平坦道路）上冗余处理，导致计算开销巨大且效率低下。"
+      },
+      "summary_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "f2ffff7072b0c58658b3e33f7c68f4016fd861c27f9891ce1671d37adcfdea22",
+          "truncated": false
+        },
+        "sha256": "5640f03a4ee936534b3d87918fbb03e36556bcf79d77830ebdffbe132e93655b",
+        "url": "https://arxiv.org/html/2607.04661"
+      },
       "title": "Targeted Structure Completion for Sparse-View 3D Reconstruction in Autonomous Driving",
       "topic_review": {
         "decisions": {
@@ -26368,6 +27045,33 @@
       "url": "https://doi.org/10.1109/icra57147.2024.10610577"
     },
     "conf-1cfa9b20f0940a58cdfb75f7": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Diffusion",
+          "Flow Matching",
+          "Reference Conditioning"
+        ],
+        "topics": [
+          "Image Gen&Edit"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "bd259b1a9e6b42e3a782c1d4d311f7c791841ba4a1d9147a00ca5dc47b554482",
+          "truncated": false
+        },
+        "sha256": "9298a9d463c4cbd313ecf6b9874c18cd446c605aa33b8ea32f5c6fe33f8f888e",
+        "url": "https://arxiv.org/html/2606.16188"
+      },
       "arxiv_id": "2606.16188",
       "authors": [
         "Xiang Gao",
@@ -30091,6 +30795,34 @@
       "url": "https://ojs.aaai.org/index.php/AAAI/article/view/29100"
     },
     "conf-21314392d8182cd8f91ba5b1": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Multi-View-to-3D",
+          "Optimization-Based",
+          "Feed-Forward"
+        ],
+        "topics": [
+          "3D Gen&Recon",
+          "Depth Estimation"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "779d282d61f2daba405ef6c1c7e0a2c8aa109e3c69de236bc87ba911a45bd3b6",
+          "truncated": false
+        },
+        "sha256": "380bf2b33f54b3e8c6145aa187c50d5d8e4867e1e931845129a2871c69b049dc",
+        "url": "https://arxiv.org/html/2603.12064"
+      },
       "arxiv_id": "2603.12064",
       "authors": [
         "Shuo Sun",
@@ -33909,6 +34641,29 @@
       "url": "https://ojs.aaai.org/index.php/AAAI/article/view/39046"
     },
     "conf-2410d0a878b02c2f3c902af6": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [],
+        "topics": [
+          "Image Gen&Edit"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "official_abstract",
+          "extraction": {
+            "method": "pdf_text"
+          },
+          "sections": [
+            "Abstract"
+          ],
+          "sha256": "4425a33130d266c1544b15ddff6c712135bf63d6cf00c1e43903c39132025e16",
+          "truncated": false
+        },
+        "sha256": "553a5f28b7a8ecf34c7ed5e8d2f0cdb92930d8f673a05343ce54f3d5ffaa4e44",
+        "url": "https://media.eventhosts.cc/Conferences/ECCV2026/pdfs/9419.pdf"
+      },
       "authors": [
         "Naoya Sogi",
         "Ren Ohkubo",
@@ -35605,6 +36360,32 @@
       "url": "https://doi.org/10.1109/icra57147.2024.10610149"
     },
     "conf-262425e9866fbf82dade41d7": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Flow Matching",
+          "Pixel Space"
+        ],
+        "topics": [
+          "Image Gen&Edit"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "12d9d4cde13ab2b2d875a1a11e3d0492ca18791fa337c41385ae4ad25b84d336",
+          "truncated": false
+        },
+        "sha256": "d767d86c78c41459a6f672986e1811b32e088bd22e8c829dd8407e4a8ad7fcf6",
+        "url": "https://arxiv.org/html/2607.01748"
+      },
       "arxiv_id": "2607.01748",
       "authors": [
         "Chenfeng Wei",
@@ -35639,7 +36420,30 @@
       },
       "source_edition": "ECCV 2026",
       "source_version": "270ef9aee3604d67e402070b2a0e86553d1c9a29192cc4dccba2c0cb98fbae4d",
-      "summary": null,
+      "summary": {
+        "contributions": [
+          "将单图像去雾重新表述为受辐射传输方程（RTE）正则化的流匹配问题，通过物理启发的先验对齐生成轨迹，提高了去雾结果的物理合理性和稳定性。",
+          "在流匹配生成过程中移除随机噪声先验，构建了由扩散-吸收项正则化的确定性潜在轨迹，相比随机采样基线更好地保持了整体颜色分布。",
+          "提出了一种可扩展的视觉语言模型（VLM）驱动的数据合成流水线，通过特征对齐和几何感知描述符生成逼真的雾霾-清晰图像对，无需依赖稀缺的真实世界数据。"
+        ],
+        "one_sentence": "该论文提出了一种受辐射传输方程启发的流匹配框架 RTE-FM-Dehazer，通过物理先验正则化确定性轨迹并利用视觉语言模型合成数据，以解决真实世界图像去雾中存在的空间非均匀性、训练数据稀缺及生成伪影问题。",
+        "problem": "真实世界中的雾霾具有空间不均匀性和多重散射特性，导致传统基于大气散射模型（ASM）的方法因假设失效而产生残雾和色彩偏差；现有深度学习方法严重依赖理想化的合成数据，泛化能力有限；而基于扩散模型或 VQGAN 的生成式方法则引入了随机采样漂移和代码本检索导致的视野外伪影，使得单图像去雾在复杂真实场景下仍面临巨大挑战。"
+      },
+      "summary_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "12d9d4cde13ab2b2d875a1a11e3d0492ca18791fa337c41385ae4ad25b84d336",
+          "truncated": false
+        },
+        "sha256": "d767d86c78c41459a6f672986e1811b32e088bd22e8c829dd8407e4a8ad7fcf6",
+        "url": "https://arxiv.org/html/2607.01748"
+      },
       "title": "RTE-FM-Dehazer: Radiative Transfer Equation Inspired Flow Matching for Real-World Image Dehazing",
       "topic_review": {
         "decisions": {
@@ -36202,6 +37006,33 @@
       "url": "https://openaccess.thecvf.com/content/CVPR2024/html/Yi_GaussianDreamer_Fast_Generation_from_Text_to_3D_Gaussians_by_Bridging_CVPR_2024_paper.html"
     },
     "conf-26b5c2dcd3f368dbdc8026bd": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Gaussian Splatting",
+          "Multi-View-to-3D",
+          "Optimization-Based"
+        ],
+        "topics": [
+          "3D Gen&Recon"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "official_abstract",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Abstract"
+          ],
+          "sha256": "c89db59531f9b0dcd1a343770f8be4aa61d06547ebf4414e910ddb77ebb68668",
+          "truncated": false
+        },
+        "sha256": "b098b5a988303d08327341a1814a5cadc8161ba3ded6891c3efda5a07b909ba2",
+        "url": "https://eccv.ecva.net/virtual/2026/poster/4783"
+      },
       "conferences": [
         {
           "edition": "ECCV 2026",
@@ -39049,6 +39880,32 @@
       "url": "https://openaccess.thecvf.com/content/CVPR2026/html/Chen_TiViBench_Benchmarking_Think-in-Video_Reasoning_for_Video_Generation_CVPR_2026_paper.html"
     },
     "conf-290ad961f877ef97577a99d2": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Text Conditioning",
+          "Structural Conditioning"
+        ],
+        "topics": [
+          "Image Gen&Edit"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "official_abstract",
+          "extraction": {
+            "method": "pdf_text"
+          },
+          "sections": [
+            "Abstract"
+          ],
+          "sha256": "6370eb3d43702aeced09cb7e29ea8cf2a4a4032f18a034c0e1ff6f5ce4c11a8d",
+          "truncated": false
+        },
+        "sha256": "b77512b49913f5f95433068b547d014c469aaba784dd7941c388788ee601c0a9",
+        "url": "https://media.eventhosts.cc/Conferences/ECCV2026/pdfs/273.pdf"
+      },
       "authors": [
         "Tianyang Yan",
         "Peisen Zhao",
@@ -39087,7 +39944,46 @@
       },
       "source_edition": "ECCV 2026",
       "source_version": "c55953996854bceceb08f163e08f752d2bead34b80b156958a94c43eab72d0e0",
-      "summary": null,
+      "summary": {
+        "contributions": [
+          "提出了 CORE-V 统一框架，通过调度语义推理与交错的视觉控制及属性想象，实现了视觉与语义模态的同步，从而达成更优的视觉-语义对齐以支持细粒度图像编辑。",
+          "构建了包含 80 万样本的 CORE-Edit-800K 数据集，该数据集涵盖了六种主要编辑类别，并标注了文本和视觉结构化的思维链推理步骤，通过严格的筛选流程确保数据质量。",
+          "建立了 CORE-Bench 基准，这是一个首创的从粗到细的一对多图像编辑评估基准，旨在通过量化编辑输出中嵌入的特征差异来评估细粒度编辑能力和结构一致性。",
+          "设计了双阶段优化策略和复合损失函数，将视觉约束与语义推理无缝整合到最终编辑结果中，确保模型在生成过程中保持高保真度。",
+          "在多种评估中进行了广泛实验，证明 CORE-V 方法在细粒度编辑任务上持续超越现有的图像编辑基线模型，展现出极具竞争力的性能。"
+        ],
+        "one_sentence": "CORE-V 提出了一种结合视觉交互的思维链推理框架，通过五阶段推理轨迹和专用数据集，实现了语义推理与显式视觉控制的同步，从而提升了图像编辑的细粒度可控性。",
+        "problem": "现有基于文本指令的图像编辑方法过度依赖自然语言提示，导致语义解释不稳定且缺乏语义逻辑与视觉结构之间的显式交互，常引发结构保真度丢失、非预期全局失真以及视觉无关的幻觉问题，难以在复杂场景中实现高精度的细粒度编辑。"
+      },
+      "summary_source": {
+        "evidence": {
+          "basis": "body_excerpt",
+          "extraction": {
+            "method": "pdf_text"
+          },
+          "sections": [
+            "Page 1",
+            "Page 2",
+            "Page 3",
+            "Page 4",
+            "Page 5",
+            "Page 6",
+            "Page 7",
+            "Page 8",
+            "Page 9",
+            "Page 10",
+            "Page 11",
+            "Page 12",
+            "Page 13",
+            "Page 14",
+            "Page 15"
+          ],
+          "sha256": "5305838605d060ac16511fa2e243aa21f56a90b1847ede38f617e5236fed90b3",
+          "truncated": true
+        },
+        "sha256": "b77512b49913f5f95433068b547d014c469aaba784dd7941c388788ee601c0a9",
+        "url": "https://media.eventhosts.cc/Conferences/ECCV2026/pdfs/273.pdf"
+      },
       "title": "CORE-V: Chain-Of-thought REasoning for Image Editing with Visual Interaction",
       "topic_review": {
         "decisions": {
@@ -40457,6 +41353,33 @@
       "url": "https://papers.nips.cc/paper_files/paper/2024/hash/3685de48976169ca9fd68cb4c8e48b76-Abstract-Conference.html"
     },
     "conf-2aa9ffd853b9baba03834c75": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Gaussian Splatting",
+          "Single-Image-to-3D",
+          "Optimization-Based"
+        ],
+        "topics": [
+          "3D Gen&Recon"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "official_abstract",
+          "extraction": {
+            "method": "pdf_text"
+          },
+          "sections": [
+            "Abstract"
+          ],
+          "sha256": "34afe815fe7f48b18760a961be2fe975471615fe069771bdc62150d1259af5d7",
+          "truncated": false
+        },
+        "sha256": "138b7b050b1be778b7734c68e6ba9148c573bf37ad0a32be0d79655a69e18967",
+        "url": "https://media.eventhosts.cc/Conferences/ECCV2026/pdfs/12210.pdf"
+      },
       "authors": [
         "Jin Liu",
         "Haodong Li",
@@ -40499,7 +41422,46 @@
       },
       "source_edition": "ECCV 2026",
       "source_version": "d53b42bd4c8f90943edb0b10949ee85ad76fb31ffe8bae8510de278ef8236540",
-      "summary": null,
+      "summary": {
+        "contributions": [
+          "提出了首个受成像校准启发的红外超分辨率 3D 高斯泼溅框架 SupIR-GS，通过桥接潜在辐射场与退化观测，实现了仅使用低分辨率输入的高保真 3D 热场景重建。",
+          "建立了包含 PhysIR-Cal 和 IRTone-Adapter 的可微前向成像方案，前者用于物理感知的退化校准以抑制非均匀性和固定模式噪声，后者用于局部强度调制，从而将潜在 3D 高斯输出与退化观测空间对齐以解决成像差异。",
+          "开发了频率感知课程学习策略，利用预训练超分辨率教师模型提供的结构先验，引导优化过程从低频几何支架逐步过渡到高频细节，同时抑制由传感器噪声引起的虚假高频伪影。",
+          "设计了分辨率无关的 3D 高斯表示方法，通过在目标高分辨率设置下原生渲染理想热红外图像，并在高密度采样网格上计算合成强度，使模型能够内在地将高频细节嵌入 3D 几何中，而非依赖图像空间的后处理。",
+          "在 TI-NSD 和 ThermoScenes 等真实世界数据集上进行了广泛评估，证明所提出的 SupIR-GS 在高分辨率新视角合成和几何保真度方面优于强基线方法。"
+        ],
+        "one_sentence": "该论文提出了一种名为 SupIR-GS 的热红外超分辨率新视角合成框架，通过引入物理约束的成像校准模块和频率感知课程学习策略，解决了低分辨率热红外图像在 3D 高斯泼溅重建中因传感器噪声与热扩散导致的几何辐射歧义问题。",
+        "problem": "现有 3D 高斯泼溅方法直接应用于热红外图像时，面临由热扩散和大气散射导致的物理边界模糊，以及非均匀响应和固定模式噪声引入的结构化高频伪影，这种信噪比反转导致优化偏向拟合传感器噪声而非真实几何结构，从而产生高频漂浮物伪影或几何坍缩，限制了低分辨率输入下高保真热红外场景重建与新视角合成的能力。"
+      },
+      "summary_source": {
+        "evidence": {
+          "basis": "body_excerpt",
+          "extraction": {
+            "method": "pdf_text"
+          },
+          "sections": [
+            "Page 1",
+            "Page 2",
+            "Page 3",
+            "Page 4",
+            "Page 5",
+            "Page 6",
+            "Page 7",
+            "Page 8",
+            "Page 9",
+            "Page 10",
+            "Page 11",
+            "Page 12",
+            "Page 13",
+            "Page 14",
+            "Page 15"
+          ],
+          "sha256": "4981a7ae685e5fc5ce77cfe75caa36276c9b22460b945cbb92cff709aec4472a",
+          "truncated": true
+        },
+        "sha256": "138b7b050b1be778b7734c68e6ba9148c573bf37ad0a32be0d79655a69e18967",
+        "url": "https://media.eventhosts.cc/Conferences/ECCV2026/pdfs/12210.pdf"
+      },
       "title": "SupIR-GS: Thermal Infrared Super-Resolution Novel View Synthesis with Imaging-Calibrated 3D Gaussian Splatting",
       "topic_review": {
         "decisions": {
@@ -41438,6 +42400,31 @@
       "url": "https://papers.nips.cc/paper_files/paper/2024/hash/9c3563bbeb2ad7f3b3b8ed0fcd3b440f-Abstract-Datasets_and_Benchmarks_Track.html"
     },
     "conf-2bddf205e8b2af9e54d29643": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Text Conditioned"
+        ],
+        "topics": [
+          "Video Gen&Edit"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "official_abstract",
+          "extraction": {
+            "method": "pdf_text"
+          },
+          "sections": [
+            "Abstract"
+          ],
+          "sha256": "fb9e45e385f285e615bbb813813643563a2b5050e02061f7f565b9f9a4685eef",
+          "truncated": false
+        },
+        "sha256": "1fff34421c844af9a2dc18cae5724492a1e1bc8714d005377be93d22f424712e",
+        "url": "https://arxiv.org/pdf/2608.21425"
+      },
       "arxiv_id": "2608.21425",
       "authors": [
         "Nai-Xin Zhai",
@@ -41478,7 +42465,45 @@
       },
       "source_edition": "ECCV 2026",
       "source_version": "e0034e446e2194dfc557e852535768637dd4c0e63178d9f1eed36ad3016efaea",
-      "summary": null,
+      "summary": {
+        "contributions": [
+          "提出了一个统一的人类对齐视频偏好学习框架，从数据可靠性、奖励表示和策略对齐三个层面系统性地解决了对齐偏差问题。",
+          "设计了精英引导的偏好校准机制，通过一致性指标筛选高置信样本训练评分模型，并利用该模型重新评估低置信数据，从而扩展高质量监督信号集。",
+          "构建了感知偏好的奖励建模方法，将视频质量建模为多维奖励分布，并引入 Wasserstein 距离作为分布级对齐目标，以更忠实地反映人类偏好的多样性。",
+          "提出了基于 Wasserstein 距离的组相对策略优化算法，替代传统的 KL 散度约束，使策略优化能够对齐生成视频分布的全局特征而非局部统计密度。",
+          "在多个指标上进行了全面的奖励建模和视频生成实验，验证了该框架在将学习到的奖励分布与人类偏好进行对齐方面的有效性。"
+        ],
+        "one_sentence": "该论文提出了一种统一的人类对齐视频偏好学习框架，通过精英引导的偏好校准、感知偏好的奖励建模以及基于 Wasserstein 距离的策略优化，系统性地解决了数据可靠性、奖励表示及策略对齐中的关键问题。",
+        "problem": "现有视频生成对齐方法面临三大瓶颈：一是人类偏好数据存在主观噪声和偏差，导致奖励信号可靠性受限；二是传统奖励模型将多维人类偏好简化为单一标量，丢失了语义、视觉及时间维度间的复杂耦合信息；三是 RLHF 和 GRPO 中使用的 KL 散度仅关注去噪步骤的局部分布对齐，无法捕捉视频生成的全局时间依赖和语义演化，导致生成结果运动保守且缺乏全局视觉合理性。"
+      },
+      "summary_source": {
+        "evidence": {
+          "basis": "body_excerpt",
+          "extraction": {
+            "method": "pdf_text"
+          },
+          "sections": [
+            "Page 2",
+            "Page 3",
+            "Page 4",
+            "Page 5",
+            "Page 6",
+            "Page 7",
+            "Page 8",
+            "Page 9",
+            "Page 10",
+            "Page 11",
+            "Page 12",
+            "Page 13",
+            "Page 14",
+            "Page 15"
+          ],
+          "sha256": "bd5af17bea942c42231020e89aaf9b9b003a967a6ac90eefbd1e39e5832f660c",
+          "truncated": true
+        },
+        "sha256": "1fff34421c844af9a2dc18cae5724492a1e1bc8714d005377be93d22f424712e",
+        "url": "https://arxiv.org/pdf/2608.21425"
+      },
       "title": "Aligning Human Sense: Calibrated Distributional Reward Learning for Video Generation",
       "topic_review": {
         "decisions": {
@@ -43391,6 +44416,35 @@
       "url": "https://papers.nips.cc/paper_files/paper/2025/hash/8187faaf6759ef6d4e93293339bc656e-Abstract-Conference.html"
     },
     "conf-2d9044da2d0e4181824fe8f7": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Diffusion",
+          "Transformer",
+          "Continuous Latents",
+          "World-Model Policy Learning",
+          "Imagination-Based Planning"
+        ],
+        "topics": [
+          "World Model"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "cf3bef2107154afed6153b09882134b5836ea2697f649439ee9539e836214f8e",
+          "truncated": false
+        },
+        "sha256": "69c8c228b58d241cb018618f5c29474d7732c5f67154e8c68df914554a368b5b",
+        "url": "https://arxiv.org/html/2606.29501"
+      },
       "arxiv_id": "2606.29501",
       "authors": [
         "Ze Huang",
@@ -43425,7 +44479,31 @@
       },
       "source_edition": "ECCV 2026",
       "source_version": "e1ab837c576dd6ca82b34cce28799dd8059e8d2019025be8d5a4b71351a5ca6a",
-      "summary": null,
+      "summary": {
+        "contributions": [
+          "引入动作到视频世界模型预训练作为学习可迁移动力学先验的机器人数据驱动方法，并实例化为在大规模高质量操作数据上预训练的多视角交互式扩散世界模型 A2World。",
+          "证明所学动力学先验可复用于以仿真器为中心的机器人学习，通过将 A2World 适配为具有历史感知能力的自回归仿真器 A2World-sim，支持长时程动作条件滚动以进行真实世界模拟和策略评估。",
+          "证明相同的动力学先验也可复用于以策略为中心的机器人学习，通过将 A2World 适配为类 MoE 的视频-动作联合预测模型 A2World-policy，在视觉和指令条件下生成强大的机器人策略。",
+          "在仿真基准和真实机器人平台上展示，与文本条件视频预训练及其他机器人预训练基线相比，动作到视频预训练产生了显著更强的可迁移先验，并在跨任务中转化为一致的下游收益和策略改进。"
+        ],
+        "one_sentence": "该论文提出了一种基于动作到视频世界模型预训练的方法，通过利用大规模机器人操作数据学习可迁移的动力学先验，并验证了其在仿真模拟和策略学习两个方向上的复用价值。",
+        "problem": "现有机器人学习方法未能充分利用机器人数据预训练作为可迁移动力学先验的来源，许多工作直接微调通用视频生成检查点或在单一数据集上预训练，导致模型在具身形态、相机设置和运动模式上的吸收能力受限，且缺乏统一范式来同时惠及基于世界模型的仿真和下游策略学习。"
+      },
+      "summary_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "cf3bef2107154afed6153b09882134b5836ea2697f649439ee9539e836214f8e",
+          "truncated": false
+        },
+        "sha256": "69c8c228b58d241cb018618f5c29474d7732c5f67154e8c68df914554a368b5b",
+        "url": "https://arxiv.org/html/2606.29501"
+      },
       "title": "Learning Transferable Dynamics Priors from Action to World Modeling",
       "topic_review": {
         "decisions": {
@@ -49457,6 +50535,33 @@
       "url": "https://papers.nips.cc/paper_files/paper/2024/hash/c4dbadd63360f0b9a79b1c541995b6cd-Abstract-Conference.html"
     },
     "conf-343365d8b12b6c6d6799dda3": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Diffusion",
+          "Multi-Condition Control",
+          "Text Conditioning"
+        ],
+        "topics": [
+          "Image Gen&Edit"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "official_abstract",
+          "extraction": {
+            "method": "pdf_text"
+          },
+          "sections": [
+            "Abstract"
+          ],
+          "sha256": "8d45115370f8e58e97b3a8a32aca2b2a59aa3a0847f9ca9592cea9c49dac92ef",
+          "truncated": false
+        },
+        "sha256": "2ae332f6c72bb5a0f01c4c0e1f18986a194d395262c60c3847dc87a5dcb7bcd0",
+        "url": "https://media.eventhosts.cc/Conferences/ECCV2026/pdfs/1200.pdf"
+      },
       "authors": [
         "Pengyu Chen",
         "Xi Yang",
@@ -49487,7 +50592,45 @@
       },
       "source_edition": "ECCV 2026",
       "source_version": "b07bef5e4c4106f9a8244ee02db12bd466bd2efdf6d2db8cdad2f01a0cd68c5a",
-      "summary": null,
+      "summary": {
+        "contributions": [
+          "提出了SGP2框架，通过引入几何和物理先验，实现了从粗到细的可控多模态遥感图像生成，解决了复杂场景中的语义遗漏和物理特征失真问题。",
+          "提出了Grassmann Miner模块，利用Grassmann流形上的动态测地线轨迹解决欧氏空间特征纠缠，使模型注意力从全局语义逐步转移到细粒度细节。",
+          "提出了Physical Prior Expert模块，利用视觉基础模型的多级特征引导扩散模型训练，并根据去噪阶段动态调整权重，同时引入频谱损失强制幅度和相位一致性。",
+          "构建了MMEarth-1.5M数据集，这是一个包含150万文本-图像对的大规模多模态、多空间分辨率数据集，支持文本到图像预训练和可控生成微调，填补了该领域的数据空白。"
+        ],
+        "one_sentence": "该论文提出了SGP2框架，通过结合几何先验与物理先验，实现了从粗到细的可控多模态遥感图像生成，有效解决了语义冲突和物理不一致问题。",
+        "problem": "现有遥感图像生成模型面临两大挑战：一是语义冲突，即文本编码器倾向于捕捉全局概念而忽略细粒度描述，导致语义不完整；二是物理不一致，即纯数据驱动模型缺乏物理信息约束，导致生成图像出现结构坍塌或辐射失真。"
+      },
+      "summary_source": {
+        "evidence": {
+          "basis": "body_excerpt",
+          "extraction": {
+            "method": "pdf_text"
+          },
+          "sections": [
+            "Page 1",
+            "Page 2",
+            "Page 3",
+            "Page 4",
+            "Page 5",
+            "Page 6",
+            "Page 7",
+            "Page 8",
+            "Page 9",
+            "Page 10",
+            "Page 11",
+            "Page 12",
+            "Page 13",
+            "Page 14",
+            "Page 15"
+          ],
+          "sha256": "3ea69ba13317bce7921f226f06fb6c6a89aae5cd0a424a3fbab5358740864421",
+          "truncated": true
+        },
+        "sha256": "2ae332f6c72bb5a0f01c4c0e1f18986a194d395262c60c3847dc87a5dcb7bcd0",
+        "url": "https://media.eventhosts.cc/Conferences/ECCV2026/pdfs/1200.pdf"
+      },
       "title": "SGP2: Coarse-to-Fine Controllable Multimodal Remote Sensing Image Generation",
       "topic_review": {
         "decisions": {
@@ -49873,6 +51016,33 @@
       "url": "https://iclr.cc/virtual/2024/poster/18765"
     },
     "conf-34827ea264a4fdcae8a0d9f9": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Gaussian Splatting",
+          "Multi-View-to-3D",
+          "Optimization-Based"
+        ],
+        "topics": [
+          "3D Gen&Recon"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "official_abstract",
+          "extraction": {
+            "method": "pdf_text"
+          },
+          "sections": [
+            "Abstract"
+          ],
+          "sha256": "33dbef2e2f5c6ee8640f435e5fd60e8f595417d9acd597772324e4eb5ec29d3a",
+          "truncated": false
+        },
+        "sha256": "4e329d1cb86953377c35020321ed86a4efb92dec2845fc66c76340a2f98562a1",
+        "url": "https://media.eventhosts.cc/Conferences/ECCV2026/pdfs/11951.pdf"
+      },
       "authors": [
         "Zihan Gao",
         "Lingling Li",
@@ -49908,7 +51078,45 @@
       },
       "source_edition": "ECCV 2026",
       "source_version": "248f5b32c0fc889552ab39a50f91b3e4d73cdfea6ba8e87e0e464fdff4924ca9",
-      "summary": null,
+      "summary": {
+        "contributions": [
+          "识别并分析了航拍场景中 3D 高斯泼溅的两种关键失效模式：由无纹理区域引起的三角化稀疏点初始化不完整，以及由稀疏各向异性观测引起的视角对齐退化。",
+          "提出了一种分层记忆引导的初始化方案，通过顺序测试时深度适应和多视角约束，利用分层深度图像（LDI）将不完整的稀疏三角化几何转化为密集点云。",
+          "提出了一种混合神经多平面高斯表示，将用于细节的显式高斯与锚定在习得平行平面上的虚拟高斯相结合，利用航拍场景固有的分层结构进行几何正则化。",
+          "在 LEVIR-NVS 和基于 3DAS 构建的新 7 视角基准上实现了最先进的性能，在不同场景类型和视角数量下均取得了超过 3dB 的一致性提升。"
+        ],
+        "one_sentence": "StratoSplat 通过利用航拍场景固有的分层规律，结合分层记忆引导的初始化与神经多平面高斯表示，解决了稀疏航拍视角下 3D 高斯泼溅面临的三角化不完整和视角对齐退化问题。",
+        "problem": "无人机航拍场景受限于飞行时间、视角几何或天气，难以获取密集多视角图像，导致 3D 高斯泼溅在稀疏输入下出现两大关键失效模式：一是无纹理区域导致 SfM 三角化点云存在大量空洞，使高斯初始化不稳定；二是稀疏各向异性观测（尤其是斜视视角）引发视角对齐退化，导致高斯过拟合训练视角的 2D 外观而非真实场景几何，在新视角下产生漂浮物。"
+      },
+      "summary_source": {
+        "evidence": {
+          "basis": "body_excerpt",
+          "extraction": {
+            "method": "pdf_text"
+          },
+          "sections": [
+            "Page 1",
+            "Page 2",
+            "Page 3",
+            "Page 4",
+            "Page 5",
+            "Page 6",
+            "Page 7",
+            "Page 8",
+            "Page 9",
+            "Page 10",
+            "Page 11",
+            "Page 12",
+            "Page 13",
+            "Page 14",
+            "Page 15"
+          ],
+          "sha256": "1c80e089a0091b57c992898019a39a4d2d85dbaf31377d28035db7d79aa1ade9",
+          "truncated": true
+        },
+        "sha256": "4e329d1cb86953377c35020321ed86a4efb92dec2845fc66c76340a2f98562a1",
+        "url": "https://media.eventhosts.cc/Conferences/ECCV2026/pdfs/11951.pdf"
+      },
       "title": "StratoSplat: Taming Layered Regularities for Sparse Aerial 3D Gaussian Splatting",
       "topic_review": {
         "decisions": {
@@ -51978,6 +53186,34 @@
       "url": "https://icml.cc/virtual/2026/poster/65573"
     },
     "conf-36b225b0d4595a4424adb898": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Single-Image-to-3D",
+          "Multi-View-to-3D",
+          "Point Cloud",
+          "Feed-Forward"
+        ],
+        "topics": [
+          "3D Gen&Recon"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "6857201b02ae0274915f032a4b86c12fb1e9ea8136faf8b9b9ffb8c77210e15e",
+          "truncated": false
+        },
+        "sha256": "011a1b8c3fda24b9612d26a62c2105095ba0e015b98330eace231aa0fde7387b",
+        "url": "https://arxiv.org/html/2605.12119"
+      },
       "arxiv_id": "2605.12119",
       "authors": [
         "Haofeng Liu",
@@ -52018,7 +53254,30 @@
       },
       "source_edition": "ECCV 2026",
       "source_version": "1559d2ae5571fed2330f7ee47aa999cc6090236012c4e01290d27c1612723143",
-      "summary": null,
+      "summary": {
+        "contributions": [
+          "识别了生成式视图合成中几何先验与外观先验之间的根本冲突，并提出结构化去噪动态作为在时间上解耦这些信号的有原则的解决方案。",
+          "提出了一个统一框架，同时适用于单图像 3D 重建和视频 4D 重相机，证明了分阶段条件化能够跨输入模态泛化。",
+          "展示了通过后期阶段的外观信号进行主动几何误差校正，在稀疏和不准确几何条件下实现了最先进的鲁棒性，为可控视图合成设定了新标准。"
+        ],
+        "one_sentence": "MoCam 提出了一种利用结构化去噪动态在扩散过程中时间解耦几何与外观先验的统一框架，以解决单图像 3D 重建和视频 4D 重相机中因几何先验稀疏或错误导致的生成质量问题。",
+        "problem": "现有方法依赖从单目输入重建的几何先验（如深度图或点云），在大视角变化下这些先验变得稀疏、不完整且包含错误，导致几何缺陷在生成过程中传播或几何与外观信号静态融合时产生冲突，从而限制了高保真度和精确电影级控制的应用。"
+      },
+      "summary_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "6857201b02ae0274915f032a4b86c12fb1e9ea8136faf8b9b9ffb8c77210e15e",
+          "truncated": false
+        },
+        "sha256": "011a1b8c3fda24b9612d26a62c2105095ba0e015b98330eace231aa0fde7387b",
+        "url": "https://arxiv.org/html/2605.12119"
+      },
       "title": "MoCam: Unified Novel View Synthesis via Structured Denoising Dynamics",
       "topic_review": {
         "decisions": {
@@ -52601,7 +53860,45 @@
       },
       "source_edition": "ECCV 2026",
       "source_version": "7367f40b183714b90fd1b3b396a064e57bd794897fcfae1719740c8fc2bca0ce",
-      "summary": null,
+      "summary": {
+        "contributions": [
+          "构建了高质量数据集 PhysEdit-50K，通过蒸馏视频生成模型中的物理先验合成连续编辑轨迹，并采用细粒度实例自适应过滤机制确保物理合理性，提供了超越传统静态输入输出对的密集物理监督。",
+          "提出了 PhysEdit 框架，将传统的单步图像编辑重构为渐进式因果生成过程，核心设计了因果扩散 Transformer（cDiT），通过多步合成中间视觉状态并严格基于历史上下文进行条件生成，以捕捉底层物理动态。",
+          "引入了自强制训练机制（Self-Forcing Training），利用 KV 缓存和少步 ODE 求解器在训练时基于模型自身预测进行条件生成，从而缓解训练与推理之间的分布不匹配，增强时间因果性。",
+          "设计了一致性正则化项（Consistency Regularization），通过从冻结的单步教师模型蒸馏来锚定未编辑背景区域，解决了视频先验合成轨迹中固有的视角偏移和相机抖动问题，保持了空间一致性。",
+          "引入了物理感知强化学习（PARL），利用多模态大语言模型作为物理专家，基于细粒度的物理约束和因果关系评估生成结果，通过密集且可解释的奖励信号进一步优化模型对复杂物理定律的遵循能力。"
+        ],
+        "one_sentence": "PhysEdit 通过将图像编辑重构为连续因果生成过程，利用密集物理监督数据集、因果扩散 Transformer 架构及物理感知强化学习，解决了现有单步编辑模型中物理一致性缺失的问题。",
+        "problem": "现有最先进的指令式图像编辑框架主要优化语义对齐和视觉一致性，往往忽略自然场景中的基本物理定律，导致生成的编辑结果在物理上不合理（例如移除底部物体后顶部物体悬空）；这主要归因于当前基准测试多由静态输入输出对组成，缺乏连续物理过程监督，以及现有架构采用静态非因果的单步映射，无法捕捉支撑真实变换的物理因果链。"
+      },
+      "summary_source": {
+        "evidence": {
+          "basis": "body_excerpt",
+          "extraction": {
+            "method": "pdf_text"
+          },
+          "sections": [
+            "Page 2",
+            "Page 3",
+            "Page 4",
+            "Page 5",
+            "Page 6",
+            "Page 7",
+            "Page 8",
+            "Page 9",
+            "Page 10",
+            "Page 11",
+            "Page 12",
+            "Page 13",
+            "Page 14",
+            "Page 15"
+          ],
+          "sha256": "faf4f444f2dd3d135db08d53fb5a97ff2bb6deabc266c1ec18bc5a89f228a423",
+          "truncated": true
+        },
+        "sha256": "ebcff6a942e7b245549e5a9a16d458080da33210d4ef016fa0bc47b57f11de88",
+        "url": "https://media.eventhosts.cc/Conferences/ECCV2026/pdfs/9693.pdf"
+      },
       "title": "PhysEdit: Physically Consistent Image Editing via Causal Enforcement",
       "topic_review": {
         "decisions": {
@@ -53064,6 +54361,34 @@
       "url": "https://eccv.ecva.net/virtual/2024/poster/2040"
     },
     "conf-37f4b14eacbcbfb16daa76ed": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Diffusion",
+          "Reference-Guided",
+          "Pixel Space"
+        ],
+        "topics": [
+          "Image Gen&Edit",
+          "Relighting"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "official_abstract",
+          "extraction": {
+            "method": "pdf_text"
+          },
+          "sections": [
+            "Abstract"
+          ],
+          "sha256": "2b300271f9c6b392d6c9760c0e5a5b6235123bcc519ac49307924e35daa3907e",
+          "truncated": false
+        },
+        "sha256": "9a849e30579315ec9b32fd75164c820c24bb5418975abe4ec205b70fd65ae0c7",
+        "url": "https://media.eventhosts.cc/Conferences/ECCV2026/pdfs/8974.pdf"
+      },
       "conferences": [
         {
           "edition": "ECCV 2026",
@@ -53092,7 +54417,46 @@
       },
       "source_edition": "ECCV 2026",
       "source_version": "c595ad7276ff1a93214f34d8d42c6398de45e4d0731dc4578e328e7f7f5eb0fa",
-      "summary": null,
+      "summary": {
+        "contributions": [
+          "提出了一种简单且有效的显著性引导扭曲-逆扭曲框架，在编码前重新分配空间表示以对抗潜在空间收缩，无需扩大潜在空间即可保留细节。",
+          "该方法具有模型无关性，无需架构修改，且与现有的潜在图像到图像翻译框架兼容，仅需LoRA微调即可适配。",
+          "扭曲过程引入了可忽略的计算开销（每张图片3.0毫秒），且没有引入任何额外的可学习参数。",
+          "提出了一种简单高效的合成数据生成流水线，利用FLUX模型和ChatGPT验证，仅需10K张合成图像即可实现高质量的人像和驾驶场景重光照训练。",
+          "在人类重光照、驾驶场景重光照以及天气或昼夜转换等多个图像到图像翻译任务中，通过定量评估和用户研究证明该方法在细粒度细节保持上优于pix2pix-Turbo、CycleGAN-Turbo、IC-Light和DreamLight等最新方法。"
+        ],
+        "one_sentence": "该论文提出了一种基于显著性引导的图像扭曲-逆扭曲框架，通过在编码前局部放大重要区域以解决轻量级潜在扩散模型在图像到图像翻译中丢失细粒度前景结构的问题。",
+        "problem": "轻量级潜在扩散模型（LDMs）由于编码器将高分辨率输入映射到下采样的潜在空间，导致高频结构信息丢失，难以保留面部细节和小物体等细粒度前景结构；而直接降低压缩比或增加输入分辨率会显著增加计算内存和推理时间，现有替代策略如多尺度扩散或测试时细化往往引入额外计算开销或需要架构修改。"
+      },
+      "summary_source": {
+        "evidence": {
+          "basis": "body_excerpt",
+          "extraction": {
+            "method": "pdf_text"
+          },
+          "sections": [
+            "Page 1",
+            "Page 2",
+            "Page 3",
+            "Page 4",
+            "Page 5",
+            "Page 6",
+            "Page 7",
+            "Page 8",
+            "Page 9",
+            "Page 10",
+            "Page 11",
+            "Page 12",
+            "Page 13",
+            "Page 14",
+            "Page 15"
+          ],
+          "sha256": "7b596f3d7373de36932c808e98c67c4e4ff1a284be364603e90bc73fa1ed6a45",
+          "truncated": true
+        },
+        "sha256": "9a849e30579315ec9b32fd75164c820c24bb5418975abe4ec205b70fd65ae0c7",
+        "url": "https://media.eventhosts.cc/Conferences/ECCV2026/pdfs/8974.pdf"
+      },
       "title": "Image Warping for Image-to-Image Translation",
       "topic_review": {
         "decisions": {
@@ -54241,6 +55605,32 @@
       "url": "https://openaccess.thecvf.com/content/CVPR2024/html/Cho_One-Shot_Structure-Aware_Stylized_Image_Synthesis_CVPR_2024_paper.html"
     },
     "conf-39135433877f187547f07d05": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Continuous Latents",
+          "Diffusion"
+        ],
+        "topics": [
+          "Image Gen&Edit"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "official_abstract",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Abstract"
+          ],
+          "sha256": "ce2db9acc34dbe38c3dd1ede519841d324cb921a69817da1ba503e356c258784",
+          "truncated": false
+        },
+        "sha256": "2f56aa75c481687fbc5972a560b6d9f5088b8c2d5ef7d508ae82620a93ae43f9",
+        "url": "https://eccv.ecva.net/virtual/2026/poster/3716"
+      },
       "conferences": [
         {
           "edition": "ECCV 2026",
@@ -57832,6 +59222,32 @@
       "url": "https://iclr.cc/virtual/2024/poster/18709"
     },
     "conf-3b66ca2fedf1ce2d307c57cf": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Diffusion",
+          "Video Conditioned"
+        ],
+        "topics": [
+          "Video Gen&Edit"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "official_abstract",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Abstract"
+          ],
+          "sha256": "24eadeacdb6f29c7afd1b4aacf1972f2532a6571160f3c7e2f706442891f250a",
+          "truncated": false
+        },
+        "sha256": "a5ac4c84c086d46eec5e0e3284a0cfab200e00b23fb9f8e60db957ab584c4772",
+        "url": "https://eccv.ecva.net/virtual/2026/poster/3783"
+      },
       "conferences": [
         {
           "edition": "ECCV 2026",
@@ -65155,6 +66571,35 @@
       "url": "https://iclr.cc/virtual/2025/poster/30765"
     },
     "conf-4335e29dd7e5c6b7af0ae9c8": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Multi-View-to-3D",
+          "Point Cloud",
+          "Feed-Forward",
+          "Metric Depth"
+        ],
+        "topics": [
+          "3D Gen&Recon",
+          "Depth Estimation"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "646e8ab8e48467b0c8456866f265a647552afe715fd291ec0d2d18519349ffbf",
+          "truncated": false
+        },
+        "sha256": "2f4a82dae997d192c9d6e1d9fd5683df58bdfb8c8e806ebbcda633dcb4ed20e4",
+        "url": "https://arxiv.org/html/2606.31086"
+      },
       "arxiv_id": "2606.31086",
       "authors": [
         "Yuzhou Ji",
@@ -69604,7 +71049,44 @@
       },
       "source_edition": "ECCV 2026",
       "source_version": "336b27235eff76a4ed934c0125c30fa7cdbbd788c34bbda894b36f2f5bed295a",
-      "summary": null,
+      "summary": {
+        "contributions": [
+          "提出一种指令转换机制，利用多模态大语言模型将编辑指令转化为面向视频的时间编辑描述，缩小图像编辑目标与视频生成之间的差距。",
+          "引入一种强化学习策略，利用基于多模态大语言模型的奖励对中间帧和最终帧进行优化，使视频生成模型能更好地利用其潜在世界知识进行推理引导的编辑。",
+          "证明VGEdit框架将视频生成转化为推理引导图像编辑的有效范式，为物理合理且具备推理能力的图像编辑提供了可扩展的路径。"
+        ],
+        "one_sentence": "该论文提出VGEdit框架，通过指令转换和强化学习将视频生成模型适配于推理引导的图像编辑任务，利用中间帧作为隐式推理轨迹以生成物理一致且符合指令的编辑结果。",
+        "problem": "现有图像编辑模型在复杂语义和物理一致性方面存在局限，而直接应用视频生成模型进行图像编辑时，由于编辑指令与视频生成目标不匹配、零样本提示无法对齐复杂指令以及直接微调未能充分利用潜在世界知识且缺乏对中间转换过程的监督，导致难以实现推理引导的图像编辑。"
+      },
+      "summary_source": {
+        "evidence": {
+          "basis": "body_excerpt",
+          "extraction": {
+            "method": "pdf_text"
+          },
+          "sections": [
+            "Page 1",
+            "Page 2",
+            "Page 3",
+            "Page 4",
+            "Page 5",
+            "Page 6",
+            "Page 7",
+            "Page 8",
+            "Page 9",
+            "Page 10",
+            "Page 11",
+            "Page 12",
+            "Page 13",
+            "Page 14",
+            "Page 15"
+          ],
+          "sha256": "1e37ecc41f84c3cf1b851a63584184c6f59cb33a1b6c46121277272d9ae32b4b",
+          "truncated": true
+        },
+        "sha256": "a60bd960ab5b086c447547141cec9e6545a372fae7fd70c6dd2c029360fce092",
+        "url": "https://media.eventhosts.cc/Conferences/ECCV2026/pdfs/723.pdf"
+      },
       "title": "VGEdit: Unlocking Video Generation Priors for Reasoning-Informed Image Editing",
       "topic_review": {
         "decisions": {
@@ -70147,7 +71629,31 @@
       },
       "source_edition": "ECCV 2026",
       "source_version": "8384018a23f8f64969b87f823c9a1f97b43a49037a8577bdfe7e7c0281ec5670",
-      "summary": null,
+      "summary": {
+        "contributions": [
+          "提出统一时空深度对齐框架，利用时空神经场在所有视角和时间步长上联合优化单目深度对齐，取代了先前工作中分离的空间和时间对齐阶段。",
+          "实现最小外部依赖，该方法统一处理静态和动态区域，无需区分前景和背景，且不依赖外部跟踪模型即可隐式捕捉运动，从而消除了对脆弱分割模型和耗时跟踪模型的依赖。",
+          "提出多视角深度顺序损失并利用经典的尺度-平移不变损失，以改善最终深度质量，确保对齐后的深度图具有更高的几何一致性。",
+          "在Ego-Exo4D和EgoHuman数据集上通过实证验证表明，该方法作为4D高斯泼溅的初始化和监督，使新视角/时间合成的PSNR提升4至6分贝，几何质量的绝对相对误差降低14%至40%。"
+        ],
+        "one_sentence": "本文提出UniFusion框架，通过统一时空神经场联合优化单目深度对齐，解决了稀疏视角动态场景重建中空间与时间对齐分离导致的依赖外部分割与跟踪模型及误差累积问题，显著提升了4D高斯泼溅的重建质量。",
+        "problem": "现有稀疏视角动态场景重建方法（如MonoFusion）将空间对齐与时间对齐作为独立阶段处理，导致严重依赖前景分割掩码和像素跟踪模型，不仅增加了预处理时间和误差累积，且无法利用时间线索改善跨视角对齐；同时，单目深度预测存在未知的每视角尺度/偏移，且在视图和时间上不一致，直接融合会产生混乱且重复的几何结构，而真实场景运动与深度预测误差相互纠缠使得对齐极具挑战性。"
+      },
+      "summary_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "a59763b9ed9e592a210f03d22cb1bb73ffa36d22390b18d2b6ec5e8109f865ba",
+          "truncated": false
+        },
+        "sha256": "8f4d924a20faa073e8c98cbe2534dc528bde59f1cac8ad0d9a9fff33b87cb5b0",
+        "url": "https://arxiv.org/html/2609.05888"
+      },
       "title": "UniFusion: Sparse-View 4D Reconstruction via Unified Spatio-temporal Depth Alignment",
       "topic_review": {
         "decisions": {
@@ -71031,6 +72537,34 @@
       "url": "https://eccv.ecva.net/virtual/2026/poster/4526"
     },
     "conf-482b1f1f35aaedbc88187f24": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Implicit Field",
+          "Feed-Forward",
+          "Monocular"
+        ],
+        "topics": [
+          "3D Gen&Recon",
+          "Depth Estimation"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "77e7ab1d46575137e2d0aac6046032e77a901af00788b14c54f284ad22863c99",
+          "truncated": false
+        },
+        "sha256": "646d3ec5c45c4405e4437abae259d276101970b9e09c3e92b803f9ffde593572",
+        "url": "https://arxiv.org/html/2606.31172"
+      },
       "arxiv_id": "2606.31172",
       "authors": [
         "Jiyong Boo",
@@ -71063,7 +72597,31 @@
       },
       "source_edition": "ECCV 2026",
       "source_version": "ca44d52653988c39628723c0fa0da7c442db4b4fc6c3d46b326c1a4c4c71261e",
-      "summary": null,
+      "summary": {
+        "contributions": [
+          "提出了一种基于高度对齐符号距离场（HSDF）的密集3D采样框架及可微渲染管线，通过沿垂直轴密集采样场景来替代稀疏锚点高度回归，从而生成表面对齐的特征和准确的高度图。",
+          "引入了车道感知语义位置编码（LSPE），将从渲染特征中预测的车道热力图转换为语义嵌入，并以此增强基于高度的位置编码，为Transformer查询提供语义先验指导。",
+          "在优化过程中引入了高度方向Eikonal损失，以稳定HSDF表示并强制生成物理一致的表面。",
+          "在OpenLane基准测试上进行了大量实验，证明HSDF-Lane显著提高了高度图估计和3D车道检测的准确性，达到了最先进的性能。"
+        ],
+        "one_sentence": "本文提出了一种名为HSDF-Lane的3D车道检测框架，通过结合密集空间采样、高度对齐符号距离场（HSDF）隐式表面建模以及车道感知语义位置编码，解决了单目3D车道检测中几何对齐不准和语义利用不足的问题。",
+        "problem": "现有单目3D车道检测方法存在几何与语义两方面的局限：基于逆透视映射（IPM）或深度估计的方法在远距或起伏路面因单目深度尺度模糊和投影误差放大导致几何不稳定；基于稀疏斜率锚点的方法受限于平面假设，在复杂路面上产生几何畸变，且随着距离增加锚点间空间间隙扩大，难以准确回归绝对路面高度；此外，现有方法对语义信息的利用有限，缺乏有效的语义先验指导。"
+      },
+      "summary_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "77e7ab1d46575137e2d0aac6046032e77a901af00788b14c54f284ad22863c99",
+          "truncated": false
+        },
+        "sha256": "646d3ec5c45c4405e4437abae259d276101970b9e09c3e92b803f9ffde593572",
+        "url": "https://arxiv.org/html/2606.31172"
+      },
       "title": "HSDF-Lane: Height-Aligned Signed Distance Field with Semantic Lane Prior for 3D Lane Detection",
       "topic_review": {
         "decisions": {
@@ -73833,6 +75391,33 @@
       "url": "https://ojs.aaai.org/index.php/AAAI/article/view/28476"
     },
     "conf-4a831ffbc1186af715ed750a": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Text-to-3D",
+          "Single-Image-to-3D",
+          "Optimization-Based"
+        ],
+        "topics": [
+          "3D Gen&Recon"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "official_abstract",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Abstract"
+          ],
+          "sha256": "da4307cdd521f80545d5ce49eb990d2ec779f1fa26ed2cc890df715001b6d02f",
+          "truncated": false
+        },
+        "sha256": "61e293115019920baf5b2ee88c12f529b610e036e0f567c3fec798d3dce8d579",
+        "url": "https://eccv.ecva.net/virtual/2026/poster/4931"
+      },
       "conferences": [
         {
           "edition": "ECCV 2026",
@@ -75154,6 +76739,32 @@
       "url": "https://proceedings.mlr.press/v267/xie25g.html"
     },
     "conf-4b65d4c36b575c45d7cfc8c0": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Multi-View-to-3D",
+          "Optimization-Based"
+        ],
+        "topics": [
+          "3D Gen&Recon"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "official_abstract",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Abstract"
+          ],
+          "sha256": "6a59c9c3fdcc4d431b4e06c8098250646ba9b98f9f2ecce1ba2a996ddbb4807f",
+          "truncated": false
+        },
+        "sha256": "0a39db4752df1bb448e514c3487983025c2b03d583d529480e3426fa5d224145",
+        "url": "https://eccv.ecva.net/virtual/2026/poster/4576"
+      },
       "arxiv_id": "2607.27194",
       "authors": [
         "Zador Pataki",
@@ -80098,6 +81709,29 @@
       "url": "https://eccv.ecva.net/virtual/2024/poster/2515"
     },
     "conf-509214e7b5d2ad93ef7eac10": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [],
+        "topics": [
+          "Video Gen&Edit"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "9fd278ff25fb603175e70905761ad5dbbdb286b7176a0c89c0be35f1a5257f1e",
+          "truncated": false
+        },
+        "sha256": "21b9d06a7ece0985e2b3408348a62726784d7d3706820c3ce73dbbffe0d62dd8",
+        "url": "https://arxiv.org/html/2607.11710"
+      },
       "arxiv_id": "2607.11710",
       "authors": [
         "Le-Kim Nguyen",
@@ -80130,7 +81764,30 @@
       },
       "source_edition": "ECCV 2026",
       "source_version": "5559d54bb535fa9f2781a70c514ed9824d1e207b6798afd1a7c1865a92f3b822",
-      "summary": null,
+      "summary": {
+        "contributions": [
+          "提出了一种新的全向视频插值方法，利用球体旋转正交视图的等变像素位移先验来引导原始球面帧的光流估计和帧插值。",
+          "引入了一种球面加权 Charbonnier 重建损失项，以应对球面视图中非均匀的像素密度，从而增强包含大部分视觉信息的中心图像区域的表现。",
+          "在 FlowScape、Flow360、ODV360 和 360VFI 等全向基准上进行了广泛评估，证明该方法在插值质量上持续优于最先进方法，同时实现了具有竞争力的光流精度。"
+        ],
+        "one_sentence": "SVI360 提出了一种利用正交视图等变先验和球面加权损失来优化球面视频帧间插值与光流估计的新方法，在多个基准数据集上显著提升了大位移和极点畸变区域的插值质量。",
+        "problem": "现有针对透视图像的插值方法在处理球面视频时，因球面数据存在的严重几何畸变、非均匀像素密度及大像素流位移，导致对应关系估计和运动重建极具挑战性，且现有球面插值方法在处理大像素位移时性能显著下降。"
+      },
+      "summary_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "9fd278ff25fb603175e70905761ad5dbbdb286b7176a0c89c0be35f1a5257f1e",
+          "truncated": false
+        },
+        "sha256": "21b9d06a7ece0985e2b3408348a62726784d7d3706820c3ce73dbbffe0d62dd8",
+        "url": "https://arxiv.org/html/2607.11710"
+      },
       "title": "SVI360: Spherical Video Interpolation",
       "topic_review": {
         "decisions": {
@@ -80238,6 +81895,32 @@
       "url": "https://openaccess.thecvf.com/content/CVPR2026/html/Xu_Real-Time_Generation_of_Streamable_Talking_Portrait_Video_with_Reference-Guided_Deep_CVPR_2026_paper.html"
     },
     "conf-50c6ddf8106592eb1480b39a": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Procedural",
+          "Feed-Forward"
+        ],
+        "topics": [
+          "3D Gen&Recon"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "official_abstract",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Abstract"
+          ],
+          "sha256": "7dde4c8bdbc9208fcb13d6a0a2bca9bbab89e36836064ce5168fce27721d9a42",
+          "truncated": false
+        },
+        "sha256": "b388644e1dd95eace2758929a9d4ce22a36d17caa56b163b53b54e28af2edb03",
+        "url": "https://eccv.ecva.net/virtual/2026/poster/4326"
+      },
       "conferences": [
         {
           "edition": "ECCV 2026",
@@ -81359,7 +83042,45 @@
       },
       "source_edition": "ECCV 2026",
       "source_version": "61d17d33452e193a07e4d37fe0c17472bfc7c1310f89f63037131922b4ab5d5b",
-      "summary": null,
+      "summary": {
+        "contributions": [
+          "提出了 DPGS 框架，这是一个专为大规模航拍重建设计的整体框架，有效克服了受限垂直俯视观测导致的几何和纹理缺陷。",
+          "引入了基于密集匹配基础模型（如 RoMa、ASpanFormer、UFM）的像素级密集初始化策略，通过注入密集高保真锚点确保在弱纹理区域的鲁棒收敛。",
+          "设计了扩散先验引导的补全机制，利用虚拟螺旋下降轨迹和 3D 感知扩散模型，为未观测角度生成合理的纹理和几何结构，以解决立面盲区问题。",
+          "提出了观测密度平衡划分（ODBP）策略，将场景分割建模为基于特征轨迹长度加权的图划分问题，以动态平衡异构场景中的渲染负载。",
+          "在具有挑战性的高空航拍基准测试中验证了该方法，展示了在渲染质量和几何完整性方面优于竞争方法的性能。"
+        ],
+        "one_sentence": "DPGS 提出了一种由扩散先验引导的大规模 3D 高斯泼溅重建框架，旨在解决仅使用垂直俯视图像进行大规模航拍重建时面临的几何缺失、立面盲区及计算负载不均等挑战。",
+        "problem": "现有方法在直接应用 3D 高斯泼溅于大规模航拍场景时，受限于实际飞行任务中稀疏的垂直俯视观测条件，主要面临三个瓶颈：一是缺乏斜视视角导致垂直建筑立面出现几何坍塌和模糊伪影；二是弱纹理区域导致稀疏的 SfM 锚点缺失，引发漂浮伪影；三是均匀的空间划分策略无法适应异构场景复杂度，导致并行训练时严重的计算负载不均和 GPU 内存耗尽。"
+      },
+      "summary_source": {
+        "evidence": {
+          "basis": "body_excerpt",
+          "extraction": {
+            "method": "pdf_text"
+          },
+          "sections": [
+            "Page 2",
+            "Page 3",
+            "Page 4",
+            "Page 5",
+            "Page 6",
+            "Page 7",
+            "Page 8",
+            "Page 9",
+            "Page 10",
+            "Page 11",
+            "Page 12",
+            "Page 13",
+            "Page 14",
+            "Page 15"
+          ],
+          "sha256": "7b27546e92c0f6181270e1947675c3ccabe36e530f4c0c4ae44ec6e256fef74f",
+          "truncated": true
+        },
+        "sha256": "76a69295bf6366595803305eb519273f21355250dde1bd5e81cbcf47f87921cf",
+        "url": "https://media.eventhosts.cc/Conferences/ECCV2026/pdfs/7853.pdf"
+      },
       "title": "DPGS: A Diffusion-Prior Guided Framework for Large-Scale 3D Gaussian Splatting Reconstruction",
       "topic_review": {
         "decisions": {
@@ -255758,6 +257479,35 @@
       "url": "https://icml.cc/virtual/2026/poster/62180"
     },
     "conf-f9278870f4930f95eac38aeb": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Direct Regression",
+          "Monocular",
+          "Video",
+          "Self-Supervised",
+          "Zero-Shot/Foundation Model"
+        ],
+        "topics": [
+          "Depth Estimation"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "14f5d83fc689233ff696c0509ea9b03e30ec340c46dc5d0b20be402af6a96903",
+          "truncated": false
+        },
+        "sha256": "940cb36cba798493910f43c2e70ebea8c359f6d8af564339f50bc0f6f849af8f",
+        "url": "https://arxiv.org/html/2312.13066"
+      },
       "arxiv_id": "2312.13066",
       "authors": [
         "Yue-Jiang Dong",
