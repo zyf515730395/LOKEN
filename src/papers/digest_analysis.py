@@ -19,7 +19,8 @@ def plain(value: str) -> str:
     return re.sub(r'\s+', ' ', html.unescape(re.sub('<[^>]+>', ' ', value))).strip()
 
 
-def validate_analysis(item: dict, ids: list[str], summaries: dict[str, str], *, titles: dict | None = None) -> None:
+def validate_analysis(item: dict, ids: list[str], summaries: dict[str, str], *, titles: dict | None = None,
+                      require_trends: bool = True) -> None:
     if not isinstance(item, dict) or item.get('generator_version') != 'problem-contribution-v2':
         raise ValueError('Independent local-model paper sentences have not been generated')
     if not isinstance(item, dict) or not isinstance(item.get('paper_ids'), list) or not all(isinstance(key, str) for key in item['paper_ids']):
@@ -49,6 +50,8 @@ def validate_analysis(item: dict, ids: list[str], summaries: dict[str, str], *, 
             raise ValueError('Analysis evidence changed')
         if contribution.get('generator_version') != 'problem-contribution-v2' or not all(contribution.get(k) for k in ('problem','contribution','model','generated_at')):
             raise ValueError('Per-paper local generation provenance required')
+    if not require_trends:
+        return
     trends = item.get('trends')
     trend_skip = item.get('skipped_trend')
     if trend_skip is not None:
@@ -75,7 +78,8 @@ def render_topic(members: list[dict], summaries: dict[str, str], analysis: dict 
     valid = False
     if analysis:
         try:
-            validate_analysis(analysis, ids, summaries, titles={row['id']:row['title'] for row in members})
+            validate_analysis(analysis, ids, summaries, titles={row['id']:row['title'] for row in members},
+                              require_trends=not include_papers)
             valid = True
         except (ValueError, TypeError, KeyError):
             pass
@@ -102,7 +106,9 @@ def render_topic(members: list[dict], summaries: dict[str, str], analysis: dict 
                     pass
         basis = '首次采集' if row['date_basis'] == 'first_collected' else '发表日期'
         rows.append(f'<tr><td>{title}<small>{html.escape(str(row.get("display_id", key)))}</small><small class="digest-paper-date">{row["digest_date"].isoformat()} · {basis}</small></td><td>{html.escape(sentence)}</td></tr>')
-    result = ('<div class="digest-table-wrap" role="region" aria-label="论文问题与贡献表" tabindex="0"><table class="digest-table"><thead><tr><th scope="col">论文</th><th scope="col">一句话：问题与贡献</th></tr></thead><tbody>' + ''.join(rows) + '</tbody></table></div><h3>技术趋势与分析</h3>') if include_papers else ''
+    result = ('<div class="digest-table-wrap" role="region" aria-label="论文问题与贡献表" tabindex="0"><table class="digest-table"><thead><tr><th scope="col">论文</th><th scope="col">一句话：问题与贡献</th></tr></thead><tbody>' + ''.join(rows) + '</tbody></table></div>') if include_papers else ''
+    if include_papers:
+        return result
     if not valid:
         return result + '<p class="periodical-note">本期分析待生成或证据已更新；不以论文标题推断技术趋势。</p>'
     skipped = analysis.get('skipped_papers', {})
