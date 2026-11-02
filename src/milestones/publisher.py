@@ -232,6 +232,8 @@ def render_family_navigation(catalog: dict[str, Any], active_family: str) -> str
         groups[category].append(family)
     items = []
     for category, families in groups.items():
+        if not families:
+            continue
         items.append(f'<details class="secondary-nav-group" open><summary>{html.escape(category)}</summary><div class="secondary-nav-links">')
         for family in sorted(families, key=lambda family: family['name'].casefold()):
             label = html.escape(family['name'])
@@ -241,8 +243,6 @@ def render_family_navigation(catalog: dict[str, Any], active_family: str) -> str
                 items.append(f'<a class="context-strip-link{active_class}" href="{html.escape(family["slug"], quote=True)}.html"{current}>{label}</a>')
             else:
                 items.append(f'<span class="context-strip-link is-disabled" aria-disabled="true">{label}</span>')
-        if not families:
-            items.append('<span class="context-strip-link is-disabled">暂无模型</span>')
         items.append('</div></details>')
     return (
         '<nav class="context-strip" aria-label="模型系列">\n'
