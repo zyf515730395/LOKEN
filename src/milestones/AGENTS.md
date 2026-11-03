@@ -1,6 +1,6 @@
 # Milestone models
 
-- `config/milestone_models.yaml` is the public catalog; releases are chronological, source-backed official milestones, with variants grouped under generations. Model-family navigation sorts names case-insensitively across topics.
+- `config/milestone_models.yaml` is the public catalog; releases are chronological, source-backed official milestones, with variants grouped under generations. Model navigation uses paper_labels from config/site.yaml in order plus VLM/LLM; each catalog topic declares navigation_topic. Sort families case-insensitively within each group and omit groups without models. Preserve source topic names for local note lookup.
 - `catalog.py` validates metadata; `publisher.py` renders family and reading pages; `reader.py` owns loopback-only deep reading. Reuse local Markdown notes and preserve existing notes and generated readings when adding families.
 - Date-based note IDs may collide across model releases. Resolve explicit `milestone_family` and `milestone_release` before legacy ID-only notes; never treat a note explicitly assigned to another release as a fallback.
 - GPT and DeepSeek track general-purpose language/reasoning releases; QwenVL tracks the named Qwen-VL lineage. Claude is excluded from the public catalog and half-month maintenance. Preserve its historical local notes without publishing its family pages. Do not silently add unrelated product or specialized model families. Undisclosed technical information stays `/`; missing reading stays visibly pending.
