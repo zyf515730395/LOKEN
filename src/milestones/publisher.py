@@ -220,22 +220,30 @@ def _status_badge(status: str) -> str:
 
 
 def render_family_navigation(catalog: dict[str, Any], active_family: str) -> str:
-    """Render every tracked model family in one horizontal strip."""
+    """Group model families by the paper taxonomy and VLM/LLM."""
+    import yaml
+    config = yaml.safe_load((Path(__file__).resolve().parents[2] / 'config/site.yaml').read_text(encoding='utf-8'))
+    groups = {label['name']: [] for label in config['paper_labels']}
+    groups['VLM/LLM'] = []
+    for topic, family in iter_families(catalog):
+        category = topic['navigation_topic']
+        if category not in groups:
+            raise ValueError(f'Unknown model navigation topic: {category}')
+        groups[category].append(family)
     items = []
-    for _, family in sorted(iter_families(catalog), key=lambda item: item[1]['name'].casefold()):
-        label = html.escape(family["name"])
-        if family["page_status"] == "ready":
-            active_class = " is-active" if family["slug"] == active_family else ""
-            current = ' aria-current="location"' if family["slug"] == active_family else ""
-            items.append(
-                f'    <a class="context-strip-link{active_class}" '
-                f'href="{html.escape(family["slug"], quote=True)}.html"{current}>{label}</a>'
-            )
-        else:
-            items.append(
-                '    <span class="context-strip-link is-disabled" aria-disabled="true">'
-                f'{label}</span>'
-            )
+    for category, families in groups.items():
+        if not families:
+            continue
+        items.append(f'<details class="secondary-nav-group" open><summary>{html.escape(category)}</summary><div class="secondary-nav-links">')
+        for family in sorted(families, key=lambda family: family['name'].casefold()):
+            label = html.escape(family['name'])
+            if family['page_status'] == 'ready':
+                active_class = ' is-active' if family['slug'] == active_family else ''
+                current = ' aria-current="page"' if family['slug'] == active_family else ''
+                items.append(f'<a class="context-strip-link{active_class}" href="{html.escape(family["slug"], quote=True)}.html"{current}>{label}</a>')
+            else:
+                items.append(f'<span class="context-strip-link is-disabled" aria-disabled="true">{label}</span>')
+        items.append('</div></details>')
     return (
         '<nav class="context-strip" aria-label="模型系列">\n'
         + "\n".join(items)
