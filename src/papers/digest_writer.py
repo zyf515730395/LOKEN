@@ -1,6 +1,7 @@
 """Generate independent paper sentences followed by whole-topic synthesis."""
 from __future__ import annotations
 import argparse
+import hashlib
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import date, datetime, timedelta
 import json
@@ -81,6 +82,25 @@ def summarize_paper(key,title,evidence,client,model,cache_root,should_continue=N
 
 def recover_official_abstract(key,row,source):
     """Route by verified identity, reusing the canonical acquisition caches."""
+    if re.fullmatch(r'hf-[a-f0-9]{24}', key):
+        from papers import paths
+        from papers.huggingface import external_rows
+        ledger = json.loads(paths.LEDGER.read_text(encoding='utf-8'))
+        entry = ledger.get('papers', {}).get(key, {})
+        if not any(item['id'] == key and item['title'] == row['title'] for item in external_rows(ledger)):
+            raise ValueError('HF digest identity mismatch')
+        url = entry['hf_daily']['url']
+        if not re.fullmatch(r'https://huggingface\.co/papers/[A-Za-z0-9][A-Za-z0-9._-]{0,199}', url):
+            raise ValueError('Invalid HF evidence source')
+        if key != 'hf-' + hashlib.sha256(url.encode()).hexdigest()[:24]:
+            raise ValueError('HF identity does not match source URL')
+        text = entry['abstract']
+        if not isinstance(text, str) or not text.strip():
+            raise ValueError('HF abstract unavailable')
+        if entry['hf_daily'].get('evidence_sha256') != hashlib.sha256((entry['title']+'\0'+text).encode()).hexdigest():
+            raise ValueError('HF abstract evidence changed')
+        return {'title': row['title'], 'url': url, 'text': text, 'sha256': evidence_hash(text),
+                'verified_at': now(), 'basis': 'huggingface_abstract'}
     if re.fullmatch(r'\d{4}\.\d{4,5}',key):
         text=source.acquire_abstract(key,row['title'])
         return {'title':row['title'],'url':f'https://arxiv.org/abs/{key}','text':text,

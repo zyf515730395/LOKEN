@@ -77,6 +77,15 @@ def archive_ids(archive: dict[str, dict[str, object]]) -> set[str]:
     }
 
 
+def merge_sources(target: dict, record: dict) -> None:
+    """Discovery provenance is a union, never a replacement of paper identity."""
+    target['sources'] = sorted(set(target.get('sources', ['arxiv'])) | set(record.get('sources', ['arxiv'])))
+    if record.get('hf_daily'):
+        old = target.get('hf_daily', {})
+        target['hf_daily'] = {**record['hf_daily'], **old,
+            'dates': sorted(set(old.get('dates', [])) | set(record['hf_daily'].get('dates', [])))}
+
+
 def merge_collected_candidates(
     archive: dict[str, dict[str, object]],
     ledger: dict[str, Any],
@@ -105,14 +114,21 @@ def merge_collected_candidates(
                 "archive_rows": {},
             },
         )
+        is_arxiv = 'arxiv' in record.get('sources', ['arxiv'])
+        if is_arxiv:
+            for field in ('title', 'abstract', 'authors', 'updated', 'paper_url', 'pdf_url'):
+                item[field] = record[field]
+        merge_sources(item, record)
         topic = record["topic"]
         if topic not in item["matched_topics"]:
             item["matched_topics"].append(topic)
-        item["archive_rows"][topic] = record["archive_row"]
+        if is_arxiv or topic not in item['archive_rows']:
+            item["archive_rows"][topic] = record["archive_row"]
 
     for paper_id, record in merged.items():
         entry = papers.get(paper_id)
-        if entry is None and paper_id in existing_ids:
+        legacy = entry is None and paper_id in existing_ids
+        if legacy and not record.get('hf_daily'):
             continue
         if entry is None:
             entry = {
@@ -132,20 +148,33 @@ def merge_collected_candidates(
                 "reviewed_at": None,
             }
             papers[paper_id] = entry
-            added += 1
+            entry['sources'] = list(record.get('sources', ['arxiv']))
+            if legacy:
+                from papers.site import parse_entry
+                old_rows = {topic: entries[paper_id] for topic, entries in archive.items() if paper_id in entries}
+                old = parse_entry(paper_id, next(iter(old_rows.values())))
+                entry.update(title=old['title'], authors=old['authors'], updated=old['date'].isoformat(),
+                    paper_url=old['paper_url'], archive_rows=old_rows, matched_topics=list(old_rows),
+                    status='accepted', selected_topic=next(iter(old_rows)),
+                    decision_reason='Preserved existing published archive membership',
+                    collected_at=None, sources=['arxiv'])
+            else:
+                added += 1
 
-        entry["title"] = record["title"]
-        entry["abstract"] = record["abstract"]
-        entry["authors"] = record["authors"]
-        entry["updated"] = record["updated"]
-        entry["paper_url"] = record["paper_url"]
-        entry["pdf_url"] = record["pdf_url"]
+        hf_only = record.get('sources') == ['huggingface']
+        if not hf_only:
+            for field in ('title', 'abstract', 'authors', 'updated', 'paper_url', 'pdf_url'):
+                entry[field] = record[field]
+        merge_sources(entry, record)
+        if record.get('display_id'):
+            entry.setdefault('display_id', record['display_id'])
         entry["matched_topics"] = sorted(
             set(entry.get("matched_topics", [])) | set(record["matched_topics"])
         )
         entry["archive_rows"] = {
             **entry.get("archive_rows", {}),
-            **record["archive_rows"],
+            **({k: v for k, v in record['archive_rows'].items() if k not in entry.get('archive_rows', {})}
+               if hf_only else record['archive_rows']),
         }
 
     next_ledger["updated_at"] = collected_at

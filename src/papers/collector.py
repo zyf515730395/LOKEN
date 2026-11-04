@@ -533,7 +533,8 @@ def collect(
         raise ValueError("Collection time must include a timezone")
     end = end.astimezone(dt.timezone.utc).replace(microsecond=0)
     today = end.date()
-    if skip_if_current and all(
+    hf_enabled = config.get('collection', {}).get('huggingface', {}).get('enabled', False)
+    if skip_if_current and not hf_enabled and all(
         _cursor_is_current(ledger.get("collection_cursors", {}).get(topic), today)
         for topic in topics
     ):
@@ -545,8 +546,10 @@ def collect(
             "failed_topic_names": [],
         }
 
+    from .huggingface import collect_daily
+    ledger, hf_result = collect_daily(config, archive, ledger, ledger_path, end)
     working_ledger = ledger
-    added = 0
+    added = hf_result['new_candidates']
 
     def save_checkpoint(
         shard_records: list[dict],
@@ -585,14 +588,15 @@ def collect(
         checkpoint=save_checkpoint,
     )
     status = "complete"
-    if failed_topics:
+    if failed_topics or hf_result['failed_dates']:
         status = "cooldown" if cooldown_was_active else "incomplete"
     result = {
-        "collected": len(records),
+        "collected": len(records) + hf_result['collected'],
         "new_candidates": added,
         "failed_topics": len(failed_topics),
         "failed_topic_names": failed_topics,
         "status": status,
+        "huggingface": hf_result,
     }
     cooldown_until = working_ledger.get("collection_cooldown_until")
     if cooldown_until is not None:
@@ -611,7 +615,7 @@ def main() -> None:
     if args.report:
         args.report.parent.mkdir(parents=True, exist_ok=True)
         atomic_write_json(args.report, result)
-    if result['failed_topics']:
+    if result['failed_topics'] or result.get('huggingface', {}).get('failed_dates'):
         logging.error('Collection incomplete; saved completed topics and preserved failed cursors. Next scheduled catch-up will retry: %s', ', '.join(result['failed_topic_names']))
         sys.exit(75)
 
