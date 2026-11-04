@@ -177,8 +177,9 @@ document.querySelectorAll("[data-archive-year]").forEach((yearArchive) => {
 function revealHashTarget({ scroll = false } = {}) {
   const id = normalizeTopicAnchor(decodeURIComponent(window.location.hash.slice(1)));
   if (!id) return;
-  const target = document.getElementById(id);
+  let target = document.getElementById(id);
   if (!target) return;
+  if (target.hasAttribute("data-paper-alias")) target = target.closest("tr") || target;
 
   const monthPanel = target.matches(".archive-period-panel")
     ? target

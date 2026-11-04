@@ -411,12 +411,14 @@ def render_table(
     for row in rows:
         paper_url = html.escape(row["paper_url"], quote=True)
         summary = _summary_for_paper(summary_catalog, row["id"])
+        if summary.get('status') != 'ready':
+            summary = row.get('conference_summary', summary)
         summary_cell = '<span class="muted">—</span>'
         if summary.get("status") == "pending":
             summary_cell = '<span class="summary-pending">待生成</span>'
         elif summary.get("status") == "ready" and summary.get("url"):
             summary_url = html.escape(summary["url"], quote=True)
-            summary_id = html.escape(f"summary-{row['id']}", quote=True)
+            summary_id = html.escape(summary.get('summary_id', f"summary-{row['id']}"), quote=True)
             summary_cell = (
                 f'<a class="summary-link" href="{summary_url}" '
                 f'data-summary-url="{summary_url}" data-summary-id="{summary_id}" '
@@ -425,9 +427,14 @@ def render_table(
         elif row.get('summary_pending') or candidate_statuses.get(row["id"]) in {"pending", "accepted"}:
             summary_cell = '<span class="summary-pending">待生成</span>'
         anchor = ""
+        aliases = ""
         if row["id"] not in anchored_papers:
             anchor = f' id="paper-{html.escape(row["id"], quote=True)}"'
             anchored_papers.add(row["id"])
+            for alias in row.get('conference_aliases', ()):
+                if alias not in anchored_papers:
+                    aliases += f'<span id="paper-{html.escape(alias, quote=True)}" data-paper-alias></span>'
+                    anchored_papers.add(alias)
         tags = "".join(
             f'<span class="paper-tag">{html.escape(tag)}</span>'
             for tag in row.get("tags", ())[:5]
@@ -451,7 +458,7 @@ def render_table(
             date_hint = ' title="' + html.escape(label + '：' + row.get('published_at', '') + '；非论文首次发表日期', quote=True) + '"'
         output.append(
             f"      <tr{anchor}>"
-            f'<td class="paper-id" data-label="Arxiv ID"><a href="{paper_url}"{date_hint} target="_blank" rel="noopener">'
+            f'<td class="paper-id" data-label="Arxiv ID">{aliases}<a href="{paper_url}"{date_hint} target="_blank" rel="noopener">'
             f'{html.escape(row.get("display_id", row["id"]))}</a></td>'
             f'<td class="paper-title" data-label="Paper"><a class="paper-title-link" href="{paper_url}" target="_blank" rel="noopener">'
             f'{html.escape(row["title"])}</a>{hf_markup}{tag_markup}</td>'
@@ -682,9 +689,23 @@ def generate_site(
         load_candidate_statuses(candidate_path, review_required_since=str(cutoff))
         if cutoff is not None else {}
     )
-    from papers.conference_library import load_library, library_rows, publish_library_notes, retain_library_matches
+    from papers.conference_library import load_library, library_rows, publish_library_notes, retain_library_matches, conference_annotation
     library = load_library()
     ledger = json.loads(Path(candidate_path).read_text(encoding='utf-8')) if candidate_path and Path(candidate_path).exists() else {}
+    archive_ids = {key for entries in data.values() for key in entries}
+    merged_conferences = {}
+    for record in library['papers'].values():
+        paper_id = record.get('arxiv_id')
+        if paper_id not in archive_ids or not record['topics'] or candidate_statuses.get(paper_id) == 'rejected':
+            continue
+        merged_conferences.setdefault(paper_id, []).append(record)
+        existing = annotations.get(paper_id)
+        inherited = conference_annotation(record)
+        current_topics = [topic for topic, entries in data.items() if paper_id in entries]
+        topics = tuple(dict.fromkeys((*current_topics, *record['topics'], *(_annotation_values(existing)[0] if existing else ()))))
+        source = existing or inherited
+        _, tags, paper_type, institutions = _annotation_values(source) if source else ((), (), 'paper', ())
+        annotations[paper_id] = PaperAnnotation(topics, tags, paper_type, institutions)
     extra_rows = library_rows(library, data, ledger)
     from papers.huggingface import external_rows
     extra_rows.extend(external_rows(ledger))
@@ -698,12 +719,21 @@ def generate_site(
     }
     extra_rows = [row for row in extra_rows if row['date'].year not in excluded_years]
     if library['papers']:
-        summary_catalog['conference'] = publish_library_notes(library, Path(output_root or Path(output_path).parent), {row['id'] for row in extra_rows})
+        visible_conference_ids = {row['id'] for row in extra_rows} | {r['id'] for records in merged_conferences.values() for r in records}
+        summary_catalog['conference'] = publish_library_notes(library, Path(output_root or Path(output_path).parent), visible_conference_ids)
     all_categories, _ = build_archive(data, labels, annotations, candidate_statuses, extra_rows)
     from papers.proceedings import load_catalog, match_papers
     all_rows = [row for category in all_categories for row in _iter_category_rows(category)]
     conference_matches = match_papers(all_rows, load_catalog())
     for row in all_rows:
+        records = merged_conferences.get(row['id'], ())
+        if records:
+            row['conference_aliases'] = [record['id'] for record in records]
+            for record in records:
+                summary = summary_catalog.get('conference', {}).get(record['id'], {})
+                if summary.get('status') == 'ready':
+                    row['conference_summary'] = {**summary, 'summary_id': 'summary-' + record['id']}
+                    break
         row['conferences'] = conference_matches.get(row['id'], row.get('conferences', []))
         hf_daily = ledger.get('papers', {}).get(row['id'], {}).get('hf_daily')
         if hf_daily:
