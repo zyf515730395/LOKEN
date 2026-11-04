@@ -1,5 +1,7 @@
 # Public paper data
 
+- `paradigm-observations.json` stores curated mechanism-level readings of published weekly analyses. Each entry binds its topic/week, exact source-trend hash and supporting paper IDs; rendering still requires the underlying weekly analysis to pass current public-paper/evidence validation. These are historical interpretations, not new paper summaries or claims of first invention. Never edit historical weekly source text to fit a route.
+
 - `conference-papers.json` stores public accepted-paper title/URL/edition metadata from official proceedings, with source and collection dates. It is independent of archive review decisions; matching never adds papers or reverses deletions. Raw downloaded HTML and maintenance reports stay in ignored `build/conferences/`.
 
 - `archive.json` is the canonical historical/public paper archive. Preserve historical entries except during an explicitly authorized full recheck: remove only explicitly rejected topic memberships, retain uncertain memberships, and record reasons and original rows in private recheck receipts. Synchronize ledger decisions and annotations through a recoverable, concurrency-checked transaction.

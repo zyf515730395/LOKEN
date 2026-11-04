@@ -1,5 +1,13 @@
 # Paper pipeline rules
 
+## Paradigm tracking
+
+- `config/paradigms.yaml` is the curated, source-linked route baseline; `paradigms.py` aggregates evidence and `paradigm_page.py` renders `docs/reports/paradigms.html`. No separate scheduler or model service is created.
+- Track all configured paper topics over the preceding calendar year. Foundation references may be older and are labelled separately. Observed dates are not invention dates. Mainstream labels require curated sources; repeated local observations never establish global dominance or independent adoption.
+- Weekly synthesis may emit structured paradigm observations with an extensible dimension, prior approach, changed mechanism, limitations and exact topic/period citations. Legacy trends remain unclassified clues; keyword association with a baseline is not a novelty determination. Validate against current public papers and evidence hashes; show missing/stale coverage explicitly.
+- Follow-up choices live in browser-local storage with export/import. They must not modify published analysis or be described as synchronized across devices.
+- Historical reviewed observations in `content/papers/paradigm-observations.json` bind an exact weekly trend hash. Only publish when that trend is still validated and in-window; show these as historical analysis review, separate from newly generated weekly observations.
+
 ## Sources, publication and taxonomy
 
 - Runtime Git push must preserve a caller-provided `GIT_SSH_COMMAND`, matching the other Git operations; otherwise use the existing secure defaults. Temporary DNS recovery must use a freshly verified address with the original host-key alias and strict host-key checking, never a permanent IP or disabled verification. Publication timeouts, process-group cleanup, pending receipts and exact remote confirmation remain mandatory.
