@@ -52,6 +52,11 @@ def validate_analysis(item: dict, ids: list[str], summaries: dict[str, str], *, 
             raise ValueError('Per-paper local generation provenance required')
     if not require_trends:
         return
+    if 'paradigms' in item or 'paradigm_version' in item:
+        from papers.paradigms import OBSERVATION_VERSION, validate_observations
+        if item.get('paradigm_version') != OBSERVATION_VERSION:
+            raise ValueError('Unknown paradigm observation version')
+        validate_observations(item.get('paradigms'), contributions)
     trends = item.get('trends')
     trend_skip = item.get('skipped_trend')
     if trend_skip is not None:
