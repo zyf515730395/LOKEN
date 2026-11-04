@@ -37,6 +37,8 @@ class PaperCandidate:
 def _candidate(paper_id: str, entry: object) -> PaperCandidate | None:
     if not isinstance(entry, dict) or entry.get("status") != "accepted":
         return None
+    if re.fullmatch(r'hf-[a-f0-9]{24}', paper_id):
+        return None  # A real external identity, never an arXiv download target.
     normalized = normalize_arxiv_id(paper_id)
     if normalized != paper_id or entry.get("id") != paper_id or not ARXIV_ID.fullmatch(paper_id):
         raise PaperSummaryError("invalid_candidate", f"invalid accepted paper id: {paper_id}")

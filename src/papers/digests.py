@@ -68,6 +68,8 @@ def load_public_papers(config_path: str | Path = CONFIG, *, today: date | None =
     library = load_library(source('conference_library_path', 'content/papers/conference-library.json'))
     # Dedupe against the complete archive before applying presentation filters.
     extra = library_rows(library, archive, ledger)
+    from papers.huggingface import external_rows
+    extra.extend(external_rows(ledger))
     excluded = {int(year) for year in config.get('publication', {}).get('excluded_years', [])}
     public_archive = {topic: {key: value for key, value in entries.items() if parse_entry(key, value)['date'].year not in excluded}
                       for topic, entries in archive.items()}

@@ -59,7 +59,7 @@ def apply_decisions(archive, ledger, decisions, topics):
         entry = next_ledger['papers'][item['id']]
         entry.update(status='accepted' if item['action'] == 'accept' else 'rejected',
                      selected_topic=item['topic'], decision_reason=item['reason'], reviewed_at=reviewed)
-        if item['action'] == 'accept':
+        if item['action'] == 'accept' and not item['id'].startswith('hf-'):
             rows = entry['archive_rows']
             next_archive.setdefault(item['topic'], {})[item['id']] = rows.get(item['topic']) or next(iter(rows.values()))
     if decisions:
