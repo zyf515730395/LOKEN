@@ -275,30 +275,22 @@ def _summary_for_paper(summary_catalog: dict[str, dict], paper_id: str) -> dict:
 def build_paper_search_documents(
     categories: list[dict], summary_catalog: dict[str, dict]
 ) -> list[SearchDocument]:
-    """Create one public result per canonical paper, preferring ready summaries."""
+    """Create one result per canonical paper, targeting its first public table row."""
     documents: dict[str, SearchDocument] = {}
     for category in categories:
         for row in _iter_category_rows(category):
             paper_id = row["id"]
-            summary = _summary_for_paper(summary_catalog, paper_id)
-            ready_summary = summary.get("status") == "ready" and summary.get("url")
-            url = (
-                summary["url"]
-                if ready_summary
-                else f"index.html#paper-{paper_id}"
-            )
             document = SearchDocument(
                 id=f"paper:{paper_id}",
                 title=row["title"],
-                url=url,
+                url=f"index.html#paper-{paper_id}",
                 section="learning",
                 kind="paper",
                 published_at=row["date"].isoformat() if row.get('date_precision', 3) == 3 else None,
+                topics=tuple(row.get('topics', (category['topic'],))),
             )
             existing = documents.get(paper_id)
-            if existing is None or (
-                existing.url.startswith("index.html#") and ready_summary
-            ):
+            if existing is None:
                 documents[paper_id] = document
     return list(documents.values())
 
