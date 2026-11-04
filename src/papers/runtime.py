@@ -152,7 +152,7 @@ def allowed_path(path):
             return True
         return bool(re.fullmatch(r'content/papers/digests/(daily|weekly)-\d{4}-\d{2}-\d{2}\.json', path))
     if path.startswith('docs/reports/'):
-        return path in {'docs/reports/daily.html', 'docs/reports/weekly.html'} or bool(
+        return path in {'docs/reports/daily.html', 'docs/reports/weekly.html', 'docs/reports/paradigms.html'} or bool(
             re.fullmatch(r'docs/reports/periods/(daily|weekly)-\d{4}-\d{2}-\d{2}\.json', path))
     return any((path.startswith(item) and path.endswith('.html') and '/' not in path[len(item):])
                if item.endswith('/') else path == item for item in PUBLIC)

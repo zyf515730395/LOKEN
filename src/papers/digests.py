@@ -270,6 +270,14 @@ def publish_paper_digests(config_path: str | Path = CONFIG, *, output_root: str 
         destination = reports / f'{kind}.html'
         documents[destination] = render_periodical_page(output_file=destination, output_root=root, active_section='learning',
             title='论文日报' if kind == 'daily' else '论文周报', kind=kind, periods=catalog, active_subtopic=kind)
+    if 'weekly' in kinds:
+        from papers.paradigms import build_catalog
+        from papers.paradigm_page import render_page
+        paradigm_config = config_file.parent / 'paradigms.yaml'
+        if paradigm_config.exists():
+            catalog = build_catalog(rows, topics, summaries, config_file.parent.parent / 'content/papers/digests',
+                                    paradigm_config, today)
+            documents[reports / 'paradigms.html'] = render_page(catalog, root)
     # Build all documents before replacing anything; malformed input preserves output.
     for destination, document in documents.items():
         atomic_write_text(destination, document)
