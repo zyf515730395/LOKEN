@@ -61,11 +61,13 @@
       const active = index === activeIndex;
       const section = SECTION_LABELS[document.section];
       const kind = KIND_LABELS[document.kind];
+      const topics = Array.isArray(document.topics) ? document.topics.filter((topic) => typeof topic === "string") : [];
+      const context = [section, kind, ...topics].join(" · ");
       return `<a class="search-result${active ? " is-active" : ""}" `
         + `id="search-result-${index}" role="option" aria-selected="${active}" `
         + `data-result-index="${index}" href="${escapeHtml(resultUrl(document))}">`
         + `<strong>${escapeHtml(document.title)}</strong>`
-        + `<span>${escapeHtml(section)} · ${escapeHtml(kind)}</span></a>`;
+        + `<span>${escapeHtml(context)}</span></a>`;
     }
 
     function renderResults() {
