@@ -1,0 +1,245 @@
+{
+  "schema_version": 1,
+  "observations": [
+    {
+      "source_id": "5351f7b08a584645f811",
+      "source_hash": "73f1644f055baa30167b704a210fa5acad8c92ec342c1cf1c20285db0f188116",
+      "topic": "image-gen-edit",
+      "week": "2026-10-26",
+      "reviewed_at": "2026-11-04",
+      "basis": "published-weekly-analysis",
+      "observation": {
+        "name": "像素域生成与轻量解码",
+        "dimension": "表示与压缩",
+        "previous": "依赖完整 VAE 编解码的潜空间生成",
+        "mechanism": "通过稀疏解码、统计先验或频谱分工降低高分辨率生成中的表示转换与注意力成本；这是多条相关探索路线，并非统一替代方案。",
+        "limitations": "像素空间模型训练稳定性仍具挑战，需大量计算资源；Wiener先验假设线性高斯结构，对复杂非线性纹理适用性有限；稀疏解码可能引入边界伪影，需精细的归一化统计共享。",
+        "paper_ids": [
+          "2610.33581",
+          "2610.36192",
+          "2610.35515",
+          "2610.40647",
+          "2610.34834"
+        ]
+      }
+    },
+    {
+      "source_id": "5e20bf16a1a59358c06c",
+      "source_hash": "ebc6a60b889a5c53ec9a7e6e937b9100ca251acfb532efff54d0b9327eec8e83",
+      "topic": "video-gen-edit",
+      "week": "2026-10-26",
+      "reviewed_at": "2026-11-04",
+      "basis": "published-weekly-analysis",
+      "observation": {
+        "name": "显式状态引擎与生成渲染解耦",
+        "dimension": "控制与交互",
+        "previous": "交互逻辑与像素生成耦合的端到端模型",
+        "mechanism": "将规则、对象状态或交互变量与视觉生成分开，让可控制的状态流驱动生成渲染。",
+        "limitations": "显式状态构建依赖高质量感知模型或代码代理，对开放域复杂场景的自动化状态提取仍有挑战；解耦架构可能引入状态-视觉同步误差，需验证在极端动态下的鲁棒性。",
+        "paper_ids": [
+          "2610.36371",
+          "2610.40607"
+        ]
+      }
+    },
+    {
+      "source_id": "b38bcc3873658012e92d",
+      "source_hash": "178fdb54d29ba410dba44e026fb687b635b7c75e5d7057f50fae75f5bf156919",
+      "topic": "3d-gen-recon",
+      "week": "2026-10-26",
+      "reviewed_at": "2026-11-04",
+      "basis": "published-weekly-analysis",
+      "observation": {
+        "name": "几何感知与变分高斯致密化",
+        "dimension": "表示自适应",
+        "previous": "按屏幕空间光度梯度启发式增殖高斯",
+        "mechanism": "用几何先验、变分生灭或结构重要性指导高斯容量分配，减少漂浮物和冗余。",
+        "limitations": "变分方法计算开销可能高于启发式方法；二阶深度先验在遮挡或纹理缺失区域可能失效；复杂度引导依赖网格或语义先验，对非结构化场景适用性待验证。",
+        "paper_ids": [
+          "2610.34344",
+          "2610.39399",
+          "2610.35152",
+          "2610.38278"
+        ]
+      }
+    },
+    {
+      "source_id": "a7f6c537ae9db7537af8",
+      "source_hash": "ebe823ca88600ad4e6fe52687a7e7951aa48d144fea5028e7e5f277de6d3a1e1",
+      "topic": "3d-gen-recon",
+      "week": "2026-10-26",
+      "reviewed_at": "2026-11-04",
+      "basis": "published-weekly-analysis",
+      "observation": {
+        "name": "物理属性与可交互三维重建",
+        "dimension": "几何与物理",
+        "previous": "只重建几何和视觉外观",
+        "mechanism": "将物理参数与可交互部件纳入三维重建表示，使重建结果能支持仿真和操作。",
+        "limitations": "物理属性预测缺乏大规模真值数据，依赖蒸馏或合成数据；多模态对齐（如音频-视觉）在复杂声学环境中可能不稳定；开放词汇语义在长尾类别上性能可能下降。",
+        "paper_ids": [
+          "2610.34473",
+          "2610.34745"
+        ]
+      }
+    },
+    {
+      "source_id": "00726f6fdc591597ba18",
+      "source_hash": "c375513cdf5fe8c6a93567ea01c96d148c7290333dd45efeb0ad04337db4be5d",
+      "topic": "world-model",
+      "week": "2026-10-26",
+      "reviewed_at": "2026-11-04",
+      "basis": "published-weekly-analysis",
+      "observation": {
+        "name": "显式几何状态与持久空间记忆",
+        "dimension": "记忆与规划",
+        "previous": "用视频潜变量隐式维持几何一致性",
+        "mechanism": "将三维几何或持久三维记忆作为世界状态的一部分，减少长时程视角变化中的结构漂移。",
+        "limitations": "显式3D表示可能增加计算开销，且依赖高质量重建数据；几何原生模型在缺乏3D标注的开放域视频上的泛化能力待验证。",
+        "paper_ids": [
+          "2610.36011",
+          "2610.40614"
+        ]
+      }
+    },
+    {
+      "source_id": "85bf890d84aaeb8ba05b",
+      "source_hash": "91c7a0a29809d6d7aca2e86977140f0eb3d56f233c4733d33b772bc33638e0a2",
+      "topic": "world-model",
+      "week": "2026-10-19",
+      "reviewed_at": "2026-11-04",
+      "basis": "published-weekly-analysis",
+      "observation": {
+        "name": "显式几何状态与持久空间记忆",
+        "dimension": "记忆与规划",
+        "previous": "纯视频或密集潜变量承担全部状态保存",
+        "mechanism": "以 SDF、平面或高斯等显式几何基元保存世界状态，并与生成潜空间结合。",
+        "limitations": "显式3D表示的计算开销及与大规模视频预训练权重的兼容性尚需验证；不同几何基元（SDF、平面、高斯、点云）在复杂非刚体场景下的通用性存在差异；部分方法依赖高质量3D标注或模拟器数据，真实世界部署的鲁棒性待进一步评估。",
+        "paper_ids": [
+          "2610.23156",
+          "2610.23795",
+          "2610.28631"
+        ]
+      }
+    },
+    {
+      "source_id": "d586cc6368aa87963b43",
+      "source_hash": "7305bd4810ac712610b3f9de81e3e9696ac031bf3a3830040bd4be90b295e7f2",
+      "topic": "world-model",
+      "week": "2026-10-19",
+      "reviewed_at": "2026-11-04",
+      "basis": "published-weekly-analysis",
+      "observation": {
+        "name": "任务状态接地与持久语义记忆",
+        "dimension": "记忆与规划",
+        "previous": "从短时视觉上下文隐式推断任务阶段",
+        "mechanism": "用任务进度、语言工作记忆或持久世界状态连接长时程推理与控制，缓解阶段混淆和遗忘。",
+        "limitations": "结构化状态（如任务进度、语言记忆）的提取依赖高质量标注或预训练VLM能力；持久记忆机制在极端长时程下的存储与检索效率瓶颈尚待解决；语义接地在开放世界非结构化任务中的泛化能力有限，可能受限于预训练数据的覆盖范围。",
+        "paper_ids": [
+          "2610.28431",
+          "2610.23334",
+          "2610.28626",
+          "2610.23396",
+          "2610.28827"
+        ]
+      }
+    },
+    {
+      "source_id": "ececa76b234782cfc0c3",
+      "source_hash": "47b421588e421e340328d49ac43fc37bd1e0abcbafed84a94a3540bf144f5ad5",
+      "topic": "relighting",
+      "week": "2026-10-26",
+      "reviewed_at": "2026-11-04",
+      "basis": "published-weekly-analysis",
+      "observation": {
+        "name": "高斯场景的物理光线追踪",
+        "dimension": "几何与物理",
+        "previous": "依赖环境贴图或外观拟合处理重光照",
+        "mechanism": "联合追踪高斯与网格，显式计算局部光、阴影和间接光传输；当前条目是单篇机制观察。",
+        "limitations": "当前观察仅基于单篇论文（2610.37036），属于单篇观察。该框架依赖LDR图像提取材质属性并反投影至高斯原语，其泛化性、计算开销及在复杂动态场景中的稳定性尚待验证。未涵盖其他重光照方法（如基于神经辐射场或纯2D扩散模型）的对比，无法断言路径追踪为唯一趋势。",
+        "paper_ids": [
+          "2610.37036"
+        ]
+      }
+    },
+    {
+      "source_id": "3cf769dfd24a8f8c6957",
+      "source_hash": "8221dc367587e9a26298f4198e863e7af74e9fd8f2c4f0ab4878ae8bbc5f260c",
+      "topic": "relighting",
+      "week": "2026-06-29",
+      "reviewed_at": "2026-11-04",
+      "basis": "published-weekly-analysis",
+      "observation": {
+        "name": "高斯场景的物理光线追踪",
+        "dimension": "几何与物理",
+        "previous": "反射、几何与外观纠缠的辐射场拟合",
+        "mechanism": "通过光线追踪高斯辐射场计算反射传输，研究物理一致的反射编辑。",
+        "limitations": "30861提出的硬件加速光线追踪器在消费级硬件上的通用性未明确说明；其“物理一致”的定义依赖于路径追踪的采样精度，可能在复杂多次反射场景中存在噪声或收敛慢的问题。",
+        "paper_ids": [
+          "2606.30861"
+        ]
+      }
+    },
+    {
+      "source_id": "f41227a927091fca6fa6",
+      "source_hash": "22ea98f0b9ddc06a36c3ca33babd412ec3942c5b3b4fecdf429a100fc62f5ed5",
+      "topic": "depth-estimation",
+      "week": "2026-10-26",
+      "reviewed_at": "2026-11-04",
+      "basis": "published-weekly-analysis",
+      "observation": {
+        "name": "共享潜表示的生成与密集感知",
+        "dimension": "任务统一",
+        "previous": "视频生成和深度等密集感知分别设计模型",
+        "mechanism": "在共享时空潜表示与骨干中联合组织生成和密集感知，探索用结构化深度帮助空间理解。",
+        "limitations": "统一架构的计算开销显著高于专用模型，实时性受限；生成式深度估计在缺乏真实几何监督时的度量精度（metric accuracy）是否优于传统监督方法，需在更多真实世界场景中验证。",
+        "paper_ids": [
+          "2610.36022",
+          "2610.39232"
+        ]
+      }
+    },
+    {
+      "source_id": "1d6412a5dac60cac60bd",
+      "source_hash": "3b66174457ffa8ef206f62364153a794439267dcf7e8135dadea73794f6cf7a4",
+      "topic": "video-gen-edit",
+      "week": "2026-10-19",
+      "reviewed_at": "2026-11-04",
+      "basis": "published-weekly-analysis",
+      "observation": {
+        "name": "显式几何约束的视频生成",
+        "dimension": "几何与物理",
+        "previous": "先生成视频再事后修复几何漂移",
+        "mechanism": "将平面、点轨迹或四维高斯等结构直接接入生成潜空间，使跨视角一致性成为生成约束。",
+        "limitations": "显式3D表示的计算开销大，且高质量多视角/4D训练数据稀缺。部分方法依赖仿真数据，真实场景泛化性待验证。几何估计误差可能传播至生成结果，需鲁棒性评估。",
+        "paper_ids": [
+          "2610.23423",
+          "2610.23795",
+          "2610.28631",
+          "2610.28521",
+          "2610.26585",
+          "2610.28632"
+        ]
+      }
+    },
+    {
+      "source_id": "14095a3c6cbf85ee94fb",
+      "source_hash": "0b3f68a23b9788ea26e3d03db29ba16b82f2e8f63b17ae1fa38f5a3be213176c",
+      "topic": "video-gen-edit",
+      "week": "2026-10-12",
+      "reviewed_at": "2026-11-04",
+      "basis": "published-weekly-analysis",
+      "observation": {
+        "name": "显式几何约束的视频生成",
+        "dimension": "几何与物理",
+        "previous": "仅依赖视觉统计和时间注意力维持一致性",
+        "mechanism": "通过持久三维状态、空间记忆与几何约束编码器向生成过程注入结构先验。",
+        "limitations": "显式3D或物理模块增加了计算开销和架构复杂度；部分方法依赖外部几何估计器或仿真器，可能引入新的误差源；在缺乏精确几何标注或复杂非刚性形变场景下，物理一致性仍待验证。",
+        "paper_ids": [
+          "2610.15807",
+          "2610.19257",
+          "2610.16204"
+        ]
+      }
+    }
+  ]
+}

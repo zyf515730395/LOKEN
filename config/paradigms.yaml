@@ -1,0 +1,190 @@
+# Curated foundations, not an adoption ranking. Patterns only associate historical clues.
+schema_version: 1
+verified_at: '2026-11-04'
+routes:
+  - name: 神经辐射场与体渲染
+    aliases: [NeRF]
+    topics: [3d-gen-recon]
+    dimension: 场景表示
+    previous: 显式表面或离散体素的视图合成
+    mechanism: 用连续坐标网络表达密度与视角相关颜色，经可微体渲染从多视图图像优化场景。
+    limitations: 逐场景优化与射线采样有成本，辐射颜色本身不等于可编辑材质。
+    investigate: 比较隐式、网格和显式高斯表示的几何保真、存储与渲染代价。
+    patterns: ['\bNeRF\b', '神经辐射场', 'neural radiance field']
+    sources: [{title: NeRF, url: 'https://arxiv.org/abs/2003.08934'}]
+  - name: 二维生成先验蒸馏三维
+    aliases: [Score Distillation Sampling, SDS]
+    topics: [3d-gen-recon]
+    dimension: 任务迁移
+    previous: 依赖三维监督直接训练三维生成器
+    mechanism: 将预训练二维扩散模型作为先验，通过多视角渲染与分数蒸馏优化三维表示。
+    limitations: 二维合理性不保证跨视角一致；优化速度、过饱和和多面问题需验证。
+    investigate: 对比分数蒸馏、直接三维生成和多视图先验的成本与一致性。
+    patterns: ['\bSDS\b', 'score distill', '分数蒸馏', 'DreamFusion']
+    sources: [{title: DreamFusion, url: 'https://arxiv.org/abs/2209.14988'}]
+  - name: 结构化三维潜表示生成
+    aliases: [TRELLIS, SLAT]
+    topics: [3d-gen-recon]
+    dimension: 表示与压缩
+    previous: 为网格、高斯和辐射场分别设计生成表示
+    mechanism: 以稀疏三维结构组织潜特征，用流模型生成统一潜表示，再解码为不同三维格式。
+    limitations: 三维资产数据质量、稀疏结构分辨率和解码器能力限制细节与泛化。
+    investigate: 关注几何与外观解耦、局部编辑以及多格式解码的一致性。
+    patterns: ['TRELLIS', '\bSLAT\b', '结构化.*三维.*潜', '稀疏.*三维.*潜']
+    sources: [{title: Structured 3D Latents / TRELLIS, url: 'https://arxiv.org/abs/2412.01506'}]
+  - name: 联合嵌入预测世界模型
+    aliases: [JEPA, V-JEPA]
+    topics: [world-model]
+    dimension: 学习目标
+    previous: 以像素重建作为世界模型的核心监督
+    mechanism: 在表征空间预测被遮挡或未来状态，结合动作条件化后用于规划，减少对像素细节重建的依赖。
+    limitations: 表征预测准确不直接证明物理或规划可靠；动作覆盖与长程误差需闭环检验。
+    investigate: 比较像素重建与表征预测的状态可辨识性、控制迁移和规划成本。
+    patterns: ['JEPA', '联合嵌入', 'joint.embedding', '表征.*预测.*世界模型']
+    sources: [{title: V-JEPA 2, url: 'https://arxiv.org/abs/2506.09985'}]
+  - name: 一致性与少步生成
+    aliases: [Consistency Models, 一致性模型]
+    topics: [image-gen-edit, video-gen-edit]
+    dimension: 推理与加速
+    previous: 多次迭代去噪的生成轨迹
+    mechanism: 学习同一概率流轨迹到终点的一致映射，通过蒸馏或直接训练减少采样步骤。
+    limitations: 少步的质量、多样性与控制能力需同时评估，速度优势依赖实际实现。
+    investigate: 比较蒸馏目标、训练成本和少步条件控制的损失。
+    patterns: ['consistency model', '一致性蒸馏', '一致性模型', '少步.*蒸馏']
+    sources: [{title: Consistency Models, url: 'https://arxiv.org/abs/2303.01469'}]
+  - name: 物理分解与逆渲染
+    topics: [relighting, 3d-gen-recon]
+    dimension: 几何与物理
+    previous: 将外观作为不可分解的辐射颜色拟合
+    mechanism: 联合估计几何、材质和光照，用可微渲染约束重建与光照编辑。
+    limitations: 光照与材质存在歧义，间接光、遮挡和非朗伯材质使优化更复杂。
+    investigate: 检查光传输模型、材质可辨识性以及编辑后的跨视角一致性。
+    patterns: ['逆渲染', 'inverse rendering', '材质.*光照.*分解', 'path tracing', '路径追踪']
+    sources: [{title: TensoIR, url: 'https://arxiv.org/abs/2304.12461'}]
+  - name: 潜空间扩散与 U-Net
+    topics: [image-gen-edit, video-gen-edit]
+    dimension: 表示与压缩
+    previous: 像素空间直接去噪
+    mechanism: 先压缩图像，再在潜空间学习去噪；用编码器与解码器分担高分辨率计算。
+    limitations: 压缩会丢失细节，生成质量受到表征与解码器约束。
+    investigate: 比较压缩率、细节保真与推理成本之间的取舍。
+    patterns: ['latent diffusion', '潜空间扩散', 'U[- ]?Net']
+    sources: [{title: Latent Diffusion Models, url: 'https://arxiv.org/abs/2112.10752'}]
+  - name: Diffusion Transformer
+    aliases: [DiT, 扩散 Transformer]
+    topics: [image-gen-edit, video-gen-edit]
+    dimension: 骨干结构
+    previous: 以卷积 U-Net 为主要去噪骨干
+    mechanism: 将潜变量切为 token，用 Transformer 学习去噪；视频路线进一步联合建模时空 token。
+    limitations: 注意力成本与 token 数相关；换骨干本身不保证更好的编辑一致性。
+    investigate: 关注空间与时间注意力组织、扩展效率及长序列成本。
+    patterns: ['\bDiT\b', 'diffusion transformer', '扩散.?Transformer', '扩散变换器']
+    sources: [{title: DiT, url: 'https://arxiv.org/abs/2212.09748'}, {title: CogVideoX, url: 'https://arxiv.org/abs/2408.06072'}]
+  - name: 多模态联合注意力
+    aliases: [MMDiT]
+    topics: [image-gen-edit, video-gen-edit]
+    dimension: 模态融合
+    previous: 文本仅通过交叉注意力单向条件化视觉特征
+    mechanism: 文本和视觉 token 在联合注意力中交换信息；独立模态权重与共享流是可分别比较的设计选择。
+    limitations: 不能由少量论文推断双流已被单流取代；须区分注意力共享与参数共享。
+    investigate: 对比双流、单流和混合层结构的对齐能力、计算量与可控性。
+    patterns: ['MMDiT', '双流', '单流', 'joint attention', '联合注意力']
+    sources: [{title: Stable Diffusion 3 / Rectified Flow Transformers, url: 'https://arxiv.org/abs/2403.03206'}]
+  - name: Flow Matching 与 Rectified Flow
+    aliases: [Flow Matching, Rectified Flow, 流匹配]
+    topics: [image-gen-edit, video-gen-edit]
+    dimension: 生成目标
+    previous: 基于噪声预测的扩散训练与采样
+    mechanism: 回归连接噪声与数据的概率路径速度场；路径选择和训练时间分布影响采样效率。
+    limitations: 训练目标改变不等于天然单步生成；少步质量仍受轨迹与求解器约束。
+    investigate: 比较路径、时间采样和求解器，确认收益来自哪一环。
+    patterns: ['flow matching', 'rectified flow', '流匹配', '整流流']
+    sources: [{title: Flow Matching, url: 'https://arxiv.org/abs/2210.02747'}, {title: Rectified Flow Transformers, url: 'https://arxiv.org/abs/2403.03206'}]
+  - name: 自回归视觉生成
+    topics: [image-gen-edit, video-gen-edit]
+    dimension: 生成顺序
+    previous: 整体反复去噪或逐 token 的固定光栅扫描
+    mechanism: 将视觉生成写成条件预测序列；图像可按尺度递进，视频可按时间推进。
+    limitations: 不同序列分解的误差累积与并行性不同，不能只比较步数。
+    investigate: 关注生成顺序、token 表示、长程误差与训练推理差异。
+    patterns: ['自回归', 'autoregressive', 'next.scale', '下一尺度']
+    sources: [{title: VAR, url: 'https://arxiv.org/abs/2404.02905'}, {title: Genie, url: 'https://arxiv.org/abs/2402.15391'}]
+  - name: 时空压缩与联合视频建模
+    topics: [video-gen-edit]
+    dimension: 表示与压缩
+    previous: 逐帧表示再添加时间模块
+    mechanism: 用时空压缩和联合视频注意力表示连续运动，减少长视频 token 成本。
+    limitations: 压缩可能损失高速运动与细小物体信息，长视频仍有一致性问题。
+    investigate: 检查时空压缩率、因果性、首帧处理和运动保真。
+    patterns: ['3D.?VAE', '时空压缩', '视频.?VAE', 'spatiotemporal.*compress']
+    sources: [{title: CogVideoX, url: 'https://arxiv.org/abs/2408.06072'}]
+  - name: 3D Gaussian Splatting
+    aliases: [3DGS, 高斯泼溅]
+    topics: [3d-gen-recon, relighting]
+    dimension: 场景表示
+    previous: 隐式辐射场的沿射线采样与体渲染
+    mechanism: 以显式三维高斯表达场景，并通过可微泼溅与密度控制支持快速渲染。
+    limitations: 原始表示不自动分离材质和光照，也不天然满足几何或物理一致性。
+    investigate: 关注几何约束、密度控制、材质分解和动态场景扩展。
+    patterns: ['3DGS', 'Gaussian Splat', '高斯泼溅', '高斯溅射', '高斯点']
+    sources: [{title: 3D Gaussian Splatting, url: 'https://arxiv.org/abs/2308.04079'}]
+  - name: 前馈统一几何重建
+    aliases: [前馈几何基础模型, VGGT]
+    topics: [3d-gen-recon, depth-estimation]
+    dimension: 任务统一
+    previous: 相机、深度与三维点分别估计，再进行多阶段优化
+    mechanism: 用统一前馈网络联合预测相机、点图、深度和轨迹，利用跨任务几何关系。
+    limitations: 泛化尺度、异常视角与高精度几何仍需验证；前馈不代表不需要后续优化。
+    investigate: 比较相机假设、尺度恢复、跨视图一致性及优化补偿收益。
+    patterns: ['VGGT', '前馈.*重建', '前馈.*几何', 'feed.forward.*reconstruction']
+    sources: [{title: VGGT, url: 'https://arxiv.org/abs/2503.11651'}]
+  - name: 潜空间世界模型与想象式控制
+    aliases: [Dreamer]
+    topics: [world-model]
+    dimension: 记忆与规划
+    previous: 直接从真实交互样本训练策略
+    mechanism: 学习潜空间动力学，在模型想象的轨迹中训练或评估行为，复用交互经验。
+    limitations: 模型误差会传递到规划和策略；生成逼真不等于控制可靠。
+    investigate: 关注状态表征、长程误差、奖励预测和闭环控制验证。
+    patterns: ['Dreamer', '想象.*策略', '潜空间.*动力学', 'latent.*dynamics']
+    sources: [{title: DreamerV3, url: 'https://arxiv.org/abs/2301.04104'}]
+  - name: 动作可控的视频世界模型
+    aliases: [潜动作世界模型, Genie]
+    topics: [world-model, video-gen-edit]
+    dimension: 控制与交互
+    previous: 仅生成被动视频，或依赖显式动作标签训练环境模型
+    mechanism: 从视频学习潜动作与动力学，将生成过程变为可交互的状态推进。
+    limitations: 潜动作的可解释性、长程稳定和真实物理对应关系仍有限。
+    investigate: 检查动作干预是否真的改变环境状态，以及闭环一致性。
+    patterns: ['潜动作', 'latent action', '动作.*世界模型', 'Genie']
+    sources: [{title: Genie, url: 'https://arxiv.org/abs/2402.15391'}]
+  - name: 扩散先验驱动重光照
+    aliases: [扩散重光照, IC-Light]
+    topics: [relighting]
+    dimension: 任务迁移
+    previous: 依赖显式重建材质、几何和光照再渲染
+    mechanism: 用生成先验学习光照编辑，同时以光传输一致性约束保持输入内容。
+    limitations: 视觉合理不代表物理参数可辨识；细节和身份保持需单独评估。
+    investigate: 对比物理约束、训练光照覆盖与可控程度。
+    patterns: ['IC.Light', '扩散.*重光照', 'diffusion.*relight', '光传输一致']
+    sources: [{title: IC-Light, url: 'https://openreview.net/forum?id=u1cQYxRI1H'}]
+  - name: 判别式单目深度基础模型
+    aliases: [Depth Anything]
+    topics: [depth-estimation]
+    dimension: 训练与监督
+    previous: 小规模真实深度监督下的任务专用估计
+    mechanism: 结合合成数据、教师模型和伪标签扩大训练覆盖，用前馈模型预测深度。
+    limitations: 相对深度不等于绝对尺度；透明、反光和域外场景仍需核验。
+    investigate: 区分教师先验、监督质量、尺度对齐与域泛化收益。
+    patterns: ['Depth Anything', '伪标签.*深度', '深度.*伪标签', '合成.*深度.*教师']
+    sources: [{title: Depth Anything V2, url: 'https://arxiv.org/abs/2406.09414'}]
+  - name: 生成先验迁移到深度估计
+    aliases: [Marigold, 生成式深度估计]
+    topics: [depth-estimation]
+    dimension: 任务迁移
+    previous: 从头训练判别式深度回归网络
+    mechanism: 将预训练图像扩散先验改造成条件深度生成器，复用视觉知识。
+    limitations: 采样成本、随机性与尺度歧义需要处理；不能只按图像观感评估几何。
+    investigate: 比较生成式与判别式路线的精度、确定性、时延与域外表现。
+    patterns: ['Marigold', '生成式深度', '扩散.*深度估计', '生成先验.*深度']
+    sources: [{title: Marigold, url: 'https://arxiv.org/abs/2312.02145'}]
