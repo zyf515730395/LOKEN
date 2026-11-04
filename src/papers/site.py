@@ -436,6 +436,12 @@ def render_table(
             for tag in row.get("tags", ())[:5]
         )
         tag_markup = f'<span class="paper-tags">{tags}</span>' if tags else ""
+        hf_markup = ''
+        hf_url = row.get('hf_daily', {}).get('url', '')
+        if re.fullmatch(r'https://huggingface\.co/papers/[A-Za-z0-9][A-Za-z0-9._-]{0,199}', hf_url):
+            hf_markup = (f' <a class="hf-daily-link" href="{html.escape(hf_url, quote=True)}" '
+                         'title="Hugging Face Daily Papers" aria-label="Hugging Face Daily Papers" '
+                         'target="_blank" rel="noopener">🤗</a>')
         conference_markup = '; '.join(
             html.escape(re.sub(r"\s+\d{4}$", "", item["edition"]))
             for item in row.get('conferences', ())
@@ -451,7 +457,7 @@ def render_table(
             f'<td class="paper-id" data-label="Arxiv ID"><a href="{paper_url}"{date_hint} target="_blank" rel="noopener">'
             f'{html.escape(row.get("display_id", row["id"]))}</a></td>'
             f'<td class="paper-title" data-label="Paper"><a class="paper-title-link" href="{paper_url}" target="_blank" rel="noopener">'
-            f'{html.escape(row["title"])}</a>{tag_markup}</td>'
+            f'{html.escape(row["title"])}</a>{hf_markup}{tag_markup}</td>'
             f'<td data-label="Conference">{conference_markup}</td>'
             f'<td class="paper-summary" data-label="Summary">{summary_cell}</td>'
             "</tr>"
@@ -570,27 +576,13 @@ def render_content(
                     f'role="tabpanel" aria-labelledby="{anchor}-tab" '
                     f'aria-hidden="{"false" if is_active else "true"}" data-active="{active}">'
                 )
-                for range_index, (day_range, rows) in enumerate(day_ranges.items()):
+                for day_range in day_ranges:
                     anchor_id = day_range_anchor(category, year, month, day_range)
-                    range_open = " open" if range_index == 0 else ""
-                    output.append(
-                        f'        <details class="archive-week" id="{anchor_id}"{range_open}>'
-                    )
-                    output.append(
-                        f'          <summary><span>{day_range_label(month, day_range)}</span>'
-                        f'<span>{len(rows)} papers</span></summary>'
-                    )
-                    output.append(
-                        render_table(
-                            rows,
-                            category["topic"],
-                            summary_catalog,
-                            candidate_statuses,
-                            anchored_papers,
-                            label_slugs,
-                        )
-                    )
-                    output.append("        </details>")
+                    output.append(f'<span class="archive-date-alias" id="{anchor_id}" aria-hidden="true"></span>')
+                rows = sorted((row for members in day_ranges.values() for row in members),
+                              key=lambda row: (row['date'], row['id']), reverse=True)
+                output.append(render_table(rows, category['topic'], summary_catalog,
+                                           candidate_statuses, anchored_papers, label_slugs))
                 output.append("      </section>")
             output.extend(["    </div>", "  </section>"])
         output.append("</section>")
@@ -697,6 +689,8 @@ def generate_site(
     library = load_library()
     ledger = json.loads(Path(candidate_path).read_text(encoding='utf-8')) if candidate_path and Path(candidate_path).exists() else {}
     extra_rows = library_rows(library, data, ledger)
+    from papers.huggingface import external_rows
+    extra_rows.extend(external_rows(ledger))
     excluded_years = set(site_config.get('publication', {}).get('excluded_years', []))
     data = {
         topic: {
@@ -714,6 +708,9 @@ def generate_site(
     conference_matches = match_papers(all_rows, load_catalog())
     for row in all_rows:
         row['conferences'] = conference_matches.get(row['id'], row.get('conferences', []))
+        hf_daily = ledger.get('papers', {}).get(row['id'], {}).get('hf_daily')
+        if hf_daily:
+            row['hf_daily'] = hf_daily
     retain_library_matches(all_rows, library, ledger)
     today = generated_on or datetime.date.today()
     conferences = load_conferences(conference_config_path, as_of=today)
