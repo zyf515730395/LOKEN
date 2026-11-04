@@ -110,6 +110,7 @@ function setYearExpanded(yearArchive, expanded) {
   yearArchive.dataset.expanded = String(expanded);
   yearToggle?.setAttribute("aria-expanded", String(expanded));
   content?.setAttribute("aria-hidden", String(!expanded));
+  if (expanded) window.requestAnimationFrame(sizeMonthlyTables);
 }
 
 function revealMonthTab(tab) {
@@ -141,6 +142,7 @@ function selectPeriod(tab, { updateHash = false, focus = false } = {}) {
   });
   setYearExpanded(yearArchive, true);
   revealMonthTab(tab);
+  window.requestAnimationFrame(sizeMonthlyTables);
 
   if (updateHash) window.history.replaceState(null, "", `#${targetId}`);
   if (focus) tab.focus();
@@ -193,9 +195,37 @@ function revealHashTarget({ scroll = false } = {}) {
     parent = parent.parentElement;
   }
   if (scroll) {
-    window.requestAnimationFrame(() => target.scrollIntoView({ block: "start" }));
+    window.requestAnimationFrame(() => {
+      sizeMonthlyTables();
+      target.scrollIntoView({ block: target.matches("tr") ? "center" : "start" });
+      if (target.matches(".paper-table tbody tr")) {
+        document.querySelectorAll(".is-search-target").forEach((row) => row.classList.remove("is-search-target"));
+        target.classList.add("is-search-target");
+        target.tabIndex = -1;
+        target.focus({ preventScroll: true });
+        window.setTimeout(() => target.classList.remove("is-search-target"), 3500);
+      }
+    });
   }
 }
+
+function sizeMonthlyTables() {
+  document.querySelectorAll(".archive-month-panel .table-scroll").forEach((viewport) => {
+    if (!viewport.getClientRects().length) return;
+    const table = viewport.querySelector(".paper-table");
+    const rows = [...table.tBodies[0].rows].filter((row) => !row.classList.contains("mobile-summary-row"));
+    const height = table.tHead.getBoundingClientRect().height
+      + rows.slice(0, 8).reduce((sum, row) => sum + row.getBoundingClientRect().height, 0) + 2;
+    viewport.style.maxHeight = `${Math.ceil(height)}px`;
+    viewport.tabIndex = 0;
+    viewport.setAttribute("role", "region");
+    viewport.setAttribute("aria-label", "本月论文，可上下滚动浏览");
+  });
+}
+window.addEventListener("resize", () => window.requestAnimationFrame(sizeMonthlyTables));
+document.addEventListener("loken:paper-topic-change", () => window.requestAnimationFrame(sizeMonthlyTables));
+document.fonts?.ready.then(sizeMonthlyTables);
+window.requestAnimationFrame(sizeMonthlyTables);
 
 document.querySelectorAll("[data-sidebar-action]").forEach((button) => {
   button.addEventListener("click", () => {
