@@ -386,6 +386,11 @@ def load_summary_catalog(output_path: str | Path) -> dict[str, dict]:
     return catalog
 
 
+def hf_daily_url(row: dict) -> str:
+    url = row.get('hf_daily', {}).get('url', '')
+    return url if re.fullmatch(r'https://huggingface\.co/papers/[A-Za-z0-9][A-Za-z0-9._-]{0,199}', url) else ''
+
+
 def render_table(
     rows: list[dict],
     topic: str,
@@ -429,8 +434,8 @@ def render_table(
         )
         tag_markup = f'<span class="paper-tags">{tags}</span>' if tags else ""
         hf_markup = ''
-        hf_url = row.get('hf_daily', {}).get('url', '')
-        if re.fullmatch(r'https://huggingface\.co/papers/[A-Za-z0-9][A-Za-z0-9._-]{0,199}', hf_url):
+        hf_url = hf_daily_url(row)
+        if hf_url:
             hf_markup = (f' <a class="hf-daily-link" href="{html.escape(hf_url, quote=True)}" '
                          'title="Hugging Face Daily Papers" aria-label="Hugging Face Daily Papers" '
                          'target="_blank" rel="noopener">🤗</a>')
@@ -572,7 +577,7 @@ def render_content(
                     anchor_id = day_range_anchor(category, year, month, day_range)
                     output.append(f'<span class="archive-date-alias" id="{anchor_id}" aria-hidden="true"></span>')
                 rows = sorted((row for members in day_ranges.values() for row in members),
-                              key=lambda row: (row['date'], row['id']), reverse=True)
+                              key=lambda row: (bool(hf_daily_url(row)), row['date'], row['id']), reverse=True)
                 output.append(render_table(rows, category['topic'], summary_catalog,
                                            candidate_statuses, anchored_papers, label_slugs))
                 output.append("      </section>")
