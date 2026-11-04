@@ -260,7 +260,8 @@ def render_secondary_navigation(
         groups.append(_nav_group("论文报刊", "".join(
             _nav_link(label, route, site_root, active=active_subtopic == key)
             for key, label, route in (("daily", "论文日报", "reports/daily.html"),
-                                      ("weekly", "论文周报", "reports/weekly.html"))
+                                      ("weekly", "论文周报", "reports/weekly.html"),
+                                      ("paradigms", "最新范式", "reports/paradigms.html"))
         )))
         if original_navigation:
             conference = re.search(r'<a\b[^>]*class="[^"]*conference-navigation-link[^"]*"[^>]*>.*?</a>', original_navigation, re.S)

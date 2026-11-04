@@ -84,6 +84,7 @@ def fingerprint(relative):
 def managed_files(start):
     return [f'content/papers/digests/weekly-{start}.json',
             'content/papers/digests/official-abstracts.json', 'docs/reports/weekly.html',
+            'docs/reports/paradigms.html',
             *[str(p.relative_to(ROOT)) for p in (ROOT/'docs/reports/periods').glob('weekly-*.json')]]
 
 
@@ -98,7 +99,8 @@ def changed_files():
 def allowed(relative, start):
     import re
     return relative in {f'content/papers/digests/weekly-{start}.json',
-                        'content/papers/digests/official-abstracts.json','docs/reports/weekly.html'} or bool(re.fullmatch(
+                        'content/papers/digests/official-abstracts.json','docs/reports/weekly.html',
+                        'docs/reports/paradigms.html'} or bool(re.fullmatch(
         r'docs/reports/periods/weekly-\d{4}-\d{2}-\d{2}\.json', relative))
 
 
