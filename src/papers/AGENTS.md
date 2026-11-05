@@ -2,6 +2,8 @@
 
 ## Paradigm tracking
 
+- The public page is named 模型范式. Reuse the shared periodical layout and an internal topic navigation. Each topic shows a sourced historical roadmap followed by a semantic table of current routes/observations. `config/paradigm-roadmaps.yaml` holds curated chronological nodes (year, paper title, official URL, contribution, branch and transition); history is not limited to the recent observation year and parallel branches must not imply exclusive replacement. Preserve evidence disclosures and existing follow-up IDs/storage.
+
 - `config/paradigms.yaml` is the curated, source-linked route baseline; `paradigms.py` aggregates evidence and `paradigm_page.py` renders `docs/reports/paradigms.html`. No separate scheduler or model service is created.
 - Track all configured paper topics over the preceding calendar year. Foundation references may be older and are labelled separately. Observed dates are not invention dates. Mainstream labels require curated sources; repeated local observations never establish global dominance or independent adoption.
 - Weekly synthesis may emit structured paradigm observations with an extensible dimension, prior approach, changed mechanism, limitations and exact topic/period citations. Legacy trends remain unclassified clues; keyword association with a baseline is not a novelty determination. Validate against current public papers and evidence hashes; show missing/stale coverage explicitly.

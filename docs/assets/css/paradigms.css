@@ -1,33 +1,36 @@
-/* Reuse the site's typography, palette and navigation. */
-.paradigm-reader{max-width:1240px;margin:0 auto;padding:0 2rem 3rem;font-family:var(--sans)}
-.paradigm-heading{padding:2rem 0 1.2rem;border-bottom:1px solid var(--line)}
-.paradigm-kicker{font:.7rem var(--mono);letter-spacing:.12em;color:var(--accent)}
-.paradigm-heading h1{font-size:clamp(2rem,4vw,3.2rem);letter-spacing:-.04em;margin:.7rem 0}
-.paradigm-reader p{line-height:1.85}.paradigm-muted,.paradigm-reader small{color:var(--muted);font-size:.8rem}
-.paradigm-stats{display:flex;flex-wrap:wrap;gap:1.5rem;padding:1.3rem 0}.paradigm-stats strong{font-size:1.55rem;margin-right:.3rem}
-.paradigm-coverage{padding:1rem;background:var(--surface);border:1px solid var(--line);border-radius:6px;font-size:.82rem}
-.paradigm-coverage ul{max-height:14rem;overflow:auto}.paradigm-reader summary{cursor:pointer;line-height:1.7}
-.paradigm-filters{display:flex;gap:.75rem;flex-wrap:wrap;padding:1.5rem 0;align-items:end}
-.paradigm-filters label,.paradigm-follow{display:flex;flex-direction:column;gap:.35rem;font-size:.75rem;color:var(--muted)}
-.paradigm-reader select,.paradigm-reader input[type=search],.paradigm-reader button,.paradigm-import{font:inherit;border:1px solid var(--line);background:var(--surface);color:var(--text);border-radius:5px;padding:.6rem .75rem;min-height:40px}
-.paradigm-reader button,.paradigm-import{cursor:pointer}.paradigm-reader button:hover{border-color:var(--accent)}
-.paradigm-search{flex:1;min-width:190px}.paradigm-reader select{max-width:100%}
-.paradigm-tabs{display:flex;gap:1.5rem;border-block:1px solid var(--line);padding:1rem 0;margin-bottom:1.8rem}
-.paradigm-reader a{color:var(--accent);text-underline-offset:.2em}
-.paradigm-reader section[id]{scroll-margin-top:5rem}.paradigm-reader h2{font-size:1.35rem;margin:2rem 0 1rem}.paradigm-reader h2 small{font-weight:400;margin-left:.5rem}
-.paradigm-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}
-[data-latest-events]{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 1.5rem;max-height:65vh;overflow-y:auto;overscroll-behavior:contain;padding-right:.5rem}
-.paradigm-route{padding:1.3rem;border:1px solid var(--line);border-radius:6px;background:var(--surface)}
-.paradigm-meta{display:flex;gap:.5rem;flex-wrap:wrap;color:var(--muted);font-size:.68rem;line-height:1.7}
-.paradigm-meta span+span:before{content:'·';margin-right:.5rem}
-.paradigm-reader h3{font-size:1.05rem;line-height:1.65;margin:.8rem 0}.paradigm-route p{font-size:.86rem}
-.paradigm-route details{font-size:.82rem;border-top:1px solid var(--line);padding-top:.8rem}
-.paradigm-route dt{font-weight:600;margin-top:.8rem}.paradigm-route dd{margin:.25rem 0;line-height:1.8}
-.paradigm-follow{margin-top:1rem;max-width:13rem}.paradigm-event{border-top:1px solid var(--line);margin-top:1rem;padding-top:.5rem}
-.paradigm-refs{padding-left:1.1rem;line-height:1.75;font-size:.8rem}.paradigm-refs li{margin:.55rem 0;overflow-wrap:anywhere}
-.paradigm-clue{padding:1.2rem 0;border-bottom:1px solid var(--line)}.paradigm-clue details{font-size:.85rem}
-[data-clues]{max-height:75vh;overflow-y:auto;overscroll-behavior:contain;padding-right:.8rem;scrollbar-gutter:stable}
-[data-more-clues]{margin-top:1rem}.paradigm-footer{margin-top:2rem;padding-top:1rem;border-top:1px solid var(--line);font-size:.8rem}
-.paradigm-import{display:inline-block;margin-left:.5rem}.paradigm-import input{max-width:210px;margin-left:.5rem}
-.paradigm-reader [hidden]{display:none!important}.paradigm-route:target,.paradigm-clue:target{outline:2px solid var(--accent);outline-offset:3px}
-@media(max-width:760px){.paradigm-grid,[data-latest-events]{grid-template-columns:1fr}.paradigm-filters label{flex:1 1 42%;min-width:0}.paradigm-filters input{width:100%;box-sizing:border-box}.paradigm-stats{gap:.8rem;font-size:.8rem}.paradigm-heading{padding-top:1rem}.paradigm-route{padding:1rem}.paradigm-import{margin:.7rem 0 0}.paradigm-reader{overflow-wrap:anywhere;padding:0 1.25rem 3rem}}
+/* Model paradigms reuse periodical layout, site fonts and light/dark tokens. */
+.paradigm-reader [hidden]{display:none!important}
+.paradigm-tools .paradigm-topic-nav{flex:0 0 auto;max-height:none}
+.paradigm-section-nav{display:flex;flex-direction:column;gap:.7rem;border-top:1px solid var(--line);padding:1.2rem .4rem;margin-top:1.4rem;font-size:.76rem}
+.paradigm-section-nav a{color:var(--muted);text-decoration:none}.paradigm-section-nav a:hover{color:var(--accent)}
+.paradigm-reader summary{cursor:pointer;line-height:1.7;font-size:.82rem}
+.paradigm-reader small{font-size:.75rem;color:var(--muted);line-height:1.8}
+.paradigm-section-en{font:.65rem var(--mono);letter-spacing:.08em;color:var(--muted);margin-left:.6rem}
+.paradigm-roadmap{list-style:none;padding:0;margin:1.5rem 0 2.5rem}
+.roadmap-node{display:grid;grid-template-columns:8.5rem minmax(0,1fr);gap:1.4rem;position:relative;padding:0 0 1.7rem 1.2rem;border-left:1px solid var(--line);margin-left:.3rem}
+.roadmap-node::before{content:'';position:absolute;width:7px;height:7px;border-radius:50%;background:var(--accent);left:-4px;top:.55rem}
+.roadmap-node:last-child{padding-bottom:.3rem}.roadmap-stamp time{display:block;font:1.25rem var(--mono);color:var(--accent)}
+.roadmap-stamp span{display:block;font-size:.7rem;color:var(--muted);line-height:1.8;margin-top:.3rem}
+.roadmap-node h4{font:600 1rem/1.6 var(--sans);margin:0 0 .35rem}.roadmap-node h4 a{text-decoration:none}.roadmap-node h4 a:hover{text-decoration:underline}
+.periodical-article .roadmap-node p{font-size:.91rem;line-height:1.8;margin:0 0 .4rem}
+.paradigm-table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:4px;scrollbar-gutter:stable}
+.paradigm-table{min-width:680px;width:100%;margin:0;table-layout:fixed}
+.paradigm-table th:nth-child(1){width:22%}.paradigm-table th:nth-child(2){width:34%}.paradigm-table th:nth-child(3){width:27%}.paradigm-table th:nth-child(4){width:17%}
+.paradigm-table tbody th{font:500 .87rem/1.75 var(--sans);text-align:left;vertical-align:top;border-bottom:1px solid var(--line);padding:1rem}
+.paradigm-table tbody small{display:block}.paradigm-table td{vertical-align:top}
+.periodical-article .paradigm-table p{font-size:.84rem;line-height:1.8;margin:0 0 .6rem}
+.paradigm-table details{margin-top:.65rem}.paradigm-table summary{font-size:.76rem;color:var(--muted)}
+.paradigm-stage{font-size:.75rem;color:var(--accent)}.paradigm-event{border-top:1px solid var(--line);padding-top:.65rem;margin-top:.65rem}.paradigm-event h4{font-size:.76rem;line-height:1.7}
+.paradigm-refs{padding-left:1rem;font-size:.75rem;line-height:1.75;overflow-wrap:anywhere}.paradigm-refs li+li{margin-top:.45rem}
+.paradigm-filter-panel{border-bottom:1px solid var(--line);padding:0 0 1rem;margin-bottom:1.5rem}
+.paradigm-filters{display:flex;flex-wrap:wrap;gap:.75rem;align-items:end;padding:1rem 0 .25rem}
+.paradigm-filters label,.paradigm-follow{display:flex;flex-direction:column;gap:.3rem;font-size:.72rem;color:var(--muted)}
+.paradigm-reader select,.paradigm-reader input[type=search],.paradigm-reader button,.paradigm-import{font:inherit;border:1px solid var(--line);border-radius:3px;background:var(--surface);color:var(--text);padding:.5rem;min-height:38px;max-width:100%;box-sizing:border-box}
+.paradigm-reader button{cursor:pointer;font-size:.75rem}.paradigm-reader button:hover{border-color:var(--accent)}
+.paradigm-follow select{width:100%;font-size:.73rem}.paradigm-search{flex:1;min-width:150px}
+.paradigm-clues-panel,.paradigm-coverage{border-top:1px solid var(--line);padding:1.2rem 0;margin-top:1.5rem}
+.paradigm-clue{padding:1rem 0;border-bottom:1px solid var(--line)}.paradigm-clue h3{font-size:1rem;line-height:1.7}.paradigm-clue .paradigm-follow{max-width:12rem;margin-top:.75rem}
+.paradigm-coverage ul{max-height:14rem;overflow:auto;font-size:.8rem;line-height:1.9}
+.paradigm-footer{border-top:1px solid var(--line);margin-top:2rem;padding-top:1rem}.paradigm-import{font-size:.75rem;display:inline-block;margin:.4rem}.paradigm-import input{max-width:210px}
+.paradigm-reader section[id],.paradigm-reader tr[id]{scroll-margin-top:1rem}.paradigm-reader tr:target{outline:2px solid var(--accent);outline-offset:-2px}
+@media(max-width:700px),(max-height:540px){.paradigm-tools>.periodical-tool-label{display:none}.paradigm-section-nav{flex-direction:row;gap:1rem;padding:.3rem 0 0;margin:0;border:0}.roadmap-node{grid-template-columns:5.7rem minmax(0,1fr);gap:.7rem;padding-left:.8rem}.roadmap-stamp time{font-size:1.05rem}.paradigm-filters label{flex:1 1 42%;min-width:0}.paradigm-filters input{width:100%}}

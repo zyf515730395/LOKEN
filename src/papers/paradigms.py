@@ -113,6 +113,7 @@ def build_catalog(rows, topics, summaries, analysis_root: Path, config_path: Pat
     review_path = analysis_root.parent / 'paradigm-observations.json'
     reviews = json.loads(review_path.read_text(encoding='utf-8'))['observations'] if review_path.exists() else []
     topic_names = {slug: name for name, slug in topics}
+    roadmaps = load_roadmaps(config_path.with_name('paradigm-roadmaps.yaml'), topic_names)
     routes = {}
     for seed in definitions['routes']:
         for topic in seed['topics']:
@@ -217,5 +218,31 @@ def build_catalog(rows, topics, summaries, analysis_root: Path, config_path: Pat
             'topics': [{'name': name, 'id': slug} for name, slug in topics],
             'routes': list(routes.values()), 'clues': sorted(clues, key=lambda c: c['week'], reverse=True),
             'coverage': coverage, 'baseline_verified_at': str(definitions['verified_at']),
+            'roadmaps': roadmaps,
             'papers': {key: {'title': public[key]['title'], 'date': str(public[key]['digest_date']),
                              'url': f'../index.html#paper-{key}'} for key in sorted(cited)}}
+
+
+def load_roadmaps(path: Path, topics):
+    value = yaml.safe_load(path.read_text(encoding='utf-8'))
+    if value.get('schema_version') != 1 or set(value.get('topics', {})) != set(topics):
+        raise ValueError('Roadmaps must cover every configured research topic')
+    verified = date.fromisoformat(str(value['verified_at']))
+    fields = {'year', 'title', 'url', 'contribution', 'branch', 'transition'}
+    for nodes in value['topics'].values():
+        if not isinstance(nodes, list) or not nodes:
+            raise ValueError('Roadmap requires sourced historical nodes')
+        previous, seen = 0, set()
+        for node in nodes:
+            if set(node) != fields or type(node['year']) is not int or not 1900 <= node['year'] <= verified.year:
+                raise ValueError('Invalid roadmap node')
+            if node['year'] < previous or node['url'] in seen:
+                raise ValueError('Roadmap nodes must be chronological and unique')
+            for key in fields - {'year'}:
+                if not isinstance(node[key], str) or not node[key].strip() or len(node[key]) > 600:
+                    raise ValueError('Invalid roadmap text')
+            if not re.fullmatch(r'https://[^\s<>"\x00-\x1f]+', node['url']):
+                raise ValueError('Roadmap sources require HTTPS URLs')
+            previous = node['year']
+            seen.add(node['url'])
+    return value
