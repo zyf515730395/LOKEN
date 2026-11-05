@@ -1,0 +1,279 @@
+schema_version: 1
+verified_at: '2026-11-05'
+topics:
+  image-gen-edit:
+  - year: 2014
+    title: GAN
+    url: https://arxiv.org/abs/1406.2661
+    contribution: 通过生成器与判别器的极小极大对抗训练，让生成器学习数据分布。
+    branch: 对抗生成
+    transition: 建立对抗学习生成路线，成为后续高保真合成与潜空间编辑的重要基础。
+  - year: 2020
+    title: DDPM
+    url: https://arxiv.org/abs/2006.11239
+    contribution: 以逐步去噪的概率模型生成图像，并连接扩散训练目标与去噪分数匹配。
+    branch: 像素扩散
+    transition: 使迭代去噪成为高质量图像合成的核心路线之一，与对抗生成并行发展。
+  - year: 2021
+    title: SDEdit
+    url: https://arxiv.org/abs/2108.01073
+    contribution: 先向输入图像加噪，再利用扩散先验去噪，在无需任务专属训练或反演的情况下完成引导合成与编辑。
+    branch: 扩散编辑
+    transition: 把生成先验用于修改已有图像，显式面对输入保真度与生成真实感之间的平衡。
+  - year: 2021
+    title: Latent Diffusion
+    url: https://arxiv.org/abs/2112.10752
+    contribution: 在预训练自编码器的压缩潜空间中执行扩散，并通过交叉注意力接入文本等条件。
+    branch: 潜空间扩散
+    transition: 降低高分辨率扩散的计算成本，并为文本生成、修复与条件控制提供可复用基础。
+  - year: 2022
+    title: InstructPix2Pix
+    url: https://arxiv.org/abs/2211.09800
+    contribution: 利用语言模型与文生图模型合成编辑训练数据，让条件扩散模型直接执行自然语言图像编辑指令。
+    branch: 指令编辑
+    transition: 把编辑接口推进到输入图像加修改指令，减少对逐例微调和反演的依赖。
+  - year: 2022
+    title: DiT
+    url: https://arxiv.org/abs/2212.09748
+    contribution: 以处理潜空间图像块的 Transformer 替代扩散模型的 U-Net，并系统研究模型计算规模与生成质量的关系。
+    branch: 扩散 Transformer
+    transition: 将扩散生成与 Transformer 的可扩展架构结合，为后续大规模视觉生成提供骨干选择。
+  - year: 2023
+    title: ControlNet
+    url: https://arxiv.org/abs/2302.05543
+    contribution: 冻结预训练扩散模型，通过零初始化卷积连接可训练分支，接入边缘、深度与姿态等空间条件。
+    branch: 空间条件控制
+    transition: 在文本语义之外增加可明确指定的布局约束，与指令编辑共同扩展生成模型的可控性。
+  - year: 2024
+    title: Stable Diffusion 3 / MMDiT
+    url: https://arxiv.org/abs/2403.03206
+    contribution: 结合改进的 rectified flow 训练与图文分别参数化、双向交互的 Transformer，提升文本理解和图像生成表现。
+    branch: 多模态流模型
+    transition: 将可扩展视觉骨干推进到图文联合交互，并把流匹配作为生成训练路线的重要选择。
+  video-gen-edit:
+  - year: 2016
+    title: VGAN / Scene Dynamics
+    url: https://arxiv.org/abs/1609.02612
+    contribution: 通过分离场景前景与背景的时空卷积 GAN，从无标注视频学习动态并生成短视频。
+    branch: 时空对抗生成
+    transition: 把图像对抗生成扩展到时间维度，开始显式建模场景动态。
+  - year: 2017
+    title: MoCoGAN
+    url: https://arxiv.org/abs/1707.04993
+    contribution: 将视频潜变量分解为固定内容与随时间变化的运动，并联合图像和视频判别器训练。
+    branch: 内容运动解耦
+    transition: 把主体外观与动态变化拆开控制，为视频生成提供可组合的时间建模思路。
+  - year: 2022
+    title: Video Diffusion Models
+    url: https://arxiv.org/abs/2204.03458
+    contribution: 将图像扩散架构扩展到视频，联合图像与视频训练，并通过条件采样进行时空扩展。
+    branch: 视频扩散
+    transition: 把迭代去噪推进到时间一致的视频生成，同时探索更长时序与更高分辨率。
+  - year: 2022
+    title: Tune-A-Video
+    url: https://arxiv.org/abs/2212.11565
+    contribution: 利用定制时空注意力和单个文本视频对微调图像扩散模型，并以 DDIM 反演提供采样结构引导。
+    branch: 单视频适配与编辑
+    transition: 展示复用文生图先验进行视频改写的低数据路线，与大规模视频预训练并行发展。
+  - year: 2023
+    title: AnimateDiff
+    url: https://arxiv.org/abs/2307.04725
+    contribution: 从视频学习可插拔运动模块，并迁移到同一基础模型衍生的个性化文生图模型。
+    branch: 运动模块迁移
+    transition: 把外观个性化与运动先验分开复用，使已有图像模型生态能够生成动态内容。
+  - year: 2023
+    title: Stable Video Diffusion
+    url: https://arxiv.org/abs/2311.15127
+    contribution: 系统研究图像预训练、视频预训练和高质量视频微调三个阶段，并建立视频数据筛选与描述流程。
+    branch: 潜空间视频扩散
+    transition: 把图像模型的视频化推进到系统的数据与训练流程，为图生视频等任务提供运动基础模型。
+  - year: 2024
+    title: Sora
+    url: https://openai.com/index/video-generation-models-as-world-simulators/
+    contribution: 将压缩后的视频和图像表示为时空块，以扩散 Transformer 联合训练不同长度、分辨率和宽高比的视觉数据。
+    branch: 时空 Transformer
+    transition: 将统一视觉表示与规模化训练结合，展示更长视频生成能力，但不代表物理一致性问题已解决。
+  - year: 2025
+    title: FramePack
+    url: https://arxiv.org/abs/2504.12626v1
+    contribution: 把历史帧压缩为固定长度的 Transformer 上下文，并通过预设端点和逆时间采样缓解逐段生成的误差累积。
+    branch: 长时序逐段生成
+    transition: 从整段视频联合生成扩展到固定上下文的渐进生成路线，针对长视频的计算开销与漂移问题。
+  3d-gen-recon:
+  - year: 2016
+    title: 3D-GAN
+    url: https://arxiv.org/abs/1610.07584
+    contribution: 结合三维体卷积与对抗训练，将低维随机潜变量映射为体素形状，并学习可用于识别的形状特征。
+    branch: 体素生成
+    transition: 让三维形状从人工建模资产成为可学习、可采样的概率分布，为原生三维生成建立早期范式。
+  - year: 2019
+    title: DeepSDF
+    url: https://arxiv.org/abs/1901.05103
+    contribution: 学习连续符号距离函数，以零等值面表达形状边界，并支持形状插值和残缺观测补全。
+    branch: 隐式几何
+    transition: 将离散体素网格之外的连续函数表示引入学习式形状建模，使几何细节不再直接受固定输出网格约束。
+  - year: 2020
+    title: NeRF
+    url: https://www.matthewtancik.com/nerf
+    contribution: 用坐标网络预测空间密度与视角相关颜色，通过可微体渲染从已知相机位姿的多视图照片优化场景。
+    branch: 辐射场重建
+    transition: 把几何与外观共同编码为连续辐射场，推动从多视图图像学习照片级新视角合成。
+  - year: 2022
+    title: DreamFusion
+    url: https://dreamfusion3d.github.io/
+    contribution: 提出分数蒸馏采样 SDS，利用预训练二维扩散模型监督随机视角渲染并优化三维辐射场。
+    branch: 二维先验蒸馏
+    transition: 将文本到图像模型的知识迁移到三维优化，在不训练三维生成模型的情况下打开文本到三维路线。
+  - year: 2023
+    title: 3D Gaussian Splatting
+    url: https://arxiv.org/abs/2308.04079
+    contribution: 联合优化各向异性三维高斯及其密度，并用可见性感知的 splatting 实现高质量实时新视角渲染。
+    branch: 显式辐射表示
+    transition: 在神经隐式场之外强化显式可优化图元路线，改善场景重建中训练成本、画质与实时显示的折中。
+  - year: 2023
+    title: LRM
+    url: https://arxiv.org/abs/2311.04400
+    contribution: 用大规模多视图数据训练 Transformer，从单张图像直接预测物体的神经辐射场。
+    branch: 大规模前馈重建
+    transition: 把逐对象迭代优化中的部分计算转移到跨对象预训练，使单图到三维能够通过快速前馈推理完成。
+  - year: 2023
+    title: DUSt3R
+    url: https://arxiv.org/abs/2312.14132
+    contribution: 将图像对重建建模为三维点图回归，再通过全局对齐整合多视图，无需预先提供相机标定与位姿。
+    branch: 几何基础模型
+    transition: 与物体生成并行，将匹配、深度和相机恢复纳入统一学习式几何框架，降低无约束照片集合的重建门槛。
+  - year: 2024
+    title: TRELLIS
+    url: https://microsoft.github.io/TRELLIS/
+    contribution: 把稀疏三维结构与多视图视觉特征编码为统一 SLAT 潜表示，用 rectified flow Transformer 生成并解码为网格、高斯或辐射场。
+    branch: 统一潜空间生成
+    transition: 让生成过程建立在可跨输出格式解码的原生三维潜空间上，连接几何、外观与局部编辑需求。
+  world-model:
+  - year: 1990
+    title: Dyna
+    url: https://papers.nips.cc/paper_files/paper/1990/hash/d9fc5b73a8d78fad3d6dffe419384e70-Abstract.html
+    contribution: 交替使用真实交互与学得的前向世界模型进行强化学习，把模型学习、规划和行为更新整合进同一过程。
+    branch: 模型学习与规划
+    transition: 确立通过内部模型产生模拟经验来辅助决策的基本思路，早于后来的深度视觉世界模型。
+  - year: 2018
+    title: World Models
+    url: https://worldmodels.github.io/
+    contribution: 学习环境的压缩空间和时间表征，让轻量策略利用模型特征决策，并可在模型生成的梦境环境中训练。
+    branch: 压缩生成动力学
+    transition: 将高维视觉环境压缩为可用于控制的内部动态表示，展示模拟训练后迁回真实环境的可行性。
+  - year: 2018
+    title: PlaNet
+    url: https://arxiv.org/abs/1811.04551
+    contribution: 结合确定性与随机状态转移学习潜在动力学，并通过多步潜空间训练目标支持从像素出发的在线规划。
+    branch: 潜空间在线规划
+    transition: 把动作候选的评估转移到紧凑潜空间，使视觉控制无需在每条预测轨迹上重建完整图像。
+  - year: 2019
+    title: Dreamer
+    url: https://arxiv.org/abs/1912.01603
+    contribution: 在世界模型的潜空间中想象轨迹，将价值函数的解析梯度沿轨迹反传以学习长时程控制行为。
+    branch: 想象策略学习
+    transition: 在潜空间规划之外发展可直接执行的策略学习路线，把想象轨迹用于持续改进策略与价值估计。
+  - year: 2023
+    title: DreamerV3
+    url: https://arxiv.org/abs/2301.04104
+    contribution: 通过归一化、平衡与数值变换稳定世界模型和想象行为学习，使同一配置适应多种控制领域。
+    branch: 通用模型式强化学习
+    transition: 把研究重点从单任务上的世界模型有效性推进到跨领域训练稳定性与可扩展性。
+  - year: 2024
+    title: Genie
+    url: https://arxiv.org/abs/2402.15391
+    contribution: 从无动作标签视频学习时空 tokenizer、自回归动力学与潜在动作模型，生成能够逐帧交互的虚拟环境。
+    branch: 交互视频生成
+    transition: 与控制代理路线并行，将互联网视频中的变化转化为可操控环境，探索无需动作标注的交互建模。
+  - year: 2025
+    title: V-JEPA 2
+    url: https://arxiv.org/abs/2506.09985
+    contribution: 先以大规模视频训练联合嵌入预测模型，再用少量机器人轨迹训练动作条件潜在世界模型以进行图像目标规划。
+    branch: 表征预测与规划
+    transition: 沿表征预测路线连接观察学习与机器人行动，在潜空间预测之外验证以目标图像驱动实际规划的能力。
+  relighting:
+  - year: 2000
+    title: Light Stage / Reflectance Field
+    url: https://www.pauldebevec.com/Research/LS/
+    contribution: 用 Light Stage 密集采样入射光方向，记录人脸逐像素反射响应，并组合生成新光照下的外观。
+    branch: 测量反射场
+    transition: 把重光照建立在真实光传输测量之上，形成高保真采集与后续学习数据的重要基础。
+  - year: 2007
+    title: Polarized Spherical Gradient Illumination
+    url: https://vgl.ict.usc.edu/Research/FaceScanning/EGSR2007_SGI_high.pdf
+    contribution: 用四种球面梯度照明与偏振分离，分别恢复漫反射和镜面反射法线，捕获细致表面形状。
+    branch: 物理采集与分解
+    transition: 在反射场采集之外推进可解释的材质与几何分解，为可控渲染提供紧凑参数。
+  - year: 2019
+    title: Single Image Portrait Relighting
+    url: https://arxiv.org/abs/1905.00824
+    contribution: 以 Light Stage 人像训练神经网络，将普通手机拍摄的单张人像转换为指定环境光照下的图像。
+    branch: 学习式人像重光照
+    transition: 把专用设备的要求移到训练数据采集阶段，使使用端能够仅凭单张照片进行重光照。
+  - year: 2021
+    title: Total Relighting
+    url: https://research.google/pubs/total-relighting-learning-to-relight-portraits-for-background-replacement/
+    contribution: 联合抠图、重光照与合成流程，以逐像素光照表示显式建模漫反射和镜面分量。
+    branch: 人像合成与光照匹配
+    transition: 从改变人像照明推进到完整背景替换，重点解决毛发边界、高光与新环境的融合。
+  - year: 2021
+    title: NeRFactor
+    url: https://arxiv.org/abs/2106.01970
+    contribution: 从单一未知光照下的多视图图像分解法线、光照可见性、反照率和 BRDF，支持新视角重光照与材质编辑。
+    branch: 神经逆渲染
+    transition: 与单图人像路线并行，通过三维分解获得跨视角一致、具阴影可控性的对象重光照。
+  - year: 2025
+    title: IC-Light (ICLR 2025)
+    url: https://proceedings.iclr.cc/paper_files/paper/2025/file/1cce374fec7829c24a97ae0e91cd0999-Paper-Conference.pdf
+    contribution: 在扩散重光照训练中施加光传输线性叠加一致性约束，减少修改照明时对固有外观的破坏。
+    branch: 生成式重光照
+    transition: 将生成模型的广泛图像先验与物理一致性结合，拓展文本及背景条件下的照明编辑。
+  depth-estimation:
+  - year: 2009
+    title: Make3D（TPAMI 期刊版）
+    url: https://www.cs.cornell.edu/~asaxena/reconstruction3d/saxena_make3d_learning3dstructure.pdf
+    contribution: 以监督学习的马尔可夫随机场融合单目视觉线索与区域关系，预测小平面的位置和朝向以重建场景。
+    branch: 传统监督单目
+    transition: 展示从图像经验学习单目三维结构的路径，为后续端到端深度学习提供早期参照。
+  - year: 2014
+    title: Eigen Multi-Scale Depth
+    url: https://arxiv.org/abs/1406.2283
+    contribution: 通过全局粗预测与局部细化两级深度网络，并使用尺度不变误差，直接从 RGB 学习稠密深度。
+    branch: 监督深度网络
+    transition: 将手工区域建模推进为从数据学习全局布局和局部边界的深度网络。
+  - year: 2018
+    title: Monodepth2
+    url: https://arxiv.org/abs/1806.01260
+    contribution: 以最小重投影损失、全分辨率多尺度采样和自动掩码，缓解自监督单目训练中的遮挡与运动假设失效。
+    branch: 几何自监督
+    transition: 沿视频或双目重投影监督路线减少对真实深度标注的依赖，与有监督学习并行发展。
+  - year: 2019
+    title: MiDaS
+    url: https://arxiv.org/abs/1907.01341
+    contribution: 用对深度范围和尺度鲁棒的训练目标及多目标学习混合不同数据集，提升零样本跨数据集泛化。
+    branch: 跨数据相对深度
+    transition: 把重点从单一数据集精度扩展到多来源数据兼容与未知场景泛化。
+  - year: 2023
+    title: ZoeDepth
+    url: https://arxiv.org/abs/2302.12288
+    contribution: 结合多数据集相对深度预训练、度量深度微调与可自动路由的 metric bins 预测头。
+    branch: 泛化度量深度
+    transition: 将相对深度的泛化能力接到具有绝对尺度的预测上，回应实际三维应用对距离单位的需求。
+  - year: 2023
+    title: Marigold
+    url: https://arxiv.org/abs/2312.02145
+    contribution: 将 Stable Diffusion 的视觉先验通过合成数据微调迁移到仿射不变的单目深度估计。
+    branch: 生成式深度
+    transition: 开辟复用图像生成先验的并行路线，以增强陌生内容和场景下的深度理解。
+  - year: 2024
+    title: Depth Anything V2
+    url: https://arxiv.org/abs/2406.09414
+    contribution: 以合成标注训练更强教师，再借大规模真实图像伪标签训练学生，提升细节和泛化能力。
+    branch: 判别式深度基础模型
+    transition: 通过教师规模与合成到真实的数据桥接推进通用深度模型，并保留高效前馈推理及度量微调路径。
+  - year: 2024
+    title: Depth Pro
+    url: https://arxiv.org/abs/2410.02073
+    contribution: 结合多尺度视觉 Transformer、真实与合成数据训练及焦距估计，生成具有精细边界的零样本度量深度。
+    branch: 高分辨率度量深度
+    transition: 继续推进绝对尺度、细边界和推理效率的结合，使深度输出更适合三维重建与图像编辑。
