@@ -340,6 +340,34 @@
       "url": "https://s2025.conference-schedule.org/?post_type=page&p=14&id=papers_809&sess=sess149"
     },
     "conf-0054a9b807d23d289b07f47c": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Diffusion",
+          "Flow Matching",
+          "Video Conditioned",
+          "Joint Spatiotemporal"
+        ],
+        "topics": [
+          "Video Gen&Edit"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "df366a0c2c0ae456471f17cff5aa8f892913cd73920dab4d3d10a0fec1e5317d",
+          "truncated": false
+        },
+        "sha256": "df790bf941f8349a3919e9a724e40b2729a6c035fe122463732a520204ff5878",
+        "url": "https://arxiv.org/html/2512.05016"
+      },
       "arxiv_id": "2512.05016",
       "authors": [
         "Qi Mao",
@@ -373,7 +401,32 @@
       },
       "source_edition": "CVPR 2026",
       "source_version": "a2c7e627e02f69452e1c3c01f833c6f53c7cbceb953d7e991ded34d923fc61c0",
-      "summary": null,
+      "summary": {
+        "contributions": [
+          "提出了GNVC-VD，这是首个利用视频原生扩散模型实现序列级潜在压缩与精化的生成式神经视频压缩框架，克服了基于图像生成先验的逐帧局限性。",
+          "设计了一种基于DiT的潜在精化机制，利用流匹配和压缩感知条件化技术，使视频扩散先验能够适应压缩引起的失真，从而在编解码器内实现有效的生成式校正。",
+          "构建了一个条件上下文变换编解码器，用于压缩时空潜在表示，同时保留长程时间结构，确保压缩后的潜在变量与扩散流形兼容。",
+          "采用两阶段训练策略，首先对齐编解码器的潜在空间与生成先验，然后在像素域进行微调，从而在不同码率设置下实现稳定且连贯的精化效果。",
+          "在多个基准测试中进行了广泛实验，证明GNVC-VD在低于0.03 bpp的码率下实现了最先进的感知性能，恢复了更清晰的纹理并显著减少了闪烁伪影。"
+        ],
+        "one_sentence": "该论文提出了GNVC-VD，首个利用视频原生扩散模型实现序列级潜在压缩与精化的生成式神经视频压缩框架，旨在解决超低码率下传统方法导致的感知质量下降和闪烁问题。",
+        "problem": "在超低码率神经视频压缩中，基于失真驱动的目标函数会导致纹理过度平滑和精细结构丢失，严重降低感知真实感；虽然图像生成先验能缓解图像领域的感知崩溃，但将其应用于视频时，由于缺乏对时间动态的建模，导致重建结果出现严重的时间不一致性和感知闪烁现象。"
+      },
+      "summary_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "df366a0c2c0ae456471f17cff5aa8f892913cd73920dab4d3d10a0fec1e5317d",
+          "truncated": false
+        },
+        "sha256": "df790bf941f8349a3919e9a724e40b2729a6c035fe122463732a520204ff5878",
+        "url": "https://arxiv.org/html/2512.05016"
+      },
       "title": "Generative Neural Video Compression via Video Diffusion Prior",
       "topic_review": {
         "decisions": {
@@ -6227,6 +6280,35 @@
       "url": "https://eccv.ecva.net/virtual/2024/poster/1027"
     },
     "conf-06d89f26645fbe75efcc72b2": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Direct Regression",
+          "Monocular",
+          "Video",
+          "Relative Depth",
+          "Self-Supervised"
+        ],
+        "topics": [
+          "Depth Estimation"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "official_abstract",
+          "extraction": {
+            "method": "pdf_text"
+          },
+          "sections": [
+            "Abstract"
+          ],
+          "sha256": "fff5b43a68298d51cf9d6f158cd5a0778ea934ceccca5ee1199a90981a4bf2e8",
+          "truncated": false
+        },
+        "sha256": "1bb175da3ccc73138fa052fdb18fd87f7a6e62712fc84f26b9db74e7bdf553ba",
+        "url": "https://openaccess.thecvf.com/content/CVPR2026/papers/Li_Seeing_Depth_Through_Frequency_and_Motion_A_Progressive_Training_Paradigm_CVPR_2026_paper.pdf"
+      },
       "conferences": [
         {
           "edition": "CVPR 2026",
@@ -6257,7 +6339,37 @@
       },
       "source_edition": "CVPR 2026",
       "source_version": "271eeb441fbce52798e6fe8536a1bfd1e19582a8cd16ff7ead69ca954a2e4ed4",
-      "summary": null,
+      "summary": {
+        "contributions": [
+          "提出了FGDepth网络及其即插即用的频率引导采样（FGS）模块，通过双路径频率建模显式恢复高频细节并抑制混叠伪影，从而提升深度估计的边界精度。",
+          "设计了带有通道对齐注意力（CAA）和可学习相对位置编码的位姿查询网络（PQNet），通过查询相邻帧特征建立几何对应关系，捕获细粒度跨帧运动线索以实现更准确的位姿估计。",
+          "引入了一种渐进式三阶段训练策略，该策略在理论上等价于块坐标下降，通过解耦并逐步优化深度与位姿网络，利用其互补优势提高了训练稳定性和整体性能，相比传统单阶段联合训练将Sq Rel指标降低了3.55%。"
+        ],
+        "one_sentence": "本文提出了一种名为FGDepth的自监督单目深度估计框架，通过引入频率引导采样模块解决高频细节丢失问题，并结合通道对齐注意力的位姿网络与渐进式三阶段训练策略，显著提升了深度估计的边界精度与跨数据集泛化能力。",
+        "problem": "现有自监督单目深度估计方法受限于尺度模糊、动态场景变化及光度一致性假设违背，导致物体边界附近细粒度结构恢复能力有限，出现边界模糊和几何线索丢失；同时，编码器-解码器架构中的下采样操作引发频率混叠，且深度与位姿网络联合训练存在不稳定性，未能充分利用两者间的互补关系。"
+      },
+      "summary_source": {
+        "evidence": {
+          "basis": "body_excerpt",
+          "extraction": {
+            "method": "pdf_text"
+          },
+          "sections": [
+            "Page 1",
+            "Page 2",
+            "Page 3",
+            "Page 4",
+            "Page 5",
+            "Page 6",
+            "Page 7",
+            "Page 8"
+          ],
+          "sha256": "23b41c63264d3fa94f6d9548ffa14f284054542de53b2d7cb568a45fd368b6e7",
+          "truncated": true
+        },
+        "sha256": "1bb175da3ccc73138fa052fdb18fd87f7a6e62712fc84f26b9db74e7bdf553ba",
+        "url": "https://openaccess.thecvf.com/content/CVPR2026/papers/Li_Seeing_Depth_Through_Frequency_and_Motion_A_Progressive_Training_Paradigm_CVPR_2026_paper.pdf"
+      },
       "title": "Seeing Depth Through Frequency and Motion: A Progressive Training Paradigm for Monocular Depth Estimation",
       "topic_review": {
         "decisions": {
@@ -6437,6 +6549,36 @@
       "url": "https://icml.cc/virtual/2026/poster/64763"
     },
     "conf-0730ba8690d26de9da6f3fff": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Diffusion",
+          "Autoregressive",
+          "Image Conditioned",
+          "Text Conditioned",
+          "Long-Horizon Generation"
+        ],
+        "topics": [
+          "Video Gen&Edit",
+          "World Model"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "2b00a3c29e455f3576735545e8d35129159858ee2b69d6987fdb2c2e74e87298",
+          "truncated": false
+        },
+        "sha256": "e6e737f3fc88b7ea613da1051cc686c7c6c8cdcba26540f1954964ee47c0e4eb",
+        "url": "https://arxiv.org/html/2512.22096"
+      },
       "arxiv_id": "2512.22096",
       "authors": [
         "Xiaofeng Mao",
@@ -6474,7 +6616,31 @@
       },
       "source_edition": "CVPR 2026",
       "source_version": "c2a13191f3557df9d57c9c9a4d1b9798e84a63e0e0a01bfc1c7d684d0b388516",
-      "summary": null,
+      "summary": {
+        "contributions": [
+          "提出联合时空通道建模（TSCM）用于无限上下文生成，通过沿时空维度压缩历史帧输入 DiT 并由并行线性 DiT 处理通道压缩特征，显著降低内存消耗并提升推理速度，确保持续采样速度稳定。",
+          "结合分数蒸馏与类似 Self-Forcing 的方法进行协同优化，用 TSCM 替代 KV 缓存建立新的训练范式，在保持视觉质量的同时大幅提升采样效率并减轻推理过程中的误差累积。",
+          "通过精心设计的架构和混合数据集训练策略，以最小数据需求实现了文本控制的世界事件生成能力，弥补了先前模型缺乏文本生成能力的不足。",
+          "Yume1.5 以自回归方式从单张图像生成交互式无限视频世界，在复杂场景生成中显著增强了视觉质量和连续性，并在世界生成与编辑任务上取得了优越性能。"
+        ],
+        "one_sentence": "Yume1.5 提出了一种基于联合时空通道建模与加速策略的文本可控交互式世界生成模型，旨在解决现有视频扩散模型在通用性、生成延迟及文本控制能力方面的局限。",
+        "problem": "现有视频扩散方法在生成交互式和真实视频时面临三大瓶颈：一是大多数方法基于游戏数据集训练导致领域差距，难以生成真实的动态城市场景；二是扩散模型的高计算成本导致生成延迟高，阻碍了无限探索所需的实时连续生成；三是现有方法仅支持图像生成视频及键鼠控制，缺乏文本控制能力且无法生成随机事件。"
+      },
+      "summary_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "2b00a3c29e455f3576735545e8d35129159858ee2b69d6987fdb2c2e74e87298",
+          "truncated": false
+        },
+        "sha256": "e6e737f3fc88b7ea613da1051cc686c7c6c8cdcba26540f1954964ee47c0e4eb",
+        "url": "https://arxiv.org/html/2512.22096"
+      },
       "title": "Yume1.5: A Text-Controlled Interactive World Generation Model",
       "topic_review": {
         "decisions": {
@@ -9163,6 +9329,33 @@
       "url": "https://openaccess.thecvf.com/content/CVPR2025/html/Vuong_AerialMegaDepth_Learning_Aerial-Ground_Reconstruction_and_View_Synthesis_CVPR_2025_paper.html"
     },
     "conf-09d7164bffe44b6dc4b38dfe": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Gaussian Splatting",
+          "Feed-Forward",
+          "Multi-View-to-3D"
+        ],
+        "topics": [
+          "3D Gen&Recon"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "official_abstract",
+          "extraction": {
+            "method": "pdf_text"
+          },
+          "sections": [
+            "Abstract"
+          ],
+          "sha256": "e187ea5cf6ecc373fd3dc592945eefc68dd8605ecbce2e133b2c1ac315f99d4a",
+          "truncated": false
+        },
+        "sha256": "7fba1b60aecd9e69c232d9c00cec9bdc8037f8f2fa84f3f079a6f38c03fea63d",
+        "url": "https://openaccess.thecvf.com/content/CVPR2026/papers/Wu_iSplat_Iterative_Learning_for_Fine-Grained_Gaussian_Splatting_CVPR_2026_paper.pdf"
+      },
       "conferences": [
         {
           "edition": "CVPR 2026",
@@ -9191,7 +9384,38 @@
       },
       "source_edition": "CVPR 2026",
       "source_version": "ded8fbd258f48209f18c310786f0b3ab3d68f5d7bfca993c1bcd582e1c8f1ce5",
-      "summary": null,
+      "summary": {
+        "contributions": [
+          "提出了 iSplat，一种用于前馈 3D 高斯泼溅的新型迭代学习框架，将一次性预测重构为循环过程，逐步增强几何和外观，弥合了高效前馈模型与高保真优化方法之间的差距。",
+          "引入了一种不确定性驱动的深度细化策略，通过动态调整深度搜索空间，实现每个高斯的细粒度且鲁棒的几何定位。",
+          "提出了一种区域感知增强机制，利用迭代改进的深度区分重叠和非重叠区域，应用针对性聚合以改进几何和外观参数。",
+          "iSplat 仅使用 42.6M 参数即实现了优越的重建质量和强大的跨数据集泛化能力，在 RealEstate10K 上超越 DepthSplat，并在 DTU 上实现了 2.88 dB 的 PSNR 提升。"
+        ],
+        "one_sentence": "iSplat 提出了一种迭代式前馈 3D 高斯泼溅框架，通过基于 GRU 的循环优化器、不确定性驱动的深度细化策略以及区域感知的特征增强机制，在保持前馈推理效率的同时实现了比单次预测更高保真度的几何与外观重建。",
+        "problem": "现有前馈 3D 高斯泼溅方法受限于单次前向传播管线，首先估计深度图作为几何支架，随后一次性预测所有高斯参数，这种一次性公式化导致对初始深度支架存在脆弱依赖，任何估计误差都会不可逆地传播到最终高斯属性中，且缺乏自我校正或渐进细化机制，导致在几何模糊区域和细粒度外观细节渲染上能力受限。"
+      },
+      "summary_source": {
+        "evidence": {
+          "basis": "body_excerpt",
+          "extraction": {
+            "method": "pdf_text"
+          },
+          "sections": [
+            "Page 1",
+            "Page 2",
+            "Page 3",
+            "Page 4",
+            "Page 5",
+            "Page 6",
+            "Page 7",
+            "Page 8"
+          ],
+          "sha256": "7ea2918552d326cf85968cfc7b30e332b3ef96bc770b0279f98870a83728c10d",
+          "truncated": true
+        },
+        "sha256": "7fba1b60aecd9e69c232d9c00cec9bdc8037f8f2fa84f3f079a6f38c03fea63d",
+        "url": "https://openaccess.thecvf.com/content/CVPR2026/papers/Wu_iSplat_Iterative_Learning_for_Fine-Grained_Gaussian_Splatting_CVPR_2026_paper.pdf"
+      },
       "title": "iSplat: Iterative Learning for Fine-Grained Gaussian Splatting",
       "topic_review": {
         "decisions": {
@@ -10181,6 +10405,33 @@
       "url": "https://openaccess.thecvf.com/content/CVPR2024/html/Zhou_Exact_Fusion_via_Feature_Distribution_Matching_for_Few-shot_Image_Generation_CVPR_2024_paper.html"
     },
     "conf-0a7ffd94f18ba5f3aed9de76": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Gaussian Splatting",
+          "Feed-Forward",
+          "Procedural"
+        ],
+        "topics": [
+          "3D Gen&Recon"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "71fddbe49063b33637835627d41ba51cb591860887b7c4281a164a92a859fb01",
+          "truncated": false
+        },
+        "sha256": "def0f25b570c1d3975f9e78e29d9c6c5a52dc0371a807f520e6b00d33c90c8cb",
+        "url": "https://arxiv.org/html/2602.22096"
+      },
       "arxiv_id": "2602.22096",
       "authors": [
         "Wenhua Wu",
@@ -150475,6 +150726,33 @@
       "url": "https://eccv.ecva.net/virtual/2026/poster/3155"
     },
     "conf-9255674e51e8febc197653a8": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Flow Matching",
+          "Text Conditioned",
+          "Joint Spatiotemporal"
+        ],
+        "topics": [
+          "Video Gen&Edit"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "official_abstract",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Abstract"
+          ],
+          "sha256": "19e2b4fb7387c3505c426e642e8b165b7936a5162dd3db9225a64ecd28807df1",
+          "truncated": false
+        },
+        "sha256": "d9e96c50e73694b53bd63d9ae677451ac30b82ea778410fc849d4ded3f50ef97",
+        "url": "https://icml.cc/virtual/2026/poster/62352"
+      },
       "conferences": [
         {
           "edition": "ICML 2026",
@@ -163743,6 +164021,33 @@
       "url": "https://doi.org/10.1145/3680528.3687688"
     },
     "conf-9ee2410c033f0828b84e538f": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Gaussian Splatting",
+          "Multi-View-to-3D",
+          "Feed-Forward"
+        ],
+        "topics": [
+          "3D Gen&Recon"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "official_abstract",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Abstract"
+          ],
+          "sha256": "567721b7ae708aa32d053dadda84c254094e207cfdfe02b7f056f933266588b0",
+          "truncated": false
+        },
+        "sha256": "0b6ac7c698e43eadb6d60ad7cd01bfc11b2c0609234d2c36e97a6fee8509382f",
+        "url": "https://icml.cc/virtual/2026/poster/60713"
+      },
       "conferences": [
         {
           "edition": "ICML 2026",
@@ -166831,6 +167136,32 @@
       "url": "https://doi.org/10.1109/icra57147.2024.10611357"
     },
     "conf-a21412da25707f05f5d37060": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Autoregressive",
+          "Discrete Tokens"
+        ],
+        "topics": [
+          "Image Gen&Edit"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "official_abstract",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Abstract"
+          ],
+          "sha256": "2592a2c222ca0f2b368a1b979b10243d8e2741d38337409dd1e3367f0c6ed767",
+          "truncated": false
+        },
+        "sha256": "d360c227c66a72d707caf542a2992aa18e01fdf036c827ae3e98f24d1566e634",
+        "url": "https://icml.cc/virtual/2026/poster/62205"
+      },
       "conferences": [
         {
           "edition": "ICML 2026",
@@ -169328,6 +169659,33 @@
       "url": "https://openaccess.thecvf.com/content/CVPR2025/html/Lee_Dense-SfM_Structure_from_Motion_with_Dense_Consistent_Matching_CVPR_2025_paper.html"
     },
     "conf-a4222a0798ecf892b2f33f8d": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Continuous Latents",
+          "Imagination-Based Planning",
+          "World-Model Policy Learning"
+        ],
+        "topics": [
+          "World Model"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "fb4961b169fb8ff55db561ae5e42bde7d6e9de1503efa2facfadc46aa39aba03",
+          "truncated": false
+        },
+        "sha256": "69cd858db2d5fd6f0c1232c1621b9c780c1756b7328193ef1136f756a51ebf20",
+        "url": "https://arxiv.org/html/2608.07548"
+      },
       "arxiv_id": "2608.07548",
       "authors": [
         "Xuan Yao",
@@ -169361,7 +169719,30 @@
       },
       "source_edition": "ICML 2026",
       "source_version": "0c2deb3c0f1c6876d9bfa5833db0545e82cbb58526abf71cf84bf9e2bf115ed1",
-      "summary": null,
+      "summary": {
+        "contributions": [
+          "提出了SC$^{2}$-WM框架，利用内部前瞻预测生成可计算的内部反馈信号，实现了连续环境视觉与语言导航中的闭环决策。",
+          "设计了双层自校正机制，包括用于即时状态级校正的反馈引导计划精化，以及用于测试时模型级校正的条件世界感知适应。",
+          "在标准VLN-CE基准测试和真实世界部署中进行了广泛实验，证明了该方法能一致地提升导航性能。"
+        ],
+        "one_sentence": "本文提出了SC$^{2}$-WM，一种通过内部前瞻预测生成反馈信号以实现闭环决策的自校正世界模型框架，旨在解决连续环境中视觉与语言导航任务中因开环执行导致的误差累积问题。",
+        "problem": "现有连续环境视觉与语言导航（VLN-CE）方法多采用开环执行范式，缺乏对动作后果的验证，导致早期决策误差随时间累积；同时，外部监督信号稀疏且延迟，传统闭环控制依赖人工设计奖励或测试时适应方法，难以有效检测并纠正智能体对环境或指令理解的内部漂移。"
+      },
+      "summary_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "fb4961b169fb8ff55db561ae5e42bde7d6e9de1503efa2facfadc46aa39aba03",
+          "truncated": false
+        },
+        "sha256": "69cd858db2d5fd6f0c1232c1621b9c780c1756b7328193ef1136f756a51ebf20",
+        "url": "https://arxiv.org/html/2608.07548"
+      },
       "title": "SC$^{2}$-WM: A Self-Correcting World Model with Closed-Loop Feedback for Vision-and-Language Navigation in Continuous Environments",
       "topic_review": {
         "decisions": {
@@ -170001,6 +170382,34 @@
       "url": "https://openaccess.thecvf.com/content/CVPR2026/html/Liang_ReFlow_Self-correction_Motion_Learning_for_Dynamic_Scene_Reconstruction_CVPR_2026_paper.html"
     },
     "conf-a4a6e24922d425510590755b": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Diffusion",
+          "Transformer",
+          "Continuous Latents",
+          "Pixel/Observation Space"
+        ],
+        "topics": [
+          "World Model"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "0db7c7aa0b1ec7335a3d2b46763dbd9622ea189a4f4ef3d3aba1a61769d082ec",
+          "truncated": false
+        },
+        "sha256": "1b190c2b94d7a1aefac5c2777814b26420bef5637b7daf720eb263e7a17ab24a",
+        "url": "https://arxiv.org/html/2512.14614"
+      },
       "arxiv_id": "2512.14614",
       "authors": [
         "Wenqiang Sun",
@@ -170040,7 +170449,32 @@
       },
       "source_edition": "ICML 2026",
       "source_version": "ae15471af3e586262bf40000473ec94377337555ed9d294c1c82b125923c10c6",
-      "summary": null,
+      "summary": {
+        "contributions": [
+          "提出了双动作表示机制，将动作信号转换为连续相机位姿和离散按键，以结合两者的优势实现稳健控制并解决记忆检索中的位置歧义问题。",
+          "设计了重构上下文记忆模块，通过基于时空邻近性的动态查询和时序重构技术重写位置嵌入，克服长程衰减以维持长期几何一致性。",
+          "开发了上下文强制蒸馏方法，通过在蒸馏过程中对齐教师模型和学生模型的记忆上下文，解决分布不匹配问题，从而在保持记忆的同时实现实时生成。",
+          "构建了包含32万条真实与合成视频的大规模数据集，并开发了自定义的渲染和处理平台以支持模型训练。",
+          "实现了在24 FPS和720p分辨率下的实时交互式视频生成，并在多种场景下展示了优越的生成质量和泛化能力。"
+        ],
+        "one_sentence": "WorldPlay 提出了一种结合双动作表示、重构上下文记忆和上下文强制蒸馏技术的实时交互式世界模型，旨在解决实时生成速度与长期几何一致性难以兼顾的问题。",
+        "problem": "现有实时交互式视频生成方法难以同时实现低延迟的实时生成和高保真的长期几何一致性，具体表现为侧重速度的方法在场景重访时出现不一致，而侧重一致性的方法因记忆机制复杂导致蒸馏困难且无法实现实时生成。"
+      },
+      "summary_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "0db7c7aa0b1ec7335a3d2b46763dbd9622ea189a4f4ef3d3aba1a61769d082ec",
+          "truncated": false
+        },
+        "sha256": "1b190c2b94d7a1aefac5c2777814b26420bef5637b7daf720eb263e7a17ab24a",
+        "url": "https://arxiv.org/html/2512.14614"
+      },
       "title": "WorldPlay: Towards Long-Term Geometric Consistency for Real-Time Interactive World Modeling",
       "topic_review": {
         "decisions": {
@@ -172298,6 +172732,32 @@
       "url": "https://iclr.cc/virtual/2024/poster/18788"
     },
     "conf-a6796691e0711d668f07789c": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Image Conditioned",
+          "Text Conditioned"
+        ],
+        "topics": [
+          "Video Gen&Edit"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "official_abstract",
+          "extraction": {
+            "method": "pdf_text"
+          },
+          "sections": [
+            "Abstract"
+          ],
+          "sha256": "6323161e5bbe4305fc35dda1b16c3535445e37d95a7394084b19e9c43325b9ee",
+          "truncated": false
+        },
+        "sha256": "eb8385b2e2240c08f8b006df281601e436888b7e701430f603cfd539cb1397f0",
+        "url": "https://icml.cc/media/icml-2026/Slides/60999.pdf"
+      },
       "conferences": [
         {
           "edition": "ICML 2026",
@@ -172325,7 +172785,35 @@
       },
       "source_edition": "ICML 2026",
       "source_version": "10f9f386dfacbac51eba4b6ed63bc328af8de24a6616f24c146e4258db1c6598",
-      "summary": null,
+      "summary": {
+        "contributions": [
+          "构建了名为MuSA-2M的新型大规模数据集，包含主体级别的掩码标注及视频、文本、主体、掩码四元组。",
+          "提出了双模态身份锚定对齐机制，以增强生成视频中的身份一致性。",
+          "设计了稀疏路由策略，有效降低了多主体视频生成的计算开销。",
+          "展示了与Phantom、VACE、HuMo、Kaleido等现有方法的定性对比结果，验证了方法的有效性。"
+        ],
+        "one_sentence": "该论文提出了DiasR框架，通过双模态身份锚定对齐和稀疏路由策略，旨在解决多主体视频生成中的身份一致性与计算效率问题，并构建了大规模标注数据集MuSA-2M。",
+        "problem": "片段指出多主体视频生成面临身份一致性挑战及计算开销过高的问题，且现有方法在处理多主体交互时存在局限性。"
+      },
+      "summary_source": {
+        "evidence": {
+          "basis": "body_excerpt",
+          "extraction": {
+            "method": "pdf_text"
+          },
+          "sections": [
+            "Page 1",
+            "Page 17",
+            "Page 18",
+            "Page 20",
+            "Page 24"
+          ],
+          "sha256": "f54758e6fe2cc65f552a9f18817d1f3c37d9cc96b24fa7f7926f61b697f627b4",
+          "truncated": false
+        },
+        "sha256": "eb8385b2e2240c08f8b006df281601e436888b7e701430f603cfd539cb1397f0",
+        "url": "https://icml.cc/media/icml-2026/Slides/60999.pdf"
+      },
       "title": "DiasR: Dual-Modal Identity-Anchored Sparse Routing for Efficient Multi-Subject Video Generation",
       "topic_review": {
         "decisions": {
@@ -173482,6 +173970,32 @@
       "url": "https://openaccess.thecvf.com/content/CVPR2025/html/Walker_CrossSDF_3D_Reconstruction_of_Thin_Structures_From_Cross-Sections_CVPR_2025_paper.html"
     },
     "conf-a7225e97d7c272c695420582": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Video Conditioned",
+          "Joint Spatiotemporal"
+        ],
+        "topics": [
+          "Video Gen&Edit"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "987793f130d2e5af79ae2850bf36a9d2f33f0921e77e04b9b61d1fe92f931d4c",
+          "truncated": false
+        },
+        "sha256": "19f11db24ab576a11f241642848bb9e76645b47b0d0e4db4dad66e14985865a0",
+        "url": "https://arxiv.org/html/2410.00262"
+      },
       "arxiv_id": "2410.00262",
       "authors": [
         "Jian Shi",
@@ -173514,7 +174028,32 @@
       },
       "source_edition": "ICML 2026",
       "source_version": "35a18213baa80620ba6eef68111610ad109435647d56e7cf869e2dc81bdabdc1",
-      "summary": null,
+      "summary": {
+        "contributions": [
+          "构建了名为 YouTube-SBS 的大规模立体电影数据集，包含超过 700 万对立体图像对，填补了该领域缺乏基准数据集的空白，用于训练和评估立体视频生成模型。",
+          "提出了 ImmersePro 方法，这是一种专为视频立体转换设计的端到端系统，利用视频帧间的上下文信息增强时序维度的立体视差一致性。",
+          "提出使用隐式视差来引导分层视差的生成，该方法在性能上优于以往工作中常用的显式视差引导（如深度估计模型）。",
+          "引入分层视差表示，即对应单张图像的一组视差图堆栈，允许图像中的像素被多次重用，从而避免变形操作后产生黑洞，确保生成的立体部分严格遵循输入视频的语义。",
+          "在定量评估中，ImmersePro 相比最佳竞争方法 stereo-from-mono 在 L1、SSIM 和 PSNR 指标上分别提升了 11.76%、6.39% 和 5.10%。"
+        ],
+        "one_sentence": "本文提出了一种名为 ImmersePro 的端到端立体视频合成系统，通过利用隐式视差引导分层视差表示，解决了单目视频转立体视频过程中存在的时序不一致、遮挡区域处理困难及语义完整性缺失等问题。",
+        "problem": "传统立体电影拍摄成本高，而基于单目视频的后处理立体转换需要大量人工工作，且现有基于深度学习的视频立体转换方法在鲁棒性、时序视差一致性以及遮挡区域几何推断方面存在不足，容易产生纹理错位或物体变形等伪影。"
+      },
+      "summary_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "987793f130d2e5af79ae2850bf36a9d2f33f0921e77e04b9b61d1fe92f931d4c",
+          "truncated": false
+        },
+        "sha256": "19f11db24ab576a11f241642848bb9e76645b47b0d0e4db4dad66e14985865a0",
+        "url": "https://arxiv.org/html/2410.00262"
+      },
       "title": "ImmersePro: End-to-End Stereo Video Synthesis Via Implicit Disparity Learning",
       "topic_review": {
         "decisions": {
@@ -175088,6 +175627,32 @@
       "url": "https://proceedings.mlr.press/v235/zhou24p.html"
     },
     "conf-a84539501f3adbe596ef2c0a": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Gaussian Splatting",
+          "Feed-Forward"
+        ],
+        "topics": [
+          "3D Gen&Recon"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "e1422a89e3db09f37dbedd584edd91449594a3349a0b796261121d85e93769d9",
+          "truncated": false
+        },
+        "sha256": "cae92ade2f27f1be7a7a9c4ab18ea8f755e78cb38bece845e720a31884962f88",
+        "url": "https://arxiv.org/html/2603.18003"
+      },
       "arxiv_id": "2603.18003",
       "authors": [
         "Ziyi Wang",
@@ -175123,7 +175688,32 @@
       },
       "source_edition": "ICML 2026",
       "source_version": "c9822604ed1cb1fad63cc8f33cb3b1a87369a4ee35a7e5c62f8b941f8734e3f2",
-      "summary": null,
+      "summary": {
+        "contributions": [
+          "提出了一种将骨架序列翻译为 MLLM 原生视觉语言的新范式，首次在一个框架内统一了异构骨架格式并支持识别、描述和推理等多任务理解，迈向通用骨架理解。",
+          "引入了 DrAction，这是首个面向 MLLM 的可微分、格式无关的骨架渲染器，基于 3D 高斯泼溅和线性混合蒙皮技术，通过端到端优化生成针对下游任务优化的视觉表示。",
+          "设计了一种协同训练策略，结合因果推理蒸馏（CR-Distill）和判别性微调（Disc-FT），分别用于引导模型学习结构化的因果推理能力和增强对混淆动作对的细粒度判别能力。",
+          "在 NTU-60/120、PKU-MMD、HumanML3D 等数据集上验证了该方法在开放词汇动作识别、跨格式迁移、动作描述和动作问答任务上的优越性能，特别是在数据极度稀缺情况下表现显著提升。",
+          "证明了该框架的格式无关性，即在一种骨架格式上训练的模型可以直接迁移到未见过的格式而无需微调，有效解决了格式孤岛问题。"
+        ],
+        "one_sentence": "该论文提出了一种名为 SkeletonLLM 的框架，通过可微分渲染技术将异构骨架序列转化为多模态大语言模型（MLLMs）原生理解的视觉模态，从而实现了跨格式、多任务的通用骨架理解。",
+        "problem": "现有骨架数据面临格式孤岛问题，不同采集系统（如 Kinect、MoCap、2D 姿态估计）的拓扑结构差异导致模型难以直接迁移；同时，现有方法缺乏开放式的语义理解能力，仅能输出离散标签而无法解释动作原因或回答自然语言问题，且现有特征对齐或离散化方法存在表示瓶颈、有损量化及格式依赖等局限，未能充分利用 MLLMs 的预训练视觉理解能力。"
+      },
+      "summary_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "e1422a89e3db09f37dbedd584edd91449594a3349a0b796261121d85e93769d9",
+          "truncated": false
+        },
+        "sha256": "cae92ade2f27f1be7a7a9c4ab18ea8f755e78cb38bece845e720a31884962f88",
+        "url": "https://arxiv.org/html/2603.18003"
+      },
       "title": "Universal Skeleton Understanding via Differentiable Rendering and MLLMs",
       "topics": [
         "3D Gen&Recon"
@@ -176226,6 +176816,32 @@
       "url": "https://papers.nips.cc/paper_files/paper/2025/hash/61960fdfda4d4e95fa1c1f6e64bfe8bc-Abstract-Conference.html"
     },
     "conf-a923a95a87d1292cff1f6488": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Diffusion",
+          "Factorized Spatial-Temporal"
+        ],
+        "topics": [
+          "Video Gen&Edit"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "official_abstract",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Abstract"
+          ],
+          "sha256": "429214218b77d36035d80431a4bb8f6baa3f7f1b0aeab1d1d29c2c946d1a50d4",
+          "truncated": false
+        },
+        "sha256": "cfb0d9018fbf9619ccf6c2d34e88c0a7528ddac29f9432ab4674e16f0f3352dc",
+        "url": "https://icml.cc/virtual/2026/poster/62091"
+      },
       "conferences": [
         {
           "edition": "ICML 2026",
@@ -179781,6 +180397,32 @@
       "url": "https://papers.nips.cc/paper_files/paper/2024/hash/96189e90e599ccc43f00434ff3ed0312-Abstract-Conference.html"
     },
     "conf-ac6b13ca5f4c7215ff51b3e7": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Autoregressive",
+          "Discrete Tokens"
+        ],
+        "topics": [
+          "Image Gen&Edit"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "f2e012e996e5c9f369eb8f80693541af5a32e9e4fc91ef3e93a7de0f79583c81",
+          "truncated": false
+        },
+        "sha256": "8b5669fa638852035aea55396469a633261f7e22ccd130241b6b5bcc6d61c7e1",
+        "url": "https://arxiv.org/html/2602.01345"
+      },
       "arxiv_id": "2602.01345",
       "authors": [
         "Yu Zhang",
@@ -179817,7 +180459,32 @@
       },
       "source_edition": "ICML 2026",
       "source_version": "21547c610f8ad741aa964f711200c86a8e53a1528da4bf8af6895575b17d64e2",
-      "summary": null,
+      "summary": {
+        "contributions": [
+          "提出了NOVA框架，这是一种基于熵分析的免训练加速方法，旨在解决VAR模型中尺度与层级被孤立处理而忽略连续预测变化的问题。",
+          "在尺度层面，通过在线识别尺度熵增长曲线的拐点来自适应确定加速激活的尺度，并利用尺度联动函数为每个加速尺度计算不同的令牌缩减比例。",
+          "在层级层面，利用层级联动比例调整函数确定每层的具体缩减比例，并通过复用前一尺度同层残差插值的缓存来进一步提升速度并保持性能。",
+          "利用熵作为原则性的令牌选择标准，捕捉高熵区域从早期尺度全局集中到后期尺度稀疏分散的时空扩散特性，以反映建模动态的演化。",
+          "实验表明NOVA在GenEval上实现了Infinity-2B模型2.89倍的加速且性能损失仅0.01%，在ImageReward上将Infinity-8B的延迟从1.51秒降至0.75秒并取得了优于原模型的偏好分数。"
+        ],
+        "one_sentence": "本文提出了一种名为NOVA的免训练加速框架，通过基于熵分析的双联动自适应令牌缩减策略，在视觉自回归模型中同时优化尺度与层级的计算冗余，从而在保持生成质量的同时显著提升推理速度。",
+        "problem": "视觉自回归模型（VAR）虽然生成性能优异，但存在巨大的计算成本，主要源于过多的令牌数量，这阻碍了其向更高分辨率生成及下游任务的扩展；现有的免训练令牌缩减方法存在三个关键局限：一是依赖启发式或经验观察进行后期阶段划分，边界精度难以保证；二是采用非自适应的固定缩减比例，无法适应不同图像实例在语义、结构等复杂度上的巨大差异；三是加速范围有限，仅针对后期阶段进行缩减，忽略了早期阶段潜在的计算冗余。"
+      },
+      "summary_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "f2e012e996e5c9f369eb8f80693541af5a32e9e4fc91ef3e93a7de0f79583c81",
+          "truncated": false
+        },
+        "sha256": "8b5669fa638852035aea55396469a633261f7e22ccd130241b6b5bcc6d61c7e1",
+        "url": "https://arxiv.org/html/2602.01345"
+      },
       "title": "Adaptive Visual Autoregressive Acceleration via Dual-Linkage Entropy Analysis",
       "topics": [
         "Image Gen&Edit"
@@ -181398,6 +182065,32 @@
       "url": "https://openaccess.thecvf.com/content/ICCV2025/html/Yu_Wasserstein_Style_Distribution_Analysis_and_Transform_for_Stylized_Image_Generation_ICCV_2025_paper.html"
     },
     "conf-add6a30dcac7089491823176": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Point Cloud",
+          "Feed-Forward"
+        ],
+        "topics": [
+          "3D Gen&Recon"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "732b64b4004ff4f071333687a048ce06dd6d183af0b95716353e69774001de41",
+          "truncated": false
+        },
+        "sha256": "a5e6a43451f5692246dfa1b882347d8c8b99befe8972bd54363c3c5bf758d1f5",
+        "url": "https://arxiv.org/html/2606.12189"
+      },
       "arxiv_id": "2606.12189",
       "authors": [
         "Weirong Chen",
@@ -182435,6 +183128,33 @@
       "url": "https://doi.org/10.1109/icra57147.2024.10610001"
     },
     "conf-aef0779c1555cae5d0a17ce0": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Flow Matching",
+          "Text Conditioning"
+        ],
+        "topics": [
+          "Image Gen&Edit",
+          "Video Gen&Edit"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "official_abstract",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Abstract"
+          ],
+          "sha256": "ec178885e79dc9804f1ec5f6183625ee40e405275a17780b917f74fd51510db3",
+          "truncated": false
+        },
+        "sha256": "52f0e77f839ef9a33e3bec59f0c2f87920e7d2044ecf76c61d66e5ec00154d6d",
+        "url": "https://icml.cc/virtual/2026/poster/66004"
+      },
       "conferences": [
         {
           "edition": "ICML 2026",
@@ -188029,6 +188749,33 @@
       "url": "https://openaccess.thecvf.com/content/CVPR2026/html/Zhang_EvoID_Reinforced_Evolution_for_Identity-Preserving_Video_Generation_CVPR_2026_paper.html"
     },
     "conf-b3c7f16ba39c0b7275e89083": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Diffusion",
+          "Text Conditioned",
+          "Video Conditioned"
+        ],
+        "topics": [
+          "Video Gen&Edit"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "official_abstract",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Abstract"
+          ],
+          "sha256": "6ac25f2c1ebabcd8276ce3a952f4ac8998b704618f5c16600cfcb46902e9ab15",
+          "truncated": false
+        },
+        "sha256": "4875344aee20d42b2819de2f3fd430550b03b674ca32735167f8226ac3fe394f",
+        "url": "https://icml.cc/virtual/2026/poster/63380"
+      },
       "conferences": [
         {
           "edition": "ICML 2026",
@@ -190637,6 +191384,32 @@
       "url": "https://ras.papercept.net/conferences/conferences/ICRA26/program/ICRA26_ContentListWeb_4.html#4696"
     },
     "conf-b60aca4381a600e214dbe9ff": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Diffusion",
+          "Text Conditioning"
+        ],
+        "topics": [
+          "Image Gen&Edit"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "official_abstract",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Abstract"
+          ],
+          "sha256": "495d0ac0bd662a2d4858730999810c99ca7edd118b6a03a46ede8d13c6e74822",
+          "truncated": false
+        },
+        "sha256": "4d7ecc1913f9c287710e49aaa5f87c75d433635fc4f196253b866436a3358cd9",
+        "url": "https://icml.cc/virtual/2026/poster/63546"
+      },
       "conferences": [
         {
           "edition": "ICML 2026",
@@ -193291,6 +194064,32 @@
       "url": "https://s2026.conference-schedule.org/?post_type=page&p=15&id=papers_495&sess=sess131"
     },
     "conf-b91ec9237f1860348b68faef": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Continuous Latents",
+          "World-Model Policy Learning"
+        ],
+        "topics": [
+          "World Model"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "official_abstract",
+          "extraction": {
+            "method": "pdf_text"
+          },
+          "sections": [
+            "Abstract"
+          ],
+          "sha256": "45458c410de400a901fc176cf89afcc2fa63982697f7624217da41415b58114c",
+          "truncated": false
+        },
+        "sha256": "736a1ab3f5f583cccbfa73c9d3065798d185fbfabaab45d66e00f0b90f140808",
+        "url": "https://icml.cc/media/icml-2026/Slides/62268.pdf"
+      },
       "conferences": [
         {
           "edition": "ICML 2026",
@@ -193318,7 +194117,41 @@
       },
       "source_edition": "ICML 2026",
       "source_version": "c95c80f2af9aa0b17f7b60533a94949b0b13e16e37426e85e098c6e97ad49c2d",
-      "summary": null,
+      "summary": {
+        "contributions": [
+          "识别了高斯先验和单视角重建在建模多模态动作及处理视角依赖噪声方面的局限性。",
+          "提出了 MuCoLA 框架，利用跨视角自蒸馏机制学习潜在动作，以多视角一致性作为归纳偏置。",
+          "证明了多视角一致性损失在频谱上充当噪声滤波器，迫使编码器投影到共享动作子空间并正交于视角特定噪声。",
+          "在图像重建、动作回归、视觉规划、基于模型的强化学习（MBRL）及行为克隆任务中均取得了优于 AdaWorld、FICC 和 LAPO 等基线的最先进性能。",
+          "通过消融实验验证了一致性损失的关键作用及高斯先验的负面影响，并展示了方法在低标签效率和模型规模扩展上的良好特性。"
+        ],
+        "one_sentence": "MuCoLA 提出了一种基于多视角一致性的潜在动作学习方法，通过跨视角自蒸馏过滤视角依赖噪声，从而在重建、规划及控制任务中实现优于基线的性能。",
+        "problem": "现有潜在动作学习（LAM）方法存在将二维位移与动力学混淆、高斯先验过于简单以及 VQ 码信息密度不足等局限，导致其易受视角依赖噪声影响，难以提取鲁棒的物理动作信号。"
+      },
+      "summary_source": {
+        "evidence": {
+          "basis": "body_excerpt",
+          "extraction": {
+            "method": "pdf_text"
+          },
+          "sections": [
+            "Page 3",
+            "Page 4",
+            "Page 5",
+            "Page 6",
+            "Page 7",
+            "Page 8",
+            "Page 9",
+            "Page 10",
+            "Page 11",
+            "Page 12"
+          ],
+          "sha256": "d5e5f7c14efca4a2442ed7cadd2936d9a4198c452d8396d34bcce42cb20860d9",
+          "truncated": false
+        },
+        "sha256": "736a1ab3f5f583cccbfa73c9d3065798d185fbfabaab45d66e00f0b90f140808",
+        "url": "https://icml.cc/media/icml-2026/Slides/62268.pdf"
+      },
       "title": "Multi-view Consistent Latent Action Learning for World Modeling and Control",
       "topic_review": {
         "decisions": {
@@ -202149,6 +202982,32 @@
       "url": "https://ojs.aaai.org/index.php/AAAI/article/view/32831"
     },
     "conf-c0f0d62ed7f8561eefe4b50f": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Diffusion",
+          "Continuous Latents"
+        ],
+        "topics": [
+          "Image Gen&Edit"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "7ffb79e5691c09a3cd6c9917bed8511bedd26af03237dc60ff3c7535ccf95f23",
+          "truncated": false
+        },
+        "sha256": "a0b2bd3559f781044a555074305856e012becac3a4ad5f93cd7ddbfb73e41fa9",
+        "url": "https://arxiv.org/html/2601.21610"
+      },
       "arxiv_id": "2601.21610",
       "authors": [
         "Zijin Yang",
@@ -202184,7 +203043,31 @@
       },
       "source_edition": "ICML 2026",
       "source_version": "22443464d458b445df2506e4a26157e202f6d035314903e520ad6880f1fe3197",
-      "summary": null,
+      "summary": {
+        "contributions": [
+          "提出了WMVLM，这是首个专为扩散模型图像水印设计的基于视觉语言模型的统一且可解释的评估框架，有效整合了定量评分与文本解释，填补了现有评估方法的空白。",
+          "建立了针对多范式评估的视觉质量与安全性的精确定义，将残差水印关联至PSNR及针对典型OSN干扰的鲁棒性，并通过假设检验计算潜在空间统计显著性来评估语义水印。",
+          "引入了一种三阶段训练策略，通过类别与分数预训练、可解释性冷启动以及利用GRPO进行泛化增强，使VLM能够稳定学习多范式评估并提高泛化能力与准确性。",
+          "在Stable Diffusion上进行了全面实验，证明WMVLM优于现有的SOTA VLM，并展示了其在不同数据集、扩散模型和水印方法上的强泛化能力。"
+        ],
+        "one_sentence": "该论文提出了WMVLM，一个基于视觉语言模型的首个统一且可解释的扩散模型图像水印评估框架，旨在通过重新定义视觉质量与安全指标并结合三阶段训练策略，解决现有评估方法缺乏统一性、可解释性及对语义水印评估不当的问题。",
+        "problem": "现有扩散模型水印评估方法存在显著局限：首先，残差水印与语义水印依赖不同的评估指标，缺乏跨范式的统一评估框架；其次，当前指标多为数值型，缺乏对水印对特定图像属性影响的解释性；再次，现有的基于VLM的方法如WMarkGPT仅关注可见水印且未应用于扩散模型，同时忽略了针对恶意擦除攻击的安全性评估；最后，传统语义水印指标无法区分扩散过程的固有随机性与水印嵌入的实际影响。"
+      },
+      "summary_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "7ffb79e5691c09a3cd6c9917bed8511bedd26af03237dc60ff3c7535ccf95f23",
+          "truncated": false
+        },
+        "sha256": "a0b2bd3559f781044a555074305856e012becac3a4ad5f93cd7ddbfb73e41fa9",
+        "url": "https://arxiv.org/html/2601.21610"
+      },
       "title": "WMVLM: Evaluating Diffusion Model Image Watermarking via Vision-Language Models",
       "topics": [
         "Image Gen&Edit"
@@ -204323,6 +205206,33 @@
       "url": "https://openaccess.thecvf.com/content/CVPR2026/html/Lee_Dynamic-eDiTor_Training-Free_Text-Driven_4D_Scene_Editing_with_Multimodal_Diffusion_Transformer_CVPR_2026_paper.html"
     },
     "conf-c2e01c26d1a03b3366f12783": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Autoregressive",
+          "Discrete Tokens",
+          "Text Conditioning"
+        ],
+        "topics": [
+          "Image Gen&Edit"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "02e2fd59096eb55e9515d41d919935b08f6455c3bb3a1ea03088490d85fdce8d",
+          "truncated": false
+        },
+        "sha256": "782621394d844e5f65289be677c090e90d52932a7a3769af1ae5ac08c6dc4a31",
+        "url": "https://arxiv.org/html/2509.23876"
+      },
       "arxiv_id": "2509.23876",
       "authors": [
         "Ky Dan Nguyen",
@@ -204358,7 +205268,30 @@
       },
       "source_edition": "ICML 2026",
       "source_version": "16456278a3b8f4d47b0bffa098de166cb65116adab2ede66af0ad9d40ee8d39e",
-      "summary": null,
+      "summary": {
+        "contributions": [
+          "对扩散模型和 SwAR 模型中引导机制的动态进行了技术分析，揭示了后者中引导往往存在语义错位的现象。",
+          "提出了 IGG（信息接地引导），这是一种新颖的技术，能够根据周围上下文推断每个 token 的语义重要性，并自适应地将引导集中在语义重要的 token 上。",
+          "通过类别条件生成和文本到图像生成的广泛实验，证明了 IGG 方法的有效性及其相对于基线方法的改进。"
+        ],
+        "one_sentence": "本文通过技术分析揭示了自回归模型中引导机制的语义错位问题，并提出了信息接地引导（IGG）方法以自适应地增强语义重要 token 的引导效果，从而提升采样质量。",
+        "problem": "尽管自回归（AR）模型在图像生成中表现优异，且基于扩散模型的引导技术已被部分引入规模感知自回归（SwAR）建模中，但 AR 模型中的引导机制相较于扩散模型理解不足，且存在与扩散模型截然不同的行为特征，具体表现为引导往往在语义上发生错位。"
+      },
+      "summary_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "02e2fd59096eb55e9515d41d919935b08f6455c3bb3a1ea03088490d85fdce8d",
+          "truncated": false
+        },
+        "sha256": "782621394d844e5f65289be677c090e90d52932a7a3769af1ae5ac08c6dc4a31",
+        "url": "https://arxiv.org/html/2509.23876"
+      },
       "title": "Rethinking Visual Autoregressive Sampling with Information-Grounding Guidance",
       "topic_review": {
         "decisions": {
@@ -204825,6 +205758,32 @@
       "url": "https://eccv.ecva.net/virtual/2024/poster/181"
     },
     "conf-c3244e85f73ca43a26a002a0": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "NeRF",
+          "Optimization-Based"
+        ],
+        "topics": [
+          "3D Gen&Recon"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "official_abstract",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Abstract"
+          ],
+          "sha256": "7f36faca7f4173a2ba88c55a79d1f00a645e6b4115a1ac7030294b6d2f686b48",
+          "truncated": false
+        },
+        "sha256": "fc485c40557e433c6d8678399e69d59cc3f1a64ef3a852110e8a900c66556bcb",
+        "url": "https://icml.cc/virtual/2026/poster/62332"
+      },
       "conferences": [
         {
           "edition": "ICML 2026",
@@ -216023,6 +216982,33 @@
       "url": "https://doi.org/10.1109/iros58592.2024.10802389"
     },
     "conf-ccaa1df8726e1c74253dec60": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Gaussian Splatting",
+          "Multi-View-to-3D",
+          "Feed-Forward"
+        ],
+        "topics": [
+          "3D Gen&Recon"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "official_abstract",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Abstract"
+          ],
+          "sha256": "af3c49d0b849a3ec39689c863e046ca7862f1a6c125d20a1fce790d04c45b3c2",
+          "truncated": false
+        },
+        "sha256": "5f5e023bb00417bf7db37faf0435b76b3c5811ec3cf6a202100e50c6b87a3327",
+        "url": "https://icml.cc/virtual/2026/poster/62117"
+      },
       "conferences": [
         {
           "edition": "ICML 2026",
@@ -224352,6 +225338,32 @@
       "url": "https://openaccess.thecvf.com/content/ICCV2025/html/Chen_Perception-as-Control_Fine-grained_Controllable_Image_Animation_with_3D-aware_Motion_Representation_ICCV_2025_paper.html"
     },
     "conf-d43ec883d05477049976bf57": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Gaussian Splatting",
+          "Optimization-Based"
+        ],
+        "topics": [
+          "3D Gen&Recon"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "official_abstract",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Abstract"
+          ],
+          "sha256": "a8d88afab17c3649588376fc42195bcbddf284440a27752177f50864b4ace7d7",
+          "truncated": false
+        },
+        "sha256": "b835e7bddf4fffc6a745fa0e9f63e6dce2d9655022792235ae9878fab558b013",
+        "url": "https://icml.cc/virtual/2026/poster/66334"
+      },
       "conferences": [
         {
           "edition": "ICML 2026",
@@ -224774,6 +225786,32 @@
       "url": "https://eccv.ecva.net/virtual/2024/poster/1028"
     },
     "conf-d48a59895da7a7154eaf78c1": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Text Conditioning",
+          "Diffusion"
+        ],
+        "topics": [
+          "Image Gen&Edit"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "official_abstract",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Abstract"
+          ],
+          "sha256": "6a5a76e2c7d7819156e57c8c5d2b351e621604565d658e8fbd91458fdb3a17da",
+          "truncated": false
+        },
+        "sha256": "b497ecdc6d92d3a9ee67eda35bf4dd24a9b5561fcc872c49a659dc8dd01e2b98",
+        "url": "https://icml.cc/virtual/2026/poster/63619"
+      },
       "conferences": [
         {
           "edition": "ICML 2026",
@@ -225442,6 +226480,32 @@
       "url": "https://eccv.ecva.net/virtual/2024/poster/1306"
     },
     "conf-d503a92e1d0079a5d17e055b": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Transformer",
+          "Language-Augmented Multimodal"
+        ],
+        "topics": [
+          "World Model"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "9a754da164dcbf486e94befbb70ceeed333a3e5d96e6c1d5cc1f883f389e3238",
+          "truncated": false
+        },
+        "sha256": "15f2522878a9a4188a1ac88543cf1ce2c4d4013ea2184c7561940889a2ab5016",
+        "url": "https://arxiv.org/html/2607.04112"
+      },
       "arxiv_id": "2607.04112",
       "authors": [
         "Silin Gao",
@@ -225481,7 +226545,33 @@
       },
       "source_edition": "ICML 2026",
       "source_version": "9b41e3cc30b19a3716d4a4443e53ca95113417683838fab2d9eb7d2b4c495538",
-      "summary": null,
+      "summary": {
+        "contributions": [
+          "提出了 DynaVieW 模型，通过在不同领域（如人类日常活动、机器人操作、创意作品和自动驾驶）的交错状态转换序列上进行持续预训练，提升了世界建模能力。",
+          "采用分层 JSON 模式表示视觉状态转换，以结构化方式捕捉从高层级活动进展到低层级空间细节的多粒度转换元素。",
+          "引入了混合 Transformer 专家（MoT）架构，结合共享的多模态选择性注意力机制，通过丢弃冗余历史信息来促进对长状态转换序列的稳健学习。",
+          "设计了模式标记重加权交叉熵损失函数，以平衡模型对转换模式格式的学习与填充到模式中的更具体槽位值的学习。",
+          "在视觉叙事生成任务中，DynaVieW 生成的图像在一致性和整体质量上显著优于基线模型，并展现出更强的可控性，能够灵活适应低层级场景描述的变化。",
+          "在世界模拟任务中，DynaVieW 的表现优于基线模型，展示了在更具确定性的视觉生成场景中更好的指令遵循能力。"
+        ],
+        "one_sentence": "DynaVieW 通过基于分层 JSON 模式引导的持续预训练，利用混合 Transformer 专家架构和特定的损失函数，显著提升了多模态大语言模型对视觉动态的理解与生成能力。",
+        "problem": "多模态大语言模型在理解视觉动态方面存在不足，难以捕捉场景中随动作发生的多层级变化（如高层级事件与低层级空间关系），导致在生成长序列视觉内容时缺乏一致性且难以通过自然语言提示进行有效控制；现有基于交错视觉文本数据的预训练方法往往存在视觉与文本组件对齐较弱或仅覆盖有限视觉动态类型的问题。"
+      },
+      "summary_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "9a754da164dcbf486e94befbb70ceeed333a3e5d96e6c1d5cc1f883f389e3238",
+          "truncated": false
+        },
+        "sha256": "15f2522878a9a4188a1ac88543cf1ce2c4d4013ea2184c7561940889a2ab5016",
+        "url": "https://arxiv.org/html/2607.04112"
+      },
       "title": "DynaVieW: Schema-Guided World Modeling for Understanding Hierarchical Visual Dynamics",
       "topic_review": {
         "decisions": {
@@ -227097,6 +228187,33 @@
       "url": "https://s2024.conference-program.org/presentation/?id=papers_758&sess=sess108"
     },
     "conf-d6ad64b599fcffbf8ddaf36f": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Continuous Latents",
+          "Pixel/Observation Space",
+          "Imagination-Based Planning"
+        ],
+        "topics": [
+          "World Model"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "6c623a615d04f08b0c83f5db9f3976194c86a1ffa02fe72c19fe3aa34de832f8",
+          "truncated": false
+        },
+        "sha256": "882c068b9a4d44bcf421508c310d05d6c6f2551027ecab777944d219bfb42807",
+        "url": "https://arxiv.org/html/2605.15733"
+      },
       "arxiv_id": "2605.15733",
       "authors": [
         "Tianqiu Zhang",
@@ -227129,7 +228246,31 @@
       },
       "source_edition": "ICML 2026",
       "source_version": "35d171f32a33c455e65618363d7f34453628533051a620c29c5f3c0deb134311",
-      "summary": null,
+      "summary": {
+        "contributions": [
+          "提出了一种自监督框架，能够联合推断抽象结构并学习受海马-内嗅皮层启发的世界模型，仅以观察序列为输入，无需对动态过程施加显式先验。",
+          "利用原始变换动态作为可控示例进行分析，证明该模型能够解耦外观与动态，并展示了周期性以及类内结构共享的特性。",
+          "提出了一种受大脑启发的分层世界模型，能够从相似的转换动态中提取共享结构，并在不同环境和物体类别间灵活复用抽象结构，实现了跨上下文的结构泛化。",
+          "该模型在真实人类活动场景中表现出有效的预测性能，并展现出对分布外数据集及未见环境的泛化能力。"
+        ],
+        "one_sentence": "本文提出了一种受海马-内嗅皮层回路启发的分层世界模型，通过自监督学习从原始视频序列中解耦具体感官内容与抽象结构，实现了跨环境和物体的结构泛化。",
+        "problem": "现有神经科学中的认知地图模型往往难以扩展，无法展示如何直接从高维真实世界视觉场景中提取抽象结构，且缺乏在无先验监督下同时学习具体感官内容表示与抽象结构并实现结构泛化的有效方法。"
+      },
+      "summary_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "6c623a615d04f08b0c83f5db9f3976194c86a1ffa02fe72c19fe3aa34de832f8",
+          "truncated": false
+        },
+        "sha256": "882c068b9a4d44bcf421508c310d05d6c6f2551027ecab777944d219bfb42807",
+        "url": "https://arxiv.org/html/2605.15733"
+      },
       "title": "Structure Abstraction and Generalization in a Hippocampal-Entorhinal Inspired World Model",
       "topic_review": {
         "decisions": {
@@ -227150,6 +228291,32 @@
       "url": "https://icml.cc/virtual/2026/poster/65751"
     },
     "conf-d6bafc65a58821b5041e5e8a": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Diffusion",
+          "Reference Conditioning"
+        ],
+        "topics": [
+          "Image Gen&Edit"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "official_abstract",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Abstract"
+          ],
+          "sha256": "649ed210d59868f2ec533bfb1720cab8633d2ffc01270cebfa7cf9d17c18eb00",
+          "truncated": false
+        },
+        "sha256": "c6e68326239f6b5da44f9ebf18765ee3646d2e96cff0dcb6231f9ea22baff531",
+        "url": "https://icml.cc/virtual/2026/poster/60814"
+      },
       "arxiv_id": "2605.15523",
       "authors": [
         "Hongxi Li",
@@ -232686,6 +233853,33 @@
       "url": "https://ojs.aaai.org/index.php/AAAI/article/view/32333"
     },
     "conf-dc460f6bc7f674219b755a1b": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "World-Model Policy Learning",
+          "Pixel/Observation Space",
+          "Transformer"
+        ],
+        "topics": [
+          "World Model"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "02c545616474aadfe7feff4ec0efcf6fb2f8261ad586188acfdd5b9c6410bd45",
+          "truncated": false
+        },
+        "sha256": "51bcb7b08428b7c60853019a3b1d22f195673dbb8d5ae5fd08ca7bdcf9d99bc4",
+        "url": "https://arxiv.org/html/2603.20607"
+      },
       "arxiv_id": "2603.20607",
       "authors": [
         "Zhilong Zhang",
@@ -232724,7 +233918,33 @@
       },
       "source_edition": "ICML 2026",
       "source_version": "29e2dcd44017aba2be7072b57216c9edfbd0513f3370a18b770623e95d750e6c",
-      "summary": null,
+      "summary": {
+        "contributions": [
+          "提出了一种实用的基于世界模型的强化学习框架VLA-MBPO，专门针对视觉-语言-动作模型的微调需求，旨在通过有限的真实世界交互实现有效的强化学习。",
+          "利用预训练的统一多模态模型作为世界模型骨干，实现了视觉动态和奖励信号的联合预测，避免了昂贵的视频滚动过程，从而支持样本高效且具泛化性的像素空间世界建模。",
+          "引入了交错视角解码技术，在保持视角特定细节的同时强制跨视角一致性，以支持精确控制所需的多视角视觉输入的一致生成。",
+          "采用了块级分支滚动策略来限制策略优化过程中的误差累积，从而缓解了稀疏奖励信号下模型误差放大导致策略学习被误导的问题。",
+          "提供了关于值差距缩减的理论分析，并在模拟和真实世界任务中进行了实验验证，证明了该方法在策略泛化性和数据效率上的显著提升。",
+          "展示了该方法使用一组通用超参数即可取得良好性能，为视觉-语言-动作模型在真实机器人应用中的可靠和可扩展部署铺平了道路。"
+        ],
+        "one_sentence": "该论文提出了一种名为VLA-MBPO的实用世界模型强化学习框架，旨在解决视觉-语言-动作模型在微调过程中面临的现实交互成本高、多视角一致性难以及稀疏奖励下模型误差累积等挑战。",
+        "problem": "现有视觉-语言-动作模型微调主要依赖模仿学习，受限于专家演示数据的高成本和泛化能力不足；而直接应用强化学习在真实环境中面临交互成本高、安全性差且难以扩展的问题；此外，将世界模型应用于视觉-语言-动作模型时，还面临像素级未来帧和奖励信号生成效率低、多视角视觉输入预测一致性难以及稀疏奖励导致模型误差累积严重误导策略学习等根本性挑战。"
+      },
+      "summary_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "02c545616474aadfe7feff4ec0efcf6fb2f8261ad586188acfdd5b9c6410bd45",
+          "truncated": false
+        },
+        "sha256": "51bcb7b08428b7c60853019a3b1d22f195673dbb8d5ae5fd08ca7bdcf9d99bc4",
+        "url": "https://arxiv.org/html/2603.20607"
+      },
       "title": "Towards Practical World Model-based Reinforcement Learning for Vision-Language-Action Models",
       "topic_review": {
         "decisions": {
@@ -236601,6 +237821,33 @@
       "url": "https://ojs.aaai.org/index.php/AAAI/article/view/32874"
     },
     "conf-df9b4f59ef1855620d947bc4": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Text-to-3D",
+          "Mesh",
+          "Feed-Forward"
+        ],
+        "topics": [
+          "3D Gen&Recon"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "2dcb3718145cfda9dac3e2debf751b6fc311b6872928fca460d93dad0f33a3c0",
+          "truncated": false
+        },
+        "sha256": "a0c07420754ee02277b26d5635c4111325cf3ccd8d1093213dae296cf9f3f0c3",
+        "url": "https://arxiv.org/html/2602.03045"
+      },
       "arxiv_id": "2602.03045",
       "authors": [
         "Bo Yuan",
@@ -236635,7 +237882,32 @@
       },
       "source_edition": "ICML 2026",
       "source_version": "5bd6985e394672124e16d33c25167b84aca34c326aa2b3cc4787eef230e0fd18",
-      "summary": null,
+      "summary": {
+        "contributions": [
+          "提出从静态一次性生成或事后修正转向动态主动智能体框架，其中澄清代理检测缺失或冲突约束并询问最小化澄清问题，代码代理随后从最终规格合成可执行 CadQuery 代码。",
+          "开发新的数据创建流水线，从 DeepCAD 生成人类化简洁自然语言规格，构建包含 1 万条无歧义样本的高质量文本到 CadQuery 数据集，并通过 LLM 验证和人工检查确保一致性。",
+          "仅使用 1.6K 精心筛选的样本微调代码代理 ProCAD-coder，在文本到 CadQuery 生成任务上取得优于现有方法的性能。",
+          "构建包含 6063 个样本的合成数据集，通过扰动验证后的规格引入语法歧义，利用智能体监督微调澄清代理 ProCAD-clarifier 以解决模糊提示。",
+          "实验表明该系统在通信成本、修正提示质量和下游几何质量方面优于 Claude Sonnet 4.5 和 GPT-4o-mini 等前沿模型。"
+        ],
+        "one_sentence": "该论文提出了一种名为 ProCAD 的主动智能体框架，通过澄清代理与代码生成代理的协作，解决文本到 CAD 生成中因描述模糊或冲突导致的失败问题，并显著提升了生成质量与交互效率。",
+        "problem": "现有文本到 CAD 生成方法通常假设用户输入是精确且一致的规格说明，但实际自然语言描述往往存在关键尺寸缺失或约束冲突等模糊与不一致问题，导致即使目标形状简单也可能生成失败，且现有范式缺乏在生成前主动识别并解决这些歧义的机制。"
+      },
+      "summary_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "2dcb3718145cfda9dac3e2debf751b6fc311b6872928fca460d93dad0f33a3c0",
+          "truncated": false
+        },
+        "sha256": "a0c07420754ee02277b26d5635c4111325cf3ccd8d1093213dae296cf9f3f0c3",
+        "url": "https://arxiv.org/html/2602.03045"
+      },
       "title": "Clarify Before You Draw: Proactive Agents for Robust Text-to-CAD Generation",
       "topic_review": {
         "decisions": {
@@ -238434,6 +239706,29 @@
       "url": "https://openaccess.thecvf.com/content/CVPR2026/html/Guo_PanoVGGT_Feed-Forward_3D_Reconstruction_from_Panoramic_Imagery_CVPR_2026_paper.html"
     },
     "conf-e0fb180aec8753d5c03d96d7": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [],
+        "topics": [
+          "Image Gen&Edit"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "official_abstract",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Abstract"
+          ],
+          "sha256": "7d929a99a82acfebebfeba62369f5fdffe7e4a0edc92da68a797333ec5a8abb9",
+          "truncated": false
+        },
+        "sha256": "cfc276fb7c46c75d9573731db82a05976b55e0d9a319362dcb58b1b7d9b9e1bf",
+        "url": "https://icml.cc/virtual/2026/poster/63022"
+      },
       "conferences": [
         {
           "edition": "ICML 2026",
@@ -243918,6 +245213,32 @@
       "url": "https://s2024.conference-program.org/presentation/?id=papers_1092&sess=sess116"
     },
     "conf-e5eed8771df2cd6a6d806948": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Autoregressive",
+          "Pixel Space"
+        ],
+        "topics": [
+          "Image Gen&Edit"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "official_abstract",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Abstract"
+          ],
+          "sha256": "0d31bad9bb589d7f94c18428005fbf1ce65113c525f016fddd6f951c9a952e02",
+          "truncated": false
+        },
+        "sha256": "d048f8711b7c55a3cfd4575e3a14467c59325e9f39b0712b34a36ea23eb7cdfc",
+        "url": "https://icml.cc/virtual/2026/poster/66235"
+      },
       "conferences": [
         {
           "edition": "ICML 2026",
@@ -251001,6 +252322,32 @@
       "url": "https://eccv.ecva.net/virtual/2024/poster/1766"
     },
     "conf-ec4b90c34e7f390931b3c451": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Diffusion",
+          "Joint Spatiotemporal"
+        ],
+        "topics": [
+          "Video Gen&Edit"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "official_abstract",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Abstract"
+          ],
+          "sha256": "71b362a95f6237207f76fefbfea9b6360977030dc67bc00ff3f3b57d175e2d85",
+          "truncated": false
+        },
+        "sha256": "fd55d1262fb98e97e39d19ba62f75579eee6b02df5990f7383272e7bc53a9e9c",
+        "url": "https://icml.cc/virtual/2026/poster/60893"
+      },
       "conferences": [
         {
           "edition": "ICML 2026",
@@ -253280,6 +254627,32 @@
       "url": "https://ojs.aaai.org/index.php/AAAI/article/view/37250"
     },
     "conf-eec354eb43c5b2f3f53d953b": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Diffusion",
+          "Text Conditioned"
+        ],
+        "topics": [
+          "Video Gen&Edit"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "official_abstract",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Abstract"
+          ],
+          "sha256": "21426fdafd1703fb000a970fc16748b1ae736ef0390f5b2792daa3c9a21c828f",
+          "truncated": false
+        },
+        "sha256": "07faab7c33d918dc9d11d81ad4ccd55a937165d8c339709f7061157d7b8c7284",
+        "url": "https://icml.cc/virtual/2026/poster/61036"
+      },
       "conferences": [
         {
           "edition": "ICML 2026",
@@ -262619,6 +263992,33 @@
       "url": "https://openaccess.thecvf.com/content/CVPR2025/html/Hong_SALAD_Skeleton-aware_Latent_Diffusion_for_Text-driven_Motion_Generation_and_Editing_CVPR_2025_paper.html"
     },
     "conf-f77546eb37d67b62b6dad0b6": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Diffusion",
+          "Discrete Tokens",
+          "Language-Augmented Multimodal"
+        ],
+        "topics": [
+          "World Model"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "official_abstract",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Abstract"
+          ],
+          "sha256": "c9d54c1b2b11eb9b190b4f9308fc7cf18e02191f8802f92e6b275de38ed728e9",
+          "truncated": false
+        },
+        "sha256": "994efd86176ed8b618383cebc14be056528b46253be17b08c4b6ccc9dbad928c",
+        "url": "https://icml.cc/virtual/2026/poster/65898"
+      },
       "conferences": [
         {
           "edition": "ICML 2026",
@@ -263802,6 +265202,33 @@
       "url": "https://doi.org/10.1109/icra55743.2025.11127657"
     },
     "conf-f92762720edfc7fcea6dc13e": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Diffusion",
+          "Video Conditioned",
+          "Joint Spatiotemporal"
+        ],
+        "topics": [
+          "Video Gen&Edit"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "3ac0af2ac9db8ff87a9e9d7d9d429dcd598375796678312bebf7822e719bd965",
+          "truncated": false
+        },
+        "sha256": "f9644ee6ebdd4b7c436b1071e7d32d367f898c8c59d72118d6df203da88a1cfd",
+        "url": "https://arxiv.org/html/2601.12066"
+      },
       "arxiv_id": "2601.12066",
       "authors": [
         "Zijie Lou",
@@ -263840,7 +265267,31 @@
       },
       "source_edition": "ICML 2026",
       "source_version": "733562c6cf97bd1e159718ece3d5dfeab221a7140f7c480e0e93adb61c46aef4",
-      "summary": null,
+      "summary": {
+        "contributions": [
+          "提出了 BridgeRemoval 框架，利用基于 SDE 的桥模型将视频物体移除重构为视频到视频的生成任务，通过建立从源视频到目标视频的随机路径，有效利用输入先验以实现更好的物体移除效果。",
+          "引入了一种自适应掩码调制策略，根据掩码的空间特征动态调整输入嵌入的影响，从而在背景保真度与生成灵活性之间取得平衡，确保模型在不同尺度物体上的鲁棒性能。",
+          "提出了 BridgeRemoval-Bench 基准测试集，涵盖多种场景并提供精心标注的掩码，旨在为视频物体移除模型提供全面评估。",
+          "通过大量实验证明了该方法在多样化真实场景中的有效性，其在视觉质量和时间一致性方面均优于现有方法，并展示了该框架扩展至其他视频编辑任务的潜力。"
+        ],
+        "one_sentence": "本文提出了一种名为 BridgeRemoval 的新框架，通过随机桥模型将视频物体移除重构为视频到视频的翻译任务，并利用自适应掩码调制策略平衡背景保真度与生成灵活性。",
+        "problem": "现有基于扩散模型的视频修复方法通常采用从噪声到数据的范式，导致需要从头合成整个视频内容，容易引发物体擦除不完整或生成与场景物理逻辑冲突的内容；而常用的参考引导生成策略虽然能缓解稳定性问题，但增加了系统复杂度，且初始帧的伪影会传播至整个序列，可能与背景的自然时间演化相冲突。"
+      },
+      "summary_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "3ac0af2ac9db8ff87a9e9d7d9d429dcd598375796678312bebf7822e719bd965",
+          "truncated": false
+        },
+        "sha256": "f9644ee6ebdd4b7c436b1071e7d32d367f898c8c59d72118d6df203da88a1cfd",
+        "url": "https://arxiv.org/html/2601.12066"
+      },
       "title": "Learning Stochastic Bridges for Video Object Removal via Video-to-Video Translation",
       "topic_review": {
         "decisions": {
@@ -268640,6 +270091,32 @@
       "url": "https://papers.nips.cc/paper_files/paper/2024/hash/7314e20a73542bbfff25030d1185ce88-Abstract-Conference.html"
     },
     "conf-fe4dffdabc01ef041f9f3770": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Image Conditioned",
+          "Text Conditioned"
+        ],
+        "topics": [
+          "Video Gen&Edit"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "official_abstract",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Abstract"
+          ],
+          "sha256": "17c0545871e3e02a2629464a5b23259b058ede1f0faa709445bc2ef1cda2138d",
+          "truncated": false
+        },
+        "sha256": "fc4da5a431a187075b399b0e6f74147830ff2d872c4d2a3ca5ced7c40b0014c7",
+        "url": "https://icml.cc/virtual/2026/poster/62940"
+      },
       "conferences": [
         {
           "edition": "ICML 2026",
@@ -268827,6 +270304,32 @@
       "url": "https://icml.cc/virtual/2026/poster/66569"
     },
     "conf-fe75ed49621e953bf6ce34be": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Gaussian Splatting",
+          "Multi-View-to-3D"
+        ],
+        "topics": [
+          "3D Gen&Recon"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "official_abstract",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Abstract"
+          ],
+          "sha256": "9fc7de6b28f132090c0128c92fd849121582c41e5b65e59878fe3c8a72814468",
+          "truncated": false
+        },
+        "sha256": "e47e2acc262f9934145511949df1141c59d3a2a2a772e294b4a6620f7d389c51",
+        "url": "https://icml.cc/virtual/2026/poster/62937"
+      },
       "conferences": [
         {
           "edition": "ICML 2026",
