@@ -60,16 +60,20 @@ def load_public_papers(config_path: str | Path = CONFIG, *, today: date | None =
     archive = json.loads(archive_source.read_text(encoding='utf-8'))
     ledger_path = Path(candidate_path) if candidate_path is not None else source('candidate_ledger_path', 'content/papers/arxiv-candidates.json')
     ledger = json.loads(ledger_path.read_text(encoding='utf-8'))
+    from papers.scope import filter_archive, excluded
     cutoff = config.get('collection', {}).get('review_required_since')
     statuses = load_candidate_statuses(ledger_path, review_required_since=str(cutoff)) if cutoff is not None else {}
     labels = load_label_definitions(path)
     annotation_source = Path(annotation_path) if annotation_path is not None else source('annotation_path', 'content/papers/paper-annotations.json')
     annotations = load_annotation_catalog(annotation_source, load_annotation_definitions(path))
+    archive = filter_archive(archive, ledger, config, annotations)
     library = load_library(source('conference_library_path', 'content/papers/conference-library.json'))
     # Dedupe against the complete archive before applying presentation filters.
     extra = library_rows(library, archive, ledger)
     from papers.huggingface import external_rows
     extra.extend(external_rows(ledger))
+    from papers.scope import excluded_row
+    extra = [row for row in extra if not excluded_row(config, row)]
     excluded = {int(year) for year in config.get('publication', {}).get('excluded_years', [])}
     public_archive = {topic: {key: value for key, value in entries.items() if parse_entry(key, value)['date'].year not in excluded}
                       for topic, entries in archive.items()}

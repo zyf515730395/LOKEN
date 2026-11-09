@@ -23,6 +23,9 @@ def load_topic_slugs(config_path: str | Path) -> dict[str, str]:
 
 
 TOPIC_SLUGS = load_topic_slugs(Path(__file__).resolve().parents[3] / "config" / "site.yaml")
+import yaml
+from papers.scope import excluded
+SCOPE_CONFIG = yaml.safe_load((Path(__file__).resolve().parents[3] / 'config/site.yaml').read_text(encoding='utf-8'))
 ARXIV_ID = re.compile(r"^\d{4}\.\d{4,5}$")
 
 
@@ -36,6 +39,8 @@ class PaperCandidate:
 
 def _candidate(paper_id: str, entry: object) -> PaperCandidate | None:
     if not isinstance(entry, dict) or entry.get("status") != "accepted":
+        return None
+    if excluded(SCOPE_CONFIG, paper_id, entry.get('title', ''), entry.get('subtopics', [])):
         return None
     if re.fullmatch(r'hf-[a-f0-9]{24}', paper_id):
         return None  # A real external identity, never an arXiv download target.

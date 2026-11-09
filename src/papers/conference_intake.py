@@ -43,6 +43,9 @@ def rules() -> dict:
 def screen_title(title: str) -> dict:
     """Conservative, inspectable title-only rules; nonmatches remain uncertain."""
     config = rules()
+    from papers.scope import excluded
+    if excluded(config, title=title):
+        return {'topics': [], 'status': 'excluded', 'basis': 'excluded_research_scope', 'evidence': {}}
     settings = config['conference_intake']
     normalized = words(title)
     if re.search(settings['excluded_title_pattern'], normalized):
@@ -360,9 +363,13 @@ def conference_work_records(records, visible: set[str], state: dict, *, attempte
                             skip_failed: bool) -> list[dict]:
     """Order incomplete conference work so repeated failures cannot starve new papers."""
     from papers.conference_retry import retry_allowed
+    from papers.scope import excluded
+    scope_config = rules()
     pending = [
         record for record in records
         if record['id'] in visible and record['id'] not in attempted
+        and not excluded(scope_config, record['id'], record['title'], record.get('subtopics', []))
+        and not excluded(scope_config, record.get('arxiv_id', ''))
         and (not record.get('summary') or _source_refresh_pending(record, 'summary')
              or not record.get('annotation')
              or _source_refresh_pending(record, 'annotation'))

@@ -100,6 +100,10 @@ def run(*, model, base_url, timeout=180, dry_run=False):
         pending = sorted(((key, entry) for key, entry in ledger['papers'].items() if entry['status'] == 'pending'),
                          key=lambda pair: (pair[1].get('updated', ''), pair[0]))
         client = LoopbackChatTransport(base_url, max_message_chars=32_000)
+        from papers.scope import excluded
+        import yaml
+        scope_config = yaml.safe_load(paths.CONFIG.read_text(encoding='utf-8'))
+        pending = [(key, entry) for key, entry in pending if not excluded(scope_config, key, entry.get('title', ''), entry.get('subtopics', []))]
         rules = [{'name': label.name, 'description': label.description} for label in labels]
         system = ('Review research relevance using ONLY title, abstract and configured topics. '
                   'Accept relevant method contributions into exactly one configured topic. '

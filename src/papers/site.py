@@ -706,6 +706,8 @@ def generate_site(
     from papers.conference_library import load_library, library_rows, publish_library_notes, retain_library_matches, conference_annotation
     library = load_library()
     ledger = json.loads(Path(candidate_path).read_text(encoding='utf-8')) if candidate_path and Path(candidate_path).exists() else {}
+    from papers.scope import filter_archive, excluded
+    data = filter_archive(data, ledger, site_config, annotations)
     archive_ids = {key for entries in data.values() for key in entries}
     merged_conferences = {}
     for record in library['papers'].values():
@@ -723,6 +725,8 @@ def generate_site(
     extra_rows = library_rows(library, data, ledger)
     from papers.huggingface import external_rows
     extra_rows.extend(external_rows(ledger))
+    from papers.scope import excluded_row
+    extra_rows = [row for row in extra_rows if not excluded_row(site_config, row)]
     excluded_years = set(site_config.get('publication', {}).get('excluded_years', []))
     data = {
         topic: {
