@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import copy
 import datetime as dt
+import hashlib
 import json
 import os
 from pathlib import Path
@@ -86,6 +87,60 @@ def merge_sources(target: dict, record: dict) -> None:
             'dates': sorted(set(old.get('dates', [])) | set(record['hf_daily'].get('dates', [])))}
 
 
+def reopen_depth_candidate(entry: dict, record: dict) -> dict:
+    """Pure, one-time replay of the 2026-11-09 source exclusion becoming stale.
+
+    Incoming HF discovery is evidence for review eligibility, never acceptance.
+    Ordinary rejections and subsequent review decisions remain authoritative.
+    """
+    migration = entry.get('topic_migration', {})
+    evidence = record.get('hf_daily', {})
+    if (entry.get('status') != 'rejected' or entry.get('selected_topic') is not None
+            or migration.get('date') != '2026-11-09'
+            or migration.get('reason') != 'User removed depth-only papers without HF or tracked-conference provenance'
+            or migration.get('previous_status') not in (None, 'pending', 'accepted')
+            or 'hf_reopened' in migration
+            or entry.get('decision_reason') != 'User scope change: depth-only, neither HF nor tracked conference'
+            or 'huggingface' not in record.get('sources', [])
+            or entry.get('id') != record.get('id')):
+        return entry
+    # Bind the official source URL and evidence to this exact incoming record.
+    url = evidence.get('url', '')
+    match = re.fullmatch(r'https://huggingface\.co/papers/(\d{4}\.\d{4,5}(?:v\d+)?)', url)
+    title, abstract = record.get('title'), record.get('abstract')
+    days = evidence.get('dates')
+    if (not match or normalize_arxiv_id(match[1]) != entry['id']
+            or not isinstance(title, str) or not title.strip()
+            or not isinstance(abstract, str) or not abstract.strip()
+            or not isinstance(days, list) or not days
+            or evidence.get('evidence_sha256') != hashlib.sha256((' '.join(title.split())+'\0'+abstract).encode()).hexdigest()):
+        return entry
+    try:
+        if any(not isinstance(day, str) or dt.date.fromisoformat(day).isoformat() != day for day in days):
+            return entry
+    except ValueError:
+        return entry
+    canonical = entry.get('recheck_decisions', {}).get('3D Gen&Recon')
+    migration_rejection = (isinstance(canonical, dict) and canonical.get('accept') is False
+                           and canonical.get('reason') == 'User excluded depth-only paper without HF or tracked conference')
+    if isinstance(canonical, dict) and canonical.get('accept') is False and not migration_rejection:
+        return entry
+    result = copy.deepcopy(entry)
+    audit = {'source': copy.deepcopy(evidence), 'previous_status': entry['status'],
+             'previous_selected_topic': entry.get('selected_topic'),
+             'previous_decision_reason': entry['decision_reason']}
+    if migration_rejection:
+        audit['previous_canonical_decision'] = result['recheck_decisions'].pop('3D Gen&Recon')
+    result['topic_migration']['hf_reopened'] = audit
+    result.update(status='pending', selected_topic=None,
+                  decision_reason='HF source verified after depth scope migration; pending review')
+    result['subtopics'] = list(dict.fromkeys([*result.get('subtopics', []), 'Depth Estimation']))
+    for field in ('title', 'abstract', 'authors', 'updated', 'paper_url', 'pdf_url'):
+        if not result.get(field) and field in record:
+            result[field] = record[field]
+    return result
+
+
 def merge_collected_candidates(
     archive: dict[str, dict[str, object]],
     ledger: dict[str, Any],
@@ -161,6 +216,8 @@ def merge_collected_candidates(
             else:
                 added += 1
 
+        entry = reopen_depth_candidate(entry, record)
+        papers[paper_id] = entry
         hf_only = record.get('sources') == ['huggingface']
         if not hf_only:
             for field in ('title', 'abstract', 'authors', 'updated', 'paper_url', 'pdf_url'):
