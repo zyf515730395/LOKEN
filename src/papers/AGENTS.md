@@ -1,5 +1,7 @@
 # Paper pipeline rules
 
+- 2026-11-09 scope update supersedes the depth-subtopic migration: stop tracking depth-estimation directions entirely, including HF and tracked-conference papers. Configured publication exclusions remove these papers from all public lists/search/digests; preserve source files and audit history. Do not merge or reopen excluded depth papers. Depth merely used as conditioning for a genuinely different research task is not sufficient for exclusion.
+
 ## Paradigm tracking
 
 - The public page is named 模型范式. Reuse the shared periodical layout and an internal topic navigation. Each topic shows a sourced historical roadmap followed by a semantic table of current routes/observations. `config/paradigm-roadmaps.yaml` holds curated chronological nodes (year, paper title, official URL, contribution, branch and transition); history is not limited to the recent observation year and parallel branches must not imply exclusive replacement. Preserve evidence disclosures and existing follow-up IDs/storage.

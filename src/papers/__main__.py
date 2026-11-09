@@ -17,7 +17,12 @@ def build():
                   paths.ROOT / 'config/milestone_models.yaml', output_root=paths.DOCS,
                   search_index_path=paths.DOCS / 'search-index.json', config_path=paths.CONFIG,
                   annotation_path=paths.ANNOTATIONS, refresh_related=False)
-    atomic_write_bytes(paths.DOCS / 'togos-papers.json', paths.ARCHIVE.read_bytes())
+    from papers.scope import filter_archive
+    import yaml
+    archive = filter_archive(json.loads(paths.ARCHIVE.read_text(encoding='utf-8')),
+                             json.loads(paths.LEDGER.read_text(encoding='utf-8')),
+                             yaml.safe_load(paths.CONFIG.read_text(encoding='utf-8')))
+    atomic_write_bytes(paths.DOCS / 'togos-papers.json', (json.dumps(archive, ensure_ascii=False, indent=2, sort_keys=True) + '\n').encode())
 
 
 def main(argv=None):

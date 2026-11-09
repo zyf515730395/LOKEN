@@ -56,6 +56,9 @@ def daily_records(items: list, config: dict, day: dt.date) -> list[dict]:
         if not isinstance(title, str) or not isinstance(abstract, str):
             raise ValueError('HF title/abstract missing')
         matched = []
+        from papers.scope import excluded
+        if excluded(config, _arxiv_identity(paper) or '', title):
+            continue
         for topic, settings in config['keywords'].items():
             fields = settings.get('fields', ['ti', 'abs'])
             haystack = ' ' + _words(' '.join(text for field, text in [('ti', title), ('abs', abstract)] if field in fields)) + ' '

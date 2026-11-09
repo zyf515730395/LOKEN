@@ -109,6 +109,8 @@ def run_annotations(
         labels = load_annotation_definitions(config_path)
         allowlists = load_topic_tag_allowlists(config_path, labels)
         archive = _read_archive(Path(archive_path))
+        from papers.scope import filter_archive
+        archive = filter_archive(archive, json.loads(Path(ledger_path).read_text(encoding='utf-8')), yaml.safe_load(Path(config_path).read_text(encoding='utf-8')))
         candidates = archive_titles(archive)
         annotations = load_annotation_catalog(catalog_path, labels)
         requested = tuple(dict.fromkeys(normalize_arxiv_id(paper_id) for paper_id in paper_ids))

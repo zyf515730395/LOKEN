@@ -158,7 +158,13 @@ def merge_collected_candidates(
     added = 0
 
     merged: dict[str, dict[str, Any]] = {}
+    from papers.scope import excluded
+    from papers.paths import CONFIG
+    import yaml
+    scope_config = yaml.safe_load(CONFIG.read_text(encoding='utf-8'))
     for record in paper_records:
+        if excluded(scope_config, normalize_arxiv_id(record['id']), record.get('title', '')):
+            continue
         paper_id = normalize_arxiv_id(record["id"])
         item = merged.setdefault(
             paper_id,
