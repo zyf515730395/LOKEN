@@ -288,11 +288,20 @@ def build_paper_search_documents(
                 kind="paper",
                 published_at=row["date"].isoformat() if row.get('date_precision', 3) == 3 else None,
                 topics=tuple(row.get('topics', (category['topic'],))),
+                tags=tuple(row.get('tags', ())),
             )
             existing = documents.get(paper_id)
             if existing is None:
                 documents[paper_id] = document
     return list(documents.values())
+
+
+def apply_subtopic_markers(rows: list[dict], ledger: dict, config: dict) -> None:
+    """Carry curated search markers without claiming a completed annotation."""
+    allowed = {label['name'] for label in config.get('paper_tag_groups', {}).get('subtopic', [])}
+    for row in rows:
+        markers = ledger.get('papers', {}).get(row['id'], {}).get('subtopics', [])
+        row['tags'] = tuple(dict.fromkeys([tag for tag in markers if tag in allowed] + list(row.get('tags', ()))))
 
 
 def render_sidebar(
@@ -437,7 +446,7 @@ def render_table(
                     anchored_papers.add(alias)
         tags = "".join(
             f'<span class="paper-tag">{html.escape(tag)}</span>'
-            for tag in row.get("tags", ())[:5]
+            for tag in row.get("tags", ())
         )
         tag_markup = f'<span class="paper-tags">{tags}</span>' if tags else ""
         hf_markup = ''
@@ -457,7 +466,7 @@ def render_table(
                      'webpage_generated': '网页生成日期', 'webpage_event': '网页报告日程日期'}.get(date_basis, '网页日期')
             date_hint = ' title="' + html.escape(label + '：' + row.get('published_at', '') + '；非论文首次发表日期', quote=True) + '"'
         output.append(
-            f"      <tr{anchor}>"
+            f'      <tr{anchor} data-paper-tags="{html.escape(json.dumps(row.get("tags", ()), ensure_ascii=False), quote=True)}">'
             f'<td class="paper-id" data-label="Arxiv ID">{aliases}<a href="{paper_url}"{date_hint} target="_blank" rel="noopener">'
             f'{html.escape(row.get("display_id", row["id"]))}</a></td>'
             f'<td class="paper-title" data-label="Paper"><a class="paper-title-link" href="{paper_url}" target="_blank" rel="noopener">'
@@ -476,6 +485,7 @@ def render_content(
     candidate_statuses: dict[str, str] | None = None,
     label_slugs: dict[str, str] | None = None,
     conference_section: str = "",
+    subtopic_names: tuple[str, ...] = (),
 ) -> str:
     output = []
     anchored_papers: set[str] = set()
@@ -493,6 +503,10 @@ def render_content(
             f'    <span>{category["count"]} papers</span>',
             '  </header>',
         ])
+        available_subtopics = [name for name in subtopic_names if any(name in row.get('tags', ()) for row in _iter_category_rows(category))]
+        if available_subtopics:
+            options = ''.join(f'<option value="{html.escape(name, quote=True)}">{html.escape(name)}</option>' for name in available_subtopics)
+            output.append(f'<label class="paper-subtopic-filter">检索子类 <select data-subtopic-filter><option value="">全部论文</option>{options}</select></label><p data-subtopic-count aria-live="polite" hidden></p>')
         if not category["years"]:
             output.append('  <p class="archive-empty">No papers in the current archive window.</p>')
         for year_index, (year, year_data) in enumerate(category["years"].items()):
@@ -724,6 +738,7 @@ def generate_site(
     all_categories, _ = build_archive(data, labels, annotations, candidate_statuses, extra_rows)
     from papers.proceedings import load_catalog, match_papers
     all_rows = [row for category in all_categories for row in _iter_category_rows(category)]
+    apply_subtopic_markers(all_rows, ledger, site_config)
     conference_matches = match_papers(all_rows, load_catalog())
     for row in all_rows:
         records = merged_conferences.get(row['id'], ())
@@ -763,7 +778,7 @@ def generate_site(
     </header>
 {render_paper_navigation(categories, include_conferences=bool(conferences))}
     </div>
-{render_content(categories, summary_catalog, candidate_statuses, label_slugs, conference_section=render_conference_section(conferences, as_of=today) if conferences else "")}
+{render_content(categories, summary_catalog, candidate_statuses, label_slugs, conference_section=render_conference_section(conferences, as_of=today) if conferences else "", subtopic_names=tuple(label['name'] for label in site_config.get('paper_tag_groups', {}).get('subtopic', [])))}
     <footer>Research papers from arXiv and official proceedings · Source: <a href="https://github.com/zyf515730395/LOKEN">{SITE_NAME}</a></footer>
 """
     document = render_site_page(

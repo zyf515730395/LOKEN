@@ -53,7 +53,7 @@ SECTIONS = (
 )
 SECTIONS_BY_KEY = {section.key: section for section in SECTIONS}
 SITE_NAME = "LOKEN"
-ASSET_VERSION = "15"
+ASSET_VERSION = "16"
 SECTION_METADATA = {
     "learning": "01 / PAPERS",
     "milestones": "02 / MODELS",
@@ -166,8 +166,8 @@ def render_inline_search() -> str:
     return """    <div class="site-search" data-search-root>
       <label class="site-search-field" for="search-input">
         <span aria-hidden="true">⌕</span>
-        <input id="search-input" type="search" placeholder="搜索文章标题"
-               aria-label="搜索文章标题" role="combobox"
+        <input id="search-input" type="search" placeholder="搜索标题或标签"
+               aria-label="搜索标题或标签" role="combobox"
                autocomplete="off" aria-autocomplete="list" aria-controls="search-results" aria-expanded="false">
         <kbd aria-hidden="true">Ctrl K</kbd>
       </label>

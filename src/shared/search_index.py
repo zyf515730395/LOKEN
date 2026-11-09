@@ -30,9 +30,12 @@ class SearchDocument:
     kind: SearchKind
     published_at: str | None = None
     topics: tuple[str, ...] = ()
+    tags: tuple[str, ...] = ()
 
 
 def _validate_document(document: SearchDocument) -> None:
+    if not isinstance(document.tags, (tuple, list)) or any(not isinstance(tag, str) or not tag.strip() for tag in document.tags):
+        raise ValueError('Search tags must be nonempty strings')
     if not isinstance(document.topics, (tuple, list)) or any(not isinstance(topic, str) or not topic.strip() for topic in document.topics):
         raise ValueError('Search topics must be nonempty strings')
     if not isinstance(document.id, str) or not document.id.strip():
@@ -78,6 +81,8 @@ def _serialize_document(document: SearchDocument) -> dict[str, str]:
         payload["published_at"] = document.published_at
     if document.topics:
         payload['topics'] = list(document.topics)
+    if document.tags:
+        payload['tags'] = list(document.tags)
     return payload
 
 

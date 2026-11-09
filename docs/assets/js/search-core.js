@@ -21,7 +21,8 @@
     return (Array.isArray(documents) ? documents : [])
       .map((document) => {
         const normalizedTitle = normalizeTitle(document?.title);
-        const positions = tokens.map((token) => normalizedTitle.indexOf(token));
+        const searchable = normalizeTitle([document?.title, ...(document?.tags || [])].join(" "));
+        const positions = tokens.map((token) => searchable.indexOf(token));
         if (positions.some((position) => position < 0)) return null;
         return {
           document,

@@ -180,6 +180,10 @@ function revealHashTarget({ scroll = false } = {}) {
   let target = document.getElementById(id);
   if (!target) return;
   if (target.hasAttribute("data-paper-alias")) target = target.closest("tr") || target;
+  if (target.matches('tr[hidden]')) {
+    const control = target.closest('[data-topic-section]')?.querySelector('[data-subtopic-filter]');
+    if (control) { control.value = ''; applySubtopic(control); }
+  }
 
   const monthPanel = target.matches(".archive-period-panel")
     ? target
@@ -214,7 +218,7 @@ function sizeMonthlyTables() {
   document.querySelectorAll(".archive-month-panel .table-scroll").forEach((viewport) => {
     if (!viewport.getClientRects().length) return;
     const table = viewport.querySelector(".paper-table");
-    const rows = [...table.tBodies[0].rows].filter((row) => !row.classList.contains("mobile-summary-row"));
+    const rows = [...table.tBodies[0].rows].filter((row) => !row.hidden && !row.classList.contains("mobile-summary-row"));
     const height = table.tHead.getBoundingClientRect().height
       + rows.slice(0, 8).reduce((sum, row) => sum + row.getBoundingClientRect().height, 0) + 2;
     viewport.style.maxHeight = `${Math.ceil(height)}px`;
@@ -227,6 +231,44 @@ window.addEventListener("resize", () => window.requestAnimationFrame(sizeMonthly
 document.addEventListener("loken:paper-topic-change", () => window.requestAnimationFrame(sizeMonthlyTables));
 document.fonts?.ready.then(sizeMonthlyTables);
 window.requestAnimationFrame(sizeMonthlyTables);
+
+function applySubtopic(control) {
+  const section = control.closest('[data-topic-section]');
+  let count = 0;
+  section.querySelectorAll('tr[data-paper-tags]').forEach(row => {
+    const tags = JSON.parse(row.dataset.paperTags);
+    row.hidden = Boolean(control.value) && !tags.includes(control.value);
+    if (!row.hidden) count++;
+  });
+  section.querySelectorAll('[data-archive-year]').forEach(year => {
+    const tabs = [...year.querySelectorAll('[data-period-target]')];
+    tabs.forEach(tab => {
+      const panel = document.getElementById(tab.dataset.periodTarget);
+      tab.hidden = Boolean(control.value) && !panel.querySelector('tr[data-paper-tags]:not([hidden])');
+    });
+    year.hidden = Boolean(control.value) && tabs.every(tab => tab.hidden);
+    const active = tabs.find(tab => tab.getAttribute('aria-selected') === 'true');
+    if (active?.hidden) selectPeriod(tabs.filter(tab => !tab.hidden).at(-1));
+  });
+  if (control.value) setYearExpanded(section.querySelector('[data-archive-year]:not([hidden])'), true);
+  const status = section.querySelector('[data-subtopic-count]');
+  status.hidden = !control.value;
+  status.textContent = `${control.value} · ${count} 篇论文`;
+  window.requestAnimationFrame(sizeMonthlyTables);
+}
+document.querySelectorAll('[data-subtopic-filter]').forEach(control => {
+  const value = new URL(location.href).searchParams.get('subtopic');
+  if ([...control.options].some(option => option.value === value)) control.value = value;
+  applySubtopic(control);
+  control.addEventListener('change', () => {
+    const url = new URL(location.href);
+    if (control.value) url.searchParams.set('subtopic', control.value); else url.searchParams.delete('subtopic');
+    url.searchParams.set('tag', control.closest('[data-topic-section]').dataset.topicSection);
+    url.hash = control.closest('[data-topic-section]').id;
+    history.replaceState(null, '', url);
+    applySubtopic(control);
+  });
+});
 
 document.querySelectorAll("[data-sidebar-action]").forEach((button) => {
   button.addEventListener("click", () => {

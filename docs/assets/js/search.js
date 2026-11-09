@@ -9,7 +9,7 @@
   };
   const SECTION_ORDER = ["learning", "milestones", "writings", "journeys"];
   const KIND_LABELS = { paper: "论文", model: "模型", article: "文章" };
-  const EMPTY_GUIDANCE = "输入标题关键词开始搜索";
+  const EMPTY_GUIDANCE = "输入标题或标签关键词开始搜索";
   const LOAD_FAILURE = "搜索索引加载失败，请刷新后重试";
   const NO_MATCH = "没有找到公开标题";
 
@@ -62,7 +62,7 @@
       const section = SECTION_LABELS[document.section];
       const kind = KIND_LABELS[document.kind];
       const topics = Array.isArray(document.topics) ? document.topics.filter((topic) => typeof topic === "string") : [];
-      const context = [section, kind, ...topics].join(" · ");
+      const context = [section, kind, ...topics, ...(document.tags || [])].join(" · ");
       return `<a class="search-result${active ? " is-active" : ""}" `
         + `id="search-result-${index}" role="option" aria-selected="${active}" `
         + `data-result-index="${index}" href="${escapeHtml(resultUrl(document))}">`
@@ -125,7 +125,7 @@
       if (!indexRequest) {
         const siteRoot = body.dataset.siteRoot ?? "";
         const indexUrl = new URL(`${siteRoot}search-index.json`, window.location.href);
-        indexRequest = fetchImpl(indexUrl, { headers: { Accept: "application/json" } })
+        indexRequest = fetchImpl(indexUrl, { cache: "no-cache", headers: { Accept: "application/json" } })
           .then((response) => {
             if (!response.ok) throw new Error(`HTTP ${response.status}`);
             return response.json();
