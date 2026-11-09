@@ -21,7 +21,7 @@ import yaml
 from papers.annotations.catalog import load_annotation_catalog, load_annotation_definitions, load_label_definitions
 from papers.conference_library import library_rows, load_library, retain_library_matches
 from papers.paths import CONFIG
-from papers.site import build_archive, filter_recent_archive, load_candidate_statuses, parse_entry, _iter_category_rows
+from papers.site import build_archive, filter_recent_archive, load_candidate_statuses, parse_entry, _iter_category_rows, apply_subtopic_markers
 from shared.periodicals import render_periodical_page
 from shared.rendering import atomic_write_text
 from papers.digest_analysis import load_analysis, render_topic
@@ -76,6 +76,7 @@ def load_public_papers(config_path: str | Path = CONFIG, *, today: date | None =
     extra = [row for row in extra if row['date'].year not in excluded]
     categories, _ = build_archive(public_archive, labels, annotations, statuses, extra)
     all_rows = [row for category in categories for row in _iter_category_rows(category)]
+    apply_subtopic_markers(all_rows, ledger, config)
     retain_library_matches(all_rows, library, ledger)
     visible = categories if include_historical else filter_recent_archive(categories, (today or date.today()).year)[0]
     unique = {row['id']: row for category in visible for row in _iter_category_rows(category)}

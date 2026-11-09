@@ -99,7 +99,7 @@ def library_rows(library: dict, archive: dict, ledger: dict) -> list[dict]:
             'date_source': record.get('date_source', {}),
             'paper_url': 'https://arxiv.org/abs/' + record['arxiv_id'] if record.get('arxiv_id') else record['url'],
             'authors': record.get('authors', ''), 'code_url': None,
-            'topics': tuple(record['topics']), 'tags': annotation.tags if annotation else (),
+            'topics': tuple(record['topics']), 'tags': tuple(dict.fromkeys([*record.get('subtopics', []), *(annotation.tags if annotation else ())])),
             'institutions': annotation.institutions if annotation else (),
             'paper_type': annotation.paper_type if annotation else 'paper',
             'annotation_status': 'ready' if annotation else 'pending', 'summary_pending': True,

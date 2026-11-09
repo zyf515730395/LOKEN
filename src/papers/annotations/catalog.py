@@ -202,17 +202,20 @@ def limit_detail_tags(
 ) -> tuple[str, ...]:
     """Keep the most relevant tags within global and per-dimension limits."""
     groups = {label.name: label.group for label in labels if label.group != "topic"}
+    subtopics = list(dict.fromkeys(tag for tag in tags if groups[tag] == 'subtopic'))
     selected: list[str] = []
     counts: dict[str, int] = {}
     for tag in tags:
         group = groups[tag]
+        if group == 'subtopic':
+            continue
         if counts.get(group, 0) >= MAX_DETAIL_TAGS_PER_DIMENSION:
             continue
         selected.append(tag)
         counts[group] = counts.get(group, 0) + 1
         if len(selected) == MAX_DETAIL_TAGS:
             break
-    return tuple(selected)
+    return tuple(subtopics + selected)
 
 
 def annotation_from_value(
@@ -238,7 +241,8 @@ def annotation_from_value(
     ) or len(institutions) != len(set(institutions)):
         fail()
     topics = tuple(x.name for x in labels if x.group == "topic" and x.name in value["topics"])
-    tags = () if value["paper_type"] == "survey" else limit_detail_tags(value["tags"], labels)
+    subtopics = {label.name for label in labels if label.group == 'subtopic'}
+    tags = tuple(tag for tag in value['tags'] if tag in subtopics) if value["paper_type"] == "survey" else limit_detail_tags(value["tags"], labels)
     return PaperAnnotation(topics, tags, value["paper_type"], tuple(institutions))
 
 

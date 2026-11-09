@@ -130,7 +130,7 @@ routes:
     sources: [{title: 3D Gaussian Splatting, url: 'https://arxiv.org/abs/2308.04079'}]
   - name: 前馈统一几何重建
     aliases: [前馈几何基础模型, VGGT]
-    topics: [3d-gen-recon, depth-estimation]
+    topics: [3d-gen-recon]
     dimension: 任务统一
     previous: 相机、深度与三维点分别估计，再进行多阶段优化
     mechanism: 用统一前馈网络联合预测相机、点图、深度和轨迹，利用跨任务几何关系。
@@ -170,7 +170,7 @@ routes:
     sources: [{title: IC-Light, url: 'https://openreview.net/forum?id=u1cQYxRI1H'}]
   - name: 判别式单目深度基础模型
     aliases: [Depth Anything]
-    topics: [depth-estimation]
+    topics: [3d-gen-recon]
     dimension: 训练与监督
     previous: 小规模真实深度监督下的任务专用估计
     mechanism: 结合合成数据、教师模型和伪标签扩大训练覆盖，用前馈模型预测深度。
@@ -180,7 +180,7 @@ routes:
     sources: [{title: Depth Anything V2, url: 'https://arxiv.org/abs/2406.09414'}]
   - name: 生成先验迁移到深度估计
     aliases: [Marigold, 生成式深度估计]
-    topics: [depth-estimation]
+    topics: [3d-gen-recon]
     dimension: 任务迁移
     previous: 从头训练判别式深度回归网络
     mechanism: 将预训练图像扩散先验改造成条件深度生成器，复用视觉知识。

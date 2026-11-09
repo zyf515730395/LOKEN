@@ -100,18 +100,42 @@ topics:
     branch: 长时序逐段生成
     transition: 从整段视频联合生成扩展到固定上下文的渐进生成路线，针对长视频的计算开销与漂移问题。
   3d-gen-recon:
+  - year: 2009
+    title: Make3D（TPAMI 期刊版）
+    url: https://www.cs.cornell.edu/~asaxena/reconstruction3d/saxena_make3d_learning3dstructure.pdf
+    contribution: 以监督学习的马尔可夫随机场融合单目视觉线索与区域关系，预测小平面的位置和朝向以重建场景。
+    branch: 传统监督单目
+    transition: 展示从图像经验学习单目三维结构的路径，为后续端到端深度学习提供早期参照。
+  - year: 2014
+    title: Eigen Multi-Scale Depth
+    url: https://arxiv.org/abs/1406.2283
+    contribution: 通过全局粗预测与局部细化两级深度网络，并使用尺度不变误差，直接从 RGB 学习稠密深度。
+    branch: 监督深度网络
+    transition: 将手工区域建模推进为从数据学习全局布局和局部边界的深度网络。
   - year: 2016
     title: 3D-GAN
     url: https://arxiv.org/abs/1610.07584
     contribution: 结合三维体卷积与对抗训练，将低维随机潜变量映射为体素形状，并学习可用于识别的形状特征。
     branch: 体素生成
     transition: 让三维形状从人工建模资产成为可学习、可采样的概率分布，为原生三维生成建立早期范式。
+  - year: 2018
+    title: Monodepth2
+    url: https://arxiv.org/abs/1806.01260
+    contribution: 以最小重投影损失、全分辨率多尺度采样和自动掩码，缓解自监督单目训练中的遮挡与运动假设失效。
+    branch: 几何自监督
+    transition: 沿视频或双目重投影监督路线减少对真实深度标注的依赖，与有监督学习并行发展。
   - year: 2019
     title: DeepSDF
     url: https://arxiv.org/abs/1901.05103
     contribution: 学习连续符号距离函数，以零等值面表达形状边界，并支持形状插值和残缺观测补全。
     branch: 隐式几何
     transition: 将离散体素网格之外的连续函数表示引入学习式形状建模，使几何细节不再直接受固定输出网格约束。
+  - year: 2019
+    title: MiDaS
+    url: https://arxiv.org/abs/1907.01341
+    contribution: 用对深度范围和尺度鲁棒的训练目标及多目标学习混合不同数据集，提升零样本跨数据集泛化。
+    branch: 跨数据相对深度
+    transition: 把重点从单一数据集精度扩展到多来源数据兼容与未知场景泛化。
   - year: 2020
     title: NeRF
     url: https://www.matthewtancik.com/nerf
@@ -142,12 +166,36 @@ topics:
     contribution: 将图像对重建建模为三维点图回归，再通过全局对齐整合多视图，无需预先提供相机标定与位姿。
     branch: 几何基础模型
     transition: 与物体生成并行，将匹配、深度和相机恢复纳入统一学习式几何框架，降低无约束照片集合的重建门槛。
+  - year: 2023
+    title: ZoeDepth
+    url: https://arxiv.org/abs/2302.12288
+    contribution: 结合多数据集相对深度预训练、度量深度微调与可自动路由的 metric bins 预测头。
+    branch: 泛化度量深度
+    transition: 将相对深度的泛化能力接到具有绝对尺度的预测上，回应实际三维应用对距离单位的需求。
+  - year: 2023
+    title: Marigold
+    url: https://arxiv.org/abs/2312.02145
+    contribution: 将 Stable Diffusion 的视觉先验通过合成数据微调迁移到仿射不变的单目深度估计。
+    branch: 生成式深度
+    transition: 开辟复用图像生成先验的并行路线，以增强陌生内容和场景下的深度理解。
   - year: 2024
     title: TRELLIS
     url: https://microsoft.github.io/TRELLIS/
     contribution: 把稀疏三维结构与多视图视觉特征编码为统一 SLAT 潜表示，用 rectified flow Transformer 生成并解码为网格、高斯或辐射场。
     branch: 统一潜空间生成
     transition: 让生成过程建立在可跨输出格式解码的原生三维潜空间上，连接几何、外观与局部编辑需求。
+  - year: 2024
+    title: Depth Anything V2
+    url: https://arxiv.org/abs/2406.09414
+    contribution: 以合成标注训练更强教师，再借大规模真实图像伪标签训练学生，提升细节和泛化能力。
+    branch: 判别式深度基础模型
+    transition: 通过教师规模与合成到真实的数据桥接推进通用深度模型，并保留高效前馈推理及度量微调路径。
+  - year: 2024
+    title: Depth Pro
+    url: https://arxiv.org/abs/2410.02073
+    contribution: 结合多尺度视觉 Transformer、真实与合成数据训练及焦距估计，生成具有精细边界的零样本度量深度。
+    branch: 高分辨率度量深度
+    transition: 继续推进绝对尺度、细边界和推理效率的结合，使深度输出更适合三维重建与图像编辑。
   world-model:
   - year: 1990
     title: Dyna
@@ -228,52 +276,3 @@ topics:
     contribution: 在扩散重光照训练中施加光传输线性叠加一致性约束，减少修改照明时对固有外观的破坏。
     branch: 生成式重光照
     transition: 将生成模型的广泛图像先验与物理一致性结合，拓展文本及背景条件下的照明编辑。
-  depth-estimation:
-  - year: 2009
-    title: Make3D（TPAMI 期刊版）
-    url: https://www.cs.cornell.edu/~asaxena/reconstruction3d/saxena_make3d_learning3dstructure.pdf
-    contribution: 以监督学习的马尔可夫随机场融合单目视觉线索与区域关系，预测小平面的位置和朝向以重建场景。
-    branch: 传统监督单目
-    transition: 展示从图像经验学习单目三维结构的路径，为后续端到端深度学习提供早期参照。
-  - year: 2014
-    title: Eigen Multi-Scale Depth
-    url: https://arxiv.org/abs/1406.2283
-    contribution: 通过全局粗预测与局部细化两级深度网络，并使用尺度不变误差，直接从 RGB 学习稠密深度。
-    branch: 监督深度网络
-    transition: 将手工区域建模推进为从数据学习全局布局和局部边界的深度网络。
-  - year: 2018
-    title: Monodepth2
-    url: https://arxiv.org/abs/1806.01260
-    contribution: 以最小重投影损失、全分辨率多尺度采样和自动掩码，缓解自监督单目训练中的遮挡与运动假设失效。
-    branch: 几何自监督
-    transition: 沿视频或双目重投影监督路线减少对真实深度标注的依赖，与有监督学习并行发展。
-  - year: 2019
-    title: MiDaS
-    url: https://arxiv.org/abs/1907.01341
-    contribution: 用对深度范围和尺度鲁棒的训练目标及多目标学习混合不同数据集，提升零样本跨数据集泛化。
-    branch: 跨数据相对深度
-    transition: 把重点从单一数据集精度扩展到多来源数据兼容与未知场景泛化。
-  - year: 2023
-    title: ZoeDepth
-    url: https://arxiv.org/abs/2302.12288
-    contribution: 结合多数据集相对深度预训练、度量深度微调与可自动路由的 metric bins 预测头。
-    branch: 泛化度量深度
-    transition: 将相对深度的泛化能力接到具有绝对尺度的预测上，回应实际三维应用对距离单位的需求。
-  - year: 2023
-    title: Marigold
-    url: https://arxiv.org/abs/2312.02145
-    contribution: 将 Stable Diffusion 的视觉先验通过合成数据微调迁移到仿射不变的单目深度估计。
-    branch: 生成式深度
-    transition: 开辟复用图像生成先验的并行路线，以增强陌生内容和场景下的深度理解。
-  - year: 2024
-    title: Depth Anything V2
-    url: https://arxiv.org/abs/2406.09414
-    contribution: 以合成标注训练更强教师，再借大规模真实图像伪标签训练学生，提升细节和泛化能力。
-    branch: 判别式深度基础模型
-    transition: 通过教师规模与合成到真实的数据桥接推进通用深度模型，并保留高效前馈推理及度量微调路径。
-  - year: 2024
-    title: Depth Pro
-    url: https://arxiv.org/abs/2410.02073
-    contribution: 结合多尺度视觉 Transformer、真实与合成数据训练及焦距估计，生成具有精细边界的零样本度量深度。
-    branch: 高分辨率度量深度
-    transition: 继续推进绝对尺度、细边界和推理效率的结合，使深度输出更适合三维重建与图像编辑。

@@ -179,7 +179,7 @@ def classify_paper(
         if constrained:
             def choices(group):
                 names = [label.name for label in labels if (label.group == 'topic') == group]
-                return {'type': 'array', 'maxItems': len(names) if group else min(5, len(names)),
+                return {'type': 'array', 'maxItems': len(names) if group else min(5 + sum(label.group == 'subtopic' for label in labels), len(names)),
                         'items': {'type': 'string', 'enum': names} if names else {'type': 'string'}}
             schema = {'type': 'object', 'additionalProperties': False,
                 'required': ['topics', 'tags', 'paper_type', 'institutions'],

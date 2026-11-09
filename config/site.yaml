@@ -1,5 +1,7 @@
 publication:
-  excluded_years: [2022, 2023]
+  excluded_years:
+  - 2022
+  - 2023
 paper_labels:
 - name: Image Gen&Edit
   description: Image synthesis, text-to-image, image editing, personalization, controllable generation, diffusion,
@@ -14,10 +16,12 @@ paper_labels:
 - name: 3D Gen&Recon
   description: Generation, reconstruction or editing of 3D/4D objects, shapes, humans, assets, scenes, meshes or
     CAD. Includes single-view and multi-view reconstruction, structure from motion, surface reconstruction, neural
-    rendering, novel-view synthesis, NeRF, Gaussian Splatting, radiance fields and differentiable rendering.
+    rendering, novel-view synthesis, NeRF, Gaussian Splatting, radiance fields and differentiable rendering. Includes
+    monocular, stereo, multi-view and metric depth estimation or depth completion as a searchable subtopic.
   aliases:
   - 3D Generation
   - Neural Rendering
+  - Depth Estimation
 - name: World Model
   description: Learned generative or predictive models of environments, physical dynamics, interactive worlds, or
     action-conditioned future states.
@@ -25,9 +29,6 @@ paper_labels:
 - name: Relighting
   description: Estimating, transferring, editing, or generating illumination, reflectance, shadows, or appearance
     under novel lighting.
-  aliases: []
-- name: Depth Estimation
-  description: Monocular, stereo, multi-view, metric, relative, or completed depth estimation and prediction.
   aliases: []
 json_gitpage_path: ./content/papers/archive.json
 html_gitpage_path: ./docs/index.html
@@ -196,6 +197,40 @@ keywords:
     - structure from motion
     - surface reconstruction
     - neural reconstruction
+    - Depth Estimation
+    - Monocular Depth
+    - Metric Depth
+    - Stereo Depth Estimation
+    - Stereo Matching
+    - Multi-View Stereo
+    - Depth Completion
+    - Depth Prediction
+    - Disparity Estimation
+    - depth estimation
+    - depth prediction
+    - depth reconstruction
+    - monocular depth
+    - metric depth
+    - relative depth
+    - dense depth
+    - depth completion
+    - depth refinement
+    - depth super-resolution
+    - depth enhancement
+    - depth from
+    - stereo matching
+    - stereo correspondence
+    - stereo depth
+    - multi-view stereo
+    - multiview stereo
+    - disparity estimation
+    - disparity prediction
+    - disparity matching
+    - depth foundation model
+    - depth anything
+    - zero-shot depth
+    - video depth
+    - surface normal estimation
   World Model:
     fields:
     - ti
@@ -255,45 +290,6 @@ keywords:
     - shadow removal
     - environment map estimation
     - illumination harmonization
-  Depth Estimation:
-    fields:
-    - ti
-    - abs
-    filters:
-    - Depth Estimation
-    - Monocular Depth
-    - Metric Depth
-    - Stereo Depth Estimation
-    - Stereo Matching
-    - Multi-View Stereo
-    - Depth Completion
-    - Depth Prediction
-    - Disparity Estimation
-    - depth estimation
-    - depth prediction
-    - depth reconstruction
-    - monocular depth
-    - metric depth
-    - relative depth
-    - dense depth
-    - depth completion
-    - depth refinement
-    - depth super-resolution
-    - depth enhancement
-    - depth from
-    - stereo matching
-    - stereo correspondence
-    - stereo depth
-    - multi-view stereo
-    - multiview stereo
-    - disparity estimation
-    - disparity prediction
-    - disparity matching
-    - depth foundation model
-    - depth anything
-    - zero-shot depth
-    - video depth
-    - surface normal estimation
 collection:
   huggingface:
     enabled: true
@@ -472,10 +468,12 @@ paper_tag_groups:
     description: Legacy tag retained only so existing public annotations remain readable.
   - name: Relighting
     description: Legacy tag retained only so existing public annotations remain readable.
-  - name: Depth Estimation
-    description: Legacy tag retained only so existing public annotations remain readable.
   - name: Neural Rendering
     description: Legacy tag retained only so existing public annotations remain readable.
+  subtopic:
+  - name: Depth Estimation
+    description: The core task is estimating or completing monocular, stereo, multi-view, metric or relative depth.
+      Search subtopic under 3D, also applicable to surveys.
 paper_topic_tag_dimensions:
   Image Gen&Edit:
     method:
@@ -526,6 +524,28 @@ paper_topic_tag_dimensions:
     - Point Cloud
     - Implicit Field
     - Voxel/Grid
+    setup:
+    - Monocular
+    - Stereo
+    - Multi-View
+    - Video
+    - Depth Completion
+    output:
+    - Metric Depth
+    - Relative Depth
+    - Disparity
+    learning:
+    - Supervised
+    - Self-Supervised
+    - Weak/Semi-Supervised
+    - Zero-Shot/Foundation Model
+    method:
+    - Direct Regression
+    - Geometric Matching
+    - Generative Prior
+    - Optimization/Rendering-Based
+    subtopic:
+    - Depth Estimation
   World Model:
     representation:
     - Pixel/Observation Space
@@ -563,27 +583,6 @@ paper_topic_tag_dimensions:
     - Reference-Guided
     - Text-Guided
     - Spatially-Varying Lighting
-  Depth Estimation:
-    setup:
-    - Monocular
-    - Stereo
-    - Multi-View
-    - Video
-    - Depth Completion
-    output:
-    - Metric Depth
-    - Relative Depth
-    - Disparity
-    learning:
-    - Supervised
-    - Self-Supervised
-    - Weak/Semi-Supervised
-    - Zero-Shot/Foundation Model
-    method:
-    - Direct Regression
-    - Geometric Matching
-    - Generative Prior
-    - Optimization/Rendering-Based
 taxonomy_sources:
 - title: 'Text to Image Generation and Editing: A Survey'
   url: https://arxiv.org/abs/2505.02527
@@ -609,21 +608,20 @@ taxonomy_sources:
   url: https://www.researchgate.net/publication/407042767_Flow_Matching_for_Visual_Generation_A_Comprehensive_Survey/download
 - title: 'World Models and World-Action Models: An Accessible and Comprehensive Survey'
   url: https://www.chefrobotics.ai/post/world-models-and-world-action-models-an-accessible-and-comprehensive-survey
-
 conference_intake:
-  # Generic method terms require visual context before title-only acceptance.
   context_required_phrases:
-    - diffusion model
-    - flow matching
-    - rectified flow
-    - consistency model
-    - generative adversarial
-    - masked image modeling
-    - dynamics model
-    - environment model
-    - action conditioned
-    - neural field
-  visual_context: '(image|video|visual|3d|4d|scene|render|pixel|photograph|portrait|motion|world|robot|embodied)'
-  excluded_title_pattern: '(medical|clinical|biomedical|radiology|radiograph|tomography|mri|cancer|tumor|tumour|pathology|pathological|histopathology|histopathological|histolog|angiograph|\bct volume\b|endoscop|surgical|surgery|retinal|fundus|ultrasound|echocardiograph)'
+  - diffusion model
+  - flow matching
+  - rectified flow
+  - consistency model
+  - generative adversarial
+  - masked image modeling
+  - dynamics model
+  - environment model
+  - action conditioned
+  - neural field
+  visual_context: (image|video|visual|3d|4d|scene|render|pixel|photograph|portrait|motion|world|robot|embodied)
+  excluded_title_pattern: (medical|clinical|biomedical|radiology|radiograph|tomography|mri|cancer|tumor|tumour|pathology|pathological|histopathology|histopathological|histolog|angiograph|\bct
+    volume\b|endoscop|surgical|surgery|retinal|fundus|ultrasound|echocardiograph)
   summary_batch_size: 20
   summary_timeout_seconds: 900
