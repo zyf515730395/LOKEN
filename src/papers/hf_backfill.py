@@ -37,9 +37,15 @@ def dates(start, end):
         end -= dt.timedelta(days=1)
 
 
-def admit():
+def metadata_priority():
+    config = yaml.safe_load(paths.CONFIG.read_text(encoding='utf-8'))
+    return config.get('collection', {}).get('huggingface', {}).get('historical_metadata_priority') is True
+
+
+def admit(*, metadata=False):
     result = routine_priority.check()
-    if not result['admitted']:
+    overridable = all(reason.startswith('routine_pending:') or reason == 'collection_not_verified' for reason in result['reasons'])
+    if not result['admitted'] and not (metadata and metadata_priority() and overridable):
         raise Deferred('; '.join(result['reasons']))
     return result
 
@@ -47,9 +53,9 @@ def admit():
 class AdmittedSession(requests.Session):
     def get(self, *args, **kwargs):
         # Includes every retry and pagination request in fetch_day.
-        admit()
+        admit(metadata=True)
         from papers.runtime import daily_waiting
-        if daily_waiting():
+        if daily_waiting() and not metadata_priority():
             raise Deferred('daily_requested_runtime')
         return super().get(*args, **kwargs)
 
@@ -88,12 +94,12 @@ def cache(start, end, limit, config):
     result = plan(start, end)
     result.update(status='running', fetched_dates=[])
     try:
-        admit()
+        admit(metadata=True)
         with AdmittedSession() as session:
             for day in dates(start, end):
                 if len(result['fetched_dates']) >= limit:
                     break
-                admit()
+                admit(metadata=True)
                 try:
                     read_cache(day)
                     continue
@@ -172,9 +178,59 @@ def apply(start, end, config):
         return report
 
 
+def mark_existing(start, end, config):
+    """Enrich only papers already present in the published search index."""
+    from papers.summaries.paths import run_lock
+    admit(metadata=True)
+    records = [record for day in dates(start, end) for record in daily_records(read_cache(day), config, day)]
+    with run_lock():
+        before = paths.LEDGER.read_bytes()
+        archive_bytes = paths.ARCHIVE.read_bytes()
+        archive, ledger = json.loads(archive_bytes), json.loads(before)
+        library_path = paths.CONTENT/'conference-library.json'
+        library_before = library_path.read_bytes()
+        library = json.loads(library_before)
+        visible = {item['id'].removeprefix('paper:') for item in json.loads((paths.DOCS/'search-index.json').read_text())['documents'] if item['kind'] == 'paper'}
+        conference_matches = {}
+        for key,record in library['papers'].items():
+            if key in visible and record.get('arxiv_id'):
+                conference_matches.setdefault(record['arxiv_id'], []).append(key)
+        conference_changed = set()
+        for record in records:
+            for key in conference_matches.get(record['id'], []):
+                target = library['papers'][key]
+                prior = json.dumps(target, sort_keys=True)
+                merge_sources(target, record)
+                if json.dumps(target, sort_keys=True) != prior:
+                    conference_changed.add(key)
+        eligible = [record for record in records if record['id'] in visible]
+        missing = [record for record in eligible if record['id'] not in ledger['papers']]
+        _, updated, _ = merge_collected_candidates(archive, ledger, missing, list(config['keywords']))
+        for record in eligible:
+            merge_sources(updated['papers'][record['id']], record)
+        for key, old in ledger['papers'].items():
+            new = updated['papers'][key]
+            if {k:v for k,v in old.items() if k not in ('sources','hf_daily')} != {k:v for k,v in new.items() if k not in ('sources','hf_daily')}:
+                raise ValueError('Review metadata changed: '+key)
+        assert set(updated['papers']) - set(ledger['papers']) <= visible
+        changed = sorted(key for key,value in updated['papers'].items() if value != ledger['papers'].get(key))
+        new_candidates = {record['id'] for record in records} - visible - conference_matches.keys()
+        report = dict(start=str(start), end=str(end), status='prepared', matched_existing=len({r['id'] for r in eligible}), changed_ids=changed, conference_changed_ids=sorted(conference_changed), awaiting_review=len(new_candidates), new_candidates_added=0)
+        atomic_write_json(REPORT/f'mark-existing-{start}-{end}.json', report)
+        if paths.LEDGER.read_bytes() != before or paths.ARCHIVE.read_bytes() != archive_bytes or library_path.read_bytes() != library_before:
+            raise Deferred('public_inputs_changed')
+        if changed:
+            atomic_write_json(paths.LEDGER, updated)
+        if conference_changed:
+            atomic_write_json(library_path, library)
+        report['status'] = 'marked_existing'
+        atomic_write_json(REPORT/f'mark-existing-{start}-{end}.json', report)
+        return report
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('command', choices=('plan', 'cache', 'apply'))
+    parser.add_argument('command', choices=('plan', 'cache', 'apply', 'mark-existing'))
     parser.add_argument('--start', type=dt.date.fromisoformat, default=dt.date(2024, 1, 1))
     parser.add_argument('--end', type=dt.date.fromisoformat, default=dt.date(2025, 12, 31))
     parser.add_argument('--limit', type=int, default=31, help='maximum newly fetched days per cache slice (1–31)')
@@ -200,7 +256,8 @@ def main(argv=None):
                     else:
                         try:
                             result = (cache(args.start, args.end, args.limit, config)
-                                      if args.command == 'cache' else apply(args.start, args.end, config))
+                                      if args.command == 'cache' else mark_existing(args.start, args.end, config)
+                                      if args.command == 'mark-existing' else apply(args.start, args.end, config))
                         except Deferred as error:
                             result = {'status': 'deferred', 'reason': str(error)}
                     if result['status'] == 'deferred':

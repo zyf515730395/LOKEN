@@ -104,6 +104,7 @@ def library_rows(library: dict, archive: dict, ledger: dict) -> list[dict]:
             'paper_type': annotation.paper_type if annotation else 'paper',
             'annotation_status': 'ready' if annotation else 'pending', 'summary_pending': True,
             'conferences': record['conferences'],
+            'hf_daily': record.get('hf_daily', {}),
         })
         if record.get('arxiv_id'):
             ids.add(record['arxiv_id'])

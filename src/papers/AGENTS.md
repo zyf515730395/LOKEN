@@ -1,5 +1,7 @@
 # Paper pipeline rules
 
+- 2026-11-10 user-authorized HF metadata priority: historical 2025→2024 HTTP caching and adding verified HF provenance to already-public papers may precede incomplete routine receipts. Preserve runtime/public-write locks, newest-first checkpoints, review decisions and depth exclusions. This exception does not authorize model inference, accepting new papers, or moving historical candidates into routine review. New-paper review still requires routine admission and shared inference budget.
+
 - 2026-11-09 scope update supersedes the depth-subtopic migration: stop tracking depth-estimation directions entirely, including HF and tracked-conference papers. Configured publication exclusions remove these papers from all public lists/search/digests; preserve source files and audit history. Do not merge or reopen excluded depth papers. Depth merely used as conditioning for a genuinely different research task is not sufficient for exclusion.
 
 ## Paradigm tracking
