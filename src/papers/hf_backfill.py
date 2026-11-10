@@ -1,7 +1,9 @@
-"""Explicit, resumable newest-first HF history intake; never runs a model.
+"""Explicit, resumable newest-first HF history intake and isolated review.
 
 plan is read-only; cache writes only private evidence; apply imports a bounded
 cached interval as candidates, without reviewing, publishing or scheduling it.
+review keeps historical responses private; apply-reviewed adds only accepted
+new identities. Neither stage publishes or starts another scheduler.
 """
 from __future__ import annotations
 
@@ -230,10 +232,10 @@ def mark_existing(start, end, config):
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('command', choices=('plan', 'cache', 'apply', 'mark-existing'))
+    parser.add_argument('command', choices=('plan', 'cache', 'apply', 'mark-existing', 'review', 'apply-reviewed'))
     parser.add_argument('--start', type=dt.date.fromisoformat, default=dt.date(2024, 1, 1))
     parser.add_argument('--end', type=dt.date.fromisoformat, default=dt.date(2025, 12, 31))
-    parser.add_argument('--limit', type=int, default=31, help='maximum newly fetched days per cache slice (1–31)')
+    parser.add_argument('--limit', type=int, default=31, help='maximum new cache days or review papers per slice (1–31)')
     args = parser.parse_args(argv)
     if not dt.date(2024, 1, 1) <= args.start <= args.end <= dt.date(2025, 12, 31):
         parser.error('date range must be within 2024–2025')
@@ -255,9 +257,14 @@ def main(argv=None):
                         result = {'status': 'deferred', 'reason': 'runtime_owned'}
                     else:
                         try:
-                            result = (cache(args.start, args.end, args.limit, config)
-                                      if args.command == 'cache' else mark_existing(args.start, args.end, config)
-                                      if args.command == 'mark-existing' else apply(args.start, args.end, config))
+                            if args.command in ('review', 'apply-reviewed'):
+                                from papers.hf_history_review import review, apply_reviewed
+                                result = (review(args.start, args.end, args.limit, config) if args.command == 'review'
+                                          else apply_reviewed(args.start, args.end, config))
+                            else:
+                                result = (cache(args.start, args.end, args.limit, config)
+                                          if args.command == 'cache' else mark_existing(args.start, args.end, config)
+                                          if args.command == 'mark-existing' else apply(args.start, args.end, config))
                         except Deferred as error:
                             result = {'status': 'deferred', 'reason': str(error)}
                     if result['status'] == 'deferred':
