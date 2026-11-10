@@ -1,6 +1,7 @@
 # Paper pipeline rules
 
 - 2026-11-10 user-authorized HF metadata priority: historical 2025→2024 HTTP caching and adding verified HF provenance to already-public papers may precede incomplete routine receipts. Preserve runtime/public-write locks, newest-first checkpoints, review decisions and depth exclusions. This exception does not authorize model inference, accepting new papers, or moving historical candidates into routine review. New-paper review still requires routine admission and shared inference budget.
+- After each metadata cache slice, `python -m papers.hf_backfill mark-existing --start <cached-start> --end <cached-end>` may enrich only already-public arXiv/conference identities from that complete cached interval. Rebuild and verify public membership/search metadata unchanged, commit only HF source changes and affected generated output, then ordinary push and verify remote. Keep unmatched historical evidence private until an admitted review slice. The explicit metadata exception preserves pauses, pending-publication safety and the ten-minute publication reserve; there is no second scheduler.
 
 - 2026-11-09 scope update supersedes the depth-subtopic migration: stop tracking depth-estimation directions entirely, including HF and tracked-conference papers. Configured publication exclusions remove these papers from all public lists/search/digests; preserve source files and audit history. Do not merge or reopen excluded depth papers. Depth merely used as conditioning for a genuinely different research task is not sufficient for exclusion.
 
