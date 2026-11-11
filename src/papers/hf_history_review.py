@@ -15,6 +15,10 @@ from papers.summaries.paths import private_path, run_lock
 from shared.loopback_chat import LoopbackChatError, LoopbackChatTransport
 
 
+class Deferred(RuntimeError):
+    """One shared type for imported helpers and the python -m CLI boundary."""
+
+
 def priority_allowed(control, start, end):
     scope = control.get('scope', {})
     return (control.get('active') is True and control.get('model_review_authorized') is True
@@ -24,7 +28,6 @@ def priority_allowed(control, start, end):
 
 
 def admit(start, end):
-    from papers.hf_backfill import Deferred
     result = routine_priority.check()
     control = json.loads((paths.ROOT/'build/reports/hf-priority-control.json').read_text())
     if not priority_allowed(control, start, end):
@@ -123,7 +126,6 @@ def review(start, end, limit, config):
                                    '--format=csv,noheader,nounits'], text=True)
     total, free = map(float, gpu.strip().splitlines()[0].split(','))
     if free < total * .85:
-        from papers.hf_backfill import Deferred
         raise Deferred('insufficient_free_gpu_memory_for_fixed_85_percent_budget')
     deadline = time.monotonic() + 50 * 60
     client = LoopbackChatTransport('http://127.0.0.1:8000/v1', max_message_chars=32_000)
@@ -180,7 +182,7 @@ def accepted_changes(archive, ledger, scoped, decisions, topics):
 
 
 def apply_reviewed(start, end, config):
-    from papers.hf_backfill import REPORT, digest, Deferred
+    from papers.hf_backfill import REPORT, digest
     admit(start, end)
     with run_lock():
         if subprocess.check_output(['git','status','--porcelain'],cwd=paths.ROOT).strip():

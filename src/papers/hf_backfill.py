@@ -21,12 +21,9 @@ import yaml
 from papers import paths, routine_priority
 from papers.candidate_ledger import atomic_write_json, merge_collected_candidates, merge_sources, reopen_depth_candidate
 from papers.huggingface import API, daily_records, fetch_day
+from papers.hf_history_review import Deferred
 
 REPORT = paths.ROOT / 'build/reports/hf-2024-2025'
-
-
-class Deferred(RuntimeError):
-    pass
 
 
 def digest(value):
