@@ -226469,6 +226469,37 @@
       "title": "BridgeSplat: Bidirectionally Coupled CT and Non-Rigid Gaussian Splatting for Deformable Intraoperative Surgical Navigation",
       "updated": "2025-09-23"
     },
+    "2509.18538": {
+      "abstract": "Towards intelligent image editing, object removal should eliminate both the\ntarget object and its causal visual artifacts, such as shadows and reflections.\nHowever, existing image appearance-based methods either follow strictly\nmask-aligned training and fail to remove these causal effects which are not\nexplicitly masked, or adopt loosely mask-aligned strategies that lack\ncontrollability and may unintentionally over-erase other objects. We identify\nthat these limitations stem from ignoring the causal relationship between an\nobject's geometry presence and its visual effects. To address this limitation,\nwe propose a geometry-aware two-stage framework that decouples object removal\ninto (1) geometry removal and (2) appearance rendering. In the first stage, we\nremove the object directly from the geometry (e.g., depth) using strictly\nmask-aligned supervision, enabling structure-aware editing with strong\ngeometric constraints. In the second stage, we render a photorealistic RGB\nimage conditioned on the updated geometry, where causal visual effects are\nconsidered implicitly as a result of the modified 3D geometry. To guide\nlearning in the geometry removal stage, we introduce a preference-driven\nobjective based on positive and negative sample pairs, encouraging the model to\nremove objects as well as their causal visual artifacts while avoiding new\nstructural insertions. Extensive experiments demonstrate that our method\nachieves state-of-the-art performance in removing both objects and their\nassociated artifacts on two popular benchmarks. The code is available at\nhttps://github.com/buxiangzhiren/GeoRemover.",
+      "archive_rows": {
+        "Image Gen&Edit": "|**2025-09-23**|**GeoRemover: Removing Objects and Their Causal Visual Artifacts**|Zixin Zhu et.al.|[2509.18538](https://arxiv.org/abs/2509.18538)|null|\n"
+      },
+      "authors": "Zixin Zhu et.al.",
+      "collected_at": "2026-11-11T13:22:06+00:00",
+      "decision_reason": "论文提出了一种用于智能图像编辑的物体移除方法，通过几何感知的两阶段框架（几何移除与外观渲染）解决阴影等因果视觉伪影的去除问题，属于图像编辑领域的具体方法贡献。",
+      "display_id": "2509.18538",
+      "hf_daily": {
+        "dates": [
+          "2025-10-01"
+        ],
+        "evidence_sha256": "aa2aa7707ad403360a110366e98ff05c355b3969cafd81118ee1c50c781d037c",
+        "url": "https://huggingface.co/papers/2509.18538"
+      },
+      "id": "2509.18538",
+      "matched_topics": [
+        "Image Gen&Edit"
+      ],
+      "paper_url": "https://arxiv.org/abs/2509.18538",
+      "pdf_url": "https://arxiv.org/pdf/2509.18538.pdf",
+      "reviewed_at": "2026-11-11T13:22:07+00:00",
+      "selected_topic": "Image Gen&Edit",
+      "sources": [
+        "huggingface"
+      ],
+      "status": "accepted",
+      "title": "GeoRemover: Removing Objects and Their Causal Visual Artifacts",
+      "updated": "2025-09-23"
+    },
     "2509.18566": {
       "abstract": "Reconstructing dynamic humans together with static scenes from monocular videos remains difficult, especially under fast motion, where RGB frames suffer from motion blur. Event cameras exhibit distinct advantages, e.g., microsecond temporal resolution, making them a superior sensing choice for dynamic human reconstruction. Accordingly, we present a novel event-guided human-scene reconstruction framework that jointly models human and scene from a single monocular event camera via 3D Gaussian Splatting. Specifically, a unified set of 3D Gaussians carries a learnable semantic attribute; only Gaussians classified as human undergo deformation for animation, while scene Gaussians stay static. To combat blur, we propose an event-guided loss that matches simulated brightness changes between consecutive renderings with the event stream, improving local fidelity in fast-moving regions. Our approach removes the need for external human masks and simplifies managing separate Gaussian sets. On two benchmark datasets, ZJU-MoCap-Blur and MMHPSD-Blur, it delivers state-of-the-art human-scene reconstruction, with notable gains over strong baselines in PSNR/SSIM and reduced LPIPS, especially for high-speed subjects.",
       "archive_rows": {
@@ -231289,6 +231320,39 @@
       "title": "UniLat3D: Geometry-Appearance Unified Latents for Single-Stage 3D Generation",
       "updated": "2025-09-29"
     },
+    "2509.25122": {
+      "abstract": "Reconstructing 3D scenes and synthesizing novel views has seen rapid progress\nin recent years. Neural Radiance Fields demonstrated that continuous volumetric\nradiance fields can achieve high-quality image synthesis, but their long\ntraining and rendering times limit practicality. 3D Gaussian Splatting (3DGS)\naddressed these issues by representing scenes with millions of Gaussians,\nenabling real-time rendering and fast optimization. However, Gaussian\nprimitives are not natively compatible with the mesh-based pipelines used in VR\nheadsets, and real-time graphics applications. Existing solutions attempt to\nconvert Gaussians into meshes through post-processing or two-stage pipelines,\nwhich increases complexity and degrades visual quality. In this work, we\nintroduce Triangle Splatting+, which directly optimizes triangles, the\nfundamental primitive of computer graphics, within a differentiable splatting\nframework. We formulate triangle parametrization to enable connectivity through\nshared vertices, and we design a training strategy that enforces opaque\ntriangles. The final output is immediately usable in standard graphics engines\nwithout post-processing. Experiments on the Mip-NeRF360 and Tanks & Temples\ndatasets show that Triangle Splatting+achieves state-of-the-art performance in\nmesh-based novel view synthesis. Our method surpasses prior splatting\napproaches in visual fidelity while remaining efficient and fast to training.\nMoreover, the resulting semi-connected meshes support downstream applications\nsuch as physics-based simulation or interactive walkthroughs. The project page\nis https://trianglesplatting2.github.io/trianglesplatting2/.",
+      "archive_rows": {
+        "3D Gen&Recon": "|**2025-09-29**|**Triangle Splatting+: Differentiable Rendering with Opaque Triangles**|Jan Held et.al.|[2509.25122](https://arxiv.org/abs/2509.25122)|null|\n",
+        "Image Gen&Edit": "|**2025-09-29**|**Triangle Splatting+: Differentiable Rendering with Opaque Triangles**|Jan Held et.al.|[2509.25122](https://arxiv.org/abs/2509.25122)|null|\n"
+      },
+      "authors": "Jan Held et.al.",
+      "collected_at": "2026-11-11T13:22:06+00:00",
+      "decision_reason": "论文提出Triangle Splatting+方法，通过可微分渲染直接优化三角形以进行3D场景重建和新视角合成，属于3D生成与重建领域的核心贡献。",
+      "display_id": "2509.25122",
+      "hf_daily": {
+        "dates": [
+          "2025-10-06"
+        ],
+        "evidence_sha256": "80981a6d345726f71be9bdbe3d7ee3a2f47d2b53efeb397b4b4dbcb45764a9e3",
+        "url": "https://huggingface.co/papers/2509.25122"
+      },
+      "id": "2509.25122",
+      "matched_topics": [
+        "3D Gen&Recon",
+        "Image Gen&Edit"
+      ],
+      "paper_url": "https://arxiv.org/abs/2509.25122",
+      "pdf_url": "https://arxiv.org/pdf/2509.25122.pdf",
+      "reviewed_at": "2026-11-11T13:22:07+00:00",
+      "selected_topic": "3D Gen&Recon",
+      "sources": [
+        "huggingface"
+      ],
+      "status": "accepted",
+      "title": "Triangle Splatting+: Differentiable Rendering with Opaque Triangles",
+      "updated": "2025-09-29"
+    },
     "2509.25161": {
       "abstract": "Streaming video generation, as one fundamental component in interactive world models and neural game engines, aims to generate high-quality, low-latency, and temporally coherent long video streams. However, most existing work suffers from severe error accumulation that often significantly degrades the generated stream videos over long horizons. We design Rolling Forcing, a novel video generation technique that enables streaming long videos with minimal error accumulation. Rolling Forcing comes with three novel designs. First, instead of iteratively sampling individual frames, which accelerates error propagation, we design a joint denoising scheme that simultaneously denoises multiple frames with progressively increasing noise levels. This design relaxes the strict causality across adjacent frames, effectively suppressing error growth. Second, we introduce the attention sink mechanism into the long-horizon stream video generation task, which allows the model to keep key–value states of initial frames as a global context anchor and thereby enhances long-term global consistency. Third, we design an efficient training algorithm that enables few-step distillation over largely extended denoising windows. This algorithm operates on non-overlapping windows and mitigates exposure bias conditioned on self-generated histories. Extensive experiments show that Rolling Forcing enables real-time streaming generation of multi-minute videos on a single GPU, with substantially reduced error accumulation.",
       "archive_rows": {
@@ -231331,6 +231395,37 @@
       "selected_topic": "Video Gen&Edit",
       "status": "accepted",
       "title": "Rolling Forcing: Autoregressive Long Video Diffusion in Real Time",
+      "updated": "2025-09-29"
+    },
+    "2509.25162": {
+      "abstract": "In this work, we propose aligning pretrained visual encoders to serve as\ntokenizers for latent diffusion models in image generation. Unlike training a\nvariational autoencoder (VAE) from scratch, which primarily emphasizes\nlow-level details, our approach leverages the rich semantic structure of\nfoundation encoders. We introduce a three-stage alignment strategy: (1) freeze\nthe encoder and train an adapter and a decoder to establish a semantic latent\nspace; (2) jointly optimize all components with an additional semantic\npreservation loss, enabling the encoder to capture perceptual details while\nretaining high-level semantics; and (3) refine the decoder for improved\nreconstruction quality. This alignment yields semantically rich image\ntokenizers that benefit diffusion models. On ImageNet 256times256, our\ntokenizer accelerates the convergence of diffusion models, reaching a gFID of\n1.90 within just 64 epochs, and improves generation both with and without\nclassifier-free guidance. Scaling to LAION, a 2B-parameter text-to-image model\ntrained with our tokenizer consistently outperforms FLUX VAE under the same\ntraining steps. Overall, our method is simple, scalable, and establishes a\nsemantically grounded paradigm for continuous tokenizer design.",
+      "archive_rows": {
+        "Image Gen&Edit": "|**2025-09-29**|**Aligning Visual Foundation Encoders to Tokenizers for Diffusion Models**|Bowei Chen et.al.|[2509.25162](https://arxiv.org/abs/2509.25162)|null|\n"
+      },
+      "authors": "Bowei Chen et.al.",
+      "collected_at": "2026-11-11T13:22:06+00:00",
+      "decision_reason": "论文提出了一种将视觉基础编码器对齐为潜在扩散模型（Latent Diffusion Models）中tokenizer的方法，旨在提升图像生成（Image Generation）和文生图（Text-to-Image）的效果与收敛速度，属于图像生成方法贡献。",
+      "display_id": "2509.25162",
+      "hf_daily": {
+        "dates": [
+          "2025-10-02"
+        ],
+        "evidence_sha256": "33681d33031f3c36114c0cebe31059d330b65731bb6e44673403e3a8cc0526dd",
+        "url": "https://huggingface.co/papers/2509.25162"
+      },
+      "id": "2509.25162",
+      "matched_topics": [
+        "Image Gen&Edit"
+      ],
+      "paper_url": "https://arxiv.org/abs/2509.25162",
+      "pdf_url": "https://arxiv.org/pdf/2509.25162.pdf",
+      "reviewed_at": "2026-11-11T13:22:07+00:00",
+      "selected_topic": "Image Gen&Edit",
+      "sources": [
+        "huggingface"
+      ],
+      "status": "accepted",
+      "title": "Aligning Visual Foundation Encoders to Tokenizers for Diffusion Models",
       "updated": "2025-09-29"
     },
     "2509.25178": {
@@ -232560,6 +232655,37 @@
       "title": "Multi-level Dynamic Style Transfer for NeRFs",
       "updated": "2025-10-01"
     },
+    "2510.00658": {
+      "abstract": "With diffusion and flow matching models achieving state-of-the-art generating\nperformance, the interest of the community now turned to reducing the inference\ntime without sacrificing sample quality. Consistency Models (CMs), which are\ntrained to be consistent on diffusion or probability flow ordinary differential\nequation (PF-ODE) trajectories, enable one or two-step flow or diffusion\nsampling. However, CMs typically require prolonged training with large batch\nsizes to obtain competitive sample quality. In this paper, we examine the\ntraining dynamics of CMs near convergence and discover that CM tangents -- CM\noutput update directions -- are quite oscillatory, in the sense that they move\nparallel to the data manifold, not towards the manifold. To mitigate\noscillatory tangents, we propose a new loss function, called the manifold\nfeature distance (MFD), which provides manifold-aligned tangents that point\ntoward the data manifold. Consequently, our method -- dubbed Align Your Tangent\n(AYT) -- can accelerate CM training by orders of magnitude and even out-perform\nthe learned perceptual image patch similarity metric (LPIPS). Furthermore, we\nfind that our loss enables training with extremely small batch sizes without\ncompromising sample quality. Code: https://github.com/1202kbs/AYT",
+      "archive_rows": {
+        "Image Gen&Edit": "|**2025-10-01**|**Align Your Tangent: Training Better Consistency Models via Manifold-Aligned Tangents**|Beomsu Kim et.al.|[2510.00658](https://arxiv.org/abs/2510.00658)|null|\n"
+      },
+      "authors": "Beomsu Kim et.al.",
+      "collected_at": "2026-11-11T13:22:06+00:00",
+      "decision_reason": "论文提出了一种改进一致性模型（Consistency Models）训练的新损失函数，旨在加速扩散模型和流匹配模型的推理过程。一致性模型是图像生成领域的重要方法，该贡献直接优化了图像生成的训练动态和采样效率，属于图像生成方法范畴。",
+      "display_id": "2510.00658",
+      "hf_daily": {
+        "dates": [
+          "2025-10-06"
+        ],
+        "evidence_sha256": "987fe13a503f2e61d4690189a4c4c551b5912622a26c0fa801a53a1a3af423c7",
+        "url": "https://huggingface.co/papers/2510.00658"
+      },
+      "id": "2510.00658",
+      "matched_topics": [
+        "Image Gen&Edit"
+      ],
+      "paper_url": "https://arxiv.org/abs/2510.00658",
+      "pdf_url": "https://arxiv.org/pdf/2510.00658.pdf",
+      "reviewed_at": "2026-11-11T13:22:07+00:00",
+      "selected_topic": "Image Gen&Edit",
+      "sources": [
+        "huggingface"
+      ],
+      "status": "accepted",
+      "title": "Align Your Tangent: Training Better Consistency Models via Manifold-Aligned Tangents",
+      "updated": "2025-10-01"
+    },
     "2510.00796": {
       "abstract": "Recent advances in text-to-image (T2I) models, especially diffusion-based architectures, have significantly improved the visual quality of generated images. However, these models continue to struggle with a critical limitation: maintaining semantic consistency when input prompts undergo minor linguistic variations. Despite being logically equivalent, such prompt pairs often yield misaligned or semantically inconsistent images, exposing a lack of robustness in reasoning and generalisation. To address this, we propose MetaLogic, a novel evaluation framework that detects T2I misalignment without relying on ground truth images. MetaLogic leverages metamorphic testing, generating image pairs from prompts that differ grammatically but are semantically identical. By directly comparing these image pairs, the framework identifies inconsistencies that signal failures in preserving the intended meaning, effectively diagnosing robustness issues in the model’s logic understanding. Unlike existing evaluation methods that compare a generated image to a single prompt, MetaLogic evaluates semantic equivalence between paired images, offering a scalable, ground-truth-free approach to identifying alignment failures. It categorises these alignment errors (e.g., entity omission, duplication, positional misalignment) and surfaces counterexamples that can be used for model debugging and refinement. We evaluate MetaLogic across multiple state-of-the-art T2I models and reveal consistent robustness failures across a range of logical constructs. We find that even the SOTA text-to-image models like Flux.dev and DALLE-3 demonstrate a 59% and 71% misalignment rate, respectively. Our results show that MetaLogic is not only efficient and scalable, but also effective in uncovering fine-grained logical inconsistencies that are overlooked by existing evaluation metrics.",
       "archive_rows": {
@@ -233037,6 +233163,37 @@
       "status": "accepted",
       "title": "Ovi: Twin Backbone Cross-Modal Fusion for Audio-Video Generation",
       "updated": "2025-09-30"
+    },
+    "2510.01329": {
+      "abstract": "Standard discrete diffusion models treat all unobserved states identically by\nmapping them to an absorbing [MASK] token. This creates an 'information void'\nwhere semantic information that could be inferred from unmasked tokens is lost\nbetween denoising steps. We introduce Continuously Augmented Discrete Diffusion\n(CADD), a framework that augments the discrete state space with a paired\ndiffusion in a continuous latent space. This yields graded, gradually corrupted\nstates in which masked tokens are represented by noisy yet informative latent\nvectors rather than collapsed 'information voids'. At each reverse step, CADD\nmay leverage the continuous latent as a semantic hint to guide discrete\ndenoising. The design is clean and compatible with existing discrete diffusion\ntraining. At sampling time, the strength and choice of estimator for the\ncontinuous latent vector enables a controlled trade-off between mode-coverage\n(generating diverse outputs) and mode-seeking (generating contextually precise\noutputs) behaviors. Empirically, we demonstrate CADD improves generative\nquality over mask-based diffusion across text generation, image synthesis, and\ncode modeling, with consistent gains on both qualitative and quantitative\nmetrics against strong discrete baselines.",
+      "archive_rows": {
+        "Image Gen&Edit": "|**2025-10-01**|**Continuously Augmented Discrete Diffusion model for Categorical Generative Modeling**|Huangjie Zheng et.al.|[2510.01329](https://arxiv.org/abs/2510.01329)|null|\n"
+      },
+      "authors": "Huangjie Zheng et.al.",
+      "collected_at": "2026-11-11T13:22:06+00:00",
+      "decision_reason": "论文提出了CADD框架，通过连续潜空间增强离散扩散模型，并在图像合成任务中验证了其提升生成质量的有效性，属于图像生成方法贡献。",
+      "display_id": "2510.01329",
+      "hf_daily": {
+        "dates": [
+          "2025-10-06"
+        ],
+        "evidence_sha256": "424ac2658afe57e55785ab60e6cbc1deab1a5479f6803ac15f8f77918076c97c",
+        "url": "https://huggingface.co/papers/2510.01329"
+      },
+      "id": "2510.01329",
+      "matched_topics": [
+        "Image Gen&Edit"
+      ],
+      "paper_url": "https://arxiv.org/abs/2510.01329",
+      "pdf_url": "https://arxiv.org/pdf/2510.01329.pdf",
+      "reviewed_at": "2026-11-11T13:22:07+00:00",
+      "selected_topic": "Image Gen&Edit",
+      "sources": [
+        "huggingface"
+      ],
+      "status": "accepted",
+      "title": "Continuously Augmented Discrete Diffusion model for Categorical Generative Modeling",
+      "updated": "2025-10-01"
     },
     "2510.01347": {
       "abstract": "image generation based on text-to-image generation models is a task with practical application scenarios. The challenge remains that fine-grained styles cannot be precisely described and controlled in natural language, while the guidance information of stylized reference images is difficult to be directly aligned with the textual conditions of traditional textual guidance generation. Among the training-based method, some related works implement the reference image as a guidance condition by introducing a new cross-attention mechanism in the denoising network, while some others simply map the stylized image to the text space as a generative guidance. The main problem of the above works is that the content of the stylized reference image is coupled with the stylistic information, which leads to mutual interference between the image and the textual control condition, so that on the one hand, the newly generated image has similarities with the reference image in content, and on the other hand, the semantic information of the textual cues may be lost. This study focuses on how to maximize the generative capability of the pretrained generative model, by obtaining fine-grained stylistic representations from a single given stylistic reference image, and injecting the stylistic representations into the generative body without changing the structural framework of the downstream generative model, so as to achieve fine-grained controlled stylized image generation. In this study, we propose a three-stage training style extraction-based image generation method, which uses a style encoder and a style projection layer to align the style representations with the textual representations to realize fine-grained textual cue-based style guide generation. In addition, this study constructs the Style30k-captions dataset, whose samples contain a triad of images, style labels, and text descriptions, to train the style encoder and style projection layer in this experiment. Evaluation of the experimental results shows that the method in this study is able to extract fine-grained stylistic features of reference images and use them in a text-to-image generation model to generate a brand new image that conforms to the style of the target image and is consistent with the textual instructions.",
@@ -233616,6 +233773,37 @@
       "selected_topic": "3D Gen&Recon",
       "status": "accepted",
       "title": "Performance-Guided Refinement for Visual Aerial Navigation using Editable Gaussian Splatting in FalconGym 2.0",
+      "updated": "2025-10-02"
+    },
+    "2510.02253": {
+      "abstract": "Drag-based image editing has long suffered from distortions in the target\nregion, largely because the priors of earlier base models, Stable Diffusion,\nare insufficient to project optimized latents back onto the natural image\nmanifold. With the shift from UNet-based DDPMs to more scalable DiT with flow\nmatching (e.g., SD3.5, FLUX), generative priors have become significantly\nstronger, enabling advances across diverse editing tasks. However, drag-based\nediting has yet to benefit from these stronger priors. This work proposes the\nfirst framework to effectively harness FLUX's rich prior for drag-based\nediting, dubbed DragFlow, achieving substantial gains over baselines. We first\nshow that directly applying point-based drag editing to DiTs performs poorly:\nunlike the highly compressed features of UNets, DiT features are insufficiently\nstructured to provide reliable guidance for point-wise motion supervision. To\novercome this limitation, DragFlow introduces a region-based editing paradigm,\nwhere affine transformations enable richer and more consistent feature\nsupervision. Additionally, we integrate pretrained open-domain personalization\nadapters (e.g., IP-Adapter) to enhance subject consistency, while preserving\nbackground fidelity through gradient mask-based hard constraints. Multimodal\nlarge language models (MLLMs) are further employed to resolve task ambiguities.\nFor evaluation, we curate a novel Region-based Dragging benchmark (ReD Bench)\nfeaturing region-level dragging instructions. Extensive experiments on\nDragBench-DR and ReD Bench show that DragFlow surpasses both point-based and\nregion-based baselines, setting a new state-of-the-art in drag-based image\nediting. Code and datasets will be publicly available upon publication.",
+      "archive_rows": {
+        "Image Gen&Edit": "|**2025-10-02**|**DragFlow: Unleashing DiT Priors with Region Based Supervision for Drag Editing**|Zihan Zhou et.al.|[2510.02253](https://arxiv.org/abs/2510.02253)|null|\n"
+      },
+      "authors": "Zihan Zhou et.al.",
+      "collected_at": "2026-11-11T13:22:06+00:00",
+      "decision_reason": "论文提出了基于DiT和流匹配的拖拽式图像编辑方法DragFlow，属于图像编辑领域的具体方法贡献。",
+      "display_id": "2510.02253",
+      "hf_daily": {
+        "dates": [
+          "2025-10-03"
+        ],
+        "evidence_sha256": "9db48fbc5f239183fd7bb222d0252cad2dcb216ba1bcefb551e604cc225fe952",
+        "url": "https://huggingface.co/papers/2510.02253"
+      },
+      "id": "2510.02253",
+      "matched_topics": [
+        "Image Gen&Edit"
+      ],
+      "paper_url": "https://arxiv.org/abs/2510.02253",
+      "pdf_url": "https://arxiv.org/pdf/2510.02253.pdf",
+      "reviewed_at": "2026-11-11T13:22:07+00:00",
+      "selected_topic": "Image Gen&Edit",
+      "sources": [
+        "huggingface"
+      ],
+      "status": "accepted",
+      "title": "DragFlow: Unleashing DiT Priors with Region Based Supervision for Drag Editing",
       "updated": "2025-10-02"
     },
     "2510.02283": {
@@ -234209,6 +234397,37 @@
       "title": "Input-Aware Sparse Attention for Real-Time Co-Speech Video Generation",
       "updated": "2025-10-02"
     },
+    "2510.02730": {
+      "abstract": "Gradient descent has proven to be a powerful and effective technique for\noptimization in numerous machine learning applications. Recent advances in\ncomputational neuroscience have shown that learning in standard gradient\ndescent optimization formulation is not consistent with learning in biological\nsystems. This has opened up interesting avenues for building biologically\ninspired learning techniques. One such approach is inspired by Dale's law,\nwhich states that inhibitory and excitatory synapses do not swap roles during\nthe course of learning. The resulting exponential gradient descent optimization\nscheme leads to log-normally distributed synaptic weights. Interestingly, the\ndensity that satisfies the Fokker-Planck equation corresponding to the\nstochastic differential equation (SDE) with geometric Brownian motion (GBM) is\nthe log-normal density. Leveraging this connection, we start with the SDE\ngoverning geometric Brownian motion, and show that discretizing the\ncorresponding reverse-time SDE yields a multiplicative update rule, which\nsurprisingly, coincides with the sampling equivalent of the exponential\ngradient descent update founded on Dale's law. Furthermore, we propose a new\nformalism for multiplicative denoising score-matching, subsuming the loss\nfunction proposed by Hyvaerinen for non-negative data. Indeed, log-normally\ndistributed data is positive and the proposed score-matching formalism turns\nout to be a natural fit. This allows for training of score-based models for\nimage data and results in a novel multiplicative update scheme for sample\ngeneration starting from a log-normal density. Experimental results on MNIST,\nFashion MNIST, and Kuzushiji datasets demonstrate generative capability of the\nnew scheme. To the best of our knowledge, this is the first instance of a\nbiologically inspired generative model employing multiplicative updates,\nfounded on geometric Brownian motion.",
+      "archive_rows": {
+        "Image Gen&Edit": "|**2025-10-03**|**Dale meets Langevin: A Multiplicative Denoising Diffusion Model**|Nishanth Shetty et.al.|[2510.02730](https://arxiv.org/abs/2510.02730)|null|\n"
+      },
+      "authors": "Nishanth Shetty et.al.",
+      "collected_at": "2026-11-11T13:22:06+00:00",
+      "decision_reason": "论文提出了一种基于几何布朗运动的乘性去噪扩散模型，并展示了其在图像生成任务（如MNIST）上的应用，属于图像生成方法贡献。",
+      "display_id": "2510.02730",
+      "hf_daily": {
+        "dates": [
+          "2025-10-06"
+        ],
+        "evidence_sha256": "4462ea8056526eff479d6c012c69f268fcb68296851ab871abff3988edf1a57f",
+        "url": "https://huggingface.co/papers/2510.02730"
+      },
+      "id": "2510.02730",
+      "matched_topics": [
+        "Image Gen&Edit"
+      ],
+      "paper_url": "https://arxiv.org/abs/2510.02730",
+      "pdf_url": "https://arxiv.org/pdf/2510.02730.pdf",
+      "reviewed_at": "2026-11-11T13:22:07+00:00",
+      "selected_topic": "Image Gen&Edit",
+      "sources": [
+        "huggingface"
+      ],
+      "status": "accepted",
+      "title": "Dale meets Langevin: A Multiplicative Denoising Diffusion Model",
+      "updated": "2025-10-03"
+    },
     "2510.02732": {
       "abstract": "Dynamic 3D reconstruction from monocular videos remains difficult due to the ambiguity inferring 3D motion from limited views and computational demands of modeling temporally varying scenes. While recent sparse control methods alleviate computation by reducing millions of Gaussians to thousands of control points, they suffer from a critical limitation: they allocate points purely by geometry, leading to static redundancy and dynamic insufficiency. We propose a motion-adaptive framework that aligns control density with motion complexity. Leveraging semantic and motion priors from vision foundation models, we establish patch-token-node correspondences and apply motion-adaptive compression to concentrate control points in dynamic regions while suppressing redundancy in static backgrounds. Our approach achieves flexible representational density adaptation through iterative voxelization and motion tendency scoring, directly addressing the fundamental mismatch between control point allocation and motion complexity. To capture temporal evolution, we introduce spline-based trajectory parameterization initialized by 2D tracklets, replacing MLP-based deformation fields to achieve smoother motion representation and more stable optimization. Extensive experiments demonstrate significant improvements in reconstruction quality and efficiency over existing state-of-the-art methods.",
       "archive_rows": {
@@ -234753,6 +234972,68 @@
       "status": "rejected",
       "title": "Learned Display Radiance Fields with Lensless Cameras",
       "updated": "2025-10-02"
+    },
+    "2510.03434": {
+      "abstract": "We present Paris, the first publicly released diffusion model pre-trained\nentirely through decentralized computation. Paris demonstrates that\nhigh-quality text-to-image generation can be achieved without centrally\ncoordinated infrastructure. Paris is open for research and commercial use.\nParis required implementing our Distributed Diffusion Training framework from\nscratch. The model consists of 8 expert diffusion models (129M-605M parameters\neach) trained in complete isolation with no gradient, parameter, or\nintermediate activation synchronization. Rather than requiring synchronized\ngradient updates across thousands of GPUs, we partition data into semantically\ncoherent clusters where each expert independently optimizes its subset while\ncollectively approximating the full distribution. A lightweight transformer\nrouter dynamically selects appropriate experts at inference, achieving\ngeneration quality comparable to centrally coordinated baselines. Eliminating\nsynchronization enables training on heterogeneous hardware without specialized\ninterconnects. Empirical validation confirms that Paris's decentralized\ntraining maintains generation quality while removing the dedicated GPU cluster\nrequirement for large-scale diffusion models. Paris achieves this using\n14times less training data and 16times less compute than the prior\ndecentralized baseline.",
+      "archive_rows": {
+        "Image Gen&Edit": "|**2025-10-03**|**Paris: A Decentralized Trained Open-Weight Diffusion Model**|Zhiying Jiang et.al.|[2510.03434](https://arxiv.org/abs/2510.03434)|null|\n"
+      },
+      "authors": "Zhiying Jiang et.al.",
+      "collected_at": "2026-11-11T13:22:06+00:00",
+      "decision_reason": "论文提出了一种去中心化训练的扩散模型，用于高质量的文生图任务，属于图像生成方法。",
+      "display_id": "2510.03434",
+      "hf_daily": {
+        "dates": [
+          "2025-10-07"
+        ],
+        "evidence_sha256": "e6b08c0330df6ab067b5266ab8bf573a7cbf328c32284b9ae6795295c5089f88",
+        "url": "https://huggingface.co/papers/2510.03434"
+      },
+      "id": "2510.03434",
+      "matched_topics": [
+        "Image Gen&Edit"
+      ],
+      "paper_url": "https://arxiv.org/abs/2510.03434",
+      "pdf_url": "https://arxiv.org/pdf/2510.03434.pdf",
+      "reviewed_at": "2026-11-11T13:22:07+00:00",
+      "selected_topic": "Image Gen&Edit",
+      "sources": [
+        "huggingface"
+      ],
+      "status": "accepted",
+      "title": "Paris: A Decentralized Trained Open-Weight Diffusion Model",
+      "updated": "2025-10-03"
+    },
+    "2510.03506": {
+      "abstract": "We present OneFlow, the first non-autoregressive multimodal model that\nenables variable-length and concurrent mixed-modal generation. Unlike\nautoregressive models that enforce rigid causal ordering between text and image\ngeneration, OneFlow combines an insertion-based Edit Flow for discrete text\ntokens with Flow Matching for image latents. OneFlow enables concurrent\ntext-image synthesis with hierarchical sampling that prioritizes content over\ngrammar. Through controlled experiments across model sizes from 1B to 8B, we\ndemonstrate that OneFlow outperforms autoregressive baselines on both\ngeneration and understanding tasks while using up to 50% fewer training FLOPs.\nOneFlow surpasses both autoregressive and diffusion-based approaches while\nunlocking new capabilities for concurrent generation, iterative refinement, and\nnatural reasoning-like generation.",
+      "archive_rows": {
+        "Image Gen&Edit": "|**2025-10-03**|**OneFlow: Concurrent Mixed-Modal and Interleaved Generation with Edit Flows**|John Nguyen et.al.|[2510.03506](https://arxiv.org/abs/2510.03506)|null|\n"
+      },
+      "authors": "John Nguyen et.al.",
+      "collected_at": "2026-11-11T13:22:06+00:00",
+      "decision_reason": "论文提出OneFlow模型，结合Flow Matching和Edit Flow实现文本与图像的并发混合模态生成，属于图像生成与编辑方法。",
+      "display_id": "2510.03506",
+      "hf_daily": {
+        "dates": [
+          "2025-10-08"
+        ],
+        "evidence_sha256": "5974e62d4ac1dec3507f88a24401f82bedda88b34d7ceb6600c3d68cf69b8ab9",
+        "url": "https://huggingface.co/papers/2510.03506"
+      },
+      "id": "2510.03506",
+      "matched_topics": [
+        "Image Gen&Edit"
+      ],
+      "paper_url": "https://arxiv.org/abs/2510.03506",
+      "pdf_url": "https://arxiv.org/pdf/2510.03506.pdf",
+      "reviewed_at": "2026-11-11T13:22:07+00:00",
+      "selected_topic": "Image Gen&Edit",
+      "sources": [
+        "huggingface"
+      ],
+      "status": "accepted",
+      "title": "OneFlow: Concurrent Mixed-Modal and Interleaved Generation with Edit Flows",
+      "updated": "2025-10-03"
     },
     "2510.03597": {
       "abstract": "Scaling generative AI models is bottlenecked by the scarcity of high-quality training data. The ease of synthesizing from a generative model suggests using (unverified) synthetic data to augment a limited corpus of real data for the purpose of fine-tuning in the hope of improving performance. Unfortunately, however, the resulting positive feedback loop leads to model autophagy disorder (MAD, aka model collapse) that results in a rapid degradation in sample quality and/or diversity. In this paper, we introduce Neon (for Negative Extrapolation frOm self-traiNing), a new learning method that turns the degradation from self-training into a powerful signal for self-improvement. Given a base model, Neon first fine-tunes it on its own self-synthesized data but then, counterintuitively, reverses its gradient updates to extrapolate away from the degraded weights. We prove that Neon works because typical inference samplers that favor high-probability regions create a predictable anti-alignment between the synthetic and real data population gradients, which negative extrapolation corrects to better align the model with the true data distribution. Neon is remarkably easy to implement via a simple post-hoc merge that requires no new real data, works effectively with as few as 1k synthetic samples, and typically uses less than 1% additional training compute. We demonstrate Neon’s universality across a range of architectures (diffusion, flow matching, autoregressive, and inductive moment matching models) and datasets (ImageNet, CIFAR-10, and FFHQ). In particular, on ImageNet 256x256, Neon elevates the xAR-L model to a new state-of-the-art FID of 1.02 with only 0.36% additional training compute. Code is available at https://github.com/VITA-Group/Neon xAR-L xAR-L + Neon",
@@ -235667,6 +235948,39 @@
       "title": "Bridging Text and Video Generation: A Survey",
       "updated": "2025-10-06"
     },
+    "2510.05057": {
+      "abstract": "A fundamental challenge in embodied intelligence is developing expressive and\ncompact state representations for efficient world modeling and decision making.\nHowever, existing methods often fail to achieve this balance, yielding\nrepresentations that are either overly redundant or lacking in task-critical\ninformation. We propose an unsupervised approach that learns a highly\ncompressed two-token state representation using a lightweight encoder and a\npre-trained Diffusion Transformer (DiT) decoder, capitalizing on its strong\ngenerative prior. Our representation is efficient, interpretable, and\nintegrates seamlessly into existing VLA-based models, improving performance by\n14.3% on LIBERO and 30% in real-world task success with minimal inference\noverhead. More importantly, we find that the difference between these tokens,\nobtained via latent interpolation, naturally serves as a highly effective\nlatent action, which can be further decoded into executable robot actions. This\nemergent capability reveals that our representation captures structured\ndynamics without explicit supervision. We name our method StaMo for its ability\nto learn generalizable robotic Motion from compact State representation, which\nis encoded from static images, challenging the prevalent dependence to learning\nlatent action on complex architectures and video data. The resulting latent\nactions also enhance policy co-training, outperforming prior methods by 10.4%\nwith improved interpretability. Moreover, our approach scales effectively\nacross diverse data sources, including real-world robot data, simulation, and\nhuman egocentric video.",
+      "archive_rows": {
+        "Image Gen&Edit": "|**2025-10-06**|**StaMo: Unsupervised Learning of Generalizable Robot Motion from Compact State Representation**|Mingyu Liu et.al.|[2510.05057](https://arxiv.org/abs/2510.05057)|null|\n",
+        "World Model": "|**2025-10-06**|**StaMo: Unsupervised Learning of Generalizable Robot Motion from Compact State Representation**|Mingyu Liu et.al.|[2510.05057](https://arxiv.org/abs/2510.05057)|null|\n"
+      },
+      "authors": "Mingyu Liu et.al.",
+      "collected_at": "2026-11-11T13:22:06+00:00",
+      "decision_reason": "论文提出了一种用于具身智能的无监督状态表示学习方法，旨在实现高效的世界建模（world modeling）和决策。虽然使用了DiT解码器，但其核心贡献在于从静态图像中学习紧凑状态表示以捕捉结构化动态并生成潜在动作，属于交互式环境或物理动态的预测/生成模型范畴，符合World Model定义。",
+      "display_id": "2510.05057",
+      "hf_daily": {
+        "dates": [
+          "2025-10-09"
+        ],
+        "evidence_sha256": "94b2c350543d40e8f584577c4748386e196ade0da8c7d6dc7bf457df4d76ff95",
+        "url": "https://huggingface.co/papers/2510.05057"
+      },
+      "id": "2510.05057",
+      "matched_topics": [
+        "Image Gen&Edit",
+        "World Model"
+      ],
+      "paper_url": "https://arxiv.org/abs/2510.05057",
+      "pdf_url": "https://arxiv.org/pdf/2510.05057.pdf",
+      "reviewed_at": "2026-11-11T13:22:07+00:00",
+      "selected_topic": "World Model",
+      "sources": [
+        "huggingface"
+      ],
+      "status": "accepted",
+      "title": "StaMo: Unsupervised Learning of Generalizable Robot Motion from Compact State Representation",
+      "updated": "2025-10-06"
+    },
     "2510.05081": {
       "abstract": "Large-scale text-to-image diffusion models have become the backbone of modern image editing, yet text prompts alone do not offer adequate control over the editing process. Two properties are especially desirable: disentanglement, where changing one attribute does not unintentionally alter others, and continuous control, where the strength of an edit can be smoothly adjusted. We introduce a method for disentangled and continuous editing through token-level manipulation of text embeddings. The edits are applied by manipulating the embeddings along carefully chosen directions, which control the strength of the target attribute. To identify such directions, we employ a Sparse Autoencoder (SAE), whose sparse latent space exposes semantically isolated dimensions. Our method operates directly on text embeddings without modifying the diffusion process, making it model agnostic and broadly applicable to various image synthesis backbones. Experiments show that it enables intuitive and efficient manipulations with continuous control across diverse attributes and domains.",
       "archive_rows": {
@@ -236041,6 +236355,37 @@
       "title": "LightCache: Memory-Efficient, Training-Free Acceleration for Video Generation",
       "updated": "2025-10-06"
     },
+    "2510.05560": {
+      "abstract": "Digitizing the physical world into accurate simulation-ready virtual\nenvironments offers significant opportunities in a variety of fields such as\naugmented and virtual reality, gaming, and robotics. However, current 3D\nreconstruction and scene-understanding methods commonly fall short in one or\nmore critical aspects, such as geometry completeness, object interactivity,\nphysical plausibility, photorealistic rendering, or realistic physical\nproperties for reliable dynamic simulation. To address these limitations, we\nintroduce HoloScene, a novel interactive 3D reconstruction framework that\nsimultaneously achieves these requirements. HoloScene leverages a comprehensive\ninteractive scene-graph representation, encoding object geometry, appearance,\nand physical properties alongside hierarchical and inter-object relationships.\nReconstruction is formulated as an energy-based optimization problem,\nintegrating observational data, physical constraints, and generative priors\ninto a unified, coherent objective. Optimization is efficiently performed via a\nhybrid approach combining sampling-based exploration with gradient-based\nrefinement. The resulting digital twins exhibit complete and precise geometry,\nphysical stability, and realistic rendering from novel viewpoints. Evaluations\nconducted on multiple benchmark datasets demonstrate superior performance,\nwhile practical use-cases in interactive gaming and real-time digital-twin\nmanipulation illustrate HoloScene's broad applicability and effectiveness.\nProject page: https://xiahongchi.github.io/HoloScene.",
+      "archive_rows": {
+        "3D Gen&Recon": "|**2025-10-07**|**HoloScene: Simulation-Ready Interactive 3D Worlds from a Single Video**|Hongchi Xia et.al.|[2510.05560](https://arxiv.org/abs/2510.05560)|null|\n"
+      },
+      "authors": "Hongchi Xia et.al.",
+      "collected_at": "2026-11-11T13:22:06+00:00",
+      "decision_reason": "论文提出了一种从单视频重建交互式3D场景的方法，涉及几何、外观及物理属性的重建与渲染，符合3D生成与重建主题。",
+      "display_id": "2510.05560",
+      "hf_daily": {
+        "dates": [
+          "2025-10-08"
+        ],
+        "evidence_sha256": "3959ea0ee4cdf0888093433bfa82cd4c8d68a38bb6820c616f5505b59d7e4f9e",
+        "url": "https://huggingface.co/papers/2510.05560"
+      },
+      "id": "2510.05560",
+      "matched_topics": [
+        "3D Gen&Recon"
+      ],
+      "paper_url": "https://arxiv.org/abs/2510.05560",
+      "pdf_url": "https://arxiv.org/pdf/2510.05560.pdf",
+      "reviewed_at": "2026-11-11T13:22:07+00:00",
+      "selected_topic": "3D Gen&Recon",
+      "sources": [
+        "huggingface"
+      ],
+      "status": "accepted",
+      "title": "HoloScene: Simulation-Ready Interactive 3D Worlds from a Single Video",
+      "updated": "2025-10-07"
+    },
     "2510.05593": {
       "abstract": "Autoregressive multimodal large language models have recently gained popularity for image generation, driven by advances in foundation models. To enhance alignment and detail, newer approaches employ chain-of-thought (CoT) reasoning, expanding user inputs into elaborated prompts prior to image synthesis. However, this strategy can introduce unnecessary redundancy—a phenomenon we call visual overthinking—which increases computational costs and can introduce details that contradict the original prompt. In this work, we explore how to generate more concise CoT sequences for more efficient image generation. We introduce ShortCoTI, a lightweight optimization framework that encourages more concise CoT while preserving output image quality. ShortCoTI rewards more concise prompts with an adaptive function that scales according to an estimated difficulty for each task. Incorporating this reward into a reinforcement learning paradigm reduces prompt reasoning length by 54%54\\% while maintaining or slightly improving quality metrics across multiple benchmarks (T2I-CompBench, GenEval). Qualitative analysis shows that our method eliminates verbose explanations and repetitive refinements, producing reasoning prompts that are both concise and semantically rich. As a result, ShortCoTI improves computational efficiency without compromising the fidelity or visual appeal of generated images.",
       "archive_rows": {
@@ -236188,6 +236533,68 @@
       "title": "Diffusion-Based Image Editing for Breaking Robust Watermarks",
       "updated": "2025-10-07"
     },
+    "2510.06131": {
+      "abstract": "Recent advances in generative medical models are constrained by\nmodality-specific scenarios that hinder the integration of complementary\nevidence from imaging, pathology, and clinical notes. This fragmentation limits\ntheir evolution into foundation models that can learn and reason across the\nfull spectrum of biomedical data. We propose MeDiM, the first medical discrete\ndiffusion model that learns shared distributions across modalities without\nmodality-specific components. MeDiM unifies multiple generative tasks:\ntranslating between images and text, and jointly producing image-report pairs\nacross domains in response to prompts. Built on a discrete diffusion framework,\nMeDiM bridges vision and language representations through a shared\nprobabilistic space. To enable unified and flexible medical generation, we\nemploy a multimodal large language model (MLLM) as the diffusion backbone,\nleveraging its prior knowledge and cross-modal reasoning. Two key designs are\nintroduced: (1) removing the causal attention mask for bidirectional context,\nand (2) injecting continuous timestep embeddings for diffusion awareness.\nExperiments demonstrate high-fidelity medical generation (FID 16.60 on\nMIMIC-CXR and FID 24.19 on PathGen) and accurate report generation (METEOR\n0.2650 and 0.2580). Jointly generated image-report pairs further enhance\ndownstream performance (plus6.43 percent BLEU-1, plus18.57 percent BLEU-2,\nplus31.58 percent BLEU-3, plus4.80 percent METEOR), showing that MeDiM supports\ncoherent and clinically grounded multimodal outputs.",
+      "archive_rows": {
+        "Image Gen&Edit": "|**2025-10-07**|**Discrete Diffusion Models with MLLMs for Unified Medical Multimodal Generation**|Jiawei Mao et.al.|[2510.06131](https://arxiv.org/abs/2510.06131)|null|\n"
+      },
+      "authors": "Jiawei Mao et.al.",
+      "collected_at": "2026-11-11T13:22:06+00:00",
+      "decision_reason": "论文提出了基于离散扩散模型和MLLM的医疗多模态生成方法，核心贡献包括图像生成、图文互译及联合生成，属于图像生成与编辑范畴。",
+      "display_id": "2510.06131",
+      "hf_daily": {
+        "dates": [
+          "2025-10-08"
+        ],
+        "evidence_sha256": "8c2ab2ffb206c013cbd2a08bb7d53f4e32b4763de5989a4a825e3d608c124ae6",
+        "url": "https://huggingface.co/papers/2510.06131"
+      },
+      "id": "2510.06131",
+      "matched_topics": [
+        "Image Gen&Edit"
+      ],
+      "paper_url": "https://arxiv.org/abs/2510.06131",
+      "pdf_url": "https://arxiv.org/pdf/2510.06131.pdf",
+      "reviewed_at": "2026-11-11T13:22:07+00:00",
+      "selected_topic": "Image Gen&Edit",
+      "sources": [
+        "huggingface"
+      ],
+      "status": "accepted",
+      "title": "Discrete Diffusion Models with MLLMs for Unified Medical Multimodal Generation",
+      "updated": "2025-10-07"
+    },
+    "2510.06199": {
+      "abstract": "Hair care is an essential daily activity, yet it remains inaccessible to\nindividuals with limited mobility and challenging for autonomous robot systems\ndue to the fine-grained physical structure and complex dynamics of hair. In\nthis work, we present DYMO-Hair, a model-based robot hair care system. We\nintroduce a novel dynamics learning paradigm that is suited for volumetric\nquantities such as hair, relying on an action-conditioned latent state editing\nmechanism, coupled with a compact 3D latent space of diverse hairstyles to\nimprove generalizability. This latent space is pre-trained at scale using a\nnovel hair physics simulator, enabling generalization across previously unseen\nhairstyles. Using the dynamics model with a Model Predictive Path Integral\n(MPPI) planner, DYMO-Hair is able to perform visual goal-conditioned hair\nstyling. Experiments in simulation demonstrate that DYMO-Hair's dynamics model\noutperforms baselines on capturing local deformation for diverse, unseen\nhairstyles. DYMO-Hair further outperforms baselines in closed-loop hair styling\ntasks on unseen hairstyles, with an average of 22% lower final geometric error\nand 42% higher success rate than the state-of-the-art system. Real-world\nexperiments exhibit zero-shot transferability of our system to wigs, achieving\nconsistent success on challenging unseen hairstyles where the state-of-the-art\nsystem fails. Together, these results introduce a foundation for model-based\nrobot hair care, advancing toward more generalizable, flexible, and accessible\nrobot hair styling in unconstrained physical environments. More details are\navailable on our project page: https://chengyzhao.github.io/DYMOHair-web/.",
+      "archive_rows": {
+        "World Model": "|**2025-10-07**|**DYMO-Hair: Generalizable Volumetric Dynamics Modeling for Robot Hair Manipulation**|Chengyang Zhao et.al.|[2510.06199](https://arxiv.org/abs/2510.06199)|null|\n"
+      },
+      "authors": "Chengyang Zhao et.al.",
+      "collected_at": "2026-11-11T13:22:06+00:00",
+      "decision_reason": "论文提出了一种基于动作条件的潜在状态编辑机制和3D潜在空间，用于学习头发这种体积量的物理动力学，属于学习环境物理动态的生成或预测模型，符合世界模型定义。",
+      "display_id": "2510.06199",
+      "hf_daily": {
+        "dates": [
+          "2025-10-08"
+        ],
+        "evidence_sha256": "541b60a236be3cb4fcbc6fd69157f24e79e52364d6fd2e5474e1744105da56dc",
+        "url": "https://huggingface.co/papers/2510.06199"
+      },
+      "id": "2510.06199",
+      "matched_topics": [
+        "World Model"
+      ],
+      "paper_url": "https://arxiv.org/abs/2510.06199",
+      "pdf_url": "https://arxiv.org/pdf/2510.06199.pdf",
+      "reviewed_at": "2026-11-11T13:22:07+00:00",
+      "selected_topic": "World Model",
+      "sources": [
+        "huggingface"
+      ],
+      "status": "accepted",
+      "title": "DYMO-Hair: Generalizable Volumetric Dynamics Modeling for Robot Hair Manipulation",
+      "updated": "2025-10-07"
+    },
     "2510.06209": {
       "abstract": "Recent advances in generative models have sparked exciting new possibilities in the field of autonomous vehicles. Specifically, video generation models are now being explored as controllable virtual testing environments. Simultaneously, end-to-end (E2E) driving models have emerged as a streamlined alternative to conventional modular autonomous driving systems, gaining popularity for their simplicity and scalability. However, the application of these techniques to simulation and planning raises important questions. First, while video generation models can generate increasingly realistic videos, can these videos faithfully adhere to the specified conditions and be realistic enough for E2E autonomous planner evaluation? Second, given that data is crucial for understanding and controlling E2E planners, how can we gain deeper insights into their biases and improve their ability to generalize to out-of-distribution scenarios? In this work, we bridge the gap between the driving models and generative world models (Drive&Gen) to address these questions. We propose novel statistical measures leveraging E2E drivers to evaluate the realism of generated videos. By exploiting the controllability of the video generation model, we conduct targeted experiments to investigate distribution gaps affecting E2E planner performance. Finally, we show that synthetic data produced by the video generation model offers a cost-effective alternative to real-world data collection. This synthetic data effectively improves E2E model generalization beyond existing Operational Design Domains, facilitating the expansion of autonomous vehicle services into new operational contexts.",
       "archive_rows": {
@@ -236285,6 +236692,37 @@
       "selected_topic": "Image Gen&Edit",
       "status": "accepted",
       "title": "Fine-grained Defocus Blur Control for Generative Image Models",
+      "updated": "2025-10-07"
+    },
+    "2510.06219": {
+      "abstract": "We present Human3R, a unified, feed-forward framework for online 4D\nhuman-scene reconstruction, in the world frame, from casually captured\nmonocular videos. Unlike previous approaches that rely on multi-stage\npipelines, iterative contact-aware refinement between humans and scenes, and\nheavy dependencies, e.g., human detection, depth estimation, and SLAM\npre-processing, Human3R jointly recovers global multi-person SMPL-X bodies\n(\"everyone\"), dense 3D scene (\"everywhere\"), and camera trajectories in a\nsingle forward pass (\"all-at-once\"). Our method builds upon the 4D online\nreconstruction model CUT3R, and uses parameter-efficient visual prompt tuning,\nto strive to preserve CUT3R's rich spatiotemporal priors, while enabling direct\nreadout of multiple SMPL-X bodies. Human3R is a unified model that eliminates\nheavy dependencies and iterative refinement. After being trained on the\nrelatively small-scale synthetic dataset BEDLAM for just one day on one GPU, it\nachieves superior performance with remarkable efficiency: it reconstructs\nmultiple humans in a one-shot manner, along with 3D scenes, in one stage, at\nreal-time speed (15 FPS) with a low memory footprint (8 GB). Extensive\nexperiments demonstrate that Human3R delivers state-of-the-art or competitive\nperformance across tasks, including global human motion estimation, local human\nmesh recovery, video depth estimation, and camera pose estimation, with a\nsingle unified model. We hope that Human3R will serve as a simple yet strong\nbaseline, be easily extended for downstream applications.Code available in\nhttps://fanegg.github.io/Human3R",
+      "archive_rows": {
+        "3D Gen&Recon": "|**2025-10-07**|**Human3R: Everyone Everywhere All at Once**|Yue Chen et.al.|[2510.06219](https://arxiv.org/abs/2510.06219)|null|\n"
+      },
+      "authors": "Yue Chen et.al.",
+      "collected_at": "2026-11-11T13:22:06+00:00",
+      "decision_reason": "论文提出了一种统一的单目视频4D人-场景重建框架，能够同时恢复人体网格、3D场景和相机轨迹，属于3D/4D重建与神经渲染范畴。",
+      "display_id": "2510.06219",
+      "hf_daily": {
+        "dates": [
+          "2025-10-08"
+        ],
+        "evidence_sha256": "d7a5c51693c01f0c21d8c030f2f1d8cf04f80b0a539d0b450921126a41cada28",
+        "url": "https://huggingface.co/papers/2510.06219"
+      },
+      "id": "2510.06219",
+      "matched_topics": [
+        "3D Gen&Recon"
+      ],
+      "paper_url": "https://arxiv.org/abs/2510.06219",
+      "pdf_url": "https://arxiv.org/pdf/2510.06219.pdf",
+      "reviewed_at": "2026-11-11T13:22:07+00:00",
+      "selected_topic": "3D Gen&Recon",
+      "sources": [
+        "huggingface"
+      ],
+      "status": "accepted",
+      "title": "Human3R: Everyone Everywhere All at Once",
       "updated": "2025-10-07"
     },
     "2510.06295": {
@@ -236424,6 +236862,68 @@
       "status": "accepted",
       "title": "How Well Do Latent World Models Understand Partially Observable Safety Constraints?",
       "updated": "2025-10-07"
+    },
+    "2510.06679": {
+      "abstract": "Recent advancements in instruction-based image editing and subject-driven\ngeneration have garnered significant attention, yet both tasks still face\nlimitations in meeting practical user needs. Instruction-based editing relies\nsolely on language instructions, which often fail to capture specific editing\ndetails, making reference images necessary. Meanwhile, subject-driven\ngeneration is limited to combining concrete objects or people, overlooking\nbroader, abstract concepts. To address these challenges, we propose two novel\ntasks: multimodal instruction-based editing and generation. These tasks support\nboth text and image instructions and extend the scope to include both concrete\nand abstract concepts, greatly enhancing their practical applications. We\nintroduce DreamOmni2, tackling two primary challenges: data creation and model\nframework design. Our data synthesis pipeline consists of three steps: (1)\nusing a feature mixing method to create extraction data for both abstract and\nconcrete concepts, (2) generating multimodal instruction-based editing training\ndata using the editing and extraction models, and (3) further applying the\nextraction model to create training data for multimodal instruction-based\nediting. For the framework, to handle multi-image input, we propose an index\nencoding and position encoding shift scheme, which helps the model distinguish\nimages and avoid pixel confusion. Additionally, we introduce joint training\nwith the VLM and our generation/editing model to better process complex\ninstructions. In addition, we have proposed comprehensive benchmarks for these\ntwo new tasks to drive their development. Experiments show that DreamOmni2 has\nachieved impressive results. Models and codes will be released.",
+      "archive_rows": {
+        "Image Gen&Edit": "|**2025-10-08**|**DreamOmni2: Multimodal Instruction-based Editing and Generation**|Bin Xia et.al.|[2510.06679](https://arxiv.org/abs/2510.06679)|null|\n"
+      },
+      "authors": "Bin Xia et.al.",
+      "collected_at": "2026-11-11T13:22:06+00:00",
+      "decision_reason": "论文提出了多模态指令驱动图像编辑与生成的新方法，包含数据合成管线及模型框架设计，属于图像生成与编辑领域的核心贡献。",
+      "display_id": "2510.06679",
+      "hf_daily": {
+        "dates": [
+          "2025-10-10"
+        ],
+        "evidence_sha256": "2375375a8a4abdadec5d0ccca1e91ae25bffed030c3b2acd5f9aed1ee51701cd",
+        "url": "https://huggingface.co/papers/2510.06679"
+      },
+      "id": "2510.06679",
+      "matched_topics": [
+        "Image Gen&Edit"
+      ],
+      "paper_url": "https://arxiv.org/abs/2510.06679",
+      "pdf_url": "https://arxiv.org/pdf/2510.06679.pdf",
+      "reviewed_at": "2026-11-11T13:22:07+00:00",
+      "selected_topic": "Image Gen&Edit",
+      "sources": [
+        "huggingface"
+      ],
+      "status": "accepted",
+      "title": "DreamOmni2: Multimodal Instruction-based Editing and Generation",
+      "updated": "2025-10-08"
+    },
+    "2510.06751": {
+      "abstract": "Large-scale text-to-image diffusion models, while powerful, suffer from\nprohibitive computational cost. Existing one-shot network pruning methods can\nhardly be directly applied to them due to the iterative denoising nature of\ndiffusion models. To bridge the gap, this paper presents OBS-Diff, a novel\none-shot pruning framework that enables accurate and training-free compression\nof large-scale text-to-image diffusion models. Specifically, (i) OBS-Diff\nrevitalizes the classic Optimal Brain Surgeon (OBS), adapting it to the complex\narchitectures of modern diffusion models and supporting diverse pruning\ngranularity, including unstructured, N:M semi-structured, and structured (MHA\nheads and FFN neurons) sparsity; (ii) To align the pruning criteria with the\niterative dynamics of the diffusion process, by examining the problem from an\nerror-accumulation perspective, we propose a novel timestep-aware Hessian\nconstruction that incorporates a logarithmic-decrease weighting scheme,\nassigning greater importance to earlier timesteps to mitigate potential error\naccumulation; (iii) Furthermore, a computationally efficient group-wise\nsequential pruning strategy is proposed to amortize the expensive calibration\nprocess. Extensive experiments show that OBS-Diff achieves state-of-the-art\none-shot pruning for diffusion models, delivering inference acceleration with\nminimal degradation in visual quality.",
+      "archive_rows": {
+        "Image Gen&Edit": "|**2025-10-08**|**OBS-Diff: Accurate Pruning For Diffusion Models in One-Shot**|Junhan Zhu et.al.|[2510.06751](https://arxiv.org/abs/2510.06751)|null|\n"
+      },
+      "authors": "Junhan Zhu et.al.",
+      "collected_at": "2026-11-11T13:22:06+00:00",
+      "decision_reason": "论文提出针对文本到图像扩散模型的高效剪枝方法，属于图像生成领域的模型压缩与加速贡献。",
+      "display_id": "2510.06751",
+      "hf_daily": {
+        "dates": [
+          "2025-10-09"
+        ],
+        "evidence_sha256": "1ada8c69d6771bceb05add859e9625604effb828bfb9618e1883d58275296574",
+        "url": "https://huggingface.co/papers/2510.06751"
+      },
+      "id": "2510.06751",
+      "matched_topics": [
+        "Image Gen&Edit"
+      ],
+      "paper_url": "https://arxiv.org/abs/2510.06751",
+      "pdf_url": "https://arxiv.org/pdf/2510.06751.pdf",
+      "reviewed_at": "2026-11-11T13:22:07+00:00",
+      "selected_topic": "Image Gen&Edit",
+      "sources": [
+        "huggingface"
+      ],
+      "status": "accepted",
+      "title": "OBS-Diff: Accurate Pruning For Diffusion Models in One-Shot",
+      "updated": "2025-10-08"
     },
     "2510.06802": {
       "abstract": "Capturing and rendering three-dimensional (3D) objects in real time remain a significant challenge, yet hold substantial potential for applications in augmented reality, digital twin systems, remote collaboration and prototyping. We present an end-to-end pipeline that leverages 3D Gaussian Splatting (3D GS) to enable rapid acquisition and interactive rendering of real-world objects using a mobile device, cloud processing and a local computer. Users scan an object with a smartphone video, upload it for automated 3D reconstruction, and visualize it interactively in Unity at an average of 150 frames per second (fps) on a laptop. The system integrates mobile capture, cloud-based 3D GS and Unity rendering to support real-time telepresence. Our experiments show that the pipeline processes scans in approximately 10 minutes on a graphics processing unit (GPU) achieving real-time rendering on the laptop.",
@@ -236991,6 +237491,37 @@
       "title": "DynamicEval: Rethinking Evaluation for Dynamic Text-to-Video Synthesis",
       "updated": "2025-10-08"
     },
+    "2510.07546": {
+      "abstract": "We address the task of video style transfer with diffusion models, where the\ngoal is to preserve the context of an input video while rendering it in a\ntarget style specified by a text prompt. A major challenge is the lack of\npaired video data for supervision. We propose PickStyle, a video-to-video style\ntransfer framework that augments pretrained video diffusion backbones with\nstyle adapters and benefits from paired still image data with source-style\ncorrespondences for training. PickStyle inserts low-rank adapters into the\nself-attention layers of conditioning modules, enabling efficient\nspecialization for motion-style transfer while maintaining strong alignment\nbetween video content and style. To bridge the gap between static image\nsupervision and dynamic video, we construct synthetic training clips from\npaired images by applying shared augmentations that simulate camera motion,\nensuring temporal priors are preserved. In addition, we introduce Context-Style\nClassifier-Free Guidance (CS-CFG), a novel factorization of classifier-free\nguidance into independent text (style) and video (context) directions. CS-CFG\nensures that context is preserved in generated video while the style is\neffectively transferred. Experiments across benchmarks show that our approach\nachieves temporally coherent, style-faithful, and content-preserving video\ntranslations, outperforming existing baselines both qualitatively and\nquantitatively.",
+      "archive_rows": {
+        "Video Gen&Edit": "|**2025-10-08**|**PickStyle: Video-to-Video Style Transfer with Context-Style Adapters**|Soroush Mehraban et.al.|[2510.07546](https://arxiv.org/abs/2510.07546)|null|\n"
+      },
+      "authors": "Soroush Mehraban et.al.",
+      "collected_at": "2026-11-11T13:22:06+00:00",
+      "decision_reason": "论文提出了基于扩散模型的Video-to-Video风格迁移框架，包含风格适配器及新的引导机制，属于视频编辑与生成方法。",
+      "display_id": "2510.07546",
+      "hf_daily": {
+        "dates": [
+          "2025-10-10"
+        ],
+        "evidence_sha256": "59b142fd1efa0d332715ece7924a12c691fd32cde5b43b738015a74c731e017f",
+        "url": "https://huggingface.co/papers/2510.07546"
+      },
+      "id": "2510.07546",
+      "matched_topics": [
+        "Video Gen&Edit"
+      ],
+      "paper_url": "https://arxiv.org/abs/2510.07546",
+      "pdf_url": "https://arxiv.org/pdf/2510.07546.pdf",
+      "reviewed_at": "2026-11-11T13:22:07+00:00",
+      "selected_topic": "Video Gen&Edit",
+      "sources": [
+        "huggingface"
+      ],
+      "status": "accepted",
+      "title": "PickStyle: Video-to-Video Style Transfer with Context-Style Adapters",
+      "updated": "2025-10-08"
+    },
     "2510.07667": {
       "abstract": "Neural radiance fields (NeRF) have transformed 3D reconstruction and rendering, facilitating photorealistic image synthesis from sparse viewpoints. This work introduces an explicit data reuse neural rendering (EDR-NR) architecture, which reduces frequent external memory accesses (EMAs) and cache misses by exploiting the spatial locality from three phases, including rays, ray packets (RPs), and samples. The EDR-NR architecture features a four-stage scheduler that clusters rays on the basis of Z-order, prioritize lagging rays when ray divergence happens, reorders RPs based on spatial proximity, and issues samples out-of-orderly (OoO) according to the availability of on-chip feature data. In addition, a four-tier hierarchical RP marching (HRM) technique is integrated with an axis-aligned bounding box (AABB) to facilitate spatial skipping (SS), reducing redundant computations and improving throughput. Moreover, a balanced allocation strategy for feature storage is proposed to mitigate SRAM bank conflicts. Fabricated using a 40 nm process with a die area of 10.5 mmX, the EDR-NR chip demonstrates a 2.41X enhancement in normalized energy efficiency, a 1.21X improvement in normalized area efficiency, a 1.20X increase in normalized throughput, and a 53.42% reduction in on-chip SRAM consumption compared to state-of-the-art accelerators.",
       "archive_rows": {
@@ -237506,6 +238037,39 @@
       "title": "Real-Time Motion-Controllable Autoregressive Video Diffusion",
       "updated": "2025-10-09"
     },
+    "2510.08143": {
+      "abstract": "Cascaded video super-resolution has emerged as a promising technique for\ndecoupling the computational burden associated with generating high-resolution\nvideos using large foundation models. Existing studies, however, are largely\nconfined to text-to-video tasks and fail to leverage additional generative\nconditions beyond text, which are crucial for ensuring fidelity in multi-modal\nvideo generation. We address this limitation by presenting UniMMVSR, the first\nunified generative video super-resolution framework to incorporate hybrid-modal\nconditions, including text, images, and videos. We conduct a comprehensive\nexploration of condition injection strategies, training schemes, and data\nmixture techniques within a latent video diffusion model. A key challenge was\ndesigning distinct data construction and condition utilization methods to\nenable the model to precisely utilize all condition types, given their varied\ncorrelations with the target video. Our experiments demonstrate that UniMMVSR\nsignificantly outperforms existing methods, producing videos with superior\ndetail and a higher degree of conformity to multi-modal conditions. We also\nvalidate the feasibility of combining UniMMVSR with a base model to achieve\nmulti-modal guided generation of 4K video, a feat previously unattainable with\nexisting techniques.",
+      "archive_rows": {
+        "Image Gen&Edit": "|**2025-10-09**|**UniMMVSR: A Unified Multi-Modal Framework for Cascaded Video Super-Resolution**|Shian Du et.al.|[2510.08143](https://arxiv.org/abs/2510.08143)|null|\n",
+        "Video Gen&Edit": "|**2025-10-09**|**UniMMVSR: A Unified Multi-Modal Framework for Cascaded Video Super-Resolution**|Shian Du et.al.|[2510.08143](https://arxiv.org/abs/2510.08143)|null|\n"
+      },
+      "authors": "Shian Du et.al.",
+      "collected_at": "2026-11-11T13:22:06+00:00",
+      "decision_reason": "论文提出了一种统一的视频超分辨率框架，利用潜在视频扩散模型进行多模态条件（文本、图像、视频）的视频生成与增强，属于视频生成与编辑方法。",
+      "display_id": "2510.08143",
+      "hf_daily": {
+        "dates": [
+          "2025-10-10"
+        ],
+        "evidence_sha256": "83b553b5f55f32308005f55f4c89d102434af7faee978c93e258076657af7813",
+        "url": "https://huggingface.co/papers/2510.08143"
+      },
+      "id": "2510.08143",
+      "matched_topics": [
+        "Image Gen&Edit",
+        "Video Gen&Edit"
+      ],
+      "paper_url": "https://arxiv.org/abs/2510.08143",
+      "pdf_url": "https://arxiv.org/pdf/2510.08143.pdf",
+      "reviewed_at": "2026-11-11T13:22:07+00:00",
+      "selected_topic": "Video Gen&Edit",
+      "sources": [
+        "huggingface"
+      ],
+      "status": "accepted",
+      "title": "UniMMVSR: A Unified Multi-Modal Framework for Cascaded Video Super-Resolution",
+      "updated": "2025-10-09"
+    },
     "2510.08157": {
       "abstract": "Image editing with natural language has gained significant popularity, yet existing methods struggle with intricate object intersections and fine-grained spatial relationships due to the lack of an explicit reasoning process. While Chain-of-Thought (CoT) has been explored to enhance reasoning, purely textual CoT or CoT augmented with coordinate information is fundamentally limited in its ability to represent intricate visual layouts and lacks the necessary visual cues to guide the generation of fine-grained, pixel-level details. To address these challenges, we propose Multimodal Reasoning Edit (MURE), a novel framework that shifts the visual editing process from purely text-based reasoning to a series of interleaved textual and visual rationales. Our framework performs image editing using a natively multimodal, interleaved text-image CoT. This approach generates a step-by-step chain of reasoning where a textual description is followed by a corresponding visual cue, such as a positional mask that defined intended edited regions or a representation of new content. Furthermore, to mitigate the hallucination phenomenon of large language models, we introduce Multimodal Deep Confidence (MMDC) reasoning paradigm. This paradigm explores a tree of visual reasoning paths at each step. By pruning low-quality branches using a deep confidence score from a reward model, it ensures the model consistently follows a high-quality trajectory towards the final edited result. The proposed method decomposes complex editing tasks into interdependent sub-tasks, achieving greater precision at each stage and yielding high-fidelity edited results. We define the formulation for interleaved text-image chains and release the first CoT-Edit-14K dataset, comprising 14K high-quality editing examples. Extensive experiments show that our method yields significant improvements across three image editing benchmarks, establishing a more effective reasoning framework for visual editing. Project page:https://github.com/zhentao-zou/MURE.",
       "archive_rows": {
@@ -237737,6 +238301,39 @@
       "title": "LinVideo: A Post-Training Framework towards O(n) Attention in Efficient Video Generation",
       "updated": "2025-10-09"
     },
+    "2510.08377": {
+      "abstract": "Unified multimodal models have shown promising results in multimodal content\ngeneration and editing but remain largely limited to the image domain. In this\nwork, we present UniVideo, a versatile framework that extends unified modeling\nto the video domain. UniVideo adopts a dual-stream design, combining a\nMultimodal Large Language Model (MLLM) for instruction understanding with a\nMultimodal DiT (MMDiT) for video generation. This design enables accurate\ninterpretation of complex multimodal instructions while preserving visual\nconsistency. Built on this architecture, UniVideo unifies diverse video\ngeneration and editing tasks under a single multimodal instruction paradigm and\nis jointly trained across them. Extensive experiments demonstrate that UniVideo\nmatches or surpasses state-of-the-art task-specific baselines in\ntext/image-to-video generation, in-context video generation and in-context\nvideo editing. Notably, the unified design of UniVideo enables two forms of\ngeneralization. First, UniVideo supports task composition, such as combining\nediting with style transfer, by integrating multiple capabilities within a\nsingle instruction. Second, even without explicit training on free-form video\nediting, UniVideo transfers its editing capability from large-scale image\nediting data to this setting, handling unseen instructions such as\ngreen-screening characters or changing materials within a video. Beyond these\ncore capabilities, UniVideo also supports visual-prompt-based video generation,\nwhere the MLLM interprets visual prompts and guides the MMDiT during synthesis.\nTo foster future research, we will release our model and code.",
+      "archive_rows": {
+        "Image Gen&Edit": "|**2025-10-09**|**UniVideo: Unified Understanding, Generation, and Editing for Videos**|Cong Wei et.al.|[2510.08377](https://arxiv.org/abs/2510.08377)|null|\n",
+        "Video Gen&Edit": "|**2025-10-09**|**UniVideo: Unified Understanding, Generation, and Editing for Videos**|Cong Wei et.al.|[2510.08377](https://arxiv.org/abs/2510.08377)|null|\n"
+      },
+      "authors": "Cong Wei et.al.",
+      "collected_at": "2026-11-11T13:22:06+00:00",
+      "decision_reason": "论文提出了UniVideo框架，统一了视频生成与编辑任务，核心贡献在于视频领域的多模态生成方法，符合Video Gen&Edit主题。",
+      "display_id": "2510.08377",
+      "hf_daily": {
+        "dates": [
+          "2025-10-10"
+        ],
+        "evidence_sha256": "5c222d485a9487f9589a73f61b64a6448c5f6148607b08925c7710eb6be3e7e5",
+        "url": "https://huggingface.co/papers/2510.08377"
+      },
+      "id": "2510.08377",
+      "matched_topics": [
+        "Image Gen&Edit",
+        "Video Gen&Edit"
+      ],
+      "paper_url": "https://arxiv.org/abs/2510.08377",
+      "pdf_url": "https://arxiv.org/pdf/2510.08377.pdf",
+      "reviewed_at": "2026-11-11T13:22:07+00:00",
+      "selected_topic": "Video Gen&Edit",
+      "sources": [
+        "huggingface"
+      ],
+      "status": "accepted",
+      "title": "UniVideo: Unified Understanding, Generation, and Editing for Videos",
+      "updated": "2025-10-09"
+    },
     "2510.08398": {
       "abstract": "The recent rapid advancement of Text-to-Video (T2V) generation technologies are engaging the trained models with more world model ability, making the existing benchmarks increasingly insufficient to evaluate state-of-the-art T2V models. First, current evaluation dimensions, such as per-frame aesthetic quality and temporal consistency, are no longer able to differentiate state-of-the-art T2V models. Second, event-level temporal causality-an essential property that differentiates videos from other modalities-remains largely unexplored. Third, existing benchmarks lack a systematic assessment of world knowledge, which are essential capabilities for building world models. To address these issues, we introduce VideoVerse, a comprehensive benchmark focusing on evaluating whether the current T2V model could understand complex temporal causality and world knowledge to synthesize videos. We collect representative videos across diverse domains and extract their event-level descriptions with inherent temporal causality, which are then rewritten into text-to-video prompts by independent annotators. For each prompt, we design ten evaluation dimensions covering dynamic and static properties, resulting in 300 prompts, 815 events, and 793 evaluation questions. Consequently, a human preference-aligned QA-based evaluation pipeline is developed by using modern vision-language models to systematically benchmark leading open- and closed-source T2V systems, revealing the current gap between T2V models and desired world modeling abilities.",
       "archive_rows": {
@@ -237790,6 +238387,72 @@
       "selected_topic": "World Model",
       "status": "accepted",
       "title": "VideoVerse: Does Your T2V Generator Have World Model Capability to Synthesize Videos?",
+      "updated": "2025-10-09"
+    },
+    "2510.08431": {
+      "abstract": "This work represents the first effort to scale up continuous-time consistency\ndistillation to general application-level image and video diffusion models.\nAlthough continuous-time consistency model (sCM) is theoretically principled\nand empirically powerful for accelerating academic-scale diffusion, its\napplicability to large-scale text-to-image and video tasks remains unclear due\nto infrastructure challenges in Jacobian-vector product (JVP) computation and\nthe limitations of standard evaluation benchmarks. We first develop a\nparallelism-compatible FlashAttention-2 JVP kernel, enabling sCM training on\nmodels with over 10 billion parameters and high-dimensional video tasks. Our\ninvestigation reveals fundamental quality limitations of sCM in fine-detail\ngeneration, which we attribute to error accumulation and the \"mode-covering\"\nnature of its forward-divergence objective. To remedy this, we propose the\nscore-regularized continuous-time consistency model (rCM), which incorporates\nscore distillation as a long-skip regularizer. This integration complements sCM\nwith the \"mode-seeking\" reverse divergence, effectively improving visual\nquality while maintaining high generation diversity. Validated on large-scale\nmodels (Cosmos-Predict2, Wan2.1) up to 14B parameters and 5-second videos, rCM\nmatches or surpasses the state-of-the-art distillation method DMD2 on quality\nmetrics while offering notable advantages in diversity, all without GAN tuning\nor extensive hyperparameter searches. The distilled models generate\nhigh-fidelity samples in only 1sim4 steps, accelerating diffusion sampling\nby 15timessim50times. These results position rCM as a practical and\ntheoretically grounded framework for advancing large-scale diffusion\ndistillation.",
+      "archive_rows": {
+        "3D Gen&Recon": "|**2025-10-09**|**Large Scale Diffusion Distillation via Score-Regularized Continuous-Time Consistency**|Kaiwen Zheng et.al.|[2510.08431](https://arxiv.org/abs/2510.08431)|null|\n",
+        "Image Gen&Edit": "|**2025-10-09**|**Large Scale Diffusion Distillation via Score-Regularized Continuous-Time Consistency**|Kaiwen Zheng et.al.|[2510.08431](https://arxiv.org/abs/2510.08431)|null|\n",
+        "Video Gen&Edit": "|**2025-10-09**|**Large Scale Diffusion Distillation via Score-Regularized Continuous-Time Consistency**|Kaiwen Zheng et.al.|[2510.08431](https://arxiv.org/abs/2510.08431)|null|\n"
+      },
+      "authors": "Kaiwen Zheng et.al.",
+      "collected_at": "2026-11-11T13:22:06+00:00",
+      "decision_reason": "论文提出了用于大规模扩散模型蒸馏的rCM方法，旨在加速文本到图像和文本到视频的生成采样，属于图像生成与编辑领域的核心方法贡献。",
+      "display_id": "2510.08431",
+      "hf_daily": {
+        "dates": [
+          "2025-10-10"
+        ],
+        "evidence_sha256": "9779f8aae42bd10ae31e710e8cba19919a0e66d9c1affa992e340c7a1aa59f7a",
+        "url": "https://huggingface.co/papers/2510.08431"
+      },
+      "id": "2510.08431",
+      "matched_topics": [
+        "3D Gen&Recon",
+        "Image Gen&Edit",
+        "Video Gen&Edit"
+      ],
+      "paper_url": "https://arxiv.org/abs/2510.08431",
+      "pdf_url": "https://arxiv.org/pdf/2510.08431.pdf",
+      "reviewed_at": "2026-11-11T13:22:07+00:00",
+      "selected_topic": "Image Gen&Edit",
+      "sources": [
+        "huggingface"
+      ],
+      "status": "accepted",
+      "title": "Large Scale Diffusion Distillation via Score-Regularized Continuous-Time Consistency",
+      "updated": "2025-10-09"
+    },
+    "2510.08485": {
+      "abstract": "With recent advances in Multimodal Large Language Models (MLLMs) showing\nstrong visual understanding and reasoning, interest is growing in using them to\nimprove the editing performance of diffusion models. Despite rapid progress,\nmost studies lack an in-depth analysis of MLLM design choices. Moreover, the\nintegration of MLLMs and diffusion models remains an open challenge in some\ndifficult tasks, such as video editing. In this paper, we present InstructX, a\nunified framework for image and video editing. Specifically, we conduct a\ncomprehensive study on integrating MLLMs and diffusion models for\ninstruction-driven editing across diverse tasks. Building on this study, we\nanalyze the cooperation and distinction between images and videos in unified\nmodeling. (1) We show that training on image data can lead to emergent video\nediting capabilities without explicit supervision, thereby alleviating the\nconstraints imposed by scarce video training data. (2) By incorporating\nmodality-specific MLLM features, our approach effectively unifies image and\nvideo editing tasks within a single model. Extensive experiments demonstrate\nthat our method can handle a broad range of image and video editing tasks and\nachieves state-of-the-art performance.",
+      "archive_rows": {
+        "Video Gen&Edit": "|**2025-10-09**|**InstructX: Towards Unified Visual Editing with MLLM Guidance**|Chong Mou et.al.|[2510.08485](https://arxiv.org/abs/2510.08485)|null|\n"
+      },
+      "authors": "Chong Mou et.al.",
+      "collected_at": "2026-11-11T13:22:06+00:00",
+      "decision_reason": "论文提出了InstructX统一框架，利用MLLM指导扩散模型进行图像和视频编辑，并展示了在视频编辑任务上的SOTA性能，属于视频生成与编辑方法。",
+      "display_id": "2510.08485",
+      "hf_daily": {
+        "dates": [
+          "2025-10-10"
+        ],
+        "evidence_sha256": "dfa77256d242e6ad74655953d21896a085520649307e6f2e480294c72a8ac90e",
+        "url": "https://huggingface.co/papers/2510.08485"
+      },
+      "id": "2510.08485",
+      "matched_topics": [
+        "Video Gen&Edit"
+      ],
+      "paper_url": "https://arxiv.org/abs/2510.08485",
+      "pdf_url": "https://arxiv.org/pdf/2510.08485.pdf",
+      "reviewed_at": "2026-11-11T13:22:07+00:00",
+      "selected_topic": "Video Gen&Edit",
+      "sources": [
+        "huggingface"
+      ],
+      "status": "accepted",
+      "title": "InstructX: Towards Unified Visual Editing with MLLM Guidance",
       "updated": "2025-10-09"
     },
     "2510.08491": {
@@ -237933,6 +238596,68 @@
       ],
       "status": "accepted",
       "title": "Kontinuous Kontext: Continuous Strength Control for Instruction-based Image Editing",
+      "updated": "2025-10-09"
+    },
+    "2510.08551": {
+      "abstract": "On-the-fly 3D reconstruction from monocular image sequences is a\nlong-standing challenge in computer vision, critical for applications such as\nreal-to-sim, AR/VR, and robotics. Existing methods face a major tradeoff:\nper-scene optimization yields high fidelity but is computationally expensive,\nwhereas feed-forward foundation models enable real-time inference but struggle\nwith accuracy and robustness. In this work, we propose ARTDECO, a unified\nframework that combines the efficiency of feed-forward models with the\nreliability of SLAM-based pipelines. ARTDECO uses 3D foundation models for pose\nestimation and point prediction, coupled with a Gaussian decoder that\ntransforms multi-scale features into structured 3D Gaussians. To sustain both\nfidelity and efficiency at scale, we design a hierarchical Gaussian\nrepresentation with a LoD-aware rendering strategy, which improves rendering\nfidelity while reducing redundancy. Experiments on eight diverse indoor and\noutdoor benchmarks show that ARTDECO delivers interactive performance\ncomparable to SLAM, robustness similar to feed-forward systems, and\nreconstruction quality close to per-scene optimization, providing a practical\npath toward on-the-fly digitization of real-world environments with both\naccurate geometry and high visual fidelity. Explore more demos on our project\npage: https://city-super.github.io/artdeco/.",
+      "archive_rows": {
+        "3D Gen&Recon": "|**2025-10-09**|**ARTDECO: Towards Efficient and High-Fidelity On-the-Fly 3D Reconstruction with Structured Scene Representation**|Guanghao Li et.al.|[2510.08551](https://arxiv.org/abs/2510.08551)|null|\n"
+      },
+      "authors": "Guanghao Li et.al.",
+      "collected_at": "2026-11-11T13:22:06+00:00",
+      "decision_reason": "论文提出ARTDECO框架，利用3D基础模型和结构化高斯解码器进行实时3D重建，属于3D重建与神经渲染方法。",
+      "display_id": "2510.08551",
+      "hf_daily": {
+        "dates": [
+          "2025-10-10"
+        ],
+        "evidence_sha256": "9702c91a4f2bef496c094f73e15b96fe3cf963d115f13ba5c86df4f50762e7e1",
+        "url": "https://huggingface.co/papers/2510.08551"
+      },
+      "id": "2510.08551",
+      "matched_topics": [
+        "3D Gen&Recon"
+      ],
+      "paper_url": "https://arxiv.org/abs/2510.08551",
+      "pdf_url": "https://arxiv.org/pdf/2510.08551.pdf",
+      "reviewed_at": "2026-11-11T13:22:07+00:00",
+      "selected_topic": "3D Gen&Recon",
+      "sources": [
+        "huggingface"
+      ],
+      "status": "accepted",
+      "title": "ARTDECO: Towards Efficient and High-Fidelity On-the-Fly 3D Reconstruction with Structured Scene Representation",
+      "updated": "2025-10-09"
+    },
+    "2510.08555": {
+      "abstract": "We introduce the task of arbitrary spatio-temporal video completion, where a\nvideo is generated from arbitrary, user-specified patches placed at any spatial\nlocation and timestamp, akin to painting on a video canvas. This flexible\nformulation naturally unifies many existing controllable video generation\ntasks--including first-frame image-to-video, inpainting, extension, and\ninterpolation--under a single, cohesive paradigm. Realizing this vision,\nhowever, faces a fundamental obstacle in modern latent video diffusion models:\nthe temporal ambiguity introduced by causal VAEs, where multiple pixel frames\nare compressed into a single latent representation, making precise frame-level\nconditioning structurally difficult. We address this challenge with\nVideoCanvas, a novel framework that adapts the In-Context Conditioning (ICC)\nparadigm to this fine-grained control task with zero new parameters. We propose\na hybrid conditioning strategy that decouples spatial and temporal control:\nspatial placement is handled via zero-padding, while temporal alignment is\nachieved through Temporal RoPE Interpolation, which assigns each condition a\ncontinuous fractional position within the latent sequence. This resolves the\nVAE's temporal ambiguity and enables pixel-frame-aware control on a frozen\nbackbone. To evaluate this new capability, we develop VideoCanvasBench, the\nfirst benchmark for arbitrary spatio-temporal video completion, covering both\nintra-scene fidelity and inter-scene creativity. Experiments demonstrate that\nVideoCanvas significantly outperforms existing conditioning paradigms,\nestablishing a new state of the art in flexible and unified video generation.",
+      "archive_rows": {
+        "Video Gen&Edit": "|**2025-10-09**|**VideoCanvas: Unified Video Completion from Arbitrary Spatiotemporal Patches via In-Context Conditioning**|Minghong Cai et.al.|[2510.08555](https://arxiv.org/abs/2510.08555)|null|\n"
+      },
+      "authors": "Minghong Cai et.al.",
+      "collected_at": "2026-11-11T13:22:06+00:00",
+      "decision_reason": "论文提出了一种基于视频扩散模型的任意时空补丁视频补全框架，属于视频生成与编辑方法。",
+      "display_id": "2510.08555",
+      "hf_daily": {
+        "dates": [
+          "2025-10-10"
+        ],
+        "evidence_sha256": "aaaf0dc56cd25b8a19be47d91d67f0f7003dee4becf97db402a56060cfdadc64",
+        "url": "https://huggingface.co/papers/2510.08555"
+      },
+      "id": "2510.08555",
+      "matched_topics": [
+        "Video Gen&Edit"
+      ],
+      "paper_url": "https://arxiv.org/abs/2510.08555",
+      "pdf_url": "https://arxiv.org/pdf/2510.08555.pdf",
+      "reviewed_at": "2026-11-11T13:22:07+00:00",
+      "selected_topic": "Video Gen&Edit",
+      "sources": [
+        "huggingface"
+      ],
+      "status": "accepted",
+      "title": "VideoCanvas: Unified Video Completion from Arbitrary Spatiotemporal Patches via In-Context Conditioning",
       "updated": "2025-10-09"
     },
     "2510.08558": {
@@ -738267,6 +738992,6 @@
       "updated": "2026-11-10"
     }
   },
-  "updated_at": "2026-11-11T12:31:16+00:00",
+  "updated_at": "2026-11-11T13:22:07+00:00",
   "version": 1
 }
