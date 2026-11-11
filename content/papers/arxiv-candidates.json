@@ -74218,6 +74218,13 @@
       ],
       "collected_at": "2026-09-06T07:39:58+00:00",
       "decision_reason": "二次复核：Image Gen&Edit: 论文核心贡献是构建基于预训练视觉特征的离线世界模型以支持零样本规划，并非图像生成或编辑方法，不涉及扩散、GAN等图像合成机制。; Video Gen&Edit: 虽然涉及视频轨迹预测，但目的是动力学建模与规划，而非视频内容生成或编辑，不属于视频生成与编辑主题的核心范畴。; 3D Gen&Recon: 论文未涉及3D几何重建、NeRF、高斯泼溅或3D资产生成，仅在2D图像特征空间进行预测，不符合3D生成与重建主题定义。; World Model: 论文提出DINO-WM，利用DINOv2特征学习离线轨迹动力学，支持测试时行为优化与任务无关推理，完全符合世界模型主题关于环境动力学预测的定义。; Relighting: 论文未涉及光照估计、反射率恢复或新光照条件下的外观生成，与重光照主题无任何技术关联。; Depth Estimation: 论文未进行单目、立体或多视角深度估计，其预测目标是视觉特征嵌入而非深度图，不符合深度估计主题。",
+      "hf_daily": {
+        "dates": [
+          "2025-02-03"
+        ],
+        "evidence_sha256": "a1e23726378d7db6b6a76c809525c5b5f1fe23ba920b52fcf2a9bef4b16022b2",
+        "url": "https://huggingface.co/papers/2411.04983"
+      },
       "id": "2411.04983",
       "matched_topics": [
         "World Model"
@@ -74252,6 +74259,10 @@
       },
       "reviewed_at": "2026-09-14T21:23:16+00:00",
       "selected_topic": "World Model",
+      "sources": [
+        "arxiv",
+        "huggingface"
+      ],
       "status": "accepted",
       "title": "DINO-WM: World Models on Pre-trained Visual Features enable Zero-shot Planning",
       "updated": "2024-11-07"
@@ -99241,6 +99252,37 @@
       "title": "DiffDoctor: Diagnosing Image Diffusion Models Before Treating",
       "updated": "2025-01-21"
     },
+    "2501.12387": {
+      "abstract": "We present a unified framework capable of solving a broad range of 3D tasks.\nOur approach features a stateful recurrent model that continuously updates its\nstate representation with each new observation. Given a stream of images, this\nevolving state can be used to generate metric-scale pointmaps (per-pixel 3D\npoints) for each new input in an online fashion. These pointmaps reside within\na common coordinate system, and can be accumulated into a coherent, dense scene\nreconstruction that updates as new images arrive. Our model, called CUT3R\n(Continuous Updating Transformer for 3D Reconstruction), captures rich priors\nof real-world scenes: not only can it predict accurate pointmaps from image\nobservations, but it can also infer unseen regions of the scene by probing at\nvirtual, unobserved views. Our method is simple yet highly flexible, naturally\naccepting varying lengths of images that may be either video streams or\nunordered photo collections, containing both static and dynamic content. We\nevaluate our method on various 3D/4D tasks and demonstrate competitive or\nstate-of-the-art performance in each. Project Page: https://cut3r.github.io/",
+      "archive_rows": {
+        "3D Gen&Recon": "|**2025-01-21**|**Continuous 3D Perception Model with Persistent State**|Qianqian Wang et.al.|[2501.12387](https://arxiv.org/abs/2501.12387)|null|\n"
+      },
+      "authors": "Qianqian Wang et.al.",
+      "collected_at": "2026-11-11T16:37:59+00:00",
+      "decision_reason": "论文提出CUT3R框架，通过状态更新Transformer从图像流中生成点图并累积为稠密场景重建，属于3D重建与神经渲染范畴。",
+      "display_id": "2501.12387",
+      "hf_daily": {
+        "dates": [
+          "2025-02-10"
+        ],
+        "evidence_sha256": "e2871eca56c3b22d35d21aad5e2c271ed139111144d4d996eee9e57b63e2b975",
+        "url": "https://huggingface.co/papers/2501.12387"
+      },
+      "id": "2501.12387",
+      "matched_topics": [
+        "3D Gen&Recon"
+      ],
+      "paper_url": "https://arxiv.org/abs/2501.12387",
+      "pdf_url": "https://arxiv.org/pdf/2501.12387.pdf",
+      "reviewed_at": "2026-11-11T16:37:59+00:00",
+      "selected_topic": "3D Gen&Recon",
+      "sources": [
+        "huggingface"
+      ],
+      "status": "accepted",
+      "title": "Continuous 3D Perception Model with Persistent State",
+      "updated": "2025-01-21"
+    },
     "2501.12389": {
       "abstract": "We introduce MAGI, a hybrid video generation framework that combines masked modeling for intra-frame generation with causal modeling for next-frame generation. Our key innovation, Complete Teacher Forcing (CTF), conditions masked frames on complete observation frames rather than masked ones (namely Masked Teacher Forcing, MTF), enabling a smooth transition from token-level (patch-level) to frame-level autoregressive generation. CTF significantly outperforms MTF, achieving a +23% improvement in FVD scores on first-frame conditioned video prediction. To address issues like exposure bias, we employ targeted training strategies, setting a new benchmark in autoregressive video generation. Experiments show that MAGI can generate long, coherent video sequences exceeding 100 frames, even when trained on as few as 16 frames, highlighting its potential for scalable, high-quality video generation. Prediction Granularity Method Temporal Attention KV Cache Var. Context Observation Patch VideoGPT [45], Phenaki [39], Omni [41] Causal ✓ ✓ Complete Frame MAGVIT† [46], GameNGen [36] Bidirectional ✗ ✗ Complete Diffusion Forcing [6] Causal ✓ ✓ Noisy Genie [2] Causal ✓ ✓ Masked MAGI (with CTF) Causal ✓ ✓ Complete",
       "archive_rows": {
@@ -102415,6 +102457,13 @@
         "3D Generation": "|**2025-01-31**|**Text-to-CAD Generation Through Infusing Visual Feedback in Large Language Models**|Ruiyu Wang et.al.|[2501.19054](http://arxiv.org/abs/2501.19054)|null|\n"
       },
       "decision_reason": "二次复核：Image Gen&Edit: 论文核心贡献是文本到CAD模型的生成，虽然涉及渲染图像的视觉反馈，但主要目标是生成参数化CAD序列而非直接生成或编辑二维图像，不符合图像生成与编辑主题的核心定义。; Video Gen&Edit: 论文未涉及视频合成、编辑或时序视频生成任务，其核心贡献完全集中在静态CAD模型的参数化序列生成上，与视频生成与编辑主题无任何关联。; 3D Gen&Recon: 论文提出CADFusion框架，通过结合序列学习与视觉反馈，利用大语言模型从文本描述生成CAD参数化序列，直接对应主题描述中明确包含的CAD生成任务，属于3D生成与重建的核心范畴。; World Model: 论文未构建用于预测环境动态、物理规律或交互式未来状态的世界模型，其核心是文本到CAD的生成任务，不涉及对物理世界或交互环境的建模与预测。; Relighting: 论文未涉及光照估计、传输、编辑或新光照下的外观生成，其视觉反馈仅用于评估渲染结果与目标的一致性，不包含任何关于照明或反射率的技术贡献。; Depth Estimation: 论文未进行单目、立体或多视角深度估计与预测，其核心任务是生成CAD参数化序列，不涉及从图像中恢复深度信息或几何深度的任何技术方法。",
+      "hf_daily": {
+        "dates": [
+          "2025-02-05"
+        ],
+        "evidence_sha256": "b05bde4f5d8314201ffebea1b92c0f3bc09d632ee7df428f77d558385f7c17e9",
+        "url": "https://huggingface.co/papers/2501.19054"
+      },
       "id": "2501.19054",
       "matched_topics": [
         "3D Gen&Recon"
@@ -102449,8 +102498,43 @@
       },
       "reviewed_at": "2026-09-14T20:56:30+00:00",
       "selected_topic": "3D Gen&Recon",
+      "sources": [
+        "arxiv",
+        "huggingface"
+      ],
       "status": "accepted",
       "title": "Text-to-CAD Generation Through Infusing Visual Feedback in Large Language Models",
+      "updated": "2025-01-31"
+    },
+    "2501.19066": {
+      "abstract": "Despite the remarkable progress in text-to-image generative models, they are\nprone to adversarial attacks and inadvertently generate unsafe, unethical\ncontent. Existing approaches often rely on fine-tuning models to remove\nspecific concepts, which is computationally expensive, lack scalability, and/or\ncompromise generation quality. In this work, we propose a novel framework\nleveraging k-sparse autoencoders (k-SAEs) to enable efficient and interpretable\nconcept manipulation in diffusion models. Specifically, we first identify\ninterpretable monosemantic concepts in the latent space of text embeddings and\nleverage them to precisely steer the generation away or towards a given concept\n(e.g., nudity) or to introduce a new concept (e.g., photographic style).\nThrough extensive experiments, we demonstrate that our approach is very simple,\nrequires no retraining of the base model nor LoRA adapters, does not compromise\nthe generation quality, and is robust to adversarial prompt manipulations. Our\nmethod yields an improvement of 20.01% in unsafe concept removal,\nis effective in style manipulation, and is sim5x faster than\ncurrent state-of-the-art.",
+      "archive_rows": {
+        "Image Gen&Edit": "|**2025-01-31**|**Concept Steerers: Leveraging K-Sparse Autoencoders for Controllable Generations**|Dahye Kim et.al.|[2501.19066](https://arxiv.org/abs/2501.19066)|null|\n"
+      },
+      "authors": "Dahye Kim et.al.",
+      "collected_at": "2026-11-11T16:37:59+00:00",
+      "decision_reason": "论文提出了一种基于K稀疏自编码器的框架，用于在扩散模型中进行可控的概念操纵（如移除不安全概念或引入新风格），属于图像生成中的可控生成方法。",
+      "display_id": "2501.19066",
+      "hf_daily": {
+        "dates": [
+          "2025-02-05"
+        ],
+        "evidence_sha256": "83958f85a231364b04056d676aa1daa521bc325e48ddd8bc703ec4cf784219cb",
+        "url": "https://huggingface.co/papers/2501.19066"
+      },
+      "id": "2501.19066",
+      "matched_topics": [
+        "Image Gen&Edit"
+      ],
+      "paper_url": "https://arxiv.org/abs/2501.19066",
+      "pdf_url": "https://arxiv.org/pdf/2501.19066.pdf",
+      "reviewed_at": "2026-11-11T16:37:59+00:00",
+      "selected_topic": "Image Gen&Edit",
+      "sources": [
+        "huggingface"
+      ],
+      "status": "accepted",
+      "title": "Concept Steerers: Leveraging K-Sparse Autoencoders for Controllable Generations",
       "updated": "2025-01-31"
     },
     "2501.19084": {
@@ -103042,6 +103126,39 @@
       "title": "Pushing the Boundaries of State Space Models for Image and Video Generation",
       "updated": "2025-02-03"
     },
+    "2502.01061": {
+      "abstract": "End-to-end human animation, such as audio-driven talking human generation,\nhas undergone notable advancements in the recent few years. However, existing\nmethods still struggle to scale up as large general video generation models,\nlimiting their potential in real applications. In this paper, we propose\nOmniHuman, a Diffusion Transformer-based framework that scales up data by\nmixing motion-related conditions into the training phase. To this end, we\nintroduce two training principles for these mixed conditions, along with the\ncorresponding model architecture and inference strategy. These designs enable\nOmniHuman to fully leverage data-driven motion generation, ultimately achieving\nhighly realistic human video generation. More importantly, OmniHuman supports\nvarious portrait contents (face close-up, portrait, half-body, full-body),\nsupports both talking and singing, handles human-object interactions and\nchallenging body poses, and accommodates different image styles. Compared to\nexisting end-to-end audio-driven methods, OmniHuman not only produces more\nrealistic videos, but also offers greater flexibility in inputs. It also\nsupports multiple driving modalities (audio-driven, video-driven and combined\ndriving signals). Video samples are provided on the ttfamily project page\n(https://omnihuman-lab.github.io)",
+      "archive_rows": {
+        "Image Gen&Edit": "|**2025-02-03**|**OmniHuman-1: Rethinking the Scaling-Up of One-Stage Conditioned Human Animation Models**|Gaojie Lin et.al.|[2502.01061](https://arxiv.org/abs/2502.01061)|null|\n",
+        "Video Gen&Edit": "|**2025-02-03**|**OmniHuman-1: Rethinking the Scaling-Up of One-Stage Conditioned Human Animation Models**|Gaojie Lin et.al.|[2502.01061](https://arxiv.org/abs/2502.01061)|null|\n"
+      },
+      "authors": "Gaojie Lin et.al.",
+      "collected_at": "2026-11-11T16:37:59+00:00",
+      "decision_reason": "论文提出了一种基于扩散Transformer的人体动画生成框架，旨在解决端到端人类视频生成（如音频驱动说话人视频）的扩展性问题，属于视频合成与生成方法。",
+      "display_id": "2502.01061",
+      "hf_daily": {
+        "dates": [
+          "2025-02-04"
+        ],
+        "evidence_sha256": "3a344797081bd47f692e10f738939636d6b30a7f5fd99f630b7782388f10a9eb",
+        "url": "https://huggingface.co/papers/2502.01061"
+      },
+      "id": "2502.01061",
+      "matched_topics": [
+        "Image Gen&Edit",
+        "Video Gen&Edit"
+      ],
+      "paper_url": "https://arxiv.org/abs/2502.01061",
+      "pdf_url": "https://arxiv.org/pdf/2502.01061.pdf",
+      "reviewed_at": "2026-11-11T16:37:59+00:00",
+      "selected_topic": "Video Gen&Edit",
+      "sources": [
+        "huggingface"
+      ],
+      "status": "accepted",
+      "title": "OmniHuman-1: Rethinking the Scaling-Up of One-Stage Conditioned Human Animation Models",
+      "updated": "2025-02-03"
+    },
     "2502.01101": {
       "abstract": "With the advancement of generative artificial intelligence, previous studies have achieved the task of generating aesthetic images from hand-drawn sketches, fulfilling the public’s needs for drawing. However, these methods are limited to static images and lack the ability to control video animation generation using hand-drawn sketches. To address this gap, we propose VidSketch, the first method capable of generating high-quality video animations directly from any number of hand-drawn sketches and simple text prompts, bridging the divide between ordinary users and professional artists. Specifically, our method introduces a Level-Based Sketch Control Strategy to automatically adjust the guidance strength of sketches during the generation process, accommodating users with varying drawing skills. Furthermore, a TempSpatial Attention mechanism is designed to enhance the spatiotemporal consistency of generated video animations, significantly improving the coherence across frames. You can find more detailed cases on our official website. All in all, the abstraction score SC\\mathcal{S}_{C} is calculated as a weighted sum of continuity, connectivity, and texture detail. Stronger continuity, stronger connectivity, and more details result in a lower level of abstraction, defined as: SC=wC⋅AC+wL⋅AL+wT⋅AT,\\mathcal{S}_{C}=w_{C}\\cdot\\mathcal{A}_{C}+w_{L}\\cdot\\mathcal{A}_{L}+w_{T}\\cdot\\mathcal{A}_{T}, (11) where wCw_{C}, wLw_{L}, and wTw_{T} are the weights for continuity, connectivity, and texture detail, and AC\\mathcal{A}_{C}, AL\\mathcal{A}_{L}, and AT\\mathcal{A}_{T} are computed using Equations 8, 9 and 10. SC\\mathcal{S}_{C} maps to the adapter’s adjustment scale ss and threshold τ\\tau (Section A.4), applied in Equations 6 and 7, dynamically adjusting the sketch’s guidance strength during video generation based on its abstraction level to meet diverse artistic needs.",
       "archive_rows": {
@@ -103218,6 +103335,37 @@
       "title": "Heterogeneous Image GNN: Graph-Conditioned Diffusion for Image Synthesis",
       "updated": "2025-02-03"
     },
+    "2502.01362": {
+      "abstract": "Learning diffusion bridge models is easy; making them fast and practical is\nan art. Diffusion bridge models (DBMs) are a promising extension of diffusion\nmodels for applications in image-to-image translation. However, like many\nmodern diffusion and flow models, DBMs suffer from the problem of slow\ninference. To address it, we propose a novel distillation technique based on\nthe inverse bridge matching formulation and derive the tractable objective to\nsolve it in practice. Unlike previously developed DBM distillation techniques,\nthe proposed method can distill both conditional and unconditional types of\nDBMs, distill models in a one-step generator, and use only the corrupted images\nfor training. We evaluate our approach for both conditional and unconditional\ntypes of bridge matching on a wide set of setups, including super-resolution,\nJPEG restoration, sketch-to-image, and other tasks, and show that our\ndistillation technique allows us to accelerate the inference of DBMs from 4x to\n100x and even provide better generation quality than used teacher model\ndepending on particular setup.",
+      "archive_rows": {
+        "Image Gen&Edit": "|**2025-02-03**|**Inverse Bridge Matching Distillation**|Nikita Gushchin et.al.|[2502.01362](https://arxiv.org/abs/2502.01362)|null|\n"
+      },
+      "authors": "Nikita Gushchin et.al.",
+      "collected_at": "2026-11-11T16:37:59+00:00",
+      "decision_reason": "论文提出了一种针对扩散桥模型（DBM）的蒸馏技术，旨在加速图像到图像转换（如超分辨率、修复、草图转图像）的推理过程，属于图像生成与编辑领域的有效方法贡献。",
+      "display_id": "2502.01362",
+      "hf_daily": {
+        "dates": [
+          "2025-02-05"
+        ],
+        "evidence_sha256": "04a770ca0c69798534ca616c4e1e151c61197979e18b1d53f651c48e2467d4da",
+        "url": "https://huggingface.co/papers/2502.01362"
+      },
+      "id": "2502.01362",
+      "matched_topics": [
+        "Image Gen&Edit"
+      ],
+      "paper_url": "https://arxiv.org/abs/2502.01362",
+      "pdf_url": "https://arxiv.org/pdf/2502.01362.pdf",
+      "reviewed_at": "2026-11-11T16:37:59+00:00",
+      "selected_topic": "Image Gen&Edit",
+      "sources": [
+        "huggingface"
+      ],
+      "status": "accepted",
+      "title": "Inverse Bridge Matching Distillation",
+      "updated": "2025-02-03"
+    },
     "2502.01366": {
       "abstract": "Heterogeneity in sensors and actuators across environments poses a significant challenge to building large-scale pre-trained world models on top of this low-dimensional sensor information. In this work, we explore pre-training world models for heterogeneous environments by addressing key transfer barriers in both data diversity and model flexibility. We introduce UniTraj, a unified dataset comprising over one million trajectories from 80 environments, designed to scale data while preserving critical diversity. Additionally, we propose TrajWorld, a novel architecture capable of flexibly handling varying sensor and actuator information and capturing environment dynamics in-context. Pre-training TrajWorld on UniTraj yields substantial gains in transition prediction, achieves a new state-of-the-art for off-policy evaluation, and also delivers superior online performance of model predictive control. To the best of our knowledge, this work, for the first time, demonstrates the transfer benefits of world models across heterogeneous and complex control environments. Code and data are available at https://github.com/thuml/TrajWorld.",
       "archive_rows": {
@@ -103316,6 +103464,39 @@
       "title": "FourieRF: Few-Shot NeRFs via Progressive Fourier Frequency Control",
       "updated": "2025-02-03"
     },
+    "2502.01441": {
+      "abstract": "Consistency models are a new family of generative models capable of producing\nhigh-quality samples in either a single step or multiple steps. Recently,\nconsistency models have demonstrated impressive performance, achieving results\non par with diffusion models in the pixel space. However, the success of\nscaling consistency training to large-scale datasets, particularly for\ntext-to-image and video generation tasks, is determined by performance in the\nlatent space. In this work, we analyze the statistical differences between\npixel and latent spaces, discovering that latent data often contains highly\nimpulsive outliers, which significantly degrade the performance of iCT in the\nlatent space. To address this, we replace Pseudo-Huber losses with Cauchy\nlosses, effectively mitigating the impact of outliers. Additionally, we\nintroduce a diffusion loss at early timesteps and employ optimal transport (OT)\ncoupling to further enhance performance. Lastly, we introduce the adaptive\nscaling-c scheduler to manage the robust training process and adopt\nNon-scaling LayerNorm in the architecture to better capture the statistics of\nthe features and reduce outlier impact. With these strategies, we successfully\ntrain latent consistency models capable of high-quality sampling with one or\ntwo steps, significantly narrowing the performance gap between latent\nconsistency and diffusion models. The implementation is released here:\nhttps://github.com/quandao10/sLCT/",
+      "archive_rows": {
+        "Image Gen&Edit": "|**2025-02-03**|**Improved Training Technique for Latent Consistency Models**|Quan Dao et.al.|[2502.01441](https://arxiv.org/abs/2502.01441)|null|\n",
+        "Video Gen&Edit": "|**2025-02-03**|**Improved Training Technique for Latent Consistency Models**|Quan Dao et.al.|[2502.01441](https://arxiv.org/abs/2502.01441)|null|\n"
+      },
+      "authors": "Quan Dao et.al.",
+      "collected_at": "2026-11-11T16:37:59+00:00",
+      "decision_reason": "论文提出了改进潜在一致性模型（LCM）的训练技术，包括Cauchy损失、扩散损失及OT耦合等，旨在提升文本到图像生成的质量与效率，属于图像生成方法贡献。",
+      "display_id": "2502.01441",
+      "hf_daily": {
+        "dates": [
+          "2025-02-04"
+        ],
+        "evidence_sha256": "3a85d1088bb4fbb9682426028092e0c7bf78c1dc960a61d0ee2772293f146283",
+        "url": "https://huggingface.co/papers/2502.01441"
+      },
+      "id": "2502.01441",
+      "matched_topics": [
+        "Image Gen&Edit",
+        "Video Gen&Edit"
+      ],
+      "paper_url": "https://arxiv.org/abs/2502.01441",
+      "pdf_url": "https://arxiv.org/pdf/2502.01441.pdf",
+      "reviewed_at": "2026-11-11T16:37:59+00:00",
+      "selected_topic": "Image Gen&Edit",
+      "sources": [
+        "huggingface"
+      ],
+      "status": "accepted",
+      "title": "Improved Training Technique for Latent Consistency Models",
+      "updated": "2025-02-03"
+    },
     "2502.01507": {
       "abstract": "Text-to-Image (T2I) synthesis is a challenging task that requires modeling complex interactions between two modalities (, i.e., text and image). A common framework adopted in recent state-of-the-art approaches to achieving such multimodal interactions is to bootstrap the learning process with pre-trained image-aligned text embeddings trained using contrastive loss. Furthermore, these embeddings are typically trained generically and reused across various synthesis models. In contrast, we explore an approach to learning text embeddings specifically tailored to the T2I synthesis network, trained in an end-to-end fashion. Further, we combine generative and contrastive training and use two embeddings, one optimized to enhance the photo-realism of the generated images, and the other seeking to capture text-to-image alignment. A comprehensive set of experiments on three text-to-image benchmark datasets (Oxford-102, Caltech-UCSD, and MS-COCO) reveal that having two separate embeddings gives better results than using a shared one and that such an approach performs favourably in comparison with methods that use text representations from a pre-trained text encoder trained using a discriminative approach. Finally, we demonstrate that such learned embeddings can be used in other contexts as well, such as text-to-image manipulation.",
       "archive_rows": {
@@ -103402,6 +103583,68 @@
       "selected_topic": "3D Gen&Recon",
       "status": "accepted",
       "title": "VR-Robo: A Real-to-Sim-to-Real Framework for Visual Robot Navigation and Locomotion",
+      "updated": "2025-02-03"
+    },
+    "2502.01572": {
+      "abstract": "A hallmark of human intelligence is the ability to create complex artifacts\nthrough structured multi-step processes. Generating procedural tutorials with\nAI is a longstanding but challenging goal, facing three key obstacles: (1)\nscarcity of multi-task procedural datasets, (2) maintaining logical continuity\nand visual consistency between steps, and (3) generalizing across multiple\ndomains. To address these challenges, we propose a multi-domain dataset\ncovering 21 tasks with over 24,000 procedural sequences. Building upon this\nfoundation, we introduce MakeAnything, a framework based on the diffusion\ntransformer (DIT), which leverages fine-tuning to activate the in-context\ncapabilities of DIT for generating consistent procedural sequences. We\nintroduce asymmetric low-rank adaptation (LoRA) for image generation, which\nbalances generalization capabilities and task-specific performance by freezing\nencoder parameters while adaptively tuning decoder layers. Additionally, our\nReCraft model enables image-to-process generation through spatiotemporal\nconsistency constraints, allowing static images to be decomposed into plausible\ncreation sequences. Extensive experiments demonstrate that MakeAnything\nsurpasses existing methods, setting new performance benchmarks for procedural\ngeneration tasks.",
+      "archive_rows": {
+        "Image Gen&Edit": "|**2025-02-03**|**MakeAnything: Harnessing Diffusion Transformers for Multi-Domain Procedural Sequence Generation**|Yiren Song et.al.|[2502.01572](https://arxiv.org/abs/2502.01572)|null|\n"
+      },
+      "authors": "Yiren Song et.al.",
+      "collected_at": "2026-11-11T16:37:59+00:00",
+      "decision_reason": "论文提出基于扩散Transformer（DIT）的框架，利用非对称LoRA进行图像生成，并包含从静态图像分解为创建序列的方法，属于图像生成与编辑范畴。",
+      "display_id": "2502.01572",
+      "hf_daily": {
+        "dates": [
+          "2025-02-04"
+        ],
+        "evidence_sha256": "24318aebe05438fd88faa253caad82a452ec0306597a1567bd3805c1ad3c6fef",
+        "url": "https://huggingface.co/papers/2502.01572"
+      },
+      "id": "2502.01572",
+      "matched_topics": [
+        "Image Gen&Edit"
+      ],
+      "paper_url": "https://arxiv.org/abs/2502.01572",
+      "pdf_url": "https://arxiv.org/pdf/2502.01572.pdf",
+      "reviewed_at": "2026-11-11T16:37:59+00:00",
+      "selected_topic": "Image Gen&Edit",
+      "sources": [
+        "huggingface"
+      ],
+      "status": "accepted",
+      "title": "MakeAnything: Harnessing Diffusion Transformers for Multi-Domain Procedural Sequence Generation",
+      "updated": "2025-02-03"
+    },
+    "2502.01591": {
+      "abstract": "We present an approach to model-based RL that achieves a new state of the art\nperformance on the challenging Craftax-classic benchmark, an open-world 2D\nsurvival game that requires agents to exhibit a wide range of general abilities\n-- such as strong generalization, deep exploration, and long-term reasoning.\nWith a series of careful design choices aimed at improving sample efficiency,\nour MBRL algorithm achieves a reward of 67.4% after only 1M environment steps,\nsignificantly outperforming DreamerV3, which achieves 53.2%, and, for the first\ntime, exceeds human performance of 65.0%. Our method starts by constructing a\nSOTA model-free baseline, using a novel policy architecture that combines CNNs\nand RNNs. We then add three improvements to the standard MBRL setup: (a) \"Dyna\nwith warmup\", which trains the policy on real and imaginary data, (b) \"nearest\nneighbor tokenizer\" on image patches, which improves the scheme to create the\ntransformer world model (TWM) inputs, and (c) \"block teacher forcing\", which\nallows the TWM to reason jointly about the future tokens of the next timestep.",
+      "archive_rows": {
+        "World Model": "|**2025-02-03**|**Improving Transformer World Models for Data-Efficient RL**|Antoine Dedieu et.al.|[2502.01591](https://arxiv.org/abs/2502.01591)|null|\n"
+      },
+      "authors": "Antoine Dedieu et.al.",
+      "collected_at": "2026-11-11T16:37:59+00:00",
+      "decision_reason": "论文提出了一种基于Transformer的世界模型（TWM）用于基于模型的强化学习，通过改进模型架构和训练策略（如块教师强制）来预测未来状态，符合世界模型主题中关于学习预测环境动态和动作条件未来状态的定义。",
+      "display_id": "2502.01591",
+      "hf_daily": {
+        "dates": [
+          "2025-02-04"
+        ],
+        "evidence_sha256": "f7be02d502e91b40195c3ac395024af30520c7b3120da524b7ba6d0f4bd8707f",
+        "url": "https://huggingface.co/papers/2502.01591"
+      },
+      "id": "2502.01591",
+      "matched_topics": [
+        "World Model"
+      ],
+      "paper_url": "https://arxiv.org/abs/2502.01591",
+      "pdf_url": "https://arxiv.org/pdf/2502.01591.pdf",
+      "reviewed_at": "2026-11-11T16:37:59+00:00",
+      "selected_topic": "World Model",
+      "sources": [
+        "huggingface"
+      ],
+      "status": "accepted",
+      "title": "Improving Transformer World Models for Data-Efficient RL",
       "updated": "2025-02-03"
     },
     "2502.01666": {
@@ -103530,6 +103773,13 @@
         "Image Generation": "|**2025-02-03**|**Generating Multi-Image Synthetic Data for Text-to-Image Customization**|Nupur Kumari et.al.|[2502.01720](http://arxiv.org/abs/2502.01720)|null|\n"
       },
       "decision_reason": "二次复核：Image Gen&Edit: 论文核心贡献是提出一种用于文本到图像模型定制的方法，包括构建多图像合成数据集、训练基于编码器的模型以及改进推理技术，旨在提升图像生成质量与对象一致性，完全符合图像生成与编辑主题的定义。; Video Gen&Edit: 论文主要关注静态图像的生成与定制，虽然使用了3D资产辅助生成多视角图像，但并未涉及视频合成、视频编辑或时序动态建模，其核心任务与视频生成编辑主题无关。; 3D Gen&Recon: 虽然论文利用3D数据集和深度引导来确保生成图像的多视角一致性，但其最终目标是生成2D图像用于图像定制，而非重建3D几何结构、生成3D资产或进行神经渲染，因此不属于3D生成与重建主题。; World Model: 论文未涉及学习环境动态、物理规律或交互式世界的预测模型，其方法专注于基于参考图像的静态图像生成与定制，缺乏世界模型所要求的时序预测或状态转移机制。; Relighting: 尽管合成数据集中包含不同光照条件的图像，但论文的核心贡献是图像定制与对象一致性保持，并未专门研究光照估计、反射率恢复或新光照下的图像重光照技术，不属于重光照主题。; Depth Estimation: 论文仅在数据生成阶段使用深度引导来促进多视角一致性，并未提出新的深度估计方法、网络结构或评估指标，深度信息仅作为辅助工具，不属于深度估计主题的核心贡献。",
+      "hf_daily": {
+        "dates": [
+          "2025-02-05"
+        ],
+        "evidence_sha256": "ef466a075f7f0a7df4a94a45b1e68c99dd044a25666921efb7496ac6aabb9ea7",
+        "url": "https://huggingface.co/papers/2502.01720"
+      },
       "id": "2502.01720",
       "matched_topics": [
         "Image Gen&Edit"
@@ -103564,6 +103814,10 @@
       },
       "reviewed_at": "2026-09-14T20:55:02+00:00",
       "selected_topic": "Image Gen&Edit",
+      "sources": [
+        "arxiv",
+        "huggingface"
+      ],
       "status": "accepted",
       "title": "Generating Multi-Image Synthetic Data for Text-to-Image Customization",
       "updated": "2025-02-03"
@@ -104573,6 +104827,13 @@
         "Image Generation": "|**2025-02-05**|**YINYANG-ALIGN: Benchmarking Contradictory Objectives and Proposing Multi-Objective Optimization based DPO for Text-to-Image Alignment**|Amitava Das et.al.|[2502.03512](http://arxiv.org/abs/2502.03512)|null|\n"
       },
       "decision_reason": "二次复核：Image Gen&Edit: 论文核心贡献是提出针对文生图系统对齐问题的基准框架YinYangAlign，并基于多目标优化改进DPO方法，直接服务于图像生成质量与意图对齐，属于图像生成与编辑领域的核心研究。; Video Gen&Edit: 论文明确聚焦于Text-to-Image系统，摘要中未提及视频生成、视频编辑或任何与视频模态相关的技术贡献，其基准和方法均针对静态图像生成任务，与视频生成主题无关。; 3D Gen&Recon: 论文讨论的是二维图像生成的对齐问题，未涉及三维物体生成、场景重建、神经辐射场或任何三维几何表示方法，其核心贡献完全局限于二维视觉生成领域，与三维生成重建主题不匹配。; World Model: 论文关注的是文生图模型的对齐机制和偏好优化，并未构建用于预测环境动态、物理规律或交互式未来状态的世界模型，其方法不涉及状态空间转移或环境模拟，与世界模型主题无实质关联。; Relighting: 论文未涉及光照估计、反射率恢复、阴影生成或任何与重光照相关的技术，其讨论的对齐目标主要围绕提示词遵循、创意修改和视觉连贯性，与重光照这一特定视觉任务领域完全无关。; Depth Estimation: 论文内容完全集中在图像生成的语义对齐和偏好优化上，未提及单目深度估计、立体匹配、深度补全或任何深度预测任务，其基准数据集和方法均不包含深度信息处理，与深度估计主题无关。",
+      "hf_daily": {
+        "dates": [
+          "2025-02-10"
+        ],
+        "evidence_sha256": "3fd2a5a0b497dc279afc619821f9f76c4d9fdf47c26334041e1cf31592de806c",
+        "url": "https://huggingface.co/papers/2502.03512"
+      },
       "id": "2502.03512",
       "matched_topics": [
         "Image Gen&Edit",
@@ -104611,8 +104872,45 @@
       },
       "reviewed_at": "2026-09-14T23:58:45+00:00",
       "selected_topic": "Image Gen&Edit",
+      "sources": [
+        "arxiv",
+        "huggingface"
+      ],
       "status": "accepted",
       "title": "YINYANG-ALIGN: Benchmarking Contradictory Objectives and Proposing Multi-Objective Optimization based DPO for Text-to-Image Alignment",
+      "updated": "2025-02-05"
+    },
+    "2502.03621": {
+      "abstract": "We present a method for augmenting real-world videos with newly generated\ndynamic content. Given an input video and a simple user-provided text\ninstruction describing the desired content, our method synthesizes dynamic\nobjects or complex scene effects that naturally interact with the existing\nscene over time. The position, appearance, and motion of the new content are\nseamlessly integrated into the original footage while accounting for camera\nmotion, occlusions, and interactions with other dynamic objects in the scene,\nresulting in a cohesive and realistic output video. We achieve this via a\nzero-shot, training-free framework that harnesses a pre-trained text-to-video\ndiffusion transformer to synthesize the new content and a pre-trained Vision\nLanguage Model to envision the augmented scene in detail. Specifically, we\nintroduce a novel inference-based method that manipulates features within the\nattention mechanism, enabling accurate localization and seamless integration of\nthe new content while preserving the integrity of the original scene. Our\nmethod is fully automated, requiring only a simple user instruction. We\ndemonstrate its effectiveness on a wide range of edits applied to real-world\nvideos, encompassing diverse objects and scenarios involving both camera and\nobject motion.",
+      "archive_rows": {
+        "Image Gen&Edit": "|**2025-02-05**|**DynVFX: Augmenting Real Videos with Dynamic Content**|Danah Yatim et.al.|[2502.03621](https://arxiv.org/abs/2502.03621)|null|\n",
+        "Video Gen&Edit": "|**2025-02-05**|**DynVFX: Augmenting Real Videos with Dynamic Content**|Danah Yatim et.al.|[2502.03621](https://arxiv.org/abs/2502.03621)|null|\n"
+      },
+      "authors": "Danah Yatim et.al.",
+      "collected_at": "2026-11-11T16:37:59+00:00",
+      "decision_reason": "论文提出了一种基于扩散Transformer的视频增强方法，通过文本指令在真实视频中合成动态内容并实现无缝融合，属于视频生成与编辑的核心方法贡献。",
+      "display_id": "2502.03621",
+      "hf_daily": {
+        "dates": [
+          "2025-02-07"
+        ],
+        "evidence_sha256": "7063697834ae9348b51d71f18a127b665287499aa985047f379d71d51641b05f",
+        "url": "https://huggingface.co/papers/2502.03621"
+      },
+      "id": "2502.03621",
+      "matched_topics": [
+        "Image Gen&Edit",
+        "Video Gen&Edit"
+      ],
+      "paper_url": "https://arxiv.org/abs/2502.03621",
+      "pdf_url": "https://arxiv.org/pdf/2502.03621.pdf",
+      "reviewed_at": "2026-11-11T16:37:59+00:00",
+      "selected_topic": "Video Gen&Edit",
+      "sources": [
+        "huggingface"
+      ],
+      "status": "accepted",
+      "title": "DynVFX: Augmenting Real Videos with Dynamic Content",
       "updated": "2025-02-05"
     },
     "2502.03639": {
@@ -104621,6 +104919,13 @@
         "Video Generation": "|**2025-02-05**|**Towards Physical Understanding in Video Generation: A 3D Point Regularization Approach**|Yunuo Chen et.al.|[2502.03639](http://arxiv.org/abs/2502.03639)|null|\n"
       },
       "decision_reason": "二次复核：Image Gen&Edit: 论文核心贡献是改进视频生成模型，通过引入3D点轨迹正则化来增强视频生成的物理合理性，而非针对静态图像的生成或编辑任务，因此不属于图像生成与编辑主题。; Video Gen&Edit: 论文提出了一种视频生成框架，通过3D点云增强和正则化来改进潜在扩散模型，旨在解决视频生成中物体形变和非物理运动问题，其核心贡献直接服务于视频生成质量的提升。; 3D Gen&Recon: 虽然论文使用了3D点轨迹，但其目的是作为辅助条件来指导2D视频像素的生成，而非直接生成3D资产、重建3D场景或进行3D形状生成，3D信息仅作为中间表示用于视频生成过程。; World Model: 论文主要关注视频生成的视觉合理性和物理一致性，并未构建可交互的环境模型、预测动作条件下的未来状态或学习通用的物理动力学规律，不符合世界模型的定义。; Relighting: 论文内容完全未涉及光照估计、反射率恢复或新光照条件下的外观生成，其关注点在于几何形状和运动轨迹的物理合理性，与重光照任务无关。; Depth Estimation: 论文虽然涉及3D坐标，但并未将深度估计作为主要任务或贡献，而是利用3D点轨迹作为视频生成的条件输入，没有提出新的深度预测方法或评估深度估计性能。",
+      "hf_daily": {
+        "dates": [
+          "2025-02-07"
+        ],
+        "evidence_sha256": "a4b5a82bc6f623be4ba3071ecdf0ebb86b4deedb5ebcd1a5ddc97e3f97b834d7",
+        "url": "https://huggingface.co/papers/2502.03639"
+      },
       "id": "2502.03639",
       "matched_topics": [
         "Video Gen&Edit"
@@ -104655,6 +104960,10 @@
       },
       "reviewed_at": "2026-09-14T20:53:37+00:00",
       "selected_topic": "Video Gen&Edit",
+      "sources": [
+        "arxiv",
+        "huggingface"
+      ],
       "status": "accepted",
       "title": "Towards Physical Understanding in Video Generation: A 3D Point Regularization Approach",
       "updated": "2025-02-05"
@@ -104747,6 +105056,37 @@
       "title": "UniForm: A Unified Multi-Task Diffusion Transformer for Audio-Video Generation",
       "updated": "2025-02-06"
     },
+    "2502.03997": {
+      "abstract": "Computer Aided Design (CAD) is indispensable across various industries.\nText-based CAD editing, which automates the modification of CAD models\nbased on textual instructions, holds great potential but remains underexplored.\nExisting methods primarily focus on design variation generation or text-based\nCAD generation, either lacking support for text-based control or neglecting\nexisting CAD models as constraints. We introduce CAD-Editor, the first\nframework for text-based CAD editing. To address the challenge of demanding\ntriplet data with accurate correspondence for training, we propose an automated\ndata synthesis pipeline. This pipeline utilizes design variation models to\ngenerate pairs of original and edited CAD models and employs Large\nVision-Language Models (LVLMs) to summarize their differences into editing\ninstructions. To tackle the composite nature of text-based CAD editing, we\npropose a locate-then-infill framework that decomposes the task into two\nfocused sub-tasks: locating regions requiring modification and infilling these\nregions with appropriate edits. Large Language Models (LLMs) serve as the\nbackbone for both sub-tasks, leveraging their capabilities in natural language\nunderstanding and CAD knowledge. Experiments show that CAD-Editor achieves\nsuperior performance both quantitatively and qualitatively.",
+      "archive_rows": {
+        "3D Gen&Recon": "|**2025-02-06**|**CAD-Editor: A Locate-then-Infill Framework with Automated Training Data Synthesis for Text-Based CAD Editing**|Yu Yuan et.al.|[2502.03997](https://arxiv.org/abs/2502.03997)|null|\n"
+      },
+      "authors": "Yu Yuan et.al.",
+      "collected_at": "2026-11-11T16:37:59+00:00",
+      "decision_reason": "论文提出了基于文本的CAD编辑框架，涉及CAD模型的修改与生成，属于3D生成与重建范畴。",
+      "display_id": "2502.03997",
+      "hf_daily": {
+        "dates": [
+          "2025-02-12"
+        ],
+        "evidence_sha256": "82776a1a1afa3681a11f3df13727bcd94f238af603fd261f6b7541cef1fda984",
+        "url": "https://huggingface.co/papers/2502.03997"
+      },
+      "id": "2502.03997",
+      "matched_topics": [
+        "3D Gen&Recon"
+      ],
+      "paper_url": "https://arxiv.org/abs/2502.03997",
+      "pdf_url": "https://arxiv.org/pdf/2502.03997.pdf",
+      "reviewed_at": "2026-11-11T16:37:59+00:00",
+      "selected_topic": "3D Gen&Recon",
+      "sources": [
+        "huggingface"
+      ],
+      "status": "accepted",
+      "title": "CAD-Editor: A Locate-then-Infill Framework with Automated Training Data Synthesis for Text-Based CAD Editing",
+      "updated": "2025-02-06"
+    },
     "2502.04050": {
       "abstract": "We present the first text-based image editing approach for object parts based on pre-trained diffusion models. Diffusion-based image editing approaches capitalized on the deep understanding of diffusion models of image semantics to perform a variety of edits. However, existing diffusion models lack sufficient understanding of many object parts, hindering fine-grained edits requested by users. To address this, we propose to expand the knowledge of pre-trained diffusion models to allow them to understand various object parts, enabling them to perform fine-grained edits. We achieve this by learning special textual tokens that correspond to different object parts through an efficient token optimization process. These tokens are optimized to produce reliable localization masks at each inference step to localize the editing region. Leveraging these masks, we design feature-blending and adaptive thresholding strategies to execute the edits seamlessly. To evaluate our approach, we establish a benchmark and an evaluation protocol for part editing. Experiments show that our approach outperforms existing editing methods on all metrics and is preferred by users 66−90%66-90\\% of the time in conducted user studies.",
       "archive_rows": {
@@ -104791,12 +105131,52 @@
       "title": "PartEdit: Fine-Grained Image Editing using Pre-Trained Diffusion Models",
       "updated": "2025-02-06"
     },
+    "2502.04296": {
+      "abstract": "We propose Heterogeneous Masked Autoregression (HMA) for modeling\naction-video dynamics to generate high-quality data and evaluation in scaling\nrobot learning. Building interactive video world models and policies for\nrobotics is difficult due to the challenge of handling diverse settings while\nmaintaining computational efficiency to run in real time. HMA uses\nheterogeneous pre-training from observations and action sequences across\ndifferent robotic embodiments, domains, and tasks. HMA uses masked\nautoregression to generate quantized or soft tokens for video predictions.\n\\ourshort achieves better visual fidelity and controllability than the previous\nrobotic video generation models with 15 times faster speed in the real world.\nAfter post-training, this model can be used as a video simulator from low-level\naction inputs for evaluating policies and generating synthetic data. See this\nlink https://liruiw.github.io/hma for more information.",
+      "archive_rows": {
+        "Video Gen&Edit": "|**2025-02-06**|**Learning Real-World Action-Video Dynamics with Heterogeneous Masked Autoregression**|Lirui Wang et.al.|[2502.04296](https://arxiv.org/abs/2502.04296)|null|\n",
+        "World Model": "|**2025-02-06**|**Learning Real-World Action-Video Dynamics with Heterogeneous Masked Autoregression**|Lirui Wang et.al.|[2502.04296](https://arxiv.org/abs/2502.04296)|null|\n"
+      },
+      "authors": "Lirui Wang et.al.",
+      "collected_at": "2026-11-11T16:37:59+00:00",
+      "decision_reason": "论文提出HMA模型用于建模动作-视频动态，旨在构建交互式视频世界模型以支持机器人策略评估与数据生成，符合世界模型定义。",
+      "display_id": "2502.04296",
+      "hf_daily": {
+        "dates": [
+          "2025-02-07"
+        ],
+        "evidence_sha256": "d6bbb4e3af35f6bfe8034d22c31ecd9d0ade36d6ee60ff2ca79b8e20c0d85952",
+        "url": "https://huggingface.co/papers/2502.04296"
+      },
+      "id": "2502.04296",
+      "matched_topics": [
+        "Video Gen&Edit",
+        "World Model"
+      ],
+      "paper_url": "https://arxiv.org/abs/2502.04296",
+      "pdf_url": "https://arxiv.org/pdf/2502.04296.pdf",
+      "reviewed_at": "2026-11-11T16:37:59+00:00",
+      "selected_topic": "World Model",
+      "sources": [
+        "huggingface"
+      ],
+      "status": "accepted",
+      "title": "Learning Real-World Action-Video Dynamics with Heterogeneous Masked Autoregression",
+      "updated": "2025-02-06"
+    },
     "2502.04299": {
       "abstract": "This paper presents a method that allows users to design cinematic video shots in the context of image-to-video generation. Shot design, a critical aspect of filmmaking, involves meticulously planning both camera movements and object motions in a scene. However, enabling intuitive shot design in modern image-to-video generation systems presents two main challenges: first, effectively capturing user intentions on the motion design, where both camera movements and scene-space object motions must be specified jointly; and second, representing motion information that can be effectively utilized by a video diffusion model to synthesize the image animations. To address these challenges, we introduce MotionCanvas, a method that integrates user-driven controls into image-to-video (I2V) generation models, allowing users to control both object and camera motions in a scene-aware manner. By connecting insights from classical computer graphics and contemporary video generation techniques, we demonstrate the ability to achieve 3D-aware motion control in I2V synthesis without requiring costly 3D-related training data. MotionCanvas enables users to intuitively depict scene-space motion intentions, and translates them into spatiotemporal motion-conditioning signals for video diffusion models. We demonstrate the effectiveness of our method on a wide range of real-world image content and shot-design scenarios, highlighting its potential to enhance the creative workflows in digital content creation and adapt to various image and video editing applications. [autoplay,loop,width=trim=0 7 0 7, clip]24Frames/teaser/030",
       "archive_rows": {
         "Video Generation": "|**2025-02-06**|**MotionCanvas: Cinematic Shot Design with Controllable Image-to-Video Generation**|Jinbo Xing et.al.|[2502.04299](http://arxiv.org/abs/2502.04299)|null|\n"
       },
       "decision_reason": "二次复核：Image Gen&Edit: 论文核心贡献是图像到视频生成中的镜头设计与运动控制，虽然输入是图像，但主要输出和评估指标均为视频，不属于图像生成或编辑的核心范畴。; Video Gen&Edit: 论文提出MotionCanvas方法，通过控制相机和物体运动实现图像到视频生成，核心贡献在于视频合成中的可控运动设计，完全符合视频生成主题。; 3D Gen&Recon: 虽然涉及3D场景空间运动意图的解析，但目的是为2D视频生成提供条件信号，并未生成3D资产、重建3D场景或进行3D几何估计，不属于3D生成与重建。; World Model: 论文未构建预测环境动态或交互世界的模型，而是利用视频扩散模型进行条件生成，缺乏世界模型所要求的物理动态学习或未来状态预测机制。; Relighting: 论文关注运动控制和镜头设计，未涉及光照估计、反射率恢复或新光照条件下的外观生成，与重光照主题完全无关。; Depth Estimation: 论文未进行单目、立体或多视角深度估计，也未输出深度图，其3D感知仅用于运动信号转换，不涉及深度预测任务。",
+      "hf_daily": {
+        "dates": [
+          "2025-02-07"
+        ],
+        "evidence_sha256": "e8431f80635e2f69b5c09ebadb7f027e746a01ecac693e8fbfe17c90728cecf8",
+        "url": "https://huggingface.co/papers/2502.04299"
+      },
       "id": "2502.04299",
       "matched_topics": [
         "Video Gen&Edit"
@@ -104831,6 +105211,10 @@
       },
       "reviewed_at": "2026-09-14T20:53:37+00:00",
       "selected_topic": "Video Gen&Edit",
+      "sources": [
+        "arxiv",
+        "huggingface"
+      ],
       "status": "accepted",
       "title": "MotionCanvas: Cinematic Shot Design with Controllable Image-to-Video Generation",
       "updated": "2025-02-06"
@@ -104841,6 +105225,13 @@
         "Video Generation": "|**2025-02-05**|**On-device Sora: Enabling Training-Free Diffusion-based Text-to-Video Generation for Mobile Devices**|Bosung Kim et.al.|[2502.04363](http://arxiv.org/abs/2502.04363)|null|\n"
       },
       "decision_reason": "二次复核：Image Gen&Edit: 论文核心贡献是提出一种无需训练的扩散模型推理加速框架，专门用于在移动设备上实现文本到视频生成，其技术重点在于视频生成的效率优化，而非图像生成或编辑任务。; Video Gen&Edit: 论文主要研究如何在资源受限的移动设备上高效运行基于扩散模型的文本到视频生成任务，提出了线性比例跳跃、时间维度令牌合并等针对视频生成模型的具体优化技术，属于视频生成领域。; 3D Gen&Recon: 论文内容完全聚焦于二维视频序列的生成效率优化，未涉及任何三维几何重建、三维资产生成、神经辐射场或高斯泼溅等三维视觉相关技术或任务。; World Model: 虽然视频生成模型可被视为世界模型的一种形式，但本文核心贡献是推理加速和部署优化，并未涉及世界模型特有的物理动力学建模、交互式环境预测或动作条件未来状态预测等核心机制。; Relighting: 论文未涉及光照估计、反射率恢复、阴影生成或新光照条件下的外观渲染等重光照任务，其关注点在于计算资源受限下的视频生成效率，与重光照技术无关。; Depth Estimation: 论文未涉及单目、立体或多视图深度估计、深度补全或深度预测等任务，其核心方法针对的是视频扩散模型的推理步骤和注意力计算优化，与深度估计领域无直接关联。",
+      "hf_daily": {
+        "dates": [
+          "2025-02-10"
+        ],
+        "evidence_sha256": "221c666b3610d5561c9699ee316a0ac72df3985773f2d8d3a672cfd77423ec41",
+        "url": "https://huggingface.co/papers/2502.04363"
+      },
       "id": "2502.04363",
       "matched_topics": [
         "Video Gen&Edit"
@@ -104875,6 +105266,10 @@
       },
       "reviewed_at": "2026-09-14T20:53:37+00:00",
       "selected_topic": "Video Gen&Edit",
+      "sources": [
+        "arxiv",
+        "huggingface"
+      ],
       "status": "accepted",
       "title": "On-device Sora: Enabling Training-Free Diffusion-based Text-to-Video Generation for Mobile Devices",
       "updated": "2025-02-05"
@@ -104885,6 +105280,13 @@
         "3D Generation": "|**2025-02-05**|**DreamDPO: Aligning Text-to-3D Generation with Human Preferences via Direct Preference Optimization**|Zhenglin Zhou et.al.|[2502.04370](http://arxiv.org/abs/2502.04370)|null|\n"
       },
       "decision_reason": "二次复核：Image Gen&Edit: 论文核心贡献是文本到3D生成的偏好对齐框架，虽然可能利用2D生成先验，但主要输出和评估对象均为3D资产，不属于图像生成或编辑主题。; Video Gen&Edit: 论文专注于静态3D内容的生成与优化，未涉及视频序列的生成、编辑或时序动态建模，与视频生成主题无关。; 3D Gen&Recon: 论文提出DreamDPO框架，通过直接偏好优化改进文本到3D生成过程，核心贡献在于提升3D资产生成质量与可控性，完全符合3D生成主题定义。; World Model: 论文未构建环境动力学模型或交互式世界状态预测，仅关注单实例3D资产的生成优化，不具备世界模型的核心特征。; Relighting: 论文未涉及光照估计、反射率恢复或新光照条件下的外观生成，其优化目标为整体3D内容与文本的对齐，与重光照主题无关。; Depth Estimation: 论文目标是生成3D内容而非从图像估计深度，未涉及单目、立体或多视图深度预测任务，与深度估计主题不匹配。",
+      "hf_daily": {
+        "dates": [
+          "2025-02-11"
+        ],
+        "evidence_sha256": "89012d6938f4379d05ba15c742aaf695ded82cda1a4d7eab5f9f34463d866176",
+        "url": "https://huggingface.co/papers/2502.04370"
+      },
       "id": "2502.04370",
       "matched_topics": [
         "3D Gen&Recon"
@@ -104919,6 +105321,10 @@
       },
       "reviewed_at": "2026-09-14T20:53:37+00:00",
       "selected_topic": "3D Gen&Recon",
+      "sources": [
+        "arxiv",
+        "huggingface"
+      ],
       "status": "accepted",
       "title": "DreamDPO: Aligning Text-to-3D Generation with Human Preferences via Direct Preference Optimization",
       "updated": "2025-02-05"
@@ -105017,6 +105423,13 @@
         "Video Generation": "|**2025-02-06**|**Fast Video Generation with Sliding Tile Attention**|Peiyuan Zhang et.al.|[2502.04507](http://arxiv.org/abs/2502.04507)|null|\n"
       },
       "decision_reason": "二次复核：Image Gen&Edit: 论文核心贡献是加速视频扩散Transformer的注意力机制，针对的是视频生成任务中的时空冗余，而非图像生成或编辑，因此不匹配该主题。; Video Gen&Edit: 论文提出滑动块注意力机制以加速视频扩散Transformer的推理，直接解决视频生成中的计算瓶颈，属于视频生成领域的核心方法贡献。; 3D Gen&Recon: 虽然视频帧具有空间结构，但论文目标是加速视频生成模型的推理，并非进行3D场景重建、生成或几何估计，不符合3D生成与重建的定义。; World Model: 论文关注的是视频生成模型的计算效率优化，并未涉及环境动力学预测、交互式世界建模或动作条件未来状态预测，不属于世界模型范畴。; Relighting: 论文内容完全集中在注意力机制的硬件优化和推理加速，未涉及光照估计、反射率恢复或新光照条件下的外观生成，与重光照无关。; Depth Estimation: 论文未涉及深度图预测、单目或立体深度估计任务，其核心是视频生成加速，与深度估计技术无直接关联。",
+      "hf_daily": {
+        "dates": [
+          "2025-02-10"
+        ],
+        "evidence_sha256": "749ee5ca248e9037deb3960ed49d0a5afd64ace1831e73d576bc071137944a1e",
+        "url": "https://huggingface.co/papers/2502.04507"
+      },
       "id": "2502.04507",
       "matched_topics": [
         "Video Gen&Edit"
@@ -105051,6 +105464,10 @@
       },
       "reviewed_at": "2026-09-14T20:53:37+00:00",
       "selected_topic": "Video Gen&Edit",
+      "sources": [
+        "arxiv",
+        "huggingface"
+      ],
       "status": "accepted",
       "title": "Fast Video Generation with Sliding Tile Attention",
       "updated": "2025-02-06"
@@ -105160,6 +105577,13 @@
       ],
       "collected_at": "2026-09-06T07:39:58+00:00",
       "decision_reason": "二次复核：Image Gen&Edit: 论文核心贡献是利用大语言模型生成PDDL符号世界模型以解决规划问题，不涉及图像合成、编辑或视觉生成技术，与图像生成主题完全无关。; Video Gen&Edit: 研究聚焦于基于PDDL的符号规划领域，旨在通过测试时扩展提升LLM生成规划域的能力，未涉及视频合成、编辑或时序视觉生成任务。; 3D Gen&Recon: 论文处理的是抽象的逻辑状态空间和规划问题，不涉及3D几何重建、网格生成、神经辐射场或任何三维视觉内容的生成与恢复。; World Model: 论文明确提出生成符号世界模型（Symbolic World Models），利用PDDL形式化状态转换，使经典搜索算法能应用于规划，符合学习或构建环境动态模型的主题定义。; Relighting: 研究内容完全集中在逻辑推理和规划领域，不涉及光照估计、反射率恢复或任何与计算机视觉中重光照相关的技术。; Depth Estimation: 论文未涉及深度图预测、单目或多目深度估计，其核心在于形式化语言处理和规划算法，与深度估计任务无关联。",
+      "hf_daily": {
+        "dates": [
+          "2025-02-10"
+        ],
+        "evidence_sha256": "97bfb4d0bfc52ecad82bfdd4dfe34472462f756c4048b23132559bb70ec1657b",
+        "url": "https://huggingface.co/papers/2502.04728"
+      },
       "id": "2502.04728",
       "matched_topics": [
         "World Model"
@@ -105194,6 +105618,10 @@
       },
       "reviewed_at": "2026-09-14T20:53:37+00:00",
       "selected_topic": "World Model",
+      "sources": [
+        "arxiv",
+        "huggingface"
+      ],
       "status": "accepted",
       "title": "Generating Symbolic World Models via Test-time Scaling of Large Language Models",
       "updated": "2025-02-07"
@@ -105336,6 +105764,13 @@
         "Video Generation": "|**2025-02-07**|**Goku: Flow Based Video Generative Foundation Models**|Shoufa Chen et.al.|[2502.04896](http://arxiv.org/abs/2502.04896)|null|\n"
       },
       "decision_reason": "二次复核：Image Gen&Edit: 论文提出Goku模型家族，明确包含文本到图像生成任务，并在GenEval和DPG-Bench等基准上取得领先成绩，核心贡献涵盖图像生成方法。; Video Gen&Edit: 论文核心是联合图像与视频生成模型，重点阐述视频生成架构、数据管线及VBench上的SOTA表现，视频生成是其主要贡献之一。; 3D Gen&Recon: 论文聚焦于2D图像和视频的生成，未涉及3D对象、场景重建、NeRF或高斯泼溅等3D生成或重建技术，不属于该主题范围。; World Model: 虽然引言提及世界模型模拟器作为应用背景，但论文核心是视觉内容生成而非学习环境动态或物理规律，未提出世界模型特有的预测或交互机制。; Relighting: 论文未涉及光照估计、重光照或反射率建模，其生成过程不专门处理照明条件变化，与重光照主题无关。; Depth Estimation: 论文未涉及深度估计、单目深度预测或几何深度恢复，其VAE压缩的是视觉内容而非显式深度图，不属于深度估计主题。",
+      "hf_daily": {
+        "dates": [
+          "2025-02-10"
+        ],
+        "evidence_sha256": "acac718d9defcdfc50ba9af0ec47ccbe2b8efdaa1e244b231d56030238fa8254",
+        "url": "https://huggingface.co/papers/2502.04896"
+      },
       "id": "2502.04896",
       "matched_topics": [
         "Video Gen&Edit"
@@ -105370,6 +105805,10 @@
       },
       "reviewed_at": "2026-09-14T20:53:37+00:00",
       "selected_topic": "Video Gen&Edit",
+      "sources": [
+        "arxiv",
+        "huggingface"
+      ],
       "status": "accepted",
       "title": "Goku: Flow Based Video Generative Foundation Models",
       "updated": "2025-02-07"
@@ -105600,6 +106039,13 @@
         "Neural Rendering": "|**2025-02-07**|**AuraFusion360: Augmented Unseen Region Alignment for Reference-based 360° Unbounded Scene Inpainting**|Chung-Ho Wu et.al.|[2502.05176](http://arxiv.org/abs/2502.05176)|null|\n"
       },
       "decision_reason": "二次复核：Image Gen&Edit: 论文核心贡献是三维场景修复，虽然使用了二维生成模型作为组件，但主要解决的是三维几何一致性问题，不属于二维图像生成或编辑的核心方法研究。; Video Gen&Edit: 论文处理的是静态三维场景的多视图一致性，而非视频序列的生成或编辑，不涉及时间维度的动态内容合成，因此不属于视频生成与编辑主题。; 3D Gen&Recon: 论文提出基于高斯泼溅的三维场景修复方法，涉及三维场景的重建、编辑及新视角合成，完全符合三维生成与重建主题中关于三维对象或场景编辑及重建的定义。; World Model: 论文关注的是特定场景的几何修复与外观补全，并非学习环境动态、物理规律或交互式世界状态的通用世界模型，缺乏对动作条件未来状态的预测能力。; Relighting: 论文主要解决物体移除和孔洞填充问题，未涉及光照估计、反射率恢复或新光照条件下的外观生成，与重光照主题的核心技术贡献无关。; Depth Estimation: 虽然方法中使用了深度感知掩码生成和深度扩散，但深度仅作为辅助几何约束用于引导三维重建，并非论文的主要贡献或独立研究目标，不属于深度估计主题。",
+      "hf_daily": {
+        "dates": [
+          "2025-02-10"
+        ],
+        "evidence_sha256": "4da6878eca7eeff2145f37a182833bb75fdc0e9446d0ebb107d882f99d524f34",
+        "url": "https://huggingface.co/papers/2502.05176"
+      },
       "id": "2502.05176",
       "matched_topics": [
         "3D Gen&Recon"
@@ -105634,8 +106080,43 @@
       },
       "reviewed_at": "2026-09-14T20:53:37+00:00",
       "selected_topic": "3D Gen&Recon",
+      "sources": [
+        "arxiv",
+        "huggingface"
+      ],
       "status": "accepted",
       "title": "AuraFusion360: Augmented Unseen Region Alignment for Reference-based 360° Unbounded Scene Inpainting",
+      "updated": "2025-02-07"
+    },
+    "2502.05178": {
+      "abstract": "We introduce Quantized Language-Image Pretraining (QLIP), a visual\ntokenization method that combines state-of-the-art reconstruction quality with\nstate-of-the-art zero-shot image understanding. QLIP trains a\nbinary-spherical-quantization-based autoencoder with reconstruction and\nlanguage-image alignment objectives. We are the first to show that the two\nobjectives do not need to be at odds. We balance the two loss terms dynamically\nduring training and show that a two-stage training pipeline effectively mixes\nthe large-batch requirements of image-language pre-training with the memory\nbottleneck imposed by the reconstruction objective. We validate the\neffectiveness of QLIP for multimodal understanding and text-conditioned image\ngeneration with a single model. Specifically, QLIP serves as a drop-in\nreplacement for the visual encoder for LLaVA and the image tokenizer for\nLlamaGen with comparable or even better performance. Finally, we demonstrate\nthat QLIP enables a unified mixed-modality auto-regressive model for\nunderstanding and generation.",
+      "archive_rows": {
+        "Image Gen&Edit": "|**2025-02-07**|**QLIP: Text-Aligned Visual Tokenization Unifies Auto-Regressive Multimodal Understanding and Generation**|Yue Zhao et.al.|[2502.05178](https://arxiv.org/abs/2502.05178)|null|\n"
+      },
+      "authors": "Yue Zhao et.al.",
+      "collected_at": "2026-11-11T16:37:59+00:00",
+      "decision_reason": "论文提出了QLIP视觉分词方法，通过结合重建与语言图像对齐目标，支持文本条件图像生成及自回归多模态生成，属于图像生成与编辑领域的方法贡献。",
+      "display_id": "2502.05178",
+      "hf_daily": {
+        "dates": [
+          "2025-02-10"
+        ],
+        "evidence_sha256": "79b6a87f27a3dbfec3198b70bd24d004bf3e07fd40a16f20352c4fee6b0c49d0",
+        "url": "https://huggingface.co/papers/2502.05178"
+      },
+      "id": "2502.05178",
+      "matched_topics": [
+        "Image Gen&Edit"
+      ],
+      "paper_url": "https://arxiv.org/abs/2502.05178",
+      "pdf_url": "https://arxiv.org/pdf/2502.05178.pdf",
+      "reviewed_at": "2026-11-11T16:37:59+00:00",
+      "selected_topic": "Image Gen&Edit",
+      "sources": [
+        "huggingface"
+      ],
+      "status": "accepted",
+      "title": "QLIP: Text-Aligned Visual Tokenization Unifies Auto-Regressive Multimodal Understanding and Generation",
       "updated": "2025-02-07"
     },
     "2502.05179": {
@@ -105644,6 +106125,13 @@
         "Video Generation": "|**2025-02-07**|**FlashVideo:Flowing Fidelity to Detail for Efficient High-Resolution Video Generation**|Shilong Zhang et.al.|[2502.05179](http://arxiv.org/abs/2502.05179)|**[link](https://github.com/foundationvision/flashvideo)**|\n"
       },
       "decision_reason": "二次复核：Image Gen&Edit: 论文核心贡献是提出FlashVideo两阶段视频生成框架，旨在解决文本到视频生成中的高保真与计算效率平衡问题，其方法针对视频时空一致性设计，并非图像生成或编辑技术。; Video Gen&Edit: 论文提出FlashVideo框架，专门用于高效的高分辨率文本到视频生成，通过两阶段策略优化视频生成的保真度与细节质量，属于视频生成领域的核心方法创新。; 3D Gen&Recon: 论文关注的是二维视频帧序列的生成与质量提升，虽然涉及3D注意力机制以维持时空一致性，但并未涉及三维几何重建、网格生成或三维场景表示等3D生成与重建任务。; World Model: 论文主要关注视频生成的视觉质量与计算效率，并未构建可交互的环境模型、物理动力学预测或动作条件未来状态预测，不符合世界模型的定义。; Relighting: 论文内容完全聚焦于视频生成的流程优化与细节增强，未涉及光照估计、反射率恢复或新光照条件下的外观生成等重光照相关技术。; Depth Estimation: 论文未涉及深度图预测、单目或立体深度估计任务，其核心贡献在于视频生成框架的设计，与深度估计领域无直接关联。",
+      "hf_daily": {
+        "dates": [
+          "2025-02-10"
+        ],
+        "evidence_sha256": "af38520389180a1c7094797f5be79fb56ee4f8899c5a0eece44df312d97dc8ce",
+        "url": "https://huggingface.co/papers/2502.05179"
+      },
       "id": "2502.05179",
       "matched_topics": [
         "Video Gen&Edit"
@@ -105678,6 +106166,10 @@
       },
       "reviewed_at": "2026-09-14T20:53:37+00:00",
       "selected_topic": "Video Gen&Edit",
+      "sources": [
+        "arxiv",
+        "huggingface"
+      ],
       "status": "accepted",
       "title": "FlashVideo:Flowing Fidelity to Detail for Efficient High-Resolution Video Generation",
       "updated": "2025-02-07"
@@ -105748,6 +106240,37 @@
       "selected_topic": "3D Gen&Recon",
       "status": "accepted",
       "title": "Vision-in-the-loop Simulation for Deep Monocular Pose Estimation of UAV in Ocean Environment",
+      "updated": "2025-02-08"
+    },
+    "2502.05415": {
+      "abstract": "There has been increasing research interest in building unified multimodal\nunderstanding and generation models, among which Show-o stands as a notable\nrepresentative, demonstrating great promise for both text-to-image and\nimage-to-text generation. The inference of Show-o involves progressively\ndenoising image tokens and autoregressively decoding text tokens, and hence,\nunfortunately, suffers from inefficiency issues from both sides. This paper\nintroduces Show-o Turbo to bridge the gap. We first identify a unified\ndenoising perspective for the generation of images and text in Show-o based on\nthe parallel decoding of text tokens. We then propose to extend consistency\ndistillation (CD), a qualified approach for shortening the denoising process of\ndiffusion models, to the multimodal denoising trajectories of Show-o. We\nintroduce a trajectory segmentation strategy and a curriculum learning\nprocedure to improve the training convergence. Empirically, in text-to-image\ngeneration, Show-o Turbo displays a GenEval score of 0.625 at 4 sampling steps\nwithout using classifier-free guidance (CFG), outperforming that of the\noriginal Show-o with 8 steps and CFG; in image-to-text generation, Show-o Turbo\nexhibits a 1.5x speedup without significantly sacrificing performance. The code\nis available at https://github.com/zhijie-group/Show-o-Turbo.",
+      "archive_rows": {
+        "Image Gen&Edit": "|**2025-02-08**|**Show-o Turbo: Towards Accelerated Unified Multimodal Understanding and Generation**|Chenkai Xu et.al.|[2502.05415](https://arxiv.org/abs/2502.05415)|null|\n"
+      },
+      "authors": "Chenkai Xu et.al.",
+      "collected_at": "2026-11-11T16:37:59+00:00",
+      "decision_reason": "论文提出Show-o Turbo，通过一致性蒸馏加速统一多模态模型中的文本到图像生成过程，属于图像生成方法的改进。",
+      "display_id": "2502.05415",
+      "hf_daily": {
+        "dates": [
+          "2025-02-11"
+        ],
+        "evidence_sha256": "281fd299929055315656653404001b6521f7dd18241751219f3f1d3c6cbbef69",
+        "url": "https://huggingface.co/papers/2502.05415"
+      },
+      "id": "2502.05415",
+      "matched_topics": [
+        "Image Gen&Edit"
+      ],
+      "paper_url": "https://arxiv.org/abs/2502.05415",
+      "pdf_url": "https://arxiv.org/pdf/2502.05415.pdf",
+      "reviewed_at": "2026-11-11T16:37:59+00:00",
+      "selected_topic": "Image Gen&Edit",
+      "sources": [
+        "huggingface"
+      ],
+      "status": "accepted",
+      "title": "Show-o Turbo: Towards Accelerated Unified Multimodal Understanding and Generation",
       "updated": "2025-02-08"
     },
     "2502.05433": {
@@ -106249,12 +106772,83 @@
       },
       "updated": "2025-02-09"
     },
+    "2502.05979": {
+      "abstract": "Crafting magic and illusions is one of the most thrilling aspects of\nfilmmaking, with visual effects (VFX) serving as the powerhouse behind\nunforgettable cinematic experiences. While recent advances in generative\nartificial intelligence have driven progress in generic image and video\nsynthesis, the domain of controllable VFX generation remains relatively\nunderexplored. In this work, we propose a novel paradigm for animated VFX\ngeneration as image animation, where dynamic effects are generated from\nuser-friendly textual descriptions and static reference images.\n  Our work makes two primary contributions: (i) Open-VFX, the first\nhigh-quality VFX video dataset spanning 15 diverse effect categories, annotated\nwith textual descriptions, instance segmentation masks for spatial\nconditioning, and start-end timestamps for temporal control. (ii) VFX Creator,\na simple yet effective controllable VFX generation framework based on a Video\nDiffusion Transformer. The model incorporates a spatial and temporal\ncontrollable LoRA adapter, requiring minimal training videos. Specifically, a\nplug-and-play mask control module enables instance-level spatial manipulation,\nwhile tokenized start-end motion timestamps embedded in the diffusion process,\nalongside the text encoder, allow precise temporal control over effect timing\nand pace.\n  Extensive experiments on the Open-VFX test set demonstrate the superiority of\nthe proposed system in generating realistic and dynamic effects, achieving\nstate-of-the-art performance and generalization ability in both spatial and\ntemporal controllability. Furthermore, we introduce a specialized metric to\nevaluate the precision of temporal control. By bridging traditional VFX\ntechniques with generative approaches, VFX Creator unlocks new possibilities\nfor efficient and high-quality video effect generation, making advanced VFX\naccessible to a broader audience.",
+      "archive_rows": {
+        "Image Gen&Edit": "|**2025-02-09**|**VFX Creator: Animated Visual Effect Generation with Controllable Diffusion Transformer**|Xinyu Liu et.al.|[2502.05979](https://arxiv.org/abs/2502.05979)|null|\n",
+        "Video Gen&Edit": "|**2025-02-09**|**VFX Creator: Animated Visual Effect Generation with Controllable Diffusion Transformer**|Xinyu Liu et.al.|[2502.05979](https://arxiv.org/abs/2502.05979)|null|\n"
+      },
+      "authors": "Xinyu Liu et.al.",
+      "collected_at": "2026-11-11T16:37:59+00:00",
+      "decision_reason": "论文提出了基于视频扩散Transformer的可控VFX生成框架，属于视频合成与编辑方法。",
+      "display_id": "2502.05979",
+      "hf_daily": {
+        "dates": [
+          "2025-02-14"
+        ],
+        "evidence_sha256": "d89d0058926e230e45be3ca2606d0932dc4c4a9e82234ec18af4ca0872e67ada",
+        "url": "https://huggingface.co/papers/2502.05979"
+      },
+      "id": "2502.05979",
+      "matched_topics": [
+        "Image Gen&Edit",
+        "Video Gen&Edit"
+      ],
+      "paper_url": "https://arxiv.org/abs/2502.05979",
+      "pdf_url": "https://arxiv.org/pdf/2502.05979.pdf",
+      "reviewed_at": "2026-11-11T16:37:59+00:00",
+      "selected_topic": "Video Gen&Edit",
+      "sources": [
+        "huggingface"
+      ],
+      "status": "accepted",
+      "title": "VFX Creator: Animated Visual Effect Generation with Controllable Diffusion Transformer",
+      "updated": "2025-02-09"
+    },
+    "2502.06023": {
+      "abstract": "Recent advancements in human preference optimization, originally developed\nfor Large Language Models (LLMs), have shown significant potential in improving\ntext-to-image diffusion models. These methods aim to learn the distribution of\npreferred samples while distinguishing them from less preferred ones. However,\nexisting preference datasets often exhibit overlap between these distributions,\nleading to a conflict distribution. Additionally, we identified that input\nprompts contain irrelevant information for less preferred images, limiting the\ndenoising network's ability to accurately predict noise in preference\noptimization methods, known as the irrelevant prompt issue. To address these\nchallenges, we propose Dual Caption Preference Optimization (DCPO), a novel\napproach that utilizes two distinct captions to mitigate irrelevant prompts. To\ntackle conflict distribution, we introduce the Pick-Double Caption dataset, a\nmodified version of Pick-a-Pic v2 with separate captions for preferred and less\npreferred images. We further propose three different strategies for generating\ndistinct captions: captioning, perturbation, and hybrid methods. Our\nexperiments show that DCPO significantly improves image quality and relevance\nto prompts, outperforming Stable Diffusion (SD) 2.1, SFT_Chosen, Diffusion-DPO,\nand MaPO across multiple metrics, including Pickscore, HPSv2.1, GenEval,\nCLIPscore, and ImageReward, fine-tuned on SD 2.1 as the backbone.",
+      "archive_rows": {
+        "Image Gen&Edit": "|**2025-02-09**|**Dual Caption Preference Optimization for Diffusion Models**|Amir Saeidi et.al.|[2502.06023](https://arxiv.org/abs/2502.06023)|null|\n"
+      },
+      "authors": "Amir Saeidi et.al.",
+      "collected_at": "2026-11-11T16:37:59+00:00",
+      "decision_reason": "论文提出了针对文本到图像扩散模型的偏好优化方法（DCPO），旨在解决提示词无关性和分布冲突问题，属于图像生成与编辑领域的核心方法贡献。",
+      "display_id": "2502.06023",
+      "hf_daily": {
+        "dates": [
+          "2025-02-11"
+        ],
+        "evidence_sha256": "4e4d488c5744762cdea5d55829b4430c24aa649b8c40f99ac8decdc850d81f3a",
+        "url": "https://huggingface.co/papers/2502.06023"
+      },
+      "id": "2502.06023",
+      "matched_topics": [
+        "Image Gen&Edit"
+      ],
+      "paper_url": "https://arxiv.org/abs/2502.06023",
+      "pdf_url": "https://arxiv.org/pdf/2502.06023.pdf",
+      "reviewed_at": "2026-11-11T16:37:59+00:00",
+      "selected_topic": "Image Gen&Edit",
+      "sources": [
+        "huggingface"
+      ],
+      "status": "accepted",
+      "title": "Dual Caption Preference Optimization for Diffusion Models",
+      "updated": "2025-02-09"
+    },
     "2502.06155": {
       "abstract": "Despite the promise of synthesizing high-fidelity videos, Diffusion Transformers (DiTs) with 3D full attention suffer from expensive inference due to the complexity of attention computation and numerous sampling steps. For example, the popular Open-Sora-Plan model consumes more than 9 minutes for generating a single video of 29 frames. This paper addresses the inefficiency issue from two aspects: 1) Prune the 3D full attention based on the redundancy within video data; We identify a prevalent tile-style repetitive pattern in the 3D attention maps for video data, and advocate a new family of sparse 3D attention that holds a linear complexity w.r.t. the number of video frames. 2) Shorten the sampling process by adopting existing multi-step consistency distillation; We split the entire sampling trajectory into several segments and perform consistency distillation within each one to activate few-step generation capacities. We further devise a three-stage training pipeline to conjoin the low-complexity attention and few-step generation capacities. Notably, with 0.1% pretraining data, we turn the Open-Sora-Plan-1.2 model into an efficient one that is 7.4×−7.8×7.4\\times-7.8\\times faster for 29 and 93 frames 720p video generation with a marginal performance trade-off in VBench. In addition, we demonstrate that our approach is amenable to distributed inference, achieving an additional 3.91×3.91\\times speedup when running on 4 GPUs with sequence parallelism.",
       "archive_rows": {
         "Video Generation": "|**2025-02-10**|**Efficient-vDiT: Efficient Video Diffusion Transformers With Attention Tile**|Hangliang Ding et.al.|[2502.06155](http://arxiv.org/abs/2502.06155)|null|\n"
       },
       "decision_reason": "二次复核：Image Gen&Edit: 论文核心贡献是加速视频扩散Transformer的推理效率，针对的是视频生成任务中的3D注意力计算冗余和采样步骤问题，并非图像生成或编辑方法，因此不匹配该主题。; Video Gen&Edit: 论文提出Efficient-vDiT框架，通过稀疏化3D注意力和一致性蒸馏显著加速视频扩散Transformer的推理，直接针对视频生成模型的效率优化，属于视频生成领域的核心方法贡献。; 3D Gen&Recon: 虽然视频数据具有时空结构，但论文目标是加速视频生成模型的推理，而非生成、重建或编辑3D几何对象、场景或资产，不涉及3D重建或生成技术，因此不匹配该主题。; World Model: 论文关注的是视频扩散模型的推理加速，并未构建用于预测环境动态、物理规律或交互式未来状态的世界模型，其核心是生成效率而非环境建模或预测，因此不匹配该主题。; Relighting: 论文内容完全聚焦于视频生成模型的注意力机制优化和采样加速，未涉及光照估计、传输、编辑或新光照下的外观生成，与重光照主题无任何关联，因此不匹配该主题。; Depth Estimation: 论文旨在解决视频生成模型的计算效率问题，并未涉及单目、立体或多视角深度估计、预测或补全任务，其方法不产生深度图或几何深度信息，因此不匹配该主题。",
+      "hf_daily": {
+        "dates": [
+          "2025-02-11"
+        ],
+        "evidence_sha256": "d181af9c6ceb9f42b9cebdbd765e18411a221f40eff8c798aa470c32b6533ed2",
+        "url": "https://huggingface.co/papers/2502.06155"
+      },
       "id": "2502.06155",
       "matched_topics": [
         "Video Gen&Edit"
@@ -106289,6 +106883,10 @@
       },
       "reviewed_at": "2026-09-14T20:52:09+00:00",
       "selected_topic": "Video Gen&Edit",
+      "sources": [
+        "arxiv",
+        "huggingface"
+      ],
       "status": "accepted",
       "title": "Efficient-vDiT: Efficient Video Diffusion Transformers With Attention Tile",
       "updated": "2025-02-10"
@@ -106478,6 +107076,13 @@
         "Video Generation": "|**2025-02-10**|**CustomVideoX: 3D Reference Attention Driven Dynamic Adaptation for Zero-Shot Customized Video Diffusion Transformers**|D. She et.al.|[2502.06527](http://arxiv.org/abs/2502.06527)|null|\n"
       },
       "decision_reason": "二次复核：Image Gen&Edit: 论文核心贡献是解决个性化视频生成中的时间一致性问题，虽然使用了图像作为参考条件，但其主要技术贡献和评估目标均集中在视频领域，而非图像合成或编辑。; Video Gen&Edit: 论文提出CustomVideoX框架，利用视频扩散Transformer进行基于参考图像的个性化视频生成，并设计了3D参考注意力等机制以解决视频生成的时间一致性和质量退化问题，完全符合视频生成主题。; 3D Gen&Recon: 尽管方法名称中包含3D Reference Attention，但这指的是在时空维度上对参考图像特征进行注意力建模，并非生成或重建3D几何结构、网格或辐射场，因此不属于3D生成与重建范畴。; World Model: 该工作主要关注基于参考图像的视频内容生成与个性化，并未涉及对环境物理动力学、交互世界状态或动作条件未来状态的建模，不符合世界模型的定义。; Relighting: 论文未涉及光照估计、传输、编辑或在新光照下生成外观等内容，其核心在于参考图像特征与视频内容的对齐，与重光照任务无关。; Depth Estimation: 论文未涉及单目、立体或多视图深度估计与预测，其核心贡献在于视频扩散模型中的注意力机制优化，与深度估计任务无直接关联。",
+      "hf_daily": {
+        "dates": [
+          "2025-02-11"
+        ],
+        "evidence_sha256": "19a954265527547b128520097d039b6d7d145ec3c5321fd7c52482b2eafee26f",
+        "url": "https://huggingface.co/papers/2502.06527"
+      },
       "id": "2502.06527",
       "matched_topics": [
         "Image Gen&Edit",
@@ -106516,6 +107121,10 @@
       },
       "reviewed_at": "2026-09-14T23:58:45+00:00",
       "selected_topic": "Video Gen&Edit",
+      "sources": [
+        "arxiv",
+        "huggingface"
+      ],
       "status": "accepted",
       "title": "CustomVideoX: 3D Reference Attention Driven Dynamic Adaptation for Zero-Shot Customized Video Diffusion Transformers",
       "updated": "2025-02-10"
@@ -106562,6 +107171,41 @@
       "selected_topic": "3D Gen&Recon",
       "status": "accepted",
       "title": "Physically-Based Mesh Generation for Confined 3D Point Clouds Using Flexible Foil Models",
+      "updated": "2025-02-10"
+    },
+    "2502.06608": {
+      "abstract": "Recent advancements in diffusion techniques have propelled image and video\ngeneration to unprece- dented levels of quality, significantly accelerating the\ndeployment and application of generative AI. However, 3D shape generation\ntechnology has so far lagged behind, constrained by limitations in 3D data\nscale, complexity of 3D data process- ing, and insufficient exploration of\nadvanced tech- niques in the 3D domain. Current approaches to 3D shape\ngeneration face substantial challenges in terms of output quality,\ngeneralization capa- bility, and alignment with input conditions. We present\nTripoSG, a new streamlined shape diffu- sion paradigm capable of generating\nhigh-fidelity 3D meshes with precise correspondence to input images.\nSpecifically, we propose: 1) A large-scale rectified flow transformer for 3D\nshape generation, achieving state-of-the-art fidelity through training on\nextensive, high-quality data. 2) A hybrid supervised training strategy\ncombining SDF, normal, and eikonal losses for 3D VAE, achieving high- quality\n3D reconstruction performance. 3) A data processing pipeline to generate 2\nmillion high- quality 3D samples, highlighting the crucial rules for data\nquality and quantity in training 3D gen- erative models. Through comprehensive\nexperi- ments, we have validated the effectiveness of each component in our new\nframework. The seamless integration of these parts has enabled TripoSG to\nachieve state-of-the-art performance in 3D shape generation. The resulting 3D\nshapes exhibit en- hanced detail due to high-resolution capabilities and\ndemonstrate exceptional fidelity to input im- ages. Moreover, TripoSG\ndemonstrates improved versatility in generating 3D models from diverse image\nstyles and contents, showcasing strong gen- eralization capabilities. To foster\nprogress and innovation in the field of 3D generation, we will make our model\npublicly available.",
+      "archive_rows": {
+        "3D Gen&Recon": "|**2025-02-10**|**TripoSG: High-Fidelity 3D Shape Synthesis using Large-Scale Rectified Flow Models**|Yangguang Li et.al.|[2502.06608](https://arxiv.org/abs/2502.06608)|null|\n",
+        "Image Gen&Edit": "|**2025-02-10**|**TripoSG: High-Fidelity 3D Shape Synthesis using Large-Scale Rectified Flow Models**|Yangguang Li et.al.|[2502.06608](https://arxiv.org/abs/2502.06608)|null|\n",
+        "Video Gen&Edit": "|**2025-02-10**|**TripoSG: High-Fidelity 3D Shape Synthesis using Large-Scale Rectified Flow Models**|Yangguang Li et.al.|[2502.06608](https://arxiv.org/abs/2502.06608)|null|\n"
+      },
+      "authors": "Yangguang Li et.al.",
+      "collected_at": "2026-11-11T16:37:59+00:00",
+      "decision_reason": "论文提出TripoSG，利用大规模整流流模型进行高保真3D形状合成，属于3D生成方法。",
+      "display_id": "2502.06608",
+      "hf_daily": {
+        "dates": [
+          "2025-02-14"
+        ],
+        "evidence_sha256": "3e3505b368be4682d97a78bf81dd5194010379e0f3c220f62b3274eaac8dd975",
+        "url": "https://huggingface.co/papers/2502.06608"
+      },
+      "id": "2502.06608",
+      "matched_topics": [
+        "3D Gen&Recon",
+        "Image Gen&Edit",
+        "Video Gen&Edit"
+      ],
+      "paper_url": "https://arxiv.org/abs/2502.06608",
+      "pdf_url": "https://arxiv.org/pdf/2502.06608.pdf",
+      "reviewed_at": "2026-11-11T16:37:59+00:00",
+      "selected_topic": "3D Gen&Recon",
+      "sources": [
+        "huggingface"
+      ],
+      "status": "accepted",
+      "title": "TripoSG: High-Fidelity 3D Shape Synthesis using Large-Scale Rectified Flow Models",
       "updated": "2025-02-10"
     },
     "2502.06682": {
@@ -106642,6 +107286,13 @@
         "Video Generation": "|**2025-02-10**|**History-Guided Video Diffusion**|Kiwhan Song et.al.|[2502.06764](http://arxiv.org/abs/2502.06764)|null|\n"
       },
       "decision_reason": "二次复核：Image Gen&Edit: 论文核心贡献是视频扩散模型中的历史引导机制，虽然涉及图像帧作为条件，但主要目标是视频生成与长视频一致性，不属于图像生成或编辑的核心范畴。; Video Gen&Edit: 论文提出DFoT架构和History Guidance方法，专门用于改进视频扩散模型的生成质量、时间一致性和长视频生成能力，完全符合视频生成主题的核心定义。; 3D Gen&Recon: 论文未涉及3D几何重建、网格生成或神经辐射场等技术，其关注点在于2D视频帧序列的生成与引导，与3D生成和重建主题无直接关联。; World Model: 虽然视频生成可视为对动态环境的预测，但论文未强调物理动力学、交互式世界状态或动作条件预测，主要聚焦于生成质量而非世界模型的结构化预测能力。; Relighting: 论文未涉及光照估计、反射率恢复或新光照条件下的外观生成，其技术核心在于扩散模型的引导机制，与重光照主题完全无关。; Depth Estimation: 论文未涉及深度图预测、单目或立体深度估计任务，其输出为视频帧序列，不涉及几何深度信息的恢复或估计，与深度估计主题无关。",
+      "hf_daily": {
+        "dates": [
+          "2025-02-11"
+        ],
+        "evidence_sha256": "65d4d480a097e452430ce3143123b9eacb11621d2926f4300ce5b2631e18a88c",
+        "url": "https://huggingface.co/papers/2502.06764"
+      },
       "id": "2502.06764",
       "matched_topics": [
         "Video Gen&Edit"
@@ -106676,6 +107327,10 @@
       },
       "reviewed_at": "2026-09-14T20:52:09+00:00",
       "selected_topic": "Video Gen&Edit",
+      "sources": [
+        "arxiv",
+        "huggingface"
+      ],
       "status": "accepted",
       "title": "History-Guided Video Diffusion",
       "updated": "2025-02-10"
@@ -106686,6 +107341,13 @@
         "Video Generation": "|**2025-02-10**|**Lumina-Video: Efficient and Flexible Video Generation with Multi-scale Next-DiT**|Dongyang Liu et.al.|[2502.06782](http://arxiv.org/abs/2502.06782)|null|\n"
       },
       "decision_reason": "二次复核：Image Gen&Edit: 论文核心贡献是提出Lumina-Video框架，旨在解决视频生成中的时空建模挑战，虽然基于图像生成模型Next-DiT，但主要创新点在于多尺度架构和运动控制，属于视频生成领域而非图像生成。; Video Gen&Edit: 论文主要贡献是提出Lumina-Video，一种基于多尺度Next-DiT架构的视频生成框架，通过联合学习多种patchification提高效率和灵活性，并引入运动分数作为条件控制视频动态程度，完全符合视频生成主题。; 3D Gen&Recon: 论文专注于二维视频序列的生成，未涉及三维几何重建、三维资产生成或三维场景编辑，其方法核心在于时空视频建模而非三维空间结构恢复或生成，因此不属于三维生成与重建主题。; World Model: 虽然视频生成可视为对视觉动态的预测，但论文未明确构建用于交互式环境模拟、动作条件未来状态预测或物理动力学学习的生成式世界模型，其目标主要是生成高质量视频内容而非学习可交互的世界状态。; Relighting: 论文未涉及光照估计、反射率恢复、阴影生成或新光照条件下的外观编辑，其核心贡献在于视频生成的架构优化和运动控制，与重光照技术无关，因此不匹配重光照主题。; Depth Estimation: 论文未涉及单目、立体或多视角深度估计，也未使用深度作为主要输入或输出，其核心任务是视频合成，虽然可能隐含几何信息，但并未提出深度预测方法或评估深度估计性能，故不匹配。",
+      "hf_daily": {
+        "dates": [
+          "2025-02-11"
+        ],
+        "evidence_sha256": "72710a80705982a80f5262cc95b1456021cdddbbc685e03392c6f8dc8d3e310e",
+        "url": "https://huggingface.co/papers/2502.06782"
+      },
       "id": "2502.06782",
       "matched_topics": [
         "Video Gen&Edit"
@@ -106720,6 +107382,10 @@
       },
       "reviewed_at": "2026-09-14T20:52:09+00:00",
       "selected_topic": "Video Gen&Edit",
+      "sources": [
+        "arxiv",
+        "huggingface"
+      ],
       "status": "accepted",
       "title": "Lumina-Video: Efficient and Flexible Video Generation with Multi-scale Next-DiT",
       "updated": "2025-02-10"
@@ -107189,6 +107855,13 @@
         "Video Generation": "|**2025-02-11**|**Enhance-A-Video: Better Generated Video for Free**|Yang Luo et.al.|[2502.07508](http://arxiv.org/abs/2502.07508)|null|\n"
       },
       "decision_reason": "二次复核：Image Gen&Edit: 论文核心贡献是提升DiT视频生成模型的时序一致性和视觉质量，属于视频生成增强领域，而非图像生成或编辑任务，因此不匹配该主题。; Video Gen&Edit: 论文提出了一种无需训练的增强方法，专门用于改善基于DiT的视频生成模型的输出质量，直接针对视频生成过程中的时序连贯性问题，完全符合视频生成与编辑的主题定义。; 3D Gen&Recon: 论文关注的是2D视频帧之间的时序一致性，并未涉及3D几何重建、3D资产生成或场景重建等任务，与3D生成与重建主题无关。; World Model: 虽然视频生成可视为对视觉世界的模拟，但本文核心是优化现有生成模型的注意力机制以提升画质，并未构建可交互的环境动力学模型或用于规划的世界模型，不符合世界模型主题。; Relighting: 论文未涉及光照估计、传输或编辑，其改进目标是时序一致性和空间细节，与重光照主题完全无关。; Depth Estimation: 论文未涉及深度图预测、单目或立体深度估计，其方法作用于视频生成的注意力层，与深度估计任务无关联。",
+      "hf_daily": {
+        "dates": [
+          "2025-02-12"
+        ],
+        "evidence_sha256": "7da34d5b163d1b2a3d72bc3843ddb19269f26c56c139caf72220b3f95d0956e1",
+        "url": "https://huggingface.co/papers/2502.07508"
+      },
       "id": "2502.07508",
       "matched_topics": [
         "Video Gen&Edit"
@@ -107223,6 +107896,10 @@
       },
       "reviewed_at": "2026-09-14T20:52:09+00:00",
       "selected_topic": "Video Gen&Edit",
+      "sources": [
+        "arxiv",
+        "huggingface"
+      ],
       "status": "accepted",
       "title": "Enhance-A-Video: Better Generated Video for Free",
       "updated": "2025-02-11"
@@ -107234,6 +107911,13 @@
         "Video Generation": "|**2025-02-11**|**VidCRAFT3: Camera, Object, and Lighting Control for Image-to-Video Generation**|Sixiao Zheng et.al.|[2502.07531](http://arxiv.org/abs/2502.07531)|null|\n"
       },
       "decision_reason": "二次复核：Image Gen&Edit: 论文核心贡献是可控的图像到视频生成框架，主要解决视频时序一致性与多因素控制问题，而非静态图像的生成或编辑方法。; Video Gen&Edit: 论文提出VidCRAFT3框架，核心任务是可控图像到视频生成，通过统一建模相机、物体和光照控制信号，显著提升视频生成的可控性与视觉一致性。; 3D Gen&Recon: 虽然使用DUSt3R重建点云作为相机控制的几何先验，但这仅是辅助模块，论文主要贡献在于视频生成控制而非3D重建或生成技术本身。; World Model: 论文未构建用于预测环境动态或交互未来状态的世界模型，而是专注于基于条件信号的视频生成，不涉及物理动力学学习或交互式世界模拟。; Relighting: 论文核心贡献之一是实现视频中的动态光照方向控制，通过Spatial Triple-Attention Transformer整合光照嵌入，解决视频重光照的一致性问题。; Depth Estimation: 论文未提出新的深度估计方法，仅利用现有单目深度或点云重建技术作为相机运动控制的中间表示，深度估计并非其研究核心。",
+      "hf_daily": {
+        "dates": [
+          "2025-02-12"
+        ],
+        "evidence_sha256": "90a64902eee3cd959ef3ace99e0900a85602f55b4a2e014674adc9a56e6dcd59",
+        "url": "https://huggingface.co/papers/2502.07531"
+      },
       "id": "2502.07531",
       "matched_topics": [
         "Relighting",
@@ -107269,6 +107953,10 @@
       },
       "reviewed_at": "2026-09-14T20:52:09+00:00",
       "selected_topic": "Relighting",
+      "sources": [
+        "arxiv",
+        "huggingface"
+      ],
       "status": "accepted",
       "title": "VidCRAFT3: Camera, Object, and Lighting Control for Image-to-Video Generation",
       "updated": "2025-02-11"
@@ -107456,12 +108144,52 @@
       "title": "Flow Distillation Sampling: Regularizing 3D Gaussians with Pre-trained Matching Priors",
       "updated": "2025-02-11"
     },
+    "2502.07701": {
+      "abstract": "In this technical report, we present Magic 1-For-1 (Magic141), an efficient\nvideo generation model with optimized memory consumption and inference latency.\nThe key idea is simple: factorize the text-to-video generation task into two\nseparate easier tasks for diffusion step distillation, namely text-to-image\ngeneration and image-to-video generation. We verify that with the same\noptimization algorithm, the image-to-video task is indeed easier to converge\nover the text-to-video task. We also explore a bag of optimization tricks to\nreduce the computational cost of training the image-to-video (I2V) models from\nthree aspects: 1) model convergence speedup by using a multi-modal prior\ncondition injection; 2) inference latency speed up by applying an adversarial\nstep distillation, and 3) inference memory cost optimization with parameter\nsparsification. With those techniques, we are able to generate 5-second video\nclips within 3 seconds. By applying a test time sliding window, we are able to\ngenerate a minute-long video within one minute with significantly improved\nvisual quality and motion dynamics, spending less than 1 second for generating\n1 second video clips on average. We conduct a series of preliminary\nexplorations to find out the optimal tradeoff between computational cost and\nvideo quality during diffusion step distillation and hope this could be a good\nfoundation model for open-source explorations. The code and the model weights\nare available at https://github.com/DA-Group-PKU/Magic-1-For-1.",
+      "archive_rows": {
+        "Image Gen&Edit": "|**2025-02-11**|**Magic 1-For-1: Generating One Minute Video Clips within One Minute**|Hongwei Yi et.al.|[2502.07701](https://arxiv.org/abs/2502.07701)|null|\n",
+        "Video Gen&Edit": "|**2025-02-11**|**Magic 1-For-1: Generating One Minute Video Clips within One Minute**|Hongwei Yi et.al.|[2502.07701](https://arxiv.org/abs/2502.07701)|null|\n"
+      },
+      "authors": "Hongwei Yi et.al.",
+      "collected_at": "2026-11-11T16:37:59+00:00",
+      "decision_reason": "论文提出了一种高效的视频生成模型，通过分解任务、对抗步蒸馏和参数稀疏化等技术优化了推理延迟和内存消耗，属于视频生成方法贡献。",
+      "display_id": "2502.07701",
+      "hf_daily": {
+        "dates": [
+          "2025-02-12"
+        ],
+        "evidence_sha256": "f304a6d69ad422c54254f53329398b46030f9a9df42f3d9770caf05b0ea1a84a",
+        "url": "https://huggingface.co/papers/2502.07701"
+      },
+      "id": "2502.07701",
+      "matched_topics": [
+        "Image Gen&Edit",
+        "Video Gen&Edit"
+      ],
+      "paper_url": "https://arxiv.org/abs/2502.07701",
+      "pdf_url": "https://arxiv.org/pdf/2502.07701.pdf",
+      "reviewed_at": "2026-11-11T16:37:59+00:00",
+      "selected_topic": "Video Gen&Edit",
+      "sources": [
+        "huggingface"
+      ],
+      "status": "accepted",
+      "title": "Magic 1-For-1: Generating One Minute Video Clips within One Minute",
+      "updated": "2025-02-11"
+    },
     "2502.07737": {
       "abstract": "Next-Token Prediction (NTP) is a de facto approach for autoregressive (AR) video generation, but it suffers from suboptimal unidirectional dependencies and slow inference speed. In this work, we propose a semi-autoregressive (semi-AR) framework, called Next-Block Prediction (NBP), for video generation. By uniformly decomposing video content into equal-sized blocks (e.g., rows or frames), we shift the generation unit from individual tokens to blocks, allowing each token in the current block to simultaneously predict the corresponding token in the next block. Unlike traditional AR modeling, our framework employs bidirectional attention within each block, enabling tokens to capture more robust spatial dependencies. By predicting multiple tokens in parallel, NBP models significantly reduce the number of generation steps, leading to faster and more efficient inference. Our model achieves FVD scores of 103.3 on UCF101 and 25.5 on K600, outperforming the vanilla NTP model by an average of 4.4. Furthermore, thanks to the reduced number of inference steps, the NBP model generates 8.89 frames (128×\\times128 resolution) per second, achieving an 11×\\times speedup. We also explored model scales ranging from 700M to 3B parameters, observing significant improvements in generation quality, with FVD scores dropping from 103.3 to 55.3 on UCF101 and from 25.5 to 19.5 on K600, demonstrating the scalability of our approach.",
       "archive_rows": {
         "Video Generation": "|**2025-02-11**|**Next Block Prediction: Video Generation via Semi-Autoregressive Modeling**|Shuhuai Ren et.al.|[2502.07737](http://arxiv.org/abs/2502.07737)|null|\n"
       },
       "decision_reason": "二次复核：Image Gen&Edit: 论文核心贡献是提出半自回归视频生成框架，虽然视频帧包含图像信息，但主要目标是解决视频时序生成中的依赖关系和推理效率问题，并非针对静态图像的生成或编辑方法。; Video Gen&Edit: 论文明确提出了名为 Next-Block Prediction 的半自回归框架，专门用于视频生成，通过块级预测和双向注意力机制优化视频内容的生成过程，并显著提升了推理速度，完全符合视频生成主题的核心定义。; 3D Gen&Recon: 论文专注于二维视频帧序列的自回归生成，未涉及三维几何结构、点云、网格或神经辐射场等三维重建或生成技术，其贡献局限于视频像素或潜空间序列的预测，与三维生成重建无关。; World Model: 虽然视频生成可视为对环境动态的预测，但本文主要关注生成架构的效率与质量提升，未强调动作条件、交互式环境模拟或物理动力学建模，不符合世界模型通常要求的交互式或动作条件未来状态预测特征。; Relighting: 论文内容完全围绕视频生成的自回归建模机制展开，未涉及光照估计、反射率恢复、阴影生成或任何与重光照相关的技术，摘要和引言中均无相关证据支持该主题。; Depth Estimation: 论文目标是生成视频内容，而非估计深度图，未使用深度作为主要输入或输出，也未涉及单目、立体或多视图深度估计方法，其技术贡献与深度估计任务无直接关联。",
+      "hf_daily": {
+        "dates": [
+          "2025-02-13"
+        ],
+        "evidence_sha256": "eb508613840b50077272b7633a568cf41af88c914792673fdb93ead40c655374",
+        "url": "https://huggingface.co/papers/2502.07737"
+      },
       "id": "2502.07737",
       "matched_topics": [
         "Video Gen&Edit"
@@ -107496,6 +108224,10 @@
       },
       "reviewed_at": "2026-09-14T20:50:44+00:00",
       "selected_topic": "Video Gen&Edit",
+      "sources": [
+        "arxiv",
+        "huggingface"
+      ],
       "status": "accepted",
       "title": "Next Block Prediction: Video Generation via Semi-Autoregressive Modeling",
       "updated": "2025-02-11"
@@ -107542,6 +108274,37 @@
       "selected_topic": "3D Gen&Recon",
       "status": "accepted",
       "title": "MeshSplats: Mesh-Based Rendering with Gaussian Splatting Initialization",
+      "updated": "2025-02-11"
+    },
+    "2502.07785": {
+      "abstract": "We present Pippo, a generative model capable of producing 1K resolution dense\nturnaround videos of a person from a single casually clicked photo. Pippo is a\nmulti-view diffusion transformer and does not require any additional inputs -\ne.g., a fitted parametric model or camera parameters of the input image. We\npre-train Pippo on 3B human images without captions, and conduct multi-view\nmid-training and post-training on studio captured humans. During mid-training,\nto quickly absorb the studio dataset, we denoise several (up to 48) views at\nlow-resolution, and encode target cameras coarsely using a shallow MLP. During\npost-training, we denoise fewer views at high-resolution and use pixel-aligned\ncontrols (e.g., Spatial anchor and Plucker rays) to enable 3D consistent\ngenerations. At inference, we propose an attention biasing technique that\nallows Pippo to simultaneously generate greater than 5 times as many views as\nseen during training. Finally, we also introduce an improved metric to evaluate\n3D consistency of multi-view generations, and show that Pippo outperforms\nexisting works on multi-view human generation from a single image.",
+      "archive_rows": {
+        "Image Gen&Edit": "|**2025-02-11**|**Pippo: High-Resolution Multi-View Humans from a Single Image**|Yash Kant et.al.|[2502.07785](https://arxiv.org/abs/2502.07785)|null|\n"
+      },
+      "authors": "Yash Kant et.al.",
+      "collected_at": "2026-11-11T16:37:59+00:00",
+      "decision_reason": "论文提出了一种从单张图像生成高分辨率多视图人类视频的方法，旨在实现3D一致性的生成，属于3D生成与重建范畴。",
+      "display_id": "2502.07785",
+      "hf_daily": {
+        "dates": [
+          "2025-02-12"
+        ],
+        "evidence_sha256": "abd96c7fae7d0a07a48bed3841de902e9a6ae2c21050d5d4fff42152303cc924",
+        "url": "https://huggingface.co/papers/2502.07785"
+      },
+      "id": "2502.07785",
+      "matched_topics": [
+        "Image Gen&Edit"
+      ],
+      "paper_url": "https://arxiv.org/abs/2502.07785",
+      "pdf_url": "https://arxiv.org/pdf/2502.07785.pdf",
+      "reviewed_at": "2026-11-11T16:37:59+00:00",
+      "selected_topic": "3D Gen&Recon",
+      "sources": [
+        "huggingface"
+      ],
+      "status": "accepted",
+      "title": "Pippo: High-Resolution Multi-View Humans from a Single Image",
       "updated": "2025-02-11"
     },
     "2502.07802": {
@@ -107729,6 +108492,13 @@
         "Image Generation": "|**2025-02-11**|**TextAtlas5M: A Large-scale Dataset for Dense Text Image Generation**|Alex Jinpeng Wang et.al.|[2502.07870](http://arxiv.org/abs/2502.07870)|null|\n"
       },
       "decision_reason": "二次复核：Image Gen&Edit: 论文核心贡献是构建面向长文本与密集文字图像生成的数据集和评测基准，并评估扩散与自回归图像生成模型在该任务上的表现，属于图像生成领域的数据与评测贡献。; Video Gen&Edit: 论文聚焦静态图像中的长文本渲染与生成，未涉及视频合成、视频编辑或时序生成方法，核心贡献与视频生成编辑主题不匹配。; 3D Gen&Recon: 论文处理二维图像中的文字布局与内容生成，没有三维重建、三维生成、多视图几何或场景结构恢复等核心贡献，与三维主题无关。; World Model: 论文没有学习环境动态、动作条件未来状态或交互式世界模型，仅关注文本条件图像生成数据集与评测，不符合世界模型主题。; Relighting: 论文不涉及光照估计、重光照、反射率或阴影生成，核心是密集文字图像生成数据集，与重光照主题无直接关系。; Depth Estimation: 论文没有深度估计、深度补全或几何深度预测方法，核心贡献是文本图像生成数据集与评测，不属于深度估计主题。",
+      "hf_daily": {
+        "dates": [
+          "2025-02-13"
+        ],
+        "evidence_sha256": "0de326b30535ccb0613a9f84def120bb722ab0888c5045b144d7c69bd5b5efa7",
+        "url": "https://huggingface.co/papers/2502.07870"
+      },
       "id": "2502.07870",
       "matched_topics": [
         "Image Gen&Edit"
@@ -107763,6 +108533,10 @@
       },
       "reviewed_at": "2026-09-14T20:50:44+00:00",
       "selected_topic": "Image Gen&Edit",
+      "sources": [
+        "arxiv",
+        "huggingface"
+      ],
       "status": "accepted",
       "title": "TextAtlas5M: A Large-scale Dataset for Dense Text Image Generation",
       "updated": "2025-02-11"
@@ -108265,6 +109039,13 @@
       ],
       "collected_at": "2026-09-06T07:30:55+00:00",
       "decision_reason": "二次复核：Image Gen&Edit: 论文核心贡献是解决视频重光照中的时序一致性问题，虽然其方法基于图像重光照模型并涉及图像编辑技术，但主要创新点在于视频维度的注意力机制与融合策略，而非图像生成或编辑本身的新方法。; Video Gen&Edit: 论文提出了一种无需训练的视频重光照方法，通过改进视频扩散模型的注意力机制和融合策略，实现了时序平滑的视频重光照，属于视频编辑与生成的核心技术范畴。; 3D Gen&Recon: 论文主要关注2D视频图像的重光照，未涉及3D几何重建、场景生成或3D资产编辑，其方法基于2D像素空间的操作，不符合3D生成与重建的主题定义。; World Model: 论文未构建用于预测环境动态或交互未来状态的世界模型，而是专注于利用现有视频扩散模型进行视觉外观编辑，不涉及物理动力学学习或交互式世界模拟。; Relighting: 论文的核心任务即为视频重光照，提出了专门针对光照一致性的注意力模块和融合策略，直接对应重光照主题中关于估计、转移或生成光照的核心定义。; Depth Estimation: 论文未涉及深度估计、单目深度预测或几何深度恢复，其方法完全基于外观和光照信息的编辑，不涉及深度图生成或几何结构推断。",
+      "hf_daily": {
+        "dates": [
+          "2025-02-13"
+        ],
+        "evidence_sha256": "6e319568b0865d64197a425b61b695ab022ebdd337f9f9da99fd57cf0be5a3a2",
+        "url": "https://huggingface.co/papers/2502.08590"
+      },
       "id": "2502.08590",
       "matched_topics": [
         "Relighting"
@@ -108299,6 +109080,10 @@
       },
       "reviewed_at": "2026-09-14T20:50:44+00:00",
       "selected_topic": "Relighting",
+      "sources": [
+        "arxiv",
+        "huggingface"
+      ],
       "status": "accepted",
       "title": "Light-A-Video: Training-free Video Relighting via Progressive Light Fusion",
       "updated": "2025-02-12"
@@ -108309,6 +109094,13 @@
         "Video Generation": "|**2025-02-12**|**CineMaster: A 3D-Aware and Controllable Framework for Cinematic Text-to-Video Generation**|Qinghe Wang et.al.|[2502.08639](http://arxiv.org/abs/2502.08639)|null|\n"
       },
       "decision_reason": "二次复核：Image Gen&Edit: 论文核心贡献是文本到视频生成框架，虽然涉及帧渲染，但主要目标是生成动态视频序列而非静态图像合成或编辑，不符合图像生成主题的核心定义。; Video Gen&Edit: 论文提出CineMaster框架，旨在实现可控的文本到视频生成，通过3D感知条件信号指导扩散模型生成视频，完全符合视频生成与编辑主题的核心范围。; 3D Gen&Recon: 虽然使用3D边界框和相机轨迹作为条件，但论文并未生成或重建3D资产、场景或几何结构，而是利用3D信息控制2D视频生成，不属于3D生成或重建主题。; World Model: 论文基于扩散模型进行条件生成，未构建可交互的环境动力学模型或预测未来状态的生成式世界模型，核心机制是条件视频生成而非世界模型学习。; Relighting: 论文未涉及光照估计、传输、编辑或新光照下的外观生成，其控制信号包括深度、相机轨迹和类别标签，与重光照技术无直接关联。; Depth Estimation: 深度图仅作为生成视频的条件输入信号，论文未提出新的深度估计方法或算法，核心贡献在于利用深度进行视频生成控制，而非深度预测本身。",
+      "hf_daily": {
+        "dates": [
+          "2025-02-13"
+        ],
+        "evidence_sha256": "c00338bde4cdff2952939b0bce5bb698ba2d33f8fa252a5ac17f5c563b512f31",
+        "url": "https://huggingface.co/papers/2502.08639"
+      },
       "id": "2502.08639",
       "matched_topics": [
         "Video Gen&Edit"
@@ -108343,6 +109135,10 @@
       },
       "reviewed_at": "2026-09-14T20:50:44+00:00",
       "selected_topic": "Video Gen&Edit",
+      "sources": [
+        "arxiv",
+        "huggingface"
+      ],
       "status": "accepted",
       "title": "CineMaster: A 3D-Aware and Controllable Framework for Cinematic Text-to-Video Generation",
       "updated": "2025-02-12"
@@ -108353,6 +109149,13 @@
         "Image Generation": "|**2025-02-12**|**Skrr: Skip and Re-use Text Encoder Layers for Memory Efficient Text-to-Image Generation**|Hoigi Seo et.al.|[2502.08690](http://arxiv.org/abs/2502.08690)|null|\n"
       },
       "decision_reason": "二次复核：Image Gen&Edit: 论文核心贡献是提出Skrr剪枝策略，专门用于优化文本到图像扩散模型中的文本编码器，旨在降低内存消耗同时保持图像生成质量，直接服务于图像生成任务。; Video Gen&Edit: 论文仅针对文本到图像生成任务中的文本编码器进行优化，未涉及视频生成、编辑或任何视频相关的时序建模与生成方法，核心贡献与视频领域无关。; 3D Gen&Recon: 论文聚焦于二维图像生成的文本编码器效率优化，未涉及三维物体生成、重建、场景理解或任何三维几何表示与处理方法，不属于三维生成与重建范畴。; World Model: 论文研究的是静态图像生成的组件优化，不涉及环境动态预测、交互式世界建模或动作条件未来状态预测，不符合世界模型的定义与核心任务。; Relighting: 论文未涉及光照估计、传输、编辑或新光照下外观生成，其核心是文本编码器的层剪枝，与重光照任务在技术目标和方法上均无关联。; Depth Estimation: 论文不涉及单目、立体或多视图深度估计，其目标是优化文本编码器以支持图像生成，与深度预测、几何恢复或深度补全任务完全无关。",
+      "hf_daily": {
+        "dates": [
+          "2025-02-14"
+        ],
+        "evidence_sha256": "9de746b5921616056544cca0fa5ee22da64fb19bc235d70728561a31a4a02367",
+        "url": "https://huggingface.co/papers/2502.08690"
+      },
       "id": "2502.08690",
       "matched_topics": [
         "Image Gen&Edit"
@@ -108387,6 +109190,10 @@
       },
       "reviewed_at": "2026-09-14T20:50:44+00:00",
       "selected_topic": "Image Gen&Edit",
+      "sources": [
+        "arxiv",
+        "huggingface"
+      ],
       "status": "accepted",
       "title": "Skrr: Skip and Re-use Text Encoder Layers for Memory Efficient Text-to-Image Generation",
       "updated": "2025-02-12"
@@ -108694,6 +109501,13 @@
         "Image Generation": "|**2025-02-13**|**ImageRAG: Dynamic Image Retrieval for Reference-Guided Image Generation**|Rotem Shalev-Arkushin et.al.|[2502.09411](http://arxiv.org/abs/2502.09411)|null|\n"
       },
       "decision_reason": "二次复核：Image Gen&Edit: 论文提出ImageRAG方法，通过检索增强生成技术解决图像生成中稀有概念和细粒度类别的生成难题，核心贡献直接属于图像生成领域。; Video Gen&Edit: 论文聚焦于静态图像的生成与编辑，未涉及视频合成、视频编辑或时序动态建模，与视频生成主题无关。; 3D Gen&Recon: 论文未涉及三维物体、场景或几何结构的生成与重建，仅处理二维图像内容的生成，不符合三维生成与重建主题。; World Model: 论文未构建学习环境动态、物理规律或交互式世界的模型，仅关注基于文本和参考图像的静态图像生成，不属于世界模型范畴。; Relighting: 论文未涉及光照估计、传输、编辑或新光照下的外观生成，核心任务是概念生成而非光照控制，与重光照主题无关。; Depth Estimation: 论文未进行单目、立体或多视角深度估计，未预测深度图或几何结构，核心贡献在于图像内容生成，与深度估计主题无关。",
+      "hf_daily": {
+        "dates": [
+          "2025-02-17"
+        ],
+        "evidence_sha256": "20e7431ef5e14af8358a9ac43d327ba519c6f75d52291608cd4b14dea6178d0b",
+        "url": "https://huggingface.co/papers/2502.09411"
+      },
       "id": "2502.09411",
       "matched_topics": [
         "Image Gen&Edit"
@@ -108728,8 +109542,43 @@
       },
       "reviewed_at": "2026-09-14T20:50:44+00:00",
       "selected_topic": "Image Gen&Edit",
+      "sources": [
+        "arxiv",
+        "huggingface"
+      ],
       "status": "accepted",
       "title": "ImageRAG: Dynamic Image Retrieval for Reference-Guided Image Generation",
+      "updated": "2025-02-13"
+    },
+    "2502.09509": {
+      "abstract": "Latent generative models have emerged as a leading approach for high-quality\nimage synthesis. These models rely on an autoencoder to compress images into a\nlatent space, followed by a generative model to learn the latent distribution.\nWe identify that existing autoencoders lack equivariance to semantic-preserving\ntransformations like scaling and rotation, resulting in complex latent spaces\nthat hinder generative performance. To address this, we propose EQ-VAE, a\nsimple regularization approach that enforces equivariance in the latent space,\nreducing its complexity without degrading reconstruction quality. By finetuning\npre-trained autoencoders with EQ-VAE, we enhance the performance of several\nstate-of-the-art generative models, including DiT, SiT, REPA and MaskGIT,\nachieving a 7 speedup on DiT-XL/2 with only five epochs of SD-VAE fine-tuning.\nEQ-VAE is compatible with both continuous and discrete autoencoders, thus\noffering a versatile enhancement for a wide range of latent generative models.\nProject page and code: https://eq-vae.github.io/.",
+      "archive_rows": {
+        "Image Gen&Edit": "|**2025-02-13**|**EQ-VAE: Equivariance Regularized Latent Space for Improved Generative Image Modeling**|Theodoros Kouzelis et.al.|[2502.09509](https://arxiv.org/abs/2502.09509)|null|\n"
+      },
+      "authors": "Theodoros Kouzelis et.al.",
+      "collected_at": "2026-11-11T16:37:59+00:00",
+      "decision_reason": "论文提出EQ-VAE正则化方法，通过增强潜空间等变性来改进图像生成模型（如DiT, SiT等）的性能，属于图像生成方法贡献。",
+      "display_id": "2502.09509",
+      "hf_daily": {
+        "dates": [
+          "2025-02-18"
+        ],
+        "evidence_sha256": "2ff22ffcd00554cbfae59b9bbef0ecb4db608d83f2f44bdbdfe15c7bd203251b",
+        "url": "https://huggingface.co/papers/2502.09509"
+      },
+      "id": "2502.09509",
+      "matched_topics": [
+        "Image Gen&Edit"
+      ],
+      "paper_url": "https://arxiv.org/abs/2502.09509",
+      "pdf_url": "https://arxiv.org/pdf/2502.09509.pdf",
+      "reviewed_at": "2026-11-11T16:37:59+00:00",
+      "selected_topic": "Image Gen&Edit",
+      "sources": [
+        "huggingface"
+      ],
+      "status": "accepted",
+      "title": "EQ-VAE: Equivariance Regularized Latent Space for Improved Generative Image Modeling",
       "updated": "2025-02-13"
     },
     "2502.09528": {
@@ -108832,6 +109681,13 @@
         "Neural Rendering": "|**2025-02-13**|**Latent Radiance Fields with 3D-aware 2D Representations**|Chaoyi Zhou et.al.|[2502.09613](http://arxiv.org/abs/2502.09613)|null|\n"
       },
       "decision_reason": "二次复核：Image Gen&Edit: 论文核心贡献是构建3D感知的2D潜在表示并用于3D场景重建，虽然涉及图像解码，但主要目标是3D几何与外观恢复，而非2D图像生成或编辑。; Video Gen&Edit: 论文未涉及视频生成、编辑或时序动态建模，其核心任务是基于多视图图像进行静态3D场景的重建与新视角合成，与视频生成主题无关。; 3D Gen&Recon: 论文提出潜在辐射场框架，通过3D感知的2D表示实现高质量3D重建和新视角合成，明确属于3D重建、神经渲染及新视角合成范畴，符合主题定义。; World Model: 论文关注静态场景的3D表示与重建，未涉及环境动力学、动作条件预测或交互式世界状态建模，不属于学习物理动态或未来状态的世界模型。; Relighting: 论文未涉及光照估计、反射率分解或新光照条件下的外观生成，其核心在于解决2D特征与3D表示间的域差距以实现几何一致的重建，与重光照无关。; Depth Estimation: 虽然3D重建隐含几何信息，但论文主要贡献是辐射场表示与渲染质量提升，并未将单目或立体深度估计作为核心任务或主要评估指标，不属于深度估计主题。",
+      "hf_daily": {
+        "dates": [
+          "2025-02-14"
+        ],
+        "evidence_sha256": "aa8ac8f6b77fe89a3fc7782277539e0e3caa9e40af2a95baf95ef5fd05d960b6",
+        "url": "https://huggingface.co/papers/2502.09613"
+      },
       "id": "2502.09613",
       "matched_topics": [
         "3D Gen&Recon"
@@ -108866,6 +109722,10 @@
       },
       "reviewed_at": "2026-09-14T20:50:44+00:00",
       "selected_topic": "3D Gen&Recon",
+      "sources": [
+        "arxiv",
+        "huggingface"
+      ],
       "status": "accepted",
       "title": "Latent Radiance Fields with 3D-aware 2D Representations",
       "updated": "2025-02-13"
@@ -108974,6 +109834,37 @@
       "selected_topic": null,
       "status": "rejected",
       "title": "DesignWeaver: Dimensional Scaffolding for Text-to-Image Product Design",
+      "updated": "2025-02-14"
+    },
+    "2502.09935": {
+      "abstract": "Novel diffusion models can synthesize photo-realistic images with integrated\nhigh-quality text. Surprisingly, we demonstrate through attention activation\npatching that only less than 1% of diffusion models' parameters, all contained\nin attention layers, influence the generation of textual content within the\nimages. Building on this observation, we improve textual generation efficiency\nand performance by targeting cross and joint attention layers of diffusion\nmodels. We introduce several applications that benefit from localizing the\nlayers responsible for textual content generation. We first show that a\nLoRA-based fine-tuning solely of the localized layers enhances, even more, the\ngeneral text-generation capabilities of large diffusion models while preserving\nthe quality and diversity of the diffusion models' generations. Then, we\ndemonstrate how we can use the localized layers to edit textual content in\ngenerated images. Finally, we extend this idea to the practical use case of\npreventing the generation of toxic text in a cost-free manner. In contrast to\nprior work, our localization approach is broadly applicable across various\ndiffusion model architectures, including U-Net (e.g., LDM and SDXL) and\ntransformer-based (e.g., DeepFloyd IF and Stable Diffusion 3), utilizing\ndiverse text encoders (e.g., from CLIP to the large language models like T5).\nProject page available at https://t2i-text-loc.github.io/.",
+      "archive_rows": {
+        "Image Gen&Edit": "|**2025-02-14**|**Precise Parameter Localization for Textual Generation in Diffusion Models**|Łukasz Staniszewski et.al.|[2502.09935](https://arxiv.org/abs/2502.09935)|null|\n"
+      },
+      "authors": "Łukasz Staniszewski et.al.",
+      "collected_at": "2026-11-11T16:37:59+00:00",
+      "decision_reason": "论文针对扩散模型中的文本生成与编辑提出参数定位方法，属于图像生成与编辑领域的具体方法贡献。",
+      "display_id": "2502.09935",
+      "hf_daily": {
+        "dates": [
+          "2025-02-17"
+        ],
+        "evidence_sha256": "f99e74badeb28a51238d0b369955cc5dc890a95ff0bea73f891f6aeb24d49220",
+        "url": "https://huggingface.co/papers/2502.09935"
+      },
+      "id": "2502.09935",
+      "matched_topics": [
+        "Image Gen&Edit"
+      ],
+      "paper_url": "https://arxiv.org/abs/2502.09935",
+      "pdf_url": "https://arxiv.org/pdf/2502.09935.pdf",
+      "reviewed_at": "2026-11-11T16:37:59+00:00",
+      "selected_topic": "Image Gen&Edit",
+      "sources": [
+        "huggingface"
+      ],
+      "status": "accepted",
+      "title": "Precise Parameter Localization for Textual Generation in Diffusion Models",
       "updated": "2025-02-14"
     },
     "2502.10012": {
@@ -109118,6 +110009,39 @@
       "title": "Hands-off Image Editing: Language-guided Editing without any Task-specific Labeling, Masking or even Training",
       "updated": "2025-02-14"
     },
+    "2502.10248": {
+      "abstract": "We present Step-Video-T2V, a state-of-the-art text-to-video pre-trained model\nwith 30B parameters and the ability to generate videos up to 204 frames in\nlength. A deep compression Variational Autoencoder, Video-VAE, is designed for\nvideo generation tasks, achieving 16x16 spatial and 8x temporal compression\nratios, while maintaining exceptional video reconstruction quality. User\nprompts are encoded using two bilingual text encoders to handle both English\nand Chinese. A DiT with 3D full attention is trained using Flow Matching and is\nemployed to denoise input noise into latent frames. A video-based DPO approach,\nVideo-DPO, is applied to reduce artifacts and improve the visual quality of the\ngenerated videos. We also detail our training strategies and share key\nobservations and insights. Step-Video-T2V's performance is evaluated on a novel\nvideo generation benchmark, Step-Video-T2V-Eval, demonstrating its\nstate-of-the-art text-to-video quality when compared with both open-source and\ncommercial engines. Additionally, we discuss the limitations of current\ndiffusion-based model paradigm and outline future directions for video\nfoundation models. We make both Step-Video-T2V and Step-Video-T2V-Eval\navailable at https://github.com/stepfun-ai/Step-Video-T2V. The online version\ncan be accessed from https://yuewen.cn/videos as well. Our goal is to\naccelerate the innovation of video foundation models and empower video content\ncreators.",
+      "archive_rows": {
+        "Image Gen&Edit": "|**2025-02-14**|**Step-Video-T2V Technical Report: The Practice, Challenges, and Future of Video Foundation Model**|Guoqing Ma et.al.|[2502.10248](https://arxiv.org/abs/2502.10248)|null|\n",
+        "Video Gen&Edit": "|**2025-02-14**|**Step-Video-T2V Technical Report: The Practice, Challenges, and Future of Video Foundation Model**|Guoqing Ma et.al.|[2502.10248](https://arxiv.org/abs/2502.10248)|null|\n"
+      },
+      "authors": "Guoqing Ma et.al.",
+      "collected_at": "2026-11-11T16:37:59+00:00",
+      "decision_reason": "论文提出了Step-Video-T2V，一种基于Flow Matching和DiT架构的文本生成视频（Text-to-Video）基础模型，属于视频生成方法。",
+      "display_id": "2502.10248",
+      "hf_daily": {
+        "dates": [
+          "2025-02-17"
+        ],
+        "evidence_sha256": "9b32e6625ac835e65c2e407a555e1cb203b1778392e9dca0b7ed7b60e5fdcfc7",
+        "url": "https://huggingface.co/papers/2502.10248"
+      },
+      "id": "2502.10248",
+      "matched_topics": [
+        "Image Gen&Edit",
+        "Video Gen&Edit"
+      ],
+      "paper_url": "https://arxiv.org/abs/2502.10248",
+      "pdf_url": "https://arxiv.org/pdf/2502.10248.pdf",
+      "reviewed_at": "2026-11-11T16:37:59+00:00",
+      "selected_topic": "Video Gen&Edit",
+      "sources": [
+        "huggingface"
+      ],
+      "status": "accepted",
+      "title": "Step-Video-T2V Technical Report: The Practice, Challenges, and Future of Video Foundation Model",
+      "updated": "2025-02-14"
+    },
     "2502.10258": {
       "abstract": "We present PromptArtisan, a groundbreaking approach to multi-instruction image editing that achieves remarkable results in a single pass, eliminating the need for time-consuming iterative refinement. Our method empowers users to provide multiple editing instructions, each associated with a specific mask within the image. This flexibility allows for complex edits involving mask intersections or overlaps, enabling the realization of intricate and nuanced image transformations. PromptArtisan leverages a pre-trained InstructPix2Pix model in conjunction with a novel Complete Attention Control Mechanism (CACM). This mechanism ensures precise adherence to user instructions, granting fine-grained control over the editing process. Furthermore, our approach is zero-shot, requiring no additional training, and boasts improved processing complexity compared to traditional iterative methods. By seamlessly integrating multi-instruction capabilities, single-pass efficiency, and complete attention control, PromptArtisan unlocks new possibilities for creative and efficient image editing workflows, catering to both novice and expert users alike.",
       "archive_rows": {
@@ -109160,6 +110084,37 @@
       "selected_topic": "Image Gen&Edit",
       "status": "accepted",
       "title": "PromptArtisan: Multi-instruction Image Editing in Single Pass with Complete Attention Control",
+      "updated": "2025-02-14"
+    },
+    "2502.10389": {
+      "abstract": "Diffusion models (DMs) have become the leading choice for generative tasks\nacross diverse domains. However, their reliance on multiple sequential forward\npasses significantly limits real-time performance. Previous acceleration\nmethods have primarily focused on reducing the number of sampling steps or\nreusing intermediate results, failing to leverage variations across spatial\nregions within the image due to the constraints of convolutional U-Net\nstructures. By harnessing the flexibility of Diffusion Transformers (DiTs) in\nhandling variable number of tokens, we introduce RAS, a novel, training-free\nsampling strategy that dynamically assigns different sampling ratios to regions\nwithin an image based on the focus of the DiT model. Our key observation is\nthat during each sampling step, the model concentrates on semantically\nmeaningful regions, and these areas of focus exhibit strong continuity across\nconsecutive steps. Leveraging this insight, RAS updates only the regions\ncurrently in focus, while other regions are updated using cached noise from the\nprevious step. The model's focus is determined based on the output from the\npreceding step, capitalizing on the temporal consistency we observed. We\nevaluate RAS on Stable Diffusion 3 and Lumina-Next-T2I, achieving speedups up\nto 2.36x and 2.51x, respectively, with minimal degradation in generation\nquality. Additionally, a user study reveals that RAS delivers comparable\nqualities under human evaluation while achieving a 1.6x speedup. Our approach\nmakes a significant step towards more efficient diffusion transformers,\nenhancing their potential for real-time applications.",
+      "archive_rows": {
+        "Image Gen&Edit": "|**2025-02-14**|**Region-Adaptive Sampling for Diffusion Transformers**|Ziming Liu et.al.|[2502.10389](https://arxiv.org/abs/2502.10389)|null|\n"
+      },
+      "authors": "Ziming Liu et.al.",
+      "collected_at": "2026-11-11T16:37:59+00:00",
+      "decision_reason": "论文提出了针对扩散Transformer（DiT）的区域自适应采样策略，旨在加速图像生成过程，属于图像生成方法优化。",
+      "display_id": "2502.10389",
+      "hf_daily": {
+        "dates": [
+          "2025-02-17"
+        ],
+        "evidence_sha256": "4ed01148e5f83ad58546a964a414a2a44fcb620d877b34339cf6a1f34a8f7a5f",
+        "url": "https://huggingface.co/papers/2502.10389"
+      },
+      "id": "2502.10389",
+      "matched_topics": [
+        "Image Gen&Edit"
+      ],
+      "paper_url": "https://arxiv.org/abs/2502.10389",
+      "pdf_url": "https://arxiv.org/pdf/2502.10389.pdf",
+      "reviewed_at": "2026-11-11T16:37:59+00:00",
+      "selected_topic": "Image Gen&Edit",
+      "sources": [
+        "huggingface"
+      ],
+      "status": "accepted",
+      "title": "Region-Adaptive Sampling for Diffusion Transformers",
       "updated": "2025-02-14"
     },
     "2502.10451": {
@@ -109205,6 +110160,37 @@
       "status": "accepted",
       "title": "FlexControl: Computation-Aware ControlNet with Differentiable Router for Text-to-Image Generation",
       "updated": "2025-02-11"
+    },
+    "2502.10458": {
+      "abstract": "This paper presents ThinkDiff, a novel alignment paradigm that empowers\ntext-to-image diffusion models with multimodal in-context understanding and\nreasoning capabilities by integrating the strengths of vision-language models\n(VLMs). Existing multimodal diffusion finetuning methods largely focus on\npixel-level reconstruction rather than in-context reasoning, and are\nconstrained by the complexity and limited availability of reasoning-based\ndatasets. ThinkDiff addresses these challenges by leveraging vision-language\ntraining as a proxy task, aligning VLMs with the decoder of an encoder-decoder\nlarge language model (LLM) instead of a diffusion decoder. This proxy task\nbuilds on the observation that the LLM decoder shares the same input\nfeature space with diffusion decoders that use the corresponding\nLLM encoder for prompt embedding. As a result, aligning VLMs with\ndiffusion decoders can be simplified through alignment with the LLM decoder.\nWithout complex training and datasets, ThinkDiff effectively unleashes\nunderstanding, reasoning, and composing capabilities in diffusion models.\nExperiments demonstrate that ThinkDiff significantly improves accuracy from\n19.2% to 46.3% on the challenging CoBSAT benchmark for multimodal in-context\nreasoning generation, with only 5 hours of training on 4 A100 GPUs.\nAdditionally, ThinkDiff demonstrates exceptional performance in composing\nmultiple images and texts into logically coherent images. Project page:\nhttps://mizhenxing.github.io/ThinkDiff.",
+      "archive_rows": {
+        "Image Gen&Edit": "|**2025-02-12**|**I Think, Therefore I Diffuse: Enabling Multimodal In-Context Reasoning in Diffusion Models**|Zhenxing Mi et.al.|[2502.10458](https://arxiv.org/abs/2502.10458)|null|\n"
+      },
+      "authors": "Zhenxing Mi et.al.",
+      "collected_at": "2026-11-11T16:37:59+00:00",
+      "decision_reason": "论文提出ThinkDiff方法，通过视觉语言模型对齐增强文本到图像扩散模型的多模态推理与生成能力，属于图像生成与编辑领域的核心方法贡献。",
+      "display_id": "2502.10458",
+      "hf_daily": {
+        "dates": [
+          "2025-02-18"
+        ],
+        "evidence_sha256": "26db1bf80e927c672166f1055c81866fdbc73c492f590f4f8ecaf7f104e42a32",
+        "url": "https://huggingface.co/papers/2502.10458"
+      },
+      "id": "2502.10458",
+      "matched_topics": [
+        "Image Gen&Edit"
+      ],
+      "paper_url": "https://arxiv.org/abs/2502.10458",
+      "pdf_url": "https://arxiv.org/pdf/2502.10458.pdf",
+      "reviewed_at": "2026-11-11T16:37:59+00:00",
+      "selected_topic": "Image Gen&Edit",
+      "sources": [
+        "huggingface"
+      ],
+      "status": "accepted",
+      "title": "I Think, Therefore I Diffuse: Enabling Multimodal In-Context Reasoning in Diffusion Models",
+      "updated": "2025-02-12"
     },
     "2502.10475": {
       "abstract": "3D Gaussian Splatting (3DGS) has been widely used in 3D reconstruction and 3D generation. However, the rapid adoption of 3D Gaussian Splatting raises growing concerns about information leakage and unauthorized use, urging the exploration of effective watermarking techniques. However, existing methods are limited by low capacity, fragility under geometric perturbations, and the infeasible requirement for costly fine-tuning or pipeline modifications, motivating the need for a generalizable, feed-forward framework capable of robust multi-modal embedding with minimal intrusion. In this paper, we propose a new framework X-SG2S which can simultaneously inject 1D to 3D watermarks for copyright protection, while keeping the high fidelity of original 3DGS scenes. Specifically, we first split the watermarks into message patches. A self-adaptive gate is developed to select the injection positions of the watermark messages. Then, we use an XD (multi-dimensional) injection head to inject multi-modal messages into sorted 3DGS points. To restore watermarking messages, a learnable gate is developed to recognize the watermarked locations, from which our XD-extraction heads are used to restore hidden messages. X-SG2S is the first framework to unify 1D-to-3D watermarking and enable simultaneous multi-modal watermark embedding in 3DGS, achieving this with minimal rendering interference and zero modifications to parameters or pipelines. Extensive experiments demonstrate that X-SG2S effectively preserves consistency between the watermark and the original 3DGS, exhibits robustness against model degradation, and maintains accurate judgment capabilities.",
@@ -109528,6 +110514,13 @@
         "Video Generation": "|**2025-02-16**|**Phantom: Subject-consistent video generation via cross-modal alignment**|Lijie Liu et.al.|[2502.11079](http://arxiv.org/abs/2502.11079)|null|\n"
       },
       "decision_reason": "二次复核：Image Gen&Edit: 论文核心贡献是提出名为Phantom的视频生成框架，旨在解决主题一致的视频生成任务，虽然其架构借鉴了图像生成中的MMDiT和CLIP等组件，但主要创新点在于视频时序建模、跨模态对齐以及解决视频生成中的内容泄漏和多主体混淆问题，并非直接针对静态图像的生成或编辑方法。; Video Gen&Edit: 论文明确提出了一个用于主题一致视频生成的统一框架Phantom，核心任务是从参考图像和文本指令生成视频，属于视频合成领域。其贡献包括重新设计联合文本图像注入模型、构建三元组数据管线以及解决视频生成中的特定问题，完全符合视频生成与编辑的主题定义。; 3D Gen&Recon: 论文主要关注二维视频帧序列的生成与一致性，并未涉及三维几何结构、网格、点云、辐射场或高斯泼溅等三维表示的生成或重建。虽然视频生成可能隐含一定的空间理解，但其核心贡献并不在于三维资产的创建或场景重建，因此不属于三维生成与重建主题。; World Model: 论文中的模型主要用于根据文本和图像条件生成视觉内容，属于生成式视频模型，而非用于预测环境动态、物理规律或支持交互式动作规划的世界模型。文中未提及利用模型进行未来状态预测以辅助决策或规划，也未强调对物理动力学或交互世界的建模，因此不符合世界模型的定义。; Relighting: 论文未涉及光照估计、反射率恢复、阴影生成或在新光照条件下改变外观等重光照任务。虽然数据管线中提到了处理图像的整体光照变化以防止内容泄漏，但这仅是数据增强或预处理的一部分，并非论文的核心技术贡献或主要研究目标，因此不归类为重光照主题。; Depth Estimation: 论文未涉及单目、立体或多视图深度估计、深度补全或深度预测等任务。其核心工作在于视频内容的生成与一致性保持，并未将深度图作为主要输出或核心中间表示来研究深度感知问题，因此与深度估计主题无关。",
+      "hf_daily": {
+        "dates": [
+          "2025-02-19"
+        ],
+        "evidence_sha256": "9cc5bb700fc3e68f7a33cd55fc4d7fb0a2ac90e232f496af33c215799bdf491e",
+        "url": "https://huggingface.co/papers/2502.11079"
+      },
       "id": "2502.11079",
       "matched_topics": [
         "Video Gen&Edit"
@@ -109562,6 +110555,10 @@
       },
       "reviewed_at": "2026-09-14T20:49:13+00:00",
       "selected_topic": "Video Gen&Edit",
+      "sources": [
+        "arxiv",
+        "huggingface"
+      ],
       "status": "accepted",
       "title": "Phantom: Subject-consistent video generation via cross-modal alignment",
       "updated": "2025-02-16"
@@ -109883,6 +110880,13 @@
       ],
       "collected_at": "2026-09-06T07:39:58+00:00",
       "decision_reason": "二次复核：Image Gen&Edit: 论文核心贡献是构建用于自动驾驶的驾驶世界模型，主要任务是基于动作预测未来视频序列，而非针对静态图像的生成或编辑任务，因此不属于图像生成与编辑主题。; Video Gen&Edit: 论文提出MaskGWM模型，利用扩散Transformer进行视频预测和生成，核心贡献包括长时程视频预测和多视角视频生成，属于视频生成与编辑的技术范畴。; 3D Gen&Recon: 虽然涉及多视角生成，但论文主要关注的是2D视频像素空间的预测与生成，并未明确提出3D几何重建、网格生成或3D场景表示的核心方法，不符合3D生成与重建主题。; World Model: 论文明确提出MaskGWM作为通用驾驶世界模型，旨在通过结合生成损失和掩码重建来预测环境在动作下的变化，其核心贡献完全符合世界模型的定义。; Relighting: 论文内容聚焦于驾驶场景的视频预测和泛化能力，未涉及光照估计、反射率恢复或新光照条件下的外观生成，与重光照主题无关。; Depth Estimation: 论文主要任务是视频生成和预测，虽然可能隐含几何信息，但并未将深度估计作为主要输出或核心贡献，未提出专门的深度预测方法，不符合深度估计主题。",
+      "hf_daily": {
+        "dates": [
+          "2025-02-24"
+        ],
+        "evidence_sha256": "ee44762f6752f9921e2fa9e82e59a2adf6f0760ada7be19f0299d3d8c7b0ba70",
+        "url": "https://huggingface.co/papers/2502.11663"
+      },
       "id": "2502.11663",
       "matched_topics": [
         "World Model"
@@ -109917,6 +110921,10 @@
       },
       "reviewed_at": "2026-09-14T20:49:13+00:00",
       "selected_topic": "World Model",
+      "sources": [
+        "arxiv",
+        "huggingface"
+      ],
       "status": "accepted",
       "title": "MaskGWM: A Generalizable Driving World Model with Video Mask Reconstruction",
       "updated": "2025-02-17"
@@ -110076,6 +111084,13 @@
       ],
       "collected_at": "2026-09-06T07:39:58+00:00",
       "decision_reason": "二次复核：Image Gen&Edit: 论文核心贡献是研究自监督视频预测模型中直觉物理理解的涌现机制，而非图像生成或编辑技术，未涉及图像合成、扩散模型或图像编辑方法。; Video Gen&Edit: 虽然使用了视频预测任务，但主要目的是探究模型对物理规律的理解能力，而非提升视频生成质量、可控性或编辑能力，不属于视频生成与编辑的核心技术贡献。; 3D Gen&Recon: 论文未涉及3D对象、场景的生成、重建或编辑，也没有使用NeRF、高斯泼溅等3D表示方法，其关注点在于2D视频帧中的物理属性理解。; World Model: 论文研究通过自监督预训练在自然视频中学习预测缺失区域，从而获得对物体恒存性等物理属性的理解，这符合学习环境动态和物理规律的世界模型定义。; Relighting: 论文未涉及光照估计、传输、编辑或生成，也没有处理反射率或阴影等与重光照相关的视觉属性，核心贡献与重光照任务无关。; Depth Estimation: 论文未进行单目、立体或多视图深度估计，也没有预测深度图或视差，其评估指标基于违反预期框架下的物理属性理解，而非几何深度信息。",
+      "hf_daily": {
+        "dates": [
+          "2025-02-18"
+        ],
+        "evidence_sha256": "1e6778f77dbc4843d9fcc79ac409a33e0f97058e6948f10378dab5d88072d371",
+        "url": "https://huggingface.co/papers/2502.11831"
+      },
       "id": "2502.11831",
       "matched_topics": [
         "World Model"
@@ -110110,6 +111125,10 @@
       },
       "reviewed_at": "2026-09-14T23:01:36+00:00",
       "selected_topic": "World Model",
+      "sources": [
+        "arxiv",
+        "huggingface"
+      ],
       "status": "accepted",
       "title": "Intuitive physics understanding emerges from self-supervised pretraining on natural videos",
       "updated": "2025-02-17"
@@ -110244,6 +111263,68 @@
       "selected_topic": "3D Gen&Recon",
       "status": "accepted",
       "title": "HumanGif: Single-View Human Diffusion with Generative Prior",
+      "updated": "2025-02-17"
+    },
+    "2502.12135": {
+      "abstract": "With the explosive growth of 3D content creation, there is an increasing\ndemand for automatically converting static 3D models into articulation-ready\nversions that support realistic animation. Traditional approaches rely heavily\non manual annotation, which is both time-consuming and labor-intensive.\nMoreover, the lack of large-scale benchmarks has hindered the development of\nlearning-based solutions. In this work, we present MagicArticulate, an\neffective framework that automatically transforms static 3D models into\narticulation-ready assets. Our key contributions are threefold. First, we\nintroduce Articulation-XL, a large-scale benchmark containing over 33k 3D\nmodels with high-quality articulation annotations, carefully curated from\nObjaverse-XL. Second, we propose a novel skeleton generation method that\nformulates the task as a sequence modeling problem, leveraging an\nauto-regressive transformer to naturally handle varying numbers of bones or\njoints within skeletons and their inherent dependencies across different 3D\nmodels. Third, we predict skinning weights using a functional diffusion process\nthat incorporates volumetric geodesic distance priors between vertices and\njoints. Extensive experiments demonstrate that MagicArticulate significantly\noutperforms existing methods across diverse object categories, achieving\nhigh-quality articulation that enables realistic animation. Project page:\nhttps://chaoyuesong.github.io/MagicArticulate.",
+      "archive_rows": {
+        "3D Gen&Recon": "|**2025-02-17**|**MagicArticulate: Make Your 3D Models Articulation-Ready**|Chaoyue Song et.al.|[2502.12135](https://arxiv.org/abs/2502.12135)|null|\n"
+      },
+      "authors": "Chaoyue Song et.al.",
+      "collected_at": "2026-11-11T16:37:59+00:00",
+      "decision_reason": "论文提出了一种将静态3D模型转换为可动画资产的方法，涉及骨架生成和蒙皮权重预测，属于3D资产生成与编辑范畴。",
+      "display_id": "2502.12135",
+      "hf_daily": {
+        "dates": [
+          "2025-02-18"
+        ],
+        "evidence_sha256": "b28525e2cde7698a674eab372e37494d7ad35fb319a0ed528a881a4061f442d5",
+        "url": "https://huggingface.co/papers/2502.12135"
+      },
+      "id": "2502.12135",
+      "matched_topics": [
+        "3D Gen&Recon"
+      ],
+      "paper_url": "https://arxiv.org/abs/2502.12135",
+      "pdf_url": "https://arxiv.org/pdf/2502.12135.pdf",
+      "reviewed_at": "2026-11-11T16:37:59+00:00",
+      "selected_topic": "3D Gen&Recon",
+      "sources": [
+        "huggingface"
+      ],
+      "status": "accepted",
+      "title": "MagicArticulate: Make Your 3D Models Articulation-Ready",
+      "updated": "2025-02-17"
+    },
+    "2502.12146": {
+      "abstract": "We propose Diffusion-Sharpening, a fine-tuning approach that enhances\ndownstream alignment by optimizing sampling trajectories. Existing RL-based\nfine-tuning methods focus on single training timesteps and neglect\ntrajectory-level alignment, while recent sampling trajectory optimization\nmethods incur significant inference NFE costs. Diffusion-Sharpening overcomes\nthis by using a path integral framework to select optimal trajectories during\ntraining, leveraging reward feedback, and amortizing inference costs. Our\nmethod demonstrates superior training efficiency with faster convergence, and\nbest inference efficiency without requiring additional NFEs. Extensive\nexperiments show that Diffusion-Sharpening outperforms RL-based fine-tuning\nmethods (e.g., Diffusion-DPO) and sampling trajectory optimization methods\n(e.g., Inference Scaling) across diverse metrics including text alignment,\ncompositional capabilities, and human preferences, offering a scalable and\nefficient solution for future diffusion model fine-tuning. Code:\nhttps://github.com/Gen-Verse/Diffusion-Sharpening",
+      "archive_rows": {
+        "Image Gen&Edit": "|**2025-02-17**|**Diffusion-Sharpening: Fine-tuning Diffusion Models with Denoising Trajectory Sharpening**|Ye Tian et.al.|[2502.12146](https://arxiv.org/abs/2502.12146)|null|\n"
+      },
+      "authors": "Ye Tian et.al.",
+      "collected_at": "2026-11-11T16:37:59+00:00",
+      "decision_reason": "论文提出了一种针对扩散模型的微调方法（Diffusion-Sharpening），通过优化去噪轨迹来增强下游对齐，属于图像生成模型的方法改进。",
+      "display_id": "2502.12146",
+      "hf_daily": {
+        "dates": [
+          "2025-02-18"
+        ],
+        "evidence_sha256": "3e9342ddbc4fa46fa8dc86d21213e3fdf15584d0c553ed3e6155bfd0587e927b",
+        "url": "https://huggingface.co/papers/2502.12146"
+      },
+      "id": "2502.12146",
+      "matched_topics": [
+        "Image Gen&Edit"
+      ],
+      "paper_url": "https://arxiv.org/abs/2502.12146",
+      "pdf_url": "https://arxiv.org/pdf/2502.12146.pdf",
+      "reviewed_at": "2026-11-11T16:37:59+00:00",
+      "selected_topic": "Image Gen&Edit",
+      "sources": [
+        "huggingface"
+      ],
+      "status": "accepted",
+      "title": "Diffusion-Sharpening: Fine-tuning Diffusion Models with Denoising Trajectory Sharpening",
       "updated": "2025-02-17"
     },
     "2502.12231": {
@@ -110468,6 +111549,39 @@
       "selected_topic": "Video Gen&Edit",
       "status": "accepted",
       "title": "MALT Diffusion: Memory-Augmented Latent Transformers for Any-Length Video Generation",
+      "updated": "2025-02-18"
+    },
+    "2502.12638": {
+      "abstract": "3D molecule generation is crucial for drug discovery and material design.\nWhile prior efforts focus on 3D diffusion models for their benefits in modeling\ncontinuous 3D conformers, they overlook the advantages of 1D SELFIES-based\nLanguage Models (LMs), which can generate 100% valid molecules and leverage the\nbillion-scale 1D molecule datasets. To combine these advantages for 3D molecule\ngeneration, we propose a foundation model -- NExT-Mol: 3D Diffusion Meets 1D\nLanguage Modeling for 3D Molecule Generation. NExT-Mol uses an extensively\npretrained molecule LM for 1D molecule generation, and subsequently predicts\nthe generated molecule's 3D conformers with a 3D diffusion model. We enhance\nNExT-Mol's performance by scaling up the LM's model size, refining the\ndiffusion neural architecture, and applying 1D to 3D transfer learning.\nNotably, our 1D molecule LM significantly outperforms baselines in\ndistributional similarity while ensuring validity, and our 3D diffusion model\nachieves leading performances in conformer prediction. Given these improvements\nin 1D and 3D modeling, NExT-Mol achieves a 26% relative improvement in 3D FCD\nfor de novo 3D generation on GEOM-DRUGS, and a 13% average relative gain for\nconditional 3D generation on QM9-2014. Our codes and pretrained checkpoints are\navailable at https://github.com/acharkq/NExT-Mol.",
+      "archive_rows": {
+        "3D Gen&Recon": "|**2025-02-18**|**NExT-Mol: 3D Diffusion Meets 1D Language Modeling for 3D Molecule Generation**|Zhiyuan Liu et.al.|[2502.12638](https://arxiv.org/abs/2502.12638)|null|\n",
+        "Image Gen&Edit": "|**2025-02-18**|**NExT-Mol: 3D Diffusion Meets 1D Language Modeling for 3D Molecule Generation**|Zhiyuan Liu et.al.|[2502.12638](https://arxiv.org/abs/2502.12638)|null|\n"
+      },
+      "authors": "Zhiyuan Liu et.al.",
+      "collected_at": "2026-11-11T16:37:59+00:00",
+      "decision_reason": "论文提出了一种结合1D语言模型和3D扩散模型的3D分子生成方法，属于3D对象（分子）的生成任务，符合3D Gen&Recon主题定义。",
+      "display_id": "2502.12638",
+      "hf_daily": {
+        "dates": [
+          "2025-02-20"
+        ],
+        "evidence_sha256": "9ec3fd6428def712c74a3714584317cad64aa832f45335ccc7e01e6d462f3bc7",
+        "url": "https://huggingface.co/papers/2502.12638"
+      },
+      "id": "2502.12638",
+      "matched_topics": [
+        "3D Gen&Recon",
+        "Image Gen&Edit"
+      ],
+      "paper_url": "https://arxiv.org/abs/2502.12638",
+      "pdf_url": "https://arxiv.org/pdf/2502.12638.pdf",
+      "reviewed_at": "2026-11-11T16:37:59+00:00",
+      "selected_topic": "3D Gen&Recon",
+      "sources": [
+        "huggingface"
+      ],
+      "status": "accepted",
+      "title": "NExT-Mol: 3D Diffusion Meets 1D Language Modeling for 3D Molecule Generation",
       "updated": "2025-02-18"
     },
     "2502.12640": {
@@ -110761,6 +111875,13 @@
       ],
       "collected_at": "2026-09-06T07:39:58+00:00",
       "decision_reason": "二次复核：Image Gen&Edit: 论文核心贡献是构建基于PDDL的符号世界模型生成基准Text2World，用于评估大语言模型从文本生成环境动态描述的能力，不涉及图像合成、编辑或视觉生成方法。; Video Gen&Edit: 研究聚焦于符号世界模型的文本到形式化表示转换，未涉及视频合成、视频编辑或任何与视频生成相关的视觉内容处理技术。; 3D Gen&Recon: 论文处理的是抽象的符号逻辑域和动作约束，而非三维几何、网格、点云或神经辐射场等三维空间数据的生成与重建任务。; World Model: 论文主要贡献是提出Text2World基准，专门用于评估大语言模型生成符号世界模型的能力，即从自然语言推断环境动态、约束及动作效果，完全符合世界模型主题定义。; Relighting: 研究内容完全集中在逻辑推理和符号规划领域，未涉及光照估计、反射率恢复、阴影生成或任何与计算机图形学重光照相关的技术。; Depth Estimation: 论文不涉及单目、立体或多视图深度估计，其评估对象是符号逻辑结构的正确性，而非图像中的几何深度信息预测。",
+      "hf_daily": {
+        "dates": [
+          "2025-02-19"
+        ],
+        "evidence_sha256": "736bb0ec7e9b2045f49956f403c125fa0ce3909002d3959378d133a430a672bc",
+        "url": "https://huggingface.co/papers/2502.13092"
+      },
       "id": "2502.13092",
       "matched_topics": [
         "World Model"
@@ -110795,6 +111916,10 @@
       },
       "reviewed_at": "2026-09-14T20:47:44+00:00",
       "selected_topic": "World Model",
+      "sources": [
+        "arxiv",
+        "huggingface"
+      ],
       "status": "accepted",
       "title": "Text2World: Benchmarking Large Language Models for Symbolic World Model Generation",
       "updated": "2025-02-18"
@@ -111079,6 +112204,13 @@
         "Video Generation": "|**2025-02-19**|**FantasyID: Face Knowledge Enhanced ID-Preserving Video Generation**|Yunpeng Zhang et.al.|[2502.13995](http://arxiv.org/abs/2502.13995)|null|\n"
       },
       "decision_reason": "二次复核：Image Gen&Edit: 论文核心贡献是身份保持的文本到视频生成框架，虽然使用了图像特征提取和参考图像，但主要目标是生成动态视频序列而非静态图像合成或编辑，不符合图像生成主题的核心定义。; Video Gen&Edit: 论文提出了一种基于扩散Transformer的视频生成方法，旨在从参考图像生成保持身份一致性的视频，核心贡献在于改进视频扩散模型的身份保持能力和面部动态表现，完全符合视频生成主题。; 3D Gen&Recon: 虽然论文使用了3D面部几何先验（DECA提取的点云）作为辅助条件，但这仅作为视频生成的输入特征，并非用于生成或重建3D资产、场景或网格，核心贡献仍是2D视频生成，不属于3D生成与重建主题。; World Model: 论文基于预训练的视频扩散模型进行适配，未涉及环境动力学学习、交互式世界建模或动作条件预测等世界模型核心要素，仅关注特定身份的视频内容生成，与世界模型主题无关。; Relighting: 论文未涉及光照估计、传输、编辑或新光照下的外观生成，其关注点在于身份一致性和面部动态，与重光照主题完全无关。; Depth Estimation: 论文未进行单目、立体或多视角深度估计，虽然使用了3D几何信息，但目的是辅助视频生成中的面部结构稳定性，而非预测深度图，不符合深度估计主题。",
+      "hf_daily": {
+        "dates": [
+          "2025-02-24"
+        ],
+        "evidence_sha256": "09e4667b67fd459e826e967e5bb81c6eaf564030079955ca71ee898505dd2b62",
+        "url": "https://huggingface.co/papers/2502.13995"
+      },
       "id": "2502.13995",
       "matched_topics": [
         "Video Gen&Edit"
@@ -111113,6 +112245,10 @@
       },
       "reviewed_at": "2026-09-14T20:47:44+00:00",
       "selected_topic": "Video Gen&Edit",
+      "sources": [
+        "arxiv",
+        "huggingface"
+      ],
       "status": "accepted",
       "title": "FantasyID: Face Knowledge Enhanced ID-Preserving Video Generation",
       "updated": "2025-02-19"
@@ -111425,6 +112561,37 @@
       "title": "OG-Gaussian: Occupancy Based Street Gaussians for Autonomous Driving",
       "updated": "2025-02-20"
     },
+    "2502.14247": {
+      "abstract": "This report presents a comprehensive framework for generating high-quality 3D\nshapes and textures from diverse input prompts, including single images,\nmulti-view images, and text descriptions. The framework consists of 3D shape\ngeneration and texture generation. (1). The 3D shape generation pipeline\nemploys a Variational Autoencoder (VAE) to encode implicit 3D geometries into a\nlatent space and a diffusion network to generate latents conditioned on input\nprompts, with modifications to enhance model capacity. An alternative\nArtist-Created Mesh (AM) generation approach is also explored, yielding\npromising results for simpler geometries. (2). Texture generation involves a\nmulti-stage process starting with frontal images generation followed by\nmulti-view images generation, RGB-to-PBR texture conversion, and\nhigh-resolution multi-view texture refinement. A consistency scheduler is\nplugged into every stage, to enforce pixel-wise consistency among multi-view\ntextures during inference, ensuring seamless integration.\n  The pipeline demonstrates effective handling of diverse input formats,\nleveraging advanced neural architectures and novel methodologies to produce\nhigh-quality 3D content. This report details the system architecture,\nexperimental results, and potential future directions to improve and expand the\nframework. The source code and pretrained weights are released at:\nhttps://github.com/Tencent/Tencent-XR-3DGen.",
+      "archive_rows": {
+        "3D Gen&Recon": "|**2025-02-20**|**Pandora3D: A Comprehensive Framework for High-Quality 3D Shape and Texture Generation**|Jiayu Yang et.al.|[2502.14247](https://arxiv.org/abs/2502.14247)|null|\n"
+      },
+      "authors": "Jiayu Yang et.al.",
+      "collected_at": "2026-11-11T16:37:59+00:00",
+      "decision_reason": "论文提出了从图像和文本生成高质量3D形状和纹理的综合框架，涉及3D生成方法，符合3D Gen&Recon主题。",
+      "display_id": "2502.14247",
+      "hf_daily": {
+        "dates": [
+          "2025-02-25"
+        ],
+        "evidence_sha256": "8601777a0310b6826567d9fbfa7bf15f87c639756a6761bc637e09a8c61c297c",
+        "url": "https://huggingface.co/papers/2502.14247"
+      },
+      "id": "2502.14247",
+      "matched_topics": [
+        "3D Gen&Recon"
+      ],
+      "paper_url": "https://arxiv.org/abs/2502.14247",
+      "pdf_url": "https://arxiv.org/pdf/2502.14247.pdf",
+      "reviewed_at": "2026-11-11T16:37:59+00:00",
+      "selected_topic": "3D Gen&Recon",
+      "sources": [
+        "huggingface"
+      ],
+      "status": "accepted",
+      "title": "Pandora3D: A Comprehensive Framework for High-Quality 3D Shape and Texture Generation",
+      "updated": "2025-02-20"
+    },
     "2502.14279": {
       "abstract": "Monocular depth estimation is a rudimentary task in robotic perception. Recently, with the development of more accurate and robust neural network models and different types of datasets, monocular depth estimation has significantly improved performance and efficiency. However, most of the research in this area focuses on very concentrated domains. In particular, most of the benchmarks in outdoor scenarios belong to urban environments for the improvement of autonomous driving devices, and these benchmarks have a massive disparity with the orchard/vineyard environment, which is hardly helpful for research in the primary industry. Therefore, we propose OrchardDepth, which fills the gap in the estimation of the metric depth of the monocular camera in the orchard/vineyard environment. In addition, we present a new retraining method to improve the training result by monitoring the consistent regularization between dense depth maps and sparse points. Our method improves the RMSE of depth estimation in the orchard environment from 1.5337 to 0.6738, proving our method’s validation.",
       "archive_rows": {
@@ -111475,12 +112642,52 @@
       },
       "updated": "2025-02-20"
     },
+    "2502.14377": {
+      "abstract": "The Diffusion Transformer plays a pivotal role in advancing text-to-image and\ntext-to-video generation, owing primarily to its inherent scalability. However,\nexisting controlled diffusion transformer methods incur significant parameter\nand computational overheads and suffer from inefficient resource allocation due\nto their failure to account for the varying relevance of control information\nacross different transformer layers. To address this, we propose the\nRelevance-Guided Efficient Controllable Generation framework, RelaCtrl,\nenabling efficient and resource-optimized integration of control signals into\nthe Diffusion Transformer. First, we evaluate the relevance of each layer in\nthe Diffusion Transformer to the control information by assessing the\n\"ControlNet Relevance Score\"-i.e., the impact of skipping each control layer on\nboth the quality of generation and the control effectiveness during inference.\nBased on the strength of the relevance, we then tailor the positioning,\nparameter scale, and modeling capacity of the control layers to reduce\nunnecessary parameters and redundant computations. Additionally, to further\nimprove efficiency, we replace the self-attention and FFN in the commonly used\ncopy block with the carefully designed Two-Dimensional Shuffle Mixer (TDSM),\nenabling efficient implementation of both the token mixer and channel mixer.\nBoth qualitative and quantitative experimental results demonstrate that our\napproach achieves superior performance with only 15% of the parameters and\ncomputational complexity compared to PixArt-delta. More examples are available\nat https://relactrl.github.io/RelaCtrl/.",
+      "archive_rows": {
+        "Image Gen&Edit": "|**2025-02-20**|**RelaCtrl: Relevance-Guided Efficient Control for Diffusion Transformers**|Ke Cao et.al.|[2502.14377](https://arxiv.org/abs/2502.14377)|null|\n",
+        "Video Gen&Edit": "|**2025-02-20**|**RelaCtrl: Relevance-Guided Efficient Control for Diffusion Transformers**|Ke Cao et.al.|[2502.14377](https://arxiv.org/abs/2502.14377)|null|\n"
+      },
+      "authors": "Ke Cao et.al.",
+      "collected_at": "2026-11-11T16:37:59+00:00",
+      "decision_reason": "论文提出了针对扩散Transformer（DiT）的高效可控生成框架RelaCtrl，旨在优化文本到图像及视频生成中的控制信号集成。虽然涉及视频，但其核心贡献是改进扩散模型架构以支持可控生成（如ControlNet变体），属于图像生成与编辑领域的通用方法贡献。",
+      "display_id": "2502.14377",
+      "hf_daily": {
+        "dates": [
+          "2025-02-21"
+        ],
+        "evidence_sha256": "7e51295df7ef3e5bc4da895357f10f0779b11bafeb113de2c8b7e132abe123b3",
+        "url": "https://huggingface.co/papers/2502.14377"
+      },
+      "id": "2502.14377",
+      "matched_topics": [
+        "Image Gen&Edit",
+        "Video Gen&Edit"
+      ],
+      "paper_url": "https://arxiv.org/abs/2502.14377",
+      "pdf_url": "https://arxiv.org/pdf/2502.14377.pdf",
+      "reviewed_at": "2026-11-11T16:37:59+00:00",
+      "selected_topic": "Image Gen&Edit",
+      "sources": [
+        "huggingface"
+      ],
+      "status": "accepted",
+      "title": "RelaCtrl: Relevance-Guided Efficient Control for Diffusion Transformers",
+      "updated": "2025-02-20"
+    },
     "2502.14397": {
       "abstract": "We introduce PhotoDoodle, a novel image editing framework designed to facilitate photo doodling by enabling artists to overlay decorative elements onto photographs. Photo doodling is challenging because the inserted elements must appear seamlessly integrated with the background, requiring realistic blending, perspective alignment, and contextual coherence. Additionally, the background must be preserved without distortion, and the artist’s unique style must be captured efficiently from limited training data. These requirements are not addressed by previous methods that primarily focus on global style transfer or regional inpainting. The proposed method, PhotoDoodle, employs a two-stage training strategy. Initially, we train a general-purpose image editing model, OmniEditor, using large-scale data. Subsequently, we fine-tune this model with EditLoRA using a small, artist-curated dataset of before-and-after image pairs to capture distinct editing styles and techniques. To enhance consistency in the generated results, we introduce a positional encoding reuse mechanism. Additionally, we release a PhotoDoodle dataset featuring six high-quality styles. Extensive experiments demonstrate the advanced performance and robustness of our method in customized image editing, opening new possibilities for artistic creation. Code is released at https://github.com/showlab/PhotoDoodle.",
       "archive_rows": {
         "Image Generation": "|**2025-02-20**|**PhotoDoodle: Learning Artistic Image Editing from Few-Shot Pairwise Data**|Shijie Huang et.al.|[2502.14397](http://arxiv.org/abs/2502.14397)|null|\n"
       },
       "decision_reason": "二次复核：Image Gen&Edit: 论文提出PhotoDoodle框架，核心贡献是基于DiT的少样本艺术图像编辑方法，通过OmniEditor和EditLoRA实现装饰元素与背景的无缝融合，属于图像编辑范畴。; Video Gen&Edit: 论文专注于静态图像的编辑与生成，未涉及视频合成、视频编辑或时序建模，核心贡献与视频生成或编辑任务无关。; 3D Gen&Recon: 论文未涉及3D对象生成、重建、NeRF或高斯泼溅等技术，其核心是2D图像层面的风格化编辑，不具备3D几何或场景重建贡献。; World Model: 论文未构建环境动力学模型或交互式世界模型，其方法基于扩散模型进行图像编辑，不涉及对未来状态或物理动态的预测。; Relighting: 论文未涉及光照估计、反射率恢复或新光照条件下的渲染，其核心是艺术风格的装饰性编辑，而非光照属性的改变或迁移。; Depth Estimation: 论文未进行单目、立体或多视角深度估计，虽然编辑过程隐含透视对齐，但核心贡献并非深度预测或几何结构恢复。",
+      "hf_daily": {
+        "dates": [
+          "2025-02-24"
+        ],
+        "evidence_sha256": "02520060646e63f202d8a676344ad3a25f076d403d70929d88203088ff30457f",
+        "url": "https://huggingface.co/papers/2502.14397"
+      },
       "id": "2502.14397",
       "matched_topics": [
         "Image Gen&Edit"
@@ -111515,6 +112722,10 @@
       },
       "reviewed_at": "2026-09-14T20:47:44+00:00",
       "selected_topic": "Image Gen&Edit",
+      "sources": [
+        "arxiv",
+        "huggingface"
+      ],
       "status": "accepted",
       "title": "PhotoDoodle: Learning Artistic Image Editing from Few-Shot Pairwise Data",
       "updated": "2025-02-20"
@@ -111768,6 +112979,39 @@
       "selected_topic": null,
       "status": "rejected",
       "title": "AVD2: Accident Video Diffusion for Accident Video Description",
+      "updated": "2025-02-20"
+    },
+    "2502.14844": {
+      "abstract": "Personalizing generative text-to-image models has seen remarkable progress,\nbut extending this personalization to text-to-video models presents unique\nchallenges. Unlike static concepts, personalizing text-to-video models has the\npotential to capture dynamic concepts, i.e., entities defined not only by their\nappearance but also by their motion. In this paper, we introduce\nSet-and-Sequence, a novel framework for personalizing Diffusion Transformers\n(DiTs)-based generative video models with dynamic concepts. Our approach\nimposes a spatio-temporal weight space within an architecture that does not\nexplicitly separate spatial and temporal features. This is achieved in two key\nstages. First, we fine-tune Low-Rank Adaptation (LoRA) layers using an\nunordered set of frames from the video to learn an identity LoRA basis that\nrepresents the appearance, free from temporal interference. In the second\nstage, with the identity LoRAs frozen, we augment their coefficients with\nMotion Residuals and fine-tune them on the full video sequence, capturing\nmotion dynamics. Our Set-and-Sequence framework results in a spatio-temporal\nweight space that effectively embeds dynamic concepts into the video model's\noutput domain, enabling unprecedented editability and compositionality while\nsetting a new benchmark for personalizing dynamic concepts.",
+      "archive_rows": {
+        "Image Gen&Edit": "|**2025-02-20**|**Dynamic Concepts Personalization from Single Videos**|Rameen Abdal et.al.|[2502.14844](https://arxiv.org/abs/2502.14844)|null|\n",
+        "Video Gen&Edit": "|**2025-02-20**|**Dynamic Concepts Personalization from Single Videos**|Rameen Abdal et.al.|[2502.14844](https://arxiv.org/abs/2502.14844)|null|\n"
+      },
+      "authors": "Rameen Abdal et.al.",
+      "collected_at": "2026-11-11T16:37:59+00:00",
+      "decision_reason": "论文提出了一种用于个性化基于DiT的视频生成模型的新框架Set-and-Sequence，旨在捕获动态概念（外观与运动），属于视频生成与编辑方法。",
+      "display_id": "2502.14844",
+      "hf_daily": {
+        "dates": [
+          "2025-02-21"
+        ],
+        "evidence_sha256": "dd567fd16f930a1b34ee9b76d5b1f5a6a5b5e0ab4b3bd909cb6ce734d704057c",
+        "url": "https://huggingface.co/papers/2502.14844"
+      },
+      "id": "2502.14844",
+      "matched_topics": [
+        "Image Gen&Edit",
+        "Video Gen&Edit"
+      ],
+      "paper_url": "https://arxiv.org/abs/2502.14844",
+      "pdf_url": "https://arxiv.org/pdf/2502.14844.pdf",
+      "reviewed_at": "2026-11-11T16:37:59+00:00",
+      "selected_topic": "Video Gen&Edit",
+      "sources": [
+        "huggingface"
+      ],
+      "status": "accepted",
+      "title": "Dynamic Concepts Personalization from Single Videos",
       "updated": "2025-02-20"
     },
     "2502.14846": {
@@ -112239,6 +113483,39 @@
       "title": "VaViM and VaVAM: Autonomous Driving through Video Generative Modeling",
       "updated": "2025-02-21"
     },
+    "2502.15681": {
+      "abstract": "Sampling from diffusion models involves a slow iterative process that hinders\ntheir practical deployment, especially for interactive applications. To\naccelerate generation speed, recent approaches distill a multi-step diffusion\nmodel into a single-step student generator via variational score distillation,\nwhich matches the distribution of samples generated by the student to the\nteacher's distribution. However, these approaches use the reverse\nKullback-Leibler (KL) divergence for distribution matching which is known to be\nmode seeking. In this paper, we generalize the distribution matching approach\nusing a novel f-divergence minimization framework, termed f-distill, that\ncovers different divergences with different trade-offs in terms of mode\ncoverage and training variance. We derive the gradient of the f-divergence\nbetween the teacher and student distributions and show that it is expressed as\nthe product of their score differences and a weighting function determined by\ntheir density ratio. This weighting function naturally emphasizes samples with\nhigher density in the teacher distribution, when using a less mode-seeking\ndivergence. We observe that the popular variational score distillation approach\nusing the reverse-KL divergence is a special case within our framework.\nEmpirically, we demonstrate that alternative f-divergences, such as\nforward-KL and Jensen-Shannon divergences, outperform the current best\nvariational score distillation methods across image generation tasks. In\nparticular, when using Jensen-Shannon divergence, f-distill achieves current\nstate-of-the-art one-step generation performance on ImageNet64 and zero-shot\ntext-to-image generation on MS-COCO. Project page:\nhttps://research.nvidia.com/labs/genair/f-distill",
+      "archive_rows": {
+        "3D Gen&Recon": "|**2025-02-21**|**One-step Diffusion Models with f-Divergence Distribution Matching**|Yilun Xu et.al.|[2502.15681](https://arxiv.org/abs/2502.15681)|null|\n",
+        "Image Gen&Edit": "|**2025-02-21**|**One-step Diffusion Models with f-Divergence Distribution Matching**|Yilun Xu et.al.|[2502.15681](https://arxiv.org/abs/2502.15681)|null|\n"
+      },
+      "authors": "Yilun Xu et.al.",
+      "collected_at": "2026-11-11T16:37:59+00:00",
+      "decision_reason": "论文提出了一种基于f-散度分布匹配的一步扩散模型蒸馏方法（f-distill），旨在加速图像生成过程，并在ImageNet和MS-COCO等图像生成任务上取得了SOTA性能，属于图像生成方法贡献。",
+      "display_id": "2502.15681",
+      "hf_daily": {
+        "dates": [
+          "2025-02-24"
+        ],
+        "evidence_sha256": "6ca791c755f2dc339f4148eac2a042a8b12eb872b091422583e3771ddf85ae59",
+        "url": "https://huggingface.co/papers/2502.15681"
+      },
+      "id": "2502.15681",
+      "matched_topics": [
+        "3D Gen&Recon",
+        "Image Gen&Edit"
+      ],
+      "paper_url": "https://arxiv.org/abs/2502.15681",
+      "pdf_url": "https://arxiv.org/pdf/2502.15681.pdf",
+      "reviewed_at": "2026-11-11T16:37:59+00:00",
+      "selected_topic": "Image Gen&Edit",
+      "sources": [
+        "huggingface"
+      ],
+      "status": "accepted",
+      "title": "One-step Diffusion Models with f-Divergence Distribution Matching",
+      "updated": "2025-02-21"
+    },
     "2502.15869": {
       "abstract": "This thesis presents a framework that integrates state-of-the-art generative AI models for real-time creation of three-dimensional (3D) objects in augmented reality (AR) environments. The primary goal is to convert diverse inputs, such as images and speech, into accurate 3D models, enhancing user interaction and immersion. Key components include advanced object detection algorithms, user-friendly interaction techniques, and robust AI models like Shap-E for 3D generation. Leveraging Vision Language Models (VLMs) and Large Language Models (LLMs), the system captures spatial details from images and processes textual information to generate comprehensive 3D objects, seamlessly integrating virtual objects into real-world environments. The framework demonstrates applications across industries such as gaming, education, retail, and interior design. It allows players to create personalized in-game assets, customers to see products in their environments before purchase, and designers to convert real-world objects into 3D models for real-time visualization. A significant contribution is democratizing 3D model creation, making advanced AI tools accessible to a broader audience, fostering creativity and innovation. The framework addresses challenges like handling multilingual inputs, diverse visual data, and complex environments, improving object detection and model generation accuracy, as well as loading 3D models in AR space in real-time. In conclusion, this thesis integrates generative AI and AR for efficient 3D model generation, enhancing accessibility and paving the way for innovative applications and improved user interactions in AR environments.",
       "archive_rows": {
@@ -112289,6 +113566,13 @@
         "Video Generation": "|**2025-02-21**|**RIFLEx: A Free Lunch for Length Extrapolation in Video Diffusion Transformers**|Min Zhao et.al.|[2502.15894](http://arxiv.org/abs/2502.15894)|null|\n"
       },
       "decision_reason": "二次复核：Image Gen&Edit: 论文核心贡献是解决视频扩散模型在时间维度上的长度外推问题，虽然引言提到该方法可自然扩展到图像空间外推，但这仅作为副产品提及，并非主要研究目标或核心贡献，因此不匹配图像生成与编辑主题。; Video Gen&Edit: 论文针对视频扩散Transformer提出RIFLEx方法，通过调整位置编码中的固有频率来解决视频长度外推时的时间重复和运动减速问题，核心贡献直接服务于视频生成中的长视频合成与时间一致性，完全匹配视频生成与编辑主题。; 3D Gen&Recon: 论文专注于二维视频序列的时间维度外推，未涉及三维几何重建、三维资产生成或场景重建等任务，其方法和技术贡献均不指向三维生成或重建领域，因此与三维生成与重建主题无关。; World Model: 论文研究的是视频扩散模型在固定序列长度训练后的外推能力，旨在生成更长的视频内容，并未构建用于预测环境动态、交互世界或动作条件未来状态的世界模型，其核心机制不属于世界模型范畴。; Relighting: 论文内容完全围绕视频生成的时间长度外推展开，未涉及光照估计、反射率恢复、阴影生成或新光照条件下的外观编辑等任何与重光照相关的技术或任务，因此与重光照主题无关。; Depth Estimation: 论文未涉及单目、立体或多视图深度估计任务，其研究重点在于视频扩散模型的位置编码频率分析与长度外推优化，与深度预测、几何匹配或深度补全等深度估计核心任务无任何关联。",
+      "hf_daily": {
+        "dates": [
+          "2025-02-25"
+        ],
+        "evidence_sha256": "2cc63ab06cc48af58566fec92076ffb040843cc4b3d926b4759bea9cab2326e5",
+        "url": "https://huggingface.co/papers/2502.15894"
+      },
       "id": "2502.15894",
       "matched_topics": [
         "Video Gen&Edit"
@@ -112323,6 +113607,10 @@
       },
       "reviewed_at": "2026-09-14T20:46:12+00:00",
       "selected_topic": "Video Gen&Edit",
+      "sources": [
+        "arxiv",
+        "huggingface"
+      ],
       "status": "accepted",
       "title": "RIFLEx: A Free Lunch for Length Extrapolation in Video Diffusion Transformers",
       "updated": "2025-02-21"
@@ -112967,6 +114255,13 @@
         "Video Generation": "|**2025-02-24**|**VideoGrain: Modulating Space-Time Attention for Multi-grained Video Editing**|Xiangpeng Yang et.al.|[2502.17258](http://arxiv.org/abs/2502.17258)|null|\n"
       },
       "decision_reason": "二次复核：Image Gen&Edit: 论文核心贡献是提出VideoGrain方法，专门针对视频编辑任务中的多粒度控制问题，通过调节时空注意力机制实现视频内容的修改，而非图像生成或编辑。; Video Gen&Edit: 论文主要研究多粒度视频编辑，提出了一种零样本方法，通过调节扩散模型中的时空交叉注意力和自注意力机制，实现对视频内容的细粒度控制，属于视频编辑的核心技术贡献。; 3D Gen&Recon: 论文未涉及3D生成、重建或编辑，其方法基于2D视频帧的注意力机制调节，不涉及3D几何结构、网格、点云或神经辐射场等3D表示或重建技术。; World Model: 论文未构建学习环境动态、物理规律或交互式世界的生成模型，其核心是视频编辑中的注意力控制，不涉及世界模型的状态预测、动作条件生成或物理动力学模拟。; Relighting: 论文未涉及光照估计、传输、编辑或生成，其关注点是视频内容的语义和实例级编辑，不涉及反射率、阴影、环境光或新光照条件下的外观变化。; Depth Estimation: 论文未进行单目、立体或多视角深度估计，其方法基于文本提示和注意力机制进行视频编辑，不涉及深度图预测、几何匹配或深度补全等深度估计任务。",
+      "hf_daily": {
+        "dates": [
+          "2025-02-25"
+        ],
+        "evidence_sha256": "b1decdaee2d142e35898f8f299af00d1df24729682744d4237cbbcb9059f2fa9",
+        "url": "https://huggingface.co/papers/2502.17258"
+      },
       "id": "2502.17258",
       "matched_topics": [
         "Video Gen&Edit"
@@ -113001,6 +114296,10 @@
       },
       "reviewed_at": "2026-09-14T20:46:12+00:00",
       "selected_topic": "Video Gen&Edit",
+      "sources": [
+        "arxiv",
+        "huggingface"
+      ],
       "status": "accepted",
       "title": "VideoGrain: Modulating Space-Time Attention for Multi-grained Video Editing",
       "updated": "2025-02-24"
@@ -113079,6 +114378,13 @@
         "Image Generation": "|**2025-02-24**|**KV-Edit: Training-Free Image Editing for Precise Background Preservation**|Tianrui Zhu et.al.|[2502.17363](http://arxiv.org/abs/2502.17363)|null|\n"
       },
       "decision_reason": "二次复核：Image Gen&Edit: 论文核心贡献是提出KV-Edit，一种基于DiT架构的免训练图像编辑方法，通过缓存背景KV值实现精确背景保留，直接解决图像编辑中的背景一致性难题，完全符合图像生成与编辑主题。; Video Gen&Edit: 论文专注于静态图像的编辑任务，利用DiT模型处理单帧图像的背景保留问题，未涉及视频序列的时间建模、视频生成或视频编辑技术，与视频生成与编辑主题无关。; 3D Gen&Recon: 论文方法基于2D图像的注意力机制和KV缓存，不涉及3D几何重建、3D资产生成、多视图合成或神经辐射场等三维视觉技术，核心贡献与3D生成与重建主题无关联。; World Model: 论文旨在解决图像编辑中的局部一致性保持问题，并非构建可交互的环境模型、预测物理动态或学习动作条件未来状态，不符合世界模型关于环境动态预测的核心定义。; Relighting: 论文关注的是图像内容编辑时的背景像素一致性，并未涉及光照估计、反射率分解、阴影生成或在新光照条件下渲染等重光照技术，与重光照主题不相关。; Depth Estimation: 论文未涉及深度图预测、单目或立体深度估计、几何匹配或深度补全等任务，其核心机制是图像编辑中的注意力控制，与深度估计主题完全无关。",
+      "hf_daily": {
+        "dates": [
+          "2025-02-26"
+        ],
+        "evidence_sha256": "348b8e5874990f2702760f8914ddfbc9732840607e2e8fca1691cce6dc2acd77",
+        "url": "https://huggingface.co/papers/2502.17363"
+      },
       "id": "2502.17363",
       "matched_topics": [
         "Image Gen&Edit"
@@ -113113,6 +114419,10 @@
       },
       "reviewed_at": "2026-09-14T20:46:12+00:00",
       "selected_topic": "Image Gen&Edit",
+      "sources": [
+        "arxiv",
+        "huggingface"
+      ],
       "status": "accepted",
       "title": "KV-Edit: Training-Free Image Editing for Precise Background Preservation",
       "updated": "2025-02-24"
@@ -113167,6 +114477,13 @@
         "Video Generation": "|**2025-02-24**|**X-Dancer: Expressive Music to Human Dance Video Generation**|Zeyuan Chen et.al.|[2502.17414](http://arxiv.org/abs/2502.17414)|null|\n"
       },
       "decision_reason": "二次复核：Image Gen&Edit: 论文核心贡献是生成动态舞蹈视频，虽然使用了图像作为参考条件，但其主要输出和评估指标均针对视频序列的时序一致性与动态质量，而非静态图像的生成或编辑。; Video Gen&Edit: 论文提出了一种由音乐驱动的单图动画生成框架，核心目标是生成连贯、逼真且与音乐同步的人类舞蹈视频，完全符合视频生成与编辑主题中关于视频合成的定义。; 3D Gen&Recon: 论文明确指出其方法建模的是2D人体姿态而非3D姿态，旨在解决3D数据稀缺问题，其输出为2D视频帧，不涉及3D几何重建、网格生成或3D场景理解。; World Model: 该模型专注于特定任务（音乐驱动舞蹈）的视频生成，并未构建通用的环境动力学模型或交互式世界状态预测，不具备世界模型所要求的通用物理规律或未来状态预测能力。; Relighting: 论文内容完全围绕人体运动生成和视频合成展开，未涉及光照估计、反射率分解、阴影生成或任何与重光照相关的技术贡献或实验评估。; Depth Estimation: 论文未将深度估计作为核心任务或关键技术组件，虽然视频生成可能隐含几何信息，但摘要和引言中均未提及深度预测、单目深度估计或深度补全等具体方法。",
+      "hf_daily": {
+        "dates": [
+          "2025-02-25"
+        ],
+        "evidence_sha256": "47870362ad84bdc61989626a6ff779b8fc50ccbe6976594419e1281fd6e8de57",
+        "url": "https://huggingface.co/papers/2502.17414"
+      },
       "id": "2502.17414",
       "matched_topics": [
         "Video Gen&Edit"
@@ -113201,6 +114518,10 @@
       },
       "reviewed_at": "2026-09-14T20:46:12+00:00",
       "selected_topic": "Video Gen&Edit",
+      "sources": [
+        "arxiv",
+        "huggingface"
+      ],
       "status": "accepted",
       "title": "X-Dancer: Expressive Music to Human Dance Video Generation",
       "updated": "2025-02-24"
@@ -113425,12 +114746,50 @@
       "title": "Bayesian Optimization for Controlled Image Editing via LLMs",
       "updated": "2025-02-25"
     },
+    "2502.18197": {
+      "abstract": "Consistency Training (CT) has recently emerged as a promising alternative to\ndiffusion models, achieving competitive performance in image generation tasks.\nHowever, non-distillation consistency training often suffers from high variance\nand instability, and analyzing and improving its training dynamics is an active\narea of research. In this work, we propose a novel CT training approach based\non the Flow Matching framework. Our main contribution is a trained\nnoise-coupling scheme inspired by the architecture of Variational Autoencoders\n(VAE). By training a data-dependent noise emission model implemented as an\nencoder architecture, our method can indirectly learn the geometry of the\nnoise-to-data mapping, which is instead fixed by the choice of the forward\nprocess in classical CT. Empirical results across diverse image datasets show\nsignificant generative improvements, with our model outperforming baselines and\nachieving the state-of-the-art (SoTA) non-distillation CT FID on CIFAR-10, and\nattaining FID on par with SoTA on ImageNet at 64 times 64 resolution in\n2-step generation. Our code is available at https://github.com/sony/vct .",
+      "archive_rows": {
+        "Image Gen&Edit": "|**2025-02-25**|**Training Consistency Models with Variational Noise Coupling**|Gianluigi Silvestri et.al.|[2502.18197](https://arxiv.org/abs/2502.18197)|null|\n"
+      },
+      "authors": "Gianluigi Silvestri et.al.",
+      "collected_at": "2026-11-11T16:37:59+00:00",
+      "decision_reason": "论文提出了一种基于Flow Matching框架的一致性模型（Consistency Models）训练方法，旨在改进图像生成任务中的训练动态和生成质量，属于图像生成方法贡献。",
+      "display_id": "2502.18197",
+      "hf_daily": {
+        "dates": [
+          "2025-02-28"
+        ],
+        "evidence_sha256": "f23af28576980981e7f500f8880f07bb108fba9cb61ef77f7bd813081ca9df46",
+        "url": "https://huggingface.co/papers/2502.18197"
+      },
+      "id": "2502.18197",
+      "matched_topics": [
+        "Image Gen&Edit"
+      ],
+      "paper_url": "https://arxiv.org/abs/2502.18197",
+      "pdf_url": "https://arxiv.org/pdf/2502.18197.pdf",
+      "reviewed_at": "2026-11-11T16:37:59+00:00",
+      "selected_topic": "Image Gen&Edit",
+      "sources": [
+        "huggingface"
+      ],
+      "status": "accepted",
+      "title": "Training Consistency Models with Variational Noise Coupling",
+      "updated": "2025-02-25"
+    },
     "2502.18302": {
       "abstract": "In this paper, we introduce LDGen, a novel method for integrating large language models (LLMs) into existing text-to-image diffusion models while minimizing computational demands. Traditional text encoders, such as CLIP and T5, exhibit limitations in multilingual processing, hindering image generation across diverse languages. We address these challenges by leveraging the advanced capabilities of LLMs. Our approach employs a language representation strategy that applies hierarchical caption optimization and human instruction techniques to derive precise semantic information,. Subsequently, we incorporate a lightweight adapter and a cross-modal refiner to facilitate efficient feature alignment and interaction between LLMs and image features. LDGen reduces training time and enables zero-shot multilingual image generation. Experimental results indicate that our method surpasses baseline models in both prompt adherence and image aesthetic quality, while seamlessly supporting multiple languages. Project page: https://zrealli.github.io/LDGen.",
       "archive_rows": {
         "Image Generation": "|**2025-02-25**|**LDGen: Enhancing Text-to-Image Synthesis via Large Language Model-Driven Language Representation**|Pengzhi Li et.al.|[2502.18302](http://arxiv.org/abs/2502.18302)|null|\n"
       },
       "decision_reason": "二次复核：Image Gen&Edit: 论文提出LDGen方法，核心贡献是改进文本到图像生成模型，通过集成大语言模型增强语义理解，属于图像生成领域的核心方法创新。; Video Gen&Edit: 论文专注于静态图像的文本到图像生成，未涉及视频合成、编辑或时序建模，与视频生成主题无关。; 3D Gen&Recon: 论文处理的是二维图像生成任务，未涉及三维物体、场景的生成、重建或编辑，与三维生成重建主题无关。; World Model: 论文旨在提升图像生成的语义对齐能力，并非构建预测环境动态或交互世界的生成式模型，不属于世界模型范畴。; Relighting: 论文未涉及光照估计、传输或编辑，其核心是文本条件控制下的图像内容生成，与重光照主题完全无关。; Depth Estimation: 论文不涉及深度图预测、单目或多目深度估计，其输出为RGB图像，与深度估计任务无关联。",
+      "hf_daily": {
+        "dates": [
+          "2025-02-26"
+        ],
+        "evidence_sha256": "2616eb1b1a42e5cef347e6d150f586ccf6e940d0f10ccd60c422426ec0eab3ac",
+        "url": "https://huggingface.co/papers/2502.18302"
+      },
       "id": "2502.18302",
       "matched_topics": [
         "Image Gen&Edit"
@@ -113465,6 +114824,10 @@
       },
       "reviewed_at": "2026-09-14T20:46:12+00:00",
       "selected_topic": "Image Gen&Edit",
+      "sources": [
+        "arxiv",
+        "huggingface"
+      ],
       "status": "accepted",
       "title": "LDGen: Enhancing Text-to-Image Synthesis via Large Language Model-Driven Language Representation",
       "updated": "2025-02-25"
@@ -113475,6 +114838,13 @@
         "Image Generation": "|**2025-02-25**|**ART: Anonymous Region Transformer for Variable Multi-Layer Transparent Image Generation**|Yifan Pu et.al.|[2502.18364](http://arxiv.org/abs/2502.18364)|null|\n"
       },
       "decision_reason": "二次复核：Image Gen&Edit: 论文核心贡献是提出匿名区域Transformer，用于基于文本和布局直接生成可变多层透明图像，属于图像生成与编辑范畴。; Video Gen&Edit: 论文专注于静态多层透明图像的生成，未涉及视频合成、时序建模或视频编辑，与视频生成主题无关。; 3D Gen&Recon: 论文处理的是二维图像层的生成与透明通道控制，不涉及三维几何重建、网格生成或三维场景合成。; World Model: 论文旨在生成静态图像内容，未构建可交互的环境模型、物理动力学预测或动作条件未来状态预测。; Relighting: 论文关注图像层的布局与内容生成，未涉及光照估计、反射率恢复或新光照条件下的图像重光照任务。; Depth Estimation: 论文未进行深度估计、单目深度预测或几何深度恢复，其核心任务是图像内容的分层生成。",
+      "hf_daily": {
+        "dates": [
+          "2025-02-26"
+        ],
+        "evidence_sha256": "b4d238fd6820b8f27324e47a064681b614830ae15776cd3afe860287be3a49f0",
+        "url": "https://huggingface.co/papers/2502.18364"
+      },
       "id": "2502.18364",
       "matched_topics": [
         "Image Gen&Edit"
@@ -113509,6 +114879,10 @@
       },
       "reviewed_at": "2026-09-14T20:46:12+00:00",
       "selected_topic": "Image Gen&Edit",
+      "sources": [
+        "arxiv",
+        "huggingface"
+      ],
       "status": "accepted",
       "title": "ART: Anonymous Region Transformer for Variable Multi-Layer Transparent Image Generation",
       "updated": "2025-02-25"
@@ -113901,6 +115275,13 @@
         "Neural Rendering": "|**2025-02-26**|**Building Interactable Replicas of Complex Articulated Objects via Gaussian Splatting**|Yu Liu et.al.|[2502.19459](http://arxiv.org/abs/2502.19459)|**[link](https://github.com/YuLiu-LY/ArtGS)**|\n"
       },
       "decision_reason": "二次复核：Image Gen&Edit: 论文核心贡献是构建可交互的铰接物体3D副本，主要解决多状态下的几何重建与运动参数估计问题，并非图像合成、编辑或生成任务，与图像生成主题无关。; Video Gen&Edit: 虽然涉及多状态物体，但目标是重建3D模型和铰接参数，而非视频合成、编辑或生成，不涉及视频生成或编辑的核心技术贡献。; 3D Gen&Recon: 论文提出ArtGS方法，利用3D高斯泼溅表示复杂铰接物体，通过规范高斯和蒙皮启发的动态建模模块，实现多状态下的部件网格重建和关节参数估计，属于3D重建核心任务。; World Model: 论文关注特定物体的几何与运动重建，旨在创建数字副本，而非学习环境动态、物理规律或预测未来状态的通用世界模型，不符合世界模型定义。; Relighting: 论文未涉及光照估计、传输、编辑或新光照下的外观生成，核心在于几何结构和铰接运动的重建，与重光照主题无直接关联。; Depth Estimation: 论文主要贡献是3D高斯表示下的物体重建和铰接参数学习，虽然隐含几何信息，但并非以单目、立体或深度估计为主要任务或核心贡献。",
+      "hf_daily": {
+        "dates": [
+          "2025-02-28"
+        ],
+        "evidence_sha256": "ceb28ecfc1ca212f430e76891b30c32cb2ff75b2d14dbc4a29468c9461d44466",
+        "url": "https://huggingface.co/papers/2502.19459"
+      },
       "id": "2502.19459",
       "matched_topics": [
         "3D Gen&Recon"
@@ -113935,6 +115316,10 @@
       },
       "reviewed_at": "2026-09-14T20:44:38+00:00",
       "selected_topic": "3D Gen&Recon",
+      "sources": [
+        "arxiv",
+        "huggingface"
+      ],
       "status": "accepted",
       "title": "Building Interactable Replicas of Complex Articulated Objects via Gaussian Splatting",
       "updated": "2025-02-26"
@@ -114435,6 +115820,13 @@
         "Image Generation": "|**2025-02-27**|**Multimodal Representation Alignment for Image Generation: Text-Image Interleaved Control Is Easier Than You Think**|Liang Chen et.al.|[2502.20172](http://arxiv.org/abs/2502.20172)|null|\n"
       },
       "decision_reason": "二次复核：Image Gen&Edit: 论文核心贡献是提出 Dream Engine 框架，利用多模态大模型作为编码器替换扩散模型中的文本编码器，实现任意文本-图像交错控制下的图像生成，属于典型的文本到图像生成与可控生成方法。; Video Gen&Edit: 论文摘要和引言均明确聚焦于静态图像的生成与控制，未涉及视频合成、图像到视频转换或视频编辑等任务，核心贡献与视频生成领域无关。; 3D Gen&Recon: 论文主要研究二维图像空间的生成与控制，虽然提及深度图作为条件之一，但核心目标是图像生成质量与控制能力，并未提出三维重建、三维生成或几何结构恢复的方法。; World Model: 论文关注的是基于扩散模型的图像生成条件控制，并未构建用于预测环境动态、物理规律或交互未来状态的世界模型，不符合世界模型的定义。; Relighting: 论文未涉及光照估计、反射率恢复或新光照条件下的图像重渲染，其核心贡献在于多模态条件对齐与图像生成，与重光照任务无直接关联。; Depth Estimation: 虽然论文在条件控制中提到了深度图，但这仅作为外部输入条件之一，论文并未提出新的深度估计算法或方法，核心贡献不在深度预测领域。",
+      "hf_daily": {
+        "dates": [
+          "2025-02-28"
+        ],
+        "evidence_sha256": "6f32ffa1538f4509d9d657c46772703aa7239b6f7e482ebbb61b93124c488178",
+        "url": "https://huggingface.co/papers/2502.20172"
+      },
       "id": "2502.20172",
       "matched_topics": [
         "Image Gen&Edit"
@@ -114469,6 +115861,10 @@
       },
       "reviewed_at": "2026-09-14T20:44:38+00:00",
       "selected_topic": "Image Gen&Edit",
+      "sources": [
+        "arxiv",
+        "huggingface"
+      ],
       "status": "accepted",
       "title": "Multimodal Representation Alignment for Image Generation: Text-Image Interleaved Control Is Easier Than You Think",
       "updated": "2025-02-27"
@@ -114479,6 +115875,13 @@
         "Video Generation": "|**2025-02-27**|**Mobius: Text to Seamless Looping Video Generation via Latent Shift**|Xiuli Bi et.al.|[2502.20307](http://arxiv.org/abs/2502.20307)|**[link](https://github.com/yisuitt/mobius)**|\n"
       },
       "decision_reason": "二次复核：Image Gen&Edit: 论文核心贡献是生成无缝循环视频，而非静态图像。虽然视频由帧组成，但其主要技术挑战在于时间一致性和循环结构，属于视频生成领域，不符合图像生成与编辑的主题定义。; Video Gen&Edit: 论文提出Mobius方法，利用预训练视频扩散模型通过潜空间移位策略直接从文本生成无缝循环视频。这属于视频合成与生成的核心范畴，且明确针对视频的时间动态特性进行优化，完全符合视频生成与编辑的主题。; 3D Gen&Recon: 论文未涉及3D几何重建、网格生成或3D场景表示。虽然视频生成可能隐含3D一致性，但方法核心在于2D像素或潜空间的时间序列建模，没有显式的3D结构输出或重建贡献，因此不属于3D生成与重建主题。; World Model: 论文主要关注基于文本的视频生成，而非构建可交互的环境动力学模型或预测未来状态的世界模型。虽然使用了扩散模型，但其目标是视觉内容的生成而非物理动力学或交互世界的学习，不符合世界模型的定义。; Relighting: 论文未涉及光照估计、反射率恢复或新光照条件下的渲染。其核心任务是生成循环视频，不涉及对场景光照条件的编辑或控制，因此与重光照主题完全无关。; Depth Estimation: 论文未进行深度估计、单目深度预测或立体匹配。其方法专注于视频帧的生成与时间一致性，没有输出深度图或进行几何深度推断，因此不属于深度估计主题。",
+      "hf_daily": {
+        "dates": [
+          "2025-02-28"
+        ],
+        "evidence_sha256": "53370e8ceeefaf771fb51f99f01fef218e426c3c4137a0a9c4c89509fbc60886",
+        "url": "https://huggingface.co/papers/2502.20307"
+      },
       "id": "2502.20307",
       "matched_topics": [
         "Video Gen&Edit"
@@ -114513,6 +115916,10 @@
       },
       "reviewed_at": "2026-09-14T20:44:38+00:00",
       "selected_topic": "Video Gen&Edit",
+      "sources": [
+        "arxiv",
+        "huggingface"
+      ],
       "status": "accepted",
       "title": "Mobius: Text to Seamless Looping Video Generation via Latent Shift",
       "updated": "2025-02-27"
@@ -114523,6 +115930,13 @@
         "Image Generation": "|**2025-02-27**|**UniTok: A Unified Tokenizer for Visual Generation and Understanding**|Chuofan Ma et.al.|[2502.20321](http://arxiv.org/abs/2502.20321)|null|\n"
       },
       "decision_reason": "二次复核：Image Gen&Edit: 论文核心贡献是提出UniTok统一视觉分词器，旨在解决图像生成与理解模型中分词器不统一的问题。其方法通过多码本量化机制提升离散token的表示能力，显著改善了自回归图像生成的重建质量（rFID 0.38）和语义理解能力，并支持无分类器引导的图像生成，属于图像生成领域的核心方法创新。; Video Gen&Edit: 论文摘要和引言均明确聚焦于图像（Image）的生成与理解，实验基准为ImageNet，未提及任何视频生成、视频编辑或时序建模的相关方法、实验或贡献。其核心贡献在于静态图像的视觉分词器设计，不涉及视频领域的技术挑战或解决方案。; 3D Gen&Recon: 论文主要关注2D图像的视觉分词器设计，用于统一图像生成与理解任务。虽然分词器可能间接用于3D生成，但论文本身并未提出任何3D生成、重建、NeRF、高斯泼溅或3D几何表示的方法，也没有在3D任务上进行评估或展示3D相关的技术贡献。; World Model: 论文核心是视觉分词器（Tokenizer）的设计，旨在优化离散表示以服务于生成和理解模型。它不涉及环境动态预测、交互式世界模拟、动作条件未来状态预测或物理动力学建模，因此不属于世界模型的研究范畴，缺乏世界模型定义中的核心要素。; Relighting: 论文内容完全围绕视觉分词器的量化机制和生成/理解性能展开，未涉及光照估计、反射率分解、阴影生成或新光照条件下的外观渲染等重光照（Relighting）相关技术。摘要和引言中没有任何关于光照控制或物理光照模型的内容。; Depth Estimation: 论文专注于图像生成与理解的统一分词器，未涉及单目、立体或多视图深度估计、深度补全或深度预测任务。其评估指标为FID和零样本准确率，与深度估计的常用指标（如绝对相对误差）无关，且未展示任何深度相关的实验结果。",
+      "hf_daily": {
+        "dates": [
+          "2025-02-28"
+        ],
+        "evidence_sha256": "643e26a75e03ca320755bb089edbaa6d1edd5f5f8b2c5d5992ba73c39cc122b9",
+        "url": "https://huggingface.co/papers/2502.20321"
+      },
       "id": "2502.20321",
       "matched_topics": [
         "Image Gen&Edit"
@@ -114557,6 +115971,10 @@
       },
       "reviewed_at": "2026-09-14T20:44:38+00:00",
       "selected_topic": "Image Gen&Edit",
+      "sources": [
+        "arxiv",
+        "huggingface"
+      ],
       "status": "accepted",
       "title": "UniTok: A Unified Tokenizer for Visual Generation and Understanding",
       "updated": "2025-02-27"
@@ -114655,6 +116073,13 @@
         "Neural Rendering": "|**2025-02-27**|**Efficient Gaussian Splatting for Monocular Dynamic Scene Rendering via Sparse Time-Variant Attribute Modeling**|Hanyang Kong et.al.|[2502.20378](http://arxiv.org/abs/2502.20378)|null|\n"
       },
       "decision_reason": "二次复核：Image Gen&Edit: 论文核心贡献是动态场景的高效渲染与表示，而非图像生成或编辑方法，不涉及文本到图像或图像编辑任务。; Video Gen&Edit: 虽然处理视频输入，但目标是基于3D表示的新视角合成与渲染，而非视频生成、编辑或时序预测模型。; 3D Gen&Recon: 论文提出EDGS方法，利用稀疏时变属性建模动态场景，属于3D场景重建、神经渲染及新视角合成范畴，符合主题定义。; World Model: 论文关注特定场景的几何与外观重建渲染，未涉及环境动力学预测、交互式世界模型或动作条件未来状态生成。; Relighting: 论文未涉及光照估计、反射率分解或新光照条件下的外观生成，核心在于动态场景的高效表示与渲染速度优化。; Depth Estimation: 论文主要任务是新视角合成与渲染，未将深度估计作为核心贡献或主要评估指标，不涉及单目或立体深度预测方法。",
+      "hf_daily": {
+        "dates": [
+          "2025-02-28"
+        ],
+        "evidence_sha256": "fdd6070553f277ccaf0c939a1e1db8f8b574d20b609a072e46b0c15e74d6ee7d",
+        "url": "https://huggingface.co/papers/2502.20378"
+      },
       "id": "2502.20378",
       "matched_topics": [
         "3D Gen&Recon"
@@ -114689,6 +116114,10 @@
       },
       "reviewed_at": "2026-09-14T20:44:38+00:00",
       "selected_topic": "3D Gen&Recon",
+      "sources": [
+        "arxiv",
+        "huggingface"
+      ],
       "status": "accepted",
       "title": "Efficient Gaussian Splatting for Monocular Dynamic Scene Rendering via Sparse Time-Variant Attribute Modeling",
       "updated": "2025-02-27"
@@ -114723,6 +116152,13 @@
         "Image Generation": "|**2025-02-27**|**Beyond Next-Token: Next-X Prediction for Autoregressive Visual Generation**|Sucheng Ren et.al.|[2502.20388](http://arxiv.org/abs/2502.20388)|null|\n"
       },
       "decision_reason": "二次复核：Image Gen&Edit: 论文提出xAR框架，通过泛化自回归预测单元并引入噪声上下文学习，显著提升了ImageNet图像生成的质量与效率，核心贡献直接属于图像生成方法。; Video Gen&Edit: 论文主要关注静态图像的自回归生成，实验基准为ImageNet-256，未涉及视频序列建模、时序一致性或视频编辑任务，核心贡献与视频生成无关。; 3D Gen&Recon: 论文针对2D图像结构进行生成，未涉及3D几何重建、多视图合成或3D资产生成，其方法局限于平面图像像素或token序列，不属于3D生成与重建范畴。; World Model: 论文旨在解决图像生成的曝光偏差与token定义问题，并非构建可交互的环境动态模型或预测未来状态，缺乏世界模型所需的动作条件或物理动态建模。; Relighting: 论文未涉及光照估计、反射率分解或新光照条件下的图像重渲染，其核心是通用图像生成框架，与重光照任务的技术目标和方法完全无关。; Depth Estimation: 论文不涉及单目、立体或多视图深度估计，未输出深度图或视差，其目标是生成高质量图像而非恢复几何深度信息，与深度估计任务无关联。",
+      "hf_daily": {
+        "dates": [
+          "2025-02-28"
+        ],
+        "evidence_sha256": "050fb56d215ef43d1b7b527881a0c874d21d25114ea71f0b8d31cf97287cbedf",
+        "url": "https://huggingface.co/papers/2502.20388"
+      },
       "id": "2502.20388",
       "matched_topics": [
         "Image Gen&Edit"
@@ -114757,6 +116193,10 @@
       },
       "reviewed_at": "2026-09-14T20:44:38+00:00",
       "selected_topic": "Image Gen&Edit",
+      "sources": [
+        "arxiv",
+        "huggingface"
+      ],
       "status": "accepted",
       "title": "Beyond Next-Token: Next-X Prediction for Autoregressive Visual Generation",
       "updated": "2025-02-27"
@@ -749931,6 +751371,6 @@
       "updated": "2026-11-10"
     }
   },
-  "updated_at": "2026-11-11T16:22:48+00:00",
+  "updated_at": "2026-11-11T16:38:06+00:00",
   "version": 1
 }
