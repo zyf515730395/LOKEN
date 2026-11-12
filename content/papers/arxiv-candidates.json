@@ -1,11 +1,11 @@
 {
   "collection_cursors": {
-    "3D Gen&Recon": "2026-11-11T11:32:31+00:00",
+    "3D Gen&Recon": "2026-11-12T04:41:45+00:00",
     "Depth Estimation": "2026-11-09T03:25:05+00:00",
-    "Image Gen&Edit": "2026-11-11T11:32:31+00:00",
-    "Relighting": "2026-11-11T11:32:31+00:00",
-    "Video Gen&Edit": "2026-11-11T11:32:31+00:00",
-    "World Model": "2026-11-11T11:32:31+00:00"
+    "Image Gen&Edit": "2026-11-12T04:41:45+00:00",
+    "Relighting": "2026-11-12T04:41:45+00:00",
+    "Video Gen&Edit": "2026-11-12T04:41:45+00:00",
+    "World Model": "2026-11-12T04:41:45+00:00"
   },
   "huggingface_backfill": {
     "checked_at": "2026-11-04T07:13:27.253079+00:00",
@@ -1867,8 +1867,8 @@
     "status": "collected"
   },
   "huggingface_collection": {
-    "checked_at": "2026-11-11T11:32:31+00:00",
-    "completed_through": "2026-11-11",
+    "checked_at": "2026-11-12T04:41:45+00:00",
+    "completed_through": "2026-11-12",
     "failed_dates": [],
     "status": "complete"
   },
@@ -721768,6 +721768,37 @@
       "title": "WorldBridge: Bridging Video and Action for Task Generalization in World Action Models",
       "updated": "2026-10-29"
     },
+    "2610.40754": {
+      "abstract": "While frontier coding agents can generate high-quality 3D scenes and articulated assets, they struggle to create coherent long-horizon animations. When equipped with general-purpose harnesses, they frequently produce physically implausible outputs, generating objects that interpenetrate, lack physical support, or move unnaturally. Such bare agents struggle to repair these errors because they default to scripting the full animation in one pass, making it difficult to verify their work and disentangle complex spatiotemporal constraints. Drawing on the practice of human animators, we introduce DyCraft, a system for animated 3D scene generation that breaks animation into steps that coding agents can more reliably solve. DyCraft first expands the user's prompt into a detailed plan and builds a static scene. It then creates a 3D storyboard of key animation poses, where each frame is a static 3D scene that the agent can build and debug in isolation. Storyboarding decomposes the problem into pairs of verified start and end states, allowing the agent to author local motion between them with a collection of motion authoring tools. We evaluate DyCraft on 24 long-horizon, multi-shot animation tasks covering humanoid robots, human and animal characters, and physical mechanisms. Compared with a native GPT-6 agent in Codex and prior agentic baselines, DyCraft substantially reduces physical violations and generates higher-quality animated 3D scenes that are more often preferred by human raters.",
+      "archive_rows": {
+        "3D Gen&Recon": "|**2026-10-29**|**DyCraft: An Agentic System for Long-Horizon 4D Scene Generation**|Jeff Tan et.al.|[2610.40754](https://arxiv.org/abs/2610.40754)|null|\n"
+      },
+      "authors": "Jeff Tan et.al.",
+      "collected_at": "2026-11-12T04:41:50+00:00",
+      "decision_reason": null,
+      "display_id": "2610.40754",
+      "hf_daily": {
+        "dates": [
+          "2026-11-11"
+        ],
+        "evidence_sha256": "a61b0aa0603a17fa8a62f1c5005dcaf22ea2f8e9218db6e516700a10ecc83443",
+        "url": "https://huggingface.co/papers/2610.40754"
+      },
+      "id": "2610.40754",
+      "matched_topics": [
+        "3D Gen&Recon"
+      ],
+      "paper_url": "https://arxiv.org/abs/2610.40754",
+      "pdf_url": "https://arxiv.org/pdf/2610.40754.pdf",
+      "reviewed_at": null,
+      "selected_topic": null,
+      "sources": [
+        "huggingface"
+      ],
+      "status": "pending",
+      "title": "DyCraft: An Agentic System for Long-Horizon 4D Scene Generation",
+      "updated": "2026-10-29"
+    },
     "2610.41564": {
       "abstract": "Language agents increasingly tackle long-horizon tasks in interactive environments, where actions often depend on latent preconditions. The core difficulty is not trajectory length but recovery: when a prerequisite is missing or an earlier decomposition fails, trying another plausible action rarely helps. ReAct and later reflection or adaptive-planning methods support local correction, but express recovery as free-form text, with no explicit control state linking the terminal goal, the active goal, and the failure source. We introduce the Verify--Backtrack Loop (VBL), a training-free extension of ReAct that turns precondition discovery and failure diagnosis into structured planning-state updates. VBL maintains the task decomposition as a bounded goal stack and, on goal activation, execution failure, or material state change, jointly verifies two horizons---whether the active goal contributes to the terminal goal and whether it is feasible in the current state. These dual-horizon judgments, combined with typed failure attribution, trigger explicit operations---Push, Pop, retry, or BacktrackTo the parent. We evaluate VBL with Qwen3.5-9B, GPT-4o, and DeepSeek-V3.2 on AppWorld, ALFWorld, and ScienceWorld. VBL improves over ReAct and reflection-based control on every backbone--benchmark pair. On the challenging AppWorld setting, it improves task success by up to 22.07 percentage points over ReAct. Ablations show that removing either verification or diagnosis degrades performance, in several settings below ReAct, confirming that the two mechanisms are complementary. These results show that reliable long-horizon interaction benefits from revising the planning state, not merely the next action.",
       "archive_rows": {
@@ -751289,6 +751320,37 @@
       "title": "MotionGraphicsBench: Evaluating Motion Graphics Generation with Programmatic Verification",
       "updated": "2026-11-07"
     },
+    "2611.10649": {
+      "abstract": "Weight-activation quantization can reduce the memory and compute cost of neural-network inference, but recent methods often require expensive optimization and architecture-specific propagation of basis transforms across layers. We introduce MACaQ, an MXFP4 W4A4 post-training quantization method that treats every linear layer independently. MACaQ applies a per-channel scale and a block-Hadamard transform online to each layer's activations, while absorbing the corresponding inverse transforms into its weights. Retaining these transforms online avoids cross-layer dependencies and enables a simple streaming implementation of the quantization process, in which only one layer must reside in memory at a time. To improve over round-to-nearest quantization, we introduce Flip-Refinement, a Hessian-aware coordinate-descent procedure that greedily moves individual FP4 codes to adjacent representable values. Despite executing the activation transforms at inference time, MACaQ adds only 2.3% end-to-end overhead over pure MXFP4 on Qwen3-32B in vLLM. MACaQ reaches lower perplexity than DuQuant++ and MR-GPTQ, and already matches their best perplexity on Llama-3-8B in 11 times less quantization time. We further apply MACaQ without architecture-specific modifications to an image diffusion model, illustrating the generality of its layer-local design and show quantization of a 122B parameter model in 64 minutes, using only 32.5GB GPU RAM.",
+      "archive_rows": {
+        "Image Gen&Edit": "|**2026-11-07**|**MACaQ: Fast, Model Agnostic Calibrated Quantization for Low-Precision Weights and Activations**|Lorenz K. Muller et.al.|[2611.10649](https://arxiv.org/abs/2611.10649)|null|\n"
+      },
+      "authors": "Lorenz K. Muller et.al.",
+      "collected_at": "2026-11-12T04:41:50+00:00",
+      "decision_reason": null,
+      "display_id": "2611.10649",
+      "hf_daily": {
+        "dates": [
+          "2026-11-11"
+        ],
+        "evidence_sha256": "8d62f3a74b71caa9b3286e94c5b43a4c3f91207664754c59fcf22fa33d19ff93",
+        "url": "https://huggingface.co/papers/2611.10649"
+      },
+      "id": "2611.10649",
+      "matched_topics": [
+        "Image Gen&Edit"
+      ],
+      "paper_url": "https://arxiv.org/abs/2611.10649",
+      "pdf_url": "https://arxiv.org/pdf/2611.10649.pdf",
+      "reviewed_at": null,
+      "selected_topic": null,
+      "sources": [
+        "huggingface"
+      ],
+      "status": "pending",
+      "title": "MACaQ: Fast, Model Agnostic Calibrated Quantization for Low-Precision Weights and Activations",
+      "updated": "2026-11-07"
+    },
     "2611.10688": {
       "abstract": "Selecting a Federated Learning (FL) framework requires understanding the resource demands of its training and evaluation workflow. This work compares Flower, NVIDIA FLARE, and FedBioMed using two-dimensional MedNIST classification with ResNet-10 in a containerized, single-host environment. Following a dated review of repository activity and documented medical applications, we evaluated nine configurations per framework, with three random seeds, for a total of 81 executions. The configurations varied federation size, communication rounds, and batch size. We monitored execution time, CPU and RAM consumption, host-level GPU utilization, server network traffic rates, and model accuracy at the end of each execution. The implementations shared nominal learning settings while retaining differences in data splitting and federated evaluation. Configuration-blocked non-parametric analysis identified differences in execution time, client and server memory, GPU utilization, and network traffic rates. NVIDIA FLARE exhibited the lowest server-memory consumption and the highest host-level GPU utilization, Flower exhibited the highest average server network traffic rate, and FedBioMed required more client memory and longer execution time. No statistically significant difference in final accuracy was detected within the evaluated short training schedules; this does not establish convergence or equivalent predictive performance. The results characterize the configured workflows under shared hardware resources. They provide a concrete case study of system behavior, with conclusions bounded by workflow asymmetries, local networking, and the lightweight MedNIST workload.",
       "archive_rows": {
@@ -756311,6 +756373,14 @@
       "authors": "Zhimin Liao et.al.",
       "collected_at": "2026-11-10T05:03:30+00:00",
       "decision_reason": null,
+      "display_id": "2611.11912",
+      "hf_daily": {
+        "dates": [
+          "2026-11-11"
+        ],
+        "evidence_sha256": "128dd64a4c3d61b388a97fe0f518818145ee4cd05c81b2dcdad7b592e954ed4c",
+        "url": "https://huggingface.co/papers/2611.11912"
+      },
       "id": "2611.11912",
       "matched_topics": [
         "Image Gen&Edit",
@@ -756321,7 +756391,8 @@
       "reviewed_at": null,
       "selected_topic": null,
       "sources": [
-        "arxiv"
+        "arxiv",
+        "huggingface"
       ],
       "status": "pending",
       "title": "LO-World: Unified BEV Latent Modeling for Joint 4D Occupancy and LiDAR Forecasting",
@@ -762389,6 +762460,14 @@
       "authors": "Huiyi Chen et.al.",
       "collected_at": "2026-11-11T03:34:02+00:00",
       "decision_reason": null,
+      "display_id": "2611.13576",
+      "hf_daily": {
+        "dates": [
+          "2026-11-11"
+        ],
+        "evidence_sha256": "02a5d0e2b5f5cfb1062aa8b903afe753e2dd2f4ded27c10aef70e3ab54d28479",
+        "url": "https://huggingface.co/papers/2611.13576"
+      },
       "id": "2611.13576",
       "matched_topics": [
         "Video Gen&Edit",
@@ -762399,7 +762478,8 @@
       "reviewed_at": null,
       "selected_topic": null,
       "sources": [
-        "arxiv"
+        "arxiv",
+        "huggingface"
       ],
       "status": "pending",
       "title": "PhyRubric: Rubric-Grounded Diagnostic Evaluation of Physical Commonsense in Text-to-Video Generation",
@@ -765955,6 +766035,6 @@
       "updated": "2026-11-10"
     }
   },
-  "updated_at": "2026-11-12T03:05:41+00:00",
+  "updated_at": "2026-11-12T04:47:18+00:00",
   "version": 1
 }
