@@ -27,8 +27,15 @@ def priority_allowed(control, start, end):
             and '2024-01-01' <= str(start) <= str(end) <= '2025-12-31')
 
 
-def admit(start, end):
+def admit(start, end, *, repair=None):
     result = routine_priority.check()
+    if repair is not None:
+        if not result['admitted']:
+            raise Deferred('; '.join(result['reasons']))
+        from papers.hf_history_repair import load
+        if load(repair['path'])['sha256'] != repair['sha256']:
+            raise Deferred('repair_authorization_changed')
+        return
     control = json.loads((paths.ROOT/'build/reports/hf-priority-control.json').read_text())
     if not priority_allowed(control, start, end):
         raise Deferred('historical_model_priority_not_authorized')
@@ -92,22 +99,36 @@ def cached_decisions(path, expected, scoped, topics):
     if value.get('status') == 'invalid_review':
         # Retain a content failure; never repeat it without changed evidence.
         return []
-    decisions = curation.parse_decisions(value['raw'], {expected['material']['id']})
+    if 'repair' in expected:
+        from papers.hf_history_repair import parse
+        decisions = parse(value['raw'], expected['material']['id'], topics)
+    else:
+        decisions = curation.parse_decisions(value['raw'], {expected['material']['id']})
     curation.apply_decisions({}, scoped, decisions, topics)
     return decisions
 
 
-def review(start, end, limit, config):
+def review(start, end, limit, config, *, repair_manifest=None):
     from papers.hf_backfill import REPORT, digest
     from papers.runtime import model_service
-    admit(start, end)
+    from papers import hf_history_repair as repairs
+    repair = repairs.load(repair_manifest) if repair_manifest is not None else None
+    admit(start, end, repair=repair)
     _, _, scoped = prepare(start, end, config)
     system, topics = prompt(config)
+    if repair is not None:
+        system = system.replace('Return ONLY a JSON array of objects',
+                                'Return ONLY a JSON object with a decisions array containing exactly one object')
     entries = sorted(scoped['papers'].values(), key=lambda p: (max(p['hf_daily']['dates']), p['id']), reverse=True)
+    root = repair['root'] if repair is not None else REPORT
+    if repair is not None:
+        entries = [entry for entry in entries if entry['id'] in repair['targets']]
     pending, accepted, rejected, held = [], [], [], []
     for entry in entries:
         value = packet(entry, config, system)
-        path = REPORT/'reviews'/f'{digest(value)}.json'
+        if repair is not None:
+            value = repairs.bind(value, repair, topics)
+        path = root/'reviews'/f'{digest(value)}.json'
         decisions = cached_decisions(path, value, scoped, topics) if path.exists() else None
         if decisions is None:
             pending.append((entry, value, path))
@@ -118,7 +139,9 @@ def review(start, end, limit, config):
     report = {'start': str(start), 'end': str(end), 'selected': len(entries),
               'accepted': accepted, 'rejected': rejected, 'held': held, 'attempted': [],
               'remaining_unattempted': len(pending), 'status': 'review_checkpoint'}
-    report_path = REPORT/f'review-{start}-{end}.json'
+    if repair is not None:
+        report.update(repair_manifest_sha256=repair['sha256'], substantive_uncertain=repair['uncertain'])
+    report_path = root/f'review-{start}-{end}.json'
     atomic_write_json(report_path, report)
     if not pending:
         return report
@@ -133,7 +156,7 @@ def review(start, end, limit, config):
         for entry, value, path in pending[:limit]:
             if time.monotonic() >= deadline:
                 break
-            admit(start, end)
+            admit(start, end, repair=repair)
             payload = json.dumps(value['material'], ensure_ascii=False, separators=(',', ':'))
             receipt = {'input': value, 'input_sha256': digest(value), 'raw': None,
                        'status': 'failed', 'attempted_at': dt.datetime.now(dt.timezone.utc).isoformat()}
@@ -142,9 +165,10 @@ def review(start, end, limit, config):
                     raise ValueError('review_input_too_large')
                 raw = client.complete(({'role':'system','content':system}, {'role':'user','content':payload}),
                                       model=model, timeout=180, max_tokens=DEFAULT_MODEL_MAX_TOKENS,
-                                      enable_thinking=False)
+                                      enable_thinking=False, **({'json_schema': value['json_schema']} if repair is not None else {}))
                 receipt['raw'] = raw
-                decisions = curation.parse_decisions(raw, {entry['id']})
+                decisions = (repairs.parse(raw, entry['id'], topics) if repair is not None
+                             else curation.parse_decisions(raw, {entry['id']}))
                 curation.apply_decisions({}, scoped, decisions, topics)
                 receipt['status'] = decisions[0]['action'] if decisions else 'uncertain'
             except ValueError as error:
@@ -181,9 +205,11 @@ def accepted_changes(archive, ledger, scoped, decisions, topics):
     return curation.apply_decisions(archive, next_ledger, accepted, topics)
 
 
-def apply_reviewed(start, end, config):
+def apply_reviewed(start, end, config, *, repair_manifest=None):
     from papers.hf_backfill import REPORT, digest
-    admit(start, end)
+    from papers import hf_history_repair as repairs
+    repair = repairs.load(repair_manifest) if repair_manifest is not None else None
+    admit(start, end, repair=repair)
     with run_lock():
         if subprocess.check_output(['git','status','--porcelain'],cwd=paths.ROOT).strip():
             raise Deferred('dirty_workspace')
@@ -195,18 +221,26 @@ def apply_reviewed(start, end, config):
         head_before = subprocess.check_output(['git','rev-parse','HEAD'],cwd=paths.ROOT)
         archive, ledger, scoped = prepare(start, end, config)
         system, topics = prompt(config)
+        if repair is not None:
+            system = system.replace('Return ONLY a JSON array of objects',
+                                    'Return ONLY a JSON object with a decisions array containing exactly one object')
+        root = repair['root'] if repair is not None else REPORT
         decisions = []
         for entry in scoped['papers'].values():
+            if repair is not None and entry['id'] not in repair['targets']:
+                continue
             value = packet(entry, config, system)
-            path = REPORT/'reviews'/f'{digest(value)}.json'
+            if repair is not None:
+                value = repairs.bind(value, repair, topics)
+            path = root/'reviews'/f'{digest(value)}.json'
             if path.exists():
                 decisions.extend(cached_decisions(path,value,scoped,topics) or [])
         a, l = accepted_changes(archive,ledger,scoped,decisions,topics)
         report = {'start':str(start),'end':str(end),'accepted_ids':sorted(set(l['papers'])-set(ledger['papers'])),
                   'status':'prepared','before':before,'published':False}
-        report_path=REPORT/f'apply-reviewed-{start}-{end}.json'
+        report_path=root/f'apply-reviewed-{start}-{end}.json'
         atomic_write_json(report_path,report)
-        admit(start,end)
+        admit(start,end,repair=repair)
         if (before != {'archive':curation._digest(paths.ARCHIVE),'ledger':curation._digest(paths.LEDGER)}
                 or library_before != curation._digest(paths.CONTENT/'conference-library.json')
                 or config_before != curation._digest(paths.CONFIG)

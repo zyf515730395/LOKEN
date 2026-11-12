@@ -233,7 +233,10 @@ def main(argv=None):
     parser.add_argument('--start', type=dt.date.fromisoformat, default=dt.date(2024, 1, 1))
     parser.add_argument('--end', type=dt.date.fromisoformat, default=dt.date(2025, 12, 31))
     parser.add_argument('--limit', type=int, default=31, help='maximum new cache days or review papers per slice (1–31)')
+    parser.add_argument('--repair-manifest', type=Path, help='explicit private held-review repair scope; normal routine admission required')
     args = parser.parse_args(argv)
+    if args.repair_manifest is not None and args.command not in ('review', 'apply-reviewed'):
+        parser.error('--repair-manifest is only valid for review/apply-reviewed')
     if not dt.date(2024, 1, 1) <= args.start <= args.end <= dt.date(2025, 12, 31):
         parser.error('date range must be within 2024–2025')
     if not 1 <= args.limit <= 31:
@@ -256,8 +259,8 @@ def main(argv=None):
                         try:
                             if args.command in ('review', 'apply-reviewed'):
                                 from papers.hf_history_review import review, apply_reviewed
-                                result = (review(args.start, args.end, args.limit, config) if args.command == 'review'
-                                          else apply_reviewed(args.start, args.end, config))
+                                result = (review(args.start, args.end, args.limit, config, repair_manifest=args.repair_manifest) if args.command == 'review'
+                                          else apply_reviewed(args.start, args.end, config, repair_manifest=args.repair_manifest))
                             else:
                                 result = (cache(args.start, args.end, args.limit, config)
                                           if args.command == 'cache' else mark_existing(args.start, args.end, config)
