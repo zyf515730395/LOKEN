@@ -44365,6 +44365,13 @@
         "Neural Rendering": "|**2024-04-01**|**NeRF-MAE : Masked AutoEncoders for Self Supervised 3D representation Learning for Neural Radiance Fields**|Muhammad Zubair Irshad et.al.|[2404.01300](http://arxiv.org/abs/2404.01300)|**[link](https://github.com/zubair-irshad/NeRF-MAE)**|\n"
       },
       "decision_reason": "二次复核：Image Gen&Edit: 论文核心贡献是提出NeRF-MAE，一种基于神经辐射场的自监督3D表示学习方法，旨在通过掩码自编码器预训练NeRF的辐射率和密度网格以增强3D场景理解能力，而非进行2D图像的生成或编辑任务。; Video Gen&Edit: 该研究专注于利用静态的多视角RGB图像构建3D神经辐射场表示，并在此基础上进行自监督预训练，其目标并非生成、编辑视频内容或处理时序视频数据，因此与视频生成和编辑主题无关。; 3D Gen&Recon: 论文核心方法NeRF-MAE直接作用于神经辐射场（NeRF）这一3D场景表示，通过提取辐射率和密度网格进行自监督预训练，旨在学习有效的3D表示以支持下游3D任务，符合3D生成与重建主题中关于神经渲染和3D表示学习的定义。; World Model: 虽然NeRF可以视为一种场景模型，但本文重点在于利用掩码自编码器进行自监督特征学习和3D场景理解（如检测、分割），并未涉及交互式环境、物理动力学预测或动作条件化的未来状态生成，因此不属于世界模型范畴。; Relighting: 论文未涉及光照估计、传输、编辑或在新型光照下生成外观的任务，其核心贡献在于3D表示的自监督预训练和场景理解，与重光照主题中关于照明、反射率或阴影处理的技术贡献无直接关联。; Depth Estimation: 尽管NeRF隐含了深度信息，但本文的主要贡献是3D表示学习和场景理解（如3D目标检测），并未将单目、立体或多视角深度估计作为核心任务或主要评估指标，因此不归类为深度估计论文。",
+      "hf_daily": {
+        "dates": [
+          "2024-08-01"
+        ],
+        "evidence_sha256": "7ac26ce1595537d257c4b7eac9d835ecfd052f93791628e5a4dcce8b29988718",
+        "url": "https://huggingface.co/papers/2404.01300"
+      },
       "id": "2404.01300",
       "matched_topics": [
         "3D Gen&Recon"
@@ -44399,6 +44406,10 @@
       },
       "reviewed_at": "2026-09-14T21:50:54+00:00",
       "selected_topic": "3D Gen&Recon",
+      "sources": [
+        "arxiv",
+        "huggingface"
+      ],
       "status": "accepted",
       "title": "NeRF-MAE : Masked AutoEncoders for Self Supervised 3D representation Learning for Neural Radiance Fields",
       "updated": "2024-04-01"
@@ -57103,6 +57114,70 @@
       "title": "PAV: Personalized Head Avatar from Unstructured Video Collection",
       "updated": "2024-07-22"
     },
+    "2407.21475": {
+      "abstract": "Incorporating a temporal dimension into pretrained image diffusion models for\nvideo generation is a prevalent approach. However, this method is\ncomputationally demanding and necessitates large-scale video datasets. More\ncritically, the heterogeneity between image and video datasets often results in\ncatastrophic forgetting of the image expertise. Recent attempts to directly\nextract video snippets from image diffusion models have somewhat mitigated\nthese problems. Nevertheless, these methods can only generate brief video clips\nwith simple movements and fail to capture fine-grained motion or non-grid\ndeformation. In this paper, we propose a novel Zero-Shot video Sampling\nalgorithm, denoted as ZS^2, capable of directly sampling\nhigh-quality video clips from existing image synthesis methods, such as Stable\nDiffusion, without any training or optimization. Specifically, ZS^2\nutilizes the dependency noise model and temporal momentum attention to ensure\ncontent consistency and animation coherence, respectively. This ability enables\nit to excel in related tasks, such as conditional and context-specialized video\ngeneration and instruction-guided video editing. Experimental results\ndemonstrate that ZS^2 achieves state-of-the-art performance in\nzero-shot video generation, occasionally outperforming recent supervised\nmethods.\n  Homepage: https://densechen.github.io/zss/.",
+      "archive_rows": {
+        "Image Gen&Edit": "|**2024-07-31**|**Fine-gained Zero-shot Video Sampling**|Dengsheng Chen et.al.|[2407.21475](https://arxiv.org/abs/2407.21475)|null|\n",
+        "Video Gen&Edit": "|**2024-07-31**|**Fine-gained Zero-shot Video Sampling**|Dengsheng Chen et.al.|[2407.21475](https://arxiv.org/abs/2407.21475)|null|\n"
+      },
+      "authors": "Dengsheng Chen et.al.",
+      "collected_at": "2026-11-12T01:08:37+00:00",
+      "decision_reason": "论文提出了一种零样本视频采样算法ZS^2，直接从图像扩散模型中生成高质量视频片段，并支持视频编辑任务，属于视频生成与编辑方法。",
+      "display_id": "2407.21475",
+      "hf_daily": {
+        "dates": [
+          "2024-08-01"
+        ],
+        "evidence_sha256": "51df46e640042dc36041e12b037ef1d5c22bb7fbd4ce9510f7793bf0623a9c54",
+        "url": "https://huggingface.co/papers/2407.21475"
+      },
+      "id": "2407.21475",
+      "matched_topics": [
+        "Image Gen&Edit",
+        "Video Gen&Edit"
+      ],
+      "paper_url": "https://arxiv.org/abs/2407.21475",
+      "pdf_url": "https://arxiv.org/pdf/2407.21475.pdf",
+      "reviewed_at": "2026-11-12T01:08:38+00:00",
+      "selected_topic": "Video Gen&Edit",
+      "sources": [
+        "huggingface"
+      ],
+      "status": "accepted",
+      "title": "Fine-gained Zero-shot Video Sampling",
+      "updated": "2024-07-31"
+    },
+    "2407.21686": {
+      "abstract": "Facial expression and hand motions are necessary to express our emotions and\ninteract with the world. Nevertheless, most of the 3D human avatars modeled\nfrom a casually captured video only support body motions without facial\nexpressions and hand motions.In this work, we present ExAvatar, an expressive\nwhole-body 3D human avatar learned from a short monocular video. We design\nExAvatar as a combination of the whole-body parametric mesh model (SMPL-X) and\n3D Gaussian Splatting (3DGS). The main challenges are 1) a limited diversity of\nfacial expressions and poses in the video and 2) the absence of 3D\nobservations, such as 3D scans and RGBD images. The limited diversity in the\nvideo makes animations with novel facial expressions and poses non-trivial. In\naddition, the absence of 3D observations could cause significant ambiguity in\nhuman parts that are not observed in the video, which can result in noticeable\nartifacts under novel motions. To address them, we introduce our hybrid\nrepresentation of the mesh and 3D Gaussians. Our hybrid representation treats\neach 3D Gaussian as a vertex on the surface with pre-defined connectivity\ninformation (i.e., triangle faces) between them following the mesh topology of\nSMPL-X. It makes our ExAvatar animatable with novel facial expressions by\ndriven by the facial expression space of SMPL-X. In addition, by using\nconnectivity-based regularizers, we significantly reduce artifacts in novel\nfacial expressions and poses.",
+      "archive_rows": {
+        "3D Gen&Recon": "|**2024-07-31**|**Expressive Whole-Body 3D Gaussian Avatar**|Gyeongsik Moon et.al.|[2407.21686](https://arxiv.org/abs/2407.21686)|null|\n"
+      },
+      "authors": "Gyeongsik Moon et.al.",
+      "collected_at": "2026-11-12T01:08:37+00:00",
+      "decision_reason": "论文提出基于3D高斯泼溅（3DGS）和SMPL-X网格的混合表示，用于从单目视频重建可驱动的全身体3D人体化身，属于3D重建与神经渲染范畴。",
+      "display_id": "2407.21686",
+      "hf_daily": {
+        "dates": [
+          "2024-08-01"
+        ],
+        "evidence_sha256": "a8ecd170ab50df6a5120f5ebcb268f52debf4f3ee6a2418805f14b6e929e5aad",
+        "url": "https://huggingface.co/papers/2407.21686"
+      },
+      "id": "2407.21686",
+      "matched_topics": [
+        "3D Gen&Recon"
+      ],
+      "paper_url": "https://arxiv.org/abs/2407.21686",
+      "pdf_url": "https://arxiv.org/pdf/2407.21686.pdf",
+      "reviewed_at": "2026-11-12T01:08:38+00:00",
+      "selected_topic": "3D Gen&Recon",
+      "sources": [
+        "huggingface"
+      ],
+      "status": "accepted",
+      "title": "Expressive Whole-Body 3D Gaussian Avatar",
+      "updated": "2024-07-31"
+    },
     "2408.00150": {
       "abstract": "In volume visualization, visualization synthesis has attracted much attention due to its ability to generate novel visualizations without following the conventional rendering pipeline. However, existing solutions based on generative adversarial networks often require many training images and take significant training time. Still, issues such as low quality, consistency, and flexibility persist. This paper introduces StyleRF-VolVis, an innovative style transfer framework for expressive volume visualization (VolVis) via neural radiance field (NeRF). The expressiveness of StyleRF-VolVis is upheld by its ability to accurately separate the underlying scene geometry (i.e., content) and color appearance (i.e., style), conveniently modify color, opacity, and lighting of the original rendering while maintaining visual content consistency across the views, and effectively transfer arbitrary styles from reference images to the reconstructed 3D scene. To achieve these, we design a base NeRF model for scene geometry extraction, a palette color network to classify regions of the radiance field for photorealistic editing, and an unrestricted color network to lift the color palette constraint via knowledge distillation for non-photorealistic editing. We demonstrate the superior quality, consistency, and flexibility of StyleRF-VolVis by experimenting with various volume rendering scenes and reference images and comparing StyleRF-VolVis against other image-based (AdaIN), video-based (ReReVST), and NeRF-based (ARF and SNeRF) style rendering solutions.",
       "archive_rows": {
@@ -57126,6 +57201,99 @@
       "status": "rejected",
       "title": "StyleRF-VolVis: Style Transfer of Neural Radiance Fields for Expressive Volume Visualization",
       "updated": "2024-07-31"
+    },
+    "2408.00458": {
+      "abstract": "Recent years have seen a tremendous improvement in the quality of video\ngeneration and editing approaches. While several techniques focus on editing\nappearance, few address motion. Current approaches using text, trajectories, or\nbounding boxes are limited to simple motions, so we specify motions with a\nsingle motion reference video instead. We further propose to use a pre-trained\nimage-to-video model rather than a text-to-video model. This approach allows us\nto preserve the exact appearance and position of a target object or scene and\nhelps disentangle appearance from motion. Our method, called motion-textual\ninversion, leverages our observation that image-to-video models extract\nappearance mainly from the (latent) image input, while the text/image embedding\ninjected via cross-attention predominantly controls motion. We thus represent\nmotion using text/image embedding tokens. By operating on an inflated\nmotion-text embedding containing multiple text/image embedding tokens per\nframe, we achieve a high temporal motion granularity. Once optimized on the\nmotion reference video, this embedding can be applied to various target images\nto generate videos with semantically similar motions. Our approach does not\nrequire spatial alignment between the motion reference video and target image,\ngeneralizes across various domains, and can be applied to various tasks such as\nfull-body and face reenactment, as well as controlling the motion of inanimate\nobjects and the camera. We empirically demonstrate the effectiveness of our\nmethod in the semantic video motion transfer task, significantly outperforming\nexisting methods in this context.",
+      "archive_rows": {
+        "Video Gen&Edit": "|**2024-08-01**|**Reenact Anything: Semantic Video Motion Transfer Using Motion-Textual Inversion**|Manuel Kansy et.al.|[2408.00458](https://arxiv.org/abs/2408.00458)|null|\n"
+      },
+      "authors": "Manuel Kansy et.al.",
+      "collected_at": "2026-11-12T01:08:37+00:00",
+      "decision_reason": "论文提出了一种基于运动-文本反转的语义视频运动迁移方法，利用预训练图像到视频模型实现视频生成与编辑，属于视频生成与编辑领域的核心方法贡献。",
+      "display_id": "2408.00458",
+      "hf_daily": {
+        "dates": [
+          "2024-08-02"
+        ],
+        "evidence_sha256": "58ab3d874ce5decd5bc7276298e68b525cb851db50cbe3c8ea2f8570ab912ab3",
+        "url": "https://huggingface.co/papers/2408.00458"
+      },
+      "id": "2408.00458",
+      "matched_topics": [
+        "Video Gen&Edit"
+      ],
+      "paper_url": "https://arxiv.org/abs/2408.00458",
+      "pdf_url": "https://arxiv.org/pdf/2408.00458.pdf",
+      "reviewed_at": "2026-11-12T01:08:38+00:00",
+      "selected_topic": "Video Gen&Edit",
+      "sources": [
+        "huggingface"
+      ],
+      "status": "accepted",
+      "title": "Reenact Anything: Semantic Video Motion Transfer Using Motion-Textual Inversion",
+      "updated": "2024-08-01"
+    },
+    "2408.00653": {
+      "abstract": "We present SF3D, a novel method for rapid and high-quality textured object\nmesh reconstruction from a single image in just 0.5 seconds. Unlike most\nexisting approaches, SF3D is explicitly trained for mesh generation,\nincorporating a fast UV unwrapping technique that enables swift texture\ngeneration rather than relying on vertex colors. The method also learns to\npredict material parameters and normal maps to enhance the visual quality of\nthe reconstructed 3D meshes. Furthermore, SF3D integrates a delighting step to\neffectively remove low-frequency illumination effects, ensuring that the\nreconstructed meshes can be easily used in novel illumination conditions.\nExperiments demonstrate the superior performance of SF3D over the existing\ntechniques. Project page: https://stable-fast-3d.github.io",
+      "archive_rows": {
+        "3D Gen&Recon": "|**2024-08-01**|**SF3D: Stable Fast 3D Mesh Reconstruction with UV-unwrapping and Illumination Disentanglement**|Mark Boss et.al.|[2408.00653](https://arxiv.org/abs/2408.00653)|null|\n"
+      },
+      "authors": "Mark Boss et.al.",
+      "collected_at": "2026-11-12T01:08:37+00:00",
+      "decision_reason": "论文提出SF3D方法，从单张图像快速重建带纹理的3D网格，涉及UV展开、材质预测及去光照，属于3D生成与重建范畴。",
+      "display_id": "2408.00653",
+      "hf_daily": {
+        "dates": [
+          "2024-08-02"
+        ],
+        "evidence_sha256": "3bfcbbe4041f980f472c710b3bb9c563ade8a1d829c4e98f171157bcfca5243b",
+        "url": "https://huggingface.co/papers/2408.00653"
+      },
+      "id": "2408.00653",
+      "matched_topics": [
+        "3D Gen&Recon"
+      ],
+      "paper_url": "https://arxiv.org/abs/2408.00653",
+      "pdf_url": "https://arxiv.org/pdf/2408.00653.pdf",
+      "reviewed_at": "2026-11-12T01:08:38+00:00",
+      "selected_topic": "3D Gen&Recon",
+      "sources": [
+        "huggingface"
+      ],
+      "status": "accepted",
+      "title": "SF3D: Stable Fast 3D Mesh Reconstruction with UV-unwrapping and Illumination Disentanglement",
+      "updated": "2024-08-01"
+    },
+    "2408.00760": {
+      "abstract": "Conditional diffusion models have shown remarkable success in visual content\ngeneration, producing high-quality samples across various domains, largely due\nto classifier-free guidance (CFG). Recent attempts to extend guidance to\nunconditional models have relied on heuristic techniques, resulting in\nsuboptimal generation quality and unintended effects. In this work, we propose\nSmoothed Energy Guidance (SEG), a novel training- and condition-free approach\nthat leverages the energy-based perspective of the self-attention mechanism to\nenhance image generation. By defining the energy of self-attention, we\nintroduce a method to reduce the curvature of the energy landscape of attention\nand use the output as the unconditional prediction. Practically, we control the\ncurvature of the energy landscape by adjusting the Gaussian kernel parameter\nwhile keeping the guidance scale parameter fixed. Additionally, we present a\nquery blurring method that is equivalent to blurring the entire attention\nweights without incurring quadratic complexity in the number of tokens. In our\nexperiments, SEG achieves a Pareto improvement in both quality and the\nreduction of side effects. The code is available at\nhttps://github.com/SusungHong/SEG-SDXL.",
+      "archive_rows": {
+        "Image Gen&Edit": "|**2024-08-01**|**Smoothed Energy Guidance: Guiding Diffusion Models with Reduced Energy Curvature of Attention**|Susung Hong et.al.|[2408.00760](https://arxiv.org/abs/2408.00760)|null|\n"
+      },
+      "authors": "Susung Hong et.al.",
+      "collected_at": "2026-11-12T01:08:37+00:00",
+      "decision_reason": "论文提出了Smoothed Energy Guidance (SEG)方法，通过优化自注意力机制的能量景观来改进扩散模型的条件生成，属于图像生成中可控生成与引导机制的方法贡献。",
+      "display_id": "2408.00760",
+      "hf_daily": {
+        "dates": [
+          "2024-08-02"
+        ],
+        "evidence_sha256": "84bbff9630ccdf47a9e2b71deb91ebb3741b4de94ab29a39b6cf084c91bea211",
+        "url": "https://huggingface.co/papers/2408.00760"
+      },
+      "id": "2408.00760",
+      "matched_topics": [
+        "Image Gen&Edit"
+      ],
+      "paper_url": "https://arxiv.org/abs/2408.00760",
+      "pdf_url": "https://arxiv.org/pdf/2408.00760.pdf",
+      "reviewed_at": "2026-11-12T01:08:38+00:00",
+      "selected_topic": "Image Gen&Edit",
+      "sources": [
+        "huggingface"
+      ],
+      "status": "accepted",
+      "title": "Smoothed Energy Guidance: Guiding Diffusion Models with Reduced Energy Curvature of Attention",
+      "updated": "2024-08-01"
     },
     "2408.00860": {
       "abstract": "Three-dimensional ultrasound imaging is a critical technology widely used in medical diagnostics. However, traditional 3D ultrasound imaging methods have limitations such as fixed resolution, low storage efficiency, and insufficient contextual connectivity, leading to poor performance in handling complex artifacts and reflection characteristics. Recently, techniques based on NeRF (Neural Radiance Fields) have made significant progress in view synthesis and 3D reconstruction, but there remains a research gap in high-quality ultrasound imaging. To address these issues, we propose a new model, UlRe-NeRF, which combines implicit neural networks and explicit ultrasound volume rendering into an ultrasound neural rendering architecture. This model incorporates reflection direction parameterization and harmonic encoding, using a directional MLP module to generate view-dependent high-frequency reflection intensity estimates, and a spatial MLP module to produce the medium’s physical property parameters. These parameters are used in the volume rendering process to accurately reproduce the propagation and reflection behavior of ultrasound waves in the medium. Experimental results demonstrate that the UlRe-NeRF model significantly enhances the realism and accuracy of high-fidelity ultrasound image reconstruction, especially in handling complex medium structures.",
@@ -57193,6 +57361,37 @@
       "selected_topic": null,
       "status": "rejected",
       "title": "NeRFoot: Robot-Footprint Estimation for Image-Based Visual Servoing",
+      "updated": "2024-08-02"
+    },
+    "2408.01291": {
+      "abstract": "Given a 3D mesh, we aim to synthesize 3D textures that correspond to\narbitrary textual descriptions. Current methods for generating and assembling\ntextures from sampled views often result in prominent seams or excessive\nsmoothing. To tackle these issues, we present TexGen, a novel multi-view\nsampling and resampling framework for texture generation leveraging a\npre-trained text-to-image diffusion model. For view consistent sampling, first\nof all we maintain a texture map in RGB space that is parameterized by the\ndenoising step and updated after each sampling step of the diffusion model to\nprogressively reduce the view discrepancy. An attention-guided multi-view\nsampling strategy is exploited to broadcast the appearance information across\nviews. To preserve texture details, we develop a noise resampling technique\nthat aids in the estimation of noise, generating inputs for subsequent\ndenoising steps, as directed by the text prompt and current texture map.\nThrough an extensive amount of qualitative and quantitative evaluations, we\ndemonstrate that our proposed method produces significantly better texture\nquality for diverse 3D objects with a high degree of view consistency and rich\nappearance details, outperforming current state-of-the-art methods.\nFurthermore, our proposed texture generation technique can also be applied to\ntexture editing while preserving the original identity. More experimental\nresults are available at https://dong-huo.github.io/TexGen/",
+      "archive_rows": {
+        "Image Gen&Edit": "|**2024-08-02**|**TexGen: Text-Guided 3D Texture Generation with Multi-view Sampling and Resampling**|Dong Huo et.al.|[2408.01291](https://arxiv.org/abs/2408.01291)|null|\n"
+      },
+      "authors": "Dong Huo et.al.",
+      "collected_at": "2026-11-12T01:08:37+00:00",
+      "decision_reason": "论文提出了一种基于多视图采样和重采样的3D纹理生成框架，旨在为3D网格合成符合文本描述的纹理，属于3D资产生成与编辑范畴，符合3D Gen&Recon主题。",
+      "display_id": "2408.01291",
+      "hf_daily": {
+        "dates": [
+          "2024-08-05"
+        ],
+        "evidence_sha256": "13bfc990223d86e60bacddb2fd06e091ce0e1ae688252990e9cc5c2ab4ed3e5d",
+        "url": "https://huggingface.co/papers/2408.01291"
+      },
+      "id": "2408.01291",
+      "matched_topics": [
+        "Image Gen&Edit"
+      ],
+      "paper_url": "https://arxiv.org/abs/2408.01291",
+      "pdf_url": "https://arxiv.org/pdf/2408.01291.pdf",
+      "reviewed_at": "2026-11-12T01:08:38+00:00",
+      "selected_topic": "3D Gen&Recon",
+      "sources": [
+        "huggingface"
+      ],
+      "status": "accepted",
+      "title": "TexGen: Text-Guided 3D Texture Generation with Multi-view Sampling and Resampling",
       "updated": "2024-08-02"
     },
     "2408.01840": {
@@ -57327,6 +57526,37 @@
       "title": "PanicleNeRF: low-cost, high-precision in-field phenotypingof rice panicles with smartphone",
       "updated": "2024-08-04"
     },
+    "2408.02657": {
+      "abstract": "We present Lumina-mGPT, a family of multimodal autoregressive models capable\nof various vision and language tasks, particularly excelling in generating\nflexible photorealistic images from text descriptions. Unlike existing\nautoregressive image generation approaches, Lumina-mGPT employs a pretrained\ndecoder-only transformer as a unified framework for modeling multimodal token\nsequences. Our key insight is that a simple decoder-only transformer with\nmultimodal Generative PreTraining (mGPT), utilizing the next-token prediction\nobjective on massive interleaved text-image sequences, can learn broad and\ngeneral multimodal capabilities, thereby illuminating photorealistic\ntext-to-image generation. Building on these pretrained models, we propose\nFlexible Progressive Supervised Finetuning (FP-SFT) on high-quality image-text\npairs to fully unlock their potential for high-aesthetic image synthesis at any\nresolution while maintaining their general multimodal capabilities.\nFurthermore, we introduce Ominiponent Supervised Finetuning (Omni-SFT),\ntransforming Lumina-mGPT into a foundation model that seamlessly achieves\nomnipotent task unification. The resulting model demonstrates versatile\nmultimodal capabilities, including visual generation tasks like flexible\ntext-to-image generation and controllable generation, visual recognition tasks\nlike segmentation and depth estimation, and vision-language tasks like\nmultiturn visual question answering. Additionally, we analyze the differences\nand similarities between diffusion-based and autoregressive methods in a direct\ncomparison.",
+      "archive_rows": {
+        "Image Gen&Edit": "|**2024-08-05**|**Lumina-mGPT: Illuminate Flexible Photorealistic Text-to-Image Generation with Multimodal Generative Pretraining**|Dongyang Liu et.al.|[2408.02657](https://arxiv.org/abs/2408.02657)|null|\n"
+      },
+      "authors": "Dongyang Liu et.al.",
+      "collected_at": "2026-11-12T01:08:37+00:00",
+      "decision_reason": "论文提出了Lumina-mGPT，一种基于自回归架构的多模态生成模型，核心贡献在于通过多模态生成预训练和灵活渐进式监督微调，实现了高质量、任意分辨率的文本到图像生成及可控生成，完全符合图像生成与编辑主题。",
+      "display_id": "2408.02657",
+      "hf_daily": {
+        "dates": [
+          "2024-08-06"
+        ],
+        "evidence_sha256": "c836b5f91368990700968cc95cff4bc010d36c8a691456b04d0f328111f8b77a",
+        "url": "https://huggingface.co/papers/2408.02657"
+      },
+      "id": "2408.02657",
+      "matched_topics": [
+        "Image Gen&Edit"
+      ],
+      "paper_url": "https://arxiv.org/abs/2408.02657",
+      "pdf_url": "https://arxiv.org/pdf/2408.02657.pdf",
+      "reviewed_at": "2026-11-12T01:08:38+00:00",
+      "selected_topic": "Image Gen&Edit",
+      "sources": [
+        "huggingface"
+      ],
+      "status": "accepted",
+      "title": "Lumina-mGPT: Illuminate Flexible Photorealistic Text-to-Image Generation with Multimodal Generative Pretraining",
+      "updated": "2024-08-05"
+    },
     "2408.03060": {
       "abstract": "Over the last few decades, image-based building surface reconstruction has garnered substantial research interest and has been applied across various fields, such as heritage preservation, architectural planning, etc. Compared to the traditional photogrammetric and NeRF-based solutions, recently, Gaussian fields-based methods have exhibited significant potential in generating surface meshes due to their time-efficient training and detailed 3D information preservation. However, most gaussian fields-based methods are trained with all image pixels, encompassing building and nonbuilding areas, which results in a significant noise for building meshes and degeneration in time efficiency. This paper proposes a novel framework, Masked Gaussian Fields (MGFs), designed to generate accurate surface reconstruction for building in a time-efficient way. The framework first applies EfficientSAM and COLMAP to generate multi-level masks of building and the corresponding masked point clouds. Subsequently, the masked gaussian fields are trained by integrating two innovative losses: a multi-level perceptual masked loss focused on constructing building regions and a boundary loss aimed at enhancing the details of the boundaries between different masks. Finally, we improve the tetrahedral surface mesh extraction method based on the masked gaussian spheres. Comprehensive experiments on UAV images demonstrate that, compared to the traditional method and several NeRF-based and Gaussian-based SOTA solutions, our approach significantly improves both the accuracy and efficiency of building surface reconstruction. Notably, as a byproduct, there is an additional gain in the novel view synthesis of building.",
       "archive_rows": {
@@ -57369,6 +57599,39 @@
       "selected_topic": "3D Gen&Recon",
       "status": "accepted",
       "title": "MGFs: Masked Gaussian Fields for Meshing Building based on Multi-View Images",
+      "updated": "2024-08-06"
+    },
+    "2408.03178": {
+      "abstract": "We introduce a new approach for generating realistic 3D models with UV maps\nthrough a representation termed \"Object Images.\" This approach encapsulates\nsurface geometry, appearance, and patch structures within a 64x64 pixel image,\neffectively converting complex 3D shapes into a more manageable 2D format. By\ndoing so, we address the challenges of both geometric and semantic irregularity\ninherent in polygonal meshes. This method allows us to use image generation\nmodels, such as Diffusion Transformers, directly for 3D shape generation.\nEvaluated on the ABO dataset, our generated shapes with patch structures\nachieve point cloud FID comparable to recent 3D generative models, while\nnaturally supporting PBR material generation.",
+      "archive_rows": {
+        "3D Gen&Recon": "|**2024-08-06**|**An Object is Worth 64x64 Pixels: Generating 3D Object via Image Diffusion**|Xingguang Yan et.al.|[2408.03178](https://arxiv.org/abs/2408.03178)|null|\n",
+        "Image Gen&Edit": "|**2024-08-06**|**An Object is Worth 64x64 Pixels: Generating 3D Object via Image Diffusion**|Xingguang Yan et.al.|[2408.03178](https://arxiv.org/abs/2408.03178)|null|\n"
+      },
+      "authors": "Xingguang Yan et.al.",
+      "collected_at": "2026-11-12T01:08:37+00:00",
+      "decision_reason": "论文提出了一种通过图像扩散模型生成带有UV贴图的3D对象的新方法，属于3D生成领域。",
+      "display_id": "2408.03178",
+      "hf_daily": {
+        "dates": [
+          "2024-08-07"
+        ],
+        "evidence_sha256": "0ec5a8e28d3ac3c1ba73aba600a414d4e1dcb0f400d660f3691ac33b75da955a",
+        "url": "https://huggingface.co/papers/2408.03178"
+      },
+      "id": "2408.03178",
+      "matched_topics": [
+        "3D Gen&Recon",
+        "Image Gen&Edit"
+      ],
+      "paper_url": "https://arxiv.org/abs/2408.03178",
+      "pdf_url": "https://arxiv.org/pdf/2408.03178.pdf",
+      "reviewed_at": "2026-11-12T01:08:38+00:00",
+      "selected_topic": "3D Gen&Recon",
+      "sources": [
+        "huggingface"
+      ],
+      "status": "accepted",
+      "title": "An Object is Worth 64x64 Pixels: Generating 3D Object via Image Diffusion",
       "updated": "2024-08-06"
     },
     "2408.03193": {
@@ -57415,12 +57678,50 @@
       "title": "Efficient NeRF Optimization -- Not All Samples Remain Equally Hard",
       "updated": "2024-08-06"
     },
+    "2408.03209": {
+      "abstract": "Diffusion models continuously push the boundary of state-of-the-art image\ngeneration, but the process is hard to control with any nuance: practice proves\nthat textual prompts are inadequate for accurately describing image style or\nfine structural details (such as faces). ControlNet and IPAdapter address this\nshortcoming by conditioning the generative process on imagery instead, but each\nindividual instance is limited to modeling a single conditional posterior: for\npractical use-cases, where multiple different posteriors are desired within the\nsame workflow, training and using multiple adapters is cumbersome. We propose\nIPAdapter-Instruct, which combines natural-image conditioning with ``Instruct''\nprompts to swap between interpretations for the same conditioning image: style\ntransfer, object extraction, both, or something else still? IPAdapterInstruct\nefficiently learns multiple tasks with minimal loss in quality compared to\ndedicated per-task models.",
+      "archive_rows": {
+        "Image Gen&Edit": "|**2024-08-06**|**IPAdapter-Instruct: Resolving Ambiguity in Image-based Conditioning using Instruct Prompts**|Ciara Rowles et.al.|[2408.03209](https://arxiv.org/abs/2408.03209)|null|\n"
+      },
+      "authors": "Ciara Rowles et.al.",
+      "collected_at": "2026-11-12T01:08:37+00:00",
+      "decision_reason": "论文提出了IPAdapter-Instruct，通过结合自然图像条件与指令提示，解决了扩散模型在图像生成中基于图像条件时的歧义问题，属于可控图像生成方法。",
+      "display_id": "2408.03209",
+      "hf_daily": {
+        "dates": [
+          "2024-08-07"
+        ],
+        "evidence_sha256": "396d8b1e21ba4480a0a81c29384ebb93c99347b4c0ef09a2aa1e6e361f31a693",
+        "url": "https://huggingface.co/papers/2408.03209"
+      },
+      "id": "2408.03209",
+      "matched_topics": [
+        "Image Gen&Edit"
+      ],
+      "paper_url": "https://arxiv.org/abs/2408.03209",
+      "pdf_url": "https://arxiv.org/pdf/2408.03209.pdf",
+      "reviewed_at": "2026-11-12T01:08:38+00:00",
+      "selected_topic": "Image Gen&Edit",
+      "sources": [
+        "huggingface"
+      ],
+      "status": "accepted",
+      "title": "IPAdapter-Instruct: Resolving Ambiguity in Image-based Conditioning using Instruct Prompts",
+      "updated": "2024-08-06"
+    },
     "2408.03356": {
       "abstract": "Differentiable volumetric rendering-based methods made significant progress in novel view synthesis. On one hand, innovative methods have replaced the Neural Radiance Fields (NeRF) network with locally parameterized structures, enabling high-quality renderings in a reasonable time. On the other hand, approaches have used differentiable splatting instead of NeRF’s ray casting to optimize radiance fields rapidly using Gaussian kernels, allowing for fine adaptation to the scene. However, differentiable ray casting of irregularly spaced kernels has been scarcely explored, while splatting, despite enabling fast rendering times, is susceptible to clearly visible artifacts. Our work closes this gap by providing a physically consistent formulation of the emitted radiance cc and density σ\\sigma, decomposed with Gaussian functions associated with Spherical Gaussians/Harmonics for all-frequency colorimetric representation. We also introduce a method enabling differentiable ray casting of irregularly distributed Gaussians using an algorithm that integrates radiance fields slab by slab and leverages a BVH structure. This allows our approach to finely adapt to the scene while avoiding splatting artifacts. As a result, we achieve superior rendering quality compared to the state-of-the-art while maintaining reasonable training times and achieving inference speeds of 25 FPS on the Blender dataset. The associated code is available at: github.com/hugobl1/ray_gauss.",
       "archive_rows": {
         "Neural Rendering": "|**2024-08-06**|**RayGauss: Volumetric Gaussian-Based Ray Casting for Photorealistic Novel View Synthesis**|Hugo Blanc et.al.|[2408.03356](http://arxiv.org/abs/2408.03356)|null|\n"
       },
       "decision_reason": "二次复核：Image Gen&Edit: 论文核心贡献是三维场景的新视角合成与体积渲染，而非二维图像的生成或编辑，不符合该主题定义。; Video Gen&Edit: 论文未涉及视频生成、编辑或时序动态建模，主要关注静态场景的三维重建与渲染，与视频主题无关。; 3D Gen&Recon: 论文提出基于高斯函数的体积辐射场表示及光线投射算法，用于新视角合成，属于三维重建与神经渲染范畴。; World Model: 论文未构建可交互的环境动力学模型或预测未来状态，仅关注静态场景的视觉重建，不属于世界模型。; Relighting: 论文未涉及光照估计、传输或重光照任务，主要解决几何与外观的新视角合成问题，与重光照无关。; Depth Estimation: 论文未以深度估计为主要目标或贡献，虽涉及三维结构但核心在于辐射场渲染，不属于深度估计主题。",
+      "hf_daily": {
+        "dates": [
+          "2024-08-08"
+        ],
+        "evidence_sha256": "5af9c2776d829224fd0ac9b26626007c227ba8ee31dc154a210a6f025f971af5",
+        "url": "https://huggingface.co/papers/2408.03356"
+      },
       "id": "2408.03356",
       "matched_topics": [
         "3D Gen&Recon"
@@ -57455,6 +57756,10 @@
       },
       "reviewed_at": "2026-09-14T21:39:24+00:00",
       "selected_topic": "3D Gen&Recon",
+      "sources": [
+        "arxiv",
+        "huggingface"
+      ],
       "status": "accepted",
       "title": "RayGauss: Volumetric Gaussian-Based Ray Casting for Photorealistic Novel View Synthesis",
       "updated": "2024-08-06"
@@ -57501,6 +57806,68 @@
       "selected_topic": "3D Gen&Recon",
       "status": "accepted",
       "title": "Goal-oriented Semantic Communication for the Metaverse Application",
+      "updated": "2024-08-07"
+    },
+    "2408.03695": {
+      "abstract": "Recent image generation models excel at creating high-quality images from\nbrief captions. However, they fail to maintain consistency of multiple\ninstances across images when encountering lengthy contexts. This inconsistency\nis largely due to in existing training datasets the absence of granular\ninstance feature labeling in existing training datasets. To tackle these\nissues, we introduce Openstory++, a large-scale dataset combining additional\ninstance-level annotations with both images and text. Furthermore, we develop a\ntraining methodology that emphasizes entity-centric image-text generation,\nensuring that the models learn to effectively interweave visual and textual\ninformation. Specifically, Openstory++ streamlines the process of keyframe\nextraction from open-domain videos, employing vision-language models to\ngenerate captions that are then polished by a large language model for\nnarrative continuity. It surpasses previous datasets by offering a more\nexpansive open-domain resource, which incorporates automated captioning,\nhigh-resolution imagery tailored for instance count, and extensive frame\nsequences for temporal consistency. Additionally, we present Cohere-Bench, a\npioneering benchmark framework for evaluating the image generation tasks when\nlong multimodal context is provided, including the ability to keep the\nbackground, style, instances in the given context coherent. Compared to\nexisting benchmarks, our work fills critical gaps in multi-modal generation,\npropelling the development of models that can adeptly generate and interpret\ncomplex narratives in open-domain environments. Experiments conducted within\nCohere-Bench confirm the superiority of Openstory++ in nurturing high-quality\nvisual storytelling models, enhancing their ability to address open-domain\ngeneration tasks. More details can be found at https://openstorypp.github.io/",
+      "archive_rows": {
+        "Image Gen&Edit": "|**2024-08-07**|**Openstory++: A Large-scale Dataset and Benchmark for Instance-aware Open-domain Visual Storytelling**|Zilyu Ye et.al.|[2408.03695](https://arxiv.org/abs/2408.03695)|null|\n"
+      },
+      "authors": "Zilyu Ye et.al.",
+      "collected_at": "2026-11-12T01:08:37+00:00",
+      "decision_reason": "论文提出了用于实例感知图像生成的数据集Openstory++及训练方法，旨在解决长上下文下多实例一致性问题，属于图像生成领域的贡献。",
+      "display_id": "2408.03695",
+      "hf_daily": {
+        "dates": [
+          "2024-08-08"
+        ],
+        "evidence_sha256": "6923a23f1ceab8cca80e75c98fffe20d0de9db253a574eac9df1796baff14335",
+        "url": "https://huggingface.co/papers/2408.03695"
+      },
+      "id": "2408.03695",
+      "matched_topics": [
+        "Image Gen&Edit"
+      ],
+      "paper_url": "https://arxiv.org/abs/2408.03695",
+      "pdf_url": "https://arxiv.org/pdf/2408.03695.pdf",
+      "reviewed_at": "2026-11-12T01:08:38+00:00",
+      "selected_topic": "Image Gen&Edit",
+      "sources": [
+        "huggingface"
+      ],
+      "status": "accepted",
+      "title": "Openstory++: A Large-scale Dataset and Benchmark for Instance-aware Open-domain Visual Storytelling",
+      "updated": "2024-08-07"
+    },
+    "2408.03822": {
+      "abstract": "3D Gaussian splatting (3DGS) has recently emerged as an alternative\nrepresentation that leverages a 3D Gaussian-based representation and introduces\nan approximated volumetric rendering, achieving very fast rendering speed and\npromising image quality. Furthermore, subsequent studies have successfully\nextended 3DGS to dynamic 3D scenes, demonstrating its wide range of\napplications. However, a significant drawback arises as 3DGS and its following\nmethods entail a substantial number of Gaussians to maintain the high fidelity\nof the rendered images, which requires a large amount of memory and storage. To\naddress this critical issue, we place a specific emphasis on two key\nobjectives: reducing the number of Gaussian points without sacrificing\nperformance and compressing the Gaussian attributes, such as view-dependent\ncolor and covariance. To this end, we propose a learnable mask strategy that\nsignificantly reduces the number of Gaussians while preserving high\nperformance. In addition, we propose a compact but effective representation of\nview-dependent color by employing a grid-based neural field rather than relying\non spherical harmonics. Finally, we learn codebooks to compactly represent the\ngeometric and temporal attributes by residual vector quantization. With model\ncompression techniques such as quantization and entropy coding, we consistently\nshow over 25x reduced storage and enhanced rendering speed compared to 3DGS for\nstatic scenes, while maintaining the quality of the scene representation. For\ndynamic scenes, our approach achieves more than 12x storage efficiency and\nretains a high-quality reconstruction compared to the existing state-of-the-art\nmethods. Our work provides a comprehensive framework for 3D scene\nrepresentation, achieving high performance, fast training, compactness, and\nreal-time rendering. Our project page is available at\nhttps://maincold2.github.io/c3dgs/.",
+      "archive_rows": {
+        "3D Gen&Recon": "|**2024-08-07**|**Compact 3D Gaussian Splatting for Static and Dynamic Radiance Fields**|Joo Chan Lee et.al.|[2408.03822](https://arxiv.org/abs/2408.03822)|null|\n"
+      },
+      "authors": "Joo Chan Lee et.al.",
+      "collected_at": "2026-11-12T01:08:37+00:00",
+      "decision_reason": "论文提出了一种紧凑的3D高斯泼溅（3DGS）表示方法，用于静态和动态辐射场，涉及3D场景重建、神经渲染及高斯属性压缩，完全符合3D生成与重建主题。",
+      "display_id": "2408.03822",
+      "hf_daily": {
+        "dates": [
+          "2024-08-08"
+        ],
+        "evidence_sha256": "9cb108b2c3970c863d9f701746c1725c98327812e2c2c5b6ac1aa050358672ec",
+        "url": "https://huggingface.co/papers/2408.03822"
+      },
+      "id": "2408.03822",
+      "matched_topics": [
+        "3D Gen&Recon"
+      ],
+      "paper_url": "https://arxiv.org/abs/2408.03822",
+      "pdf_url": "https://arxiv.org/pdf/2408.03822.pdf",
+      "reviewed_at": "2026-11-12T01:08:38+00:00",
+      "selected_topic": "3D Gen&Recon",
+      "sources": [
+        "huggingface"
+      ],
+      "status": "accepted",
+      "title": "Compact 3D Gaussian Splatting for Static and Dynamic Radiance Fields",
       "updated": "2024-08-07"
     },
     "2408.04268": {
@@ -57615,6 +57982,39 @@
       "title": "LumiGauss: High-Fidelity Outdoor Relighting with 2D Gaussian Splatting",
       "updated": "2024-08-06"
     },
+    "2408.04567": {
+      "abstract": "3D Content Generation is at the heart of many computer graphics applications,\nincluding video gaming, film-making, virtual and augmented reality, etc. This\npaper proposes a novel deep-learning based approach for automatically\ngenerating interactive and playable 3D game scenes, all from the user's casual\nprompts such as a hand-drawn sketch. Sketch-based input offers a natural, and\nconvenient way to convey the user's design intention in the content creation\nprocess. To circumvent the data-deficient challenge in learning (i.e. the lack\nof large training data of 3D scenes), our method leverages a pre-trained 2D\ndenoising diffusion model to generate a 2D image of the scene as the conceptual\nguidance. In this process, we adopt the isometric projection mode to factor out\nunknown camera poses while obtaining the scene layout. From the generated\nisometric image, we use a pre-trained image understanding method to segment the\nimage into meaningful parts, such as off-ground objects, trees, and buildings,\nand extract the 2D scene layout. These segments and layouts are subsequently\nfed into a procedural content generation (PCG) engine, such as a 3D video game\nengine like Unity or Unreal, to create the 3D scene. The resulting 3D scene can\nbe seamlessly integrated into a game development environment and is readily\nplayable. Extensive tests demonstrate that our method can efficiently generate\nhigh-quality and interactive 3D game scenes with layouts that closely follow\nthe user's intention.",
+      "archive_rows": {
+        "3D Gen&Recon": "|**2024-08-08**|**Sketch2Scene: Automatic Generation of Interactive 3D Game Scenes from User's Casual Sketches**|Yongzhi Xu et.al.|[2408.04567](https://arxiv.org/abs/2408.04567)|null|\n",
+        "Image Gen&Edit": "|**2024-08-08**|**Sketch2Scene: Automatic Generation of Interactive 3D Game Scenes from User's Casual Sketches**|Yongzhi Xu et.al.|[2408.04567](https://arxiv.org/abs/2408.04567)|null|\n"
+      },
+      "authors": "Yongzhi Xu et.al.",
+      "collected_at": "2026-11-12T01:08:37+00:00",
+      "decision_reason": "论文提出了一种从用户草图自动生成可交互3D游戏场景的方法，属于3D内容生成与重建范畴。",
+      "display_id": "2408.04567",
+      "hf_daily": {
+        "dates": [
+          "2024-08-09"
+        ],
+        "evidence_sha256": "c43b2bd55428ffa2770e256b51cc0100fb437e7d9081f8109a9f61f6ed075df1",
+        "url": "https://huggingface.co/papers/2408.04567"
+      },
+      "id": "2408.04567",
+      "matched_topics": [
+        "3D Gen&Recon",
+        "Image Gen&Edit"
+      ],
+      "paper_url": "https://arxiv.org/abs/2408.04567",
+      "pdf_url": "https://arxiv.org/pdf/2408.04567.pdf",
+      "reviewed_at": "2026-11-12T01:08:38+00:00",
+      "selected_topic": "3D Gen&Recon",
+      "sources": [
+        "huggingface"
+      ],
+      "status": "accepted",
+      "title": "Sketch2Scene: Automatic Generation of Interactive 3D Game Scenes from User's Casual Sketches",
+      "updated": "2024-08-08"
+    },
     "2408.04803": {
       "abstract": "In this paper, we address the challenge of generating novel views of real-world objects with limited multi-view images through our proposed approach, FewShotNeRF. Our method utilizes meta-learning to acquire an optimal initialization, facilitating rapid adaptation of a Neural Radiance Field (NeRF) to specific scenes. The focus of our meta-learning process is on capturing shared geometry and textures within a category, embedded in the weight initialization. This approach expedites the learning process of NeRFs and leverages recent advancements in positional encodings to reduce the time required for fitting a NeRF to a scene, thereby accelerating the inner loop optimization of meta-learning. Notably, our method enables meta-learning on a large number of 3D scenes to establish a robust 3D prior for various categories. Through extensive evaluations on the Common Objects in 3D open source dataset[27], we empirically demonstrate the efficacy and potential of meta-learning in generating high-quality novel views of objects.",
       "archive_rows": {
@@ -57703,6 +58103,37 @@
       "title": "DreamCouple: Exploring High Quality Text-to-3D Generation Via Rectified Flow",
       "updated": "2024-08-09"
     },
+    "2408.05492": {
+      "abstract": "Diffusion-based text-to-image generation models have significantly advanced\nthe field of art content synthesis. However, current portrait stylization\nmethods generally require either model fine-tuning based on examples or the\nemployment of DDIM Inversion to revert images to noise space, both of which\nsubstantially decelerate the image generation process. To overcome these\nlimitations, this paper presents an inversion-free portrait stylization\nframework based on diffusion models that accomplishes content and style feature\nfusion in merely four sampling steps. We observed that Latent Consistency\nModels employing consistency distillation can effectively extract\nrepresentative Consistency Features from noisy images. To blend the Consistency\nFeatures extracted from both content and style images, we introduce a Style\nEnhancement Attention Control technique that meticulously merges content and\nstyle features within the attention space of the target image. Moreover, we\npropose a feature merging strategy to amalgamate redundant features in\nConsistency Features, thereby reducing the computational load of attention\ncontrol. Extensive experiments have validated the effectiveness of our proposed\nframework in enhancing stylization efficiency and fidelity. The code is\navailable at https://github.com/liujin112/ZePo.",
+      "archive_rows": {
+        "Image Gen&Edit": "|**2024-08-10**|**ZePo: Zero-Shot Portrait Stylization with Faster Sampling**|Jin Liu et.al.|[2408.05492](https://arxiv.org/abs/2408.05492)|null|\n"
+      },
+      "authors": "Jin Liu et.al.",
+      "collected_at": "2026-11-12T01:08:37+00:00",
+      "decision_reason": "论文提出了一种基于扩散模型的零样本人像风格化框架，通过一致性特征融合和注意力控制实现快速图像编辑与生成，属于图像生成与编辑方法。",
+      "display_id": "2408.05492",
+      "hf_daily": {
+        "dates": [
+          "2024-08-14"
+        ],
+        "evidence_sha256": "d47083483b06e050bc5d2bd32ea0ff66f1726518a3538ea5ef686a13364c9c18",
+        "url": "https://huggingface.co/papers/2408.05492"
+      },
+      "id": "2408.05492",
+      "matched_topics": [
+        "Image Gen&Edit"
+      ],
+      "paper_url": "https://arxiv.org/abs/2408.05492",
+      "pdf_url": "https://arxiv.org/pdf/2408.05492.pdf",
+      "reviewed_at": "2026-11-12T01:08:38+00:00",
+      "selected_topic": "Image Gen&Edit",
+      "sources": [
+        "huggingface"
+      ],
+      "status": "accepted",
+      "title": "ZePo: Zero-Shot Portrait Stylization with Faster Sampling",
+      "updated": "2024-08-10"
+    },
     "2408.05533": {
       "abstract": "First-Person-View (FPV) holds immense potential for revolutionizing the trajectory of Unmanned Aerial Vehicles (UAVs), offering an exhilarating avenue for navigating complex building structures. Yet, traditional Neural Radiance Field (NeRF) methods face challenges such as sampling single points per iteration and requiring an extensive array of views for supervision. UAV videos exacerbate these issues with limited viewpoints and significant spatial scale variations, resulting in inadequate detail rendering across diverse scales. In response, we introduce FPV-NeRF, addressing these challenges through three key facets: (1) Temporal consistency. Leveraging spatio-temporal continuity ensures seamless coherence between frames; (2) Global structure. Incorporating various global features during point sampling preserves space integrity; (3) Local granularity. Employing a comprehensive framework and multi-resolution supervision for multi-scale scene feature representation tackles the intricacies of UAV video spatial scales. Additionally, due to the scarcity of publicly available FPV videos, we introduce an innovative view synthesis method using NeRF to generate FPV perspectives from UAV footage, enhancing spatial perception for drones. Our novel dataset spans diverse trajectories, from outdoor to indoor environments, in the UAV domain, differing significantly from traditional NeRF scenarios. Through extensive experiments encompassing both interior and exterior building structures, FPV-NeRF demonstrates a superior understanding of the UAV flying space, outperforming state-of-the-art methods in our curated UAV dataset. Explore our project page for further insights: https://fpv-nerf.github.io/.",
       "archive_rows": {
@@ -57746,6 +58177,70 @@
       "status": "accepted",
       "title": "Radiance Field Learners As UAV First-Person Viewers",
       "updated": "2024-08-10"
+    },
+    "2408.06019": {
+      "abstract": "In this paper, we present a novel 3D head avatar creation approach capable of\ngeneralizing from few-shot in-the-wild data with high-fidelity and animatable\nrobustness. Given the underconstrained nature of this problem, incorporating\nprior knowledge is essential. Therefore, we propose a framework comprising\nprior learning and avatar creation phases. The prior learning phase leverages\n3D head priors derived from a large-scale multi-view dynamic dataset, and the\navatar creation phase applies these priors for few-shot personalization. Our\napproach effectively captures these priors by utilizing a Gaussian\nSplatting-based auto-decoder network with part-based dynamic modeling. Our\nmethod employs identity-shared encoding with personalized latent codes for\nindividual identities to learn the attributes of Gaussian primitives. During\nthe avatar creation phase, we achieve fast head avatar personalization by\nleveraging inversion and fine-tuning strategies. Extensive experiments\ndemonstrate that our model effectively exploits head priors and successfully\ngeneralizes them to few-shot personalization, achieving photo-realistic\nrendering quality, multi-view consistency, and stable animation.",
+      "archive_rows": {
+        "3D Gen&Recon": "|**2024-08-12**|**HeadGAP: Few-shot 3D Head Avatar via Generalizable Gaussian Priors**|Xiaozheng Zheng et.al.|[2408.06019](https://arxiv.org/abs/2408.06019)|null|\n"
+      },
+      "authors": "Xiaozheng Zheng et.al.",
+      "collected_at": "2026-11-12T01:08:37+00:00",
+      "decision_reason": "论文提出基于高斯泼溅（Gaussian Splatting）的3D头部化身生成方法，属于3D生成与重建范畴。",
+      "display_id": "2408.06019",
+      "hf_daily": {
+        "dates": [
+          "2024-08-13"
+        ],
+        "evidence_sha256": "692225ff58a63fbe11c61448e355c0a99adbca4147f4c65c16f1c23dfe72dc22",
+        "url": "https://huggingface.co/papers/2408.06019"
+      },
+      "id": "2408.06019",
+      "matched_topics": [
+        "3D Gen&Recon"
+      ],
+      "paper_url": "https://arxiv.org/abs/2408.06019",
+      "pdf_url": "https://arxiv.org/pdf/2408.06019.pdf",
+      "reviewed_at": "2026-11-12T01:08:38+00:00",
+      "selected_topic": "3D Gen&Recon",
+      "sources": [
+        "huggingface"
+      ],
+      "status": "accepted",
+      "title": "HeadGAP: Few-shot 3D Head Avatar via Generalizable Gaussian Priors",
+      "updated": "2024-08-12"
+    },
+    "2408.06070": {
+      "abstract": "Diffusion models have demonstrated remarkable and robust abilities in both\nimage and video generation. To achieve greater control over generated results,\nresearchers introduce additional architectures, such as ControlNet, Adapters\nand ReferenceNet, to integrate conditioning controls. However, current\ncontrollable generation methods often require substantial additional\ncomputational resources, especially for video generation, and face challenges\nin training or exhibit weak control. In this paper, we propose ControlNeXt: a\npowerful and efficient method for controllable image and video generation. We\nfirst design a more straightforward and efficient architecture, replacing heavy\nadditional branches with minimal additional cost compared to the base model.\nSuch a concise structure also allows our method to seamlessly integrate with\nother LoRA weights, enabling style alteration without the need for additional\ntraining. As for training, we reduce up to 90% of learnable parameters compared\nto the alternatives. Furthermore, we propose another method called Cross\nNormalization (CN) as a replacement for Zero-Convolution' to achieve fast and\nstable training convergence. We have conducted various experiments with\ndifferent base models across images and videos, demonstrating the robustness of\nour method.",
+      "archive_rows": {
+        "Image Gen&Edit": "|**2024-08-12**|**ControlNeXt: Powerful and Efficient Control for Image and Video Generation**|Bohao Peng et.al.|[2408.06070](https://arxiv.org/abs/2408.06070)|null|\n",
+        "Video Gen&Edit": "|**2024-08-12**|**ControlNeXt: Powerful and Efficient Control for Image and Video Generation**|Bohao Peng et.al.|[2408.06070](https://arxiv.org/abs/2408.06070)|null|\n"
+      },
+      "authors": "Bohao Peng et.al.",
+      "collected_at": "2026-11-12T01:08:37+00:00",
+      "decision_reason": "论文提出了ControlNeXt，一种用于图像和视频生成的可控生成方法，通过高效架构和训练策略改进扩散模型的控制能力，属于图像生成与编辑领域的核心方法贡献。",
+      "display_id": "2408.06070",
+      "hf_daily": {
+        "dates": [
+          "2024-08-13"
+        ],
+        "evidence_sha256": "5700598485220bbeb9c9e89878f99d3131472fd6eba264535cf083e8831cb9e9",
+        "url": "https://huggingface.co/papers/2408.06070"
+      },
+      "id": "2408.06070",
+      "matched_topics": [
+        "Image Gen&Edit",
+        "Video Gen&Edit"
+      ],
+      "paper_url": "https://arxiv.org/abs/2408.06070",
+      "pdf_url": "https://arxiv.org/pdf/2408.06070.pdf",
+      "reviewed_at": "2026-11-12T01:08:38+00:00",
+      "selected_topic": "Image Gen&Edit",
+      "sources": [
+        "huggingface"
+      ],
+      "status": "accepted",
+      "title": "ControlNeXt: Powerful and Efficient Control for Image and Video Generation",
+      "updated": "2024-08-12"
     },
     "2408.06244": {
       "abstract": "Recent advancements in deep learning for predicting 3D protein structures have shown promise, particularly when leveraging inputs like protein sequences and Cryo-Electron microscopy (Cryo-EM) images. However, these techniques often fall short when predicting the structures of protein complexes (PCs), which involve multiple proteins. In our study, we investigate using atomic force microscopy (AFM) combined with deep learning to predict the 3D structures of PCs. AFM generates height maps that depict the PCs in various random orientations, providing a rich information for training a neural network to predict the 3D structures. We then employ the pre-trained UpFusion model (which utilizes a conditional diffusion model for synthesizing novel views) to train an instance-specific NeRF model for 3D reconstruction. The performance of UpFusion is evaluated through zero-shot predictions of 3D protein structures using AFM images. The challenge, however, lies in the time-intensive and impractical nature of collecting actual AFM images. To address this, we use a virtual AFM imaging process that transforms a ‘PDB’ protein file into multi-view 2D virtual AFM images via volume rendering techniques. We extensively validate the UpFusion architecture using both virtual and actual multi-view AFM images. Our results include a comparison of structures predicted with varying numbers of views and different sets of views. This novel approach holds significant potential for enhancing the accuracy of protein complex structure predictions with further fine-tuning of the UpFusion network.",
@@ -57947,12 +58442,112 @@
       "title": "Potamoi: Accelerating Neural Rendering via a Unified Streaming Architecture",
       "updated": "2024-08-13"
     },
+    "2408.06697": {
+      "abstract": "The ability to distill object-centric abstractions from intricate visual\nscenes underpins human-level generalization. Despite the significant progress\nin object-centric learning methods, learning object-centric representations in\nthe 3D physical world remains a crucial challenge. In this work, we propose\nSlotLifter, a novel object-centric radiance model addressing scene\nreconstruction and decomposition jointly via slot-guided feature lifting. Such\na design unites object-centric learning representations and image-based\nrendering methods, offering state-of-the-art performance in scene decomposition\nand novel-view synthesis on four challenging synthetic and four complex\nreal-world datasets, outperforming existing 3D object-centric learning methods\nby a large margin. Through extensive ablative studies, we showcase the efficacy\nof designs in SlotLifter, revealing key insights for potential future\ndirections.",
+      "archive_rows": {
+        "3D Gen&Recon": "|**2024-08-13**|**SlotLifter: Slot-guided Feature Lifting for Learning Object-centric Radiance Fields**|Yu Liu et.al.|[2408.06697](https://arxiv.org/abs/2408.06697)|null|\n"
+      },
+      "authors": "Yu Liu et.al.",
+      "collected_at": "2026-11-12T01:08:37+00:00",
+      "decision_reason": "论文提出SlotLifter，结合对象中心学习与基于图像的渲染方法，实现了场景重建、分解及新视角合成，属于3D重建与神经渲染范畴。",
+      "display_id": "2408.06697",
+      "hf_daily": {
+        "dates": [
+          "2024-08-14"
+        ],
+        "evidence_sha256": "6e087313bed4178d8651568f28e207e218a58e9a9aa14633088cddbdd5fd82e7",
+        "url": "https://huggingface.co/papers/2408.06697"
+      },
+      "id": "2408.06697",
+      "matched_topics": [
+        "3D Gen&Recon"
+      ],
+      "paper_url": "https://arxiv.org/abs/2408.06697",
+      "pdf_url": "https://arxiv.org/pdf/2408.06697.pdf",
+      "reviewed_at": "2026-11-12T01:08:38+00:00",
+      "selected_topic": "3D Gen&Recon",
+      "sources": [
+        "huggingface"
+      ],
+      "status": "accepted",
+      "title": "SlotLifter: Slot-guided Feature Lifting for Learning Object-centric Radiance Fields",
+      "updated": "2024-08-13"
+    },
+    "2408.07009": {
+      "abstract": "We introduce Imagen 3, a latent diffusion model that generates high quality\nimages from text prompts. We describe our quality and responsibility\nevaluations. Imagen 3 is preferred over other state-of-the-art (SOTA) models at\nthe time of evaluation. In addition, we discuss issues around safety and\nrepresentation, as well as methods we used to minimize the potential harm of\nour models.",
+      "archive_rows": {
+        "Image Gen&Edit": "|**2024-08-13**|**Imagen 3**|Imagen-Team-Google et.al.|[2408.07009](https://arxiv.org/abs/2408.07009)|null|\n"
+      },
+      "authors": "Imagen-Team-Google et.al.",
+      "collected_at": "2026-11-12T01:08:37+00:00",
+      "decision_reason": "论文提出了Imagen 3，一种基于潜在扩散模型（latent diffusion model）的文本到图像生成方法，属于图像生成领域的核心方法贡献。",
+      "display_id": "2408.07009",
+      "hf_daily": {
+        "dates": [
+          "2024-08-14"
+        ],
+        "evidence_sha256": "b42b58351c7e96a7a1a575fa45a953d7491dbb32f1b22b518a1e0fa72394a177",
+        "url": "https://huggingface.co/papers/2408.07009"
+      },
+      "id": "2408.07009",
+      "matched_topics": [
+        "Image Gen&Edit"
+      ],
+      "paper_url": "https://arxiv.org/abs/2408.07009",
+      "pdf_url": "https://arxiv.org/pdf/2408.07009.pdf",
+      "reviewed_at": "2026-11-12T01:08:38+00:00",
+      "selected_topic": "Image Gen&Edit",
+      "sources": [
+        "huggingface"
+      ],
+      "status": "accepted",
+      "title": "Imagen 3",
+      "updated": "2024-08-13"
+    },
+    "2408.07116": {
+      "abstract": "Text-to-image models are powerful tools for image creation. However, the\ngeneration process is akin to a dice roll and makes it difficult to achieve a\nsingle image that captures everything a user wants. In this paper, we propose a\nframework for creating the desired image by compositing it from various parts\nof generated images, in essence forming a Generative Photomontage. Given a\nstack of images generated by ControlNet using the same input condition and\ndifferent seeds, we let users select desired parts from the generated results\nusing a brush stroke interface. We introduce a novel technique that takes in\nthe user's brush strokes, segments the generated images using a graph-based\noptimization in diffusion feature space, and then composites the segmented\nregions via a new feature-space blending method. Our method faithfully\npreserves the user-selected regions while compositing them harmoniously. We\ndemonstrate that our flexible framework can be used for many applications,\nincluding generating new appearance combinations, fixing incorrect shapes and\nartifacts, and improving prompt alignment. We show compelling results for each\napplication and demonstrate that our method outperforms existing image blending\nmethods and various baselines.",
+      "archive_rows": {
+        "Image Gen&Edit": "|**2024-08-13**|**Generative Photomontage**|Sean J. Liu et.al.|[2408.07116](https://arxiv.org/abs/2408.07116)|null|\n"
+      },
+      "authors": "Sean J. Liu et.al.",
+      "collected_at": "2026-11-12T01:08:37+00:00",
+      "decision_reason": "提出了一种基于扩散特征空间的生成式照片蒙太奇框架，通过用户交互选择并合成生成图像的局部区域，属于图像编辑与可控生成方法。",
+      "display_id": "2408.07116",
+      "hf_daily": {
+        "dates": [
+          "2024-08-15"
+        ],
+        "evidence_sha256": "7d2f12357f762c21fea653441a6f69f5880f40242ee44cd116974b171fa10df0",
+        "url": "https://huggingface.co/papers/2408.07116"
+      },
+      "id": "2408.07116",
+      "matched_topics": [
+        "Image Gen&Edit"
+      ],
+      "paper_url": "https://arxiv.org/abs/2408.07116",
+      "pdf_url": "https://arxiv.org/pdf/2408.07116.pdf",
+      "reviewed_at": "2026-11-12T01:08:38+00:00",
+      "selected_topic": "Image Gen&Edit",
+      "sources": [
+        "huggingface"
+      ],
+      "status": "accepted",
+      "title": "Generative Photomontage",
+      "updated": "2024-08-13"
+    },
     "2408.07416": {
       "abstract": "Understanding the 3D semantics of a scene is a fundamental problem for various scenarios such as embodied agents. While NeRFs and 3DGS excel at novel-view synthesis, previous methods for understanding their semantics have been limited to incomplete 3D understanding: their segmentation results are rendered as 2D masks that do not represent the entire 3D space. To address this limitation, we redefine the problem to segment the 3D volume and propose the following methods for better 3D understanding. We directly supervise the 3D points to train the language embedding field, unlike previous methods that anchor supervision at 2D pixels. We transfer the learned language field to 3DGS, achieving the first real-time rendering speed without sacrificing training time or accuracy. Lastly, we introduce a 3D querying and evaluation protocol for assessing the reconstructed geometry and semantics together. Code, checkpoints, and annotations are available at the project page. Yonsei University {hyunji12, bbangsik, jaymin.bae, hailey07, yj.uh}@yonsei.ac.kr Project page — https://hyunji12.github.io/Open3DRF/",
       "archive_rows": {
         "Neural Rendering": "|**2024-08-18**|**Rethinking Open-Vocabulary Segmentation of Radiance Fields in 3D Space**|Hyunjee Lee et.al.|[2408.07416](http://arxiv.org/abs/2408.07416)|null|\n"
       },
       "decision_reason": "二次复核：Image Gen&Edit: 论文核心贡献是重新定义辐射场中的开放词汇分割问题，旨在实现3D体积的语义理解，而非图像生成或编辑。虽然涉及渲染，但目的是评估3D语义一致性，不属于图像生成主题。; Video Gen&Edit: 论文关注静态3D场景的语义分割与理解，不涉及视频合成、编辑或时序动态生成。其方法针对的是3D体积和点云，与视频生成主题无关。; 3D Gen&Recon: 论文核心是对NeRF和3DGS等3D表示进行语义分割，属于3D场景理解与重建范畴。它通过直接监督3D点来学习语言嵌入场，并评估重建几何与语义的一致性，符合3D生成与重建主题中关于3D对象和场景处理的定义。; World Model: 论文未涉及环境动力学预测、交互式世界建模或动作条件未来状态预测。其重点在于静态场景的语义分割和几何评估，不具备世界模型的核心特征。; Relighting: 论文未涉及光照估计、传输、编辑或新光照下的外观生成。其研究焦点是语义分割和语言嵌入，与重光照技术无关。; Depth Estimation: 虽然3DGS和NeRF隐含深度信息，但论文核心贡献是语义分割而非深度估计。它没有提出新的深度预测方法，也未将深度作为主要输出或评估指标，因此不属于深度估计主题。",
+      "hf_daily": {
+        "dates": [
+          "2024-08-15"
+        ],
+        "evidence_sha256": "74189e1a3c5aa7b7136f8fdab666621d7192faefbf215cf91aaa1f240af0fe94",
+        "url": "https://huggingface.co/papers/2408.07416"
+      },
       "id": "2408.07416",
       "matched_topics": [
         "3D Gen&Recon"
@@ -57987,9 +58582,75 @@
       },
       "reviewed_at": "2026-09-14T21:39:24+00:00",
       "selected_topic": "3D Gen&Recon",
+      "sources": [
+        "arxiv",
+        "huggingface"
+      ],
       "status": "accepted",
       "title": "Rethinking Open-Vocabulary Segmentation of Radiance Fields in 3D Space",
       "updated": "2024-08-18"
+    },
+    "2408.07540": {
+      "abstract": "The modeling and manipulation of 3D scenes captured from the real world are\npivotal in various applications, attracting growing research interest. While\nprevious works on editing have achieved interesting results through\nmanipulating 3D meshes, they often require accurately reconstructed meshes to\nperform editing, which limits their application in 3D content generation. To\naddress this gap, we introduce a novel single-image-driven 3D scene editing\napproach based on 3D Gaussian Splatting, enabling intuitive manipulation via\ndirectly editing the content on a 2D image plane. Our method learns to optimize\nthe 3D Gaussians to align with an edited version of the image rendered from a\nuser-specified viewpoint of the original scene. To capture long-range object\ndeformation, we introduce positional loss into the optimization process of 3D\nGaussian Splatting and enable gradient propagation through reparameterization.\nTo handle occluded 3D Gaussians when rendering from the specified viewpoint, we\nbuild an anchor-based structure and employ a coarse-to-fine optimization\nstrategy capable of handling long-range deformation while maintaining\nstructural stability. Furthermore, we design a novel masking strategy to\nadaptively identify non-rigid deformation regions for fine-scale modeling.\nExtensive experiments show the effectiveness of our method in handling\ngeometric details, long-range, and non-rigid deformation, demonstrating\nsuperior editing flexibility and quality compared to previous approaches.",
+      "archive_rows": {
+        "3D Gen&Recon": "|**2024-08-14**|**3D Gaussian Editing with A Single Image**|Guan Luo et.al.|[2408.07540](https://arxiv.org/abs/2408.07540)|null|\n"
+      },
+      "authors": "Guan Luo et.al.",
+      "collected_at": "2026-11-12T01:08:37+00:00",
+      "decision_reason": "论文提出基于3D高斯泼溅（3D Gaussian Splatting）的单图驱动3D场景编辑方法，涉及3D内容的生成、编辑及神经渲染，完全符合3D生成与重建主题。",
+      "display_id": "2408.07540",
+      "hf_daily": {
+        "dates": [
+          "2024-08-15"
+        ],
+        "evidence_sha256": "ce65824a8e1cbd98d8ee51b169cc3bf53863596c863d3bcc45b532597eaca125",
+        "url": "https://huggingface.co/papers/2408.07540"
+      },
+      "id": "2408.07540",
+      "matched_topics": [
+        "3D Gen&Recon"
+      ],
+      "paper_url": "https://arxiv.org/abs/2408.07540",
+      "pdf_url": "https://arxiv.org/pdf/2408.07540.pdf",
+      "reviewed_at": "2026-11-12T01:08:38+00:00",
+      "selected_topic": "3D Gen&Recon",
+      "sources": [
+        "huggingface"
+      ],
+      "status": "accepted",
+      "title": "3D Gaussian Editing with A Single Image",
+      "updated": "2024-08-14"
+    },
+    "2408.08189": {
+      "abstract": "Synthesizing motion-rich and temporally consistent videos remains a challenge\nin artificial intelligence, especially when dealing with extended durations.\nExisting text-to-video (T2V) models commonly employ spatial cross-attention for\ntext control, equivalently guiding different frame generations without\nframe-specific textual guidance. Thus, the model's capacity to comprehend the\ntemporal logic conveyed in prompts and generate videos with coherent motion is\nrestricted. To tackle this limitation, we introduce FancyVideo, an innovative\nvideo generator that improves the existing text-control mechanism with the\nwell-designed Cross-frame Textual Guidance Module (CTGM). Specifically, CTGM\nincorporates the Temporal Information Injector (TII), Temporal Affinity Refiner\n(TAR), and Temporal Feature Booster (TFB) at the beginning, middle, and end of\ncross-attention, respectively, to achieve frame-specific textual guidance.\nFirstly, TII injects frame-specific information from latent features into text\nconditions, thereby obtaining cross-frame textual conditions. Then, TAR refines\nthe correlation matrix between cross-frame textual conditions and latent\nfeatures along the time dimension. Lastly, TFB boosts the temporal consistency\nof latent features. Extensive experiments comprising both quantitative and\nqualitative evaluations demonstrate the effectiveness of FancyVideo. Our\napproach achieves state-of-the-art T2V generation results on the EvalCrafter\nbenchmark and facilitates the synthesis of dynamic and consistent videos. The\nvideo show results can be available at https://fancyvideo.github.io/, and we\nwill make our code and model weights publicly available.",
+      "archive_rows": {
+        "Video Gen&Edit": "|**2024-08-15**|**FancyVideo: Towards Dynamic and Consistent Video Generation via Cross-frame Textual Guidance**|Jiasong Feng et.al.|[2408.08189](https://arxiv.org/abs/2408.08189)|null|\n"
+      },
+      "authors": "Jiasong Feng et.al.",
+      "collected_at": "2026-11-12T01:08:37+00:00",
+      "decision_reason": "论文提出FancyVideo，通过跨帧文本引导模块改进文本到视频生成机制，属于视频生成方法贡献。",
+      "display_id": "2408.08189",
+      "hf_daily": {
+        "dates": [
+          "2024-08-16"
+        ],
+        "evidence_sha256": "b05e50bd9b4334caac7d6d89adc914ab69e5de5f726a334893ede1a2d4567fe7",
+        "url": "https://huggingface.co/papers/2408.08189"
+      },
+      "id": "2408.08189",
+      "matched_topics": [
+        "Video Gen&Edit"
+      ],
+      "paper_url": "https://arxiv.org/abs/2408.08189",
+      "pdf_url": "https://arxiv.org/pdf/2408.08189.pdf",
+      "reviewed_at": "2026-11-12T01:08:38+00:00",
+      "selected_topic": "Video Gen&Edit",
+      "sources": [
+        "huggingface"
+      ],
+      "status": "accepted",
+      "title": "FancyVideo: Towards Dynamic and Consistent Video Generation via Cross-frame Textual Guidance",
+      "updated": "2024-08-15"
     },
     "2408.08206": {
       "abstract": "The underwater 3D scene reconstruction is a challenging, yet interesting problem with applications ranging from naval robots to VR experiences. The problem was successfully tackled by fully volumetric NeRF-based methods which can model both the geometry and the medium (water). Unfortunately, these methods are slow to train and do not offer real-time rendering. More recently, 3D Gaussian Splatting (3DGS) method offered a fast alternative to NeRFs. However, because it is an explicit method that renders only the geometry, it cannot render the medium and is therefore unsuited for underwater reconstruction. Therefore, we propose a novel approach that fuses volumetric rendering with 3DGS to handle underwater data effectively. Our method employs 3DGS for explicit geometry representation and a separate volumetric field (queried once per pixel) for capturing the scattering medium. This dual representation further allows the restoration of the scenes by removing the scattering medium. Our method outperforms state-of-the-art NeRF-based methods in rendering quality on the underwater SeaThru-NeRF dataset. Furthermore, it does so while offering real-time rendering performance, addressing the efficiency limitations of existing methods. Web: https://water-splatting.github.io",
@@ -58034,6 +58695,37 @@
       "status": "accepted",
       "title": "WaterSplatting: Fast Underwater 3D Scene Reconstruction Using Gaussian Splatting",
       "updated": "2024-08-15"
+    },
+    "2408.08332": {
+      "abstract": "We address the challenges of precise image inversion and disentangled image\nediting in the context of few-step diffusion models. We introduce an encoder\nbased iterative inversion technique. The inversion network is conditioned on\nthe input image and the reconstructed image from the previous step, allowing\nfor correction of the next reconstruction towards the input image. We\ndemonstrate that disentangled controls can be easily achieved in the few-step\ndiffusion model by conditioning on an (automatically generated) detailed text\nprompt. To manipulate the inverted image, we freeze the noise maps and modify\none attribute in the text prompt (either manually or via instruction based\nediting driven by an LLM), resulting in the generation of a new image similar\nto the input image with only one attribute changed. It can further control the\nediting strength and accept instructive text prompt. Our approach facilitates\nrealistic text-guided image edits in real-time, requiring only 8 number of\nfunctional evaluations (NFEs) in inversion (one-time cost) and 4 NFEs per edit.\nOur method is not only fast, but also significantly outperforms\nstate-of-the-art multi-step diffusion editing techniques.",
+      "archive_rows": {
+        "Image Gen&Edit": "|**2024-08-14**|**TurboEdit: Instant text-based image editing**|Zongze Wu et.al.|[2408.08332](https://arxiv.org/abs/2408.08332)|null|\n"
+      },
+      "authors": "Zongze Wu et.al.",
+      "collected_at": "2026-11-12T01:08:37+00:00",
+      "decision_reason": "论文提出了基于扩散模型的快速文本引导图像编辑方法，涉及图像反转、解耦编辑及实时生成，属于图像生成与编辑的核心方法贡献。",
+      "display_id": "2408.08332",
+      "hf_daily": {
+        "dates": [
+          "2024-08-19"
+        ],
+        "evidence_sha256": "424b41a0e64e6aca3916e4e2a96b7b7e2d884a89108680982eb436f25de344cc",
+        "url": "https://huggingface.co/papers/2408.08332"
+      },
+      "id": "2408.08332",
+      "matched_topics": [
+        "Image Gen&Edit"
+      ],
+      "paper_url": "https://arxiv.org/abs/2408.08332",
+      "pdf_url": "https://arxiv.org/pdf/2408.08332.pdf",
+      "reviewed_at": "2026-11-12T01:08:38+00:00",
+      "selected_topic": "Image Gen&Edit",
+      "sources": [
+        "huggingface"
+      ],
+      "status": "accepted",
+      "title": "TurboEdit: Instant text-based image editing",
+      "updated": "2024-08-14"
     },
     "2408.08766": {
       "abstract": "Implicit surfaces via neural radiance fields (NeRF) have shown surprising accuracy in surface reconstruction. Despite their success in reconstructing richly textured surfaces, existing methods struggle with planar regions with weak textures, which account for the majority of indoor scenes. In this paper, we address indoor dense surface reconstruction by revisiting key aspects of NeRF in order to use the recently proposed Vector Field (VF) as the implicit representation. VF is defined by the unit vector directed to the nearest surface point. It therefore flips direction at the surface and equals to the explicit surface normals. Except for this flip, VF remains constant along planar surfaces and provides a strong inductive bias in representing planar surfaces. Concretely, we develop a novel density-VF relationship and a training scheme that allows us to learn VF via volume rendering. By doing this, VF-NeRF can model large planar surfaces and sharp corners accurately. We show that, when depth cues are available, our method further improves and achieves state-of-the-art results in reconstructing indoor scenes and rendering novel views. We extensively evaluate VF-NeRF on indoor datasets and run ablations of its components. We release the code at: https://github.com/albertgassol1/vf-nerf.",
@@ -58331,6 +59023,37 @@
       "title": "DiscoNeRF: Class-Agnostic Object Field for 3D Object Discovery",
       "updated": "2024-08-19"
     },
+    "2408.10119": {
+      "abstract": "Text-to-video (T2V) generation has gained significant attention due to its\nwide applications to video generation, editing, enhancement and translation,\n\\etc. However, high-quality (HQ) video synthesis is extremely challenging\nbecause of the diverse and complex motions existed in real world. Most existing\nworks struggle to address this problem by collecting large-scale HQ videos,\nwhich are inaccessible to the community. In this work, we show that publicly\navailable limited and low-quality (LQ) data are sufficient to train a HQ video\ngenerator without recaptioning or finetuning. We factorize the whole T2V\ngeneration process into two steps: generating an image conditioned on a highly\ndescriptive caption, and synthesizing the video conditioned on the generated\nimage and a concise caption of motion details. Specifically, we present\nFactorized-Dreamer, a factorized spatiotemporal framework with several\ncritical designs for T2V generation, including an adapter to combine text and\nimage embeddings, a pixel-aware cross attention module to capture pixel-level\nimage information, a T5 text encoder to better understand motion description,\nand a PredictNet to supervise optical flows. We further present a noise\nschedule, which plays a key role in ensuring the quality and stability of video\ngeneration. Our model lowers the requirements in detailed captions and HQ\nvideos, and can be directly trained on limited LQ datasets with noisy and brief\ncaptions such as WebVid-10M, largely alleviating the cost to collect\nlarge-scale HQ video-text pairs. Extensive experiments in a variety of T2V and\nimage-to-video generation tasks demonstrate the effectiveness of our proposed\nFactorized-Dreamer. Our source codes are available at\nhttps://github.com/yangxy/Factorized-Dreamer/.",
+      "archive_rows": {
+        "Video Gen&Edit": "|**2024-08-19**|**Factorized-Dreamer: Training A High-Quality Video Generator with Limited and Low-Quality Data**|Tao Yang et.al.|[2408.10119](https://arxiv.org/abs/2408.10119)|null|\n"
+      },
+      "authors": "Tao Yang et.al.",
+      "collected_at": "2026-11-12T01:08:37+00:00",
+      "decision_reason": "论文提出了Factorized-Dreamer框架，通过分解时空生成过程，利用有限低质量数据训练高质量文本到视频（T2V）及图像到视频生成模型，属于视频生成方法贡献。",
+      "display_id": "2408.10119",
+      "hf_daily": {
+        "dates": [
+          "2024-08-20"
+        ],
+        "evidence_sha256": "ff1fa72c380aa2e859da9c3dc5c3214077585489938c906e8617acc3a4432f32",
+        "url": "https://huggingface.co/papers/2408.10119"
+      },
+      "id": "2408.10119",
+      "matched_topics": [
+        "Video Gen&Edit"
+      ],
+      "paper_url": "https://arxiv.org/abs/2408.10119",
+      "pdf_url": "https://arxiv.org/pdf/2408.10119.pdf",
+      "reviewed_at": "2026-11-12T01:08:38+00:00",
+      "selected_topic": "Video Gen&Edit",
+      "sources": [
+        "huggingface"
+      ],
+      "status": "accepted",
+      "title": "Factorized-Dreamer: Training A High-Quality Video Generator with Limited and Low-Quality Data",
+      "updated": "2024-08-19"
+    },
     "2408.10135": {
       "abstract": "Mesh reconstruction from Neural Radiance Fields (NeRF) is widely used in 3D reconstruction and has been applied across numerous domains. However, existing methods typically rely solely on the given training set images, which restricts supervision to limited observations and makes it difficult to fully constrain geometry and appearance. Moreover, the contribution of each viewpoint for training is not uniform and changes dynamically during the optimization process, which can result in suboptimal guidance for both geometric refinement and rendering quality. To address these limitations, we propose R2R^{2}-Mesh, a reinforcement learning framework that combines NeRF-rendered pseudo-supervision with online viewpoint selection. Our key insight is to exploit NeRF’s rendering ability to synthesize additional high-quality images, enriching training with diverse viewpoint information. To ensure that supervision focuses on the most beneficial perspectives, we introduce a UCB-based strategy with a geometry-aware reward, which dynamically balances exploration and exploitation to identify informative viewpoints throughout training. Within this framework, we jointly optimize SDF geometry and view-dependent appearance under differentiable rendering, while periodically refining meshes to capture fine geometric details. Experiments demonstrate that our method achieves competitive results in both geometric accuracy and rendering quality.",
       "archive_rows": {
@@ -58375,6 +59098,39 @@
       "title": "$R^2$-Mesh: Reinforcement Learning Powered Mesh Reconstruction via Geometry and Appearance Refinement",
       "updated": "2024-08-19"
     },
+    "2408.10195": {
+      "abstract": "Open-world 3D generation has recently attracted considerable attention. While\nmany single-image-to-3D methods have yielded visually appealing outcomes, they\noften lack sufficient controllability and tend to produce hallucinated regions\nthat may not align with users' expectations. In this paper, we explore an\nimportant scenario in which the input consists of one or a few unposed 2D\nimages of a single object, with little or no overlap. We propose a novel\nmethod, SpaRP, to reconstruct a 3D textured mesh and estimate the relative\ncamera poses for these sparse-view images. SpaRP distills knowledge from 2D\ndiffusion models and finetunes them to implicitly deduce the 3D spatial\nrelationships between the sparse views. The diffusion model is trained to\njointly predict surrogate representations for camera poses and multi-view\nimages of the object under known poses, integrating all information from the\ninput sparse views. These predictions are then leveraged to accomplish 3D\nreconstruction and pose estimation, and the reconstructed 3D model can be used\nto further refine the camera poses of input views. Through extensive\nexperiments on three datasets, we demonstrate that our method not only\nsignificantly outperforms baseline methods in terms of 3D reconstruction\nquality and pose prediction accuracy but also exhibits strong efficiency. It\nrequires only about 20 seconds to produce a textured mesh and camera poses for\nthe input views. Project page: https://chaoxu.xyz/sparp.",
+      "archive_rows": {
+        "3D Gen&Recon": "|**2024-08-19**|**SpaRP: Fast 3D Object Reconstruction and Pose Estimation from Sparse Views**|Chao Xu et.al.|[2408.10195](https://arxiv.org/abs/2408.10195)|null|\n",
+        "Image Gen&Edit": "|**2024-08-19**|**SpaRP: Fast 3D Object Reconstruction and Pose Estimation from Sparse Views**|Chao Xu et.al.|[2408.10195](https://arxiv.org/abs/2408.10195)|null|\n"
+      },
+      "authors": "Chao Xu et.al.",
+      "collected_at": "2026-11-12T01:08:37+00:00",
+      "decision_reason": "论文提出SpaRP方法，从稀疏视图重建3D纹理网格并估计相机位姿，属于3D重建与生成范畴。",
+      "display_id": "2408.10195",
+      "hf_daily": {
+        "dates": [
+          "2024-08-20"
+        ],
+        "evidence_sha256": "d77d3cfc713feb57eb14b10065f49d6242fe870042b5d21801b687c4d75a98c6",
+        "url": "https://huggingface.co/papers/2408.10195"
+      },
+      "id": "2408.10195",
+      "matched_topics": [
+        "3D Gen&Recon",
+        "Image Gen&Edit"
+      ],
+      "paper_url": "https://arxiv.org/abs/2408.10195",
+      "pdf_url": "https://arxiv.org/pdf/2408.10195.pdf",
+      "reviewed_at": "2026-11-12T01:08:38+00:00",
+      "selected_topic": "3D Gen&Recon",
+      "sources": [
+        "huggingface"
+      ],
+      "status": "accepted",
+      "title": "SpaRP: Fast 3D Object Reconstruction and Pose Estimation from Sparse Views",
+      "updated": "2024-08-19"
+    },
     "2408.10739": {
       "abstract": "Neural radiance fields (NeRFs) generally require many images with accurate poses for accurate novel view synthesis, which does not reflect realistic setups where views can be sparse and poses can be noisy. Previous solutions for learning NeRFs with sparse views and noisy poses only consider local geometry consistency with pairs of views. Closely following bundle adjustment in Structure-from-Motion (SfM), we introduce TrackNeRF for more globally consistent geometry reconstruction and more accurate pose optimization. TrackNeRF introduces feature tracks, i.e. connected pixel trajectories across all visible views that correspond to the same 3D points. By enforcing reprojection consistency among feature tracks, TrackNeRF encourages holistic 3D consistency explicitly. Through extensive experiments, TrackNeRF sets a new benchmark in noisy and sparse view reconstruction. In particular, TrackNeRF shows significant improvements over the state-of-the-art BARF and SPARF by ∼8\\sim 8 and ∼1\\sim 1 in terms of PSNR on DTU under various sparse and noisy view setups. The code is available at https://tracknerf.github.io/.",
       "archive_rows": {
@@ -58417,6 +59173,68 @@
       "selected_topic": "3D Gen&Recon",
       "status": "accepted",
       "title": "TrackNeRF: Bundle Adjusting NeRF from Sparse and Noisy Views via Feature Tracks",
+      "updated": "2024-08-20"
+    },
+    "2408.10906": {
+      "abstract": "3D Gaussian Splatting (3DGS) has become the de facto method of 3D\nrepresentation in many vision tasks. This calls for the 3D understanding\ndirectly in this representation space. To facilitate the research in this\ndirection, we first build a large-scale dataset of 3DGS using the commonly used\nShapeNet and ModelNet datasets. Our dataset ShapeSplat consists of 65K objects\nfrom 87 unique categories, whose labels are in accordance with the respective\ndatasets. The creation of this dataset utilized the compute equivalent of 2 GPU\nyears on a TITAN XP GPU.\n  We utilize our dataset for unsupervised pretraining and supervised finetuning\nfor classification and segmentation tasks. To this end, we introduce\n\\textit{Gaussian-MAE}, which highlights the unique benefits of\nrepresentation learning from Gaussian parameters. Through exhaustive\nexperiments, we provide several valuable insights. In particular, we show that\n(1) the distribution of the optimized GS centroids significantly differs from\nthe uniformly sampled point cloud (used for initialization) counterpart; (2)\nthis change in distribution results in degradation in classification but\nimprovement in segmentation tasks when using only the centroids; (3) to\nleverage additional Gaussian parameters, we propose Gaussian feature grouping\nin a normalized feature space, along with splats pooling layer, offering a\ntailored solution to effectively group and embed similar Gaussians, which leads\nto notable improvement in finetuning tasks.",
+      "archive_rows": {
+        "3D Gen&Recon": "|**2024-08-20**|**ShapeSplat: A Large-scale Dataset of Gaussian Splats and Their Self-Supervised Pretraining**|Qi Ma et.al.|[2408.10906](https://arxiv.org/abs/2408.10906)|null|\n"
+      },
+      "authors": "Qi Ma et.al.",
+      "collected_at": "2026-11-12T01:08:37+00:00",
+      "decision_reason": "论文构建了大规模3D Gaussian Splatting数据集，并提出了针对该表示的自监督预训练方法（Gaussian-MAE），属于3D表示学习与重建领域的核心贡献。",
+      "display_id": "2408.10906",
+      "hf_daily": {
+        "dates": [
+          "2024-08-21"
+        ],
+        "evidence_sha256": "4d4d193869e8d71b0250bb1ea99581093c5403a387716cdd36c11573e326c938",
+        "url": "https://huggingface.co/papers/2408.10906"
+      },
+      "id": "2408.10906",
+      "matched_topics": [
+        "3D Gen&Recon"
+      ],
+      "paper_url": "https://arxiv.org/abs/2408.10906",
+      "pdf_url": "https://arxiv.org/pdf/2408.10906.pdf",
+      "reviewed_at": "2026-11-12T01:08:38+00:00",
+      "selected_topic": "3D Gen&Recon",
+      "sources": [
+        "huggingface"
+      ],
+      "status": "accepted",
+      "title": "ShapeSplat: A Large-scale Dataset of Gaussian Splats and Their Self-Supervised Pretraining",
+      "updated": "2024-08-20"
+    },
+    "2408.11001": {
+      "abstract": "Diffusion models have emerged as frontrunners in text-to-image generation for\ntheir impressive capabilities. Nonetheless, their fixed image resolution during\ntraining often leads to challenges in high-resolution image generation, such as\nsemantic inaccuracies and object replication. This paper introduces MegaFusion,\na novel approach that extends existing diffusion-based text-to-image generation\nmodels towards efficient higher-resolution generation without additional\nfine-tuning or extra adaptation. Specifically, we employ an innovative truncate\nand relay strategy to bridge the denoising processes across different\nresolutions, allowing for high-resolution image generation in a coarse-to-fine\nmanner. Moreover, by integrating dilated convolutions and noise re-scheduling,\nwe further adapt the model's priors for higher resolution. The versatility and\nefficacy of MegaFusion make it universally applicable to both latent-space and\npixel-space diffusion models, along with other derivative models. Extensive\nexperiments confirm that MegaFusion significantly boosts the capability of\nexisting models to produce images of megapixels and various aspect ratios,\nwhile only requiring about 40% of the original computational cost.",
+      "archive_rows": {
+        "Image Gen&Edit": "|**2024-08-20**|**MegaFusion: Extend Diffusion Models towards Higher-resolution Image Generation without Further Tuning**|Haoning Wu et.al.|[2408.11001](https://arxiv.org/abs/2408.11001)|null|\n"
+      },
+      "authors": "Haoning Wu et.al.",
+      "collected_at": "2026-11-12T01:08:37+00:00",
+      "decision_reason": "论文提出MegaFusion方法，通过截断中继策略和空洞卷积扩展扩散模型，实现无需额外微调的高分辨率文生图，属于图像生成方法贡献。",
+      "display_id": "2408.11001",
+      "hf_daily": {
+        "dates": [
+          "2024-08-21"
+        ],
+        "evidence_sha256": "271652f8336ea91a3c93aa3efe4dd47de639a23a34a8a463743bc056eab1026f",
+        "url": "https://huggingface.co/papers/2408.11001"
+      },
+      "id": "2408.11001",
+      "matched_topics": [
+        "Image Gen&Edit"
+      ],
+      "paper_url": "https://arxiv.org/abs/2408.11001",
+      "pdf_url": "https://arxiv.org/pdf/2408.11001.pdf",
+      "reviewed_at": "2026-11-12T01:08:38+00:00",
+      "selected_topic": "Image Gen&Edit",
+      "sources": [
+        "huggingface"
+      ],
+      "status": "accepted",
+      "title": "MegaFusion: Extend Diffusion Models towards Higher-resolution Image Generation without Further Tuning",
       "updated": "2024-08-20"
     },
     "2408.11085": {
@@ -58507,6 +59325,68 @@
       "title": "Irregularity Inspection using Neural Radiance Field",
       "updated": "2024-08-21"
     },
+    "2408.11706": {
+      "abstract": "Text-to-image (T2I) diffusion models have demonstrated impressive\ncapabilities in generating high-quality images given a text prompt. However,\nensuring the prompt-image alignment remains a considerable challenge, i.e.,\ngenerating images that faithfully align with the prompt's semantics. Recent\nworks attempt to improve the faithfulness by optimizing the latent code, which\npotentially could cause the latent code to go out-of-distribution and thus\nproduce unrealistic images. In this paper, we propose FRAP, a simple, yet\neffective approach based on adaptively adjusting the per-token prompt weights\nto improve prompt-image alignment and authenticity of the generated images. We\ndesign an online algorithm to adaptively update each token's weight\ncoefficient, which is achieved by minimizing a unified objective function that\nencourages object presence and the binding of object-modifier pairs. Through\nextensive evaluations, we show FRAP generates images with significantly higher\nprompt-image alignment to prompts from complex datasets, while having a lower\naverage latency compared to recent latent code optimization methods, e.g., 4\nseconds faster than D&B on the COCO-Subject dataset. Furthermore, through\nvisual comparisons and evaluation on the CLIP-IQA-Real metric, we show that\nFRAP not only improves prompt-image alignment but also generates more authentic\nimages with realistic appearances. We also explore combining FRAP with prompt\nrewriting LLM to recover their degraded prompt-image alignment, where we\nobserve improvements in both prompt-image alignment and image quality.",
+      "archive_rows": {
+        "Image Gen&Edit": "|**2024-08-21**|**FRAP: Faithful and Realistic Text-to-Image Generation with Adaptive Prompt Weighting**|Liyao Jiang et.al.|[2408.11706](https://arxiv.org/abs/2408.11706)|null|\n"
+      },
+      "authors": "Liyao Jiang et.al.",
+      "collected_at": "2026-11-12T01:08:37+00:00",
+      "decision_reason": "论文提出了FRAP方法，通过自适应调整提示词权重来改进文本到图像扩散模型的生成质量与对齐度，属于图像生成方法贡献。",
+      "display_id": "2408.11706",
+      "hf_daily": {
+        "dates": [
+          "2024-08-22"
+        ],
+        "evidence_sha256": "1dc8e3fd1a5d5a1994e4a937c93fc13c7b65fbb9ba0181a6a5a191774f15a5ab",
+        "url": "https://huggingface.co/papers/2408.11706"
+      },
+      "id": "2408.11706",
+      "matched_topics": [
+        "Image Gen&Edit"
+      ],
+      "paper_url": "https://arxiv.org/abs/2408.11706",
+      "pdf_url": "https://arxiv.org/pdf/2408.11706.pdf",
+      "reviewed_at": "2026-11-12T01:08:38+00:00",
+      "selected_topic": "Image Gen&Edit",
+      "sources": [
+        "huggingface"
+      ],
+      "status": "accepted",
+      "title": "FRAP: Faithful and Realistic Text-to-Image Generation with Adaptive Prompt Weighting",
+      "updated": "2024-08-21"
+    },
+    "2408.11721": {
+      "abstract": "We address a persistent challenge in text-to-image models: accurately\ngenerating a specified number of objects. Current models, which learn from\nimage-text pairs, inherently struggle with counting, as training data cannot\ndepict every possible number of objects for any given object. To solve this, we\npropose optimizing the generated image based on a counting loss derived from a\ncounting model that aggregates an object\\'s potential. Employing an\nout-of-the-box counting model is challenging for two reasons: first, the model\nrequires a scaling hyperparameter for the potential aggregation that varies\ndepending on the viewpoint of the objects, and second, classifier guidance\ntechniques require modified models that operate on noisy intermediate diffusion\nsteps. To address these challenges, we propose an iterated online training mode\nthat improves the accuracy of inferred images while altering the text\nconditioning embedding and dynamically adjusting hyperparameters. Our method\noffers three key advantages: (i) it can consider non-derivable counting\ntechniques based on detection models, (ii) it is a zero-shot plug-and-play\nsolution facilitating rapid changes to the counting techniques and image\ngeneration methods, and (iii) the optimized counting token can be reused to\ngenerate accurate images without additional optimization. We evaluate the\ngeneration of various objects and show significant improvements in accuracy.\nThe project page is available at https://ozzafar.github.io/count_token.",
+      "archive_rows": {
+        "Image Gen&Edit": "|**2024-08-21**|**Iterative Object Count Optimization for Text-to-image Diffusion Models**|Oz Zafar et.al.|[2408.11721](https://arxiv.org/abs/2408.11721)|null|\n"
+      },
+      "authors": "Oz Zafar et.al.",
+      "collected_at": "2026-11-12T01:08:37+00:00",
+      "decision_reason": "论文提出了一种针对文本到图像扩散模型的优化方法，通过迭代优化计数损失来准确生成指定数量的对象，属于可控图像生成方法的贡献。",
+      "display_id": "2408.11721",
+      "hf_daily": {
+        "dates": [
+          "2024-08-22"
+        ],
+        "evidence_sha256": "db493ff392153b0d8876d9bd43da5fa23abc72a1311ee6bde5d96db3dcededfc",
+        "url": "https://huggingface.co/papers/2408.11721"
+      },
+      "id": "2408.11721",
+      "matched_topics": [
+        "Image Gen&Edit"
+      ],
+      "paper_url": "https://arxiv.org/abs/2408.11721",
+      "pdf_url": "https://arxiv.org/pdf/2408.11721.pdf",
+      "reviewed_at": "2026-11-12T01:08:38+00:00",
+      "selected_topic": "Image Gen&Edit",
+      "sources": [
+        "huggingface"
+      ],
+      "status": "accepted",
+      "title": "Iterative Object Count Optimization for Text-to-image Diffusion Models",
+      "updated": "2024-08-21"
+    },
     "2408.11816": {
       "abstract": "In the face of difficult exploration problems in reinforcement learning, we study whether giving an agent an object-centric mapping (describing a set of items and their attributes) allow for more efficient learning. We found this problem is best solved hierarchically by modelling items at a higher level of state abstraction to pixels, and attribute change at a higher level of temporal abstraction to primitive actions. This abstraction simplifies the transition dynamic by making specific future states easier to predict. We make use of this to propose a fully model-based algorithm that learns a discriminative world model, plans to explore efficiently with only a count-based intrinsic reward, and can subsequently plan to reach any discovered (abstract) states. We demonstrate the model's ability to (i) efficiently solve single tasks, (ii) transfer zero-shot and few-shot across item types and environments, and (iii) plan across long horizons. Across a suite of 2D crafting and MiniHack environments, we empirically show our model significantly out-performs state-of-the-art low-level methods (without abstraction), as well as performant model-free and model-based methods using the same abstraction. Finally, we show how to learn low level object-perturbing policies via reinforcement learning, and the object mapping itself by supervised learning.",
       "archive_rows": {
@@ -58556,6 +59436,165 @@
       "status": "accepted",
       "title": "Efficient Exploration and Discriminative World Model Learning with an Object-Centric Abstraction",
       "updated": "2024-08-21"
+    },
+    "2408.12245": {
+      "abstract": "We introduce AiM, an autoregressive (AR) image generative model based on\nMamba architecture. AiM employs Mamba, a novel state-space model characterized\nby its exceptional performance for long-sequence modeling with linear time\ncomplexity, to supplant the commonly utilized Transformers in AR image\ngeneration models, aiming to achieve both superior generation quality and\nenhanced inference speed. Unlike existing methods that adapt Mamba to handle\ntwo-dimensional signals via multi-directional scan, AiM directly utilizes the\nnext-token prediction paradigm for autoregressive image generation. This\napproach circumvents the need for extensive modifications to enable Mamba to\nlearn 2D spatial representations. By implementing straightforward yet\nstrategically targeted modifications for visual generative tasks, we preserve\nMamba's core structure, fully exploiting its efficient long-sequence modeling\ncapabilities and scalability. We provide AiM models in various scales, with\nparameter counts ranging from 148M to 1.3B. On the ImageNet1K 256*256\nbenchmark, our best AiM model achieves a FID of 2.21, surpassing all existing\nAR models of comparable parameter counts and demonstrating significant\ncompetitiveness against diffusion models, with 2 to 10 times faster inference\nspeed. Code is available at https://github.com/hp-l33/AiM",
+      "archive_rows": {
+        "Image Gen&Edit": "|**2024-08-22**|**Scalable Autoregressive Image Generation with Mamba**|Haopeng Li et.al.|[2408.12245](https://arxiv.org/abs/2408.12245)|null|\n"
+      },
+      "authors": "Haopeng Li et.al.",
+      "collected_at": "2026-11-12T01:08:37+00:00",
+      "decision_reason": "论文提出了基于Mamba架构的自回归图像生成模型AiM，属于图像生成方法，符合Image Gen&Edit主题。",
+      "display_id": "2408.12245",
+      "hf_daily": {
+        "dates": [
+          "2024-08-23"
+        ],
+        "evidence_sha256": "d6c474133bfd51a261d31972adfa1e70baabba38a3f0df2ce1c5dde2d51aaf3f",
+        "url": "https://huggingface.co/papers/2408.12245"
+      },
+      "id": "2408.12245",
+      "matched_topics": [
+        "Image Gen&Edit"
+      ],
+      "paper_url": "https://arxiv.org/abs/2408.12245",
+      "pdf_url": "https://arxiv.org/pdf/2408.12245.pdf",
+      "reviewed_at": "2026-11-12T01:08:38+00:00",
+      "selected_topic": "Image Gen&Edit",
+      "sources": [
+        "huggingface"
+      ],
+      "status": "accepted",
+      "title": "Scalable Autoregressive Image Generation with Mamba",
+      "updated": "2024-08-22"
+    },
+    "2408.12282": {
+      "abstract": "3D reconstruction and relighting of objects made from scattering materials\npresent a significant challenge due to the complex light transport beneath the\nsurface. 3D Gaussian Splatting introduced high-quality novel view synthesis at\nreal-time speeds. While 3D Gaussians efficiently approximate an object's\nsurface, they fail to capture the volumetric properties of subsurface\nscattering. We propose a framework for optimizing an object's shape together\nwith the radiance transfer field given multi-view OLAT (one light at a time)\ndata. Our method decomposes the scene into an explicit surface represented as\n3D Gaussians, with a spatially varying BRDF, and an implicit volumetric\nrepresentation of the scattering component. A learned incident light field\naccounts for shadowing. We optimize all parameters jointly via ray-traced\ndifferentiable rendering. Our approach enables material editing, relighting and\nnovel view synthesis at interactive rates. We show successful application on\nsynthetic data and introduce a newly acquired multi-view multi-light dataset of\nobjects in a light-stage setup. Compared to previous work we achieve comparable\nor better results at a fraction of optimization and rendering time while\nenabling detailed control over material attributes. Project page\nhttps://sss.jdihlmann.com/",
+      "archive_rows": {
+        "3D Gen&Recon": "|**2024-08-22**|**Subsurface Scattering for 3D Gaussian Splatting**|Jan-Niklas Dihlmann et.al.|[2408.12282](https://arxiv.org/abs/2408.12282)|null|\n",
+        "Relighting": "|**2024-08-22**|**Subsurface Scattering for 3D Gaussian Splatting**|Jan-Niklas Dihlmann et.al.|[2408.12282](https://arxiv.org/abs/2408.12282)|null|\n"
+      },
+      "authors": "Jan-Niklas Dihlmann et.al.",
+      "collected_at": "2026-11-12T01:08:37+00:00",
+      "decision_reason": "论文提出了一种基于3D高斯泼溅的框架，专门用于解决散射材料（如皮肤、玉石）的次表面散射问题，核心贡献包括光照重定向（Relighting）、材质编辑以及基于多视角数据的光照估计，完全符合Relighting主题定义。",
+      "display_id": "2408.12282",
+      "hf_daily": {
+        "dates": [
+          "2024-08-23"
+        ],
+        "evidence_sha256": "9764ccd15766b2a629a9282d6887798817840248854d6bf20a0081d731a45285",
+        "url": "https://huggingface.co/papers/2408.12282"
+      },
+      "id": "2408.12282",
+      "matched_topics": [
+        "3D Gen&Recon",
+        "Relighting"
+      ],
+      "paper_url": "https://arxiv.org/abs/2408.12282",
+      "pdf_url": "https://arxiv.org/pdf/2408.12282.pdf",
+      "reviewed_at": "2026-11-12T01:08:38+00:00",
+      "selected_topic": "Relighting",
+      "sources": [
+        "huggingface"
+      ],
+      "status": "accepted",
+      "title": "Subsurface Scattering for 3D Gaussian Splatting",
+      "updated": "2024-08-22"
+    },
+    "2408.12418": {
+      "abstract": "Conditioning image generation facilitates seamless editing and the creation\nof photorealistic images. However, conditioning on noisy or Out-of-Distribution\n(OoD) images poses significant challenges, particularly in balancing fidelity\nto the input and realism of the output. We introduce Confident Ordinary\nDifferential Editing (CODE), a novel approach for image synthesis that\neffectively handles OoD guidance images. Utilizing a diffusion model as a\ngenerative prior, CODE enhances images through score-based updates along the\nprobability-flow Ordinary Differential Equation (ODE) trajectory. This method\nrequires no task-specific training, no handcrafted modules, and no assumptions\nregarding the corruptions affecting the conditioning image. Our method is\ncompatible with any diffusion model. Positioned at the intersection of\nconditional image generation and blind image restoration, CODE operates in a\nfully blind manner, relying solely on a pre-trained generative model. Our\nmethod introduces an alternative approach to blind restoration: instead of\ntargeting a specific ground truth image based on assumptions about the\nunderlying corruption, CODE aims to increase the likelihood of the input image\nwhile maintaining fidelity. This results in the most probable in-distribution\nimage around the input. Our contributions are twofold. First, CODE introduces a\nnovel editing method based on ODE, providing enhanced control, realism, and\nfidelity compared to its SDE-based counterpart. Second, we introduce a\nconfidence interval-based clipping method, which improves CODE's effectiveness\nby allowing it to disregard certain pixels or information, thus enhancing the\nrestoration process in a blind manner. Experimental results demonstrate CODE's\neffectiveness over existing methods, particularly in scenarios involving severe\ndegradation or OoD inputs.",
+      "archive_rows": {
+        "Image Gen&Edit": "|**2024-08-22**|**CODE: Confident Ordinary Differential Editing**|Bastien van Delft et.al.|[2408.12418](https://arxiv.org/abs/2408.12418)|null|\n"
+      },
+      "authors": "Bastien van Delft et.al.",
+      "collected_at": "2026-11-12T01:08:37+00:00",
+      "decision_reason": "论文提出了基于扩散模型ODE轨迹的图像编辑与修复方法，属于图像生成与编辑范畴。",
+      "display_id": "2408.12418",
+      "hf_daily": {
+        "dates": [
+          "2024-08-26"
+        ],
+        "evidence_sha256": "887a44b8beb395d90e8827424d114f454e8f5a9153b8825a0abbac4909eb9516",
+        "url": "https://huggingface.co/papers/2408.12418"
+      },
+      "id": "2408.12418",
+      "matched_topics": [
+        "Image Gen&Edit"
+      ],
+      "paper_url": "https://arxiv.org/abs/2408.12418",
+      "pdf_url": "https://arxiv.org/pdf/2408.12418.pdf",
+      "reviewed_at": "2026-11-12T01:08:38+00:00",
+      "selected_topic": "Image Gen&Edit",
+      "sources": [
+        "huggingface"
+      ],
+      "status": "accepted",
+      "title": "CODE: Confident Ordinary Differential Editing",
+      "updated": "2024-08-22"
+    },
+    "2408.12528": {
+      "abstract": "We present a unified transformer, i.e., Show-o, that unifies multimodal\nunderstanding and generation. Unlike fully autoregressive models, Show-o\nunifies autoregressive and (discrete) diffusion modeling to adaptively handle\ninputs and outputs of various and mixed modalities. The unified model flexibly\nsupports a wide range of vision-language tasks including visual\nquestion-answering, text-to-image generation, text-guided\ninpainting/extrapolation, and mixed-modality generation. Across various\nbenchmarks, it demonstrates comparable or superior performance to existing\nindividual models with an equivalent or larger number of parameters tailored\nfor understanding or generation. This significantly highlights its potential as\na next-generation foundation model. Code and models are released at\nhttps://github.com/showlab/Show-o.",
+      "archive_rows": {
+        "Image Gen&Edit": "|**2024-08-22**|**Show-o: One Single Transformer to Unify Multimodal Understanding and Generation**|Jinheng Xie et.al.|[2408.12528](https://arxiv.org/abs/2408.12528)|null|\n"
+      },
+      "authors": "Jinheng Xie et.al.",
+      "collected_at": "2026-11-12T01:08:37+00:00",
+      "decision_reason": "论文提出统一Transformer模型Show-o，结合自回归与离散扩散方法，明确支持文生图、文本引导的图像修复/外推等图像生成与编辑任务，符合图像生成与编辑主题。",
+      "display_id": "2408.12528",
+      "hf_daily": {
+        "dates": [
+          "2024-08-23"
+        ],
+        "evidence_sha256": "577ca7c0851e94de69c5cf6da1d33bc658f0349ccfa9eff91fd2c57fbce08409",
+        "url": "https://huggingface.co/papers/2408.12528"
+      },
+      "id": "2408.12528",
+      "matched_topics": [
+        "Image Gen&Edit"
+      ],
+      "paper_url": "https://arxiv.org/abs/2408.12528",
+      "pdf_url": "https://arxiv.org/pdf/2408.12528.pdf",
+      "reviewed_at": "2026-11-12T01:08:38+00:00",
+      "selected_topic": "Image Gen&Edit",
+      "sources": [
+        "huggingface"
+      ],
+      "status": "accepted",
+      "title": "Show-o: One Single Transformer to Unify Multimodal Understanding and Generation",
+      "updated": "2024-08-22"
+    },
+    "2408.12590": {
+      "abstract": "We present xGen-VideoSyn-1, a text-to-video (T2V) generation model capable of\nproducing realistic scenes from textual descriptions. Building on recent\nadvancements, such as OpenAI's Sora, we explore the latent diffusion model\n(LDM) architecture and introduce a video variational autoencoder (VidVAE).\nVidVAE compresses video data both spatially and temporally, significantly\nreducing the length of visual tokens and the computational demands associated\nwith generating long-sequence videos. To further address the computational\ncosts, we propose a divide-and-merge strategy that maintains temporal\nconsistency across video segments. Our Diffusion Transformer (DiT) model\nincorporates spatial and temporal self-attention layers, enabling robust\ngeneralization across different timeframes and aspect ratios. We have devised a\ndata processing pipeline from the very beginning and collected over 13M\nhigh-quality video-text pairs. The pipeline includes multiple steps such as\nclipping, text detection, motion estimation, aesthetics scoring, and dense\ncaptioning based on our in-house video-LLM model. Training the VidVAE and DiT\nmodels required approximately 40 and 642 H100 days, respectively. Our model\nsupports over 14-second 720p video generation in an end-to-end way and\ndemonstrates competitive performance against state-of-the-art T2V models.",
+      "archive_rows": {
+        "Image Gen&Edit": "|**2024-08-22**|**xGen-VideoSyn-1: High-fidelity Text-to-Video Synthesis with Compressed Representations**|Can Qin et.al.|[2408.12590](https://arxiv.org/abs/2408.12590)|null|\n",
+        "Video Gen&Edit": "|**2024-08-22**|**xGen-VideoSyn-1: High-fidelity Text-to-Video Synthesis with Compressed Representations**|Can Qin et.al.|[2408.12590](https://arxiv.org/abs/2408.12590)|null|\n"
+      },
+      "authors": "Can Qin et.al.",
+      "collected_at": "2026-11-12T01:08:37+00:00",
+      "decision_reason": "论文提出了基于潜扩散模型和DiT架构的文本到视频生成方法，属于视频生成核心贡献。",
+      "display_id": "2408.12590",
+      "hf_daily": {
+        "dates": [
+          "2024-08-23"
+        ],
+        "evidence_sha256": "529d6ae712ddb6a3d5b408efaaf812943f530cc47877e1acf82e9326110213be",
+        "url": "https://huggingface.co/papers/2408.12590"
+      },
+      "id": "2408.12590",
+      "matched_topics": [
+        "Image Gen&Edit",
+        "Video Gen&Edit"
+      ],
+      "paper_url": "https://arxiv.org/abs/2408.12590",
+      "pdf_url": "https://arxiv.org/pdf/2408.12590.pdf",
+      "reviewed_at": "2026-11-12T01:08:38+00:00",
+      "selected_topic": "Video Gen&Edit",
+      "sources": [
+        "huggingface"
+      ],
+      "status": "accepted",
+      "title": "xGen-VideoSyn-1: High-fidelity Text-to-Video Synthesis with Compressed Representations",
+      "updated": "2024-08-22"
     },
     "2408.13252": {
       "abstract": "3D immersive scene generation is a challenging yet critical task in computer vision and graphics. A desired virtual 3D scene should 1) exhibit omnidirectional view consistency, and 2) allow for free exploration in complex scene hierarchies. Existing methods either rely on successive scene expansion via inpainting or employ panorama representation to represent large FOV scene environments. However, the generated scene suffers from semantic drift during expansion and is unable to handle occlusion among scene hierarchies. To tackle these challenges, we introduce Layerpano3D, a novel framework for full-view, explorable panoramic 3D scene generation from a single text prompt. Our key insight is to decompose a reference 2D panorama into multiple layers at different depth levels, where each layer reveals the unseen space from the reference views via diffusion prior. Layerpano3D comprises multiple dedicated designs: 1) We introduce a new panorama dataset Upright360, comprising 9k high-quality and upright panorama images, and finetune the advanced Flux model on Upright360 for high-quality, upright and consistent panorama generation. 2) We pioneer the Layered 3D Panorama as underlying representation to manage complex scene hierarchies and lift it into 3D Gaussians to splat detailed 360-degree omnidirectional scenes with unconstrained viewing paths. Extensive experiments demonstrate that our framework generates state-of-the-art 3D panoramic scene in both full view consistency and immersive exploratory experience. We believe that Layerpano3D holds promise for advancing 3D panoramic scene creation with numerous applications.",
@@ -58636,6 +59675,39 @@
       "title": "SIn-NeRF2NeRF: Editing 3D Scenes with Instructions through Segmentation and Inpainting",
       "updated": "2024-08-23"
     },
+    "2408.13423": {
+      "abstract": "Video generation models hold substantial potential in areas such as\nfilmmaking. However, current video diffusion models need high computational\ncosts and produce suboptimal results due to high complexity of video generation\ntask. In this paper, we propose ConFiner, an efficient high-quality\nvideo generation framework that decouples video generation into easier\nsubtasks: structure control and spatial-temporal refinement.\nIt can generate high-quality videos with chain of off-the-shelf diffusion model\nexperts, each expert responsible for a decoupled subtask. During the\nrefinement, we introduce coordinated denoising, which can merge multiple\ndiffusion experts' capabilities into a single sampling. Furthermore, we design\nConFiner-Long framework, which can generate long coherent video with three\nconstraint strategies on ConFiner. Experimental results indicate that with only\n10\\% of the inference cost, our ConFiner surpasses representative models like\nLavie and Modelscope across all objective and subjective metrics. And\nConFiner-Long can generate high-quality and coherent videos with up to 600\nframes.",
+      "archive_rows": {
+        "Image Gen&Edit": "|**2024-08-24**|**Training-free Long Video Generation with Chain of Diffusion Model Experts**|Wenhao Li et.al.|[2408.13423](https://arxiv.org/abs/2408.13423)|null|\n",
+        "Video Gen&Edit": "|**2024-08-24**|**Training-free Long Video Generation with Chain of Diffusion Model Experts**|Wenhao Li et.al.|[2408.13423](https://arxiv.org/abs/2408.13423)|null|\n"
+      },
+      "authors": "Wenhao Li et.al.",
+      "collected_at": "2026-11-12T01:08:37+00:00",
+      "decision_reason": "论文提出了ConFiner框架，通过解耦结构控制和时空细化子任务，利用链式扩散模型专家实现高效的高质量视频生成及长视频生成，属于视频生成方法。",
+      "display_id": "2408.13423",
+      "hf_daily": {
+        "dates": [
+          "2024-08-27"
+        ],
+        "evidence_sha256": "ae9ca30d862756611875297b0138748678d8999fe5928f5718bd97629be813b7",
+        "url": "https://huggingface.co/papers/2408.13423"
+      },
+      "id": "2408.13423",
+      "matched_topics": [
+        "Image Gen&Edit",
+        "Video Gen&Edit"
+      ],
+      "paper_url": "https://arxiv.org/abs/2408.13423",
+      "pdf_url": "https://arxiv.org/pdf/2408.13423.pdf",
+      "reviewed_at": "2026-11-12T01:08:38+00:00",
+      "selected_topic": "Video Gen&Edit",
+      "sources": [
+        "huggingface"
+      ],
+      "status": "accepted",
+      "title": "Training-free Long Video Generation with Chain of Diffusion Model Experts",
+      "updated": "2024-08-24"
+    },
     "2408.13508": {
       "abstract": "Neural Radiance Fields (NeRF) have emerged as a powerful tool for creating highly detailed and photorealistic scenes. Existing methods for NeRF-based 3D style transfer need extensive per-scene optimization for single or multiple styles, limiting the applicability and efficiency of 3D style transfer. In this work, we overcome the limitations of existing methods by rendering stylized novel views from a NeRF without the need for per-scene or per-style optimization. To this end, we take advantage of a generalizable NeRF model to facilitate style transfer in 3D, thereby enabling the use of a single learned model across various scenes. By incorporating a hypernetwork into a generalizable NeRF, our approach enables on-the-fly generation of stylized novel views. Moreover, we introduce a novel flow-based multi-view consistency loss to preserve consistency across multiple views. We evaluate our method across various scenes and artistic styles and show its performance in generating high-quality and multi-view consistent stylized images without the need for a scene-specific implicit model. Our findings demonstrate that this approach not only achieves a good visual quality comparable to that of per-scene methods but also significantly enhances efficiency and applicability, marking a notable advancement in the field of 3D style transfer.",
       "archive_rows": {
@@ -58678,6 +59750,37 @@
       "selected_topic": "3D Gen&Recon",
       "status": "accepted",
       "title": "G3DST: Generalizing 3D Style Transfer with Neural Radiance Fields across Scenes and Styles",
+      "updated": "2024-08-24"
+    },
+    "2408.13674": {
+      "abstract": "Photo-realistic and controllable 3D avatars are crucial for various applications such as virtual and mixed reality (VR/MR), telepresence, gaming, and film production. Traditional methods for avatar creation often involve time-consuming scanning and reconstruction processes for each avatar, which limits their scalability. Furthermore, these methods do not offer the flexibility to sample new identities or modify existing ones. On the other hand, by learning a strong prior from data, generative models provide a promising alternative to traditional reconstruction methods, easing the time constraints for both data capture and processing. Additionally, generative methods enable downstream applications beyond reconstruction, such as editing and stylization. Nonetheless, the research on generative 3D avatars is still in its infancy, and therefore current methods still have limitations such as creating static avatars, lacking photo-realism, having incomplete facial details, or having limited drivability. To address this, we propose a text-conditioned generative model that can generate photo-realistic facial avatars of diverse identities, with more complete details like hair, eyes and mouth interior, and which can be driven through a powerful non-parametric latent expression space. Specifically, we integrate the generative and editing capabilities of latent diffusion models with a strong prior model for avatar expression driving.\n  Our model can generate and control high-fidelity avatars, even those out-of-distribution. We also highlight its potential for downstream applications, including avatar editing and single-shot avatar reconstruction.",
+      "archive_rows": {
+        "3D Gen&Recon": "|**2024-08-24**|**GenCA: A Text-conditioned Generative Model for Realistic and Drivable Codec Avatars**|Keqiang Sun et.al.|[2408.13674](https://arxiv.org/abs/2408.13674)|null|\n"
+      },
+      "authors": "Keqiang Sun et.al.",
+      "collected_at": "2026-11-12T01:08:37+00:00",
+      "decision_reason": "论文提出了一种基于文本条件的生成模型，用于生成逼真且可驱动的3D头像，属于3D生成与重建范畴。",
+      "display_id": "2408.13674",
+      "hf_daily": {
+        "dates": [
+          "2024-08-28"
+        ],
+        "evidence_sha256": "a3a0faecf0d19bb3b01039d7c6abf26430212b33a6736a357021dad163bc7cef",
+        "url": "https://huggingface.co/papers/2408.13674"
+      },
+      "id": "2408.13674",
+      "matched_topics": [
+        "3D Gen&Recon"
+      ],
+      "paper_url": "https://arxiv.org/abs/2408.13674",
+      "pdf_url": "https://arxiv.org/pdf/2408.13674.pdf",
+      "reviewed_at": "2026-11-12T01:08:38+00:00",
+      "selected_topic": "3D Gen&Recon",
+      "sources": [
+        "huggingface"
+      ],
+      "status": "accepted",
+      "title": "GenCA: A Text-conditioned Generative Model for Realistic and Drivable Codec Avatars",
       "updated": "2024-08-24"
     },
     "2408.13770": {
@@ -58777,6 +59880,37 @@
       "status": "accepted",
       "title": "COMPOSE: Comprehensive Portrait Shadow Editing",
       "updated": "2024-08-25"
+    },
+    "2408.14176": {
+      "abstract": "In this paper, we aim to enhance the performance of SwiftBrush, a prominent\none-step text-to-image diffusion model, to be competitive with its multi-step\nStable Diffusion counterpart. Initially, we explore the quality-diversity\ntrade-off between SwiftBrush and SD Turbo: the former excels in image\ndiversity, while the latter excels in image quality. This observation motivates\nour proposed modifications in the training methodology, including better weight\ninitialization and efficient LoRA training. Moreover, our introduction of a\nnovel clamped CLIP loss enhances image-text alignment and results in improved\nimage quality. Remarkably, by combining the weights of models trained with\nefficient LoRA and full training, we achieve a new state-of-the-art one-step\ndiffusion model, achieving an FID of 8.14 and surpassing all GAN-based and\nmulti-step Stable Diffusion models. The evaluation code is available at:\nhttps://github.com/vinairesearch/swiftbrushv2.",
+      "archive_rows": {
+        "Image Gen&Edit": "|**2024-08-26**|**SwiftBrush v2: Make Your One-step Diffusion Model Better Than Its Teacher**|Trung Dao et.al.|[2408.14176](https://arxiv.org/abs/2408.14176)|null|\n"
+      },
+      "authors": "Trung Dao et.al.",
+      "collected_at": "2026-11-12T01:08:37+00:00",
+      "decision_reason": "论文提出了一种改进的一步扩散模型（SwiftBrush v2），用于文本到图像生成，属于图像生成方法。",
+      "display_id": "2408.14176",
+      "hf_daily": {
+        "dates": [
+          "2024-08-27"
+        ],
+        "evidence_sha256": "a71ef5cdf1c2d903921cfd7dc288c9f28ebcc32dbdd62549b852cbc37c8fe0bf",
+        "url": "https://huggingface.co/papers/2408.14176"
+      },
+      "id": "2408.14176",
+      "matched_topics": [
+        "Image Gen&Edit"
+      ],
+      "paper_url": "https://arxiv.org/abs/2408.14176",
+      "pdf_url": "https://arxiv.org/pdf/2408.14176.pdf",
+      "reviewed_at": "2026-11-12T01:08:38+00:00",
+      "selected_topic": "Image Gen&Edit",
+      "sources": [
+        "huggingface"
+      ],
+      "status": "accepted",
+      "title": "SwiftBrush v2: Make Your One-step Diffusion Model Better Than Its Teacher",
+      "updated": "2024-08-26"
     },
     "2408.14197": {
       "abstract": "World models envision potential future states based on various ego actions. They embed extensive knowledge about the driving environment, facilitating safe and scalable autonomous driving. Most existing methods primarily focus on either data generation or the pretraining paradigms of world models. Unlike the aforementioned prior works, we propose Drive-OccWorld, which adapts a vision-centric 4D forecasting world model to end-to-end planning for autonomous driving. Specifically, we first introduce a semantic and motion-conditional normalization in the memory module, which accumulates semantic and dynamic information from historical BEV embeddings. These BEV features are then conveyed to the world decoder for future occupancy and flow forecasting, considering both geometry and spatiotemporal modeling. Additionally, we propose injecting flexible action conditions, such as velocity, steering angle, trajectory, and commands, into the world model to enable controllable generation and facilitate a broader range of downstream applications. Furthermore, we explore integrating the generative capabilities of the 4D world model with end-to-end planning, enabling continuous forecasting of future states and the selection of optimal trajectories using an occupancy-based cost function. Comprehensive experiments conducted on the nuScenes, nuScenes-Occupancy, and Lyft-Level5 datasets illustrate that our method can generate plausible and controllable 4D occupancy, paving the way for advancements in driving world generation and end-to-end planning. Project page: https://drive-occworld.github.io/",
@@ -58977,6 +60111,13 @@
       ],
       "collected_at": "2026-09-06T07:39:58+00:00",
       "decision_reason": "二次复核：Image Gen&Edit: 论文核心贡献是构建一个能够实时交互模拟复杂游戏环境的神经引擎，虽然其底层机制涉及图像生成，但主要目标并非静态图像的生成或编辑，而是动态环境的持续模拟与状态保持，因此不属于图像生成与编辑主题的核心范畴。; Video Gen&Edit: 尽管论文涉及视频帧的生成，但其核心在于通过动作条件进行交互式的世界模拟，而非传统的文本到视频或视频编辑任务。论文强调的是游戏引擎的实时交互能力和长期轨迹的稳定性，而非视频内容的生成质量或编辑能力，故不匹配视频生成与编辑主题。; 3D Gen&Recon: 论文并未涉及3D几何结构、网格、点云或神经辐射场等3D表示的生成或重建。它直接在像素空间或潜在空间预测下一帧图像，而不显式地构建3D场景或物体，因此不符合3D生成与重建主题中关于3D/4D对象、形状或场景生成的定义。; World Model: 论文提出GameNGen，这是一个完全由神经模型驱动的游戏引擎，能够根据动作序列预测环境未来的状态（下一帧），并支持实时交互。这符合世界模型作为学习环境动态、交互世界或动作条件未来状态的生成或预测模型的定义，其核心贡献正是构建一个可交互的神经世界模型。; Relighting: 论文内容完全未涉及光照估计、传输、编辑或生成，也没有处理反射率、阴影或新光照下的外观问题。其关注点在于游戏状态的模拟和帧预测，与重光照主题没有任何技术或应用上的关联，因此明确不相关。; Depth Estimation: 论文没有进行单目、立体或多视图深度估计，也没有预测度量或相对深度。它直接生成视觉帧，而不显式地恢复几何深度信息。虽然游戏引擎内部可能有深度信息，但论文的核心贡献和评估指标均不涉及深度估计任务，因此不属于该主题。",
+      "hf_daily": {
+        "dates": [
+          "2024-08-28"
+        ],
+        "evidence_sha256": "0b46d3ac7e4ffbb2aa4d0af4a04bc3d487502fe85a0d79b64cb2adfcea9a261f",
+        "url": "https://huggingface.co/papers/2408.14837"
+      },
       "id": "2408.14837",
       "matched_topics": [
         "World Model"
@@ -59011,6 +60152,10 @@
       },
       "reviewed_at": "2026-09-14T21:38:00+00:00",
       "selected_topic": "World Model",
+      "sources": [
+        "arxiv",
+        "huggingface"
+      ],
       "status": "accepted",
       "title": "Diffusion Models Are Real-Time Game Engines",
       "updated": "2024-08-27"
@@ -59073,6 +60218,13 @@
         "Neural Rendering": "|**2024-08-28**|**Towards Realistic Example-based Modeling via 3D Gaussian Stitching**|Xinyu Gao et.al.|[2408.15708](http://arxiv.org/abs/2408.15708)|null|\n"
       },
       "decision_reason": "二次复核：Image Gen&Edit: 论文核心贡献是基于3D高斯泼溅的三维场景部件拼接与编辑，旨在实现真实世界的示例建模，其操作对象和输出结果均为三维几何与外观表示，而非二维图像合成或编辑任务。; Video Gen&Edit: 论文未涉及视频生成、视频编辑或时序动态建模，其方法专注于静态三维场景的部件组合与外观融合，不涉及视频帧序列的生成或处理。; 3D Gen&Recon: 论文提出了一种基于3D高斯泼溅的示例建模方法，通过分割、变换和优化多个高斯场来实现三维对象的无缝拼接与合成，属于三维内容生成与编辑的核心范畴。; World Model: 论文不涉及环境动力学预测、交互式世界状态建模或动作条件生成，其目标是对静态三维场景进行几何和外观上的组合编辑，不具备世界模型的预测或交互特性。; Relighting: 虽然引言提到逆渲染相关工作，但本文核心贡献是解决多高斯场拼接时的纹理与结构一致性，并未提出新的光照估计、传输或重光照方法，不属于重光照主题。; Depth Estimation: 论文未涉及深度估计、单目或多目深度预测任务，其方法基于已有的3D高斯表示进行编辑，不产生新的深度图或深度估计模型。",
+      "hf_daily": {
+        "dates": [
+          "2024-08-29"
+        ],
+        "evidence_sha256": "5ba0a00d34fded8e192a74457628d0ffad219f91cefd13bb11fdd6a8e064b493",
+        "url": "https://huggingface.co/papers/2408.15708"
+      },
       "id": "2408.15708",
       "matched_topics": [
         "3D Gen&Recon"
@@ -59107,8 +60259,107 @@
       },
       "reviewed_at": "2026-09-14T21:38:00+00:00",
       "selected_topic": "3D Gen&Recon",
+      "sources": [
+        "arxiv",
+        "huggingface"
+      ],
       "status": "accepted",
       "title": "Towards Realistic Example-based Modeling via 3D Gaussian Stitching",
+      "updated": "2024-08-28"
+    },
+    "2408.15991": {
+      "abstract": "Accelerating the sampling speed of diffusion models remains a significant\nchallenge. Recent score distillation methods distill a heavy teacher model into\nan one-step student generator, which is optimized by calculating the difference\nbetween the two score functions on the samples generated by the student model.\nHowever, there is a score mismatch issue in the early stage of the distillation\nprocess, because existing methods mainly focus on using the endpoint of\npre-trained diffusion models as teacher models, overlooking the importance of\nthe convergence trajectory between the student generator and the teacher model.\nTo address this issue, we extend the score distillation process by introducing\nthe entire convergence trajectory of teacher models and propose Distribution\nBacktracking Distillation (DisBack) for distilling student generators. DisBask\nis composed of two stages: Degradation Recording and Distribution Backtracking.\nDegradation Recording is designed to obtain the convergence trajectory of\nteacher models, which records the degradation path from the trained teacher\nmodel to the untrained initial student generator. The degradation path\nimplicitly represents the intermediate distributions of teacher models. Then\nDistribution Backtracking trains a student generator to backtrack the\nintermediate distributions for approximating the convergence trajectory of\nteacher models. Extensive experiments show that DisBack achieves faster and\nbetter convergence than the existing distillation method and accomplishes\ncomparable generation performance. Notably, DisBack is easy to implement and\ncan be generalized to existing distillation methods to boost performance. Our\ncode is publicly available on https://github.com/SYZhang0805/DisBack.",
+      "archive_rows": {
+        "3D Gen&Recon": "|**2024-08-28**|**Distribution Backtracking Builds A Faster Convergence Trajectory for One-step Diffusion Distillation**|Shengyuan Zhang et.al.|[2408.15991](https://arxiv.org/abs/2408.15991)|null|\n"
+      },
+      "authors": "Shengyuan Zhang et.al.",
+      "collected_at": "2026-11-12T01:08:37+00:00",
+      "decision_reason": "论文提出了一种用于加速扩散模型采样的蒸馏方法（DisBack），属于图像生成领域的可控生成与加速技术，符合Image Gen&Edit主题。",
+      "display_id": "2408.15991",
+      "hf_daily": {
+        "dates": [
+          "2024-08-29"
+        ],
+        "evidence_sha256": "996904cbdb364fce36d3288f02adee622d62f3689b31e07a62587268beddeabb",
+        "url": "https://huggingface.co/papers/2408.15991"
+      },
+      "id": "2408.15991",
+      "matched_topics": [
+        "3D Gen&Recon"
+      ],
+      "paper_url": "https://arxiv.org/abs/2408.15991",
+      "pdf_url": "https://arxiv.org/pdf/2408.15991.pdf",
+      "reviewed_at": "2026-11-12T01:08:38+00:00",
+      "selected_topic": "Image Gen&Edit",
+      "sources": [
+        "huggingface"
+      ],
+      "status": "accepted",
+      "title": "Distribution Backtracking Builds A Faster Convergence Trajectory for One-step Diffusion Distillation",
+      "updated": "2024-08-28"
+    },
+    "2408.15995": {
+      "abstract": "Over the past years, significant progress has been made in creating\nphotorealistic and drivable 3D avatars solely from videos of real humans.\nHowever, a core remaining challenge is the fine-grained and user-friendly\nediting of clothing styles by means of textual descriptions. To this end, we\npresent TEDRA, the first method allowing text-based edits of an avatar, which\nmaintains the avatar's high fidelity, space-time coherency, as well as\ndynamics, and enables skeletal pose and view control. We begin by training a\nmodel to create a controllable and high-fidelity digital replica of the real\nactor. Next, we personalize a pretrained generative diffusion model by\nfine-tuning it on various frames of the real character captured from different\ncamera angles, ensuring the digital representation faithfully captures the\ndynamics and movements of the real person. This two-stage process lays the\nfoundation for our approach to dynamic human avatar editing. Utilizing this\npersonalized diffusion model, we modify the dynamic avatar based on a provided\ntext prompt using our Personalized Normal Aligned Score Distillation Sampling\n(PNA-SDS) within a model-based guidance framework. Additionally, we propose a\ntime step annealing strategy to ensure high-quality edits. Our results\ndemonstrate a clear improvement over prior work in functionality and visual\nquality.",
+      "archive_rows": {
+        "3D Gen&Recon": "|**2024-08-28**|**TEDRA: Text-based Editing of Dynamic and Photoreal Actors**|Basavaraj Sunagad et.al.|[2408.15995](https://arxiv.org/abs/2408.15995)|null|\n",
+        "Image Gen&Edit": "|**2024-08-28**|**TEDRA: Text-based Editing of Dynamic and Photoreal Actors**|Basavaraj Sunagad et.al.|[2408.15995](https://arxiv.org/abs/2408.15995)|null|\n"
+      },
+      "authors": "Basavaraj Sunagad et.al.",
+      "collected_at": "2026-11-12T01:08:37+00:00",
+      "decision_reason": "论文提出了一种基于文本的动态3D人体化身编辑方法，涉及3D资产的重建、个性化扩散模型微调及基于模型的引导编辑，属于3D生成与重建范畴。",
+      "display_id": "2408.15995",
+      "hf_daily": {
+        "dates": [
+          "2024-08-29"
+        ],
+        "evidence_sha256": "36a7f8e0268d56fc2e0ad4feacc7df363c9e1611c599786e8adff741ba4331bb",
+        "url": "https://huggingface.co/papers/2408.15995"
+      },
+      "id": "2408.15995",
+      "matched_topics": [
+        "3D Gen&Recon",
+        "Image Gen&Edit"
+      ],
+      "paper_url": "https://arxiv.org/abs/2408.15995",
+      "pdf_url": "https://arxiv.org/pdf/2408.15995.pdf",
+      "reviewed_at": "2026-11-12T01:08:38+00:00",
+      "selected_topic": "3D Gen&Recon",
+      "sources": [
+        "huggingface"
+      ],
+      "status": "accepted",
+      "title": "TEDRA: Text-based Editing of Dynamic and Photoreal Actors",
+      "updated": "2024-08-28"
+    },
+    "2408.16061": {
+      "abstract": "We present Spann3R, a novel approach for dense 3D reconstruction from ordered\nor unordered image collections. Built on the DUSt3R paradigm, Spann3R uses a\ntransformer-based architecture to directly regress pointmaps from images\nwithout any prior knowledge of the scene or camera parameters. Unlike DUSt3R,\nwhich predicts per image-pair pointmaps each expressed in its local coordinate\nframe, Spann3R can predict per-image pointmaps expressed in a global coordinate\nsystem, thus eliminating the need for optimization-based global alignment. The\nkey idea of Spann3R is to manage an external spatial memory that learns to keep\ntrack of all previous relevant 3D information. Spann3R then queries this\nspatial memory to predict the 3D structure of the next frame in a global\ncoordinate system. Taking advantage of DUSt3R's pre-trained weights, and\nfurther fine-tuning on a subset of datasets, Spann3R shows competitive\nperformance and generalization ability on various unseen datasets and can\nprocess ordered image collections in real time. Project page:\nhttps://hengyiwang.github.io/projects/spanner",
+      "archive_rows": {
+        "3D Gen&Recon": "|**2024-08-28**|**3D Reconstruction with Spatial Memory**|Hengyi Wang et.al.|[2408.16061](https://arxiv.org/abs/2408.16061)|null|\n"
+      },
+      "authors": "Hengyi Wang et.al.",
+      "collected_at": "2026-11-12T01:08:37+00:00",
+      "decision_reason": "论文提出Spann3R方法，通过空间记忆机制实现从图像集合到全局坐标系点图的直接回归，属于3D重建领域的核心方法贡献。",
+      "display_id": "2408.16061",
+      "hf_daily": {
+        "dates": [
+          "2024-08-30"
+        ],
+        "evidence_sha256": "f73651cf1a3efd805c5284354c4443483b9f610b991c685053668c3a6fdd97f8",
+        "url": "https://huggingface.co/papers/2408.16061"
+      },
+      "id": "2408.16061",
+      "matched_topics": [
+        "3D Gen&Recon"
+      ],
+      "paper_url": "https://arxiv.org/abs/2408.16061",
+      "pdf_url": "https://arxiv.org/pdf/2408.16061.pdf",
+      "reviewed_at": "2026-11-12T01:08:38+00:00",
+      "selected_topic": "3D Gen&Recon",
+      "sources": [
+        "huggingface"
+      ],
+      "status": "accepted",
+      "title": "3D Reconstruction with Spatial Memory",
       "updated": "2024-08-28"
     },
     "2408.16355": {
@@ -59274,6 +60525,41 @@
       "status": "accepted",
       "title": "Generic Objects as Pose Probes for Few-Shot View Synthesis",
       "updated": "2024-09-01"
+    },
+    "2408.16767": {
+      "abstract": "Advancements in 3D scene reconstruction have transformed 2D images from the\nreal world into 3D models, producing realistic 3D results from hundreds of\ninput photos. Despite great success in dense-view reconstruction scenarios,\nrendering a detailed scene from insufficient captured views is still an\nill-posed optimization problem, often resulting in artifacts and distortions in\nunseen areas. In this paper, we propose ReconX, a novel 3D scene reconstruction\nparadigm that reframes the ambiguous reconstruction challenge as a temporal\ngeneration task. The key insight is to unleash the strong generative prior of\nlarge pre-trained video diffusion models for sparse-view reconstruction.\nHowever, 3D view consistency struggles to be accurately preserved in directly\ngenerated video frames from pre-trained models. To address this, given limited\ninput views, the proposed ReconX first constructs a global point cloud and\nencodes it into a contextual space as the 3D structure condition. Guided by the\ncondition, the video diffusion model then synthesizes video frames that are\nboth detail-preserved and exhibit a high degree of 3D consistency, ensuring the\ncoherence of the scene from various perspectives. Finally, we recover the 3D\nscene from the generated video through a confidence-aware 3D Gaussian Splatting\noptimization scheme. Extensive experiments on various real-world datasets show\nthe superiority of our ReconX over state-of-the-art methods in terms of quality\nand generalizability.",
+      "archive_rows": {
+        "3D Gen&Recon": "|**2024-08-29**|**ReconX: Reconstruct Any Scene from Sparse Views with Video Diffusion Model**|Fangfu Liu et.al.|[2408.16767](https://arxiv.org/abs/2408.16767)|null|\n",
+        "Image Gen&Edit": "|**2024-08-29**|**ReconX: Reconstruct Any Scene from Sparse Views with Video Diffusion Model**|Fangfu Liu et.al.|[2408.16767](https://arxiv.org/abs/2408.16767)|null|\n",
+        "Video Gen&Edit": "|**2024-08-29**|**ReconX: Reconstruct Any Scene from Sparse Views with Video Diffusion Model**|Fangfu Liu et.al.|[2408.16767](https://arxiv.org/abs/2408.16767)|null|\n"
+      },
+      "authors": "Fangfu Liu et.al.",
+      "collected_at": "2026-11-12T01:08:37+00:00",
+      "decision_reason": "论文提出ReconX用于稀疏视角下的3D场景重建，利用视频扩散模型生成中间视角，并通过3D高斯泼溅优化恢复3D场景，属于3D重建与神经渲染方法。",
+      "display_id": "2408.16767",
+      "hf_daily": {
+        "dates": [
+          "2024-08-30"
+        ],
+        "evidence_sha256": "fbc30380eba47fdcb1780598076dabef13eea3e49f715de3fb45ecb2cda27a7f",
+        "url": "https://huggingface.co/papers/2408.16767"
+      },
+      "id": "2408.16767",
+      "matched_topics": [
+        "3D Gen&Recon",
+        "Image Gen&Edit",
+        "Video Gen&Edit"
+      ],
+      "paper_url": "https://arxiv.org/abs/2408.16767",
+      "pdf_url": "https://arxiv.org/pdf/2408.16767.pdf",
+      "reviewed_at": "2026-11-12T01:08:38+00:00",
+      "selected_topic": "3D Gen&Recon",
+      "sources": [
+        "huggingface"
+      ],
+      "status": "accepted",
+      "title": "ReconX: Reconstruct Any Scene from Sparse Views with Video Diffusion Model",
+      "updated": "2024-08-29"
     },
     "2408.17027": {
       "abstract": "To advance the state of the art in the creation of 3D foundation models, this paper introduces the ConDense framework for 3D pre-training utilizing existing pre-trained 2D networks and large-scale multi-view datasets. We propose a novel 2D-3D joint training scheme to extract co-embedded 2D and 3D features in an end-to-end pipeline, where 2D-3D feature consistency is enforced through a volume rendering NeRF-like ray marching process. Using dense per pixel features we are able to 1) directly distill the learned priors from 2D models to 3D models and create useful 3D backbones, 2) extract more consistent and less noisy 2D features, 3) formulate a consistent embedding space where 2D, 3D, and other modalities of data (e.g., natural language prompts) can be jointly queried. Furthermore, besides dense features, ConDense can be trained to extract sparse features (e.g., key points), also with 2D-3D consistency – condensing 3D NeRF representations into compact sets of decorated key points. We demonstrate that our pre-trained model provides good initialization for various 3D tasks including 3D classification and segmentation, outperforming other 3D pre-training methods by a significant margin. It also enables, by exploiting our sparse features, additional useful downstream tasks, such as matching 2D images to 3D scenes, detecting duplicate 3D scenes, and querying a repository of 3D scenes through natural language – all quite efficiently and without any per-scene fine-tuning.",
@@ -757251,6 +758537,6 @@
       "updated": "2026-11-10"
     }
   },
-  "updated_at": "2026-11-12T00:53:11+00:00",
+  "updated_at": "2026-11-12T01:08:45+00:00",
   "version": 1
 }
