@@ -215,7 +215,13 @@ def publish(mode, *, expected_head, model=None):
 def lock(name, *, blocking=True):
     import fcntl
     PRIVATE.mkdir(parents=True, exist_ok=True)
-    with (PRIVATE / name).open('a+b') as stream:
+    if name in {'runtime.lock', 'daily-request.lock'}:
+        from shared.inference_runtime import runtime_paths
+        key = 'runtime_lock' if name == 'runtime.lock' else 'daily_request_lock'
+        path = runtime_paths()[key]
+    else:
+        path = PRIVATE / name
+    with path.open('a+b') as stream:
         try:
             fcntl.flock(stream, fcntl.LOCK_EX | (0 if blocking else fcntl.LOCK_NB))
         except BlockingIOError:

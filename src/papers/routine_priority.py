@@ -10,7 +10,7 @@ import re
 from papers import paths
 from papers.scheduler import JOBS, ZONE, periods
 
-CHECKPOINT_HOURS = (0, 8, 10, 12, 16, 18)
+CHECKPOINT_HOURS = (8, 10, 12, 16, 18)
 PUBLICATION_RESERVE_SECONDS = 600
 
 
@@ -82,9 +82,7 @@ def check(at=None, *, root=None, reserve_seconds=PUBLICATION_RESERVE_SECONDS):
         missing = Path(error.filename).name if getattr(error, 'filename', None) else ''
         reasons.append(f'routine_evidence_unavailable:{type(error).__name__}:{missing}')
     for relative in ('build/paper-summaries/pending-runtime-push.json',
-                     'build/paper-summaries/recheck/local-only.json',
-                     'build/reports/stocks/pending-publication.json',
-                     'build/reports/stocks/actuals/pending-publication.json'):
+                     'build/paper-summaries/recheck/local-only.json'):
         if (root/relative).exists():
             reasons.append(f'publication_or_review_pending:{relative}')
     for pending in (root/'build/reports/model-maintenance').glob('pending-publication*.json'):

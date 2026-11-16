@@ -17,7 +17,7 @@ from papers.candidate_ledger import atomic_write_json
 
 ZONE = ZoneInfo('Asia/Shanghai')
 STATE = paths.ROOT / 'build/reports/task-coordinator.json'
-JOBS = ('daily', 'stocks_weekly', 'stocks_actuals', 'models', 'conferences')
+JOBS = ('daily', 'models', 'conferences')
 STATUSES = ('completed', 'partial', 'failed', 'deferred')
 
 
@@ -33,14 +33,7 @@ def periods(now):
         hour=10, minute=0, second=0, microsecond=0)
     if now < weekly:
         weekly -= timedelta(days=7)
-    stocks = (now - timedelta(days=(now.weekday() + 1) % 7)).replace(hour=8, minute=0, second=0, microsecond=0)
-    if now < stocks:
-        stocks -= timedelta(days=7)
-    # Midnight belongs to the new calendar day (the preceding day's 24:00).
-    actuals = now.replace(hour=8 if now.hour >= 8 else 0, minute=0, second=0, microsecond=0)
     return {'daily': daily.strftime('%Y-%m-%d'),
-            'stocks_weekly': stocks.strftime('%Y-%m-%d'),
-            'stocks_actuals': actuals.strftime('%Y-%m-%dT%H:%M'),
             'models': monthly.strftime('%Y-%m-%d'),
             'conferences': weekly.strftime('%Y-%m-%d')}
 
@@ -82,7 +75,7 @@ def due_jobs(state, now):
 def record(state, job, period, status, summary, now):
     if job not in JOBS or status not in STATUSES or not summary.strip():
         raise ValueError('valid job, status and evidence summary are required')
-    fmt = '%Y-%m-%dT%H:%M' if job == 'stocks_actuals' else '%Y-%m-%d'
+    fmt = '%Y-%m-%d'
     parsed = datetime.strptime(period, fmt)
     # Let the already saved Saturday receipt finish during the Monday transition.
     legacy_conference = (job == 'conferences' and parsed.weekday() == 5
@@ -94,12 +87,6 @@ def record(state, job, period, status, summary, now):
         raise ValueError('conference period must be a Monday')
     if job == 'models' and parsed.day not in (1, 15):
         raise ValueError('model period must be day 1 or 15')
-    if job == 'stocks_weekly' and parsed.weekday() != 6:
-        raise ValueError('stocks weekly period must be a Sunday')
-    legacy_actuals = (job == 'stocks_actuals' and parsed.hour == 22
-                      and state.get('jobs', {}).get(job, {}).get('period') == period)
-    if job == 'stocks_actuals' and (parsed.minute != 0 or (parsed.hour not in (0, 8) and not legacy_actuals)):
-        raise ValueError('stocks actuals period must be 00:00 or 08:00')
     result = deepcopy(state)
     result['version'] = 1
     jobs = result.setdefault('jobs', {})

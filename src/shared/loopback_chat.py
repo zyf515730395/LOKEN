@@ -2,12 +2,14 @@
 
 from __future__ import annotations
 
+from contextlib import contextmanager
 import http.client
 import ipaddress
 import json
 import socket
 
 from .inference_budget import InferenceBudget
+from .inference_runtime import external_model_access
 from typing import Mapping, Sequence
 from urllib.parse import SplitResult, urlsplit
 
@@ -74,6 +76,16 @@ def validate_connected_peer(connection: http.client.HTTPConnection) -> None:
         raise LoopbackChatError(
             "model_peer_invalid", "connected model peer is not loopback"
         )
+
+
+@contextmanager
+def _model_access():
+    try:
+        with external_model_access():
+            yield
+    except ValueError as error:
+        if isinstance(error, LoopbackChatError): raise
+        raise LoopbackChatError('model_runtime_environment', str(error)) from None
 
 
 class LoopbackChatTransport:
@@ -179,7 +191,7 @@ class LoopbackChatTransport:
             budget = InferenceBudget()
         except ValueError as error:
             raise LoopbackChatError('model_runtime_environment', str(error)) from None
-        with budget.request():
+        with budget.request(), _model_access():
             try:
                 connection.connect()
                 validate_connected_peer(connection)

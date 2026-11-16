@@ -6,6 +6,7 @@ full cooldown begins; a natural idle interval also satisfies the required rest.
 from __future__ import annotations
 
 from contextlib import contextmanager
+from .inference_runtime import runtime_paths
 import json
 import math
 import os
@@ -31,10 +32,11 @@ def _process_identity(pid):
 
 
 class InferenceBudget:
-    def __init__(self, directory: Path = ROOT, *, clock=time.time):
+    def __init__(self, directory: Path | None = None, *, clock=time.time):
         if os.name != 'posix' or not Path('/proc/sys/kernel/random/boot_id').is_file():
             raise ValueError('Run local model inference inside WSL/Linux to share the inference budget safely')
-        self.directory = directory
+        self.require_existing = directory is None
+        self.directory = directory if directory is not None else runtime_paths()['budget_directory']
         self.clock = clock
 
     @contextmanager
@@ -64,6 +66,8 @@ class InferenceBudget:
                                    for lease in state['active'].values())):
                         raise ValueError('Invalid inference budget state; preserve it for inspection')
                 else:
+                    if self.require_existing:
+                        raise ValueError('Shared inference budget state is missing; preserve and restore the existing ledger')
                     state = dict(version=1, busy=0.0, updated=now, idle_since=now,
                                  cooldown_until=0.0, active={})
                 # A backwards wall clock must not erase accumulated work.

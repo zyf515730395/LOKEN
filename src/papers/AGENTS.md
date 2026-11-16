@@ -25,7 +25,7 @@
 
 - `routine_priority.check` 是历史回填只读准入真源，watch/worker/逐请求复用；任何例行最近一期回执未 completed/partial、暂停、待发布事务、云端采集无独立核验或下一检查点不足10分钟均让行。partial仍须原业务完整尝试与公开缺口，不由准入器伪造完成。云端核验回执在忽略的 `build/reports/collection-receipt.json`：schema_version=1、period（北京时间08/12/16的YYYY-MM-DDTHH:MM）、status=completed/partial、full_attempt=true、published=true、带时区verified_at、官方仓库actions run_url、evidence_path与evidence_sha256。证据必须在build/reports内，来自真实云端回执审计；URL或游标时间不能代替核验。不创建新采集器/定时器，不凭成功退出码补造回执。
 
-- weekly_backfill读取私有backfill-control.json的resume_after（必须带时区）。暂停期间run/watch不得启动模型；在途任务在下一次admission停止领取，保留缓存/事务。恢复时间不影响daily、会议、模型或Stocks调度回执。
+- weekly_backfill读取私有backfill-control.json的resume_after（必须带时区）。暂停期间run/watch不得启动模型；在途任务在下一次admission停止领取，保留缓存/事务。恢复时间不影响daily、会议、模型调度回执。
 
 - 历史主题推理最多3次内容尝试；失败3次可保存skipped_trend（attempts、reason、failures、evidence_hash），全量逐篇contributions仍严格校验。只有证据绑定正确、trends为空的显式跳过记录可作为partial主题；日报默认生成不启用此降级。发布事务同时保留skipped_topics，远端核验前不推进。传输/环境/让行及文件故障继续传播，不计内容跳过。
 
@@ -42,7 +42,7 @@
 - 期刊缺失证据按身份路由：arXiv ID使用arXiv采集器，conf-ID使用会议库记录与现有官方会议摘要采集器及其版本化缓存；官方摘要真源须绑定标题、来源URL、正文哈希、原始来源哈希和会议source_version。不能把会议ID传给arXiv接口。回填多线程共享的daily-request锁探测必须在进程内串行，避免探测线程互相误判成daily等待者。
 - 主题趋势的paper_ids输出schema必须使用本主题本期真实ID枚举，禁止集合外引用；格式与语义校验失败最多3次本地模型重试，每次请求前重查让行。所有原始响应按内容哈希分别保留，不能通过删引用、改ID或放宽校验让错误分析通过。
 - 期刊逐篇问题/贡献与周报主题趋势通过本地模型生成；日报不请求主题趋势。逐篇一次调用、最多4并发，共享持久化推理预算，缓存按证据哈希与提示词版本隔离。最近一周人工触发重生成也必须持有唯一runtime锁，退出时只关闭自己启动的模型服务。
-- scheduler统一管理daily、stocks_weekly、stocks_actuals、models、conferences，保留旧论文回执兼容；stocks_weekly为周日08:00期次，stocks_actuals为每日00:00/08:00最近检查期次。无新证据也须核对待发布阶段后才结束。
+- scheduler仅管理daily、models、conferences，保留旧论文回执兼容；美股回执由迁出项目独立管理，不参与本仓历史准入。无新证据也须核对本仓待发布阶段后才结束。
 - digests.py 从同一公开可见集合和已发布摘要生成论文日报/周报；每日构建同步更新 docs/reports/daily.html、weekly.html 与 periods/ 下受管日期 JSON。runtime 只允许这些精确路径进入每日提交，不能扩大到任意报告或 Stocks 输出。
 - 日报每主题只显示完整论文表和一句话问题/贡献，不调用主题趋势生成，也不展示历史趋势；周报仅显示主题技术趋势、路线比较、局限与引用，不渲染逐篇列表/表格。周报仍使用全部论文证据，保留真源里的逐篇结果用于校验与复用。分析使用 content/papers/digests 真源并核验覆盖集合、摘要哈希；周报还须核验趋势引用。过期或缺失的逐篇分析明确标记待更新。
 - daily arXiv 发布阶段先构建摘要，再在现有 runtime/model 锁内使用实际服务模型执行 digest_writer（最近8天及对应自然周，按证据哈希跳过已完成主题），最后重建发布；不额外启动协调器。分析失败保留旧真源、页面显示待更新，arXiv结果仍可发布但本期记partial并附 build/reports/digests/latest.json。自动提交仅允许 digests/ 下 daily/weekly-YYYY-MM-DD.json，不包含测试或私有回执。
