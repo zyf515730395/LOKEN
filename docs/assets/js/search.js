@@ -1,14 +1,9 @@
 (function initializeSearchModule(globalScope) {
   "use strict";
 
-  const SECTION_LABELS = {
-    learning: "学习一个",
-    milestones: "身经百战",
-    writings: "谈笑风生",
-    journeys: "跑得还快",
-  };
-  const SECTION_ORDER = ["learning", "milestones", "writings", "journeys"];
-  const KIND_LABELS = { paper: "论文", model: "模型", article: "文章" };
+  const SECTION_LABELS = {learning: "学习一个", milestones: "身经百战"};
+  const SECTION_ORDER = ["learning", "milestones"];
+  const KIND_LABELS = {paper: "论文", model: "模型"};
   const EMPTY_GUIDANCE = "输入标题或标签关键词开始搜索";
   const LOAD_FAILURE = "搜索索引加载失败，请刷新后重试";
   const NO_MATCH = "没有找到公开标题";

@@ -24,7 +24,6 @@ from shared.search_index import SearchDocument, serialize_search_index
 from shared.site_shell import (
     SITE_NAME,
     render_context_strip,
-    publish_journey_pages,
     render_section_intro,
     render_site_page,
 )
@@ -688,8 +687,6 @@ def generate_site(
     config_path: str | Path = DEFAULT_SITE_CONFIG,
     conference_config_path: str | Path = DEFAULT_CONFERENCE_CONFIG,
     annotation_path: str | Path = DEFAULT_ANNOTATION_CATALOG,
-    writings_source_root: str | Path = PROJECT_ROOT / "content" / "writings",
-    writings_report_path: str | Path = PROJECT_ROOT / "build" / "reports" / "writings.json",
     refresh_related: bool = True,
 ) -> None:
     data = json.loads(Path(json_path).read_text(encoding="utf-8"))
@@ -807,53 +804,8 @@ def generate_site(
 
     from milestones.publisher import build_milestone_search_documents
 
-    if not refresh_related:
-        # Refresh catalog-backed entries while preserving independently published sections.
-        index_path = Path(search_index_path or site_root / "search-index.json")
-        existing = json.loads(index_path.read_text(encoding="utf-8")) if index_path.exists() else {"documents": []}
-        documents = [SearchDocument(**item) for item in existing["documents"] if item["section"] not in {"learning", "milestones"}]
-        documents.extend(build_paper_search_documents(categories, summary_catalog))
-        documents.extend(build_milestone_search_documents(milestone_catalog))
-        atomic_write_text(index_path, serialize_search_index(documents, generated_on=today))
-        return
-
-    publish_journey_pages(site_root)
-
-    from writings.publisher import (
-        abort_writings_publication,
-        commit_writings_and_search,
-        prepare_writings_publication,
-    )
-
-    prepared_writings = prepare_writings_publication(
-        writings_source_root,
-        site_root / "writings",
-        writings_report_path,
-        today,
-    )
-
-    try:
-        search_documents = [
-            *build_paper_search_documents(categories, summary_catalog),
-            *build_milestone_search_documents(milestone_catalog),
-            *prepared_writings.result.search_documents,
-        ]
-        search_content = serialize_search_index(search_documents, generated_on=today)
-    except Exception:
-        abort_writings_publication(prepared_writings)
-        raise
-    commit_writings_and_search(
-        prepared_writings,
-        search_index_path or site_root / "search-index.json",
-        search_content,
-    )
-    for issue in prepared_writings.result.issues:
-        source = issue.source.replace("%", "%25").replace("\r", "%0D").replace("\n", "%0A")
-        message = issue.message.replace("%", "%25").replace("\r", "%0D").replace("\n", "%0A")
-        print(f"::warning file={source},title=Writings {issue.code}::{message}")
-    result = prepared_writings.result
-    print(
-        "Writings publication: "
-        f"published={len(result.published)} retained={len(result.retained)} "
-        f"skipped={len(result.skipped)} removed={len(result.removed)}"
-    )
+    # Rebuild from owned catalogs in both modes; never retain foreign search rows.
+    documents = [*build_paper_search_documents(categories, summary_catalog),
+                 *build_milestone_search_documents(milestone_catalog)]
+    atomic_write_text(Path(search_index_path or site_root / "search-index.json"),
+                      serialize_search_index(documents, generated_on=today))

@@ -35,41 +35,15 @@ SECTIONS = (
         "这些模型是身经百战了",
         "milestone-models/flux.html",
     ),
-    Section(
-        "writings",
-        "谈笑风生",
-        "ARTICLES",
-        "还是要提高自己的知识水平",
-        "writings/index.html",
-    ),
-    Section(
-        "journeys",
-        "跑得还快",
-        "TRAVELS",
-        "比其他的西方记者啊，跑得还快",
-        "journeys/index.html",
-    ),
-    Section("stocks", "闷声发大财", "STOCKS", "投资研究、策略与量化方法", "stocks/index.html"),
+
 )
 SECTIONS_BY_KEY = {section.key: section for section in SECTIONS}
 SITE_NAME = "LOKEN"
-ASSET_VERSION = "16"
+ASSET_VERSION = "17"
 SECTION_METADATA = {
     "learning": "01 / PAPERS",
     "milestones": "02 / MODELS",
-    "writings": "03 / ARTICLES",
-    "journeys": "04 / TRAVELS",
-    "stocks": "05 / STOCKS",
 }
-CONTINENTS = (
-    ("asia", "亚洲", "ASIA"),
-    ("europe", "欧洲", "EUROPE"),
-    ("africa", "非洲", "AFRICA"),
-    ("north-america", "北美洲", "NORTH AMERICA"),
-    ("south-america", "南美洲", "SOUTH AMERICA"),
-    ("oceania", "大洋洲", "OCEANIA"),
-    ("antarctica", "南极洲", "ANTARCTICA"),
-)
 
 
 def get_section(key: str) -> Section:
@@ -276,21 +250,6 @@ def render_secondary_navigation(
             groups.append(_nav_group("会议", _nav_link("Conference", "index.html?tag=conferences#conferences", site_root)))
     elif active_section == "milestones":
         groups.append(_nav_group("模型系列", original_navigation))
-    elif active_section == "writings":
-        groups.append(_nav_group("文章栏目", original_navigation or _nav_link("LATEST", "writings/index.html", site_root, active=True)))
-    elif active_section == "journeys":
-        groups.append(_nav_group("旅行档案", _nav_link("环游世界", "journeys/index.html", site_root, active=active_subtopic in ("", "world"))))
-        groups.append(_nav_group("七大洲", "".join(
-            _nav_link(label, f"journeys/{slug}.html", site_root, active=active_subtopic == slug)
-            for slug, label, _ in CONTINENTS
-        )))
-    elif active_section == "stocks":
-        groups.append(_nav_group("投资信息", "".join(
-            _nav_link(label, route, site_root, active=active_subtopic == key)
-            for key, label, route in (("outlook", "预期推演", "stocks/outlook.html"),
-                                      ("events", "关键节点", "stocks/index.html"),
-                                      ("quant", "量化投资", "stocks/quant.html"))
-        )))
     return f'''  <aside class="context-drawer" id="context-drawer" aria-label="{html.escape(section.label)}二级导航">
     <header class="secondary-nav-header"><div><span>{section.content_label}</span><h2>{html.escape(section.label)}</h2></div>
       <button type="button" data-context-close aria-label="收起二级导航">‹</button></header>
@@ -385,69 +344,3 @@ def render_empty_section_page(
         main_content=main_content,
         body_class="empty-section-page",
     )
-
-
-def render_journey_placeholder_page(*, output_file: Path, output_root: Path) -> str:
-    """Render the City Memory shell without manufacturing travel data."""
-    section = get_section("journeys")
-    main_content = f"""    <section class="journey-archive" aria-labelledby="section-journeys-title">
-      <div class="section-sticky-header">
-      <header class="journey-header section-header">
-{render_section_intro("journeys")}
-      </header>
-      </div>
-      <div class="journey-map-placeholder" id="world-map" aria-label="尚未开放的城市地图档案">
-        <div class="journey-map-grid" aria-hidden="true"><span class="journey-world-silhouette"></span></div>
-        <aside class="journey-photo-contact" id="photography">
-          <div class="journey-photo-contact-surface" aria-hidden="true"></div>
-          <p>摄影接触表将随首批城市档案一同出现。</p>
-        </aside>
-      </div>
-    </section>
-"""
-    return render_site_page(
-        output_file=output_file,
-        output_root=output_root,
-        active_section="journeys",
-        page_title=f"{section.label} · {SITE_NAME}",
-        meta_description=section.description,
-        main_content=main_content,
-        body_class="journey-page",
-    )
-
-
-def render_journey_continent_page(
-    *, output_file: Path, output_root: Path, continent: str
-) -> str:
-    """Render an honest empty country/photo archive for one continent."""
-    try:
-        _, label, english = next(item for item in CONTINENTS if item[0] == continent)
-    except StopIteration as error:
-        raise ValueError(f"Unknown continent: {continent}") from error
-    content = f'''<section class="journey-continent" aria-labelledby="continent-title">
-      <header class="section-header"><p class="journey-continent-meta">{english} / TRAVEL ARCHIVE</p>
-        <h1 id="continent-title">{label}</h1><p>按国家收纳旅途中的照片与记忆。</p></header>
-      <div class="journey-continent-empty"><span aria-hidden="true">◎</span><h2>{label}</h2>
-        <h3>暂无照片</h3><p>{label}的国家与照片档案将在这里呈现。</p></div>
-    </section>'''
-    return render_site_page(output_file=output_file, output_root=output_root,
-        active_section="journeys", active_subtopic=continent,
-        page_title=f"{label} · {SITE_NAME}", meta_description=f"{label}旅行照片与记忆",
-        main_content=content, body_class="journey-page")
-
-
-def publish_journey_pages(output_root: Path) -> list[Path]:
-    """Publish the original world map and seven continent archive routes."""
-    from shared.rendering import atomic_write_text
-
-    output_root = Path(output_root)
-    directory = output_root / "journeys"
-    directory.mkdir(parents=True, exist_ok=True)
-    world = directory / "index.html"
-    atomic_write_text(world, render_journey_placeholder_page(output_file=world, output_root=output_root))
-    paths = [world]
-    for slug, _, _ in CONTINENTS:
-        destination = directory / f"{slug}.html"
-        atomic_write_text(destination, render_journey_continent_page(output_file=destination, output_root=output_root, continent=slug))
-        paths.append(destination)
-    return paths

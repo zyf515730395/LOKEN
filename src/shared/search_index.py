@@ -14,10 +14,10 @@ from .rendering import atomic_write_text
 from .site_shell import SECTIONS
 
 
-SectionKey = Literal["learning", "milestones", "writings", "journeys"]
-SearchKind = Literal["paper", "model", "article"]
+SectionKey = Literal["learning", "milestones"]
+SearchKind = Literal["paper", "model"]
 SECTION_ORDER = {section.key: index for index, section in enumerate(SECTIONS)}
-SUPPORTED_KINDS = {"paper", "model", "article"}
+SUPPORTED_KINDS = {"paper", "model"}
 SLUG_PATTERN = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 
 
@@ -129,31 +129,3 @@ def serialize_search_index(
     """Serialize the validated public search index without writing it."""
     payload = build_search_payload(documents, generated_on=generated_on)
     return json.dumps(payload, ensure_ascii=False, separators=(",", ":")) + "\n"
-
-
-def public_article_search_documents(
-    records: Iterable[Mapping[str, Any]],
-) -> list[SearchDocument]:
-    """Normalize explicitly public future writing records without reading private metadata."""
-    documents = []
-    for record in records:
-        if record.get("public") is not True:
-            continue
-        title = record.get("title")
-        slug = record.get("slug")
-        published_at = record.get("published_at")
-        if not isinstance(title, str) or not title.strip():
-            raise ValueError("Public article title must be a non-empty string")
-        if not isinstance(slug, str) or not SLUG_PATTERN.fullmatch(slug):
-            raise ValueError(f"Invalid public article slug: {slug}")
-        documents.append(
-            SearchDocument(
-                id=f"article:{slug}",
-                title=title.strip(),
-                url=f"writings/{slug}.html",
-                section="writings",
-                kind="article",
-                published_at=published_at,
-            )
-        )
-    return documents

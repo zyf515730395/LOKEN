@@ -288,8 +288,6 @@ def _regenerate_site(
         search_index_path=docs_root / "search-index.json",
         config_path=DEFAULT_SITE_CONFIG,
         annotation_path=DEFAULT_ANNOTATIONS,
-        writings_source_root=PROJECT_ROOT / "content" / "writings",
-        writings_report_path=PROJECT_ROOT / "build" / "reports" / "writings.json",
         refresh_related=False,
     )
 

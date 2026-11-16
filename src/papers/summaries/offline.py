@@ -284,8 +284,6 @@ def publish_offline_summaries(
                 search_index_path=docs / "search-index.json",
                 config_path=DEFAULT_CONFIG,
                 annotation_path=DEFAULT_ANNOTATIONS,
-                writings_source_root=site_project_root / "content" / "writings",
-                writings_report_path=site_project_root / "build" / "reports" / "writings.json",
                 refresh_related=False,
             )
 

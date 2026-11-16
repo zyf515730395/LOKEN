@@ -197,8 +197,6 @@ def run_annotations(
                     search_index_path=Path(docs_root) / "search-index.json",
                     config_path=config_path,
                     annotation_path=catalog_path,
-                    writings_source_root=publication_root / "content" / "writings",
-                    writings_report_path=publication_root / "build" / "reports" / "writings.json",
                     refresh_related=False,
                 )
             except Exception:
