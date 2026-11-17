@@ -117,6 +117,7 @@ def _push_main():
     if (not commit or not base or git('rev-parse', 'HEAD', capture=True) != commit
             or git('rev-parse', f'{commit}^', capture=True) != base):
         raise RuntimeError('Publication history changed; preserve concurrent task commits for review')
+    command(sys.executable, '-m', 'shared.publication_scope', '--root', str(paths.DOCS))
     _push_main_once(commit)
     git('fetch', 'origin', 'main')
     if commit != git('rev-parse', 'origin/main', capture=True):
@@ -179,6 +180,7 @@ def publish(mode, *, expected_head, model=None):
         digest_failed = bool(report['failures'])
         print('Digest analysis: ' + json.dumps(report, ensure_ascii=False), flush=True)
         command(sys.executable, '-m', 'papers', 'build')
+    command(sys.executable, '-m', 'shared.publication_scope', '--root', str(paths.DOCS))
     git('diff', '--check')
     for path in (paths.DOCS / 'assets/js').glob('*.js'):
         node = shutil.which('node') or shutil.which('node.exe')
