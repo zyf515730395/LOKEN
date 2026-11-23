@@ -399,6 +399,10 @@ def hf_daily_url(row: dict) -> str:
     return url if re.fullmatch(r'https://huggingface\.co/papers/[A-Za-z0-9][A-Za-z0-9._-]{0,199}', url) else ''
 
 
+def paper_table_sort_key(row: dict) -> tuple[bool, datetime.date, str]:
+    return bool(hf_daily_url(row)), row["date"], row["id"]
+
+
 def render_table(
     rows: list[dict],
     topic: str,
@@ -575,7 +579,7 @@ def render_content(
                 )
                 output.append(
                     render_table(
-                        surveys,
+                        sorted(surveys, key=paper_table_sort_key, reverse=True),
                         category["topic"],
                         summary_catalog,
                         candidate_statuses,
@@ -597,7 +601,7 @@ def render_content(
                     anchor_id = day_range_anchor(category, year, month, day_range)
                     output.append(f'<span class="archive-date-alias" id="{anchor_id}" aria-hidden="true"></span>')
                 rows = sorted((row for members in day_ranges.values() for row in members),
-                              key=lambda row: (bool(hf_daily_url(row)), row['date'], row['id']), reverse=True)
+                              key=paper_table_sort_key, reverse=True)
                 output.append(render_table(rows, category['topic'], summary_catalog,
                                            candidate_statuses, anchored_papers, label_slugs))
                 output.append("      </section>")
