@@ -223820,6 +223820,32 @@
       "url": "https://iclr.cc/virtual/2025/poster/28479"
     },
     "conf-c832f3df1a2c9241d1d4a37b": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Diffusion",
+          "Text Conditioning"
+        ],
+        "topics": [
+          "Image Gen&Edit"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "f57fbb7b8e64136b166eaf81601c0399efbf4b8090a5f693feb04fba38a6b31f",
+          "truncated": false
+        },
+        "sha256": "8c90e1166a0a5f58a567cbd66a4fe6a95d089f2d1a111ccd572faba2f2a22beb",
+        "url": "https://arxiv.org/html/2509.22323"
+      },
       "arxiv_id": "2509.22323",
       "authors": [
         "Wangbo Zhao",
@@ -223858,7 +223884,31 @@
       },
       "source_edition": "ICLR 2026",
       "source_version": "11dac48d850909579bf086d6754aa262e4feca1c225055bf7a31d736add487fa",
-      "summary": null,
+      "summary": {
+        "contributions": [
+          "将扩散 Transformer 的推理过程建模为马尔可夫决策过程，利用冻结生成器作为确定性模拟器，通过强化学习训练轻量级策略以动态选择加速策略，无需修改生成器参数。",
+          "设计了 RAPID$^3$ 框架，包含步长跳过、缓存重用和稀疏注意力三个超小型策略头，它们独立观察潜在变量、时间步和提示词的摘要并决定相应的加速策略。",
+          "采用组相对策略优化（GRPO）在线训练所有策略参数，并训练一个对抗性判别器来构建奖励函数，以防止奖励黑客问题并增强接近原始生成分布的样本奖励。",
+          "实验表明该方法在 Stable Diffusion 3 和 FLUX 上实现了近 3 倍加速，同时保持具有竞争力的视觉质量，且仅更新占生成器参数 0.025% 的策略头，训练成本仅为动态神经网络方法的 1%。"
+        ],
+        "one_sentence": "RAPID$^3$ 提出了一种基于强化学习的三层加速策略，通过为冻结的扩散 Transformer 附加轻量级策略头来动态决定步长跳过、缓存重用和稀疏注意力，从而在保持视觉质量的同时实现近 3 倍推理加速。",
+        "problem": "扩散 Transformer 在推理阶段因需要多步去噪和计算密集型模块而效率低下，现有免训练加速器存在质量波动且加速保守，而动态神经网络方法则需要大规模数据集进行微调，难以适用于大型或专有模型。"
+      },
+      "summary_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "f57fbb7b8e64136b166eaf81601c0399efbf4b8090a5f693feb04fba38a6b31f",
+          "truncated": false
+        },
+        "sha256": "8c90e1166a0a5f58a567cbd66a4fe6a95d089f2d1a111ccd572faba2f2a22beb",
+        "url": "https://arxiv.org/html/2509.22323"
+      },
       "title": "RAPID$^3$: Tri-Level Reinforced Acceleration Policies for Diffusion Transformer",
       "topic_review": {
         "decisions": {
@@ -224526,6 +224576,33 @@
       "url": "https://openaccess.thecvf.com/content/ICCV2025/html/Zhang_Gaussian_Variation_Field_Diffusion_for_High-fidelity_Video-to-4D_Synthesis_ICCV_2025_paper.html"
     },
     "conf-c921134b20c6d2ff15e962c2": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Mesh",
+          "Multi-View-to-3D",
+          "Optimization-Based"
+        ],
+        "topics": [
+          "3D Gen&Recon"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "9db2fe1f9b38f9f3c18469e313d56774d74de49d031c57831662cfbeb33b0618",
+          "truncated": false
+        },
+        "sha256": "c0a632a970e8d0ce9facddf2aefa79b726b690b3efc538b68bbc2166d454aa01",
+        "url": "https://arxiv.org/html/2601.21400"
+      },
       "arxiv_id": "2601.21400",
       "authors": [
         "Ruiqi Zhang",
@@ -224557,7 +224634,30 @@
       },
       "source_edition": "ICLR 2026",
       "source_version": "703ce28bb9c965afdeb19e2478254e467c44a47998c29d309ad0103d64faea98",
-      "summary": null,
+      "summary": {
+        "contributions": [
+          "提出了一种将网格软化为多层半透明层的方法，通过增加三维感受野来学习复杂细节，同时保留网格特性并支持通过重网格化技术进行拓扑控制。",
+          "引入了一种基于 Splatting 的渲染器，能够高效地将半透明层渲染为图像，使得训练时间缩短至约 20 分钟。",
+          "提出了一种结合 DMTet 网格化和连续重网格化的混合拓扑控制策略，提高了优化过程中的拓扑稳定性并显著提升了最终网格质量。"
+        ],
+        "one_sentence": "该论文提出了一种名为 Mesh Splatting 的方法，通过将网格软化为多层半透明层以构建伪体积表示，结合基于 Splatting 的渲染器和混合拓扑控制策略，实现了端到端的多视角表面重建，从而在保持网格结构特性的同时增强了学习复杂几何细节的能力。",
+        "problem": "现有体积方法依赖易产生错误和过度密集网格的网格化步骤，而基于表面的端到端网格优化方法仅具有单层感受野，缺乏足够的三维上下文，导致难以学习复杂几何细节且对先验监督依赖较高。"
+      },
+      "summary_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "9db2fe1f9b38f9f3c18469e313d56774d74de49d031c57831662cfbeb33b0618",
+          "truncated": false
+        },
+        "sha256": "c0a632a970e8d0ce9facddf2aefa79b726b690b3efc538b68bbc2166d454aa01",
+        "url": "https://arxiv.org/html/2601.21400"
+      },
       "title": "Mesh Splatting for End-to-end Multiview Surface Reconstruction",
       "topic_review": {
         "decisions": {
@@ -226428,6 +226528,31 @@
       "url": "https://papers.nips.cc/paper_files/paper/2025/hash/5e85dc044c7e774ebc1ce44963b4755c-Abstract-Conference.html"
     },
     "conf-ca82a8b495032a9d2b91e9fd": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Diffusion"
+        ],
+        "topics": [
+          "Image Gen&Edit"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "170ff959beddfcee8dc6d6f2a4d5d0b52d74170a539863a4dd7aad62c581c67a",
+          "truncated": false
+        },
+        "sha256": "b959a9721ba2c3af641d4fc98379cac0b8f79fbe9696f014f44be5152d4bcc3c",
+        "url": "https://arxiv.org/html/2512.23258"
+      },
       "arxiv_id": "2512.23258",
       "authors": [
         "Tong Shao",
@@ -226462,7 +226587,31 @@
       },
       "source_edition": "ICLR 2026",
       "source_version": "188e8c8476ec63ad20784f74569c377193be46ec34601324b9ae4a84f2c02f22",
-      "summary": null,
+      "summary": {
+        "contributions": [
+          "提出了一种名为CEM的免训练即插即用缓存策略优化方法，能够无缝集成到现有的误差校正方法和量化模型中，在保持加速效率的同时显著提升生成保真度。",
+          "提出了离线误差建模机制，通过随机样本生成构建模型在不同缓存间隔下的内在敏感性先验，该先验用于指导缓存策略优化，无需额外的在线计算成本。",
+          "引入基于先验误差的动态规划算法，在给定加速预算下推导最小化累积误差的最优缓存策略，从而降低现有基于缓存方法的误差。",
+          "在八个生成模型和一个量化模型上进行了广泛实验，证明CEM作为插件能有效提升最先进加速方法和量化模型的生成保真度，例如帮助TaylorSeer等方法超越原始模型保真度，并在Q-DiT上实现额外2倍加速。"
+        ],
+        "one_sentence": "本文提出了一种名为CEM的免训练即插即用保真度优化插件，通过离线误差建模和动态规划最小化累积误差，在保持加速效率的同时显著提升了扩散Transformer加速方法的生成保真度。",
+        "problem": "现有基于缓存的扩散Transformer加速方法虽然能实现免训练加速，但简单的缓存策略导致去噪过程中累积误差指数级增长，严重损害生成保真度；现有的误差校正方法受限于固定或线性的缓存调度，无法适应去噪过程中对缓存的复杂动态敏感性，且部分方法依赖实时误差估计，引入了额外的计算开销并限制了与不同加速比或模型架构的兼容性。"
+      },
+      "summary_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "170ff959beddfcee8dc6d6f2a4d5d0b52d74170a539863a4dd7aad62c581c67a",
+          "truncated": false
+        },
+        "sha256": "b959a9721ba2c3af641d4fc98379cac0b8f79fbe9696f014f44be5152d4bcc3c",
+        "url": "https://arxiv.org/html/2512.23258"
+      },
       "title": "Plug-and-Play Fidelity Optimization for Diffusion Transformer Acceleration via Cumulative Error Minimization",
       "topic_review": {
         "decisions": {
@@ -227397,6 +227546,34 @@
       "url": "https://papers.nips.cc/paper_files/paper/2025/hash/43a69d143273bd8215578bde887bb552-Abstract-Conference.html"
     },
     "conf-cb2de641baaae8ca2759f30e": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Multi-View-to-3D",
+          "Single-Image-to-3D",
+          "Point Cloud",
+          "Feed-Forward"
+        ],
+        "topics": [
+          "3D Gen&Recon"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "95ebf9e5d0e615a20025bde93486fb95c657b4e702bc6feb46e250528aa69d26",
+          "truncated": false
+        },
+        "sha256": "520ae530fbd755576ff43703c05143acc73541578bd4c89f00f1aeda1aed2b5d",
+        "url": "https://arxiv.org/html/2603.04179"
+      },
       "arxiv_id": "2603.04179",
       "authors": [
         "Weirong Chen",
@@ -227430,7 +227607,32 @@
       },
       "source_edition": "ICLR 2026",
       "source_version": "a616426a02c6ba7bac452ca4dc80836318177f93c1ac2f9660b175c983474d72",
-      "summary": null,
+      "summary": {
+        "contributions": [
+          "提出了一种假设最少的统一非像素对齐重建流水线，适用于物体级和场景级的完整重建任务。",
+          "解决了像素对齐方法常导致点云不完整、几何重复及重叠区域3D不一致的关键局限，通过非像素对齐形式自然生成完整且均匀分布的几何结构。",
+          "利用基于扩散的3D自编码器处理非像素对齐监督，通过流匹配损失解决无序点集的匹配歧义，仅需点云监督即可捕获完整3D场景先验。",
+          "构建了基于预训练图像编码器并增加可学习场景Token的模型架构，支持任意数量视角的单目和多视图重建，将图像映射到全局场景表示。",
+          "整合了前馈Transformer架构与轻量级流匹配解码器，有效弥合了像素对齐重建与潜在3D生成之间的差距，兼具前馈效率与强大的3D建模能力。"
+        ],
+        "one_sentence": "本文提出了一种名为NOVA3R的非像素对齐视觉Transformer，旨在通过前馈方式从单张或多张无位姿图像中实现完整且物理合理的3D场景重建，克服了传统像素对齐方法仅重建可见表面及产生冗余几何的局限。",
+        "problem": "现有像素对齐的3D重建方法（如DUSt3R及其后续工作）受限于逐射线预测，仅能重建可见区域，导致几何不完整且在多视角重叠区域产生冗余点云；而现有的潜在3D生成方法多局限于物体级别，依赖高质量网格监督且难以处理复杂杂乱场景；基于扩散模型的场景级重建方法虽能补全未见区域，但无法保证点云在物理上的合理性。"
+      },
+      "summary_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "95ebf9e5d0e615a20025bde93486fb95c657b4e702bc6feb46e250528aa69d26",
+          "truncated": false
+        },
+        "sha256": "520ae530fbd755576ff43703c05143acc73541578bd4c89f00f1aeda1aed2b5d",
+        "url": "https://arxiv.org/html/2603.04179"
+      },
       "title": "NOVA3R: Non-pixel-aligned Visual Transformer for Amodal 3D Reconstruction",
       "topic_review": {
         "decisions": {
