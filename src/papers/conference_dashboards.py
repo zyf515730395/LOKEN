@@ -96,7 +96,7 @@ def _link(url: str, label: str) -> str:
 def _stats(rows: list[dict], proceedings: dict) -> str:
     cards = [
         f'<li><span>{_escape(row["label"])}</span><strong>{_escape(row["value"])}</strong>'
-        f'<p>{_escape(row["scope"])} · {_link(row["source_url"], "官方来源")}</p></li>'
+        f'<p>{_escape(row["scope"])} · {_link(row["source_url"], "统计出处")}</p></li>'
         for row in rows
     ]
     entries = proceedings.get("papers", [])
@@ -117,7 +117,7 @@ def _awards(rows: list[dict]) -> str:
     for row in rows:
         reading = _escape(row["reading"]) if row.get("reading") else "精读待补。"
         items.append(f'<li><h4>{_escape(row["name"])} · {_link(row["paper_url"], row["title"])}</h4>'
-                     f'<p>{reading}</p><small>{_link(row["award_url"], "官方获奖名单")}</small></li>')
+                     f'<p>{reading}</p><small>{_link(row["award_url"], "获奖记录")}</small></li>')
     return '<ul class="conference-evidence-list">' + "".join(items) + "</ul>"
 
 
