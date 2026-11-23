@@ -19,6 +19,7 @@ from papers.conferences import (
     _meeting_year,
     _reject_unknown_fields,
     _text,
+    dashboard_route,
     load_conferences,
 )
 from shared.rendering import atomic_write_text
@@ -28,12 +29,7 @@ from shared.site_shell import SITE_NAME, render_site_page, site_root_for
 ROOT = Path(__file__).resolve().parents[2]
 CONFERENCE_CONFIG = ROOT / "config/conferences.yaml"
 DASHBOARD_CATALOG = ROOT / "content/papers/conference-dashboards.yaml"
-ROUTE_PREFIX = "reports/conferences/"
 THEME_KINDS = ("技术趋势", "新模型范式", "新概念")
-
-
-def dashboard_route(conference_id: str) -> str:
-    return f"{ROUTE_PREFIX}{conference_id}.html"
 
 
 def navigation_links(conferences: tuple[Conference, ...]) -> tuple[tuple[str, str, str], ...]:
@@ -122,7 +118,9 @@ def _awards(rows: list[dict]) -> str:
 
 
 def _themes(rows: list[dict]) -> str:
-    sections = []
+    if not rows:
+        return '<p class="dashboard-muted">技术趋势、新模型范式与新概念的论文证据待补。</p>'
+    sections = ['<p class="dashboard-muted">基于所列论文的观察，不代表全会趋势、占比或首创结论。</p>']
     for kind in THEME_KINDS:
         items = []
         for row in rows:
@@ -137,23 +135,34 @@ def _themes(rows: list[dict]) -> str:
     return "".join(sections)
 
 
-def _board(meeting: ConferenceMeeting, rows: dict, proceedings: dict, as_of: date, default: bool) -> str:
+def _year_navigation(years: list[int], selected: int) -> str:
+    links = []
+    for year in years:
+        current = ' aria-current="location"' if year == selected else ""
+        links.append(f'<a href="#year-{year}"{current}>{year}</a>')
+    return '<nav class="conference-year-picker" aria-label="选择会议年份"><span>年份</span>' + "".join(links) + "</nav>"
+
+
+def _board(meeting: ConferenceMeeting, rows: dict, proceedings: dict, as_of: date, default: bool, years: list[int]) -> str:
     year = _meeting_year(meeting)
     state = ("日期未公布" if meeting.end_date is None else
              "已举办" if meeting.end_date < as_of else "举办中" if meeting.start_date <= as_of else "已确认")
+    place = _escape(meeting.location)
+    when_where = place if meeting.start_date is None else f"{_escape(_meeting_date_label(meeting))} · {place}"
     sources = _link(meeting.website or meeting.source_url, "会议官网")
     if meeting.proceedings_url:
         sources += " · " + _link(meeting.proceedings_url, "官方论文库")
     cls = "conference-year-board" + (" is-default" if default else "")
     return f"""<article class="{cls}" id="year-{year}" aria-labelledby="title-{year}">
+  {_year_navigation(years, year)}
   <header class="conference-board-heading">
-    <div><p>{state} · {_escape(_meeting_date_label(meeting))}</p><h2 id="title-{year}">{_escape(meeting.edition)}</h2></div>
-    <p>{_escape(meeting.location)}<br>{sources}</p>
+    <div><p class="conference-board-state">{state}</p><h2 id="title-{year}">{_escape(meeting.edition)}</h2></div>
+    <div class="conference-board-meta"><p>{when_where}</p>
+    <p>{sources}</p></div>
   </header>
-  <section class="conference-board-section"><h3>会议数据</h3>{_stats(rows.get("statistics", []), proceedings)}</section>
-  <section class="conference-board-section"><h3>关键奖项与论文精读</h3>{_awards(rows.get("awards", []))}</section>
-  <section class="conference-board-section"><h3>研究方向</h3>
-  <p class="dashboard-muted">基于所列论文的观察，不代表全会趋势、占比或首创结论。</p>{_themes(rows.get("themes", []))}</section>
+  <section class="conference-board-section"><h3>会议数据</h3><div>{_stats(rows.get("statistics", []), proceedings)}</div></section>
+  <section class="conference-board-section"><h3>关键奖项与论文精读</h3><div>{_awards(rows.get("awards", []))}</div></section>
+  <section class="conference-board-section"><h3>研究方向</h3><div>{_themes(rows.get("themes", []))}</div></section>
 </article>"""
 
 
@@ -173,18 +182,18 @@ def publish_conference_dashboards(
         if len(set(years)) != len(years):
             raise ValueError(f"Multiple editions share one dashboard year: {conference.id}")
         default = next((m for m in meetings if m.end_date and m.end_date < as_of), meetings[0])
-        chips = "".join(f'<a href="#year-{year}">{year}</a>' for year in years)
         boards = "\n".join(_board(m, content.get(m.edition, {}), catalog.get((conference.id, m.edition), {}),
-                                    as_of, m == default) for m in meetings)
+                                    as_of, m == default, years) for m in meetings)
         path = output_root / dashboard_route(conference.id)
         root = site_root_for(path, output_root)
+        year_range = str(years[0]) if len(years) == 1 else f"{years[-1]}–{years[0]}"
         name = conference.name
         body = f"""<div class="conference-dashboard">
 <header class="conference-dashboard-heading">
-  <p>学习一个 / 会议</p><h1>{_escape(name)}</h1>
-  <p>逐届查看会议数据、获奖论文与研究方向。没有官方依据的字段不会以零代替。</p>
+  <div><p class="conference-path">学习一个 / <a href="{root}index.html?tag=conferences#conferences">会议时间线</a></p>
+  <h1>{_escape(name)}</h1></div>
+  <p class="conference-coverage">{year_range} · {len(years)} 届</p>
 </header>
-<nav class="conference-year-picker" aria-label="切换会议年份">{chips}</nav>
 <div class="conference-year-boards">{boards}</div>
 </div>"""
         atomic_write_text(path, render_site_page(
@@ -194,7 +203,7 @@ def publish_conference_dashboards(
             main_content=body, body_class="conference-dashboard-page",
             sidebar_status="CONFERENCE / EDITIONS", active_subtopic=f"conference-{conference.id}",
             conference_links=links,
-            head_content=f'  <link rel="stylesheet" href="{_escape(root)}assets/css/conference-dashboards.css?v=1">\n',
+            head_content=f'  <link rel="stylesheet" href="{_escape(root)}assets/css/conference-dashboards.css?v=2">\n',
         ))
         outputs.append(path)
     return outputs

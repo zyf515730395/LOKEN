@@ -209,6 +209,10 @@ def _meeting_year(meeting: ConferenceMeeting) -> int:
     return int(year.group(1))
 
 
+def dashboard_route(conference_id: str) -> str:
+    return f"reports/conferences/{conference_id}.html"
+
+
 def render_conference_section(
     conferences: tuple[Conference, ...], *, as_of: datetime.date | None = None
 ) -> str:
@@ -235,19 +239,18 @@ def render_conference_section(
         state = "status-announced" if pending else "status-released"
         status_label = "日期未公布" if pending else ("已举办" if meeting.end_date < today else "已确认")
         date_label = html.escape(_meeting_date_label(meeting))
-        date_markup = date_label if pending else f'<time datetime="{meeting.start_date.isoformat()}">{date_label}</time>'
+        date_markup = "" if pending else f'<time datetime="{meeting.start_date.isoformat()}">{date_label}</time>'
         website = html.escape(meeting.website or meeting.source_url, quote=True)
         proceedings = (
             f'<a href="{html.escape(meeting.proceedings_url, quote=True)}">录用论文</a>'
             if meeting.proceedings_url else '<span>论文库待公布</span>'
         )
+        edition_url = f"{dashboard_route(conference.id)}#year-{year}"
         cards.append(f"""      <li class="timeline-release conference-release {state}" data-conference-year="{year}">
         <span class="timeline-dot" aria-hidden="true"></span>
-        <p class="conference-year">{year}</p>
-        {date_markup}
-        <h3><a href="{website}">{html.escape(meeting.edition)}</a></h3>
+        <div class="conference-dateline">{date_markup}<span class="conference-status">{status_label}</span></div>
+        <h3><a href="{edition_url}">{html.escape(meeting.edition)}</a></h3>
         <p class="conference-location">{html.escape(meeting.location)}</p>
-        <p class="conference-status">{status_label}</p>
         <div class="conference-links"><a href="{website}">官网</a>{proceedings}</div>
         <footer><a href="{html.escape(meeting.source_url, quote=True)}">官方来源</a><span>核验于 {meeting.verified_on.strftime('%Y.%m.%d')}</span></footer>
       </li>""")
