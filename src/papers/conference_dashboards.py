@@ -33,8 +33,12 @@ THEME_KINDS = ("技术趋势", "新模型范式", "新概念")
 
 
 def navigation_links(conferences: tuple[Conference, ...]) -> tuple[tuple[str, str, str], ...]:
+    def impact_order(conference: Conference) -> tuple[int, str, str]:
+        score = conference.research_h_index
+        return (-score if score is not None else 1, conference.name.casefold(), conference.id)
+
     return tuple((f"conference-{c.id}", c.name, dashboard_route(c.id))
-                 for c in conferences if c.meetings)
+                 for c in sorted(conferences, key=impact_order) if c.meetings)
 
 
 @cache
