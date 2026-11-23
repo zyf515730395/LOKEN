@@ -108397,6 +108397,32 @@
       "url": "https://proceedings.mlr.press/v267/peng25g.html"
     },
     "conf-624b726d70c6d6aaea655e2b": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Autoregressive",
+          "Discrete Tokens"
+        ],
+        "topics": [
+          "Image Gen&Edit"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "d12d5ddef32f5f3ae1d35477c8bbbeab4ba8a531b0500aa4ce6de349b36105d4",
+          "truncated": false
+        },
+        "sha256": "a45d27687feed0f0e8297e100a29f26903747d0684bc34697035029268f6c592",
+        "url": "https://arxiv.org/html/2505.12742"
+      },
       "arxiv_id": "2505.12742",
       "authors": [
         "Jinhua Zhang",
@@ -108430,7 +108456,31 @@
       },
       "source_edition": "ICLR 2026",
       "source_version": "eab42b1b8596322a49f815065476afbb1afb60b419a7248f70010030838c38ce",
-      "summary": null,
+      "summary": {
+        "contributions": [
+          "提出一种具有尺度马尔可夫假设的新型下一尺度自回归框架，通过仅建模相邻尺度间的转移概率来减少训练和推理过程中的内存消耗，使得模型能够在八张NVIDIA RTX 4090 GPU上完成训练。",
+          "引入空间马尔可夫注意力机制，将每个令牌的感受野限制在大小为k的邻域内，以缓解相邻尺度间的空间冗余，并将注意力计算的复杂度从O(N^2)降低至O(Nk)。",
+          "在ImageNet 256x256数据集上进行了全面实验，验证了该方法在从头训练的小模型和微调的大模型上均能实现与原始下一尺度预测模型相当或更优的性能。",
+          "实验结果表明，该方法在保持或提升建模精度的同时，将内存消耗降低了4.2倍，并消除了推理过程中对KV缓存的需求。"
+        ],
+        "one_sentence": "该论文提出MVAR模型，通过引入尺度马尔可夫和空间马尔可夫假设优化视觉自回归建模，显著降低了计算复杂度与内存消耗并提升了生成质量。",
+        "problem": "传统自回归模型采用光栅扫描顺序导致解码步骤过多和生成延迟高；虽然视觉自回归（VAR）通过下一尺度预测范式改善了效率和结构保持，但现有方法在预测当前尺度时依赖所有先前尺度，且在注意力机制中使用所有先前令牌作为键值，存在跨尺度和空间位置上的冗余计算，导致GPU内存消耗大且计算效率低。"
+      },
+      "summary_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "d12d5ddef32f5f3ae1d35477c8bbbeab4ba8a531b0500aa4ce6de349b36105d4",
+          "truncated": false
+        },
+        "sha256": "a45d27687feed0f0e8297e100a29f26903747d0684bc34697035029268f6c592",
+        "url": "https://arxiv.org/html/2505.12742"
+      },
       "title": "MVAR: Visual Autoregressive Modeling with Scale and Spatial Markovian Conditioning",
       "topic_review": {
         "decisions": {
@@ -110033,6 +110083,33 @@
       "url": "https://eccv.ecva.net/virtual/2026/poster/4478"
     },
     "conf-63a014006a197e0251384b0d": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Multi-View-to-3D",
+          "Feed-Forward",
+          "Implicit Field"
+        ],
+        "topics": [
+          "3D Gen&Recon"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "a5749eef6276f97f4f84d34806179e9e5465e583edc4e713bf9dafb572b0d871",
+          "truncated": false
+        },
+        "sha256": "03953f31d2d2eab8574198db2f1b37b703ccd2b0cf5a21854bf00b5d976ca96c",
+        "url": "https://arxiv.org/html/2510.13063"
+      },
       "arxiv_id": "2510.13063",
       "authors": [
         "Thomas W. Mitchel",
@@ -110067,7 +110144,32 @@
       },
       "source_edition": "ICLR 2026",
       "source_version": "e8d2735e08561561acebe0a00de2e0106696b506708d84621e666351481df599",
-      "summary": null,
+      "summary": {
+        "contributions": [
+          "引入可迁移性作为判断自监督模型是否具备真正新视角合成能力的关键标准，并提出True Pose Similarity指标来量化新视图对参考位姿的遵循程度。",
+          "指出先前多视图自监督新视角合成模型存在插值上下文帧而非推理视点的问题，并通过在双帧模型基础上引导多视图新视角合成来解决该问题，因为双帧模型在设计上总是进行外推。",
+          "提出一种明确促进可迁移性的新自监督新视角合成训练目标，并引入一种受表示学习启发的增强策略，通过最小化像素内容重叠同时保留相机运动来利用真实世界视频进行训练。",
+          "提出XFactor模型，据作者所知这是首个实现可迁移性从而执行真正新视角合成的完全自监督模型，该模型使用无约束的潜在位姿变量，不依赖任何三维归纳偏置或多视图几何概念。",
+          "在RE10K、DL3DV、MVImgNet和CO3Dv2等大规模真实世界数据集上进行了全面实验和消融研究，证明XFactor在场景和物体级别均显著优于RayZer和RUST等先前方法，并发现强制将相机位姿参数化为SE(3)是有害的。"
+        ],
+        "one_sentence": "本文提出XFactor，一种无需多视图几何先验且完全自监督的新视角合成模型，通过引入可迁移性作为核心标准并设计特定的训练目标与增强策略，实现了在任意场景中复现指定相机轨迹的真正新视角合成。",
+        "problem": "现有基于多视图几何的新视角合成方法依赖结构从运动模型计算相机位姿，且现有的自监督方法往往只是对上下文帧进行插值而非真正推理视点，无法在任意场景中根据用户指定的相机位姿渲染对应视图，缺乏跨场景的相机轨迹可迁移性。"
+      },
+      "summary_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "a5749eef6276f97f4f84d34806179e9e5465e583edc4e713bf9dafb572b0d871",
+          "truncated": false
+        },
+        "sha256": "03953f31d2d2eab8574198db2f1b37b703ccd2b0cf5a21854bf00b5d976ca96c",
+        "url": "https://arxiv.org/html/2510.13063"
+      },
       "title": "True Self-Supervised Novel View Synthesis is Transferable",
       "topic_review": {
         "decisions": {
@@ -113483,6 +113585,32 @@
       "url": "https://icml.cc/virtual/2026/poster/62112"
     },
     "conf-66a15abe059c59d8049294f9": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Text Conditioning",
+          "Pixel Space"
+        ],
+        "topics": [
+          "Image Gen&Edit"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "df855bb427082314ca2e06f3e10de179fb3311b57c455d274db7d04d8b65db2c",
+          "truncated": false
+        },
+        "sha256": "2b57f98972abe5d4896d3f39b748f1ef4d531b19ec9a2cf1664f68f430f8a19d",
+        "url": "https://arxiv.org/html/2510.01010"
+      },
       "arxiv_id": "2510.01010",
       "authors": [
         "Yuxiang Guo",
@@ -113524,7 +113652,32 @@
       },
       "source_edition": "ICLR 2026",
       "source_version": "9a8e4caf44e3964b6d20e1bffeb7e841e0071779253a2ac65d3708b9e40208b9",
-      "summary": null,
+      "summary": {
+        "contributions": [
+          "提出了ImageDoctor，一个统一的文生图评估模型，能够生成包含多方面评分和定位缺陷的热力图在内的密集反馈，实现可解释且细粒度的评估。",
+          "引入了“看-想-预测”范式，通过整合视觉定位和文本分析，赋予ImageDoctor结构化推理能力，使其能先定位潜在缺陷区域再进行多维度分析。",
+          "通过定制奖励函数的强化微调优化ImageDoctor，在增强对人类偏好遵循的同时，确保其具备空间定位的推理能力。",
+          "提出了DenseFlow-GRPO，一种新的文生图强化学习方法，将ImageDoctor的密集空间反馈纳入奖励信号，提供区域感知的监督，从而更稳健地提升图像生成质量。",
+          "在人类偏好数据集上进行了广泛实验，证明ImageDoctor在人类偏好对齐方面具有优越性，并验证了其在作为验证器和奖励模型的下游任务中的有效性。"
+        ],
+        "one_sentence": "本文提出了ImageDoctor，一个基于多模态大语言模型的统一文生图评估框架，通过引入“看-想-预测”范式生成多维评分及空间定位的热力图反馈，并进一步提出DenseFlow-GRPO方法，利用该密集空间反馈作为奖励信号以增强文生图模型的强化学习训练效果。",
+        "problem": "现有文生图评估模型通常仅输出单一标量分数，缺乏对图像细节缺陷的细粒度解释能力，且无法提供空间定位反馈以指出图像中具体存在问题的区域，这限制了评估结果的可解释性及其作为奖励函数指导模型改进的有效性。"
+      },
+      "summary_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "df855bb427082314ca2e06f3e10de179fb3311b57c455d274db7d04d8b65db2c",
+          "truncated": false
+        },
+        "sha256": "2b57f98972abe5d4896d3f39b748f1ef4d531b19ec9a2cf1664f68f430f8a19d",
+        "url": "https://arxiv.org/html/2510.01010"
+      },
       "title": "ImageDoctor: Diagnosing Text-to-Image Generation via Grounded Image Reasoning",
       "topic_review": {
         "decisions": {
@@ -114137,6 +114290,34 @@
       "url": "https://icml.cc/virtual/2026/poster/66506"
     },
     "conf-675da653b8b606e8863382c7": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Diffusion",
+          "Text Conditioning",
+          "Continuous Latents"
+        ],
+        "topics": [
+          "Image Gen&Edit",
+          "Video Gen&Edit"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "66fd52a9d9cabb28252adf031935eacd43f64c5d31373ac60a62571d5d1d65d3",
+          "truncated": false
+        },
+        "sha256": "3d8c52977c607be76855fb363364b7c2dc4e1b576c8c3c12c406ebbcd7b5acea",
+        "url": "https://arxiv.org/html/2508.09131"
+      },
       "arxiv_id": "2508.09131",
       "authors": [
         "Zixin Yin",
@@ -114186,7 +114367,31 @@
         "arxiv",
         "huggingface"
       ],
-      "summary": null,
+      "summary": {
+        "contributions": [
+          "提出了 ColorCtrl，一种免训练的颜色编辑方法，支持修改固有色、光源颜色和环境光照，同时保持几何、材质及光物质交互的一致性。",
+          "通过大量实验证明，ColorCtrl 在多模态扩散 Transformer 基础模型上实现了免训练方法中的最先进性能。",
+          "与商业模型相比，该方法在保持背景、结构保真度等视觉一致性方面表现显著更优，并产生更自然的编辑效果。",
+          "该方法具有模型无关性，可无缝扩展至视频模型及基于指令的编辑模型，展示了广泛的适用性和可扩展性。"
+        ],
+        "one_sentence": "本文提出了一种名为 ColorCtrl 的免训练文本引导颜色编辑方法，利用多模态扩散 Transformer 架构在修改物体固有色、光源颜色及环境光照的同时，精准保留几何结构、材质属性及光影交互等视觉一致性。",
+        "problem": "基于文本指令的图像和视频颜色编辑是一个病态问题，需要显式或隐式地重建整个场景的三维结构及正确光照。传统图像处理软件学习曲线陡峭且难以自动化，而现有的微调扩散模型方法依赖大规模数据集和复杂训练流程，免训练方法则难以实现细粒度颜色控制且易导致编辑区域与非编辑区域不一致。"
+      },
+      "summary_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "66fd52a9d9cabb28252adf031935eacd43f64c5d31373ac60a62571d5d1d65d3",
+          "truncated": false
+        },
+        "sha256": "3d8c52977c607be76855fb363364b7c2dc4e1b576c8c3c12c406ebbcd7b5acea",
+        "url": "https://arxiv.org/html/2508.09131"
+      },
       "title": "Training-Free Text-Guided Color Editing with Multi-Modal Diffusion Transformer",
       "topic_review": {
         "decisions": {
@@ -121833,6 +122038,33 @@
       "url": "https://openaccess.thecvf.com/content/ICCV2025/html/Zhu_Stable_Score_Distillation_ICCV_2025_paper.html"
     },
     "conf-6e4968a97df68ec595057e4c": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Diffusion",
+          "Reference Conditioning",
+          "Continuous Latents"
+        ],
+        "topics": [
+          "Image Gen&Edit"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "official_abstract",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Abstract"
+          ],
+          "sha256": "5cf63c2f1f6f8066ca5742f34a1f1025a4874ff76bc2fad128353af1de698a73",
+          "truncated": false
+        },
+        "sha256": "9ceabcf66e94ed0d5d223143dcc70711fa4fc7bb212eaa4fcddc00d564492a05",
+        "url": "https://iclr.cc/virtual/2026/poster/10007207"
+      },
       "arxiv_id": "2509.22414",
       "authors": [
         "Song Fei",
@@ -122162,6 +122394,32 @@
       "url": "https://eccv.ecva.net/virtual/2026/poster/3159"
     },
     "conf-6e6fa639d97459dff79f17b8": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Autoregressive",
+          "Discrete Tokens"
+        ],
+        "topics": [
+          "Image Gen&Edit"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "official_abstract",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Abstract"
+          ],
+          "sha256": "c11b20bbd6297aa5544f634cffbe2b95505ce2b84337ac6572e4be016c6a1741",
+          "truncated": false
+        },
+        "sha256": "81a62de4a02da309678db1dc7549458a3b7c4fbc5008400f9d0e04dcce385f26",
+        "url": "https://iclr.cc/virtual/2026/poster/10011134"
+      },
       "conferences": [
         {
           "edition": "ICLR 2026",
@@ -127332,6 +127590,31 @@
       "url": "https://ojs.aaai.org/index.php/AAAI/article/view/27931"
     },
     "conf-73f934757de016dbac9135a1": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Text Conditioning"
+        ],
+        "topics": [
+          "Image Gen&Edit"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "068f6d116d1ebc23022ccfe9cec170e38ce6999b30327ebe9162b5b0346841d8",
+          "truncated": false
+        },
+        "sha256": "1a3e9228085ef09934f7eeb2ccf9fa884d6493001a2d8f865805eb94efbd4c78",
+        "url": "https://arxiv.org/html/2411.08127"
+      },
       "arxiv_id": "2411.08127",
       "authors": [
         "Shih-Ying Yeh",
@@ -127369,7 +127652,31 @@
       },
       "source_edition": "ICLR 2026",
       "source_version": "f02a4206087085e62586b07bc3e7f1a262266096d6246a0619057177f89733c9",
-      "summary": null,
+      "summary": {
+        "contributions": [
+          "提出了TIPO框架，利用文本到图像模型训练中的大规模文本分布进行提示词优化，使提示词与模型先验知识对齐。",
+          "构建了一个经过筛选和平衡的3000万对、400亿token的标题语料库，以最大化与主流文本到图像模型的兼容性并保留美学质量。",
+          "设计了一套预文本任务，将原始用户输入（包括简洁自然句和基于标签的提示词）重构为丰富且分布一致的形式，通过轻量级语言模型扩展而非完全重写提示词。",
+          "在域内和域外提示词上的广泛实验表明，TIPO在人类偏好、文本对齐、美学质量和运行时效率方面均优于强基线方法。"
+        ],
+        "one_sentence": "该论文提出了TIPO框架，通过利用大规模文本预采样和多任务预训练来优化文本到图像生成的提示词，从而提升生成质量与效率。",
+        "problem": "现有提示词优化方法存在局限性：零样本大语言模型重写提示词时因训练数据分布差异导致对齐不佳；基于用户数据训练受限于用户专业水平导致输出不稳定；基于强化学习的方法计算成本高且仅适用于特定模型。"
+      },
+      "summary_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "068f6d116d1ebc23022ccfe9cec170e38ce6999b30327ebe9162b5b0346841d8",
+          "truncated": false
+        },
+        "sha256": "1a3e9228085ef09934f7eeb2ccf9fa884d6493001a2d8f865805eb94efbd4c78",
+        "url": "https://arxiv.org/html/2411.08127"
+      },
       "title": "TIPO: Text to Image with Text Pre-sampling for Prompt Optimization",
       "topic_review": {
         "decisions": {
@@ -127604,6 +127911,34 @@
       "url": "https://openaccess.thecvf.com/content/CVPR2026/html/Nazarieh_SyncDreamer_Controllable_and_Expressive_Avatar_Generation_Beyond_the_Talking_Head_CVPR_2026_paper.html"
     },
     "conf-7460c642815296c6ad24b5cd": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Diffusion",
+          "Reference Conditioning",
+          "Continuous Latents"
+        ],
+        "topics": [
+          "Image Gen&Edit",
+          "Video Gen&Edit"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "official_abstract",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Abstract"
+          ],
+          "sha256": "c26a9665c139974f4806c77858eff883081b2e7230d1fec44ebcfc193543088a",
+          "truncated": false
+        },
+        "sha256": "4b5c9ff07dfefafc0b17a3b8dcd5aedb08b247bafebdbc27868f60d3afbd2c38",
+        "url": "https://iclr.cc/virtual/2026/poster/10011177"
+      },
       "conferences": [
         {
           "edition": "ICLR 2026",
@@ -129403,6 +129738,33 @@
       "url": "https://openaccess.thecvf.com/content/CVPR2024/html/Sheynin_Emu_Edit_Precise_Image_Editing_via_Recognition_and_Generation_Tasks_CVPR_2024_paper.html"
     },
     "conf-76595d16a7d0675fa9eb42ea": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Multi-View-to-3D",
+          "Gaussian Splatting",
+          "Feed-Forward"
+        ],
+        "topics": [
+          "3D Gen&Recon"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "official_abstract",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Abstract"
+          ],
+          "sha256": "78d798f179b576b14a05ccbd3d0f4922fc38d9bd71be5529972710a627631288",
+          "truncated": false
+        },
+        "sha256": "a287562099aa8e2eb71b3585ef194a71c79edc065e4c01bc90ae9c1460a79690",
+        "url": "https://iclr.cc/virtual/2026/poster/10011581"
+      },
       "conferences": [
         {
           "edition": "ICLR 2026",
@@ -130078,6 +130440,33 @@
       "url": "https://proceedings.mlr.press/v267/sun25r.html"
     },
     "conf-76c4f87e367217c806e0023b": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Gaussian Splatting",
+          "Multi-View-to-3D",
+          "Optimization-Based"
+        ],
+        "topics": [
+          "3D Gen&Recon"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "official_abstract",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Abstract"
+          ],
+          "sha256": "985aa727850306fb312720fedd08a7d311c55b813fdb816c12e984343e9de5dc",
+          "truncated": false
+        },
+        "sha256": "9135d1c6df63b18941dd801f89c74a14ca3b05f67f427221c5d80dda12d67c8e",
+        "url": "https://iclr.cc/virtual/2026/poster/10006502"
+      },
       "conferences": [
         {
           "edition": "ICLR 2026",
@@ -131851,6 +132240,33 @@
       "url": "https://eccv.ecva.net/virtual/2024/poster/1219"
     },
     "conf-790897759a52978edbc4ddde": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Gaussian Splatting",
+          "Feed-Forward",
+          "Unconditional Sampling"
+        ],
+        "topics": [
+          "3D Gen&Recon"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "670f0e9b54c1915478e14c070875a7f889f26dfa53ba950f1b9669d297bb023f",
+          "truncated": false
+        },
+        "sha256": "1556d52c8bb4ebfea100b8a13e707666b59e8cf12127bb1912448cf1a754bc88",
+        "url": "https://arxiv.org/html/2509.23402"
+      },
       "arxiv_id": "2509.23402",
       "authors": [
         "Ziyue Zhu",
@@ -131890,7 +132306,32 @@
       },
       "source_edition": "ICLR 2026",
       "source_version": "16ace16932912fc239a0341cd4cb7f389affcda73c2357091e7a74b981eca2b1",
-      "summary": null,
+      "summary": {
+        "contributions": [
+          "提出了WorldSplat，一个统一驾驶场景视频生成与显式动态场景重建的前馈4D生成框架。",
+          "设计了一种动态感知的高斯解码器，能够从多模态潜变量直接推断精确的像素对齐高斯，并将其聚合为具有静态-动态分解的4D高斯表示。",
+          "通过嵌入3D感知到扩散模型并使用显式高斯中心世界表示，确保了新轨迹视图在空间和时间上的一致性。",
+          "支持包括道路草图、文本描述、动态物体放置和自车轨迹在内的丰富条件输入，实现了高度可控的多样化驾驶场景模拟。",
+          "通过大量实验证明该框架能生成空间和时间一致的自由视点视频，在驾驶视频生成中达到最先进性能，并为下游驾驶任务带来显著益处。"
+        ],
+        "one_sentence": "本文提出WorldSplat，一种结合生成扩散与显式3D重建的前馈4D驾驶场景生成框架，旨在解决现有方法在生成灵活性与新视角一致性之间的权衡难题。",
+        "problem": "现有视频生成模型在2D图像域工作，缺乏3D一致性和新视角可控性；而场景重建方法虽具备3D一致性但缺乏生成灵活性，无法想象超出捕获数据的场景；此外，先生成后重建的方法受限于两个过程的质量，难以同时实现生成想象与忠实的4D重建。"
+      },
+      "summary_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "670f0e9b54c1915478e14c070875a7f889f26dfa53ba950f1b9669d297bb023f",
+          "truncated": false
+        },
+        "sha256": "1556d52c8bb4ebfea100b8a13e707666b59e8cf12127bb1912448cf1a754bc88",
+        "url": "https://arxiv.org/html/2509.23402"
+      },
       "title": "WorldSplat: Gaussian-Centric Feed-Forward 4D Scene Generation for Autonomous Driving",
       "topic_review": {
         "decisions": {
@@ -132134,6 +132575,31 @@
       "url": "https://iclr.cc/virtual/2025/poster/30714"
     },
     "conf-794a4befbfe0536cc2914256": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Multi-View-to-3D"
+        ],
+        "topics": [
+          "3D Gen&Recon"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "official_abstract",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Abstract"
+          ],
+          "sha256": "f909307b532d98a4465f45970c334486e936f626877d4b435f5bda49d66d54db",
+          "truncated": false
+        },
+        "sha256": "ae9973e1b6e8ff9ca13537545c1ccbe7dfc350e0384c5f02fd508f5f2e89f05c",
+        "url": "https://iclr.cc/virtual/2026/poster/10011294"
+      },
       "conferences": [
         {
           "edition": "ICLR 2026",
@@ -136925,6 +137391,33 @@
       "url": "https://openaccess.thecvf.com/content/CVPR2024/html/Pang_Cross_Initialization_for_Face_Personalization_of_Text-to-Image_Models_CVPR_2024_paper.html"
     },
     "conf-7d426bd36cdbd2dcea7b2e60": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Autoregressive",
+          "Discrete Tokens",
+          "Text Conditioning"
+        ],
+        "topics": [
+          "Image Gen&Edit"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "3b16862c2f20b3474999bdcb47dc6dd29c0e5b210272fccd412c5fd81f62ccce",
+          "truncated": false
+        },
+        "sha256": "f9297b6c2a01b1fbf11319504874bf25a61db2df88fb717afc6746f3e6fda198",
+        "url": "https://arxiv.org/html/2510.00996"
+      },
       "arxiv_id": "2510.00996",
       "authors": [
         "Dongli Xu",
@@ -136956,7 +137449,32 @@
       },
       "source_edition": "ICLR 2026",
       "source_version": "953ae17432e01e59945b7fd98a0fb993d310e446194ba07a325e80c97dd6bf5c",
-      "summary": null,
+      "summary": {
+        "contributions": [
+          "证明了利用已生成的视觉内容作为后续令牌预测引导的必要性，将引导概念从类别或文本令牌扩展到生成内容本身。",
+          "提出了SoftCFG框架，这是一种引入令牌级软加权以整合生成内容引导的通用推理方法。",
+          "通过令牌预测置信度实例化加权机制，利用值缓存缩放机制让高置信度令牌对后续解码步骤产生更强影响，从而稳定分布引导信号。",
+          "引入了步骤归一化程序，通过归一化扰动权重之和来避免退化行为，确保生成过程中引导的稳定性和平衡性。",
+          "在ImageNet 256x256类别条件基准上进行了全面实验，证明SoftCFG无需额外训练或架构修改，即可将FID从1.37降低至1.27，达到自回归模型的最先进水平。"
+        ],
+        "one_sentence": "本文提出SoftCFG，一种通过不确定性引导的推理方法，利用预测置信度对视觉自回归模型中的值缓存进行加权扰动，以解决分类器自由引导（CFG）在自回归生成中信号衰减和过度引导的问题，从而在ImageNet 256x256基准上实现了新的最先进FID分数。",
+        "problem": "视觉自回归模型中应用分类器自由引导（CFG）存在两个主要挑战：一是引导信号随时间衰减，因为条件令牌远离局部上下文导致条件与无条件预测的差距缩小甚至消失；二是过度引导，即仅依赖外部条件（如类别标签）的引导会过度强制语义对齐，导致肢体重复、多余部件等视觉连贯性冲突和伪影。"
+      },
+      "summary_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "3b16862c2f20b3474999bdcb47dc6dd29c0e5b210272fccd412c5fd81f62ccce",
+          "truncated": false
+        },
+        "sha256": "f9297b6c2a01b1fbf11319504874bf25a61db2df88fb717afc6746f3e6fda198",
+        "url": "https://arxiv.org/html/2510.00996"
+      },
       "title": "SoftCFG: Uncertainty-guided Stable Guidance for Visual Autoregressive Model",
       "topics": [
         "Image Gen&Edit"
@@ -141819,6 +142337,33 @@
       "url": "https://icml.cc/virtual/2026/poster/61799"
     },
     "conf-81371989cd71e68f7ee42ecc": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Video Conditioned",
+          "Text Conditioned",
+          "Joint Spatiotemporal"
+        ],
+        "topics": [
+          "Video Gen&Edit"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "official_abstract",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Abstract"
+          ],
+          "sha256": "72382885e68e220bf12c56b5199d64aafc9c6dad672238bc05c340e813dd0c22",
+          "truncated": false
+        },
+        "sha256": "6bac333481c8eeea9777d524682a968b65bb8d5501f58964dd8a90a203b163bb",
+        "url": "https://iclr.cc/virtual/2026/poster/10007575"
+      },
       "arxiv_id": "2506.04590",
       "authors": [
         "Yue Ma",
@@ -142394,6 +142939,32 @@
       "url": "https://s2025.conference-schedule.org/?post_type=page&p=14&id=papers_626&sess=sess141"
     },
     "conf-81dc0c76860eb5a2145faee5": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Diffusion",
+          "Text Conditioning"
+        ],
+        "topics": [
+          "Image Gen&Edit"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "cd92c6b5b3d125bf87150afdcdb308c4b21fba248881880bc868cd2b8e0b4bf6",
+          "truncated": false
+        },
+        "sha256": "b220f1aea51fec727d013636dbf945e6950ca326377ea450bbdcce0fe2be7f78",
+        "url": "https://arxiv.org/html/2511.07970"
+      },
       "arxiv_id": "2511.07970",
       "authors": [
         "Justin Lee",
@@ -142429,7 +143000,32 @@
       },
       "source_edition": "ICLR 2026",
       "source_version": "011349bed01d8f4910c36d7d9a0234d18fb4f3462e4affc986ef8d693d180469",
-      "summary": null,
+      "summary": {
+        "contributions": [
+          "首次对文本到图像扩散模型的连续遗忘进行了全面的实证研究，并引入了一个扩展了风格级和对象级遗忘序列的基准测试。",
+          "揭示了连续遗忘中效用崩溃的根本原因是累积参数漂移，即连续的遗忘步骤使模型参数逐渐偏离预训练流形。",
+          "探索并验证了多种可无缝集成到现有遗忘方法中的通用正则化器，包括约束更新范数、选择性更新关键参数以及合并独立遗忘模型，以缓解漂移。",
+          "发现语义感知对于域内保留至关重要，指出保留性能与保留概念和遗忘概念之间的文本嵌入相似度存在强负相关。",
+          "提出了一种梯度投影方法，通过强制参数更新与语义相近概念张成的子空间正交，从而最小化非预期干扰并显著改善域内保留能力。"
+        ],
+        "one_sentence": "该研究针对文本到图像扩散模型中连续遗忘请求导致的效用崩溃问题，通过实证分析揭示了累积参数漂移的成因，并提出了基于梯度投影等正则化策略的兼容解决方案以增强现有方法的保留能力。",
+        "problem": "现有针对扩散模型的机器遗忘方法大多假设遗忘请求是同时到达的，而现实场景中请求通常是顺序到达的；在连续遗忘设置下，主流方法会导致模型迅速遗忘保留知识，产生效用崩溃，且现有研究在图像生成领域对连续遗忘缺乏系统性探索。"
+      },
+      "summary_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "cd92c6b5b3d125bf87150afdcdb308c4b21fba248881880bc868cd2b8e0b4bf6",
+          "truncated": false
+        },
+        "sha256": "b220f1aea51fec727d013636dbf945e6950ca326377ea450bbdcce0fe2be7f78",
+        "url": "https://arxiv.org/html/2511.07970"
+      },
       "title": "Continual Unlearning for Text-to-Image Diffusion Models: A Regularization Perspective",
       "topic_review": {
         "decisions": {
@@ -143338,6 +143934,33 @@
       "url": "https://papers.nips.cc/paper_files/paper/2025/hash/d01db5cd2555ba11f75da0454d57b903-Abstract-Conference.html"
     },
     "conf-8332cce691dc36560528b1f0": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Point Cloud",
+          "Unconditional Sampling",
+          "Feed-Forward"
+        ],
+        "topics": [
+          "3D Gen&Recon"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "5506f03591c4654499d0334f4f52627b06988cf9e5ea0d9a16fbf2483acd3639",
+          "truncated": false
+        },
+        "sha256": "18eab21907ddfd0563f09649ee9c1e9f9d58793b30a7fa3e991ab91aa1f6a9e2",
+        "url": "https://arxiv.org/html/2601.20425"
+      },
       "arxiv_id": "2601.20425",
       "authors": [
         "Chenliang Zhou",
@@ -143372,7 +143995,32 @@
       },
       "source_edition": "ICLR 2026",
       "source_version": "a0be0986a073fd118ae72ab9161366b46f499cdb32b401b74fd868e58c60605b",
-      "summary": null,
+      "summary": {
+        "contributions": [
+          "提出了Quartet of Diffusions框架，这是一种显式利用部件和对称性引导的结构感知点云生成方法。",
+          "采用四个扩散模型分别学习形状潜变量、对称性、语义部件以及将部件组装成完整点云的组装器的分布。",
+          "实现了高质量且多样化的点云生成，并保证了生成形状具有对称性，这是首个在生成形状中保证对称性的3D形状生成方法。",
+          "通过解耦的结构表示使生成过程具有可解释性和可控性，支持在保持全局一致性的同时对单个部件进行针对性修改。",
+          "利用全局形状潜变量锚定部件组装，进一步强化了结构连贯性，确保部件组装与整体几何结构保持一致。"
+        ],
+        "one_sentence": "该论文提出了一种名为Quartet of Diffusions的结构感知点云生成框架，通过显式利用部件和对称性引导，解决了现有生成方法缺乏结构建模导致部件组织混乱和对称性不一致的问题。",
+        "problem": "现有生成方法大多对结构无感知，将点云合成视为无约束的分布学习问题，往往优先关注全局视觉保真度而忽视内在结构的显式建模，导致生成的形状存在部件组织差、对称性断裂或不一致以及泛化能力有限的问题；尽管近期有支持部件级生成的尝试，但很少将对称性作为学习到的关系先验纳入，缺乏统一且原则性的框架来联合编码部件级组合和对称结构。"
+      },
+      "summary_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "5506f03591c4654499d0334f4f52627b06988cf9e5ea0d9a16fbf2483acd3639",
+          "truncated": false
+        },
+        "sha256": "18eab21907ddfd0563f09649ee9c1e9f9d58793b30a7fa3e991ab91aa1f6a9e2",
+        "url": "https://arxiv.org/html/2601.20425"
+      },
       "title": "Quartet of Diffusions: Structure-Aware Point Cloud Generation through Part and Symmetry Guidance",
       "topic_review": {
         "decisions": {
@@ -148736,6 +149384,33 @@
       "url": "https://openaccess.thecvf.com/content/CVPR2025/html/Yang_Improving_Gaussian_Splatting_with_Localized_Points_Management_CVPR_2025_paper.html"
     },
     "conf-88fd872e5123a95ae0dd0cb5": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Mesh",
+          "Feed-Forward",
+          "Multi-View-to-3D"
+        ],
+        "topics": [
+          "3D Gen&Recon"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "7d96e6dcd0cc36452cbf5f6750b2a4ebee706fce3d78b2906b1f6d9b82a23adc",
+          "truncated": false
+        },
+        "sha256": "8e7d6862bbd80c1e5047d2e9c07d4a53d7247dc3f05b4a5260d22d6005299a95",
+        "url": "https://arxiv.org/html/2510.06208"
+      },
       "arxiv_id": "2510.06208",
       "authors": [
         "Jiraphon Yenphraphai",
@@ -148783,7 +149458,32 @@
         "arxiv",
         "huggingface"
       ],
-      "summary": null,
+      "summary": {
+        "contributions": [
+          "提出了首个直接从视频生成动态3D网格的4D形状生成框架，区别于将3D模型作为黑盒使用或结合优化的现有方法。",
+          "通过微调而非扩展独立网络的方式，将最先进的3D形状生成模型架构扩展至4D生成任务。",
+          "在形状扩散变换器中引入时空注意力机制，以捕捉时间依赖性并提升时间一致性。",
+          "重新设计了形状编码器中的点采样策略，以改善潜在表示的一致性和可扩散性。",
+          "利用跨帧共享噪声的技术来增强生成结果的时间稳定性。"
+        ],
+        "one_sentence": "本文提出了首个直接从视频生成动态3D网格的4D形状生成框架ShapeGen4D，通过引入时空注意力、重新设计点采样及共享噪声机制，解决了现有方法在拓扑变化、时间一致性及数据依赖方面的局限。",
+        "problem": "现有视频条件4D形状生成方法存在显著缺陷：基于分数蒸馏采样（SDS）的方法脆弱且计算昂贵；两阶段流水线方法受限于多视图生成中的累积误差和重建不完美；近期尝试适配3D生成模型的方法（如V2M4和GVFD）要么无法原生生成4D网格、依赖优化导致伪影，要么仅基于首帧条件且受限于有限的4D训练数据，无法处理拓扑变化或大体积变形。"
+      },
+      "summary_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "7d96e6dcd0cc36452cbf5f6750b2a4ebee706fce3d78b2906b1f6d9b82a23adc",
+          "truncated": false
+        },
+        "sha256": "8e7d6862bbd80c1e5047d2e9c07d4a53d7247dc3f05b4a5260d22d6005299a95",
+        "url": "https://arxiv.org/html/2510.06208"
+      },
       "title": "ShapeGen4D: Towards High Quality 4D Shape Generation from Videos",
       "topic_review": {
         "decisions": {
@@ -152584,6 +153284,34 @@
       "url": "https://eccv.ecva.net/virtual/2026/poster/5417"
     },
     "conf-8caac672da4dfafd5ae50782": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Diffusion",
+          "Discrete Tokens",
+          "Structural Conditioning",
+          "Reference Conditioning"
+        ],
+        "topics": [
+          "Image Gen&Edit"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "63f1c08ec949fc04aab8572feebcba3ea97a330f3e31945cf9ef2d7ed7a21db3",
+          "truncated": false
+        },
+        "sha256": "0c5d7d71e4aa1f5e210a67c1fc5f74cf91004967b7ff9f1617fb28024092f706",
+        "url": "https://arxiv.org/html/2509.25731"
+      },
       "arxiv_id": "2509.25731",
       "authors": [
         "Zhenghao Zhang",
@@ -152621,7 +153349,32 @@
       },
       "source_edition": "ICLR 2026",
       "source_version": "9fdeb93184b029a9c3af4f643289c9e6c9f9c135252f898adb33a53bc108c710",
-      "summary": null,
+      "summary": {
+        "contributions": [
+          "构建了 HFL-150K 数据集，包含超过 15 万对具有细粒度编辑指令和高精度面部地标标注的人脸编辑数据，据片段所述是该领域目前最大的资源。",
+          "提出了 LaTo 模型，这是首个用于精确人脸编辑的地标标记化扩散 Transformer，集成了原始坐标的地标标记化、位置映射位置编码以及地标感知的无分类器引导机制。",
+          "设计了地标标记器，采用 VQVAE 风格的码本将地标坐标直接量化为与图像令牌维度相同的离散面部令牌，从而忠实保留面部结构并避免密集像素渲染带来的计算开销。",
+          "开发了地标预测器，利用轻量级视觉语言模型通过结构化思维链从源图像和文本指令中推断目标地标，降低了终端用户需要提供精确地标输入的要求。",
+          "在复杂细粒度指令下实现了精确的面部属性控制，并在语义一致性和身份保持方面达到了最先进的性能。"
+        ],
+        "one_sentence": "LaTo 提出了一种基于地标标记化的扩散 Transformer 架构，通过直接量化地标坐标为离散面部令牌并引入位置映射编码，解决了现有方法在细粒度人脸编辑中存在的身份漂移、几何推理不足及计算成本高昂的问题。",
+        "problem": "现有基于指令的人脸编辑模型主要依赖高层语义编码器，难以捕捉精确控制所需的结构面部线索，导致指令遵循不准确和身份保持能力弱；而将地标渲染为 2D 图像并编码为密集视觉令牌的方法，不仅容易引发像素级复制导致的身份漂移和伪影，还因自注意力机制的二次方复杂度带来 prohibitive 的内存和计算成本，限制了其在复杂场景中的实际应用。"
+      },
+      "summary_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "63f1c08ec949fc04aab8572feebcba3ea97a330f3e31945cf9ef2d7ed7a21db3",
+          "truncated": false
+        },
+        "sha256": "0c5d7d71e4aa1f5e210a67c1fc5f74cf91004967b7ff9f1617fb28024092f706",
+        "url": "https://arxiv.org/html/2509.25731"
+      },
       "title": "LaTo: Landmark-tokenized Diffusion Transformer for Fine-grained Human Face Editing",
       "topic_review": {
         "decisions": {
@@ -153167,6 +153920,33 @@
       "url": "https://doi.org/10.1109/iros58592.2024.10802264"
     },
     "conf-8d2f5709083846a697ec9047": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Diffusion",
+          "Image Conditioned",
+          "Video Conditioned"
+        ],
+        "topics": [
+          "Video Gen&Edit"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "official_abstract",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Abstract"
+          ],
+          "sha256": "5a76a7eb59952d45d732c8f5165ae7b9ecf04d655a0afbbb73c0c712ffbe3d2d",
+          "truncated": false
+        },
+        "sha256": "9160da878ac1cce6fea2664a43cbc4d8fecf1413c4e18b6611b89742144113d7",
+        "url": "https://iclr.cc/virtual/2026/poster/10010862"
+      },
       "conferences": [
         {
           "edition": "ICLR 2026",
@@ -154253,6 +155033,33 @@
       "url": "https://eccv.ecva.net/virtual/2024/poster/1756"
     },
     "conf-8e7f1a3d83febd876549a820": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Autoregressive",
+          "Discrete Tokens",
+          "Text Conditioning"
+        ],
+        "topics": [
+          "Image Gen&Edit"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "758598bf0b314111a5529c8cf4d5845729ba3029d476fe3a4770cf08eeda95cb",
+          "truncated": false
+        },
+        "sha256": "b81b1b10e7ed99723e8c54e2a2647179720349711086db311ddbaf78e4b0b7bc",
+        "url": "https://arxiv.org/html/2602.05534"
+      },
       "arxiv_id": "2602.05534",
       "authors": [
         "Youngwoo Shin",
@@ -154284,7 +155091,32 @@
       },
       "source_edition": "ICLR 2026",
       "source_version": "bc10f3ec1b210bd54e1c5941bddcd4e5c24746cb5a735cd48fca8e4d393dc51c",
-      "summary": null,
+      "summary": {
+        "contributions": [
+          "提出了 Scaled Spatial Guidance (SSG)，这是一种免训练的引导方法，通过优先在每一步生成新颖的高频信息来强制执行从粗到细的层级结构。",
+          "从信息论视角重新解释了视觉自回归采样过程，分析了每一步的目标，并确定了实现稳健生成所需的每一步最优优先级。",
+          "设计了 Discrete Spatial Enhancement (DSE) 技术，这是一种频域插值方法，用于构建携带前一步较粗结构的先验，以隔离特定尺度的语义残差并保持跨尺度的结构完整性。",
+          "在多种不同的视觉自回归基线模型上验证了 SSG 的有效性，展示了在类别条件和文本条件生成任务中保真度和多样性的持续改进，且几乎不增加延迟开销。",
+          "证明了 SSG 方法独立于具体的标记化和条件设置，适用于所有使用离散视觉标记的视觉自回归模型，并在保持低延迟的同时实现了与近期扩散模型和掩码模型相竞争的鲁棒性能。"
+        ],
+        "one_sentence": "本文提出了一种名为 SSG 的免训练空间引导方法，通过信息论视角重新审视视觉自回归模型，利用离散空间增强技术引导模型在每一步生成特定尺度的语义残差，从而在保持低延迟的同时显著提升了生成保真度。",
+        "problem": "现有改进视觉自回归模型的方法通常涉及昂贵的重新训练或引入额外开销，且容易因误差累积导致训练与推理不一致，削弱了该范式原本具备的高效性优势。"
+      },
+      "summary_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "758598bf0b314111a5529c8cf4d5845729ba3029d476fe3a4770cf08eeda95cb",
+          "truncated": false
+        },
+        "sha256": "b81b1b10e7ed99723e8c54e2a2647179720349711086db311ddbaf78e4b0b7bc",
+        "url": "https://arxiv.org/html/2602.05534"
+      },
       "title": "SSG: Scaled Spatial Guidance for Multi-Scale Visual Autoregressive Generation",
       "topics": [
         "Image Gen&Edit"
