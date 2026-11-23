@@ -13,7 +13,7 @@ import yaml
 
 
 CONFERENCE_ID_PATTERN = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
-CONFERENCE_FIELDS = {"id", "name", "enabled", "homepage", "meetings"}
+CONFERENCE_FIELDS = {"id", "name", "enabled", "homepage", "meetings", "research_h_index"}
 MEETING_FIELDS = {
     "edition", "status", "start_date", "end_date", "location", "source_url", "verified_on", "website", "proceedings_url",
     "accepted_papers_urls", "crossref_sources",
@@ -40,6 +40,7 @@ class Conference:
     name: str
     homepage: str
     meetings: tuple[ConferenceMeeting, ...]
+    research_h_index: int | None = None
 
 
 def _mapping(value: object, context: str) -> dict:
@@ -163,6 +164,9 @@ def load_conferences(
         if conference_id in seen_ids:
             raise ValueError(f"Duplicate conference id: {conference_id}")
         seen_ids.add(conference_id)
+        h_index = data.get("research_h_index")
+        if h_index is not None and (type(h_index) is not int or h_index < 0):
+            raise ValueError(f"{context}.research_h_index must be a non-negative integer")
         enabled = data.get("enabled")
         if not isinstance(enabled, bool):
             raise ValueError(f"{context}.enabled must be true or false")
@@ -182,6 +186,7 @@ def load_conferences(
                 name=_text(data.get("name"), f"{context}.name"),
                 homepage=_https_url(data.get("homepage"), f"{context}.homepage"),
                 meetings=meetings,
+                research_h_index=h_index,
             ))
     return tuple(conferences)
 
