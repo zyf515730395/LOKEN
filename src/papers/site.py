@@ -399,6 +399,10 @@ def hf_daily_url(row: dict) -> str:
     return url if re.fullmatch(r'https://huggingface\.co/papers/[A-Za-z0-9][A-Za-z0-9._-]{0,199}', url) else ''
 
 
+def paper_table_sort_key(row: dict) -> tuple[bool, datetime.date, str]:
+    return bool(hf_daily_url(row)), row["date"], row["id"]
+
+
 def render_table(
     rows: list[dict],
     topic: str,
@@ -575,7 +579,7 @@ def render_content(
                 )
                 output.append(
                     render_table(
-                        surveys,
+                        sorted(surveys, key=paper_table_sort_key, reverse=True),
                         category["topic"],
                         summary_catalog,
                         candidate_statuses,
@@ -597,7 +601,7 @@ def render_content(
                     anchor_id = day_range_anchor(category, year, month, day_range)
                     output.append(f'<span class="archive-date-alias" id="{anchor_id}" aria-hidden="true"></span>')
                 rows = sorted((row for members in day_ranges.values() for row in members),
-                              key=lambda row: (bool(hf_daily_url(row)), row['date'], row['id']), reverse=True)
+                              key=paper_table_sort_key, reverse=True)
                 output.append(render_table(rows, category['topic'], summary_catalog,
                                            candidate_statuses, anchored_papers, label_slugs))
                 output.append("      </section>")
@@ -633,7 +637,7 @@ def render_paper_navigation(
         '<div class="paper-context-navigation">'
         + topic_strip
         + '<a class="context-strip-link conference-navigation-link" '
-        'href="?tag=conferences#conferences" data-topic-filter="conferences">Conference</a>'
+        'href="?tag=conferences#conferences" data-topic-filter="conferences">时间线</a>'
         '</div>'
     )
 
@@ -740,7 +744,8 @@ def generate_site(
     from papers.proceedings import load_catalog, match_papers
     all_rows = [row for category in all_categories for row in _iter_category_rows(category)]
     apply_subtopic_markers(all_rows, ledger, site_config)
-    conference_matches = match_papers(all_rows, load_catalog())
+    proceedings_catalog = load_catalog()
+    conference_matches = match_papers(all_rows, proceedings_catalog)
     for row in all_rows:
         records = merged_conferences.get(row['id'], ())
         if records:
@@ -757,6 +762,7 @@ def generate_site(
     retain_library_matches(all_rows, library, ledger)
     today = generated_on or datetime.date.today()
     conferences = load_conferences(conference_config_path, as_of=today)
+    from papers.conference_dashboards import navigation_links, publish_conference_dashboards
     categories, themes = filter_recent_archive(all_categories, today.year)
     label_slugs = {label.name: label.slug for label in labels}
     updated = today.isoformat()
@@ -794,8 +800,14 @@ def generate_site(
         main_content=main_content,
         body_class="learning-page",
         sidebar_status=f"{updated.replace('-', '.')} / DAILY",
+        conference_links=navigation_links(conferences),
     )
     atomic_write_text(page_output, document)
+    if Path(conference_config_path).resolve() == DEFAULT_CONFERENCE_CONFIG.resolve():
+        publish_conference_dashboards(conferences, proceedings_catalog, output_root=site_root, as_of=today)
+    else:
+        publish_conference_dashboards(conferences, proceedings_catalog, output_root=site_root, as_of=today,
+                                      dashboard_catalog=Path(conference_config_path).with_name("conference-dashboards.yaml"))
 
     from papers.digests import publish_paper_digests
     publish_paper_digests(config_path, output_root=site_root, generated_on=today,

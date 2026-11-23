@@ -26,7 +26,8 @@ from shared.periodicals import render_periodical_page
 from shared.rendering import atomic_write_text
 from papers.digest_analysis import load_analysis, render_topic
 
-DATE_NOTE = ('按北京时间首次采集日期归档（仅已公开论文）；无首次采集记录的历史论文按发表日期归档，逐篇标明。'
+DATE_NOTE = ('日报只收录独立纳入 arXiv 或 Hugging Face 论文归档的公开论文，不纳入会议论文库独有条目。'
+             '按北京时间首次采集日期归档；无首次采集记录的历史论文按发表日期归档，逐篇标明。'
              '仅月份或年份已知的记录不分配到某一天。逐篇问题与贡献依据公开摘要生成；技术趋势仅在周报展示。未更新的历史条目保留原摘要结论并明确标记。')
 WEEKLY_NOTE = ('周一至周日的技术趋势回顾，基于本期全部公开论文综合分析，保留支撑引用，不逐篇罗列。'
                '按北京时间首次采集日期归档；缺少采集记录的历史论文使用已核验发表日期。结论仅适用于本期样本。')
@@ -191,10 +192,17 @@ def load_digest_evidence(output_root: Path, analysis_root: Path) -> dict[str, st
     return summaries
 
 
+def digest_period_includes(kind: str, paper_id: str) -> bool:
+    # The canonical ID preserves provenance after conference metadata enriches
+    # independently admitted arXiv/HF rows. Display IDs and URLs do not.
+    return kind != 'daily' or not paper_id.startswith('conf-')
+
+
 def build_digest_periods(rows: list[dict], topics: list[tuple[str, str]], summaries: dict[str, str], *, kind: str, today: date, limit: int, analysis_root: Path | None = None) -> list[dict]:
     """Build calendar days or Monday–Sunday weeks with exact, deduplicated counts."""
     if kind not in {'daily','weekly'} or limit < 1:
         raise ValueError('Expected daily/weekly and a positive period limit')
+    rows = [row for row in rows if digest_period_includes(kind, row['id'])]
     step = 1 if kind == 'daily' else 7
     anchor = today if kind == 'daily' else today - timedelta(days=today.weekday())
     periods = []

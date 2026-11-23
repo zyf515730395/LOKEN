@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from datetime import date
 import html
 from pathlib import Path
 import re
@@ -225,7 +226,8 @@ def _paper_archive_navigation(site_root: str) -> str:
 
 
 def render_secondary_navigation(
-    active_section: str, site_root: str, original_navigation: str = "", active_subtopic: str = ""
+    active_section: str, site_root: str, original_navigation: str = "", active_subtopic: str = "",
+    conference_links: tuple[tuple[str, str, str], ...] | None = None,
 ) -> str:
     """Render the current theme's vertical navigation and preserve original controls."""
     section = get_section(active_section)
@@ -243,11 +245,18 @@ def render_secondary_navigation(
             if conference:
                 topics = topics.replace(conference.group(0), "")
             groups.append(_nav_group("研究主题", topics))
-            if conference:
-                groups.append(_nav_group("会议", conference.group(0)))
         else:
+            conference = None
             groups.append(_nav_group("研究主题", _paper_archive_navigation(site_root)))
-            groups.append(_nav_group("会议", _nav_link("Conference", "index.html?tag=conferences#conferences", site_root)))
+        if conference_links is None:
+            from papers.conference_dashboards import configured_navigation
+            conference_links = configured_navigation(date.today())
+        if conference or conference_links:
+            timeline = (conference.group(0) if conference else
+                        _nav_link("时间线", "index.html?tag=conferences#conferences", site_root))
+            links = "".join(_nav_link(label, route, site_root, active=active_subtopic == key)
+                            for key, label, route in conference_links)
+            groups.append(_nav_group("会议", timeline + links))
     elif active_section == "milestones":
         groups.append(_nav_group("模型系列", original_navigation))
     return f'''  <aside class="context-drawer" id="context-drawer" aria-label="{html.escape(section.label)}二级导航">
@@ -270,6 +279,7 @@ def render_site_page(
     trailing_dialogs: str = "",
     head_content: str = "",
     active_subtopic: str = "",
+    conference_links: tuple[tuple[str, str, str], ...] | None = None,
 ) -> str:
     site_root = site_root_for(output_file, output_root)
     main_content, original_navigation = _take_context_navigation(main_content)
@@ -309,7 +319,7 @@ def render_site_page(
   <button class="navigation-close" type="button" data-navigation-close
           aria-label="关闭导航" hidden>×</button>
 {render_primary_navigation(active_section, site_root, sidebar_status)}
-{render_secondary_navigation(active_section, site_root, original_navigation, active_subtopic)}
+{render_secondary_navigation(active_section, site_root, original_navigation, active_subtopic, conference_links)}
 </div>
   <main class="page-content" id="top">
 {main_content}

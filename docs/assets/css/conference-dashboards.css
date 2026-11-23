@@ -1,0 +1,24 @@
+.conference-dashboard { max-width: 72rem; margin: 0 auto; padding: clamp(1rem, 3vw, 3rem); overflow-wrap: anywhere; }
+.conference-dashboard-heading, .conference-year-picker, .conference-board-heading, .conference-board-section { padding: 1.25rem 0; }
+.conference-dashboard-heading h1, .conference-board-heading h2 { margin: .15rem 0 .4rem; }
+.conference-dashboard-heading h1 { font-size: clamp(2rem, 7vw, 4rem); }
+.conference-dashboard-heading > p, .conference-board-heading p, .dashboard-muted,
+.conference-metrics p, .conference-evidence-list small { color: var(--muted); }
+.conference-year-picker { display: flex; flex-wrap: wrap; gap: .5rem; border-top: 1px solid var(--line); }
+.conference-year-picker a { padding: .45rem .85rem; border: 1px solid var(--line); border-radius: .35rem; color: var(--text); text-decoration: none; }
+.conference-year-picker a:hover, .conference-year-picker a:focus-visible { border-color: var(--accent); color: var(--accent); }
+.conference-year-board { padding: 0 clamp(1rem, 3vw, 2rem); background: var(--surface); border: 1px solid var(--line); border-radius: .65rem; scroll-margin-top: 1rem; }
+@supports selector(:has(*)) {
+  .conference-year-boards:not(:has(.conference-year-board:target)) .conference-year-board:not(.is-default),
+  .conference-year-boards:has(.conference-year-board:target) .conference-year-board:not(:target) { display: none; }
+}
+.conference-board-heading { display: flex; flex-wrap: wrap; gap: .75rem; justify-content: space-between; align-items: center; }
+.conference-board-section { border-top: 1px solid var(--line); }
+.conference-board-section a { text-decoration: underline; text-underline-offset: .14em; }
+.conference-board-section h3, .conference-board-section h4, .conference-board-section h5 { margin-top: 0; }
+.conference-metrics, .conference-evidence-list { list-style: none; margin: .8rem 0; padding: 0; }
+.conference-metrics { display: grid; gap: .75rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr)); }
+.conference-metrics li, .conference-evidence-list li { padding: .85rem; border: 1px solid var(--line); border-radius: .4rem; }
+.conference-metrics strong { display: block; font-size: 1.7rem; }
+.conference-metrics p, .conference-evidence-list p { margin: .4rem 0; }
+.conference-evidence-list li + li, .conference-board-section > section + section { margin-top: .75rem; }

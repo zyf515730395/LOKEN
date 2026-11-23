@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="NeurIPS 的历届会议数据、关键奖项、论文精读与研究方向。">
+  <title>NeurIPS 逐届看板 · LOKEN</title>
+  <script>
+    (() => {
+      document.documentElement.classList.add("js");
+      let theme = null;
+      let contextOpen = null;
+      try {
+        theme = window.localStorage.getItem("arxiv-theme");
+        contextOpen = window.localStorage.getItem("togos-secondary-sidebar-collapsed");
+      } catch (error) { /* Storage can be unavailable. */ }
+      if (theme !== "light" && theme !== "dark") {
+        theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      }
+      document.documentElement.dataset.theme = theme;
+      if (contextOpen !== "true") document.documentElement.dataset.contextOpen = "true";
+    })();
+  </script>
+  <link rel="stylesheet" href="../../assets/css/conference-dashboards.css?v=1">
+  <link rel="stylesheet" href="../../assets/css/site.css?v=17">
+  <script src="../../assets/js/site-shell.js?v=17" defer></script>
+  <script src="../../assets/js/search-core.js?v=17" defer></script>
+  <script src="../../assets/js/search.js?v=17" defer></script>
+  <script src="../../assets/js/sidebar.js?v=17" defer></script>
+</head>
+<body data-site-root="../../" data-active-section="learning" data-active-subtopic="conference-neurips" class="conference-dashboard-page">
+  <header class="site-utility" aria-label="页面工具">
+    <button class="sidebar-toggle" type="button" aria-controls="navigation-shell" aria-expanded="false">
+      <span aria-hidden="true" data-sidebar-toggle-icon>☰</span><span data-sidebar-toggle-label>导航</span>
+    </button>
+    <div class="site-search" data-search-root>
+      <label class="site-search-field" for="search-input">
+        <span aria-hidden="true">⌕</span>
+        <input id="search-input" type="search" placeholder="搜索标题或标签"
+               aria-label="搜索标题或标签" role="combobox"
+               autocomplete="off" aria-autocomplete="list" aria-controls="search-results" aria-expanded="false">
+        <kbd aria-hidden="true">Ctrl K</kbd>
+      </label>
+      <div class="search-popover" data-search-popover hidden>
+        <p class="search-status" data-search-status aria-live="polite">输入标题关键词开始搜索</p>
+        <div id="search-results" class="search-results" data-search-results role="listbox"></div>
+      </div>
+    </div>
+    <button class="theme-toggle" type="button" aria-label="切换颜色主题" aria-pressed="false">
+      <span data-theme-icon aria-hidden="true"></span>
+    </button>
+  </header>
+  <div class="sidebar-scrim" data-sidebar-close></div>
+<div class="navigation-shell" id="navigation-shell">
+  <button class="navigation-close" type="button" data-navigation-close
+          aria-label="关闭导航" hidden>×</button>
+  <aside class="primary-sidebar" aria-label="知识主题">
+    <a class="primary-brand" href="../../index.html" aria-label="LOKEN 首页"><img class="brand-logo" src="../../assets/images/loken-logo.png" width="1990" height="329" alt=""></a>
+    <button class="primary-menu" type="button" data-context-toggle aria-controls="context-drawer" aria-expanded="true" aria-label="收起二级导航"><span>MENU</span><span aria-hidden="true">☰</span></button>
+    <nav class="primary-navigation" aria-label="知识主题">
+      <a class="primary-nav-item is-active" href="../../index.html" aria-current="page"><span class="primary-nav-copy"><span class="primary-nav-label">学习一个</span><span class="primary-nav-meta">01 / PAPERS</span></span></a>
+      <a class="primary-nav-item" href="../../milestone-models/flux.html"><span class="primary-nav-copy"><span class="primary-nav-label">身经百战</span><span class="primary-nav-meta">02 / MODELS</span></span></a>
+    </nav>
+    <div class="primary-sidebar-status"><span>LAST SYNC</span><strong>CONFERENCE / EDITIONS</strong></div>
+  </aside>
+  <aside class="context-drawer" id="context-drawer" aria-label="学习一个二级导航">
+    <header class="secondary-nav-header"><div><span>PAPERS</span><h2>学习一个</h2></div>
+      <button type="button" data-context-close aria-label="收起二级导航">‹</button></header>
+    <div class="secondary-nav-scroll"><details class="secondary-nav-group" open><summary>论文报刊</summary><div class="secondary-nav-links"><a class="secondary-nav-link" href="../../reports/daily.html">论文日报</a><a class="secondary-nav-link" href="../../reports/weekly.html">论文周报</a><a class="secondary-nav-link" href="../../reports/paradigms.html">模型范式</a></div></details><details class="secondary-nav-group" open><summary>研究主题</summary><div class="secondary-nav-links"><a class="secondary-nav-link" href="../../index.html?tag=image-gen-edit#image-gen-edit">Image Gen&amp;Edit</a>
+<a class="secondary-nav-link" href="../../index.html?tag=video-gen-edit#video-gen-edit">Video Gen&amp;Edit</a>
+<a class="secondary-nav-link" href="../../index.html?tag=3d-gen-recon#3d-gen-recon">3D Gen&amp;Recon</a>
+<a class="secondary-nav-link" href="../../index.html?tag=world-model#world-model">World Model</a>
+<a class="secondary-nav-link" href="../../index.html?tag=relighting#relighting">Relighting</a></div></details><details class="secondary-nav-group" open><summary>会议</summary><div class="secondary-nav-links"><a class="secondary-nav-link" href="../../index.html?tag=conferences#conferences">时间线</a><a class="secondary-nav-link" href="../../reports/conferences/cvpr.html">CVPR</a><a class="secondary-nav-link" href="../../reports/conferences/icml.html">ICML</a><a class="secondary-nav-link is-active" href="../../reports/conferences/neurips.html" aria-current="page">NeurIPS</a><a class="secondary-nav-link" href="../../reports/conferences/iclr.html">ICLR</a><a class="secondary-nav-link" href="../../reports/conferences/iccv.html">ICCV</a><a class="secondary-nav-link" href="../../reports/conferences/eccv.html">ECCV</a><a class="secondary-nav-link" href="../../reports/conferences/siggraph.html">SIGGRAPH</a><a class="secondary-nav-link" href="../../reports/conferences/siggraph-asia.html">SIGGRAPH Asia</a><a class="secondary-nav-link" href="../../reports/conferences/aaai.html">AAAI</a><a class="secondary-nav-link" href="../../reports/conferences/icra.html">ICRA</a><a class="secondary-nav-link" href="../../reports/conferences/iros.html">IROS</a></div></details></div>
+  </aside>
+</div>
+  <main class="page-content" id="top">
+<div class="conference-dashboard">
+<header class="conference-dashboard-heading">
+  <p>学习一个 / 会议</p><h1>NeurIPS</h1>
+  <p>逐届查看会议数据、获奖论文与研究方向。没有官方依据的字段不会以零代替。</p>
+</header>
+<nav class="conference-year-picker" aria-label="切换会议年份"><a href="#year-2026">2026</a><a href="#year-2025">2025</a><a href="#year-2024">2024</a></nav>
+<div class="conference-year-boards"><article class="conference-year-board" id="year-2026" aria-labelledby="title-2026">
+  <header class="conference-board-heading">
+    <div><p>已确认 · 2026.12.06–12.12</p><h2 id="title-2026">NeurIPS 2026</h2></div>
+    <p>Sydney, Australia<br><a href="https://neurips.cc/Conferences/2026">会议官网</a></p>
+  </header>
+  <section class="conference-board-section"><h3>会议数据</h3><p class="dashboard-muted">未找到可核验的官方数据，暂不填投稿量、录用量或录用率。</p></section>
+  <section class="conference-board-section"><h3>关键奖项与论文精读</h3><p class="dashboard-muted">奖项与获奖论文精读待核验。</p></section>
+  <section class="conference-board-section"><h3>研究方向</h3>
+  <p class="dashboard-muted">基于所列论文的观察，不代表全会趋势、占比或首创结论。</p><section><h4>技术趋势</h4><p class="dashboard-muted">待补可核验的论文证据。</p></section><section><h4>新模型范式</h4><p class="dashboard-muted">待补可核验的论文证据。</p></section><section><h4>新概念</h4><p class="dashboard-muted">待补可核验的论文证据。</p></section></section>
+</article>
+<article class="conference-year-board is-default" id="year-2025" aria-labelledby="title-2025">
+  <header class="conference-board-heading">
+    <div><p>已举办 · 2025.12.02–12.07</p><h2 id="title-2025">NeurIPS 2025</h2></div>
+    <p>San Diego, CA, USA<br><a href="https://neurips.cc/Conferences/2025">会议官网</a> · <a href="https://papers.nips.cc/paper_files/paper/2025">官方论文库</a></p>
+  </header>
+  <section class="conference-board-section"><h3>会议数据</h3><ul class="conference-metrics"><li><span>有效投稿</span><strong>21,575</strong><p>主会 Main Program；不含 Datasets and Benchmarks 和 Position Paper 专轨。 · <a href="https://blog.neurips.cc/2025/09/30/reflections-on-the-2025-review-process-from-the-program-committee-chairs/">官方来源</a></p></li><li><span>录用论文</span><strong>5,290</strong><p>主会 Main Program；不含 Datasets and Benchmarks 和 Position Paper 专轨。 · <a href="https://blog.neurips.cc/2025/09/30/reflections-on-the-2025-review-process-from-the-program-committee-chairs/">官方来源</a></p></li><li><span>录用率</span><strong>24.52%</strong><p>程序委员会主席公布的主会比率；分母为 21,575 篇有效投稿。 · <a href="https://blog.neurips.cc/2025/09/30/reflections-on-the-2025-review-process-from-the-program-committee-chairs/">官方来源</a></p></li><li><span>本站已索引的论文库条目</span><strong>5,887</strong><p>论文库覆盖量，不等同于官方录用量 · <a href="https://papers.nips.cc/paper_files/paper/2025">论文库来源</a></p></li></ul></section>
+  <section class="conference-board-section"><h3>关键奖项与论文精读</h3><ul class="conference-evidence-list"><li><h4>Best Paper Award（主轨） · <a href="https://proceedings.neurips.cc/paper_files/paper/2025/hash/904e89bb4e632e75fb47f093b620b257-Abstract-Conference.html">Gated Attention for Large Language Models: Non-linearity, Sparsity, and Attention-Sink-Free</a></h4><p>在标准缩放点积注意力的输出端，为每个头加一个依赖当前 query 的 sigmoid 门。作者在 1.7B 稠密、15B MoE 等实验设置下观察到更稳定的训练、缓解 attention sink 并改善长上下文外推；门控的是输出，不是用稀疏注意力替换 SDPA。</p><small><a href="https://blog.neurips.cc/2025/11/26/announcing-the-neurips-2025-best-paper-awards/">官方获奖名单</a></small></li><li><h4>Best Paper Award（主轨） · <a href="https://papers.nips.cc/paper_files/paper/2025/hash/ceb7f3cc876a6dcb15130a645b5a4507-Abstract-Conference.html">Why Diffusion Models Don’t Memorize: The Role of Implicit Dynamical Regularization in Training</a></h4><p>实验和可解析随机特征模型显示两个时间尺度：生成质量可以在较早时改善，而可检测的样本记忆在更晚才出现。这为早停为何有效提供了机制解释，不等于扩散模型永远不复制训练样本。</p><small><a href="https://blog.neurips.cc/2025/11/26/announcing-the-neurips-2025-best-paper-awards/">官方获奖名单</a></small></li><li><h4>Best Paper Award（Datasets &amp; Benchmarks 专轨） · <a href="https://proceedings.neurips.cc/paper_files/paper/2025/hash/754d5a526a5ee5a47220664a0eb92751-Abstract-Datasets_and_Benchmarks_Track.html">Artificial Hivemind: The Open-Ended Homogeneity of Language Models (and Beyond)</a></h4><p>Infinity-Chat 用约 2.6 万条开放式提问研究生成多样性，区分同一模型反复给出类似答案与不同模型彼此趋同。论文也发现，评价者偏好分歧更大的答案更容易导致模型评审与人类判断失配。</p><small><a href="https://blog.neurips.cc/2025/11/26/announcing-the-neurips-2025-best-paper-awards/">官方获奖名单</a></small></li></ul></section>
+  <section class="conference-board-section"><h3>研究方向</h3>
+  <p class="dashboard-muted">基于所列论文的观察，不代表全会趋势、占比或首创结论。</p><section><h4>技术趋势</h4><p class="dashboard-muted">待补可核验的论文证据。</p></section><section><h4>新模型范式</h4><p class="dashboard-muted">待补可核验的论文证据。</p></section><section><h4>新概念</h4><ul class="conference-evidence-list"><li><h5>生成的质量、记忆与多样性可以分开量</h5><p>主轨获奖论文在扩散训练中区分了出样质量和记忆出现的时点；数据与基准专轨获奖论文在开放生成中区分了单模型重复和跨模型同质化。两篇论文共同提示，生成得像或看起来好，不等于不复制、也不等于答案多样。这是跨轨论文对读，不是投稿热度统计。</p><small>支撑论文：<a href="https://papers.nips.cc/paper_files/paper/2025/hash/ceb7f3cc876a6dcb15130a645b5a4507-Abstract-Conference.html">Why Diffusion Models Don’t Memorize（主轨）</a> · <a href="https://proceedings.neurips.cc/paper_files/paper/2025/hash/754d5a526a5ee5a47220664a0eb92751-Abstract-Datasets_and_Benchmarks_Track.html">Artificial Hivemind（数据与基准轨）</a></small></li></ul></section></section>
+</article>
+<article class="conference-year-board" id="year-2024" aria-labelledby="title-2024">
+  <header class="conference-board-heading">
+    <div><p>已举办 · 2024.12.10–12.15</p><h2 id="title-2024">NeurIPS 2024</h2></div>
+    <p>Vancouver, Canada<br><a href="https://neurips.cc/Conferences/2024">会议官网</a> · <a href="https://papers.nips.cc/paper_files/paper/2024">官方论文库</a></p>
+  </header>
+  <section class="conference-board-section"><h3>会议数据</h3><p class="dashboard-muted">未找到可核验的官方数据，暂不填投稿量、录用量或录用率。</p><ul class="conference-metrics"><li><span>本站已索引的论文库条目</span><strong>4,493</strong><p>论文库覆盖量，不等同于官方录用量 · <a href="https://papers.nips.cc/paper_files/paper/2024">论文库来源</a></p></li></ul></section>
+  <section class="conference-board-section"><h3>关键奖项与论文精读</h3><p class="dashboard-muted">奖项与获奖论文精读待核验。</p></section>
+  <section class="conference-board-section"><h3>研究方向</h3>
+  <p class="dashboard-muted">基于所列论文的观察，不代表全会趋势、占比或首创结论。</p><section><h4>技术趋势</h4><p class="dashboard-muted">待补可核验的论文证据。</p></section><section><h4>新模型范式</h4><p class="dashboard-muted">待补可核验的论文证据。</p></section><section><h4>新概念</h4><p class="dashboard-muted">待补可核验的论文证据。</p></section></section>
+</article></div>
+</div>
+  </main>
+
+</body>
+</html>

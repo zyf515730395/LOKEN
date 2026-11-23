@@ -264,8 +264,8 @@ def render_conference_section(
         timeline = '<p class="conference-empty">近三年暂无会议信息。</p>'
     return f"""<section class="topic-section conference-section" id="conferences" data-topic-section="conferences" data-topic-aliases="">
   <header class="topic-header">
-    <p>Conference</p>
-    <h2>Timeline</h2>
+    <p>会议</p>
+    <h2>时间线</h2>
     <span>{first_year}–{today.year} · {len(conferences)} 个会议</span>
   </header>
   {timeline}

@@ -199,7 +199,7 @@ def skippable_paper_error(error,stage):
 
 def generate_periods(periods,*,today=None,model=None,workers=4,sentence_evidence_only=False,context=None,on_write=None,should_continue=None,skip_failed_papers=False):
     from papers import paths
-    from papers.digests import load_public_papers,load_digest_evidence
+    from papers.digests import digest_period_includes,load_public_papers,load_digest_evidence
     from papers.model_runtime import DEFAULT_MODEL
     from shared.loopback_chat import LoopbackChatTransport
     if sys.platform!='linux' or paths.ROOT.resolve()!=Path('/mnt/g/share/projects/arxiv-papers-daily').resolve():
@@ -217,7 +217,8 @@ def generate_periods(periods,*,today=None,model=None,workers=4,sentence_evidence
     def save_public(path,value):
         write_json(path,value)
         if on_write: on_write(path)
-    selected={r['id']:r for r in rows if any(s<=r['digest_date']<=e for _,s,e in periods)}
+    selected={r['id']:r for r in rows if any(digest_period_includes(kind,r['id']) and s<=r['digest_date']<=e
+                                            for kind,s,e in periods)}
     failures=[]
     from papers.summaries.acquisition import ArxivSourceClient
     source=ArxivSourceClient(); official_path=root/'official-abstracts.json'
@@ -258,7 +259,8 @@ def generate_periods(periods,*,today=None,model=None,workers=4,sentence_evidence
     for kind,start,end in periods:
         previous=load_analysis(root,kind,str(start)); output={}
         for topic,slug in topics:
-            members=[r for r in selected.values() if start<=r['digest_date']<=end and topic in r['topics']]
+            members=[r for r in selected.values() if digest_period_includes(kind,r['id'])
+                     and start<=r['digest_date']<=end and topic in r['topics']]
             if not members: continue
             ids=sorted(r['id'] for r in members); old=previous.get(slug)
             try:
