@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="ICLR 的历届会议数据、关键奖项、论文精读与研究方向。">
+  <title>ICLR 逐届看板 · LOKEN</title>
+  <script>
+    (() => {
+      document.documentElement.classList.add("js");
+      let theme = null;
+      let contextOpen = null;
+      try {
+        theme = window.localStorage.getItem("arxiv-theme");
+        contextOpen = window.localStorage.getItem("togos-secondary-sidebar-collapsed");
+      } catch (error) { /* Storage can be unavailable. */ }
+      if (theme !== "light" && theme !== "dark") {
+        theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      }
+      document.documentElement.dataset.theme = theme;
+      if (contextOpen !== "true") document.documentElement.dataset.contextOpen = "true";
+    })();
+  </script>
+  <link rel="stylesheet" href="../../assets/css/conference-dashboards.css?v=1">
+  <link rel="stylesheet" href="../../assets/css/site.css?v=17">
+  <script src="../../assets/js/site-shell.js?v=17" defer></script>
+  <script src="../../assets/js/search-core.js?v=17" defer></script>
+  <script src="../../assets/js/search.js?v=17" defer></script>
+  <script src="../../assets/js/sidebar.js?v=17" defer></script>
+</head>
+<body data-site-root="../../" data-active-section="learning" data-active-subtopic="conference-iclr" class="conference-dashboard-page">
+  <header class="site-utility" aria-label="页面工具">
+    <button class="sidebar-toggle" type="button" aria-controls="navigation-shell" aria-expanded="false">
+      <span aria-hidden="true" data-sidebar-toggle-icon>☰</span><span data-sidebar-toggle-label>导航</span>
+    </button>
+    <div class="site-search" data-search-root>
+      <label class="site-search-field" for="search-input">
+        <span aria-hidden="true">⌕</span>
+        <input id="search-input" type="search" placeholder="搜索标题或标签"
+               aria-label="搜索标题或标签" role="combobox"
+               autocomplete="off" aria-autocomplete="list" aria-controls="search-results" aria-expanded="false">
+        <kbd aria-hidden="true">Ctrl K</kbd>
+      </label>
+      <div class="search-popover" data-search-popover hidden>
+        <p class="search-status" data-search-status aria-live="polite">输入标题关键词开始搜索</p>
+        <div id="search-results" class="search-results" data-search-results role="listbox"></div>
+      </div>
+    </div>
+    <button class="theme-toggle" type="button" aria-label="切换颜色主题" aria-pressed="false">
+      <span data-theme-icon aria-hidden="true"></span>
+    </button>
+  </header>
+  <div class="sidebar-scrim" data-sidebar-close></div>
+<div class="navigation-shell" id="navigation-shell">
+  <button class="navigation-close" type="button" data-navigation-close
+          aria-label="关闭导航" hidden>×</button>
+  <aside class="primary-sidebar" aria-label="知识主题">
+    <a class="primary-brand" href="../../index.html" aria-label="LOKEN 首页"><img class="brand-logo" src="../../assets/images/loken-logo.png" width="1990" height="329" alt=""></a>
+    <button class="primary-menu" type="button" data-context-toggle aria-controls="context-drawer" aria-expanded="true" aria-label="收起二级导航"><span>MENU</span><span aria-hidden="true">☰</span></button>
+    <nav class="primary-navigation" aria-label="知识主题">
+      <a class="primary-nav-item is-active" href="../../index.html" aria-current="page"><span class="primary-nav-copy"><span class="primary-nav-label">学习一个</span><span class="primary-nav-meta">01 / PAPERS</span></span></a>
+      <a class="primary-nav-item" href="../../milestone-models/flux.html"><span class="primary-nav-copy"><span class="primary-nav-label">身经百战</span><span class="primary-nav-meta">02 / MODELS</span></span></a>
+    </nav>
+    <div class="primary-sidebar-status"><span>LAST SYNC</span><strong>CONFERENCE / EDITIONS</strong></div>
+  </aside>
+  <aside class="context-drawer" id="context-drawer" aria-label="学习一个二级导航">
+    <header class="secondary-nav-header"><div><span>PAPERS</span><h2>学习一个</h2></div>
+      <button type="button" data-context-close aria-label="收起二级导航">‹</button></header>
+    <div class="secondary-nav-scroll"><details class="secondary-nav-group" open><summary>论文报刊</summary><div class="secondary-nav-links"><a class="secondary-nav-link" href="../../reports/daily.html">论文日报</a><a class="secondary-nav-link" href="../../reports/weekly.html">论文周报</a><a class="secondary-nav-link" href="../../reports/paradigms.html">模型范式</a></div></details><details class="secondary-nav-group" open><summary>研究主题</summary><div class="secondary-nav-links"><a class="secondary-nav-link" href="../../index.html?tag=image-gen-edit#image-gen-edit">Image Gen&amp;Edit</a>
+<a class="secondary-nav-link" href="../../index.html?tag=video-gen-edit#video-gen-edit">Video Gen&amp;Edit</a>
+<a class="secondary-nav-link" href="../../index.html?tag=3d-gen-recon#3d-gen-recon">3D Gen&amp;Recon</a>
+<a class="secondary-nav-link" href="../../index.html?tag=world-model#world-model">World Model</a>
+<a class="secondary-nav-link" href="../../index.html?tag=relighting#relighting">Relighting</a></div></details><details class="secondary-nav-group" open><summary>会议</summary><div class="secondary-nav-links"><a class="secondary-nav-link" href="../../index.html?tag=conferences#conferences">时间线</a><a class="secondary-nav-link" href="../../reports/conferences/cvpr.html">CVPR</a><a class="secondary-nav-link" href="../../reports/conferences/icml.html">ICML</a><a class="secondary-nav-link" href="../../reports/conferences/neurips.html">NeurIPS</a><a class="secondary-nav-link is-active" href="../../reports/conferences/iclr.html" aria-current="page">ICLR</a><a class="secondary-nav-link" href="../../reports/conferences/iccv.html">ICCV</a><a class="secondary-nav-link" href="../../reports/conferences/eccv.html">ECCV</a><a class="secondary-nav-link" href="../../reports/conferences/siggraph.html">SIGGRAPH</a><a class="secondary-nav-link" href="../../reports/conferences/siggraph-asia.html">SIGGRAPH Asia</a><a class="secondary-nav-link" href="../../reports/conferences/aaai.html">AAAI</a><a class="secondary-nav-link" href="../../reports/conferences/icra.html">ICRA</a><a class="secondary-nav-link" href="../../reports/conferences/iros.html">IROS</a></div></details></div>
+  </aside>
+</div>
+  <main class="page-content" id="top">
+<div class="conference-dashboard">
+<header class="conference-dashboard-heading">
+  <p>学习一个 / 会议</p><h1>ICLR</h1>
+  <p>逐届查看会议数据、获奖论文与研究方向。没有官方依据的字段不会以零代替。</p>
+</header>
+<nav class="conference-year-picker" aria-label="切换会议年份"><a href="#year-2027">2027</a><a href="#year-2026">2026</a><a href="#year-2025">2025</a><a href="#year-2024">2024</a></nav>
+<div class="conference-year-boards"><article class="conference-year-board" id="year-2027" aria-labelledby="title-2027">
+  <header class="conference-board-heading">
+    <div><p>已确认 · 2027.04.26–04.30</p><h2 id="title-2027">ICLR 2027</h2></div>
+    <p>California<br><a href="https://iclr.cc/Conferences/2027">会议官网</a></p>
+  </header>
+  <section class="conference-board-section"><h3>会议数据</h3><p class="dashboard-muted">未找到可核验的官方数据，暂不填投稿量、录用量或录用率。</p></section>
+  <section class="conference-board-section"><h3>关键奖项与论文精读</h3><p class="dashboard-muted">奖项与获奖论文精读待核验。</p></section>
+  <section class="conference-board-section"><h3>研究方向</h3>
+  <p class="dashboard-muted">基于所列论文的观察，不代表全会趋势、占比或首创结论。</p><section><h4>技术趋势</h4><p class="dashboard-muted">待补可核验的论文证据。</p></section><section><h4>新模型范式</h4><p class="dashboard-muted">待补可核验的论文证据。</p></section><section><h4>新概念</h4><p class="dashboard-muted">待补可核验的论文证据。</p></section></section>
+</article>
+<article class="conference-year-board is-default" id="year-2026" aria-labelledby="title-2026">
+  <header class="conference-board-heading">
+    <div><p>已举办 · 2026.04.23–04.27</p><h2 id="title-2026">ICLR 2026</h2></div>
+    <p>Rio de Janeiro, Brazil<br><a href="https://iclr.cc/Conferences/2026">会议官网</a> · <a href="https://iclr.cc/virtual/2026/papers.html">官方论文库</a></p>
+  </header>
+  <section class="conference-board-section"><h3>会议数据</h3><ul class="conference-metrics"><li><span>有效投稿</span><strong>19,525</strong><p>项目主席所列格式合规、有效投稿；含后来撤稿或被桌拒的部分。 · <a href="https://blog.iclr.cc/2026/03/31/a-retrospective-on-the-iclr-2026-review-process/">官方来源</a></p></li><li><span>录用</span><strong>5,355</strong><p>项目主席审稿回顾中的录用决定；不以事后公开库快照替代。 · <a href="https://blog.iclr.cc/2026/03/31/a-retrospective-on-the-iclr-2026-review-process/">官方来源</a></p></li><li><span>官方录用率</span><strong>27.4%</strong><p>以有效投稿为分母，5,355 ÷ 19,525；与仅对作出录用或拒稿决定的稿件计算的比率不同。 · <a href="https://blog.iclr.cc/2026/03/31/a-retrospective-on-the-iclr-2026-review-process/">官方来源</a></p></li><li><span>收到录用或拒稿决定</span><strong>13,763</strong><p>项目主席记录的审稿决定集合；不是上述官方录用率的分母。 · <a href="https://blog.iclr.cc/2026/03/31/a-retrospective-on-the-iclr-2026-review-process/">官方来源</a></p></li><li><span>本站已索引的论文库条目</span><strong>5,468</strong><p>论文库覆盖量，不等同于官方录用量 · <a href="https://iclr.cc/virtual/2026/papers.html">论文库来源</a></p></li></ul></section>
+  <section class="conference-board-section"><h3>关键奖项与论文精读</h3><ul class="conference-evidence-list"><li><h4>Outstanding Paper · <a href="https://proceedings.iclr.cc/paper_files/paper/2026/hash/5f7804e8855efe5554025217abc49315-Abstract-Conference.html">Transformers are Inherently Succinct</a></h4><p>用形式语言表示的描述长度比较 Transformer、有限自动机和时序逻辑；这是指定数学模型的表达简洁性结果，不是现实模型训练规模或推理速度的排名。</p><small><a href="https://blog.iclr.cc/2026/04/23/announcing-the-iclr-2026-outstanding-papers/">官方获奖名单</a></small></li><li><h4>Outstanding Paper · <a href="https://arxiv.org/abs/2505.06120">LLMs Get Lost In Multi-Turn Conversation</a></h4><p>将同一任务的信息分段注入对话，对照一次性给全提示；所测六类生成任务平均下降 39%，主要表现为答复更不可靠。不是对所有真实对话的普遍估计。</p><small><a href="https://blog.iclr.cc/2026/04/23/announcing-the-iclr-2026-outstanding-papers/">官方获奖名单</a></small></li><li><h4>Honorable Mention · <a href="https://proceedings.iclr.cc/paper_files/paper/2026/hash/df88b275bef31ac96c85f0c4013734fc-Abstract-Conference.html">The Polar Express: Optimal Matrix Sign Methods and their Application to the Muon Algorithm</a></h4><p>以极小极大多项式逼近矩阵符号函数，并代入 Muon 的极分解步骤；实证验证包含 GPT-2/FineWeb，不能直接外推到图像 LoRA 或更大的训练规模。</p><small><a href="https://blog.iclr.cc/2026/04/23/announcing-the-iclr-2026-outstanding-papers/">官方获奖名单</a></small></li></ul></section>
+  <section class="conference-board-section"><h3>研究方向</h3>
+  <p class="dashboard-muted">基于所列论文的观察，不代表全会趋势、占比或首创结论。</p><section><h4>技术趋势</h4><ul class="conference-evidence-list"><li><h5>评测从单轮任务扩展到逐轮澄清</h5><p>保持任务和最终可用信息一致，只改变信息到达方式，以区分会做任务与能否在多轮修正早期假设。可以借鉴这种设计测试多轮图像编辑：先给目标风格，再追加保真约束，与一次给全条件比较。</p><small>支撑论文：<a href="https://arxiv.org/abs/2505.06120">LLMs Get Lost In Multi-Turn Conversation</a></small></li></ul></section><section><h4>新模型范式</h4><p class="dashboard-muted">待补可核验的论文证据。</p></section><section><h4>新概念</h4><ul class="conference-evidence-list"><li><h5>最坏误差约束下的矩阵迭代</h5><p>Polar Express 将 Muon 内部的矩阵逼近写成可检验的极小极大目标。读论文时把理论最坏误差和训练中验证损失的改善分开，后者仍需要在目标模型和硬件上实测。</p><small>支撑论文：<a href="https://arxiv.org/abs/2505.16932">The Polar Express</a></small></li></ul></section></section>
+</article>
+<article class="conference-year-board" id="year-2025" aria-labelledby="title-2025">
+  <header class="conference-board-heading">
+    <div><p>已举办 · 2025.04.24–04.28</p><h2 id="title-2025">ICLR 2025</h2></div>
+    <p>Singapore<br><a href="https://iclr.cc/Conferences/2025">会议官网</a> · <a href="https://iclr.cc/virtual/2025/papers.html?filter=titles">官方论文库</a></p>
+  </header>
+  <section class="conference-board-section"><h3>会议数据</h3><p class="dashboard-muted">未找到可核验的官方数据，暂不填投稿量、录用量或录用率。</p><ul class="conference-metrics"><li><span>本站已索引的论文库条目</span><strong>3,827</strong><p>论文库覆盖量，不等同于官方录用量 · <a href="https://iclr.cc/virtual/2025/papers.html?filter=titles">论文库来源</a></p></li></ul></section>
+  <section class="conference-board-section"><h3>关键奖项与论文精读</h3><p class="dashboard-muted">奖项与获奖论文精读待核验。</p></section>
+  <section class="conference-board-section"><h3>研究方向</h3>
+  <p class="dashboard-muted">基于所列论文的观察，不代表全会趋势、占比或首创结论。</p><section><h4>技术趋势</h4><p class="dashboard-muted">待补可核验的论文证据。</p></section><section><h4>新模型范式</h4><p class="dashboard-muted">待补可核验的论文证据。</p></section><section><h4>新概念</h4><p class="dashboard-muted">待补可核验的论文证据。</p></section></section>
+</article>
+<article class="conference-year-board" id="year-2024" aria-labelledby="title-2024">
+  <header class="conference-board-heading">
+    <div><p>已举办 · 2024.05.07–05.11</p><h2 id="title-2024">ICLR 2024</h2></div>
+    <p>Vienna, Austria<br><a href="https://iclr.cc/Conferences/2024">会议官网</a> · <a href="https://iclr.cc/virtual/2024/papers.html?filter=titles">官方论文库</a></p>
+  </header>
+  <section class="conference-board-section"><h3>会议数据</h3><p class="dashboard-muted">未找到可核验的官方数据，暂不填投稿量、录用量或录用率。</p><ul class="conference-metrics"><li><span>本站已索引的论文库条目</span><strong>2,296</strong><p>论文库覆盖量，不等同于官方录用量 · <a href="https://iclr.cc/virtual/2024/papers.html?filter=titles">论文库来源</a></p></li></ul></section>
+  <section class="conference-board-section"><h3>关键奖项与论文精读</h3><p class="dashboard-muted">奖项与获奖论文精读待核验。</p></section>
+  <section class="conference-board-section"><h3>研究方向</h3>
+  <p class="dashboard-muted">基于所列论文的观察，不代表全会趋势、占比或首创结论。</p><section><h4>技术趋势</h4><p class="dashboard-muted">待补可核验的论文证据。</p></section><section><h4>新模型范式</h4><p class="dashboard-muted">待补可核验的论文证据。</p></section><section><h4>新概念</h4><p class="dashboard-muted">待补可核验的论文证据。</p></section></section>
+</article></div>
+</div>
+  </main>
+
+</body>
+</html>

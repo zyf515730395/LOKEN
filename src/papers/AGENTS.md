@@ -105,6 +105,11 @@
 - Proceedings refresh revalidates cached lists with validators/hashes. Public source versions bind one selected edition to acquisition identity; other editions update only provenance. Identity/version changes mark summary/annotation pending refresh, retaining successes until replacements pass. Initial baselines skip refresh only when title, URL and supplied DOI/arXiv identity match; changed versions use separate private caches.
 - summarize --skip-failed can exclude previous failures for explicitly scoped historical work; keep their receipts/evidence. Per-paper acquisition/inference exceptions remain retryable; interrupts, memory exhaustion and checkpoint-write failure are fatal.
 
+## Conference dashboards
+
+- 学习一个的会议导航保留原时间线 URL；每个已启用会议拥有同级独立看板，年份来自实际配置届次。沿用公开站点构建，无新增日程或推理入口。
+- content/papers/conference-dashboards.yaml 按届存放有来源的官方投稿、录用及统计口径、奖项与论文精读、基于具体论文的研究方向。本站索引数量不等同于官方录用量，刷新失败时标注保留值。未披露或未经核验的资料显示缺口，不填零、不冒充全会趋势。沿用会议维护流程补充有可靠来源的年度资料。
+
 ## Conference dates
 - config/conferences.yaml retains official sources/verification dates for actual editions, including history/future. Timeline shows current year plus preceding two years; pending publication stays pending and biennial meetings never invent off-years.
 - conference_dates.py resolves missing dates newest-first: verified arXiv first submission, then official/DOI/publisher evidence. Never substitute revision, retrieval, conference date or inferred display-ID prefix for paper publication.

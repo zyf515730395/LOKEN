@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="ICRA 的历届会议数据、关键奖项、论文精读与研究方向。">
+  <title>ICRA 逐届看板 · LOKEN</title>
+  <script>
+    (() => {
+      document.documentElement.classList.add("js");
+      let theme = null;
+      let contextOpen = null;
+      try {
+        theme = window.localStorage.getItem("arxiv-theme");
+        contextOpen = window.localStorage.getItem("togos-secondary-sidebar-collapsed");
+      } catch (error) { /* Storage can be unavailable. */ }
+      if (theme !== "light" && theme !== "dark") {
+        theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      }
+      document.documentElement.dataset.theme = theme;
+      if (contextOpen !== "true") document.documentElement.dataset.contextOpen = "true";
+    })();
+  </script>
+  <link rel="stylesheet" href="../../assets/css/conference-dashboards.css?v=1">
+  <link rel="stylesheet" href="../../assets/css/site.css?v=17">
+  <script src="../../assets/js/site-shell.js?v=17" defer></script>
+  <script src="../../assets/js/search-core.js?v=17" defer></script>
+  <script src="../../assets/js/search.js?v=17" defer></script>
+  <script src="../../assets/js/sidebar.js?v=17" defer></script>
+</head>
+<body data-site-root="../../" data-active-section="learning" data-active-subtopic="conference-icra" class="conference-dashboard-page">
+  <header class="site-utility" aria-label="页面工具">
+    <button class="sidebar-toggle" type="button" aria-controls="navigation-shell" aria-expanded="false">
+      <span aria-hidden="true" data-sidebar-toggle-icon>☰</span><span data-sidebar-toggle-label>导航</span>
+    </button>
+    <div class="site-search" data-search-root>
+      <label class="site-search-field" for="search-input">
+        <span aria-hidden="true">⌕</span>
+        <input id="search-input" type="search" placeholder="搜索标题或标签"
+               aria-label="搜索标题或标签" role="combobox"
+               autocomplete="off" aria-autocomplete="list" aria-controls="search-results" aria-expanded="false">
+        <kbd aria-hidden="true">Ctrl K</kbd>
+      </label>
+      <div class="search-popover" data-search-popover hidden>
+        <p class="search-status" data-search-status aria-live="polite">输入标题关键词开始搜索</p>
+        <div id="search-results" class="search-results" data-search-results role="listbox"></div>
+      </div>
+    </div>
+    <button class="theme-toggle" type="button" aria-label="切换颜色主题" aria-pressed="false">
+      <span data-theme-icon aria-hidden="true"></span>
+    </button>
+  </header>
+  <div class="sidebar-scrim" data-sidebar-close></div>
+<div class="navigation-shell" id="navigation-shell">
+  <button class="navigation-close" type="button" data-navigation-close
+          aria-label="关闭导航" hidden>×</button>
+  <aside class="primary-sidebar" aria-label="知识主题">
+    <a class="primary-brand" href="../../index.html" aria-label="LOKEN 首页"><img class="brand-logo" src="../../assets/images/loken-logo.png" width="1990" height="329" alt=""></a>
+    <button class="primary-menu" type="button" data-context-toggle aria-controls="context-drawer" aria-expanded="true" aria-label="收起二级导航"><span>MENU</span><span aria-hidden="true">☰</span></button>
+    <nav class="primary-navigation" aria-label="知识主题">
+      <a class="primary-nav-item is-active" href="../../index.html" aria-current="page"><span class="primary-nav-copy"><span class="primary-nav-label">学习一个</span><span class="primary-nav-meta">01 / PAPERS</span></span></a>
+      <a class="primary-nav-item" href="../../milestone-models/flux.html"><span class="primary-nav-copy"><span class="primary-nav-label">身经百战</span><span class="primary-nav-meta">02 / MODELS</span></span></a>
+    </nav>
+    <div class="primary-sidebar-status"><span>LAST SYNC</span><strong>CONFERENCE / EDITIONS</strong></div>
+  </aside>
+  <aside class="context-drawer" id="context-drawer" aria-label="学习一个二级导航">
+    <header class="secondary-nav-header"><div><span>PAPERS</span><h2>学习一个</h2></div>
+      <button type="button" data-context-close aria-label="收起二级导航">‹</button></header>
+    <div class="secondary-nav-scroll"><details class="secondary-nav-group" open><summary>论文报刊</summary><div class="secondary-nav-links"><a class="secondary-nav-link" href="../../reports/daily.html">论文日报</a><a class="secondary-nav-link" href="../../reports/weekly.html">论文周报</a><a class="secondary-nav-link" href="../../reports/paradigms.html">模型范式</a></div></details><details class="secondary-nav-group" open><summary>研究主题</summary><div class="secondary-nav-links"><a class="secondary-nav-link" href="../../index.html?tag=image-gen-edit#image-gen-edit">Image Gen&amp;Edit</a>
+<a class="secondary-nav-link" href="../../index.html?tag=video-gen-edit#video-gen-edit">Video Gen&amp;Edit</a>
+<a class="secondary-nav-link" href="../../index.html?tag=3d-gen-recon#3d-gen-recon">3D Gen&amp;Recon</a>
+<a class="secondary-nav-link" href="../../index.html?tag=world-model#world-model">World Model</a>
+<a class="secondary-nav-link" href="../../index.html?tag=relighting#relighting">Relighting</a></div></details><details class="secondary-nav-group" open><summary>会议</summary><div class="secondary-nav-links"><a class="secondary-nav-link" href="../../index.html?tag=conferences#conferences">时间线</a><a class="secondary-nav-link" href="../../reports/conferences/cvpr.html">CVPR</a><a class="secondary-nav-link" href="../../reports/conferences/icml.html">ICML</a><a class="secondary-nav-link" href="../../reports/conferences/neurips.html">NeurIPS</a><a class="secondary-nav-link" href="../../reports/conferences/iclr.html">ICLR</a><a class="secondary-nav-link" href="../../reports/conferences/iccv.html">ICCV</a><a class="secondary-nav-link" href="../../reports/conferences/eccv.html">ECCV</a><a class="secondary-nav-link" href="../../reports/conferences/siggraph.html">SIGGRAPH</a><a class="secondary-nav-link" href="../../reports/conferences/siggraph-asia.html">SIGGRAPH Asia</a><a class="secondary-nav-link" href="../../reports/conferences/aaai.html">AAAI</a><a class="secondary-nav-link is-active" href="../../reports/conferences/icra.html" aria-current="page">ICRA</a><a class="secondary-nav-link" href="../../reports/conferences/iros.html">IROS</a></div></details></div>
+  </aside>
+</div>
+  <main class="page-content" id="top">
+<div class="conference-dashboard">
+<header class="conference-dashboard-heading">
+  <p>学习一个 / 会议</p><h1>ICRA</h1>
+  <p>逐届查看会议数据、获奖论文与研究方向。没有官方依据的字段不会以零代替。</p>
+</header>
+<nav class="conference-year-picker" aria-label="切换会议年份"><a href="#year-2026">2026</a><a href="#year-2025">2025</a><a href="#year-2024">2024</a></nav>
+<div class="conference-year-boards"><article class="conference-year-board is-default" id="year-2026" aria-labelledby="title-2026">
+  <header class="conference-board-heading">
+    <div><p>已举办 · 2026.06.01–06.05</p><h2 id="title-2026">ICRA 2026</h2></div>
+    <p>Vienna, Austria<br><a href="https://2026.ieee-icra.org/">会议官网</a> · <a href="https://ras.papercept.net/conferences/conferences/ICRA26/program/">官方论文库</a></p>
+  </header>
+  <section class="conference-board-section"><h3>会议数据</h3><ul class="conference-metrics"><li><span>征稿结束时投稿数</span><strong>5,088</strong><p>ICRA 官网征稿关闭后公布的原始投稿数；不作为最终有效投稿数或录用率分母。 · <a href="https://2026.ieee-icra.org/contribute/call-for-icra-2026-papers-now-accepting-submissions/">官方来源</a></p></li><li><span>本站已索引的论文库条目</span><strong>2,898</strong><p>论文库覆盖量，不等同于官方录用量 · <a href="https://ras.papercept.net/conferences/conferences/ICRA26/program/">论文库来源</a></p></li></ul></section>
+  <section class="conference-board-section"><h3>关键奖项与论文精读</h3><ul class="conference-evidence-list"><li><h4>Best Conference Paper Award · <a href="https://ieeexplore.ieee.org/abstract/document/11696487">OmniRetarget: Interaction-Preserving Data Generation for Humanoid Whole-Body Loco-Manipulation and Scene Interaction</a></h4><p>用交互网格编码身体、地形和物体的空间关系及接触，优化时尽量保留这些关系，同时满足机器人运动学约束。源演示的接触如果重建错了，方法无法自动识别并纠正。</p><small><a href="https://www.ieee-ras.org/lujie-yang-on-teaching-humanoid-robots-by-preserving-interactions/">官方获奖名单</a></small></li><li><h4>Best Conference Paper Award · <a href="https://arxiv.org/abs/2510.01661">SymSkill: Symbol and Skill Co-Invention for Data-Efficient and Reactive Long-Horizon Manipulation</a></h4><p>从自由交互演示中联合学习可复用的操作技能和符号前提，用符号规划组合长任务。当前实验依赖可跟踪的刚体及其相对位姿，速度分段只是动作边界的代理。</p><small><a href="https://www.ieee-ras.org/yifei-simon-shao-on-symskill-and-long-horizon-robot-manipulation/">官方获奖名单</a></small></li></ul></section>
+  <section class="conference-board-section"><h3>研究方向</h3>
+  <p class="dashboard-muted">基于所列论文的观察，不代表全会趋势、占比或首创结论。</p><section><h4>技术趋势</h4><ul class="conference-evidence-list"><li><h5>用显式交互约束提高机器人演示的复用性</h5><p>两篇获奖论文分别处理不同层级的复用：OmniRetarget 保留身体与环境的接触，使同一人类动作能适配不同物体和地形；SymSkill 学习可执行技能和符号前提，让技能可重组为新任务。这是两项研究体现的共同方向，不代表全会论文分布。</p><small>支撑论文：<a href="https://omniretarget.github.io/">OmniRetarget 作者项目页</a> · <a href="https://symskill.github.io/">SymSkill 作者项目页</a></small></li></ul></section><section><h4>新模型范式</h4><p class="dashboard-muted">待补可核验的论文证据。</p></section><section><h4>新概念</h4><p class="dashboard-muted">待补可核验的论文证据。</p></section></section>
+</article>
+<article class="conference-year-board" id="year-2025" aria-labelledby="title-2025">
+  <header class="conference-board-heading">
+    <div><p>已举办 · 2025.05.19–05.23</p><h2 id="title-2025">ICRA 2025</h2></div>
+    <p>Atlanta, GA, USA<br><a href="https://2025.ieee-icra.org/">会议官网</a> · <a href="https://ras.papercept.net/conferences/conferences/ICRA25/program/">官方论文库</a></p>
+  </header>
+  <section class="conference-board-section"><h3>会议数据</h3><p class="dashboard-muted">未找到可核验的官方数据，暂不填投稿量、录用量或录用率。</p><ul class="conference-metrics"><li><span>本站已索引的论文库条目</span><strong>1,609</strong><p>论文库覆盖量，不等同于官方录用量 · <a href="https://ras.papercept.net/conferences/conferences/ICRA25/program/">论文库来源</a></p></li></ul></section>
+  <section class="conference-board-section"><h3>关键奖项与论文精读</h3><p class="dashboard-muted">奖项与获奖论文精读待核验。</p></section>
+  <section class="conference-board-section"><h3>研究方向</h3>
+  <p class="dashboard-muted">基于所列论文的观察，不代表全会趋势、占比或首创结论。</p><section><h4>技术趋势</h4><p class="dashboard-muted">待补可核验的论文证据。</p></section><section><h4>新模型范式</h4><p class="dashboard-muted">待补可核验的论文证据。</p></section><section><h4>新概念</h4><p class="dashboard-muted">待补可核验的论文证据。</p></section></section>
+</article>
+<article class="conference-year-board" id="year-2024" aria-labelledby="title-2024">
+  <header class="conference-board-heading">
+    <div><p>已举办 · 2024.05.13–05.17</p><h2 id="title-2024">ICRA 2024</h2></div>
+    <p>Yokohama, Japan<br><a href="https://2024.ieee-icra.org/">会议官网</a> · <a href="https://ras.papercept.net/conferences/conferences/ICRA24/program/">官方论文库</a></p>
+  </header>
+  <section class="conference-board-section"><h3>会议数据</h3><p class="dashboard-muted">未找到可核验的官方数据，暂不填投稿量、录用量或录用率。</p><ul class="conference-metrics"><li><span>本站已索引的论文库条目</span><strong>1,766</strong><p>论文库覆盖量，不等同于官方录用量 · <a href="https://ras.papercept.net/conferences/conferences/ICRA24/program/">论文库来源</a></p></li></ul></section>
+  <section class="conference-board-section"><h3>关键奖项与论文精读</h3><p class="dashboard-muted">奖项与获奖论文精读待核验。</p></section>
+  <section class="conference-board-section"><h3>研究方向</h3>
+  <p class="dashboard-muted">基于所列论文的观察，不代表全会趋势、占比或首创结论。</p><section><h4>技术趋势</h4><p class="dashboard-muted">待补可核验的论文证据。</p></section><section><h4>新模型范式</h4><p class="dashboard-muted">待补可核验的论文证据。</p></section><section><h4>新概念</h4><p class="dashboard-muted">待补可核验的论文证据。</p></section></section>
+</article></div>
+</div>
+  </main>
+
+</body>
+</html>

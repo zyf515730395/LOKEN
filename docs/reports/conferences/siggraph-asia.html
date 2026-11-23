@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="SIGGRAPH Asia 的历届会议数据、关键奖项、论文精读与研究方向。">
+  <title>SIGGRAPH Asia 逐届看板 · LOKEN</title>
+  <script>
+    (() => {
+      document.documentElement.classList.add("js");
+      let theme = null;
+      let contextOpen = null;
+      try {
+        theme = window.localStorage.getItem("arxiv-theme");
+        contextOpen = window.localStorage.getItem("togos-secondary-sidebar-collapsed");
+      } catch (error) { /* Storage can be unavailable. */ }
+      if (theme !== "light" && theme !== "dark") {
+        theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      }
+      document.documentElement.dataset.theme = theme;
+      if (contextOpen !== "true") document.documentElement.dataset.contextOpen = "true";
+    })();
+  </script>
+  <link rel="stylesheet" href="../../assets/css/conference-dashboards.css?v=1">
+  <link rel="stylesheet" href="../../assets/css/site.css?v=17">
+  <script src="../../assets/js/site-shell.js?v=17" defer></script>
+  <script src="../../assets/js/search-core.js?v=17" defer></script>
+  <script src="../../assets/js/search.js?v=17" defer></script>
+  <script src="../../assets/js/sidebar.js?v=17" defer></script>
+</head>
+<body data-site-root="../../" data-active-section="learning" data-active-subtopic="conference-siggraph-asia" class="conference-dashboard-page">
+  <header class="site-utility" aria-label="页面工具">
+    <button class="sidebar-toggle" type="button" aria-controls="navigation-shell" aria-expanded="false">
+      <span aria-hidden="true" data-sidebar-toggle-icon>☰</span><span data-sidebar-toggle-label>导航</span>
+    </button>
+    <div class="site-search" data-search-root>
+      <label class="site-search-field" for="search-input">
+        <span aria-hidden="true">⌕</span>
+        <input id="search-input" type="search" placeholder="搜索标题或标签"
+               aria-label="搜索标题或标签" role="combobox"
+               autocomplete="off" aria-autocomplete="list" aria-controls="search-results" aria-expanded="false">
+        <kbd aria-hidden="true">Ctrl K</kbd>
+      </label>
+      <div class="search-popover" data-search-popover hidden>
+        <p class="search-status" data-search-status aria-live="polite">输入标题关键词开始搜索</p>
+        <div id="search-results" class="search-results" data-search-results role="listbox"></div>
+      </div>
+    </div>
+    <button class="theme-toggle" type="button" aria-label="切换颜色主题" aria-pressed="false">
+      <span data-theme-icon aria-hidden="true"></span>
+    </button>
+  </header>
+  <div class="sidebar-scrim" data-sidebar-close></div>
+<div class="navigation-shell" id="navigation-shell">
+  <button class="navigation-close" type="button" data-navigation-close
+          aria-label="关闭导航" hidden>×</button>
+  <aside class="primary-sidebar" aria-label="知识主题">
+    <a class="primary-brand" href="../../index.html" aria-label="LOKEN 首页"><img class="brand-logo" src="../../assets/images/loken-logo.png" width="1990" height="329" alt=""></a>
+    <button class="primary-menu" type="button" data-context-toggle aria-controls="context-drawer" aria-expanded="true" aria-label="收起二级导航"><span>MENU</span><span aria-hidden="true">☰</span></button>
+    <nav class="primary-navigation" aria-label="知识主题">
+      <a class="primary-nav-item is-active" href="../../index.html" aria-current="page"><span class="primary-nav-copy"><span class="primary-nav-label">学习一个</span><span class="primary-nav-meta">01 / PAPERS</span></span></a>
+      <a class="primary-nav-item" href="../../milestone-models/flux.html"><span class="primary-nav-copy"><span class="primary-nav-label">身经百战</span><span class="primary-nav-meta">02 / MODELS</span></span></a>
+    </nav>
+    <div class="primary-sidebar-status"><span>LAST SYNC</span><strong>CONFERENCE / EDITIONS</strong></div>
+  </aside>
+  <aside class="context-drawer" id="context-drawer" aria-label="学习一个二级导航">
+    <header class="secondary-nav-header"><div><span>PAPERS</span><h2>学习一个</h2></div>
+      <button type="button" data-context-close aria-label="收起二级导航">‹</button></header>
+    <div class="secondary-nav-scroll"><details class="secondary-nav-group" open><summary>论文报刊</summary><div class="secondary-nav-links"><a class="secondary-nav-link" href="../../reports/daily.html">论文日报</a><a class="secondary-nav-link" href="../../reports/weekly.html">论文周报</a><a class="secondary-nav-link" href="../../reports/paradigms.html">模型范式</a></div></details><details class="secondary-nav-group" open><summary>研究主题</summary><div class="secondary-nav-links"><a class="secondary-nav-link" href="../../index.html?tag=image-gen-edit#image-gen-edit">Image Gen&amp;Edit</a>
+<a class="secondary-nav-link" href="../../index.html?tag=video-gen-edit#video-gen-edit">Video Gen&amp;Edit</a>
+<a class="secondary-nav-link" href="../../index.html?tag=3d-gen-recon#3d-gen-recon">3D Gen&amp;Recon</a>
+<a class="secondary-nav-link" href="../../index.html?tag=world-model#world-model">World Model</a>
+<a class="secondary-nav-link" href="../../index.html?tag=relighting#relighting">Relighting</a></div></details><details class="secondary-nav-group" open><summary>会议</summary><div class="secondary-nav-links"><a class="secondary-nav-link" href="../../index.html?tag=conferences#conferences">时间线</a><a class="secondary-nav-link" href="../../reports/conferences/cvpr.html">CVPR</a><a class="secondary-nav-link" href="../../reports/conferences/icml.html">ICML</a><a class="secondary-nav-link" href="../../reports/conferences/neurips.html">NeurIPS</a><a class="secondary-nav-link" href="../../reports/conferences/iclr.html">ICLR</a><a class="secondary-nav-link" href="../../reports/conferences/iccv.html">ICCV</a><a class="secondary-nav-link" href="../../reports/conferences/eccv.html">ECCV</a><a class="secondary-nav-link" href="../../reports/conferences/siggraph.html">SIGGRAPH</a><a class="secondary-nav-link is-active" href="../../reports/conferences/siggraph-asia.html" aria-current="page">SIGGRAPH Asia</a><a class="secondary-nav-link" href="../../reports/conferences/aaai.html">AAAI</a><a class="secondary-nav-link" href="../../reports/conferences/icra.html">ICRA</a><a class="secondary-nav-link" href="../../reports/conferences/iros.html">IROS</a></div></details></div>
+  </aside>
+</div>
+  <main class="page-content" id="top">
+<div class="conference-dashboard">
+<header class="conference-dashboard-heading">
+  <p>学习一个 / 会议</p><h1>SIGGRAPH Asia</h1>
+  <p>逐届查看会议数据、获奖论文与研究方向。没有官方依据的字段不会以零代替。</p>
+</header>
+<nav class="conference-year-picker" aria-label="切换会议年份"><a href="#year-2026">2026</a><a href="#year-2025">2025</a><a href="#year-2024">2024</a></nav>
+<div class="conference-year-boards"><article class="conference-year-board" id="year-2026" aria-labelledby="title-2026">
+  <header class="conference-board-heading">
+    <div><p>已确认 · 2026.12.01–12.04</p><h2 id="title-2026">SIGGRAPH Asia 2026</h2></div>
+    <p>Kuala Lumpur, Malaysia<br><a href="https://asia.siggraph.org/2026/">会议官网</a></p>
+  </header>
+  <section class="conference-board-section"><h3>会议数据</h3><p class="dashboard-muted">未找到可核验的官方数据，暂不填投稿量、录用量或录用率。</p></section>
+  <section class="conference-board-section"><h3>关键奖项与论文精读</h3><p class="dashboard-muted">奖项与获奖论文精读待核验。</p></section>
+  <section class="conference-board-section"><h3>研究方向</h3>
+  <p class="dashboard-muted">基于所列论文的观察，不代表全会趋势、占比或首创结论。</p><section><h4>技术趋势</h4><p class="dashboard-muted">待补可核验的论文证据。</p></section><section><h4>新模型范式</h4><p class="dashboard-muted">待补可核验的论文证据。</p></section><section><h4>新概念</h4><p class="dashboard-muted">待补可核验的论文证据。</p></section></section>
+</article>
+<article class="conference-year-board is-default" id="year-2025" aria-labelledby="title-2025">
+  <header class="conference-board-heading">
+    <div><p>已举办 · 2025.12.15–12.18</p><h2 id="title-2025">SIGGRAPH Asia 2025</h2></div>
+    <p>Hong Kong<br><a href="https://asia.siggraph.org/2025/">会议官网</a> · <a href="https://asia.siggraph.org/2025/program/conference-proceedings/">官方论文库</a></p>
+  </header>
+  <section class="conference-board-section"><h3>会议数据</h3><ul class="conference-metrics"><li><span>技术论文投稿</span><strong>1,106</strong><p>ACM SIGGRAPH 技术论文委员会遴选公告；Journal 和 Conference 两轨合计，不含技术通讯、海报等独立项目。 · <a href="https://www.linkedin.com/posts/acm-siggraph_siggraph-asia-2025-technical-papers-program-activity-7360522611312783360-ekZJ">官方来源</a></p></li><li><span>技术论文录用</span><strong>301</strong><p>ACM SIGGRAPH 技术论文委员会遴选公告的两轨合计，非最终会程或各单轨数量。 · <a href="https://www.linkedin.com/posts/acm-siggraph_siggraph-asia-2025-technical-papers-program-activity-7360522611312783360-ekZJ">官方来源</a></p></li><li><span>技术论文录用率</span><strong>27.2%</strong><p>根据官方公告的两轨录用合计 301 ÷ 1,106 计算，四舍五入到一位小数；非 Journal 单轨录用率。 · <a href="https://www.linkedin.com/posts/acm-siggraph_siggraph-asia-2025-technical-papers-program-activity-7360522611312783360-ekZJ">官方来源</a></p></li><li><span>本站已索引的论文库条目（最新刷新失败，上次留存）</span><strong>301</strong><p>论文库覆盖量，不等同于官方录用量 · <a href="https://asia.siggraph.org/2025/program/conference-proceedings/">论文库来源</a></p></li></ul></section>
+  <section class="conference-board-section"><h3>关键奖项与论文精读</h3><ul class="conference-evidence-list"><li><h4>Technical Papers Best Paper Award · <a href="https://doi.org/10.1145/3763278">Fovea Stacking: Imaging with Dynamic Localized Aberration Correction</a></h4><p>用可变形相位板在采集端动态纠正局部像差，再合成多次拍摄中的清晰区域；全画幅合成依赖专门光学器件和多帧，不是任意单图的后处理超分。</p><small><a href="https://asia.siggraph.org/2025/program/award-winners/">官方获奖名单</a></small></li><li><h4>Technical Papers Best Paper Award · <a href="https://doi.org/10.1145/3763291">Automatic Sampling for Discontinuities in Differentiable Shaders</a></h4><p>将分段连续的着色器转换成分段常数代理，在随机线段上搜索不连续边界并比较两侧值，估计边界导数；证据来自逆图形及着色器实例，不代表任意神经图像模型都可直接套用。</p><small><a href="https://asia.siggraph.org/2025/program/award-winners/">官方获奖名单</a></small></li><li><h4>Technical Papers Best Paper Award · <a href="https://doi.org/10.1145/3763281">BSP-OT: Sparse transport plans between discrete measures in loglinear time</a></h4><p>用匹配的二元空间分割树生成多个稀疏耦合，再合并以降低传输代价。论文的低误差证据来自特定三维点集实验，方法给出近似传输，不承诺一般情形的精确最优。</p><small><a href="https://asia.siggraph.org/2025/program/award-winners/">官方获奖名单</a></small></li></ul></section>
+  <section class="conference-board-section"><h3>研究方向</h3>
+  <p class="dashboard-muted">基于所列论文的观察，不代表全会趋势、占比或首创结论。</p><section><h4>技术趋势</h4><p class="dashboard-muted">待补可核验的论文证据。</p></section><section><h4>新模型范式</h4><ul class="conference-evidence-list"><li><h5>在采集时主动获得局部高频</h5><p>Fovea Stacking 用可控光学器件把清晰区域移到所需位置，并利用多帧得到全画面清晰图。与软件超分的区别是它实际采集到新的高频；做对照时应把额外硬件和采集帧数计入预算。</p><small>支撑论文：<a href="https://doi.org/10.1145/3763278">Fovea Stacking</a></small></li></ul></section><section><h4>新概念</h4><ul class="conference-evidence-list"><li><h5>显式采样不连续边界的梯度</h5><p>逆渲染遇到遮挡或硬边时，平滑区域的梯度不能替代跳变贡献。该论文以线段采样估计着色器跳变边界；若用于研究清晰轮廓，可将边界误差与平滑区域误差分别测量。</p><small>支撑论文：<a href="https://doi.org/10.1145/3763291">Automatic Sampling for Discontinuities in Differentiable Shaders</a></small></li></ul></section></section>
+</article>
+<article class="conference-year-board" id="year-2024" aria-labelledby="title-2024">
+  <header class="conference-board-heading">
+    <div><p>已举办 · 2024.12.03–12.06</p><h2 id="title-2024">SIGGRAPH Asia 2024</h2></div>
+    <p>Tokyo, Japan<br><a href="https://asia.siggraph.org/2024/">会议官网</a> · <a href="https://asia.siggraph.org/2024/program/conference-proceedings/">官方论文库</a></p>
+  </header>
+  <section class="conference-board-section"><h3>会议数据</h3><p class="dashboard-muted">未找到可核验的官方数据，暂不填投稿量、录用量或录用率。</p><ul class="conference-metrics"><li><span>本站已索引的论文库条目</span><strong>265</strong><p>论文库覆盖量，不等同于官方录用量 · <a href="https://asia.siggraph.org/2024/program/conference-proceedings/">论文库来源</a></p></li></ul></section>
+  <section class="conference-board-section"><h3>关键奖项与论文精读</h3><p class="dashboard-muted">奖项与获奖论文精读待核验。</p></section>
+  <section class="conference-board-section"><h3>研究方向</h3>
+  <p class="dashboard-muted">基于所列论文的观察，不代表全会趋势、占比或首创结论。</p><section><h4>技术趋势</h4><p class="dashboard-muted">待补可核验的论文证据。</p></section><section><h4>新模型范式</h4><p class="dashboard-muted">待补可核验的论文证据。</p></section><section><h4>新概念</h4><p class="dashboard-muted">待补可核验的论文证据。</p></section></section>
+</article></div>
+</div>
+  </main>
+
+</body>
+</html>

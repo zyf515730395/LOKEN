@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="IROS 的历届会议数据、关键奖项、论文精读与研究方向。">
+  <title>IROS 逐届看板 · LOKEN</title>
+  <script>
+    (() => {
+      document.documentElement.classList.add("js");
+      let theme = null;
+      let contextOpen = null;
+      try {
+        theme = window.localStorage.getItem("arxiv-theme");
+        contextOpen = window.localStorage.getItem("togos-secondary-sidebar-collapsed");
+      } catch (error) { /* Storage can be unavailable. */ }
+      if (theme !== "light" && theme !== "dark") {
+        theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      }
+      document.documentElement.dataset.theme = theme;
+      if (contextOpen !== "true") document.documentElement.dataset.contextOpen = "true";
+    })();
+  </script>
+  <link rel="stylesheet" href="../../assets/css/conference-dashboards.css?v=1">
+  <link rel="stylesheet" href="../../assets/css/site.css?v=17">
+  <script src="../../assets/js/site-shell.js?v=17" defer></script>
+  <script src="../../assets/js/search-core.js?v=17" defer></script>
+  <script src="../../assets/js/search.js?v=17" defer></script>
+  <script src="../../assets/js/sidebar.js?v=17" defer></script>
+</head>
+<body data-site-root="../../" data-active-section="learning" data-active-subtopic="conference-iros" class="conference-dashboard-page">
+  <header class="site-utility" aria-label="页面工具">
+    <button class="sidebar-toggle" type="button" aria-controls="navigation-shell" aria-expanded="false">
+      <span aria-hidden="true" data-sidebar-toggle-icon>☰</span><span data-sidebar-toggle-label>导航</span>
+    </button>
+    <div class="site-search" data-search-root>
+      <label class="site-search-field" for="search-input">
+        <span aria-hidden="true">⌕</span>
+        <input id="search-input" type="search" placeholder="搜索标题或标签"
+               aria-label="搜索标题或标签" role="combobox"
+               autocomplete="off" aria-autocomplete="list" aria-controls="search-results" aria-expanded="false">
+        <kbd aria-hidden="true">Ctrl K</kbd>
+      </label>
+      <div class="search-popover" data-search-popover hidden>
+        <p class="search-status" data-search-status aria-live="polite">输入标题关键词开始搜索</p>
+        <div id="search-results" class="search-results" data-search-results role="listbox"></div>
+      </div>
+    </div>
+    <button class="theme-toggle" type="button" aria-label="切换颜色主题" aria-pressed="false">
+      <span data-theme-icon aria-hidden="true"></span>
+    </button>
+  </header>
+  <div class="sidebar-scrim" data-sidebar-close></div>
+<div class="navigation-shell" id="navigation-shell">
+  <button class="navigation-close" type="button" data-navigation-close
+          aria-label="关闭导航" hidden>×</button>
+  <aside class="primary-sidebar" aria-label="知识主题">
+    <a class="primary-brand" href="../../index.html" aria-label="LOKEN 首页"><img class="brand-logo" src="../../assets/images/loken-logo.png" width="1990" height="329" alt=""></a>
+    <button class="primary-menu" type="button" data-context-toggle aria-controls="context-drawer" aria-expanded="true" aria-label="收起二级导航"><span>MENU</span><span aria-hidden="true">☰</span></button>
+    <nav class="primary-navigation" aria-label="知识主题">
+      <a class="primary-nav-item is-active" href="../../index.html" aria-current="page"><span class="primary-nav-copy"><span class="primary-nav-label">学习一个</span><span class="primary-nav-meta">01 / PAPERS</span></span></a>
+      <a class="primary-nav-item" href="../../milestone-models/flux.html"><span class="primary-nav-copy"><span class="primary-nav-label">身经百战</span><span class="primary-nav-meta">02 / MODELS</span></span></a>
+    </nav>
+    <div class="primary-sidebar-status"><span>LAST SYNC</span><strong>CONFERENCE / EDITIONS</strong></div>
+  </aside>
+  <aside class="context-drawer" id="context-drawer" aria-label="学习一个二级导航">
+    <header class="secondary-nav-header"><div><span>PAPERS</span><h2>学习一个</h2></div>
+      <button type="button" data-context-close aria-label="收起二级导航">‹</button></header>
+    <div class="secondary-nav-scroll"><details class="secondary-nav-group" open><summary>论文报刊</summary><div class="secondary-nav-links"><a class="secondary-nav-link" href="../../reports/daily.html">论文日报</a><a class="secondary-nav-link" href="../../reports/weekly.html">论文周报</a><a class="secondary-nav-link" href="../../reports/paradigms.html">模型范式</a></div></details><details class="secondary-nav-group" open><summary>研究主题</summary><div class="secondary-nav-links"><a class="secondary-nav-link" href="../../index.html?tag=image-gen-edit#image-gen-edit">Image Gen&amp;Edit</a>
+<a class="secondary-nav-link" href="../../index.html?tag=video-gen-edit#video-gen-edit">Video Gen&amp;Edit</a>
+<a class="secondary-nav-link" href="../../index.html?tag=3d-gen-recon#3d-gen-recon">3D Gen&amp;Recon</a>
+<a class="secondary-nav-link" href="../../index.html?tag=world-model#world-model">World Model</a>
+<a class="secondary-nav-link" href="../../index.html?tag=relighting#relighting">Relighting</a></div></details><details class="secondary-nav-group" open><summary>会议</summary><div class="secondary-nav-links"><a class="secondary-nav-link" href="../../index.html?tag=conferences#conferences">时间线</a><a class="secondary-nav-link" href="../../reports/conferences/cvpr.html">CVPR</a><a class="secondary-nav-link" href="../../reports/conferences/icml.html">ICML</a><a class="secondary-nav-link" href="../../reports/conferences/neurips.html">NeurIPS</a><a class="secondary-nav-link" href="../../reports/conferences/iclr.html">ICLR</a><a class="secondary-nav-link" href="../../reports/conferences/iccv.html">ICCV</a><a class="secondary-nav-link" href="../../reports/conferences/eccv.html">ECCV</a><a class="secondary-nav-link" href="../../reports/conferences/siggraph.html">SIGGRAPH</a><a class="secondary-nav-link" href="../../reports/conferences/siggraph-asia.html">SIGGRAPH Asia</a><a class="secondary-nav-link" href="../../reports/conferences/aaai.html">AAAI</a><a class="secondary-nav-link" href="../../reports/conferences/icra.html">ICRA</a><a class="secondary-nav-link is-active" href="../../reports/conferences/iros.html" aria-current="page">IROS</a></div></details></div>
+  </aside>
+</div>
+  <main class="page-content" id="top">
+<div class="conference-dashboard">
+<header class="conference-dashboard-heading">
+  <p>学习一个 / 会议</p><h1>IROS</h1>
+  <p>逐届查看会议数据、获奖论文与研究方向。没有官方依据的字段不会以零代替。</p>
+</header>
+<nav class="conference-year-picker" aria-label="切换会议年份"><a href="#year-2027">2027</a><a href="#year-2026">2026</a><a href="#year-2025">2025</a><a href="#year-2024">2024</a></nav>
+<div class="conference-year-boards"><article class="conference-year-board" id="year-2027" aria-labelledby="title-2027">
+  <header class="conference-board-heading">
+    <div><p>已确认 · 2027.09.27–10.01</p><h2 id="title-2027">IROS 2027</h2></div>
+    <p>Florence, Italy<br><a href="https://www.ieee-ras.org/conferences-workshops/financially-co-sponsored/iros/iros-past-and-future-venues/">会议官网</a></p>
+  </header>
+  <section class="conference-board-section"><h3>会议数据</h3><p class="dashboard-muted">未找到可核验的官方数据，暂不填投稿量、录用量或录用率。</p></section>
+  <section class="conference-board-section"><h3>关键奖项与论文精读</h3><p class="dashboard-muted">奖项与获奖论文精读待核验。</p></section>
+  <section class="conference-board-section"><h3>研究方向</h3>
+  <p class="dashboard-muted">基于所列论文的观察，不代表全会趋势、占比或首创结论。</p><section><h4>技术趋势</h4><p class="dashboard-muted">待补可核验的论文证据。</p></section><section><h4>新模型范式</h4><p class="dashboard-muted">待补可核验的论文证据。</p></section><section><h4>新概念</h4><p class="dashboard-muted">待补可核验的论文证据。</p></section></section>
+</article>
+<article class="conference-year-board is-default" id="year-2026" aria-labelledby="title-2026">
+  <header class="conference-board-heading">
+    <div><p>已举办 · 2026.09.27–10.01</p><h2 id="title-2026">IROS 2026</h2></div>
+    <p>Pittsburgh, PA, USA<br><a href="https://2026.ieee-iros.org/">会议官网</a> · <a href="https://2026.ieee-iros.org/program/paper_index/">官方论文库</a></p>
+  </header>
+  <section class="conference-board-section"><h3>会议数据</h3><p class="dashboard-muted">未找到可核验的官方数据，暂不填投稿量、录用量或录用率。</p></section>
+  <section class="conference-board-section"><h3>关键奖项与论文精读</h3><p class="dashboard-muted">奖项与获奖论文精读待核验。</p></section>
+  <section class="conference-board-section"><h3>研究方向</h3>
+  <p class="dashboard-muted">基于所列论文的观察，不代表全会趋势、占比或首创结论。</p><section><h4>技术趋势</h4><p class="dashboard-muted">待补可核验的论文证据。</p></section><section><h4>新模型范式</h4><p class="dashboard-muted">待补可核验的论文证据。</p></section><section><h4>新概念</h4><p class="dashboard-muted">待补可核验的论文证据。</p></section></section>
+</article>
+<article class="conference-year-board" id="year-2025" aria-labelledby="title-2025">
+  <header class="conference-board-heading">
+    <div><p>已举办 · 2025.10.19–10.25</p><h2 id="title-2025">IROS 2025</h2></div>
+    <p>Hangzhou, China<br><a href="https://www.iros25.org/">会议官网</a> · <a href="https://ras.papercept.net/conferences/conferences/IROS25/program/">官方论文库</a></p>
+  </header>
+  <section class="conference-board-section"><h3>会议数据</h3><ul class="conference-metrics"><li><span>会议论文投稿</span><strong>4,306</strong><p>大会官方手册欢迎辞口径，仅会议论文，不含另列的 777 篇期刊转投。 · <a href="https://www.iros25.org/templates/iros2025/doc/IROS2025-Digest.pdf#page=3">官方来源</a></p></li><li><span>会议论文录用</span><strong>1,991</strong><p>大会官方手册欢迎辞口径，与其会议论文投稿数对应，不是含期刊转投的报告总数。 · <a href="https://www.iros25.org/templates/iros2025/doc/IROS2025-Digest.pdf#page=3">官方来源</a></p></li><li><span>会议论文录用率</span><strong>46%</strong><p>采用大会官方手册给出的取整值；分母仅为同页列出的会议论文投稿，不含期刊转投。 · <a href="https://www.iros25.org/templates/iros2025/doc/IROS2025-Digest.pdf#page=3">官方来源</a></p></li><li><span>本站已索引的论文库条目</span><strong>2,672</strong><p>论文库覆盖量，不等同于官方录用量 · <a href="https://ras.papercept.net/conferences/conferences/IROS25/program/">论文库来源</a></p></li></ul></section>
+  <section class="conference-board-section"><h3>关键奖项与论文精读</h3><ul class="conference-evidence-list"><li><h4>Best Conference Paper Award · <a href="https://events.infovaya.com/uploads/documents/pdfviewer/80/65/200114-4372.pdf">Interdigitated Electrodes for Selective Stimulation of Skeletal Muscle Actuators in Biosyncretic Robots</a></h4><p>研究用薄膜叉指电极对工程骨骼肌执行器进行局部刺激，并在台架上验证选中肌肉收缩时，邻近肌肉未出现明显收缩。证据支持独立寻址，不等于已验证整机长时运行；疲劳、能耗和耐久仍待评估。</p><small><a href="https://english.sia.cas.cn/news/Events/202512/t20251212_1136776.html">官方获奖名单</a></small></li></ul></section>
+  <section class="conference-board-section"><h3>研究方向</h3>
+  <p class="dashboard-muted">基于所列论文的观察，不代表全会趋势、占比或首创结论。</p><section><h4>技术趋势</h4><p class="dashboard-muted">待补可核验的论文证据。</p></section><section><h4>新模型范式</h4><p class="dashboard-muted">待补可核验的论文证据。</p></section><section><h4>新概念</h4><ul class="conference-evidence-list"><li><h5>给生物混合机器人肌肉执行器独立寻址</h5><p>关键不只在于肌肉能否收缩，还在于能否在紧凑空间里单独驱动某一束肌肉，避免邻近单元误动作。论文的受控实验验证了这个部件级能力，尚未证明能扩展到复杂整机闭环控制。</p><small>支撑论文：<a href="https://events.infovaya.com/uploads/documents/pdfviewer/80/65/200114-4372.pdf">IROS 2025 论文全文（结果 III-E、结论 IV）</a> · <a href="https://english.sia.cas.cn/news/Events/202512/t20251212_1136776.html">中科院沈阳自动化所获奖公告</a></small></li></ul></section></section>
+</article>
+<article class="conference-year-board" id="year-2024" aria-labelledby="title-2024">
+  <header class="conference-board-heading">
+    <div><p>已举办 · 2024.10.14–10.18</p><h2 id="title-2024">IROS 2024</h2></div>
+    <p>Abu Dhabi, UAE<br><a href="https://www.ieee-ras.org/conferences-workshops/financially-co-sponsored/iros/iros-past-and-future-venues/">会议官网</a> · <a href="https://ieeexplore.ieee.org/xpl/conhome/10801246/proceeding">官方论文库</a></p>
+  </header>
+  <section class="conference-board-section"><h3>会议数据</h3><p class="dashboard-muted">未找到可核验的官方数据，暂不填投稿量、录用量或录用率。</p><ul class="conference-metrics"><li><span>本站已索引的论文库条目（最新刷新失败，上次留存）</span><strong>1,587</strong><p>论文库覆盖量，不等同于官方录用量 · <a href="https://ieeexplore.ieee.org/xpl/conhome/10801246/proceeding">论文库来源</a></p></li></ul></section>
+  <section class="conference-board-section"><h3>关键奖项与论文精读</h3><p class="dashboard-muted">奖项与获奖论文精读待核验。</p></section>
+  <section class="conference-board-section"><h3>研究方向</h3>
+  <p class="dashboard-muted">基于所列论文的观察，不代表全会趋势、占比或首创结论。</p><section><h4>技术趋势</h4><p class="dashboard-muted">待补可核验的论文证据。</p></section><section><h4>新模型范式</h4><p class="dashboard-muted">待补可核验的论文证据。</p></section><section><h4>新概念</h4><p class="dashboard-muted">待补可核验的论文证据。</p></section></section>
+</article></div>
+</div>
+  </main>
+
+</body>
+</html>

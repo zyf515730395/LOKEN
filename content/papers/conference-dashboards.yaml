@@ -1,0 +1,416 @@
+version: 1
+editions:
+  CVPR 2026:
+    statistics:
+      - label: 有效投稿
+        value: '16,092'
+        scope: 主会，进入审稿流程的有效投稿；主会项目手册第 3 页。
+        source_url: https://media.eventhosts.cc/Conferences/CVPR2026/CVPR_main_conf_2026_15.pdf#page=3
+      - label: 录用决定
+        value: '4,089'
+        scope: 主会审稿结束时的录用决定；不是论文库实际抓取条数，也不是手册所列的海报邀请组。
+        source_url: https://media.eventhosts.cc/Conferences/CVPR2026/CVPR_main_conf_2026_15.pdf#page=3
+      - label: 录用率
+        value: '25.4%'
+        scope: 主会审稿决定口径：4,089 ÷ 16,092。
+        source_url: https://media.eventhosts.cc/Conferences/CVPR2026/CVPR_main_conf_2026_15.pdf#page=3
+      - label: 海报邀请组论文
+        value: '4,072'
+        scope: 同一手册另列的海报邀请组；手册未说明与录用决定数的差额原因。
+        source_url: https://media.eventhosts.cc/Conferences/CVPR2026/CVPR_main_conf_2026_15.pdf#page=3
+    awards:
+      - name: Best Paper
+        title: Efficiently Reconstructing Dynamic Scenes One D4RT at a Time
+        award_url: https://cvpr.thecvf.com/Conferences/2026/News/Best_Papers
+        paper_url: https://arxiv.org/abs/2512.08924
+        reading: 视频编码后用按需查询的解码器预测不同时刻、不同相机坐标系中的点，统一深度、时空对应和相机参数；论文检验的是动态几何与运动重建，而非可交互场景生成。
+      - name: Best Student Paper
+        title: Native and Compact Structured Latents for 3D Generation
+        award_url: https://cvpr.thecvf.com/Conferences/2026/News/Best_Papers
+        paper_url: https://arxiv.org/abs/2512.14692
+        reading: O-Voxel 直接在稀疏体素中编码形状和 PBR 外观，并用稀疏卷积 VAE 压缩；论文处理三维资产及材质，不等于从任意实拍人像分离光照和纹理。
+      - name: Best Student Paper Honorable Mention
+        title: 'ChordEdit: One-Step Low-Energy Transport for Image Editing'
+        award_url: https://cvpr.thecvf.com/Conferences/2026/News/Best_Papers
+        paper_url: https://arxiv.org/abs/2602.19083
+        reading: 从动态最优传输出发，以局部时间平滑估计低能量编辑场，在一步生成模型上做免训练、免反演的编辑；适用边界应在作者实际测试过的模型及编辑任务上分别核验。
+    themes:
+      - kind: 新模型范式
+        title: 把动态 4D 重建变成按需查询
+        analysis: D4RT 不必预先输出每一帧的所有几何与运动结果，而是将视频编码与点级查询解码解耦。读这篇时可分别看遮挡区域追踪、相机估计与稠密重建，再判断哪一部分能复用于自己的视频管线。
+        references:
+          - title: D4RT
+            url: https://arxiv.org/abs/2512.08924
+      - kind: 技术趋势
+        title: 流模型编辑从免反演走向一步
+        analysis: ICCV 2025 的 FlowEdit 直接积分源到目标的传输 ODE；本届 ChordEdit 将目标推向一步近似。两篇是相关路线的例子，不代表整个会议的频数趋势。复现时应分别检查编辑耗时和无关区域的保真度，不能仅以单步推理判断编辑质量。
+        references:
+          - title: ChordEdit（CVPR 2026）
+            url: https://arxiv.org/abs/2602.19083
+          - title: FlowEdit（ICCV 2025，对照）
+            url: https://arxiv.org/abs/2412.08629
+  ICCV 2025:
+    statistics:
+      - label: 有效投稿
+        value: '11,239'
+        scope: 主会有效投稿；主会项目手册第 3 页。
+        source_url: https://media.eventhosts.cc/Conferences/ICCV2025/iccv25_main_program.pdf#page=3
+      - label: 录用
+        value: '2,701'
+        scope: 主会项目手册；口头报告和亮点论文是录用论文中的展示类别，不另加。
+        source_url: https://media.eventhosts.cc/Conferences/ICCV2025/iccv25_main_program.pdf#page=3
+      - label: 录用率
+        value: '24.0%'
+        scope: 主会口径：2,701 ÷ 11,239，约 24.0%。
+        source_url: https://media.eventhosts.cc/Conferences/ICCV2025/iccv25_main_program.pdf#page=3
+    awards:
+      - name: Best Paper（Marr Prize）
+        title: Generating Physically Stable and Buildable Brick Structures from Text
+        award_url: https://www.thecvf.com/?page_id=413
+        paper_url: https://openaccess.thecvf.com/content/ICCV2025/html/Pun_Generating_Physically_Stable_and_Buildable_Brick_Structures_from_Text_ICCV_2025_paper.html
+        reading: 推理时用物理稳定性和装配约束检查自回归砖块序列，必要时回滚；实验针对积木结构，不能外推成任意材料、连续拓扑的物理生成。
+      - name: Best Student Paper
+        title: 'FlowEdit: Inversion-Free Text-Based Editing Using Pre-Trained Flow Models'
+        award_url: https://www.thecvf.com/?page_id=413
+        paper_url: https://arxiv.org/abs/2412.08629
+        reading: 构造从源提示分布直接到目标提示分布的 ODE，无需先反演到噪声；保真度优势来自论文所测的文本编辑设定，并非像素对齐或光照物理性的保证。
+      - name: Best Paper Honorable Mention
+        title: Spatially-Varying Autofocus
+        award_url: https://www.thecvf.com/?page_id=413
+        paper_url: https://openaccess.thecvf.com/content/ICCV2025/html/Qin_Spatially-Varying_Autofocus_ICCV_2025_paper.html
+      - name: Best Paper Honorable Mention
+        title: 'RayZer: A Self-supervised Large View Synthesis Model'
+        award_url: https://www.thecvf.com/?page_id=413
+        paper_url: https://openaccess.thecvf.com/content/ICCV2025/html/Jiang_RayZer_A_Self-supervised_Large_View_Synthesis_Model_ICCV_2025_paper.html
+    themes:
+      - kind: 新模型范式
+        title: 同一个 DiT 中联合处理参考图条件
+        analysis: OminiControl 复用原模型的 VAE 和 Transformer，将图像条件与生成 token 放在同一序列，以动态位置编码区分对齐和不对齐条件。主要在空间控制和主体驱动生成中验证，并未覆盖一般参考图超分。
+        references:
+          - title: OminiControl（ICCV 2025 Highlight）
+            url: https://openaccess.thecvf.com/content/ICCV2025/html/Tan_OminiControl_Minimal_and_Universal_Control_for_Diffusion_Transformer_ICCV_2025_paper.html
+      - kind: 新概念
+        title: 把可执行的物理检查放进生成循环
+        analysis: BrickGPT 把候选生成与约束验证拆开：生成器提出砖块，规则拒绝不稳定或无法装配的动作。这是离散积木中的证据；对其他视觉任务，可借鉴先把可验证约束独立出来，而不是沿用积木求解器。
+        references:
+          - title: BrickGPT
+            url: https://arxiv.org/abs/2505.05469
+  ICLR 2026:
+    statistics:
+      - label: 有效投稿
+        value: '19,525'
+        scope: 项目主席所列格式合规、有效投稿；含后来撤稿或被桌拒的部分。
+        source_url: https://blog.iclr.cc/2026/03/31/a-retrospective-on-the-iclr-2026-review-process/
+      - label: 录用
+        value: '5,355'
+        scope: 项目主席审稿回顾中的录用决定；不以事后公开库快照替代。
+        source_url: https://blog.iclr.cc/2026/03/31/a-retrospective-on-the-iclr-2026-review-process/
+      - label: 官方录用率
+        value: '27.4%'
+        scope: 以有效投稿为分母，5,355 ÷ 19,525；与仅对作出录用或拒稿决定的稿件计算的比率不同。
+        source_url: https://blog.iclr.cc/2026/03/31/a-retrospective-on-the-iclr-2026-review-process/
+      - label: 收到录用或拒稿决定
+        value: '13,763'
+        scope: 项目主席记录的审稿决定集合；不是上述官方录用率的分母。
+        source_url: https://blog.iclr.cc/2026/03/31/a-retrospective-on-the-iclr-2026-review-process/
+    awards:
+      - name: Outstanding Paper
+        title: Transformers are Inherently Succinct
+        award_url: https://blog.iclr.cc/2026/04/23/announcing-the-iclr-2026-outstanding-papers/
+        paper_url: https://proceedings.iclr.cc/paper_files/paper/2026/hash/5f7804e8855efe5554025217abc49315-Abstract-Conference.html
+        reading: 用形式语言表示的描述长度比较 Transformer、有限自动机和时序逻辑；这是指定数学模型的表达简洁性结果，不是现实模型训练规模或推理速度的排名。
+      - name: Outstanding Paper
+        title: LLMs Get Lost In Multi-Turn Conversation
+        award_url: https://blog.iclr.cc/2026/04/23/announcing-the-iclr-2026-outstanding-papers/
+        paper_url: https://arxiv.org/abs/2505.06120
+        reading: 将同一任务的信息分段注入对话，对照一次性给全提示；所测六类生成任务平均下降 39%，主要表现为答复更不可靠。不是对所有真实对话的普遍估计。
+      - name: Honorable Mention
+        title: 'The Polar Express: Optimal Matrix Sign Methods and their Application to the Muon Algorithm'
+        award_url: https://blog.iclr.cc/2026/04/23/announcing-the-iclr-2026-outstanding-papers/
+        paper_url: https://proceedings.iclr.cc/paper_files/paper/2026/hash/df88b275bef31ac96c85f0c4013734fc-Abstract-Conference.html
+        reading: 以极小极大多项式逼近矩阵符号函数，并代入 Muon 的极分解步骤；实证验证包含 GPT-2/FineWeb，不能直接外推到图像 LoRA 或更大的训练规模。
+    themes:
+      - kind: 技术趋势
+        title: 评测从单轮任务扩展到逐轮澄清
+        analysis: 保持任务和最终可用信息一致，只改变信息到达方式，以区分会做任务与能否在多轮修正早期假设。可以借鉴这种设计测试多轮图像编辑：先给目标风格，再追加保真约束，与一次给全条件比较。
+        references:
+          - title: LLMs Get Lost In Multi-Turn Conversation
+            url: https://arxiv.org/abs/2505.06120
+      - kind: 新概念
+        title: 最坏误差约束下的矩阵迭代
+        analysis: Polar Express 将 Muon 内部的矩阵逼近写成可检验的极小极大目标。读论文时把理论最坏误差和训练中验证损失的改善分开，后者仍需要在目标模型和硬件上实测。
+        references:
+          - title: The Polar Express
+            url: https://arxiv.org/abs/2505.16932
+
+  ECCV 2026:
+    statistics:
+      - label: 论文集统计投稿量
+        value: '10,473'
+        scope: Springer 多卷正式论文集公布的投稿总数；非主办方会前报道的约数。
+        source_url: https://link.springer.com/book/10.1007/978-3-032-37383-0
+      - label: 正式论文集选录论文
+        value: '2,834'
+        scope: Springer 正式论文集口径；不用于推断其他赛道。
+        source_url: https://link.springer.com/book/10.1007/978-3-032-37383-0
+      - label: 按论文集口径计算的选录比例
+        value: '约 27.06%'
+        scope: 2,834 ÷ 10,473，本站根据 Springer 公布的两项数值计算。
+        source_url: https://link.springer.com/book/10.1007/978-3-032-37383-0
+    awards:
+      - name: Best Paper
+        title: "Heat Kernel Textures: the Geodesic Gaussians That Do Not Splat"
+        award_url: https://eccv.ecva.net/Conferences/2026/AcceptedPapers
+        paper_url: https://arxiv.org/html/2609.07557v1
+        reading: 用三角网格表面的各向异性热核表示纹理，在曲面上更新核位置并控制密度，渲染时在光线交点求值，不需要 UV 展开。论文实证集中于反照率，尚未验证粗糙度或镜面分量；核聚合和邻域查询带来额外开销。
+    themes:
+      - kind: 新概念
+        title: 用曲面内禀热核表示纹理
+        analysis: HKTex 与其让欧氏空间的高斯贴近网格，不如直接在表面上定义纹理基元。它适用于已有网格上的纹理拟合和多视图反照率反演，不等于从图像恢复未知几何，也不能据此认定渲染更快。
+        references:
+          - title: HKTex 论文与实验（表 2、结论）
+            url: https://arxiv.org/html/2609.07557v1
+          - title: 作者项目页
+            url: https://circle-group.github.io/research/HeatKernelTextures/
+  ICRA 2026:
+    statistics:
+      - label: 征稿结束时投稿数
+        value: "5,088"
+        scope: ICRA 官网征稿关闭后公布的原始投稿数；不作为最终有效投稿数或录用率分母。
+        source_url: https://2026.ieee-icra.org/contribute/call-for-icra-2026-papers-now-accepting-submissions/
+    awards:
+      - name: Best Conference Paper Award
+        title: "OmniRetarget: Interaction-Preserving Data Generation for Humanoid Whole-Body Loco-Manipulation and Scene Interaction"
+        award_url: https://www.ieee-ras.org/lujie-yang-on-teaching-humanoid-robots-by-preserving-interactions/
+        paper_url: https://ieeexplore.ieee.org/abstract/document/11696487
+        reading: 用交互网格编码身体、地形和物体的空间关系及接触，优化时尽量保留这些关系，同时满足机器人运动学约束。源演示的接触如果重建错了，方法无法自动识别并纠正。
+      - name: Best Conference Paper Award
+        title: "SymSkill: Symbol and Skill Co-Invention for Data-Efficient and Reactive Long-Horizon Manipulation"
+        award_url: https://www.ieee-ras.org/yifei-simon-shao-on-symskill-and-long-horizon-robot-manipulation/
+        paper_url: https://arxiv.org/abs/2510.01661
+        reading: 从自由交互演示中联合学习可复用的操作技能和符号前提，用符号规划组合长任务。当前实验依赖可跟踪的刚体及其相对位姿，速度分段只是动作边界的代理。
+    themes:
+      - kind: 技术趋势
+        title: 用显式交互约束提高机器人演示的复用性
+        analysis: 两篇获奖论文分别处理不同层级的复用：OmniRetarget 保留身体与环境的接触，使同一人类动作能适配不同物体和地形；SymSkill 学习可执行技能和符号前提，让技能可重组为新任务。这是两项研究体现的共同方向，不代表全会论文分布。
+        references:
+          - title: OmniRetarget 作者项目页
+            url: https://omniretarget.github.io/
+          - title: SymSkill 作者项目页
+            url: https://symskill.github.io/
+
+  ICML 2026:
+    statistics:
+      - label: 进入评审
+        value: "23,918"
+        scope: 官方发出决定通知时的进入评审论文口径，不是所有登记投稿。
+        source_url: https://www.linkedin.com/posts/icmlconf_decision-notifications-are-being-released-activity-7455685189479055361-PXq3
+      - label: 录用论文
+        value: "6,352"
+        scope: 官方决定通知口径；不与会期开幕回顾的不同统计口径混算。
+        source_url: https://www.linkedin.com/posts/icmlconf_decision-notifications-are-being-released-activity-7455685189479055361-PXq3
+      - label: 录用率
+        value: "26.6%"
+        scope: 官方决定通知，6,352 篇录用 / 23,918 篇进入评审。
+        source_url: https://www.linkedin.com/posts/icmlconf_decision-notifications-are-being-released-activity-7455685189479055361-PXq3
+    awards:
+      - name: Outstanding Paper Award
+        title: "The Flexibility Trap: Rethinking the Value of Arbitrary Order in Diffusion Language Models"
+        award_url: https://blog.icml.cc/2026/07/05/announcing-the-icml-2026-awards/
+        paper_url: https://proceedings.mlr.press/v306/ni26e.html
+        reading: 作者在数学与代码推理中观察到，扩散语言模型可能利用任意解码顺序绕过用于探索的高不确定性 token，过早缩窄候选答案。JustGRPO 简化推理强化学习训练，同时保留并行解码能力；这不意味着所有任务都该取消任意顺序。
+      - name: Outstanding Paper Award
+        title: High-Accuracy Sampling for Diffusion Models and Log-Concave Distributions
+        award_url: https://blog.icml.cc/2026/07/05/announcing-the-icml-2026-awards/
+        paper_url: https://proceedings.mlr.press/v306/chen26p.html
+        reading: 给定足够准确的 L² 分数函数估计，作者构造采样算法，使取得目标误差所需步数对误差倒数仅呈多对数增长。重点是有明确假设的采样复杂度，不是宣布实际图像模型都能用几步无损生成。
+    themes:
+      - kind: 技术趋势
+        title: 扩散建模的两类瓶颈：推理轨迹与采样误差
+        analysis: 两篇杰出论文把问题拆在不同层级：语言扩散的瓶颈可以是探索轨迹选得不好；连续扩散则要区分采样器的离散化误差和分数估计误差。这是对两篇获奖工作的归纳，不能外推为全部录用论文的趋势。
+        references:
+          - title: The Flexibility Trap（PMLR）
+            url: https://proceedings.mlr.press/v306/ni26e.html
+          - title: High-Accuracy Sampling（PMLR）
+            url: https://proceedings.mlr.press/v306/chen26p.html
+  NeurIPS 2025:
+    statistics:
+      - label: 有效投稿
+        value: "21,575"
+        scope: 主会 Main Program；不含 Datasets and Benchmarks 和 Position Paper 专轨。
+        source_url: https://blog.neurips.cc/2025/09/30/reflections-on-the-2025-review-process-from-the-program-committee-chairs/
+      - label: 录用论文
+        value: "5,290"
+        scope: 主会 Main Program；不含 Datasets and Benchmarks 和 Position Paper 专轨。
+        source_url: https://blog.neurips.cc/2025/09/30/reflections-on-the-2025-review-process-from-the-program-committee-chairs/
+      - label: 录用率
+        value: "24.52%"
+        scope: 程序委员会主席公布的主会比率；分母为 21,575 篇有效投稿。
+        source_url: https://blog.neurips.cc/2025/09/30/reflections-on-the-2025-review-process-from-the-program-committee-chairs/
+    awards:
+      - name: Best Paper Award（主轨）
+        title: "Gated Attention for Large Language Models: Non-linearity, Sparsity, and Attention-Sink-Free"
+        award_url: https://blog.neurips.cc/2025/11/26/announcing-the-neurips-2025-best-paper-awards/
+        paper_url: https://proceedings.neurips.cc/paper_files/paper/2025/hash/904e89bb4e632e75fb47f093b620b257-Abstract-Conference.html
+        reading: 在标准缩放点积注意力的输出端，为每个头加一个依赖当前 query 的 sigmoid 门。作者在 1.7B 稠密、15B MoE 等实验设置下观察到更稳定的训练、缓解 attention sink 并改善长上下文外推；门控的是输出，不是用稀疏注意力替换 SDPA。
+      - name: Best Paper Award（主轨）
+        title: "Why Diffusion Models Don’t Memorize: The Role of Implicit Dynamical Regularization in Training"
+        award_url: https://blog.neurips.cc/2025/11/26/announcing-the-neurips-2025-best-paper-awards/
+        paper_url: https://papers.nips.cc/paper_files/paper/2025/hash/ceb7f3cc876a6dcb15130a645b5a4507-Abstract-Conference.html
+        reading: 实验和可解析随机特征模型显示两个时间尺度：生成质量可以在较早时改善，而可检测的样本记忆在更晚才出现。这为早停为何有效提供了机制解释，不等于扩散模型永远不复制训练样本。
+      - name: Best Paper Award（Datasets & Benchmarks 专轨）
+        title: "Artificial Hivemind: The Open-Ended Homogeneity of Language Models (and Beyond)"
+        award_url: https://blog.neurips.cc/2025/11/26/announcing-the-neurips-2025-best-paper-awards/
+        paper_url: https://proceedings.neurips.cc/paper_files/paper/2025/hash/754d5a526a5ee5a47220664a0eb92751-Abstract-Datasets_and_Benchmarks_Track.html
+        reading: Infinity-Chat 用约 2.6 万条开放式提问研究生成多样性，区分同一模型反复给出类似答案与不同模型彼此趋同。论文也发现，评价者偏好分歧更大的答案更容易导致模型评审与人类判断失配。
+    themes:
+      - kind: 新概念
+        title: 生成的质量、记忆与多样性可以分开量
+        analysis: 主轨获奖论文在扩散训练中区分了出样质量和记忆出现的时点；数据与基准专轨获奖论文在开放生成中区分了单模型重复和跨模型同质化。两篇论文共同提示，生成得像或看起来好，不等于不复制、也不等于答案多样。这是跨轨论文对读，不是投稿热度统计。
+        references:
+          - title: Why Diffusion Models Don’t Memorize（主轨）
+            url: https://papers.nips.cc/paper_files/paper/2025/hash/ceb7f3cc876a6dcb15130a645b5a4507-Abstract-Conference.html
+          - title: Artificial Hivemind（数据与基准轨）
+            url: https://proceedings.neurips.cc/paper_files/paper/2025/hash/754d5a526a5ee5a47220664a0eb92751-Abstract-Datasets_and_Benchmarks_Track.html
+  AAAI 2026:
+    statistics:
+      - label: 主技术轨原始投稿
+        value: "近 29,000"
+        scope: 组织方 2025 年 8 月流程更新；包含合规检查中移除的投稿。
+        source_url: https://aaai.org/conference/aaai/aaai-26/review-process-update/
+      - label: 主技术轨进入评审
+        value: "约 23,000"
+        scope: 同一份组织方早期流程更新；指剔除不合规稿件后，当时仍在评审中的主技术轨论文。不是最终精确分母。
+        source_url: https://aaai.org/conference/aaai/aaai-26/review-process-update/
+    awards:
+      - name: Outstanding Paper Award
+        title: "ReconVLA: Reconstructive Vision-Language-Action Model as Effective Robot Perceiver"
+        award_url: https://aaai.org/about-aaai/aaai-awards/aaai-conference-paper-awards-and-recognition/
+        paper_url: https://ojs.aaai.org/index.php/AAAI/article/view/38921
+        reading: 训练时用扩散 Transformer 重建当前观测中与操作目标对应的区域，作为动作学习之外的视觉监督，引导 VLA 减少对无关干扰物的关注。论文在仿真和所选实体任务上验证了效果，不能替代跨机器人或开放场景的系统评估。
+      - name: Outstanding Paper Award
+        title: Causal Structure Learning for Dynamical Systems with Theoretical Score Analysis
+        award_url: https://aaai.org/about-aaai/aaai-awards/aaai-conference-paper-awards-and-recognition/
+        paper_url: https://ojs.aaai.org/index.php/AAAI/article/view/40999
+        reading: 用基于差分的因果模型描述连续动态系统，再通过评分分析学习变量之间的因果结构。有别于直接套用离散时间动态贝叶斯网络，它把连续变化的建模假设显式写进发现过程。
+    themes:
+      - kind: 新模型范式
+        title: 用局部重建教机器人看对地方
+        analysis: ReconVLA 将当前图像的目标区域重建作为辅助任务，重点是精确感知而非预测下一帧。可把它看成一条可检验的 VLA 设计路线：在动作监督外增加对任务相关视觉表征的约束。这只概括该获奖案例，不代表 AAAI 全会的技术分布。
+        references:
+          - title: ReconVLA（AAAI 正式论文）
+            url: https://ojs.aaai.org/index.php/AAAI/article/view/38921
+
+  IROS 2025:
+    statistics:
+      - label: 会议论文投稿
+        value: "4,306"
+        scope: 大会官方手册欢迎辞口径，仅会议论文，不含另列的 777 篇期刊转投。
+        source_url: https://www.iros25.org/templates/iros2025/doc/IROS2025-Digest.pdf#page=3
+      - label: 会议论文录用
+        value: "1,991"
+        scope: 大会官方手册欢迎辞口径，与其会议论文投稿数对应，不是含期刊转投的报告总数。
+        source_url: https://www.iros25.org/templates/iros2025/doc/IROS2025-Digest.pdf#page=3
+      - label: 会议论文录用率
+        value: "46%"
+        scope: 采用大会官方手册给出的取整值；分母仅为同页列出的会议论文投稿，不含期刊转投。
+        source_url: https://www.iros25.org/templates/iros2025/doc/IROS2025-Digest.pdf#page=3
+    awards:
+      - name: Best Conference Paper Award
+        title: Interdigitated Electrodes for Selective Stimulation of Skeletal Muscle Actuators in Biosyncretic Robots
+        award_url: https://english.sia.cas.cn/news/Events/202512/t20251212_1136776.html
+        paper_url: https://events.infovaya.com/uploads/documents/pdfviewer/80/65/200114-4372.pdf
+        reading: 研究用薄膜叉指电极对工程骨骼肌执行器进行局部刺激，并在台架上验证选中肌肉收缩时，邻近肌肉未出现明显收缩。证据支持独立寻址，不等于已验证整机长时运行；疲劳、能耗和耐久仍待评估。
+    themes:
+      - kind: 新概念
+        title: 给生物混合机器人肌肉执行器独立寻址
+        analysis: 关键不只在于肌肉能否收缩，还在于能否在紧凑空间里单独驱动某一束肌肉，避免邻近单元误动作。论文的受控实验验证了这个部件级能力，尚未证明能扩展到复杂整机闭环控制。
+        references:
+          - title: IROS 2025 论文全文（结果 III-E、结论 IV）
+            url: https://events.infovaya.com/uploads/documents/pdfviewer/80/65/200114-4372.pdf
+          - title: 中科院沈阳自动化所获奖公告
+            url: https://english.sia.cas.cn/news/Events/202512/t20251212_1136776.html
+
+  SIGGRAPH 2026:
+    statistics:
+      - label: 完整技术论文投稿
+        value: "1,177"
+        scope: 技术论文主席最终特刊编者按；216 篇仅投期刊轨，961 篇同时申请期刊和会议轨，只计一次。不同于早期官网新闻稿。
+        source_url: https://doi.org/10.1145/3815597
+      - label: 录用技术论文
+        value: "327"
+        scope: 技术论文主席最终口径；132 篇进入 ACM TOG 期刊轨（97 篇期刊单轨投稿、35 篇双轨投稿），195 篇进入会议论文集。
+        source_url: https://doi.org/10.1145/3815597
+      - label: 录用率（按编者按计数计算）
+        value: "约 27.8%"
+        scope: 327 / 1,177 的复算值；主席编者按将总体比率报告为 27%。两轨合计，不含 Art Papers。
+        source_url: https://doi.org/10.1145/3815597
+    awards:
+      - name: Technical Papers Best Paper Award
+        title: "GimmBO: Interactive Generative Image Model Merging via Bayesian Optimization"
+        award_url: https://blog.siggraph.org/2026/05/siggraph-2026-technical-papers-awards-best-papers-honorable-mentions-and-test-of-time.html/
+        paper_url: https://arxiv.org/abs/2601.18585
+        reading: 把图像生成适配器的融合权重当成搜索变量。用户比较生成样张，偏好贝叶斯优化根据选择推荐下一组权重，减少反复拖动滑块的成本。关键是人的反馈如何引导参数搜索，并不是重训底模。
+      - name: Technical Papers Best Paper Award
+        title: Inverse Rendering for Discrete X-Ray Computed Tomography
+        award_url: https://blog.siggraph.org/2026/05/siggraph-2026-technical-papers-awards-best-papers-honorable-mentions-and-test-of-time.html/
+        paper_url: https://rgl.epfl.ch/publications/Nuic2026DiscreteCT
+        reading: 将每个体素表示为已知材料类别上的概率分布，再用实测投影与可微渲染预测的一致性作梯度反演。支持散射等非线性效应，在论文测试的稀疏投影和有限角度条件下尤其有优势；前提是材料类别已知。
+      - name: Technical Papers Best Paper Award
+        title: "Walk on Decomposed Subdomains: A Hybrid Monte Carlo-Deterministic Solver for Elliptic PDEs"
+        award_url: https://blog.siggraph.org/2026/05/siggraph-2026-technical-papers-awards-best-papers-honorable-mentions-and-test-of-time.html/
+        paper_url: https://clementjambon.github.io/wods/
+        reading: 把复杂域拆成可处理的子域，用蒙特卡洛估计局部求解算子，再以稀疏线性系统耦合子域边界。把随机采样留给易并行的局部步骤，把全局一致性交给确定性求解。
+    themes:
+      - kind: 新概念
+        title: 反演时，关键是选对未知量与观测
+        analysis: 两篇获奖工作是互补例子：GimmBO 的未知量是适配器融合系数，反馈是人的样张偏好；离散 CT 则从物理投影估计已知材质的体素分布。它们的求解器并不通用，但都说明先明确参数和反馈，比直接增加生成或采样预算更有针对性。此处为获奖案例对读，不是全会统计。
+        references:
+          - title: GimmBO 作者项目
+            url: https://gimmbo-project.github.io/
+          - title: 离散 CT 逆渲染作者论文
+            url: https://rgl.epfl.ch/publications/Nuic2026DiscreteCT
+
+  SIGGRAPH Asia 2025:
+    statistics:
+      - label: 技术论文投稿
+        value: '1,106'
+        scope: ACM SIGGRAPH 技术论文委员会遴选公告；Journal 和 Conference 两轨合计，不含技术通讯、海报等独立项目。
+        source_url: https://www.linkedin.com/posts/acm-siggraph_siggraph-asia-2025-technical-papers-program-activity-7360522611312783360-ekZJ
+      - label: 技术论文录用
+        value: '301'
+        scope: ACM SIGGRAPH 技术论文委员会遴选公告的两轨合计，非最终会程或各单轨数量。
+        source_url: https://www.linkedin.com/posts/acm-siggraph_siggraph-asia-2025-technical-papers-program-activity-7360522611312783360-ekZJ
+      - label: 技术论文录用率
+        value: '27.2%'
+        scope: 根据官方公告的两轨录用合计 301 ÷ 1,106 计算，四舍五入到一位小数；非 Journal 单轨录用率。
+        source_url: https://www.linkedin.com/posts/acm-siggraph_siggraph-asia-2025-technical-papers-program-activity-7360522611312783360-ekZJ
+    awards:
+      - name: Technical Papers Best Paper Award
+        title: 'Fovea Stacking: Imaging with Dynamic Localized Aberration Correction'
+        award_url: https://asia.siggraph.org/2025/program/award-winners/
+        paper_url: https://doi.org/10.1145/3763278
+        reading: 用可变形相位板在采集端动态纠正局部像差，再合成多次拍摄中的清晰区域；全画幅合成依赖专门光学器件和多帧，不是任意单图的后处理超分。
+      - name: Technical Papers Best Paper Award
+        title: Automatic Sampling for Discontinuities in Differentiable Shaders
+        award_url: https://asia.siggraph.org/2025/program/award-winners/
+        paper_url: https://doi.org/10.1145/3763291
+        reading: 将分段连续的着色器转换成分段常数代理，在随机线段上搜索不连续边界并比较两侧值，估计边界导数；证据来自逆图形及着色器实例，不代表任意神经图像模型都可直接套用。
+      - name: Technical Papers Best Paper Award
+        title: 'BSP-OT: Sparse transport plans between discrete measures in loglinear time'
+        award_url: https://asia.siggraph.org/2025/program/award-winners/
+        paper_url: https://doi.org/10.1145/3763281
+        reading: 用匹配的二元空间分割树生成多个稀疏耦合，再合并以降低传输代价。论文的低误差证据来自特定三维点集实验，方法给出近似传输，不承诺一般情形的精确最优。
+    themes:
+      - kind: 新模型范式
+        title: 在采集时主动获得局部高频
+        analysis: Fovea Stacking 用可控光学器件把清晰区域移到所需位置，并利用多帧得到全画面清晰图。与软件超分的区别是它实际采集到新的高频；做对照时应把额外硬件和采集帧数计入预算。
+        references:
+          - title: Fovea Stacking
+            url: https://doi.org/10.1145/3763278
+      - kind: 新概念
+        title: 显式采样不连续边界的梯度
+        analysis: 逆渲染遇到遮挡或硬边时，平滑区域的梯度不能替代跳变贡献。该论文以线段采样估计着色器跳变边界；若用于研究清晰轮廓，可将边界误差与平滑区域误差分别测量。
+        references:
+          - title: Automatic Sampling for Discontinuities in Differentiable Shaders
+            url: https://doi.org/10.1145/3763291

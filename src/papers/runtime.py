@@ -152,6 +152,9 @@ def allowed_path(path):
         if path == 'content/papers/digests/official-abstracts.json':
             return True
         return bool(re.fullmatch(r'content/papers/digests/(daily|weekly)-\d{4}-\d{2}-\d{2}\.json', path))
+    if path.startswith('docs/reports/conferences/'):
+        from papers.conference_dashboards import configured_navigation
+        return path.removeprefix('docs/') in {route for _, _, route in configured_navigation(datetime.now(ZONE).date())}
     if path.startswith('docs/reports/'):
         return path in {'docs/reports/daily.html', 'docs/reports/weekly.html', 'docs/reports/paradigms.html'} or bool(
             re.fullmatch(r'docs/reports/periods/(daily|weekly)-\d{4}-\d{2}-\d{2}\.json', path))
