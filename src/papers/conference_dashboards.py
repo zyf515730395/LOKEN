@@ -19,6 +19,7 @@ from papers.conferences import (
     _meeting_year,
     _reject_unknown_fields,
     _text,
+    dashboard_route,
     load_conferences,
 )
 from shared.rendering import atomic_write_text
@@ -28,12 +29,7 @@ from shared.site_shell import SITE_NAME, render_site_page, site_root_for
 ROOT = Path(__file__).resolve().parents[2]
 CONFERENCE_CONFIG = ROOT / "config/conferences.yaml"
 DASHBOARD_CATALOG = ROOT / "content/papers/conference-dashboards.yaml"
-ROUTE_PREFIX = "reports/conferences/"
 THEME_KINDS = ("技术趋势", "新模型范式", "新概念")
-
-
-def dashboard_route(conference_id: str) -> str:
-    return f"{ROUTE_PREFIX}{conference_id}.html"
 
 
 def navigation_links(conferences: tuple[Conference, ...]) -> tuple[tuple[str, str, str], ...]:
