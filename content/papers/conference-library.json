@@ -20727,7 +20727,33 @@
       },
       "source_edition": "NeurIPS 2025",
       "source_version": "c6c567c6f50e4218d1d4e05fb3febd94c6e55f66a2cc4d82c6d5894e2af5f33f",
-      "summary": null,
+      "summary": {
+        "contributions": [
+          "提出了嫁接（Grafting）方法，这是一种简单的两阶段架构编辑策略，包括通过回归目标进行激活蒸馏以转移原算子功能，以及通过有限数据进行轻量级微调以缓解误差传播。",
+          "建立了自嫁接基线，证明在DiT-XL/2中用随机初始化的算子替换所有MHA和MLP算子时，嫁接程序能以不到1%的预训练计算量实现接近基线的模型质量。",
+          "构建了一个基于DiT-XL/2的测试平台，并沿四个维度（替换哪个算子、替换为什么、如何选择层、替换比例）系统性地定义了架构编辑空间，用于评估不同嫁接方案对模型质量的影响。",
+          "在类别条件图像生成任务中验证了嫁接方法，展示了多种混合架构设计（如使用局部门控卷积、局部注意力或线性注意力替换MHA）能取得2.38至2.64之间的FID分数，且每个实验在8块H100 GPU上24小时内完成，计算量小于预训练的2%。",
+          "在高分辨率文本到图像生成任务中验证了嫁接方法的扩展性，利用12k合成数据在PixArt-Σ模型上实现了1.43倍的速度提升，同时GenEval分数下降小于2%。",
+          "通过案例研究展示了将模型深度转换为宽度的能力，通过并行化每对Transformer块将DiT-XL/2的深度减半，所得模型FID为2.77，优于其他同等深度的模型，这是首次在预训练DiT中尝试将顺序Transformer块转换为并行结构。"
+        ],
+        "one_sentence": "本文提出了一种名为嫁接（Grafting）的两阶段架构编辑方法，通过激活蒸馏和轻量级微调，在极小计算预算下对预训练扩散Transformer进行算子替换，以探索新的架构设计并验证其有效性。",
+        "problem": "在基础模型时代，从头训练模型以研究新架构设计的成本过高，导致难以获得关于哪些架构设计有效或无效的洞察，特别是在生成模型领域，如何利用预训练模型作为脚手架在低计算预算下研究新架构设计是一个关键挑战。"
+      },
+      "summary_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "37aa1572e62441eace7c8dbe18c0e099c9ae21d85630f7e6b3fb622994913a2d",
+          "truncated": false
+        },
+        "sha256": "6ed1d61aa4b44ed80d5171668ebcfdbe040be22fc598fc40dd7945d87b939e6d",
+        "url": "https://arxiv.org/html/2506.05340"
+      },
       "title": "Exploring Diffusion Transformer Designs via Grafting",
       "topic_review": {
         "decisions": {
@@ -24640,6 +24666,36 @@
       "url": "https://eccv.ecva.net/virtual/2024/poster/671"
     },
     "conf-17a0f3b9a6d11536e3d3d1e6": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Diffusion",
+          "Voxel/Grid",
+          "Gaussian Splatting",
+          "Multi-View-to-3D",
+          "Feed-Forward"
+        ],
+        "topics": [
+          "3D Gen&Recon",
+          "World Model"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "official_abstract",
+          "extraction": {
+            "method": "pdf_text"
+          },
+          "sections": [
+            "Abstract"
+          ],
+          "sha256": "88e768234622f3ce8c2f5f9c2c477bdeeb4c24c5ae00af34eaee0f95008cdba4",
+          "truncated": false
+        },
+        "sha256": "ac1a33c876e82f27c8e90464f262e323c6d0188f7031f2c0aa0236abebac6751",
+        "url": "https://arxiv.org/pdf/2506.13558"
+      },
       "arxiv_id": "2506.13558",
       "authors": [
         "Yu Yang",
@@ -24674,7 +24730,53 @@
       },
       "source_edition": "NeurIPS 2025",
       "source_version": "2de39883d0c0885aada371379d8b081a7d16e3cb936f04c2722e578d97574dc8",
-      "summary": null,
+      "summary": {
+        "contributions": [
+          "提出了 X-Scene 框架，这是一个用于大规模 3D 驾驶场景生成的新型框架，具备多粒度可控性、几何与视觉保真度以及一致的大规模外推能力，支持多种下游应用。",
+          "设计了一种灵活的多粒度控制机制，协同结合高层语义引导（经 LLM 增强的文本提示）与低层几何规范（用户提供的或文本驱动的布局），实现针对不同用户需求的场景创建。",
+          "提出了一种统一的占用-图像-视频生成流水线，通过条件扩散模型合成对齐的 3D 体素占用、多视图图像和视频，实现了几何保真度、照片级真实感外观和时间连贯性。",
+          "引入了一种一致性感知的外绘机制，通过基于相邻已生成区域的条件进行渐进式外推，保持了空间连续性，实现了超越局部区域的大规模场景无缝扩展。",
+          "将生成的占用和多视图图像/视频重建为 3D 高斯（3DGS）表示，忠实保留了几何细节和视觉质量，以支持逼真的驾驶模拟等下游应用。"
+        ],
+        "one_sentence": "X-Scene 提出了一种支持多粒度可控性、高保真几何与外观生成以及大规模空间外推的统一框架，旨在解决自动驾驶场景中大规模 3D 场景生成的挑战。",
+        "problem": "现有大规模驾驶场景生成方法存在局限性：部分方法如 SemCity 缺乏外观细节，难以用于真实模拟；其他方法如 UniScene 和 InfiniCube 需要手动定义的大规模布局作为条件输入，导致生成过程复杂且灵活性不足；此外，现有工作多强调时间递归的视频生成，而缺乏针对空间扩展的大规模场景生成能力，难以在扩展区域中保持空间一致性。"
+      },
+      "summary_source": {
+        "evidence": {
+          "basis": "body_excerpt",
+          "extraction": {
+            "method": "pdf_text"
+          },
+          "sections": [
+            "Page 1",
+            "Page 2",
+            "Page 3",
+            "Page 4",
+            "Page 5",
+            "Page 6",
+            "Page 7",
+            "Page 8",
+            "Page 9",
+            "Page 10",
+            "Page 11",
+            "Page 12",
+            "Page 13",
+            "Page 14",
+            "Page 15",
+            "Page 16",
+            "Page 17",
+            "Page 18",
+            "Page 19",
+            "Page 20",
+            "Page 24",
+            "Page 25"
+          ],
+          "sha256": "fdad17ef754abd531056033e03e6d79ba6f0b33ee0463bf6b4e949b3e58eb2b8",
+          "truncated": true
+        },
+        "sha256": "ac1a33c876e82f27c8e90464f262e323c6d0188f7031f2c0aa0236abebac6751",
+        "url": "https://arxiv.org/pdf/2506.13558"
+      },
       "title": "X-Scene: Large-Scale Driving Scene Generation with High Fidelity and Flexible Controllability",
       "topic_review": {
         "decisions": {
@@ -25108,6 +25210,35 @@
       "url": "https://openaccess.thecvf.com/content/CVPR2026/html/Zhang_SpeeDiff_Scalable_Pixel-Anchored_End-to-End_Latent_Diffusion_Model_CVPR_2026_paper.html"
     },
     "conf-181d3c814e70df079a87e0e4": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Autoregressive",
+          "Discrete Tokens",
+          "Text Conditioning",
+          "Image Conditioned"
+        ],
+        "topics": [
+          "Image Gen&Edit",
+          "Video Gen&Edit"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "08b16ffac4e2468c2cea81264c334badb8822d96f0645131b0af23cd2b42a885",
+          "truncated": false
+        },
+        "sha256": "b897702f229d5698fa73d0cec16c72d9ec7a2345765b9865e69255b96f8a645a",
+        "url": "https://arxiv.org/html/2511.04675"
+      },
       "arxiv_id": "2511.04675",
       "authors": [
         "Jinlai Liu",
@@ -25145,7 +25276,32 @@
       },
       "source_edition": "NeurIPS 2025",
       "source_version": "687e6322be502b5d948bb66af05d8a109e3a5194cab8d4448d8f35052ac75ab7",
-      "summary": null,
+      "summary": {
+        "contributions": [
+          "提出了 InfinityStar 时空金字塔建模框架，将视频建模为图像金字塔和多个片段金字塔，统一了文本到图像、文本到视频、零样本图像到视频及零样本视频外推任务，并解耦了静态外观与动态运动。",
+          "通过利用连续视频分词器的知识继承来改进离散重建质量，并在分词器训练中引入随机量化器深度以缓解跨尺度信息分布不平衡的问题。",
+          "提出了语义尺度重复机制，通过细化视频中早期语义尺度的预测，显著增强了生成视频的细粒度细节和复杂运动表现。",
+          "在大规模视频语料库上训练 InfinityStar，支持生成高达 720p 分辨率和可变时长的视频，并在 VBench 基准上建立了自回归视频生成模型的新最先进状态，性能超越行业领先的 HunyuanVideo。",
+          "在保持高质量生成的同时显著提升了推理效率，使用相同压缩率的视觉分词器时，相比领先的扩散模型实现了 10 倍的推理延迟降低。"
+        ],
+        "one_sentence": "InfinityStar 提出了一种统一时空自回归建模框架，通过时空金字塔建模实现了文本到图像、文本到视频、零样本图像到视频及视频外推的统一生成，并在 VBench 基准上超越了现有自回归模型及行业领先的扩散模型。",
+        "problem": "现有视频生成范式存在显著缺陷：扩散模型虽能合成固定长度序列，但需数十至数百次去噪步骤导致计算成本高且难以无缝扩展至视频外推；基于下一词预测的自回归模型虽支持流式生成，但视觉保真度不足且因数万步推理导致延迟过高，缺乏同时具备高视觉质量、效率和时间泛化能力的生成框架。"
+      },
+      "summary_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "08b16ffac4e2468c2cea81264c334badb8822d96f0645131b0af23cd2b42a885",
+          "truncated": false
+        },
+        "sha256": "b897702f229d5698fa73d0cec16c72d9ec7a2345765b9865e69255b96f8a645a",
+        "url": "https://arxiv.org/html/2511.04675"
+      },
       "title": "InfinityStar: Uniﬁed Spacetime AutoRegressive Modeling for Visual Generation",
       "topic_review": {
         "decisions": {
@@ -32483,6 +32639,34 @@
       "url": "https://openaccess.thecvf.com/content/CVPR2025/html/Sharan_Neuro-Symbolic_Evaluation_of_Text-to-Video_Models_using_Formal_Verification_CVPR_2025_paper.html"
     },
     "conf-1ffdcbd328b758690f3fc336": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Diffusion",
+          "Text Conditioned",
+          "Audio/Multimodal Conditioned",
+          "Latent Dynamics"
+        ],
+        "topics": [
+          "Video Gen&Edit"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "official_abstract",
+          "extraction": {
+            "method": "pdf_text"
+          },
+          "sections": [
+            "Abstract"
+          ],
+          "sha256": "0c0b7bd16391f90cd601fed8aedfb48e476a82c001d9d3c30b5a947ccf09c1ac",
+          "truncated": false
+        },
+        "sha256": "f323a01334b5c964b2e1ced70741939c7049ef719f3582a596b1a02f05826e4c",
+        "url": "https://papers.nips.cc/paper_files/paper/2025/file/fceae9d27e68e183d71aaa88030f52ee-Paper-Conference.pdf"
+      },
       "authors": [
         "Zheng, Jiyang",
         "Pan, Siqi",
@@ -32502,6 +32686,7 @@
         "basis": "publisher_publication",
         "url": "https://papers.nips.cc/paper_files/paper/2025/hash/fceae9d27e68e183d71aaa88030f52ee-Abstract-Conference.html"
       },
+      "doi": "10.52202/085713-5764",
       "id": "conf-1ffdcbd328b758690f3fc336",
       "order_date": "2025-12-02",
       "published": "2026-04-23",
@@ -32516,7 +32701,39 @@
       },
       "source_edition": "NeurIPS 2025",
       "source_version": "22670eba89a4467dfbdf287666205caeeaf6cda5dc9a156dd7ceb6ce417989c7",
-      "summary": null,
+      "summary": {
+        "contributions": [
+          "提出了SAVA框架，通过可学习掩码机制识别并仅对齐跨模态共同预测的潜变量组件，同时忽略模态特异性信息以减少噪声和冲突。",
+          "设计了基于因果视图的数据生成过程，将音视频数据建模为视频特定潜变量、音频特定潜变量和跨模态共享潜变量的组合，并建立了相应的因果演化方程。",
+          "实现了三阶段训练流程，包括通过掩码潜在适配学习对齐投影、利用多条件微调适应联合条件输入，以及通过级联扩散推理生成高保真音视频输出。",
+          "提供了理论分析，证明了带L1惩罚的掩码跨模态重建目标能够恢复视频和音频之间共享的最小潜变量集合，即最小马尔可夫毯，从而确保了解释性和鲁棒性。",
+          "在多样化基准测试上的实证结果表明，SAVA显著提升了文本到音视频生成中的语义对齐和时序同步性能，优于现有基线模型。"
+        ],
+        "one_sentence": "该论文提出了SAVA框架，通过掩码潜在适配机制选择性对齐文本到音视频生成中的跨模态共享潜变量，以解决强制全量对齐导致的语义不一致和时序不同步问题。",
+        "problem": "现有文本到音视频生成方法通常假设音频和视觉特征完全对齐，但在实际场景中两者往往仅存在部分对应关系，强制全量对齐会将不匹配的信息引入联合表示，导致生成结果语义不一致或时序不同步。"
+      },
+      "summary_source": {
+        "evidence": {
+          "basis": "body_excerpt",
+          "extraction": {
+            "method": "pdf_text"
+          },
+          "sections": [
+            "Page 2",
+            "Page 3",
+            "Page 4",
+            "Page 5",
+            "Page 6",
+            "Page 7",
+            "Page 8",
+            "Page 9"
+          ],
+          "sha256": "bc8e60800d1a688b12bde60cfd42e772a2bdba2bfb954947e63c2df45ddcd648",
+          "truncated": true
+        },
+        "sha256": "f323a01334b5c964b2e1ced70741939c7049ef719f3582a596b1a02f05826e4c",
+        "url": "https://papers.nips.cc/paper_files/paper/2025/file/fceae9d27e68e183d71aaa88030f52ee-Paper-Conference.pdf"
+      },
       "title": "Aligning What Matters: Masked Latent Adaptation for Text-to-Audio-Video Generation",
       "topic_review": {
         "decisions": {
@@ -34504,6 +34721,33 @@
       "url": "https://iclr.cc/virtual/2024/poster/17370"
     },
     "conf-2177f0cc0fe826202b7c15e9": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "NeRF",
+          "Multi-View-to-3D",
+          "Optimization-Based"
+        ],
+        "topics": [
+          "3D Gen&Recon"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "official_abstract",
+          "extraction": {
+            "method": "pdf_text"
+          },
+          "sections": [
+            "Abstract"
+          ],
+          "sha256": "6e8433714184fefbeeeec4508007af6f4b2111b16ce713feb0f9097b22b2444e",
+          "truncated": false
+        },
+        "sha256": "2bb50847a80231cb5dc56fa5db0e341e9b7d73d9d38e9f26c0b70983ae337736",
+        "url": "https://papers.nips.cc/paper_files/paper/2025/file/70915b08a205ea5522528690d93518f6-Paper-Conference.pdf"
+      },
       "authors": [
         "Xue, Weiyi",
         "Lu, Fan",
@@ -34580,6 +34824,32 @@
       "url": "https://papers.nips.cc/paper_files/paper/2025/hash/70915b08a205ea5522528690d93518f6-Abstract-Conference.html"
     },
     "conf-217fdf0f479a97116e7a3f05": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Imagination-Based Planning",
+          "World-Model Policy Learning"
+        ],
+        "topics": [
+          "World Model"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "official_abstract",
+          "extraction": {
+            "method": "pdf_text"
+          },
+          "sections": [
+            "Abstract"
+          ],
+          "sha256": "1e0ebb21e59b0772d3e809e4caeabe6db6d3d0578182f58a1fa7b7fe6bb52c7d",
+          "truncated": false
+        },
+        "sha256": "bedd2c1ae0e495eaf8f7b8496de8838550446467d1df61374abbd03902a877e2",
+        "url": "https://papers.nips.cc/paper_files/paper/2025/file/3a2d96d2eb2902043c2db705ca03e9a2-Paper-Conference.pdf"
+      },
       "authors": [
         "Zhao, Zijie",
         "Zhao, Zhongyue",
@@ -34600,6 +34870,7 @@
         "basis": "publisher_publication",
         "url": "https://papers.nips.cc/paper_files/paper/2025/hash/3a2d96d2eb2902043c2db705ca03e9a2-Abstract-Conference.html"
       },
+      "doi": "10.52202/085713-1364",
       "id": "conf-217fdf0f479a97116e7a3f05",
       "order_date": "2025-12-02",
       "published": "2026-04-23",
@@ -34614,7 +34885,39 @@
       },
       "source_edition": "NeurIPS 2025",
       "source_version": "26ad3e79902ecb971840d56b409a063096c53c7e274bb61a3ffecde99c229193",
-      "summary": null,
+      "summary": {
+        "contributions": [
+          "识别了多任务动态中的有界相似性现象，并重新审视了模块化的作用，提出将其应用于世界模型而非策略以更好地利用组内相似性。",
+          "提出了一种新颖的M3W框架，利用基于SoftMoE的多智能体动态模型和基于SparseMoE的奖励预测器学习世界模型，并直接在预测轨迹上进行规划，不依赖显式决策策略。",
+          "在Bi-DexHands和MA-Mujoco基准上进行了广泛评估，通过对比实验、消融研究和可视化分析，证明了该方法在性能、样本效率和可解释性方面的优越性。"
+        ],
+        "one_sentence": "该论文提出了一种名为M3W的基于混合专家（MoE）的世界模型框架，通过识别多任务动态中的有界相似性现象，将模块化结构应用于世界模型而非策略，从而在无需显式策略的情况下实现多智能体多任务的高效学习与规划。",
+        "problem": "现有基于策略的多任务多智能体强化学习方法未能充分捕捉任务间动态的有界相似性，即任务在特定组内具有局部动态相似性但在全局上不泛化，导致难以在复用相似任务知识的同时避免不同任务间的梯度冲突。"
+      },
+      "summary_source": {
+        "evidence": {
+          "basis": "body_excerpt",
+          "extraction": {
+            "method": "pdf_text"
+          },
+          "sections": [
+            "Page 1",
+            "Page 2",
+            "Page 3",
+            "Page 4",
+            "Page 5",
+            "Page 6",
+            "Page 7",
+            "Page 8",
+            "Page 9",
+            "Page 10"
+          ],
+          "sha256": "f81d2c633eabf754335c663703b6d5dd28138d8ec3bf1e1de5ab3474d0a30b12",
+          "truncated": true
+        },
+        "sha256": "bedd2c1ae0e495eaf8f7b8496de8838550446467d1df61374abbd03902a877e2",
+        "url": "https://papers.nips.cc/paper_files/paper/2025/file/3a2d96d2eb2902043c2db705ca03e9a2-Paper-Conference.pdf"
+      },
       "title": "Learning and Planning Multi-Agent Tasks via an MoE-based World Model",
       "topic_review": {
         "decisions": {
@@ -37688,6 +37991,33 @@
       "url": "https://proceedings.mlr.press/v267/villar-corrales25a.html"
     },
     "conf-23cf1924cb5a1cbefd4507e1": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Autoregressive",
+          "Text Conditioning",
+          "Pixel Space"
+        ],
+        "topics": [
+          "Image Gen&Edit"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "d9587c589a0e5e8de07b22328057390bd23d16e97b4189d4e16265763c5c4138",
+          "truncated": false
+        },
+        "sha256": "7fe91ae87e6a15f02d7e8d572ada691a20666a6c051875df903dc41d5aacdb13",
+        "url": "https://arxiv.org/html/2505.19602"
+      },
       "arxiv_id": "2505.19602",
       "authors": [
         "Kunjun Li",
@@ -37731,7 +38061,32 @@
         "arxiv",
         "huggingface"
       ],
-      "summary": null,
+      "summary": {
+        "contributions": [
+          "分析了视觉自回归模型下一尺度预测范式的特性，发现不同Transformer层的缓存需求差异显著，且不同尺度表现出不同的注意力模式，表明需要层自适应和尺度特定的缓存管理策略。",
+          "提出了ScaleKV方法，将Transformer层分为起草层和精修层两类功能组，其中起草层关注多尺度全局信息需较大缓存容量，精修层关注当前token映射局部细节需较小缓存存储。",
+          "实现了尺度感知的层预算分配机制，通过识别每个尺度的特定起草层和精修层，实施差异化的缓存管理以匹配其计算需求。",
+          "实验表明ScaleKV在保持生成质量几乎不变的情况下（GenEval分数保持0.79，DPG分数从86.61微降至86.49），仅需原始Infinity-8B模型10%的GPU内存消耗。",
+          "验证了该方法有效解决了制约视觉自回归模型实用部署的根本内存瓶颈，使其能够在资源受限环境中高效部署。"
+        ],
+        "one_sentence": "针对视觉自回归模型在生成高分辨率图像时因多尺度KV缓存指数级增长导致的严重内存瓶颈，本文提出了一种名为ScaleKV的尺度感知KV缓存压缩方法，通过区分Transformer层中的起草层与精修层并实施差异化的缓存管理策略，在几乎不损失生成质量的前提下将GPU内存消耗降低至原来的10%。",
+        "problem": "视觉自回归模型采用下一尺度预测机制，需要保留所有先前尺度token映射的KV状态，导致KV缓存需求随尺度数量呈立方级增长，注意力计算复杂度达到O(n^4)，在生成1024x1024图像时仅KV缓存就消耗约85GB内存，严重阻碍了模型的实用部署。"
+      },
+      "summary_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "d9587c589a0e5e8de07b22328057390bd23d16e97b4189d4e16265763c5c4138",
+          "truncated": false
+        },
+        "sha256": "7fe91ae87e6a15f02d7e8d572ada691a20666a6c051875df903dc41d5aacdb13",
+        "url": "https://arxiv.org/html/2505.19602"
+      },
       "title": "Memory-Efficient Visual Autoregressive Modeling with Scale-Aware KV Cache Compression",
       "topics": [
         "Image Gen&Edit"
@@ -39565,6 +39920,33 @@
       "url": "https://doi.org/10.1109/iros58592.2024.10802436"
     },
     "conf-25cf5eeac4661c428a94700a": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Gaussian Splatting",
+          "Multi-View-to-3D",
+          "Optimization-Based"
+        ],
+        "topics": [
+          "3D Gen&Recon"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "427f63ed7ba8af2f125e0bfe58c46fd9e0e2923908a1429f642afbc0d425c65f",
+          "truncated": false
+        },
+        "sha256": "1cd5d756d18152075ecb9983ceb362868b0e646f93f655f76deb5217b2841627",
+        "url": "https://arxiv.org/html/2510.25173"
+      },
       "arxiv_id": "2510.25173",
       "authors": [
         "Kejing Xia",
@@ -39603,7 +39985,31 @@
       },
       "source_edition": "NeurIPS 2025",
       "source_version": "ff4c9bb2f7ecdef3b79a9436e1638e6ea94dead6624a9ea21e633a7ce8e5ce4d",
-      "summary": null,
+      "summary": {
+        "contributions": [
+          "引入了D2GS框架，仅使用相机输入即可重建动态城市街道场景，消除了对LiDAR点云采集的需求以及由校准和重投影带来的误差。",
+          "提出了一种渐进式剪枝策略，用于高效管理由初始深度估计导出的密集点云，从而生成能够捕捉全局场景几何的紧凑高斯表示。",
+          "开发了一种基于扩散的深度增强器联合优化策略，通过迭代细化估计的深度和高斯表示，提供了具有密集度量深度的鲁棒几何监督。",
+          "通过在场景图中创建道路节点并显式利用强几何先验建模地面平面，进一步提高了道路区域的重建精度。"
+        ],
+        "one_sentence": "该论文提出了一种名为D2GS的无LiDAR动态城市街道场景重建框架，通过利用多视图深度估计初始化点云、渐进式剪枝策略以及基于扩散模型的深度增强模块进行联合优化，并结合道路节点约束，实现了仅依赖相机输入的高保真3D重建。",
+        "problem": "现有基于3D高斯泼溅的城市街道场景重建方法严重依赖LiDAR数据提供几何先验，但LiDAR数据采集成本高、设备昂贵且难以扩展，同时LiDAR与相机之间的时空校准要求极高，不同安装位置导致的视角差异会引起重投影误差，且LiDAR仅提供稀疏深度监督，限制了模型学习细粒度几何细节的能力；而现有的几何约束方法要么依赖仅提供相对深度的单目深度估计，要么使用不适合动态场景且存在较大绝对误差的多视图深度估计。"
+      },
+      "summary_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "427f63ed7ba8af2f125e0bfe58c46fd9e0e2923908a1429f642afbc0d425c65f",
+          "truncated": false
+        },
+        "sha256": "1cd5d756d18152075ecb9983ceb362868b0e646f93f655f76deb5217b2841627",
+        "url": "https://arxiv.org/html/2510.25173"
+      },
       "title": "D$^2$GS: Dense Depth Regularization for LiDAR-free Urban Scene Reconstruction",
       "topic_review": {
         "decisions": {
@@ -39747,7 +40153,31 @@
       },
       "source_edition": "NeurIPS 2025",
       "source_version": "692dc15753a34fbc26b154477a7aabdc8c5f6a9edabef987af4240bae5cf16c6",
-      "summary": null,
+      "summary": {
+        "contributions": [
+          "提出了GPDiT框架，这是一种利用帧级因果注意力机制的自回归视频生成模型，旨在通过捕捉帧间因果依赖同时保留帧内全注意力，从而提升长时程视频的时序一致性。",
+          "设计了一种轻量级因果注意力变体，通过利用视频序列的时间冗余性，在训练期间消除干净帧之间的注意力计算，从而显著降低训练和推理过程中的计算成本。",
+          "引入了一种基于旋转的时间条件策略，将噪声注入过程重新解释为复平面上的旋转，提供了一种无参数注入时间信息的方法，消除了对adaLN-Zero及其相关参数的需求。",
+          "通过大量实验证明GPDiT在视频生成基准测试中取得了具有竞争力的性能，并在视频表示任务和少样本学习任务中展示了其视频理解能力的潜力。"
+        ],
+        "one_sentence": "该论文提出了一种名为GPDiT的帧级自回归扩散Transformer框架，通过结合因果注意力机制与无参数旋转时间条件策略，旨在解决现有扩散模型在长视频生成中存在的时序一致性和运动连贯性不足的问题。",
+        "problem": "现有基于扩散模型的视频生成方法在长程生成中表现出时序一致性和运动连贯性的局限性，主要归因于双向注意力机制允许未来上下文影响当前预测，从而违反了自回归生成所需的因果结构；此外，现有的自回归与扩散结合方法（如因果注意力替换或扩散强制）仍面临训练不稳定、计算效率低或长序列外推质量下降等挑战。"
+      },
+      "summary_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "a2ebe18396c301a23dd591235e0ec1d1450f9428142e63eb1bf40bb024bef2dd",
+          "truncated": false
+        },
+        "sha256": "7c95d65ae9f91e9679a64c48dcfc2836c5c023b5670ded8dc0c0fecd865c252c",
+        "url": "https://arxiv.org/html/2505.07344"
+      },
       "title": "Generative Pre-trained Autoregressive Diffusion Transformer",
       "topic_review": {
         "decisions": {
@@ -44086,6 +44516,31 @@
       "url": "https://eccv.ecva.net/virtual/2024/poster/1045"
     },
     "conf-295ae223d1de6cf47fd05e44": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Autoregressive"
+        ],
+        "topics": [
+          "Video Gen&Edit"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "official_abstract",
+          "extraction": {
+            "method": "pdf_text"
+          },
+          "sections": [
+            "Abstract"
+          ],
+          "sha256": "a153cb119c02b9d7990e8e60cea439c6a09fb81f88fe20982a756f540c8cfbdb",
+          "truncated": false
+        },
+        "sha256": "1855c642fe909ead3f3c78b2364617a6442df65594df036c7666bc24b451f4f4",
+        "url": "https://papers.nips.cc/paper_files/paper/2025/file/43e41fa7544d2ee435c72305702de61f-Paper-Conference.pdf"
+      },
       "authors": [
         "Yang, Minghao",
         "Bai, Zechen",
@@ -44104,6 +44559,7 @@
         "basis": "publisher_publication",
         "url": "https://papers.nips.cc/paper_files/paper/2025/hash/43e41fa7544d2ee435c72305702de61f-Abstract-Conference.html"
       },
+      "doi": "10.52202/085713-1583",
       "id": "conf-295ae223d1de6cf47fd05e44",
       "order_date": "2025-12-02",
       "published": "2026-04-23",
@@ -44118,7 +44574,41 @@
       },
       "source_edition": "NeurIPS 2025",
       "source_version": "0a83f6602a5f782ddc6a006d26dd3afbbef4a1855b9a5a41c08b0699b14866b7",
-      "summary": null,
+      "summary": {
+        "contributions": [
+          "提出概率尾部丢弃（Probabilistic Taildrop）技术，利用视觉复杂度构建截断采样分布，动态调整 token 数量以平衡计算效率与信息保真度。",
+          "设计基于视频复杂度的先验分布，通过 KL 散度损失监督尾部丢弃概率查询模块，使分词器在训练阶段即具备对视觉内容的自适应感知能力。",
+          "提出将视频分词建模为序列决策过程，并引入并行采样 GRPO（Parallel Sample GRPO）框架，解决非马尔可夫场景下强化学习训练中的模式崩溃问题。",
+          "设计 Vapor Reward 多信号奖励函数，整合重建质量、生成性能、效率及多样性等指标，通过强化学习优化分词器以实现对下游自回归生成任务的感知。",
+          "首次将强化学习框架应用于视觉分词器的任务感知自适应训练，实现了分词器与生成模型在优化目标上的对齐，提升了整体生成性能。"
+        ],
+        "one_sentence": "VaporTok 提出了一种结合视觉复杂度先验与强化学习（GRPO）的自适应视频分词器，通过概率尾部丢弃机制动态调整 token 数量，并利用多信号奖励函数优化分词器以适配下游自回归生成任务。",
+        "problem": "现有自回归视觉生成模型中的分词器通常输出固定数量的 token，无法根据视频内容的复杂度自适应调整，导致简单内容冗余或复杂信息丢失；此外，分词器与自回归模型通常分阶段训练，缺乏对下游生成任务的感知，且传统尾部丢弃方法未利用视觉先验，难以实现真正高效的自适应分词。"
+      },
+      "summary_source": {
+        "evidence": {
+          "basis": "body_excerpt",
+          "extraction": {
+            "method": "pdf_text"
+          },
+          "sections": [
+            "Page 1",
+            "Page 2",
+            "Page 3",
+            "Page 4",
+            "Page 5",
+            "Page 6",
+            "Page 7",
+            "Page 8",
+            "Page 9",
+            "Page 10"
+          ],
+          "sha256": "5bcc6ea1bbc7b110df7f5a7bcb59c6b81219d3fc8878278d447d67c4351b221c",
+          "truncated": true
+        },
+        "sha256": "1855c642fe909ead3f3c78b2364617a6442df65594df036c7666bc24b451f4f4",
+        "url": "https://papers.nips.cc/paper_files/paper/2025/file/43e41fa7544d2ee435c72305702de61f-Paper-Conference.pdf"
+      },
       "title": "VaporTok: RL-Driven Adaptive Video Tokenizer with Prior & Task Awareness",
       "topic_review": {
         "decisions": {
@@ -48558,6 +49048,33 @@
       "url": "https://ojs.aaai.org/index.php/AAAI/article/view/33590"
     },
     "conf-2d7aeda8dead007999e98933": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Object-Centric",
+          "Imagination-Based Planning",
+          "World-Model Policy Learning"
+        ],
+        "topics": [
+          "World Model"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "59a840d62493776792711e5564c8e208f3c79c09182ca10961a9a8cdbc23ca1e",
+          "truncated": false
+        },
+        "sha256": "2ab18204bf9f4278c2cfb921bd72631554259ff70de2d67c2982f77c1cc7cdc5",
+        "url": "https://arxiv.org/html/2511.02225"
+      },
       "arxiv_id": "2511.02225",
       "authors": [
         "Fan Feng",
@@ -48590,7 +49107,32 @@
       },
       "source_edition": "NeurIPS 2025",
       "source_version": "ad52f98049f9b58a79f09ea63add16d2f73aeb8466205ce0ad845374693450c0",
-      "summary": null,
+      "summary": {
+        "contributions": [
+          "提出了FIOC-WM框架，实现了对象级表示（含显式交互）和每个对象的属性级表示的两级分解结构。",
+          "在对象层面建模了独立演化物体及其交互，在属性层面根据时间行为将物体分解为静态属性（如颜色、形状）和动态属性（如位置、速度）。",
+          "利用预训练视觉嵌入作为原始高维观测的替代，以学习语义有意义的潜变量并恢复其中的交互和分解状态。",
+          "基于层级强化学习思想，将子目标实例化为对象交互，使复杂任务分解为交互原语序列，从而支持更高效的规划与控制。",
+          "在多种机器人控制和具身智能基准上进行了评估，证明了采用适当分解并利用其作为子任务能增强世界模型能力并提高下游策略学习效率。"
+        ],
+        "one_sentence": "该论文提出了一种名为FIOC-WM的交互式对象中心世界模型，通过结合对象级交互建模与属性级分解，利用预训练视觉嵌入学习结构化潜变量，从而支持基于交互原语的高效长时程策略学习。",
+        "problem": "现有世界模型在从高维观测中提取低维结构化潜表示时，尚不清楚何种类型和程度的分解结构对于下游策略学习是必要且充分的，且现实场景中物体外观和动态交互存在巨大变异性，需要更精细地建模物体及其交互属性。"
+      },
+      "summary_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "59a840d62493776792711e5564c8e208f3c79c09182ca10961a9a8cdbc23ca1e",
+          "truncated": false
+        },
+        "sha256": "2ab18204bf9f4278c2cfb921bd72631554259ff70de2d67c2982f77c1cc7cdc5",
+        "url": "https://arxiv.org/html/2511.02225"
+      },
       "title": "Learning Interactive World Model for Object-Centric Reinforcement Learning",
       "topic_review": {
         "decisions": {
@@ -51510,6 +52052,32 @@
       "url": "https://openaccess.thecvf.com/content/CVPR2026/html/Butt_GenColorBench_A_Color_Evaluation_Benchmark_for_Text-to-Image_Generation_CVPR_2026_paper.html"
     },
     "conf-30b28269e767f358edb1db57": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Voxel/Grid",
+          "Feed-Forward"
+        ],
+        "topics": [
+          "3D Gen&Recon"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "c1169154f8cf49f2c2bff00253f7cf8ed3e42786d4ddeeff20a7e442d19c12ac",
+          "truncated": false
+        },
+        "sha256": "c8d786314d1061a87e0825c5a83a4d5854f9d9d34344a50317c6792504fc2159",
+        "url": "https://arxiv.org/html/2505.22643"
+      },
       "arxiv_id": "2505.22643",
       "authors": [
         "Dekai Zhu",
@@ -51544,7 +52112,32 @@
       },
       "source_edition": "NeurIPS 2025",
       "source_version": "682485c226600cb5172e15e3cdbeda06c31284d96c232a0234f4a7daae2629b5",
-      "summary": null,
+      "summary": {
+        "contributions": [
+          "提出了一种名为Spiral的新型语义感知range-view激光雷达扩散模型，能够联合生成深度、反射率图像以及语义标签。",
+          "引入了渐进式语义预测机制，通过指数移动平均（EMA）聚合中间语义图以抑制噪声并生成稳定的逐像素置信度分数。",
+          "设计了闭环推理策略，当预测置信度超过阈值时，将语义图作为条件反馈给模型以指导深度和反射率的生成，从而增强跨模态一致性。",
+          "扩展了评估指标，在range-view图像、笛卡尔点云和BEV投影三个视角中融入语义感知，实现了对生成场景几何、物理和语义质量的综合评估。",
+          "在SemanticKITTI和nuScenes数据集上验证了Spiral在带标签激光雷达场景生成方面达到了最先进性能，并展示了其作为合成数据增强下游分割模型训练的有效性。"
+        ],
+        "one_sentence": "该论文提出了一种名为Spiral的语义感知渐进式激光雷达场景生成与理解框架，旨在解决现有生成方法缺乏语义标签输出及评估指标未涵盖语义维度的问题。",
+        "problem": "现有基于range-view的激光雷达生成方法存在两个主要局限：一是生成的场景仅包含深度和反射率图像，缺乏语义标签，且采用独立训练的两步流水线会导致语义与其他模态一致性差；二是现有的评估方法仅从range-view图像、笛卡尔点云和BEV投影三个视角提取全局特征，未考虑语义标签，无法全面评估生成场景的语义质量。"
+      },
+      "summary_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "c1169154f8cf49f2c2bff00253f7cf8ed3e42786d4ddeeff20a7e442d19c12ac",
+          "truncated": false
+        },
+        "sha256": "c8d786314d1061a87e0825c5a83a4d5854f9d9d34344a50317c6792504fc2159",
+        "url": "https://arxiv.org/html/2505.22643"
+      },
       "title": "Spiral: Semantic-Aware Progressive LiDAR Scene Generation and Understanding",
       "topic_review": {
         "decisions": {
@@ -57694,6 +58287,33 @@
       "url": "https://proceedings.mlr.press/v235/ko24e.html"
     },
     "conf-369487304c475fbb0bb2b0c1": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Diffusion",
+          "Text Conditioning",
+          "Continuous Latents"
+        ],
+        "topics": [
+          "Image Gen&Edit"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "b3e90e4fd09a2e5fbabc68ea99d7e46fe7fcc1e5382133f631f254e8ee716a21",
+          "truncated": false
+        },
+        "sha256": "f396066af1221d63778c47e04def7723855a3d946bb759a71e6a76af9405ccb1",
+        "url": "https://arxiv.org/html/2510.03886"
+      },
       "arxiv_id": "2510.03886",
       "authors": [
         "Seil Kang",
@@ -57726,7 +58346,32 @@
       },
       "source_edition": "NeurIPS 2025",
       "source_version": "150e9ed2454e6703334117a9a5a69d8e46707aa852ea94c04c5f5e2447558021",
-      "summary": null,
+      "summary": {
+        "contributions": [
+          "揭示了多模态扩散Transformer中罕见文本语义的潜在存在性，指出模型能识别语义但难以视觉化，并发现文本嵌入的各向异性与局部各向同性特性影响罕见语义的涌现。",
+          "提出ToRA方法，利用主成分分析将文本嵌入空间划分为主空间和残差空间，通过Token Spacing在主空间放大方差以增强语义区分度，并通过Residual Alignment在残差空间旋转嵌入以缓解副作用。",
+          "证明了方差缩放能放大联合注意力块中的局部各向同性，促进罕见语义的清晰涌现，同时指出其可能放大与语义无关的嵌入方向，从而设计了互补的干预机制。",
+          "验证了ToRA在文本到视频生成和图像编辑任务中的卓越泛化能力，表明该方法能无缝集成到标准推理流程中，且低开销、高兼容，可与现有方法结合使用。",
+          "展示了ToRA在包括常见提示在内的广泛文本提示上均能一致地提高语义连贯性和生成质量，实现了从外部强加语义对齐到自然揭示潜在语义的范式转变。"
+        ],
+        "one_sentence": "本文提出ToRA方法，通过主成分分析将文本嵌入空间分解为主空间和残差空间，分别进行方差缩放和残差对齐，以在无需重训练或外部模块的情况下，自然激发多模态扩散Transformer中潜藏的罕见文本语义。",
+        "problem": "多模态扩散Transformer在处理罕见或高度想象力的文本提示时，由于预训练数据中此类概念稀缺，导致生成结果与文本语义不对齐；虽然现有方法如微调、推理优化或借助大语言模型可缓解此问题，但本文观察到模型能识别常见提示的特定语义却难以视觉化罕见语义，推测罕见语义存在于文本嵌入中但无法被模型有效访问。"
+      },
+      "summary_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "b3e90e4fd09a2e5fbabc68ea99d7e46fe7fcc1e5382133f631f254e8ee716a21",
+          "truncated": false
+        },
+        "sha256": "f396066af1221d63778c47e04def7723855a3d946bb759a71e6a76af9405ccb1",
+        "url": "https://arxiv.org/html/2510.03886"
+      },
       "title": "Rare Text Semantics Were Always There in Your Diffusion Transformer",
       "topic_review": {
         "decisions": {
@@ -59322,6 +59967,32 @@
       "url": "https://eccv.ecva.net/virtual/2026/poster/5130"
     },
     "conf-3803c9e13d71eeccb34e52b0": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Diffusion",
+          "Text Conditioning"
+        ],
+        "topics": [
+          "Image Gen&Edit"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "official_abstract",
+          "extraction": {
+            "method": "pdf_text"
+          },
+          "sections": [
+            "Abstract"
+          ],
+          "sha256": "3ff782b12a0161acd35958541dc33f009752ab39c37df7261aab4bbb67773dec",
+          "truncated": false
+        },
+        "sha256": "da351add3b67ad90db41ca5b7117481c2fa4f9f5d53fd9c04bf7a33d89402d31",
+        "url": "https://papers.nips.cc/paper_files/paper/2025/file/7c661860e9b02e2971741df1b9161764-Paper-Conference.pdf"
+      },
       "authors": [
         "Jha, Ritika",
         "Bhattacharyya, Aanisha",
@@ -59341,6 +60012,7 @@
         "basis": "publisher_publication",
         "url": "https://papers.nips.cc/paper_files/paper/2025/hash/7c661860e9b02e2971741df1b9161764-Abstract-Conference.html"
       },
+      "doi": "10.52202/085713-2881",
       "id": "conf-3803c9e13d71eeccb34e52b0",
       "order_date": "2025-12-02",
       "published": "2026-04-23",
@@ -59355,7 +60027,42 @@
       },
       "source_edition": "NeurIPS 2025",
       "source_version": "7a6e4e3feea1d180f4b5fccc1293346ecb049cb32f3a76c6ad13c18d450edcd8",
-      "summary": null,
+      "summary": {
+        "contributions": [
+          "提出了首个跨多模型和多模态的自博弈偏好对齐框架SPRO，实现了视觉语言模型与扩散模型的协同优化。",
+          "在美学、参与度和用户偏好三个目标上实现了最先进的对齐性能，平均超越基线方法30%，且完全无需人工标注数据。",
+          "引入了Guider-VLM进行智能探索，自动发现新颖且反直觉的提示词策略，比传统人工数据驱动方法更高效。",
+          "证明了在提示词生成中引入推理链能比单纯增加计算量带来平均2%的质量提升。",
+          "构建了扩散模型无关的框架，在SDXL、Flux和DALL·E等开源及闭源模型上均实现了73.59%的平均胜率。",
+          "发布了一个包含超过一百万个图像-提示词对的合成偏好数据集，该数据集完全通过自博弈生成，为未来研究提供了可扩展的资源。"
+        ],
+        "one_sentence": "本文提出了SPRO（Self-Play Reward Optimization）框架，通过多模态自博弈机制协同优化视觉语言模型与扩散模型，无需人工标注数据即可显著提升图像生成在美学、用户偏好及参与度方面与人类偏好的对齐程度。",
+        "problem": "现有扩散模型在美学吸引力、用户偏好和参与度等抽象且主观的人类偏好维度上对齐能力有限，而现有的提示词优化或模型优化方法严重依赖人工策划的数据集，导致成本高、多样性受限且难以发现超越人类直觉的生成策略。"
+      },
+      "summary_source": {
+        "evidence": {
+          "basis": "body_excerpt",
+          "extraction": {
+            "method": "pdf_text"
+          },
+          "sections": [
+            "Page 1",
+            "Page 2",
+            "Page 3",
+            "Page 4",
+            "Page 5",
+            "Page 6",
+            "Page 7",
+            "Page 8",
+            "Page 9",
+            "Page 10"
+          ],
+          "sha256": "ae0f23fe5a3cf97c6d641a5cb813464db53f072ff654ae21bdfc99014eaf400c",
+          "truncated": true
+        },
+        "sha256": "da351add3b67ad90db41ca5b7117481c2fa4f9f5d53fd9c04bf7a33d89402d31",
+        "url": "https://papers.nips.cc/paper_files/paper/2025/file/7c661860e9b02e2971741df1b9161764-Paper-Conference.pdf"
+      },
       "title": "SPRO: Improving Image Generation via Self-Play",
       "topic_review": {
         "decisions": {
@@ -59376,6 +60083,32 @@
       "url": "https://papers.nips.cc/paper_files/paper/2025/hash/7c661860e9b02e2971741df1b9161764-Abstract-Conference.html"
     },
     "conf-38107f850990e4a16d3009be": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Autoregressive",
+          "Text Conditioned"
+        ],
+        "topics": [
+          "Video Gen&Edit"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "official_abstract",
+          "extraction": {
+            "method": "pdf_text"
+          },
+          "sections": [
+            "Abstract"
+          ],
+          "sha256": "1cb3b232ec89aae0ff49f66547081b4632a8fb22efbedfbd21fa6acea9f49cf1",
+          "truncated": false
+        },
+        "sha256": "302aa6f4274187be4378812652510c9b5ce6cf86115f330eb79ffc68295caf3b",
+        "url": "https://papers.nips.cc/paper_files/paper/2025/file/56dcc5a7b91a63f81bbcf91ba8699c74-Paper-Conference.pdf"
+      },
       "authors": [
         "Tu, Linnan",
         "Meng, Lingwei",
@@ -59394,6 +60127,7 @@
         "basis": "publisher_publication",
         "url": "https://papers.nips.cc/paper_files/paper/2025/hash/56dcc5a7b91a63f81bbcf91ba8699c74-Abstract-Conference.html"
       },
+      "doi": "10.52202/085713-2016",
       "id": "conf-38107f850990e4a16d3009be",
       "order_date": "2025-12-02",
       "published": "2026-04-23",
@@ -59408,7 +60142,40 @@
       },
       "source_edition": "NeurIPS 2025",
       "source_version": "fbdc47a39838c986f91a7f31d0ec647af07364a41c76960746533be50a7f6c2e",
-      "summary": null,
+      "summary": {
+        "contributions": [
+          "提出了一种可学习的高斯混合模型（GMM）作为变分自编码器的先验分布，将运动序列表示为连续的多模态分布，以保留时间序列的完整性并克服单模态高斯分布拟合不足的问题。",
+          "设计了一种基于因果Transformer的自回归模型，该模型直接预测高斯混合分布的参数（权重、均值、方差），并通过高斯混合采样生成连续潜变量，从而避免了扩散模型的多步迭代采样过程。",
+          "引入了一种基于Kolmogorov-Smirnov（KS）距离的潜空间正则化方法，用于约束编码器输出的潜变量分布与可学习的高斯混合先验分布保持一致，确保潜空间的语义丰富性和结构合理性。",
+          "采用头部预填充（head pre-padding）策略和可学习旋转位置编码（RoPE），解决了不同长度运动序列在批量处理时的对齐问题，并增强了模型在训练于短序列数据时生成更长运动序列的外推能力。",
+          "构建了一个包含GM-VAE和自回归采样模块的两阶段训练框架，其中第一阶段学习连续运动表示，第二阶段通过教师强制训练结合高斯混合采样恢复潜变量，最终通过PostNet细化生成高质量运动输出。"
+        ],
+        "one_sentence": "该论文提出了一种名为GMMotion的自回归运动生成框架，通过利用可学习的高斯混合模型作为变分自编码器的先验分布，在连续潜空间中建模多模态运动表示，从而避免了向量量化带来的离散化误差并实现了无需预定义时长的连续运动序列生成。",
+        "problem": "现有3D人体运动合成主要依赖离散向量量化（VQ）或连续扩散模型，前者因量化过程破坏时间序列连续性导致连接错误且输出多样性受限，后者虽质量高但推理速度慢且需预指定最大序列长度，限制了运动生成的可扩展性。"
+      },
+      "summary_source": {
+        "evidence": {
+          "basis": "body_excerpt",
+          "extraction": {
+            "method": "pdf_text"
+          },
+          "sections": [
+            "Page 1",
+            "Page 2",
+            "Page 3",
+            "Page 4",
+            "Page 5",
+            "Page 6",
+            "Page 7",
+            "Page 8",
+            "Page 9"
+          ],
+          "sha256": "ac395816f9eb791fa40c48620b820f0b2200fd1667457edd44379382b891ac6c",
+          "truncated": true
+        },
+        "sha256": "302aa6f4274187be4378812652510c9b5ce6cf86115f330eb79ffc68295caf3b",
+        "url": "https://papers.nips.cc/paper_files/paper/2025/file/56dcc5a7b91a63f81bbcf91ba8699c74-Paper-Conference.pdf"
+      },
       "title": "Autoregressive Motion Generation with Gaussian Mixture-Guided Latent Sampling",
       "topic_review": {
         "decisions": {
@@ -62145,6 +62912,33 @@
       "url": "https://openaccess.thecvf.com/content/CVPR2026/html/Xiu_MLLMSplat_A_2D_MLLM-Powered_Framework_for_3D_Gaussian_Splatting_Understanding_CVPR_2026_paper.html"
     },
     "conf-3a2188024015369a361d1a3b": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Multi-View-to-3D",
+          "Voxel/Grid",
+          "Optimization-Based"
+        ],
+        "topics": [
+          "3D Gen&Recon"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "e5da9c3b9dd09bc8436ac8bb589fa76175a6c36964828455952e8bb4d2bd7b81",
+          "truncated": false
+        },
+        "sha256": "bcee571c965ec4f95e1998681d53f7961920b5ade6e74ba726a1a49f4ee02764",
+        "url": "https://arxiv.org/html/2509.18090"
+      },
       "arxiv_id": "2509.18090",
       "authors": [
         "Jiahe Li",
@@ -62191,7 +62985,32 @@
         "arxiv",
         "huggingface"
       ],
-      "summary": null,
+      "summary": {
+        "contributions": [
+          "提出了 GeoSVR 框架，利用稀疏体素结合光栅化技术，通过完全覆盖的粗体素初始化实现完整且精细的几何学习，克服了高斯表示中边缘模糊的问题。",
+          "设计了体素不确定性深度约束，通过评估每个体素的几何不确定性，在像素级别自适应决定对外部单目深度线索的依赖程度，从而在利用外部约束的同时避免错误对已重建几何造成质量退化。",
+          "开发了稀疏体素表面正则化方法，通过随机丢弃部分体素以简化场景并强制微小体素保持全局几何一致性，解决了稀疏体素极端局部性导致的多视图几何约束效果不佳的问题。",
+          "引入了两种体素级正则化机制：表面校正限制表面形成与唯一体素对齐以减少深度偏差，以及缩放惩罚消除几何不准确的大体素参与表面形成，从而促进锐利且准确表面的重建。",
+          "在 DTU、Tanks and Temples 和 Mip-NeRF 360 数据集上进行了广泛实验，证明 GeoSVR 在保持计算效率的同时，在细节保留和高完整性方面优于现有最先进方法。"
+        ],
+        "one_sentence": "GeoSVR 提出了一种基于稀疏体素的显式表面重建框架，通过引入体素不确定性深度约束和稀疏体素表面正则化，解决了现有 3D 高斯泼溅方法中点云初始化不完整及几何边缘模糊的问题，实现了高精度且完整的几何重建。",
+        "problem": "现有基于 3D 高斯泼溅的表面重建方法存在两个主要瓶颈：一是依赖多视图几何生成的点云初始化，这些点云因外观歧义包含不准确和未覆盖区域，导致难以精确优化挑战性区域并阻碍几何基础模型的潜力发挥；二是高斯基元缺乏清晰定义的边缘，导致几何表示在清晰度和计算精度之间存在权衡，造成几何模糊。"
+      },
+      "summary_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "e5da9c3b9dd09bc8436ac8bb589fa76175a6c36964828455952e8bb4d2bd7b81",
+          "truncated": false
+        },
+        "sha256": "bcee571c965ec4f95e1998681d53f7961920b5ade6e74ba726a1a49f4ee02764",
+        "url": "https://arxiv.org/html/2509.18090"
+      },
       "title": "GeoSVR: Taming Sparse Voxels for Geometrically Accurate Surface Reconstruction",
       "topic_review": {
         "decisions": {
@@ -63365,6 +64184,33 @@
       "url": "https://openaccess.thecvf.com/content/CVPR2025/html/Edstedt_ColabSfM_Collaborative_Structure-from-Motion_by_Point_Cloud_Registration_CVPR_2025_paper.html"
     },
     "conf-3aefd222f72812e93d33a106": {
+      "annotation": {
+        "institutions": [],
+        "paper_type": "paper",
+        "tags": [
+          "Gaussian Splatting",
+          "Multi-View-to-3D",
+          "Feed-Forward"
+        ],
+        "topics": [
+          "3D Gen&Recon"
+        ]
+      },
+      "annotation_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "808fc610879b32ec7c2b5edfe1cce9fcb9eaf01d704248fd6b4a61bfa29a8ad1",
+          "truncated": false
+        },
+        "sha256": "61fa08adb90adfbc7e0cc70207e04656e94f8bbf7501962b4ca35dd7eb51cf5c",
+        "url": "https://arxiv.org/html/2509.23492"
+      },
       "arxiv_id": "2509.23492",
       "authors": [
         "Junyi Wu",
@@ -63399,7 +64245,32 @@
       },
       "source_edition": "NeurIPS 2025",
       "source_version": "4f7264584a779c73d32490c3473b836a4cc75774d1de33d0260f0fcb795d6662",
-      "summary": null,
+      "summary": {
+        "contributions": [
+          "提出了一个名为 OriGS 的新框架，旨在从非受控单目视频中实现高质量的 4D 重建，该框架包含两个协同的动态建模组件。",
+          "构建了全局方向场，通过局部结构对齐估计并传播主要前进方向，捕捉长程场景演化，为不同区域的多样化运动模式提供稳定的方向锚点。",
+          "提出了方向感知超维高斯表示，将每个高斯基元与定义在时间、空间、几何和方向结构化流形上的统一概率状态相关联，以建模复杂的局部动态。",
+          "设计了一种基于场景演化方向场进行条件化的切片策略，通过推断区域特定的变形，使模型能够自适应地建模场景不同部分随时间的变形及其与潜在动态意图的对齐。",
+          "在 DAVIS、OpenAI SORA、YouTube-VOS 和 DyCheck 基准上验证了方法的有效性，结果表明 OriGS 相比最新的最先进方法能恢复更清晰的几何结构和更连贯的运动。"
+        ],
+        "one_sentence": "该论文提出了一种名为 OriGS 的新框架，通过引入全局方向场和方向感知超维高斯表示，利用方向作为动态锚点，解决了从非受控单目视频中重建复杂局部动态时存在的空间漂移和结构碎片化问题，实现了高质量的 4D 重建。",
+        "problem": "从非受控单目视频中重建场景动态极具挑战性，因为场景中不同区域受物体关节运动、交互上下文或动作阶段影响，呈现出多样化的局部运动模式。现有方法通常将复杂动态简化为低秩运动锚点，假设相邻区域具有相似运动，这种假设在真实世界的非受控动态下非常脆弱，导致难以捕捉复杂的局部动态，进而引发空间漂移、结构碎片化或时间不一致性等问题。"
+      },
+      "summary_source": {
+        "evidence": {
+          "basis": "introduction",
+          "extraction": {
+            "method": "html_text"
+          },
+          "sections": [
+            "Introduction"
+          ],
+          "sha256": "808fc610879b32ec7c2b5edfe1cce9fcb9eaf01d704248fd6b4a61bfa29a8ad1",
+          "truncated": false
+        },
+        "sha256": "61fa08adb90adfbc7e0cc70207e04656e94f8bbf7501962b4ca35dd7eb51cf5c",
+        "url": "https://arxiv.org/html/2509.23492"
+      },
       "title": "Orientation-anchored Hyper-Gaussian for 4D Reconstruction from Casual Videos",
       "topic_review": {
         "decisions": {
